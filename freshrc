@@ -2,6 +2,11 @@
 
 fresh freshshell/fresh bin/fresh --bin
 
+fresh-options --file=~/.bash_profile --marker
+  fresh shell/bash/bash.bash
+  fresh shell/generic.sh
+fresh-options
+
 fresh-options --file=~/.zshrc --marker
   fresh shell/zsh/zshrc.zsh
   fresh shell/generic.sh
@@ -18,5 +23,9 @@ fresh-options --bin
   fresh vim-scripts/vimcat vimcat
 fresh-options
 
+fresh config/screenrc --file
+fresh config/gitconfig --file
+
+# oh-my-zsh and my own custom
 fresh robbyrussell/oh-my-zsh . --file=~/.oh-my-zsh/
 fresh shell/zsh/oh-my-zsh/custom --file=~/.oh-my-zsh_custom/

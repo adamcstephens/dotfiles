@@ -1,0 +1,7 @@
+[user]
+  email = astephens@drh.net
+  name = Adam Stephens
+[color]
+  ui = true
+[core]
+  pager = less -rFX

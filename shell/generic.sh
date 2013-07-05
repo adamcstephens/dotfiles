@@ -1,12 +1,4 @@
-#alias git=hub
-#function git(){hub $@}
-#alias ga='git add'
-#alias gbv='git branch -av'
-#alias gc='git commit'
-#alias gd='git diff'
-#alias gp='git push'
-#alias gs='git status'
-alias ll='ls -l'
+#alias ll='ls -l'
 alias pwgen='curl -k -3 https://mail.drh.net/cgi-bin/get_password.cgi'
 alias tree='tree -C'
 alias veewee='bundle exec veewee'
@@ -15,13 +7,21 @@ alias vs='vagrant status'
 alias vv='veewee vbox'
 alias vundle_update='vim +BundleInstall +qall'
 alias synckvm='rsync -av ~/projects/greenarrow-integration/ kvm:/opt/greenarrow-integration/'
-export PATH="$PATH:$HOME/bin:$HOME/.rbenv/shims:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin"
+
+if [ -d $HOME/.rbenv ]
+then
+  export PATH="$PATH:$HOME/.rbenv/shims"
+fi
+if which rbenv > /dev/null 2>&1; then eval "$(rbenv init -)"; fi
+
+# fresh
+source ~/.fresh/build/shell.sh
 
 export CLICOLOR=''
 export PAGER='less -rFX'
 
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
-#alias vssh='vagrant ssh'
+
+#vagrant stuff
 alias vdestroy='vagrant destroy '
 function vssh {
   vmName=$1
@@ -40,11 +40,9 @@ function vreload {
 }
 
 function delkey {
-  gsed -i "/.*$1/d" ~/.ssh/known_hosts
+  sed -i -e "/.*$1/d" ~/.ssh/known_hosts
 }
 
 # my sublime text customizations
 #export EDITOR='subl -w'
 alias subl="'/Applications/Sublime Text 2.app/Contents/SharedSupport/bin/subl' "
-
-# vim: set ft=sh
