@@ -12,3 +12,5 @@ fresh-options
 fresh-options --bin
   fresh vim-scripts/vimcat vimcat
 fresh-options
+
+fresh robbyrussell/oh-my-zsh . --file=~/.oh-my-zsh/
