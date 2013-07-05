@@ -1,11 +1,11 @@
 #alias git=hub
 #function git(){hub $@}
-alias ga='git add'
-alias gbv='git branch -av'
-alias gc='git commit'
-alias gd='git diff'
-alias gp='git push'
-alias gs='git status'
+#alias ga='git add'
+#alias gbv='git branch -av'
+#alias gc='git commit'
+#alias gd='git diff'
+#alias gp='git push'
+#alias gs='git status'
 alias ll='ls -l'
 alias pwgen='curl -k -3 https://mail.drh.net/cgi-bin/get_password.cgi'
 alias tree='tree -C'
@@ -13,6 +13,7 @@ alias veewee='bundle exec veewee'
 alias vf='veewee fusion'
 alias vs='vagrant status'
 alias vv='veewee vbox'
+alias vundle_update='vim +BundleInstall +qall'
 alias synckvm='rsync -av ~/projects/greenarrow-integration/ kvm:/opt/greenarrow-integration/'
 export PATH="$PATH:$HOME/bin:$HOME/.rbenv/shims:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin"
 

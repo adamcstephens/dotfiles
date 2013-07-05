@@ -2,6 +2,11 @@
 
 fresh freshshell/fresh bin/fresh --bin
 
+fresh-options --file=~/.zshrc --marker
+  fresh shell/zsh/zshrc.zsh
+  fresh shell/generic.sh
+fresh-options
+
 fresh-options --file=~/.vimrc --marker=\"
   fresh vim/vimrc
   fresh twe4ked/dotfiles vim/vundle_before.vim
