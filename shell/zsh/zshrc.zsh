@@ -43,20 +43,3 @@ ZSH_THEME="daveverwer"
 plugins=(git vagrant brew rbenv github)
 
 source $ZSH/oh-my-zsh.sh
-#source $HOME/.zshuery/zshuery.sh
-#load_defaults
-#load_aliases
-#load_lol_aliases
-#load_completion $HOME/.zshuery/completion
-#load_correction
-
-#chpwd() {
-  #update_terminal_cwd
-#}
-
-
-#prompts '%{$fg[red]%}%m%{$reset_color%}:%{$fg[green]%}%2~%{$reset_color%}$(virtualenv_info) %{$fg[yellow]%}$(prompt_char)%{$reset_color%} ' #'%{$fg[red]%}$(ruby_version)%{$reset_color%}'
-# %{$fg[red]%}%m%{$reset_color%}:%{$fg[green]%}%c%{$reset_color%}$(git_prompt_info) %(!.#.$)
-
-# Customize to your needs...
-source ~/.myrc
