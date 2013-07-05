@@ -19,4 +19,4 @@ fresh-options --bin
 fresh-options
 
 fresh robbyrussell/oh-my-zsh . --file=~/.oh-my-zsh/
-fresh shell/zsh/oh-my-zsh/custom --file=~/.oh-my-zsh/custom/
+fresh shell/zsh/oh-my-zsh/custom --file=~/.oh-my-zsh_custom/
