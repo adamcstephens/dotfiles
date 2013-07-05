@@ -1,0 +1,1 @@
+Bundle 'rodjek/vim-puppet'

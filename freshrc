@@ -1,0 +1,14 @@
+# vim: set ft=sh:
+
+fresh freshshell/fresh bin/fresh --bin
+
+fresh-options --file=~/.vimrc --marker=\"
+  fresh vim/vimrc
+  fresh twe4ked/dotfiles vim/vundle_before.vim
+  fresh vim/vundle.vim
+  fresh twe4ked/dotfiles vim/vundle_after.vim
+fresh-options
+
+fresh-options --bin
+  fresh vim-scripts/vimcat vimcat
+fresh-options
