@@ -13,10 +13,10 @@ fresh-options --file=~/.zshrc --marker
 fresh-options
 
 fresh-options --file=~/.vimrc --marker=\"
-  fresh vim/vimrc
   fresh twe4ked/dotfiles vim/vundle_before.vim
   fresh vim/vundle.vim
   fresh twe4ked/dotfiles vim/vundle_after.vim
+  fresh vim/vimrc
 fresh-options
 
 fresh-options --bin
