@@ -6,6 +6,6 @@
 [core]
   pager = less -rFX
 [push]
-  default = simple
+  default = tracking
 [include]
   path = .gitconfig.local
