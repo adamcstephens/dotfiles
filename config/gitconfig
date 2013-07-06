@@ -1,7 +1,11 @@
+#   git config -f ~/.gitconfig.local user.email me@example.com
 [user]
-  email = astephens@drh.net
   name = Adam Stephens
 [color]
   ui = true
 [core]
   pager = less -rFX
+[push]
+  default = simple
+[include]
+  path = .gitconfig.local
