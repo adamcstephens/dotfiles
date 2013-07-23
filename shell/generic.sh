@@ -7,12 +7,17 @@ alias pwgen='curl -k -3 https://mail.drh.net/cgi-bin/get_password.cgi'
 alias tree='tree -C'
 alias vundle_update='vim +BundleInstall +qall'
 
+# debian
+alias acsh="aptitude show"
+
 # fresh
 source ~/.fresh/build/shell.sh
 
 # git
 alias gbv='git branch -av'
 alias gs='git status' 
+alias gtl='git tag -l'
+alias gt='git tag'
 
 # rbenv
 if [ -d $HOME/.rbenv ]
