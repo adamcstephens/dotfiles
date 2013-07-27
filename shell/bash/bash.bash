@@ -7,3 +7,7 @@ fi
 
 export PS1='\[\e[32m\]\u@\h \[\e[33m\]\w\[\e[0m\]\$ '
 export PROMPT_COMMAND='echo -ne "\033]0;@${HOSTNAME}\007"'
+
+if [ -f ~/.bashrc ]; then
+     source ~/.bashrc
+fi
