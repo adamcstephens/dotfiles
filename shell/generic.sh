@@ -13,6 +13,7 @@ source ~/.fresh/build/shell.sh
 # git
 alias gbv='git branch -av'
 alias gs='git status' 
+alias gt='git tag -l'
 
 # rbenv
 if [ -d $HOME/.rbenv ]
