@@ -15,6 +15,15 @@ alias gbv='git branch -av'
 alias gs='git status' 
 alias gt='git tag -l'
 
+# notes
+alias eln="vim ~/notes/\`ls -1t ~/notes | head -n1\`"
+function elng {
+  filename=`grep "$1" ~/notes/* | cut -f1 -d\: | sort -u`
+  vim $filename
+}
+alias nn="vim ~/notes/\`date +%Y-%m-%d_%k%M\`.txt"
+alias lnn="ls -lt ~/notes"
+
 # rbenv
 if [ -d $HOME/.rbenv ]
 then
