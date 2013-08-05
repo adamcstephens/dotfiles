@@ -8,3 +8,5 @@ set expandtab
 syntax on
 filetype plugin indent on
 colorscheme slate
+
+nmap <F12> :set invnumber<CR>
