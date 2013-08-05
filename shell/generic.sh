@@ -16,6 +16,7 @@ alias gs='git status'
 alias gt='git tag -l'
 
 # notes
+alias cln="cat ~/notes/\`ls -1t ~/notes | head -n1\`"
 alias eln="vim ~/notes/\`ls -1t ~/notes | head -n1\`"
 function elng {
   filename=`grep "$1" ~/notes/* | cut -f1 -d\: | sort -u`
