@@ -22,7 +22,7 @@ function elng {
   filename=`grep "$1" ~/notes/* | cut -f1 -d\: | sort -u`
   vim $filename
 }
-alias nn="vim ~/notes/\`date +%Y-%m-%d_%k%M\`.txt"
+alias nn="vim ~/notes/\`date +%Y-%m-%d_%H%M\`.txt"
 alias lnn="ls -lt ~/notes"
 
 # rbenv
