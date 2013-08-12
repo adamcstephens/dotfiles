@@ -25,6 +25,13 @@ function elng {
 alias nn="vim ~/notes/\`date +%Y-%m-%d_%H%M\`.txt"
 alias lnn="ls -lt ~/notes"
 
+# pyenv
+if [ -d $HOME/.pyenv ]
+then
+  export PATH="$PATH:$HOME/.pyenv/shims"
+fi
+if which pyenv > /dev/null 2>&1; then eval "$(pyenv init -)"; fi
+
 # rbenv
 if [ -d $HOME/.rbenv ]
 then
