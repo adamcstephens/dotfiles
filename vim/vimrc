@@ -9,4 +9,5 @@ syntax on
 filetype plugin indent on
 colorscheme slate
 
+nmap <F11> :set invpaste<CR>
 nmap <F12> :set invnumber<CR>
