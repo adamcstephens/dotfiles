@@ -32,6 +32,15 @@ then
 fi
 if which pyenv > /dev/null 2>&1; then eval "$(pyenv init -)"; fi
 
+# python
+if python -V | grep -q 2.4
+then
+  if which python26 > /dev/null
+  then
+    alias python=python26
+  fi
+fi
+
 # rbenv
 if [ -d $HOME/.rbenv ]
 then
