@@ -33,7 +33,7 @@ fi
 if which pyenv > /dev/null 2>&1; then eval "$(pyenv init -)"; fi
 
 # python
-if python -V | grep -q 2.4
+if python -V 2>&1 | grep -q 2.4
 then
   if which python26 > /dev/null
   then
