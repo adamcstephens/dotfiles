@@ -57,6 +57,10 @@ if [ -d $HOME/.rbenv ]
 then
   export PATH="$PATH:$HOME/.rbenv/shims"
 fi
+if [ -d $HOME/.rbenv/bin ]
+then
+  export PATH="$PATH:$HOME/.rbenv/bin"
+fi
 if which rbenv > /dev/null 2>&1; then eval "$(rbenv init -)"; fi
 
 # ssh
