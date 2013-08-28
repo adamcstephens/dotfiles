@@ -29,3 +29,8 @@ fresh config/gitconfig --file
 # oh-my-zsh and my own custom
 fresh robbyrussell/oh-my-zsh . --file=~/.oh-my-zsh/
 fresh shell/zsh/oh-my-zsh/custom --file=~/.oh-my-zsh_custom/
+
+# fish
+fresh shell/fish/functions --file=~/.config/fish/functions/
+fresh shell/fish/config.fish --file=~/.config/fish/config.fish
+fresh fish-shell/fish-shell share/completions --file=~/.config/fish/completions/
