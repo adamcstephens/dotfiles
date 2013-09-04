@@ -16,6 +16,7 @@ source ~/.fresh/build/shell.sh
 alias ga='git add'
 alias gbv='git branch -av'
 alias gc='git commit'
+alias gc='git checkout'
 alias gd='git diff'
 alias gl='git pull'
 alias gp='git push'
