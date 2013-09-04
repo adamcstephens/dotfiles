@@ -5,7 +5,12 @@ then
   fi
 fi
 
-export PS1='\[\e[32m\]\u@\h \[\e[33m\]\w\[\e[0m\]\$ '
+COLORRESET="\[\033[0m\]"
+RED="\[\033[0;31m\]"
+YELLOW="\[\033[0;33m\]"
+GREEN="\[\033[0;32m\]"
+
+export PS1="${GREEN}\u@\h ${YELLOW}\w${RED}\$(__git_ps1) ${COLORRESET}❯ "
 export PROMPT_COMMAND='echo -ne "\033]0;@${HOSTNAME}\007"'
 
 if [ -f ~/.bashrc ]; then

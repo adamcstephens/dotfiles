@@ -89,11 +89,33 @@ end
 #end  
 
 if [ -d $HOME/.rbenv/bin ]
-  set PATH $HOME/.rbenv/bin $PATH
+  set -x PATH $HOME/.rbenv/bin $PATH
 end
 if [ -d $HOME/.rbenv/shims ]
-  set PATH $HOME/.rbenv/shims $PATH
+  set -x PATH $HOME/.rbenv/shims $PATH
 end
 if which rbenv > /dev/null 2>&1
   rbenv rehash >/dev/null ^&1
 end
+
+if [ -d $HOME/.pyenv ]
+  set -x PATH "$HOME/.pyenv/shims" $PATH
+end
+if which pyenv > /dev/null 2>&1
+  pyenv rehash >/dev/null ^&1
+end
+
+if [ -d $HOME/projects/ansible ]
+  set HACKING_DIR $HOME/projects/ansible
+  set FULL_PATH (python -c "import os; print(os.path.realpath('$HACKING_DIR'))")
+  set -x ANSIBLE_HOME $FULL_PATH
+
+  set PREFIX_PYTHONPATH "$ANSIBLE_HOME/lib"
+  set PREFIX_PATH "$ANSIBLE_HOME/bin"
+  set PREFIX_MANPATH "$ANSIBLE_HOME/docs/man"
+
+  set -x PYTHONPATH $PREFIX_PYTHONPATH $PYTHONPATH
+  set -x PATH $PREFIX_PATH $PATH
+  set -x ANSIBLE_LIBRARY "$ANSIBLE_HOME/library"
+end 
+

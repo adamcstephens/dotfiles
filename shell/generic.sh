@@ -2,6 +2,8 @@ export CLICOLOR=''
 export PAGER='less -rFX'
 
 # _generic
+alias ll="ls -l"
+alias l="ls -la"
 alias esl="exec $SHELL -l"
 alias pwgen='curl -k -3 https://mail.drh.net/cgi-bin/get_password.cgi'
 alias tree='tree -C'
@@ -11,8 +13,13 @@ alias vundle_update='vim +BundleInstall +qall'
 source ~/.fresh/build/shell.sh
 
 # git
+alias ga='git add'
 alias gbv='git branch -av'
+alias gc='git commit'
+alias gl='git pull'
+alias gp='git push'
 alias gs='git status' 
+alias gss='git status --short' 
 alias gt='git tag -l'
 
 # notes
