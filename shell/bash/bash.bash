@@ -13,6 +13,12 @@ GREEN="\[\033[0;32m\]"
 export PS1="${GREEN}\u@\h ${YELLOW}\w${RED}\$(__git_ps1) ${COLORRESET}❯ "
 export PROMPT_COMMAND='echo -ne "\033]0;@${HOSTNAME}\007"'
 
+export GIT_PS1_SHOWCOLORHINTS=1
+export GIT_PS1_SHOWSTASHSTATE=1
+export GIT_PS1_SHOWUNTRACKEDFILES=1
+export GIT_PS1_SHOWUPSTREAM=1
+export GIT_PS1_SHOWCOLORHINTS=1
+
 if [ -f ~/.bashrc ]; then
      source ~/.bashrc
 fi
