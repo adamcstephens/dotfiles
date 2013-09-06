@@ -34,16 +34,19 @@ fi
 
 if [[ $USER == 'root' ]]
 then
-  USERCOLOR=$LTRED
+  USERSTRING="${LTRED}\u"
+elif [[ $USER == 'adam' ]]
+then
+  USERSTRING="${GREEN}"
 else
-  USERCOLOR=$GREEN
+  USERSTRING="${GREEN}\u"
 fi
 
 if declare -f __git_ps1 > /dev/null 2>&1
 then
-  export PS1="${USERCOLOR}\u@\h ${BROWN}\w${RED}\$(__git_ps1) ${COLORRESET}❯ "
+  export PS1="${USERSTRING}@\h ${BROWN}\w${PURPLE}\$(__git_ps1) ${COLORRESET}❯ "
 else
-  export PS1="${USERCOLOR}\u@\h ${BROWN}\w ${COLORRESET}❯ "
+  export PS1="${USERSTRING}@\h ${BROWN}\w ${COLORRESET}❯ "
 fi
 export PROMPT_COMMAND='echo -ne "\033]0;@${HOSTNAME}\007"'
 
