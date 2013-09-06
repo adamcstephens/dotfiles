@@ -3,6 +3,10 @@ export PAGER='less -rFX'
 export EDITOR='vim'
 
 # _generic
+if ls --color=auto > /dev/null 2>&1
+then
+  alias ls="ls --color=auto"
+fi
 alias ll="ls -l"
 alias l="ls -la"
 alias esl="exec $SHELL -l"
