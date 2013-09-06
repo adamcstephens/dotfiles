@@ -10,9 +10,12 @@ RED="\[\033[0;31m\]"
 YELLOW="\[\033[0;33m\]"
 GREEN="\[\033[0;32m\]"
 
-if [ -f /usr/share/git/completion/git-prompt.sh ]
+if [ -f /usr/share/git/completion/git-prompt.sh ] # archlinux
 then
   source /usr/share/git/completion/git-prompt.sh
+elif [ -f /usr/share/git-core/contrib/completion/git-prompt.sh ] # centos
+then
+  source /usr/share/git-core/contrib/completion/git-prompt.sh
 fi
 
 if declare -f __git_ps1 > /dev/null 2>&1
