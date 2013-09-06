@@ -10,6 +10,8 @@ fi
 alias ll="ls -l"
 alias l="ls -la"
 alias esl="exec $SHELL -l"
+alias fesl="fresh && esl"
+alias fuesl="fresh update && esl"
 alias pwgen='curl -k -3 https://mail.drh.net/cgi-bin/get_password.cgi'
 alias tree='tree -C'
 alias vundle_update='vim +BundleInstall +qall'
