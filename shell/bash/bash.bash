@@ -44,10 +44,11 @@ fi
 
 if declare -f __git_ps1 > /dev/null 2>&1
 then
-  export PS1="${USERSTRING}@\h ${BROWN}\w${PURPLE}\$(__git_ps1) ${COLORRESET}❯ "
+  MYGITPROMPT="${PURPLE}\$(__git_ps1)"
 else
-  export PS1="${USERSTRING}@\h ${BROWN}\w ${COLORRESET}❯ "
+  MYGITPROMPT=''
 fi
+export PS1="${USERSTRING}@\h ${BROWN}\w${MYGITPROMPT} ${CYAN}❯${COLORRESET} "
 export PROMPT_COMMAND='echo -ne "\033]0;@${HOSTNAME}\007"'
 
 export GIT_PS1_SHOWCOLORHINTS=1
