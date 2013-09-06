@@ -31,6 +31,6 @@ fresh config/gitconfig --file
 #disable fresh shell/zsh/oh-my-zsh/custom --file=~/.oh-my-zsh_custom/
 
 # fish
-fresh shell/fish/functions --file=~/.config/fish/functions/
-fresh shell/fish/config.fish --file=~/.config/fish/config.fish
-fresh fish-shell/fish-shell share/completions --file=~/.config/fish/completions/
+#disable fresh shell/fish/functions --file=~/.config/fish/functions/
+#disable fresh shell/fish/config.fish --file=~/.config/fish/config.fish
+#disable fresh fish-shell/fish-shell share/completions --file=~/.config/fish/completions/
