@@ -7,8 +7,22 @@ fi
 
 COLORRESET="\[\033[0m\]"
 RED="\[\033[0;31m\]"
-YELLOW="\[\033[0;33m\]"
 GREEN="\[\033[0;32m\]"
+BROWN="\[\033[0;33m\]"
+BLUE="\[\033[0;34m\]"
+PURPLE="\[\033[0;35m\]"
+CYAN="\[\033[0;36m\]"
+LTGRAY="\[\033[0;37m\]"
+
+DKGRAY="\[\033[1;30m\]"
+LTRED="\[\033[1;31m\]"
+LTGREEN="\[\033[1;32m\]"
+YELLOW="\[\033[1;33m\]"
+LTBLUE="\[\033[1;34m\]"
+LTPURPLE="\[\033[1;35m\]"
+LTCYAN="\[\033[1;36m\]"
+WHITE="\[\033[1;37m\]"
+
 
 if [ -f /usr/share/git/completion/git-prompt.sh ] # archlinux
 then
@@ -18,11 +32,18 @@ then
   source /usr/share/git-core/contrib/completion/git-prompt.sh
 fi
 
+if [[ $USER == 'root' ]]
+then
+  USERCOLOR=$LTRED
+else
+  USERCOLOR=$GREEN
+fi
+
 if declare -f __git_ps1 > /dev/null 2>&1
 then
-  export PS1="${GREEN}\u@\h ${YELLOW}\w${RED}\$(__git_ps1) ${COLORRESET}❯ "
+  export PS1="${USERCOLOR}\u@\h ${BROWN}\w${RED}\$(__git_ps1) ${COLORRESET}❯ "
 else
-  export PS1="${GREEN}\u@\h ${YELLOW}\w ${COLORRESET}❯ "
+  export PS1="${USERCOLOR}\u@\h ${BROWN}\w ${COLORRESET}❯ "
 fi
 export PROMPT_COMMAND='echo -ne "\033]0;@${HOSTNAME}\007"'
 
