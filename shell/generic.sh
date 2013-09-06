@@ -19,6 +19,7 @@ alias gc='git commit'
 alias gco='git checkout'
 alias gd='git diff'
 alias gl='git pull'
+alias glo='git log --oneline'
 alias gp='git push'
 alias gs='git status' 
 alias gss='git status --short' 
@@ -59,6 +60,7 @@ if which rbenv > /dev/null 2>&1; then eval "$(rbenv init -)"; fi
 
 # ssh
 function delkey {
+  [ -z $1 ] && echo "supply deletion key" && return 2
   sed -i -e "/.*$1/d" ~/.ssh/known_hosts
 }
 
