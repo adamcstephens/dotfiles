@@ -5,23 +5,23 @@ then
   fi
 fi
 
-COLORRESET="\[\033[0m\]"
-RED="\[\033[0;31m\]"
-GREEN="\[\033[0;32m\]"
-BROWN="\[\033[0;33m\]"
-BLUE="\[\033[0;34m\]"
-PURPLE="\[\033[0;35m\]"
-CYAN="\[\033[0;36m\]"
-LTGRAY="\[\033[0;37m\]"
+MY_COLORRESET="\[\033[0m\]"
+MY_RED="\[\033[0;31m\]"
+MY_GREEN="\[\033[0;32m\]"
+MY_BROWN="\[\033[0;33m\]"
+MY_BLUE="\[\033[0;34m\]"
+MY_PURPLE="\[\033[0;35m\]"
+MY_CYAN="\[\033[0;36m\]"
+MY_LTGRAY="\[\033[0;37m\]"
 
-DKGRAY="\[\033[1;30m\]"
-LTRED="\[\033[1;31m\]"
-LTGREEN="\[\033[1;32m\]"
-YELLOW="\[\033[1;33m\]"
-LTBLUE="\[\033[1;34m\]"
-LTPURPLE="\[\033[1;35m\]"
-LTCYAN="\[\033[1;36m\]"
-WHITE="\[\033[1;37m\]"
+MY_DKGRAY="\[\033[1;30m\]"
+MY_LTRED="\[\033[1;31m\]"
+MY_LTGREEN="\[\033[1;32m\]"
+MY_YELLOW="\[\033[1;33m\]"
+MY_LTBLUE="\[\033[1;34m\]"
+MY_LTPURPLE="\[\033[1;35m\]"
+MY_LTCYAN="\[\033[1;36m\]"
+MY_WHITE="\[\033[1;37m\]"
 
 
 if [ -f /usr/share/git/completion/git-prompt.sh ] # archlinux
@@ -34,21 +34,21 @@ fi
 
 if [[ $USER == 'root' ]]
 then
-  USERSTRING="${LTRED}\u"
+  USERSTRING="${MY_LTRED}\u"
 elif [[ $USER == 'adam' ]]
 then
-  USERSTRING="${GREEN}"
+  USERSTRING="${MY_GREEN}"
 else
-  USERSTRING="${GREEN}\u"
+  USERSTRING="${MY_GREEN}\u"
 fi
 
 if declare -f __git_ps1 > /dev/null 2>&1
 then
-  MYGITPROMPT="${PURPLE}\$(__git_ps1)"
+  MYGITPROMPT="${MY_PURPLE}\$(__git_ps1)"
 else
   MYGITPROMPT=''
 fi
-export PS1="${USERSTRING}@\h ${BROWN}\w${MYGITPROMPT} ${CYAN}❯${COLORRESET} "
+export PS1="${USERSTRING}@\h ${MY_BROWN}\w${MYGITPROMPT} ${MY_CYAN}❯${MY_COLORRESET} "
 export PROMPT_COMMAND='echo -ne "\033]0;@${HOSTNAME}\007"'
 
 export GIT_PS1_SHOWCOLORHINTS=1
