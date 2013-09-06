@@ -1,5 +1,6 @@
 export CLICOLOR=''
 export PAGER='less -rFX'
+export EDITOR='vim'
 
 # _generic
 alias ll="ls -l"
