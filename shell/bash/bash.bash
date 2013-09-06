@@ -10,7 +10,17 @@ RED="\[\033[0;31m\]"
 YELLOW="\[\033[0;33m\]"
 GREEN="\[\033[0;32m\]"
 
-export PS1="${GREEN}\u@\h ${YELLOW}\w${RED}\$(__git_ps1) ${COLORRESET}❯ "
+if [ -f /usr/share/git/completion/git-prompt.sh ]
+then
+  source /usr/share/git/completion/git-prompt.sh
+fi
+
+if declare -f __git_ps1 > /dev/null 2>&1
+then
+  export PS1="${GREEN}\u@\h ${YELLOW}\w${RED}\$(__git_ps1) ${COLORRESET}❯ "
+else
+  export PS1="${GREEN}\u@\h ${YELLOW}\w ${COLORRESET}❯ "
+fi
 export PROMPT_COMMAND='echo -ne "\033]0;@${HOSTNAME}\007"'
 
 export GIT_PS1_SHOWCOLORHINTS=1
