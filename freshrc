@@ -5,11 +5,14 @@ fresh freshshell/fresh bin/fresh --bin
 fresh-options --file=~/.bash_profile --marker
   fresh shell/bash/bash.bash
   fresh shell/generic.sh
+  fresh shell/drh.sh
 fresh-options
 
 fresh-options --file=~/.zshrc --marker
   fresh shell/zsh/zshrc.zsh
+  fresh shell/zsh/prompt.zsh
   fresh shell/generic.sh
+  fresh shell/drh.sh
 fresh-options
 
 fresh-options --file=~/.vimrc --marker=\"
