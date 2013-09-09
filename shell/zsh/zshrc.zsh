@@ -14,12 +14,14 @@ fi
 
 # completion
 zmodload zsh/complist
-autoload -Uz compinit
-compinit
+autoload -Uz compinit && compinit
 
 # promptinit
-autoload -U promptinit
-promptinit
+autoload -U promptinit && promptinit
+
+# prompt colors
+setopt prompt_subst
+autoload -U colors && colors # Enable colors in prompt
 
 # history
 export HISTSIZE=10000 
