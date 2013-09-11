@@ -27,6 +27,8 @@ fresh-options --bin
   fresh vim-scripts/vimcat vimcat
 fresh-options
 
+fresh github/hub bin/hub --bin
+
 fresh config/screenrc --file
 fresh config/gitconfig --file
 

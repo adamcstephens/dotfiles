@@ -33,6 +33,12 @@ alias ai="sudo apt-get install"
 # fresh
 source ~/.fresh/build/shell.sh
 
+# linux
+alias linsleep='sudo pm-suspend'
+
+# debian
+alias acsh='apt-cache show'
+
 # git
 alias ga='git add'
 alias gbv='git branch -av'
@@ -48,12 +54,25 @@ alias gt='git tag -l'
 
 # notes
 alias cln="cat ~/notes/\`ls -1t ~/notes | head -n1\`"
+
+#function aln {
+#  fc -l $1 $1 >> 
+#}
 alias eln="vim ~/notes/\`ls -1t ~/notes | head -n1\`"
 function elng {
-  filename=`grep "$1" ~/notes/* | cut -f1 -d\: | sort -u`
-  vim $filename
+  filename=`grep -H "$1" ~/notes/* | cut -f1 -d\: | sort -u | head -n1`
+  if [ -e $filename ]
+  then
+    vim $filename
+  else
+    echo "no note found"
+  fi
 }
 alias nn="vim ~/notes/\`date +%Y-%m-%d_%H%M\`.txt"
+alias nn="vim ~/notes/.txt"
+function nnn {
+  vim ~/notes/$1.txt
+}
 alias lnn="ls -lt ~/notes"
 
 # pyenv
@@ -80,12 +99,19 @@ fi
 if [ -d $HOME/.rbenv/shims ]
 then
   export PATH="$PATH:$HOME/.rbenv/shims"
+  if [ -d $HOME/.rbenv ]
+  then
+    export PATH="$HOME/.rbenv/bin:$PATH"
+  fi
 fi
 if [ -d $HOME/.rbenv/bin ]
 then
   export PATH="$PATH:$HOME/.rbenv/bin"
 fi
 if which rbenv > /dev/null 2>&1; then eval "$(rbenv init -)"; fi
+
+# set up ruby libs
+export RUBYLIB=~/.fresh/source/github/hub/lib
 
 # ssh
 function delkey {
