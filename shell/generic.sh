@@ -57,9 +57,13 @@ alias nn="vim ~/notes/\`date +%Y-%m-%d_%H%M\`.txt"
 alias lnn="ls -lt ~/notes"
 
 # pyenv
-if [ -d $HOME/.pyenv ]
+if [ -d $HOME/.pyenv/shims ]
 then
   export PATH="$PATH:$HOME/.pyenv/shims"
+fi
+if [ -d $HOME/.pyenv/bin ]
+then
+  export PATH="$PATH:$HOME/.pyenv/bin"
 fi
 if which pyenv > /dev/null 2>&1; then eval "$(pyenv init -)"; fi
 
@@ -73,7 +77,7 @@ then
 fi
 
 # rbenv
-if [ -d $HOME/.rbenv ]
+if [ -d $HOME/.rbenv/shims ]
 then
   export PATH="$PATH:$HOME/.rbenv/shims"
 fi
