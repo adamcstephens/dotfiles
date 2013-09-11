@@ -99,10 +99,6 @@ fi
 if [ -d $HOME/.rbenv/shims ]
 then
   export PATH="$PATH:$HOME/.rbenv/shims"
-  if [ -d $HOME/.rbenv ]
-  then
-    export PATH="$HOME/.rbenv/bin:$PATH"
-  fi
 fi
 if [ -d $HOME/.rbenv/bin ]
 then
