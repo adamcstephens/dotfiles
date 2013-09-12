@@ -32,6 +32,12 @@ setopt hist_ignore_all_dups
 #
 setopt extendedglob
 
+# save history immediately
+setopt inc_append_history
+
+# share history between terminals
+# setopt share_history
+
 # set emacs mode
 bindkey -e
 
