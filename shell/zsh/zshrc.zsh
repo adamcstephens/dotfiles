@@ -38,8 +38,13 @@ setopt inc_append_history
 # share history between terminals
 # setopt share_history
 
+# word separation for movement 
+export WORDCHARS='*?_[]~=&;!#$%^(){}.-'
+
 # set emacs mode
 bindkey -e
+bindkey ";5C" forward-word
+bindkey ";5D" backward-word
 
 # create a zkbd compatible hash;
 # to add other keys to this hash, see: man 5 terminfo
