@@ -39,7 +39,7 @@ setopt inc_append_history
 # setopt share_history
 
 # word separation for movement 
-export WORDCHARS='*?_[]~=&;!#$%^(){}.-'
+export WORDCHARS='*?_[]~|&;!#$%^(){}.-"'
 
 # set emacs mode
 bindkey -e
