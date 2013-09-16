@@ -38,6 +38,9 @@ setopt inc_append_history
 # share history between terminals
 # setopt share_history
 
+# allow comments in interactive shell
+setopt interactivecomments
+
 # word separation for movement 
 export WORDCHARS='*?_[]~|&;!#$%^(){}.-"'
 
