@@ -69,7 +69,6 @@ function elng {
   fi
 }
 alias nn="vim ~/notes/\`date +%Y-%m-%d_%H%M\`.txt"
-alias nn="vim ~/notes/.txt"
 function nnn {
   vim ~/notes/$1.txt
 }
