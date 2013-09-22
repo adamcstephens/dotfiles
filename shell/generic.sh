@@ -95,7 +95,16 @@ export RUBYLIB=~/.fresh/source/github/hub/lib
 # ssh
 function delkey {
   [ -z $1 ] && echo "supply deletion key" && return 2
-  sed -i -e "/.*$1/d" ~/.ssh/known_hosts
+
+  if grep -q 'HashKnownHosts yes' /etc/ssh/ssh_config 2>/dev/null
+  then
+    delhost="`ssh-keygen -lf ~/.ssh/known_hosts -F $1 | grep -v '^#' | awk '{print $3}'`"
+  else
+    delhost=$1
+  fi
+
+  hostline=`grep -n $delhost $HOME/.ssh/known_hosts | cut -f1 -d\:`
+  sed -i -e "${hostline}d" ~/.ssh/known_hosts
 }
 
 # vagrant/veewee
