@@ -32,9 +32,10 @@ setopt hist_ignore_all_dups
 #
 setopt extendedglob
 
+# override history
+alias history='fc -l 1 | less'
 # save history immediately
 setopt inc_append_history
-
 # share history between terminals
 # setopt share_history
 
