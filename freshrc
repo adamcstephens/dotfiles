@@ -5,6 +5,7 @@ fresh freshshell/fresh bin/fresh --bin
 fresh-options --file=~/.bash_profile --marker
   fresh shell/bash/bash.bash
   fresh shell/generic.sh
+  fresh shell/packages.sh
   fresh shell/drh.sh
 fresh-options
 
@@ -14,6 +15,7 @@ fresh-options --file=~/.zshrc --marker
   fresh shell/zsh/python.zsh
   fresh shell/zsh/rprompt.zsh
   fresh shell/generic.sh
+  fresh shell/packages.sh
   fresh shell/drh.sh
 fresh-options
 
