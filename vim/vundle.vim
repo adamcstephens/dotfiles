@@ -1,4 +1,5 @@
 Bundle 'airblade/vim-gitgutter'
+Bundle 'cometsong/ferm.vim'
 Bundle 'godlygeek/tabular'
 Bundle 'rodjek/vim-puppet'
 Bundle 'scrooloose/syntastic'
