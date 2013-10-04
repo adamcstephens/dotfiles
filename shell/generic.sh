@@ -39,19 +39,6 @@ alias linsleep='sudo pm-suspend'
 # debian
 alias acsh='apt-cache show'
 
-# git
-alias ga='git add'
-alias gbv='git branch -av'
-alias gc='git commit'
-alias gco='git checkout'
-alias gd='git diff'
-alias gl='git pull'
-alias glo='git log --oneline'
-alias gp='git push'
-alias gs='git status' 
-alias gss='git status --short' 
-alias gt='git tag -l'
-
 # notes
 alias cln="cat ~/notes/\`ls -1t ~/notes | head -n1\`"
 
