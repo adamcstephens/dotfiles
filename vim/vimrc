@@ -1,5 +1,5 @@
 set nocompatible
-set modelines=1
+set modelines=2
 set nu
 
 set tabstop=2
