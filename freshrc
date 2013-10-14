@@ -7,6 +7,7 @@ fresh-options --file=~/.bash_profile --marker
   fresh shell/generic.sh
   fresh shell/packages.sh
   fresh shell/drh.sh
+  fresh shell/git.sh
 fresh-options
 
 fresh-options --file=~/.zshrc --marker
@@ -17,6 +18,7 @@ fresh-options --file=~/.zshrc --marker
   fresh shell/generic.sh
   fresh shell/packages.sh
   fresh shell/drh.sh
+  fresh shell/git.sh
 fresh-options
 
 fresh-options --file=~/.vimrc --marker=\"
