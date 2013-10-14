@@ -24,12 +24,6 @@ alias acsh="aptitude show"
 alias mountcrypt="encfs $HOME/backup/encrypted $HOME/decrypted/"
 alias umountcrypt="fusermount -u $HOME/decrypted"
 
-# debian
-alias acs="apt-cache search"
-alias acsh="apt-cache show"
-alias adg="sudo apt-get update && sudo apt-get dist-upgrade"
-alias ai="sudo apt-get install"
-
 # fresh
 source ~/.fresh/build/shell.sh
 

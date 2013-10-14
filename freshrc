@@ -3,6 +3,7 @@
 fresh freshshell/fresh bin/fresh --bin
 
 fresh-options --file=~/.bash_profile --marker
+  fresh shell/os_detect.sh
   fresh shell/bash/bash.bash
   fresh shell/generic.sh
   fresh shell/packages.sh
@@ -11,6 +12,7 @@ fresh-options --file=~/.bash_profile --marker
 fresh-options
 
 fresh-options --file=~/.zshrc --marker
+  fresh shell/os_detect.sh
   fresh shell/zsh/zshrc.zsh
   fresh shell/zsh/prompt.zsh
   fresh shell/zsh/python.zsh
