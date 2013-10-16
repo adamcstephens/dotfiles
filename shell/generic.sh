@@ -54,6 +54,7 @@ function nnn {
   vim ~/notes/$1.txt
 }
 alias lnn="ls -lt ~/notes"
+alias lln="ls -1 ~/notes/\`ls -1t ~/notes | head -n1\`"
 
 # pyenv
 if [ -d $HOME/.pyenv/shims ]
