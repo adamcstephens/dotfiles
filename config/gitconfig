@@ -9,3 +9,5 @@
   default = tracking
 [include]
   path = .gitconfig.local
+[github]
+  user = adamcstephens
