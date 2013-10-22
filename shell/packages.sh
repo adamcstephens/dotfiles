@@ -30,13 +30,13 @@ function pki () {
   [ -x $1 ] && return 5
   case $DIST in
     'arch')
-      pacman -S $1
+      sudo pacman -S $1
       ;;
     'debian')
-      apt-get install $1
+      sudo apt-get install $1
       ;;
     'redhat')
-      yum install $1
+      sudo yum install $1
       ;;
     *)
       return 6
