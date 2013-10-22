@@ -4,6 +4,8 @@ export GREP_COLOR='3;32'
 export PAGER='less -rFX'
 export EDITOR='vim'
 
+[ -e $HOME/.shell_local.sh ] && . $HOME/.shell_local.sh
+
 # _generic
 if ls --color=auto > /dev/null 2>&1
 then
