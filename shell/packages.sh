@@ -61,3 +61,20 @@ function pkp () {
       ;;
   esac
 }
+
+function pku () {
+  case $DIST in
+    'arch')
+      sudo pacman -Syu
+      ;;
+    'debian')
+      sudo apt-get update && sudo apt-get dist-upgrade
+      ;;
+    'redhat')
+      sudo yum update
+      ;;
+    *)
+      return 6
+      ;;
+  esac
+}
