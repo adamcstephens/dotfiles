@@ -4,6 +4,8 @@ export GREP_COLOR='3;32'
 export PAGER='less -rFX'
 export EDITOR='vim'
 
+[ -e $HOME/.shell_local.sh ] && . $HOME/.shell_local.sh
+
 # _generic
 if ls --color=auto > /dev/null 2>&1
 then
@@ -23,12 +25,6 @@ alias acsh="aptitude show"
 # crypt
 alias mountcrypt="encfs $HOME/backup/encrypted $HOME/decrypted/"
 alias umountcrypt="fusermount -u $HOME/decrypted"
-
-# debian
-alias acs="apt-cache search"
-alias acsh="apt-cache show"
-alias adg="sudo apt-get update && sudo apt-get dist-upgrade"
-alias ai="sudo apt-get install"
 
 # fresh
 source ~/.fresh/build/shell.sh
@@ -60,6 +56,7 @@ function nnn {
   vim ~/notes/$1.txt
 }
 alias lnn="ls -lt ~/notes"
+alias lln="ls -1 ~/notes/\`ls -1t ~/notes | head -n1\`"
 
 # pyenv
 if [ -d $HOME/.pyenv/shims ]
