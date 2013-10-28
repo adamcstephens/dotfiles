@@ -49,7 +49,7 @@ else
   MYGITPROMPT=''
 fi
 export PS1="${USERSTRING}@\h ${MY_BROWN}\w${MYGITPROMPT} ${MY_CYAN}❯${MY_COLORRESET} "
-if [[ $TERM == 'xterm' ]]
+if [[ $TERM =~ xterm.* ]]
 then
   export PROMPT_COMMAND='echo -ne "\033]0;@${HOSTNAME}\007"'
 fi
