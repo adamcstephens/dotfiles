@@ -1,3 +1,4 @@
+# arch
 alias pi='sudo pacman -S'
 alias pqs='sudo pacman -Ss'
 alias pyu='sudo pacman -Syu'
@@ -8,73 +9,29 @@ alias acsh="apt-cache show"
 alias adg="sudo apt-get update && sudo apt-get dist-upgrade"
 alias ai="sudo apt-get install"
 
-function pks () {
-  [ -z $1 ] && return 5
-  case $DIST in
-    'arch')
-      pacman -Ss $1
-      ;;
-    'debian')
-      apt-cache search $1
-      ;;
-    'redhat')
-      yum search $1
-      ;;
-    *)
-      return 6
-      ;;
-  esac
-}
-
-function pki () {
-  [ -x $1 ] && return 5
-  case $DIST in
-    'arch')
-      sudo pacman -S $@
-      ;;
-    'debian')
-      sudo apt-get install $@
-      ;;
-    'redhat')
-      sudo yum install $@
-      ;;
-    *)
-      return 6
-      ;;
-  esac
-}
-
-function pkp () {
-  [ -x $1 ] && return 5
-  case $DIST in
-    'arch')
-      pkgfile $1
-      ;;
-    'debian')
-      apt-file search $1
-      ;;
-    'redhat')
-      yum provides $1
-      ;;
-    *)
-      return 6
-      ;;
-  esac
-}
-
-function pku () {
-  case $DIST in
-    'arch')
-      sudo pacman -Syu
-      ;;
-    'debian')
-      sudo apt-get update && sudo apt-get dist-upgrade
-      ;;
-    'redhat')
-      sudo yum update
-      ;;
-    *)
-      return 6
-      ;;
-  esac
-}
+case $DIST in
+  'arch')
+    alias pki="sudo pacman -S"
+    alias pkp="pkgfile"
+    alias pks="pacman -Ss"
+    alias pksh="pacman -S"
+    alias pku="sudo pacman -Syu"
+    ;;
+  'debian')
+    alias pki="sudo apt-get install"
+    alias pkp="apt-file search"
+    alias pks="apt-cache search"
+    alias pksh="apt-cache show"
+    alias pku="sudo apt-get update && sudo apt-get dist-upgrade"
+    ;;
+  'redhat')
+    alias pki="sudo yum install"
+    alias pkp="yum provides"
+    alias pks="yum search"
+    alias pksh="yum info"
+    alias pku="sudo yum update"
+    ;;
+  *)
+    echo "Unknown distribution"
+    ;;
+esac
