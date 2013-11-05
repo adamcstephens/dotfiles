@@ -98,27 +98,6 @@ function delkey {
   sed -i -e "/.*$1/d" ~/.ssh/known_hosts
 }
 
-# vagrant/veewee
-alias vdestroy='vagrant destroy '
-alias veewee='bundle exec veewee'
-alias vf='veewee fusion'
-alias vs='vagrant status'
-alias vv='veewee vbox'
-function vssh {
-  vmName=$1
-
-  if ! vagrant status $vmName | grep 'running (' 
-  then
-    vagrant up $vmName
-  fi
-  vagrant ssh $vmName
-}
-function vreload {
-  vmName=$1
-  vagrant destroy -f $vmName
-  vssh $vmName
-}
-
 function bootstrap_rbenv {
   git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
   git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
