@@ -10,6 +10,7 @@ fresh-options --file=~/.bash_profile --marker
   fresh shell/drh.sh
   fresh shell/git.sh
   fresh shell/virtual.sh
+  fresh shell/puppet.sh
 fresh-options
 
 fresh-options --file=~/.zshrc --marker
@@ -23,6 +24,7 @@ fresh-options --file=~/.zshrc --marker
   fresh shell/drh.sh
   fresh shell/git.sh
   fresh shell/virtual.sh
+  fresh shell/puppet.sh
 fresh-options
 
 fresh-options --file=~/.vimrc --marker=\"
