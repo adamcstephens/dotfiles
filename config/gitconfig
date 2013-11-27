@@ -11,3 +11,8 @@
   path = .gitconfig.local
 [github]
   user = adamcstephens
+[color "diff"]
+  meta = blue
+  frag = magenta
+  old = red 
+  new = green
