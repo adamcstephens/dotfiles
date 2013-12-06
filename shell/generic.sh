@@ -95,7 +95,7 @@ export RUBYLIB=~/.fresh/source/github/hub/lib
 # ssh
 function delkey {
   [ -z $1 ] && echo "supply deletion key" && return 2
-  sed -i -e "/.*$1/d" ~/.ssh/known_hosts
+  ssh-keygen -f "$HOME/.ssh/known_hosts" -R $1
 }
 
 function bootstrap_rbenv {
