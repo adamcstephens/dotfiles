@@ -36,6 +36,10 @@ fresh-options
 
 fresh-options --bin
   fresh vim-scripts/vimcat vimcat
+  if [ -e /etc/debian_version ]
+  then
+    fresh blyork/apt-history apt-history
+  fi
 fresh-options
 
 fresh github/hub bin/hub --bin
