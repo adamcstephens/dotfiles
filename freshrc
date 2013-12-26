@@ -9,6 +9,8 @@ fresh-options --file=~/.bash_profile --marker
   fresh shell/packages.sh
   fresh shell/drh.sh
   fresh shell/git.sh
+  fresh shell/virtual.sh
+  fresh shell/puppet.sh
 fresh-options
 
 fresh-options --file=~/.zshrc --marker
@@ -21,6 +23,8 @@ fresh-options --file=~/.zshrc --marker
   fresh shell/packages.sh
   fresh shell/drh.sh
   fresh shell/git.sh
+  fresh shell/virtual.sh
+  fresh shell/puppet.sh
 fresh-options
 
 fresh-options --file=~/.vimrc --marker=\"
@@ -32,6 +36,10 @@ fresh-options
 
 fresh-options --bin
   fresh vim-scripts/vimcat vimcat
+  if [ -e /etc/debian_version ]
+  then
+    fresh blyork/apt-history apt-history
+  fi
 fresh-options
 
 fresh github/hub bin/hub --bin

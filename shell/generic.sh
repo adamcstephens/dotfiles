@@ -95,37 +95,7 @@ export RUBYLIB=~/.fresh/source/github/hub/lib
 # ssh
 function delkey {
   [ -z $1 ] && echo "supply deletion key" && return 2
-
-  if grep -q 'HashKnownHosts yes' /etc/ssh/ssh_config 2>/dev/null
-  then
-    delhost="`ssh-keygen -lf ~/.ssh/known_hosts -F $1 | grep -v '^#' | awk '{print $3}'`"
-  else
-    delhost=$1
-  fi
-
-  hostline=`grep -n $delhost $HOME/.ssh/known_hosts | cut -f1 -d\:`
-  sed -i -e "${hostline}d" ~/.ssh/known_hosts
-}
-
-# vagrant/veewee
-alias vdestroy='vagrant destroy '
-alias veewee='bundle exec veewee'
-alias vf='veewee fusion'
-alias vs='vagrant status'
-alias vv='veewee vbox'
-function vssh {
-  vmName=$1
-
-  if ! vagrant status $vmName | grep 'running (' 
-  then
-    vagrant up $vmName
-  fi
-  vagrant ssh $vmName
-}
-function vreload {
-  vmName=$1
-  vagrant destroy -f $vmName
-  vssh $vmName
+  ssh-keygen -f "$HOME/.ssh/known_hosts" -R $1
 }
 
 function bootstrap_rbenv {
