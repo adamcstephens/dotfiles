@@ -20,8 +20,6 @@ alias pwgen='curl -k -3 https://mail.drh.net/cgi-bin/get_password.cgi'
 alias tree='tree -C'
 alias vundle_update='vim +BundleInstall +qall'
 
-# debian
-alias acsh="aptitude show"
 # crypt
 alias mountcrypt="encfs $HOME/backup/encrypted $HOME/decrypted/"
 alias umountcrypt="fusermount -u $HOME/decrypted"
@@ -35,60 +33,6 @@ alias linsleep='sudo pm-suspend'
 # debian
 alias acsh='apt-cache show'
 
-# notes
-alias cln="cat ~/notes/\`ls -1t ~/notes | head -n1\`"
-
-#function aln {
-#  fc -l $1 $1 >> 
-#}
-alias eln="vim ~/notes/\`ls -1t ~/notes | head -n1\`"
-function elng {
-  filename=`grep -H "$1" ~/notes/* | cut -f1 -d\: | sort -u | head -n1`
-  if [ -e $filename ]
-  then
-    vim $filename
-  else
-    echo "no note found"
-  fi
-}
-alias nn="vim ~/notes/\`date +%Y-%m-%d_%H%M\`.txt"
-function nnn {
-  vim ~/notes/$1.txt
-}
-alias lnn="ls -lt ~/notes"
-alias lln="ls -1 ~/notes/\`ls -1t ~/notes | head -n1\`"
-
-# pyenv
-if [ -d $HOME/.pyenv/shims ]
-then
-  export PATH="$PATH:$HOME/.pyenv/shims"
-fi
-if [ -d $HOME/.pyenv/bin ]
-then
-  export PATH="$PATH:$HOME/.pyenv/bin"
-fi
-if which pyenv > /dev/null 2>&1; then eval "$(pyenv init -)"; fi
-
-# python
-if python -V 2>&1 | grep -q 2.4
-then
-  if which python26 > /dev/null
-  then
-    alias python=python26
-  fi
-fi
-
-# rbenv
-if [ -d $HOME/.rbenv/shims ]
-then
-  export PATH="$PATH:$HOME/.rbenv/shims"
-fi
-if [ -d $HOME/.rbenv/bin ]
-then
-  export PATH="$PATH:$HOME/.rbenv/bin"
-fi
-if which rbenv > /dev/null 2>&1; then eval "$(rbenv init -)"; fi
-
 # set up ruby libs
 export RUBYLIB=~/.fresh/source/github/hub/lib
 
@@ -96,9 +40,4 @@ export RUBYLIB=~/.fresh/source/github/hub/lib
 function delkey {
   [ -z $1 ] && echo "supply deletion key" && return 2
   ssh-keygen -f "$HOME/.ssh/known_hosts" -R $1
-}
-
-function bootstrap_rbenv {
-  git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
-  git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
 }
