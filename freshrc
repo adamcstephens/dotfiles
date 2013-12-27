@@ -9,6 +9,8 @@ fresh-options --file=~/.bash_profile --marker
   fresh shell/packages.sh
   fresh shell/drh.sh
   fresh shell/git.sh
+  fresh shell/notes.sh
+  fresh shell/devlang.sh
   fresh shell/virtual.sh
   fresh shell/puppet.sh
 fresh-options
@@ -23,6 +25,8 @@ fresh-options --file=~/.zshrc --marker
   fresh shell/packages.sh
   fresh shell/drh.sh
   fresh shell/git.sh
+  fresh shell/notes.sh
+  fresh shell/devlang.sh
   fresh shell/virtual.sh
   fresh shell/puppet.sh
 fresh-options
