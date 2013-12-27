@@ -27,6 +27,12 @@ fresh-options --file=~/.zshrc --marker
   fresh shell/puppet.sh
 fresh-options
 
+#fresh zsh-users/zsh-completions src --file=completion/
+fresh zsh-users/zsh-completions src/_vagrant --file=completion/_vagrant
+fresh zsh-users/zsh-completions src/_veewee --file=completion/_veewee
+fresh zsh-users/zsh-completions src/_virtualbox --file=completion/_virtualbox
+fresh freshshell/fresh contrib/completion/fresh-completion.zsh --file=completion/_fresh
+
 fresh-options --file=~/.vimrc --marker=\"
   fresh twe4ked/dotfiles vim/vundle_before.vim
   fresh vim/vundle.vim

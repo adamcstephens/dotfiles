@@ -1,3 +1,5 @@
+# virtualbox
+alias vb=VBoxManage
 # vagrant/veewee
 alias vdestroy='vagrant destroy '
 alias veewee='bundle exec veewee'
