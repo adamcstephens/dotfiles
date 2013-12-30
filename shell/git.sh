@@ -9,11 +9,17 @@ alias gc='git commit'
 alias gco='git checkout'
 alias gd='git diff'
 alias gl='git pull'
-alias glo='git log --oneline'
+function glo () {
+  [ -z $1 ] && git log --oneline -n 10 && return 0
+  git log --oneline $@
+}
 alias gm='git merge'
 alias gp='git push'
 alias grh='git reset HEAD'
 alias grv='git remote -v'
 alias gs='git status' 
 alias gss='git status --short' 
-alias gt='git tag -l -n1'
+function gt () {
+  [ -z $1 ] && git tag -l -n1 && return 0
+  git tag $@
+}
