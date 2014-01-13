@@ -1,11 +1,12 @@
 # virtualbox
 alias vb=VBoxManage
-# vagrant/veewee
+# vagrant
 alias vdestroy='vagrant destroy '
-alias veewee='bundle exec veewee'
-alias vf='veewee fusion'
+alias vp='vagrant provision'
 alias vs='vagrant status'
-alias vv='veewee vbox'
+#alias veewee='bundle exec veewee'
+#alias vf='veewee fusion'
+#alias vv='veewee vbox'
 function vssh {
   vmName=$1
 
