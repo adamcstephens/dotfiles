@@ -4,7 +4,7 @@ function gac () {
   [ -z $1 ] && echo "needs argument" && return 20
   git add $1 && git commit -v
 }
-alias gbv='git branch -av'
+alias gbv='git branch -avv'
 alias gc='git commit'
 alias gco='git checkout'
 alias gd='git diff'
