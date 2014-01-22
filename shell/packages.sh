@@ -23,6 +23,7 @@ case $DIST in
     alias pks="apt-cache search"
     alias pksh="apt-cache show"
     alias pku="sudo apt-get update && sudo apt-get dist-upgrade"
+    alias pkr="sudo apt-get remove"
     ;;
   'redhat')
     alias pki="sudo yum install"
