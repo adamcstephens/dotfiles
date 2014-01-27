@@ -2,7 +2,7 @@ case $USER in
   'root')
     USERSTRING="%{$fg_bold[red]%}%n"
     ;;
-  'adam')
+  'adam'|'adam.c.stephens')
     USERSTRING="%{$fg[green]%}"
     ;;
   *)
@@ -10,7 +10,7 @@ case $USER in
     ;;
 esac
 
-export PS1="${USERSTRING}@%m %{$fg[yellow]%}%~ %{$fg[cyan]%}❯%{$reset_color%} "
+export PS1="${USERSTRING}@%m %{$fg[yellow]%}%2c %{$fg[cyan]%}❯%{$reset_color%} "
 
 case $TERM in
     xterm*)
