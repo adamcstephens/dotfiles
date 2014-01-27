@@ -4,6 +4,7 @@ alias vb=VBoxManage
 alias vdestroy='vagrant destroy '
 alias vp='vagrant provision'
 alias vs='vagrant status'
+alias vup='vagrant up'
 #alias veewee='bundle exec veewee'
 #alias vf='veewee fusion'
 #alias vv='veewee vbox'
