@@ -36,6 +36,10 @@ fresh zsh-users/zsh-completions src/_vagrant --file=completion/_vagrant
 fresh zsh-users/zsh-completions src/_veewee --file=completion/_veewee
 fresh zsh-users/zsh-completions src/_virtualbox --file=completion/_virtualbox
 fresh freshshell/fresh contrib/completion/fresh-completion.zsh --file=completion/_fresh
+if `which docker &>/dev/null`
+then
+  fresh felixr/docker-zsh-completion _docker --file=completion/_docker
+fi
 
 fresh-options --file=~/.vimrc --marker=\"
   fresh twe4ked/dotfiles vim/vundle_before.vim
