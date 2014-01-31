@@ -16,6 +16,7 @@ case $DIST in
     alias pks="pacman -Ss"
     alias pksh="pacman -S"
     alias pku="sudo pacman -Syu"
+    alias pkr="sudo pacman -R"
     ;;
   'debian')
     alias pki="sudo apt-get install"
