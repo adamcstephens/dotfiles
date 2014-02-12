@@ -14,6 +14,7 @@ fresh-options --file=~/.bash_profile --marker
   fresh shell/virtual.sh
   fresh shell/puppet.sh
 fresh-options
+fresh shell/bash/bashrc --file
 
 fresh-options --file=~/.zshrc --marker
   fresh shell/os_detect.sh
@@ -44,6 +45,10 @@ fi
 fresh-options --file=~/.vimrc --marker=\"
   fresh twe4ked/dotfiles vim/vundle_before.vim
   fresh vim/vundle.vim
+  if `which docker &>/dev/null`
+  then
+    fresh vim/plugins/docker.vim
+  fi
   fresh twe4ked/dotfiles vim/vundle_after.vim
   fresh vim/vimrc
 fresh-options
