@@ -1,9 +1,20 @@
+# os x bash_completion
 if which brew > /dev/null 2>&1
 then
   if [ -f $(brew --prefix)/etc/bash_completion ]; then
       . $(brew --prefix)/etc/bash_completion
   fi
 fi
+
+# enable bash completion in interactive shells
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi
+
 
 MY_COLORRESET="\[\033[0m\]"
 MY_RED="\[\033[0;31m\]"
