@@ -14,7 +14,7 @@ case $DIST in
     alias pki="sudo pacman -S"
     alias pkp="pkgfile"
     alias pks="pacman -Ss"
-    alias pksh="pacman -S"
+    alias pksh="pacman -Si"
     alias pku="sudo pacman -Syu"
     alias pkr="sudo pacman -R"
     ;;
