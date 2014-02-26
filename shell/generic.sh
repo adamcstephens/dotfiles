@@ -4,6 +4,8 @@ export GREP_COLOR='3;32'
 export PAGER='less -rFX'
 export EDITOR='vim'
 
+which colordiff &>/dev/null && alias diff=colordiff
+
 [ -e $HOME/.shell_local.sh ] && . $HOME/.shell_local.sh
 
 # _generic
