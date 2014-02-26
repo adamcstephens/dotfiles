@@ -22,6 +22,9 @@ fresh-options --file=~/.zshrc --marker
   fresh shell/zsh/prompt.zsh
   fresh shell/zsh/python.zsh
   fresh shell/zsh/rprompt.zsh
+  if [[ "$(uname)" == "Linux" ]]; then
+      fresh shell/linux.sh
+  fi
   fresh shell/generic.sh
   fresh shell/packages.sh
   fresh shell/drh.sh
@@ -65,6 +68,16 @@ fresh github/hub bin/hub --bin
 
 fresh config/screenrc --file
 fresh config/gitconfig --file
+
+init_vim() {
+  if which vim &> /dev/null && ! [ -d $HOME/.vim/bundle/vundle ]; then
+    vim || [ -d $HOME/.vim/bundle/vundle ]
+  fi
+}
+
+fresh_after_build() {
+  init_vim
+}
 
 # oh-my-zsh and my own custom
 #disable fresh robbyrussell/oh-my-zsh . --file=~/.oh-my-zsh/
