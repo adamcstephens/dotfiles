@@ -14,6 +14,7 @@ fresh-options --file=~/.bash_profile --marker
   fresh shell/virtual.sh
   fresh shell/puppet.sh
 fresh-options
+fresh shell/bash/bashrc --file
 
 fresh-options --file=~/.zshrc --marker
   fresh shell/os_detect.sh
@@ -31,9 +32,23 @@ fresh-options --file=~/.zshrc --marker
   fresh shell/puppet.sh
 fresh-options
 
+#fresh zsh-users/zsh-completions src --file=completion/
+fresh zsh-users/zsh-completions src/_vagrant --file=completion/_vagrant
+fresh zsh-users/zsh-completions src/_veewee --file=completion/_veewee
+fresh zsh-users/zsh-completions src/_virtualbox --file=completion/_virtualbox
+fresh freshshell/fresh contrib/completion/fresh-completion.zsh --file=completion/_fresh
+if `which docker &>/dev/null`
+then
+  fresh felixr/docker-zsh-completion _docker --file=completion/_docker
+fi
+
 fresh-options --file=~/.vimrc --marker=\"
   fresh twe4ked/dotfiles vim/vundle_before.vim
   fresh vim/vundle.vim
+  if `which docker &>/dev/null`
+  then
+    fresh vim/plugins/docker.vim
+  fi
   fresh twe4ked/dotfiles vim/vundle_after.vim
   fresh vim/vimrc
 fresh-options

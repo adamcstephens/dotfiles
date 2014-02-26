@@ -12,6 +12,12 @@ then
   source /usr/local/Cellar/rbenv/0.4.0/completions/rbenv.zsh
 fi
 
+# follow fresh recommended  https://github.com/freshshell/fresh/wiki/Loading-Zsh-Completions
+if [ -d ~/.fresh/build/completion ]
+then
+  fpath=(~/.fresh/build/completion $fpath)
+fi
+
 # completion
 zmodload zsh/complist
 autoload -Uz compinit && compinit

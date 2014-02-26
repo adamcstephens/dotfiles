@@ -14,8 +14,9 @@ case $DIST in
     alias pki="sudo pacman -S"
     alias pkp="pkgfile"
     alias pks="pacman -Ss"
-    alias pksh="pacman -S"
+    alias pksh="pacman -Si"
     alias pku="sudo pacman -Syu"
+    alias pkr="sudo pacman -R"
     ;;
   'debian')
     alias pki="sudo apt-get install"
@@ -23,6 +24,7 @@ case $DIST in
     alias pks="apt-cache search"
     alias pksh="apt-cache show"
     alias pku="sudo apt-get update && sudo apt-get dist-upgrade"
+    alias pkr="sudo apt-get remove"
     ;;
   'redhat')
     alias pki="sudo yum install"
