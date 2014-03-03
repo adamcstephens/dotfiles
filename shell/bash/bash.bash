@@ -46,7 +46,7 @@ fi
 if [[ $USER == 'root' ]]
 then
   USERSTRING="${MY_LTRED}\u"
-elif [[ $USER == 'adam' ]]
+elif [[ $USER == 'adam' || $USER == 'adam.c.stephens' ]]
 then
   USERSTRING="${MY_GREEN}"
 else
