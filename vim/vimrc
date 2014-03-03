@@ -33,3 +33,6 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 " json
 " disable vim-json's quite hiding
 let g:vim_json_syntax_conceal = 0
+
+" syntastic
+let g:syntastic_puppet_lint_arguments='--no-80chars-check'
