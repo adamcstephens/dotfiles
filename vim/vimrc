@@ -35,4 +35,4 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 let g:vim_json_syntax_conceal = 0
 
 " syntastic
-let g:syntastic_puppet_lint_arguments='--no-80chars-check'
+let g:syntastic_puppet_puppetlint_args='--no-80chars-check'
