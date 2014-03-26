@@ -12,7 +12,7 @@ colorscheme slate
 set shell=/bin/bash
 
 nmap <F11> :set invpaste<CR>
-nmap <F12> :set invnumber<CR>:GitGutterToggle<CR>
+nmap <F12> :set invnumber<CR>:GitGutterToggle<CR>:SyntasticToggleMode<CR>
 
 "
 " plugins
