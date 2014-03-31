@@ -64,8 +64,6 @@ fresh-options --bin
   fi
 fresh-options
 
-fresh github/hub bin/hub --bin
-
 fresh config/screenrc --file
 fresh config/gitconfig --file
 
