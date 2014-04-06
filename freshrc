@@ -52,6 +52,10 @@ fresh-options --file=~/.vimrc --marker=\"
   then
     fresh vim/plugins/docker.vim
   fi
+  if `which ferm &>/dev/null`
+  then
+    fresh vim/plugins/ferm.vim
+  fi
   fresh twe4ked/dotfiles vim/vundle_after.vim
   fresh vim/vimrc
 fresh-options
@@ -63,8 +67,6 @@ fresh-options --bin
     fresh blyork/apt-history apt-history
   fi
 fresh-options
-
-fresh github/hub bin/hub --bin
 
 fresh config/screenrc --file
 fresh config/gitconfig --file
