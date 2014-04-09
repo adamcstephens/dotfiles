@@ -12,6 +12,7 @@ alias ai="sudo apt-get install"
 case $DIST in
   'arch')
     alias pki="sudo pacman -S"
+    alias pkls="pacman -Ql"
     alias pkp="pkgfile"
     alias pks="pacman -Ss"
     alias pksh="pacman -Si"
@@ -20,6 +21,7 @@ case $DIST in
     ;;
   'debian')
     alias pki="sudo apt-get install"
+    alias pkls="dpkg -L"
     alias pkp="apt-file search"
     alias pks="apt-cache search"
     alias pksh="apt-cache show"
@@ -28,6 +30,7 @@ case $DIST in
     ;;
   'redhat')
     alias pki="sudo yum install"
+    alias pkls="rpm -ql"
     alias pkp="yum provides"
     alias pks="yum search"
     alias pksh="yum info"
