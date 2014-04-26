@@ -1,17 +1,3 @@
-# brew installs
-if [ -f /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]
-then
-  source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-fi
-if [ -d /usr/local/share/zsh-completions ]
-then
-  fpath=(/usr/local/share/zsh-completions $fpath)
-fi
-if [ -f /usr/local/Cellar/rbenv/0.4.0/completions/rbenv.zsh ]
-then
-  source /usr/local/Cellar/rbenv/0.4.0/completions/rbenv.zsh
-fi
-
 # follow fresh recommended  https://github.com/freshshell/fresh/wiki/Loading-Zsh-Completions
 if [ -d ~/.fresh/build/completion ]
 then
@@ -33,7 +19,7 @@ setopt prompt_subst
 autoload -U colors && colors # Enable colors in prompt
 
 # history
-export HISTSIZE=10000 
+export HISTSIZE=100000
 export HISTFILE="$HOME/.zsh_history"
 export SAVEHIST=$HISTSIZE
 setopt hist_ignore_all_dups

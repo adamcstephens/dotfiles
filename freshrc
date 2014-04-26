@@ -4,9 +4,16 @@ fresh freshshell/fresh bin/fresh --bin
 
 fresh-options --file=~/.bash_profile --marker
   fresh shell/os_detect.sh
-  fresh shell/bash/bash.bash
   fresh shell/generic.sh
-  fresh shell/packages.sh
+  if [[ "$(uname)" == "Linux" ]]; then
+    fresh shell/linux.sh
+    fresh shell/packages.sh
+  fi
+  if [[ "$(uname)" == "Darwin" ]]; then
+    fresh shell/mac.sh
+    fresh shell/bash/mac.sh
+  fi
+  fresh shell/bash/bash.bash
   fresh shell/drh.sh
   fresh shell/git.sh
   fresh shell/notes.sh
@@ -23,10 +30,14 @@ fresh-options --file=~/.zshrc --marker
   fresh shell/zsh/python.zsh
   fresh shell/zsh/rprompt.zsh
   if [[ "$(uname)" == "Linux" ]]; then
-      fresh shell/linux.sh
+    fresh shell/linux.sh
+    fresh shell/packages.sh
+  fi
+  if [[ "$(uname)" == "Darwin" ]]; then
+    fresh shell/mac.sh
+    fresh shell/zsh/mac.sh
   fi
   fresh shell/generic.sh
-  fresh shell/packages.sh
   fresh shell/drh.sh
   fresh shell/git.sh
   fresh shell/notes.sh
