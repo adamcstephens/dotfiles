@@ -7,12 +7,12 @@ fresh-options --file=~/.bash_profile --marker
   fresh shell/generic.sh
   if [[ "$(uname)" == "Linux" ]]; then
     fresh shell/linux.sh
-    fresh shell/packages.sh
   fi
   if [[ "$(uname)" == "Darwin" ]]; then
     fresh shell/mac.sh
     fresh shell/bash/mac.sh
   fi
+  fresh shell/packages.sh
   fresh shell/bash/bash.bash
   fresh shell/drh.sh
   fresh shell/git.sh
@@ -31,12 +31,12 @@ fresh-options --file=~/.zshrc --marker
   fresh shell/zsh/rprompt.zsh
   if [[ "$(uname)" == "Linux" ]]; then
     fresh shell/linux.sh
-    fresh shell/packages.sh
   fi
   if [[ "$(uname)" == "Darwin" ]]; then
     fresh shell/mac.sh
     fresh shell/zsh/mac.sh
   fi
+  fresh shell/packages.sh
   fresh shell/generic.sh
   fresh shell/drh.sh
   fresh shell/git.sh
