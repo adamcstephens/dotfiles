@@ -47,10 +47,16 @@ fresh-options --file=~/.zshrc --marker
 fresh-options
 
 #fresh zsh-users/zsh-completions src --file=completion/
-fresh zsh-users/zsh-completions src/_vagrant --file=completion/_vagrant
-fresh zsh-users/zsh-completions src/_veewee --file=completion/_veewee
-fresh zsh-users/zsh-completions src/_virtualbox --file=completion/_virtualbox
+if which vagrant &>/dev/null
+then
+  fresh zsh-users/zsh-completions src/_vagrant --file=completion/_vagrant
+fi
+if which VBoxManage &>/dev/null
+then
+  fresh zsh-users/zsh-completions src/_virtualbox --file=completion/_virtualbox
+fi
 fresh freshshell/fresh contrib/completion/fresh-completion.zsh --file=completion/_fresh
+
 if `which docker &>/dev/null`
 then
   fresh felixr/docker-zsh-completion _docker --file=completion/_docker
