@@ -62,6 +62,14 @@ then
   fresh felixr/docker-zsh-completion _docker --file=completion/_docker
 fi
 
+if which conky &> /dev/null
+then
+  if [ -e "config/conkyrc/$(hostname)" ]
+  then
+    fresh config/conkyrc/$(hostname) --file=~/.conkyrc
+  fi
+fi
+
 fresh-options --file=~/.vimrc --marker=\"
   fresh twe4ked/dotfiles vim/vundle_before.vim
   fresh vim/vundle.vim
