@@ -15,7 +15,7 @@ then
 fi
 alias ll="ls -l"
 alias l="ls -la"
-alias esl="exec $SHELL -l"
+alias esl="exec $0 -l"
 alias fesl="fresh && esl"
 alias fuesl="fresh update && esl"
 if which apg &>/dev/null
