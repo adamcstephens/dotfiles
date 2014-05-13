@@ -1,85 +1,117 @@
 # vim: set ft=sh:
 
+# install the fresh binary
 fresh freshshell/fresh bin/fresh --bin
 
-fresh-options --file=~/.bash_profile --marker
-  fresh shell/os_detect.sh
-  fresh shell/bash/bash.bash
-  fresh shell/generic.sh
-  fresh shell/packages.sh
-  fresh shell/drh.sh
-  fresh shell/git.sh
-  fresh shell/notes.sh
-  fresh shell/devlang.sh
-  fresh shell/virtual.sh
-  fresh shell/puppet.sh
-fresh-options
-fresh shell/bash/bashrc --file
-
-fresh-options --file=~/.zshrc --marker
-  fresh shell/os_detect.sh
-  fresh shell/zsh/zshrc.zsh
-  fresh shell/zsh/prompt.zsh
-  fresh shell/zsh/python.zsh
-  fresh shell/zsh/rprompt.zsh
-  if [[ "$(uname)" == "Linux" ]]; then
-      fresh shell/linux.sh
-  fi
-  fresh shell/generic.sh
-  fresh shell/packages.sh
-  fresh shell/drh.sh
-  fresh shell/git.sh
-  fresh shell/notes.sh
-  fresh shell/devlang.sh
-  fresh shell/virtual.sh
-  fresh shell/puppet.sh
-fresh-options
-
-#fresh zsh-users/zsh-completions src --file=completion/
-fresh zsh-users/zsh-completions src/_vagrant --file=completion/_vagrant
-fresh zsh-users/zsh-completions src/_veewee --file=completion/_veewee
-fresh zsh-users/zsh-completions src/_virtualbox --file=completion/_virtualbox
-fresh freshshell/fresh contrib/completion/fresh-completion.zsh --file=completion/_fresh
-if `which docker &>/dev/null`
+#
+# bash
+#
+if which bash &> /dev/null
 then
-  fresh felixr/docker-zsh-completion _docker --file=completion/_docker
+  fresh-options --file=~/.bash_profile --marker
+    fresh shell/os_detect.sh
+    fresh shell/bash/bash.bash
+    fresh shell/generic.sh
+    fresh shell/packages.sh
+    fresh shell/drh.sh
+    fresh shell/git.sh
+    fresh shell/notes.sh
+    fresh shell/devlang.sh
+    fresh shell/virtual.sh
+    fresh shell/puppet.sh
+  fresh-options
+  fresh shell/bash/bashrc --file
 fi
 
-fresh-options --file=~/.vimrc --marker=\"
-  fresh twe4ked/dotfiles vim/vundle_before.vim
-  fresh vim/vundle.vim
+#
+# zsh
+#
+if which zsh &> /dev/null
+then
+  fresh-options --file=~/.zshrc --marker
+    fresh shell/os_detect.sh
+    fresh shell/zsh/zshrc.zsh
+    fresh shell/zsh/prompt.zsh
+    fresh shell/zsh/python.zsh
+    fresh shell/zsh/rprompt.zsh
+    if [[ "$(uname)" == "Linux" ]]; then
+        fresh shell/linux.sh
+    fi
+    fresh shell/generic.sh
+    fresh shell/packages.sh
+    fresh shell/drh.sh
+    fresh shell/git.sh
+    fresh shell/notes.sh
+    fresh shell/devlang.sh
+    fresh shell/virtual.sh
+    fresh shell/puppet.sh
+  fresh-options
+
+  #fresh zsh-users/zsh-completions src --file=completion/
+  fresh zsh-users/zsh-completions src/_vagrant --file=completion/_vagrant
+  fresh zsh-users/zsh-completions src/_veewee --file=completion/_veewee
+  fresh zsh-users/zsh-completions src/_virtualbox --file=completion/_virtualbox
+  fresh freshshell/fresh contrib/completion/fresh-completion.zsh --file=completion/_fresh
   if `which docker &>/dev/null`
   then
-    fresh vim/plugins/docker.vim
+    fresh felixr/docker-zsh-completion _docker --file=completion/_docker
   fi
-  if `which ferm &>/dev/null`
-  then
-    fresh vim/plugins/ferm.vim
-  fi
-  fresh twe4ked/dotfiles vim/vundle_after.vim
-  fresh vim/vimrc
-fresh-options
+fi
 
-fresh-options --bin
-  fresh vim-scripts/vimcat vimcat
-  if [ -e /etc/debian_version ]
-  then
-    fresh blyork/apt-history apt-history
-  fi
-fresh-options
+#
+# vim
+#
+if which vim &> /dev/null
+then
+  fresh-options --file=~/.vimrc --marker=\"
+    fresh twe4ked/dotfiles vim/vundle_before.vim
+    fresh vim/vundle.vim
+    if `which docker &>/dev/null`
+    then
+      fresh vim/plugins/docker.vim
+    fi
+    if `which ferm &>/dev/null`
+    then
+      fresh vim/plugins/ferm.vim
+    fi
+    fresh twe4ked/dotfiles vim/vundle_after.vim
+    fresh vim/vimrc
+  fresh-options
 
-fresh config/screenrc --file
-fresh config/gitconfig --file
+  # vimcat binary
+  fresh vim-scripts/vimcat vimcat --bin
 
-init_vim() {
-  if which vim &> /dev/null && ! [ -d $HOME/.vim/bundle/vundle ]; then
-    vim || [ -d $HOME/.vim/bundle/vundle ]
-  fi
-}
+  init_vim() {
+    if which vim &> /dev/null && ! [ -d $HOME/.vim/bundle/vundle ]; then
+      vim || [ -d $HOME/.vim/bundle/vundle ]
+    fi
+  }
 
-fresh_after_build() {
-  init_vim
-}
+  fresh_after_build() {
+    init_vim
+  }
+fi
+
+if [ -e /etc/debian_version ]
+then
+  fresh blyork/apt-history apt-history --bin
+fi
+
+if which screen &> /dev/null
+then
+  fresh config/screenrc --file
+fi
+
+if which git &> /dev/null
+then
+  fresh config/gitconfig --file
+fi
+
+if [ ! -e /etc/inputrc ]
+then
+  fresh config/inputrc --file
+fi
+
 
 # oh-my-zsh and my own custom
 #disable fresh robbyrussell/oh-my-zsh . --file=~/.oh-my-zsh/
