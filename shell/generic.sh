@@ -17,7 +17,7 @@ alias ll="ls -l"
 alias l="ls -la"
 alias esl="exec $SHELL -l"
 alias fesl="fresh && esl"
-alias fuesl="fresh update && esl"
+alias fuesl="fresh clean && fresh update && esl"
 if which apg &>/dev/null
 then
   alias pwgen='apg -n10 -m12 -x20 -M CLNS -t'
