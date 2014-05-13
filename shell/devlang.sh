@@ -1,29 +1,29 @@
 # plenv
 if [ -d $HOME/.plenv/bin ]
 then
-  export PATH="$PATH:$HOME/.plenv/bin"
+  export PATH="$HOME/.plenv/bin:$PATH"
 fi
 if which plenv > /dev/null 2>&1; then eval "$(plenv init -)"; fi
 
 # pyenv
 if [ -d $HOME/.pyenv/shims ]
 then
-  export PATH="$PATH:$HOME/.pyenv/shims"
+  export PATH="$HOME/.pyenv/shims:$PATH"
 fi
 if [ -d $HOME/.pyenv/bin ]
 then
-  export PATH="$PATH:$HOME/.pyenv/bin"
+  export PATH="$HOME/.pyenv/bin:$PATH"
 fi
 if which pyenv > /dev/null 2>&1; then eval "$(pyenv init -)"; fi
 
 # rbenv
 if [ -d $HOME/.rbenv/shims ]
 then
-  export PATH="$PATH:$HOME/.rbenv/shims"
+  export PATH="$HOME/.rbenv/shims:$PATH"
 fi
 if [ -d $HOME/.rbenv/bin ]
 then
-  export PATH="$PATH:$HOME/.rbenv/bin"
+  export PATH="$HOME/.rbenv/bin:$PATH"
 fi
 if which rbenv > /dev/null 2>&1; then eval "$(rbenv init -)"; fi
 

@@ -10,9 +10,16 @@ if which bash &> /dev/null
 then
   fresh-options --file=~/.bash_profile --marker
     fresh shell/os_detect.sh
-    fresh shell/bash/bash.bash
     fresh shell/generic.sh
+    if [[ "$(uname)" == "Linux" ]]; then
+      fresh shell/linux.sh
+    fi
+    if [[ "$(uname)" == "Darwin" ]]; then
+      fresh shell/mac.sh
+      fresh shell/bash/mac.sh
+    fi
     fresh shell/packages.sh
+    fresh shell/bash/bash.bash
     fresh shell/drh.sh
     fresh shell/git.sh
     fresh shell/notes.sh
@@ -37,8 +44,12 @@ then
     if [[ "$(uname)" == "Linux" ]]; then
         fresh shell/linux.sh
     fi
-    fresh shell/generic.sh
+    if [[ "$(uname)" == "Darwin" ]]; then
+      fresh shell/mac.sh
+      fresh shell/zsh/mac.sh
+    fi
     fresh shell/packages.sh
+    fresh shell/generic.sh
     fresh shell/drh.sh
     fresh shell/git.sh
     fresh shell/notes.sh
@@ -48,10 +59,17 @@ then
   fresh-options
 
   #fresh zsh-users/zsh-completions src --file=completion/
-  fresh zsh-users/zsh-completions src/_vagrant --file=completion/_vagrant
-  fresh zsh-users/zsh-completions src/_veewee --file=completion/_veewee
-  fresh zsh-users/zsh-completions src/_virtualbox --file=completion/_virtualbox
   fresh freshshell/fresh contrib/completion/fresh-completion.zsh --file=completion/_fresh
+
+  # conditional completions
+  if which vagrant &>/dev/null
+  then
+    fresh zsh-users/zsh-completions src/_vagrant --file=completion/_vagrant
+  fi
+  if which VBoxManage &>/dev/null
+  then
+    fresh zsh-users/zsh-completions src/_virtualbox --file=completion/_virtualbox
+  fi
   if `which docker &>/dev/null`
   then
     fresh felixr/docker-zsh-completion _docker --file=completion/_docker
@@ -95,6 +113,19 @@ fi
 if [ -e /etc/debian_version ]
 then
   fresh blyork/apt-history apt-history --bin
+fi
+
+if which conky &> /dev/null
+then
+  if [ -e "config/conkyrc/$(hostname)" ]
+  then
+    fresh config/conkyrc/$(hostname) --file=~/.conkyrc
+  fi
+fi
+
+if which tmux &> /dev/null
+then
+  fresh config/tmux.conf --file=~/.tmux.conf
 fi
 
 if which screen &> /dev/null

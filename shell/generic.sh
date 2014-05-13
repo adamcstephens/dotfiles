@@ -20,7 +20,7 @@ alias fesl="fresh && esl"
 alias fuesl="fresh update && esl"
 if which apg &>/dev/null
 then
-  alias pwgen='apg -n10 -m10 -x12 -M CLNS -t'
+  alias pwgen='apg -n10 -m12 -x20 -M CLNS -t'
 else
   alias pwgen='curl -k -3 https://mail.drh.net/cgi-bin/get_password.cgi'
 fi
