@@ -70,6 +70,11 @@ then
   fi
 fi
 
+if which tmux &> /dev/null
+then
+  fresh config/tmux.conf --file=~/.tmux.conf
+fi
+
 fresh-options --file=~/.vimrc --marker=\"
   fresh twe4ked/dotfiles vim/vundle_before.vim
   fresh vim/vundle.vim
