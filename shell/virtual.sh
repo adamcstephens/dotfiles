@@ -1,4 +1,5 @@
 # docker
+alias di='docker images'
 alias drm='docker rm'
 alias dps='docker ps -a'
 
