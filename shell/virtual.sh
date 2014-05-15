@@ -1,16 +1,18 @@
 # docker
 alias drm='docker rm'
 alias dps='docker ps -a'
-# virtualbox
-alias vb=VBoxManage
+
+#
+# lxc
+alias lxca='sudo lxc-ls --active'
+
+#
 # vagrant
 alias vdestroy='vagrant destroy '
 alias vp='vagrant provision'
 alias vs='vagrant status'
+alias vsg='vagrant global-status'
 alias vup='vagrant up'
-#alias veewee='bundle exec veewee'
-#alias vf='veewee fusion'
-#alias vv='veewee vbox'
 function vssh {
   vmName=$1
 
@@ -27,5 +29,5 @@ function vreload {
 }
 
 #
-# lxc
-alias lxca='sudo lxc-ls --active'
+# virtualbox
+alias vb=VBoxManage
