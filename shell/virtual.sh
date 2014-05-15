@@ -1,3 +1,6 @@
+# docker
+alias drm='docker rm'
+alias dps='docker ps -a'
 # virtualbox
 alias vb=VBoxManage
 # vagrant
@@ -22,3 +25,7 @@ function vreload {
   vagrant destroy -f $vmName
   vssh $vmName
 }
+
+#
+# lxc
+alias lxca='sudo lxc-ls --active'
