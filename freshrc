@@ -84,34 +84,40 @@ fi
 if which vim &> /dev/null
 then
   fresh-options --file=~/.vimrc --marker=\"
-    fresh twe4ked/dotfiles vim/vundle_before.vim
-    fresh vim/vundle.vim
-    if `which docker &>/dev/null`
-    then
-      fresh vim/plugins/ondemand/docker.vim
-    fi
-    if `which ferm &>/dev/null`
-    then
-      fresh vim/plugins/ondemand/ferm.vim
-    fi
-    fresh vim/plugins/active/\*.vim
-    fresh twe4ked/dotfiles vim/vundle_after.vim
     fresh vim/vimrc
-    fresh vim/full
+    if [[ "$DISTRIB_ID" != 'CoreOS' ]]
+    then
+      fresh twe4ked/dotfiles vim/vundle_before.vim
+      fresh vim/vundle.vim
+      if `which docker &>/dev/null`
+      then
+        fresh vim/plugins/ondemand/docker.vim
+      fi
+      if `which ferm &>/dev/null`
+      then
+        fresh vim/plugins/ondemand/ferm.vim
+      fi
+      fresh vim/plugins/active/\*.vim
+      fresh twe4ked/dotfiles vim/vundle_after.vim
+      fresh vim/full
+    fi
   fresh-options
 
-  # vimcat binary
-  fresh vim-scripts/vimcat vimcat --bin
+  if [[ "$DISTRIB_ID" != 'CoreOS' ]]
+  then
+    # vimcat binary
+    fresh vim-scripts/vimcat vimcat --bin
 
-  init_vim() {
-    if which vim &> /dev/null && ! [ -d $HOME/.vim/bundle/vundle ]; then
-      vim || [ -d $HOME/.vim/bundle/vundle ]
-    fi
-  }
+    init_vim() {
+      if which vim &> /dev/null && ! [ -d $HOME/.vim/bundle/vundle ]; then
+        vim || [ -d $HOME/.vim/bundle/vundle ]
+      fi
+    }
 
-  fresh_after_build() {
-    init_vim
-  }
+    fresh_after_build() {
+      init_vim
+    }
+  fi
 fi
 
 if [ -e /etc/debian_version ]
