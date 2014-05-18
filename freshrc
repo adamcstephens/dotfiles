@@ -1,5 +1,7 @@
 # vim: set ft=sh:
 
+[ -e /etc/lsb-release ] && . /etc/lsb-release
+
 # install the fresh binary
 fresh freshshell/fresh bin/fresh --bin
 
@@ -86,14 +88,16 @@ then
     fresh vim/vundle.vim
     if `which docker &>/dev/null`
     then
-      fresh vim/plugins/docker.vim
+      fresh vim/plugins/ondemand/docker.vim
     fi
     if `which ferm &>/dev/null`
     then
-      fresh vim/plugins/ferm.vim
+      fresh vim/plugins/ondemand/ferm.vim
     fi
+    fresh vim/plugins/active/\*.vim
     fresh twe4ked/dotfiles vim/vundle_after.vim
     fresh vim/vimrc
+    fresh vim/full
   fresh-options
 
   # vimcat binary

@@ -6,33 +6,7 @@ set tabstop=2
 set softtabstop=2
 set shiftwidth=2
 set expandtab
-syntax on
-filetype plugin indent on
-colorscheme slate
 set shell=/bin/bash
 
 nmap <F11> :set invpaste<CR>
 nmap <F12> :set invnumber<CR>:GitGutterToggle<CR>:SyntasticToggleMode<CR>
-
-"
-" plugins
-"
-" vimwiki
-let wiki_1 = {}
-let wiki_1.path = '~/notes/'
-let wiki_1.path_html = '~/public_html/'
-let wiki_1.nested_syntaxes = {'python': 'python', 'sh': 'sh'}
-
-let g:vimwiki_list = [wiki_1]
-
-" nerdtree
-map <C-n> :NERDTreeToggle<CR>
-" allow quit if nerdtree is only open buffer
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-
-" json
-" disable vim-json's quite hiding
-let g:vim_json_syntax_conceal = 0
-
-" syntastic
-let g:syntastic_puppet_puppetlint_args='--no-80chars-check'
