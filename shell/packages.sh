@@ -8,6 +8,8 @@ case $DIST in
     alias pku="sudo pacman -Syu"
     alias pkr="sudo pacman -R"
     ;;
+  'coreos')
+    ;;
   'Darwin')
     ;;
   'debian')
@@ -34,6 +36,6 @@ case $DIST in
     alias pku="sudo yum update"
     ;;
   *)
-    echo "Unknown distribution"
+    echo "Unknown distribution in packages.sh"
     ;;
 esac
