@@ -1,6 +1,7 @@
 # vim: set ft=sh:
 
 [ -e /etc/lsb-release ] && . /etc/lsb-release
+DISTRIB_ID=${DISTRIB_ID:-}
 
 # install the fresh binary
 fresh freshshell/fresh bin/fresh --bin
