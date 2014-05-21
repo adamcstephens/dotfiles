@@ -1,13 +1,13 @@
 OS=$(uname)
 case $OS in
   'Linux')
-    if which pacman &> /dev/null
+    if [ -e /etc/arch-release ]
     then
       export DIST='arch' 
-    elif which dpkg &> /dev/null
+    elif [ -e /etc/debian_version ]
     then
       export DIST='debian'
-    elif which rpm &> /dev/null
+    elif [ -e /etc/redhat-release ]
     then
       export DIST='redhat'
     elif grep CoreOS /etc/lsb-release &> /dev/null
