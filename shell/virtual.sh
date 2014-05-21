@@ -14,15 +14,7 @@ alias vp='vagrant provision'
 alias vs='vagrant status'
 alias vsg='vagrant global-status'
 alias vup='vagrant up'
-function vssh {
-  vmName=$1
-
-  if ! vagrant status $vmName | grep 'running (' 
-  then
-    vagrant up $vmName
-  fi
-  vagrant ssh $vmName
-}
+alias vssh='vagrant ssh'
 function vreload {
   vmName=$1
   vagrant destroy -f $vmName
