@@ -98,6 +98,14 @@ then
       then
         fresh vim/plugins/ondemand/ferm.vim
       fi
+      if `which puppet &>/dev/null`
+      then
+        fresh vim/plugins/ondemand/puppet.vim
+      fi
+      if `which rake &>/dev/null`
+      then
+        fresh vim/plugins/ondemand/rake.vim
+      fi
       fresh vim/plugins/active/\*.vim
       fresh twe4ked/dotfiles vim/vundle_after.vim
       fresh vim/full
