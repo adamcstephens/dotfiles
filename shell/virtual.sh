@@ -1,7 +1,8 @@
 # docker
 alias di='docker images'
 alias drm='docker rm'
-alias dps='docker ps -a'
+alias drmi='docker rmi'
+alias dps='docker ps'
 
 #
 # lxc
