@@ -1,1 +1,95 @@
-theblack.boko.private
+# conky configuration
+#
+# The list of variables has been removed from this file in favour
+# of keeping the documentation more maintainable.
+# Check http://conky.sf.net for an up-to-date-list.
+#
+# For ideas about how to modify conky, please see:
+# http://crunchbanglinux.org/forums/topic/59/my-conky-config/
+#
+# For help with conky, please see:
+# http://crunchbanglinux.org/forums/topic/2047/conky-help/
+#
+# Enjoy! :)
+##############################################
+# Settings
+##############################################
+own_window yes
+own_window_type normal
+own_window_argb_visual yes
+own_window_argb_value 255
+own_window_transparent yes
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+background yes
+use_xft yes
+xftfont Liberation Sans:size=9
+xftalpha 1
+update_interval 1.0
+total_run_times 0
+own_window yes
+own_window_transparent yes
+own_window_type desktop
+#own_window_argb_visual yes
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+double_buffer yes
+minimum_size 200 200
+maximum_width 240
+draw_shades no
+draw_outline no
+draw_borders yes
+draw_graph_borders no
+default_color 656667
+default_shade_color 000000
+default_outline_color 828282
+alignment top_right
+gap_x 12
+gap_y 46
+no_buffers yes
+uppercase no
+cpu_avg_samples 2
+override_utf8_locale no
+##############################################
+#  Output
+##############################################
+TEXT
+sys
+${hr}
+Host:$alignr$nodename
+Uptime:$alignr$uptime
+
+cpu
+${hr}
+#${freq_g 1} ${freq_g 2} ${freq_g 3} ${freq_g 4}
+${cpugraph cpu1 -t}
+${cpugraph cpu2 -t}
+${cpugraph cpu3 -t}
+${cpugraph cpu4 -t}
+#${freq_g 5} ${freq_g 6} ${freq_g 7} ${freq_g 8}
+${cpugraph cpu5 -t}
+${cpugraph cpu6 -t}
+${cpugraph cpu7 -t}
+${cpugraph cpu8 -t}
+
+net
+${hr}
+Down: ${downspeedf eno1}${alignr}Up: ${upspeedf eno1}
+${downspeedgraph eno1 -t}
+${upspeedgraph eno1 -t}
+Down: ${downspeedf wlp2s0}${alignr}Up: ${upspeedf wlp2s0}
+${downspeedgraph wlp2s0 -t}
+${upspeedgraph wlp2s0 -t}
+
+memory
+${hr}
+Used: ${mem}${alignr}Free: $memfree
+$memgraph
+
+disk
+${hr}
+/$alignr${fs_used /}/${fs_size /} (${fs_used_perc /}%)
+home$alignr${fs_used /home}/${fs_size /home} (${fs_used_perc /home}%)
+laugh$alignr${fs_used /home/laugh}/${fs_size /home/laugh} (${fs_used_perc /home/laugh}%)
+sda$alignr${diskio sda}
+${diskiograph /dev/sda}
+sdb$alignr${diskio sdb}
+${diskiograph /dev/sdb}

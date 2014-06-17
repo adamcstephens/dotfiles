@@ -3,6 +3,9 @@
 [ -e /etc/lsb-release ] && . /etc/lsb-release
 DISTRIB_ID=${DISTRIB_ID:-}
 
+# get hostname
+HOSTNAME=$(hostname)
+
 # install the fresh binary
 fresh freshshell/fresh bin/fresh --bin
 
@@ -136,10 +139,7 @@ fi
 
 if which conky &> /dev/null
 then
-  if [ -e "config/conkyrc/$(hostname)" ]
-  then
-    fresh config/conkyrc/$(hostname) --file=~/.conkyrc
-  fi
+  fresh config/conkyrc/$(hostname) --file=~/.conkyrc --ignore-missing
 fi
 
 if which tmux &> /dev/null

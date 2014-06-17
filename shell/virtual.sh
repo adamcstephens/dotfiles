@@ -1,5 +1,6 @@
 # docker
 alias di='docker images'
+alias dk='docker kill'
 alias drm='docker rm'
 alias drmi='docker rmi'
 alias dps='docker ps'
