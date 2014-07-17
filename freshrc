@@ -101,6 +101,10 @@ then
       then
         fresh vim/plugins/ondemand/ferm.vim
       fi
+      if `which git &>/dev/null`
+      then
+        fresh vim/plugins/ondemand/fugitive.vim
+      fi
       if `which puppet &>/dev/null`
       then
         fresh vim/plugins/ondemand/puppet.vim
