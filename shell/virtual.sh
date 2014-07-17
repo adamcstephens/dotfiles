@@ -20,7 +20,7 @@ alias vssh='vagrant ssh'
 function vreload {
   vmName=$1
   vagrant destroy -f $vmName
-  vup $vmName
+  vup $2 $vmName
   vssh $vmName
 }
 
