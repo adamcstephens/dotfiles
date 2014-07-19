@@ -137,6 +137,11 @@ then
   fresh blyork/apt-history apt-history --bin
 fi
 
+if which pacman &> /dev/null
+then
+  fresh giddie/bits-n-pieces pacman-undo/pacman-undo --bin
+fi
+
 if which conky &> /dev/null
 then
   fresh config/conkyrc/$(hostname) --file=~/.conkyrc --ignore-missing
