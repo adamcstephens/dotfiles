@@ -38,7 +38,7 @@ draw_shades no
 draw_outline no
 draw_borders yes
 draw_graph_borders no
-default_color 656667
+default_color D3D3D3
 default_shade_color 000000
 default_outline_color 828282
 alignment top_right
@@ -53,12 +53,12 @@ override_utf8_locale no
 ##############################################
 TEXT
 sys
-${hr}
+$hr
 Host:$alignr$nodename
 Uptime:$alignr$uptime
 
 cpu
-${hr}
+$hr
 #${freq_g 1} ${freq_g 2} ${freq_g 3} ${freq_g 4}
 ${cpugraph cpu1 -t}
 ${cpugraph cpu2 -t}
@@ -70,26 +70,19 @@ ${cpugraph cpu6 -t}
 ${cpugraph cpu7 -t}
 ${cpugraph cpu8 -t}
 
+temp
+$hr
+$alignc ${hwmon temp 1}C | ${hwmon temp 2}C | ${hwmon temp 3}C | ${hwmon temp 4}C | ${hwmon temp 5}C
+
 net
-${hr}
+$hr
 Down: ${downspeedf eno1}${alignr}Up: ${upspeedf eno1}
 ${downspeedgraph eno1 -t}
 ${upspeedgraph eno1 -t}
-Down: ${downspeedf wlp2s0}${alignr}Up: ${upspeedf wlp2s0}
-${downspeedgraph wlp2s0 -t}
-${upspeedgraph wlp2s0 -t}
-
-memory
-${hr}
-Used: ${mem}${alignr}Free: $memfree
-$memgraph
+#Down: ${downspeedf wlp2s0}${alignr}Up: ${upspeedf wlp2s0}
+#${downspeedgraph wlp2s0 -t}
+#${upspeedgraph wlp2s0 -t}
 
 disk
-${hr}
+$hr
 /$alignr${fs_used /}/${fs_size /} (${fs_used_perc /}%)
-home$alignr${fs_used /home}/${fs_size /home} (${fs_used_perc /home}%)
-laugh$alignr${fs_used /home/laugh}/${fs_size /home/laugh} (${fs_used_perc /home/laugh}%)
-sda$alignr${diskio sda}
-${diskiograph /dev/sda}
-sdb$alignr${diskio sdb}
-${diskiograph /dev/sdb}
