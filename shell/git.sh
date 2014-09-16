@@ -8,6 +8,7 @@ alias gbv='git branch -avv'
 alias gc='git commit'
 alias gco='git checkout'
 alias gd='git diff'
+alias gdt="git diff \$(git describe --tags \$(git rev-list --tags --max-count=1 2>/dev/null ))..HEAD"
 alias gl='git pull'
 function glo () {
   [ -z $1 ] && git log --oneline -n 10 && return 0
