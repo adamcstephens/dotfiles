@@ -166,6 +166,11 @@ then
   fresh config/gitconfig --file
 fi
 
+if which top &> /dev/null
+then
+  fresh config/toprc --file
+fi
+
 if [ ! -e /etc/inputrc ]
 then
   fresh config/inputrc --file
