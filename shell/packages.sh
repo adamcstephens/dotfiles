@@ -7,6 +7,7 @@ case $DIST in
     alias pksh="pacman -Si"
     alias pku="sudo pacman -Syu"
     alias pkr="sudo pacman -R"
+    which pacaur &>/dev/null && alias pacaur="pacaur --noedit"
     ;;
   'coreos')
     ;;
