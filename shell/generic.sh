@@ -32,7 +32,7 @@ alias mountcrypt="encfs $HOME/.encrypted $HOME/decrypted/"
 alias umountcrypt="fusermount -u $HOME/decrypted"
 
 # fresh
-source ~/.fresh/build/shell.sh
+[ -e ~/.fresh/build/shell.sh ] && source ~/.fresh/build/shell.sh
 
 # linux
 alias linsleep='sudo pm-suspend'
