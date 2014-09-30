@@ -4,6 +4,10 @@ alias dk='docker kill '
 alias drm='docker rm '
 alias drmi='docker rmi '
 alias dps='docker ps '
+function dsh {
+  [ -z $1 ] && echo "needs image to run." && return 2
+  docker run -t -i --rm=true $1 /bin/bash
+}
 
 #
 # lxc
