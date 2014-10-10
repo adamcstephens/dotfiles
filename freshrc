@@ -76,9 +76,13 @@ then
   then
     fresh zsh-users/zsh-completions src/_virtualbox --file=completion/_virtualbox
   fi
-  if `which docker &>/dev/null`
+  if which docker &>/dev/null
   then
     fresh felixr/docker-zsh-completion _docker --file=completion/_docker
+  fi
+  if which ag &>/dev/null
+  then
+    fresh zsh-users/zsh-completions src/_ag --file=completion/_ag
   fi
 fi
 
@@ -114,6 +118,7 @@ then
         fresh vim/plugins/ondemand/rake.vim
       fi
       fresh vim/plugins/active/\*.vim
+      fresh vim/local.vim
       fresh twe4ked/dotfiles vim/vundle_after.vim
       fresh vim/full
     fi
@@ -176,12 +181,25 @@ then
   fresh config/inputrc --file
 fi
 
+if which sshrc &> /dev/null
+then
+  # install the sshrc script
+  fresh Russell91/sshrc sshrc --bin
 
-# oh-my-zsh and my own custom
-#disable fresh robbyrussell/oh-my-zsh . --file=~/.oh-my-zsh/
-#disable fresh shell/zsh/oh-my-zsh/custom --file=~/.oh-my-zsh_custom/
+  fresh-options --file=~/.sshrc --marker
+    fresh shell/os_detect.sh
+    fresh shell/generic.sh
+    fresh shell/linux.sh
+    fresh shell/packages.sh
+    fresh shell/bash/bash.bash
+    fresh shell/git.sh
+    fresh shell/notes.sh
+    fresh shell/puppet.sh
+    fresh shell/sshrc.sh
+  fresh-options
 
-# fish
-#disable fresh shell/fish/functions --file=~/.config/fish/functions/
-#disable fresh shell/fish/config.fish --file=~/.config/fish/config.fish
-#disable fresh fish-shell/fish-shell share/completions --file=~/.config/fish/completions/
+  fresh-options --file=~/.sshrc.d/vimrc --marker=\"
+    fresh vim/vimrc
+    fresh vim/full
+  fresh-options
+fi
