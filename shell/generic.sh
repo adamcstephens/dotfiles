@@ -15,7 +15,14 @@ then
 fi
 alias ll="ls -l"
 alias l="ls -la"
-alias esl="exec $SHELL -l"
+function esl {
+  if [ ! -z $ZSH_NAME ]
+  then
+    exec $ZSH_NAME -l
+  else
+    exec $SHELL -l
+  fi
+}
 alias fesl="fresh && esl"
 alias fuesl="fresh update && fresh clean && esl"
 if which apg &>/dev/null
