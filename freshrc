@@ -117,6 +117,10 @@ then
       then
         fresh vim/plugins/ondemand/rake.vim
       fi
+      if which ag &>/dev/null
+      then
+        fresh vim/plugins/ondemand/ag.vim
+      fi
       fresh vim/plugins/active/\*.vim
       fresh vim/local.vim
       fresh twe4ked/dotfiles vim/vundle_after.vim
