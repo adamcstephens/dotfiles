@@ -35,6 +35,7 @@ case $DIST in
     alias pks="yum search"
     alias pksh="yum info"
     alias pku="sudo yum update"
+    alias pkr="sudo yum remove"
     ;;
   *)
     echo "Unknown distribution in packages.sh"
