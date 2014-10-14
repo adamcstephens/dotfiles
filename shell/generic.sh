@@ -32,7 +32,7 @@ else
   alias pwgen='curl -k -3 https://mail.drh.net/cgi-bin/get_password.cgi'
 fi
 alias tree='tree -C'
-alias vundle_update='vim +BundleInstall +qall'
+alias vundle_update='vim +BundleUpdate +BundleClean! +qall'
 
 # crypt
 alias mountcrypt="encfs $HOME/.encrypted $HOME/decrypted/"
