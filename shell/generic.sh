@@ -24,7 +24,7 @@ function esl {
   fi
 }
 alias fesl="fresh && esl"
-alias fuesl="fresh update && fresh clean && esl"
+alias fuesl="fresh update && fresh clean && vundle_update &> /dev/null && esl"
 if which apg &>/dev/null
 then
   alias pwgen='apg -n10 -m12 -x20 -M CLNS -t'
