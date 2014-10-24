@@ -1,4 +1,6 @@
 case $DIST in
+  'AIX')
+    ;;
   'arch')
     alias pki="sudo pacman -S"
     alias pkls="pacman -Ql"

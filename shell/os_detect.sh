@@ -21,6 +21,9 @@ case $OS in
   'FreeBSD')
     export DIST=$OS
     ;;
+  'AIX')
+    export DIST=$OS
+    ;;
   * )
     echo "Failed to detect OS in os_detect.sh"
     ;;
