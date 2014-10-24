@@ -23,6 +23,8 @@ case $OS in
     ;;
   'AIX')
     export DIST=$OS
+    # stick this here for lack of a better place
+    export PATH="$PATH:/opt/freeware/bin:/opt/freeware/sbin"
     ;;
   * )
     echo "Failed to detect OS in os_detect.sh"
