@@ -24,7 +24,7 @@ function esl {
   fi
 }
 alias fesl="fresh && esl"
-alias fuesl="fresh update && fresh clean && esl"
+alias fuesl="fresh update && fresh clean && vundle_update &> /dev/null && esl"
 if which apg &>/dev/null
 then
   alias pwgen='apg -n10 -m12 -x20 -M CLNS -t'
@@ -32,7 +32,7 @@ else
   alias pwgen='curl -k -3 https://mail.drh.net/cgi-bin/get_password.cgi'
 fi
 alias tree='tree -C'
-alias vundle_update='vim +BundleInstall +qall'
+alias vundle_update='vim +BundleUpdate +BundleClean! +qall'
 
 # crypt
 alias mountcrypt="encfs $HOME/.encrypted $HOME/decrypted/"

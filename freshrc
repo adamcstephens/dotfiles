@@ -202,6 +202,7 @@ then
     fresh shell/bash/bash.bash
     fresh shell/git.sh
     fresh shell/notes.sh
+    fresh shell/devlang.sh
     fresh shell/puppet.sh
     fresh shell/sshrc.sh
   fresh-options
