@@ -84,6 +84,10 @@ then
   then
     fresh zsh-users/zsh-completions src/_ag --file=completion/_ag
   fi
+  if which virsh &>/dev/null
+  then
+    fresh zsh-users/zsh-completions src/_virsh --file=completion/_virsh
+  fi
 fi
 
 #
