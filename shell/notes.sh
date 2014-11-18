@@ -21,3 +21,18 @@ function nnn {
 alias lnn="ls -lt ~/notes"
 alias lln="ls -1 ~/notes/\`ls -1t ~/notes | head -n1\`"
 
+function ewr {
+  # create a monthly work report file with daily timestamps
+  filename="${HOME}/notes/workreport-$(date +%Y.%m).md"
+  datestamp="$(date +%Y.%m.%d)"
+  if [ ! -f $filename ]
+  then
+    echo "# $(date +'%B %Y')" > $filename
+    echo >> $filename
+  fi
+  if ! grep $datestamp $filename &>/dev/null
+  then
+    echo "## $datestamp" >> $filename
+  fi
+  vim $filename
+}
