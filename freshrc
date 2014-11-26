@@ -24,6 +24,10 @@ then
       fresh shell/mac.sh
       fresh shell/bash/mac.sh
     fi
+    if which systemctl &>/dev/null
+    then
+      fresh shell/systemd.sh
+    fi
     fresh shell/packages.sh
     fresh shell/bash/bash.bash
     fresh shell/drh.sh
@@ -53,6 +57,10 @@ then
     if [[ "$(uname)" == "Darwin" ]]; then
       fresh shell/mac.sh
       fresh shell/zsh/mac.sh
+    fi
+    if which systemctl &>/dev/null
+    then
+      fresh shell/systemd.sh
     fi
     fresh shell/packages.sh
     fresh shell/generic.sh
