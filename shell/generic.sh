@@ -15,6 +15,7 @@ then
 fi
 alias ll="ls -l"
 alias l="ls -la"
+alias l1h="ls -1t | head"
 function esl {
   if [ ! -z $ZSH_NAME ]
   then
@@ -23,6 +24,7 @@ function esl {
     exec $SHELL -l
   fi
 }
+alias esl="exec $SHELL -l"
 alias fesl="fresh && esl"
 alias fuesl="fresh update && fresh clean && vundle_update &> /dev/null && esl"
 if which apg &>/dev/null
