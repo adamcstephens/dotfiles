@@ -1,5 +1,10 @@
+if [[ "$DIST" == 'arch' ]]
+then
+  alias grep='grep --color=auto'
+else
+  export GREP_OPTIONS='--color=auto'
+fi
 export CLICOLOR=''
-alias grep='grep --color=auto'
 export GREP_COLOR='3;32'
 export PAGER='less -rFX'
 export EDITOR='vim'
