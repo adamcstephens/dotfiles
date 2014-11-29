@@ -30,6 +30,10 @@ case $DIST in
     alias pksh="pkg info"
     alias pku="sudo freebsd-update fetch && sudo freebsd-update install"
     ;;
+  'OpenBSD')
+    alias pki="sudo pkg_add -i -v "
+    alias pku="sudo pkg_add -u -v "
+    ;;
   'redhat')
     alias pki="sudo yum install"
     alias pkls="rpm -ql"

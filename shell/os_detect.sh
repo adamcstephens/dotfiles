@@ -21,6 +21,9 @@ case $OS in
   'FreeBSD')
     export DIST=$OS
     ;;
+  'OpenBSD')
+    export DIST=$OS
+    ;;
   'AIX')
     export DIST=$OS
     # stick this here for lack of a better place
