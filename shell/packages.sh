@@ -33,6 +33,7 @@ case $DIST in
   'OpenBSD')
     alias pki="sudo pkg_add -i -v "
     alias pku="sudo pkg_add -u -v "
+    alias pkls="pkg_info -L "
     ;;
   'redhat')
     alias pki="sudo yum install"
