@@ -14,3 +14,6 @@ nmap <F12> :set invnumber<CR>:GitGutterToggle<CR>:SyntasticToggleMode<CR>
 " don't create stupid files
 set nobackup
 set noundofile
+
+" screw the mouse, terminals do better
+set mouse=
