@@ -23,10 +23,6 @@ case $OS in
     ;;
   'OpenBSD')
     export DIST=$OS
-    alias pfe='sudo vim /etc/pf.conf'
-    alias pfr='sudo pfctl -nf /etc/pf.conf && sudo pfctl -f /etc/pf.conf'
-    alias pfl='sudo pfctl -sr'
-    alias pflog='sudo tcpdump -n -e -ttt -i pflog0'
     ;;
   'AIX')
     export DIST=$OS
