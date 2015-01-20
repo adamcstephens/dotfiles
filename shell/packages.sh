@@ -14,6 +14,8 @@ case $DIST in
   'coreos')
     ;;
   'Darwin')
+    alias pki="brew install "
+    alias pku="brew update && brew upgrade"
     ;;
   'debian')
     alias pki="sudo apt-get install"
