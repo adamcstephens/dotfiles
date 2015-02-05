@@ -231,6 +231,8 @@ fi
 
 if which bspwm &> /dev/null
 then
-  continue
-  #fresh config/bspwm/bsmwmrc --file
+  [[ -d ~/.config/bspwm ]] || mkdir -p ~/.config/bspwm
+  [[ -d ~/.config/sxhkd ]] || mkdir -p ~/.config/sxhkd
+  fresh config/bspwm/bspwmrc --bin=~/.config/bspwm/bspwmrc
+  fresh config/sxhkd/sxhkdrc --file=~/.config/sxhkd/sxhkdrc
 fi

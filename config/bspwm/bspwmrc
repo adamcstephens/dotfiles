@@ -8,7 +8,10 @@ bspc config borderless_monocle  true
 bspc config gapless_monocle     true
 bspc config focus_by_distance   true
 
-bspc monitor -d I a b c d e
+bspc monitor -d a b c d e
+
+# focus follow mouse
+bspc config focus_follows_pointer true
 
 bspc rule -a Gimp desktop=^8 follow=on floating=on
 bspc rule -a Firefox desktop=^2
