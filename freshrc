@@ -228,3 +228,9 @@ then
     fresh vim/full
   fresh-options
 fi
+
+if which bspwm &> /dev/null
+then
+  continue
+  #fresh config/bspwm/bsmwmrc --file
+fi
