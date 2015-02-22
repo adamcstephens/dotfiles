@@ -234,7 +234,17 @@ then
   fresh config/sxhkd/sxhkdrc --file=~/.config/sxhkd/sxhkdrc
 fi
 
+fresh config/xprofile_$(hostname) --file=~/.xprofile --ignore-missing
+fresh config/tint3rc_$(hostname) --file=~/.tint3rc --ignore-missing
+
 fresh_after_build() {
   init_vim
-  [ -e ~/.toprc ] && chmod 0600 ~/.toprc
+  for cfg in .toprc
+  do
+    [ -e $HOME/$cfg ] && chmod 0600 $HOME/$cfg
+  done
+  for cfg in .config/bspwm/bspwmrc .config/sxhkd/sxhkdrc
+  do
+    [ -e $HOME/$cfg ] && chmod 0700 $HOME/$cfg
+  done
 }

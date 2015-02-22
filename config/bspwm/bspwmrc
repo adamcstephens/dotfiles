@@ -24,7 +24,6 @@ bspc rule -a trayer floating=on
 
 # panel
 bspc config top_padding 16
-#bmpanel2 &
-compton &
-conky &
-trayer --edge top --align right --widthtype request --height 17 &
+tint3 &
+sxhkd &
+dex -a
