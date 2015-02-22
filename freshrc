@@ -166,15 +166,30 @@ then
   fresh blyork/apt-history apt-history --bin
 fi
 
-if which pacman &> /dev/null
+# don't install stuff in root's home
+if [[ "$USER" != 'root' ]]
 then
-  fresh giddie/bits-n-pieces pacman-undo/pacman-undo --bin
-  fresh oshazard/apacman apacman --bin
-fi
+  if which pacman &> /dev/null
+  then
+    fresh giddie/bits-n-pieces pacman-undo/pacman-undo --bin
+    fresh oshazard/apacman apacman --bin
+  fi
 
-if which conky &> /dev/null
-then
-  fresh config/conkyrc/$(hostname) --file=~/.conkyrc --ignore-missing
+  if which conky &> /dev/null
+  then
+    fresh config/conkyrc/$(hostname) --file=~/.conkyrc --ignore-missing
+  fi
+
+  if which bspwm &> /dev/null
+  then
+    [[ -d ~/.config/bspwm ]] || mkdir -p ~/.config/bspwm
+    [[ -d ~/.config/sxhkd ]] || mkdir -p ~/.config/sxhkd
+    fresh config/bspwm/bspwmrc --bin=~/.config/bspwm/bspwmrc
+    fresh config/sxhkd/sxhkdrc --file=~/.config/sxhkd/sxhkdrc
+  fi
+
+  fresh config/xprofile_$(hostname) --file=~/.xprofile --ignore-missing
+  fresh config/tint3rc_$(hostname) --file=~/.tint3rc --ignore-missing
 fi
 
 if which tmux &> /dev/null
@@ -225,17 +240,6 @@ then
     fresh vim/full
   fresh-options
 fi
-
-if which bspwm &> /dev/null
-then
-  [[ -d ~/.config/bspwm ]] || mkdir -p ~/.config/bspwm
-  [[ -d ~/.config/sxhkd ]] || mkdir -p ~/.config/sxhkd
-  fresh config/bspwm/bspwmrc --bin=~/.config/bspwm/bspwmrc
-  fresh config/sxhkd/sxhkdrc --file=~/.config/sxhkd/sxhkdrc
-fi
-
-fresh config/xprofile_$(hostname) --file=~/.xprofile --ignore-missing
-fresh config/tint3rc_$(hostname) --file=~/.tint3rc --ignore-missing
 
 fresh_after_build() {
   init_vim
