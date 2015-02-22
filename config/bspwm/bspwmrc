@@ -9,6 +9,7 @@ bspc config gapless_monocle     true
 bspc config focus_by_distance   true
 
 bspc monitor -d a b c d e
+bspc desktop -n a
 
 # focus follow mouse
 bspc config focus_follows_pointer true
@@ -19,7 +20,11 @@ bspc rule -a Google-chrome-stable desktop=^3
 bspc rule -a xfreerdp floating=off desktop=^4
 bspc rule -a Kupfer.py focus=on
 bspc rule -a Screenkey manage=off
+bspc rule -a trayer floating=on
 
 # panel
 bspc config top_padding 16
-bmpanel2 &
+#bmpanel2 &
+compton &
+conky &
+trayer --edge top --align right --widthtype request --height 17 &
