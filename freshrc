@@ -173,6 +173,7 @@ fi
 if which pacman &> /dev/null
 then
   fresh giddie/bits-n-pieces pacman-undo/pacman-undo --bin
+  fresh oshazard/apacman apacman --bin
 fi
 
 if which conky &> /dev/null
