@@ -158,10 +158,6 @@ then
         vim || [ -d $HOME/.vim/bundle/vundle ]
       fi
     }
-
-    fresh_after_build() {
-      init_vim
-    }
   fi
 fi
 
@@ -237,3 +233,8 @@ then
   fresh config/bspwm/bspwmrc --bin=~/.config/bspwm/bspwmrc
   fresh config/sxhkd/sxhkdrc --file=~/.config/sxhkd/sxhkdrc
 fi
+
+fresh_after_build() {
+  init_vim
+  [ -e ~/.toprc ] && chmod 0600 ~/.toprc
+}
