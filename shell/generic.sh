@@ -38,7 +38,7 @@ then
 else
   alias pwgen='curl -k -3 https://mail.drh.net/cgi-bin/get_password.cgi'
 fi
-alias tree='tree -C'
+alias tree='tree -FaC'
 alias vundle_update='vim +BundleUpdate +BundleClean! +qall'
 
 # crypt
