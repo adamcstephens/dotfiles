@@ -113,6 +113,12 @@ if which vim &> /dev/null
 then
   fresh-options --file=~/.vimrc --marker=\"
     fresh vim/vimrc
+    if [[ "$(uname)" == "Linux" ]]; then
+        fresh vim/linux.vim
+    fi
+    if [[ "$(uname)" == "Darwin" ]]; then
+      fresh vim/mac.vim
+    fi
     if [[ "$DISTRIB_ID" != 'CoreOS' ]]
     then
       fresh twe4ked/dotfiles vim/vundle_before.vim
