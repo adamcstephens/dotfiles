@@ -1,4 +1,5 @@
 Bundle 'airblade/vim-gitgutter'
+Bundle 'bling/vim-airline'
 Bundle 'elzr/vim-json'
 Bundle 'godlygeek/tabular'
 Bundle 'scrooloose/syntastic'

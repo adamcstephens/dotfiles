@@ -16,7 +16,10 @@ case $DIST in
     ;;
   'Darwin')
     alias pki="brew install "
+    alias pks="brew search "
+    alias pksh="brew info "
     alias pku="brew update && brew upgrade"
+    alias pkr="brew remove "
     ;;
   'debian')
     alias pki="sudo apt-get install"
