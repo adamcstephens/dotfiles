@@ -1,4 +1,4 @@
-if [[ "$DIST" == 'arch' ]]
+if [[ "$DIST" == 'arch' || "$DIST" == 'coreos' ]]
 then
   alias grep='grep --color=auto'
 else
