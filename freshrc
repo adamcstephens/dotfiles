@@ -248,7 +248,10 @@ then
 fi
 
 fresh_after_build() {
-  init_vim
+  if [[ "$(type -t init_vim)" == 'function' ]]
+  then
+    init_vim
+  fi
   for cfg in .toprc
   do
     [ -e $HOME/$cfg ] && chmod 0600 $HOME/$cfg
