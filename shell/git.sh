@@ -16,7 +16,8 @@ function glo () {
 }
 alias gm='git merge'
 alias gp='git push'
-alias gppr="git push -u origin \$(git rev-parse --abbrev-ref HEAD) && hub pull-request"
+alias gpob="git push -u origin \$(git rev-parse --abbrev-ref HEAD)"
+alias gppr="gpob && hub pull-request"
 alias gpt='git push && git push --tags'
 alias grh='git reset HEAD'
 alias grv='git remote -v'
