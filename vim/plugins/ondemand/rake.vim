@@ -1,1 +1,1 @@
-Bundle 'tpope/vim-rake'
+Plugin 'tpope/vim-rake'

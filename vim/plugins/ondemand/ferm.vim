@@ -1,1 +1,1 @@
-Bundle 'cometsong/ferm.vim'
+Plugin 'cometsong/ferm.vim'

@@ -1,1 +1,1 @@
-Bundle "ekalinin/Dockerfile.vim"
+Plugin "ekalinin/Dockerfile.vim"
