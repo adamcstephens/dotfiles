@@ -1,6 +1,10 @@
 syntax on
 filetype plugin indent on
+
 colorscheme vibrantink
-set background=dark
-highlight clear LineNr
-highlight clear SignColumn
+highlight Normal ctermbg=NONE
+
+"colorscheme vividchalk
+"set background=dark
+"highlight clear LineNr
+"highlight clear SignColumn
