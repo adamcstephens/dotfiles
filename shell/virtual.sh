@@ -17,6 +17,7 @@ alias lxca='sudo lxc-ls --active'
 # vagrant
 alias vdestroy='vagrant destroy '
 alias vp='vagrant provision '
+alias vpp='vp --provision-with puppet '
 alias vs='vagrant status '
 alias vsg='vagrant global-status '
 alias vup='vagrant up '
