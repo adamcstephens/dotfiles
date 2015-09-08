@@ -21,6 +21,9 @@ fi
 alias ll="ls -l"
 alias l="ls -la"
 alias l1h="ls -1t | head"
+alias scat="egrep -v '^(\s*)?(#|$)' "
+
+# shell
 function esl {
   if [ ! -z $ZSH_NAME ]
   then
@@ -32,6 +35,8 @@ function esl {
 alias esl="exec $SHELL -l"
 alias fesl="fresh ; esl"
 alias fuesl="fresh update && fresh clean && vundle_update &> /dev/null && esl"
+
+# passwords
 if which apg &>/dev/null
 then
   alias pwgen='apg -n10 -m12 -x20 -M CLNS -t'
