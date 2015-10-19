@@ -123,30 +123,14 @@ then
     then
       fresh twe4ked/dotfiles vim/vundle_before.vim
       fresh vim/vundle.vim
-      if `which docker &>/dev/null`
-      then
-        fresh vim/plugins/ondemand/docker.vim
-      fi
-      if `which ferm &>/dev/null`
-      then
-        fresh vim/plugins/ondemand/ferm.vim
-      fi
-      if `which git &>/dev/null`
-      then
-        fresh vim/plugins/ondemand/fugitive.vim
-      fi
-      if `which puppet &>/dev/null`
-      then
-        fresh vim/plugins/ondemand/puppet.vim
-      fi
-      if `which rake &>/dev/null`
-      then
-        fresh vim/plugins/ondemand/rake.vim
-      fi
-      if which ag &>/dev/null
-      then
-        fresh vim/plugins/ondemand/ag.vim
-      fi
+      for ondvp in $(ls -1 vim/plugins/ondemand | cut -f1 -d.)
+      do
+        echo "vim (ondemnad): $ondvp"
+        if which $ondvp &>/dev/null
+        then
+          fresh vim/plugins/ondemand/$ondvp.vim
+        fi
+      done
       fresh vim/plugins/active/\*.vim
       fresh vim/local.vim
       fresh twe4ked/dotfiles vim/vundle_after.vim
