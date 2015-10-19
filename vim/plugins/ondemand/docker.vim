@@ -1,1 +1,1 @@
-Plugin "ekalinin/Dockerfile.vim"
+Plugin 'ekalinin/Dockerfile.vim'
