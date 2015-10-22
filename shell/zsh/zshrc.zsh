@@ -28,6 +28,8 @@ export HISTSIZE=100000
 export HISTFILE="$HOME/.zsh_history"
 export SAVEHIST=$HISTSIZE
 setopt hist_ignore_all_dups
+# ignore commands started with a space
+setopt HIST_IGNORE_SPACE
 
 #
 setopt extendedglob
