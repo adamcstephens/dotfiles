@@ -123,7 +123,7 @@ then
     then
       fresh twe4ked/dotfiles vim/vundle_before.vim
       fresh vim/vundle.vim
-      for ondvp in $(ls -1 vim/plugins/ondemand | cut -f1 -d.)
+      for ondvp in $(ls -1 ~/.dotfiles/vim/plugins/ondemand | cut -f1 -d.)
       do
         echo "vim (ondemnad): $ondvp"
         if which $ondvp &>/dev/null
