@@ -1,0 +1,1 @@
+Plugin 'ctrlpvim/ctrlp.vim'
