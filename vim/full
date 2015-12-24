@@ -8,3 +8,6 @@ highlight Normal ctermbg=NONE
 "set background=dark
 "highlight clear LineNr
 "highlight clear SignColumn
+
+" set diff to vertical
+set diffopt+=vertical

@@ -20,3 +20,7 @@ if has("autocmd")
   au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
     \| exe "normal! g'\"" | endif
 endif
+
+" fix my damn inability to type
+command Qa qa
+command Q q
