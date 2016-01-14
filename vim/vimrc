@@ -20,6 +20,8 @@ if has("autocmd")
   au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
     \| exe "normal! g'\"" | endif
 endif
+" except for git commits
+autocmd FileType gitcommit call setpos('.', [0, 1, 1, 0])
 
 " fix my damn inability to type
 command Qa qa
