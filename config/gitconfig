@@ -5,6 +5,7 @@
   ui = true
 [core]
   pager = less -rFX
+  excludesfile = ~/.gitignore
 [push]
   default = tracking
 [include]

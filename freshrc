@@ -195,6 +195,7 @@ fi
 if which git &> /dev/null
 then
   fresh config/gitconfig --file
+  fresh config/gitignore --file
 fi
 
 if which top &> /dev/null
