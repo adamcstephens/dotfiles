@@ -26,3 +26,11 @@ autocmd FileType gitcommit call setpos('.', [0, 1, 1, 0])
 " fix my damn inability to type
 command Qa qa
 command Q q
+
+" shortcuts
+nnoremap <C-h> :tabprevious<CR>
+nnoremap <C-l> :tabnext<CR>
+map <C-t> :tabnew <Enter>
+
+" open help in a new tab
+cabbrev help tab help
