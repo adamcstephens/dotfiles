@@ -46,3 +46,7 @@ set hidden
 
 " open help in a new tab
 cabbrev help tab help
+
+" highlight unwanted chars
+set list
+set listchars=tab:»·,trail:·
