@@ -9,6 +9,10 @@ set expandtab
 set shell=/bin/bash
 
 nmap <F11> :set invpaste<CR>
+" allow toggling in insert mode
+set pastetoggle=<F11>
+
+" toggle the gutter
 nmap <F12> :set invnumber<CR>:GitGutterToggle<CR>:SyntasticToggleMode<CR>
 
 " don't create stupid files

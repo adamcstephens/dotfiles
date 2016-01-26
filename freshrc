@@ -137,6 +137,12 @@ then
       fresh vim/full
     fi
   fresh-options
+  if which nvim &> /dev/null
+  then
+    [ ! -d ~/.config ] && mkdir -vp ~/.config
+    [ ! -h ~/.config/nvim ] && ln -sfv ~/.vim ~/.config/nvim
+    [ ! -h ~/.config/nvim/init.vim ] && ln -sfv ~/.vimrc ~/.config/nvim/init.vim
+  fi
 
   if [[ "$DISTRIB_ID" != 'CoreOS' ]]
   then
