@@ -8,7 +8,7 @@ let g:airline_theme="simple"
 let g:airline#extensions#tabline#enabled = 1
 
 " add the date/time to the gutter
-let g:airline_section_gutter = '%= %{strftime("%c")}'
+let g:airline_section_gutter = '%= %{strftime("%R")}'
 
 " use powerline fonts if available
 let g:airline_powerline_fonts = 1
