@@ -42,13 +42,13 @@ case $DIST in
     alias pkls="pkg_info -L "
     ;;
   'redhat')
-    alias pki="sudo yum install"
+    alias pki="sudo yum --color=auto install"
     alias pkls="rpm -ql"
-    alias pkp="yum provides"
-    alias pks="yum search"
-    alias pksh="yum info"
-    alias pku="sudo yum update"
-    alias pkr="sudo yum remove"
+    alias pkp="yum --color=auto provides"
+    alias pks="yum --color=auto search"
+    alias pksh="yum --color=auto info"
+    alias pku="sudo yum --color=auto update"
+    alias pkr="sudo yum --color=auto remove"
     ;;
   *)
     echo "Unknown distribution in packages.sh"
