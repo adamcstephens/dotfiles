@@ -124,6 +124,7 @@ then
     fresh shell/apps/ondemand/systemctl.sh
     fresh shell/git.sh
     fresh shell/generic.sh
+    fresh shell/server.sh
   fresh-options
 fi
 

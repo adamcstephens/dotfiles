@@ -1,12 +1,25 @@
+[ -e /etc/profile.d/cmm-env.sh ] && source /etc/profile.d/cmm-env.sh
+case $APP_ENV in
+  'production')
+    ENVCOLOR='$fg_bold[red]'
+    ;;
+  'integration')
+    ENVCOLOR='$fg[yellow]'
+    ;;
+  * )
+    ENVCOLOR='$fg[green]'
+    ;;
+esac
+
 case $USER in
   'root')
     USERSTRING="%{$fg_bold[red]%}%n"
     ;;
   'adam'|'astephens'|'adam.c.stephens')
-    USERSTRING="%{$fg[green]%}"
+    USERSTRING="%{${ENVCOLOR}%}${APP_ENV}"
     ;;
   *)
-    USERSTRING="%{$fg[green]%}%n"
+    USERSTRING="%{${ENVCOLOR}%}${APP_ENV}%n"
     ;;
 esac
 
