@@ -2,7 +2,7 @@ case $USER in
   'root')
     USERSTRING="%{$fg_bold[red]%}%n"
     ;;
-  'adam'|'adam.c.stephens')
+  'adam'|'astephens'|'adam.c.stephens')
     USERSTRING="%{$fg[green]%}"
     ;;
   *)

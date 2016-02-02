@@ -40,6 +40,7 @@ command Q q
 " shortcuts
 nnoremap <C-h> :bprevious<CR>
 nnoremap <C-l> :bnext<CR>
+nnoremap <Leader>l :redraw!<CR>
 map <C-t> :enew <Enter>
 " keep buffer undo when switching
 set hidden

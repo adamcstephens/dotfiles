@@ -1,5 +1,25 @@
 # vim: set ft=sh:
 
+OS=$(uname)
+echo "Found OS: $OS"
+if [[ "$OS" == 'Linux' ]]
+then
+  if [ -e /etc/arch-release ]
+  then
+    export DIST='arch'
+  elif [ -e /etc/debian_version ]
+  then
+    export DIST='debian'
+  elif [ -e /etc/redhat-release ]
+  then
+    export DIST='redhat'
+  elif grep CoreOS /etc/lsb-release &> /dev/null
+  then
+    export DIST='coreos'
+  fi
+  echo "Found Linux Distribution: $DIST"
+fi
+
 [ -e /etc/lsb-release ] && . /etc/lsb-release
 DISTRIB_ID=${DISTRIB_ID:-}
 
@@ -15,31 +35,24 @@ fresh freshshell/fresh bin/fresh --bin
 if which bash &> /dev/null
 then
   fresh-options --file=~/.bash_profile --marker
-    fresh shell/os_detect.sh
+    fresh shell/fresh.sh
     fresh shell/generic.sh
-    if [[ "$(uname)" == "Linux" ]]; then
-      fresh shell/linux.sh
-    fi
-    if [[ "$(uname)" == "Darwin" ]]; then
-      fresh shell/mac.sh
-      fresh shell/bash/mac.sh
-    fi
-    if which systemctl &>/dev/null
-    then
-      fresh shell/systemd.sh
-    fi
-    if which pfctl &>/dev/null
-    then
-      fresh shell/pf.sh
-    fi
-    fresh shell/packages.sh
+    for ondvp in $(ls -1 ~/.dotfiles/shell/apps/ondemand | cut -f1 -d.)
+    do
+      if which $ondvp &>/dev/null
+      then
+        echo "bash (ondemand): $ondvp"
+        fresh shell/apps/ondemand/$ondvp.sh
+      fi
+    done
+    [ -e shell/os/${OS}.sh ] && fresh shell/os/${OS}.sh
+    [ -e shell/os/${OS}.bash ] && fresh shell/os/${OS}.bash
+    [[ "$OS" == 'Linux' ]] && [ -e shell/os/Linux/${DIST}.sh ] && fresh shell/os/Linux/${DIST}.sh
     fresh shell/bash/bash.bash
-    fresh shell/drh.sh
     fresh shell/git.sh
     fresh shell/notes.sh
     fresh shell/devlang.sh
     fresh shell/virtual.sh
-    fresh shell/puppet.sh
   fresh-options
   fresh shell/bash/bashrc --file
 fi
@@ -50,34 +63,28 @@ fi
 if which zsh &> /dev/null
 then
   fresh-options --file=~/.zshrc --marker
-    fresh shell/os_detect.sh
+    fresh shell/fresh.sh
+    fresh shell/zsh/fresh.zsh
     fresh shell/zsh/zshrc.zsh
     fresh shell/zsh/prompt.zsh
     fresh shell/zsh/python.zsh
     fresh shell/zsh/rprompt.zsh
-    if [[ "$(uname)" == "Linux" ]]; then
-        fresh shell/linux.sh
-    fi
-    if [[ "$(uname)" == "Darwin" ]]; then
-      fresh shell/mac.sh
-      fresh shell/zsh/mac.sh
-    fi
-    if which systemctl &>/dev/null
-    then
-      fresh shell/systemd.sh
-    fi
-    if which pfctl &>/dev/null
-    then
-      fresh shell/pf.sh
-    fi
-    fresh shell/packages.sh
     fresh shell/generic.sh
-    fresh shell/drh.sh
+    for ondvp in $(ls -1 ~/.dotfiles/shell/apps/ondemand | cut -f1 -d.)
+    do
+      if which $ondvp &>/dev/null
+      then
+        echo "zsh (ondemand): $ondvp"
+        fresh shell/apps/ondemand/$ondvp.sh
+      fi
+    done
+    [ -e shell/os/${OS}.sh ] && fresh shell/os/${OS}.sh
+    [ -e shell/os/${OS}.bash ] && fresh shell/os/${OS}.bash
+    [[ "$OS" == 'Linux' ]] && [ -e shell/os/Linux/${DIST}.sh ] && fresh shell/os/Linux/${DIST}.sh
     fresh shell/git.sh
     fresh shell/notes.sh
     fresh shell/devlang.sh
     fresh shell/virtual.sh
-    fresh shell/puppet.sh
   fresh-options
 
   #fresh zsh-users/zsh-completions src --file=completion/
@@ -106,6 +113,20 @@ then
   fi
 fi
 
+# simplified zshrc
+if which zsh &> /dev/null
+then
+  fresh-options --file=~/.zshrc.simple --marker
+    fresh shell/zsh/zshrc.zsh
+    fresh shell/zsh/prompt.zsh
+    fresh shell/zsh/rprompt.zsh
+    fresh shell/os/Linux.sh
+    fresh shell/apps/ondemand/systemctl.sh
+    fresh shell/git.sh
+    fresh shell/generic.sh
+  fresh-options
+fi
+
 #
 # vim
 #
@@ -113,19 +134,19 @@ if which vim &> /dev/null
 then
   fresh-options --file=~/.vimrc --marker=\"
     fresh vim/vimrc
-    if [[ "$(uname)" == "Linux" ]]; then
+    if [[ "$OS" == "Linux" ]]; then
         fresh vim/linux.vim
     fi
-    if [[ "$(uname)" == "Darwin" ]]; then
+    if [[ "$OS" == "Darwin" ]]; then
       fresh vim/mac.vim
     fi
-    if [[ "$DISTRIB_ID" != 'CoreOS' ]]
+    if [[ "$DIST" != 'coreos' ]]
     then
       fresh twe4ked/dotfiles vim/vundle_before.vim
       fresh vim/vundle.vim
       for ondvp in $(ls -1 ~/.dotfiles/vim/plugins/ondemand | cut -f1 -d.)
       do
-        echo "vim (ondemnad): $ondvp"
+        echo "vim (ondemand): $ondvp"
         if which $ondvp &>/dev/null
         then
           fresh vim/plugins/ondemand/$ondvp.vim
@@ -144,7 +165,7 @@ then
     [ ! -h ~/.config/nvim/init.vim ] && ln -sfv ~/.vimrc ~/.config/nvim/init.vim
   fi
 
-  if [[ "$DISTRIB_ID" != 'CoreOS' ]]
+  if [[ "$DIST" != 'coreos' ]]
   then
     # vimcat binary
     fresh vim-scripts/vimcat vimcat --bin
@@ -212,30 +233,6 @@ fi
 if [ ! -e /etc/inputrc ]
 then
   fresh config/inputrc --file
-fi
-
-if which sshrc &> /dev/null
-then
-  # install the sshrc script
-  fresh Russell91/sshrc sshrc --bin
-
-  fresh-options --file=~/.sshrc --marker
-    fresh shell/os_detect.sh
-    fresh shell/generic.sh
-    fresh shell/linux.sh
-    fresh shell/packages.sh
-    fresh shell/bash/bash.bash
-    fresh shell/git.sh
-    fresh shell/notes.sh
-    fresh shell/devlang.sh
-    fresh shell/puppet.sh
-    fresh shell/sshrc.sh
-  fresh-options
-
-  fresh-options --file=~/.sshrc.d/vimrc --marker=\"
-    fresh vim/vimrc
-    fresh vim/full
-  fresh-options
 fi
 
 fresh_after_build() {

@@ -1,0 +1,1 @@
+Plugin 'tpope/vim-obsession'
