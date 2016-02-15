@@ -47,7 +47,7 @@ then
     done
     [ -e shell/os/${OS}.sh ] && fresh shell/os/${OS}.sh
     [ -e shell/os/${OS}.bash ] && fresh shell/os/${OS}.bash
-    [[ "$OS" == 'Linux' ]] && [ -e shell/os/Linux/${DIST}.sh ] && fresh shell/os/Linux/${DIST}.sh
+    [[ "$OS" == 'Linux' ]] && [ -e shell/os/Linux/${DIST}.sh ] && fresh shell/os/Linux/${DIST}.sh && echo "bash (ondemand) Linux/${DIST}"
     fresh shell/bash/bash.bash
     fresh shell/git.sh
     fresh shell/notes.sh
@@ -80,7 +80,7 @@ then
     done
     [ -e shell/os/${OS}.sh ] && fresh shell/os/${OS}.sh
     [ -e shell/os/${OS}.bash ] && fresh shell/os/${OS}.bash
-    [[ "$OS" == 'Linux' ]] && [ -e shell/os/Linux/${DIST}.sh ] && fresh shell/os/Linux/${DIST}.sh
+    [[ "$OS" == 'Linux' ]] && [ -e shell/os/Linux/${DIST}.sh ] && fresh shell/os/Linux/${DIST}.sh && echo "zsh (ondemand) Linux/${DIST}"
     fresh shell/git.sh
     fresh shell/notes.sh
     fresh shell/devlang.sh
