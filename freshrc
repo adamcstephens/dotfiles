@@ -79,7 +79,7 @@ then
       fi
     done
     [ -e shell/os/${OS}.sh ] && fresh shell/os/${OS}.sh
-    [ -e shell/os/${OS}.bash ] && fresh shell/os/${OS}.bash
+    [ -e shell/os/${OS}.zsh ] && fresh shell/os/${OS}.zsh
     [[ "$OS" == 'Linux' ]] && [ -e shell/os/Linux/${DIST}.sh ] && fresh shell/os/Linux/${DIST}.sh
     fresh shell/git.sh
     fresh shell/notes.sh
