@@ -18,6 +18,8 @@ then
     export DIST='coreos'
   fi
   echo "Found Linux Distribution: $DIST"
+else
+  DIST="$OS"
 fi
 
 [ -e /etc/lsb-release ] && . /etc/lsb-release
