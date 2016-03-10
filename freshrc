@@ -18,6 +18,8 @@ then
     export DIST='coreos'
   fi
   echo "Found Linux Distribution: $DIST"
+else
+  export DIST=$OS
 fi
 
 [ -e /etc/lsb-release ] && . /etc/lsb-release
@@ -229,6 +231,10 @@ fi
 if which top &> /dev/null
 then
   fresh config/toprc --file
+fi
+
+if [[ "$OS" == "Darwin" ]]; then
+  fresh gnachman/iTerm2 tests/imgcat --bin
 fi
 
 if [ ! -e /etc/inputrc ]
