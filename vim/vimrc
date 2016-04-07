@@ -59,4 +59,4 @@ cabbrev help vertical help
 
 " highlight unwanted chars
 set list
-set listchars=tab:»·,trail:·
+set listchars=tab:»·,trail:·,nbsp:·
