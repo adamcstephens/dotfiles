@@ -18,6 +18,8 @@ then
     export DIST='coreos'
   fi
   echo "Found Linux Distribution: $DIST"
+else
+  DIST="$OS"
 fi
 
 [ -e /etc/lsb-release ] && . /etc/lsb-release
@@ -231,6 +233,10 @@ then
   fresh config/toprc --file
 fi
 
+if [[ "$OS" == "Darwin" ]]; then
+  fresh gnachman/iTerm2 tests/imgcat --bin
+fi
+
 if [ ! -e /etc/inputrc ]
 then
   fresh config/inputrc --file
@@ -249,4 +255,7 @@ fresh_after_build() {
   do
     [ -e $HOME/$cfg ] && chmod 0700 $HOME/$cfg
   done
+
+  # return true so that we don't mess up the return code from fresh itself
+  true
 }

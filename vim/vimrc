@@ -13,7 +13,16 @@ nmap <F11> :set invpaste<CR>
 set pastetoggle=<F11>
 
 " toggle the gutter
-nmap <F12> :set invnumber<CR>:GitGutterToggle<CR>:SyntasticToggleMode<CR>
+function! ToggleGutters()
+  :set invnumber
+  if exists("*GitGutterToggle")
+    :GitGutterToggle
+  endif
+  if exists("*SyntasticToggleMode")
+    :SyntasticToggleMode
+  endif
+endfunction
+nmap <F12> :call ToggleGutters()<CR>
 
 " don't create stupid files
 set nobackup
@@ -46,8 +55,8 @@ map <C-t> :enew <Enter>
 set hidden
 
 " open help in a new tab
-cabbrev help tab help
+cabbrev help vertical help
 
 " highlight unwanted chars
 set list
-set listchars=tab:»·,trail:·
+set listchars=tab:»·,trail:·,nbsp:·

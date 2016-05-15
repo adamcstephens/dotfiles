@@ -1,3 +1,7 @@
+# support newer grep
+alias grep='grep --color=auto'
+unset GREP_OPTIONS
+
 alias pki="sudo apt-get install"
 alias pkls="dpkg -L"
 alias pkp="apt-file search"
