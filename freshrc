@@ -10,6 +10,9 @@ then
   elif [ -e /etc/debian_version ]
   then
     export DIST='debian'
+  elif [ -e /etc/fedora-release ]
+  then
+    export DIST='fedora'
   elif [ -e /etc/redhat-release ]
   then
     export DIST='redhat'
