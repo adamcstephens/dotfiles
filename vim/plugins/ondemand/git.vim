@@ -1,1 +1,1 @@
-Plugin 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'

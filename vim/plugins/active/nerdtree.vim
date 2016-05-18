@@ -1,5 +1,5 @@
 " nerdtree
-Plugin 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree'
 map <C-n> :NERDTreeToggle<CR>
 
 " allow quit if nerdtree is only open buffer

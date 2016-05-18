@@ -1,1 +1,1 @@
-Plugin 'rodjek/vim-puppet'
+Plug 'rodjek/vim-puppet'

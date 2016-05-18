@@ -1,4 +1,4 @@
-Plugin 'rking/ag.vim'
+Plug 'rking/ag.vim'
 
 " Use ag over grep
 set grepprg=ag\ --nogroup\ --nocolor

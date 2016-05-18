@@ -1,3 +1,3 @@
-Plugin 'ctrlpvim/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 
 "let g:ctrlp_working_path_mode = 'c'
