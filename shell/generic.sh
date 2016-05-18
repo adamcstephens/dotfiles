@@ -1,7 +1,7 @@
 [ -e $HOME/.shell_local.sh ] && . $HOME/.shell_local.sh
 
 # _generic
-export GREP_OPTIONS='--color=auto'
+alias grep='grep --color=auto'
 
 # colorize ls output
 export CLICOLOR=''

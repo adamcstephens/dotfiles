@@ -1,7 +1,3 @@
-# support newer grep
-alias grep='grep --color=auto'
-unset GREP_OPTIONS
-
 # packages
 alias pki="sudo pacman -S"
 alias pkls="pacman -Ql"
