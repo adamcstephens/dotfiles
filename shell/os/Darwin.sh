@@ -6,9 +6,9 @@ alias pkr="brew remove "
 
 if [ -d $HOME/.homebrew/bin ] 
 then
-  export PATH="$PATH:$HOME/.homebrew/bin"
+  export PATH="$HOME/.homebrew/bin:$PATH"
 fi
 if [ -d $HOME/.homebrew/sbin ]
 then
-  export PATH="$PATH:$HOME/.homebrew/sbin"
+  export PATH="$HOME/.homebrew/sbin:$PATH"
 fi
