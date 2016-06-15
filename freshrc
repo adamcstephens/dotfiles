@@ -116,6 +116,10 @@ then
   then
     fresh zsh-users/zsh-completions src/_virsh --file=completion/_virsh
   fi
+  if which oc &>/dev/null
+  then
+    fresh chmouel/oh-my-zsh-openshift _oc --file=completion/_oc
+  fi
 fi
 
 # simplified zshrc

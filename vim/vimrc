@@ -15,12 +15,8 @@ set pastetoggle=<F11>
 " toggle the gutter
 function! ToggleGutters()
   :set invnumber
-  if exists("*GitGutterToggle")
-    :GitGutterToggle
-  endif
-  if exists("*SyntasticToggleMode")
-    :SyntasticToggleMode
-  endif
+  :GitGutterToggle
+  :SyntasticToggleMode
 endfunction
 nmap <F12> :call ToggleGutters()<CR>
 
