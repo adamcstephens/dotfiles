@@ -1,7 +1,7 @@
 syntax on
 filetype plugin indent on
 
-colorscheme vibrantink
+silent! colorscheme vibrantink
 highlight Normal ctermbg=NONE
 
 "colorscheme vividchalk
