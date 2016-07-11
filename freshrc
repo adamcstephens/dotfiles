@@ -247,6 +247,11 @@ then
   fresh config/inputrc --file
 fi
 
+if [[ -e $HOME/.ssh/config ]] && grep -q ControlMaster $HOME/.ssh/config
+then
+  fresh ClockworkNet/cmc cmc --bin
+fi
+
 fresh_after_build() {
   for cfg in .toprc
   do
