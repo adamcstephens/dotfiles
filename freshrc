@@ -120,11 +120,8 @@ then
   then
     fresh chmouel/oh-my-zsh-openshift _oc --file=completion/_oc
   fi
-fi
 
-# simplified zshrc
-if which zsh &> /dev/null
-then
+  # simplified zshrc
   fresh-options --file=~/.zshrc.simple --marker
     fresh shell/zsh/zshrc.zsh
     fresh shell/zsh/prompt.zsh
@@ -165,7 +162,7 @@ then
       fresh vim/plugins/active/\*.vim
       fresh vim/local.vim
       fresh vim/plug_post.vim
-      fresh vim/full
+      fresh vim/full.vim
     fi
   fresh-options
   if which nvim &> /dev/null
@@ -184,6 +181,14 @@ then
     fresh vim-scripts/vimcat vimcat --bin
 
   fi
+
+  # simplified vimrc
+  fresh-options --file=~/.vimrc.simple --marker=\"
+    fresh vim/vimrc
+    fresh vim/linux.vim
+    fresh vim/local.vim
+    fresh vim/full.vim
+  fresh-options
 fi
 
 if [ -e /etc/debian_version ]
