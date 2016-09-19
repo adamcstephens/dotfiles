@@ -1,0 +1,1 @@
+Plug 'GEverding/vim-hocon'
