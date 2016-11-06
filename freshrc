@@ -142,6 +142,7 @@ fi
 #
 if which vim &> /dev/null
 then
+  [ ! -d ~/.vim ] && mkdir -vp ~/.vim
   fresh-options --file=~/.vimrc --marker=\"
     fresh vim/vimrc
     if [[ "$OS" == "Linux" ]]; then
