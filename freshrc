@@ -19,6 +19,9 @@ then
   elif grep CoreOS /etc/lsb-release &> /dev/null
   then
     export DIST='coreos'
+  elif [ -e /etc/nixos ]
+  then
+    export DIST='nixos'
   fi
   echo "Found Linux Distribution: $DIST"
 else
@@ -50,9 +53,9 @@ then
         fresh shell/apps/ondemand/$ondvp.sh
       fi
     done
-    [ -e shell/os/${OS}.sh ] && fresh shell/os/${OS}.sh && echo "bash (ondemand) ${OS}.sh"
-    [ -e shell/os/${OS}.bash ] && fresh shell/os/${OS}.bash && echo "bash (ondemand) ${OS}.bash"
-    [[ "$OS" == 'Linux' ]] && [ -e shell/os/Linux/${DIST}.sh ] && fresh shell/os/Linux/${DIST}.sh && echo "bash (ondemand) Linux/${DIST}"
+    [ -e $HOME/.dotfiles/shell/os/${OS}.sh ] && fresh shell/os/${OS}.sh && echo "bash (ondemand) ${OS}.sh"
+    [ -e $HOME/.dotfiles/shell/os/${OS}.bash ] && fresh shell/os/${OS}.bash && echo "bash (ondemand) ${OS}.bash"
+    [[ "$OS" == 'Linux' ]] && [ -e $HOME/.dotfiles/shell/os/Linux/${DIST}.sh ] && fresh shell/os/Linux/${DIST}.sh && echo "bash (ondemand) Linux/${DIST}"
     fresh shell/bash/bash.bash
     fresh shell/git.sh
     fresh shell/notes.sh
@@ -83,9 +86,9 @@ then
         fresh shell/apps/ondemand/$ondvp.sh
       fi
     done
-    [ -e shell/os/${OS}.sh ] && fresh shell/os/${OS}.sh && echo "zsh (ondemand) ${OS}.sh"
-    [ -e shell/os/${OS}.zsh ] && fresh shell/os/${OS}.zsh && echo "zsh (ondemand) ${OS}.zsh"
-    [[ "$OS" == 'Linux' ]] && [ -e shell/os/Linux/${DIST}.sh ] && fresh shell/os/Linux/${DIST}.sh && echo "zsh (ondemand) Linux/${DIST}"
+    [ -e $HOME/.dotfiles/shell/os/${OS}.sh ] && fresh shell/os/${OS}.sh && echo "zsh (ondemand) ${OS}.sh"
+    [ -e $HOME/.dotfiles/shell/os/${OS}.zsh ] && fresh shell/os/${OS}.zsh && echo "zsh (ondemand) ${OS}.zsh"
+    [[ "$OS" == 'Linux' ]] && [ -e $HOME/.dotfiles/shell/os/Linux/${DIST}.sh ] && fresh shell/os/Linux/${DIST}.sh && echo "zsh (ondemand) Linux/${DIST}"
     fresh shell/git.sh
     fresh shell/notes.sh
     fresh shell/devlang.sh
