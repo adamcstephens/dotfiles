@@ -1,4 +1,4 @@
-#alias pki="sudo apt-get install"
+alias pki="nix-env -iA "
 #alias pkls="dpkg -L"
 #alias pkp="apt-file search"
 alias pks="nix-env -qaP '*' --description | grep "
