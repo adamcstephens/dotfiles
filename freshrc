@@ -157,9 +157,9 @@ then
       fresh vim/plugins.vim
       for ondvp in $(ls -1 ~/.dotfiles/vim/plugins/ondemand | cut -f1 -d.)
       do
-        echo "vim (ondemand): $ondvp"
         if which $ondvp &>/dev/null
         then
+          echo "vim (ondemand): $ondvp"
           fresh vim/plugins/ondemand/$ondvp.vim
         fi
       done
