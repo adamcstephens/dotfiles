@@ -43,7 +43,7 @@ command Q q
 :let mapleader=","
 
 " shortcuts
-nnoremap <C-w> :bdelete<CR>
+"nnoremap <C-w> :bdelete<CR>
 nnoremap <C-h> :bprevious<CR>
 nnoremap <C-l> :bnext<CR>
 nnoremap <Leader>l :redraw!<CR>
