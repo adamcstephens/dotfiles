@@ -30,6 +30,7 @@ function esl {
 alias esl="exec $SHELL -l"
 
 alias tree='tree -FC'
+alias tfind='tree --prune -P '
 alias vundle_update='vim +BundleUpdate +BundleClean! +qall'
 
 # ssh
