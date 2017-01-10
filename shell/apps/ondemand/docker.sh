@@ -16,4 +16,16 @@ function dsh {
   fi
   docker run -t -i --rm=true $runimg $runcmd
 }
+function dksh {
+  [ -z $1 ] && echo "needs image to run." && return 2
+  runimg="$1"
+  shift
+  if [ -z $1 ]
+  then
+    runcmd="/bin/bash -l"
+  else
+    runcmd="$@"
+  fi
+  kubectl run dksh-image --rm --tty -i --image $runimg -- $runcmd
+}
 alias docker_rm_all="docker ps -a | grep -vi container | awk '{print $1}' | xargs docker rm -f"

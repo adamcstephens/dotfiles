@@ -30,7 +30,11 @@ function esl {
 alias esl="exec $SHELL -l"
 
 alias tree='tree -FC'
-alias tfind='tree --prune -P '
+function tfind {
+  findfile=$1
+  shift
+  tree --prune -P "*$findfile*" $@
+}
 alias vundle_update='vim +BundleUpdate +BundleClean! +qall'
 
 # ssh
