@@ -45,12 +45,13 @@ then
   fresh-options --file=~/.bash_profile --marker
     fresh shell/fresh.sh
     fresh shell/generic.sh
-    for ondvp in $(ls -1 ~/.dotfiles/shell/apps/ondemand | cut -f1 -d.)
+    for ondvp in $(ls -1 ~/.dotfiles/shell/apps/ondemand | cut -f1 -d. | sort -u )
     do
       if which $ondvp &>/dev/null
       then
         echo "bash (ondemand): $ondvp"
         fresh shell/apps/ondemand/$ondvp.sh
+        [ -e $HOME/.dotfiles/shell/apps/ondemand/$ondvp.bash ] && fresh shell/apps/ondemand/$ondvp.bash
       fi
     done
     [ -e $HOME/.dotfiles/shell/os/${OS}.sh ] && fresh shell/os/${OS}.sh && echo "bash (ondemand) ${OS}.sh"
@@ -78,12 +79,13 @@ then
     fresh shell/zsh/python.zsh
     fresh shell/zsh/rprompt.zsh
     fresh shell/generic.sh
-    for ondvp in $(ls -1 ~/.dotfiles/shell/apps/ondemand | cut -f1 -d.)
+    for ondvp in $(ls -1 ~/.dotfiles/shell/apps/ondemand | cut -f1 -d. | sort -u )
     do
       if which $ondvp &>/dev/null
       then
         echo "zsh (ondemand): $ondvp"
         fresh shell/apps/ondemand/$ondvp.sh
+        [ -e $HOME/.dotfiles/shell/apps/ondemand/$ondvp.zsh ] && fresh shell/apps/ondemand/$ondvp.zsh
       fi
     done
     [ -e $HOME/.dotfiles/shell/os/${OS}.sh ] && fresh shell/os/${OS}.sh && echo "zsh (ondemand) ${OS}.sh"
