@@ -10,7 +10,7 @@ function dsh {
   shift
   if [ -z $1 ]
   then
-    runcmd="/bin/bash -l"
+    runcmd="/bin/bash"
   else
     runcmd="$@"
   fi

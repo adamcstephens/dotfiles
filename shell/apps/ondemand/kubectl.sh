@@ -4,9 +4,9 @@ function dksh {
   shift
   if [ -z $1 ]
   then
-    runcmd="/bin/bash -l"
+    runcmd="/bin/bash"
   else
     runcmd="$@"
   fi
-  kubectl run dksh-image --rm --tty -i --image $runimg -- $runcmd
+  kubectl run -i --tty dksh-image --rm --image=$runimg --restart=Never --namespace=default -- $runcmd
 }
