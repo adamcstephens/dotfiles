@@ -2,6 +2,7 @@
 
 # _generic
 alias grep='grep --color=auto'
+alias thisweek='date +%Y-%W'
 
 # colorize ls output
 export CLICOLOR=''
