@@ -750,15 +750,15 @@
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>930 598 700 622 0 0 2560 1418 </string>
 	<key>NSWindow Frame SessionsPreferences</key>
-	<string>93 -42 599 502 0 0 1280 778 </string>
+	<string>270 4 606 456 0 0 2560 1418 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>459 176 796 473 0 0 2560 1440 </string>
+	<string>514 341 796 473 0 0 2560 1440 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>230 833 592 584 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
 	<string>0 0 2560 1440 0 0 2560 1418 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>902 414 1658 998 0 0 2560 1418 </string>
+	<string>0 8 1274 770 0 0 1280 800 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
 	<string>22 33 1674 1017 0 0 1680 1050 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
@@ -2386,7 +2386,7 @@
 	<key>OpenBookmark</key>
 	<false/>
 	<key>OpenNoWindowsAtStartup</key>
-	<false/>
+	<true/>
 	<key>OpenTmuxWindowsIn</key>
 	<integer>1</integer>
 	<key>PMPrintingExpandedStateForPrint2</key>
@@ -2442,6 +2442,8 @@
 	<integer>8</integer>
 	<key>RightOption</key>
 	<integer>3</integer>
+	<key>RunJobsInServers</key>
+	<false/>
 	<key>SUEnableAutomaticChecks</key>
 	<true/>
 	<key>SUFeedAlternateAppNameKey</key>
@@ -2451,7 +2453,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2017-04-10T14:11:36Z</date>
+	<date>2017-05-03T14:56:07Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>ShowBookmarkName</key>
