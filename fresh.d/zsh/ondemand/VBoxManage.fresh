@@ -1,0 +1,1 @@
+fresh zsh-users/zsh-completions src/_virtualbox --file=completion/_virtualbox

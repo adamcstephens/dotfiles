@@ -100,31 +100,15 @@ then
   #fresh zsh-users/zsh-completions src --file=completion/
   fresh freshshell/fresh contrib/completion/fresh-completion.zsh --file=completion/_fresh
 
-  # conditional completions
-  if which vagrant &>/dev/null
-  then
-    fresh zsh-users/zsh-completions src/_vagrant --file=completion/_vagrant
-  fi
-  if which VBoxManage &>/dev/null
-  then
-    fresh zsh-users/zsh-completions src/_virtualbox --file=completion/_virtualbox
-  fi
-  if which docker &>/dev/null
-  then
-    fresh felixr/docker-zsh-completion _docker --file=completion/_docker
-  fi
-  if which ag &>/dev/null
-  then
-    fresh zsh-users/zsh-completions src/_ag --file=completion/_ag
-  fi
-  if which virsh &>/dev/null
-  then
-    fresh zsh-users/zsh-completions src/_virsh --file=completion/_virsh
-  fi
-  if which oc &>/dev/null
-  then
-    fresh chmouel/oh-my-zsh-openshift _oc --file=completion/_oc
-  fi
+  # ondemand fresh includes
+  for app in $(ls -1 ~/.dotfiles/fresh.d/zsh/ondemand | cut -f1 -d. | sort -u )
+  do
+    if which $app &>/dev/null
+    then
+      echo "zsh (ondemand) ${app}.fresh"
+      source ~/.dotfiles/fresh.d/zsh/ondemand/$app.fresh
+    fi
+  done
 
   # simplified zshrc
   fresh-options --file=~/.zshrc.simple --marker
