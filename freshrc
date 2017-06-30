@@ -97,9 +97,6 @@ then
     fresh shell/virtual.sh
   fresh-options
 
-  #fresh zsh-users/zsh-completions src --file=completion/
-  fresh freshshell/fresh contrib/completion/fresh-completion.zsh --file=completion/_fresh
-
   # ondemand fresh includes
   for app in $(ls -1 ~/.dotfiles/fresh.d/zsh/ondemand | cut -f1 -d. | sort -u )
   do

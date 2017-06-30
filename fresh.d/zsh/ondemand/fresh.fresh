@@ -1,0 +1,1 @@
+fresh freshshell/fresh contrib/completion/fresh-completion.zsh --file=completion/_fresh
