@@ -1,3 +1,4 @@
+ENVCOLOR='$fg[green]'
 case $USER in
   'root')
     USERSTRING="%{$fg_bold[red]%}%n"
