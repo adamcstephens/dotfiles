@@ -109,18 +109,6 @@ then
       source ~/.dotfiles/fresh.d/zsh/ondemand/$app.fresh
     fi
   done
-
-  # simplified zshrc
-  fresh-options --file=~/.zshrc.simple --marker
-    fresh shell/zsh/zshrc.zsh
-    fresh shell/zsh/prompt.zsh
-    fresh shell/zsh/rprompt.zsh
-    fresh shell/os/Linux.sh
-    fresh shell/apps/ondemand/systemctl.sh
-    fresh shell/git.sh
-    fresh shell/generic.sh
-    fresh shell/server.sh
-  fresh-options
 fi
 
 #
@@ -171,14 +159,6 @@ then
     fresh vim-scripts/vimcat vimcat --bin
 
   fi
-
-  # simplified vimrc
-  fresh-options --file=~/.vimrc.simple --marker=\"
-    fresh vim/vimrc
-    fresh vim/linux.vim
-    fresh vim/local.vim
-    fresh vim/full.vim
-  fresh-options
 fi
 
 if [ -e /etc/debian_version ]
