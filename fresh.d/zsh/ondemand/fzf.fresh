@@ -1,0 +1,4 @@
+fresh junegunn/fzf shell/completion.bash --file=vendor/fzf/completion.bash
+fresh junegunn/fzf shell/key-bindings.bash --file=vendor/fzf/key-bindings.bash
+fresh junegunn/fzf shell/completion.zsh --file=vendor/fzf/completion.zsh
+fresh junegunn/fzf shell/key-bindings.zsh --file=vendor/fzf/key-bindings.zsh

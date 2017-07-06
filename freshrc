@@ -49,14 +49,13 @@ then
     do
       if which $ondvp &>/dev/null
       then
-        echo "bash (ondemand): $ondvp"
-        fresh shell/apps/ondemand/$ondvp.sh
-        [ -e $HOME/.dotfiles/shell/apps/ondemand/$ondvp.bash ] && fresh shell/apps/ondemand/$ondvp.bash
+        [ -e $HOME/.dotfiles/shell/apps/ondemand/$ondvp.sh ] && fresh shell/apps/ondemand/$ondvp.sh && echo "bash (app): ${ondvp}"
+        [ -e $HOME/.dotfiles/shell/apps/ondemand/$ondvp.bash ] && fresh shell/apps/ondemand/$ondvp.bash && echo "bash (app): ${ondvp}.bash"
       fi
     done
-    [ -e $HOME/.dotfiles/shell/os/${OS}.sh ] && fresh shell/os/${OS}.sh && echo "bash (ondemand) ${OS}.sh"
-    [ -e $HOME/.dotfiles/shell/os/${OS}.bash ] && fresh shell/os/${OS}.bash && echo "bash (ondemand) ${OS}.bash"
-    [[ "$OS" == 'Linux' ]] && [ -e $HOME/.dotfiles/shell/os/Linux/${DIST}.sh ] && fresh shell/os/Linux/${DIST}.sh && echo "bash (ondemand) Linux/${DIST}"
+    [ -e $HOME/.dotfiles/shell/os/${OS}.sh ] && fresh shell/os/${OS}.sh && echo "bash (os): ${OS}.sh"
+    [ -e $HOME/.dotfiles/shell/os/${OS}.bash ] && fresh shell/os/${OS}.bash && echo "bash (os): ${OS}.bash"
+    [[ "$OS" == 'Linux' ]] && [ -e $HOME/.dotfiles/shell/os/Linux/${DIST}.sh ] && fresh shell/os/Linux/${DIST}.sh && echo "bash (os): Linux/${DIST}"
     fresh shell/bash/bash.bash
     fresh shell/git.sh
     fresh shell/notes.sh
@@ -83,60 +82,28 @@ then
     do
       if which $ondvp &>/dev/null
       then
-        echo "zsh (ondemand): $ondvp"
-        fresh shell/apps/ondemand/$ondvp.sh
-        [ -e $HOME/.dotfiles/shell/apps/ondemand/$ondvp.zsh ] && fresh shell/apps/ondemand/$ondvp.zsh
+        [ -e $HOME/.dotfiles/shell/apps/ondemand/$ondvp.sh ] && fresh shell/apps/ondemand/$ondvp.sh && echo "zsh (app): ${ondvp}"
+        [ -e $HOME/.dotfiles/shell/apps/ondemand/$ondvp.zsh ] && fresh shell/apps/ondemand/$ondvp.zsh && echo "zsh (app): ${ondvp}.zsh"
       fi
     done
-    [ -e $HOME/.dotfiles/shell/os/${OS}.sh ] && fresh shell/os/${OS}.sh && echo "zsh (ondemand) ${OS}.sh"
-    [ -e $HOME/.dotfiles/shell/os/${OS}.zsh ] && fresh shell/os/${OS}.zsh && echo "zsh (ondemand) ${OS}.zsh"
-    [[ "$OS" == 'Linux' ]] && [ -e $HOME/.dotfiles/shell/os/Linux/${DIST}.sh ] && fresh shell/os/Linux/${DIST}.sh && echo "zsh (ondemand) Linux/${DIST}"
+    [ -e $HOME/.dotfiles/shell/os/${OS}.sh ] && fresh shell/os/${OS}.sh && echo "zsh (os): ${OS}.sh"
+    [ -e $HOME/.dotfiles/shell/os/${OS}.zsh ] && fresh shell/os/${OS}.zsh && echo "zsh (os): ${OS}.zsh"
+    [[ "$OS" == 'Linux' ]] && [ -e $HOME/.dotfiles/shell/os/Linux/${DIST}.sh ] && fresh shell/os/Linux/${DIST}.sh && echo "zsh (os): Linux/${DIST}"
     fresh shell/git.sh
     fresh shell/notes.sh
     fresh shell/devlang.sh
     fresh shell/virtual.sh
   fresh-options
 
-  #fresh zsh-users/zsh-completions src --file=completion/
-  fresh freshshell/fresh contrib/completion/fresh-completion.zsh --file=completion/_fresh
-
-  # conditional completions
-  if which vagrant &>/dev/null
-  then
-    fresh zsh-users/zsh-completions src/_vagrant --file=completion/_vagrant
-  fi
-  if which VBoxManage &>/dev/null
-  then
-    fresh zsh-users/zsh-completions src/_virtualbox --file=completion/_virtualbox
-  fi
-  if which docker &>/dev/null
-  then
-    fresh felixr/docker-zsh-completion _docker --file=completion/_docker
-  fi
-  if which ag &>/dev/null
-  then
-    fresh zsh-users/zsh-completions src/_ag --file=completion/_ag
-  fi
-  if which virsh &>/dev/null
-  then
-    fresh zsh-users/zsh-completions src/_virsh --file=completion/_virsh
-  fi
-  if which oc &>/dev/null
-  then
-    fresh chmouel/oh-my-zsh-openshift _oc --file=completion/_oc
-  fi
-
-  # simplified zshrc
-  fresh-options --file=~/.zshrc.simple --marker
-    fresh shell/zsh/zshrc.zsh
-    fresh shell/zsh/prompt.zsh
-    fresh shell/zsh/rprompt.zsh
-    fresh shell/os/Linux.sh
-    fresh shell/apps/ondemand/systemctl.sh
-    fresh shell/git.sh
-    fresh shell/generic.sh
-    fresh shell/server.sh
-  fresh-options
+  # ondemand fresh includes
+  for app in $(ls -1 ~/.dotfiles/fresh.d/zsh/ondemand | cut -f1 -d. | sort -u )
+  do
+    if which $app &>/dev/null
+    then
+      echo "zsh (app): ${app}.fresh"
+      source ~/.dotfiles/fresh.d/zsh/ondemand/$app.fresh
+    fi
+  done
 fi
 
 #
@@ -161,7 +128,7 @@ then
       do
         if which $ondvp &>/dev/null
         then
-          echo "vim (ondemand): $ondvp"
+          echo "vim (app): $ondvp"
           fresh vim/plugins/ondemand/$ondvp.vim
         fi
       done
@@ -187,14 +154,6 @@ then
     fresh vim-scripts/vimcat vimcat --bin
 
   fi
-
-  # simplified vimrc
-  fresh-options --file=~/.vimrc.simple --marker=\"
-    fresh vim/vimrc
-    fresh vim/linux.vim
-    fresh vim/local.vim
-    fresh vim/full.vim
-  fresh-options
 fi
 
 if [ -e /etc/debian_version ]
