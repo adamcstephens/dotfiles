@@ -8,9 +8,8 @@ set shiftwidth=2
 set expandtab
 set shell=/bin/bash
 
-nmap <F11> :set invpaste<CR>
-" allow toggling in insert mode
-set pastetoggle=<F11>
+" set a leader!
+:let mapleader=","
 
 " toggle the gutter
 function! ToggleGutters()
@@ -18,7 +17,7 @@ function! ToggleGutters()
   :GitGutterToggle
   :SyntasticToggleMode
 endfunction
-nmap <F12> :call ToggleGutters()<CR>
+map <Leader>g :call ToggleGutters()<CR>
 
 " don't create stupid files
 set nobackup
@@ -38,9 +37,6 @@ autocmd FileType gitcommit call setpos('.', [0, 1, 1, 0])
 " fix my damn inability to type
 command Qa qa
 command Q q
-
-" set a leader!
-:let mapleader=","
 
 " shortcuts
 "nnoremap <C-w> :bdelete<CR>
