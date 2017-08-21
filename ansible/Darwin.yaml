@@ -1,0 +1,21 @@
+- hosts: localhost
+  connection: local
+  tasks:
+    - name: homebrews
+      homebrew:
+        name: "{{ item }}"
+        state: present
+        update_homebrew: yes
+      with_items:
+        - colordiff
+        - gnu-sed
+        - gnu-tar
+        - htop-osx
+        - hub
+        - jq
+        - nmap
+        - the_silver_searcher
+        - tmate
+        - tmux
+        - tree
+        - wget
