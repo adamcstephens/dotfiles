@@ -8,6 +8,7 @@
         update_homebrew: yes
       with_items:
         - colordiff
+        - fzf
         - gnu-sed
         - gnu-tar
         - htop-osx
@@ -19,3 +20,7 @@
         - tmux
         - tree
         - wget
+
+    - name: upgrade homebrews
+      homebrew:
+        upgrade_all: yes
