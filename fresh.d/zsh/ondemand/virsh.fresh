@@ -1,1 +1,0 @@
-fresh zsh-users/zsh-completions src/_virsh --file=completion/_virsh

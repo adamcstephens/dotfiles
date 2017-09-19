@@ -72,7 +72,6 @@ if which zsh &> /dev/null
 then
   fresh-options --file=~/.zshrc --marker
     fresh shell/fresh.sh
-    fresh shell/zsh/fresh.zsh
     fresh shell/zsh/zshrc.zsh
     fresh shell/zsh/prompt.zsh
     fresh shell/zsh/python.zsh
@@ -93,6 +92,9 @@ then
     fresh shell/notes.sh
     fresh shell/devlang.sh
     fresh shell/virtual.sh
+
+    fresh shell/zsh/zplug.zsh
+
   fresh-options
 
   # ondemand fresh includes
