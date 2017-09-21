@@ -9,6 +9,7 @@ zplug "zsh-users/zsh-completions", depth:1
 
 zplug "plugins/docker",         from:oh-my-zsh
 zplug "plugins/docker-compose", from:oh-my-zsh, as:plugin
+zplug "plugins/systemd", from:oh-my-zsh, as:plugin, if:"which systemctl"
 zplug "~/.fresh/source/freshshell/fresh/contrib/completion/fresh-completion.zsh", from:local
 
 # Source after compinit to enable completion
