@@ -1,3 +1,6 @@
+*.log
+*.retry
 *.sw?
-vendor
 .bundle
+.ruby-version
+vendor
