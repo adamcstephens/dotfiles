@@ -10,10 +10,8 @@ zplug "zsh-users/zsh-completions", depth:1
 zplug "plugins/docker",         from:oh-my-zsh
 zplug "plugins/docker-compose", from:oh-my-zsh, as:plugin
 zplug "plugins/systemd", from:oh-my-zsh, as:plugin, if:"which systemctl"
+zplug "plugins/nomad", from:oh-my-zsh, as:plugin, if:"which nomad"
 zplug "~/.fresh/source/freshshell/fresh/contrib/completion/fresh-completion.zsh", from:local
-
-# Source after compinit to enable completion
-zplug "knu/z", use:z.sh, defer:2
 
 # self-manage zplug
 zplug 'zplug/zplug', hook-build:'zplug --self-manage'
