@@ -65,3 +65,6 @@ export GIT_PS1_SHOWSTASHSTATE=1
 export GIT_PS1_SHOWUNTRACKEDFILES=1
 export GIT_PS1_SHOWUPSTREAM=1
 export GIT_PS1_SHOWCOLORHINTS=1
+
+# fzf
+[[ -e ~/.fzf.bash ]] && source ~/.fzf.bash

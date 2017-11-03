@@ -96,16 +96,6 @@ then
     fresh shell/zsh/zplug.zsh
 
   fresh-options
-
-  # ondemand fresh includes
-  for app in $(ls -1 ~/.dotfiles/fresh.d/zsh/ondemand | cut -f1 -d. | sort -u )
-  do
-    if which $app &>/dev/null
-    then
-      echo "zsh (app): ${app}.fresh"
-      source ~/.dotfiles/fresh.d/zsh/ondemand/$app.fresh
-    fi
-  done
 fi
 
 #
