@@ -199,6 +199,11 @@ then
   fresh config/screenrc --file
 fi
 
+if which emacs &> /dev/null
+then
+  ln -sf ~/.dotfiles/config/spacemacs ~/.spacemacs
+fi
+
 if which git &> /dev/null
 then
   fresh config/gitconfig --file
