@@ -21,7 +21,8 @@ newpassgen() {
       if [[ "$x" == '2' ]]
       then
         y="$(od -vAn -N1 -tu < /dev/urandom | head -n 1 | awk '{print $1}')"
-        echo -n "$y "
+        z="$(pwgen -0yA -r abcdefghijklmnopqrstuvwxyz 1 1)"
+        echo -n "$y$z "
       fi
     done
     echo
