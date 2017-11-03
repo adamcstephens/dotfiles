@@ -15,7 +15,6 @@ set shell=/bin/bash
 function! ToggleGutters()
   :set invnumber
   :GitGutterToggle
-  :SyntasticToggleMode
 endfunction
 map <Leader>g :call ToggleGutters()<CR>
 
