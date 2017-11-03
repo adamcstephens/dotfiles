@@ -1,7 +1,7 @@
 syntax on
 filetype plugin indent on
 
-silent! colorscheme vibrantink
+silent! colorscheme molokai
 highlight Normal ctermbg=NONE
 
 " highlight active line
