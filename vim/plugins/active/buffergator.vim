@@ -1,1 +1,0 @@
-Plug 'jeetsukumaran/vim-buffergator'

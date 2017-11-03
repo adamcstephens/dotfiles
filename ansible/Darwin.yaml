@@ -10,17 +10,26 @@
       with_items:
         - colordiff
         - flake8
+        - go
         - gnu-sed
         - gnu-tar
         - htop-osx
         - hub
         - jq
         - nmap
+        - nodejs
+        - npm
         - the_silver_searcher
         - tmate
         - tmux
         - tree
         - wget
+
+    - name: vim
+      homebrew:
+        name: vim
+        state: present
+        install_options: "--without-python --with-python3"
 
     - name: upgrade homebrews
       homebrew:
