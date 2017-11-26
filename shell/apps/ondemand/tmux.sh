@@ -8,3 +8,5 @@ update_auth_sock() {
     export SSH_AUTH_SOCK="$socket_path"
   fi
 }
+
+alias uas=update_auth_sock
