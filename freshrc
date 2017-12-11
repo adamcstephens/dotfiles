@@ -207,6 +207,12 @@ fi
 
 if [[ "$OS" == "Darwin" ]]; then
   fresh gnachman/iTerm2 tests/imgcat --bin
+  if [[ -d /Applications/Visual\ Studio\ Code.app ]]
+  then
+    [[ ! -h ~/Library/Application\ Support/Code/User/settings.json ]] && ln -sv ~/.dotfiles/config/vscode/settings.json ~/Library/Application\ Support/Code/User/settings.json
+    [[ ! -h ~/Library/Application\ Support/Code/User/keybindings.json ]] && ln -sv ~/.dotfiles/config/vscode/keybindings.json ~/Library/Application\ Support/Code/User/keybindings.json
+    [[ ! -h ~/Library/Application\ Support/Code/User/snippets ]] && ln -sv ~/.dotfiles/config/vscode/snippets ~/Library/Application\ Support/Code/User
+  fi
 fi
 
 if [ ! -e /etc/inputrc ]
