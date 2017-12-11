@@ -46,6 +46,8 @@ map <C-t> :enew <Enter>
 " keep buffer undo when switching
 set hidden
 
+nnoremap <Leader>s :set hlsearch!<CR>
+
 " open help in a new tab
 cabbrev help vertical help
 

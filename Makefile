@@ -4,12 +4,15 @@ all:
 mac:
 	ansible-playbook ansible/Darwin.yaml
 
-update-vim:
-	vim +PlugUpdate +PlugClean +qall
+update-vim: all
+	vim +PlugUpdate +qall
 
 update-fresh:
 	fresh update
+
+clean:
 	fresh clean
+	vim +PlugClean +qall
 
 update: update-fresh update-vim
 
@@ -24,4 +27,4 @@ powerline:
 		cd .. &&\
 		rm -rf fonts
 
-.PHONY: all ansible update-vim update-fresh update
+.PHONY: all ansible clean update-vim update-fresh update
