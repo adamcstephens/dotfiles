@@ -1,0 +1,27 @@
+---
+- hosts: localhost
+  connection: local
+  become: True
+  tasks:
+    - name: packages
+      package:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - colordiff
+        - docker
+        - flake8
+        - gconf2
+        - golang-1.9
+        - htop
+        - git-hub
+        - jq
+        - nmap
+        - nodejs
+        - npm
+        - silversearcher-ag
+        - tmate
+        - tmux
+        - tree
+        - wget
+        - yamllint
