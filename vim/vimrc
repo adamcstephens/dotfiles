@@ -43,6 +43,10 @@ nnoremap <C-h> :bprevious<CR>
 nnoremap <C-l> :bnext<CR>
 nnoremap <Leader>l :redraw!<CR>
 map <C-t> :enew <Enter>
+"insert but not
+nmap <Leader>O O<Esc>j
+nmap <Leader>o o<Esc>k
+
 " keep buffer undo when switching
 set hidden
 
