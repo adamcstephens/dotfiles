@@ -207,6 +207,11 @@ fi
 
 if [[ "$OS" == "Darwin" ]]; then
   fresh gnachman/iTerm2 tests/imgcat --bin
+  [[ ! -d "$HOME/Library/Application Support/pip" ]] && mkdir -vp "$HOME/Library/Application Support/pip"
+  fresh config/pip.conf --file="$HOME/Library/Application Support/pip/pip.conf"
+elif [[ "$OS" == 'Linux' ]]; then
+  [[ ! -d $HOME/.config/pip ]] && mkdir -vp $HOME/.config/pip
+  fresh config/pip.conf --file="$HOME/.config/pip"
 fi
 
 if [ ! -e /etc/inputrc ]
