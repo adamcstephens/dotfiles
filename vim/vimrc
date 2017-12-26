@@ -46,6 +46,7 @@ map <C-t> :enew <Enter>
 "insert but not
 nmap <Leader>O O<Esc>j
 nmap <Leader>o o<Esc>k
+map <Leader>w :write<CR>
 
 " keep buffer undo when switching
 set hidden
