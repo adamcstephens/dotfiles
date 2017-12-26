@@ -45,6 +45,9 @@ then
   fresh-options --file=~/.bash_profile --marker
     fresh shell/fresh.sh
     fresh shell/generic.sh
+    [ -e $HOME/.dotfiles/shell/os/${OS}.sh ] && fresh shell/os/${OS}.sh && echo "bash (os): ${OS}.sh"
+    [ -e $HOME/.dotfiles/shell/os/${OS}.bash ] && fresh shell/os/${OS}.bash && echo "bash (os): ${OS}.bash"
+    [[ "$OS" == 'Linux' ]] && [ -e $HOME/.dotfiles/shell/os/Linux/${DIST}.sh ] && fresh shell/os/Linux/${DIST}.sh && echo "bash (os): Linux/${DIST}"
     for ondvp in $(ls -1 ~/.dotfiles/shell/apps/ondemand | cut -f1 -d. | sort -u )
     do
       if which $ondvp &>/dev/null
@@ -53,9 +56,6 @@ then
         [ -e $HOME/.dotfiles/shell/apps/ondemand/$ondvp.bash ] && fresh shell/apps/ondemand/$ondvp.bash && echo "bash (app): ${ondvp}.bash"
       fi
     done
-    [ -e $HOME/.dotfiles/shell/os/${OS}.sh ] && fresh shell/os/${OS}.sh && echo "bash (os): ${OS}.sh"
-    [ -e $HOME/.dotfiles/shell/os/${OS}.bash ] && fresh shell/os/${OS}.bash && echo "bash (os): ${OS}.bash"
-    [[ "$OS" == 'Linux' ]] && [ -e $HOME/.dotfiles/shell/os/Linux/${DIST}.sh ] && fresh shell/os/Linux/${DIST}.sh && echo "bash (os): Linux/${DIST}"
     fresh shell/bash/bash.bash
     fresh shell/git.sh
     fresh shell/notes.sh
@@ -77,6 +77,9 @@ then
     fresh shell/zsh/python.zsh
     fresh shell/zsh/rprompt.zsh
     fresh shell/generic.sh
+    [ -e $HOME/.dotfiles/shell/os/${OS}.sh ] && fresh shell/os/${OS}.sh && echo "zsh (os): ${OS}.sh"
+    [ -e $HOME/.dotfiles/shell/os/${OS}.zsh ] && fresh shell/os/${OS}.zsh && echo "zsh (os): ${OS}.zsh"
+    [[ "$OS" == 'Linux' ]] && [ -e $HOME/.dotfiles/shell/os/Linux/${DIST}.sh ] && fresh shell/os/Linux/${DIST}.sh && echo "zsh (os): Linux/${DIST}"
     for ondvp in $(ls -1 ~/.dotfiles/shell/apps/ondemand | cut -f1 -d. | sort -u )
     do
       if which $ondvp &>/dev/null
@@ -85,9 +88,6 @@ then
         [ -e $HOME/.dotfiles/shell/apps/ondemand/$ondvp.zsh ] && fresh shell/apps/ondemand/$ondvp.zsh && echo "zsh (app): ${ondvp}.zsh"
       fi
     done
-    [ -e $HOME/.dotfiles/shell/os/${OS}.sh ] && fresh shell/os/${OS}.sh && echo "zsh (os): ${OS}.sh"
-    [ -e $HOME/.dotfiles/shell/os/${OS}.zsh ] && fresh shell/os/${OS}.zsh && echo "zsh (os): ${OS}.zsh"
-    [[ "$OS" == 'Linux' ]] && [ -e $HOME/.dotfiles/shell/os/Linux/${DIST}.sh ] && fresh shell/os/Linux/${DIST}.sh && echo "zsh (os): Linux/${DIST}"
     fresh shell/git.sh
     fresh shell/notes.sh
     fresh shell/devlang.sh
