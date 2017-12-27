@@ -27,6 +27,11 @@ then
 fi
 if which rbenv > /dev/null 2>&1; then eval "$(rbenv init -)"; fi
 
+if [[ -d $HOME/.local/bin ]]
+then
+  export PATH="$HOME/.local/bin:$PATH"
+fi
+
 function bootstrap_plenv {
   git clone https://github.com/tokuhirom/plenv.git ~/.plenv
   git clone https://github.com/tokuhirom/Perl-Build.git ~/.plenv/plugins/perl-build/
