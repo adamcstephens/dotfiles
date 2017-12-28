@@ -1,3 +1,5 @@
 {
-    "editor.tabSize": 2
+    "C_Cpp.intelliSenseEngine": "Tag Parser",
+    "editor.tabSize": 2,
+    "workbench.colorTheme": "Monokai"
 }

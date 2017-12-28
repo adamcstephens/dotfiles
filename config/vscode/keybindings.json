@@ -1,0 +1,6 @@
+[
+  {
+    "key": "shift+cmd+k",
+    "command": "workbench.action.tasks.terminate"
+  }
+]
