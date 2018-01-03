@@ -1,6 +1,9 @@
 all:
 	fresh
 
+dev-ruby:
+	ansible-playbook ansible/dev-ruby.yaml
+
 mac:
 	ansible-playbook ansible/Darwin.yaml
 
