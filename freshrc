@@ -1,5 +1,7 @@
 # vim: set ft=sh:
 
+[ ! -d ~/projects ] && mkdir -vp ~/projects
+
 OS=$(uname)
 echo "Found OS: $OS"
 if [[ "$OS" == 'Linux' ]]
