@@ -219,7 +219,7 @@ if [[ "$OS" == "Darwin" ]]; then
   fresh config/pip.conf --file="$HOME/Library/Application Support/pip/pip.conf"
 elif [[ "$OS" == 'Linux' ]]; then
   [[ ! -d $HOME/.config/pip ]] && mkdir -vp $HOME/.config/pip
-  fresh config/pip.conf --file="$HOME/.config/pip"
+  fresh config/pip.conf --file="$HOME/.config/pip/pip.conf"
 fi
 
 if [ ! -e /etc/inputrc ]
