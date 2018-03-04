@@ -19,6 +19,7 @@
         - nmap
         - nodejs
         - npm
+        - pstree
         - the_silver_searcher
         - tmate
         - tmux
