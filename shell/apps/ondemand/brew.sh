@@ -1,8 +1,9 @@
 alias pki="brew install "
+alias pkls="brew ls --verbose "
+alias pkr="brew remove "
 alias pks="brew search "
 alias pksh="brew info "
 alias pku="brew update && brew upgrade"
-alias pkr="brew remove "
 
 if [ -d $HOME/.homebrew/bin ]
 then
