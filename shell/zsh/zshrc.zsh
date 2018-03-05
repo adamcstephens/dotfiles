@@ -40,6 +40,8 @@ export WORDCHARS='*?_[]~|&;!#$%^(){}.-"'
 bindkey -e
 bindkey ";5C" forward-word
 bindkey ";5D" backward-word
+bindkey '^[[1;5C' forward-word
+bindkey '^[[1;5D' backward-word
 
 # create a zkbd compatible hash;
 # to add other keys to this hash, see: man 5 terminfo
