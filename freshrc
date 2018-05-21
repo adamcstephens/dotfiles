@@ -202,6 +202,11 @@ then
   fresh config/gitignore --file
 fi
 
+if which rubocop &> /dev/null
+then
+  fresh config/rubocop.yml --file
+fi
+
 if which top &> /dev/null
 then
   fresh config/toprc --file

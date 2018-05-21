@@ -31,17 +31,3 @@ if [[ -d $HOME/.local/bin ]]
 then
   export PATH="$HOME/.local/bin:$PATH"
 fi
-
-function bootstrap_plenv {
-  git clone https://github.com/tokuhirom/plenv.git ~/.plenv
-  git clone https://github.com/tokuhirom/Perl-Build.git ~/.plenv/plugins/perl-build/
-}
-
-function bootstrap_pyenv {
-  git clone https://github.com/yyuu/pyenv.git ~/.pyenv
-}
-
-function bootstrap_rbenv {
-  git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
-  git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
-}

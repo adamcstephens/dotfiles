@@ -4,6 +4,13 @@ all:
 dev-ruby:
 	ansible-playbook ansible/dev-ruby.yaml
 
+dev-python-pyenv:
+	git clone https://github.com/yyuu/pyenv.git ~/.pyenv
+
+dev-ruby-rbenv:
+	git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
+	git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
+
 mac:
 	ansible-playbook ansible/Darwin.yaml
 
