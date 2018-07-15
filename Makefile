@@ -37,4 +37,9 @@ powerline:
 		cd .. &&\
 		rm -rf fonts
 
+zsh-prof:
+	chmod +w ~/.zshrc
+	ex -sc '1i|zmodload zsh/zprof' -cx ~/.zshrc
+	echo "zprof" >> ~/.zshrc
+
 .PHONY: all ansible clean update-vim update-fresh update

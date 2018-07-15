@@ -1,0 +1,7 @@
+robbyrussell/oh-my-zsh folder:plugins/docker
+robbyrussell/oh-my-zsh folder:plugins/docker-compose
+robbyrussell/oh-my-zsh folder:plugins/systemd
+zsh-users/zsh-completions
+
+# this is loaded last
+zsh-users/zsh-syntax-highlighting

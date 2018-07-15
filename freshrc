@@ -70,6 +70,13 @@ fi
 #
 # zsh
 #
+
+if ! which antibody &>/dev/null
+then
+  curl -sL https://git.io/antibody | sed -e "s,/usr/local/bin,$HOME/bin," -e 's/sudo //' | sh -s
+fi
+antibody bundle < ./shell/zsh/antibody_plugins.txt > ~/.zsh_plugins.sh
+
 if which zsh &> /dev/null
 then
   fresh-options --file=~/.zshrc --marker
@@ -95,9 +102,11 @@ then
     fresh shell/devlang.sh
     fresh shell/virtual.sh
 
-    fresh shell/zsh/zplug.zsh
-
+    fresh shell/zsh/antibody.zsh
   fresh-options
+
+  # clean compdump
+  rm -f ~/.zcompdump
 fi
 
 #
