@@ -70,6 +70,13 @@ fi
 #
 # zsh
 #
+
+if ! which antibody &>/dev/null
+then
+  curl -sL https://git.io/antibody | sed -e "s,/usr/local/bin,$HOME/bin," -e 's/sudo //' | sh -s
+fi
+antibody bundle < ./shell/zsh/antibody_plugins.txt > ~/.zsh_plugins.sh
+
 if which zsh &> /dev/null
 then
   fresh-options --file=~/.zshrc --marker
@@ -95,9 +102,11 @@ then
     fresh shell/devlang.sh
     fresh shell/virtual.sh
 
-    fresh shell/zsh/zplug.zsh
-
+    fresh shell/zsh/antibody.zsh
   fresh-options
+
+  # clean compdump
+  rm -f ~/.zcompdump
 fi
 
 #
@@ -220,11 +229,6 @@ if [[ "$OS" == "Darwin" ]]; then
     [[ ! -h ~/Library/Application\ Support/Code/User/keybindings.json ]] && ln -sv ~/.dotfiles/config/vscode/keybindings.json ~/Library/Application\ Support/Code/User/keybindings.json
     [[ ! -h ~/Library/Application\ Support/Code/User/snippets ]] && ln -sv ~/.dotfiles/config/vscode/snippets ~/Library/Application\ Support/Code/User
   fi
-  [[ ! -d "$HOME/Library/Application Support/pip" ]] && mkdir -vp "$HOME/Library/Application Support/pip"
-  fresh config/pip.conf --file="$HOME/Library/Application Support/pip/pip.conf"
-elif [[ "$OS" == 'Linux' ]]; then
-  [[ ! -d $HOME/.config/pip ]] && mkdir -vp $HOME/.config/pip
-  fresh config/pip.conf --file="$HOME/.config/pip/pip.conf"
 fi
 
 if [ ! -e /etc/inputrc ]
