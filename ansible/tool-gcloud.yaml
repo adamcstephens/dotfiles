@@ -1,0 +1,23 @@
+---
+- hosts: localhost
+  connection: local
+  become: True
+  tasks:
+    - name: install https transport
+      apt:
+        name: apt-transport-https
+        update_cache: True
+
+    - name: install gcloud apt key
+      apt_key:
+        url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+
+    - name: setup gcloud apt repo
+      apt_repository:
+        repo: "deb https://packages.cloud.google.com/apt cloud-sdk-{{ ansible_distribution_release }} main"
+        filename: google-cloud-sdk
+
+    - name: install gcloud sdk
+      apt:
+        name: google-cloud-sdk
+        state: latest
