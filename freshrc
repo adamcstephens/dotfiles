@@ -71,14 +71,14 @@ fi
 # zsh
 #
 
-if ! which antibody &>/dev/null
-then
-  curl -sL https://git.io/antibody | sed -e "s,/usr/local/bin,$HOME/bin," -e 's/sudo //' | sh -s
-fi
-antibody bundle < ./shell/zsh/antibody_plugins.txt > ~/.zsh_plugins.sh
-
 if which zsh &> /dev/null
 then
+  if ! which antibody &>/dev/null
+  then
+    curl -sL https://git.io/antibody | sed -e "s,/usr/local/bin,$HOME/bin," -e 's/sudo //' | sh -s
+  fi
+  antibody bundle < ./shell/zsh/antibody_plugins.txt > ~/.zsh_plugins.sh
+
   fresh-options --file=~/.zshrc --marker
     fresh shell/fresh.sh
     fresh shell/zsh/zshrc.zsh
@@ -101,6 +101,7 @@ then
     fresh shell/notes.sh
     fresh shell/devlang.sh
     fresh shell/virtual.sh
+    [[ -d $HOME/.asdf ]] && fresh shell/asdf.sh
 
     fresh shell/zsh/antibody.zsh
   fresh-options
@@ -229,6 +230,7 @@ if [[ "$OS" == "Darwin" ]]; then
     [[ ! -h ~/Library/Application\ Support/Code/User/keybindings.json ]] && ln -sv ~/.dotfiles/config/vscode/keybindings.json ~/Library/Application\ Support/Code/User/keybindings.json
     [[ ! -h ~/Library/Application\ Support/Code/User/snippets ]] && ln -sv ~/.dotfiles/config/vscode/snippets ~/Library/Application\ Support/Code/User
   fi
+  fresh config/finicky.js --file
 fi
 
 if [ ! -e /etc/inputrc ]

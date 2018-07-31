@@ -26,6 +26,13 @@
         - tree
         - wget
 
+    - name: homebrew casks
+      homebrew_cask:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - finicky
+
     - name: vim
       homebrew:
         name: vim
