@@ -2,7 +2,8 @@
 finicky.setDefaultBrowser('com.apple.Safari');
 
 finicky.onUrl(function(url, opts) {
-  if (url.match(/^https?:\/\/portal\.azure\.com/)) {
+  // azure should go to chrome
+  if (url.match(/^https?:\/\/portal\.azure\.com/) || url.match(/^https:\/\/microsoft.com\/devicelogin/)) {
     return {
       bundleIdentifier: "com.google.Chrome"
     };
