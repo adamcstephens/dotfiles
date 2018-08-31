@@ -2,43 +2,132 @@
 - hosts: localhost
   connection: local
   tasks:
-    - name: homebrews
-      homebrew:
-        name: "{{ item }}"
-        state: present
-        update_homebrew: yes
-      with_items:
-        - colordiff
-        - flake8
-        - go
-        - gnu-sed
-        - gnu-tar
-        - htop-osx
-        - hub
-        - jq
-        - nmap
-        - nodejs
-        - npm
-        - pstree
-        - the_silver_searcher
-        - tmate
-        - tmux
-        - tree
-        - wget
+    - name: set AppleAquaColorVariant
+      osx_defaults:
+        key: AppleAquaColorVariant
+        type: int
+        value: 6
+        
+    - name: set AppleHighlightColor
+      osx_defaults:
+        key: AppleHighlightColor
+        type: string
+        value: 0.847059 0.847059 0.862745
+                
+    - name: set AppleInterfaceStyle
+      osx_defaults:
+        key: AppleInterfaceStyle
+        type: string
+        value: Dark
+      
+    - name: set com.apple.mouse.scaling
+      osx_defaults:
+        key: com.apple.mouse.scaling
+        type: float
+        value: 1
 
-    - name: homebrew casks
-      homebrew_cask:
-        name: "{{ item }}"
-        state: present
-      with_items:
-        - finicky
+    - name: set InitialKeyRepeat
+      osx_defaults:
+        key: InitialKeyRepeat
+        type: int
+        value: 15
 
-    - name: vim
-      homebrew:
-        name: vim
-        state: present
-        install_options: "--without-python --with-python3"
+    - name: set KeyRepeat
+      osx_defaults:
+        key: KeyRepeat
+        type: int
+        value: 0
 
-    - name: upgrade homebrews
-      homebrew:
-        upgrade_all: yes
+
+### dock
+    - name: set autohide
+      osx_defaults:
+        domain: com.apple.dock
+        key: autohide
+        type: int
+        value: 1
+   
+    - name: set autohide
+      osx_defaults:
+        domain: com.apple.dock
+        key: magnification
+        type: int
+        value: 1
+   
+### safari
+    - name: set AlwaysRestoreSessionAtLaunch
+      osx_defaults:
+        domain: com.apple.Safari
+        key: AlwaysRestoreSessionAtLaunch
+        type: int
+        value: 1
+
+    - name: safari AutoFillCreditCardData
+      osx_defaults:
+        domain: com.apple.Safari
+        key: AutoFillCreditCardData
+        type: int
+        value: 1
+
+    - name: safari AutoFillFromAddressBook
+      osx_defaults:
+        domain: com.apple.Safari
+        key: AutoFillFromAddressBook
+        type: int
+        value: 0
+
+    - name: safari AutoFillMiscellaneousForms
+      osx_defaults:
+        domain: com.apple.Safari
+        key: AutoFillMiscellaneousForms
+        type: int
+        value: 0
+
+    - name: safari AutoFillPasswords
+      osx_defaults:
+        domain: com.apple.Safari
+        key: AutoFillPasswords
+        type: int
+        value: 0
+        
+    - name: safari PreloadTopHit
+      osx_defaults:
+        domain: com.apple.Safari
+        key: PreloadTopHit
+        type: int
+        value: 0
+
+    - name: safari AutoOpenSafeDownloads
+      osx_defaults:
+        domain: com.apple.Safari
+        key: AutoOpenSafeDownloads
+        type: int
+        value: 0
+
+    - name: safari SendDoNotTrackHTTPHeader
+      osx_defaults:
+        domain: com.apple.Safari
+        key: SendDoNotTrackHTTPHeader
+        type: int
+        value: 1
+
+    - name: safari ShowOverlayStatusBar
+      osx_defaults:
+        domain: com.apple.Safari
+        key: ShowOverlayStatusBar
+        type: int
+        value: 1
+
+    - name: safari SuppressSearchSuggestions
+      osx_defaults:
+        domain: com.apple.Safari
+        key: SuppressSearchSuggestions
+        type: int
+        value: 1
+
+    - name: safari WebsiteSpecificSearchEnabled
+      osx_defaults:
+        domain: com.apple.Safari
+        key: WebsiteSpecificSearchEnabled
+        type: int
+        value: 0

@@ -1453,7 +1453,7 @@
 	gAKACoAN0xAJChEVGVdOUy5rZXlzoxITFIADgASABaMWFxiABoAHgAiACVpJZGVudGlm
 	aWVyVVdpZHRoVkhpZGRlblEwI0BowAAAAAAACNIhIiMkWiRjbGFzc25hbWVYJGNsYXNz
 	ZXNcTlNEaWN0aW9uYXJ5oiMlWE5TT2JqZWN00xAJCicrGaMSExSAA4AEgAWjLC0YgAuA
-	DIAIgAlRMSNAdKGdsi0OVtIhIjM0Xk5TTXV0YWJsZUFycmF5ozM1JVdOU0FycmF5XxAP
+	DIAIgAlRMSNAc7Gdsi0OVtIhIjM0Xk5TTXV0YWJsZUFycmF5ozM1JVdOU0FycmF5XxAP
 	TlNLZXllZEFyY2hpdmVy0Tg5VUFycmF5gAEACAARABoAIwAtADIANwBGAEwAUQBcAGMA
 	ZgBoAGoAbABzAHsAfwCBAIMAhQCJAIsAjQCPAJEAnACiAKkAqwC0ALUAugDFAM4A2wDe
 	AOcA7gDyAPQA9gD4APwA/gEAAQIBBAEGAQ8BFAEjAScBLwFBAUQBSgAAAAAAAAIBAAAA
@@ -1475,17 +1475,11 @@
 		<integer>1</integer>
 	</dict>
 	<key>NSWindow Frame NSFontPanel</key>
-	<string>736 156 663 174 0 0 1440 878 </string>
-	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>410 364 620 392 0 0 1440 878 </string>
-	<key>NSWindow Frame SessionsPreferences</key>
-	<string>269 57 606 469 0 0 1440 877 </string>
+	<string>1792 110 702 375 0 0 2560 1417 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>176 338 796 486 0 0 1440 900 </string>
+	<string>220 491 918 394 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 0 1440 900 0 0 1440 877 </string>
-	<key>NSWindow Frame iTerm Window 1</key>
-	<string>0 0 1440 900 0 0 1440 878 </string>
+	<string>0 0 2560 1440 0 0 2560 1417 </string>
 	<key>NeverWarnAboutShortLivedSessions_E4539B70-99FC-4F65-8127-994F98C07FB0</key>
 	<true/>
 	<key>New Bookmarks</key>
@@ -2080,7 +2074,7 @@
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>SourceCodeProForPowerline-Regular 14</string>
+			<string>SauceCodePowerline-Regular 14</string>
 			<key>Only The Default BG Color Uses Transparency</key>
 			<true/>
 			<key>Option Key Sends</key>
@@ -3034,15 +3028,9 @@
 	<key>NoSyncHaveWarnedAboutPasteConfirmationChange</key>
 	<true/>
 	<key>NoSyncInstallationId</key>
-	<string>3CBA8EEA-5426-4244-984D-5DD11DD95E01</string>
-	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
-	<true/>
-	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
-	<integer>0</integer>
-	<key>NoSyncPermissionToShowTip</key>
-	<false/>
+	<string>24D5515C-A373-4A2F-8DB5-22764D09E1DA</string>
 	<key>NoSyncTimeOfFirstLaunchOfVersionWithTip</key>
-	<real>512943966.77440798</real>
+	<real>557427382.06595397</real>
 	<key>OnlyWhenMoreTabs</key>
 	<false/>
 	<key>OpenArrangementAtStartup</key>
@@ -3097,7 +3085,7 @@
 		</dict>
 	</dict>
 	<key>PrefsCustomFolder</key>
-	<string>/Users/adam/.dotfiles/config/iterm2</string>
+	<string>/Users/astephens/.dotfiles/config/iterm2</string>
 	<key>Print In Black And White</key>
 	<true/>
 	<key>PromptOnQuit</key>
@@ -3115,11 +3103,11 @@
 	<key>SUFeedAlternateAppNameKey</key>
 	<string>iTerm</string>
 	<key>SUFeedURL</key>
-	<string>https://iterm2.com/appcasts/final.xml?shard=96</string>
+	<string>https://iterm2.com/appcasts/final.xml?shard=9</string>
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2018-08-18T14:55:11Z</date>
+	<date>2018-08-31T16:57:02Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SavePasteHistory</key>

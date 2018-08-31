@@ -11,8 +11,11 @@ dev-ruby-rbenv:
 	git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
 	git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
 
-mac:
+mac-setup:
 	ansible-playbook ansible/Darwin.yaml
+
+mac-upgrade:
+	mas upgrade
 
 update-vim: all
 	vim +PlugUpdate +qall

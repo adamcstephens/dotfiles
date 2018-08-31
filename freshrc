@@ -75,9 +75,9 @@ if which zsh &> /dev/null
 then
   if ! which antibody &>/dev/null
   then
-    curl -sL https://git.io/antibody | sed -e "s,/usr/local/bin,$HOME/bin," -e 's/sudo //' | sh -s
+    curl -sL https://git.io/antibody | sed -e "s,/usr/local/bin,$HOME/bin," -e 's/sudo //' | sh -s || true
   fi
-  antibody bundle < ./shell/zsh/antibody_plugins.txt > ~/.zsh_plugins.sh
+  ~/bin/antibody bundle < ./shell/zsh/antibody_plugins.txt > ~/.zsh_plugins.sh
 
   fresh-options --file=~/.zshrc --marker
     fresh shell/fresh.sh
@@ -101,7 +101,7 @@ then
     fresh shell/notes.sh
     fresh shell/devlang.sh
     fresh shell/virtual.sh
-    [[ -d $HOME/.asdf ]] && fresh shell/asdf.sh
+    [[ -d $HOME/.asdf || -d /usr/local/Cellar/asdf ]] && fresh shell/asdf.sh
 
     fresh shell/zsh/antibody.zsh
   fresh-options
