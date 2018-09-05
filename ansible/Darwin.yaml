@@ -7,19 +7,19 @@
         key: AppleAquaColorVariant
         type: int
         value: 6
-        
+
     - name: set AppleHighlightColor
       osx_defaults:
         key: AppleHighlightColor
         type: string
         value: 0.847059 0.847059 0.862745
-                
+
     - name: set AppleInterfaceStyle
       osx_defaults:
         key: AppleInterfaceStyle
         type: string
         value: Dark
-      
+
     - name: set com.apple.mouse.scaling
       osx_defaults:
         key: com.apple.mouse.scaling
@@ -36,8 +36,7 @@
       osx_defaults:
         key: KeyRepeat
         type: int
-        value: 0
-
+        value: 2
 
 ### dock
     - name: set autohide
@@ -46,14 +45,14 @@
         key: autohide
         type: int
         value: 1
-   
+
     - name: set autohide
       osx_defaults:
         domain: com.apple.dock
         key: magnification
         type: int
         value: 1
-   
+
 ### safari
     - name: set AlwaysRestoreSessionAtLaunch
       osx_defaults:

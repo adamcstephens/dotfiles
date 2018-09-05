@@ -28,6 +28,7 @@ cask "font-source-code-pro-for-powerline"
 cask "istat-menus"
 cask "iterm2"
 cask "slack"
+cask "sonos"
 cask "spotify"
 cask "telegram-desktop"
 cask "visual-studio-code"
@@ -40,3 +41,4 @@ mas "Numbers", id: 409203825
 mas "OneDrive", id: 823766827
 mas "Pages", id: 409201541
 mas "Things3", id: 904280696
+mas "Tweetbot", id: 1384080005
