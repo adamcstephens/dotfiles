@@ -1,8 +1,4 @@
-#
-# lxc
-alias lxca='sudo lxc-ls --active'
-
-#
+#!/bin/bash
 # vagrant
 alias vdestroy='vagrant destroy '
 alias vp='vagrant provision '
@@ -13,12 +9,8 @@ alias vsg='vagrant global-status '
 alias vup='vagrant up '
 alias vssh='vagrant ssh '
 function vreload {
-  vmName=$1
-  vagrant destroy -f $vmName
-  vup $2 $vmName
-  vssh $vmName
+  vmName="$1"
+  vagrant destroy -f "$vmName"
+  vup "$2" "$vmName"
+  vssh "$vmName"
 }
-
-#
-# virtualbox
-alias vb=VBoxManage
