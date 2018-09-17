@@ -41,6 +41,9 @@ powerline:
 		rm -rf fonts
 
 zsh-prof:
+	time zsh -i -c exit
+
+zsh-prof-setup:
 	chmod +w ~/.zshrc
 	ex -sc '1i|zmodload zsh/zprof' -cx ~/.zshrc
 	echo "zprof" >> ~/.zshrc
