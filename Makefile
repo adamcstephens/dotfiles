@@ -8,6 +8,9 @@ brew-dump:
 	brew bundle dump -f
 	git diff Brewfile
 
+asdf:
+	git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.5.1
+
 dev-ruby:
 	ansible-playbook ansible/dev-ruby.yaml
 
