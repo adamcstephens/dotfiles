@@ -1,6 +1,13 @@
 all:
 	fresh
 
+brew:
+	brew bundle
+
+brew-dump:
+	brew bundle dump -f
+	git diff Brewfile
+
 dev-ruby:
 	ansible-playbook ansible/dev-ruby.yaml
 

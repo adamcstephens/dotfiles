@@ -1,5 +1,6 @@
 tap "homebrew/bundle"
 tap "homebrew/cask"
+tap "homebrew/cask-drivers"
 tap "homebrew/cask-fonts"
 tap "homebrew/core"
 brew "asdf"
@@ -14,7 +15,6 @@ brew "hub"
 brew "jq"
 brew "mas"
 brew "nmap"
-brew "node"
 brew "pinentry-mac"
 brew "pstree"
 brew "pwgen"
@@ -34,14 +34,21 @@ cask "sonos"
 cask "spotify"
 cask "steam"
 cask "telegram-desktop"
+cask "transmission-remote-gui"
+cask "tunnelblick"
 cask "visual-studio-code"
+cask "xquartz"
 mas "1Password 7", id: 1333542190
 mas "Bear", id: 1091189122
 mas "GarageBand", id: 682658836
 mas "iMovie", id: 408981434
 mas "Keynote", id: 409183694
+mas "Microsoft Remote Desktop", id: 715768417
 mas "Numbers", id: 409203825
 mas "OneDrive", id: 823766827
 mas "Pages", id: 409201541
+mas "Parcel", id: 639968404
+mas "Slack", id: 803453959
 mas "Things3", id: 904280696
 mas "Tweetbot", id: 1384080005
+mas "Xcode", id: 497799835
