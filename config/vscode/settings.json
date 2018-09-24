@@ -10,8 +10,6 @@
     "editor.fontFamily": "'Source Code Pro', Menlo, Monaco, 'Courier New', monospace",
     "editor.fontSize": 13,
     "terminal.integrated.fontSize": 13,
-    "team.showWelcomeMessage": false,
-    "azure-iot-toolkit.showIoTHubInfo": false,
     "gitlens.keymap": "chorded",
     "gitlens.advanced.messages": {
         "suppressCommitHasNoPreviousCommitWarning": false,
@@ -23,5 +21,7 @@
         "suppressResultsExplorerNotice": false,
         "suppressShowKeyBindingsNotice": true
     },
-    "vim.disableExtension": true
+    "shellcheck.exclude": [
+        2086
+    ]
 }
