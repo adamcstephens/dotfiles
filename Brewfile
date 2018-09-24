@@ -17,12 +17,14 @@ brew "nmap"
 brew "pinentry-mac"
 brew "pstree"
 brew "pwgen"
+brew "shellcheck"
 brew "the_silver_searcher"
 brew "tmate"
 brew "tmux"
 brew "tree"
 brew "wget"
 cask "bettertouchtool"
+cask "docker"
 cask "finicky"
 cask "flux"
 cask "font-source-code-pro-for-powerline"
@@ -50,4 +52,5 @@ mas "Parcel", id: 639968404
 mas "Slack", id: 803453959
 mas "Things3", id: 904280696
 mas "Tweetbot", id: 1384080005
+mas "Webcam Settings", id: 533696630
 mas "Xcode", id: 497799835
