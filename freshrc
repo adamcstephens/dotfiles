@@ -242,6 +242,7 @@ fi
 
 if command -v gpg-agent &> /dev/null
 then
+  fresh config/gpg.conf --file=~/.gnupg/gpg.conf
   fresh config/gpg-agent.conf --file=~/.gnupg/gpg-agent.conf
 fi
 
