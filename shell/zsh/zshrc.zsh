@@ -1,13 +1,8 @@
 # completion
 zmodload zsh/complist
 autoload -Uz compinit
-if [[ ! -e ~/.zcompdump || $(date +'%j') != $(stat -f '%Sm' -t '%j' ~/.zcompdump) ]]
-then
-  compinit
-else
-  compinit -C
-fi
 autoload -U +X bashcompinit && bashcompinit
+compinit
 
 # case-insensitive (all),partial-word and then substring completion
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' \
