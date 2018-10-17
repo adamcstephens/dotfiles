@@ -3,4 +3,5 @@
 *.sw?
 .bundle
 .ruby-version
+.vscode
 vendor
