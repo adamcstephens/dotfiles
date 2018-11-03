@@ -1,5 +1,5 @@
 // default is chrome which we never want
-finicky.setDefaultBrowser('com.apple.Safari');
+finicky.setDefaultBrowser('org.mozilla.firefox');
 
 finicky.onUrl(function(url, opts) {
   // azure should go to chrome
@@ -28,8 +28,8 @@ finicky.onUrl(function(url, opts) {
     // if the default browser isn't open, choose an open one
     return {
       bundleIdentifier: [
-        "com.apple.Safari",
         "org.mozilla.firefox",
+        "com.apple.Safari",
         "com.google.Chrome"
       ]
     };
