@@ -8,10 +8,10 @@ finicky.onUrl(function(url, opts) {
       bundleIdentifier: "com.google.Chrome"
     };
 
-  } else if (url.match(/^https?:\/\/(covermymeds.)?bluejeans\.com\/[0-9]+/)) {
+  } else if (url.match(/^https?:\/\/([a-z]+\.)?bluejeans\.com\/[0-9]+/)) {
     // modify the bluejeans URL for what the app wants
     var url = url.replace(
-      /^https?:\/\/(covermymeds.)?bluejeans\.com/,
+      /^https?:\/\/([a-z]+\.)?bluejeans\.com/,
       "bjnb://meet/id"
     );
     return {
