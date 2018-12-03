@@ -229,11 +229,6 @@ then
   fresh config/screenrc --file
 fi
 
-if command -v emacs &> /dev/null
-then
-  ln -sf ~/.dotfiles/config/spacemacs ~/.spacemacs
-fi
-
 if command -v git &> /dev/null
 then
   fresh config/gitconfig --file
