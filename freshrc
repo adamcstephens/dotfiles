@@ -251,6 +251,11 @@ then
   fresh config/rubocop.yml --file
 fi
 
+if command -v solargraph &> /dev/null
+then
+  fresh config/solargraph.yml --file
+fi
+
 if command -v top &> /dev/null
 then
   fresh config/toprc --file
