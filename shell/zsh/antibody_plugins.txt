@@ -1,8 +1,7 @@
-robbyrussell/oh-my-zsh folder:plugins/docker
-robbyrussell/oh-my-zsh folder:plugins/docker-compose
-robbyrussell/oh-my-zsh folder:plugins/systemd
-zsh-users/zsh-completions
+robbyrussell/oh-my-zsh path:plugins/docker
+robbyrussell/oh-my-zsh path:plugins/docker-compose
+robbyrussell/oh-my-zsh path:plugins/systemd
 zsh-users/zsh-autosuggestions
-
-# this is loaded last
+#zsh-users/zsh-completions
+zsh-users/zsh-history-substring-search
 zsh-users/zsh-syntax-highlighting

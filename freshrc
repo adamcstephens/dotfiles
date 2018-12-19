@@ -119,6 +119,7 @@ then
 
   fresh-options --file=~/.zshrc --marker
     fresh shell/fresh.sh
+    fresh shell/zsh/antibody.zsh
     fresh shell/zsh/zshrc.zsh
     fresh shell/zsh/prompt.zsh
     fresh shell/zsh/rprompt.zsh
@@ -130,8 +131,6 @@ then
     fresh shell/notes.sh
     fresh shell/devlang.sh
     [[ -d $HOME/.asdf || -d /usr/local/Cellar/asdf ]] && fresh shell/asdf.sh
-
-    fresh shell/zsh/antibody.zsh
   fresh-options
 
   # clean compdump
