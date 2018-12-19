@@ -1,8 +1,14 @@
+" LanguageClient
 Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
     \ }
+let g:LanguageClient_serverCommands = {
+    \ 'ruby': [ 'solargraph', 'stdio' ],
+    \ }
+nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 
+" deoplete
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 else
@@ -12,8 +18,11 @@ else
 endif
 let g:deoplete#enable_at_startup = 1
 
-let g:LanguageClient_serverCommands = {
-    \ 'ruby': ['tcp://localhost:7658']
-    \ }
+" snippets
+Plug 'sirver/ultisnips'
+Plug 'honza/vim-snippets'
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
-nnoremap <F5> :call LanguageClient_contextMenu()<CR>

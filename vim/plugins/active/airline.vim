@@ -9,6 +9,9 @@ let g:airline_theme="simple"
 " show buffer bar
 let g:airline#extensions#tabline#enabled = 1
 
+" Show just the filename
+let g:airline#extensions#tabline#fnamemod = ':t'
+
 " add the date/time to the gutter
 let g:airline_section_gutter = '%= %{strftime("%R")}'
 
