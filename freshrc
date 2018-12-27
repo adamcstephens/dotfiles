@@ -230,8 +230,8 @@ fi
 
 if command -v git &> /dev/null
 then
-  fresh .git/config --file
-  fresh .git/ignore --file
+  fresh git/config --file=~/.gitconfig
+  fresh git/ignore --file=~/.gitignore
   mkdir -vp ~/.git_template
   ln -sf ~/.dotfiles/git/template/hooks ~/.git_template/
 fi
@@ -258,7 +258,6 @@ then
 fi
 
 if [[ "$OS" == "Darwin" ]]; then
-  fresh gnachman/iTerm2 tests/imgcat --bin
   fresh config/finicky.js --file
 fi
 
