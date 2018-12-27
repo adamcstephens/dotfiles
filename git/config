@@ -17,3 +17,7 @@
   frag = magenta
   old = red 
   new = green
+[init]
+  templatedir = ~/.git_template
+[alias]
+  ctags = !.git/hooks/ctags
