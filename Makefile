@@ -29,7 +29,7 @@ mac-upgrade:
 	mas upgrade
 
 update-vim: all
-	vim +PlugUpdate +qall
+	vim +PlugClean +PlugUpdate +qall
 
 update-fresh:
 	fresh update

@@ -155,15 +155,6 @@ then
     then
       fresh vim/plug_pre.vim
       fresh vim/plugins.vim
-      for ondvp in $(find "${HOME}/.dotfiles/vim/plugins/ondemand"/* | sed 's#.*/##' | cut -f 1 -d . | sort -u)
-      do
-        if command -v "$ondvp" &>/dev/null
-        then
-          echo "vim (app): $ondvp.vim"
-          fresh "vim/plugins/ondemand/$ondvp.vim"
-        fi
-      done
-      fresh vim/plugins/active/\*.vim
       fresh vim/local.vim
       fresh vim/plug_post.vim
       fresh vim/full.vim

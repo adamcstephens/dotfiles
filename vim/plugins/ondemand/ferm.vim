@@ -1,1 +1,0 @@
-Plug 'cometsong/ferm.vim'

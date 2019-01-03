@@ -40,8 +40,8 @@ command Q q
 
 " shortcuts
 "nnoremap <C-w> :bdelete<CR>
-nnoremap <C-h> :bprevious<CR>
-nnoremap <C-l> :bnext<CR>
+"nnoremap <C-h> :bprevious<CR>
+"nnoremap <C-l> :bnext<CR>
 nnoremap <Leader>d :bdelete<CR>
 nnoremap <Leader>l :redraw!<CR>
 nnoremap <Leader>p :set invpaste<CR>
