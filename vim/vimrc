@@ -42,14 +42,17 @@ command Q q
 "nnoremap <C-w> :bdelete<CR>
 nnoremap <C-h> :bprevious<CR>
 nnoremap <C-l> :bnext<CR>
+nnoremap <Leader>d :bdelete<CR>
 nnoremap <Leader>l :redraw!<CR>
-"insert but not
-nmap <Leader>O O<Esc>j
-nmap <Leader>o o<Esc>k
+nnoremap <Leader>p :set invpaste<CR>
 map <Leader>w :write<CR>
+nnoremap <Leader>k :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 " keep buffer undo when switching
 set hidden
+
+" close netrw
+autocmd FileType netrw setl bufhidden=wipe
 
 nnoremap <Leader>s :set hlsearch!<CR>
 
