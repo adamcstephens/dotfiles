@@ -4,3 +4,7 @@ Metrics/LineLength:
   Max: 160
 Metrics/MethodLength:
   Max: 100
+Style/StringLiterals:
+  Enabled: False
+Style/Documentation:
+  Enabled: False
