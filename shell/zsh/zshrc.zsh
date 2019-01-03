@@ -92,4 +92,8 @@ zle -N edit-command-line
 bindkey "^X^E" edit-command-line
 
 # fzf
-[[ -e ~/.fzf.zsh ]] && source ~/.fzf.zsh
+if [[ -e ~/.fzf.zsh ]]
+then
+  export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
+  source ~/.fzf.zsh
+fi
