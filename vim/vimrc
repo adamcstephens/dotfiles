@@ -42,7 +42,12 @@ command Q q
 "nnoremap <C-w> :bdelete<CR>
 "nnoremap <C-h> :bprevious<CR>
 "nnoremap <C-l> :bnext<CR>
+map <Leader>[ :bprevious<CR>
+map <Leader>] :bnext<CR>
+map <Leader>{ :tabprevious<CR>
+map <Leader>} :tabnext<CR>
 nnoremap <Leader>d :bdelete<CR>
+nnoremap <Leader>D :bdelete!<CR>
 nnoremap <Leader>l :redraw!<CR>
 nnoremap <Leader>p :set invpaste<CR>
 map <Leader>w :write<CR>
@@ -54,9 +59,6 @@ set hidden
 autocmd FileType netrw setl bufhidden=wipe
 
 nnoremap <Leader>s :set hlsearch!<CR>
-
-" open help in a new tab
-cabbrev help vertical help
 
 " highlight unwanted chars
 set list
