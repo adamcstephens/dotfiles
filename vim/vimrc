@@ -46,7 +46,6 @@ nnoremap <Leader>d :bdelete<CR>
 nnoremap <Leader>l :redraw!<CR>
 nnoremap <Leader>p :set invpaste<CR>
 map <Leader>w :write<CR>
-nnoremap <Leader>k :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 " keep buffer undo when switching
 set hidden

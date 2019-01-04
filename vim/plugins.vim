@@ -73,6 +73,7 @@ let g:ale_yaml_yamllint_options = '-d "{extends: relaxed, rules: {line-length: {
 " act like ctrl-p
 nnoremap <c-p> :FZF<cr>
 nnoremap <Leader>b :Buffers<cr>
+nnoremap <Leader>k :Ag "\b<C-R><C-W>\b"<CR>
 
 " LanguageClient
 " Plug 'autozimu/LanguageClient-neovim', {
