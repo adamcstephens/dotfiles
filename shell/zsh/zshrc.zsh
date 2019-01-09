@@ -23,6 +23,9 @@ setopt hist_ignore_all_dups
 # ignore commands started with a space
 setopt HIST_IGNORE_SPACE
 
+# 10ms for key sequences
+export KEYTIMEOUT=1
+
 #
 setopt extendedglob
 

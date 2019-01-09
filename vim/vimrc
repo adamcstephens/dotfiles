@@ -8,6 +8,10 @@ set shiftwidth=2
 set expandtab
 set shell=/bin/bash
 
+" modify delays
+set timeoutlen=1000
+set ttimeoutlen=0
+
 " set a leader!
 :let mapleader=","
 
