@@ -66,6 +66,8 @@ let g:ale_set_highlights = 0
 let g:ale_puppet_puppetlint_options = '--no-80chars-check --no-class_inherits_from_params_class-check --no-variable_scope-check --no-documentation-check --no-autoloader_layout-check'
 let g:ale_python_flake8_options = '--ignore=E501,E221,E251'
 let g:ale_yaml_yamllint_options = '-d "{extends: relaxed, rules: {line-length: {max: 1200}}}"'
+nmap <silent> <Leader>j <Plug>(ale_previous_wrap)
+nmap <silent> <Leader>k <Plug>(ale_next_wrap)
 
 " deoplete
 "let g:deoplete#enable_at_startup = 1
@@ -74,7 +76,7 @@ let g:ale_yaml_yamllint_options = '-d "{extends: relaxed, rules: {line-length: {
 " act like ctrl-p
 nnoremap <c-p> :FZF<cr>
 nnoremap <Leader>b :Buffers<cr>
-nnoremap <Leader>k :Ag "\b<C-R><C-W>\b"<CR>
+nnoremap <silent> <Leader>K :Ag "\b<C-R><C-W>\b"<CR>
 
 " LanguageClient
 " Plug 'autozimu/LanguageClient-neovim', {
@@ -87,7 +89,9 @@ nnoremap <Leader>k :Ag "\b<C-R><C-W>\b"<CR>
 " nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 
 " length highlighting
+nmap <Leader>t :LengthmattersToggle<CR>
 let g:lengthmatters_start_at_column = 101
+let g:lengthmatters_highlight_one_column=1
 let g:vim_markdown_folding_disabled=1
 
 " snippets

@@ -13,7 +13,7 @@ set timeoutlen=1000
 set ttimeoutlen=0
 
 " set a leader!
-:let mapleader=","
+:let mapleader="f"
 
 " toggle the gutter
 function! ToggleGutters()

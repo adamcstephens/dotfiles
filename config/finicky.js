@@ -19,6 +19,12 @@ finicky.onUrl(function(url, opts) {
       url: url
     };
 
+  } else if (url.match(/^https:\/\/insiders.liveshare.vsengsaas.visualstudio.com\/join\?[A-Z0-9]$/)) {
+    return {
+      bundleIdentifier: "com.microsoft.VSCode"
+    };
+
+
   } else if (url.match(/^https?:\/\/open\.spotify\.com/)) {
     return {
       bundleIdentifier: "com.spotify.client"
