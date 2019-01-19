@@ -28,6 +28,9 @@ mac-setup:
 mac-upgrade:
 	mas upgrade
 
+update-asdf:
+	asdf plugin-update --all
+
 update-vim: all
 	vim +PlugClean +PlugUpdate +qall
 
@@ -42,7 +45,7 @@ clean:
 	fresh clean
 	vim +PlugClean +qall
 
-update: update-fresh update-vim
+update: update-fresh update-vim update-asdf
 
 linux-workstation:
 	ansible-playbook ansible/Linux-workstation.yaml

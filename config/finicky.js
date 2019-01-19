@@ -2,13 +2,7 @@
 finicky.setDefaultBrowser('org.mozilla.firefox');
 
 finicky.onUrl(function(url, opts) {
-  // azure should go to chrome
-  if (url.match(/^https?:\/\/portal\.azure\.com/) || url.match(/^https:\/\/microsoft.com\/devicelogin/)) {
-    return {
-      bundleIdentifier: "com.google.Chrome"
-    };
-
-  } else if (url.match(/^https?:\/\/([a-z]+\.)?bluejeans\.com\/[0-9]+/)) {
+  if (url.match(/^https?:\/\/([a-z]+\.)?bluejeans\.com\/[0-9]+/)) {
     // modify the bluejeans URL for what the app wants
     var url = url.replace(
       /^https?:\/\/([a-z]+\.)?bluejeans\.com/,
