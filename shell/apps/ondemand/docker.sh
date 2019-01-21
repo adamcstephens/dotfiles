@@ -3,7 +3,7 @@ alias di='docker images '
 alias dk='docker kill '
 alias drm='docker rm '
 alias drmi='docker rmi '
-alias dps='docker ps '
+alias dps='docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}\t{{.Command}}\t{{.Image}}"'
 function dsh {
   [ -z $1 ] && echo "needs image to run." && return 2
   runimg="$1"
