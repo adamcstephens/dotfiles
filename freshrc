@@ -97,7 +97,7 @@ then
 
     shell_os bash
     shell_ondemand bash
-    
+
     fresh shell/bash/bash.bash
     fresh shell/notes.sh
     fresh shell/devlang.sh
@@ -111,15 +111,8 @@ fi
 
 if command -v zsh &> /dev/null
 then
-  if ! command -v antibody &>/dev/null
-  then
-    curl -sL https://git.io/antibody | sed -e "s,/usr/local/bin,$HOME/bin," -e 's/sudo //' | sh -s || true
-  fi
-  ~/bin/antibody bundle < ./shell/zsh/antibody_plugins.txt > ~/.zsh_plugins.sh
-
   fresh-options --file=~/.zshrc --marker
     fresh shell/fresh.sh
-    fresh shell/zsh/antibody.zsh
     fresh shell/zsh/zshrc.zsh
     fresh shell/zsh/prompt.zsh
     fresh shell/zsh/rprompt.zsh
