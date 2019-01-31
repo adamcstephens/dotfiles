@@ -11,9 +11,8 @@ Plug 'honza/vim-snippets'
 Plug 'janko-m/vim-test'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all --no-update-rc'}
 Plug 'junegunn/fzf.vim'
-Plug 'justinmk/vim-dirvish'
-Plug 'kristijanhusak/vim-dirvish-git'
 Plug 'rking/ag.vim'
+Plug 'scrooloose/nerdtree'
 Plug 'sheerun/vim-polyglot'
 Plug 'sirver/ultisnips'
 Plug 'tpope/vim-commentary'
@@ -93,6 +92,16 @@ nmap <Leader>t :LengthmattersToggle<CR>
 let g:lengthmatters_start_at_column = 101
 let g:lengthmatters_highlight_one_column=1
 let g:vim_markdown_folding_disabled=1
+
+" nerdtree
+map <C-n> :NERDTreeToggle<CR>
+
+" allow quit if nerdtree is only open buffer
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+
+" open nerdtree if no files
+" autocmd StdinReadPre * let s:std_in=1
+" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 " snippets
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
