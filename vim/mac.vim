@@ -1,5 +1,4 @@
-" break all mouse support in iterm, all ways suck
-set mouse=
+set mouse=a
 
 " yank into the system clipboard
-"set clipboard=unnamed
+set clipboard=unnamed
