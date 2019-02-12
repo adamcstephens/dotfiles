@@ -45,7 +45,7 @@ clean:
 	fresh clean
 	vim +PlugClean +qall
 
-update: update-fresh update-vim update-asdf
+update: update-fresh update-vim
 
 linux-workstation:
 	ansible-playbook ansible/Linux-workstation.yaml
