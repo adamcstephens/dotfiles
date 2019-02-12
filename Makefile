@@ -37,10 +37,6 @@ update-vim: all
 update-fresh:
 	fresh update
 
-update-antibody:
-	rm ~/bin/antibody
-	fresh
-
 clean:
 	fresh clean
 	vim +PlugClean +qall
