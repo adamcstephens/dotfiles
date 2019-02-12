@@ -3,13 +3,17 @@ source ~/.zplug/init.zsh
 # zplug "zsh-users/zsh-completions", depth:1
 zplug "zsh-users/zsh-autosuggestions"
 
-# zplug "plugins/docker",         from:oh-my-zsh
-# zplug "plugins/docker-compose", from:oh-my-zsh, as:plugin
 zplug "~/.fresh/source/freshshell/fresh/contrib/completion/fresh-completion.zsh", from:local
+
 zplug "kiurchv/asdf.plugin.zsh", defer:2
 
 # self-manage zplug
 zplug 'zplug/zplug', hook-build:'zplug --self-manage'
+
+# Async for zsh, used by pure
+zplug "mafredri/zsh-async", from:github, defer:0
+# # Theme!
+zplug "sindresorhus/pure", use:pure.zsh, from:github, as:theme
 
 # this is loaded last
 zplug "zdharma/fast-syntax-highlighting"

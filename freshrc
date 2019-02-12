@@ -116,8 +116,6 @@ then
   fresh-options --file=~/.zshrc --marker
     fresh shell/fresh.sh
     fresh shell/zsh/zshrc.zsh
-    fresh shell/zsh/prompt.zsh
-    fresh shell/zsh/rprompt.zsh
     fresh shell/generic.sh
 
     fresh shell/zsh/zplug.zsh
