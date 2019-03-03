@@ -1,7 +1,8 @@
 source ~/.zplug/init.zsh
 
-# zplug "zsh-users/zsh-completions", depth:1
+zplug "hlissner/zsh-autopair"
 zplug "zsh-users/zsh-autosuggestions"
+zplug "zsh-users/zsh-completions"
 
 zplug "~/.fresh/source/freshshell/fresh/contrib/completion/fresh-completion.zsh", from:local
 
@@ -27,3 +28,8 @@ if ! zplug check --verbose; then
 fi
 
 zplug load
+
+if command -v direnv &> /dev/null
+then
+  eval "$(direnv hook zsh)"
+fi

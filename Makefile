@@ -37,11 +37,14 @@ update-vim: all
 update-fresh:
 	fresh update
 
+update-zplug:
+	pushd ~/.zplug; git pull; popd
+
 clean:
 	fresh clean
 	vim +PlugClean +qall
 
-update: update-fresh update-vim
+update: update-fresh update-vim update-zplug
 
 linux-workstation:
 	ansible-playbook ansible/Linux-workstation.yaml

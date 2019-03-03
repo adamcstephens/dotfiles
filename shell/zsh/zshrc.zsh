@@ -40,7 +40,7 @@ setopt inc_append_history
 setopt interactivecomments
 
 # word separation for movement 
-export WORDCHARS='*?_[]~|&;!#$%^(){}.-"'
+export WORDCHARS='*?_[]~;!#$%^(){}.-'
 
 # set emacs mode
 bindkey -e

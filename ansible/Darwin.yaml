@@ -36,7 +36,7 @@
       osx_defaults:
         key: KeyRepeat
         type: int
-        value: 2
+        value: 1
 
 ### dock
     - name: set autohide

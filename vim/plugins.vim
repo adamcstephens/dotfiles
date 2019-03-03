@@ -1,6 +1,15 @@
+set mouse=a
+
+" yank into the system clipboard
+set clipboard=unnamed
+
 "
 " plugins
 "
+call plug#begin('~/.vim/plugged')
+
+Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'edkolev/tmuxline.vim'
 Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
@@ -30,6 +39,7 @@ Plug 'vim-scripts/molokai'
 Plug 'w0rp/ale'
 Plug 'whatyouhide/vim-lengthmatters'
 if has('nvim')
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 else
   Plug 'Shougo/deoplete.nvim'
@@ -49,7 +59,7 @@ set grepprg=ag\ --nogroup\ --nocolor
 " airline
 set laststatus=2
 " set a theme
-let g:airline_theme="simple"
+let g:airline_theme="dracula"
 " show buffer bar
 let g:airline#extensions#tabline#enabled = 1
 " Show just the filename
@@ -120,3 +130,24 @@ let test#strategy = {
   \ 'file':    'dispatch',
   \ 'suite':   'basic',
   \}
+
+" Add plugins to &runtimepath
+call plug#end()
+
+" must run after loaded
+call lengthmatters#highlight_link_to('ColorColumn')
+
+syntax on
+filetype plugin indent on
+
+if (has("termguicolors"))
+  set termguicolors
+endif
+
+silent! colorscheme dracula
+
+" highlight active line
+set cursorline
+
+" set diff to vertical
+set diffopt+=vertical
