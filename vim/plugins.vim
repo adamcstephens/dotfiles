@@ -8,7 +8,7 @@ set clipboard=unnamed
 "
 call plug#begin('~/.vim/plugged')
 
-Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'morhetz/gruvbox'
 Plug 'edkolev/tmuxline.vim'
 Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'airblade/vim-gitgutter'
@@ -60,7 +60,7 @@ set grepprg=ag\ --nogroup\ --nocolor
 " airline
 set laststatus=2
 " set a theme
-let g:airline_theme="dracula"
+let g:airline_theme="gruvbox"
 " show buffer bar
 let g:airline#extensions#tabline#enabled = 1
 " Show just the filename
@@ -156,7 +156,7 @@ if (has("termguicolors"))
   set termguicolors
 endif
 
-silent! colorscheme dracula
+silent! colorscheme gruvbox
 
 " highlight active line
 set cursorline
