@@ -157,6 +157,7 @@ if (has("termguicolors"))
 endif
 
 silent! colorscheme gruvbox
+set background=dark
 
 " highlight active line
 set cursorline
