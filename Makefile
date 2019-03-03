@@ -28,6 +28,10 @@ mac-setup:
 mac-upgrade:
 	mas upgrade
 
+terminfo-italic:
+	tic -o $(HOME)/.terminfo terminfo/tmux-256color.terminfo
+	tic -o $(HOME)/.terminfo terminfo/xterm-256color.terminfo
+
 update-asdf:
 	asdf plugin-update --all
 
