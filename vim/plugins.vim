@@ -1,6 +1,15 @@
+set mouse=a
+
+" yank into the system clipboard
+set clipboard=unnamed
+
 "
 " plugins
 "
+call plug#begin('~/.vim/plugged')
+
+Plug 'morhetz/gruvbox'
+Plug 'edkolev/tmuxline.vim'
 Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
@@ -29,7 +38,9 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/molokai'
 Plug 'w0rp/ale'
 Plug 'whatyouhide/vim-lengthmatters'
+Plug 'Yggdroot/indentLine'
 if has('nvim')
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 else
   Plug 'Shougo/deoplete.nvim'
@@ -49,7 +60,7 @@ set grepprg=ag\ --nogroup\ --nocolor
 " airline
 set laststatus=2
 " set a theme
-let g:airline_theme="simple"
+let g:airline_theme="gruvbox"
 " show buffer bar
 let g:airline#extensions#tabline#enabled = 1
 " Show just the filename
@@ -73,9 +84,15 @@ nmap <silent> <Leader>k <Plug>(ale_next_wrap)
 
 " fzf
 " act like ctrl-p
-nnoremap <c-p> :FZF<cr>
+nnoremap <c-p> :Files<cr>
 nnoremap <Leader>b :Buffers<cr>
 nnoremap <silent> <Leader>K :Ag "\b<C-R><C-W>\b"<CR>
+" preview
+let g:fzf_files_options =
+      \ '--reverse ' .
+      \ '--preview-window top:60% ' .
+      \ '--preview "(bat --color "always" {} || cat {}) 2> /dev/null | head -'
+      \ . &lines . '"'
 
 " LanguageClient
 " Plug 'autozimu/LanguageClient-neovim', {
@@ -86,6 +103,11 @@ nnoremap <silent> <Leader>K :Ag "\b<C-R><C-W>\b"<CR>
 "     \ 'ruby': [ 'solargraph', 'stdio' ],
 "     \ }
 " nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+
+" indentline
+let g:indentLine_showFirstIndentLevel = 1
+let g:indentLine_first_char = '▏'
+let g:indentLine_char = '▏'
 
 " length highlighting
 nmap <Leader>t :LengthmattersToggle<CR>
@@ -120,3 +142,24 @@ let test#strategy = {
   \ 'file':    'dispatch',
   \ 'suite':   'basic',
   \}
+
+" Add plugins to &runtimepath
+call plug#end()
+
+" must run after loaded
+call lengthmatters#highlight_link_to('ColorColumn')
+
+syntax on
+filetype plugin indent on
+
+if (has("termguicolors"))
+  set termguicolors
+endif
+
+silent! colorscheme gruvbox
+
+" highlight active line
+set cursorline
+
+" set diff to vertical
+set diffopt+=vertical

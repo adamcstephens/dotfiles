@@ -111,7 +111,11 @@ fi
 
 if command -v zsh &> /dev/null
 then
-  fresh zplug/zplug . --file=~/.zplug/
+  if [[ ! -d ~/.zplug ]]
+  then
+    [[ -h ~/.zplug ]] && rm ~/.zplug
+    git clone https://github.com/zplug/zplug ~/.zplug
+  fi
 
   fresh-options --file=~/.zshrc --marker
     fresh shell/fresh.sh
@@ -138,22 +142,9 @@ fi
 if command -v vim &> /dev/null
 then
   [ ! -d ~/.vim ] && mkdir -vp ~/.vim
-  fresh-options --file=~/.vimrc --marker=\"
+  fresh-options --file=~/.vimrc
     fresh vim/vimrc
-    if [[ "$OS" == "Linux" ]]; then
-        fresh vim/linux.vim
-    fi
-    if [[ "$OS" == "Darwin" ]]; then
-      fresh vim/mac.vim
-    fi
-    if [[ "$DIST" != 'coreos' ]]
-    then
-      fresh vim/plug_pre.vim
-      fresh vim/plugins.vim
-      fresh vim/local.vim
-      fresh vim/plug_post.vim
-      fresh vim/full.vim
-    fi
+    fresh vim/plugins.vim
   fresh-options
   if command -v nvim &> /dev/null
   then
@@ -162,15 +153,8 @@ then
     [ ! -h ~/.config/nvim/init.vim ] && ln -sfv ~/.vimrc ~/.config/nvim/init.vim
   fi
 
-  if [[ "$DIST" != 'coreos' ]]
-  then
-    # enable vim-plug
-    fresh junegunn/vim-plug plug.vim --file=~/.vim/autoload/plug.vim
-
-    # vimcat binary
-    fresh vim-scripts/vimcat vimcat --bin
-
-  fi
+  # enable vim-plug
+  fresh junegunn/vim-plug plug.vim --file=~/.vim/autoload/plug.vim
 fi
 
 if [ -e /etc/debian_version ]
@@ -255,6 +239,12 @@ fi
 if [[ -e $HOME/.ssh/config ]] && grep -q ControlMaster "$HOME/.ssh/config"
 then
   fresh ClockworkNet/cmc cmc --bin
+fi
+
+if command -v bat &> /dev/null
+then
+  [[ ! -d ~/.config/bat ]] && mkdir -vp ~/.config/bat
+  fresh config/bat --file=~/.config/bat/config
 fi
 
 fresh_after_build() {

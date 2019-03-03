@@ -5,3 +5,5 @@
 # brew install
 [[ -e /usr/local/opt/asdf/asdf.sh ]] && source /usr/local/opt/asdf/asdf.sh
 [[ -e /usr/local/etc/bash_completion.d/asdf.bash ]] && source /usr/local/etc/bash_completion.d/asdf.bash
+
+true

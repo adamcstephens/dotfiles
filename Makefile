@@ -28,6 +28,10 @@ mac-setup:
 mac-upgrade:
 	mas upgrade
 
+terminfo-italic:
+	tic -o $(HOME)/.terminfo terminfo/tmux-256color.terminfo
+	tic -o $(HOME)/.terminfo terminfo/xterm-256color.terminfo
+
 update-asdf:
 	asdf plugin-update --all
 
@@ -37,11 +41,14 @@ update-vim: all
 update-fresh:
 	fresh update
 
+update-zplug:
+	pushd ~/.zplug; git pull; popd
+
 clean:
 	fresh clean
 	vim +PlugClean +qall
 
-update: update-fresh update-vim
+update: update-fresh update-vim update-zplug
 
 linux-workstation:
 	ansible-playbook ansible/Linux-workstation.yaml
