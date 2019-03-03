@@ -1,5 +1,5 @@
 gpg_private_keys=(~/.gnupg/private-keys-v1.d/*)&>/dev/null
-if [ ${#gpg_private_keys[@]} -gt 0 ]
+if [[ ${#gpg_private_keys[@]} -gt 0 ]]
 then
   pgrep gpg-agent &>/dev/null || eval $(gpg-agent --daemon)
 fi
