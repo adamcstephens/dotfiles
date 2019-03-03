@@ -38,6 +38,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/molokai'
 Plug 'w0rp/ale'
 Plug 'whatyouhide/vim-lengthmatters'
+Plug 'Yggdroot/indentLine'
 if has('nvim')
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -83,9 +84,15 @@ nmap <silent> <Leader>k <Plug>(ale_next_wrap)
 
 " fzf
 " act like ctrl-p
-nnoremap <c-p> :FZF<cr>
+nnoremap <c-p> :Files<cr>
 nnoremap <Leader>b :Buffers<cr>
 nnoremap <silent> <Leader>K :Ag "\b<C-R><C-W>\b"<CR>
+" preview
+let g:fzf_files_options =
+      \ '--reverse ' .
+      \ '--preview-window top:60% ' .
+      \ '--preview "(bat --color "always" {} || cat {}) 2> /dev/null | head -'
+      \ . &lines . '"'
 
 " LanguageClient
 " Plug 'autozimu/LanguageClient-neovim', {
@@ -96,6 +103,11 @@ nnoremap <silent> <Leader>K :Ag "\b<C-R><C-W>\b"<CR>
 "     \ 'ruby': [ 'solargraph', 'stdio' ],
 "     \ }
 " nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+
+" indentline
+let g:indentLine_showFirstIndentLevel = 1
+let g:indentLine_first_char = '▏'
+let g:indentLine_char = '▏'
 
 " length highlighting
 nmap <Leader>t :LengthmattersToggle<CR>

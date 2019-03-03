@@ -241,6 +241,12 @@ then
   fresh ClockworkNet/cmc cmc --bin
 fi
 
+if command -v bat &> /dev/null
+then
+  [[ ! -d ~/.config/bat ]] && mkdir -vp ~/.config/bat
+  fresh config/bat --file=~/.config/bat/config
+fi
+
 fresh_after_build() {
   [ -e "$HOME/.toprc" ] && chmod 0600 "$HOME/.toprc"
 
