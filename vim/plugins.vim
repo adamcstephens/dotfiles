@@ -8,7 +8,7 @@ set clipboard=unnamed
 "
 call plug#begin('~/.vim/plugged')
 
-Plug 'morhetz/gruvbox'
+Plug 'sonph/onehalf', {'rtp': 'vim/'}
 Plug 'edkolev/tmuxline.vim'
 Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'airblade/vim-gitgutter'
@@ -60,7 +60,7 @@ set grepprg=ag\ --nogroup\ --nocolor
 " airline
 set laststatus=2
 " set a theme
-let g:airline_theme="gruvbox"
+let g:airline_theme="onehalfdark"
 " show buffer bar
 let g:airline#extensions#tabline#enabled = 1
 " Show just the filename
@@ -156,8 +156,9 @@ if (has("termguicolors"))
   set termguicolors
 endif
 
-silent! colorscheme gruvbox
+silent! colorscheme onehalfdark
 set background=dark
+highlight Comment cterm=italic gui=italic
 
 " highlight active line
 set cursorline
