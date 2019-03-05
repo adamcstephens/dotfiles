@@ -51,3 +51,5 @@ function delkey {
   ssh-keygen -f "$HOME/.ssh/known_hosts" -R $delip
   ssh-keygen -f "$HOME/.ssh/known_hosts" -R $1
 }
+
+[[ "$TERM" == "tmux-256color" ]] && alias ssh="TERM=screen-256color ssh "
