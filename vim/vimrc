@@ -43,16 +43,8 @@ command Qa qa
 command Q q
 
 " shortcuts
-"nnoremap <C-w> :bdelete<CR>
-"nnoremap <C-h> :bprevious<CR>
-"nnoremap <C-l> :bnext<CR>
-map <Leader>[ :bprevious<CR>
-map <Leader>] :bnext<CR>
-map <Leader>{ :tabprevious<CR>
-map <Leader>} :tabnext<CR>
 nnoremap <Leader>d :bdelete<CR>
 nnoremap <Leader>D :bdelete!<CR>
-nnoremap <Leader>l :redraw!<CR>
 nnoremap <Leader>p :set invpaste<CR>
 map <Leader>w :write<CR>
 

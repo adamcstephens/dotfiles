@@ -3,6 +3,9 @@ set mouse=a
 " yank into the system clipboard
 set clipboard=unnamed
 
+" set colorcolumn
+set colorcolumn=100
+
 "
 " plugins
 "
@@ -14,6 +17,7 @@ Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
 Plug 'bling/vim-airline'
+Plug 'blueyed/vim-qf_resize'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'godlygeek/tabular'
 Plug 'honza/vim-snippets'
@@ -24,6 +28,7 @@ Plug 'rking/ag.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'sheerun/vim-polyglot'
 "Plug 'sirver/ultisnips'
+Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-endwise'
@@ -37,7 +42,7 @@ Plug 'tpope/vim-unimpaired'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/molokai'
 Plug 'w0rp/ale'
-Plug 'whatyouhide/vim-lengthmatters'
+Plug 'Valloric/ListToggle'
 Plug 'Yggdroot/indentLine'
 if has('nvim')
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
@@ -81,6 +86,9 @@ nmap <silent> <Leader>k <Plug>(ale_next_wrap)
 
 " deoplete
 "let g:deoplete#enable_at_startup = 1
+inoremap <silent><expr><C-j> pumvisible() ? "\<c-n>" : "\<C-j>"
+inoremap <silent><expr><C-k> pumvisible() ? "\<c-p>" : "\<C-k>"
+inoremap <silent><expr><C-e> pumvisible() ? "\<c-y>" : "\<C-e>"
 
 " fzf
 " act like ctrl-p
@@ -93,6 +101,10 @@ let g:fzf_files_options =
       \ '--preview-window top:60% ' .
       \ '--preview "(bat --color "always" {} || cat {}) 2> /dev/null | head -'
       \ . &lines . '"'
+
+" gitgutter
+" reduce update time from 4s
+set updatetime=100
 
 " LanguageClient
 " Plug 'autozimu/LanguageClient-neovim', {
@@ -109,12 +121,6 @@ let g:indentLine_showFirstIndentLevel = 1
 let g:indentLine_first_char = '▏'
 let g:indentLine_char = '▏'
 
-" length highlighting
-nmap <Leader>t :LengthmattersToggle<CR>
-let g:lengthmatters_start_at_column = 101
-let g:lengthmatters_highlight_one_column=1
-let g:vim_markdown_folding_disabled=1
-
 " nerdtree
 map <C-n> :NERDTreeToggle<CR>
 
@@ -124,6 +130,11 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 " open nerdtree if no files
 " autocmd StdinReadPre * let s:std_in=1
 " autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+" qf-resize
+let g:qf_resize_min_height = 2
+let g:qf_resize_max_height = 30
+let g:qf_resize_max_ratio = 0.30
 
 " snippets
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
@@ -139,16 +150,15 @@ nmap <silent> t<C-l> :TestLast<CR>
 nmap <silent> t<C-g> :TestVisit<CR>
 let test#strategy = {
   \ 'nearest': 'dispatch',
-  \ 'file':    'dispatch',
+  \ 'file':    'dispatch_background',
   \ 'suite':   'basic',
   \}
+let g:dispatch_tmux_height=20
 
 " Add plugins to &runtimepath
 call plug#end()
 
 " must run after loaded
-call lengthmatters#highlight_link_to('ColorColumn')
-
 syntax on
 filetype plugin indent on
 
