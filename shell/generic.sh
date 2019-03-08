@@ -52,4 +52,22 @@ function delkey {
   ssh-keygen -f "$HOME/.ssh/known_hosts" -R $1
 }
 
-[[ "$TERM" == "tmux-256color" ]] && alias ssh="TERM=screen-256color ssh "
+ssh() {
+  (
+    [[ "$TERM" == "tmux-256color" ]] && TERM=screen-256color
+    if [[ -z $TMUX ]]; then
+      command ssh "$@"
+    else
+      local HOST="$(echo $* | rev | cut -d ' ' -f 1 | rev)"
+      if echo $HOST | egrep "^([0-9]+\.)*[0-9]+" -q
+      then
+        _hostname=$HOST
+      else
+        _hostname=$(echo $HOST| cut -d . -f 1)
+      fi
+      tmux rename-window "$_hostname"
+      command ssh "$@"
+      tmux set-window-option automatic-rename "on" 1>/dev/null
+    fi
+  )
+}
