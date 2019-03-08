@@ -132,7 +132,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 " autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 " qf-resize
-let g:qf_resize_min_height = 2
+let g:qf_resize_min_height = 10
 let g:qf_resize_max_height = 30
 let g:qf_resize_max_ratio = 0.30
 
@@ -150,7 +150,7 @@ nmap <silent> t<C-l> :TestLast<CR>
 nmap <silent> t<C-g> :TestVisit<CR>
 let test#strategy = {
   \ 'nearest': 'dispatch',
-  \ 'file':    'dispatch_background',
+  \ 'file':    'dispatch',
   \ 'suite':   'basic',
   \}
 let g:dispatch_tmux_height=20
