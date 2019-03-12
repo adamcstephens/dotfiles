@@ -1,3 +1,4 @@
+tap "heroku/brew"
 tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/cask-drivers"
@@ -5,7 +6,9 @@ tap "homebrew/cask-fonts"
 tap "homebrew/core"
 tap "universal-ctags/universal-ctags"
 brew "azure-cli"
+brew "bat"
 brew "colordiff"
+brew "direnv"
 brew "doctl"
 brew "gnu-sed"
 brew "gnu-tar"
@@ -14,10 +17,13 @@ brew "go"
 brew "htop"
 brew "httpie"
 brew "hub"
+brew "iftop"
+brew "iperf3"
 brew "jq"
 brew "mas"
 brew "media-info"
 brew "neovim"
+brew "netcat"
 brew "nmap"
 brew "pinentry-mac"
 brew "pstree"
@@ -29,6 +35,8 @@ brew "tmate"
 brew "tmux"
 brew "tree"
 brew "wget"
+brew "zsh"
+brew "heroku/brew/heroku"
 brew "universal-ctags/universal-ctags/universal-ctags", args: ["HEAD"]
 cask "adobe-creative-cloud"
 cask "bettertouchtool"
@@ -37,6 +45,7 @@ cask "finicky"
 cask "firefox"
 cask "flux"
 cask "font-source-code-pro-for-powerline"
+cask "google-cloud-sdk"
 cask "insomnia"
 cask "istat-menus"
 cask "iterm2"
@@ -59,7 +68,6 @@ mas "Numbers", id: 409203825
 mas "OneDrive", id: 823766827
 mas "Pages", id: 409201541
 mas "Parcel", id: 639968404
-mas "Slack", id: 803453959
 mas "Things3", id: 904280696
 mas "Tweetbot", id: 1384080005
 mas "Webcam Settings", id: 533696630
