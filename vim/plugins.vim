@@ -44,6 +44,7 @@ Plug 'vim-scripts/molokai'
 Plug 'w0rp/ale'
 Plug 'Valloric/ListToggle'
 Plug 'Yggdroot/indentLine'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 if has('nvim')
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
