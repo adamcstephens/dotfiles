@@ -7,3 +7,4 @@
 .vscode
 tags
 vendor
+.DS_Store
