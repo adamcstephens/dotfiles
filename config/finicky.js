@@ -1,5 +1,11 @@
 module.exports = {
   defaultBrowser: "Firefox",
+  options: {
+    urlShorteners: [
+      "github.co",
+      "t.co"
+    ],
+  },
   rewrite: [
     {
       match: /^https?:\/\/([a-z]+\.)?bluejeans\.com\/[0-9]+/,
@@ -10,6 +16,16 @@ module.exports = {
           host: "meet",
           pathname: path,
           protocol: "bjnb"
+        }
+      }
+    },
+    {
+      match: ({ url }) => (url.search.includes("utm_")),
+      url({ url }) {
+        const search = url.search.split('&').filter(part => !part.startsWith("utm_"));
+        return {
+          ...url,
+          search: search.join('&')
         }
       }
     }
