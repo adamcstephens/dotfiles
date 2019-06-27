@@ -43,7 +43,7 @@ update-fresh:
 	fresh update
 
 update-zplug:
-	pushd ~/.zplug; git pull; popd
+	cd ~/.zplug; git pull
 
 clean:
 	fresh clean
