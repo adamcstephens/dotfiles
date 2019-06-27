@@ -1,6 +1,7 @@
 source ~/.zplug/init.zsh
 
 zplug "hlissner/zsh-autopair"
+zplug "MikeDacre/tmux-zsh-vim-titles"
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-completions"
 
