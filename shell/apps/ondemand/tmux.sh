@@ -11,6 +11,18 @@ update_auth_sock() {
 
 alias uas=update_auth_sock
 
+if [[ -z "$TMUX" ]]
+then
+  if [[ -n "$ITERM_SESSION_ID" ]]
+  then
+    sname="$(echo "$ITERM_SESSION_ID" | cut -f 1 -d :)"
+  else
+    sname="t-$(hostname)"
+  fi
+  tmux attach-session -t "$sname" || tmux new-session -s "$sname"
+  exit
+fi
+
 # copy this as an alternative future option
 # if [ -n "$TMUX" ]; then
 #   TMUX_SESSION=`tmux display-message -p '#S'`
