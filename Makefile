@@ -1,5 +1,18 @@
+ZSH := $(shell which zsh)
+
 all:
 	fresh
+
+install-brew:
+	/usr/bin/ruby -e "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+install-asdf:
+	git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.6.0
+	$(HOME)/.asdf/bin/asdf update
+
+install-zsh:
+	if ! grep $(ZSH) /etc/shells; then echo "$(ZSH)" | sudo tee -a /etc/shells; fi
+	chsh -s $(ZSH)
 
 brew:
 	brew bundle
@@ -7,20 +20,6 @@ brew:
 brew-dump:
 	brew bundle dump -f
 	git diff Brewfile
-
-asdf:
-	git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.6.0
-	$(HOME)/.asdf/bin/asdf update
-
-dev-ruby:
-	ansible-playbook ansible/dev-ruby.yaml
-
-dev-python-pyenv:
-	git clone https://github.com/yyuu/pyenv.git ~/.pyenv
-
-dev-ruby-rbenv:
-	git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
-	git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
 
 mac-setup:
 	ansible-playbook ansible/Darwin.yaml
@@ -33,8 +32,8 @@ terminfo-italic:
 	tic -o $(HOME)/.terminfo terminfo/xterm-256color.terminfo
 
 update-asdf:
-	asdf update
-	asdf plugin-update --all
+	if [ -e $(HOME)/.asdf ]; then $(HOME)/.asdf/bin/asdf update; fi
+	if [ -e $(HOME)/.asdf/plugins ]; then $(HOME)/.asdf/bin/asdf plugin-update --all; fi
 
 update-vim: all
 	vim +PlugClean +PlugUpdate +qall

@@ -20,7 +20,6 @@ then
     sname="t-$(hostname)"
   fi
   tmux attach-session -t "$sname" || tmux new-session -s "$sname"
-  exit
 fi
 
 # copy this as an alternative future option

@@ -100,7 +100,7 @@ then
 
     fresh shell/bash/bash.bash
     fresh shell/notes.sh
-    fresh shell/devlang.sh
+    [[ -d $HOME/.asdf || -d /usr/local/Cellar/asdf ]] && fresh shell/asdf.sh
   fresh-options
   fresh shell/bash/bashrc --file
 fi
@@ -128,7 +128,6 @@ then
     shell_ondemand zsh
 
     fresh shell/notes.sh
-    fresh shell/devlang.sh
     [[ -d $HOME/.asdf || -d /usr/local/Cellar/asdf ]] && fresh shell/asdf.sh
   fresh-options
 
