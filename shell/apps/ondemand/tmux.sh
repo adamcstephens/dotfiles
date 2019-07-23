@@ -11,7 +11,7 @@ update_auth_sock() {
 
 alias uas=update_auth_sock
 
-if [[ -z "$TMUX" ]]
+if [[ -z "$TMUX" && ("$TERM_PROGRAM" != "vscode") ]]
 then
   if [[ -n "$ITERM_SESSION_ID" ]]
   then
