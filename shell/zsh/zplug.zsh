@@ -12,10 +12,8 @@ zplug "kiurchv/asdf.plugin.zsh", defer:2
 # self-manage zplug
 zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 
-# Async for zsh, used by pure
-zplug "mafredri/zsh-async", from:github, defer:0
-# # Theme!
-zplug "sindresorhus/pure", use:pure.zsh, from:github, as:theme
+zplug romkatv/powerlevel10k, use:powerlevel10k.zsh-theme
+
 
 # this is loaded last
 zplug "zdharma/fast-syntax-highlighting"
@@ -34,3 +32,5 @@ if command -v direnv &> /dev/null
 then
   eval "$(direnv hook zsh)"
 fi
+
+source ~/.zplug/repos/romkatv/powerlevel10k/config/p10k-pure.zsh
