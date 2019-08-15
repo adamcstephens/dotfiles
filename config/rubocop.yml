@@ -1,10 +1,16 @@
 Metrics/BlockLength:
   Max: 200
 Metrics/LineLength:
-  Max: 160
+  Max: 200
 Metrics/MethodLength:
-  Max: 100
+  Enabled: False
 Style/StringLiterals:
   Enabled: False
 Style/Documentation:
+  Enabled: False
+Metrics/AbcSize:
+  Enabled: False
+Style/SymbolArray:
+  Enabled: False
+Metrics/BlockLength:
   Enabled: False

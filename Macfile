@@ -41,14 +41,14 @@ fi
 
 # battery
 sudo pmset -b disksleep 1
-sudo pmset -b displaysleep 4
+sudo pmset -b displaysleep 3
 sudo pmset -b halfdim 1
 sudo pmset -b powernap 0
 sudo pmset -b sleep 0
 
 # plugged in
 sudo pmset -c disksleep 0
-sudo pmset -c displaysleep 15
+sudo pmset -c displaysleep 5
 sudo pmset -c powernap 1
 sudo pmset -c sleep 0
 
