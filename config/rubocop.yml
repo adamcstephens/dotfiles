@@ -1,5 +1,5 @@
 Metrics/BlockLength:
-  Max: 200
+  Enabled: False
 Metrics/LineLength:
   Max: 200
 Metrics/MethodLength:
@@ -12,5 +12,5 @@ Metrics/AbcSize:
   Enabled: False
 Style/SymbolArray:
   Enabled: False
-Metrics/BlockLength:
+Metrics/ClassLength:
   Enabled: False
