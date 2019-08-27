@@ -207,6 +207,7 @@ then
   fresh git/ignore --file=~/.gitignore
   mkdir -vp ~/.git_template
   ln -sf ~/.dotfiles/git/template/hooks ~/.git_template/
+  fresh git/editor.sh --bin=~/bin/git-editor.sh
 fi
 
 if command -v gpg-agent &> /dev/null
