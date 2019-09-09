@@ -221,6 +221,11 @@ then
   fresh config/rubocop.yml --file
 fi
 
+if command -v standardrb &> /dev/null
+then
+  fresh config/standard.yml --file
+fi
+
 if command -v solargraph &> /dev/null
 then
   fresh config/solargraph.yml --file

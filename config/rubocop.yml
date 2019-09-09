@@ -14,3 +14,5 @@ Style/SymbolArray:
   Enabled: False
 Metrics/ClassLength:
   Enabled: False
+Metrics/ModuleLength:
+  Enabled: False
