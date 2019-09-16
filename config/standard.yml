@@ -1,3 +1,6 @@
 ignore:
   - '**/*':
     - 'Style/StringLiterals'
+    - 'Layout/SpaceInsideHashLiteralBraces'
+    - 'Style/TrailingCommaInHashLiteral'
+    - 'Style/TrailingCommaInArrayLiteral'
