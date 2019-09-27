@@ -8,3 +8,5 @@
 tags
 vendor
 .DS_Store
+.elixir_ls/
+.envrc
