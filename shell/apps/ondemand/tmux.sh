@@ -12,7 +12,7 @@ update_auth_sock() {
 alias uas=update_auth_sock
 
 function tm() {
-  tmux attach-session -t "$hostname" || tmux new-session -s "$hostname"
+  tmux attach-session -t "$HOST" || tmux new-session -s "$HOST"
 }
 
 # copy this as an alternative future option
