@@ -11,16 +11,9 @@ update_auth_sock() {
 
 alias uas=update_auth_sock
 
-if [[ -z "$TMUX" && ("$TERM_PROGRAM" != "vscode") ]]
-then
-  if [[ -n "$ITERM_SESSION_ID" ]]
-  then
-    sname="$(echo "$ITERM_SESSION_ID" | cut -f 1 -d :)"
-  else
-    sname="t-$(hostname)"
-  fi
-  tmux attach-session -t "$sname" || tmux new-session -s "$sname"
-fi
+function tm() {
+  tmux attach-session -t "$hostname" || tmux new-session -s "$hostname"
+}
 
 # copy this as an alternative future option
 # if [ -n "$TMUX" ]; then
