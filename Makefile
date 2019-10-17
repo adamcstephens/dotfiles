@@ -43,6 +43,7 @@ update-fresh:
 
 update-zplug:
 	cd ~/.zplug; git pull
+	zsh -i -c zplug clean --force
 
 clean:
 	fresh clean
