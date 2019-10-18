@@ -217,6 +217,11 @@ then
   fresh config/gpg-agent.conf --file=~/.gnupg/gpg-agent.conf
 fi
 
+if command -v irb &> /dev/null
+then
+  fresh config/irbrc --file
+fi
+
 if command -v rubocop &> /dev/null
 then
   fresh config/rubocop.yml --file
