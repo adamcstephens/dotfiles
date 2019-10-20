@@ -12,7 +12,8 @@ update_auth_sock() {
 alias uas=update_auth_sock
 
 function tm() {
-  tmux attach-session -t "$HOST" || tmux new-session -s "$HOST"
+  session="$(echo $HOST | sed 's/\./_/g')"
+  tmux attach-session -t "$session" || tmux new-session -s "$session"
 }
 
 # copy this as an alternative future option
