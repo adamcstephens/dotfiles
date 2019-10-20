@@ -1,9 +1,9 @@
-tap "heroku/brew"
 tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/cask-drivers"
 tap "homebrew/cask-fonts"
 tap "homebrew/core"
+tap "tdsmith/ham"
 tap "universal-ctags/universal-ctags"
 brew "bat"
 brew "colordiff"
@@ -13,7 +13,6 @@ brew "git"
 brew "gnu-sed"
 brew "gnu-tar"
 brew "gnupg"
-brew "go"
 brew "htop"
 brew "httpie"
 brew "hub"
@@ -28,6 +27,7 @@ brew "nmap"
 brew "pinentry-mac"
 brew "pstree"
 brew "pwgen"
+brew "rclone"
 brew "shellcheck"
 brew "sipcalc"
 brew "the_silver_searcher"
@@ -36,38 +36,34 @@ brew "tmux"
 brew "tree"
 brew "wget"
 brew "zsh"
-brew "heroku/brew/heroku"
+brew "tdsmith/ham/chirp"
 brew "universal-ctags/universal-ctags/universal-ctags", args: ["HEAD"]
 cask "adobe-creative-cloud"
+cask "balenaetcher"
 cask "bettertouchtool"
 cask "deezer"
 cask "docker"
 cask "finicky"
 cask "firefox"
-cask "flux"
 cask "font-fira-code"
 cask "font-source-code-pro-for-powerline"
-cask "google-cloud-sdk"
-cask "insomnia"
+cask "google-chrome"
 cask "istat-menus"
 cask "iterm2"
 cask "pocket-casts"
-cask "sauce-connect"
+cask "slack"
 cask "sonos"
+cask "steam"
 cask "telegram"
 cask "transmission-remote-gui"
 cask "tunnelblick"
 cask "visual-studio-code"
-cask "xquartz"
+cask "vlc"
 mas "1Password 7", id: 1333542190
 mas "Bear", id: 1091189122
-mas "Ka-Block!", id: 1335413823
 mas "Keynote", id: 409183694
-mas "Microsoft Remote Desktop", id: 715768417
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
-mas "Parcel", id: 639968404
 mas "Things", id: 904280696
 mas "Tweetbot", id: 1384080005
 mas "Webcam Settings", id: 533696630
-mas "Xcode", id: 497799835
