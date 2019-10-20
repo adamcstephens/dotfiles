@@ -63,7 +63,7 @@ powerline:
 		rm -rf fonts
 
 tmuxline:
-	vim +"TmuxlineSnapshot ~/.tmux.tmuxline" +qall
+	vim +"TmuxlineSnapshot! ~/.tmux.tmuxline" +qall
 
 zsh-prof:
 	time zsh -i -c exit
