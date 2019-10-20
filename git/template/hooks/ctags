@@ -3,9 +3,5 @@ set -e
 PATH="/usr/local/bin:$PATH"
 dir="`git rev-parse --git-dir`"
 trap 'rm -f "$dir/$$.tags"' EXIT
-if [[ -e Gemfile ]]
-then
-  bundle check || bundle install
-fi
 ctags -R --tag-relative=never -f "$dir/$$.tags" --languages=ruby --exclude=.git --exclude=log . $(bundle list --paths 2>&1 | grep $USER)
 mv "$dir/$$.tags" "$dir/tags"

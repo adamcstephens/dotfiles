@@ -1,2 +1,5 @@
 #!/bin/sh
-.git/hooks/ctags >/dev/null 2>&1 &
+if [[ -e Gemfile ]]
+then
+  bundle check || bundle install
+fi
