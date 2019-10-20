@@ -1,0 +1,18 @@
+# trigger an apt-get update
+update
+
+package "colordiff"
+package "direnv"
+package "exuberant-ctags"
+package "gconf2"
+package "git-hub"
+package "htop"
+package "httpie"
+package "jq"
+package "nmap"
+package "shellcheck"
+package "silversearcher-ag"
+package "tmux"
+package "tree"
+package "wget"
+package "yamllint"

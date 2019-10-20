@@ -14,6 +14,9 @@ install-zsh:
 	if ! grep $(ZSH) /etc/shells; then echo "$(ZSH)" | sudo tee -a /etc/shells; fi
 	chsh -s $(ZSH)
 
+aptfile:
+	sudo $(HOME)/bin/aptfile
+
 brew:
 	brew bundle
 
@@ -73,4 +76,4 @@ zsh-prof-setup:
 	ex -sc '1i|zmodload zsh/zprof' -cx ~/.zshrc
 	echo "zprof" >> ~/.zshrc
 
-.PHONY: all ansible clean update-vim update-fresh update
+.PHONY: all ansible aptfile clean update-vim update-fresh update

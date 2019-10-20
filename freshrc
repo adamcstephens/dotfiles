@@ -159,6 +159,7 @@ fi
 if [ -e /etc/debian_version ]
 then
   fresh blyork/apt-history apt-history --bin
+  fresh seatgeek/bash-aptfile bin/aptfile --bin
 fi
 
 # don't install stuff in root's home
