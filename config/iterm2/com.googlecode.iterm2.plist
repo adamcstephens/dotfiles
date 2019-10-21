@@ -5723,7 +5723,7 @@
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>FiraCode-Medium 14</string>
+			<string>FiraCode-Regular 14</string>
 			<key>Only The Default BG Color Uses Transparency</key>
 			<true/>
 			<key>Option Key Sends</key>
@@ -7531,6 +7531,7 @@
 	</dict>
 	<key>NoSyncSearchHistory2</key>
 	<array>
+		<string>mipinfmo</string>
 		<string>azure</string>
 	</array>
 	<key>NoSyncTimeOfFirstLaunchOfVersionWithTip</key>
