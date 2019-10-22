@@ -56,7 +56,6 @@ cask "sonos"
 cask "steam"
 cask "telegram"
 cask "transmission-remote-gui"
-cask "tunnelblick"
 cask "visual-studio-code"
 cask "vlc"
 mas "1Password 7", id: 1333542190
