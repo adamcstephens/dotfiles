@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 set -e
 PATH="/usr/local/bin:$PATH"
 dir="`git rev-parse --git-dir`"

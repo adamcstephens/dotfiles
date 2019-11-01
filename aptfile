@@ -1,14 +1,18 @@
 # trigger an apt-get update
 update
 
+package "bat"
 package "colordiff"
 package "direnv"
 package "exuberant-ctags"
+package "fonts-firacode"
+package "gawk"
 package "gconf2"
 package "git-hub"
 package "htop"
 package "httpie"
 package "jq"
+package "neovim"
 package "nmap"
 package "shellcheck"
 package "silversearcher-ag"
@@ -16,3 +20,4 @@ package "tmux"
 package "tree"
 package "wget"
 package "yamllint"
+package "zsh"
