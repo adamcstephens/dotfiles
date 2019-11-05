@@ -222,6 +222,12 @@ then
   fresh config/irbrc --file
 fi
 
+if command -v kitty &> /dev/null
+then
+  [[ ! -d ~/.config/kitty ]] && mkdir -vp ~/.config/kitty
+  fresh config/kitty.conf --file=~/.config/kitty/kitty.conf
+fi
+
 if command -v rubocop &> /dev/null
 then
   fresh config/rubocop.yml --file
