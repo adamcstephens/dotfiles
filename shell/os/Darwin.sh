@@ -34,3 +34,8 @@ newpassgen() {
     echo
   done
 }
+
+# override code if insiders is installed
+if [[ -d "/Applications/Visual Studio Code - Insiders.app" ]]; then
+  export PATH="/Applications/Visual Studio Code - Insiders.app/Contents/Resources/app/bin:$PATH"
+fi
