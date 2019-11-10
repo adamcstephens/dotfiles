@@ -1,6 +1,8 @@
 { config, pkgs, ... }:
 
 {
+  nixpkgs.config.allowUnfree = true;
+
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
@@ -19,12 +21,13 @@
     pkgs.kitty
     pkgs.neovim
     pkgs.nmap
+    pkgs.python37Packages.yamllint
     pkgs.shellcheck
     pkgs.silver-searcher
     pkgs.tmux
     pkgs.tree
+    pkgs.vscodium
     pkgs.wget
-    pkgs.python37Packages.yamllint
     pkgs.xcape
   ];
 }
