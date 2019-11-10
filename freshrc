@@ -248,8 +248,18 @@ then
   fresh config/toprc --file
 fi
 
+if command -v X &>/dev/null
+then
+  fresh config/xprofile --file
+fi
+
 if [[ "$OS" == "Darwin" ]]; then
   fresh config/finicky.js --file
+fi
+
+if [[ "$DIST" == "nixos" ]]; then
+  [[ -d $HOME/.config ]] || mkdir -vp $HOME/.config
+  [[ -h $HOME/.config/nixpkgs ]] || ln -svT $HOME/.dotfiles/config/nixpkgs $HOME/.config/nixpkgs
 fi
 
 if [ ! -e /etc/inputrc ]
