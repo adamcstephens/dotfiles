@@ -11,13 +11,13 @@ set colorcolumn=100
 "
 call plug#begin('~/.vim/plugged')
 
-Plug 'sonph/onehalf', {'rtp': 'vim/'}
 Plug 'edkolev/tmuxline.vim'
 Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
 Plug 'bling/vim-airline'
 Plug 'blueyed/vim-qf_resize'
+Plug 'chriskempson/base16-vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'cohama/lexima.vim'
 Plug 'godlygeek/tabular'
@@ -42,7 +42,6 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'vim-scripts/molokai'
 Plug 'w0rp/ale'
 Plug 'Valloric/ListToggle'
 Plug 'Yggdroot/indentLine'
@@ -68,7 +67,7 @@ set grepprg=ag\ --nogroup\ --nocolor
 " airline
 set laststatus=2
 " set a theme
-let g:airline_theme="onehalfdark"
+let g:airline_theme="base16_default"
 " show buffer bar
 let g:airline#extensions#tabline#enabled = 1
 " Show just the filename
@@ -170,8 +169,8 @@ if (has("termguicolors"))
   set termguicolors
 endif
 
-silent! colorscheme onehalfdark
-set background=dark
+silent! colorscheme base16-default-dark
+" set background=dark
 highlight Comment cterm=italic gui=italic
 
 " highlight active line
