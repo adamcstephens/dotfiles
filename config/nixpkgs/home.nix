@@ -6,6 +6,9 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
+  # expose fonts
+  fonts.fontconfig.enable = true;
+
   home.packages = [
     pkgs.bat
     pkgs.colordiff
