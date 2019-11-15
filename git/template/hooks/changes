@@ -1,5 +1,0 @@
-#!/bin/bash
-if command -v bundle && [[ -e Gemfile ]]
-then
-  bundle check || bundle install
-fi

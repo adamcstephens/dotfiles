@@ -1,7 +1,0 @@
-#!/bin/bash
-set -e
-PATH="/usr/local/bin:$PATH"
-dir="`git rev-parse --git-dir`"
-trap 'rm -f "$dir/$$.tags"' EXIT
-ctags -R --tag-relative=never -f "$dir/$$.tags" --languages=ruby --exclude=.git --exclude=log . $(bundle list --paths 2>&1 | grep $USER)
-mv "$dir/$$.tags" "$dir/tags"
