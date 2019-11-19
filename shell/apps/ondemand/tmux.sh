@@ -13,7 +13,7 @@ alias uas=update_auth_sock
 
 function tm() {
   session="$(echo $HOST | sed 's/\./_/g')"
-  tmux attach-session -t "$session" || tmux new-session -s "$session"
+  TERM="tmux-256color" tmux attach-session -t "$session" || tmux new-session -s "$session"
 }
 
 # copy this as an alternative future option

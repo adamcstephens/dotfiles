@@ -194,7 +194,6 @@ then
   [[ ! -d ~/.tmux/plugins/tpm ]] && git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm/
   fresh config/tmux.conf --file=~/.tmux.conf
   fresh config/tzvt_config --file
-  fresh config/tmux-yank.sh --file=~/.tmux/yank.sh
 fi
 
 if command -v screen &> /dev/null
