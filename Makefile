@@ -43,6 +43,7 @@ update-vim: all
 
 update-fresh:
 	fresh update
+	fresh clean
 
 update-zplug:
 	cd ~/.zplug; git pull
