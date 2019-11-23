@@ -1,1 +1,1 @@
-xcape -e 'Control_L=Escape'
+command -v xcape >/dev/null && xcape -e 'Control_L=Escape'
