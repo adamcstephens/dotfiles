@@ -9,7 +9,6 @@
         colordiff
         ctags
         direnv
-        fira-code
         firefox
         fzf
         gnumake
@@ -20,6 +19,7 @@
         neovim
         nmap
         python37Packages.yamllint
+        redshift
         shellcheck
         silver-searcher
         slack
@@ -29,9 +29,7 @@
         vscodium
         wget
         xcape
-        nixUnstable
       ];
     };
   };
 }
-

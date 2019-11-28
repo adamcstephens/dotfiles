@@ -3,5 +3,5 @@
 #alias pkp="apt-file search"
 alias pks="nix search "
 #alias pksh="apt-cache show"
-alias pku="nix-channel --update && nix-env -u"
+alias pku="nix-channel --update && nix-env -u all"
 #alias pkr="sudo apt-get remove"
