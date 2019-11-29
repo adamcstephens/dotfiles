@@ -1,0 +1,12 @@
+# trigger an apt-get update
+update
+
+package "codium"
+package "firefox"
+package "i3"
+package "kitty"
+package "fonts-firacode"
+package "redshift-gtk"
+package "telegram-desktop"
+package "xcape"
+package "xinput"

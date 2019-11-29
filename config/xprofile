@@ -1,10 +1,8 @@
-command -v xcape >/dev/null && xcape -e 'Control_L=Escape'
-
-xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation" 1
-xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Button" 2
-xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Timeout" 200
-xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Axes" 6 7 4 5
+#!/bin/sh
 
 xset r rate 200 25
 
 command -v redshift-gtk && redshift-gtk -l 40.0236346:-83.0237067 -t 6500:2100 &
+
+setxkbmap -layout us -option ctrl:nocaps
+command -v xcape >/dev/null && xcape -e 'Control_L=Escape' &

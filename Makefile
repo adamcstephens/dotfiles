@@ -17,6 +17,9 @@ install-zsh:
 aptfile:
 	sudo $(HOME)/bin/aptfile
 
+aptfile-desktop:
+	sudo $(HOME)/bin/aptfile $(HOME)/.dotfiles/aptfile.desktop
+
 brew:
 	brew bundle
 

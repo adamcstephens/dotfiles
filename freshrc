@@ -184,7 +184,6 @@ then
     fresh config/sxhkd/sxhkdrc --file=~/.config/sxhkd/sxhkdrc
   fi
 
-  fresh "config/xprofile_$(hostname)" --file=~/.xprofile --ignore-missing
   fresh "config/tint3rc_$(hostname)" --file=~/.tint3rc --ignore-missing
 fi
 
@@ -254,7 +253,11 @@ fi
 
 if command -v X &>/dev/null
 then
-  fresh config/xprofile --file
+  if [[ "$DIST" == "debian" ]]; then
+    fresh config/xprofile --file=~/.xsessionrc
+  else
+    fresh config/xprofile --file
+  fi
 fi
 
 if [[ "$OS" == "Darwin" ]]; then
