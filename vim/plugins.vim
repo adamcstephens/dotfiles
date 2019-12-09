@@ -169,7 +169,7 @@ if (has("termguicolors"))
   set termguicolors
 endif
 
-silent! colorscheme base16-default-dark
+silent! colorscheme base16-material-darker
 " set background=dark
 highlight Comment cterm=italic gui=italic
 
