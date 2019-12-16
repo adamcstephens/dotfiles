@@ -21,6 +21,7 @@ Plug 'chriskempson/base16-vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'cohama/lexima.vim'
 Plug 'godlygeek/tabular'
+Plug 'hashivim/vim-terraform'
 Plug 'honza/vim-snippets'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'janko-m/vim-test'
@@ -56,7 +57,6 @@ else
 endif
 
 " let g:ansible_name_highlight = 'b'
-" let g:terraform_align=1
 " disable vim-json's quite hiding
 " let g:vim_json_syntax_conceal = 0
 
@@ -144,6 +144,10 @@ let g:qf_resize_max_ratio = 0.30
 " let g:UltiSnipsExpandTrigger="<tab>"
 " let g:UltiSnipsJumpForwardTrigger="<c-b>"
 " let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" terraform
+let g:terraform_align=1
+let g:terraform_fmt_on_save=1
 
 " test
 nmap <silent> t<C-n> :TestNearest<CR>
