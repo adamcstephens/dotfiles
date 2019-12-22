@@ -299,7 +299,7 @@ set_from_resource $i3-wm.bar.workspace.urgent.border.color i3-wm.bar.workspace.u
 set_from_resource $i3-wm.bar.workspace.urgent.background.color i3-wm.bar.workspace.urgent.background.color "#dc322f"
 set_from_resource $i3-wm.bar.workspace.urgent.text.color i3-wm.bar.workspace.urgent.text.color "#fdf6e3"
 
-set_from_resource $i3-wm.bar.font i3-wm.bar.font "pango:Source Code Pro Medium 13, FontAwesome 13"
+set_from_resource $i3-wm.bar.font i3-wm.bar.font "pango:Fira Code 13, FontAwesome 13"
 
 # Configure the bar
 bar {

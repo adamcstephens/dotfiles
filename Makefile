@@ -69,10 +69,16 @@ powerline:
 		cd .. &&\
 		rm -rf fonts
 
+ssh-setup:
+	ssh-keygen -t ed25519
+
 tmuxline:
 	vim +"TmuxlineSnapshot! ~/.tmux.tmuxline" +qall
 
 ubuntu-keyboard:
+	gsettings set org.gnome.desktop.input-sources xkb-options "['ctrl:nocaps']"
+	gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 30
+	gsettings set org.gnome.desktop.peripherals.keyboard delay 250
 	sudo sed -i 's/XKBOPTIONS=""/XKBOPTIONS="ctrl:nocaps"/' /etc/default/keyboard
 
 zsh-prof:
