@@ -72,6 +72,9 @@ powerline:
 tmuxline:
 	vim +"TmuxlineSnapshot! ~/.tmux.tmuxline" +qall
 
+ubuntu-keyboard:
+	sudo sed -i 's/XKBOPTIONS=""/XKBOPTIONS="ctrl:nocaps"/' /etc/default/keyboard
+
 zsh-prof:
 	time zsh -i -c exit
 

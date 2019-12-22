@@ -221,7 +221,12 @@ then
 fi
 
 if command -v i3 >/dev/null; then
-  [[ -h $HOME/.config/i3 ]] || ln -svT $HOME/.dotfiles/config/i3 $HOME/.config/i3
+  if [[ -f /etc/regolith/i3/config ]]; then
+    [[ -d $HOME/.config/regolith/i3 ]] || mkdir -vp $HOME/.config/regolith/i3
+    fresh config/i3/config.regolith --file=$HOME/.config/regolith/i3/config
+  else
+    [[ -h $HOME/.config/i3 ]] || ln -svT $HOME/.dotfiles/config/i3 $HOME/.config/i3
+  fi
 fi
 
 if command -v kitty &> /dev/null

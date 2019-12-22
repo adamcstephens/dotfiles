@@ -1,9 +1,10 @@
 # trigger an apt-get update
 update
 
-package "codium"
+ppa "kgilmer/regolith-stable"
+package "regolith-desktop"
+
 package "firefox"
-package "i3"
 package "kitty"
 package "fonts-firacode"
 package "redshift-gtk"
