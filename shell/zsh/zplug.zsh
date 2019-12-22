@@ -1,9 +1,9 @@
 source ~/.zplug/init.zsh
 
-zplug "hlissner/zsh-autopair"
 zplug "MikeDacre/tmux-zsh-vim-titles"
+zplug "greymd/docker-zsh-completion"
+zplug "hlissner/zsh-autopair"
 zplug "zsh-users/zsh-autosuggestions"
-zplug "zsh-users/zsh-completions"
 
 zplug "~/.fresh/source/freshshell/fresh/contrib/completion/fresh-completion.zsh", from:local
 

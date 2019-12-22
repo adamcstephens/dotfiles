@@ -118,11 +118,11 @@ then
   fi
 
   fresh-options --file=~/.zshrc --marker
+    fresh shell/zsh/zplug.zsh
+
     fresh shell/fresh.sh
     fresh shell/zsh/zshrc.zsh
     fresh shell/generic.sh
-
-    fresh shell/zsh/zplug.zsh
 
     shell_os zsh
     shell_ondemand zsh
