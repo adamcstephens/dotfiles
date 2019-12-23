@@ -67,7 +67,7 @@ set grepprg=ag\ --nogroup\ --nocolor
 " airline
 set laststatus=2
 " set a theme
-let g:airline_theme="base16_default"
+let g:airline_theme="minimalist"
 " show buffer bar
 let g:airline#extensions#tabline#enabled = 1
 " Show just the filename
