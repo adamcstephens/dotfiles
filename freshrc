@@ -111,14 +111,10 @@ fi
 
 if command -v zsh &> /dev/null
 then
-  if [[ ! -d ~/.zplug ]]
-  then
-    [[ -h ~/.zplug ]] && rm ~/.zplug
-    git clone https://github.com/zplug/zplug ~/.zplug
-  fi
+  fresh zdharma/zplugin . --file=~/.zplugin/bin/
 
   fresh-options --file=~/.zshrc --marker
-    fresh shell/zsh/zplug.zsh
+    fresh shell/zsh/zplugin.zsh
 
     fresh shell/fresh.sh
     fresh shell/zsh/zshrc.zsh
