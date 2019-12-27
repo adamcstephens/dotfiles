@@ -22,7 +22,6 @@ zplugin light "kiurchv/asdf.plugin.zsh"
 zplugin ice pick"async.zsh" src"pure.zsh"
 zplugin light "sindresorhus/pure"
 
-# pull the direnv binary and generate file to be sourced
-zplugin ice from"gh-r" as"program" mv"direnv* -> direnv" \
-    './direnv hook zsh > zhook.zsh' atpull'%atclone' pick"direnv"
+# use installed direnv and generate a hook file
+zplugin ice from"gh-r" as"program" mv"direnv* -> direnv" atclone'./direnv hook zsh > zhook.zsh' atpull'%atclone' pick"direnv" src"zhook.zsh"
 zplugin light direnv/direnv

@@ -1,13 +1,3 @@
-if [ -d /usr/local/bin ]
-then
-  export PATH="/usr/local/bin:$PATH"
-fi
-
-if [ -d /usr/local/sbin ]
-then
-  export PATH="/usr/local/sbin:$PATH"
-fi
-
 alias pki="brew install "
 alias pks="brew search "
 alias pksh="brew info "
