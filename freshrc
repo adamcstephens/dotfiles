@@ -3,6 +3,7 @@
 
 [ ! -d ~/projects ] && mkdir -vp ~/projects
 
+# OS detection
 OS=$(uname)
 echo "Found OS: $OS"
 if [[ "$OS" == 'Linux' ]]
@@ -19,24 +20,11 @@ then
   elif [ -e /etc/redhat-release ]
   then
     export DIST='redhat'
-  elif grep CoreOS /etc/lsb-release &> /dev/null
-  then
-    export DIST='coreos'
-  elif [ -e /etc/nixos ]
-  then
-    export DIST='nixos'
   fi
   echo "Found Linux Distribution: $DIST"
 else
   DIST="$OS"
 fi
-
-# shellcheck disable=SC1091
-[ -e /etc/lsb-release ] && source /etc/lsb-release
-DISTRIB_ID=${DISTRIB_ID:-}
-
-# get hostname
-HOSTNAME=$(hostname)
 
 # install the fresh binary
 fresh freshshell/fresh bin/fresh --bin
@@ -100,8 +88,10 @@ then
 
     fresh shell/bash/bash.bash
     fresh shell/notes.sh
+
     [[ -d $HOME/.asdf || -d /usr/local/Cellar/asdf ]] && fresh shell/asdf.sh
   fresh-options
+
   fresh shell/bash/bashrc --file
 fi
 
@@ -137,10 +127,12 @@ fi
 if command -v vim &> /dev/null
 then
   [ ! -d ~/.vim ] && mkdir -vp ~/.vim
+
   fresh-options --file=~/.vimrc
     fresh vim/vimrc
     fresh vim/plugins.vim
   fresh-options
+
   if command -v nvim &> /dev/null
   then
     [ ! -d ~/.config ] && mkdir -vp ~/.config
@@ -156,31 +148,6 @@ if [ -e /etc/debian_version ]
 then
   fresh blyork/apt-history apt-history --bin
   fresh seatgeek/bash-aptfile bin/aptfile --bin
-fi
-
-# don't install stuff in root's home
-if [[ "$USER" != 'root' ]]
-then
-  if command -v pacman &> /dev/null
-  then
-    fresh giddie/bits-n-pieces pacman-undo/pacman-undo --bin
-    fresh oshazard/apacman apacman --bin
-  fi
-
-  if command -v conky &> /dev/null
-  then
-    fresh "config/conkyrc/$(hostname)" --file=~/.conkyrc --ignore-missing
-  fi
-
-  if command -v bspwm &> /dev/null
-  then
-    [[ -d ~/.config/bspwm ]] || mkdir -p ~/.config/bspwm
-    [[ -d ~/.config/sxhkd ]] || mkdir -p ~/.config/sxhkd
-    fresh config/bspwm/bspwmrc --bin=~/.config/bspwm/bspwmrc
-    fresh config/sxhkd/sxhkdrc --file=~/.config/sxhkd/sxhkdrc
-  fi
-
-  fresh "config/tint3rc_$(hostname)" --file=~/.tint3rc --ignore-missing
 fi
 
 if command -v tmux &> /dev/null
@@ -263,11 +230,6 @@ fi
 
 if [[ "$OS" == "Darwin" ]]; then
   fresh config/finicky.js --file
-fi
-
-if [[ "$DIST" == "nixos" ]]; then
-  [[ -d $HOME/.config ]] || mkdir -vp $HOME/.config
-  [[ -h $HOME/.config/nixpkgs ]] || ln -svT $HOME/.dotfiles/config/nixpkgs $HOME/.config/nixpkgs
 fi
 
 if [ ! -e /etc/inputrc ]

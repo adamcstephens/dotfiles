@@ -48,15 +48,11 @@ update-fresh:
 	fresh update
 	fresh clean
 
-update-zplug:
-	cd ~/.zplug; git pull
-	zsh -i -c zplug clean --force
-
 clean:
 	fresh clean
 	vim +PlugClean +qall
 
-update: update-asdf update-fresh update-vim update-zplug
+update: update-asdf update-fresh update-vim
 
 linux-workstation:
 	ansible-playbook ansible/Linux-workstation.yaml
