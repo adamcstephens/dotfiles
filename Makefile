@@ -52,7 +52,7 @@ clean:
 	fresh clean
 	vim +PlugClean +qall
 
-update: update-asdf update-fresh update-vim
+update: update-asdf update-fresh update-vim tmuxline
 
 linux-workstation:
 	ansible-playbook ansible/Linux-workstation.yaml
@@ -69,7 +69,7 @@ ssh-setup:
 	ssh-keygen -t ed25519
 
 tmuxline:
-	vim +"TmuxlineSnapshot! ~/.tmux.tmuxline" +qall
+	if [ ! -z $TMUX ]; then vim +"TmuxlineSnapshot! ~/.tmux.tmuxline" +qall; fi
 
 ubuntu-keyboard:
 	gsettings set org.gnome.desktop.input-sources xkb-options "['ctrl:nocaps']"
