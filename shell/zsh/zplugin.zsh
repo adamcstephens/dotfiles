@@ -1,12 +1,12 @@
 source ~/.zplugin/bin/zplugin.zsh
 
-zplugin ice wait'!0'
+zplugin ice wait'!0' lucid
 zplugin light "MikeDacre/tmux-zsh-vim-titles"
 
-zplugin ice wait'!0'
+zplugin ice wait'!0' lucid
 zplugin light "greymd/docker-zsh-completion"
 
-zplugin ice wait'!0'
+zplugin ice wait'!0' lucid
 zplugin light "hlissner/zsh-autopair"
 
 zplugin ice wait lucid atload'_zsh_autosuggest_start'
