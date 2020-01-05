@@ -180,5 +180,7 @@ highlight Comment cterm=italic gui=italic
 " highlight active line
 set cursorline
 
-" set diff to vertical
-set diffopt+=vertical
+" set diff to vertical - not global - Mac 10.15.2 vim doesn't support
+if has('nvim')
+  set diffopt+=vertical
+endif
