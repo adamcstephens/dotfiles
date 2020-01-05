@@ -25,3 +25,8 @@ zplugin light "sindresorhus/pure"
 # use installed direnv and generate a hook file
 zplugin ice from"gh-r" as"program" mv"direnv* -> direnv" atclone'./direnv hook zsh > zhook.zsh' atpull'%atclone' pick"direnv" src"zhook.zsh"
 zplugin light direnv/direnv
+alias da="direnv allow"
+
+zplugin light jonmosco/kube-ps1
+
+PROMPT=' $(kube_ps1)%(?.%F{magenta}△.%F{red}▲)%f  '
