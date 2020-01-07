@@ -29,4 +29,4 @@ alias da="direnv allow"
 
 zplugin light jonmosco/kube-ps1
 
-PROMPT=' $(kube_ps1)%(?.%F{magenta}△.%F{red}▲)%f  '
+PROMPT=' $(kube_ps1)%(?.%F{magenta}->.%F{red}~>)%f '
