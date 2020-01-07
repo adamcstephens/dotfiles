@@ -5,7 +5,8 @@
 .ruby-version
 .tool-versions
 .vscode
-tags
+.notags
+.tags
 vendor
 .DS_Store
 .elixir_ls/

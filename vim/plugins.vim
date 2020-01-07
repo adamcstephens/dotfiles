@@ -109,6 +109,9 @@ let g:fzf_files_options =
 " reduce update time from 4s
 set updatetime=100
 
+" gutentags
+let g:gutentags_ctags_tagfile = '.tags'
+
 " LanguageClient
 " Plug 'autozimu/LanguageClient-neovim', {
 "     \ 'branch': 'next',
