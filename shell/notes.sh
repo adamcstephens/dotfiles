@@ -14,9 +14,9 @@ function elng {
     echo "no note found"
   fi
 }
-alias nn="vim ~/notes/\`date +%Y-%m-%d_%H%M\`.txt"
+alias nn="vim ~/notes/\`date +%Y-%m-%d_%H%M\`.md"
 function nnn {
-  vim ~/notes/$1.txt
+  vim ~/notes/$1.md
 }
 alias lnn="ls -lt ~/notes"
 alias lln="ls -1 ~/notes/\`ls -1t ~/notes | head -n1\`"
