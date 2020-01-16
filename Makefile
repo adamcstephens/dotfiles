@@ -7,7 +7,7 @@ install-brew:
 	/usr/bin/ruby -e "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 install-asdf:
-	git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.6.0
+	git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.7.6
 	$(HOME)/.asdf/bin/asdf update
 
 install-zsh:

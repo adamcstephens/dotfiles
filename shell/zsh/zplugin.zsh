@@ -27,6 +27,4 @@ zplugin ice from"gh-r" as"program" mv"direnv* -> direnv" atclone'./direnv hook z
 zplugin light direnv/direnv
 alias da="direnv allow"
 
-zplugin light jonmosco/kube-ps1
-
-PROMPT=' $(kube_ps1)%(?.%F{magenta}->.%F{red}~>)%f '
+PROMPT=' %(?.%F{magenta}->.%F{red}~>)%f '

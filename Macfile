@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# set the time zone
+sudo systemsetup -settimezone "America/New_York" > /dev/null
+
+# Set highlight color to orange
+defaults write NSGlobalDomain AppleHighlightColor -string "1.000000 0.874510 0.701961"
+
 # defaults write NSGlobalDomain com.apple.mouse.scaling -float 1
 
 # make keyboard fast
@@ -16,7 +22,7 @@ defaults write com.apple.dock showhidden -bool true
 defaults write com.apple.dock show-recents -bool false
 
 # Wait 3 seconds before showing the dock
-defaults write com.apple.dock autohide-delay -float 3
+defaults write com.apple.dock autohide-delay -float 2
 
 # Enable the automatic update check
 defaults write com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
@@ -61,6 +67,30 @@ defaults write com.apple.systemuiserver menuExtras -array \
 "/System/Library/CoreServices/Menu Extras/Battery.menu" \
 "/System/Library/CoreServices/Menu Extras/Bluetooth.menu" \
 "/System/Library/CoreServices/Menu Extras/Volume.menu"
+
+defaults write com.apple.spotlight orderedItems -array \
+	'{"enabled" = 1;"name" = "APPLICATIONS";}' \
+	'{"enabled" = 1;"name" = "SYSTEM_PREFS";}' \
+	'{"enabled" = 0;"name" = "DIRECTORIES";}' \
+	'{"enabled" = 0;"name" = "PDF";}' \
+	'{"enabled" = 0;"name" = "FONTS";}' \
+	'{"enabled" = 0;"name" = "DOCUMENTS";}' \
+	'{"enabled" = 0;"name" = "MESSAGES";}' \
+	'{"enabled" = 0;"name" = "CONTACT";}' \
+	'{"enabled" = 0;"name" = "EVENT_TODO";}' \
+	'{"enabled" = 0;"name" = "IMAGES";}' \
+	'{"enabled" = 0;"name" = "BOOKMARKS";}' \
+	'{"enabled" = 0;"name" = "MUSIC";}' \
+	'{"enabled" = 0;"name" = "MOVIES";}' \
+	'{"enabled" = 0;"name" = "PRESENTATIONS";}' \
+	'{"enabled" = 0;"name" = "SPREADSHEETS";}' \
+	'{"enabled" = 0;"name" = "SOURCE";}' \
+	'{"enabled" = 0;"name" = "MENU_DEFINITION";}' \
+	'{"enabled" = 0;"name" = "MENU_OTHER";}' \
+	'{"enabled" = 0;"name" = "MENU_CONVERSION";}' \
+	'{"enabled" = 0;"name" = "MENU_EXPRESSION";}' \
+	'{"enabled" = 0;"name" = "MENU_WEBSEARCH";}' \
+	'{"enabled" = 0;"name" = "MENU_SPOTLIGHT_SUGGESTIONS";}'
 
 for app in "Activity Monitor" "Dock" "SystemUIServer"
 do
