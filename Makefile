@@ -24,8 +24,7 @@ brew:
 	brew bundle
 
 brew-dump:
-	brew bundle dump -f
-	git diff Brewfile
+	brew bundle dump --force
 
 mac-setup:
 	ansible-playbook ansible/Darwin.yaml
