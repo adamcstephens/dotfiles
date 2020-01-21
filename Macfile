@@ -1,5 +1,7 @@
 #!/bin/bash
 
+osascript -e 'tell application "System Events" to tell appearance preferences to set dark mode to true'
+
 # set the time zone
 sudo systemsetup -settimezone "America/New_York" > /dev/null
 
@@ -11,6 +13,13 @@ defaults write NSGlobalDomain AppleHighlightColor -string "1.000000 0.874510 0.7
 # make keyboard fast
 defaults write NSGlobalDomain InitialKeyRepeat -int 15
 defaults write NSGlobalDomain KeyRepeat -int 1
+
+# I know how to type
+defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 
 # Automatically hide and show the Dock
 defaults write com.apple.dock autohide -bool true
