@@ -199,6 +199,11 @@ then
   fresh kdrag0n/base16-kitty colors/base16-material-darker.conf --file=~/.config/kitty/theme.conf
 fi
 
+if command -v kubectl &>/dev/null; then
+  fresh ahmetb/kubectx kubectx --bin
+  fresh ahmetb/kubectx kubens --bin
+fi
+
 if command -v rubocop &> /dev/null
 then
   fresh config/rubocop.yml --file
