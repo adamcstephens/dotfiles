@@ -26,12 +26,6 @@ brew:
 brew-dump:
 	brew bundle dump --force
 
-mac-setup:
-	ansible-playbook ansible/Darwin.yaml
-
-mac-upgrade:
-	mas upgrade
-
 terminfo-italic:
 	tic -o $(HOME)/.terminfo terminfo/tmux-256color.terminfo
 	tic -o $(HOME)/.terminfo terminfo/xterm-256color.terminfo
@@ -53,17 +47,6 @@ clean:
 
 update: update-asdf update-fresh update-vim tmuxline
 
-linux-workstation:
-	ansible-playbook ansible/Linux-workstation.yaml
-
-powerline:
-	cd /tmp && \
-		git clone https://github.com/powerline/fonts.git --depth=1 && \
-		cd fonts && \
-		./install.sh && \
-		cd .. &&\
-		rm -rf fonts
-
 ssh-setup:
 	ssh-keygen -t ed25519
 
@@ -84,4 +67,4 @@ zsh-prof-setup:
 	ex -sc '1i|zmodload zsh/zprof' -cx ~/.zshrc
 	echo "zprof" >> ~/.zshrc
 
-.PHONY: all ansible aptfile clean update-vim update-fresh update
+.PHONY: all aptfile-desktop aptfile brew-dump brew clean install-asdf install-brew install-zsh ssh-setup terminfo-italic tmuxline ubuntu-keyboard update-asdf update-fresh update-vim update zsh-prof-setup zsh-prof
