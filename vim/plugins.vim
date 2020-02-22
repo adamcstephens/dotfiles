@@ -11,8 +11,12 @@ set colorcolumn=100
 "
 call plug#begin('~/.vim/plugged')
 
-Plug 'edkolev/tmuxline.vim'
+"Plug 'sirver/ultisnips'
 Plug 'ConradIrwin/vim-bracketed-paste'
+Plug 'MikeDacre/tmux-zsh-vim-titles'
+Plug 'Valloric/ListToggle'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'Yggdroot/indentLine'
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
 Plug 'bling/vim-airline'
@@ -20,18 +24,18 @@ Plug 'blueyed/vim-qf_resize'
 Plug 'chriskempson/base16-vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'cohama/lexima.vim'
+Plug 'direnv/direnv.vim'
+Plug 'edkolev/tmuxline.vim'
 Plug 'godlygeek/tabular'
 Plug 'hashivim/vim-terraform'
 Plug 'honza/vim-snippets'
-Plug 'ludovicchabant/vim-gutentags'
 Plug 'janko-m/vim-test'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all --no-update-rc'}
 Plug 'junegunn/fzf.vim'
+Plug 'ludovicchabant/vim-gutentags'
 Plug 'rking/ag.vim'
-Plug 'MikeDacre/tmux-zsh-vim-titles'
 Plug 'scrooloose/nerdtree'
 Plug 'sheerun/vim-polyglot'
-"Plug 'sirver/ultisnips'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dispatch'
@@ -44,9 +48,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'w0rp/ale'
-Plug 'Valloric/ListToggle'
-Plug 'Yggdroot/indentLine'
-Plug 'Xuyuanp/nerdtree-git-plugin'
+
 if has('nvim')
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
