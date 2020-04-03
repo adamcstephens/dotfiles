@@ -28,3 +28,5 @@ zplugin light direnv/direnv
 alias da="direnv allow"
 
 PROMPT=' %(?.%F{magenta}->.%F{red}~>)%f '
+
+zplugin snippet OMZ::plugins/ssh-agent/ssh-agent.plugin.zsh

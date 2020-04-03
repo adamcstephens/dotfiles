@@ -45,10 +45,10 @@ alias vundle_update='vim +BundleUpdate +BundleClean! +qall'
 
 # ssh
 function delkey {
-  [ -z $1 ] && echo "supply deletion key" && return 2
+  [[ -z $1 ]] && echo "supply deletion key" && return 2
   delip="$(grep ${1}\  $HOME/.ssh/known_hosts | awk '{print $1}' | cut -f 2 -d \, )"
 
-  ssh-keygen -f "$HOME/.ssh/known_hosts" -R $delip
+  [[ -n $delip ]] && ssh-keygen -f "$HOME/.ssh/known_hosts" -R $delip
   ssh-keygen -f "$HOME/.ssh/known_hosts" -R $1
 }
 

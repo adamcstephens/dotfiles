@@ -51,10 +51,10 @@ defaults write com.apple.SoftwareUpdate ConfigDataInstall -int 1
 # Turn on app auto-update
 defaults write com.apple.commerce AutoUpdate -bool true
 
-# Turn on restrictive firewall
-if ! ( defaults read /Library/Preferences/com.apple.alf globalstate | grep -q 2 )
+# Turn on firewall, but allow incoming connections
+if ! ( defaults read /Library/Preferences/com.apple.alf globalstate | grep -q 1 )
 then
-  sudo defaults write /Library/Preferences/com.apple.alf globalstate -int 2
+  sudo defaults write /Library/Preferences/com.apple.alf globalstate -int 1
 fi
 
 # battery

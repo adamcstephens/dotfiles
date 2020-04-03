@@ -7,7 +7,7 @@
 .vscode
 .notags
 .tags
-vendor
+.tags.lock
 .DS_Store
 .elixir_ls/
 .envrc
