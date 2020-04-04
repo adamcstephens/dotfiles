@@ -29,4 +29,6 @@ alias da="direnv allow"
 
 PROMPT=' %(?.%F{magenta}->.%F{red}~>)%f '
 
-zplugin snippet OMZ::plugins/ssh-agent/ssh-agent.plugin.zsh
+if [[ -e ~/.ssh/id_ed25519 ]] || [[ -e ~/.ssh/id_rsa ]]; then
+  zplugin snippet OMZ::plugins/ssh-agent/ssh-agent.plugin.zsh
+fi
