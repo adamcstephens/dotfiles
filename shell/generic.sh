@@ -55,7 +55,7 @@ function delkey {
 ssh() {
   (
     [[ "$TERM" == "tmux-256color" ]] && TERM=screen-256color
-    if [[ "$TERM" == "xterm-kitty" ]] && command -v kitty; then
+    if [[ "$TERM" == "xterm-kitty" ]] && command -v kitty &>/dev/null; then
       command kitty +kitten ssh $@
     else
       command ssh "$@"
