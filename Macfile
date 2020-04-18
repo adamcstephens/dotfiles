@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# enable touchid in sudo
+grep 'auth sufficient pam_tid.so' /etc/pam.d/sudo || sudo sed -i .bak $'2i\\\nauth sufficient pam_tid.so\n' /etc/pam.d/sudo
+
 osascript -e 'tell application "System Events" to tell appearance preferences to set dark mode to true'
 
 # set the time zone
