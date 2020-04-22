@@ -40,6 +40,10 @@ module.exports = {
       browser: "BlueJeans"
     },
     {
+      match:  /zoom.us\/j\//,
+      browser: "us.zoom.xos"
+    },
+    {
       match: finicky.matchDomains("open.spotify.com"),
       browser: "Spotify"
     }
