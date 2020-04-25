@@ -16,8 +16,6 @@ zplugin light "zdharma/fast-syntax-highlighting"
 
 # zplugin light "~/.fresh/source/freshshell/fresh/contrib/completion/fresh-completion.zsh"
 
-zplugin light "kiurchv/asdf.plugin.zsh"
-
 # Load the pure theme, with zsh-async library that's bundled with it.
 zplugin ice pick"async.zsh" src"pure.zsh"
 zplugin light "sindresorhus/pure"
@@ -31,4 +29,9 @@ PROMPT=' %(?.%F{magenta}->.%F{red}~>)%f '
 
 if [[ -e ~/.ssh/id_ed25519 ]] || [[ -e ~/.ssh/id_rsa ]]; then
   zplugin snippet OMZ::plugins/ssh-agent/ssh-agent.plugin.zsh
+fi
+
+if [[ -e $HOME/.asdf/asdf.sh ]]; then
+  source $HOME/.asdf/asdf.sh
+  fpath=(${ASDF_DIR}/completions $fpath)
 fi

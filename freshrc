@@ -114,7 +114,6 @@ then
     shell_ondemand zsh
 
     fresh shell/notes.sh
-    [[ -d $HOME/.asdf || -d /usr/local/Cellar/asdf ]] && fresh shell/asdf.sh
   fresh-options
 
   # clean compdump

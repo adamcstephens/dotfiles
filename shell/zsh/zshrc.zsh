@@ -1,8 +1,7 @@
 # completion
 zmodload zsh/complist
-autoload -Uz compinit
+autoload -Uz compinit && compinit
 autoload -U +X bashcompinit && bashcompinit
-compinit
 
 # case-insensitive (all),partial-word and then substring completion
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' \
@@ -39,7 +38,7 @@ setopt inc_append_history
 # allow comments in interactive shell
 setopt interactivecomments
 
-# word separation for movement 
+# word separation for movement
 export WORDCHARS='*?_[]~;!#$%^(){}.-'
 
 # set emacs mode
