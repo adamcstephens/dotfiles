@@ -50,7 +50,6 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'w0rp/ale'
 
 if has('nvim')
-  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 else
   Plug 'Shougo/deoplete.nvim'
@@ -177,9 +176,7 @@ call plug#end()
 syntax on
 filetype plugin indent on
 
-if (has("termguicolors"))
-  set termguicolors
-endif
+set termguicolors
 
 silent! colorscheme base16-material-darker
 " set background=dark
@@ -188,7 +185,8 @@ highlight Comment cterm=italic gui=italic
 " highlight active line
 set cursorline
 
-" set diff to vertical - not global - Mac 10.15.2 vim doesn't support
-if has('nvim')
-  set diffopt+=vertical
+" catalina defaults to internal, but doesn't support it :(
+if &diff
+    set diffopt-=internal
+    set diffopt+=vertical
 endif

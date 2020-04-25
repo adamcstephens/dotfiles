@@ -51,14 +51,3 @@ function delkey {
   [[ -n $delip ]] && ssh-keygen -f "$HOME/.ssh/known_hosts" -R $delip
   ssh-keygen -f "$HOME/.ssh/known_hosts" -R $1
 }
-
-ssh() {
-  (
-    [[ "$TERM" == "tmux-256color" ]] && TERM=screen-256color
-    if [[ "$TERM" == "xterm-kitty" ]] && command -v kitty &>/dev/null; then
-      command kitty +kitten ssh $@
-    else
-      command ssh "$@"
-    fi
-  )
-}
