@@ -99,10 +99,10 @@ fi
 
 if command -v zsh &> /dev/null
 then
-  fresh zdharma/zplugin . --file=~/.zplugin/bin/
+  [[ ! -d ~/.zinit/bin ]] && git clone https://github.com/zdharma/zinit.git ~/.zinit/bin
 
   fresh-options --file=~/.zshrc --marker
-    fresh shell/zsh/zplugin.zsh
+    fresh shell/zsh/zinit.zsh
 
     fresh shell/fresh.sh
     fresh shell/zsh/zshrc.zsh
