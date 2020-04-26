@@ -21,3 +21,4 @@ alias docker_rm_all="docker ps -a | grep -vi container | awk '{print $1}' | xarg
 alias dcgc="docker run -ti -v /var/run/docker.sock:/var/run/docker.sock yelp/docker-custodian dcgc "
 
 alias dc="docker-compose "
+alias dclf="docker-compose logs --tail=100 -f"
