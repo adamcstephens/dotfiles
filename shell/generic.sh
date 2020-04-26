@@ -51,3 +51,5 @@ function delkey {
   [[ -n $delip ]] && ssh-keygen -f "$HOME/.ssh/known_hosts" -R $delip
   ssh-keygen -f "$HOME/.ssh/known_hosts" -R $1
 }
+
+[[ -e "$(gpgconf --list-dirs agent-socket)" ]] || gpgconf --create-socketdir
