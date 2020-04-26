@@ -16,7 +16,9 @@
 [color "diff"]
   meta = blue
   frag = magenta
-  old = red 
+  old = red
   new = green
 [init]
   templatedir = ~/.git_template
+[commit]
+  gpgsign = true
