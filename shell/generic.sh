@@ -53,3 +53,5 @@ function delkey {
 }
 
 [[ -e "$(gpgconf --list-dirs agent-socket)" ]] || gpgconf --create-socketdir
+
+alias ssh="TERM=screen-256color ssh "
