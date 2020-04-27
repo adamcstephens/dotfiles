@@ -27,7 +27,7 @@ brew-dump:
 	brew bundle dump --force
 
 terminfo-italic:
-	tic -x -o $(HOME)/.terminfo terminfo/screen-256color.terminfo
+	PATH="/usr/local/opt/ncurses/bin:$(PATH)" tic -x -o $(HOME)/.terminfo terminfo/xterm-screen-256color.terminfo
 
 update-asdf:
 	if [ -e $(HOME)/.asdf ]; then $(HOME)/.asdf/bin/asdf update; fi
