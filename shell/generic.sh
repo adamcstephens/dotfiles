@@ -8,12 +8,6 @@ alias thisweek='date +%Y-%W'
 export CLICOLOR=''
 export GREP_COLOR='3;32'
 export PAGER='less -rFX'
-if command -v nvim &> /dev/null
-then
-  export EDITOR='nvim'
-else
-  export EDITOR='vim'
-fi
 
 if ls --color=auto > /dev/null 2>&1
 then
@@ -52,6 +46,7 @@ function delkey {
   ssh-keygen -f "$HOME/.ssh/known_hosts" -R $1
 }
 
-[[ -e "$(gpgconf --list-dirs agent-socket)" ]] || gpgconf --create-socketdir
+# [[ -e "$(gpgconf --list-dirs agent-socket)" ]] ||gpgconf --create-socketdir || true
 
-alias ssh="TERM=screen-256color ssh "
+# set default SSH terminal
+alias ssh="TERM=xterm-256color ssh"

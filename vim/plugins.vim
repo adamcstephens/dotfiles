@@ -19,7 +19,6 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'Yggdroot/indentLine'
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
-Plug 'bling/vim-airline'
 Plug 'blueyed/vim-qf_resize'
 Plug 'chriskempson/base16-vim'
 Plug 'christoomey/vim-tmux-navigator'
@@ -29,6 +28,7 @@ Plug 'edkolev/tmuxline.vim'
 Plug 'godlygeek/tabular'
 Plug 'hashivim/vim-terraform'
 Plug 'honza/vim-snippets'
+Plug 'itchyny/lightline.vim'
 Plug 'janko-m/vim-test'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all --no-update-rc'}
 Plug 'junegunn/fzf.vim'
@@ -46,7 +46,6 @@ Plug 'tpope/vim-rake'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
-Plug 'vim-airline/vim-airline-themes'
 Plug 'w0rp/ale'
 
 if has('nvim')
@@ -64,19 +63,6 @@ endif
 " ag.vim
 " Use ag over grep
 set grepprg=ag\ --nogroup\ --nocolor
-
-" airline
-set laststatus=2
-" set a theme
-let g:airline_theme="minimalist"
-" show buffer bar
-let g:airline#extensions#tabline#enabled = 1
-" Show just the filename
-let g:airline#extensions#tabline#fnamemod = ':t'
-" add the date/time to the gutter
-let g:airline_section_gutter = '%= %{strftime("%R")}'
-" use powerline fonts if available
-let g:airline_powerline_fonts = 1
 
 " ale
 " turn off background highlighting in favor of gutter only
@@ -130,6 +116,21 @@ let g:gutentags_ctags_tagfile = '.tags'
 let g:indentLine_showFirstIndentLevel = 1
 let g:indentLine_first_char = '▏'
 let g:indentLine_char = '▏'
+
+" lightline
+let g:tmuxline_theme = 'lightline_insert'
+set laststatus=2
+set noshowmode
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'FugitiveHead'
+      \ },
+      \ }
 
 " nerdtree
 map <C-n> :NERDTreeToggle<CR>

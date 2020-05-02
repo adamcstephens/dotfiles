@@ -28,6 +28,7 @@ brew-dump:
 
 terminfo-italic:
 	PATH="/usr/local/opt/ncurses/bin:$(PATH)" tic -x -o $(HOME)/.terminfo terminfo/xterm-screen-256color.terminfo
+	grep TERM=xterm-screen-256color ~/.shell_local.sh || echo "export TERM=xterm-screen-256color" >> ~/.shell_local.sh
 
 update-asdf:
 	if [ -e $(HOME)/.asdf ]; then $(HOME)/.asdf/bin/asdf update; fi
