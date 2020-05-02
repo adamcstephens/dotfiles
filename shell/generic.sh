@@ -46,7 +46,9 @@ function delkey {
   ssh-keygen -f "$HOME/.ssh/known_hosts" -R $1
 }
 
-# [[ -e "$(gpgconf --list-dirs agent-socket)" ]] ||gpgconf --create-socketdir || true
+if [[ -e "/run/user" ]] ; then
+  [[ -e "$(gpgconf --list-dirs agent-socket)" ]] || gpgconf --create-socketdir
+fi
 
 # set default SSH terminal
 alias ssh="TERM=xterm-256color ssh"
