@@ -1,0 +1,25 @@
+[plugins]
+
+[plugins.tmux-zsh-vim-titles]
+github = 'MikeDacre/tmux-zsh-vim-titles'
+
+[plugins.async]
+github = 'mafredri/zsh-async'
+
+[plugins.pure]
+github = 'sindresorhus/pure'
+
+[plugins.fast-syntax-highlighting]
+github = 'zdharma/fast-syntax-highlighting'
+
+[plugins.zsh-autosuggestions]
+github = 'zsh-users/zsh-autosuggestions'
+
+[plugins.comp-docker]
+github = 'greymd/docker-zsh-completion'
+
+[plugins.comp-buffalo]
+github = '1995parham/buffalo.zsh'
+
+[plugins.ssh-agent]
+github = 'bobsoppe/zsh-ssh-agent'

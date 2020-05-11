@@ -1,0 +1,57 @@
+version = "0.5.0"
+home = "/Users/adam"
+root = "/Users/adam/.sheldon"
+config_file = "/Users/adam/.sheldon/plugins.toml"
+lock_file = "/Users/adam/.sheldon/plugins.lock"
+clone_dir = "/Users/adam/.sheldon/repos"
+download_dir = "/Users/adam/.sheldon/downloads"
+
+[[plugins]]
+name = "tmux-zsh-vim-titles"
+source_dir = "/Users/adam/.sheldon/repos/github.com/MikeDacre/tmux-zsh-vim-titles"
+files = ["/Users/adam/.sheldon/repos/github.com/MikeDacre/tmux-zsh-vim-titles/unified-titles.plugin.zsh"]
+apply = ["source"]
+
+[[plugins]]
+name = "async"
+source_dir = "/Users/adam/.sheldon/repos/github.com/mafredri/zsh-async"
+files = ["/Users/adam/.sheldon/repos/github.com/mafredri/zsh-async/async.plugin.zsh"]
+apply = ["source"]
+
+[[plugins]]
+name = "pure"
+source_dir = "/Users/adam/.sheldon/repos/github.com/sindresorhus/pure"
+files = ["/Users/adam/.sheldon/repos/github.com/sindresorhus/pure/pure.plugin.zsh"]
+apply = ["source"]
+
+[[plugins]]
+name = "fast-syntax-highlighting"
+source_dir = "/Users/adam/.sheldon/repos/github.com/zdharma/fast-syntax-highlighting"
+files = ["/Users/adam/.sheldon/repos/github.com/zdharma/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"]
+apply = ["source"]
+
+[[plugins]]
+name = "zsh-autosuggestions"
+source_dir = "/Users/adam/.sheldon/repos/github.com/zsh-users/zsh-autosuggestions"
+files = ["/Users/adam/.sheldon/repos/github.com/zsh-users/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh"]
+apply = ["source"]
+
+[[plugins]]
+name = "comp-docker"
+source_dir = "/Users/adam/.sheldon/repos/github.com/greymd/docker-zsh-completion"
+files = ["/Users/adam/.sheldon/repos/github.com/greymd/docker-zsh-completion/docker-zsh-completion.plugin.zsh"]
+apply = ["source"]
+
+[[plugins]]
+name = "comp-buffalo"
+source_dir = "/Users/adam/.sheldon/repos/github.com/1995parham/buffalo.zsh"
+files = ["/Users/adam/.sheldon/repos/github.com/1995parham/buffalo.zsh/buffalo.plugin.zsh"]
+apply = ["source"]
+
+[[plugins]]
+name = "ssh-agent"
+source_dir = "/Users/adam/.sheldon/repos/github.com/bobsoppe/zsh-ssh-agent"
+files = ["/Users/adam/.sheldon/repos/github.com/bobsoppe/zsh-ssh-agent/ssh-agent.plugin.zsh"]
+apply = ["source"]
+
+[templates]

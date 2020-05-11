@@ -99,13 +99,17 @@ fi
 
 if command -v zsh &> /dev/null
 then
-  [[ ! -d ~/.zinit/bin ]] && git clone https://github.com/zdharma/zinit.git ~/.zinit/bin
+  fresh freshshell/fresh contrib/completion/fresh-completion.zsh --file=completion/_fresh
+
+  if ! command -v sheldon &> /dev/null; then
+    curl --proto '=https' -fLsS https://rossmacarthur.github.io/install/crate.sh | bash -s -- --repo "rossmacarthur/sheldon" --to ~/bin
+  fi
+
+  [[ -h $HOME/.sheldon ]] || ln -svf $HOME/.dotfiles/config/sheldon $HOME/.sheldon
 
   fresh-options --file=~/.zshrc --marker
-    fresh shell/zsh/zinit.zsh
-
     fresh shell/fresh.sh
-    fresh shell/zsh/zshrc.zsh
+    fresh shell/zshrc.zsh
     fresh shell/generic.sh
 
     shell_os zsh

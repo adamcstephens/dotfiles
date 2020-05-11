@@ -1,7 +1,18 @@
+PROMPT=' %(?.%F{magenta}->.%F{red}~>)%f '
+
+if [[ -e $HOME/.asdf/asdf.sh ]]; then
+  source $HOME/.asdf/asdf.sh
+  fpath=(${ASDF_DIR}/completions $fpath)
+fi
+
+fpath=(~/.fresh/build/completion $fpath)
+
 # completion
 zmodload zsh/complist
 autoload -Uz compinit && compinit
 autoload -U +X bashcompinit && bashcompinit
+
+source <(sheldon source)
 
 # case-insensitive (all),partial-word and then substring completion
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' \
