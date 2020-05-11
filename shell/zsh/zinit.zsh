@@ -1,18 +1,17 @@
 source ~/.zinit/bin/zinit.zsh
 
-zinit ice wait'!0' lucid
-zinit light "MikeDacre/tmux-zsh-vim-titles"
+# zinit ice wait'!0' lucid
+# zinit light "hlissner/zsh-autopair"
 
-zinit ice wait'!0' lucid
-zinit light "greymd/docker-zsh-completion"
-
-zinit ice wait'!0' lucid
-zinit light "hlissner/zsh-autopair"
-
-zinit ice wait lucid atload'_zsh_autosuggest_start'
-zinit light "zsh-users/zsh-autosuggestions"
-
-zinit light "zdharma/fast-syntax-highlighting"
+zinit wait lucid light-mode for \
+  MikeDacre/tmux-zsh-vim-titles \
+atinit"zicompinit; zicdreplay" \
+  zdharma/fast-syntax-highlighting \
+atload'_zsh_autosuggest_start' \
+  zsh-users/zsh-autosuggestions \
+as"completion" \
+  1995parham/buffalo.zsh \
+  greymd/docker-zsh-completion
 
 # zinit light "~/.fresh/source/freshshell/fresh/contrib/completion/fresh-completion.zsh"
 
