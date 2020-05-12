@@ -7,12 +7,14 @@ fi
 
 fpath=(~/.fresh/build/completion $fpath)
 
-# completion
-zmodload zsh/complist
 autoload -Uz compinit && compinit
-autoload -U +X bashcompinit && bashcompinit
 
 source <(sheldon source)
+
+# completion
+compinit
+zmodload zsh/complist
+autoload -U +X bashcompinit && bashcompinit
 
 # case-insensitive (all),partial-word and then substring completion
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' \
