@@ -1,31 +1,6 @@
 #!/bin/bash
 # vim: set ft=sh:
 
-[ ! -d ~/projects ] && mkdir -vp ~/projects
-
-# OS detection
-OS=$(uname)
-echo "Found OS: $OS"
-if [[ "$OS" == 'Linux' ]]
-then
-  if [ -e /etc/arch-release ]
-  then
-    export DIST='arch'
-  elif [ -e /etc/debian_version ]
-  then
-    export DIST='debian'
-  elif [ -e /etc/fedora-release ]
-  then
-    export DIST='fedora'
-  elif [ -e /etc/redhat-release ]
-  then
-    export DIST='redhat'
-  fi
-  echo "Found Linux Distribution: $DIST"
-else
-  DIST="$OS"
-fi
-
 # install the fresh binary
 fresh freshshell/fresh bin/fresh --bin
 
@@ -142,57 +117,12 @@ fi
 
 if [ -e /etc/debian_version ]
 then
-  fresh blyork/apt-history apt-history --bin
   fresh seatgeek/bash-aptfile bin/aptfile --bin
 fi
 
 if command -v tmux &> /dev/null
 then
-  [[ ! -d ~/.tmux/plugins ]] && mkdir -vp ~/.tmux/plugins
   [[ ! -d ~/.tmux/plugins/tpm ]] && git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm/
-  fresh config/tmux.conf --file=~/.tmux.conf
-  fresh config/tzvt_config --file
-fi
-
-if command -v screen &> /dev/null
-then
-  fresh config/screenrc --file
-fi
-
-if command -v git &> /dev/null
-then
-  fresh git/config --file=~/.gitconfig
-  fresh git/ignore --file=~/.gitignore
-  mkdir -vp ~/.git_template
-  ln -sf ~/.dotfiles/git/template/hooks ~/.git_template/
-  fresh git/editor.sh --bin=~/bin/git-editor.sh
-fi
-
-if command -v gpg-agent &> /dev/null
-then
-  fresh config/gpg.conf --file=~/.gnupg/gpg.conf
-  fresh config/gpg-agent.conf --file=~/.gnupg/gpg-agent.conf
-fi
-
-if command -v irb &> /dev/null
-then
-  fresh config/irbrc --file
-fi
-
-if command -v i3 >/dev/null; then
-  if [[ -f /etc/regolith/i3/config ]]; then
-    [[ -d $HOME/.config/regolith/i3 ]] || mkdir -vp $HOME/.config/regolith/i3
-    fresh config/i3/config.regolith --file=$HOME/.config/regolith/i3/config
-  else
-    [[ -h $HOME/.config/i3 ]] || ln -svT $HOME/.dotfiles/config/i3 $HOME/.config/i3
-  fi
-fi
-
-if command -v kitty &> /dev/null
-then
-  [[ ! -d ~/.config/kitty ]] && mkdir -vp ~/.config/kitty
-  fresh config/kitty.conf --file=~/.config/kitty/kitty.conf
-  fresh kdrag0n/base16-kitty colors/base16-material-darker.conf --file=~/.config/kitty/theme.conf
 fi
 
 if command -v kubectl &>/dev/null; then
@@ -200,58 +130,8 @@ if command -v kubectl &>/dev/null; then
   fresh ahmetb/kubectx kubens --bin
 fi
 
-if command -v rubocop &> /dev/null
-then
-  fresh config/rubocop.yml --file
-fi
-
-if command -v standardrb &> /dev/null
-then
-  fresh config/standard.yml --file
-fi
-
-if command -v solargraph &> /dev/null
-then
-  fresh config/solargraph.yml --file
-fi
-
-if command -v top &> /dev/null
-then
-  fresh config/toprc --file
-fi
-
-if command -v X &>/dev/null
-then
-  if [[ "$DIST" == "debian" ]]; then
-    fresh config/xprofile --file=~/.xsessionrc
-  else
-    fresh config/xprofile --file
-  fi
-fi
-
-if [[ "$OS" == "Darwin" ]]; then
-  fresh config/finicky.js --file
-fi
-
-if [ ! -e /etc/inputrc ]
-then
-  fresh config/inputrc --file
-fi
 
 if [[ -e $HOME/.ssh/config ]] && grep -q ControlMaster "$HOME/.ssh/config"
 then
   fresh ClockworkNet/cmc cmc --bin
 fi
-
-if command -v bat &> /dev/null
-then
-  [[ ! -d ~/.config/bat ]] && mkdir -vp ~/.config/bat
-  fresh config/bat --file=~/.config/bat/config
-fi
-
-fresh_after_build() {
-  [ -e "$HOME/.toprc" ] && chmod 0600 "$HOME/.toprc"
-
-  # return true so that we don't mess up the return code from fresh itself
-  true
-}
