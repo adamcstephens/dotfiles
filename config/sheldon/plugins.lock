@@ -54,4 +54,10 @@ source_dir = "/Users/astephens/.sheldon/downloads/raw.githubusercontent.com/ohmy
 files = ["/Users/astephens/.sheldon/downloads/raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/ssh-agent/ssh-agent.plugin.zsh"]
 apply = ["source"]
 
+[[plugins]]
+name = "asdf"
+source_dir = "/Users/astephens/.asdf/completions"
+files = []
+apply = ["source"]
+
 [templates]
