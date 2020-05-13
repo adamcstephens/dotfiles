@@ -1,3 +1,66 @@
+set nocompatible
+set modelines=2
+set nu
+
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
+set expandtab
+set shell=/bin/bash
+
+" modify delays
+set timeoutlen=1000
+set ttimeoutlen=0
+
+" set a leader!
+:let mapleader="f"
+
+" toggle the gutter
+function! ToggleGutters()
+  :set invnumber
+  :GitGutterToggle
+  :ALEToggle
+endfunction
+map <Leader>g :call ToggleGutters()<CR>
+
+" don't create stupid files
+set nobackup
+set noundofile
+
+" allow all backspace in insert
+:set backspace=indent,eol,start
+
+" jump to last position when re-opening a file
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
+    \| exe "normal! g'\"" | endif
+endif
+" except for git commits
+autocmd FileType gitcommit call setpos('.', [0, 1, 1, 0])
+
+" fix my damn inability to type
+command Qa qa
+command Q q
+
+" shortcuts
+nnoremap <Leader>d :bdelete<CR>
+nnoremap <Leader>D :bdelete!<CR>
+nnoremap <Leader>p :set invpaste<CR>
+map <Leader>w :write<CR>
+
+" keep buffer undo when switching
+set hidden
+
+" close netrw
+autocmd FileType netrw setl bufhidden=wipe
+
+nnoremap <Leader>s :set hlsearch!<CR>
+
+" highlight unwanted chars
+set list
+set listchars=tab:»·,trail:·,nbsp:·
+
+" enable mouse
 set mouse=a
 
 " yank into the system clipboard

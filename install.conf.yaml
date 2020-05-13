@@ -1,0 +1,6 @@
+- create:
+    - ~/.vim
+
+- link:
+    ~/.vimrc: vimrc
+    ~/.tmux.conf: tmux.conf

@@ -129,11 +129,6 @@ if command -v vim &> /dev/null
 then
   [ ! -d ~/.vim ] && mkdir -vp ~/.vim
 
-  fresh-options --file=~/.vimrc
-    fresh vim/vimrc
-    fresh vim/plugins.vim
-  fresh-options
-
   if command -v nvim &> /dev/null
   then
     [ ! -d ~/.config ] && mkdir -vp ~/.config
