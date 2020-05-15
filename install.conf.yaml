@@ -19,18 +19,26 @@
     ~/.gitconfig: gitconfig
     ~/.giteditor.sh: giteditor.sh
     ~/.gitignore: gitignore
-    ~/.gnupg/gpg-agent.conf: gnupg/gpg-agent.conf
-    ~/.gnupg/gpg.conf: gnupg/gpg.conf
-    ~/.irbrc:
-      if: 'which irb'
-      path: irbrc
+    ~/.gnupg/gpg-agent.conf:
+      if: 'which gpg-agent'
+      path: gnupg/gpg-agent.conf
+    ~/.gnupg/gpg.conf:
+      if: 'which gpg-agent'
+      path: gnupg/gpg.conf
     ~/.inputrc:
       if: '[ ! -e /etc/inputrc ]'
       path: inputrc
+    ~/.irbrc:
+      if: 'which irb'
+      path: irbrc
     ~/.screenrc: screenrc
-    ~/.tmux.conf: tmux.conf
+    ~/.tmux.conf:
+      if: 'which tmux'
+      path: tmux.conf
     ~/.toprc: toprc
-    ~/.tzvt_config: tzvt_config
+    ~/.tzvt_config:
+      if: 'which tmux'
+      path: tzvt_config
     ~/.vimrc: vimrc
     ~/.xprofile:
       if: '[ `uname` = Linux ] && which X'
