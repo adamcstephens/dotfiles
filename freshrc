@@ -4,30 +4,6 @@
 # install the fresh binary
 fresh freshshell/fresh bin/fresh --bin
 
-export fresh_ondemand_path="shell/apps/ondemand"
-export ondemand_path="$HOME/.dotfiles/${fresh_ondemand_path}"
-function shell_ondemand() {
-  shell="$1"
-
-  for ondemand_app in $(find "$ondemand_path"/* | sed 's#.*/##' | cut -f 1 -d . | sort -u)
-  do
-    if command -v "$ondemand_app" &>/dev/null
-    then
-      if [[ -e "${ondemand_path}/${ondemand_app}.sh" ]]
-      then
-        fresh "${fresh_ondemand_path}/${ondemand_app}.sh"
-        echo "${shell} (app): ${ondemand_app}.sh"
-      fi
-      if [[ -e "${ondemand_path}/${ondemand_app}.${shell}" ]]
-      then
-        fresh "${fresh_ondemand_path}/${ondemand_app}.${shell}"
-        echo "${shell} (app): ${ondemand_app}.${shell}"
-      fi
-    fi
-  done
-  true
-}
-
 export fresh_shell_os_path="shell/os"
 export shell_os_path="$HOME/.dotfiles/${fresh_shell_os_path}"
 function shell_os() {
@@ -56,13 +32,10 @@ if command -v bash &> /dev/null
 then
   fresh-options --file=~/.bash_profile --marker
     fresh shell/fresh.sh
-    fresh shell/generic.sh
 
     shell_os bash
-    shell_ondemand bash
 
     fresh shell/bash/bash.bash
-    fresh shell/notes.sh
   fresh-options
 
   fresh shell/bash/bashrc --file
@@ -76,21 +49,11 @@ if command -v zsh &> /dev/null
 then
   fresh freshshell/fresh contrib/completion/fresh-completion.zsh --file=completion/_fresh
 
-  if ! command -v sheldon &> /dev/null; then
-    curl --proto '=https' -fLsS https://rossmacarthur.github.io/install/crate.sh | bash -s -- --repo "rossmacarthur/sheldon" --to ~/bin
-  fi
-
-  [[ -h $HOME/.sheldon ]] || ln -svf $HOME/.dotfiles/config/sheldon $HOME/.sheldon
-
   fresh-options --file=~/.zshrc --marker
     fresh shell/fresh.sh
     fresh shell/zshrc.zsh
-    fresh shell/generic.sh
 
     shell_os zsh
-    shell_ondemand zsh
-
-    fresh shell/notes.sh
   fresh-options
 
   # clean compdump

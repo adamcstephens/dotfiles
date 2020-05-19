@@ -33,6 +33,7 @@
       path: irbrc
     ~/.screenrc: screenrc
     ~/.shell_generic.sh: shell/generic.sh
+    ~/.sheldon: sheldon/
     ~/.tmux.conf:
       if: 'which tmux'
       path: tmux.conf
@@ -49,3 +50,4 @@
 
 - shell:
     - [chmod 0700 ~/.gnupg, Setting gnupg to 0700]
+    - [command -v sheldon || curl --proto '=https' -fLsS https://rossmacarthur.github.io/install/crate.sh | bash -s -- --repo "rossmacarthur/sheldon" --to ~/bin,Installing Sheldon]
