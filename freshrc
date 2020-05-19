@@ -26,33 +26,12 @@ function shell_os() {
 }
 
 #
-# bash
-#
-if command -v bash &> /dev/null
-then
-  fresh-options --file=~/.bash_profile --marker
-    fresh shell/fresh.sh
-
-    shell_os bash
-
-    fresh shell/bash/bash.bash
-  fresh-options
-
-  fresh shell/bash/bashrc --file
-fi
-
-#
 # zsh
 #
 
 if command -v zsh &> /dev/null
 then
-  fresh freshshell/fresh contrib/completion/fresh-completion.zsh --file=completion/_fresh
-
   fresh-options --file=~/.zshrc --marker
-    fresh shell/fresh.sh
-    fresh shell/zshrc.zsh
-
     shell_os zsh
   fresh-options
 
@@ -92,7 +71,6 @@ if command -v kubectl &>/dev/null; then
   fresh ahmetb/kubectx kubectx --bin
   fresh ahmetb/kubectx kubens --bin
 fi
-
 
 if [[ -e $HOME/.ssh/config ]] && grep -q ControlMaster "$HOME/.ssh/config"
 then

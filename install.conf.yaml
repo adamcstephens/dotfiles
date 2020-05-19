@@ -11,6 +11,8 @@
     - ~/tmp
 
 - link:
+    ~/.bash_profile: bash_profile
+    ~/.bashrc: bashrc
     ~/.config/bat/config: bat
     ~/.config/kitty/kitty.conf: kitty.conf
     ~/.finicky.js:
@@ -32,7 +34,7 @@
       if: 'which irb'
       path: irbrc
     ~/.screenrc: screenrc
-    ~/.shell_generic.sh: shell/generic.sh
+    ~/.shell_generic.sh: shell_generic.sh
     ~/.sheldon: sheldon/
     ~/.tmux.conf:
       if: 'which tmux'
@@ -46,7 +48,7 @@
       if: '[ `uname` = Linux ] && which X'
       path: xprofile
     ~/.zshrc:
-      path: shell/zshrc.zsh
+      path: zshrc
 
 - shell:
     - [chmod 0700 ~/.gnupg, Setting gnupg to 0700]
