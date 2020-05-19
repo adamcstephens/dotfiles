@@ -68,3 +68,5 @@ export GIT_PS1_SHOWCOLORHINTS=1
 
 # fzf
 [[ -e ~/.fzf.bash ]] && source ~/.fzf.bash
+
+[[ -e "$HOME/.shell_generic.sh" ]] && . "$HOME/.shell_generic.sh"

@@ -1,1 +1,0 @@
-alias da="direnv allow"

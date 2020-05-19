@@ -1,5 +1,3 @@
-PROMPT=' %(?.%F{magenta}->.%F{red}~>)%f '
-
 if [[ -e $HOME/.asdf/asdf.sh ]]; then
   source $HOME/.asdf/asdf.sh
   fpath=(${ASDF_DIR}/completions $fpath)
@@ -15,6 +13,9 @@ source <(sheldon source)
 compinit
 zmodload zsh/complist
 autoload -U +X bashcompinit && bashcompinit
+
+# override pure prompt and give it different true/false indicators
+PROMPT=' %(?.%F{magenta}->.%F{red}~>)%f '
 
 # case-insensitive (all),partial-word and then substring completion
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' \
@@ -112,3 +113,8 @@ then
   export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
   source ~/.fzf.zsh
 fi
+if type brew &>/dev/null; then
+  FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+fi
+
+[[ -e "$HOME/.shell_generic.sh" ]] && . "$HOME/.shell_generic.sh"
