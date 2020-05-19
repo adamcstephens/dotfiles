@@ -1,10 +1,9 @@
 ZSH := $(shell which zsh)
 
-all:
-	fresh
+default:
 
 install-brew:
-	/usr/bin/ruby -e "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+	/bin/bash -c "`curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh`"
 
 install-asdf:
 	git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.7.6
@@ -37,15 +36,10 @@ update-asdf:
 update-vim: all
 	vim +PlugClean +PlugUpdate +qall
 
-update-fresh:
-	fresh update
-	fresh clean
-
 clean:
-	fresh clean
 	vim +PlugClean +qall
 
-update: update-asdf update-fresh update-vim tmuxline
+update: update-asdf update-vim tmuxline
 
 ssh-setup:
 	ssh-keygen -t ed25519
@@ -67,4 +61,4 @@ zsh-prof-setup:
 	ex -sc '1i|zmodload zsh/zprof' -cx ~/.zshrc
 	echo "zprof" >> ~/.zshrc
 
-.PHONY: all aptfile-desktop aptfile brew-dump brew clean install-asdf install-brew install-zsh ssh-setup terminfo-italic tmuxline ubuntu-keyboard update-asdf update-fresh update-vim update zsh-prof-setup zsh-prof
+.PHONY: default aptfile-desktop aptfile brew-dump brew clean install-asdf install-brew install-zsh ssh-setup terminfo-italic tmuxline ubuntu-keyboard update-asdf update-vim update zsh-prof-setup zsh-prof
