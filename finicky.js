@@ -1,11 +1,5 @@
 module.exports = {
-  defaultBrowser: "Firefox",
-  options: {
-    urlShorteners: [
-      "github.co",
-      "t.co"
-    ],
-  },
+  defaultBrowser: ["Firefox", "Google Chrome", "Safari"],
   rewrite: [
     {
       match: /^https?:\/\/([a-z]+\.)?bluejeans\.com\/[0-9]+/,
@@ -28,6 +22,13 @@ module.exports = {
           search: search.join('&')
         }
       }
+    },
+    {
+      match: finicky.matchDomains(["amazon.com"]),
+      url: ({ url }) => ({
+        ...url,
+        host: "smile.amazon.com"
+      })
     }
   ],
   handlers: [
