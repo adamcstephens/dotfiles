@@ -18,6 +18,8 @@
     ~/.finicky.js:
       if: "[ `uname` = Darwin ]"
       path: finicky.js
+    ~/.freshrc: freshrc
+    ~/.fresh/source/freshshell/fresh: fresh
     ~/.gitconfig: gitconfig
     ~/.giteditor.sh: giteditor.sh
     ~/.gitignore: gitignore
@@ -51,6 +53,8 @@
       path: zshrc
 
 - shell:
+    - [~/.fresh/source/freshshell/fresh/bin/fresh, Run fresh]
     - [chmod 0700 ~/.gnupg, Setting gnupg to 0700]
     - [command -v sheldon || curl --proto '=https' -fLsS https://rossmacarthur.github.io/install/crate.sh | bash -s -- --repo "rossmacarthur/sheldon" --to ~/bin, Installing Sheldon]
     - [test -d ~/.tmux/plugins/tpm || git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm/, Bootstrap tmux tpm]
+

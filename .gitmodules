@@ -2,3 +2,6 @@
 	path = dotbot
 	url = https://github.com/anishathalye/dotbot
 	ignore = dirty
+[submodule "fresh"]
+	path = fresh
+	url = https://github.com/freshshell/fresh
