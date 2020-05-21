@@ -33,7 +33,7 @@ update-asdf:
 	if [ -e $(HOME)/.asdf ]; then $(HOME)/.asdf/bin/asdf update; fi
 	if [ -e $(HOME)/.asdf/plugins ]; then $(HOME)/.asdf/bin/asdf plugin-update --all; fi
 
-update-vim: all
+update-vim:
 	vim +PlugClean +PlugUpdate +qall
 
 clean:
