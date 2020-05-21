@@ -85,7 +85,6 @@ Plug 'airblade/vim-rooter'
 Plug 'blueyed/vim-qf_resize'
 Plug 'chriskempson/base16-vim'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'cohama/lexima.vim'
 Plug 'direnv/direnv.vim'
 Plug 'edkolev/tmuxline.vim'
 Plug 'godlygeek/tabular'
@@ -109,7 +108,7 @@ Plug 'tpope/vim-rake'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
-Plug 'w0rp/ale'
+Plug 'dense-analysis/ale'
 
 " let g:ansible_name_highlight = 'b'
 " disable vim-json's quite hiding
@@ -186,6 +185,9 @@ let g:lightline = {
       \   'gitbranch': 'FugitiveHead'
       \ },
       \ }
+
+" markdown
+let g:vim_markdown_conceal = 0
 
 " nerdtree
 map <C-n> :NERDTreeToggle<CR>
