@@ -42,6 +42,7 @@
     ~/.tmux.conf:
       if: "which tmux"
       path: tmux.conf
+    ~/.tmux/plugins/tpm: tpm
     ~/.toprc: toprc
     ~/.tzvt_config:
       if: "which tmux"
@@ -63,8 +64,4 @@
     - [
         antibody bundle < ~/.dotfiles/zsh_plugins.txt > ~/.zsh_plugins.sh,
         Run antibody,
-      ]
-    - [
-        test -d ~/.tmux/plugins/tpm || git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm/,
-        Bootstrap tmux tpm,
       ]
