@@ -9,6 +9,8 @@ fpath=(~/.fresh/build/completion $fpath)
 
 autoload -Uz compinit && compinit
 
+zstyle :omz:plugins:ssh-agent agent-forwarding on
+
 source <(sheldon source)
 
 # completion
