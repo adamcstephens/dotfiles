@@ -1,3 +1,5 @@
+# shellcheck shell=bash
+
 # shellcheck disable=SC1090
 [[ -e "$HOME/.shell_local.sh" ]] && . "$HOME/.shell_local.sh"
 export PATH=~/bin:$PATH:/snap/bin
@@ -78,6 +80,7 @@ shell_os() {
     source "${shell_os_path}/Linux/${DIST}.sh"
   fi
 }
+# shellcheck disable=SC2086
 shell_os "$(basename $SHELL)"
 
 #

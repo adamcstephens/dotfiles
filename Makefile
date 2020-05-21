@@ -13,6 +13,9 @@ install-zsh:
 	if ! grep $(ZSH) /etc/shells; then echo "$(ZSH)" | sudo tee -a /etc/shells; fi
 	chsh -s $(ZSH)
 
+antibody:
+	antibody bundle < ~/.dotfiles/zsh_plugins.txt > ~/.zsh_plugins.sh
+
 aptfile:
 	sudo $(HOME)/bin/aptfile
 
@@ -61,4 +64,4 @@ zsh-prof-setup:
 	ex -sc '1i|zmodload zsh/zprof' -cx ~/.zshrc
 	echo "zprof" >> ~/.zshrc
 
-.PHONY: default aptfile-desktop aptfile brew-dump brew clean install-asdf install-brew install-zsh ssh-setup terminfo-italic tmuxline ubuntu-keyboard update-asdf update-vim update zsh-prof-setup zsh-prof
+.PHONY: default antibody aptfile-desktop aptfile brew-dump brew clean install-asdf install-brew install-zsh ssh-setup terminfo-italic tmuxline ubuntu-keyboard update-asdf update-vim update zsh-prof-setup zsh-prof

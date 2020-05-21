@@ -1,17 +1,21 @@
+# shellcheck shell=bash
+autoload -Uz compinit && compinit
+
+# shellcheck disable=SC1090
 [[ -e "$HOME/.shell_generic.sh" ]] && . "$HOME/.shell_generic.sh"
 
 if [[ -e $HOME/.asdf/asdf.sh ]]; then
-  source $HOME/.asdf/asdf.sh
-  fpath=(${ASDF_DIR}/completions $fpath)
+  # shellcheck disable=SC1090
+  source "$HOME/.asdf/asdf.sh"
+  fpath=("${ASDF_DIR}/completions" $fpath)
 fi
 
 fpath=(~/.fresh/build/completion $fpath)
 
-autoload -Uz compinit && compinit
-
 zstyle :omz:plugins:ssh-agent agent-forwarding on
 
-source <(sheldon source)
+# shellcheck disable=SC1090
+source ~/.zsh_plugins.sh
 
 # completion
 compinit
@@ -19,7 +23,7 @@ zmodload zsh/complist
 autoload -U +X bashcompinit && bashcompinit
 
 # override pure prompt and give it different true/false indicators
-PROMPT=' %(?.%F{magenta}->.%F{red}~>)%f '
+PROMPT=' %(?.%F{yellow}->.%F{red}~>)%f '
 
 # case-insensitive (all),partial-word and then substring completion
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' \
