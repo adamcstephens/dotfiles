@@ -45,6 +45,44 @@ elif command -v pwgen > /dev/null; then
   alias pwgen='pwgen -cn1 20 12'
 fi
 
+shell_os() {
+  dotfiles_shell_os_path="shell/os"
+  shell_os_path="$HOME/.dotfiles/${dotfiles_shell_os_path}"
+  shell="$1"
+  OS=$(uname)
+
+  if [[ "$OS" == 'Linux' ]]; then
+    if [[ -e /etc/arch-release ]]; then
+      DIST='arch'
+    elif [[ -e /etc/debian_version ]]; then
+      DIST='debian'
+    elif [[ -e /etc/fedora-release ]]; then
+      DIST='fedora'
+    elif [[ -e /etc/redhat-release ]]; then
+      DIST='redhat'
+    fi
+  else
+    DIST="$OS"
+  fi
+
+  if [[ -e "${shell_os_path}/${OS}.sh" ]]; then
+    source "${shell_os_path}/${OS}.sh"
+  fi
+
+  if [[ -e "${shell_os_path}/${OS}.${shell}" ]]; then
+    source "${shell_os_path}/${OS}.${shell}"
+  fi
+
+  if [[ "$OS" == 'Linux' ]] && [[ -e "${shell_os_path}/Linux/${DIST}.sh" ]]; then
+    source "${shell_os_path}/Linux/${DIST}.sh"
+  fi
+}
+shell_os "$(basename $SHELL)"
+
+#
+# app specific
+#
+
 # ansible
 alias ap='ansible-playbook '
 alias ac='ansible-container '
@@ -117,7 +155,7 @@ gt () {
 }
 
 # gpg
-if [[ -d ~/.gnupg/private-keys-v1.d && $(find ~/.gnupg/private-keys-v1.d/* | wc -l) -gt 0 ]]
+if [[ -d ~/.gnupg/private-keys-v1.d && $(find ~/.gnupg/private-keys-v1.d | wc -l) -gt 1 ]]
 then
   # shellcheck disable=SC2046
   pgrep gpg-agent &>/dev/null || eval $(gpg-agent --daemon)

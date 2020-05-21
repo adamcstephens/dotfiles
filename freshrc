@@ -4,75 +4,10 @@
 # install the fresh binary
 fresh freshshell/fresh bin/fresh --bin
 
-export fresh_shell_os_path="shell/os"
-export shell_os_path="$HOME/.dotfiles/${fresh_shell_os_path}"
-function shell_os() {
-  shell="$1"
-  if [[ -e "${shell_os_path}/${OS}.sh" ]]
-  then
-    fresh "${fresh_shell_os_path}/${OS}.sh"
-    echo "${shell} (os): ${OS}.sh"
-  fi
-    if [[ -e "${shell_os_path}/${OS}.${shell}" ]]
-  then
-    fresh "${fresh_shell_os_path}/${OS}.${shell}"
-    echo "${shell} (os): ${OS}.${shell}"
-  fi
-  if [[ "$OS" == 'Linux' ]] && [[ -e "${shell_os_path}/Linux/${DIST}.sh" ]]
-  then
-    fresh "${fresh_shell_os_path}/Linux/${DIST}.sh"
-    echo "${shell} (os): Linux/${DIST}.sh"
-  fi
-}
-
-#
-# zsh
-#
-
-if command -v zsh &> /dev/null
-then
-  fresh-options --file=~/.zshrc --marker
-    shell_os zsh
-  fresh-options
-
-  # clean compdump
-  rm -f ~/.zcompdump
-fi
-
-#
-# vim
-#
-if command -v vim &> /dev/null
-then
-  [ ! -d ~/.vim ] && mkdir -vp ~/.vim
-
-  if command -v nvim &> /dev/null
-  then
-    [ ! -d ~/.config ] && mkdir -vp ~/.config
-    [ ! -h ~/.config/nvim ] && ln -sfv ~/.vim ~/.config/nvim
-    [ ! -h ~/.config/nvim/init.vim ] && ln -sfv ~/.vimrc ~/.config/nvim/init.vim
-  fi
-
-  # enable vim-plug
-  fresh junegunn/vim-plug plug.vim --file=~/.vim/autoload/plug.vim
-fi
+fresh ClockworkNet/cmc cmc --bin
+fresh junegunn/vim-plug plug.vim --file=~/.vim/autoload/plug.vim
 
 if [ -e /etc/debian_version ]
 then
   fresh seatgeek/bash-aptfile bin/aptfile --bin
-fi
-
-if command -v tmux &> /dev/null
-then
-  [[ ! -d ~/.tmux/plugins/tpm ]] && git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm/
-fi
-
-if command -v kubectl &>/dev/null; then
-  fresh ahmetb/kubectx kubectx --bin
-  fresh ahmetb/kubectx kubens --bin
-fi
-
-if [[ -e $HOME/.ssh/config ]] && grep -q ControlMaster "$HOME/.ssh/config"
-then
-  fresh ClockworkNet/cmc cmc --bin
 fi

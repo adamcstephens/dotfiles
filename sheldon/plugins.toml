@@ -23,6 +23,3 @@ github = '1995parham/buffalo.zsh'
 
 [plugins.ssh-agent]
 remote = 'https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/ssh-agent/ssh-agent.plugin.zsh'
-
-[plugins.asdf]
-local = '/Users/astephens/.asdf/completions/'
