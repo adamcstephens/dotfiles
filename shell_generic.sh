@@ -1,5 +1,6 @@
 # shellcheck disable=SC1090
 [[ -e "$HOME/.shell_local.sh" ]] && . "$HOME/.shell_local.sh"
+export PATH=~/bin:$PATH:/snap/bin
 
 alias thisweek='date +%Y-%W'
 

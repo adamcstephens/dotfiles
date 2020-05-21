@@ -1,4 +1,4 @@
-version = "0.5.0"
+version = "0.5.1"
 home = "/home/adam"
 root = "/home/adam/.sheldon"
 config_file = "/home/adam/.sheldon/plugins.toml"

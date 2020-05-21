@@ -1,3 +1,5 @@
+[[ -e "$HOME/.shell_generic.sh" ]] && . "$HOME/.shell_generic.sh"
+
 if [[ -e $HOME/.asdf/asdf.sh ]]; then
   source $HOME/.asdf/asdf.sh
   fpath=(${ASDF_DIR}/completions $fpath)
@@ -116,5 +118,3 @@ fi
 if type brew &>/dev/null; then
   FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
 fi
-
-[[ -e "$HOME/.shell_generic.sh" ]] && . "$HOME/.shell_generic.sh"
