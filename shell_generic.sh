@@ -91,6 +91,9 @@ shell_os "$(basename $SHELL)"
 alias ap='ansible-playbook '
 alias ac='ansible-container '
 
+# bat, since debian named it batcat
+alias bat='batcat '
+
 # bundle
 alias be='bundle exec '
 
@@ -191,6 +194,12 @@ delkey() {
   [[ -n $delip ]] && ssh-keygen -f "$HOME/.ssh/known_hosts" -R "$delip"
   ssh-keygen -f "$HOME/.ssh/known_hosts" -R "$1"
 }
+
+# terraform
+alias tp='terraform plan '
+alias tp='terraform plan '
+alias ta='terraform apply '
+alias taa='terraform apply -auto-approve '
 
 # tree
 alias tree='tree -FC'
