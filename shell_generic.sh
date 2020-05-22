@@ -47,41 +47,80 @@ if command -v apg > /dev/null; then
 elif command -v pwgen > /dev/null; then
   alias pwgen='pwgen -cn1 20 12'
 fi
-
-shell_os() {
-  dotfiles_shell_os_path="shell/os"
-  shell_os_path="$HOME/.dotfiles/${dotfiles_shell_os_path}"
-  shell="$1"
-  OS=$(uname)
-
-  if [[ "$OS" == 'Linux' ]]; then
-    if [[ -e /etc/arch-release ]]; then
-      DIST='arch'
-    elif [[ -e /etc/debian_version ]]; then
-      DIST='debian'
-    elif [[ -e /etc/fedora-release ]]; then
-      DIST='fedora'
-    elif [[ -e /etc/redhat-release ]]; then
-      DIST='redhat'
-    fi
-  else
-    DIST="$OS"
-  fi
-
-  if [[ -e "${shell_os_path}/${OS}.sh" ]]; then
-    source "${shell_os_path}/${OS}.sh"
-  fi
-
-  if [[ -e "${shell_os_path}/${OS}.${shell}" ]]; then
-    source "${shell_os_path}/${OS}.${shell}"
-  fi
-
-  if [[ "$OS" == 'Linux' ]] && [[ -e "${shell_os_path}/Linux/${DIST}.sh" ]]; then
-    source "${shell_os_path}/Linux/${DIST}.sh"
-  fi
+newpassgen() {
+  for z in {1..10}
+  do
+    n=$(wc -l /usr/share/dict/words)
+    for x in {1..3}
+    do
+      y="$(cat -n /usr/share/dict/words | grep -w "$(jot -r 1 1 "$n")" | cut -f2)"
+      echo -n "$y "
+      if [[ "$x" == '2' ]]
+      then
+        y="$(od -vAn -N1 -tu < /dev/urandom | head -n 1 | awk '{print $1}')"
+        z="$(pwgen -0yA -r abcdefghijklmnopqrstuvwxyz 1 1)"
+        echo -n "$y$z "
+      fi
+    done
+    echo
+  done
 }
-# shellcheck disable=SC2086
-shell_os "$(basename $SHELL)"
+
+# package manager aliases
+case $(uname) in
+  "Darwin")
+    alias pki="brew install "
+    alias pks="brew search "
+    alias pksh="brew info "
+    alias pku="brew update && brew upgrade"
+    alias pkr="brew remove "
+    alias flushdns='sudo killall -HUP mDNSResponder'
+    ;;
+  "Linux")
+    if [[ -e /etc/arch-release ]]; then
+      alias pki="sudo pacman -S"
+      alias pkls="pacman -Ql"
+      alias pkp="pkgfile"
+      alias pks="pacman -Ss"
+      alias pksh="pacman -Si"
+      alias pku="sudo pacman -Syu"
+      alias pkr="sudo pacman -R"
+    elif [[ -e /etc/debian_version ]]; then
+      alias pki="sudo apt-get install"
+      alias pkls="dpkg -L"
+      alias pkp="apt-file search"
+      alias pks="apt-cache search"
+      alias pksh="apt-cache show"
+      alias pku="sudo apt-get update && sudo apt-get --autoremove dist-upgrade"
+      alias pkr="sudo apt-get remove"
+    elif [[ -e /etc/fedora-release ]]; then
+      alias pki="sudo dnf --color=auto install"
+      alias pkls="rpm -ql"
+      alias pkp="dnf --color=auto provides"
+      alias pks="dnf --color=auto search"
+      alias pksh="dnf --color=auto info"
+      alias pku="sudo dnf --color=auto update"
+      alias pkr="sudo dnf --color=auto remove"
+    elif [[ -e /etc/redhat-release ]]; then
+      alias pki="sudo yum --color=auto install"
+      alias pkls="rpm -ql"
+      alias pkp="yum --color=auto provides"
+      alias pks="yum --color=auto search"
+      alias pksh="yum --color=auto info"
+      alias pku="sudo yum --color=auto update"
+      alias pkr="sudo yum --color=auto remove"
+    else
+      echo "!! Unsupported Linux distribution"
+    fi
+    ;;
+  "OpenBSD")
+    alias pki="sudo pkg_add -i -v "
+    alias pku="sudo pkg_add -u -v "
+    alias pkls="pkg_info -L "
+    ;;
+  *)
+    echo "!! Unsupported OS: $(uname)"
+esac
 
 #
 # app specific
@@ -182,6 +221,9 @@ alias grep='grep --color=auto'
 if command -v gsed > /dev/null; then
   alias sed=gsed
 fi
+
+# iptables
+alias ivl='sudo iptables -vnL --line-numbers'
 
 # snap
 if command -v snap > /dev/null; then
