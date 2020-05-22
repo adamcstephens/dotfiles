@@ -87,6 +87,9 @@ shell_os "$(basename $SHELL)"
 # app specific
 #
 
+# ag
+alias ag="ag --no-break --no-heading --color-match '1;32' --color-path '0;34'"
+
 # ansible
 alias ap='ansible-playbook '
 alias ac='ansible-container '
@@ -254,4 +257,4 @@ vreload() {
 }
 
 # virtualbox
-alias vb=VBoxManagealias ag="ag --no-break --no-heading --color-match '1;32' --color-path '0;34'"
+alias vb=VBoxManage
