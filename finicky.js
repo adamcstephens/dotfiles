@@ -1,6 +1,21 @@
 module.exports = {
   defaultBrowser: ["Firefox", "Google Chrome", "Safari"],
+  options: {
+    urlShorteners: [
+      "applications.zoom.us",
+      "bit.ly",
+      "github.co",
+      "t.co"
+    ],
+  },
   rewrite: [
+    // { // debug stanza
+    //   match(all) {
+    //     finicky.log(JSON.stringify(all, null, 2));
+    //     return false;
+    //   },
+    //   url: ({ url }) => url,
+    // },
     {
       match: /^https?:\/\/([a-z]+\.)?bluejeans\.com\/[0-9]+/,
       url({ url }) {
