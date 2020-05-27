@@ -134,7 +134,9 @@ alias ap='ansible-playbook '
 alias ac='ansible-container '
 
 # bat, since debian named it batcat
-alias bat='batcat '
+if command -v batcat &> /dev/null; then
+  alias bat='batcat '
+fi
 
 # bundle
 alias be='bundle exec '
