@@ -1,0 +1,67 @@
+- defaults:
+    link:
+      relink: true
+      create: true
+
+- clean: ["~"]
+
+- create:
+    - ~/.tmux/plugins
+    - ~/.vim
+    - ~/notes
+    - ~/projects
+    - ~/tmp
+
+- link:
+    ~/.bash_profile: bash_profile
+    ~/.bashrc: bashrc
+    ~/.config/bat/config: bat
+    ~/.config/kitty/kitty.conf: kitty.conf
+    ~/.finicky.js:
+      if: "[ `uname` = Darwin ]"
+      path: finicky.js
+    ~/.freshrc: freshrc
+    ~/.fresh/source/freshshell/fresh: fresh
+    ~/.gitconfig: gitconfig
+    ~/.giteditor.sh: giteditor.sh
+    ~/.gitignore: gitignore
+    ~/.gnupg/gpg-agent.conf:
+      if: "which gpg-agent"
+      path: gpg-agent.conf
+    ~/.gnupg/gpg.conf:
+      if: "which gpg-agent"
+      path: gpg.conf
+    ~/.inputrc:
+      if: "[ ! -e /etc/inputrc ]"
+      path: inputrc
+    ~/.irbrc:
+      if: "which irb"
+      path: irbrc
+    ~/.screenrc: screenrc
+    ~/.shell_generic.sh: shell_generic.sh
+    ~/.tmux.conf:
+      if: "which tmux"
+      path: tmux.conf
+    ~/.tmux/plugins/tpm: tpm
+    ~/.toprc: toprc
+    ~/.tzvt_config:
+      if: "which tmux"
+      path: tzvt_config
+    ~/.vimrc: vimrc
+    ~/.xprofile:
+      if: "[ `uname` = Linux ] && which X"
+      path: xprofile
+    ~/.zshrc:
+      path: zshrc
+
+- shell:
+    - [~/.fresh/source/freshshell/fresh/bin/fresh, Run fresh]
+    - [chmod 0700 ~/.gnupg, Setting gnupg to 0700]
+    - [
+        test -e ~/bin/antibody || curl -sfL git.io/antibody | sh -s - -b ~/bin,
+        Install antibody,
+      ]
+    - [
+        antibody bundle < ~/.dotfiles/zsh_plugins.txt > ~/.zsh_plugins.sh,
+        Run antibody,
+      ]

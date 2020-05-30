@@ -1,10 +1,9 @@
 ZSH := $(shell which zsh)
 
-all:
-	fresh
+default:
 
 install-brew:
-	/usr/bin/ruby -e "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+	/bin/bash -c "`curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh`"
 
 install-asdf:
 	git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.7.6
@@ -13,6 +12,9 @@ install-asdf:
 install-zsh:
 	if ! grep $(ZSH) /etc/shells; then echo "$(ZSH)" | sudo tee -a /etc/shells; fi
 	chsh -s $(ZSH)
+
+antibody:
+	antibody bundle < ~/.dotfiles/zsh_plugins.txt > ~/.zsh_plugins.sh
 
 aptfile:
 	sudo $(HOME)/bin/aptfile
@@ -27,25 +29,20 @@ brew-dump:
 	brew bundle dump --force
 
 terminfo-italic:
-	PATH="/usr/local/opt/ncurses/bin:$(PATH)" tic -x -o $(HOME)/.terminfo terminfo/xterm-screen-256color.terminfo
+	PATH="/usr/local/opt/ncurses/bin:$(PATH)" tic -x -o $(HOME)/.terminfo xterm-screen-256color.terminfo
 	grep TERM=xterm-screen-256color ~/.shell_local.sh || echo "export TERM=xterm-screen-256color" >> ~/.shell_local.sh
 
 update-asdf:
 	if [ -e $(HOME)/.asdf ]; then $(HOME)/.asdf/bin/asdf update; fi
 	if [ -e $(HOME)/.asdf/plugins ]; then $(HOME)/.asdf/bin/asdf plugin-update --all; fi
 
-update-vim: all
+update-vim:
 	vim +PlugClean +PlugUpdate +qall
 
-update-fresh:
-	fresh update
-	fresh clean
-
 clean:
-	fresh clean
 	vim +PlugClean +qall
 
-update: update-asdf update-fresh update-vim tmuxline
+update: update-asdf update-vim tmuxline
 
 ssh-setup:
 	ssh-keygen -t ed25519
@@ -67,4 +64,4 @@ zsh-prof-setup:
 	ex -sc '1i|zmodload zsh/zprof' -cx ~/.zshrc
 	echo "zprof" >> ~/.zshrc
 
-.PHONY: all aptfile-desktop aptfile brew-dump brew clean install-asdf install-brew install-zsh ssh-setup terminfo-italic tmuxline ubuntu-keyboard update-asdf update-fresh update-vim update zsh-prof-setup zsh-prof
+.PHONY: default antibody aptfile-desktop aptfile brew-dump brew clean install-asdf install-brew install-zsh ssh-setup terminfo-italic tmuxline ubuntu-keyboard update-asdf update-vim update zsh-prof-setup zsh-prof

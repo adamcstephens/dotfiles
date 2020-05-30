@@ -1,0 +1,28 @@
+#   git config -f ~/.gitconfig.local user.email me@example.com
+[user]
+  name = Adam Stephens
+[color]
+  ui = true
+[core]
+  editor = ~/.giteditor.sh
+  pager = less -rFX
+  excludesfile = ~/.gitignore
+[push]
+  default = tracking
+[include]
+  path = .gitconfig.local
+[github]
+  user = adamcstephens
+[color "diff"]
+  meta = blue
+  frag = magenta
+  old = red
+  new = green
+[init]
+  templatedir = ~/.git_template
+[commit]
+  gpgsign = true
+[tag]
+  gpgsign = true
+[url "git@github.com:adamcstephens"]
+  insteadof = https://github.com/adamcstephens

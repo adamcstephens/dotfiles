@@ -1,5 +1,0 @@
-ignore:
-  - '**/*':
-    - 'Style/TrailingCommaInHashLiteral' # allow last element to have a trailing comma
-    - 'Style/TrailingCommaInArrayLiteral' # allow last element to have a trailing comma
-    - 'Style/FrozenStringLiteralComment' # don't force magic comment

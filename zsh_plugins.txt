@@ -1,0 +1,7 @@
+greymd/docker-zsh-completion
+mafredri/zsh-async
+MikeDacre/tmux-zsh-vim-titles
+robbyrussell/oh-my-zsh path:plugins/ssh-agent
+sindresorhus/pure
+zdharma/fast-syntax-highlighting
+zsh-users/zsh-autosuggestions

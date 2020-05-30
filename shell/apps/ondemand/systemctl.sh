@@ -1,6 +1,0 @@
-alias syd='sudo systemctl disable '
-alias sye='sudo systemctl enable '
-alias syi='sudo systemctl status '
-alias syo='sudo systemctl stop '
-alias syr='sudo systemctl restart '
-alias sys='sudo systemctl start '
