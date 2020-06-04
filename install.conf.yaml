@@ -37,6 +37,7 @@
     ~/.irbrc:
       if: "which irb"
       path: irbrc
+    ~/.rubocop.yml: rubocop.yml
     ~/.screenrc: screenrc
     ~/.shell_generic.sh: shell_generic.sh
     ~/.tmux.conf:
