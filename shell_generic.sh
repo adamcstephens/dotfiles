@@ -147,6 +147,7 @@ if command -v colordiff > /dev/null; then
 fi
 
 # direnv
+eval "$(direnv hook zsh)"
 alias da="direnv allow"
 
 # docker
