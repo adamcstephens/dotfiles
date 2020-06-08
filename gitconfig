@@ -18,8 +18,6 @@
   frag = magenta
   old = red
   new = green
-[init]
-  templatedir = ~/.git_template
 [commit]
   gpgsign = true
 [tag]
