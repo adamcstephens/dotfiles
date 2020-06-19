@@ -3,16 +3,6 @@
   name = Adam Stephens
 [color]
   ui = true
-[core]
-  editor = ~/.giteditor.sh
-  pager = less -rFX
-  excludesfile = ~/.gitignore
-[push]
-  default = tracking
-[include]
-  path = .gitconfig.local
-[github]
-  user = adamcstephens
 [color "diff"]
   meta = blue
   frag = magenta
@@ -20,6 +10,20 @@
   new = green
 [commit]
   gpgsign = true
+[core]
+  editor = ~/.giteditor.sh
+  pager = less -rFX
+  excludesfile = ~/.gitignore
+[github]
+  user = adamcstephens
+[include]
+  path = .gitconfig.local
+[init]
+  templateDir = ~/.config/git/template/
+[pull]
+	rebase = false
+[push]
+  default = tracking
 [tag]
   gpgsign = true
 [url "git@github.com:adamcstephens"]

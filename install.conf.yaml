@@ -16,6 +16,7 @@
     ~/.bash_profile: bash_profile
     ~/.bashrc: bashrc
     ~/.config/bat/config: bat
+    ~/.config/git/template: gittemplate
     ~/.config/kitty/kitty.conf: kitty.conf
     ~/.finicky.js:
       if: "[ `uname` = Darwin ]"
