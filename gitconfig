@@ -1,4 +1,6 @@
 #   git config -f ~/.gitconfig.local user.email me@example.com
+[alias]
+  subup = submodule update --remote --merge --recursive
 [user]
   name = Adam Stephens
 [color]
