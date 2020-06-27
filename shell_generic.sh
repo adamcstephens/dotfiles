@@ -45,7 +45,7 @@ elng() {
 if command -v apg > /dev/null; then
   alias pwgen='apg -n10 -m12 -x20 -M CLNS -t'
 elif command -v pwgen > /dev/null; then
-  alias pwgen='pwgen -cn1 20 12'
+  alias pwgen='pwgen -csn1 20 12'
 fi
 newpassgen() {
   for z in {1..10}
