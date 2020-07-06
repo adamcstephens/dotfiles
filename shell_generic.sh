@@ -127,7 +127,9 @@ esac
 #
 
 # ag
-alias ag="ag --no-break --no-heading --color-match '1;32' --color-path '0;34'"
+if command -v ag &> /dev/null; then
+  alias ag="ag --no-break --no-heading --color-match '1;32' --color-path '0;34'"
+fi
 
 # ansible
 alias ap='ansible-playbook '
@@ -136,6 +138,9 @@ alias ac='ansible-container '
 # bat, since debian named it batcat
 if command -v batcat &> /dev/null; then
   alias bat='batcat '
+  alias cat='batcat'
+else
+  alias cat='bat'
 fi
 
 # bundle
