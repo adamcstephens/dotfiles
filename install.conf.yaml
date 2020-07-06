@@ -18,6 +18,8 @@
     ~/.config/bat/config: bat
     ~/.config/git/template: gittemplate
     ~/.config/kitty/kitty.conf: kitty.conf
+    ~/.config/ripgrep/ripgreprc: ripgreprc
+    ~/.config/rubocop/config.yml: rubocop.yml
     ~/.finicky.js:
       if: "[ `uname` = Darwin ]"
       path: finicky.js
@@ -38,7 +40,6 @@
     ~/.irbrc:
       if: "which irb"
       path: irbrc
-    ~/.rubocop.yml: rubocop.yml
     ~/.screenrc: screenrc
     ~/.shell_generic.sh: shell_generic.sh
     ~/.tmux.conf:

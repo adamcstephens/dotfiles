@@ -233,6 +233,9 @@ fi
 # iptables
 alias ivl='sudo iptables -vnL --line-numbers'
 
+# ripgrep
+export RIPGREP_CONFIG_PATH=$HOME/.config/ripgrep/ripgreprc
+
 # snap
 if command -v snap > /dev/null; then
   export PATH=$PATH:/snap/bin

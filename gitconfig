@@ -1,8 +1,7 @@
 #   git config -f ~/.gitconfig.local user.email me@example.com
 [alias]
   subup = submodule update --remote --merge --recursive
-[user]
-  name = Adam Stephens
+  yolo = commit --amend --no-edit
 [color]
   ui = true
 [color "diff"]
@@ -30,3 +29,5 @@
   gpgsign = true
 [url "git@github.com:adamcstephens"]
   insteadof = https://github.com/adamcstephens
+[user]
+  name = Adam Stephens

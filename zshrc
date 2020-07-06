@@ -1,9 +1,6 @@
 # shellcheck shell=bash
 autoload -Uz compinit && compinit
 
-# shellcheck disable=SC1090
-[[ -e "$HOME/.shell_generic.sh" ]] && . "$HOME/.shell_generic.sh"
-
 if [[ -e $HOME/.asdf/asdf.sh ]]; then
   # shellcheck disable=SC1090
   source "$HOME/.asdf/asdf.sh"
@@ -118,9 +115,12 @@ bindkey "^X^E" edit-command-line
 # fzf
 if [[ -e ~/.fzf.zsh ]]
 then
-  export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
+  export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
   source ~/.fzf.zsh
 fi
 if type brew &>/dev/null; then
   FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
 fi
+
+# shellcheck disable=SC1090
+[[ -e "$HOME/.shell_generic.sh" ]] && . "$HOME/.shell_generic.sh"
