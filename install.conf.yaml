@@ -64,6 +64,6 @@
         Install antibody,
       ]
     - [
-        antibody bundle < ~/.dotfiles/zsh_plugins.txt > ~/.zsh_plugins.sh,
+        $HOME/bin/antibody bundle < ~/.dotfiles/zsh_plugins.txt > ~/.zsh_plugins.sh,
         Run antibody,
       ]

@@ -3,7 +3,9 @@
 ## Installation
 
 ``` sh
-rm -f ~/.bashrc ~/.bash_profile; ./install
+git clone https://github.com/adamcstephens/dotfiles ~/.dotfiles
+cd ~/.dotfiles
+./install
 ```
 
 ## Tools

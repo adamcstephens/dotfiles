@@ -212,7 +212,7 @@ then
   # shellcheck disable=SC2046
   pgrep gpg-agent &>/dev/null || eval $(gpg-agent --daemon)
 fi
-if [[ -e "/run/user" ]] ; then
+if [[ -d "/run/user/${USER}" ]] ; then
   [[ -e "$(gpgconf --list-dirs agent-socket)" ]] || gpgconf --create-socketdir
 fi
 
