@@ -25,21 +25,28 @@ fi
 alias esl="exec $SHELL -l"
 
 # notes
-alias cln="cat ~/notes/\`ls -1t ~/notes | head -n1\`"
-alias eln="vim ~/notes/\`ls -1t ~/notes | head -n1\`"
-alias nn="vim ~/notes/\`date +%Y-%m-%d_%H%M\`.md"
-alias lnn="ls -lt ~/notes"
-alias lln="ls -1 ~/notes/\`ls -1t ~/notes | head -n1\`"
-
-elng() {
-  filename=$(grep -H "$1" ~/notes/* | cut -f1 -d: | sort -u | head -n1)
-  if [ -e "$filename" ]
-  then
-    vim "$filename"
+edit_note() {
+  if [[ -n $1 ]]; then
+    filename="${HOME}/notes/${1}"
   else
-    echo "no note found"
+    date=$(date +%Y-%m-%d_%H%M)
+    filename="${HOME}/notes/${date}.md"
+    touch "$filename"
+    echo "# ${date} - ${PWD}" >> "$filename"
+  fi
+
+  if [[ "$TERM_PROGRAM" == "vscode" ]]
+  then
+    code "$filename"
+  else
+    vim "$filename"
   fi
 }
+alias cln="cat ~/notes/\`ls -1t ~/notes | head -n1\`"
+alias eln="edit_note \`ls -1t ~/notes | head -n1\`"
+alias nn="edit_note"
+alias lnn="ls -lt ~/notes"
+alias lln="ls -1 ~/notes/\`ls -1t ~/notes | head -n1\`"
 
 # passwords
 if command -v apg > /dev/null; then
