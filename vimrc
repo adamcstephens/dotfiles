@@ -95,7 +95,6 @@ Plug 'janko-m/vim-test'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all --no-update-rc'}
 Plug 'junegunn/fzf.vim'
 Plug 'ludovicchabant/vim-gutentags'
-Plug 'rking/ag.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'sheerun/vim-polyglot'
 Plug 'tmux-plugins/vim-tmux-focus-events'
@@ -113,10 +112,6 @@ Plug 'dense-analysis/ale'
 " let g:ansible_name_highlight = 'b'
 " disable vim-json's quite hiding
 " let g:vim_json_syntax_conceal = 0
-
-" ag.vim
-" Use ag over grep
-set grepprg=ag\ --nogroup\ --nocolor
 
 " ale
 " turn off background highlighting in favor of gutter only
