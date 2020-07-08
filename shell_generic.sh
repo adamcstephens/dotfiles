@@ -199,7 +199,7 @@ alias gd='git diff'
 alias gdt="git diff \$(git describe --tags \$(git rev-list --tags --max-count=1 2>/dev/null ))..HEAD"
 alias gl='git pull'
 glo() {
-  [ -z "$1" ] && git log --oneline -n 10 && return 0
+  [ -z "$1" ] && git log --graph --decorate --pretty=oneline --abbrev-commit --max-count=15 && return 0
   # shellcheck disable=SC2068
   git log --oneline $@
 }
