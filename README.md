@@ -18,4 +18,3 @@ apk add curl git python3 ripgrep vim zsh
 
 * [antibody](https://getantibody.github.io/)
 * [dotbot](https://github.com/anishathalye/dotbot)
-* [fresh](https://github.com/freshshell/fresh)

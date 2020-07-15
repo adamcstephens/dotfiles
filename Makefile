@@ -21,14 +21,6 @@ install-zsh:
 antibody:
 	antibody bundle < ~/.dotfiles/zsh_plugins.txt > ~/.zsh_plugins.sh
 
-.PHONY: aptfile
-aptfile:
-	sudo $(HOME)/bin/aptfile
-
-.PHONY: aptfile-desktop
-aptfile-desktop:
-	sudo $(HOME)/bin/aptfile $(HOME)/.dotfiles/aptfile.desktop
-
 .PHONY: brew
 brew:
 	brew bundle

@@ -7,8 +7,6 @@ if [[ -e $HOME/.asdf/asdf.sh ]]; then
   fpath=("${ASDF_DIR}/completions" $fpath)
 fi
 
-fpath=(~/.fresh/build/completion $fpath)
-
 zstyle :omz:plugins:ssh-agent agent-forwarding on
 
 # shellcheck disable=SC1090

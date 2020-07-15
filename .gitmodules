@@ -11,3 +11,6 @@
 [submodule "vim-plug"]
 	path = vim-plug
 	url = https://github.com/junegunn/vim-plug
+[submodule "cmc"]
+	path = cmc
+	url = https://github.com/ClockworkNet/cmc
