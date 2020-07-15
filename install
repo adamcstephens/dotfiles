@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
 set -e
 
@@ -6,14 +6,14 @@ CONFIG="install.conf.yaml"
 DOTBOT_DIR="dotbot"
 
 DOTBOT_BIN="bin/dotbot"
-BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+BASEDIR="${HOME}/.dotfiles"
 
 cd "${BASEDIR}"
 git -C "${DOTBOT_DIR}" submodule sync --quiet --recursive
 git submodule update --init --recursive
 
 # delete some stock files
-[[ -h $HOME/.bashrc ]] || rm -fv $HOME/.bashrc
-[[ -h $HOME/.bash_profile ]] || rm -fv $HOME/.bash_profile
+[ -h $HOME/.bashrc ] || rm -fv $HOME/.bashrc
+[ -h $HOME/.bash_profile ] || rm -fv $HOME/.bash_profile
 
 "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}" "${@}"

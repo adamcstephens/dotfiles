@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env sh
 
-if [[ "$TERM_PROGRAM" == "vscode" ]]
+if [ "$TERM_PROGRAM" == "vscode" ]
 then
   exec code --wait $@
 else

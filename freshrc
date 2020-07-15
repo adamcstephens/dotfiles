@@ -5,7 +5,6 @@
 fresh freshshell/fresh bin/fresh --bin
 
 fresh ClockworkNet/cmc cmc --bin
-fresh junegunn/vim-plug plug.vim --file=~/.vim/autoload/plug.vim
 
 if [ -e /etc/debian_version ]
 then

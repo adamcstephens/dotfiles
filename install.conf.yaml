@@ -8,6 +8,7 @@
 - create:
     - ~/.tmux/plugins
     - ~/.vim
+    - ~/bin
     - ~/notes
     - ~/projects
     - ~/tmp
@@ -51,6 +52,7 @@
       if: "which tmux"
       path: tzvt_config
     ~/.vimrc: vimrc
+    ~/.vim/autoload/plug.vim: vim-plug/plug.vim
     ~/.xprofile:
       if: "[ `uname` = Linux ] && which X"
       path: xprofile

@@ -116,6 +116,12 @@ case $(uname) in
       alias pksh="yum --color=auto info"
       alias pku="sudo yum --color=auto update"
       alias pkr="sudo yum --color=auto remove"
+    elif [[ -e /etc/alpine-release ]]; then
+      alias pki="sudo apk add "
+      alias pks="echo unsupported"
+      alias pksh="echo unsupported"
+      alias pku="sudo apk -U upgrade"
+      alias pkr="echo unsupported"
     else
       echo "!! Unsupported Linux distribution"
     fi
@@ -146,7 +152,7 @@ alias ac='ansible-container '
 if command -v batcat &> /dev/null; then
   alias bat='batcat '
   alias cat='batcat'
-else
+elif command -v bat &> /dev/null; then
   alias cat='bat'
 fi
 
@@ -159,8 +165,10 @@ if command -v colordiff > /dev/null; then
 fi
 
 # direnv
-eval "$(direnv hook zsh)"
-alias da="direnv allow"
+if command -v direnv &>/dev/null; then
+  eval "$(direnv hook zsh)"
+  alias da="direnv allow"
+fi
 
 # docker
 alias dc="docker-compose "
