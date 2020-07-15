@@ -6,7 +6,6 @@ set tabstop=2
 set softtabstop=2
 set shiftwidth=2
 set expandtab
-set shell=/bin/bash
 
 " modify delays
 set timeoutlen=1000
@@ -85,7 +84,6 @@ Plug 'airblade/vim-rooter'
 Plug 'blueyed/vim-qf_resize'
 Plug 'chriskempson/base16-vim'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'direnv/direnv.vim'
 Plug 'edkolev/tmuxline.vim'
 Plug 'godlygeek/tabular'
 Plug 'hashivim/vim-terraform'
@@ -94,7 +92,6 @@ Plug 'itchyny/lightline.vim'
 Plug 'janko-m/vim-test'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all --no-update-rc'}
 Plug 'junegunn/fzf.vim'
-Plug 'ludovicchabant/vim-gutentags'
 Plug 'scrooloose/nerdtree'
 Plug 'sheerun/vim-polyglot'
 Plug 'tmux-plugins/vim-tmux-focus-events'
@@ -147,9 +144,6 @@ let g:fzf_files_options =
 " gitgutter
 " reduce update time from 4s
 set updatetime=100
-
-" gutentags
-let g:gutentags_ctags_tagfile = '.tags'
 
 " LanguageClient
 " Plug 'autozimu/LanguageClient-neovim', {
