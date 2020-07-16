@@ -1,5 +1,5 @@
 module.exports = {
-  defaultBrowser: ["Microsoft Edge", "Safari", "Firefox", "Google Chrome"],
+  defaultBrowser: ["Microsoft Edge", "Safari", "Firefox"],
   options: {
     urlShorteners: [
       "applications.zoom.us",
