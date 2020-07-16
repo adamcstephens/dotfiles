@@ -2,7 +2,7 @@
 
 # shellcheck disable=SC1090
 [[ -e "$HOME/.shell_local.sh" ]] && . "$HOME/.shell_local.sh"
-export PATH=~/bin:$PATH:/snap/bin
+export PATH=~/bin:$PATH:/snap/bin:~/go/bin
 
 alias thisweek='date +%Y-%W'
 
@@ -77,6 +77,7 @@ newpassgen() {
 case $(uname) in
   "Darwin")
     alias pki="brew install "
+    alias pkls="brew list "
     alias pks="brew search "
     alias pksh="brew info "
     alias pku="brew update && brew upgrade"
@@ -213,7 +214,7 @@ glo() {
 }
 alias gm='git merge'
 alias gp='git push'
-alias gpob="git push -u origin \$(git rev-parse --abbrev-ref HEAD)"
+alias gpob="git push -u origin \$(git rev-parse --abbrev-ref HEAD):\$(git rev-parse --abbrev-ref HEAD)"
 alias gppr="gpob && hub pull-request"
 alias gpt='git push && git push --tags'
 alias grh='git reset HEAD'

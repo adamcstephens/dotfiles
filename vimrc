@@ -82,7 +82,6 @@ Plug 'Yggdroot/indentLine'
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
 Plug 'blueyed/vim-qf_resize'
-Plug 'chriskempson/base16-vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'edkolev/tmuxline.vim'
 Plug 'godlygeek/tabular'
@@ -92,6 +91,8 @@ Plug 'itchyny/lightline.vim'
 Plug 'janko-m/vim-test'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all --no-update-rc'}
 Plug 'junegunn/fzf.vim'
+Plug 'patstockwell/vim-monokai-tasty'
+Plug 'sainnhe/sonokai'
 Plug 'scrooloose/nerdtree'
 Plug 'sheerun/vim-polyglot'
 Plug 'tmux-plugins/vim-tmux-focus-events'
@@ -165,7 +166,7 @@ let g:tmuxline_theme = 'lightline_insert'
 set laststatus=2
 set noshowmode
 let g:lightline = {
-      \ 'colorscheme': 'wombat',
+      \ 'colorscheme': 'sonokai',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
@@ -225,7 +226,13 @@ filetype plugin indent on
 
 set termguicolors
 
-silent! colorscheme base16-material-darker
+" let g:vim_monokai_tasty_italic = 1
+" colorscheme vim-monokai-tasty
+let g:sonokai_style = 'andromeda'
+let g:sonokai_enable_italic = 1
+let g:sonokai_disable_italic_comment = 1
+
+colorscheme sonokai
 " set background=dark
 highlight Comment cterm=italic gui=italic
 
