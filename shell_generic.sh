@@ -119,10 +119,10 @@ case $(uname) in
       alias pkr="sudo yum --color=auto remove"
     elif [[ -e /etc/alpine-release ]]; then
       alias pki="sudo apk add "
-      alias pks="echo unsupported"
-      alias pksh="echo unsupported"
+      alias pks="apk search "
+      alias pksh="apk info "
       alias pku="sudo apk -U upgrade"
-      alias pkr="echo unsupported"
+      alias pkr="sudo apk del "
     else
       echo "!! Unsupported Linux distribution"
     fi

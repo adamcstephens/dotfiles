@@ -226,13 +226,11 @@ filetype plugin indent on
 
 set termguicolors
 
-" let g:vim_monokai_tasty_italic = 1
-" colorscheme vim-monokai-tasty
 let g:sonokai_style = 'andromeda'
 let g:sonokai_enable_italic = 1
 let g:sonokai_disable_italic_comment = 1
 
-colorscheme sonokai
+silent! colorscheme sonokai
 " set background=dark
 highlight Comment cterm=italic gui=italic
 
