@@ -3,6 +3,10 @@ ZSH := $(shell which zsh)
 .PHONY: default
 default:
 
+.PHONY: clean-fresh
+clean-fresh:
+	rm -rfv $(HOME)/.fresh $(HOME)/.freshrc $(HOME)/.dotfiles/fresh
+
 .PHONY: install-brew
 install-brew:
 	/bin/bash -c "`curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh`"
