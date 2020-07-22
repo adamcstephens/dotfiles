@@ -232,8 +232,8 @@ then
   # shellcheck disable=SC2046
   pgrep gpg-agent &>/dev/null || eval $(gpg-agent --daemon)
 fi
-if [[ -d "/run/user/${USER}" ]] ; then
-  [[ -e "$(gpgconf --list-dirs agent-socket)" ]] || gpgconf --create-socketdir
+if command -v gpgconf > /dev/null && [ -d "/run/user/${USER}" ] ; then
+  [ -e "$(gpgconf --list-dirs agent-socket)" ] || gpgconf --create-socketdir
 fi
 
 # grep
@@ -247,6 +247,11 @@ fi
 
 # iptables
 alias ivl='sudo iptables -vnL --line-numbers'
+
+# nix
+if [ -e "${HOME}/.nix-profile/etc/profile.d/nix.sh" ]; then
+  . "${HOME}/.nix-profile/etc/profile.d/nix.sh"
+fi
 
 # ripgrep
 export RIPGREP_CONFIG_PATH=$HOME/.config/ripgrep/ripgreprc
