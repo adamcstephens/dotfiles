@@ -75,7 +75,6 @@ call plug#begin('~/.vim/plugged')
 
 "Plug 'sirver/ultisnips'
 Plug 'ConradIrwin/vim-bracketed-paste'
-Plug 'MikeDacre/tmux-zsh-vim-titles'
 Plug 'Valloric/ListToggle'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'Yggdroot/indentLine'
@@ -83,7 +82,6 @@ Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
 Plug 'blueyed/vim-qf_resize'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'edkolev/tmuxline.vim'
 Plug 'godlygeek/tabular'
 Plug 'hashivim/vim-terraform'
 Plug 'honza/vim-snippets'
@@ -162,7 +160,6 @@ let g:indentLine_first_char = '▏'
 let g:indentLine_char = '▏'
 
 " lightline
-let g:tmuxline_theme = 'lightline_insert'
 set laststatus=2
 set noshowmode
 let g:lightline = {
