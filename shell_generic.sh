@@ -287,7 +287,7 @@ update_auth_sock() {
   socket_path="$(tmux show-environment | sed -n 's/^SSH_AUTH_SOCK=//p')"
   local socket_path
 
-  if ! [[ "$socket_path" ]]; then
+  if ! [ -e "$socket_path" ]; then
     echo 'no socket path' >&2
     return 1
   else
