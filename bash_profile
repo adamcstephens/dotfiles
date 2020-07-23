@@ -14,6 +14,9 @@ fi
 
 
 MY_COLORRESET="\[\033[0m\]"
+MY_DIM="\[\033[2m\]"
+
+MY_BLACK="\[\033[0;30m\]"
 MY_RED="\[\033[0;31m\]"
 MY_GREEN="\[\033[0;32m\]"
 MY_BROWN="\[\033[0;33m\]"
@@ -45,18 +48,18 @@ then
   USERSTRING="${MY_LTRED}\u"
 elif [[ $USER == 'adam' || $USER == 'adam.c.stephens' ]]
 then
-  USERSTRING="${MY_GREEN}"
+  USERSTRING=""
 else
-  USERSTRING="${MY_GREEN}\u"
+  USERSTRING="\u"
 fi
 
 if declare -f __git_ps1 > /dev/null 2>&1
 then
-  MYGITPROMPT="${MY_PURPLE}\$(__git_ps1)"
+  MYGITPROMPT="${MY_DIM}\$(__git_ps1)"
 else
   MYGITPROMPT=''
 fi
-export PS1="${USERSTRING}@\h ${MY_BROWN}\w${MYGITPROMPT} ${MY_CYAN}❯${MY_COLORRESET} "
+export PS1="\n\e[2m${USERSTRING}@\h${MY_COLORRESET} ${MY_BLUE}\w${MY_COLORRESET}${MYGITPROMPT}\n ${MY_BROWN}->${MY_COLORRESET} "
 if [[ $TERM =~ xterm.* ]]
 then
   export PROMPT_COMMAND='echo -ne "\033]0;@${HOSTNAME}\007"'
