@@ -33,6 +33,7 @@
     ~/.gnupg/gpg.conf:
       if: "which gpg-agent"
       path: gpg.conf
+    ~/.hyper.js: hyper.js
     ~/.inputrc:
       if: "[ ! -e /etc/inputrc ]"
       path: inputrc
