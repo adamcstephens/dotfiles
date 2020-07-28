@@ -1493,6 +1493,9 @@
   }
 
   function prompt_knife_block() {
+    if ! command -v knife > /dev/null || [ ! -e  ~/.chef/knife.rb ]; then
+      return 0
+    fi
     local block=$(readlink ~/.chef/knife.rb  | cut -d '/' -f 5 | cut -d '-' -f 2 | sed 's|.rb||')
     p10k segment -t $block
   }
