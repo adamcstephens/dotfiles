@@ -37,6 +37,8 @@
     vcs                     # git status
     direnv                  # direnv status (https://direnv.net/)
     asdf                    # asdf version manager (https://github.com/asdf-vm/asdf)
+    knife_block
+    gcloud                  # google cloud cli account and project (https://cloud.google.com/)
     # =========================[ Line #2 ]=========================
     newline                 # \n
     prompt_char             # prompt symbol
@@ -79,7 +81,6 @@
     # aws                     # aws profile (https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html)
     # aws_eb_env              # aws elastic beanstalk environment (https://aws.amazon.com/elasticbeanstalk/)
     # azure                   # azure account name (https://docs.microsoft.com/en-us/cli/azure)
-    # gcloud                  # google cloud cli account and project (https://cloud.google.com/)
     # google_app_cred         # google application credentials (https://cloud.google.com/docs/authentication/production)
     # nordvpn                 # nordvpn connection status, linux only (https://nordvpn.com/)
     # ranger                  # ranger shell (https://github.com/ranger/ranger)
@@ -357,7 +358,7 @@
     if (( $1 )); then
       # Styling for up-to-date Git status.
       local       meta='%f'     # default foreground
-      local      clean='%8F'   # green foreground
+      local      clean='%244F'   # green foreground
       local   modified='%178F'  # yellow foreground
       local  untracked='%243F'   # blue foreground
       local conflicted='%196F'  # red foreground
@@ -531,7 +532,7 @@
 
   #######################[ direnv: direnv status (https://direnv.net/) ]########################
   # Direnv color.
-  typeset -g POWERLEVEL9K_DIRENV_FOREGROUND=8
+  typeset -g POWERLEVEL9K_DIRENV_FOREGROUND=244
   # Custom icon.
   # typeset -g POWERLEVEL9K_DIRENV_VISUAL_IDENTIFIER_EXPANSION='⭐'
 
@@ -815,7 +816,7 @@
   # Context color when running with privileges.
   typeset -g POWERLEVEL9K_CONTEXT_ROOT_FOREGROUND=178
   # Context color in SSH without privileges.
-  typeset -g POWERLEVEL9K_CONTEXT_{REMOTE,REMOTE_SUDO}_FOREGROUND=8
+  typeset -g POWERLEVEL9K_CONTEXT_{REMOTE,REMOTE_SUDO}_FOREGROUND=244
   # Default context color (no privileges, no SSH).
   typeset -g POWERLEVEL9K_CONTEXT_FOREGROUND=180
 
@@ -1286,7 +1287,7 @@
   # Tip: Remove the next line to always show gcloud.
   typeset -g POWERLEVEL9K_GCLOUD_SHOW_ON_COMMAND='gcloud|gcs'
    # Google cloud color.
-  typeset -g POWERLEVEL9K_GCLOUD_FOREGROUND=32
+  typeset -g POWERLEVEL9K_GCLOUD_FOREGROUND=2
 
   # Google cloud format. Change the value of POWERLEVEL9K_GCLOUD_PARTIAL_CONTENT_EXPANSION and/or
   # POWERLEVEL9K_GCLOUD_COMPLETE_CONTENT_EXPANSION if the default is too verbose or not informative
@@ -1490,6 +1491,13 @@
     p10k segment -f 208 -i '*' -t 'hello, %n'
   }
 
+  function prompt_knife_block() {
+    local block=$(readlink ~/.chef/knife.rb  | cut -d '/' -f 5 | cut -d '-' -f 2 | sed 's|.rb||')
+    p10k segment -t $block
+  }
+  typeset -g POWERLEVEL9K_KNIFE_BLOCK_SHOW_ON_COMMAND='knife'
+  typeset -g POWERLEVEL9K_KNIFE_BLOCK_FOREGROUND=2
+
   # User-defined prompt segments may optionally provide an instant_prompt_* function. Its job
   # is to generate the prompt segment for display in instant prompt. See
   # https://github.com/romkatv/powerlevel10k/blob/master/README.md#instant-prompt.
@@ -1520,7 +1528,7 @@
   #   - always:   Trim down prompt when accepting a command line.
   #   - same-dir: Trim down prompt when accepting a command line unless this is the first command
   #               typed after changing current working directory.
-  typeset -g POWERLEVEL9K_TRANSIENT_PROMPT=always
+  typeset -g POWERLEVEL9K_TRANSIENT_PROMPT=same-dir
 
   # Instant prompt mode.
   #

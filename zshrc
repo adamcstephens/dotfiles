@@ -24,9 +24,6 @@ compinit
 zmodload zsh/complist
 autoload -U +X bashcompinit && bashcompinit
 
-# override pure prompt and give it different true/false indicators
-PROMPT=' %(?.%F{yellow}->.%F{red}~>)%f '
-
 # case-insensitive (all),partial-word and then substring completion
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' \
       'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
