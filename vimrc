@@ -228,10 +228,8 @@ let g:sonokai_enable_italic = 1
 let g:sonokai_disable_italic_comment = 1
 
 silent! colorscheme sonokai
-" set background=dark
 highlight Comment cterm=italic gui=italic
 
-" highlight active line
 set cursorline
 
 " catalina defaults to internal, but doesn't support it :(
