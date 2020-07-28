@@ -256,6 +256,11 @@ fi
 # ripgrep
 export RIPGREP_CONFIG_PATH=$HOME/.config/ripgrep/ripgreprc
 
+# rust
+if [ -d "${HOME}/.cargo/bin" ]; then
+  export PATH="${HOME}/.cargo/bin:$PATH"
+fi
+
 # snap
 if command -v snap > /dev/null; then
   export PATH=$PATH:/snap/bin

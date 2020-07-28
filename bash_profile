@@ -14,6 +14,7 @@ fi
 
 
 MY_COLORRESET="\[\033[0m\]"
+
 MY_BLACK="\[\033[0;30m\]"
 MY_RED="\[\033[0;31m\]"
 MY_GREEN="\[\033[0;32m\]"
