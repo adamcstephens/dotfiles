@@ -39,6 +39,7 @@
     ~/.irbrc:
       if: "which irb"
       path: irbrc
+    ~/.p10k.zsh: p10k.zsh
     ~/.screenrc: screenrc
     ~/.shell_generic.sh: shell_generic.sh
     ~/.tmux.conf:
