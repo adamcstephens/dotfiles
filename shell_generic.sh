@@ -255,6 +255,9 @@ fi
 
 # ripgrep
 export RIPGREP_CONFIG_PATH=$HOME/.config/ripgrep/ripgreprc
+if command -v rg >/dev/null; then
+  export FZF_DEFAULT_COMMAND='rg --files --hidden'
+fi
 
 # rust
 if [ -d "${HOME}/.cargo/bin" ]; then

@@ -122,7 +122,6 @@ fi
 # fzf
 if [[ -e ~/.fzf.zsh ]]
 then
-  export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
   source ~/.fzf.zsh
 fi
 if type brew &>/dev/null; then
