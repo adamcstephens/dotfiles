@@ -21,6 +21,7 @@
   path = .gitconfig.local
 [init]
   templateDir = ~/.config/git/template/
+	defaultBranch = main
 [pull]
 	rebase = false
 [push]
