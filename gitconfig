@@ -2,6 +2,7 @@
 [alias]
   subup = submodule update --remote --merge --recursive
   yolo = commit --amend --no-edit
+  ftag = push --tags --force
 [color]
   ui = true
 [color "diff"]

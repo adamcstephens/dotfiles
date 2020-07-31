@@ -339,3 +339,9 @@ vreload() {
 
 # virtualbox
 alias vb=VBoxManage
+
+# vscode
+if [[ "$TERM_PROGRAM" == "vscode" ]]
+then
+  alias vim=code
+fi
