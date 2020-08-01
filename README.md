@@ -8,12 +8,6 @@ cd ~/.dotfiles
 ./install
 ```
 
-## Alpine notes
-
-~~~sh
-apk add curl git python3 ripgrep vim zsh
-~~~
-
 ## Tools
 
 * [antibody](https://getantibody.github.io/)
