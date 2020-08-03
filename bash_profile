@@ -14,6 +14,7 @@ fi
 
 
 MY_COLORRESET="\[\033[0m\]"
+MY_DIM="\[\033[2m\]"
 
 MY_BLACK="\[\033[0;30m\]"
 MY_RED="\[\033[0;31m\]"
@@ -47,9 +48,9 @@ then
   USERSTRING="${MY_LTRED}\u"
 elif [[ $USER == 'adam' || $USER == 'adam.c.stephens' ]]
 then
-  USERSTRING="${MY_DKGRAY}"
+  USERSTRING="${MY_DIM}"
 else
-  USERSTRING="${MY_DKGRAY}\u"
+  USERSTRING="${MY_DIM}\u"
 fi
 
 if declare -f __git_ps1 > /dev/null 2>&1
