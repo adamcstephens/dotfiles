@@ -70,5 +70,12 @@ export GIT_PS1_SHOWUNTRACKEDFILES=1
 export GIT_PS1_SHOWUPSTREAM=1
 export GIT_PS1_SHOWCOLORHINTS=1
 
+#asdf
+if [[ -e $HOME/.asdf/asdf.sh ]]; then
+  # shellcheck disable=SC1090
+  source "$HOME/.asdf/asdf.sh"
+  source "$HOME/.asdf/completions/asdf.bash"
+fi
+
 # fzf
 [[ -e ~/.fzf.bash ]] && source ~/.fzf.bash

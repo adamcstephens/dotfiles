@@ -8,6 +8,7 @@ fi
 # shellcheck shell=bash
 autoload -Uz compinit && compinit
 
+#asdf - here because of load order
 if [[ -e $HOME/.asdf/asdf.sh ]]; then
   # shellcheck disable=SC1090
   source "$HOME/.asdf/asdf.sh"
