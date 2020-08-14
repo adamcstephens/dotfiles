@@ -79,3 +79,4 @@
         $HOME/bin/antibody bundle < ~/.dotfiles/zsh_plugins.txt > ~/.zsh_plugins.sh,
         Run antibody,
       ]
+    - [which gnome-shell &>/dev/null && mkdir -vp ~/.config/autostart && cp xcape.desktop ~/.config/autostart]

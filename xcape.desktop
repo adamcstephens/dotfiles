@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Exec=xcape -e 'Control_L=Escape'
+Hidden=false
+X-GNOME-Autostart-enabled=true
+Name=xcape
+Comment=super caps lock
