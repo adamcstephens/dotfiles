@@ -1,0 +1,9 @@
+[Unit]
+Description=evcape
+
+[Service]
+ExecStart=/home/adam/.dotfiles/evcape/evcape.py
+Restart=always
+
+[Install]
+WantedBy=default.target

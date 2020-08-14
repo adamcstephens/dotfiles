@@ -1,0 +1,4 @@
+- link:
+  ~/.config/kitty/mac.conf: kitty-mac.conf
+  ~/.finicky.js: finicky.js
+  ~/.gnupg/gpg-agent.conf: gpg-agent-mac.conf

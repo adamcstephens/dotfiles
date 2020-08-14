@@ -115,18 +115,21 @@ autoload -z edit-command-line
 zle -N edit-command-line
 bindkey "^X^E" edit-command-line
 
+# brew
+if type brew &>/dev/null; then
+  FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+fi
+
 # direnv
 if command -v direnv &>/dev/null; then
   eval "$(direnv hook zsh)"
 fi
 
 # fzf
+#~fzf/shell/completion.zsh
 if [[ -e ~/.fzf.zsh ]]
 then
   source ~/.fzf.zsh
-fi
-if type brew &>/dev/null; then
-  FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
 fi
 
 # shellcheck disable=SC1090

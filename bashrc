@@ -6,3 +6,5 @@
 [[ $- != *i* ]] && return
 
 [ -e $HOME/.bash_profile ] && . $HOME/.bash_profile
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

@@ -6,6 +6,12 @@
 zypper install htop kitty git fprintd telegram-desktop zsh ripgrep tmux xcape
 ~~~
 
+## gui
+
+~~~
+gsettings set org.gnome.desktop.interface enable-hot-corners false
+~~~
+
 ## fonts
 
 ~~~
@@ -15,10 +21,15 @@ git clone --depth 1 https://github.com/ryanoasis/nerd-fonts
 ## keyboard
 
 ~~~
-sudo zypper addrepo https://download.opensuse.org/repositories/home:/mnemitz/openSUSE_Tumbleweed/ xcape
 gsettings set org.gnome.desktop.input-sources xkb-options "['ctrl:nocaps']"
 gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 30
 gsettings set org.gnome.desktop.peripherals.keyboard delay 250
+
+sudo zypper install python3-evdev python3-six python3-udev
+sudo addgroup -r uinput
+sudo usermod -a -G input,uinput adam
+echo uinput | sudo /etc/modules-load.d/uinput.conf
+echo 'KERNEL=="uinput", GROUP="uinput", MODE:="0660"' | sudo tee /etc/udev/rules.d/99-uinput.rules
 ~~~
 
 ## sonos

@@ -19,26 +19,11 @@
     ~/.config/bat/config: bat
     ~/.config/git/template: gittemplate
     ~/.config/kitty/kitty.conf: kitty.conf
-    ~/.config/kitty/linux.conf:
-      if: "[ `uname` = Linux ]"
-      path: kitty-linux.conf
-    ~/.config/kitty/mac.conf:
-      if: "[ `uname` = Darwin ]"
-      path: kitty-mac.conf
     ~/.config/ripgrep/ripgreprc: ripgreprc
     ~/.config/rubocop/config.yml: rubocop.yml
-    ~/.finicky.js:
-      if: "[ `uname` = Darwin ]"
-      path: finicky.js
     ~/.gitconfig: gitconfig
     ~/.giteditor.sh: giteditor.sh
     ~/.gitignore: gitignore
-    ~/.gnupg/gpg-agent.conf:
-      if: "which gpg-agent && [ `uname` = Darwin ]"
-      path: gpg-agent-mac.conf
-    ~/.gnupg/gpg-agent.conf:
-      if: "which gpg-agent && [ `uname` = Linux ]"
-      path: gpg-agent-linux.conf
     ~/.gnupg/gpg.conf:
       if: "which gpg-agent"
       path: gpg.conf
@@ -62,9 +47,6 @@
       path: tzvt_config
     ~/.vimrc: vimrc
     ~/.vim/autoload/plug.vim: vim-plug/plug.vim
-    ~/.xprofile:
-      if: "[ `uname` = Linux ] && which X"
-      path: xprofile
     ~/.zshrc:
       path: zshrc
     ~/bin/cmc: cmc/cmc
@@ -79,4 +61,3 @@
         $HOME/bin/antibody bundle < ~/.dotfiles/zsh_plugins.txt > ~/.zsh_plugins.sh,
         Run antibody,
       ]
-    - [which gnome-shell &>/dev/null && mkdir -vp ~/.config/autostart && cp xcape.desktop ~/.config/autostart]
