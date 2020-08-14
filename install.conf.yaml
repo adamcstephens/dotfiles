@@ -19,6 +19,12 @@
     ~/.config/bat/config: bat
     ~/.config/git/template: gittemplate
     ~/.config/kitty/kitty.conf: kitty.conf
+    ~/.config/kitty/linux.conf:
+      if: "[ `uname` = Linux ]"
+      path: kitty-linux.conf
+    ~/.config/kitty/mac.conf:
+      if: "[ `uname` = Darwin ]"
+      path: kitty-mac.conf
     ~/.config/ripgrep/ripgreprc: ripgreprc
     ~/.config/rubocop/config.yml: rubocop.yml
     ~/.finicky.js:
