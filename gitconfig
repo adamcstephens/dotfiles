@@ -22,9 +22,9 @@
   path = .gitconfig.local
 [init]
   templateDir = ~/.config/git/template/
-	defaultBranch = main
+  defaultBranch = main
 [pull]
-	rebase = false
+  rebase = false
 [push]
   default = tracking
 [tag]
