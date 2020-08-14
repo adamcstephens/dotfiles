@@ -34,8 +34,11 @@
     ~/.giteditor.sh: giteditor.sh
     ~/.gitignore: gitignore
     ~/.gnupg/gpg-agent.conf:
-      if: "which gpg-agent"
-      path: gpg-agent.conf
+      if: "which gpg-agent && [ `uname` = Darwin ]"
+      path: gpg-agent-mac.conf
+    ~/.gnupg/gpg-agent.conf:
+      if: "which gpg-agent && [ `uname` = Linux ]"
+      path: gpg-agent-linux.conf
     ~/.gnupg/gpg.conf:
       if: "which gpg-agent"
       path: gpg.conf
