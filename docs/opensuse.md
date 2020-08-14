@@ -22,8 +22,8 @@ git clone --depth 1 https://github.com/ryanoasis/nerd-fonts
 
 ~~~
 gsettings set org.gnome.desktop.input-sources xkb-options "['ctrl:nocaps']"
-gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 30
-gsettings set org.gnome.desktop.peripherals.keyboard delay 250
+gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 20
+gsettings set org.gnome.desktop.peripherals.keyboard delay 200
 
 sudo zypper install python3-evdev python3-six python3-udev
 sudo addgroup -r uinput
@@ -42,7 +42,6 @@ zypper install noson-app
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 flathub io.github.janbar.noson
 ~~~
-
 
 ## slack
 
