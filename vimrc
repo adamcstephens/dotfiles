@@ -77,7 +77,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'Valloric/ListToggle'
 Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'Yggdroot/indentLine'
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
 Plug 'blueyed/vim-qf_resize'
