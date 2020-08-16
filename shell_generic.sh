@@ -125,9 +125,11 @@ case $(uname) in
       alias pkr="sudo apk del "
     elif grep -q opensuse /etc/os-release; then
       alias pki="sudo zypper install "
+      alias pkls="zypper packages "
+      alias pkp="zypper what-provides "
       alias pks="sudo zypper search "
       alias pksh="sudo zypper info "
-      alias pku="sudo zypper refresh && sudo zypper dist-upgrade"
+      alias pku="sudo zypper refresh && sudo zypper update"
       alias pkr="sudo zypper remove "
     else
       echo "!! Unsupported Linux distribution"

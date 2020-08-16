@@ -1,0 +1,1 @@
+adam    ALL = NOPASSWD: /usr/bin/zypper, /usr/bin/zypper *

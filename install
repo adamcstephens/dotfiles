@@ -22,3 +22,8 @@ git submodule update --init --recursive
 if [[ -e "$OSCONFIG" ]]; then
   "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${OSCONFIG}" "${@}"
 fi
+
+HOSTCONFIG="install.$(hostname -s).yaml"
+if [ -e $HOSTCONFIG ]; then
+  "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${HOSTCONFIG}" "${@}"
+fi
