@@ -2,7 +2,7 @@
 Description=evcape
 
 [Service]
-ExecStart=/home/adam/.dotfiles/evcape/evcape.py
+ExecStart=udevmon -c /home/adam/.dotfiles/caps2esc.yml
 Restart=always
 
 [Install]
