@@ -19,7 +19,7 @@ git submodule update --init --recursive
 
 "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}" "${@}"
 
-if [[ -e "$OSCONFIG" ]]; then
+if [ -e "$OSCONFIG" ]; then
   "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${OSCONFIG}" "${@}"
 fi
 
