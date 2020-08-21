@@ -129,7 +129,7 @@ case $(uname) in
       alias pkp="zypper what-provides "
       alias pks="sudo zypper search "
       alias pksh="sudo zypper info "
-      alias pku="sudo zypper refresh && sudo zypper update"
+      alias pku="sudo zypper refresh && sudo zypper dist-upgrade"
       alias pkr="sudo zypper remove "
     else
       echo "!! Unsupported Linux distribution"

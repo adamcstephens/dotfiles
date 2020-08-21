@@ -17,6 +17,9 @@ sudo zypper install \
 sudo chsh -s /bin/zsh adam
 sudo hostnamectl set-hostname think
 sudo cp sudoers.d/* /etc/sudoers.d/
+
+# disable e1000e since we don't have the adapter
+echo blacklist e1000e | sudo tee /etc/modprobe.d/99-myblacklist.conf
 ~~~
 
 ## developer
