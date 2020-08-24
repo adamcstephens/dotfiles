@@ -1,5 +1,5 @@
 [Unit]
-Description=evcape
+Description=caps2esc
 
 [Service]
 ExecStart=udevmon -c /home/adam/.dotfiles/caps2esc.yml

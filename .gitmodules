@@ -14,6 +14,3 @@
 [submodule "cmc"]
 	path = cmc
 	url = https://github.com/ClockworkNet/cmc
-[submodule "evcape"]
-	path = evcape
-	url = https://github.com/wbolster/evcape
