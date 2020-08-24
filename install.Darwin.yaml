@@ -1,4 +1,9 @@
+- defaults:
+    link:
+      relink: true
+      create: true
+
 - link:
-  ~/.config/kitty/mac.conf: kitty-mac.conf
-  ~/.finicky.js: finicky.js
-  ~/.gnupg/gpg-agent.conf: gpg-agent-mac.conf
+    ~/.config/kitty/mac.conf: kitty-mac.conf
+    ~/.finicky.js: finicky.js
+    ~/.gnupg/gpg-agent.conf: gpg-agent-mac.conf
