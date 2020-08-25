@@ -3,6 +3,11 @@ ZSH := $(shell which zsh)
 .PHONY: default
 default:
 
+.PHONY: backup-windows-terminal
+backup-windows-terminal:
+	cp /mnt/c/Users/adam/AppData/Local/Packages/Microsoft.WindowsTerminalPreview_*/LocalState/settings.json ./windowsterminal-settings.json
+	chmod 644 windowsterminal-settings.json
+
 .PHONY: clean-fresh
 clean-fresh:
 	rm -rfv $(HOME)/.fresh $(HOME)/.freshrc $(HOME)/.dotfiles/fresh
