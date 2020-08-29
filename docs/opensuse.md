@@ -8,6 +8,7 @@ sudo zypper install \
        fprintd-pam \
        git \
        htop \
+       httpie \
        kitty \
        ripgrep \
        ShellCheck \
@@ -42,7 +43,7 @@ sudo zypper install nerd-fonts-jetbrains-mono
 ~~~bash
 gsettings set org.gnome.desktop.interface enable-hot-corners false
 gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
-gsettings set org.gnome.desktop.interface monospace-font-name 'JetBrainsMono Nerd Font Mono 10'
+gsettings set org.gnome.desktop.interface monospace-font-name 'JetBrainsMono NF 12'
 gsettings set org.gnome.desktop.interface show-battery-percentage true
 gsettings set org.gnome.desktop.interface clock-show-date true
 gsettings set org.gnome.shell favorite-apps "['firefox.desktop', 'kitty.desktop']"
@@ -52,6 +53,7 @@ gsettings set org.gnome.settings-daemon.plugins.color night-light-schedule-autom
 gsettings set org.gnome.settings-daemon.plugins.color night-light-schedule-to 6.0
 gsettings set org.gnome.settings-daemon.plugins.color night-light-last-coordinates (91.0, 181.0)
 gsettings set org.gnome.settings-daemon.plugins.color night-light-schedule-from 22.0
+gsettings set org.gnome.desktop.interface text-scaling-factor 1.5
 ~~~
 
 ## keyboard
@@ -59,7 +61,7 @@ gsettings set org.gnome.settings-daemon.plugins.color night-light-schedule-from 
 ~~~bash
 gsettings set org.gnome.desktop.input-sources xkb-options "['ctrl:nocaps']"
 gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 20
-gsettings set org.gnome.desktop.peripherals.keyboard delay 210
+gsettings set org.gnome.desktop.peripherals.keyboard delay 230
 
 sudo zypper install python3-evdev python3-six python3-pyudev
 sudo groupadd --system uinput
@@ -74,11 +76,26 @@ echo 'KERNEL=="uinput", GROUP="uinput", MODE:="0660"' | sudo tee /etc/udev/rules
 sudo zypper in https://github.com/cli/cli/releases/download/v0.11.1/gh_0.11.1_linux_amd64.rpm
 ~~~
 
+## iphone
+
+~~~bash
+sudo zypper install libimobiledevice-tools
+idevicebackup2 backup --full backup/iphone
+~~~
+
 ## slack
 
 ~~~bash
 sudo zypper addrepo https://download.opensuse.org/repositories/server:messaging/openSUSE_Factory/server:messaging.repo
 sudo zypper install slack
+~~~
+
+## snap
+
+~~~bash
+sudo zypper addrepo --refresh https://download.opensuse.org/repositories/system:/snappy/openSUSE_Tumbleweed snappy
+sudo zypper install snapd
+sudo systemctl enable --now snapd snapd.apparmor
 ~~~
 
 ## sonos
@@ -90,6 +107,17 @@ zypper install noson-app
 # latest version, not fully functional
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 flathub io.github.janbar.noson
+~~~
+
+## terminal
+
+~~~bash
+profileid=$(gsettings get org.gnome.Terminal.ProfilesList default)
+gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:$profileid/ scrollback-unlimited true
+gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:$profileid/ cursor-blink-mode 'off'
+gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:$profileid/ foreground-color 'rgb(225,227,228)'
+gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:$profileid/ background-color 'rgb(43,45,58)'
+gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:$profileid/ palette "['rgb(24,26,28)', 'rgb(251,97,126)', 'rgb(158,208,108)', 'rgb(237,199,99)', 'rgb(109,202,232)', 'rgb(187,151,238)', 'rgb(248,152,96)', 'rgb(225,227,228)', 'rgb(126,130,148)', 'rgb(251,97,126)', 'rgb(158,208,108)', 'rgb(237,199,99)', 'rgb(109,202,232)', 'rgb(187,151,238)', 'rgb(248,152,96)', 'rgb(225,227,228)']"
 ~~~
 
 ## vscode
