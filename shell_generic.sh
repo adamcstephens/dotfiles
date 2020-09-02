@@ -26,13 +26,22 @@ alias esl="exec $SHELL -l"
 
 # notes
 edit_note() {
+  date=$(date +%Y-%m-%d_%H%M)
+
   if [[ -n $1 ]]; then
-    filename="${HOME}/notes/${1}"
+    notename="$1"
+    if echo "$1" | grep -q "$HOME/notes"; then
+      filename="$1"
+    else
+      filename="${HOME}/notes/${1}.md"
+    fi
   else
-    date=$(date +%Y-%m-%d_%H%M)
+    notename="$PWD"
     filename="${HOME}/notes/${date}.md"
-    touch "$filename"
-    echo "# ${date} - ${PWD}" >> "$filename"
+  fi
+
+  if [[ ! -f "$filename" ]]; then
+    echo "# ${date} - ${notename}" >> "$filename"
   fi
 
   if [[ "$TERM_PROGRAM" == "vscode" ]]
@@ -42,11 +51,17 @@ edit_note() {
     vim "$filename"
   fi
 }
+find_note() {
+  note="$(rg "$1" ~/notes | fzf)"
+  edit_note "${note/:*/}"
+}
 alias cln="cat ~/notes/\`ls -1t ~/notes | head -n1\`"
 alias eln="edit_note \`ls -1t ~/notes | head -n1\`"
+alias fn="find_note "
 alias nn="edit_note"
 alias lnn="ls -lt ~/notes"
 alias lln="ls -1 ~/notes/\`ls -1t ~/notes | head -n1\`"
+
 
 # passwords
 if command -v apg > /dev/null; then
