@@ -1,11 +1,17 @@
+- defaults:
+      link:
+          relink: true
+          create: true
+
 - create:
-    - ~/.config/systemd/user
+      - ~/.config/systemd/user
 
 - link:
-    ~/.config/kitty/linux.conf: kitty-linux.conf
-    ~/.config/systemd/user/caps2esc.service: caps2esc.service
-    ~/.xprofile: xprofile
+      ~/.config/kitty/linux.conf: kitty-linux.conf
+      ~/.config/sway/config: sway.conf
+      ~/.config/systemd/user/caps2esc.service: caps2esc.service
+      ~/.xprofile: xprofile
 
 - shell:
-    - [systemctl --user daemon-reload]
-    - [systemctl --user enable caps2esc && systemctl --user start caps2esc]
+      - [systemctl --user daemon-reload]
+      - [systemctl --user enable caps2esc && systemctl --user start caps2esc]
