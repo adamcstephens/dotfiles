@@ -4,6 +4,7 @@
 
 ~~~bash
 sudo zypper install \
+       direnv \
        fprintd \
        fprintd-pam \
        git \
@@ -21,6 +22,35 @@ sudo cp sudoers.d/* /etc/sudoers.d/
 
 # disable e1000e since we don't have the adapter
 echo blacklist e1000e | sudo tee /etc/modprobe.d/99-myblacklist.conf
+
+# switch to packman for non-free video codecs
+sudo zypper ar -cfp 90 http://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Tumbleweed/Essentials packman-essentials
+sudo zypper dup --from packman-essentials --allow-vendor-change
+~~~
+
+## kernel
+
+Set /etc/default/grub
+
+~~~bash
+# normal mode only
+GRUB_CMDLINE_LINUX_DEFAULT="splash=silent mitigations=auto quiet mem_sleep_default=deep"
+# normal and recovery
+GRUB_CMDLINE_LINUX=""
+~~~
+
+Run:
+
+~~~bash
+grub2-mkconfig -o /boot/grub2/grub.cfg
+~~~
+
+## bluetooth
+
+~~~bash
+sudo zypper addrepo https://download.opensuse.org/repositories/home:MasterPatricko/openSUSE_Tumbleweed/home:MasterPatricko.repo
+sudo zypper refresh
+sudo zypper install pulseaudio-modules-bt
 ~~~
 
 ## developer
