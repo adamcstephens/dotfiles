@@ -1,5 +1,5 @@
 module.exports = {
-  defaultBrowser: ["Microsoft Edge", "Safari", "Firefox"],
+  defaultBrowser: ["Google Chrome", "Safari", "Firefox"],
   options: {
     urlShorteners: [
       "applications.zoom.us",
@@ -19,7 +19,7 @@ module.exports = {
     {
       match: /^https?:\/\/([a-z]+\.)?bluejeans\.com\/[0-9]+/,
       url({ url }) {
-        var path = url.pathname.replace(/([0-9]+)/, "id/$1");
+        var path = url.pathname.replace(/([0-9]+)/, "id/$1")
         return {
           ...url,
           host: "meet",
@@ -31,7 +31,7 @@ module.exports = {
     {
       match: ({ url }) => (url.search.includes("utm_")),
       url({ url }) {
-        const search = url.search.split('&').filter(part => !part.startsWith("utm_"));
+        const search = url.search.split('&').filter(part => !part.startsWith("utm_"))
         return {
           ...url,
           search: search.join('&')
@@ -56,7 +56,7 @@ module.exports = {
       browser: "BlueJeans"
     },
     {
-      match:  /zoom.us\/j\//,
+      match: /zoom.us\/j\//,
       browser: "us.zoom.xos"
     },
     {
@@ -64,4 +64,4 @@ module.exports = {
       browser: "Spotify"
     }
   ]
-};
+}
