@@ -133,7 +133,9 @@ then
 fi
 
 # shellcheck disable=SC1090
-[[ -e "$HOME/.shell_generic.sh" ]] && . "$HOME/.shell_generic.sh"
+[[ -e "$HOME/.shell_generic.sh" ]] && source "$HOME/.shell_generic.sh"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+[[ -e /usr/share/google-cloud-sdk/completion.zsh.inc ]] && source /usr/share/google-cloud-sdk/completion.zsh.inc
