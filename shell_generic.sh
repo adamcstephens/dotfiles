@@ -140,7 +140,7 @@ case $(uname) in
       alias pkr="sudo apk del "
     elif grep -q opensuse /etc/os-release; then
       alias pki="sudo zypper install "
-      alias pkls="zypper packages "
+      alias pkls="rpm -ql"
       alias pkp="zypper what-provides "
       alias pks="sudo zypper search "
       alias pksh="sudo zypper info "
