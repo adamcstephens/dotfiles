@@ -4,6 +4,8 @@
 
 ~~~bash
 sudo zypper install \
+       bat \
+       colordiff \
        direnv \
        fprintd \
        fprintd-pam \
@@ -11,13 +13,18 @@ sudo zypper install \
        htop \
        httpie \
        kitty \
+       pwgen \
        ripgrep \
        ShellCheck \
        telegram-desktop \
-       tmux
+       tmux \
+       u2f-host \
+       yubikey-manager \
        zsh
 sudo chsh -s /bin/zsh adam
 sudo hostnamectl set-hostname think
+
+# TODO: move this to infra control
 sudo cp sudoers.d/* /etc/sudoers.d/
 
 # disable e1000e since we don't have the adapter
@@ -26,6 +33,13 @@ echo blacklist e1000e | sudo tee /etc/modprobe.d/99-myblacklist.conf
 # switch to packman for non-free video codecs
 sudo zypper ar -cfp 90 http://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Tumbleweed/Essentials packman-essentials
 sudo zypper dup --from packman-essentials --allow-vendor-change
+
+# grant native serial access
+sudo usermod -a -G dialout adam
+
+# set up trusted firewall zone
+nmcli show
+nmcli c modify $UUID connection.zone home
 ~~~
 
 ## kernel
@@ -71,6 +85,9 @@ sudo zypper install nerd-fonts-jetbrains-mono
 ## gui
 
 ~~~bash
+# deps for gnome system-monitor
+sudo zypper install gnome-shell-devel libgtop-devel libgtop-2_0-11
+
 gsettings set org.gnome.desktop.interface enable-hot-corners false
 gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
 gsettings set org.gnome.desktop.interface monospace-font-name 'JetBrainsMono NF 12'
@@ -111,6 +128,12 @@ sudo zypper in https://github.com/cli/cli/releases/download/v0.11.1/gh_0.11.1_li
 ~~~bash
 sudo zypper install libimobiledevice-tools
 idevicebackup2 backup --full backup/iphone
+~~~
+
+## joplin
+
+~~~bash
+wget -O - https://raw.githubusercontent.com/laurent22/joplin/master/Joplin_install_and_update.sh | bash
 ~~~
 
 ## slack
