@@ -3,6 +3,7 @@
 ## default
 
 ~~~bash
+sudo zypper addrepo --refresh https://download.opensuse.org/repositories/mozilla/openSUSE_Tumbleweed/mozilla.repo
 sudo zypper install \
        bat \
        colordiff \
@@ -25,6 +26,7 @@ sudo chsh -s /bin/zsh adam
 sudo hostnamectl set-hostname think
 
 # TODO: move this to infra control
+# suse also defaults targetpw and a wide open rule
 sudo cp sudoers.d/* /etc/sudoers.d/
 
 # disable e1000e since we don't have the adapter
@@ -40,6 +42,9 @@ sudo usermod -a -G dialout adam
 # set up trusted firewall zone
 nmcli show
 nmcli c modify $UUID connection.zone home
+
+# enable fingerprint auth
+sudo pam-config -a --fprintd
 ~~~
 
 ## kernel
@@ -57,6 +62,15 @@ Run:
 
 ~~~bash
 grub2-mkconfig -o /boot/grub2/grub.cfg
+~~~
+
+
+## android
+
+~~~bash
+zypper addrepo https://download.opensuse.org/repositories/hardware/openSUSE_Tumbleweed/hardware.repo
+zypper refresh
+zypper install android-tools
 ~~~
 
 ## bluetooth
@@ -126,7 +140,7 @@ sudo zypper in https://github.com/cli/cli/releases/download/v0.11.1/gh_0.11.1_li
 ## iphone
 
 ~~~bash
-sudo zypper install libimobiledevice-tools
+sudo zypper install imobiledevice-tools
 idevicebackup2 backup --full backup/iphone
 ~~~
 
