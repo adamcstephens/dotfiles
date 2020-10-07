@@ -25,6 +25,13 @@ fi
 alias esl="exec $SHELL -l"
 
 # notes
+cleanup_note() {
+  note="$1"
+
+  if [[ "$(head -zn 1 $note)" =~ ^#\ 20.*$ ]]; then
+    rm $note;
+  fi
+}
 edit_note() {
   date=$(date +%Y-%m-%d_%H%M)
 
@@ -50,10 +57,12 @@ edit_note() {
   else
     vim "$filename"
   fi
+
+  cleanup_note "$filename"
 }
 find_note() {
   note="$(rg "$1" ~/notes | fzf)"
-  edit_note "${note/:*/}"
+  [[ -n "$note" ]] && edit_note "${note/:*/}"
 }
 alias cln="cat ~/notes/\`ls -1t ~/notes | head -n1\`"
 alias eln="edit_note \`ls -1t ~/notes | head -n1\`"
