@@ -339,6 +339,7 @@ update_auth_sock() {
 }
 alias uas=update_auth_sock
 tm() {
+  cd ~
   tmux attach-session || tmux new-session
 }
 # copy this as an alternative future option
