@@ -20,6 +20,8 @@ zstyle :omz:plugins:ssh-agent agent-forwarding on
 # shellcheck disable=SC1090
 source ~/.zsh_plugins.sh
 
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
+
 # completion
 compinit
 zmodload zsh/complist
