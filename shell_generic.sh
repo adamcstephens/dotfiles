@@ -150,7 +150,7 @@ case $(uname) in
     elif grep -q opensuse /etc/os-release; then
       alias pki="sudo zypper install "
       alias pkls="rpm -ql"
-      alias pkp="zypper what-provides "
+      alias pkp="zypper search --provides --file-list "
       alias pks="sudo zypper search "
       alias pksh="sudo zypper info "
       alias pku="sudo zypper refresh && sudo zypper dist-upgrade"
