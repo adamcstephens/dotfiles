@@ -29,6 +29,10 @@ sudo hostnamectl set-hostname think
 # suse also defaults targetpw and a wide open rule
 sudo cp sudoers.d/* /etc/sudoers.d/
 
+# set polkit to wheel
+usermod -a -G wheel adam
+cat 50-default.rules | sed -e 's/unix-user:0/unix-group:wheel/' | sudo tee /etc/polkit-1/rules.d/40-wheeladmin.rules
+
 # disable e1000e since we don't have the adapter
 echo blacklist e1000e | sudo tee /etc/modprobe.d/99-myblacklist.conf
 
@@ -115,6 +119,10 @@ gsettings set org.gnome.settings-daemon.plugins.color night-light-schedule-to 6.
 gsettings set org.gnome.settings-daemon.plugins.color night-light-last-coordinates (91.0, 181.0)
 gsettings set org.gnome.settings-daemon.plugins.color night-light-schedule-from 22.0
 gsettings set org.gnome.desktop.interface text-scaling-factor 1.5
+
+# disable gnome updates
+gsettings set org.gnome.software download-updates false
+gsettings set org.gnome.software download-updates-notify false
 ~~~
 
 ## keyboard
@@ -193,4 +201,28 @@ gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profi
 sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
 sudo zypper addrepo --refresh --check https://packages.microsoft.com/yumrepos/vscode vscode
 sudo zypper in code
+~~~
+
+## arduino
+
+~~~bash
+zypper addrepo https://download.opensuse.org/repositories/CrossToolchain:avr/openSUSE_Tumbleweed/CrossToolchain:avr.repo
+zypper refresh
+zypper install Arduino
+~~~
+
+## i3
+
+here we go
+
+~~~bash
+zypper install i3 dunst picom xautolock
+~~~
+
+## power
+
+~~~bash
+sudo cp tlp.conf /etc/tlp.d/99-mine.conf
+sudo systemctl enable --now tlp
+sudo tlp-stat -b
 ~~~
