@@ -23,7 +23,6 @@
     ~/.config/ripgrep/ripgreprc: ripgreprc
     ~/.config/rubocop/config.yml: rubocop.yml
     ~/.gitconfig: gitconfig
-    ~/.giteditor.sh: giteditor.sh
     ~/.gitignore: gitignore
     ~/.gnupg/gpg.conf:
       if: "which gpg-agent"
@@ -51,6 +50,7 @@
     ~/.zshrc:
       path: zshrc
     ~/bin/cmc: cmc/cmc
+    ~/bin/editor: editor
 
 - shell:
     - [chmod 0700 ~/.gnupg, Setting gnupg to 0700]

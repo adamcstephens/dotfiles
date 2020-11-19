@@ -13,7 +13,7 @@
 [commit]
   gpgsign = true
 [core]
-  editor = ~/.giteditor.sh
+  editor = ~/bin/editor
   pager = less -rFX
   excludesfile = ~/.gitignore
 [github]
