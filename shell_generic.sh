@@ -25,6 +25,12 @@ fi
 # shellcheck disable=SC2139
 alias esl="exec $SHELL -l"
 
+# custom terminal overrides
+if [[ "$TERM" == "xterm-screen-256color" ]]; then
+  alias multipass="TERM=screen-256color multipass"
+  alias ssh="TERM=screen-256color ssh"
+fi
+
 # notes
 cleanup_note() {
   note="$1"
@@ -101,7 +107,8 @@ newpassgen() {
 # package manager aliases
 case $(uname) in
   "Darwin")
-    alias pki="brew install "
+    export HOMEBREW_NO_AUTO_UPDATE=1
+    alias pki="HOMEBREW_NO_AUTO_UPDATE=0 brew install "
     alias pkls="brew list "
     alias pks="brew search "
     alias pksh="brew info "
@@ -303,7 +310,6 @@ if command -v snap > /dev/null; then
 fi
 
 # ssh
-alias ssh="TERM=xterm-256color ssh"
 delkey() {
   [[ -z $1 ]] && echo "supply deletion key" && return 2
   delip="$(grep "${1}"\  "$HOME"/.ssh/known_hosts | awk '{print $1}' | cut -f 2 -d \, )"
