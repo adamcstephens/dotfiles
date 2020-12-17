@@ -10,8 +10,8 @@
       ~/.config/kitty/linux.conf: kitty-linux.conf
       ~/.config/sway/config: sway.conf
       ~/.config/systemd/user/caps2esc.service: caps2esc.service
-      ~/.xprofile: xprofile
+      ~/.config/kanshi/config: kanshi.conf
 
 - shell:
       - [systemctl --user daemon-reload]
-      - [systemctl --user enable caps2esc && systemctl --user start caps2esc]
+      - [systemctl --user enable --now caps2esc]
