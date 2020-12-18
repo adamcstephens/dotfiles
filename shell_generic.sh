@@ -6,7 +6,7 @@ export PATH=~/bin:$PATH:/snap/bin:~/go/bin
 
 alias thisweek='date +%Y-%W'
 
-export PAGER='less -rFX'
+export PAGER='less -rF'
 export EDITOR="$HOME/bin/editor"
 
 # ls
@@ -161,9 +161,11 @@ case $(uname) in
       alias pkls="rpm -ql"
       alias pkp="zypper search --provides --file-list "
       alias pks="sudo zypper search "
-      alias pksh="sudo zypper info "
+      alias pksh="zypper info "
       alias pku="sudo zypper refresh && sudo zypper dist-upgrade"
       alias pkr="sudo zypper remove "
+
+      export PATH="$PATH:/usr/sbin"
     else
       echo "!! Unsupported Linux distribution"
     fi
