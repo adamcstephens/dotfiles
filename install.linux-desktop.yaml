@@ -7,11 +7,17 @@
       - ~/.config/systemd/user
 
 - link:
+      ~/.config/kanshi/config: kanshi.conf
       ~/.config/kitty/linux.conf: kitty-linux.conf
       ~/.config/sway/config: sway.conf
       ~/.config/systemd/user/caps2esc.service: caps2esc.service
-      ~/.config/kanshi/config: kanshi.conf
+      ~/.config/systemd/user/kanshi.service: kanshi.service
+      ~/.config/systemd/user/ssh-agent.service: ssh-agent.service
+      ~/.config/waybar/config: waybar.conf
+      ~/.config/waybar/style.css: waybar.css
+      ~/.config/wofi/config: wofi.conf
+      ~/.config/wofi/style.css: wofi.css
 
 - shell:
       - [systemctl --user daemon-reload]
-      - [systemctl --user enable --now caps2esc]
+      - [systemctl --user enable --now caps2esc kanshi ssh-agent]

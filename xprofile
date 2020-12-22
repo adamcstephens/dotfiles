@@ -1,8 +1,0 @@
-#!/bin/sh
-
-xset r rate 200 25
-
-command -v redshift-gtk && redshift-gtk -l 40.0236346:-83.0237067 -t 6500:2100 &
-
-setxkbmap -layout us -option ctrl:nocaps
-command -v xcape >/dev/null && xcape -e 'Control_L=Escape' &
