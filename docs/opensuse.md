@@ -211,12 +211,18 @@ zypper refresh
 zypper install Arduino
 ~~~
 
-## i3
+## i3/sway
 
 here we go
 
 ~~~bash
 zypper install i3 dunst picom xautolock
+~~~
+
+### sound
+
+~~~bash
+systemctl --user enable --now pulseaudio.{service,socket}
 ~~~
 
 ## power
@@ -225,4 +231,28 @@ zypper install i3 dunst picom xautolock
 sudo cp tlp.conf /etc/tlp.d/99-mine.conf
 sudo systemctl enable --now tlp
 sudo tlp-stat -b
+
+# temporary full charge
+tlp fullcharge
+~~~
+
+## disable touchpad in x11
+
+~~~bash
+╰─❯ xinput --list
+⎡ Virtual core pointer                    	id=2	[master pointer  (3)]
+⎜   ↳ Virtual core XTEST pointer              	id=4	[slave  pointer  (2)]
+⎜   ↳ SYNA8004:00 06CB:CD8B Mouse             	id=9	[slave  pointer  (2)]
+⎜   ↳ SYNA8004:00 06CB:CD8B Touchpad          	id=10	[slave  pointer  (2)]
+⎜   ↳ TPPS/2 Elan TrackPoint                  	id=13	[slave  pointer  (2)]
+⎣ Virtual core keyboard                   	id=3	[master keyboard (2)]
+    ↳ Virtual core XTEST keyboard             	id=5	[slave  keyboard (3)]
+    ↳ Power Button                            	id=6	[slave  keyboard (3)]
+    ↳ Video Bus                               	id=7	[slave  keyboard (3)]
+    ↳ Sleep Button                            	id=8	[slave  keyboard (3)]
+    ↳ HDA Intel PCH Headset Jack              	id=11	[slave  keyboard (3)]
+    ↳ AT Translated Set 2 keyboard            	id=12	[slave  keyboard (3)]
+    ↳ ThinkPad Extra Buttons                  	id=14	[slave  keyboard (3)]
+    ↳ AT Translated Set 2 keyboard            	id=15	[slave  keyboard (3)]
+❯ xinput set-prop 10 'Device Enabled' 0
 ~~~
