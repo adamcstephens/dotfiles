@@ -11,6 +11,9 @@
       ~/.config/kitty/linux.conf: kitty-linux.conf
       ~/.config/sway/config: sway.conf
       ~/.config/systemd/user/caps2esc.service: caps2esc.service
+      ~/.config/systemd/user/gpg-agent.service: gpg-agent.service
+      ~/.config/systemd/user/gpg-agent.socket: gpg-agent.socket
+      ~/.config/systemd/user/gpg-agent-extra.socket: gpg-agent-extra.socket
       ~/.config/systemd/user/kanshi.service: kanshi.service
       ~/.config/systemd/user/ssh-agent.service: ssh-agent.service
       ~/.config/waybar/config: waybar.conf
@@ -20,4 +23,4 @@
 
 - shell:
       - [systemctl --user daemon-reload]
-      - [systemctl --user enable --now caps2esc kanshi ssh-agent]
+      - [systemctl --user enable --now caps2esc gpg-agent gpg-agent.socket gpg-agent-extra.socket kanshi ssh-agent]
