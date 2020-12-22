@@ -33,13 +33,7 @@ if [[ "$TERM" == "xterm-screen-256color" ]]; then
 fi
 
 # notes
-cleanup_note() {
-  note="$1"
 
-  if [[ "$(head -zn 1 $note)" =~ ^#\ 20.*$ ]]; then
-    rm $note;
-  fi
-}
 edit_note() {
   date=$(date +%Y-%m-%d_%H%M)
 
@@ -65,8 +59,6 @@ edit_note() {
   else
     vim "$filename"
   fi
-
-  cleanup_note "$filename"
 }
 find_note() {
   note="$(rg "$1" ~/notes | fzf)"
@@ -321,6 +313,10 @@ delkey() {
   ssh-keygen -f "$HOME/.ssh/known_hosts" -R "$1"
 }
 
+# systemd
+alias sy="sudo systemctl "
+alias syu="systemctl --user "
+
 # terraform
 alias tp='terraform plan '
 alias tp='terraform plan '
@@ -349,6 +345,7 @@ update_auth_sock() {
 }
 alias uas=update_auth_sock
 tm() {
+  # shellcheck disable=SC2164
   cd ~
   tmux attach-session || tmux new-session
 }
