@@ -10,6 +10,7 @@
       ~/.config/kanshi/config: kanshi.conf
       ~/.config/kitty/linux.conf: kitty-linux.conf
       ~/.config/sway/config: sway.conf
+      ~/.config/swaylock/config: swaylock.conf
       ~/.config/systemd/user/caps2esc.service: caps2esc.service
       ~/.config/systemd/user/gpg-agent.service: gpg-agent.service
       ~/.config/systemd/user/gpg-agent.socket: gpg-agent.socket
