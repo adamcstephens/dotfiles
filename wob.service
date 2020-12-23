@@ -1,0 +1,11 @@
+[Unit]
+Description=wob - A lightweight overlay volume/backlight/progress/anything bar for Wayland.
+Documentation=https://github.com/francma/wob
+PartOf=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=/bin/sh -c 'tail -f $XDG_RUNTIME_DIR/wob.fifo | wob'
+
+[Install]
+WantedBy=sway-session.target
