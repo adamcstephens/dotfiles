@@ -22,7 +22,7 @@
       ~/.config/systemd/user/waybar.service: waybar.service
       ~/.config/systemd/user/wob.service: wob.service
       ~/.config/systemd/user/wob.socket: wob.socket
-      ~/.config/waybar/config: waybar.conf
+      ~/.config/waybar/config: waybar.jsonc
       ~/.config/waybar/style.css: waybar.css
       ~/.config/wofi/config: wofi.conf
       ~/.config/wofi/style.css: wofi.css

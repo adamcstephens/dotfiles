@@ -1,45 +1,49 @@
 * {
-    border:        none;
-    border-radius: 0;
-    font-family:   "Source Sans Pro";
-    font-size:     15px;
-    box-shadow:    none;
-    text-shadow:   none;
-    transition-duration: 0s;
+  border: none;
+  border-radius: 0;
+  font-family: "Source Sans Pro";
+  font-size: 15px;
+  box-shadow: none;
+  text-shadow: none;
+  transition-duration: 0s;
 }
 
 window#waybar {
-    color: #9ed06c;
-    background-color: #2b2d37;
-    border-bottom: 2px solid #7e8294
+  color: #9ed06c;
+  background-color: #2b2d37;
+  border-bottom: 2px solid #7e8294;
 }
 
 window#waybar.solo {
-    color: #9ed06c;
+  color: #9ed06c;
 }
 
 #workspaces {
-    margin: 0 5px;
+  margin: 0 5px;
 }
 
 #workspaces button {
-    padding: 0 5px;
-    color: #9ed06c;
+  padding: 0 5px;
+  color: #9ed06c;
 }
 
 #workspaces button.focused {
-    color: #bb97ee;
+  color: #f89860;
 }
 
 #workspaces button.visible {
-    color: #bb97ee;
+  color: #f89860;
 }
 
 #workspaces button.urgent {
-    color: #fb617e;
+  color: #fb617e;
 }
 
-#mode,
+#mode {
+  color: #bb97ee;
+  margin: 0px 6px 0px 10px;
+}
+
 #battery,
 #cpu,
 #memory,
@@ -49,23 +53,22 @@ window#waybar.solo {
 #temperature,
 #custom-layout,
 #backlight {
-    margin: 0px 6px 0px 10px;
-/*    min-width: 30px;*/
+  margin: 0px 6px 0px 10px;
+  /*  min-width: 30px;*/
 }
 
 #clock {
-    margin: 0px 6px 0px 10px;
+  margin: 0px 6px 0px 10px;
 }
 
 #battery.warning {
-   color: #f0c362;
+  color: #f0c362;
 }
 
 #battery.critical {
-    color: #fb617e;
+  color: #fb617e;
 }
 
 #battery.charging {
-    color: #6dcae8;
+  color: #6dcae8;
 }
-

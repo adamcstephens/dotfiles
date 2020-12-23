@@ -1,35 +1,33 @@
 {
     "layer": "top", // Waybar at top layer
-    // "position": "bottom", // Waybar position (top|bottom|left|right)
-    "height": 30, // Waybar height (to be removed for auto height)
-    // "width": 1280, // Waybar width
-    // "gtk-layer-shell": "false",
-    // Choose the order of the modules
-    "modules-left": ["sway/workspaces", "sway/mode", "tray"],
-    "modules-center": ["sway/window"],
-    "modules-right": ["network", "cpu", "memory", "temperature", "backlight", "battery", "battery#bat2", "pulseaudio", "custom/layout", "clock#date", "clock"],
+    "position": "top", // Waybar position (top|bottom|left|right)
+    "height": 30,
+    "modules-left": [
+        "sway/workspaces",
+        "sway/mode",
+        "tray"
+    ],
+    "modules-center": [],
+    "modules-right": [
+        "network",
+        "cpu",
+        "memory",
+        "temperature",
+        "backlight",
+        "battery",
+        "battery#bat2",
+        "pulseaudio",
+        "clock#date",
+        "clock"
+    ],
     "sway/mode": {
         "format": " {}"
     },
+    // "sway/window": {
+    //     "max-length": 80,
+    //     "tooltip": false
+    // },
     "sway/workspaces": {
-        "all-outputs": false,
-        "disable-scroll": true,
-        "format": " {icon} ",
-        "format-icons": {
-            "urgent": "",
-            "focused": "",
-            "default": ""
-        }
-    },
-    "sway/window": {
-        "max-length": 80,
-        "tooltip": false
-    },
-    "custom/layout": {
-        "tooltip": false,
-        "exec": "swaymsg -mrt subscribe '[\"input\"]' | jq -r --unbuffered \"select(.change == \\\"xkb_layout\\\") | .input | select(.type == \\\"keyboard\\\") | .xkb_active_layout_name | .[0:2]\""
-    },
-     "sway/workspaces": {
         "disable-scroll": true,
         "all-outputs": true,
         "format": "{name}: {icon}",
@@ -60,7 +58,7 @@
         "tooltip": false
     },
     "clock#date": {
-        "format": "{:%a %d %b w:%V}",
+        "format": "{:%a %d %b}",
         "tooltip": false
     },
     "cpu": {
@@ -76,12 +74,18 @@
         "critical-threshold": 80,
         // "format-critical": "{temperatureC}°C {icon}",
         "format": "{temperatureC}°C {icon}",
-        "format-icons": ["", "", ""]
+        "format-icons": [
+            "",
+            ""
+        ]
     },
     "backlight": {
         // "device": "acpi_video1",
         "format": "{percent}% {icon}",
-        "format-icons": ["", ""]
+        "format-icons": [
+            "",
+            ""
+        ]
     },
     "battery": {
         "states": {
@@ -93,7 +97,13 @@
         "format-charging": "",
         "format-plugged": "",
         "format-alt": "{capacity}% {time}",
-        "format-icons": ["", "", "", "", ""]
+        "format-icons": [
+            "",
+            "",
+            "",
+            "",
+            ""
+        ]
     },
     "battery#bat2": {
         "bat": "BAT2"
@@ -118,7 +128,11 @@
             "phone": "",
             "portable": "",
             "car": "",
-            "default": ["", "", ""]
+            "default": [
+                "",
+                "",
+                ""
+            ]
         },
         "scroll-step": 10,
         "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
