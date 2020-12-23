@@ -2,7 +2,7 @@
 
 Installed with only base and apparmor
 
-```
+```bash
 zypper addrepo https://download.opensuse.org/repositories/filesystems/openSUSE_Leap_15.2/filesystems.repo
 
 zypper install \
@@ -42,7 +42,7 @@ zypper install \
 
 ### zwave/zigbee
 
-```
+```bash
 ❯ 'cat' /etc/udev/rules.d/99-usb-serial.rules
 SUBSYSTEM=="tty", ATTRS{interface}=="HubZ Z-Wave Com Port", SYMLINK+="zwave"
 SUBSYSTEM=="tty", ATTRS{interface}=="HubZ ZigBee Com Port", SYMLINK+="zigbee"
@@ -50,7 +50,7 @@ SUBSYSTEM=="tty", ATTRS{interface}=="HubZ ZigBee Com Port", SYMLINK+="zigbee"
 
 ### zfs
 
-```
+```bash
 zypper addrepo https://download.opensuse.org/repositories/filesystems/openSUSE_Leap_15.2/filesystems.repo
 zypper install zfs
 
@@ -62,7 +62,7 @@ options zfs zfs_arc_max=12884901888
 
 ### network
 
-```
+```bash
 zypper in openvswitch
 ovs-vsctl add-br ovsbr0
 ovs-vsctl add-bond ovsbr0 bond0 eth1 eth2 eth3 eth4 lacp=active
