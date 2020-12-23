@@ -16,6 +16,9 @@
       ~/.config/systemd/user/gpg-agent-extra.socket: gpg-agent-extra.socket
       ~/.config/systemd/user/kanshi.service: kanshi.service
       ~/.config/systemd/user/ssh-agent.service: ssh-agent.service
+      ~/.config/systemd/user/sway-session.target: sway-session.target
+      ~/.config/systemd/user/swayidle.service: swayidle.service
+      ~/.config/systemd/user/waybar.service: waybar.service
       ~/.config/waybar/config: waybar.conf
       ~/.config/waybar/style.css: waybar.css
       ~/.config/wofi/config: wofi.conf
@@ -23,4 +26,4 @@
 
 - shell:
       - [systemctl --user daemon-reload]
-      - [systemctl --user enable --now caps2esc gpg-agent gpg-agent.socket gpg-agent-extra.socket kanshi ssh-agent]
+      - [systemctl --user enable --now caps2esc gpg-agent gpg-agent.socket gpg-agent-extra.socket kanshi pulseaudio pulseaudio.socket ssh-agent waybar swayidle]

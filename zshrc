@@ -126,7 +126,6 @@ if command -v direnv &>/dev/null; then
 fi
 
 # fzf
-#~fzf/shell/completion.zsh
 if [[ -e ~/.fzf.zsh ]]
 then
   source ~/.fzf.zsh
@@ -139,3 +138,9 @@ fi
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 [[ -e /usr/share/google-cloud-sdk/completion.zsh.inc ]] && source /usr/share/google-cloud-sdk/completion.zsh.inc
+
+# manually import the ssh plugin if no agent
+if [[ -z "$SSH_AUTH_SOCK" ]]; then
+  source <(antibody init)
+  antibody bundle robbyrussell/oh-my-zsh path:plugins/ssh-agent
+fi

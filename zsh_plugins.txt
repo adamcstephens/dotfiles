@@ -1,6 +1,6 @@
 romkatv/powerlevel10k
 greymd/docker-zsh-completion
 MikeDacre/tmux-zsh-vim-titles
-robbyrussell/oh-my-zsh path:plugins/ssh-agent
+sainnhe/sonokai path:zsh/.zsh-theme-sonokai-andromeda
 zsh-users/zsh-autosuggestions
 zsh-users/zsh-syntax-highlighting

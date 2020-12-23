@@ -305,6 +305,9 @@ if command -v snap > /dev/null; then
 fi
 
 # ssh
+if [[ -S "${XDG_RUNTIME_DIR}/ssh-agent.socket" ]]; then
+  export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/ssh-agent.socket"
+fi
 delkey() {
   [[ -z $1 ]] && echo "supply deletion key" && return 2
   delip="$(grep "${1}"\  "$HOME"/.ssh/known_hosts | awk '{print $1}' | cut -f 2 -d \, )"

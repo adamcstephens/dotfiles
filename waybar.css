@@ -9,13 +9,13 @@
 }
 
 window#waybar {
-    color: rgba(53, 185, 171, 1);
-    background-color: rgba(23, 63, 79, 0.4);
-    border-bottom: 2px solid rgba(53, 185, 171, 0.4);
+    color: #9ed06c;
+    background-color: #2b2d37;
+    border-bottom: 2px solid #7e8294
 }
 
 window#waybar.solo {
-    color: rgba(53, 185, 171, 1);
+    color: #9ed06c;
 }
 
 #workspaces {
@@ -24,28 +24,28 @@ window#waybar.solo {
 
 #workspaces button {
     padding: 0 5px;
-    color: rgba(53, 185, 171, 1);
+    color: #9ed06c;
 }
 
 #workspaces button.focused {
-    color: rgba(115, 186, 37, 1);
+    color: #bb97ee;
 }
 
 #workspaces button.visible {
-    color: rgba(115, 186, 37, 1);
+    color: #bb97ee;
 }
 
 #workspaces button.urgent {
-    color: rgba(33, 164, 223, 1);
+    color: #fb617e;
 }
 
-#mode, 
-#battery, 
-#cpu, 
-#memory, 
-#network, 
-#pulseaudio, 
-#idle_inhibitor, 
+#mode,
+#battery,
+#cpu,
+#memory,
+#network,
+#pulseaudio,
+#idle_inhibitor,
 #temperature,
 #custom-layout,
 #backlight {
@@ -58,14 +58,14 @@ window#waybar.solo {
 }
 
 #battery.warning {
-   color: rgba(255, 210, 4, 1);
+   color: #f0c362;
 }
 
 #battery.critical {
-    color: rgba(238, 46, 36, 1);
+    color: #fb617e;
 }
 
 #battery.charging {
-    color: rgba(217, 216, 216, 1);
+    color: #6dcae8;
 }
 
