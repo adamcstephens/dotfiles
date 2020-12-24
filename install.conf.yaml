@@ -9,6 +9,7 @@
     - ~/.tmux/plugins
     - ~/.vim
     - ~/bin
+    - ~/git
     - ~/notes
     - ~/projects
     - ~/tmp
