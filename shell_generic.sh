@@ -269,7 +269,7 @@ gt () {
 }
 
 # gpg
-if command -v gpgconf > /dev/null && [ -d "/run/user/${USER}" ] ; then
+if command -v gpgconf > /dev/null && [[ -n "$XDG_RUNTIME_DIR" && -d "$XDG_RUNTIME_DIR" ]]; then
   [ -e "$(gpgconf --list-dirs agent-socket)" ] || gpgconf --create-socketdir
 fi
 
