@@ -7,7 +7,7 @@ PartOf=graphical-session.target
 Type=simple
 ExecStart=/usr/bin/swayidle -w \
             timeout 120 'swaylock --daemonize' \
-            timeout 240 'systemctl suspend' \
+            timeout 240 '(playerctl status | grep Playing) || systemctl suspend' \
             timeout 600 'swaymsg "output * dpms off"' \
                 resume 'swaymsg "output * dpms on"' \
             before-sleep 'swaylock --daemonize'

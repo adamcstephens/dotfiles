@@ -108,6 +108,13 @@ case $(uname) in
     alias pku="brew update && brew upgrade"
     alias pkr="brew remove "
     alias flushdns='sudo killall -HUP mDNSResponder'
+
+    source <(antibody init)
+    zstyle :omz:plugins:ssh-agent agent-forwarding on
+    antibody bundle robbyrussell/oh-my-zsh path:plugins/ssh-agent
+
+    # shellcheck disable=SC2046
+    pgrep gpg-agent &>/dev/null || eval $(gpg-agent --daemon)
     ;;
   "Linux")
     if [[ -e /etc/arch-release ]]; then
@@ -155,7 +162,7 @@ case $(uname) in
       alias pks="sudo zypper search "
       alias pksh="zypper info "
       alias pku="sudo zypper refresh && sudo zypper dist-upgrade"
-      alias pkr="sudo zypper remove "
+      alias pkr="sudo zypper remove --clean-deps "
 
       export PATH="$PATH:/usr/sbin"
     else
@@ -262,11 +269,6 @@ gt () {
 }
 
 # gpg
-if [[ -d ~/.gnupg/private-keys-v1.d && $(find ~/.gnupg/private-keys-v1.d | wc -l) -gt 1 ]]
-then
-  # shellcheck disable=SC2046
-  pgrep gpg-agent &>/dev/null || eval $(gpg-agent --daemon)
-fi
 if command -v gpgconf > /dev/null && [ -d "/run/user/${USER}" ] ; then
   [ -e "$(gpgconf --list-dirs agent-socket)" ] || gpgconf --create-socketdir
 fi

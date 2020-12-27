@@ -26,6 +26,7 @@
     ~/.config/waybar/style.css: waybar.css
     ~/.config/wofi/config: wofi.conf
     ~/.config/wofi/style.css: wofi.css
+    ~/bin/screenshot: bin/screenshot
 
 - shell:
     - [systemctl --user daemon-reload]

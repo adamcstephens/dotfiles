@@ -81,7 +81,7 @@ zypper install android-tools
 ```bash
 sudo zypper addrepo https://download.opensuse.org/repositories/home:MasterPatricko/openSUSE_Tumbleweed/home:MasterPatricko.repo
 sudo zypper refresh
-sudo zypper install pulseaudio-modules-bt
+sudo zypper install pulseaudio-modules-bt libfdk-aac2
 ```
 
 ## developer

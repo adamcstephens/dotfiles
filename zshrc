@@ -15,8 +15,6 @@ if [[ -e $HOME/.asdf/asdf.sh ]]; then
   fpath=("${ASDF_DIR}/completions" $fpath)
 fi
 
-zstyle :omz:plugins:ssh-agent agent-forwarding on
-
 # shellcheck disable=SC1090
 source ~/.zsh_plugins.sh
 
@@ -26,36 +24,25 @@ zmodload zsh/complist
 autoload -U +X bashcompinit && bashcompinit
 
 # case-insensitive (all),partial-word and then substring completion
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' \
-      'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
 # promptinit
 autoload -U promptinit && promptinit
 
-# prompt colors
-setopt prompt_subst
-autoload -U colors && colors # Enable colors in prompt
-
 # history
-export HISTSIZE=100000
+export HISTSIZE=10000000
 export HISTFILE="$HOME/.zsh_history"
 export SAVEHIST=$HISTSIZE
 setopt hist_ignore_all_dups
-# ignore commands started with a space
-setopt HIST_IGNORE_SPACE
+setopt hist_ignore_space
+setopt inc_append_history
+# setopt share_history
+alias history='fc -l 1 | less'
 
 # 10ms for key sequences
 export KEYTIMEOUT=1
 
-#
 setopt extendedglob
-
-# override history
-alias history='fc -l 1 | less'
-# save history immediately
-setopt inc_append_history
-# share history between terminals
-# setopt share_history
 
 # allow comments in interactive shell
 setopt interactivecomments
@@ -138,9 +125,3 @@ fi
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 [[ -e /usr/share/google-cloud-sdk/completion.zsh.inc ]] && source /usr/share/google-cloud-sdk/completion.zsh.inc
-
-# manually import the ssh plugin if no agent
-if [[ -z "$SSH_AUTH_SOCK" ]]; then
-  source <(antibody init)
-  antibody bundle robbyrussell/oh-my-zsh path:plugins/ssh-agent
-fi
