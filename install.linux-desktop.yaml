@@ -21,7 +21,6 @@
     ~/.config/systemd/user/swayidle.service: swayidle.service
     ~/.config/systemd/user/waybar.service: waybar.service
     ~/.config/systemd/user/wob.service: wob.service
-    ~/.config/systemd/user/wob.socket: wob.socket
     ~/.config/waybar/config: waybar.jsonc
     ~/.config/waybar/style.css: waybar.css
     ~/.config/wofi/config: wofi.conf
@@ -31,5 +30,5 @@
 - shell:
     - [systemctl --user daemon-reload]
     - [
-        systemctl --user enable --now caps2esc gpg-agent gpg-agent.socket gpg-agent-extra.socket kanshi pulseaudio pulseaudio.socket ssh-agent swayidle waybar wob wob.socket,
+        systemctl --user enable --now caps2esc gpg-agent gpg-agent.socket gpg-agent-extra.socket kanshi pulseaudio pulseaudio.socket ssh-agent swayidle waybar wob,
       ]
