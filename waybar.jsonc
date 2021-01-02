@@ -4,11 +4,12 @@
     "height": 30,
     "modules-left": [
         "sway/workspaces",
-        "sway/mode",
-        "tray"
+        "sway/mode"
     ],
     "modules-center": [],
     "modules-right": [
+        "tray",
+        "idle_inhibitor",
         "network",
         "cpu",
         "memory",
