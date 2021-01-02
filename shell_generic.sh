@@ -319,6 +319,8 @@ delkey() {
 }
 
 # systemd
+alias jc="sudo journalctl "
+alias jcu="journalctl --user "
 alias sy="sudo systemctl "
 alias syu="systemctl --user "
 
