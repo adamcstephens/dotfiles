@@ -11,6 +11,8 @@ set expandtab
 set timeoutlen=1000
 set ttimeoutlen=0
 
+set encoding=utf-8
+
 " set a leader!
 :let mapleader="f"
 
