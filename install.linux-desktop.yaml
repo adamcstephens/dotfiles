@@ -26,6 +26,7 @@
     ~/.config/wofi/config: wofi.conf
     ~/.config/wofi/style.css: wofi.css
     ~/bin/screenshot: bin/screenshot
+    ~/bin/suspend: bin/suspend
 
 - shell:
     - [systemctl --user daemon-reload]

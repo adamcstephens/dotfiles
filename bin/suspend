@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+AC=$(cat /sys/class/power_supply/AC/online)
+if [[ $AC -eq 1 ]]; then
+  echo "Plugged in, not suspending"
+  exit 0
+fi
+if playerctl status | grep -q Playing; then
+  echo "Playing audio, not suspending"
+  exit 0
+fi
+
+exec systemctl suspend
