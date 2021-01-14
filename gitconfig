@@ -1,7 +1,7 @@
 #   git config -f ~/.gitconfig.local user.email me@example.com
 [alias]
   ftag = push --tags --force
-  home = "!git checkout $(git symbolic-ref --short HEAD); git pull"
+  home = "!git checkout $(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'); git pull"
   subup = submodule update --remote --merge --recursive
   yolo = commit --amend --no-edit
 [color]
