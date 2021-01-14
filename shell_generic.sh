@@ -27,9 +27,10 @@ alias esl="exec $SHELL -l"
 
 # custom terminal overrides
 if [[ "$TERM" == "xterm-screen-256color" ]]; then
-  alias lxc="TERM=screen-256color lxc"
-  alias multipass="TERM=screen-256color multipass"
-  alias ssh="TERM=screen-256color ssh"
+  NEWTERM="xterm-256color"
+  alias lxc="TERM=$NEWTERM lxc"
+  alias multipass="TERM=$NEWTERM multipass"
+  alias ssh="TERM=$NEWTERM ssh"
 fi
 
 # notes

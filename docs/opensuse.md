@@ -20,6 +20,7 @@ sudo zypper install \
        telegram-desktop \
        tmux \
        u2f-host \
+       thunderbolt-user-space \
        yubikey-manager \
        zsh
 sudo chsh -s /bin/zsh adam
