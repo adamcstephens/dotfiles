@@ -193,6 +193,9 @@ let g:qf_resize_min_height = 10
 let g:qf_resize_max_height = 30
 let g:qf_resize_max_ratio = 0.30
 
+" rooter
+let g:rooter_silent_chdir = 1
+
 " snippets
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 " let g:UltiSnipsExpandTrigger="<tab>"
