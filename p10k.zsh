@@ -329,6 +329,7 @@
   # Custom prefix.
   # typeset -g POWERLEVEL9K_DIR_PREFIX='%fin '
   typeset -g POWERLEVEL9K_DIR_DEFAULT_VISUAL_IDENTIFIER_EXPANSION=' '
+  typeset -g POWERLEVEL9K_DIR_DEFAULT_NOT_WRITABLE_FOREGROUND=1
   typeset -g POWERLEVEL9K_DIR_HOME_VISUAL_IDENTIFIER_EXPANSION=''
 
   #####################################[ vcs: git status ]######################################
