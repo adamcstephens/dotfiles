@@ -237,6 +237,7 @@ dsh() {
 }
 
 # git
+[[ -e ~/.dotfiles/git-subrepo/.rc ]] && source ~/.dotfiles/git-subrepo/.rc
 alias ga='git add'
 gac() {
   [ -z "$1" ] && echo "needs argument" && return 20
