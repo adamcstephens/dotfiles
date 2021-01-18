@@ -6,7 +6,7 @@ export PATH=~/bin:$PATH:/snap/bin:~/go/bin
 
 alias thisweek='date +%Y-%W'
 
-export PAGER='less -rF'
+export PAGER='less -r'
 export EDITOR="$HOME/bin/editor"
 
 # ls
