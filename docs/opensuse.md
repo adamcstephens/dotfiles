@@ -10,6 +10,7 @@ sudo zypper install \
        direnv \
        fprintd \
        fprintd-pam \
+       gammastep \
        git \
        htop \
        httpie \

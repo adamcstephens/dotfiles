@@ -323,6 +323,9 @@ delkey() {
   ssh-keygen -f "$HOME/.ssh/known_hosts" -R "$1"
 }
 
+# sway
+alias sw="sway &> ~/.config/sway/sway.log"
+
 # systemd
 alias jc="sudo journalctl "
 alias jcu="journalctl --user "
