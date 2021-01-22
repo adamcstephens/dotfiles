@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/git-commands/git-subrepo#readme
+;
+[subrepo]
+	remote = https://github.com/junegunn/vim-plug
+	branch = master
+	commit = 8b45742540f92ba902c97ad1d3d8862ba3305438
+	parent = 8f6ae46515c00713eec4b1c525e53ab42a7e71c8
+	method = merge
+	cmdver = 0.4.3
