@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/git-commands/git-subrepo#readme
+;
+[subrepo]
+	remote = https://github.com/TimidRobot/cmc
+	branch = main
+	commit = 0a0344d0ac5aec43a32f47aae2a42acf79ff6381
+	parent = 944281d26d24da2a5f51a055383ad4001e7d2870
+	method = merge
+	cmdver = 0.4.3
