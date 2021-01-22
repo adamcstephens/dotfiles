@@ -62,10 +62,8 @@ set list
 set listchars=tab:»·,trail:·,nbsp:·
 
 " enable mouse
-set mouse=a
-
-" yank into the system clipboard
-set clipboard=unnamed
+set mouse=
+set ttymouse=
 
 " set colorcolumn
 set colorcolumn=100

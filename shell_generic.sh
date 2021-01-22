@@ -116,6 +116,9 @@ case $(uname) in
 
     # shellcheck disable=SC2046
     pgrep gpg-agent &>/dev/null || eval $(gpg-agent --daemon)
+    if [[ -n $SSH_AUTH_SOCK ]] && ! ssh-add -l &>/dev/null; then
+      ssh-add -K
+    fi
     ;;
   "Linux")
     if [[ -e /etc/arch-release ]]; then

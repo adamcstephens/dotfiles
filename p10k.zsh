@@ -39,6 +39,7 @@
     direnv                  # direnv status (https://direnv.net/)
     asdf                    # asdf version manager (https://github.com/asdf-vm/asdf)
     knife_block
+    terraform_ws
     gcloud                  # google cloud cli account and project (https://cloud.google.com/)
     virtualenv              # python virtual environment (https://docs.python.org/3/library/venv.html)
     # =========================[ Line #2 ]=========================
@@ -1505,7 +1506,7 @@
   }
 
   function prompt_knife_block() {
-    if ! command -v knife > /dev/null || [ ! -e  ~/.chef/knife.rb ]; then
+    if [ ! -e  ~/.chef/knife.rb ] || ! command -v knife > /dev/null ; then
       return 0
     fi
     local block=$(readlink ~/.chef/knife.rb  | cut -d '/' -f 5 | cut -d '-' -f 2 | sed 's|.rb||')
@@ -1513,6 +1514,16 @@
   }
   typeset -g POWERLEVEL9K_KNIFE_BLOCK_SHOW_ON_COMMAND='knife'
   typeset -g POWERLEVEL9K_KNIFE_BLOCK_FOREGROUND=2
+
+  function prompt_terraform_ws() {
+    if [[ ! -e .terraform ]] || ! command -v terraform > /dev/null ; then
+      return 0
+    fi
+    local block=$(terraform workspace show)
+    p10k segment -t $block
+  }
+  typeset -g POWERLEVEL9K_TERRAFORM_WS_SHOW_ON_COMMAND='terraform|tp|ta'
+  typeset -g POWERLEVEL9K_TERRAFORM_WS_FOREGROUND=5
 
   # User-defined prompt segments may optionally provide an instant_prompt_* function. Its job
   # is to generate the prompt segment for display in instant prompt. See
