@@ -10,8 +10,6 @@ DOTBOT_BIN="bin/dotbot"
 BASEDIR="${HOME}/.dotfiles"
 
 cd "${BASEDIR}"
-git -C "${DOTBOT_DIR}" submodule sync --quiet --recursive
-git submodule update --init --recursive
 
 # delete some stock files
 [ -h $HOME/.bashrc ] || rm -fv $HOME/.bashrc
