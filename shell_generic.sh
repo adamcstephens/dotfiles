@@ -168,7 +168,7 @@ case $(uname) in
       alias pku="sudo zypper refresh && sudo zypper dist-upgrade"
       alias pkr="sudo zypper remove --clean-deps "
 
-      export PATH="$PATH:/usr/sbin"
+      export PATH="$PATH:/usr/sbin:/sbin"
     else
       echo "!! Unsupported Linux distribution"
     fi
