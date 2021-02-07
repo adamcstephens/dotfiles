@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+export MOZ_ENABLE_WAYLAND=1
+
+sway &> ~/.config/sway/sway.log

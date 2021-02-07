@@ -5,7 +5,7 @@ PartOf=graphical-session.target
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/gammastep -t 6500:3000
+ExecStart=/usr/bin/gammastep -l 39.9612:-82.9988 -t 6500:3000
 Restart=always
 
 [Install]

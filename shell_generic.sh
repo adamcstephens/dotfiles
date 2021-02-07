@@ -137,6 +137,8 @@ case $(uname) in
       alias pksh="apt-cache show"
       alias pku="sudo apt-get update && sudo apt-get --autoremove dist-upgrade"
       alias pkr="sudo apt-get remove"
+
+      export PATH="$PATH:/usr/sbin:/sbin"
     elif [[ -e /etc/fedora-release ]]; then
       alias pki="sudo dnf --color=auto install"
       alias pkls="rpm -ql"
@@ -328,9 +330,6 @@ delkey() {
   [[ -n $delip ]] && ssh-keygen -f "$HOME/.ssh/known_hosts" -R "$delip"
   ssh-keygen -f "$HOME/.ssh/known_hosts" -R "$1"
 }
-
-# sway
-alias sw="sway &> ~/.config/sway/sway.log"
 
 # systemd
 alias jc="sudo journalctl "

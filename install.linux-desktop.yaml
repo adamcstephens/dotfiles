@@ -11,7 +11,6 @@
     ~/.config/kitty/linux.conf: kitty-linux.conf
     ~/.config/sway/config: sway.conf
     ~/.config/swaylock/config: swaylock.conf
-    ~/.config/systemd/user/caps2esc.service: caps2esc.service
     ~/.config/systemd/user/gammastep.service: gammastep.service
     ~/.config/systemd/user/gpg-agent.service: gpg-agent.service
     ~/.config/systemd/user/gpg-agent.socket: gpg-agent.socket
@@ -26,12 +25,14 @@
     ~/.config/waybar/style.css: waybar.css
     ~/.config/wofi/config: wofi.conf
     ~/.config/wofi/style.css: wofi.css
+    ~/.local/share/fonts: fonts
     ~/bin/screenshot: bin/screenshot
     ~/bin/suspend: bin/suspend
+    ~/bin/sw: bin/sw
 
 - shell:
     - [systemctl --user daemon-reload]
     - [
-        systemctl --user enable --now caps2esc gammastep gpg-agent gpg-agent.socket gpg-agent-extra.socket kanshi ssh-agent swayidle waybar wob,
+        systemctl --user enable --now gammastep gpg-agent gpg-agent.socket gpg-agent-extra.socket kanshi ssh-agent swayidle waybar wob
       ]
     - [systemctl --user disable --now pulseaudio pulseaudio.socket]
