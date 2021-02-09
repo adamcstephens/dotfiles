@@ -16,10 +16,8 @@
         "temperature",
         "backlight",
         "battery",
-        "battery#bat2",
         "pulseaudio",
-        "clock#date",
-        "clock"
+        "custom/clock"
     ],
     "sway/mode": {
         "format": " {}"
@@ -54,13 +52,9 @@
         // "icon-size": 21,
         "spacing": 10
     },
-    "clock": {
-        "format": "{:%H:%M}",
-        "tooltip": false
-    },
-    "clock#date": {
-        "format": "{:%a %d %b}",
-        "tooltip": false
+    "custom/clock": {
+        "exec": "date +'%H:%M'",
+        "interval": 5
     },
     "cpu": {
         "format": "{usage}% ",
@@ -105,9 +99,6 @@
             "",
             ""
         ]
-    },
-    "battery#bat2": {
-        "bat": "BAT2"
     },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface

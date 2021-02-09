@@ -289,6 +289,9 @@ if command -v gsed > /dev/null; then
   alias sed=gsed
 fi
 
+# iproute2
+alias ip='ip --color'
+
 # iptables
 alias ivl='sudo iptables -vnL --line-numbers'
 
