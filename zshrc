@@ -8,12 +8,16 @@ fi
 # shellcheck shell=bash
 autoload -Uz compinit && compinit
 
-#asdf - here because of load order
+# completion before compinit
+# asdf
 if [[ -e $HOME/.asdf/asdf.sh ]]; then
   # shellcheck disable=SC1090
   source "$HOME/.asdf/asdf.sh"
   fpath=("${ASDF_DIR}/completions" $fpath)
 fi
+
+# git-subrepo
+fpath=("$HOME/.dotfiles/git-subrepo/share/zsh-completion" $fpath)
 
 # shellcheck disable=SC1090
 source ~/.zsh_plugins.sh
