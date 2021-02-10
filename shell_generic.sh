@@ -130,13 +130,13 @@ case $(uname) in
       alias pku="sudo pacman -Syu"
       alias pkr="sudo pacman -R"
     elif [[ -e /etc/debian_version ]]; then
-      alias pki="sudo apt-get install"
+      alias pki="sudo apt install"
       alias pkls="dpkg -L"
       alias pkp="apt-file search"
-      alias pks="apt-cache search"
-      alias pksh="apt-cache show"
-      alias pku="sudo apt-get update && sudo apt-get --autoremove dist-upgrade"
-      alias pkr="sudo apt-get remove"
+      alias pks="apt search"
+      alias pksh="apt show"
+      alias pku="sudo apt update && sudo apt --autoremove dist-upgrade"
+      alias pkr="sudo apt purge --autremove"
 
       export PATH="$PATH:/usr/sbin:/sbin"
     elif [[ -e /etc/fedora-release ]]; then

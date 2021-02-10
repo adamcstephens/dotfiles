@@ -1,0 +1,8 @@
+[Unit]
+PartOf=graphical-session.target
+
+[Service]
+ExecStart=/usr/bin/lxpolkit
+
+[Install]
+WantedBy=sway-session.target
