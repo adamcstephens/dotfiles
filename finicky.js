@@ -1,12 +1,7 @@
 module.exports = {
-  defaultBrowser: ["Safari", "Google Chrome", "Firefox"],
+  defaultBrowser: ["Google Chrome", "Safari", "Firefox"],
   options: {
-    urlShorteners: [
-      "applications.zoom.us",
-      "bit.ly",
-      "github.co",
-      "t.co"
-    ],
+    urlShorteners: ["applications.zoom.us", "bit.ly", "github.co", "t.co"],
   },
   rewrite: [
     // { // debug stanza
@@ -19,49 +14,51 @@ module.exports = {
     {
       match: /^https?:\/\/([a-z]+\.)?bluejeans\.com\/[0-9]+/,
       url({ url }) {
-        var path = url.pathname.replace(/([0-9]+)/, "id/$1")
+        var path = url.pathname.replace(/([0-9]+)/, "id/$1");
         return {
           ...url,
           host: "meet",
           pathname: path,
-          protocol: "bjnb"
-        }
-      }
+          protocol: "bjnb",
+        };
+      },
     },
     {
-      match: ({ url }) => (url.search.includes("utm_")),
+      match: ({ url }) => url.search.includes("utm_"),
       url({ url }) {
-        const search = url.search.split('&').filter(part => !part.startsWith("utm_"))
+        const search = url.search
+          .split("&")
+          .filter((part) => !part.startsWith("utm_"));
         return {
           ...url,
-          search: search.join('&')
-        }
-      }
+          search: search.join("&"),
+        };
+      },
     },
     {
       match: finicky.matchDomains(["amazon.com"]),
       url: ({ url }) => ({
         ...url,
-        host: "smile.amazon.com"
-      })
-    }
+        host: "smile.amazon.com",
+      }),
+    },
   ],
   handlers: [
     {
       match: /^https:\/\/insiders.liveshare.vsengsaas.visualstudio.com\/join\?[A-Z0-9]$/,
-      browser: "Visual Studio Code"
+      browser: "Visual Studio Code",
     },
     {
       match: /bjnb:\/\/meet\/id/,
-      browser: "BlueJeans"
+      browser: "BlueJeans",
     },
     {
       match: /zoom.us\/j\//,
-      browser: "us.zoom.xos"
+      browser: "us.zoom.xos",
     },
     {
       match: finicky.matchDomains("open.spotify.com"),
-      browser: "Spotify"
-    }
-  ]
-}
+      browser: "Spotify",
+    },
+  ],
+};
