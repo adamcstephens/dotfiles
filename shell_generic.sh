@@ -136,7 +136,7 @@ case $(uname) in
       alias pks="apt search"
       alias pksh="apt show"
       alias pku="sudo apt update && sudo apt --autoremove dist-upgrade"
-      alias pkr="sudo apt purge --autremove"
+      alias pkr="sudo apt purge --autoremove"
 
       export PATH="$PATH:/usr/sbin:/sbin"
     elif [[ -e /etc/fedora-release ]]; then
