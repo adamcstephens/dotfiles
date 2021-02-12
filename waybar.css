@@ -23,7 +23,7 @@ window#waybar.solo {
 }
 
 #workspaces button {
-  padding: 0 5px;
+  padding: 0 7px;
   color: #9ed06c;
 }
 
@@ -45,20 +45,13 @@ window#waybar.solo {
 }
 
 #battery,
-#cpu,
-#memory,
+#custom-clock,
+#idle_inhibitor,
 #network,
 #pulseaudio,
-#idle_inhibitor,
-#temperature,
-#custom-layout,
-#backlight {
-  margin: 0px 6px 0px 10px;
-  /*  min-width: 30px;*/
-}
-
-#custom-clock {
-  margin: 0px 6px 0px 0px;
+#tray {
+  margin: 0px 10px;
+  min-width: 10px;
 }
 
 #battery.warning {
