@@ -174,6 +174,11 @@ case $(uname) in
     else
       echo "!! Unsupported Linux distribution"
     fi
+
+    if [[ -d /run/WSL ]]; then
+      source ~/bin/wsl-ssh-relay
+      ~/bin/wsl-gpg-relay
+    fi
     ;;
   "OpenBSD")
     alias pki="sudo pkg_add -i -v "
