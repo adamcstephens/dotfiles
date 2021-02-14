@@ -7,6 +7,7 @@
     - ~/.config/systemd/user
 
 - link:
+    ~/.config/gammastep/hooks/toggle.sh: bin/gammastep-toggle.sh
     ~/.config/kanshi/config: kanshi.conf
     ~/.config/kitty/linux.conf: kitty-linux.conf
     ~/.config/sway/config: sway.conf
@@ -35,6 +36,5 @@
 - shell:
     - [systemctl --user daemon-reload]
     - [
-        systemctl --user enable --now gammastep gpg-agent gpg-agent.socket gpg-agent-extra.socket lxpolkit kanshi ssh-agent swayidle waybar wob
+        systemctl --user enable --now gammastep gpg-agent gpg-agent.socket gpg-agent-extra.socket lxpolkit kanshi pulseaudio ssh-agent swayidle waybar wob,
       ]
-    - [systemctl --user disable --now pulseaudio pulseaudio.socket]
