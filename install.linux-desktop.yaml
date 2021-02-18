@@ -28,10 +28,6 @@
     ~/.config/wofi/config: wofi.conf
     ~/.config/wofi/style.css: wofi.css
     ~/.local/share/fonts: fonts
-    ~/bin/pavolume: bin/pavolume.pl
-    ~/bin/screenshot: bin/screenshot
-    ~/bin/suspend: bin/suspend
-    ~/bin/sw: bin/sw
 
 - shell:
     - [systemctl --user daemon-reload]
