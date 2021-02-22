@@ -98,6 +98,16 @@ newpassgen() {
   done
 }
 
+toggle_dark() {
+  [[ -z $1 ]] && return 1
+
+  if [[ $1 == "off" ]]; then
+    kitty @ set-colors --all --configured ~/.config/kitty/theme-light.conf
+  else
+    kitty @ set-colors --reset
+  fi
+}
+
 # OS-specific
 case $(uname) in
   "Darwin")
@@ -120,16 +130,9 @@ case $(uname) in
       ssh-add -K
     fi
 
-    (
-      if command -v dark-mode &> /dev/null && command -v kitty &>/dev/null; then
-        DARKMODE=$(dark-mode status)
-        if [[ $DARKMODE == "off" ]]; then
-          kitty @ set-colors --all --configured ~/.config/kitty/theme-light.conf
-        else
-          kitty @ set-colors --reset
-        fi
-      fi
-    )
+    if command -v dark-mode &> /dev/null && command -v kitty &>/dev/null; then
+      toggle_dark "$(dark-mode status)"
+    fi
     ;;
   "Linux")
     if [[ -e /etc/arch-release ]]; then
