@@ -98,7 +98,7 @@ newpassgen() {
   done
 }
 
-# package manager aliases
+# OS-specific
 case $(uname) in
   "Darwin")
     export HOMEBREW_NO_AUTO_UPDATE=1
@@ -119,6 +119,17 @@ case $(uname) in
     if [[ -n $SSH_AUTH_SOCK ]] && ! ssh-add -l &>/dev/null; then
       ssh-add -K
     fi
+
+    (
+      if command -v dark-mode &> /dev/null && command -v kitty &>/dev/null; then
+        DARKMODE=$(dark-mode status)
+        if [[ $DARKMODE == "off" ]]; then
+          kitty @ set-colors --all --configured ~/.config/kitty/theme-light.conf
+        else
+          kitty @ set-colors --reset
+        fi
+      fi
+    )
     ;;
   "Linux")
     if [[ -e /etc/arch-release ]]; then
