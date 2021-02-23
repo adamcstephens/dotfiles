@@ -101,10 +101,12 @@ newpassgen() {
 toggle_dark() {
   [[ -z $1 ]] && return 1
 
-  if [[ $1 == "off" ]]; then
-    kitty @ set-colors --all --configured ~/.config/kitty/theme-light.conf
-  else
-    kitty @ set-colors --reset
+  if [[ -n $KITTY_WINDOW_ID && "$TERM_PROGRAM" != "vscode" ]]; then
+    if [[ $1 == "off" ]]; then
+      kitty @ set-colors --all --configured ~/.config/kitty/theme-light.conf
+    else
+      kitty @ set-colors --reset
+    fi
   fi
 }
 
