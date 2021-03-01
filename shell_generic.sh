@@ -195,6 +195,14 @@ case $(uname) in
       source ~/bin/wsl-ssh-relay
       ~/bin/wsl-gpg-relay
     fi
+
+    if command -v gsettings &> /dev/null; then
+      if gsettings get org.gnome.desktop.interface gtk-theme | grep -q dark; then
+        toggle_dark on
+      else
+        toggle_dark off
+      fi
+    fi
     ;;
   "OpenBSD")
     alias pki="sudo pkg_add -i -v "

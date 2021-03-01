@@ -3,27 +3,35 @@
 # arguments are: <event> <previous state> <new state>
 # see man gammastep
 
+# EVENT=$1
+PREV=$2
+NEW=$3
 
 dark() {
   gsettings set org.gnome.desktop.interface gtk-theme Adwaita-dark
+  # kitty @ set-colors --reset
+
 }
 
 light() {
   gsettings set org.gnome.desktop.interface gtk-theme Adwaita
+  # kitty @ set-colors --all --configured ~/.config/kitty/theme-light.conf
 }
 
 case $1 in
   period-changed)
-    if [[ $2 == "daytime" && $3 == "transition" ]]; then
+    if [[ $PREV == "daytime" && $NEW == "transition" ]]; then
       dark
-    elif [[ $2 == "night" && $3 == "transition" ]]; then
+    elif [[ $PREV == "night" && $NEW == "transition" ]]; then
       light
-    elif [[ $2 == "none" && $3 == "night" ]]; then
+    elif [[ $PREV == "none" && $NEW == "night" ]]; then
       dark
-    elif [[ $2 == "none" && $3 == "daytime" ]]; then
+    elif [[ $PREV == "none" && $NEW == "daytime" ]]; then
       light
     fi
     ;;
   *)
     :
 esac
+
+echo "Received: $*" 1>&2
