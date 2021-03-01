@@ -2,8 +2,8 @@
 
 AC=$(cat /sys/class/power_supply/AC/online)
 if [[ $AC -eq 1 ]]; then
-  echo "Plugged in, not suspending"
-  exit 0
+  echo "Plugged in, so just turn off monitor"
+  exec pkill -SIGUSR1 swayidle
 fi
 if playerctl status | grep -q Playing; then
   echo "Playing audio, not suspending"

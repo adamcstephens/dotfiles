@@ -2,7 +2,7 @@
 
 # shellcheck disable=SC1090
 [[ -e "$HOME/.shell_local.sh" ]] && . "$HOME/.shell_local.sh"
-export PATH=~/bin:$PATH:/snap/bin:~/go/bin
+export PATH=~/.dotfiles/bin:~/bin:$PATH:/snap/bin:~/go/bin
 
 alias thisweek='date +%Y-%W'
 
@@ -98,7 +98,19 @@ newpassgen() {
   done
 }
 
-# package manager aliases
+toggle_dark() {
+  [[ -z $1 ]] && return 1
+
+  if [[ -n $KITTY_WINDOW_ID && "$TERM_PROGRAM" != "vscode" ]]; then
+    if [[ $1 == "off" ]]; then
+      kitty @ set-colors --all --configured ~/.config/kitty/theme-light.conf
+    else
+      kitty @ set-colors --reset
+    fi
+  fi
+}
+
+# OS-specific
 case $(uname) in
   "Darwin")
     export HOMEBREW_NO_AUTO_UPDATE=1
@@ -118,6 +130,10 @@ case $(uname) in
     pgrep gpg-agent &>/dev/null || eval $(gpg-agent --daemon)
     if [[ -n $SSH_AUTH_SOCK ]] && ! ssh-add -l &>/dev/null; then
       ssh-add -K
+    fi
+
+    if command -v dark-mode &> /dev/null && command -v kitty &>/dev/null; then
+      toggle_dark "$(dark-mode status)"
     fi
     ;;
   "Linux")
@@ -173,6 +189,19 @@ case $(uname) in
       export PATH="$PATH:/usr/sbin:/sbin"
     else
       echo "!! Unsupported Linux distribution"
+    fi
+
+    if [[ -d /run/WSL ]]; then
+      source ~/bin/wsl-ssh-relay
+      ~/bin/wsl-gpg-relay
+    fi
+
+    if command -v gsettings &> /dev/null; then
+      if gsettings get org.gnome.desktop.interface gtk-theme | grep -q dark; then
+        toggle_dark on
+      else
+        toggle_dark off
+      fi
     fi
     ;;
   "OpenBSD")
