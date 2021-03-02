@@ -1,5 +1,5 @@
 module.exports = {
-  defaultBrowser: ["Google Chrome", "Safari", "Firefox"],
+  defaultBrowser: ["Firefox", "Safari", "Google Chrome"],
   options: {
     urlShorteners: ["applications.zoom.us", "bit.ly", "github.co", "t.co"],
   },
