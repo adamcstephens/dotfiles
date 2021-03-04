@@ -1,0 +1,10 @@
+[Unit]
+Description=mako -  A lightweight Wayland notification daemon
+Documentation=https://github.com/emersion/mako
+PartOf=graphical-session.target
+
+[Service]
+ExecStart=/usr/bin/mako
+
+[Install]
+WantedBy=sway-session.target
