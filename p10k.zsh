@@ -34,9 +34,9 @@
     # =========================[ Line #1 ]=========================
     # os_icon               # os identifier
     context                 # user@hostname
+    direnv                  # direnv status (https://direnv.net/)
     dir                     # current directory
     vcs                     # git status
-    direnv                  # direnv status (https://direnv.net/)
     asdf                    # asdf version manager (https://github.com/asdf-vm/asdf)
     knife_block
     terraform_ws
