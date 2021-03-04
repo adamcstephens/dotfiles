@@ -7,6 +7,7 @@
     - ~/.config/systemd/user
 
 - link:
+    ~/.config/dunst/dunstrc: dunstrc
     ~/.config/gammastep/hooks/toggle.sh: bin/gammastep-toggle.sh
     ~/.config/kanshi/config: kanshi.conf
     ~/.config/kitty/linux.conf: kitty/kitty-linux.conf
@@ -32,5 +33,5 @@
 - shell:
     - [systemctl --user daemon-reload]
     - [
-        systemctl --user enable --now gammastep gpg-agent gpg-agent.socket gpg-agent-extra.socket lxpolkit kanshi pulseaudio ssh-agent swayidle waybar wob,
+        systemctl --user enable --now dunst gammastep gpg-agent gpg-agent.socket gpg-agent-extra.socket lxpolkit kanshi pulseaudio ssh-agent swayidle waybar wob,
       ]
