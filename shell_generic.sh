@@ -138,6 +138,13 @@ case $(uname) in
       toggle_dark "$(dark-mode status)"
     fi
     ;;
+  "FreeBSD")
+      alias pki="sudo pkg install"
+      alias pks="pkg search"
+      alias pksh="pkg info"
+      alias pku="sudo pkg upgrade"
+      alias pkr="sudo pkg remove"
+    ;;
   "Linux")
     if [[ -e /etc/arch-release ]]; then
       alias pki="sudo pacman -S"
