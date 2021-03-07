@@ -31,6 +31,8 @@ if [[ "$TERM" == "xterm-screen-256color" ]]; then
   alias lxc="TERM=$NEWTERM lxc"
   alias multipass="TERM=$NEWTERM multipass"
   alias ssh="TERM=$NEWTERM ssh"
+elif [[ "$TERM" == "xterm-kitty" ]]; then
+  alias ssh="kitty +kitten ssh"
 fi
 
 # notes
