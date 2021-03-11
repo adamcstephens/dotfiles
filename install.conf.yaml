@@ -6,6 +6,7 @@
 - clean: ["~"]
 
 - create:
+    - ~/.cache
     - ~/.tmux/plugins
     - ~/.vim
     - ~/bin
@@ -36,7 +37,6 @@
     ~/.irbrc:
       if: "which irb"
       path: irbrc
-    ~/.p10k.zsh: p10k.zsh
     ~/.screenrc: screenrc
     ~/.shell_generic.sh: shell_generic.sh
     ~/.tmux.conf:
@@ -61,6 +61,6 @@
         Install antibody,
       ]
     - [
-        $HOME/bin/antibody bundle < ~/.dotfiles/zsh_plugins.txt > ~/.zsh_plugins.sh,
+        $HOME/bin/antibody bundle < ~/.dotfiles/zsh_plugins.txt > ~/.cache/zsh_plugins.sh,
         Run antibody,
       ]

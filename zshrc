@@ -20,7 +20,7 @@ fi
 fpath=("$HOME/.dotfiles/git-subrepo/share/zsh-completion" $fpath)
 
 # shellcheck disable=SC1090
-source ~/.zsh_plugins.sh
+source ~/.cache/zsh_plugins.sh
 
 # completion
 compinit
@@ -126,7 +126,7 @@ fi
 [[ -e "$HOME/.shell_generic.sh" ]] && source "$HOME/.shell_generic.sh"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+[[ ! -f ~/.dotfiles/p10k.zsh ]] || source ~/.dotfiles/p10k.zsh
 
 [[ -e /usr/share/google-cloud-sdk/completion.zsh.inc ]] && source /usr/share/google-cloud-sdk/completion.zsh.inc
 
