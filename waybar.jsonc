@@ -25,7 +25,8 @@
         "format-icons": {
             "1": "",
             "2": "",
-            "3": "",
+            "3": "",
+            "4": "",
             "urgent": "",
             "focused": "",
             "default": ""
@@ -43,7 +44,7 @@
         "spacing": 10
     },
     "custom/clock": {
-        "exec": "date +'%H:%M'",
+        "exec": "date +'%m/%d @ %H:%M'",
         "interval": 5
     },
     "battery": {
@@ -52,17 +53,9 @@
             "warning": 35,
             "critical": 20
         },
-        "format": "{capacity}% {icon}",
+        "format": "{capacity}% {time}",
         "format-charging": "",
         "format-plugged": "",
-        "format-alt": "{capacity}% {time}",
-        "format-icons": [
-            "",
-            "",
-            "",
-            "",
-            ""
-        ]
     },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
