@@ -33,6 +33,7 @@ if [[ "$TERM" == "xterm-screen-256color" ]]; then
   alias ssh="TERM=$NEWTERM ssh"
 elif [[ "$TERM" == "xterm-kitty" ]]; then
   alias ssh="kitty +kitten ssh"
+  export TERMINFO=$HOME/.terminfo
 fi
 
 # notes
@@ -312,6 +313,19 @@ gt () {
   # shellcheck disable=SC2068
   git tag $@
 }
+gitignore() {
+  [ -z "$1" ] && echo "missing language to ignore" && return 1
+
+  wget --output-document=.gitignore.tmp "https://raw.githubusercontent.com/github/gitignore/master/$1.gitignore"
+
+  if [ -e .gitignore ]; then
+    cat .gitignore.tmp >> .gitignore
+    rm .gitignore.tmp
+  else
+    mv .gitignore.tmp .gitignore
+  fi
+}
+
 
 # gpg
 if command -v gpgconf > /dev/null && [[ -n "$XDG_RUNTIME_DIR" && -d "$XDG_RUNTIME_DIR" ]]; then
