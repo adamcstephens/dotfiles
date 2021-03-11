@@ -48,9 +48,9 @@ then
   USERSTRING="${MY_LTRED}\u"
 elif [[ $USER == 'adam' || $USER == 'adam.c.stephens' ]]
 then
-  USERSTRING="${MY_DIM}"
+  USERSTRING=""
 else
-  USERSTRING="${MY_DIM}\u"
+  USERSTRING="\u"
 fi
 
 if declare -f __git_ps1 > /dev/null 2>&1
@@ -59,7 +59,8 @@ then
 else
   MYGITPROMPT=''
 fi
-export PS1="\n${USERSTRING}@\h${MY_COLORRESET} ${MY_BLUE}\w${MYGITPROMPT}\n ${MY_BROWN}->${MY_COLORRESET} "
+export PS1="\n${MY_DIM}╭─ ${USERSTRING}@\h${MY_COLORRESET} ${MY_BLUE}\w${MYGITPROMPT}${MY_COLORRESET}\n${MY_DIM}╰─${MY_BROWN}❯${MY_COLORRESET} "
+
 if [[ $TERM =~ xterm.* ]]
 then
   export PROMPT_COMMAND='echo -ne "\033]0;@${HOSTNAME}\007"'
