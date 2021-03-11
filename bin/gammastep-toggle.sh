@@ -24,9 +24,9 @@ case $1 in
       dark
     elif [[ $PREV == "night" && $NEW == "transition" ]]; then
       light
-    elif [[ $PREV == "none" && $NEW == "night" ]]; then
+    elif [[ $NEW == "night" ]]; then
       dark
-    elif [[ $PREV == "none" && $NEW == "daytime" ]]; then
+    elif [[ $NEW == "daytime" ]]; then
       light
     fi
     ;;
@@ -34,4 +34,4 @@ case $1 in
     :
 esac
 
-echo "Received: $*" 1>&2
+echo "$(date) Received: $*" &>> $HOME/.cache/gammastep.log
