@@ -28,5 +28,5 @@ fi
 
 if ! command -v starship; then
   [[ ! -d ~/bin ]] && mkdir -vp ~/bin
-  ~/.dotfiles/bin/install-starship.sh -b ~/bin
+  ~/.dotfiles/bin/install-starship.sh --bin-dir ~/bin --yes
 fi
