@@ -25,6 +25,7 @@
     ~/.config/kitty/theme-dark.conf: kitty/theme-dark.conf
     ~/.config/ripgrep/ripgreprc: ripgreprc
     ~/.config/rubocop/config.yml: rubocop.yml
+    ~/.config/starship.toml: starship.toml
     ~/.gitconfig: gitconfig
     ~/.gitignore: gitignore
     ~/.gnupg/gpg.conf:

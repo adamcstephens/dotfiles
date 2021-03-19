@@ -1,0 +1,11 @@
+[aws]
+disabled = true
+
+[gcloud]
+format = '[$symbol$project]($style) '
+
+[nodejs]
+disabled = true
+
+[ruby]
+disabled = true
