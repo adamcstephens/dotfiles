@@ -31,6 +31,7 @@ if [[ "$TERM" == "xterm-screen-256color" ]]; then
   alias lxc="TERM=$NEWTERM lxc"
   alias multipass="TERM=$NEWTERM multipass"
   alias ssh="TERM=$NEWTERM ssh"
+  export TERMINFO=$HOME/.terminfo
 elif [[ "$TERM" == "xterm-kitty" ]]; then
   alias ssh="kitty +kitten ssh"
   export TERMINFO=$HOME/.terminfo
@@ -204,14 +205,6 @@ case $(uname) in
     if [[ -d /run/WSL ]]; then
       source ~/bin/wsl-ssh-relay
       ~/bin/wsl-gpg-relay
-    fi
-
-    if command -v gsettings &> /dev/null; then
-      if gsettings get org.gnome.desktop.interface gtk-theme | grep -q dark; then
-        toggle_dark on
-      else
-        toggle_dark off
-      fi
     fi
     ;;
   "OpenBSD")
