@@ -4,8 +4,19 @@ disabled = true
 [gcloud]
 format = '[$symbol$project]($style) '
 
+[git_branch]
+format = "[$symbol$branch]($style) "
+
+[hostname]
+style = 'bold yellow'
+format = '[$hostname]($style) '
+
 [nodejs]
 disabled = true
 
 [ruby]
 disabled = true
+
+[username]
+style_user = 'fg:244'
+format = '[$user@]($style)'
