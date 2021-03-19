@@ -1,7 +1,7 @@
 [global]
     monitor = 0
     follow = mouse
-    font = JetBrainsMono NF 11
+    font = JetBrainsMono Nerd Font 11
 
     # The geometry of the window:
     #   [{width}]x{height}[+/-{x}+/-{y}]
