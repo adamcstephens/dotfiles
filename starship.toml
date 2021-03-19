@@ -1,5 +1,12 @@
+format = "[╭─](fg:244) $all"
+
 [aws]
 disabled = true
+
+[character]
+format = "[╰─](fg:244)$symbol "
+success_symbol = "[❯](bold yellow)"
+error_symbol = "[❯](bold red)"
 
 [gcloud]
 format = '[$symbol$project]($style) '
