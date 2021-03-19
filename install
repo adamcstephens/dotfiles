@@ -25,3 +25,8 @@ HOSTCONFIG="install.$(hostname -s).yaml"
 if [ -e $HOSTCONFIG ]; then
   "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${HOSTCONFIG}" "${@}"
 fi
+
+if ! command -v starship; then
+  [[ ! -d ~/bin ]] && mkdir -vp ~/bin
+  ~/.dotfiles/bin/install-starship.sh -b ~/bin
+fi
