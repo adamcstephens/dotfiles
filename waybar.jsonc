@@ -53,9 +53,17 @@
             "warning": 35,
             "critical": 20
         },
-        "format": "{capacity}% {time}",
+        "format": "{capacity}% {icon}",
         "format-charging": "",
         "format-plugged": "",
+        "format-alt": "{capacity}% {time}",
+        "format-icons": [
+            "",
+            "",
+            "",
+            "",
+            ""
+        ]
     },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
