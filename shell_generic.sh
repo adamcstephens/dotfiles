@@ -348,6 +348,9 @@ if [ -e "${HOME}/.nix-profile/etc/profile.d/nix.sh" ]; then
   . "${HOME}/.nix-profile/etc/profile.d/nix.sh"
 fi
 
+# python
+export PYTHONSTARTUP=$HOME/.dotfiles/pythonstartup.py
+
 # ripgrep
 export RIPGREP_CONFIG_PATH=$HOME/.config/ripgrep/ripgreprc
 if command -v rg >/dev/null; then
