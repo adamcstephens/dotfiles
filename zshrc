@@ -1,6 +1,3 @@
-# shellcheck shell=bash
-autoload -Uz compinit && compinit
-
 # completion before compinit
 # asdf
 if [[ -e $HOME/.asdf/asdf.sh ]]; then
@@ -15,8 +12,10 @@ fpath=("$HOME/.dotfiles/git-subrepo/share/zsh-completion" $fpath)
 # shellcheck disable=SC1090
 source ~/.cache/zsh_plugins.sh
 
+# shellcheck shell=bash
+autoload -Uz compinit && compinit
+
 # completion
-compinit
 zmodload zsh/complist
 autoload -U +X bashcompinit && bashcompinit
 
