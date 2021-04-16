@@ -26,7 +26,10 @@ if [ -e $HOSTCONFIG ]; then
   "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${HOSTCONFIG}" "${@}"
 fi
 
+[[ ! -d ~/bin ]] && mkdir -vp ~/bin
 if ! command -v starship; then
-  [[ ! -d ~/bin ]] && mkdir -vp ~/bin
   ~/.dotfiles/bin/install-starship.sh --bin-dir ~/bin --yes
+fi
+if ! command -v zoxide; then
+  ~/.dotfiles/bin/install-zoxide.sh
 fi
