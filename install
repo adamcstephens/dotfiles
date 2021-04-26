@@ -27,9 +27,9 @@ if [ -e $HOSTCONFIG ]; then
 fi
 
 [[ ! -d ~/bin ]] && mkdir -vp ~/bin
-if ! command -v starship; then
-  ~/.dotfiles/bin/install-starship.sh --bin-dir ~/bin --yes
+if ! command -v starship >/dev/null; then
+  make install-starship
 fi
-if ! command -v zoxide; then
-  ~/.dotfiles/bin/install-zoxide.sh
+if ! command -v zoxide >/dev/null; then
+  make install-zoxide
 fi

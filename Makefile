@@ -1,5 +1,3 @@
-ZSH := $(shell which zsh)
-
 .PHONY: default
 default:
 
@@ -8,23 +6,14 @@ backup-windows-terminal:
 	cp /mnt/c/Users/adam/AppData/Local/Packages/Microsoft.WindowsTerminalPreview_*/LocalState/settings.json ./windowsterminal-settings.json
 	chmod 644 windowsterminal-settings.json
 
-.PHONY: clean-fresh
-clean-fresh:
-	rm -rfv $(HOME)/.fresh $(HOME)/.freshrc $(HOME)/.dotfiles/fresh
-
 .PHONY: install-brew
 install-brew:
-	/bin/bash -c "`curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh`"
+	~/.dotfiles/bin/install-brew.sh
 
 .PHONY: install-asdf
 install-asdf:
-	git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.7.6
+	git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.8.0
 	$(HOME)/.asdf/bin/asdf update
-
-.PHONY: install-zsh
-install-zsh:
-	if ! grep $(ZSH) /etc/shells; then echo "$(ZSH)" | sudo tee -a /etc/shells; fi
-	chsh -s $(ZSH)
 
 .PHONY: antibody
 antibody:
@@ -56,7 +45,18 @@ update-vim:
 clean:
 	vim +PlugClean +qall
 
-update: update-asdf update-vim tmuxline
+.PHONY: install-starship
+install-starship:
+	~/.dotfiles/bin/install-starship.sh --bin-dir ~/bin --yes
+
+.PHONY: install-zoxide
+install-zoxide:
+	~/.dotfiles/bin/install-zoxide.sh
+
+.PHONY: update-bins
+update-bins: install-starship install-zoxide
+
+update: update-asdf update-vim update-bins
 
 .PHONY: ssh-setup
 ssh-setup:
@@ -65,13 +65,6 @@ ssh-setup:
 .PHONY: tmuxline
 tmuxline:
 	if [ ! -z $TMUX ]; then vim +"TmuxlineSnapshot! ~/.tmux.tmuxline" +qall; fi
-
-.PHONY: ubuntu-keyboard
-ubuntu-keyboard:
-	gsettings set org.gnome.desktop.input-sources xkb-options "['ctrl:nocaps']"
-	gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 30
-	gsettings set org.gnome.desktop.peripherals.keyboard delay 250
-	sudo sed -i 's/XKBOPTIONS=""/XKBOPTIONS="ctrl:nocaps"/' /etc/default/keyboard
 
 .PHONY: zsh-prof
 zsh-prof:
