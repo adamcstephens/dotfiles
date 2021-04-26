@@ -26,7 +26,6 @@ if [ -e $HOSTCONFIG ]; then
   "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${HOSTCONFIG}" "${@}"
 fi
 
-[[ ! -d ~/bin ]] && mkdir -vp ~/bin
 if ! command -v starship >/dev/null; then
   make install-starship
 fi
