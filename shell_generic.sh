@@ -450,7 +450,7 @@ alias vb=VBoxManage
 if [[ "$TERM_PROGRAM" == "vscode" ]]
 then
   alias vim=code
-  if ! command -v code > /dev/null && command -v code-insiders > /dev/null; then
+  if [[ $TERM_PROGRAM_VERSION == *-insider ]]; then
     alias code=code-insiders
   fi
 fi

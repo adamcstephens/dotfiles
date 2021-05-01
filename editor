@@ -2,7 +2,11 @@
 
 if [[ "$TERM_PROGRAM" == "vscode" ]]
 then
-  exec code --wait $@
+  if [[ $TERM_PROGRAM_VERSION == *-insider ]]; then
+    exec code-insiders --wait $@
+  else
+    exec code --wait $@
+  fi
 else
   exec vim $@
 fi
