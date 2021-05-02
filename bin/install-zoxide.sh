@@ -70,10 +70,13 @@ install() {
 	ensure rm -rf "zoxide-$_target"
 	curl -s https://api.github.com/repos/ajeetdsouza/zoxide/releases/latest | grep "browser_download_url" | cut -d '"' -f 4 | grep "$_target" | xargs -n 1 curl -LJO
 
+	ensure tar -zxf "zoxide-$_target.tar.gz"
+
 	ensure mv "zoxide-$_target" "zoxide_bin"
 
-	ensure mv zoxide_bin "$_install_path/zoxide"
+	ensure mv zoxide_bin/zoxide "$_install_path/zoxide"
 	ensure chmod +x "$_install_path/zoxide"
+	ensure rm -r zoxide_bin "zoxide-$_target.tar.gz"
 
 	success "zoxide is installed!"
 	info "Please ensure that $_install_path is added to your \$PATH."
