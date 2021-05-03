@@ -268,6 +268,13 @@ dsh() {
   # shellcheck disable=SC2086
   docker run -t -i --rm=true $runimg $runcmd
 }
+dcnet() {
+  [[ -z $1 ]] && return 1
+  svc=$(docker-compose ps | grep $1 | awk '{print $1}')
+  [[ -z $svc ]] && return 1
+
+  docker run -it --net container:$svc nicolaka/netshoot
+}
 
 # git
 [[ -e ~/.dotfiles/git-subrepo/.rc ]] && source ~/.dotfiles/git-subrepo/.rc
