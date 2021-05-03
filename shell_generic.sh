@@ -314,12 +314,15 @@ gitignore() {
 
   wget --output-document=.gitignore.tmp "https://raw.githubusercontent.com/github/gitignore/master/$1.gitignore"
 
-  if [ -e .gitignore ]; then
-    cat .gitignore.tmp >> .gitignore
-    rm .gitignore.tmp
-  else
-    mv .gitignore.tmp .gitignore
+  if [[ $? == 0 ]]; then
+    if [ -e .gitignore ]; then
+      cat .gitignore.tmp >> .gitignore
+    else
+      mv -v .gitignore.tmp .gitignore
+    fi
   fi
+
+  rm -f .gitignore.tmp
 }
 
 
