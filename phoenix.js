@@ -1,3 +1,8 @@
+Phoenix.set({
+  daemon: true,
+  openAtLogin: true,
+})
+
 Key.on("f", ["control", "command"], function () {
   const window = Window.focused()
   const screen = Screen.main().flippedVisibleFrame()
