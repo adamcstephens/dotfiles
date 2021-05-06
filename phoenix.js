@@ -3,7 +3,13 @@ Phoenix.set({
   openAtLogin: true,
 })
 
-Key.on("f", ["control", "command"], function () {
+const FOCUS_MODS = ["control", "command"]
+const MOVE_MODS = ["control", "command", "shift"]
+
+const WEST = "j"
+const EAST = "l"
+
+Key.on("f", MOVE_MODS, function () {
   const window = Window.focused()
   const screen = Screen.main().flippedVisibleFrame()
 
@@ -13,7 +19,7 @@ Key.on("f", ["control", "command"], function () {
   }
 })
 
-Key.on("j", ["control", "command"], function () {
+Key.on(WEST, MOVE_MODS, function () {
   const window = Window.focused()
   const screen = Screen.main().flippedVisibleFrame()
 
@@ -23,7 +29,7 @@ Key.on("j", ["control", "command"], function () {
   }
 })
 
-Key.on("l", ["control", "command"], function () {
+Key.on(EAST, MOVE_MODS, function () {
   const window = Window.focused()
   const screen = Screen.main().flippedVisibleFrame()
 
@@ -33,7 +39,7 @@ Key.on("l", ["control", "command"], function () {
   }
 })
 
-Key.on("u", ["control", "command"], function () {
+Key.on("u", MOVE_MODS, function () {
   const window = Window.focused()
   const screen = Screen.main().flippedVisibleFrame()
 
@@ -43,7 +49,7 @@ Key.on("u", ["control", "command"], function () {
   }
 })
 
-Key.on("o", ["control", "command"], function () {
+Key.on("o", MOVE_MODS, function () {
   const window = Window.focused()
   const screen = Screen.main().flippedVisibleFrame()
 
@@ -53,7 +59,7 @@ Key.on("o", ["control", "command"], function () {
   }
 })
 
-Key.on("m", ["control", "command"], function () {
+Key.on("m", MOVE_MODS, function () {
   const window = Window.focused()
   const screen = Screen.main().flippedVisibleFrame()
 
@@ -63,12 +69,28 @@ Key.on("m", ["control", "command"], function () {
   }
 })
 
-Key.on(".", ["control", "command"], function () {
+Key.on(".", MOVE_MODS, function () {
   const window = Window.focused()
   const screen = Screen.main().flippedVisibleFrame()
 
   if (window) {
     window.setTopLeft({ x: screen.width / 2, y: screen.height / 2 })
     window.setSize({ width: screen.width / 2, height: screen.height / 2 })
+  }
+})
+
+Key.on(WEST, FOCUS_MODS, function () {
+  const window = Window.focused()
+
+  if (window) {
+    window.focusClosestNeighbour("west")
+  }
+})
+
+Key.on(EAST, FOCUS_MODS, function () {
+  const window = Window.focused()
+
+  if (window) {
+    window.focusClosestNeighbour("east")
   }
 })
