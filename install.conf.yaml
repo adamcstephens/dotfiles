@@ -19,6 +19,7 @@
     ~/.bash_profile: bash_profile
     ~/.bashrc: bashrc
     ~/.config/bat/config: bat
+    ~/.config/direnv/direnvrc: direnvrc.sh
     ~/.config/git/template: gittemplate
     ~/.config/kitty/kitty.conf: kitty/kitty.conf
     ~/.config/kitty/theme-light.conf: kitty/theme-light.conf
@@ -57,11 +58,5 @@
 
 - shell:
     - [chmod 0700 ~/.gnupg, Setting gnupg to 0700]
-    - [
-        test -e ~/bin/antibody || curl -sfL git.io/antibody | sh -s - -b ~/bin,
-        Install antibody,
-      ]
-    - [
-        $HOME/bin/antibody bundle < ~/.dotfiles/zsh_plugins.txt > ~/.cache/zsh_plugins.sh,
-        Run antibody,
-      ]
+    - [test -e ~/bin/antibody || curl -sfL git.io/antibody | sh -s - -b ~/bin, Install antibody]
+    - [$HOME/bin/antibody bundle < ~/.dotfiles/zsh_plugins.txt > ~/.cache/zsh_plugins.sh, Run antibody]

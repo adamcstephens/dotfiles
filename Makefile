@@ -11,7 +11,10 @@ install-brew:
 	~/.dotfiles/bin/install-brew.sh
 
 .PHONY: install-asdf
-install-asdf:
+install-asdf: bootstrap-asdf update-asdf
+
+.PHONY: bootstrap-asdf
+bootstrap-asdf:
 	git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.8.0
 	$(HOME)/.asdf/bin/asdf update
 
@@ -34,8 +37,10 @@ terminfo-italic:
 
 .PHONY: update-asdf
 update-asdf:
-	if [ -e $(HOME)/.asdf ]; then $(HOME)/.asdf/bin/asdf update; fi
+	if [ -e $(HOME)/.asdf ]; then $(HOME)/.asdf/bin/asdf update; $(HOME)/.asdf/bin/asdf plugin add direnv || true; fi
 	if [ -e $(HOME)/.asdf/plugins ]; then $(HOME)/.asdf/bin/asdf plugin-update --all; fi
+	if [ -e $(HOME)/.asdf/plugins ]; then $(HOME)/.asdf/bin/asdf install direnv latest; fi
+	if [ -e $(HOME)/.asdf/plugins ]; then $(HOME)/.asdf/bin/asdf global direnv $(shell asdf latest direnv); fi
 
 .PHONY: update-vim
 update-vim:
