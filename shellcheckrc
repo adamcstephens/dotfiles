@@ -1,0 +1,2 @@
+# disable shebang check
+disable=SC2148

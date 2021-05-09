@@ -41,6 +41,7 @@
       path: irbrc
     ~/.screenrc: screenrc
     ~/.shell_generic.sh: shell_generic.sh
+    ~/.shellcheckrc: shellcheckrc
     ~/.tmux.conf:
       if: "which tmux"
       path: tmux.conf
