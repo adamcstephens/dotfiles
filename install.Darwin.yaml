@@ -6,6 +6,6 @@
 - link:
     ~/.config/karabiner: karabiner
     ~/.config/kitty/mac.conf: kitty/kitty-mac.conf
-    ~/.config/phoenix/phoenix.js: phoenix.js
     ~/.finicky.js: finicky.js
     ~/.gnupg/gpg-agent.conf: gpg-agent-mac.conf
+    ~/Library/Preferences/com.knollsoft.Rectangle.plist: rectangle.plist
