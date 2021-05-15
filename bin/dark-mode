@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import argparse
+import os
 import subprocess
 import sys
 
@@ -52,12 +53,28 @@ def set_sway_theme(target):
     )
 
 
+def set_waybar_theme(target):
+    if target:
+        theme = f"{os.environ['HOME']}/.dotfiles/waybar.css"
+    else:
+        theme = f"{os.environ['HOME']}/.dotfiles/waybar-light.css"
+
+    style_file = f"{os.environ['HOME']}/.config/waybar/style.css"
+    os.unlink(style_file)
+    os.symlink(
+        src=theme,
+        dst=style_file,
+    )
+    print(run("systemctl --user restart waybar"))
+
+
 def set_dark(target):
     print(f"setting dark mode to {target}")
 
     set_gtk_theme(target)
     set_kitty_theme(target)
     set_sway_theme(target)
+    set_waybar_theme(target)
 
 
 if __name__ == "__main__":

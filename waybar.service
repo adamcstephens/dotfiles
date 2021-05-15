@@ -6,6 +6,7 @@ PartOf=graphical-session.target
 [Service]
 Type=simple
 ExecStart=/usr/bin/waybar
+# needs 0.9.6+ ExecReload=kill -SIGUSR2 $MAINPID
 
 [Install]
 WantedBy=sway-session.target
