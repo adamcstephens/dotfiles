@@ -7,7 +7,7 @@ if [[ -e $HOME/.asdf/asdf.sh ]]; then
 fi
 
 # git-subrepo
-fpath=("$HOME/.dotfiles/git-subrepo/share/zsh-completion" $fpath)
+fpath=("$HOME/.dotfiles/zsh-completion" "$HOME/.dotfiles/git-subrepo/share/zsh-completion" $fpath)
 
 # shellcheck disable=SC1090
 source ~/.cache/zsh_plugins.sh
@@ -112,6 +112,11 @@ fi
 if [[ -e ~/.fzf.zsh ]]
 then
   source ~/.fzf.zsh
+fi
+
+# kubectl
+if command -v kubectl &>/dev/null; then
+  source <(kubectl completion zsh)
 fi
 
 # shellcheck disable=SC1090

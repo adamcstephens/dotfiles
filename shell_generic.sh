@@ -348,6 +348,7 @@ alias ivl='sudo iptables -vnL --line-numbers'
 
 # kubectl
 alias k="kubectl "
+alias kns="kubens "
 
 # nix
 if [ -e "${HOME}/.nix-profile/etc/profile.d/nix.sh" ]; then

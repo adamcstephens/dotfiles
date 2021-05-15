@@ -1,0 +1,80 @@
+#!/usr/bin/env python
+
+import argparse
+import subprocess
+import sys
+
+
+def run(command):
+    return subprocess.run(command.split(" "), capture_output=True).stdout.decode(
+        "utf-8"
+    )
+
+
+def set_gtk_theme(target):
+    if target:
+        theme = "Adwaita-dark"
+    else:
+        theme = "Adwaita"
+
+    run(f"gsettings set org.gnome.desktop.interface gtk-theme {theme}")
+
+
+def set_kitty_theme(target):
+    if target:
+        run("kitty @ set-colors --reset")
+    else:
+        run("kitty @ set-colors --all --configured ~/.config/kitty/theme-light.conf")
+
+
+def set_sway_theme(target):
+    if target:
+        theme = {
+            "client.focused": "#7e8294 #2b2d37 #9ed06c",
+            "client.unfocused": "#2b2d37 #2b2d37 #7e8294",
+            "client.focused_inactive": "#7e8294 #2b2d37 #7e8294",
+        }
+
+        background = "#181a1c solid_color"
+    else:
+        theme = {
+            "client.focused": "#001080 #ffffff #a31515",
+            "client.unfocused": "#2b2d37 #ffffff #7e8294",
+            "client.focused_inactive": "#001080 #ffffff #7e8294",
+        }
+
+        background = "#7e8294 solid_color"
+    for setting, value in theme.items():
+        subprocess.run(["swaymsg", setting, value], capture_output=True)
+
+    subprocess.run(
+        ["swaymsg", "output", "eDP-1", "background", background], capture_output=True
+    )
+
+
+def set_dark(target):
+    print(f"setting dark mode to {target}")
+
+    set_gtk_theme(target)
+    set_kitty_theme(target)
+    set_sway_theme(target)
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Control Dark Mode")
+    parser.add_argument(
+        "target",
+        type=str,
+        help="set the target dark state",
+        choices=["enable", "disable"],
+    )
+
+    args = parser.parse_args()
+
+    if args.target == "enable":
+        set_dark(True)
+    elif args.target == "disable":
+        set_dark(False)
+    else:
+        print("unknown target state")
+        sys.exit(1)
