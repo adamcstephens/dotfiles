@@ -2,7 +2,7 @@
 
 # shellcheck disable=SC1090
 [[ -e "$HOME/.shell_local.sh" ]] && . "$HOME/.shell_local.sh"
-export PATH=~/.dotfiles/bin:~/bin:$PATH:/snap/bin:~/go/bin
+export PATH=~/.dotfiles/bin:~/bin:~/.local/bin:$PATH:/snap/bin:~/go/bin
 
 alias thisweek='date +%Y-%W'
 
