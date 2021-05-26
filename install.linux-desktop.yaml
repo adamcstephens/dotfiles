@@ -8,7 +8,6 @@
 
 - link:
     ~/.config/dunst/dunstrc: dunstrc
-    ~/.config/gammastep/hooks/toggle.sh: bin/gammastep-toggle.sh
     ~/.config/kitty/linux.conf: kitty/kitty-linux.conf
     ~/.config/sway/config: sway.conf
     ~/.config/mpd/mpd.conf: mpd.conf
