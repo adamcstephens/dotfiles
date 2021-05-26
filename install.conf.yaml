@@ -27,6 +27,7 @@
     ~/.config/ripgrep/ripgreprc: ripgreprc
     ~/.config/rubocop/config.yml: rubocop.yml
     ~/.config/starship.toml: starship.toml
+    ~/.default-python-packages: default-python-packages
     ~/.gitconfig: gitconfig
     ~/.gitignore: gitignore
     ~/.gnupg/gpg.conf:
