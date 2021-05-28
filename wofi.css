@@ -1,13 +1,13 @@
 /* https://cloudninja.pw/docs/wofi.html */
 window {
     border: 2px solid black;
-    background-color: #2b2d37;
+    background-color: #2b2d3a;
 }
 
 #input {
     color: #9ed06c;
     border: 2px solid black;
-    background-color: #2b2d37;
+    background-color: #2b2d3a;
     font-size: 18px;
 }
 
@@ -28,5 +28,5 @@ window {
 
 #entry:selected {
     color: #9ed06c;
-    background-color: #2b2d37;
+    background-color: #2b2d3a;
 }
