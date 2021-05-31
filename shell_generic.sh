@@ -77,6 +77,10 @@ alias lnn="ls -lt ~/notes"
 alias lln="ls -1 ~/notes/\`ls -1t ~/notes | head -n1\`"
 
 
+license() {
+  wget -O LICENSE https://www.gnu.org/licenses/agpl-3.0.txt
+}
+
 # passwords
 if command -v apg > /dev/null; then
   alias pwgen='apg -n10 -m12 -x20 -M CLNS -t'
@@ -255,6 +259,10 @@ alias dk='docker kill '
 alias dps='docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}\t{{.Command}}\t{{.Image}}"'
 alias drm='docker rm '
 alias drmi='docker rmi '
+dive() {
+  # shellcheck disable=SC2068
+  docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock wagoodman/dive:latest $@
+}
 dsh() {
   [ -z "$1" ] && echo "needs image to run." && return 2
   runimg="$1"
