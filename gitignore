@@ -3,7 +3,6 @@
 *.sw?
 .bundle
 .ruby-version
-.tool-versions
 .vscode
 .notags
 .tags

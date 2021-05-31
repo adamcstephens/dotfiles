@@ -37,10 +37,7 @@ terminfo-italic:
 
 .PHONY: update-asdf
 update-asdf:
-	if [ -e $(HOME)/.asdf ]; then $(HOME)/.asdf/bin/asdf update; $(HOME)/.asdf/bin/asdf plugin add direnv || true; fi
 	if [ -e $(HOME)/.asdf/plugins ]; then $(HOME)/.asdf/bin/asdf plugin-update --all; fi
-	if [ -e $(HOME)/.asdf/plugins ]; then $(HOME)/.asdf/bin/asdf install direnv latest; fi
-	if [ -e $(HOME)/.asdf/plugins ]; then $(HOME)/.asdf/bin/asdf global direnv $(shell $(HOME)/.asdf/bin/asdf latest direnv); fi
 
 .PHONY: update-vim
 update-vim:
