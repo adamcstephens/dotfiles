@@ -1,9 +1,12 @@
 #!/usr/bin/env python
 
 import argparse
+import json
 import os
 import subprocess
 import sys
+
+STATEFILE = os.getenv("HOME") + "/.cache/dark-mode.state"
 
 
 def run(command):
@@ -68,6 +71,15 @@ def set_waybar_theme(target):
     print(run("systemctl --user restart waybar"))
 
 
+def set_state_data(target):
+    with open(STATEFILE, "w") as sf:
+        json.dump(target, sf)
+
+
+def get_state_data():
+    return json.loads(open(STATEFILE).read())
+
+
 def set_dark(target):
     print(f"setting dark mode to {target}")
 
@@ -76,6 +88,12 @@ def set_dark(target):
     set_sway_theme(target)
     set_waybar_theme(target)
 
+    set_state_data(target)
+
+
+def toggle_dark():
+    set_dark(not get_state_data())
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Control Dark Mode")
@@ -83,7 +101,7 @@ if __name__ == "__main__":
         "target",
         type=str,
         help="set the target dark state",
-        choices=["enable", "disable"],
+        choices=["enable", "disable", "toggle"],
     )
 
     args = parser.parse_args()
@@ -92,6 +110,8 @@ if __name__ == "__main__":
         set_dark(True)
     elif args.target == "disable":
         set_dark(False)
+    elif args.target == "toggle":
+        toggle_dark()
     else:
         print("unknown target state")
         sys.exit(1)
