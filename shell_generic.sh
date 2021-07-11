@@ -189,6 +189,8 @@ case $(uname) in
       alias pku="sudo apk -U upgrade"
       alias pkr="sudo apk del "
     elif grep -q opensuse /etc/os-release; then
+      alias zy="sudo zypper "
+
       alias pki="sudo zypper install "
       alias pkls="rpm -ql"
       alias pkp="zypper search --provides --file-list "
