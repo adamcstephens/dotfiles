@@ -4,4 +4,6 @@ export MOZ_ENABLE_WAYLAND=1
 export QT_QPA_PLATFORM=wayland
 export QT_QPA_PLATFORMTHEME=gnome
 
+export XDG_DATA_DIRS="$XDG_DATA_DIRS:$HOME/.local/share/flatpak/exports/share"
+
 sway &> ~/.config/sway/sway.log
