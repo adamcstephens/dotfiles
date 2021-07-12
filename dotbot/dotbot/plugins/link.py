@@ -27,23 +27,26 @@ class Link(dotbot.Plugin):
         for destination, source in links.items():
             destination = os.path.expandvars(destination)
             relative = defaults.get('relative', False)
-            canonical_path = defaults.get('canonicalize-path', True)
+            # support old "canonicalize-path" key for compatibility
+            canonical_path = defaults.get('canonicalize', defaults.get('canonicalize-path', True))
             force = defaults.get('force', False)
             relink = defaults.get('relink', False)
             create = defaults.get('create', False)
             use_glob = defaults.get('glob', False)
             test = defaults.get('if', None)
             ignore_missing = defaults.get('ignore-missing', False)
+            exclude_paths = defaults.get('exclude', [])
             if isinstance(source, dict):
                 # extended config
                 test = source.get('if', test)
                 relative = source.get('relative', relative)
-                canonical_path = source.get('canonicalize-path', canonical_path)
+                canonical_path = source.get('canonicalize', source.get('canonicalize-path', canonical_path))
                 force = source.get('force', force)
                 relink = source.get('relink', relink)
                 create = source.get('create', create)
                 use_glob = source.get('glob', use_glob)
                 ignore_missing = source.get('ignore-missing', ignore_missing)
+                exclude_paths = source.get('exclude', exclude_paths)
                 path = self._default_source(destination, source.get('path'))
             else:
                 path = self._default_source(destination, source)
@@ -52,8 +55,7 @@ class Link(dotbot.Plugin):
                 continue
             path = os.path.expandvars(os.path.expanduser(path))
             if use_glob:
-                self._log.debug("Globbing with path: " + str(path))
-                glob_results = glob.glob(path)
+                glob_results = self._create_glob_results(path, exclude_paths)
                 if len(glob_results) == 0:
                     self._log.warning("Globbing couldn't find anything matching " + str(path))
                     success = False
@@ -76,6 +78,8 @@ class Link(dotbot.Plugin):
                 else:
                     self._log.lowinfo("Globs from '" + path + "': " + str(glob_results))
                     glob_base = path[:glob_star_loc]
+                    if glob_base.endswith('/.') or glob_base == '.':
+                        glob_base = path[:glob_star_loc - 1]
                     for glob_full_item in glob_results:
                         glob_item = glob_full_item[len(glob_base):]
                         glob_link_destination = os.path.join(destination, glob_item)
@@ -120,6 +124,17 @@ class Link(dotbot.Plugin):
                 return basename
         else:
             return source
+
+    def _create_glob_results(self, path, exclude_paths):
+        self._log.debug("Globbing with path: " + str(path))
+        base_include = glob.glob(path)
+        to_exclude = []
+        for expath in exclude_paths:
+            self._log.debug("Excluding globs with path: " + str(expath))
+            to_exclude.extend(glob.glob(expath))
+        self._log.debug("Excluded globs from '" + path + "': " + str(to_exclude))
+        ret = set(base_include) - set(to_exclude)
+        return list(ret)
 
     def _is_link(self, path):
         '''
