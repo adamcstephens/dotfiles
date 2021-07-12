@@ -229,6 +229,9 @@ fi
 alias ap='ansible-playbook '
 alias ac='ansible-container '
 
+# asdf
+export ASDF_PYTHON_DEFAULT_PACKAGES_FILE=$HOME/.dotfile/python-packages
+
 # bat, since debian named it batcat
 if command -v batcat &> /dev/null; then
   alias bat='batcat '
