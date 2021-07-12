@@ -6,7 +6,7 @@
 [subrepo]
 	remote = https://github.com/junegunn/vim-plug
 	branch = master
-	commit = 8b45742540f92ba902c97ad1d3d8862ba3305438
-	parent = 8f6ae46515c00713eec4b1c525e53ab42a7e71c8
+	commit = fc2813ef4484c7a5c080021ceaa6d1f70390d920
+	parent = 2bac66ddd6922243c2ff3c29766c892682413401
 	method = merge
 	cmdver = 0.4.3
