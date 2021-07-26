@@ -10,6 +10,7 @@ success_symbol = "[❯](bold yellow)"
 error_symbol = "[❯](bold red)"
 
 [gcloud]
+disabled = true
 format = '[$symbol$project]($style) '
 
 [git_branch]
