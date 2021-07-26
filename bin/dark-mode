@@ -3,6 +3,7 @@
 import argparse
 import json
 import os
+import platform
 import subprocess
 import sys
 
@@ -13,6 +14,13 @@ def run(command):
     return subprocess.run(command.split(" "), capture_output=True).stdout.decode(
         "utf-8"
     )
+
+
+def set_darwin_theme(target):
+    if target:
+        run("/usr/local/bin/dark-mode on")
+    else:
+        run("/usr/local/bin/dark-mode off")
 
 
 def set_gtk_theme(target):
@@ -83,10 +91,16 @@ def get_state_data():
 def set_dark(target):
     print(f"setting dark mode to {target}")
 
-    set_gtk_theme(target)
+    os = platform.system()
+
     set_kitty_theme(target)
-    set_sway_theme(target)
-    set_waybar_theme(target)
+
+    if os == "Linux":
+        set_gtk_theme(target)
+        set_sway_theme(target)
+        set_waybar_theme(target)
+    elif os == "Darwin":
+        set_darwin_theme(target)
 
     set_state_data(target)
 

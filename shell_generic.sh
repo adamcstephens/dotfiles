@@ -189,6 +189,8 @@ case $(uname) in
       alias pku="sudo apk -U upgrade"
       alias pkr="sudo apk del "
     elif grep -q opensuse /etc/os-release; then
+      alias zy="sudo zypper "
+
       alias pki="sudo zypper install "
       alias pkls="rpm -ql"
       alias pkp="zypper search --provides --file-list "
@@ -228,6 +230,9 @@ fi
 # ansible
 alias ap='ansible-playbook '
 alias ac='ansible-container '
+
+# asdf
+export ASDF_PYTHON_DEFAULT_PACKAGES_FILE=$HOME/.dotfiles/python-packages
 
 # bat, since debian named it batcat
 if command -v batcat &> /dev/null; then

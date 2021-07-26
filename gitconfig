@@ -26,6 +26,7 @@
   templateDir = ~/.config/git/template/
   defaultBranch = main
 [pull]
+  ff = only
   rebase = false
 [push]
   default = tracking

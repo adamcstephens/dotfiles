@@ -1,7 +1,7 @@
 import os, glob
 import sys
 
-from argparse import ArgumentParser
+from argparse import ArgumentParser, RawTextHelpFormatter
 from .config import ConfigReader, ReadingError
 from .dispatcher import Dispatcher, DispatchError
 from .messenger import Messenger
@@ -9,15 +9,18 @@ from .messenger import Level
 from .util import module
 
 import dotbot
-import yaml
+import os
+import subprocess
 
 def add_options(parser):
     parser.add_argument('-Q', '--super-quiet', action='store_true',
         help='suppress almost all output')
     parser.add_argument('-q', '--quiet', action='store_true',
         help='suppress most output')
-    parser.add_argument('-v', '--verbose', action='store_true',
-        help='enable verbose output')
+    parser.add_argument('-v', '--verbose', action='count', default=0,
+        help='enable verbose output\n'
+             '-v: typical verbose\n'
+             '-vv: also, set shell commands stderr/stdout to true')
     parser.add_argument('-d', '--base-directory',
         help='execute commands from within BASEDIR',
         metavar='BASEDIR')
@@ -47,17 +50,24 @@ def read_config(config_file):
 def main():
     log = Messenger()
     try:
-        parser = ArgumentParser()
+        parser = ArgumentParser(formatter_class=RawTextHelpFormatter)
         add_options(parser)
         options = parser.parse_args()
         if options.version:
-            print('Dotbot version %s (yaml: %s)' % (dotbot.__version__, yaml.__version__))
+            try:
+                with open(os.devnull) as devnull:
+                    git_hash = subprocess.check_output(['git', 'rev-parse', 'HEAD'],
+                            cwd=os.path.dirname(os.path.abspath(__file__)), stderr=devnull)
+                hash_msg = ' (git %s)' % git_hash[:10]
+            except (OSError, subprocess.CalledProcessError):
+                hash_msg = ''
+            print('Dotbot version %s%s' % (dotbot.__version__, hash_msg))
             exit(0)
         if options.super_quiet:
             log.set_level(Level.WARNING)
         if options.quiet:
             log.set_level(Level.INFO)
-        if options.verbose:
+        if options.verbose > 0:
             log.set_level(Level.DEBUG)
 
         if options.force_color and options.no_color:
@@ -97,7 +107,7 @@ def main():
             # default to directory of config file
             base_directory = os.path.dirname(os.path.abspath(options.config_file))
         os.chdir(base_directory)
-        dispatcher = Dispatcher(base_directory, only=options.only, skip=options.skip)
+        dispatcher = Dispatcher(base_directory, only=options.only, skip=options.skip, options=options)
         success = dispatcher.dispatch(tasks)
         if success:
             log.info('\n==> All tasks executed successfully')
