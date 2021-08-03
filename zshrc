@@ -2,6 +2,10 @@
 zstyle ':znap:*' repos-dir ~/.znap
 source ~/.dotfiles/zsh-snap/znap.zsh
 
+# prompt
+znap eval starship '~/bin/starship init zsh --print-full-init'
+znap prompt
+
 # asdf
 if [[ -e $HOME/.asdf/asdf.sh ]]; then
   znap source asdf-vm/asdf asdf.sh
@@ -10,11 +14,6 @@ fi
 
 # git-subrepo
 fpath=("$HOME/.dotfiles/zsh-completion" "$HOME/.dotfiles/git-subrepo/share/zsh-completion" $fpath)
-
-#
-znap eval starship 'starship init zsh --print-full-init'
-znap prompt
-
 
 ZSH_AUTOSUGGEST_STRATEGY=( history )
 znap source zsh-users/zsh-autosuggestions
