@@ -6,7 +6,7 @@
 - clean: ["~"]
 
 - create:
-    - ~/.cache
+    - ~/.cache/znap
     - ~/.gnupg
     - ~/.tmux/plugins
     - ~/.vim
@@ -60,5 +60,3 @@
 
 - shell:
     - [chmod 0700 ~/.gnupg, Setting gnupg to 0700]
-    - [test -e ~/bin/antibody || curl -sfL git.io/antibody | sh -s - -b ~/bin, Install antibody]
-    - [$HOME/bin/antibody bundle < ~/.dotfiles/zsh_plugins.txt > ~/.cache/zsh_plugins.sh, Run antibody]

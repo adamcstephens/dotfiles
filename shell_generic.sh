@@ -132,9 +132,8 @@ case $(uname) in
     alias pkr="brew remove "
     alias flushdns='sudo killall -HUP mDNSResponder'
 
-    source <(antibody init)
-    zstyle :omz:plugins:ssh-agent agent-forwarding on
-    antibody bundle robbyrussell/oh-my-zsh path:plugins/ssh-agent
+    zstyle :omz:plugins:ssh-agent ssh-add-args -K
+    znap source ohmyzsh/ohmyzsh plugins/ssh-agent
 
     # shellcheck disable=SC2046
     pgrep gpg-agent &>/dev/null || eval $(gpg-agent --daemon)

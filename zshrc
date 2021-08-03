@@ -1,29 +1,43 @@
 # completion before compinit
 # asdf
 if [[ -e $HOME/.asdf/asdf.sh ]]; then
-  # shellcheck disable=SC1090
-  source "$HOME/.asdf/asdf.sh"
+  znap source asdf-vm/asdf asdf.sh
   fpath=("${ASDF_DIR}/completions" $fpath)
 fi
 
 # git-subrepo
 fpath=("$HOME/.dotfiles/zsh-completion" "$HOME/.dotfiles/git-subrepo/share/zsh-completion" $fpath)
 
-# shellcheck disable=SC1090
-source ~/.cache/zsh_plugins.sh
+# bootstrap znap
+zstyle ':znap:*' repos-dir ~/.znap
+source ~/.dotfiles/zsh-snap/znap.zsh
 
-# shellcheck shell=bash
-autoload -Uz compinit && compinit
+#
+znap eval starship 'starship init zsh --print-full-init'
+znap prompt
 
-# completion
-zmodload zsh/complist
-autoload -U +X bashcompinit && bashcompinit
 
-# case-insensitive (all),partial-word and then substring completion
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+ZSH_AUTOSUGGEST_STRATEGY=( history )
+znap source zsh-users/zsh-autosuggestions
 
-# promptinit
-autoload -U promptinit && promptinit
+ZSH_HIGHLIGHT_HIGHLIGHTERS=( main brackets )
+znap source zsh-users/zsh-syntax-highlighting
+
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#7e8294"
+znap source sainnhe/sonokai zsh/.zsh-theme-sonokai-andromeda
+
+# # shellcheck shell=bash
+# autoload -Uz compinit && compinit
+
+# # completion
+# zmodload zsh/complist
+# autoload -U +X bashcompinit && bashcompinit
+
+# # case-insensitive (all),partial-word and then substring completion
+# zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+
+# # promptinit
+# autoload -U promptinit && promptinit
 
 # history
 export HISTSIZE=10000000
@@ -116,13 +130,12 @@ fi
 
 # kubectl
 if command -v kubectl &>/dev/null; then
-  source <(kubectl completion zsh)
+  znap compdef _kubectl 'kubectl completion zsh'
 fi
 
 # shellcheck disable=SC1090
 [[ -e "$HOME/.shell_generic.sh" ]] && source "$HOME/.shell_generic.sh"
 
-eval "$(starship init zsh)"
 if command -v zoxide &>/dev/null; then
   eval "$(zoxide init zsh --cmd j)"
 fi

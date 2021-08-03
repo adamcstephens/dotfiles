@@ -1,5 +1,0 @@
-greymd/docker-zsh-completion
-MikeDacre/tmux-zsh-vim-titles
-sainnhe/sonokai path:zsh/.zsh-theme-sonokai-andromeda
-zsh-users/zsh-autosuggestions
-zsh-users/zsh-syntax-highlighting
