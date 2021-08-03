@@ -44,6 +44,8 @@
     ~/.screenrc: screenrc
     ~/.shell_generic.sh: shell_generic.sh
     ~/.shellcheckrc: shellcheckrc
+    ~/.spacemacs: spacemacs
+    ~/.spacemacs.env: spacemacs.env
     ~/.tmux.conf:
       if: "which tmux"
       path: tmux.conf

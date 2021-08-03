@@ -290,6 +290,9 @@ dcnet() {
   docker run -it --net container:$svc nicolaka/netshoot
 }
 
+# emacs
+alias em="emacs -nw"
+
 # git
 [[ -e ~/.dotfiles/git-subrepo/.rc ]] && source ~/.dotfiles/git-subrepo/.rc
 alias ga='git add'
