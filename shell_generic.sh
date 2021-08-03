@@ -121,6 +121,8 @@ toggle_dark() {
 # OS-specific
 case $(uname) in
   "Darwin")
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+
     export HOMEBREW_NO_AUTO_UPDATE=1
     alias pki="HOMEBREW_NO_AUTO_UPDATE=0 brew install "
     alias pkls="brew list "

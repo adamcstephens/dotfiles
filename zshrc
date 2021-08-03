@@ -123,7 +123,9 @@ fi
 [[ -e "$HOME/.shell_generic.sh" ]] && source "$HOME/.shell_generic.sh"
 
 eval "$(starship init zsh)"
-eval "$(zoxide init zsh --cmd j)"
+if command -v zoxide &>/dev/null; then
+  eval "$(zoxide init zsh --cmd j)"
+fi
 
 [[ -e /usr/share/google-cloud-sdk/completion.zsh.inc ]] && source /usr/share/google-cloud-sdk/completion.zsh.inc
 
