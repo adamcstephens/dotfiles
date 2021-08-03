@@ -1,0 +1,50 @@
+#!/bin/zsh
+zmodload -F zsh/zutil b:zparseopts
+
+znap() {
+  if (( $#@ > 0 )); then
+    local -A opts1=()
+    zparseopts -D -A opts1 - h -help
+    if (( $#@ == 0 )); then
+      .znap.help
+      return
+    fi
+
+    local cmd=$1; shift
+
+    case $cmd in
+      cd | ls )
+        print -u2 'znap: try `'"$cmd ~${${1:+[$1]}:-znap}"'` instead'
+        return $(( sysexits[(i)USAGE] + 63 ))
+        ;;
+      path )
+        print -u2 'znap: try `path+=( ~'"${${1:+[$1]}:-znap}"' )` instead'
+        return $(( sysexits[(i)USAGE] + 63 ))
+        ;;
+      rm )
+        print -u2 'znap: try `rm ~'"${${1:+[$1]}:-znap}"'` instead'
+        return $(( sysexits[(i)USAGE] + 63 ))
+        ;;
+    esac
+
+    local -A opts2=()
+    zparseopts -D -A opts2 h -help
+    local REPLY
+    local func=.znap.$cmd
+    if [[ -v functions[$func] ]]; then
+      if (( $#opts1 > 0 || $#opts2 > 0 )); then
+        .znap.help $cmd
+      else
+        $func $@
+      fi
+    else
+      print -u2 "znap: '$cmd' is not a valid command"
+      .znap.help
+      return $(( sysexits[(i)USAGE] + 63 ))
+    fi
+  else
+    .znap.help
+  fi
+}
+
+znap "$@"

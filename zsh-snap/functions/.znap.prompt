@@ -1,0 +1,82 @@
+#!/bin/zsh
+# instant prompt from repo
+# args: [ <repo> ] <theme>
+zmodload -Fa zsh/files b:zf_mkdir
+zmodload -F zsh/parameter p:functions
+zmodload -Fa zsh/zleparameter p:widgets
+autoload -Uz add-zsh-hook add-zle-hook-widget promptinit
+
+.znap.prompt() {
+  if (( # )); then
+    local repo=~znap/$1; [[ $1 == */* ]] && repo=~[$1]
+    local theme=${2:-${${repo##*/((oh-my-|)zsh-|)}%%((-zsh|)-(prompt|theme)|.zsh)}}
+    if ! .znap.prompt.load $repo $theme; then
+      print -u2 'znap prompt: no such theme:' $@
+      return $(( sysexits[(i)NOINPUT] + 63 ))
+    fi
+  fi
+
+  ..znap.tput civis
+  ..znap.tput sc
+  add-zsh-hook precmd .znap.prompt.precmd
+
+  promptinit
+  if [[ -n $theme ]]; then
+    prompt_themes+=( $theme )
+    prompt $theme
+    ..znap.tput sc
+
+    local precmd=prompt_${theme}_precmd
+    if [[ -n $functions[$precmd] ]]; then
+      $precmd
+
+      # Ensure $precmd doesn't get called twice before the first prompt.
+      functions[:znap:$precmd]=$functions[$precmd]
+      eval "$precmd() {
+        functions[$precmd]=\$functions[:znap:$precmd]
+        unfunction :znap:$precmd
+      }"
+    fi
+  fi
+
+  setopt NO_promptsp
+  [[ -o promptcr ]] &&
+      print -n $'\r'
+  :
+  print -nPr -- "$PS1"
+  ..znap.tput cnorm
+}
+
+.znap.prompt.precmd() {
+  add-zsh-hook -d precmd ${(%):-%N}
+
+  ..znap.tput civis
+  ..znap.tput rc
+
+  # Clean up any mess that syntax highlighting might have made, to prevent an infinite loop.
+  if zstyle -L zle-hook types > /dev/null; then
+    local hook
+    for hook in isearch-{exit,update} line-{pre-redraw,init,finish} history-line-set keymap-select
+    do
+      [[ $widgets[zle-$hook] == user:_zsh_highlight_widget_orig-s<->.<->-r<->-zle-$hook ]] &&
+          zle -N zle-$hook azhw:zle-$hook
+    done
+  fi
+
+  add-zle-hook-widget line-init .znap.prompt.line-init
+
+  return 0
+}
+
+.znap.prompt.line-init() {
+  add-zle-hook-widget -d line-init ${(%):-%N}
+
+  ..znap.tput cnorm
+
+  [[ -v prompt_opts ]] ||
+      setopt promptsp
+
+  return 0
+}
+
+.znap.prompt "$@"

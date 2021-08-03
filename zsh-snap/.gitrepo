@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/git-commands/git-subrepo#readme
+;
+[subrepo]
+	remote = https://github.com/marlonrichert/zsh-snap.git
+	branch = main
+	commit = 4857647f17fc244bad1d0774ccef6fd40c8eed66
+	parent = 18fe8bcce1e324f1bdb5da19882c764f3ecca8d7
+	method = merge
+	cmdver = 0.4.3
