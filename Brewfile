@@ -5,10 +5,7 @@ tap "homebrew/cask-drivers"
 tap "homebrew/cask-fonts"
 tap "homebrew/core"
 tap "homebrew/services"
-brew "xz"
 brew "bat"
-brew "glib"
-brew "pkg-config"
 brew "colordiff"
 brew "coreutils"
 brew "dark-mode"
@@ -16,8 +13,11 @@ brew "direnv"
 brew "gh"
 brew "git"
 brew "git-crypt"
+brew "xz"
+brew "glib"
 brew "gnu-sed"
 brew "gnu-tar"
+brew "pkg-config"
 brew "gnupg"
 brew "gotop"
 brew "grep"
@@ -63,7 +63,11 @@ cask "sonos"
 cask "spotify"
 cask "visual-studio-code"
 cask "xquartz"
-mas "Reddirect", id: 1479320952
+mas "1Password 7", id: 1333542190
+mas "GarageBand", id: 682658836
+mas "Keynote", id: 409183694
+mas "Numbers", id: 409203825
+mas "Pages", id: 409201541
 mas "Webcam Settings", id: 533696630
 mas "WireGuard", id: 1451685025
 mas "Xcode", id: 497799835
