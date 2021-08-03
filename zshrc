@@ -1,4 +1,7 @@
-# completion before compinit
+# bootstrap znap
+zstyle ':znap:*' repos-dir ~/.znap
+source ~/.dotfiles/zsh-snap/znap.zsh
+
 # asdf
 if [[ -e $HOME/.asdf/asdf.sh ]]; then
   znap source asdf-vm/asdf asdf.sh
@@ -7,10 +10,6 @@ fi
 
 # git-subrepo
 fpath=("$HOME/.dotfiles/zsh-completion" "$HOME/.dotfiles/git-subrepo/share/zsh-completion" $fpath)
-
-# bootstrap znap
-zstyle ':znap:*' repos-dir ~/.znap
-source ~/.dotfiles/zsh-snap/znap.zsh
 
 #
 znap eval starship 'starship init zsh --print-full-init'

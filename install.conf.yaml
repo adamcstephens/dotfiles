@@ -10,6 +10,7 @@
     - ~/.gnupg
     - ~/.tmux/plugins
     - ~/.vim
+    - ~/.znap
     - ~/bin
     - ~/git
     - ~/notes
