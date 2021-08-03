@@ -24,6 +24,8 @@ znap source zsh-users/zsh-syntax-highlighting
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#7e8294"
 znap source sainnhe/sonokai zsh/.zsh-theme-sonokai-andromeda
 
+znap source MikeDacre/tmux-zsh-vim-titles
+
 # # shellcheck shell=bash
 # autoload -Uz compinit && compinit
 
