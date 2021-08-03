@@ -43,6 +43,7 @@ if [[ -z "${HOMEBREW_ON_LINUX-}" ]]; then
   HOMEBREW_CORE_DEFAULT_GIT_REMOTE="https://github.com/Homebrew/homebrew-core"
 
   STAT="stat -f"
+  PERMISSION_FORMAT="%A"
   CHOWN="/usr/sbin/chown"
   CHGRP="/usr/bin/chgrp"
   GROUP="admin"
@@ -57,6 +58,7 @@ else
   HOMEBREW_CORE_DEFAULT_GIT_REMOTE="https://github.com/Homebrew/linuxbrew-core"
 
   STAT="stat --printf"
+  PERMISSION_FORMAT="%a"
   CHOWN="/bin/chown"
   CHGRP="/bin/chgrp"
   GROUP="$(id -gn)"
@@ -227,11 +229,11 @@ should_install_command_line_tools() {
 }
 
 get_permission() {
-  $STAT "%A" "$1"
+  $STAT "${PERMISSION_FORMAT}" "$1"
 }
 
 user_only_chmod() {
-  [[ -d "$1" ]] && [[ "$(get_permission "$1")" != "755" ]]
+  [[ -d "$1" ]] && [[ "$(get_permission "$1")" != 75[0145] ]]
 }
 
 exists_but_not_writable() {
@@ -251,7 +253,7 @@ get_group() {
 }
 
 file_not_grpowned() {
-  [[ " $(id -G "$USER") " != *" $(get_group "$1") "*  ]]
+  [[ " $(id -G "$USER") " != *" $(get_group "$1") "* ]]
 }
 
 # Please sync with 'test_ruby()' in 'Library/Homebrew/utils/ruby.sh' from Homebrew/brew repository.
@@ -360,8 +362,14 @@ fi
 HOMEBREW_CORE="${HOMEBREW_REPOSITORY}/Library/Taps/homebrew/homebrew-core"
 
 if [[ "${EUID:-${UID}}" == "0" ]]; then
-  abort "Don't run this as root!"
-elif [[ -d "${HOMEBREW_PREFIX}" && ! -x "${HOMEBREW_PREFIX}" ]]; then
+  # Allow Azure Pipelines/GitHub Actions/Docker/Concourse/Kubernetes to do everything as root (as it's normal there)
+  if ! [[ -f /proc/1/cgroup ]] ||
+     ! grep -E "azpl_job|actions_job|docker|garden|kubepods" -q /proc/1/cgroup; then
+    abort "Don't run this as root!"
+  fi
+fi
+
+if [[ -d "${HOMEBREW_PREFIX}" && ! -x "${HOMEBREW_PREFIX}" ]]; then
   abort "$(cat <<EOABORT
 The Homebrew prefix, ${HOMEBREW_PREFIX}, exists but is not searchable.
 If this is not intentional, please restore the default permissions and
@@ -469,9 +477,12 @@ for dir in "${directories[@]}"; do
 done
 
 user_chmods=()
+mkdirs_user_only=()
 if [[ "${#zsh_dirs[@]}" -gt 0 ]]; then
   for dir in "${zsh_dirs[@]}"; do
-    if user_only_chmod "${dir}"; then
+    if [[ ! -d "${dir}" ]]; then
+      mkdirs_user_only+=("${dir}")
+    elif user_only_chmod "${dir}"; then
       user_chmods+=("${dir}")
     fi
   done
@@ -552,7 +563,7 @@ if [[ -d "${HOMEBREW_PREFIX}" ]]; then
     execute_sudo "/bin/chmod" "g+rwx" "${group_chmods[@]}"
   fi
   if [[ "${#user_chmods[@]}" -gt 0 ]]; then
-    execute_sudo "/bin/chmod" "755" "${user_chmods[@]}"
+    execute_sudo "/bin/chmod" "g-w,o-w" "${user_chmods[@]}"
   fi
   if [[ "${#chowns[@]}" -gt 0 ]]; then
     execute_sudo "$CHOWN" "$USER" "${chowns[@]}"
@@ -571,7 +582,10 @@ fi
 
 if [[ "${#mkdirs[@]}" -gt 0 ]]; then
   execute_sudo "/bin/mkdir" "-p" "${mkdirs[@]}"
-  execute_sudo "/bin/chmod" "g+rwx" "${mkdirs[@]}"
+  execute_sudo "/bin/chmod" "u=rwx,g=rwx" "${mkdirs[@]}"
+  if [[ "${#mkdirs_user_only[@]}" -gt 0 ]]; then
+    execute_sudo "/bin/chmod" "g-w,o-w" "${mkdirs_user_only[@]}"
+  fi
   execute_sudo "$CHOWN" "$USER" "${mkdirs[@]}"
   execute_sudo "$CHGRP" "$GROUP" "${mkdirs[@]}"
 fi
@@ -736,7 +750,7 @@ case "$SHELL" in
 esac
 if [[ "$UNAME_MACHINE" == "arm64" ]] || [[ -n "${HOMEBREW_ON_LINUX-}" ]]; then
   cat <<EOS
-- Add Homebrew to your ${tty_bold}PATH${tty_reset} in ${tty_underline}${shell_profile}${tty_reset}:
+- Run these two commands in your terminal to add Homebrew to your ${tty_bold}PATH${tty_reset}:
     echo 'eval "\$(${HOMEBREW_PREFIX}/bin/brew shellenv)"' >> ${shell_profile}
     eval "\$(${HOMEBREW_PREFIX}/bin/brew shellenv)"
 EOS
@@ -746,7 +760,7 @@ if [[ -n "${non_default_repos}" ]]; then
   if [[ "${#additional_shellenv_commands[@]}" -gt 1 ]]; then
     s="s"
   fi
-  echo "- Add the non-default Git remote${s} for ${non_default_repos} in ${tty_underline}${shell_profile}${tty_reset}:"
+  echo "- Run these commands in your terminal to add the non-default Git remote${s} for ${non_default_repos}:"
   printf "    echo '%s' >> ${shell_profile}\n" "${additional_shellenv_commands[@]}"
   printf "    %s\n" "${additional_shellenv_commands[@]}"
 fi
