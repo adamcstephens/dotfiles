@@ -132,11 +132,7 @@ case $(uname) in
     alias pkr="brew remove "
     alias flushdns='sudo killall -HUP mDNSResponder'
 
-    zstyle :omz:plugins:ssh-agent ssh-add-args -K
-    znap source ohmyzsh/ohmyzsh plugins/ssh-agent
-
-    # shellcheck disable=SC2046
-    pgrep gpg-agent &>/dev/null || eval $(gpg-agent --daemon)
+    # load ssh key using keychain if empty agent
     if [[ -n $SSH_AUTH_SOCK ]] && ! ssh-add -l &>/dev/null; then
       ssh-add -K
     fi

@@ -8,4 +8,9 @@
     ~/.config/kitty/mac.conf: kitty/kitty-mac.conf
     ~/.finicky.js: finicky.js
     ~/.gnupg/gpg-agent.conf: gpg-agent-mac.conf
-    ~/Library/Preferences/com.knollsoft.Rectangle.plist: rectangle.plist
+    ~/Library/LaunchAgents/homebrew.gpg.gpg-agent.plist: LaunchAgents/homebrew.gpg.gpg-agent.plist
+
+- shell:
+    - [launchctl load -F ~/Library/LaunchAgents/homebrew.gpg.gpg-agent.plist, load launchd gpg-agent]
+    - [launchctl start homebrew.gpg.gpg-agent, enable launchd ssh-agent]
+    - [launchctl start com.openssh.ssh-agent, enable launchd ssh-agent]
