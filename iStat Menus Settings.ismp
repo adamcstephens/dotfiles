@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>build</key>
-	<string>1164</string>
+	<string>1177</string>
 	<key>license</key>
 	<dict>
 		<key>email</key>
@@ -29,27 +29,14 @@
 			</dict>
 		</array>
 		<key>Battery_MenubarMode</key>
-		<array>
-			<dict>
-				<key>key</key>
-				<string>2</string>
-				<key>uuid</key>
-				<string>B934CC4E-95A1-475C-BA7D-C6A290F13AAC</string>
-			</dict>
-		</array>
+		<array/>
 		<key>Battery_MenubarModeAirpods</key>
 		<array>
 			<dict>
 				<key>key</key>
-				<string>8</string>
-				<key>uuid</key>
-				<string>8E5CD9F6-B237-4BFE-83D2-F44F0E8D188F</string>
-			</dict>
-			<dict>
-				<key>key</key>
 				<string>6</string>
 				<key>uuid</key>
-				<string>1A68D179-A035-41E4-809C-398A9CECC445</string>
+				<string>E0DBE241-8F2A-4C21-9264-EFA62D02A96B</string>
 			</dict>
 		</array>
 		<key>Battery_MenubarModeBluetooth</key>
@@ -81,13 +68,7 @@
 				<key>key</key>
 				<string>6</string>
 				<key>uuid</key>
-				<string>DEE4D9A4-53F2-4D18-8498-1F15FF2C1A1D</string>
-			</dict>
-			<dict>
-				<key>key</key>
-				<string>5</string>
-				<key>uuid</key>
-				<string>4983FD18-B17B-463B-B994-8E3EE9F87C17</string>
+				<string>21360888-7A87-46D3-B65A-30D4139CF146</string>
 			</dict>
 		</array>
 		<key>Disks_MenubarItems</key>
@@ -107,73 +88,23 @@
 		<array>
 			<dict>
 				<key>model</key>
-				<string>MacBookPro16,1</string>
+				<string>MacBookPro17,1</string>
 				<key>name</key>
 				<string>Medium</string>
 				<key>speeds</key>
-				<array>
-					<dict>
-						<key>fan</key>
-						<string>F0Ac</string>
-						<key>high</key>
-						<integer>5297</integer>
-						<key>low</key>
-						<integer>1836</integer>
-						<key>percentage</key>
-						<integer>50</integer>
-						<key>speed</key>
-						<integer>3566</integer>
-					</dict>
-					<dict>
-						<key>fan</key>
-						<string>F1Ac</string>
-						<key>high</key>
-						<integer>4905</integer>
-						<key>low</key>
-						<integer>1700</integer>
-						<key>percentage</key>
-						<integer>50</integer>
-						<key>speed</key>
-						<integer>3302</integer>
-					</dict>
-				</array>
+				<array/>
 				<key>uuid</key>
-				<string>F065F46D-5466-4B37-AE3D-E85027D2561E</string>
+				<string>BE5FF74F-2DCB-492B-AD33-24111411DEF8</string>
 			</dict>
 			<dict>
 				<key>model</key>
-				<string>MacBookPro16,1</string>
+				<string>MacBookPro17,1</string>
 				<key>name</key>
 				<string>High</string>
 				<key>speeds</key>
-				<array>
-					<dict>
-						<key>fan</key>
-						<string>F0Ac</string>
-						<key>high</key>
-						<integer>5297</integer>
-						<key>low</key>
-						<integer>1836</integer>
-						<key>percentage</key>
-						<integer>100</integer>
-						<key>speed</key>
-						<integer>5297</integer>
-					</dict>
-					<dict>
-						<key>fan</key>
-						<string>F1Ac</string>
-						<key>high</key>
-						<integer>4905</integer>
-						<key>low</key>
-						<integer>1700</integer>
-						<key>percentage</key>
-						<integer>100</integer>
-						<key>speed</key>
-						<integer>4905</integer>
-					</dict>
-				</array>
+				<array/>
 				<key>uuid</key>
-				<string>1A80FE2C-8F0D-4DE9-B043-A9266CE5E65D</string>
+				<string>05C563B5-0A76-4497-9791-4ED3DB950063</string>
 			</dict>
 		</array>
 		<key>Memory_MenubarMode</key>
@@ -202,6 +133,10 @@
 		<key>Migrated_6.22</key>
 		<true/>
 		<key>Migrated_6.5</key>
+		<true/>
+		<key>Migrated_6.52</key>
+		<true/>
+		<key>Migrated_6.60_ARM</key>
 		<true/>
 		<key>Network_MenubarMode</key>
 		<array>
@@ -283,10 +218,8 @@
 		<key>StatusItems-Order</key>
 		<array>
 			<integer>1</integer>
-			<integer>7</integer>
 			<integer>2</integer>
 			<integer>4</integer>
-			<integer>6</integer>
 		</array>
 		<key>Theme-SeperateStyles</key>
 		<true/>
@@ -451,14 +384,14 @@
 		<key>Zarya-TLE</key>
 		<dict>
 			<key>time</key>
-			<real>1625577361.6688371</real>
+			<real>1628349240.4177098</real>
 			<key>tle</key>
 			<string>ISS (ZARYA)             
-1 25544U 98067A   21187.46697458  .00000431  00000-0  16068-4 0  9991
-2 25544  51.6441 247.3821 0002094 139.8380 359.0994 15.48767607291582</string>
+1 25544U 98067A   21219.08610569  .00000949  00000-0  25444-4 0  9995
+2 25544  51.6433  91.0271 0001374 260.4652 256.5001 15.48879336296486</string>
 		</dict>
 	</dict>
 	<key>version</key>
-	<string>6.51</string>
+	<string>6.60</string>
 </dict>
 </plist>
