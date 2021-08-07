@@ -291,7 +291,7 @@ dcnet() {
 }
 
 # emacs
-alias em="emacs -nw"
+alias em="emacsclient -t"
 
 # git
 [[ -e ~/.dotfiles/git-subrepo/.rc ]] && source ~/.dotfiles/git-subrepo/.rc
