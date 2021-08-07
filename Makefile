@@ -15,7 +15,7 @@ install-asdf: bootstrap-asdf update-asdf
 
 .PHONY: bootstrap-asdf
 bootstrap-asdf:
-	git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.8.0
+	git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.8.1
 	$(HOME)/.asdf/bin/asdf update
 
 .PHONY: antibody
