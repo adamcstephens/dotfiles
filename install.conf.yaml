@@ -8,6 +8,7 @@
 - create:
     - ~/.cache/znap
     - ~/.gnupg
+    - ~/.ssh
     - ~/.tmux/plugins
     - ~/.vim
     - ~/.znap
