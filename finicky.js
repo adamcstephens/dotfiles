@@ -1,6 +1,7 @@
 module.exports = {
   defaultBrowser: ["Firefox", "Safari", "Google Chrome"],
   options: {
+    hideIcon: true,
     urlShorteners: ["applications.zoom.us", "bit.ly", "github.co", "t.co"],
   },
   rewrite: [
@@ -14,25 +15,23 @@ module.exports = {
     {
       match: /^https?:\/\/([a-z]+\.)?bluejeans\.com\/[0-9]+/,
       url({ url }) {
-        var path = url.pathname.replace(/([0-9]+)/, "id/$1");
+        var path = url.pathname.replace(/([0-9]+)/, "id/$1")
         return {
           ...url,
           host: "meet",
           pathname: path,
           protocol: "bjnb",
-        };
+        }
       },
     },
     {
       match: ({ url }) => url.search.includes("utm_"),
       url({ url }) {
-        const search = url.search
-          .split("&")
-          .filter((part) => !part.startsWith("utm_"));
+        const search = url.search.split("&").filter((part) => !part.startsWith("utm_"))
         return {
           ...url,
           search: search.join("&"),
-        };
+        }
       },
     },
     {
@@ -61,4 +60,4 @@ module.exports = {
       browser: "Spotify",
     },
   ],
-};
+}
