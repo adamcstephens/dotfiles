@@ -182,7 +182,7 @@ It should only modify the values of Spacemacs settings."
    ;; directory. A string value must be a path to an image format supported
    ;; by your Emacs build.
    ;; If the value is nil then no banner is displayed. (default 'official)
-   dotspacemacs-startup-banner nil
+   dotspacemacs-startup-banner 'official
 
    ;; List of items to show in startup buffer or an association list of
    ;; the form `(list-type . list-size)`. If nil then it is disabled.
@@ -553,21 +553,6 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded.")
-  (setq wl-copy-process nil)
-  (defun wl-copy (text)
-    (setq wl-copy-process (make-process :name "wl-copy"
-                                        :buffer nil
-                                        :command '("wl-copy" "-f" "-n")
-                                        :connection-type 'pipe))
-    (process-send-string wl-copy-process text)
-    (process-send-eof wl-copy-process))
-  (defun wl-paste ()
-    (if (and wl-copy-process (process-live-p wl-copy-process))
-        nil ; should return nil if we're the current paste owner
-      (shell-command-to-string "wl-paste -n | tr -d \r")))
-  (setq interprogram-cut-function 'wl-copy)
-  (setq interprogram-paste-function 'wl-paste)
-
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
