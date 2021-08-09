@@ -57,3 +57,5 @@
       doom-variable-pitch-font (font-spec :family "JetBrainsMono Nerd Font") ; inherits `doom-font''s :size
       doom-unicode-font (font-spec :family "JetBrainsMono Nerd Font" :size 12)
       doom-big-font (font-spec :family "JetBrainsMono Nerd Font" :size 19))
+
+(setq doom-localleader-key ",")
