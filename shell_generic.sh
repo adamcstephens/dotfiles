@@ -279,6 +279,9 @@ dcnet() {
 }
 
 # emacs
+if [ -d ~/.emacs.d/bin ]; then
+  export PATH="$PATH:$HOME/.emacs.d/bin"
+fi
 alias em="emacsclient -t"
 
 # git
