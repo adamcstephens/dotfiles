@@ -6,7 +6,7 @@
 [subrepo]
 	remote = https://github.com/marlonrichert/zsh-snap.git
 	branch = main
-	commit = 4857647f17fc244bad1d0774ccef6fd40c8eed66
-	parent = 18fe8bcce1e324f1bdb5da19882c764f3ecca8d7
+	commit = 6ed9cce302f52f579cb8758e6f28e05d5a747c46
+	parent = b9b4585051175f910608a6b57b6173aa55bd4876
 	method = merge
 	cmdver = 0.4.3
