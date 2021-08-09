@@ -9,11 +9,8 @@
     ~/.finicky.js: finicky.js
     ~/.gnupg/gpg-agent.conf: gpg-agent-mac.conf
     ~/Library/LaunchAgents/homebrew.gpg.gpg-agent.plist: LaunchAgents/homebrew.gpg.gpg-agent.plist
-    ~/Library/LaunchAgents/valkor.emacs.plist: LaunchAgents/valkor.emacs.plist
 
 - shell:
     - [launchctl load -F ~/Library/LaunchAgents/homebrew.gpg.gpg-agent.plist, load launchd gpg-agent]
-    - [launchctl load -F ~/Library/LaunchAgents/valkor.emacs.plist, load launchd emacs]
     - [launchctl start com.openssh.ssh-agent, enable launchd ssh-agent]
     - [launchctl start homebrew.gpg.gpg-agent, enable launchd gpg-agent]
-    - [launchctl start valkor.emacs, enable launchd emacs]

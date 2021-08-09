@@ -30,6 +30,7 @@
     ~/.config/ripgrep/ripgreprc: ripgreprc
     ~/.config/rubocop/config.yml: rubocop.yml
     ~/.config/starship.toml: starship.toml
+    ~/.doom.d: doom.d
     ~/.gitconfig: gitconfig
     ~/.gitignore: gitignore
     ~/.gnupg/gpg.conf:
@@ -45,9 +46,6 @@
     ~/.screenrc: screenrc
     ~/.shell_generic.sh: shell_generic.sh
     ~/.shellcheckrc: shellcheckrc
-    ~/.emacs.d: spacemacs
-    ~/.spacemacs: spacemacs.el
-    ~/.spacemacs.env: spacemacs.env
     ~/.tmux.conf:
       if: "which tmux"
       path: tmux.conf
