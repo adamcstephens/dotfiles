@@ -53,7 +53,8 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 ;;; Add to ~/.doom.d/config.el
-(setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 12 :weight 'semi-light)
+
+(setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 12.5 :weight 'semi-light)
       doom-variable-pitch-font (font-spec :family "JetBrainsMono Nerd Font") ; inherits `doom-font''s :size
-      doom-unicode-font (font-spec :family "JetBrainsMono Nerd Font" :size 12)
+      doom-unicode-font (font-spec :family "JetBrainsMono Nerd Font" :size 12.5)
       doom-big-font (font-spec :family "JetBrainsMono Nerd Font" :size 19))
