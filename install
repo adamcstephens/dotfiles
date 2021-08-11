@@ -15,15 +15,15 @@ cd "${BASEDIR}"
 [ -h $HOME/.bashrc ] || rm -fv $HOME/.bashrc
 [ -h $HOME/.bash_profile ] || rm -fv $HOME/.bash_profile
 
-"${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}" "${@}"
+"${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}" -p ~/.dotfiles/dotbot-git/git.py "${@}"
 
 if [ -e "$OSCONFIG" ]; then
-  "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${OSCONFIG}" "${@}"
+  "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${OSCONFIG}" -p ~/.dotfiles/dotbot-git/git.py "${@}"
 fi
 
 HOSTCONFIG="install.$(hostname -s).yaml"
 if [ -e $HOSTCONFIG ]; then
-  "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${HOSTCONFIG}" "${@}"
+  "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${HOSTCONFIG}" -p ~/.dotfiles/dotbot-git/git.py "${@}"
 fi
 
 if ! command -v starship >/dev/null; then

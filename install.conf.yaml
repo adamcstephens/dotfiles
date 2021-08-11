@@ -18,6 +18,10 @@
     - ~/projects
     - ~/tmp
 
+- git:
+    '~/.emacs.d':
+        url: https://github.com/hlissner/doom-emacs.git
+
 - link:
     ~/.bash_profile: bash_profile
     ~/.bashrc: bashrc
