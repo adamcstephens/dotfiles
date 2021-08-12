@@ -5,6 +5,7 @@
 
 - create:
     - ~/.config/systemd/user
+    - ~/.local/mpd
 
 - link:
     ~/.config/dunst/dunstrc: dunstrc
