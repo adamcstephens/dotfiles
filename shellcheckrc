@@ -1,2 +1,4 @@
 # disable shebang check
 disable=SC2148
+# disable [[ POSIX warning
+disable=SC2039

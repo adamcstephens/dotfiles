@@ -284,6 +284,11 @@ if [ -d ~/.emacs.d/bin ]; then
 fi
 alias em="emacsclient -t"
 
+# fd
+if command -v fdfind &>/dev/null; then
+  alias fd=fdfind
+fi
+
 # git
 [[ -e ~/.dotfiles/git-subrepo/.rc ]] && source ~/.dotfiles/git-subrepo/.rc
 alias ga='git add'
