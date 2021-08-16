@@ -59,5 +59,9 @@ module.exports = {
       match: finicky.matchDomains("open.spotify.com"),
       browser: "Spotify",
     },
+    {
+      match: /^https?:\/\/teams\.microsoft\.com\/l\/meetup\-join\/.*$/,
+      browser: "Microsoft Teams",
+    },
   ],
 }
