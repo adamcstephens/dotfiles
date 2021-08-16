@@ -68,7 +68,16 @@
 
 (after! elfeed-protocol
         (setq elfeed-feeds '(
-                        ("fever+https://adam@rss.egret.valkor.net"
-                                :api-url "https://rss.egret.valkor.net/api/fever.php"
-                                :password (password-store-get "freshrss/api")
-                                ))))
+                ("fever+https://adam@rss.egret.valkor.net"
+                        :api-url "https://rss.egret.valkor.net/api/fever.php"
+                        :password (password-store-get "freshrss/api")
+                        ))))
+
+(cond (IS-MAC
+        (add-to-list 'exec-path "/opt/homebrew/bin")))
+
+;; Disable completion of words in org mode
+(defun zz/adjust-org-company-backends ()
+  (remove-hook 'after-change-major-mode-hook '+company-init-backends-h)
+  (setq-local company-backends nil))
+  (add-hook! org-mode (zz/adjust-org-company-backends))
