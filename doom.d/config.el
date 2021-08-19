@@ -81,3 +81,6 @@
   (remove-hook 'after-change-major-mode-hook '+company-init-backends-h)
   (setq-local company-backends nil))
   (add-hook! org-mode (zz/adjust-org-company-backends))
+
+;; automatically revert buffers to on-disk
+(global-auto-revert-mode t)
