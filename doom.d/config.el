@@ -93,3 +93,44 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 
 ;; automatically revert buffers to on-disk
 (global-auto-revert-mode t)
+
+(after! org
+        (require 'ox-latex)
+
+        (setq org-latex-classes nil)
+        (add-to-list 'org-latex-classes
+             '("syllabus"
+               "\\documentclass[11pt]{article}
+\\usepackage[margin=1in]{geometry}
+\\usepackage{graphicx,wrapfig,subfig}
+\\usepackage{fontspec}
+\\setmainfont{Times New Roman}
+\\usepackage{caption,anyfontsize}
+\\makeatletter
+% here, adjust captions
+\\l@addto@macro\\captionfont{\\fontsize{9}{7}\\selectfont}
+\\makeatother
+% required to change the spacing
+\\usepackage{setspace}
+%\\doublespacing
+\\usepackage{boxedminipage}
+\\usepackage{fancyhdr}
+\\pagestyle{fancy}
+%clear default header/footer
+\\fancyhf{}
+\\usepackage{lastpage}
+% center sections
+\\usepackage{sectsty}
+\\sectionfont{\\centering}
+% move title up, but this still leaves space to section
+%\\usepackage{titling}
+%\\setlength{\\droptitle}{-10em}
+[DEFAULT-PACKAGES]
+% customize link colors
+\\hypersetup{colorlinks = true, urlcolor = blue, linkcolor = black}"
+                ("\\section{%s}" . "\\section*{%s}")
+                ("\\subsection{%s}" . "\\subsection*{%s}")
+                ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                ("\\paragraph{%s}" . "\\paragraph*{%s}")))
+
+        (setq org-latex-compiler "xelatex"))
