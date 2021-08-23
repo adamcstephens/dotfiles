@@ -125,6 +125,8 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 % move title up, but this still leaves space to section
 %\\usepackage{titling}
 %\\setlength{\\droptitle}{-10em}
+\\usepackage[table]{xcolor}
+\\usepackage{colortbl}
 [DEFAULT-PACKAGES]
 % customize link colors
 \\hypersetup{colorlinks = true, urlcolor = blue, linkcolor = black}"
@@ -134,3 +136,6 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
                 ("\\paragraph{%s}" . "\\paragraph*{%s}")))
 
         (setq org-latex-compiler "xelatex"))
+
+(after! ispell
+        (setq ispell-personal-dictionary "~/.aspell.en.pws"))
