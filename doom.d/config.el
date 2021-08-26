@@ -61,17 +61,17 @@
 (setq doom-localleader-key ",")
 
 (after! elfeed
-        (setq elfeed-use-curl t)
-        (elfeed-set-timeout 120)
-        (add-hook! 'elfeed-search-mode-hook 'elfeed-update)
-        (elfeed-protocol-enable))
+  (setq elfeed-use-curl t)
+  (elfeed-set-timeout 120)
+  (add-hook! 'elfeed-search-mode-hook 'elfeed-update)
+  (elfeed-protocol-enable))
 
 (after! elfeed-protocol
-        (setq elfeed-feeds '(
-                ("fever+https://adam@rss.egret.valkor.net"
-                        :api-url "https://rss.egret.valkor.net/api/fever.php"
-                        :password (password-store-get "freshrss/api")
-                        ))))
+  (setq elfeed-feeds '(
+    ("fever+https://adam@rss.egret.valkor.net"
+      :api-url "https://rss.egret.valkor.net/api/fever.php"
+      :password (password-store-get "freshrss/api")
+      ))))
 
 (defun set-exec-path-from-shell-PATH ()
   "Set up Emacs' `exec-path' and PATH environment variable to match that used by the user's shell.
@@ -85,7 +85,7 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 (cond (IS-MAC
        (set-exec-path-from-shell-PATH)))
 
-;; Disable completion of words in org mode
+;; disable completion of words in org mode
 (defun zz/adjust-org-company-backends ()
   (remove-hook 'after-change-major-mode-hook '+company-init-backends-h)
   (setq-local company-backends nil))
@@ -95,12 +95,14 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 (global-auto-revert-mode t)
 
 (after! org
-        (require 'ox-latex)
+  ;; Interpret "_" and "^" for export when braces are used.
+  (setq org-export-with-sub-superscripts '{})
+  (require 'ox-latex)
 
-        (setq org-latex-classes nil)
-        (add-to-list 'org-latex-classes
-             '("syllabus"
-               "\\documentclass[11pt]{article}
+  (setq org-latex-classes nil)
+  (add-to-list 'org-latex-classes
+       '("syllabus"
+         "\\documentclass[11pt]{article}
 \\usepackage[margin=1in]{geometry}
 \\usepackage{graphicx,wrapfig,subfig}
 \\usepackage{fontspec}
@@ -127,15 +129,19 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 %\\setlength{\\droptitle}{-10em}
 \\usepackage[table]{xcolor}
 \\usepackage{colortbl}
+\\usepackage{indentfirst}
 [DEFAULT-PACKAGES]
 % customize link colors
 \\hypersetup{colorlinks = true, urlcolor = blue, linkcolor = black}"
-                ("\\section{%s}" . "\\section*{%s}")
-                ("\\subsection{%s}" . "\\subsection*{%s}")
-                ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-                ("\\paragraph{%s}" . "\\paragraph*{%s}")))
+    ("\\section{%s}" . "\\section*{%s}")
+    ("\\subsection{%s}" . "\\subsection*{%s}")
+    ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+    ("\\paragraph{%s}" . "\\paragraph*{%s}")))
 
-        (setq org-latex-compiler "xelatex"))
+  (setq org-latex-compiler "xelatex"))
+
+(after! org-re-reveal
+  (setq org-re-reveal-theme "black"))
 
 (after! ispell
-        (setq ispell-personal-dictionary "~/.aspell.en.pws"))
+  (setq ispell-personal-dictionary "~/.aspell.en.pws"))
