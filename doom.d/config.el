@@ -25,7 +25,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-one)
+(setq doom-theme 'doom-vibrant)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -59,19 +59,6 @@
       doom-big-font (font-spec :family "JetBrainsMono Nerd Font" :size 19))
 
 (setq doom-localleader-key ",")
-
-(after! elfeed
-  (setq elfeed-use-curl t)
-  (elfeed-set-timeout 120)
-  (add-hook! 'elfeed-search-mode-hook 'elfeed-update)
-  (elfeed-protocol-enable))
-
-(after! elfeed-protocol
-  (setq elfeed-feeds '(
-    ("fever+https://adam@rss.egret.valkor.net"
-      :api-url "https://rss.egret.valkor.net/api/fever.php"
-      :password (password-store-get "freshrss/api")
-      ))))
 
 (defun set-exec-path-from-shell-PATH ()
   "Set up Emacs' `exec-path' and PATH environment variable to match that used by the user's shell.
@@ -129,7 +116,6 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 %\\setlength{\\droptitle}{-10em}
 \\usepackage[table]{xcolor}
 \\usepackage{colortbl}
-\\usepackage{indentfirst}
 [DEFAULT-PACKAGES]
 % customize link colors
 \\hypersetup{colorlinks = true, urlcolor = blue, linkcolor = black}"
@@ -145,3 +131,6 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 
 (after! ispell
   (setq ispell-personal-dictionary "~/.aspell.en.pws"))
+
+(after! evil
+  (setq evil-kill-on-visual-paste nil))
