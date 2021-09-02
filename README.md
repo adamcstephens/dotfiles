@@ -7,7 +7,7 @@ git clone https://github.com/adamcstephens/dotfiles ~/.dotfiles
 # OR
 git clone https://git.sr.ht/~adamcstephens/dotfiles ~/.dotfiles
 cd ~/.dotfiles
-./install
+make bootstrap
 ```
 
 ## Tools

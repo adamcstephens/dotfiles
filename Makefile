@@ -1,6 +1,13 @@
 .PHONY: default
 default:
 
+.PHONY: bootstrap
+bootstrap: install update-vim
+
+.PHONY: install
+install:
+	./install
+
 .PHONY: backup-windows-terminal
 backup-windows-terminal:
 	cp /mnt/c/Users/adam/AppData/Local/Packages/Microsoft.WindowsTerminalPreview_*/LocalState/settings.json ./windowsterminal-settings.json
