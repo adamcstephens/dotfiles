@@ -8,7 +8,7 @@ znap prompt
 
 # asdf
 if [[ -e $HOME/.asdf/asdf.sh ]]; then
-  znap source asdf-vm/asdf asdf.sh
+  source $HOME/.asdf/asdf.sh
   fpath=("${ASDF_DIR}/completions" $fpath)
 fi
 

@@ -15,6 +15,11 @@ cd "${BASEDIR}"
 [ -h $HOME/.bashrc ] || rm -fv $HOME/.bashrc
 [ -h $HOME/.bash_profile ] || rm -fv $HOME/.bash_profile
 
+if [ ! -e ~/.asdf ]; then
+  make bootstrap-asdf
+  source $HOME/.asdf/asdf.sh
+fi
+
 "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}" -p ~/.dotfiles/dotbot-git/git.py "${@}"
 
 if [ -e "$OSCONFIG" ]; then
