@@ -2,7 +2,7 @@
 default:
 
 .PHONY: bootstrap
-bootstrap: install update-vim
+bootstrap: install update-vim update-bins
 
 .PHONY: install
 install:

@@ -17,7 +17,7 @@ cd "${BASEDIR}"
 
 if [ ! -e ~/.asdf ]; then
   make bootstrap-asdf
-  source $HOME/.asdf/asdf.sh
+  . $HOME/.asdf/asdf.sh
 fi
 
 "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}" -p ~/.dotfiles/dotbot-git/git.py "${@}"
@@ -29,11 +29,4 @@ fi
 HOSTCONFIG="install.$(hostname -s).yaml"
 if [ -e $HOSTCONFIG ]; then
   "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${HOSTCONFIG}" -p ~/.dotfiles/dotbot-git/git.py "${@}"
-fi
-
-if ! command -v starship >/dev/null; then
-  make install-starship
-fi
-if ! command -v zoxide >/dev/null; then
-  make install-zoxide
 fi
