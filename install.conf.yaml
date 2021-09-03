@@ -18,6 +18,9 @@
     - ~/projects
     - ~/tmp
 
+- asdf:
+  - plugin: python
+
 - git:
     '~/.emacs.d':
         url: https://github.com/hlissner/doom-emacs.git

@@ -9,6 +9,8 @@ DOTBOT_DIR="dotbot"
 DOTBOT_BIN="bin/dotbot"
 BASEDIR="${HOME}/.dotfiles"
 
+PLUGINS="-p dotbot-git/git.py -p dotbot-asdf/asdf.py"
+
 cd "${BASEDIR}"
 
 # delete some stock files
@@ -20,13 +22,13 @@ if [ ! -e ~/.asdf ]; then
   . $HOME/.asdf/asdf.sh
 fi
 
-"${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}" -p ~/.dotfiles/dotbot-git/git.py "${@}"
+"${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}" $PLUGINS "${@}"
 
 if [ -e "$OSCONFIG" ]; then
-  "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${OSCONFIG}" -p ~/.dotfiles/dotbot-git/git.py "${@}"
+  "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${OSCONFIG}" $PLUGINS "${@}"
 fi
 
 HOSTCONFIG="install.$(hostname -s).yaml"
 if [ -e $HOSTCONFIG ]; then
-  "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${HOSTCONFIG}" -p ~/.dotfiles/dotbot-git/git.py "${@}"
+  "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${HOSTCONFIG}" $PLUGINS "${@}"
 fi
