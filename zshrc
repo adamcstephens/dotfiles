@@ -4,7 +4,7 @@ source ~/.dotfiles/zsh-snap/znap.zsh
 
 # prompt
 znap eval starship '~/bin/starship init zsh --print-full-init'
-znap prompt
+# znap prompt
 
 # asdf
 if [[ -e $HOME/.asdf/asdf.sh ]]; then
