@@ -2,7 +2,7 @@
 default:
 
 .PHONY: bootstrap
-bootstrap: install update-vim update-bins
+bootstrap: install-asdf install update-vim update-bins
 
 .PHONY: install
 install:
@@ -22,8 +22,7 @@ install-asdf: bootstrap-asdf update-asdf
 
 .PHONY: bootstrap-asdf
 bootstrap-asdf:
-	git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.8.1
-	$(HOME)/.asdf/bin/asdf update
+	[ -e ~/.asdf ] || git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.8.1
 
 .PHONY: antibody
 antibody:
@@ -44,6 +43,7 @@ terminfo-italic:
 
 .PHONY: update-asdf
 update-asdf:
+	$(HOME)/.asdf/bin/asdf update
 	if [ -e $(HOME)/.asdf/plugins ]; then $(HOME)/.asdf/bin/asdf plugin-update --all; fi
 
 .PHONY: update-vim

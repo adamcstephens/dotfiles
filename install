@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 set -e
 
@@ -17,10 +17,7 @@ cd "${BASEDIR}"
 [ -h $HOME/.bashrc ] || rm -fv $HOME/.bashrc
 [ -h $HOME/.bash_profile ] || rm -fv $HOME/.bash_profile
 
-if [ ! -e ~/.asdf ]; then
-  make bootstrap-asdf
-  . $HOME/.asdf/asdf.sh
-fi
+. $HOME/.asdf/asdf.sh
 
 "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}" $PLUGINS "${@}"
 
