@@ -226,12 +226,14 @@ if command -v ag &> /dev/null; then
 fi
 
 # ansible
+alias ad='ansible-doc '
 alias ap='ansible-playbook '
 alias ac='ansible-container '
 alias ad='ansible-doc'
 
 # asdf
 export ASDF_PYTHON_DEFAULT_PACKAGES_FILE=$HOME/.dotfiles/python-packages
+export KERL_CONFIGURE_OPTIONS="--disable-debug --without-javac"
 
 # bundle
 alias be='bundle exec '

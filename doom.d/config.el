@@ -84,11 +84,17 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 (after! org
   ;; Interpret "_" and "^" for export when braces are used.
   (setq org-export-with-sub-superscripts '{})
+  (setq org-link-descriptive nil)
   (require 'ox-latex)
 
-  (setq org-latex-classes nil)
-  (add-to-list 'org-latex-classes
-       '("syllabus"
+  (setq org-latex-classes
+       '(("article" "\\documentclass[11pt]{article}"
+  ("\\section{%s}" . "\\section*{%s}")
+  ("\\subsection{%s}" . "\\subsection*{%s}")
+  ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+  ("\\paragraph{%s}" . "\\paragraph*{%s}")
+  ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))
+        ("syllabus"
          "\\documentclass[11pt]{article}
 \\usepackage[margin=1in]{geometry}
 \\usepackage{graphicx,wrapfig,subfig}
@@ -122,15 +128,23 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
     ("\\section{%s}" . "\\section*{%s}")
     ("\\subsection{%s}" . "\\subsection*{%s}")
     ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-    ("\\paragraph{%s}" . "\\paragraph*{%s}")))
+    ("\\paragraph{%s}" . "\\paragraph*{%s}"))))
 
   (setq org-latex-compiler "xelatex"))
 
 (after! org-re-reveal
-  (setq org-re-reveal-theme "black"))
+  (setq org-re-reveal-theme "black")
+  (setq org-re-reveal-history t)
+  (setq org-re-reveal-center t))
 
 (after! ispell
   (setq ispell-personal-dictionary "~/.aspell.en.pws"))
 
 (after! evil
   (setq evil-kill-on-visual-paste nil))
+
+;; don't prompt on quit
+(setq confirm-kill-emacs nil)
+
+(setq js-indent-level 2)
+(setq standard-indent 2)
