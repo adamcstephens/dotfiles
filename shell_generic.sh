@@ -227,6 +227,7 @@ fi
 # ansible
 alias ap='ansible-playbook '
 alias ac='ansible-container '
+alias ad='ansible-doc'
 
 # asdf
 export ASDF_PYTHON_DEFAULT_PACKAGES_FILE=$HOME/.dotfiles/python-packages
@@ -343,6 +344,11 @@ gitignore() {
 if command -v gpgconf > /dev/null && [[ -n "$XDG_RUNTIME_DIR" && -d "$XDG_RUNTIME_DIR" ]]; then
   [ -e "$(gpgconf --list-dirs agent-socket)" ] || gpgconf --create-socketdir
 fi
+gpgfwd() {
+  host=$1
+  scp ~/.gnupg/pubring.kbx $host:.gnupg/
+  scp ~/.gnupg/trustdb.gpg $host:.gnupg/
+}
 
 # grep
 export GREP_COLOR='3;32'

@@ -2,10 +2,14 @@
 default:
 
 .PHONY: bootstrap
-bootstrap: install-asdf install update-vim update-bins
+bootstrap: install-packages install-asdf install-dotbot update-vim update-bins
 
-.PHONY: install
-install:
+.PHONY: bootstrap-dev
+bootstrap-dev:
+	~/.dotfiles/bin/install-packages.sh dev
+
+.PHONY: install-dotbot
+install-dotbot:
 	./install
 
 .PHONY: backup-windows-terminal
@@ -23,6 +27,10 @@ install-asdf: bootstrap-asdf update-asdf
 .PHONY: bootstrap-asdf
 bootstrap-asdf:
 	[ -e ~/.asdf ] || git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.8.1
+
+.PHONY: install-packages
+install-packages:
+	~/.dotfiles/bin/install-packages.sh
 
 .PHONY: antibody
 antibody:

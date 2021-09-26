@@ -81,3 +81,16 @@ fi
 
 # fzf
 [[ -e ~/.fzf.bash ]] && source ~/.fzf.bash
+
+if [[ -e ~/.asdf/asdf.sh ]]; then
+  source ~/.asdf/asdf.sh
+  source ~/.asdf/completions/asdf.bash
+fi
+
+if command -v starship &>/dev/null; then
+  eval "$(starship init bash)"
+fi
+
+if command -v zoxide &>/dev/null; then
+  eval "$(zoxide init bash --cmd j)"
+fi
