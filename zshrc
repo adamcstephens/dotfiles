@@ -3,7 +3,7 @@ zstyle ':znap:*' repos-dir ~/.znap
 source ~/.dotfiles/zsh-snap/znap.zsh
 
 # prompt
-znap eval starship '~/bin/starship init zsh --print-full-init'
+eval "$(~/bin/starship init zsh --print-full-init)"
 # znap prompt
 
 # asdf
