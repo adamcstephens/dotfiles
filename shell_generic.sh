@@ -28,6 +28,7 @@ alias esl="exec $SHELL -l"
 # custom terminal overrides
 if [[ "$TERM" == "xterm-screen-256color" ]]; then
   NEWTERM="xterm-256color"
+  alias emacsclient="TERM=$NEWTERM emacsclient"
   alias lxc="TERM=$NEWTERM lxc"
   alias multipass="TERM=$NEWTERM multipass"
   alias ssh="TERM=$NEWTERM ssh"
@@ -62,7 +63,7 @@ edit_note() {
   then
     code "$filename"
   else
-    vim "$filename"
+    TERM=xterm-256color emacsclient -t "$filename"
   fi
 }
 find_note() {
@@ -483,4 +484,6 @@ then
   if [[ $TERM_PROGRAM_VERSION == *-insider ]]; then
     alias code=code-insiders
   fi
+else
+  alias vim="TERM=xterm-256color emacsclient -t"
 fi
