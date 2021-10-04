@@ -49,6 +49,10 @@ terminfo-italic:
 	PATH="/opt/homebrew/opt/ncurses/bin:/usr/local/opt/ncurses/bin:$(PATH)" tic -x -o $(HOME)/.terminfo xterm-screen-256color.terminfo
 	grep TERM=xterm-screen-256color ~/.shell_local.sh || echo "export TERM=xterm-screen-256color" >> ~/.shell_local.sh
 
+.PHONY: terminfo-italic-global
+terminfo-italic-global:
+	sudo PATH="/opt/homebrew/opt/ncurses/bin:/usr/local/opt/ncurses/bin:$(PATH)" tic -x -o /usr/share/terminfo xterm-screen-256color.terminfo
+
 .PHONY: update-asdf
 update-asdf:
 	$(HOME)/.asdf/bin/asdf update
