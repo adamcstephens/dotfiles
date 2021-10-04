@@ -82,13 +82,26 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 (global-auto-revert-mode t)
 
 (after! org
+  (require 'ox-latex)
+
   ;; Interpret "_" and "^" for export when braces are used.
   (setq org-export-with-sub-superscripts '{})
   (setq org-link-descriptive nil)
-  (require 'ox-latex)
 
+  ;; syntax highlight latex export
+  (setq org-latex-listings 'minted
+      org-latex-packages-alist '(("" "minted"))
+      org-latex-pdf-process
+      '("xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+        "xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
   (setq org-latex-classes
-       '(("article" "\\documentclass[11pt]{article}"
+       '(("article" "\\documentclass[11pt]{article}
+\\usepackage{fontspec}
+\\setmainfont{Times New Roman}
+% dont indent paragraphs
+\\usepackage{parskip}
+[DEFAULT-PACKAGES]
+\\hypersetup{colorlinks = true, urlcolor = blue, linkcolor = black}"
   ("\\section{%s}" . "\\section*{%s}")
   ("\\subsection{%s}" . "\\subsection*{%s}")
   ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
@@ -132,16 +145,17 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 
   (setq org-latex-compiler "xelatex"))
 
-(after! org-re-reveal
-  (setq org-re-reveal-theme "black")
-  (setq org-re-reveal-history t)
-  (setq org-re-reveal-center t))
+;; (after! org-re-reveal
+;;   (setq org-re-reveal-theme "black")
+;;   (setq org-re-reveal-history t)
+;;   (setq org-re-reveal-center t))
 
 (after! ispell
   (setq ispell-personal-dictionary "~/.aspell.en.pws"))
 
 (after! evil
-  (setq evil-kill-on-visual-paste nil))
+  (setq evil-kill-on-visual-paste nil)
+  (setq evil-shift-width 2))
 
 ;; don't prompt on quit
 (setq confirm-kill-emacs nil)
