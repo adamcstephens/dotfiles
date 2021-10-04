@@ -8,14 +8,12 @@ PREV=$2
 NEW=$3
 
 dark() {
-  gsettings set org.gnome.desktop.interface gtk-theme Adwaita-dark
-  # kitty @ set-colors --reset
+  ~/.dotfiles/bin/dark-mode enable
 
 }
 
 light() {
-  gsettings set org.gnome.desktop.interface gtk-theme Adwaita
-  # kitty @ set-colors --all --configured ~/.config/kitty/theme-light.conf
+  ~/.dotfiles/bin/dark-mode disable
 }
 
 case $1 in

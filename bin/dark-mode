@@ -25,9 +25,9 @@ def set_darwin_theme(target):
 
 def set_gtk_theme(target):
     if target:
-        theme = "Adwaita-dark"
+        theme = "Yaru-dark"
     else:
-        theme = "Adwaita"
+        theme = "Yaru"
 
     run(f"gsettings set org.gnome.desktop.interface gtk-theme {theme}")
 

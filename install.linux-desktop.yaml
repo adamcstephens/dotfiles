@@ -13,6 +13,7 @@
     ~/.config/sway/config: sway.conf
     ~/.config/mpd/mpd.conf: mpd.conf
     ~/.config/swaylock/config: swaylock.conf
+    ~/.config/systemd/user/dunst.service: dunst.service
     ~/.config/systemd/user/emacs.service: emacs.service
     ~/.config/systemd/user/gammastep.service: gammastep.service
     ~/.config/systemd/user/gpg-agent.service: gpg-agent.service
@@ -29,9 +30,12 @@
     ~/.config/wofi/config: wofi.conf
     ~/.config/wofi/style.css: wofi.css
     ~/.local/share/fonts: fonts
+    ~/.local/share/applications/code.desktop: code.desktop
 
 - shell:
     - [systemctl --user daemon-reload]
+    - [systemctl --user disable --now pulseaudio]
     - [
-        systemctl --user enable --now dunst emacs gammastep gpg-agent gpg-agent.socket gpg-agent-extra.socket lxpolkit mpd pulseaudio ssh-agent swayidle waybar wob,
+        systemctl --user enable --now dunst emacs gammastep gpg-agent gpg-agent.socket gpg-agent-extra.socket pipewire pipewire-pulse ssh-agent swayidle waybar wob,
       ]
+    - [systemctl --user mask gammastep-indicator]
