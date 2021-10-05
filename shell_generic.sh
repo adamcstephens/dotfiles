@@ -186,6 +186,13 @@ case $(uname) in
       alias pksh="apk info "
       alias pku="sudo apk -U upgrade"
       alias pkr="sudo apk del "
+    elif grep -q void /etc/os-release; then
+      alias pki="sudo xbps-install "
+      alias pkls="xbps-query -f "
+      alias pkp="sudo xclocate "
+      alias pks="xbps-query -Rs "
+      alias pksh="xbps-query -RS "
+
     elif grep -q opensuse /etc/os-release; then
       alias zy="sudo zypper "
 
@@ -486,6 +493,7 @@ then
   if [[ $TERM_PROGRAM_VERSION == *-insider ]]; then
     alias code=code-insiders
   fi
-else
+elif command -v emacsclient &>/dev/null
+then
   alias vim="TERM=xterm-256color emacsclient -t"
 fi
