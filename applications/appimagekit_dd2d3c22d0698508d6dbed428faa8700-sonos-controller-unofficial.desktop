@@ -1,0 +1,35 @@
+[Desktop Entry]
+Name=sonos-controller-unofficial (0.2.5)
+Exec=/home/adam/bin/sonos-controller-unofficial-0.2.5.AppImage --no-sandbox %U
+Terminal=false
+Type=Application
+Icon=appimagekit_dd2d3c22d0698508d6dbed428faa8700_sonos-controller-unofficial
+StartupWMClass=sonos-controller-unofficial
+X-AppImage-Version=0.2.5
+Comment=Unoffical sonos controller for linux.
+Categories=Audio;
+
+TryExec=/home/adam/bin/sonos-controller-unofficial-0.2.5.AppImage
+X-AppImage-Old-Icon=sonos-controller-unofficial
+X-AppImage-Old-Name=sonos-controller-unofficial
+X-AppImage-Identifier=dd2d3c22d0698508d6dbed428faa8700
+Actions=Remove;
+X-AppImageLauncher-Version=2.2.0 (git commit 0f91801), built on 2020-09-29 21:36:15 UTC
+
+[Desktop Action Remove]
+Name=Remove AppImage from system
+Icon=AppImageLauncher
+Exec=/usr/lib/x86_64-linux-gnu/appimagelauncher/remove "/home/adam/bin/sonos-controller-unofficial-0.2.5.AppImage"
+Name[ast]=Desaniciar AppImage del sistema
+Name[cs]=Odebrat AppImage ze systému
+Name[de]=AppImage vom System entfernen
+Name[en]=Remove AppImage from system
+Name[es]=Eliminar Appimage del Sistema
+Name[fr]=Supprimer l'AppImage du système
+Name[it]=Rimuovi AppImage dal sistema
+Name[nl]=AppImage deïnstalleren
+Name[pl]=Usuń AppImage z systemu
+Name[pt]=Remover AppImage do sistema
+Name[pt_PT]=Remover AppImage do sistema
+Name[ru]=Удалить AppImage из системы
+Name[zh_Hans]=从系统中移除 AppImage

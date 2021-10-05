@@ -1,0 +1,35 @@
+[Desktop Entry]
+Name=Plexamp (3.5.0)
+Exec=/home/adam/bin/Plexamp-3.5.0.AppImage --no-sandbox %U
+Terminal=false
+Type=Application
+Icon=appimagekit_5b12acade62373c58fe8078204c0b219_plexamp
+StartupWMClass=plexamp
+X-AppImage-Version=3.5.0
+Comment=The best little audio player on the planet
+Categories=AudioVideo;
+
+TryExec=/home/adam/bin/Plexamp-3.5.0.AppImage
+X-AppImage-Old-Icon=plexamp
+X-AppImage-Old-Name=Plexamp
+X-AppImage-Identifier=5b12acade62373c58fe8078204c0b219
+Actions=Remove;
+X-AppImageLauncher-Version=2.2.0 (git commit 0f91801), built on 2020-09-29 21:36:15 UTC
+
+[Desktop Action Remove]
+Name=Remove AppImage from system
+Icon=AppImageLauncher
+Exec=/usr/lib/x86_64-linux-gnu/appimagelauncher/remove "/home/adam/bin/Plexamp-3.5.0.AppImage"
+Name[ast]=Desaniciar AppImage del sistema
+Name[cs]=Odebrat AppImage ze systému
+Name[de]=AppImage vom System entfernen
+Name[en]=Remove AppImage from system
+Name[es]=Eliminar Appimage del Sistema
+Name[fr]=Supprimer l'AppImage du système
+Name[it]=Rimuovi AppImage dal sistema
+Name[nl]=AppImage deïnstalleren
+Name[pl]=Usuń AppImage z systemu
+Name[pt]=Remover AppImage do sistema
+Name[pt_PT]=Remover AppImage do sistema
+Name[ru]=Удалить AppImage из системы
+Name[zh_Hans]=从系统中移除 AppImage

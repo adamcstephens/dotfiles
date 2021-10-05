@@ -30,7 +30,7 @@
     ~/.config/wofi/config: wofi.conf
     ~/.config/wofi/style.css: wofi.css
     ~/.local/share/fonts: fonts
-    ~/.local/share/applications/code.desktop: code.desktop
+    ~/.local/share/applications: applications
 
 - shell:
     - [systemctl --user daemon-reload]
