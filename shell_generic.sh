@@ -1,5 +1,9 @@
 # shellcheck shell=bash
 
+if [[ -e ~/.terminfo/78/xterm-screen-256color ]]; then
+  export TERM=xterm-screen-256color
+fi
+
 # shellcheck disable=SC1090
 [[ -e "$HOME/.shell_local.sh" ]] && . "$HOME/.shell_local.sh"
 export PATH=~/.dotfiles/bin:~/bin:~/.local/bin:$PATH:/snap/bin:~/go/bin
@@ -28,7 +32,6 @@ alias esl="exec $SHELL -l"
 # custom terminal overrides
 if [[ "$TERM" == "xterm-screen-256color" ]]; then
   NEWTERM="xterm-256color"
-  alias emacsclient="TERM=$NEWTERM emacsclient"
   alias lxc="TERM=$NEWTERM lxc"
   alias multipass="TERM=$NEWTERM multipass"
   alias ssh="TERM=$NEWTERM ssh"
@@ -63,7 +66,7 @@ edit_note() {
   then
     code "$filename"
   else
-    TERM=xterm-256color emacsclient -t "$filename"
+    TERM=xterm-emacs emacsclient -t "$filename"
   fi
 }
 find_note() {
@@ -293,7 +296,25 @@ dcnet() {
 if [ -d ~/.emacs.d/bin ]; then
   export PATH="$PATH:$HOME/.emacs.d/bin"
 fi
-alias em="emacsclient -t"
+emacsclient() {
+  (
+    if [[ -e ~/.terminfo/78/xterm-emacs ]]; then
+      export TERM=xterm-emacs
+    else
+      export TERM=xterm-256color
+    fi
+    command emacsclient -t
+  )
+}
+em() {
+  emacsclient
+}
+if command -v emacsclient &>/dev/null
+then
+  vim() {
+    em
+  }
+fi
 
 # fd
 if command -v fdfind &>/dev/null; then
@@ -493,7 +514,5 @@ then
   if [[ $TERM_PROGRAM_VERSION == *-insider ]]; then
     alias code=code-insiders
   fi
-elif command -v emacsclient &>/dev/null
-then
-  alias vim="TERM=xterm-256color emacsclient -t"
 fi
+

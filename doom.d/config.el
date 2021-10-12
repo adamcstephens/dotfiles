@@ -25,7 +25,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-material)
+(setq doom-theme 'doom-sonokai-andromeda)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -158,9 +158,9 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
   (setq evil-shift-width 2)
 
   ;; use emacs bindings in insert-mode so we can copy/paste
-  (setq evil-disable-insert-state-bindings t)
-  (setq evil-want-keybinding nil)
-  (setq evil-escape-key-sequence nil))
+  ;; (setq evil-disable-insert-state-bindings t)
+  ;; (setq evil-want-keybinding nil)
+  ;; (setq evil-escape-key-sequence nil))
 
 ;; don't prompt on quit
 (setq confirm-kill-emacs nil)
