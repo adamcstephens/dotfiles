@@ -7,6 +7,13 @@ then
   else
     exec code --wait $@
   fi
+elif command -v emacsclient &>/dev/null; then
+  if [[ -e ~/.terminfo/78/xterm-emacs ]]; then
+    export TERM=xterm-emacs
+  else
+    export TERM=xterm-256color
+  fi
+  exec emacsclient -t $@
 else
   exec vim $@
 fi

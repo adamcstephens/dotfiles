@@ -270,17 +270,13 @@ emacsclient() {
     else
       export TERM=xterm-256color
     fi
-    command emacsclient -t
+    command emacsclient -t $@
   )
 }
-em() {
-  emacsclient
-}
+alias em=emacsclient
 if command -v emacsclient &>/dev/null
 then
-  vim() {
-    em
-  }
+  alias vim=emacsclient
 fi
 
 # fd
