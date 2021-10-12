@@ -41,46 +41,6 @@ elif [[ "$TERM" == "xterm-kitty" ]]; then
   export TERMINFO=$HOME/.terminfo
 fi
 
-# notes
-
-edit_note() {
-  date=$(date +%Y-%m-%d_%H%M)
-
-  if [[ -n $1 ]]; then
-    notename="$1"
-    if echo "$1" | grep -q "$HOME/notes"; then
-      filename="$1"
-    else
-      filename="${HOME}/notes/${1}.md"
-    fi
-  else
-    notename="$PWD"
-    filename="${HOME}/notes/${date}.md"
-  fi
-
-  if [[ ! -f "$filename" ]]; then
-    echo "# ${date} - ${notename}" >> "$filename"
-  fi
-
-  if [[ "$TERM_PROGRAM" == "vscode" ]]
-  then
-    code "$filename"
-  else
-    TERM=xterm-emacs emacsclient -t "$filename"
-  fi
-}
-find_note() {
-  note="$(rg "$1" ~/notes | fzf)"
-  [[ -n "$note" ]] && edit_note "${note/:*/}"
-}
-alias cln="cat ~/notes/\`ls -1t ~/notes | head -n1\`"
-alias eln="edit_note \`ls -1t ~/notes | head -n1\`"
-alias fn="find_note "
-alias nn="edit_note"
-alias lnn="ls -lt ~/notes"
-alias lln="ls -1 ~/notes/\`ls -1t ~/notes | head -n1\`"
-
-
 license() {
   wget -O LICENSE https://www.gnu.org/licenses/agpl-3.0.txt
 }
