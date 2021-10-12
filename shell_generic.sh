@@ -135,6 +135,7 @@ case $(uname) in
     alias pku="brew update && brew upgrade"
     alias pkr="brew remove "
     alias flushdns='sudo killall -HUP mDNSResponder'
+    alias syu="brew services"
 
     # load ssh key using keychain if empty agent
     if [[ -n $SSH_AUTH_SOCK ]] && ! ssh-add -l &>/dev/null; then
@@ -149,6 +150,12 @@ case $(uname) in
       alias pkr="sudo pkg remove"
     ;;
   "Linux")
+    # systemd
+    alias jc="sudo journalctl "
+    alias jcu="journalctl --user "
+    alias sy="sudo systemctl "
+    alias syu="systemctl --user "
+
     if [[ -e /etc/arch-release ]]; then
       alias pki="sudo pacman -S"
       alias pkls="pacman -Ql"
@@ -438,12 +445,6 @@ delkey() {
   [[ -n $delip ]] && ssh-keygen -f "$HOME/.ssh/known_hosts" -R "$delip"
   ssh-keygen -f "$HOME/.ssh/known_hosts" -R "$1"
 }
-
-# systemd
-alias jc="sudo journalctl "
-alias jcu="journalctl --user "
-alias sy="sudo systemctl "
-alias syu="systemctl --user "
 
 # terraform
 alias tp='terraform plan '
