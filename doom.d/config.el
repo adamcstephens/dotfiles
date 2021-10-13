@@ -155,7 +155,7 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 
 (after! evil
   (setq evil-kill-on-visual-paste nil)
-  (setq evil-shift-width 2)
+  (setq evil-shift-width 2))
 
   ;; use emacs bindings in insert-mode so we can copy/paste
   ;; (setq evil-disable-insert-state-bindings t)
