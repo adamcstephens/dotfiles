@@ -71,7 +71,7 @@ Can be an integer to determine the exact padding."
    ;; face categories
    (highlight      base8)
    (vertical-bar   (doom-lighten bg 0.1))
-   (selection      base3)
+   (selection      base4)
    (builtin        blue)
    (comments       grey)
    (doc-comments   yellow)
