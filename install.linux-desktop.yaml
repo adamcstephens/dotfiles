@@ -12,6 +12,7 @@
     ~/.config/kitty/linux.conf: kitty/kitty-linux.conf
     ~/.config/sway/config: sway.conf
     ~/.config/mpd/mpd.conf: mpd.conf
+    ~/.config/river/init: river.sh
     ~/.config/swaylock/config: swaylock.conf
     ~/.config/systemd/user/dunst.service: dunst.service
     ~/.config/systemd/user/emacs.service: emacs.service
@@ -29,12 +30,12 @@
     ~/.config/waybar/style.css: waybar.css
     ~/.config/wofi/config: wofi.conf
     ~/.config/wofi/style.css: wofi.css
+    ~/.config/yay/config.json: yay.json
     ~/.local/share/fonts: fonts
     ~/.local/share/applications: applications
 
 - shell:
     - [systemctl --user daemon-reload]
-    - [systemctl --user disable --now pulseaudio]
     - [
         systemctl --user enable --now dunst emacs gammastep gpg-agent gpg-agent.socket gpg-agent-extra.socket pipewire pipewire-pulse ssh-agent swayidle waybar wob,
       ]
