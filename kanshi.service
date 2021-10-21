@@ -1,0 +1,8 @@
+[Unit]
+Description=kanshi
+
+[Service]
+ExecStart=/usr/bin/kanshi
+
+[Install]
+WantedBy=default.target
