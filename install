@@ -25,7 +25,13 @@ if [ -e "$OSCONFIG" ]; then
   "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${OSCONFIG}" $PLUGINS "${@}"
 fi
 
-HOSTCONFIG="install.$(hostname).yaml"
+if command -v hostname &>/dev/null; then
+  hostname="$(hostname)"
+else
+  hostname=$(uname -n)
+fi
+
+HOSTCONFIG="install.$hostname.yaml"
 if [ -e $HOSTCONFIG ]; then
   "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${HOSTCONFIG}" $PLUGINS "${@}"
 fi

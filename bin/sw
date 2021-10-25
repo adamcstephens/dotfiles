@@ -5,6 +5,6 @@ export QT_QPA_PLATFORM=wayland
 export QT_QPA_PLATFORMTHEME=gnome
 
 export DESKTOP_SESSION=sway
-export XDG_DATA_DIRS="/usr/local/share/:/usr/share/:$HOME/.local/share/flatpak/exports/share"
+eval $(gnome-keyring-daemon --components=secrets,pksc11 --start)
 
 sway &> ~/.config/sway/sway.log

@@ -22,6 +22,7 @@
     ~/.config/systemd/user/gpg-agent.socket: gpg-agent.socket
     ~/.config/systemd/user/gpg-agent-extra.socket: gpg-agent-extra.socket
     ~/.config/systemd/user/lxpolkit.service: lxpolkit.service
+    ~/.config/systemd/user/kanshi.service: kanshi.service
     ~/.config/systemd/user/ssh-agent.service: ssh-agent.service
     ~/.config/systemd/user/sway-session.target: sway-session.target
     ~/.config/systemd/user/swayidle.service: swayidle.service

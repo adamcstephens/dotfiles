@@ -1,9 +1,0 @@
-[Unit]
-Description=caps2esc
-
-[Service]
-ExecStart=udevmon -c /home/adam/.dotfiles/caps2esc.yml
-Restart=always
-
-[Install]
-WantedBy=default.target

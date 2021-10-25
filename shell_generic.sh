@@ -123,7 +123,7 @@ case $(uname) in
       alias pks="pacman -Ss"
       alias pksh="pacman -Si"
       alias pku="sudo pacman -Syu"
-      alias pkr="sudo pacman -R"
+      alias pkr="sudo pacman -R --recursive"
     elif [[ -e /etc/debian_version ]]; then
       alias pki="sudo apt install"
       alias pkls="dpkg -L"
@@ -333,6 +333,12 @@ gitignore() {
   rm -f .gitignore.tmp
 }
 
+# gnome-keyring-daemon
+if command -v gnome-keyring-daemon &>/dev/null; then
+  if [ -n "$DESKTOP_SESSION" ];then
+      eval $(gnome-keyring-daemon --start --components=secrets,pkcs11)
+  fi
+fi
 
 # gpg
 if command -v gpgconf > /dev/null && [[ -n "$XDG_RUNTIME_DIR" && -d "$XDG_RUNTIME_DIR" ]]; then
