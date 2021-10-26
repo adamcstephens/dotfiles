@@ -11,18 +11,18 @@
     ~/.config/dunst/dunstrc: dunstrc
     ~/.config/kanshi/config: kanshi.conf
     ~/.config/kitty/linux.conf: kitty/kitty-linux.conf
-    ~/.config/sway/config: sway.conf
     ~/.config/mpd/mpd.conf: mpd.conf
     ~/.config/river/init: river.sh
+    ~/.config/sway/config: sway.conf
     ~/.config/swaylock/config: swaylock.conf
     ~/.config/systemd/user/dunst.service: dunst.service
     ~/.config/systemd/user/emacs.service: emacs.service
     ~/.config/systemd/user/gammastep.service: gammastep.service
+    ~/.config/systemd/user/gpg-agent-extra.socket: gpg-agent-extra.socket
     ~/.config/systemd/user/gpg-agent.service: gpg-agent.service
     ~/.config/systemd/user/gpg-agent.socket: gpg-agent.socket
-    ~/.config/systemd/user/gpg-agent-extra.socket: gpg-agent-extra.socket
-    ~/.config/systemd/user/lxpolkit.service: lxpolkit.service
     ~/.config/systemd/user/kanshi.service: kanshi.service
+    ~/.config/systemd/user/polkit-gnome-authentication-agent-1.service: polkit-gnome-authentication-agent-1.service
     ~/.config/systemd/user/ssh-agent.service: ssh-agent.service
     ~/.config/systemd/user/sway-session.target: sway-session.target
     ~/.config/systemd/user/swayidle.service: swayidle.service
@@ -33,12 +33,12 @@
     ~/.config/wofi/config: wofi.conf
     ~/.config/wofi/style.css: wofi.css
     ~/.config/yay/config.json: yay.json
-    ~/.local/share/fonts: fonts
     ~/.local/share/applications: applications
+    ~/.local/share/fonts: fonts
 
 - shell:
     - [systemctl --user daemon-reload]
     - [
-        systemctl --user enable --now dunst emacs gammastep gpg-agent gpg-agent.socket gpg-agent-extra.socket kanshi pipewire pipewire-pulse ssh-agent swayidle waybar wob,
+        systemctl --user enable --now dunst emacs gammastep gpg-agent gpg-agent.socket gpg-agent-extra.socket kanshi pipewire pipewire-pulse polkit-gnome-authentication-agent-1 ssh-agent swayidle waybar wob,
       ]
     - [systemctl --user mask gammastep-indicator]
