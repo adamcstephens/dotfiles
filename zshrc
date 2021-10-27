@@ -117,6 +117,9 @@ if type brew &>/dev/null; then
   FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
 fi
 
+# shellcheck disable=SC1090
+[[ -e "$HOME/.shell_generic.sh" ]] && source "$HOME/.shell_generic.sh"
+
 # direnv
 if command -v direnv &>/dev/null; then
   eval "$(direnv hook zsh)"
@@ -132,9 +135,6 @@ fi
 if command -v kubectl &>/dev/null; then
   znap compdef _kubectl 'kubectl completion zsh'
 fi
-
-# shellcheck disable=SC1090
-[[ -e "$HOME/.shell_generic.sh" ]] && source "$HOME/.shell_generic.sh"
 
 if command -v zoxide &>/dev/null; then
   eval "$(zoxide init zsh --cmd j)"

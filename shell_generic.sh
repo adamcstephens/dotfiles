@@ -373,6 +373,12 @@ alias kns="kubens "
 if [ -e "${HOME}/.nix-profile/etc/profile.d/nix.sh" ]; then
   . "${HOME}/.nix-profile/etc/profile.d/nix.sh"
 fi
+if [ -e "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh" ]; then
+  . $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
+fi
+if [ -e "$HOME/.nix-defexpr/channels" ]; then
+  export NIX_PATH=$HOME/.nix-defexpr/channels${NIX_PATH:+:}$NIX_PATH
+fi
 
 # python
 export PYTHONSTARTUP=$HOME/.dotfiles/pythonstartup.py
