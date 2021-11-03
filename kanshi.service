@@ -6,4 +6,4 @@ PartOf=graphical-session.target
 ExecStart=/usr/bin/kanshi
 
 [Install]
-WantedBy=sway-session.target
+WantedBy=river-session.target

@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+export MOZ_DBUS_REMOTE=1
+export MOZ_ENABLE_WAYLAND=1
+export QT_QPA_PLATFORM=wayland
+export QT_QPA_PLATFORMTHEME=gnome
+
+export DESKTOP_SESSION=sway
+eval $(gnome-keyring-daemon --components=secrets,pksc11 --start)
+
+river &> ~/.cache/river.log

@@ -10,3 +10,4 @@ Restart=always
 
 [Install]
 WantedBy=sway-session.target
+WantedBy=river-session.target

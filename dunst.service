@@ -10,3 +10,4 @@ ExecStart=/usr/bin/dunst
 
 [Install]
 WantedBy=sway-session.target
+WantedBy=river-session.target

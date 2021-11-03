@@ -10,3 +10,4 @@ ExecStart=/usr/bin/waybar
 
 [Install]
 WantedBy=sway-session.target
+WantedBy=river-session.target

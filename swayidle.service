@@ -14,3 +14,4 @@ ExecStart=/usr/bin/swayidle -w \
 
 [Install]
 WantedBy=sway-session.target
+WantedBy=river-session.target

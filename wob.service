@@ -11,3 +11,4 @@ ExecStopPost=rm %t/wob.fifo
 
 [Install]
 WantedBy=sway-session.target
+WantedBy=river-session.target

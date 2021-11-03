@@ -23,6 +23,7 @@
     ~/.config/systemd/user/gpg-agent.socket: gpg-agent.socket
     ~/.config/systemd/user/kanshi.service: kanshi.service
     ~/.config/systemd/user/polkit-gnome-authentication-agent-1.service: polkit-gnome-authentication-agent-1.service
+    ~/.config/systemd/user/river-session.target: river-session.target
     ~/.config/systemd/user/ssh-agent.service: ssh-agent.service
     ~/.config/systemd/user/sway-session.target: sway-session.target
     ~/.config/systemd/user/swayidle.service: swayidle.service
@@ -39,6 +40,6 @@
 - shell:
     - [systemctl --user daemon-reload]
     - [
-        systemctl --user enable --now dunst emacs gammastep gpg-agent gpg-agent.socket gpg-agent-extra.socket kanshi pipewire pipewire-pulse polkit-gnome-authentication-agent-1 ssh-agent swayidle waybar wob,
+        systemctl --user enable dunst emacs gammastep gpg-agent gpg-agent.socket gpg-agent-extra.socket kanshi pipewire pipewire-pulse polkit-gnome-authentication-agent-1 ssh-agent swayidle waybar wob,
       ]
     - [systemctl --user mask gammastep-indicator]
