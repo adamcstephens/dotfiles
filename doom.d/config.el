@@ -76,7 +76,7 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 (defun zz/adjust-org-company-backends ()
   (remove-hook 'after-change-major-mode-hook '+company-init-backends-h)
   (setq-local company-backends nil))
-  (add-hook! org-mode (zz/adjust-org-company-backends))
+(add-hook! org-mode (zz/adjust-org-company-backends))
 
 ;; automatically revert buffers to on-disk
 (global-auto-revert-mode t)
@@ -90,25 +90,25 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 
   ;; syntax highlight latex export
   (setq org-latex-listings 'minted
-      org-latex-packages-alist '(("" "minted"))
-      org-latex-pdf-process
-      '("xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"
-        "xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+        org-latex-packages-alist '(("" "minted"))
+        org-latex-pdf-process
+        '("xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+          "xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
   (setq org-latex-classes
-       '(("article" "\\documentclass[11pt]{article}
+        '(("article" "\\documentclass[11pt]{article}
 \\usepackage{fontspec}
 \\setmainfont{Times New Roman}
 % dont indent paragraphs
 \\usepackage{parskip}
 [DEFAULT-PACKAGES]
 \\hypersetup{colorlinks = true, urlcolor = blue, linkcolor = black}"
-  ("\\section{%s}" . "\\section*{%s}")
-  ("\\subsection{%s}" . "\\subsection*{%s}")
-  ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-  ("\\paragraph{%s}" . "\\paragraph*{%s}")
-  ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))
-        ("syllabus"
-         "\\documentclass[11pt]{article}
+           ("\\section{%s}" . "\\section*{%s}")
+           ("\\subsection{%s}" . "\\subsection*{%s}")
+           ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+           ("\\paragraph{%s}" . "\\paragraph*{%s}")
+           ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))
+          ("syllabus"
+           "\\documentclass[11pt]{article}
 \\usepackage[margin=1in]{geometry}
 \\usepackage{graphicx,wrapfig,subfig}
 \\usepackage{fontspec}
@@ -138,10 +138,10 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 [DEFAULT-PACKAGES]
 % customize link colors
 \\hypersetup{colorlinks = true, urlcolor = blue, linkcolor = black}"
-    ("\\section{%s}" . "\\section*{%s}")
-    ("\\subsection{%s}" . "\\subsection*{%s}")
-    ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-    ("\\paragraph{%s}" . "\\paragraph*{%s}"))))
+           ("\\section{%s}" . "\\section*{%s}")
+           ("\\subsection{%s}" . "\\subsection*{%s}")
+           ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+           ("\\paragraph{%s}" . "\\paragraph*{%s}"))))
 
   (setq org-latex-compiler "xelatex"))
 
@@ -157,10 +157,10 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
   (setq evil-kill-on-visual-paste nil)
   (setq evil-shift-width 2))
 
-  ;; use emacs bindings in insert-mode so we can copy/paste
-  ;; (setq evil-disable-insert-state-bindings t)
-  ;; (setq evil-want-keybinding nil)
-  ;; (setq evil-escape-key-sequence nil))
+;; use emacs bindings in insert-mode so we can copy/paste
+;; (setq evil-disable-insert-state-bindings t)
+;; (setq evil-want-keybinding nil)
+;; (setq evil-escape-key-sequence nil))
 
 ;; don't prompt on quit
 (setq confirm-kill-emacs nil)
