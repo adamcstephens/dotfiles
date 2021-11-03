@@ -1,3 +1,4 @@
 Brewfile.lock.json
 *.zwc
 applications/userapp*.desktop
+applications/appimagekit*desktop
