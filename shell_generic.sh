@@ -117,13 +117,18 @@ case $(uname) in
     alias syu="systemctl --user "
 
     if [[ -e /etc/arch-release ]]; then
-      alias pki="sudo pacman -S"
-      alias pkls="pacman -Ql"
+      if command -v yay &>/dev/null; then
+        pkgcmd="yay"
+      else
+        pkgcmd="sudo pacman"
+      fi
+      alias pki="$pkgcmd -S"
+      alias pkls="$pkgcmd -Ql"
       alias pkp="pkgfile"
-      alias pks="pacman -Ss"
-      alias pksh="pacman -Si"
-      alias pku="sudo pacman -Syu"
-      alias pkr="sudo pacman -R --recursive"
+      alias pks="$pkgcmd -Ss"
+      alias pksh="$pkgcmd -Si"
+      alias pku="$pkgcmd -Syu"
+      alias pkr="$pkgcmd -R --recursive"
     elif [[ -e /etc/debian_version ]]; then
       alias pki="sudo apt install"
       alias pkls="dpkg -L"
