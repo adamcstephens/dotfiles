@@ -165,6 +165,9 @@ riverctl set-repeat 100 190
 riverctl input 1452:613:Apple_Inc._Magic_Trackpad_2 natural-scroll enabled
 riverctl input 1452:613:Apple_Inc._Magic_Trackpad_2 tap enabled
 riverctl input 1452:613:Apple_Inc._Magic_Trackpad_2 tap-button-map left-right-middle
+riverctl focus-follows-cursor normal
+
+# systemd
 
 systemctl --user import-environment
 systemctl --user start river-session.target
@@ -172,4 +175,4 @@ systemctl --user start river-session.target
 # Set and exec into the default layout generator, rivertile.
 # River will send the process group of the init executable SIGTERM on exit.
 riverctl default-layout rivertile
-exec rivertile
+exec rivertile -main-ratio 0.5 -view-padding 2 -outer-padding 2

@@ -22,11 +22,14 @@ window#waybar.solo {
   margin: 0 5px;
 }
 
+#tags button,
+#tags button.occupied,
 #workspaces button {
   padding: 0 7px;
   color: #9ed06c;
 }
 
+#tags button.focused,
 #workspaces button.focused {
   color: #f89860;
 }
@@ -35,6 +38,7 @@ window#waybar.solo {
   color: #f89860;
 }
 
+#tags button.urgent,
 #workspaces button.urgent {
   color: #fb617e;
 }

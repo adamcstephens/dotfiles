@@ -4,7 +4,8 @@
     "height": 30,
     "modules-left": [
         "sway/workspaces",
-        "sway/mode"
+        "sway/mode",
+        "river/tags"
     ],
     "modules-center": [],
     "modules-right": [
@@ -31,6 +32,9 @@
             "focused": "",
             "default": ""
         }
+    },
+    "river/tags": {
+        "num-tags": 5
     },
     "idle_inhibitor": {
         "format": "{icon}",
