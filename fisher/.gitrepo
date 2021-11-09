@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/git-commands/git-subrepo#readme
+;
+[subrepo]
+	remote = https://github.com/jorgebucaran/fisher
+	branch = 4.3.0
+	commit = 247b58e0d97c785ef960b88cd07c734d4e92225c
+	parent = cbfdd9bc8b1d5a80c828fc3947b8d2e2e4660909
+	method = merge
+	cmdver = 0.4.3
