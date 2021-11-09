@@ -1,22 +1,24 @@
 set -U fish_greeting
 
 # paths
-fish_add_path ~/bin
-fish_add_path ~/.dotfiles/bin
+fish_add_path --append ~/bin
+fish_add_path --append ~/.dotfiles/bin
+if test -d ~/.emacs.d/bin
+    fish_add_path ~/.emacs.d/bin
+end
+if test -d ~/go/bin
+    fish_add_path ~/go/bin
+end
 if test -d /opt/homebrew/bin
-    fish_add_path /opt/homebrew/bin
+    fish_add_path /opt/homebrew/bin /opt/homebrew/sbin
+end
+if test -d /snap/bin
+    fish_add_path /snap/bin
 end
 
 # envs
-set EDITOR ~/bin/editor
-
-# asdf
-if test -e ~/.asdf/asdf.fish
-    source ~/.asdf/asdf.fish
-    if ! test -e ~/.config/fish/completions/asdf.fish
-        ln -s ~/.asdf/completions/asdf.fish ~/.config/fish/completions
-    end
-end
+set -x EDITOR ~/bin/editor
+set -x PAGER "less -r"
 
 # direnv
 if command -v direnv &>/dev/null
@@ -29,6 +31,12 @@ set fzf_fd_opts --hidden --exclude=.git
 
 # git-subrepo
 source ~/.dotfiles/git-subrepo/.fish.rc
+
+# ripgrep
+set -x RIPGREP_CONFIG_PATH ~/.config/ripgrep/ripgreprc
+if command -v rg >/dev/null
+    set -x FZF_DEFAULT_COMMAND 'rg --files --hidden'
+end
 
 # starship
 if command -v starship &>/dev/null

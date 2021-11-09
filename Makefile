@@ -2,7 +2,7 @@
 default:
 
 .PHONY: bootstrap
-bootstrap: install-packages install-asdf install-dotbot update-vim update-bins
+bootstrap: install-packages install-asdf install-dotbot install-fisher update-vim update-bins
 
 .PHONY: bootstrap-dev
 bootstrap-dev:
@@ -58,6 +58,10 @@ update-asdf:
 	$(HOME)/.asdf/bin/asdf update
 	if [ -e $(HOME)/.asdf/plugins ]; then $(HOME)/.asdf/bin/asdf plugin-update --all; fi
 
+.PHONY: update-fisher
+update-fisher:
+	fish -c "source ~/.dotfiles/fisher/functions/fisher.fish; fisher update"
+
 .PHONY: update-vim
 update-vim:
 	vim +PlugClean +PlugUpdate +qall
@@ -68,7 +72,7 @@ clean:
 
 .PHONY: install-fisher
 install-fisher:
-	~/.dotfiles/bin/install-fishers.fish
+	~/.dotfiles/bin/install-fisher.fish
 
 .PHONY: install-starship
 install-starship:
@@ -81,7 +85,7 @@ install-zoxide:
 .PHONY: update-bins
 update-bins: install-starship install-zoxide
 
-update: update-asdf update-vim update-bins
+update: update-asdf update-vim update-bins update-fisher
 
 .PHONY: ssh-setup
 ssh-setup:
