@@ -31,6 +31,7 @@
     ~/.bashrc: bashrc
     ~/.config/bat/config: bat
     ~/.config/direnv/direnvrc: direnvrc.sh
+    ~/.config/fish: fish
     ~/.config/git/template: gittemplate
     ~/.config/kitty/kitty.conf: kitty/kitty.conf
     ~/.config/kitty/theme-light.conf: kitty/theme-light.conf

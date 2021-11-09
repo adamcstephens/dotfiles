@@ -66,6 +66,10 @@ update-vim:
 clean:
 	vim +PlugClean +qall
 
+.PHONY: install-fisher
+install-fisher:
+	~/.dotfiles/bin/install-fishers.fish
+
 .PHONY: install-starship
 install-starship:
 	~/.dotfiles/bin/install-starship.sh --bin-dir ~/bin --yes
