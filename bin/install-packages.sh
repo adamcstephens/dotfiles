@@ -8,7 +8,7 @@ source ~/.dotfiles/shell_generic.sh
 # test
 sudo --non-interactive true
 
-pki --yes curl fish git make python3 python3-apt vim zsh
+pkiyy curl fish fzf git make python3 vim zsh
 
 if [[ $1 == "dev" ]]; then
   pki --yes make build-essential libssl-dev zlib1g-dev \
