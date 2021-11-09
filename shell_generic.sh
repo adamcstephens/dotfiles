@@ -103,6 +103,7 @@ case $(uname) in
         pkgcmd="sudo pacman"
       fi
       alias pki="$pkgcmd -S"
+      alias pkiyy="$pkgcmd -S --noconfirm"
       alias pkls="$pkgcmd -Ql"
       alias pkp="pkgfile"
       alias pks="$pkgcmd -Ss"
@@ -111,6 +112,7 @@ case $(uname) in
       alias pkr="$pkgcmd -R --recursive"
     elif [[ -e /etc/debian_version ]]; then
       alias pki="sudo apt install"
+      alias pkiyy="sudo apt install --yes"
       alias pkls="dpkg -L"
       alias pkp="apt-file search"
       alias pks="apt search"
