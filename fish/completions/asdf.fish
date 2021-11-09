@@ -1,1 +1,1 @@
-/Users/astephe9/.asdf/completions/asdf.fish
+../../../.asdf/completions/asdf.fish
