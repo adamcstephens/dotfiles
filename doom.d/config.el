@@ -165,9 +165,6 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 ;; don't prompt on quit
 (setq confirm-kill-emacs nil)
 
-(setq js-indent-level 2)
-(setq standard-indent 2)
-
 (setq wl-copy-process nil)
 (defun wl-copy (text)
   (setq wl-copy-process (make-process :name "wl-copy"

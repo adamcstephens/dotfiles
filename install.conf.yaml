@@ -39,6 +39,7 @@
     ~/.config/rubocop/config.yml: rubocop.yml
     ~/.config/starship.toml: starship.toml
     ~/.doom.d: doom.d
+    ~/.editorconfig: editorconfig
     ~/.gitconfig: gitconfig
     ~/.gitignore: gitignore
     ~/.gnupg/gpg.conf:
