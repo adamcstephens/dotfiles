@@ -6,7 +6,7 @@ fi
 
 # shellcheck disable=SC1090
 [[ -e "$HOME/.shell_local.sh" ]] && . "$HOME/.shell_local.sh"
-export PATH=~/.dotfiles/bin:~/bin:~/.local/bin:$PATH:/snap/bin:~/go/bin
+export PATH=~/.dotfiles/bin:~/bin:~/.local/bin:$PATH:~/go/bin
 
 alias thisweek='date +%Y-%W'
 
@@ -46,29 +46,9 @@ license() {
 }
 
 # passwords
-if command -v apg > /dev/null; then
-  alias pwgen='apg -n10 -m12 -x20 -M CLNS -t'
-elif command -v pwgen > /dev/null; then
+if command -v pwgen > /dev/null; then
   alias pwgen='pwgen -csn1 20 12'
 fi
-newpassgen() {
-  for z in {1..10}
-  do
-    n=$(wc -l /usr/share/dict/words)
-    for x in {1..3}
-    do
-      y="$(cat -n /usr/share/dict/words | grep -w "$(jot -r 1 1 "$n")" | cut -f2)"
-      echo -n "$y "
-      if [[ "$x" == '2' ]]
-      then
-        y="$(od -vAn -N1 -tu < /dev/urandom | head -n 1 | awk '{print $1}')"
-        z="$(pwgen -0yA -r abcdefghijklmnopqrstuvwxyz 1 1)"
-        echo -n "$y$z "
-      fi
-    done
-    echo
-  done
-}
 
 toggle_dark() {
   [[ -z $1 ]] && return 1
@@ -202,16 +182,10 @@ esac
 # app specific
 #
 
-# ag
-if command -v ag &> /dev/null; then
-  alias ag="ag --no-break --no-heading --color-match '1;32' --color-path '0;34'"
-fi
-
 # ansible
 alias ad='ansible-doc '
 alias ap='ansible-playbook '
 alias ac='ansible-container '
-alias ad='ansible-doc'
 
 # asdf
 export ASDF_PYTHON_DEFAULT_PACKAGES_FILE=$HOME/.dotfiles/python-packages

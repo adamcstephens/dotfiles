@@ -32,10 +32,6 @@ bootstrap-asdf:
 install-packages:
 	~/.dotfiles/bin/install-packages.sh
 
-.PHONY: antibody
-antibody:
-	antibody bundle < ~/.dotfiles/zsh_plugins.txt > ~/.zsh_plugins.sh
-
 .PHONY: brew
 brew:
 	brew bundle
