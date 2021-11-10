@@ -6,7 +6,7 @@ Documentation=info:emacs man:emacs(1) https://gnu.org/software/emacs/
 Type=simple
 ExecStart=/usr/bin/emacs --fg-daemon
 ExecStop=/usr/bin/emacsclient --eval "(kill-emacs)"
-Environment=SSH_AUTH_SOCK=%t/ssh-agent.socket
+Environment=SSH_AUTH_SOCK=%t/keyring/ssh
 Environment=WAYLAND_DISPLAY=wayland-1
 Restart=on-failure
 
