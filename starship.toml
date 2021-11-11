@@ -23,6 +23,9 @@ format = '[$hostname]($style) '
 [nodejs]
 disabled = true
 
+[python]
+disabled = true
+
 [ruby]
 disabled = true
 
