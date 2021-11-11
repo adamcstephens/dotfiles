@@ -3,11 +3,15 @@
 ## Installation
 
 ``` sh
-git clone https://github.com/adamcstephens/dotfiles ~/.dotfiles
-# OR
 git clone https://git.sr.ht/~adamcstephens/dotfiles ~/.dotfiles
 cd ~/.dotfiles
 make bootstrap
+```
+
+## Mirror
+
+```
+git clone https://github.com/adamcstephens/dotfiles ~/.dotfiles
 ```
 
 ## Tools
