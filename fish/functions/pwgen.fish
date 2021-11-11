@@ -1,3 +1,8 @@
-function pwgen --description 'alias pwgen=pwgen -csn1 20 12'
-    command pwgen -csn1 20 12 $argv
+function pwgen
+    if [ (count $argv) = 0 ]
+        set pwargs 20 12
+    else
+        set pwargs $argv
+    end
+    command pwgen -csn1 $pwargs
 end
