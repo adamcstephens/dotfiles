@@ -3,7 +3,7 @@ zstyle ':znap:*' repos-dir ~/.znap
 source ~/.dotfiles/zsh-snap/znap.zsh
 
 # prompt
-eval "$(~/bin/starship init zsh --print-full-init)"
+eval "$(~/bin/starship init zsh)"
 # znap prompt
 
 # asdf
@@ -128,7 +128,7 @@ fi
 # fzf
 if [[ -e ~/.fzf.zsh ]]
 then
-  source ~/.fzf.zsh
+   source ~/.fzf.zsh 2>/dev/null
 fi
 
 # kubectl
