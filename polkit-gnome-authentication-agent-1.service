@@ -6,3 +6,4 @@ ExecStart=/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
 [Install]
 WantedBy=sway-session.target
+WantedBy=river-session.target
