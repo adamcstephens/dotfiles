@@ -1,149 +1,171 @@
-#!/bin/sh
+#!/bin/bash
 
+#set -x
+
+function __install_webi() {
+WEBI_PKG=zoxide@stable
+WEBI_HOST=https://webinstall.dev
+    export WEBI_HOST
+
+    echo ""
+    echo "Thanks for using webi to install '${WEBI_PKG:-}' on '$(uname -s)/$(uname -m)'."
+    echo "Have a problem? Experience a bug? Please let us know:"
+    echo "        https://github.com/webinstall/packages/issues"
+    echo ""
+    WEBI_WELCOME=true
+    export WEBI_WELCOME
+
+    set -e
+    set -u
+
+    mkdir -p "$HOME/.local/bin"
+
+    cat << EOF > "$HOME/.local/bin/webi"
+#!/bin/bash
+
+set -e
 set -u
+#set -x
 
-usage() {
-	cat 1>&2 <<EOF
-The installer for zoxide
+function __webi_main () {
 
-USAGE
-	zoxide-install
+    export WEBI_TIMESTAMP=\$(date +%F_%H-%M-%S)
+    export _webi_tmp="\${_webi_tmp:-\$(mktemp -d -t webi-\$WEBI_TIMESTAMP.XXXXXXXX)}"
+
+    if [ -n "\${_WEBI_PARENT:-}" ]; then
+        export _WEBI_CHILD=true
+    else
+        export _WEBI_CHILD=
+    fi
+    export _WEBI_PARENT=true
+
+    ##
+    ## Detect acceptable package formats
+    ##
+
+    my_ext=""
+    set +e
+    # NOTE: the order here is least favorable to most favorable
+    if [ -n "\$(command -v pkgutil)" ]; then
+        my_ext="pkg,\$my_ext"
+    fi
+    # disable this check for the sake of building the macOS installer on Linux
+    #if [ -n "\$(command -v diskutil)" ]; then
+        # note: could also detect via hdiutil
+        my_ext="dmg,\$my_ext"
+    #fi
+    if [ -n "\$(command -v git)" ]; then
+        my_ext="git,\$my_ext"
+    fi
+    if [ -n "\$(command -v unxz)" ]; then
+        my_ext="xz,\$my_ext"
+    fi
+    if [ -n "\$(command -v unzip)" ]; then
+        my_ext="zip,\$my_ext"
+    fi
+    # for mac/linux 'exe' refers to the uncompressed binary without extension
+    my_ext="exe,\$my_ext"
+    if [ -n "\$(command -v tar)" ]; then
+        my_ext="tar,\$my_ext"
+    fi
+    my_ext="\$(echo "\$my_ext" | sed 's/,$//')" # nix trailing comma
+    set -e
+
+
+    ##
+    ## Detect http client
+    ##
+
+    set +e
+    export WEBI_CURL="\$(command -v curl)"
+    export WEBI_WGET="\$(command -v wget)"
+    set -e
+
+    export WEBI_HOST="\${WEBI_HOST:-https://webinstall.dev}"
+    export WEBI_UA="\$(uname -a)"
+
+
+    function webinstall() {
+
+        my_package="\${1:-}"
+        if [ -z "\$my_package" ]; then
+            >&2 echo "Usage: webi <package>@<version> ..."
+            >&2 echo "Example: webi node@lts rg"
+            exit 1
+        fi
+
+        export WEBI_BOOT="\$(mktemp -d -t "\$my_package-bootstrap.\$WEBI_TIMESTAMP.XXXXXXXX")"
+
+        my_installer_url="\$WEBI_HOST/api/installers/\$my_package.sh?formats=\$my_ext"
+        set +e
+        if [ -n "\$WEBI_CURL" ]; then
+            curl -fsSL "\$my_installer_url" -H "User-Agent: curl \$WEBI_UA" \\
+                -o "\$WEBI_BOOT/\$my_package-bootstrap.sh"
+        else
+            wget -q "\$my_installer_url" --user-agent="wget \$WEBI_UA" \\
+                -O "\$WEBI_BOOT/\$my_package-bootstrap.sh"
+        fi
+        if ! [ \$? -eq 0 ]; then
+          >&2 echo "error fetching '\$my_installer_url'"
+          exit 1
+        fi
+        set -e
+
+        pushd "\$WEBI_BOOT" 2>&1 > /dev/null
+            bash "\$my_package-bootstrap.sh"
+        popd 2>&1 > /dev/null
+
+        rm -rf "\$WEBI_BOOT"
+
+    }
+
+    show_path_updates() {
+
+        if ! [ -n "\${_WEBI_CHILD}" ]; then
+            if [ -f "\$_webi_tmp/.PATH.env" ]; then
+                my_paths=\$(cat "\$_webi_tmp/.PATH.env" | sort -u)
+                if [ -n "\$my_paths" ]; then
+                    echo "IMPORTANT: You must update you PATH to use the installed program(s)"
+                    echo ""
+                    echo "You can either"
+                    echo "A) can CLOSE and REOPEN Terminal or"
+                    echo "B) RUN these exports:"
+                    echo ""
+                    echo "\$my_paths"
+                    echo ""
+                fi
+                rm -f "\$_webi_tmp/.PATH.env"
+            fi
+        fi
+
+    }
+
+    for pkgname in "\$@"
+    do
+        webinstall "\$pkgname"
+    done
+
+    show_path_updates
+
+}
+
+__webi_main "\$@"
+
 EOF
+
+    chmod a+x "$HOME/.local/bin/webi"
+
+    if [ -n "${WEBI_PKG:-}" ]; then
+        "$HOME/.local/bin/webi" "${WEBI_PKG}"
+    else
+        echo ""
+        echo "Hmm... no WEBI_PKG was specified. This is probably an error in the script."
+        echo ""
+        echo "Please open an issue with this information: Package '${WEBI_PKG:-}' on '$(uname -s)/$(uname -m)'"
+        echo "    https://github.com/webinstall/packages/issues"
+        echo ""
+    fi
+
 }
 
-main() {
-	need_cmd uname
-	need_cmd curl
-	need_cmd grep
-	need_cmd cut
-	need_cmd xargs
-	need_cmd chmod
-	install
-}
-
-install() {
-	local _ostype _cputype _clibtype _target _cargobuild _install_path
-	_ostype="$(uname -s)"
-	_cputype="$(uname -m)"
-	_cargobuild="no"
-	_install_path="$HOME/bin"
-
-	case $_cputype in
-	x86_64 | x86-64 | amd64)
-		_cputype="x86_64"
-		_clibtype="musl"
-		;;
-	aarch64)
-		_clibtype="musl"
-		;;
-	*)
-		warning "No binaries are available for your CPU architecture ($_cputype)"
-		_clibtype="gnu"
-		_cargobuild="yes"
-		;;
-	esac
-
-	case $_ostype in
-	Linux)
-		_ostype=unknown-linux-$_clibtype
-		;;
-	Darwin)
-		_ostype=apple-darwin
-		;;
-	*)
-		warning "No binaries are available for your operating system ($_ostype)"
-		_cargobuild="yes"
-		;;
-	esac
-
-	if [ $_cargobuild = "yes" ]; then
-		cargo_build
-		exit 0
-	fi
-
-	_target="$_cputype-$_ostype"
-	warning "Detected target: $_target"
-
-	success "Downloading zoxide..."
-
-	## Downloading the binaries
-	ensure rm -rf "zoxide-$_target"
-	curl -s https://api.github.com/repos/ajeetdsouza/zoxide/releases/latest | grep "browser_download_url" | cut -d '"' -f 4 | grep "$_target" | xargs -n 1 curl -LJO
-
-	ensure tar -zxf "zoxide-$_target.tar.gz"
-
-	ensure mv "zoxide-$_target" "zoxide_bin"
-
-	ensure mv zoxide_bin/zoxide "$_install_path/zoxide"
-	ensure chmod +x "$_install_path/zoxide"
-	ensure rm -r zoxide_bin "zoxide-$_target.tar.gz"
-
-	success "zoxide is installed!"
-	info "Please ensure that $_install_path is added to your \$PATH."
-}
-
-success() {
-	printf "\033[32m%s\033[0m\n" "$1" >&1
-}
-
-info() {
-	printf "%s\n" "$1" >&1
-}
-
-warning() {
-	printf "\033[33m%s\033[0m\n" "$1" >&2
-}
-
-error() {
-	printf "\033[31;1m%s\033[0m\n" "$1" >&2
-	exit 1
-}
-
-cmd_chk() {
-	command -v "$1" >/dev/null 2>&1
-}
-
-## Ensures that the command executes without error
-ensure() {
-	if ! "$@"; then error "command failed: $*"; fi
-}
-
-need_cmd() {
-	if ! cmd_chk "$1"; then
-		error "need $1 (command not found)"
-	fi
-}
-
-prompt_confirm() {
-	if [ ! -t 1 ]; then
-		error "Unable to run interactively. Please execute this script using interactive shell"
-	fi
-
-	while true; do
-		read -rp "Is this okay? (y/N): " _choice
-		_choice=$(echo "$_choice" | tr '[:upper:]' '[:lower:]')
-
-		case "$_choice" in
-		y | yes) break ;;
-		n | no) error "Operation aborted" ;;
-		esac
-	done
-}
-
-cargo_build() {
-	success "Compiling from source..."
-
-	if ! cmd_chk "cargo"; then
-		success "Cargo will be installed."
-		prompt_confirm
-
-		ensure curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-
-		# shellcheck source=/dev/null
-		. "$HOME/.cargo/env"
-	fi
-
-	RUSTFLAGS="-C target-cpu=native" ensure cargo install zoxide
-}
-
-main "$@" || exit 1
+__install_webi
