@@ -18,9 +18,6 @@
     - ~/projects
     - ~/tmp
 
-- asdf:
-  - plugin: python
-
 - git:
     '~/.emacs.d':
         url: https://github.com/hlissner/doom-emacs.git
@@ -28,10 +25,14 @@
 - link:
     ~/.aspell.en.pws: aspell.en.pws
     ~/.bash_profile: bash_profile
-    ~/.bashrc: bashrc
+    ~/.bashrc:
+      force: true
+      path: bashrc
     ~/.config/bat/config: bat
     ~/.config/direnv/direnvrc: direnvrc.sh
-    ~/.config/fish: fish
+    ~/.config/fish:
+      force: true
+      path: fish
     ~/.config/git/template: gittemplate
     ~/.config/kitty/kitty.conf: kitty/kitty.conf
     ~/.config/kitty/theme-light.conf: kitty/theme-light.conf
@@ -68,6 +69,7 @@
     ~/.vimrc: vimrc
     ~/.vim/autoload/plug.vim: vim-plug/plug.vim
     ~/.zshrc:
+      force: true
       path: zshrc
     ~/bin/cmc: cmc/cmc
     ~/bin/editor: editor
