@@ -12,7 +12,7 @@
 mod="Mod4"
 
 # Mod+Shift+Return to start an instance of foot (https://codeberg.org/dnkl/foot)
-riverctl map normal $mod+Shift Return spawn kitty
+riverctl map normal $mod Return spawn kitty
 riverctl map normal $mod+Shift W spawn firefox
 riverctl map normal $mod+Shift V spawn 'gtk-launch code'
 riverctl map normal $mod+Shift+Control E spawn 'gtk-launch emacsclient'
@@ -42,7 +42,7 @@ riverctl map normal $mod+Shift Period send-to-output next
 riverctl map normal $mod+Shift Comma send-to-output previous
 
 # Mod+Return to bump the focused view to the top of the layout stack
-riverctl map normal $mod Return zoom
+riverctl map normal $mod+Shift Return zoom
 
 # Mod+H and Mod+L to decrease/increase the main ratio of rivertile(1)
 riverctl map normal $mod H send-layout-cmd rivertile "main-ratio -0.05"

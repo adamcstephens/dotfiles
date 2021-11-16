@@ -49,6 +49,7 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
 
+(package! ssh-config-mode)
 (package! jsonnet-mode)
 (package! org-re-reveal :pin "cf000894f6e5d0627151e2bec5b1a54a311ad53e")
 ;; (package! revealjs :pin "b18f12d")
