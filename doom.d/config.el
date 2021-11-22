@@ -181,3 +181,6 @@
 (when (string-prefix-p "wayland" (getenv "WAYLAND_DISPLAY"))
   (setq interprogram-cut-function 'wl-copy)
   (setq interprogram-paste-function 'wl-paste))
+
+;; force full ranger mode
+ (after! ranger (setq ranger-override-dired 'ranger))
