@@ -71,10 +71,10 @@ riverctl map normal $mod+Mod1+Shift K resize vertical -100
 riverctl map normal $mod+Mod1+Shift L resize horizontal 100
 
 # Mod + Left Mouse Button to move views
-riverctl map-pointer normal $mod BTN_LEFT move-view
+# riverctl map-pointer normal $mod BTN_LEFT move-view
 
 # Mod + Right Mouse Button to resize views
-riverctl map-pointer normal $mod BTN_RIGHT resize-view
+# riverctl map-pointer normal $mod BTN_RIGHT resize-view
 
 for i in $(seq 1 9)
 do
@@ -100,7 +100,7 @@ riverctl map normal $mod 0 set-focused-tags $all_tags
 riverctl map normal $mod+Shift 0 set-view-tags $all_tags
 
 # Mod+Space to toggle float
-riverctl map normal $mod Space toggle-float
+riverctl map normal $mod+Shift Space toggle-float
 
 # Mod+F to toggle fullscreen
 riverctl map normal $mod F toggle-fullscreen
@@ -165,6 +165,7 @@ riverctl set-repeat 100 190
 riverctl input 1452:613:Apple_Inc._Magic_Trackpad_2 natural-scroll enabled
 riverctl input 1452:613:Apple_Inc._Magic_Trackpad_2 tap enabled
 riverctl input 1452:613:Apple_Inc._Magic_Trackpad_2 tap-button-map left-right-middle
+riverctl input 1739:52619:SYNA8004:00_06CB:CD8B_Touchpad events disabled
 riverctl input 1739:52619:SYNA8004:00_06CB:CD8B_Touchpad natural-scroll enabled
 riverctl input 1739:52619:SYNA8004:00_06CB:CD8B_Touchpad tap enabled
 riverctl input 1739:52619:SYNA8004:00_06CB:CD8B_Touchpad tap-button-map left-right-middle
