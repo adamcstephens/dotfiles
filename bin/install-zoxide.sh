@@ -36,6 +36,9 @@ install() {
   aarch64)
     _clibtype="musl"
     ;;
+  arm64)
+    _cputype="aarch64"
+    ;;
   armv7l)
     _clibtype="musleabihf"
     ;;
