@@ -10,9 +10,6 @@ end
 if test -d ~/go/bin
     fish_add_path ~/go/bin
 end
-if test -d /opt/homebrew/bin
-    fish_add_path /opt/homebrew/bin /opt/homebrew/sbin
-end
 if test -d /snap/bin
     fish_add_path /snap/bin
 end
