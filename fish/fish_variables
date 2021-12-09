@@ -4,9 +4,8 @@ SETUVAR --export GNOME_KEYRING_CONTROL:/run/user/1000/keyring/ssh
 SETUVAR --export SSH_AUTH_SOCK:/run/user/1000/keyring/ssh
 SETUVAR __fish_initialized:3100
 SETUVAR _fisher_PatrickF1_2F_fzf_2E_fish_files:/Users/astephe9/\x2econfig/fish/functions/_fzf_configure_bindings_help\x2efish\x1e/Users/astephe9/\x2econfig/fish/functions/_fzf_extract_var_info\x2efish\x1e/Users/astephe9/\x2econfig/fish/functions/_fzf_preview_file\x2efish\x1e/Users/astephe9/\x2econfig/fish/functions/_fzf_report_file_type\x2efish\x1e/Users/astephe9/\x2econfig/fish/functions/_fzf_search_directory\x2efish\x1e/Users/astephe9/\x2econfig/fish/functions/_fzf_search_git_log\x2efish\x1e/Users/astephe9/\x2econfig/fish/functions/_fzf_search_git_status\x2efish\x1e/Users/astephe9/\x2econfig/fish/functions/_fzf_search_history\x2efish\x1e/Users/astephe9/\x2econfig/fish/functions/_fzf_search_variables\x2efish\x1e/Users/astephe9/\x2econfig/fish/functions/_fzf_wrapper\x2efish\x1e/Users/astephe9/\x2econfig/fish/functions/fzf_configure_bindings\x2efish\x1e/Users/astephe9/\x2econfig/fish/conf\x2ed/fzf\x2efish\x1e/Users/astephe9/\x2econfig/fish/completions/fzf_configure_bindings\x2efish
-SETUVAR _fisher_evanlucas_2F_fish_2D_kubectl_2D_completions_files:/Users/astephe9/\x2econfig/fish/completions/kubectl\x2efish
 SETUVAR _fisher_jorgebucaran_2F_fisher_files:/Users/astephe9/\x2econfig/fish/functions/fisher\x2efish\x1e/Users/astephe9/\x2econfig/fish/completions/fisher\x2efish
-SETUVAR _fisher_plugins:jorgebucaran/fisher\x1eevanlucas/fish\x2dkubectl\x2dcompletions\x1ePatrickF1/fzf\x2efish
+SETUVAR _fisher_plugins:jorgebucaran/fisher\x1ePatrickF1/fzf\x2efish
 SETUVAR fish_color_autosuggestion:7e8294
 SETUVAR fish_color_cancel:\x2dr
 SETUVAR fish_color_command:9ed06c
