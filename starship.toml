@@ -20,15 +20,6 @@ format = "[$symbol$branch]($style) "
 style = 'bold yellow'
 format = '[$hostname]($style) '
 
-[nodejs]
-disabled = true
-
-[python]
-disabled = true
-
-[ruby]
-disabled = true
-
 [username]
 style_user = 'fg:244'
 format = '[$user@]($style)'
