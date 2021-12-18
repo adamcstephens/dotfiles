@@ -95,6 +95,10 @@ ssh-setup:
 tmuxline:
 	if [ ! -z $TMUX ]; then vim +"TmuxlineSnapshot! ~/.tmux.tmuxline" +qall; fi
 
+.PHONY: vscode-extensions
+vscode-extensions:
+	~/.dotfiles/bin/vscode-extensions.sh
+
 .PHONY: zsh-prof
 zsh-prof:
 	time zsh -i -c exit

@@ -1,0 +1,17 @@
+bmalehorn.vscode-fish
+DavidAnson.vscode-markdownlint
+EditorConfig.EditorConfig
+esbenp.prettier-vscode
+foxundermoon.shell-format
+golang.go
+ms-python.python
+ms-python.vscode-pylance
+ms-toolsai.jupyter
+ms-vscode-remote.remote-ssh
+ms-vscode-remote.remote-ssh-edit
+naumovs.color-highlight
+redhat.ansible
+redhat.vscode-yaml
+signageos.signageos-vscode-sops
+timonwong.shellcheck
+vscode-org-mode.org-mode
