@@ -9,6 +9,8 @@
     ~/.config/nixpkgs/home.nix: home.nix
     ~/.finicky.js: finicky.js
     ~/.gnupg/gpg-agent.conf: gpg-agent-mac.conf
+    ~/Library/Application Support/Code/User/keybindings.json: vscode/keybindings.json
+    ~/Library/Application Support/Code/User/settings.json: vscode/settings.json
     ~/Library/LaunchAgents/homebrew.gpg.gpg-agent.plist: LaunchAgents/homebrew.gpg.gpg-agent.plist
 
 - shell:
