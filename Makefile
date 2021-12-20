@@ -97,7 +97,7 @@ tmuxline:
 
 .PHONY: vscode-extensions
 vscode-extensions:
-	~/.dotfiles/bin/vscode-extensions.sh
+	~/.dotfiles/bin/vscode-extensions.fish
 
 .PHONY: zsh-prof
 zsh-prof:
