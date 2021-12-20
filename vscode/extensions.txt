@@ -6,6 +6,7 @@ filipesabella.live-p5
 foxundermoon.shell-format
 golang.go
 JulienDuchesne.vscode-jsonnet
+ms-kubernetes-tools.vscode-kubernetes-tools
 ms-python.python
 ms-python.vscode-pylance
 ms-toolsai.jupyter
@@ -16,6 +17,7 @@ ms-vscode-remote.remote-ssh-edit
 naumovs.color-highlight
 redhat.ansible
 redhat.vscode-yaml
+ritwickdey.LiveServer
 samplavigne.p5-vscode
 signageos.signageos-vscode-sops
 timonwong.shellcheck
