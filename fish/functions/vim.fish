@@ -1,5 +1,7 @@
 function vim
-    if command -v emacsclient &>/dev/null
+    if command -q emacsclient
         emacsclient $argv
+    else
+        command vim $argv
     end
 end
