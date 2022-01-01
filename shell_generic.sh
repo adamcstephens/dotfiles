@@ -255,7 +255,7 @@ emacsclient() {
   )
 }
 alias em=emacsclient
-if command -v emacsclient &>/dev/null
+if command -p emacsclient &>/dev/null
 then
   alias vim=emacsclient
 fi
