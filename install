@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-set -e
-
 CONFIG="install.conf.yaml"
 OSCONFIG="install.$(uname).yaml"
 DOTBOT_DIR="dotbot"
