@@ -195,5 +195,6 @@
   "[shellscript]": {
     "editor.formatOnSave": true,
   },
-  "git.confirmSync": false
+  "git.confirmSync": false,
+  "workbench.colorTheme": "Panda Syntax"
 }
