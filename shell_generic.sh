@@ -20,8 +20,7 @@ alias l1h="ls -1t | head"
 alias scat="egrep -v '^(\s*)?(#|$)' "
 # colorize ls output
 export CLICOLOR=''
-if ls --color=auto > /dev/null 2>&1
-then
+if ls --color=auto >/dev/null 2>&1; then
   alias ls="ls --color=auto"
 fi
 
@@ -46,7 +45,7 @@ license() {
 }
 
 # passwords
-if command -v pwgen > /dev/null; then
+if command -v pwgen >/dev/null; then
   alias pwgen='pwgen -csn1 20 12'
 fi
 
@@ -64,121 +63,122 @@ toggle_dark() {
 
 # OS-specific
 case $(uname) in
-  "Darwin")
-    eval "$(/opt/homebrew/bin/brew shellenv)"
+"Darwin")
+  eval "$(/opt/homebrew/bin/brew shellenv)"
 
-    export HOMEBREW_NO_AUTO_UPDATE=1
-    alias pki="HOMEBREW_NO_AUTO_UPDATE=0 brew install "
-    alias pkls="brew list "
-    alias pks="brew search "
-    alias pksh="brew info "
-    alias pku="brew update && brew upgrade"
-    alias pkr="brew remove "
-    alias flushdns='sudo killall -HUP mDNSResponder'
-    alias syu="brew services"
+  export HOMEBREW_NO_AUTO_UPDATE=1
+  alias pki="HOMEBREW_NO_AUTO_UPDATE=0 brew install "
+  alias pkls="brew list "
+  alias pks="brew search "
+  alias pksh="brew info "
+  alias pku="brew update && brew upgrade"
+  alias pkr="brew remove "
+  alias flushdns='sudo killall -HUP mDNSResponder'
+  alias syu="brew services"
 
-    # load ssh key using keychain if empty agent
-    if [[ -n $SSH_AUTH_SOCK ]] && ! ssh-add -l &>/dev/null; then
-      ssh-add -K
-    fi
-    ;;
-  "FreeBSD")
-      alias pki="sudo pkg install"
-      alias pks="pkg search"
-      alias pksh="pkg info"
-      alias pku="sudo pkg upgrade"
-      alias pkr="sudo pkg remove"
-    ;;
-  "Linux")
-    # systemd
-    alias jc="sudo journalctl "
-    alias jcu="journalctl --user "
-    alias sy="sudo systemctl "
-    alias syu="systemctl --user "
+  # load ssh key using keychain if empty agent
+  if [[ -n $SSH_AUTH_SOCK ]] && ! ssh-add -l &>/dev/null; then
+    ssh-add -K
+  fi
+  ;;
+"FreeBSD")
+  alias pki="sudo pkg install"
+  alias pks="pkg search"
+  alias pksh="pkg info"
+  alias pku="sudo pkg upgrade"
+  alias pkr="sudo pkg remove"
+  ;;
+"Linux")
+  # systemd
+  alias jc="sudo journalctl "
+  alias jcu="journalctl --user "
+  alias sy="sudo systemctl "
+  alias syu="systemctl --user "
 
-    if [[ -e /etc/arch-release ]]; then
-      if command -v yay &>/dev/null; then
-        pkgcmd="yay"
-      else
-        pkgcmd="sudo pacman"
-      fi
-      alias pki="$pkgcmd -S"
-      alias pkiyy="$pkgcmd -S --noconfirm"
-      alias pkls="$pkgcmd -Ql"
-      alias pkp="pkgfile"
-      alias pks="$pkgcmd -Ss"
-      alias pksh="$pkgcmd -Si"
-      alias pku="$pkgcmd -Syu"
-      alias pkr="$pkgcmd -R --recursive"
-    elif [[ -e /etc/debian_version ]]; then
-      alias pki="sudo apt install"
-      alias pkiyy="sudo apt install --yes"
-      alias pkls="dpkg -L"
-      alias pkp="apt-file search"
-      alias pks="apt search"
-      alias pksh="apt show"
-      alias pku="sudo apt update && sudo apt --autoremove dist-upgrade"
-      alias pkr="sudo apt purge --autoremove"
-
-      export PATH="$PATH:/usr/sbin:/sbin"
-    elif [[ -e /etc/fedora-release ]]; then
-      alias pki="sudo dnf --color=auto install"
-      alias pkls="rpm -ql"
-      alias pkp="dnf --color=auto provides"
-      alias pks="dnf --color=auto search"
-      alias pksh="dnf --color=auto info"
-      alias pku="sudo dnf --color=auto update"
-      alias pkr="sudo dnf --color=auto remove"
-    elif [[ -e /etc/redhat-release ]]; then
-      alias pki="sudo yum --color=auto install"
-      alias pkls="rpm -ql"
-      alias pkp="yum --color=auto provides"
-      alias pks="yum --color=auto search"
-      alias pksh="yum --color=auto info"
-      alias pku="sudo yum --color=auto update"
-      alias pkr="sudo yum --color=auto remove"
-    elif [[ -e /etc/alpine-release ]]; then
-      alias pki="sudo apk add "
-      alias pkiyy="sudo apk add "
-      alias pks="apk search "
-      alias pksh="apk info "
-      alias pku="sudo apk -U upgrade"
-      alias pkr="sudo apk del "
-    elif grep -q void /etc/os-release; then
-      alias pki="sudo xbps-install "
-      alias pkls="xbps-query -f "
-      alias pkp="sudo xclocate "
-      alias pks="xbps-query -Rs "
-      alias pksh="xbps-query -RS "
-
-    elif grep -q opensuse /etc/os-release; then
-      alias zy="sudo zypper "
-
-      alias pki="sudo zypper install "
-      alias pkls="rpm -ql"
-      alias pkp="zypper search --provides --file-list "
-      alias pks="sudo zypper search "
-      alias pksh="zypper info "
-      alias pku="sudo zypper refresh && sudo zypper dist-upgrade"
-      alias pkr="sudo zypper remove --clean-deps "
-
-      export PATH="$PATH:/usr/sbin:/sbin"
+  if [[ -e /etc/arch-release ]]; then
+    if command -v yay &>/dev/null; then
+      pkgcmd="yay"
     else
-      echo "!! Unsupported Linux distribution"
+      pkgcmd="sudo pacman"
     fi
+    alias pki="$pkgcmd -S"
+    alias pkiyy="$pkgcmd -S --noconfirm"
+    alias pkls="$pkgcmd -Ql"
+    alias pkp="pkgfile"
+    alias pks="$pkgcmd -Ss"
+    alias pksh="$pkgcmd -Si"
+    alias pku="$pkgcmd -Syu"
+    alias pkr="$pkgcmd -R --recursive"
+  elif [[ -e /etc/debian_version ]]; then
+    alias pki="sudo apt install"
+    alias pkiyy="sudo apt install --yes"
+    alias pkls="dpkg -L"
+    alias pkp="apt-file search"
+    alias pks="apt search"
+    alias pksh="apt show"
+    alias pku="sudo apt update && sudo apt --autoremove dist-upgrade"
+    alias pkr="sudo apt purge --autoremove"
 
-    if [[ -d /run/WSL ]]; then
-      source ~/bin/wsl-ssh-relay
-      ~/bin/wsl-gpg-relay
-    fi
-    ;;
-  "OpenBSD")
-    alias pki="sudo pkg_add -i -v "
-    alias pku="sudo pkg_add -u -v "
-    alias pkls="pkg_info -L "
-    ;;
-  *)
-    echo "!! Unsupported OS: $(uname)"
+    export PATH="$PATH:/usr/sbin:/sbin"
+  elif [[ -e /etc/fedora-release ]]; then
+    alias pki="sudo dnf --color=auto install"
+    alias pkls="rpm -ql"
+    alias pkp="dnf --color=auto provides"
+    alias pks="dnf --color=auto search"
+    alias pksh="dnf --color=auto info"
+    alias pku="sudo dnf --color=auto update"
+    alias pkr="sudo dnf --color=auto remove"
+  elif [[ -e /etc/redhat-release ]]; then
+    alias pki="sudo yum --color=auto install"
+    alias pkls="rpm -ql"
+    alias pkp="yum --color=auto provides"
+    alias pks="yum --color=auto search"
+    alias pksh="yum --color=auto info"
+    alias pku="sudo yum --color=auto update"
+    alias pkr="sudo yum --color=auto remove"
+  elif [[ -e /etc/alpine-release ]]; then
+    alias pki="sudo apk add "
+    alias pkiyy="sudo apk add "
+    alias pks="apk search "
+    alias pksh="apk info "
+    alias pku="sudo apk -U upgrade"
+    alias pkr="sudo apk del "
+  elif grep -q void /etc/os-release; then
+    alias pki="sudo xbps-install "
+    alias pkls="xbps-query -f "
+    alias pkp="sudo xclocate "
+    alias pks="xbps-query -Rs "
+    alias pksh="xbps-query -RS "
+
+  elif grep -q opensuse /etc/os-release; then
+    alias zy="sudo zypper "
+
+    alias pki="sudo zypper install "
+    alias pkls="rpm -ql"
+    alias pkp="zypper search --provides --file-list "
+    alias pks="sudo zypper search "
+    alias pksh="zypper info "
+    alias pku="sudo zypper refresh && sudo zypper dist-upgrade"
+    alias pkr="sudo zypper remove --clean-deps "
+
+    export PATH="$PATH:/usr/sbin:/sbin"
+  else
+    echo "!! Unsupported Linux distribution"
+  fi
+
+  if [[ -d /run/WSL ]]; then
+    source ~/bin/wsl-ssh-relay
+    ~/bin/wsl-gpg-relay
+  fi
+  ;;
+"OpenBSD")
+  alias pki="sudo pkg_add -i -v "
+  alias pku="sudo pkg_add -u -v "
+  alias pkls="pkg_info -L "
+  ;;
+*)
+  echo "!! Unsupported OS: $(uname)"
+  ;;
 esac
 
 #
@@ -198,7 +198,7 @@ export KERL_CONFIGURE_OPTIONS="--disable-debug --without-javac"
 alias be='bundle exec '
 
 # colordiff
-if command -v colordiff > /dev/null; then
+if command -v colordiff >/dev/null; then
   alias diff=colordiff
 fi
 
@@ -224,8 +224,7 @@ dsh() {
   [ -z "$1" ] && echo "needs image to run." && return 2
   runimg="$1"
   shift
-  if [ -z "$1" ]
-  then
+  if [ -z "$1" ]; then
     runcmd="/bin/bash"
   else
     runcmd="$*"
@@ -256,8 +255,7 @@ emacsclient() {
   )
 }
 alias em=emacsclient
-if command -p emacsclient &>/dev/null
-then
+if command -p emacsclient &>/dev/null; then
   alias vim=emacsclient
 fi
 
@@ -294,7 +292,7 @@ alias grh='git reset HEAD'
 alias grv='git remote -v'
 alias gs='git status'
 alias gss='git status --short'
-gt () {
+gt() {
   [ -z "$1" ] && git tag -l -n1 && return 0
   # shellcheck disable=SC2068
   git tag $@
@@ -306,7 +304,7 @@ gitignore() {
 
   if [[ $? == 0 ]]; then
     if [ -e .gitignore ]; then
-      cat .gitignore.tmp >> .gitignore
+      cat .gitignore.tmp >>.gitignore
     else
       mv -v .gitignore.tmp .gitignore
     fi
@@ -317,13 +315,13 @@ gitignore() {
 
 # gnome-keyring-daemon
 if command -v gnome-keyring-daemon &>/dev/null; then
-  if [ -n "$DESKTOP_SESSION" ];then
-      eval $(gnome-keyring-daemon --start --components=secrets,pkcs11)
+  if [ -n "$DESKTOP_SESSION" ]; then
+    eval $(gnome-keyring-daemon --start --components=secrets,pkcs11)
   fi
 fi
 
 # gpg
-if command -v gpgconf > /dev/null && [[ -n "$XDG_RUNTIME_DIR" && -d "$XDG_RUNTIME_DIR" ]]; then
+if command -v gpgconf >/dev/null && [[ -n "$XDG_RUNTIME_DIR" && -d "$XDG_RUNTIME_DIR" ]]; then
   [ -e "$(gpgconf --list-dirs agent-socket)" ] || gpgconf --create-socketdir
 fi
 gpgfwd() {
@@ -337,7 +335,7 @@ export GREP_COLOR='3;32'
 alias grep='grep --color=auto'
 
 # gsed
-if command -v gsed > /dev/null; then
+if command -v gsed >/dev/null; then
   alias sed=gsed
 fi
 
@@ -377,7 +375,7 @@ if [ -d "${HOME}/.cargo/bin" ]; then
 fi
 
 # snap
-if command -v snap > /dev/null; then
+if command -v snap >/dev/null; then
   export PATH=$PATH:/snap/bin
 fi
 
@@ -390,7 +388,7 @@ if [[ -n $SSH_AUTH_SOCK ]] && ! ssh-add -l &>/dev/null; then
 fi
 delkey() {
   [[ -z $1 ]] && echo "supply deletion key" && return 2
-  delip="$(grep "${1}"\  "$HOME"/.ssh/known_hosts | awk '{print $1}' | cut -f 2 -d \, )"
+  delip="$(grep "${1}"\  "$HOME"/.ssh/known_hosts | awk '{print $1}' | cut -f 2 -d \,)"
 
   [[ -n $delip ]] && ssh-keygen -f "$HOME/.ssh/known_hosts" -R "$delip"
   ssh-keygen -f "$HOME/.ssh/known_hosts" -R "$1"
@@ -459,11 +457,9 @@ vreload() {
 alias vb=VBoxManage
 
 # vscode
-if [[ "$TERM_PROGRAM" == "vscode" ]]
-then
+if [[ "$TERM_PROGRAM" == "vscode" ]]; then
   alias vim=code
   if [[ $TERM_PROGRAM_VERSION == *-insider ]]; then
     alias code=code-insiders
   fi
 fi
-
