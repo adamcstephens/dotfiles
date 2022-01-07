@@ -1,7 +1,7 @@
 bmalehorn.vscode-fish
 DavidAnson.vscode-markdownlint
+dustinsanders.an-old-hope-theme-vscode
 EditorConfig.EditorConfig
-Equinusocio.vsc-community-material-theme
 esbenp.prettier-vscode
 filipesabella.live-p5
 foxundermoon.shell-format
@@ -22,5 +22,4 @@ ritwickdey.LiveServer
 samplavigne.p5-vscode
 signageos.signageos-vscode-sops
 timonwong.shellcheck
-tinkertrain.theme-panda
 vscode-org-mode.org-mode
