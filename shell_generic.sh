@@ -139,6 +139,7 @@ case $(uname) in
       alias pkr="sudo yum --color=auto remove"
     elif [[ -e /etc/alpine-release ]]; then
       alias pki="sudo apk add "
+      alias pkiyy="sudo apk add "
       alias pks="apk search "
       alias pksh="apk info "
       alias pku="sudo apk -U upgrade"
