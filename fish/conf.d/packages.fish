@@ -67,6 +67,8 @@ if status is-interactive
                 alias pki="sudo apk add "
                 alias pks="apk search "
                 alias pksh="apk info "
+                alias pkls="apk info --contents "
+                alias pkp="apk-file"
                 alias pku="sudo apk -U upgrade"
                 alias pkr="sudo apk del "
             else if grep -q void /etc/os-release
