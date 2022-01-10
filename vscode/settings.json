@@ -166,6 +166,7 @@
   },
   "remote.SSH.remotePlatform": {
     "svc-arch1": "linux",
+    "svc-compose": "linux",
     "theblack": "linux"
   },
   "workbench.editor.untitled.hint": "hidden",
