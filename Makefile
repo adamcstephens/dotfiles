@@ -2,7 +2,7 @@
 default:
 
 .PHONY: bootstrap
-bootstrap: install-packages install-asdf install-dotbot update-vim update-bins
+bootstrap: install-asdf install-dotbot update-vim update-bins
 
 .PHONY: bootstrap-dev
 bootstrap-dev:
