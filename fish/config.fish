@@ -3,7 +3,6 @@ set -U fish_greeting
 # paths
 fish_add_path --append ~/bin
 fish_add_path --append ~/.dotfiles/bin
-fish_add_path --append ~/.local/bin
 if test -d ~/.emacs.d/bin
     fish_add_path ~/.emacs.d/bin
 end
