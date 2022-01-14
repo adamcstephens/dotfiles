@@ -73,37 +73,28 @@ set colorcolumn=100
 "
 call plug#begin('~/.vim/plugged')
 
-"Plug 'sirver/ultisnips'
 Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'Valloric/ListToggle'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
 Plug 'blueyed/vim-qf_resize'
-Plug 'christoomey/vim-tmux-navigator'
 Plug 'godlygeek/tabular'
-Plug 'hashivim/vim-terraform'
-Plug 'honza/vim-snippets'
 Plug 'itchyny/lightline.vim'
-Plug 'janko-m/vim-test'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all --no-update-rc'}
+Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
-Plug 'patstockwell/vim-monokai-tasty'
-Plug 'sainnhe/sonokai'
-Plug 'saltstack/salt-vim'
 Plug 'scrooloose/nerdtree'
 Plug 'sheerun/vim-polyglot'
+Plug 'christoomey/vim-tmux-navigator'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-obsession'
-Plug 'tpope/vim-rails'
-Plug 'tpope/vim-rake'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'dense-analysis/ale'
+Plug 'j-tom/vim-old-hope'
 
 " let g:ansible_name_highlight = 'b'
 " disable vim-json's quite hiding
@@ -122,12 +113,6 @@ let g:ale_yaml_yamllint_options = '-d "{extends: relaxed, rules: {line-length: {
 nmap <silent> <Leader>j <Plug>(ale_previous_wrap)
 nmap <silent> <Leader>k <Plug>(ale_next_wrap)
 
-" deoplete
-"let g:deoplete#enable_at_startup = 1
-inoremap <silent><expr><C-j> pumvisible() ? "\<c-n>" : "\<C-j>"
-inoremap <silent><expr><C-k> pumvisible() ? "\<c-p>" : "\<C-k>"
-inoremap <silent><expr><C-e> pumvisible() ? "\<c-y>" : "\<C-e>"
-
 " fzf
 " act like ctrl-p
 nnoremap <c-p> :Files<cr>
@@ -144,16 +129,6 @@ let g:fzf_files_options =
 " reduce update time from 4s
 set updatetime=100
 
-" LanguageClient
-" Plug 'autozimu/LanguageClient-neovim', {
-"     \ 'branch': 'next',
-"     \ 'do': 'bash install.sh',
-"     \ }
-" let g:LanguageClient_serverCommands = {
-"     \ 'ruby': [ 'solargraph', 'stdio' ],
-"     \ }
-" nnoremap <F5> :call LanguageClient_contextMenu()<CR>
-
 " indentline
 let g:indentLine_showFirstIndentLevel = 1
 let g:indentLine_first_char = '▏'
@@ -163,7 +138,7 @@ let g:indentLine_char = '▏'
 set laststatus=2
 set noshowmode
 let g:lightline = {
-      \ 'colorscheme': 'sonokai',
+      \ 'colorscheme': 'OldHope',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
@@ -194,29 +169,6 @@ let g:qf_resize_max_ratio = 0.30
 " rooter
 let g:rooter_silent_chdir = 1
 
-" snippets
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-" let g:UltiSnipsExpandTrigger="<tab>"
-" let g:UltiSnipsJumpForwardTrigger="<c-b>"
-" let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-
-" terraform
-let g:terraform_align=1
-let g:terraform_fmt_on_save=1
-
-" test
-nmap <silent> t<C-n> :TestNearest<CR>
-nmap <silent> t<C-f> :TestFile<CR>
-nmap <silent> t<C-s> :TestSuite<CR>
-nmap <silent> t<C-l> :TestLast<CR>
-nmap <silent> t<C-g> :TestVisit<CR>
-let test#strategy = {
-  \ 'nearest': 'dispatch',
-  \ 'file':    'dispatch',
-  \ 'suite':   'basic',
-  \}
-let g:dispatch_tmux_height=20
-
 " Add plugins to &runtimepath
 call plug#end()
 
@@ -225,12 +177,7 @@ syntax on
 filetype plugin indent on
 
 set termguicolors
-
-let g:sonokai_style = 'andromeda'
-let g:sonokai_enable_italic = 1
-let g:sonokai_disable_italic_comment = 1
-
-silent! colorscheme sonokai
+silent! colorscheme old-hope
 highlight Comment cterm=italic gui=italic
 
 set cursorline
