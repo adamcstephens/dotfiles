@@ -1,12 +1,9 @@
 #!/bin/sh
 
-# This is the example configuration file for river.
-#
-# If you wish to edit this, you will probably want to copy it to
-# $XDG_CONFIG_HOME/river/init or $HOME/.config/river/init first.
-#
-# See the river(1), riverctl(1), and rivertile(1) man pages for complete
-# documentation.
+# Set background and border color
+riverctl background-color 0x1c1d21
+riverctl border-color-focused 0xcbcdd2
+riverctl border-color-unfocused 0x3f4044
 
 # Use the "logo" key as the primary modifier
 mod="Mod4"
@@ -149,11 +146,6 @@ for mode in normal locked; do
   #riverctl map $mode None XF86MonBrightnessUp   spawn 'light -A 5'
   #riverctl map $mode None XF86MonBrightnessDown spawn 'light -U 5'
 done
-
-# Set background and border color
-riverctl background-color 0x002b36
-riverctl border-color-focused 0x93a1a1
-riverctl border-color-unfocused 0x586e75
 
 # Set repeat rate
 riverctl set-repeat 50 300

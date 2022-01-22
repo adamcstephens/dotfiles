@@ -9,13 +9,13 @@
 }
 
 window#waybar {
-  color: #9ed06c;
-  background-color: #2b2d3a;
-  border-bottom: 2px solid #7e8294;
+  color: #78bd65;
+  background-color: #1c1d21;
+  border-bottom: 2px solid #686b78;
 }
 
 window#waybar.solo {
-  color: #9ed06c;
+  color: #78bd65;
 }
 
 #workspaces {
@@ -26,23 +26,24 @@ window#waybar.solo {
 #tags button.occupied,
 #workspaces button {
   padding: 0 7px;
-  color: #9ed06c;
+  color: #78bd65;
 }
 
 #tags button.focused,
 #workspaces button.focused {
-  color: #f89860;
+  color: #ef7c2a;
 }
 
 #workspaces button.visible {
-  color: #f89860;
+  color: #ef7c2a;
 }
 
 #tags button.urgent,
 #workspaces button.urgent {
-  color: #fb617e;
+  color: #eb3d54;
 }
 
+/* sway mode */
 #mode {
   color: #bb97ee;
   margin: 0px 6px 0px 10px;
@@ -59,13 +60,13 @@ window#waybar.solo {
 }
 
 #battery.warning {
-  color: #f0c362;
+  color: #e5cd52;
 }
 
 #battery.critical {
-  color: #fb617e;
+  color: #eb3d54;
 }
 
 #battery.charging {
-  color: #6dcae8;
+  color: #4fb4d8;
 }
