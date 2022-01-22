@@ -42,6 +42,7 @@
 - shell:
     - [systemctl --user daemon-reload]
     - [
-        systemctl --user enable dunst emacs gammastep gpg-agent gpg-agent.socket gpg-agent-extra.socket kanshi pipewire pipewire-pulse polkit-gnome-authentication-agent-1 ssh-agent swayidle waybar wob,
+        systemctl --user enable --now dunst emacs gammastep gpg-agent gpg-agent.socket gpg-agent-extra.socket kanshi pipewire pipewire-pulse polkit-gnome-authentication-agent-1 ssh-agent swayidle waybar wob,
       ]
+    - [systemctl --user enable --now syncthing]
     - [systemctl --user mask gammastep-indicator]
