@@ -1,3 +1,4 @@
 --no-heading
 --ignore-case
 --hidden
+--no-ignore-vcs
