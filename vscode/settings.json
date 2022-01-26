@@ -98,7 +98,7 @@
   "files.insertFinalNewline": true,
   "shellcheck.disableVersionCheck": true,
   "scm.defaultViewMode": "tree",
-  "editor.fontLigatures": true,
+  "editor.fontLigatures": false,
   "python.formatting.provider": "black",
   "explorer.confirmDelete": false,
   "javascript.format.semicolons": "remove",
