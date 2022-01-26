@@ -118,27 +118,6 @@
     "*.sls": "yaml"
   },
   "window.titleBarStyle": "custom",
-  "settingsSync.ignoredExtensions": [
-    "dart-code.flutter",
-    "svelte.svelte-vscode",
-    "redhat.vscode-promql",
-    "twxs.cmake",
-    "trond-snekvik.devicetree",
-    "ms-vscode.cpptools",
-    "zbr.vscode-ansible"
-  ],
-  "[dart]": {
-    "editor.formatOnSave": true,
-    "editor.formatOnType": true,
-    "editor.rulers": [
-      80
-    ],
-    "editor.selectionHighlight": false,
-    "editor.suggest.snippetsPreventQuickSuggestions": false,
-    "editor.suggestSelection": "first",
-    "editor.tabCompletion": "onlySnippets",
-    "editor.wordBasedSuggestions": false
-  },
   "window.autoDetectColorScheme": true,
   "editor.cursorBlinking": "phase",
   "terminal.integrated.cursorBlinking": true,
@@ -165,9 +144,8 @@
     }
   },
   "remote.SSH.remotePlatform": {
-    "svc-arch1": "linux",
-    "svc-compose": "linux",
-    "theblack": "linux"
+    "dev": "linux",
+    "svc-compose": "linux"
   },
   "workbench.editor.untitled.hint": "hidden",
   "window.nativeFullScreen": false,
