@@ -145,12 +145,32 @@
            ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
            ("\\paragraph{%s}" . "\\paragraph*{%s}"))))
 
-  (setq org-latex-compiler "xelatex"))
+  (setq org-latex-compiler "xelatex")
 
-;; (after! org-re-reveal
-;;   (setq org-re-reveal-theme "black")
-;;   (setq org-re-reveal-history t)
-;;   (setq org-re-reveal-center t))
+  (setq my-presentation-template '("#+REVEAL_THEME: moon
+#+TITLE:
+#+SUBTITLE:
+#+REVEAL_TITLE_SLIDE: <h1>%t</h1><h2>%s</h2><h3>%A %a</h3>
+#+OPTIONS: toc:nil tags:nil timestamp:nil reveal_width:1280 reveal_height:720 reveal_embed_local_resources:t
+#+REVEAL_THEME: ../../../presentations/pikestreet.css
+#+REVEAL_TITLE_SLIDE_BACKGROUND: ../../../presentations/images/annie-spratt-MwbKwAZeTXs-unsplash.jpg
+#+REVEAL_DEFAULT_SLIDE_BACKGROUND: ../../../presentations/images/jeremy-bishop-G9i_plbfDgk-unsplash.jpg
+
+* Plan :noexport:
+** Review and Bridge-In
+** Objectives
+** Points
+** Activities
+** Assessments
+** Closure
+"))
+
+  (tempo-define-template "my-presentation-template" my-presentation-template "<P" "Insert presentation template")
+  (tempo-define-template "my-properties" '(":PROPERTIES:\n\n:END:\n") "<p" "Insert properties")
+  )
+
+(after! org-re-reveal
+  (setq org-re-reveal-history t))
 
 (after! ispell
   (setq ispell-personal-dictionary "~/.aspell.en.pws"))

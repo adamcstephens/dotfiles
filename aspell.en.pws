@@ -1,12 +1,21 @@
-personal_ws-1.1 en 44 
+personal_ws-1.1 en 61
 AJ
 API's
 ASC
 CCI
 CCI's
+CIS
+CommStudies
+CompSci
+DBs
+Davey
+Dev
+DigSci
+DiglSysMgt
 ELR
 EMAT
 Fastly
+IdeaBase
 Ideabase
 KSU
 LastPage
@@ -14,8 +23,13 @@ PDFs
 PowerPoints
 RGB
 SRVSS
+Standup
 TODO
 Timecard
+UX
+UXD
+VCD
+WDD
 adamcstephens
 definecolor
 deliverables
@@ -36,6 +50,8 @@ pastelSalmon
 pastelYellow
 rebranding
 reimagines
+repo
+repos
 rfoot
 rhead
 rowcolor
@@ -43,3 +59,4 @@ skillsets
 thepage
 timecards
 toc
+vscode

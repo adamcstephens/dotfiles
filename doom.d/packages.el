@@ -51,5 +51,5 @@
 
 (package! ssh-config-mode)
 (package! jsonnet-mode)
-(package! org-re-reveal :pin "cf000894f6e5d0627151e2bec5b1a54a311ad53e")
+(package! org-re-reveal :pin "55fca47c740c50fe04cbf2b8ae90e02174626c0c")
 ;; (package! revealjs :pin "b18f12d")
