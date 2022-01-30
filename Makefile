@@ -64,7 +64,7 @@ update-fisher:
 
 .PHONY: update-vim
 update-vim:
-	vim +PlugClean +PlugUpdate +qall
+	vim +PlugClean! +PlugUpdate +qall
 
 .PHONY: clean
 clean:
