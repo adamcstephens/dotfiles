@@ -12,6 +12,9 @@ end
 if test -d /snap/bin
     fish_add_path /snap/bin
 end
+if test -d ~/.local/share/aquaproj-aqua/bin
+    fish_add_path ~/.local/share/aquaproj-aqua/bin
+end
 
 # envs
 set -x EDITOR ~/bin/editor
