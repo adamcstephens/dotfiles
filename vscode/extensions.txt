@@ -19,6 +19,5 @@ redhat.ansible
 redhat.vscode-yaml
 ritwickdey.LiveServer
 samplavigne.p5-vscode
-signageos.signageos-vscode-sops
 timonwong.shellcheck
 vscode-org-mode.org-mode
