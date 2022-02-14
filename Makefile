@@ -17,6 +17,10 @@ backup-windows-terminal:
 	cp /mnt/c/Users/adam/AppData/Local/Packages/Microsoft.WindowsTerminalPreview_*/LocalState/settings.json ./windowsterminal-settings.json
 	chmod 644 windowsterminal-settings.json
 
+.PHONY: install-aqua
+install-aqua:
+	~/.dotfiles/bin/install-aqua.sh -i ~/bin/aqua
+
 .PHONY: install-brew
 install-brew:
 	~/.dotfiles/bin/install-brew.sh
