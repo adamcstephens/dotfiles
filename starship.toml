@@ -9,6 +9,9 @@ format = "[─](fg:244)$symbol "
 success_symbol = "[❯](bold yellow)"
 error_symbol = "[❯](bold red)"
 
+[container]
+disabled = true
+
 [gcloud]
 disabled = true
 format = '[$symbol$project]($style) '
@@ -19,6 +22,9 @@ format = "[$symbol$branch]($style) "
 [hostname]
 style = 'bold yellow'
 format = '[$hostname]($style) '
+
+[localip]
+disabled = true
 
 [nodejs]
 disabled = true
