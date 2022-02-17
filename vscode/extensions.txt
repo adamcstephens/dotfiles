@@ -1,6 +1,8 @@
 bmalehorn.vscode-fish
+danielgjackson.auto-dark-mode-windows
 DavidAnson.vscode-markdownlint
 dustinsanders.an-old-hope-theme-vscode
+eamodio.gitlens
 EditorConfig.EditorConfig
 esbenp.prettier-vscode
 filipesabella.live-p5

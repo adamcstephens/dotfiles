@@ -23,7 +23,6 @@
   ],
   "git.autofetch": true,
   "workbench.startupEditor": "newUntitledFile",
-  "workbench.preferredLightColorTheme": "Default Light+",
   "extensions.ignoreRecommendations": true,
   "zenMode.fullScreen": false,
   "zenMode.hideLineNumbers": false,
@@ -105,8 +104,6 @@
   "python.formatting.provider": "black",
   "explorer.confirmDelete": false,
   "javascript.format.semicolons": "remove",
-  "go.formatTool": "goimports",
-  "go.useLanguageServer": true,
   "window.restoreWindows": "none",
   "python.languageServer": "Pylance",
   "files.associations": {
@@ -178,5 +175,6 @@
     "editor.formatOnSave": true,
   },
   "git.confirmSync": false,
-  "workbench.colorTheme": "An Old Hope Italic"
+  "workbench.colorTheme": "An Old Hope Italic",
+  "workbench.preferredDarkColorTheme": "An Old Hope Italic"
 }

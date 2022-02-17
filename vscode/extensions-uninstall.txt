@@ -1,2 +1,5 @@
 ms-kubernetes-tools.vscode-kubernetes-tools
 signageos.signageos-vscode-sops
+github.classroom
+GitHub.vscode-pull-request-github
+ms-vsliveshare.vsliveshare
