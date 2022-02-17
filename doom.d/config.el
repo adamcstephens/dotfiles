@@ -85,6 +85,7 @@
 
 (after! org
   (require 'ox-latex)
+  (require 'org-tempo)
 
   ;; Interpret "_" and "^" for export when braces are used.
   (setq org-export-with-sub-superscripts '{})
@@ -151,10 +152,16 @@
 #+TITLE:
 #+SUBTITLE:
 #+REVEAL_TITLE_SLIDE: <h1>%t</h1><h2>%s</h2><h3>%A %a</h3>
-#+OPTIONS: toc:nil tags:nil timestamp:nil reveal_width:1280 reveal_height:720 reveal_embed_local_resources:t
+#+OPTIONS: toc:nil tags:nil timestamp:nil reveal_width:1680 reveal_height:1050 reveal_embed_local_resources:t reveal_klipsify_src:t
 #+REVEAL_THEME: ../../../presentations/pikestreet.css
 #+REVEAL_TITLE_SLIDE_BACKGROUND: ../../../presentations/images/annie-spratt-MwbKwAZeTXs-unsplash.jpg
 #+REVEAL_DEFAULT_SLIDE_BACKGROUND: ../../../presentations/images/jeremy-bishop-G9i_plbfDgk-unsplash.jpg
+#+REVEAL_KLIPSE_CSS_URL: ../../../presentations/codemirror.css
+#+REVEAL_MIN_SCALE: 1.0
+#+REVEAL_MAX_SCALE: 1.0
+#+REVEAL_CODEMIRROR_CONFIG: codemirror_options_in: {
+#+REVEAL_CODEMIRROR_CONFIG:   autoCloseBrackets: true
+#+REVEAL_CODEMIRROR_CONFIG: }
 
 * Plan :noexport:
 ** Review and Bridge-In
@@ -163,6 +170,7 @@
 ** Activities
 ** Assessments
 ** Closure
+* Reflect :noexport:
 "))
 
   (tempo-define-template "my-presentation-template" my-presentation-template "<P" "Insert presentation template")
@@ -204,4 +212,6 @@
   (setq interprogram-paste-function 'wl-paste))
 
 ;; force full ranger mode
- (after! ranger (setq ranger-override-dired 'ranger))
+(after! ranger (setq ranger-override-dired 'ranger))
+
+(after! format-all (setq +format-on-save-enabled-modes '(not sgml-mode html-mode sql-mode tex-mode latex-mode org-msg-edit-mode)))
