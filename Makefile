@@ -2,7 +2,7 @@
 default:
 
 .PHONY: bootstrap
-bootstrap: install-asdf install-dotbot update-vim update-bins
+bootstrap: install-aqua install-dotbot update-vim update-bins
 
 .PHONY: bootstrap-dev
 bootstrap-dev:
@@ -20,6 +20,7 @@ backup-windows-terminal:
 .PHONY: install-aqua
 install-aqua:
 	~/.dotfiles/bin/install-aqua.sh -i ~/bin/aqua
+	pushd ~/.dotfiles && aqua install && popd
 
 .PHONY: install-brew
 install-brew:
