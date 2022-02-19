@@ -1,15 +1,14 @@
 #!/usr/bin/env bash
 
 if [[ "$USER" != "root" ]]; then
-  if [[ "$TERM_PROGRAM" == "vscode" ]]
-  then
+  if [[ "$TERM_PROGRAM" == "vscode" ]]; then
     if [[ $TERM_PROGRAM_VERSION == *-insider ]]; then
       exec code-insiders --wait $@
     else
       exec code --wait $@
     fi
   elif command -v emacsclient &>/dev/null; then
-    if [[ -e ~/.terminfo/78/xterm-emacs ]]; then
+    if [ -e ~/.terminfo/x/xterm-emacs ] || [ -e ~/.terminfo/78/xterm-emacs ]; then
       export TERM=xterm-emacs
     else
       export TERM=xterm-256color

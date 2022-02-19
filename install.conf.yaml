@@ -80,7 +80,7 @@
       force: true
       path: zshrc
     ~/bin/cmc: cmc/cmc
-    ~/bin/editor: editor
+    ~/bin/editor: bin/editor
 
 - shell:
     - [chmod 0700 ~/.gnupg, Setting gnupg to 0700]
