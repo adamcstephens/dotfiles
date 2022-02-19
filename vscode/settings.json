@@ -32,69 +32,32 @@
   "editor.renderWhitespace": "selection",
   "files.trimTrailingWhitespace": true,
   "window.newWindowDimensions": "inherit",
-  "[ruby]": {
-    "editor.formatOnSave": false
-  },
-  "[terraform]": {
-    "editor.formatOnSave": true
-  },
-  "[elixir]": {
-    "editor.formatOnSave": true
-  },
   "[json]": {
-    "editor.formatOnSave": true,
     "editor.defaultFormatter": "vscode.json-language-features"
   },
   "[jsonc]": {
-    "editor.formatOnSave": true,
     "editor.defaultFormatter": "vscode.json-language-features"
   },
-  "[jsonnet]": {
-    "editor.formatOnSave": true,
-  },
-  "[python]": {
-    "editor.formatOnSave": true,
-    "editor.tabSize": 4
-  },
-  "[fish]": {
-    "editor.formatOnSave": true,
-  },
-  "[scss]": {
-    "editor.formatOnSave": true
-  },
   "[yaml]": {
-    "editor.formatOnSave": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[html]": {
-    "editor.formatOnSave": true,
     "editor.defaultFormatter": "vscode.html-language-features"
   },
   "[css]": {
-    "editor.formatOnSave": true
-  },
-  "[rust]": {
-    "editor.formatOnSave": true,
-    "editor.tabSize": 4
-  },
-  "[go]": {
-    "editor.formatOnSave": true
-  },
-  "[toml]": {
-    "editor.formatOnSave": true
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true
   },
-  "[svelte]": {
-    "editor.formatOnSave": true
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "[dockercompose]": {
-    "editor.formatOnSave": true
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "[zig]": {
-    "editor.formatOnSave": true,
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "workbench.sideBar.location": "left",
   "files.insertFinalNewline": true,
@@ -144,8 +107,8 @@
     }
   },
   "remote.SSH.remotePlatform": {
-    "dev": "linux",
-    "svc-compose": "linux"
+    "svc-compose": "linux",
+    "svc-arch1": "linux"
   },
   "workbench.editor.untitled.hint": "hidden",
   "window.nativeFullScreen": false,
@@ -160,21 +123,9 @@
     "!encrypted/pkcs1-oaep scalar",
     "!vault scalar"
   ],
-  "[markdown]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[typescript]": {
-    "editor.formatOnSave": true,
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[javascriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true,
-  },
-  "[shellscript]": {
-    "editor.formatOnSave": true,
-  },
   "git.confirmSync": false,
   "workbench.colorTheme": "An Old Hope Italic",
-  "workbench.preferredDarkColorTheme": "An Old Hope Italic"
+  "workbench.preferredDarkColorTheme": "An Old Hope Italic",
+  "remote.SSH.lockfilesInTmp": true,
+  "remote.SSH.useLocalServer": false
 }
