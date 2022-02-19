@@ -3,7 +3,7 @@ registries:
     ref: v1.2.1 # renovate: depName=aquaproj/aqua-registry
   - name: local
     type: local
-    path: aqua-registry.yaml
+    path: registry.yaml
 
 packages:
   - name: Peltoche/lsd@0.21.0

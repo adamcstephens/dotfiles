@@ -34,7 +34,7 @@
     ~/.bashrc:
       force: true
       path: bashrc
-    ~/.config/aquaproj-aqua/aqua.yaml: aqua.yaml
+    ~/.config/aquaproj-aqua: aqua
     ~/.config/bat/config: bat
     ~/.config/direnv/direnvrc: direnvrc.sh
     ~/.config/fish:
