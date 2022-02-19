@@ -36,6 +36,7 @@
       path: bashrc
     ~/.config/aquaproj-aqua: aqua
     ~/.config/bat/config: bat
+    ~/.config/btop/btop.conf: btop.conf
     ~/.config/direnv/direnvrc: direnvrc.sh
     ~/.config/fish:
       force: true
