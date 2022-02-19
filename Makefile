@@ -20,7 +20,7 @@ backup-windows-terminal:
 .PHONY: install-aqua
 install-aqua:
 	~/.dotfiles/bin/install-aqua.sh -i ~/bin/aqua
-	pushd ~/.dotfiles && aqua install && popd
+	cd ~/.dotfiles/aqua && aqua install
 
 .PHONY: install-brew
 install-brew:

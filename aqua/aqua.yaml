@@ -20,3 +20,5 @@ packages:
   - name: aristocratos/btop@v1.2.3
     registry: local
   - name: mvdan/sh@v3.4.2
+  - name: BurntSushi/ripgrep@13.0.0
+  - name: go-task/task@v3.10.0
