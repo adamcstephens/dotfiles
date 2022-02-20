@@ -11,10 +11,11 @@
   "modules-right": [
     "tray",
     "idle_inhibitor",
+    "bluetooth",
     "network",
     "battery",
     "pulseaudio",
-    "custom/clock"
+    "clock"
   ],
   "sway/mode": {
     "format": " {}"
@@ -47,9 +48,10 @@
     // "icon-size": 21,
     "spacing": 10
   },
-  "custom/clock": {
-    "exec": "date +'%m/%d @ %H:%M'",
-    "interval": 5
+  "clock": {
+    "interval": 60,
+    "format": "{:%m/%d @ %H:%M}",
+    "max-length": 25
   },
   "battery": {
     "states": {
@@ -68,6 +70,15 @@
       "",
       ""
     ]
+  },
+  "bluetooth": {
+    "format": "{icon}",
+    "format-icons": {
+      "enabled": "",
+      "disabled": ""
+    },
+    "tooltip-format": "{}",
+    "on-click": "blueberry"
   },
   "network": {
     // "interface": "wlp2*", // (Optional) To force the use of this interface

@@ -50,10 +50,11 @@ window#waybar.solo {
 }
 
 #battery,
-#custom-clock,
+#clock,
 #idle_inhibitor,
 #network,
 #pulseaudio,
+#bluetooth,
 #tray {
   margin: 0px 10px;
   min-width: 10px;

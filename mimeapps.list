@@ -1,0 +1,10 @@
+[Default Applications]
+application/vnd.openxmlformats-officedocument.wordprocessingml.document=libreoffice-writer.desktop
+text/html=firefox.desktop
+x-scheme-handler/http=firefox.desktop
+x-scheme-handler/https=firefox.desktop
+x-scheme-handler/about=firefox.desktop
+x-scheme-handler/unknown=firefox.desktop
+
+[Added Associations]
+application/vnd.openxmlformats-officedocument.wordprocessingml.document=libreoffice-writer.desktop;

@@ -45,6 +45,7 @@
     ~/.config/kitty/kitty.conf: kitty/kitty.conf
     ~/.config/kitty/theme-light.conf: kitty/theme-light.conf
     ~/.config/kitty/theme-dark.conf: kitty/theme-dark.conf
+    ~/.config/mimeapps.list: mimeapps.list
     ~/.config/ripgrep/ripgreprc: ripgreprc
     ~/.config/rubocop/config.yml: rubocop.yml
     ~/.config/starship.toml: starship.toml
