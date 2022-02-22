@@ -11,15 +11,17 @@ usage_exit() {
 
 install_path=/usr/local/bin/aqua
 
-while getopts i:v: OPT
-do
+while getopts i:v: OPT; do
   case $OPT in
-    v) version=$OPTARG
-      ;;
-    i) install_path=$OPTARG
-      ;;
-    \?) usage_exit
-      ;;
+  v)
+    version=$OPTARG
+    ;;
+  i)
+    install_path=$OPTARG
+    ;;
+  \?)
+    usage_exit
+    ;;
   esac
 done
 
@@ -29,9 +31,9 @@ uname_os() {
   local os
   os=$(uname -s | tr '[:upper:]' '[:lower:]')
   case "$os" in
-    cygwin_nt*) os="windows" ;;
-    mingw*) os="windows" ;;
-    msys_nt*) os="windows" ;;
+  cygwin_nt*) os="windows" ;;
+  mingw*) os="windows" ;;
+  msys_nt*) os="windows" ;;
   esac
   echo "$os"
 }
@@ -40,8 +42,8 @@ uname_arch() {
   local arch
   arch=$(uname -m)
   case $arch in
-    x86_64) arch="amd64" ;;
-    aarch64) arch="arm64" ;;
+  x86_64) arch="amd64" ;;
+  aarch64) arch="arm64" ;;
   esac
   echo ${arch}
 }
@@ -51,6 +53,9 @@ ARCH="$(uname_arch)"
 
 mkdir -p "$(dirname "$install_path")"
 
+currentversion="$(aqua version | awk '{print $3}')"
+latestversion="$(curl -s https://api.github.com/repos/aquaproj/aqua/releases/latest -H "Accept: application/vnd.github.v3+json" | grep "tag_name" | awk '{print $2}' | cut -f 2 -d\" | sed -e 's/v//')"
+
 if [ -n "${version:-}" ]; then
   URL=https://github.com/aquaproj/aqua/releases/download/${version}/aqua_${OS}_${ARCH}.tar.gz
 else
@@ -58,15 +63,20 @@ else
   version=latest
 fi
 
-tempdir=$(mktemp -d)
-echo "===> Downloading $URL ..." >&2
-curl --fail -L "$URL" -o "$tempdir/aqua_${OS}_${ARCH}.tar.gz"
+if [ "$version" != "latest" ] || [ "$currentversion" != "$latestversion" ]; then
+  tempdir=$(mktemp -d)
+  echo "===> Downloading $URL ..." >&2
+  curl --fail -L "$URL" -o "$tempdir/aqua_${OS}_${ARCH}.tar.gz"
 
-(cd "$tempdir"; tar xvzf "aqua_${OS}_${ARCH}.tar.gz" > /dev/null)
-echo "===> Install aqua $version ($OS/$ARCH) to $install_path" >&2
+  (
+    cd "$tempdir"
+    tar xvzf "aqua_${OS}_${ARCH}.tar.gz" >/dev/null
+  )
+  echo "===> Install aqua $version ($OS/$ARCH) to $install_path" >&2
 
-mv "$tempdir/aqua" "$install_path"
+  mv "$tempdir/aqua" "$install_path"
 
-rm -R "$tempdir"
+  rm -R "$tempdir"
+fi
 
 chmod a+x "$install_path"

@@ -2,3 +2,17 @@ version: "3"
 
 includes:
   os: ./tasks/Taskfile_{{OS}}.yml
+
+tasks:
+  default:
+    cmds:
+      - task: dotbot
+      - task: vim-plug
+
+  dotbot:
+    cmds:
+      - ./install
+
+  vim-plug:
+    cmds:
+      - "vim +PlugClean! +PlugUpdate +qall"
