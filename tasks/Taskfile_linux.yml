@@ -1,0 +1,8 @@
+version: "3"
+
+tasks:
+  install-emacs:
+    cmds:
+      - yay -S --noconfirm emacs-native-comp-git-enhanced
+      - doom upgrade
+      - doom sync

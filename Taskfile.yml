@@ -1,0 +1,4 @@
+version: "3"
+
+includes:
+  os: ./tasks/Taskfile_{{OS}}.yml
