@@ -6,12 +6,12 @@ bootstrap: install-aqua run-aqua
 
 .PHONY: install-aqua
 install-aqua:
-	~/.dotfiles/bin/install-aqua.sh -i ~/bin/aqua
+	PATH="$(PATH):$(HOME)/bin" ~/.dotfiles/bin/install-aqua.sh -i ~/bin/aqua
 	cd ~/.dotfiles/aqua && aqua install
 
 .PHONY: run-aqua
 run-aqua:
-	task dotbot
+	PATH="$(PATH):$(HOME)/bin:$(HOME)/.local/share/aquaproj-aqua/bin" AQUA_GLOBAL_CONFIG=$(HOME)/.dotfiles/aqua/aqua.yaml task
 
 .PHONY: bootstrap-dev
 bootstrap-dev:
