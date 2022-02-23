@@ -108,7 +108,7 @@
   },
   "remote.SSH.remotePlatform": {
     "svc-compose": "linux",
-    "svc-arch1": "linux"
+    "arch1": "linux"
   },
   "workbench.editor.untitled.hint": "hidden",
   "window.nativeFullScreen": false,

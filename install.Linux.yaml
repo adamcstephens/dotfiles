@@ -1,3 +1,7 @@
 - link:
-    ~/.config/yay/config.json: yay.json
-    ~/.gnupg/gpg-agent.conf: gpg-agent-linux.conf
+    ~/.config/yay/config.json:
+      if: "which yay"
+      path: yay.json
+    ~/.gnupg/gpg-agent.conf:
+      if: "which gpg-agent"
+      path: gpg-agent-linux.conf

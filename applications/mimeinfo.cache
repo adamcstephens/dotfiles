@@ -1,9 +1,7 @@
 [MIME Cache]
-application/x-code-workspace=code.desktop;
 application/x-shellscript=emacsclient.desktop;
-inode/directory=code.desktop;
 text/english=emacsclient.desktop;
-text/plain=code.desktop;emacsclient.desktop;
+text/plain=emacsclient.desktop;
 text/x-c=emacsclient.desktop;
 text/x-c++=emacsclient.desktop;
 text/x-c++hdr=emacsclient.desktop;
