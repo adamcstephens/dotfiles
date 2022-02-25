@@ -1,10 +1,9 @@
 registries:
   - type: standard
-    ref: v1.2.1 # renovate: depName=aquaproj/aqua-registry
+    ref: v1.4.0 # renovate: depName=aquaproj/aqua-registry
   - name: local
     type: local
     path: registry.yaml
-
 packages:
   - name: Peltoche/lsd@0.21.0
   - name: ajeetdsouza/zoxide@v0.8.0
@@ -17,7 +16,8 @@ packages:
   - name: starship/starship@v1.3.0
   - name: stedolan/jq@jq-1.6
   - name: aristocratos/btop@v1.2.3
-    registry: local
   - name: mvdan/sh@v3.4.2
   - name: BurntSushi/ripgrep@13.0.0
   - name: go-task/task@v3.10.0
+  - name: caarlos0/fork-cleaner@v2.2.1
+    registry: local
