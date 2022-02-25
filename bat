@@ -1,1 +1,2 @@
+--style plain
 --theme="base16"
