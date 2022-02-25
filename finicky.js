@@ -1,8 +1,8 @@
 module.exports = {
-  defaultBrowser: ["Firefox", "Safari", "Google Chrome"],
+  defaultBrowser: ["Firefox", "Microsoft Edge", "Safari", "Google Chrome"],
   options: {
-    hideIcon: true,
-    urlShorteners: ["applications.zoom.us", "bit.ly", "github.co", "t.co"],
+    hideIcon: false,
+    urlShorteners: ["applications.zoom.us", "bit.ly", "github.co", "t.co", "nam11.safelinks.protection.outlook.com"],
   },
   rewrite: [
     // { // debug stanza
@@ -61,7 +61,7 @@ module.exports = {
     },
     {
       match: /^https?:\/\/teams\.microsoft\.com\/l\/meetup\-join\/.*$/,
-      browser: "Microsoft Teams",
+      browser: "Microsoft Edge",
     },
   ],
 }
