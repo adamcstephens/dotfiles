@@ -287,7 +287,7 @@
     "when": "terminalEditorFocus && terminalFocus && terminalHasBeenCreated && resourceScheme == 'vscode-terminal' || terminalEditorFocus && terminalFocus && terminalProcessSupported && resourceScheme == 'vscode-terminal'"
   },
   {
-    "key": "shift+cmd+0",
+    "key": "ctrl+shift+0",
     "command": "workbench.action.zoomReset"
   },
   {
