@@ -6,7 +6,7 @@ fi
 
 # shellcheck disable=SC1090
 [[ -e "$HOME/.shell_local.sh" ]] && . "$HOME/.shell_local.sh"
-export PATH=~/.dotfiles/bin:~/bin:~/.local/bin:~/go/bin:~/.local/share/aquaproj-aqua/bin:$PATH
+export PATH=~/go/bin:~/.local/share/aquaproj-aqua/bin:~/.dotfiles/bin:~/bin:~/.local/bin:$PATH
 export AQUA_GLOBAL_CONFIG=~/.config/aquaproj-aqua/aqua.yaml
 
 alias thisweek='date +%Y-%W'
