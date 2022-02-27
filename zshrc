@@ -2,8 +2,6 @@
 zstyle ':znap:*' repos-dir ~/.znap
 source ~/.dotfiles/zsh-snap/znap.zsh
 
-# prompt
-eval "$(starship init zsh)"
 # znap prompt
 
 # asdf
@@ -119,6 +117,9 @@ fi
 
 # shellcheck disable=SC1090
 [[ -e "$HOME/.shell_generic.sh" ]] && source "$HOME/.shell_generic.sh"
+
+# prompt
+eval "$(starship init zsh)"
 
 # direnv
 if command -v direnv &>/dev/null; then
