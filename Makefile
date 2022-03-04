@@ -7,7 +7,7 @@ bootstrap: install-aqua run-aqua
 .PHONY: install-aqua
 install-aqua:
 	PATH="$(PATH):$(HOME)/bin" ~/.dotfiles/bin/install-aqua.sh -i ~/bin/aqua
-	cd ~/.dotfiles/aqua && aqua install
+	cd ~/.dotfiles/aqua && ~/bin/aqua install
 
 .PHONY: run-aqua
 run-aqua:
