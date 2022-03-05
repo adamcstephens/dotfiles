@@ -1,5 +1,7 @@
 function emacsclient
-    if not command -q systemctl && not pgrep emacs &>/dev/null
+    if command -q systemctl && [ -e ~/.config/systemd/user/emacs.service ]
+        emacs --bg-daemon
+    else if ! pgrep emacs &>/dev/null
         emacs --bg-daemon
     end
 
