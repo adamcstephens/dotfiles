@@ -24,3 +24,7 @@ tasks:
   vim-plug:
     cmds:
       - "vim +PlugClean! +PlugUpdate +qall"
+
+  vscode:
+    cmds:
+      - vscode-extensions.fish

@@ -6,9 +6,12 @@ eamodio.gitlens
 EditorConfig.EditorConfig
 esbenp.prettier-vscode
 filipesabella.live-p5
+firefox-devtools.vscode-firefox-debug
 foxundermoon.shell-format
 golang.go
-JulienDuchesne.vscode-jsonnet
+hashicorp.terraform
+haskell.haskell
+justusadam.language-haskell
 ms-python.python
 ms-python.vscode-pylance
 ms-toolsai.jupyter
@@ -17,9 +20,12 @@ ms-toolsai.jupyter-renderers
 ms-vscode-remote.remote-ssh
 ms-vscode-remote.remote-ssh-edit
 naumovs.color-highlight
+nimsaem.nimvscode
 redhat.ansible
 redhat.vscode-yaml
 ritwickdey.LiveServer
 samplavigne.p5-vscode
+samuelcolvin.jinjahtml
+tamasfe.even-better-toml
 timonwong.shellcheck
 vscode-org-mode.org-mode

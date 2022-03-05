@@ -128,7 +128,6 @@
   "workbench.colorTheme": "An Old Hope Italic",
   "workbench.preferredDarkColorTheme": "An Old Hope Italic",
   "remote.SSH.lockfilesInTmp": true,
-  "remote.SSH.useLocalServer": false,
   "git.ignoreMissingGitWarning": true,
   "terraform.languageServer": {
     "external": true,
