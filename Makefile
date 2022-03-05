@@ -2,16 +2,18 @@
 default: bootstrap
 
 .PHONY: bootstrap
-bootstrap: install-aqua run-aqua
+bootstrap: install-aqua task-bootstrap
 
 .PHONY: install-aqua
 install-aqua:
 	PATH="$(PATH):$(HOME)/bin" ~/.dotfiles/bin/install-aqua.sh -i ~/bin/aqua
 	cd ~/.dotfiles/aqua && ~/bin/aqua install
 
-.PHONY: run-aqua
-run-aqua:
-	PATH="$(PATH):$(HOME)/bin:$(HOME)/.local/share/aquaproj-aqua/bin" AQUA_GLOBAL_CONFIG=$(HOME)/.dotfiles/aqua/aqua.yaml task
+.PHONY: task-bootstrap
+task-bootstrap:
+	PATH="$(PATH):$(HOME)/bin:$(HOME)/.local/share/aquaproj-aqua/bin" AQUA_GLOBAL_CONFIG=$(HOME)/.dotfiles/aqua/aqua.yaml task bootstrap
+
+# legacy below
 
 .PHONY: bootstrap-dev
 bootstrap-dev:
@@ -44,19 +46,6 @@ brew:
 .PHONY: brew-dump
 brew-dump:
 	brew bundle dump --force
-
-.PHONY: terminfo-italic
-terminfo-italic:
-	PATH="/opt/homebrew/opt/ncurses/bin:/usr/local/opt/ncurses/bin:$(PATH)" tic -x -o $(HOME)/.terminfo xterm-screen-256color.terminfo
-	grep TERM=xterm-screen-256color ~/.shell_local.sh || echo "export TERM=xterm-screen-256color" >> ~/.shell_local.sh
-
-.PHONY: terminfo-emacs
-terminfo-emacs:
-	PATH="/opt/homebrew/opt/ncurses/bin:/usr/local/opt/ncurses/bin:$(PATH)" tic -x -o $(HOME)/.terminfo xterm-emacs.terminfo
-
-.PHONY: terminfo-italic-global
-terminfo-italic-global:
-	sudo PATH="/opt/homebrew/opt/ncurses/bin:/usr/local/opt/ncurses/bin:$(PATH)" tic -x -o /usr/share/terminfo xterm-screen-256color.terminfo
 
 .PHONY: update-asdf
 update-asdf:

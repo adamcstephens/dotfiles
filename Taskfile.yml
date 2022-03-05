@@ -4,7 +4,7 @@ includes:
   os: ./tasks/Taskfile_{{OS}}.yml
 
 tasks:
-  default:
+  bootstrap:
     cmds:
       - task: dotbot
       - task: vim-plug
@@ -12,6 +12,14 @@ tasks:
   dotbot:
     cmds:
       - ./install
+
+  terminfo-custom:
+    cmds:
+      - tic -x -o $HOME/.terminfo xterm-screen-256color.terminfo
+
+  terminfo-emacs:
+    cmds:
+      - tic -x -o $HOME/.terminfo xterm-emacs.terminfo
 
   vim-plug:
     cmds:

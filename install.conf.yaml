@@ -48,6 +48,7 @@
     ~/.config/mimeapps.list: mimeapps.list
     ~/.config/ripgrep/ripgreprc: ripgreprc
     ~/.config/rubocop/config.yml: rubocop.yml
+    ~/.stack/config.yaml: stack.yaml
     ~/.config/starship.toml: starship.toml
     ~/.doom.d: doom.d
     ~/.editorconfig: editorconfig

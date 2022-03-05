@@ -1,0 +1,6 @@
+color: always
+
+templates:
+  params:
+    author-name: Adam Stephens
+  scm-init: git
