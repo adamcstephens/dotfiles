@@ -1,7 +1,5 @@
 {
-  "remote.SSH.defaultExtensions": [
-    "esbenp.prettier-vscode"
-  ],
+  "remote.SSH.defaultExtensions": ["esbenp.prettier-vscode"],
   "telemetry.telemetryLevel": "off",
   "editor.tabSize": 2,
   "editor.bracketPairColorization.enabled": true,
@@ -10,17 +8,12 @@
   "terminal.integrated.tabs.enabled": true,
   "diffEditor.renderSideBySide": true,
   "editor.minimap.enabled": false,
-  "shellcheck.exclude": [
-    "SC1117",
-    "SC2039"
-  ],
+  "shellcheck.exclude": ["SC1117", "SC2039"],
   "editor.fontFamily": "JetBrainsMono NF, JetBrainsMono Nerd Font, JetBrains Mono",
   "breadcrumbs.enabled": true,
   "terminal.integrated.scrollback": 20000,
   "search.useGlobalIgnoreFiles": true,
-  "editor.rulers": [
-    120
-  ],
+  "editor.rulers": [120],
   "git.autofetch": true,
   "workbench.startupEditor": "newUntitledFile",
   "extensions.ignoreRecommendations": true,
@@ -32,32 +25,8 @@
   "editor.renderWhitespace": "selection",
   "files.trimTrailingWhitespace": true,
   "window.newWindowDimensions": "inherit",
-  "[json]": {
-    "editor.defaultFormatter": "vscode.json-language-features"
-  },
-  "[jsonc]": {
-    "editor.defaultFormatter": "vscode.json-language-features"
-  },
-  "[yaml]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[html]": {
-    "editor.defaultFormatter": "vscode.html-language-features"
-  },
-  "[css]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-  },
-  "[markdown]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[javascriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[haskell]": {
+    "editor.defaultFormatter": "haskell.haskell"
   },
   "workbench.sideBar.location": "left",
   "files.insertFinalNewline": true,
@@ -120,10 +89,7 @@
   "editor.inlayHints.fontFamily": "default",
   "redhat.telemetry.enabled": false,
   "security.workspace.trust.untrustedFiles": "open",
-  "yaml.customTags": [
-    "!encrypted/pkcs1-oaep scalar",
-    "!vault scalar"
-  ],
+  "yaml.customTags": ["!encrypted/pkcs1-oaep scalar", "!vault scalar"],
   "git.confirmSync": false,
   "workbench.colorTheme": "An Old Hope Italic",
   "workbench.preferredDarkColorTheme": "An Old Hope Italic",
@@ -132,11 +98,10 @@
   "terraform.languageServer": {
     "external": true,
     "pathToBinary": "",
-    "args": [
-      "serve"
-    ],
+    "args": ["serve"],
     "maxNumberOfProblems": 100,
     "trace.server": "off"
   },
-  "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
 }
