@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import argparse
 import json
@@ -6,8 +6,6 @@ import os
 import platform
 import subprocess
 import sys
-
-STATEFILE = os.getenv("HOME") + "/.cache/dark-mode.state"
 
 
 def run(command):
@@ -18,9 +16,9 @@ def run(command):
 
 def set_darwin_theme(target):
     if target:
-        run("/usr/local/bin/dark-mode on")
+        run("/opt/homebrew/bin/dark-mode on")
     else:
-        run("/usr/local/bin/dark-mode off")
+        run("/opt/homebrew/bin/dark-mode off")
 
 
 def set_gtk_theme(target):
@@ -79,27 +77,41 @@ def set_waybar_theme(target):
     print(run("systemctl --user restart waybar"))
 
 
+def platform_state_file():
+    os_name = platform.system()
+
+    if os_name == "Linux":
+        platform_cache = "/.cache"
+    elif os_name == "Darwin":
+        platform_cache = "/Library/Caches"
+
+    return os.getenv("HOME") + platform_cache + "/dark-mode.state"
+
+
 def set_state_data(target):
-    with open(STATEFILE, "w") as sf:
+    with open(platform_state_file(), "w") as sf:
         json.dump(target, sf)
 
 
 def get_state_data():
-    return json.loads(open(STATEFILE).read())
+    try:
+        return json.loads(open(platform_state_file()).read())
+    except FileNotFoundError:
+        return {}
 
 
 def set_dark(target):
     print(f"setting dark mode to {target}")
 
-    os = platform.system()
+    os_name = platform.system()
 
     set_kitty_theme(target)
 
-    if os == "Linux":
+    if os_name == "Linux":
         set_gtk_theme(target)
         set_sway_theme(target)
         set_waybar_theme(target)
-    elif os == "Darwin":
+    elif os_name == "Darwin":
         set_darwin_theme(target)
 
     set_state_data(target)
