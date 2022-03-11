@@ -215,3 +215,7 @@
 (after! ranger (setq ranger-override-dired 'ranger))
 
 (after! format-all (setq +format-on-save-enabled-modes '(not sgml-mode html-mode sql-mode tex-mode latex-mode org-msg-edit-mode)))
+
+(use-package! git-auto-commit-mode)
+(after! git-auto-commit-mode
+  (setq-default gac-debounce-interval 300))
