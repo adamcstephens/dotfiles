@@ -5,3 +5,15 @@ packages:
     description: Quickly clean up unused forks on your github account
     asset: "fork-cleaner_{{trimV .Version}}_{{.OS}}_{{.Arch}}.{{.Format}}"
     format: tar.gz
+  - name: ziglang/zig
+    type: http
+    url: https://ziglang.org/download/{{.Version}}/zig-{{.OS}}-{{.Arch}}-{{.Version}}.tar.xz
+    link: https://ziglang.org/
+    description: Zig is a general-purpose programming language and toolchain for maintaining robust, optimal, and reusable software
+    replacements:
+      arm64: aarch64
+      amd64: x86_64
+      darwin: macos
+    files:
+      - name: zig
+        src: zig-{{.OS}}-{{.Arch}}-{{.Version}}/zig
