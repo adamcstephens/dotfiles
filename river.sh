@@ -10,6 +10,7 @@ riverctl map normal Mod4+Shift W spawn 'gtk-launch firefox'
 riverctl map normal Mod4+Shift V spawn 'gtk-launch code'
 riverctl map normal Mod4+Shift+Control E spawn 'gtk-launch emacsclient'
 riverctl map normal Mod4 D spawn 'wofi --show drun,run'
+riverctl map normal Mod4+Shift+Control D spawn 'dark-mode toggle'
 
 # Mod+Q to close the focused view
 riverctl map normal Mod4+Shift Q close
@@ -152,9 +153,9 @@ riverctl float-filter-add title "popup title with spaces"
 riverctl csd-filter-add app-id "gedit"
 
 riverctl set-repeat 100 190
-riverctl input 1452:613:Apple_Inc._Magic_Trackpad_2 natural-scroll enabled
-riverctl input 1452:613:Apple_Inc._Magic_Trackpad_2 tap enabled
-riverctl input 1452:613:Apple_Inc._Magic_Trackpad_2 tap-button-map left-right-middle
+riverctl input 1452:613:Apple_Inc._Magic_Trackpad natural-scroll enabled
+riverctl input 1452:613:Apple_Inc._Magic_Trackpad tap enabled
+riverctl input 1452:613:Apple_Inc._Magic_Trackpad tap-button-map left-right-middle
 # riverctl input 1739:52619:SYNA8004:00_06CB:CD8B_Touchpad events disabled
 riverctl input 1739:52619:SYNA8004:00_06CB:CD8B_Touchpad natural-scroll enabled
 riverctl input 1739:52619:SYNA8004:00_06CB:CD8B_Touchpad tap enabled
