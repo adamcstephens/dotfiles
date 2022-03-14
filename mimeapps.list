@@ -7,6 +7,13 @@ x-scheme-handler/about=firefox.desktop
 x-scheme-handler/unknown=firefox.desktop
 video/quicktime=mpv.desktop
 video/mp4=mpv.desktop
+x-scheme-handler/ame=Cider.desktop
+x-scheme-handler/cider=Cider.desktop
+x-scheme-handler/itms=Cider.desktop
+x-scheme-handler/itmss=Cider.desktop
+x-scheme-handler/musics=Cider.desktop
+x-scheme-handler/music=Cider.desktop
+x-scheme-handler/discord-911790844204437504=Cider.desktop
 
 [Added Associations]
 application/vnd.openxmlformats-officedocument.wordprocessingml.document=libreoffice-writer.desktop;

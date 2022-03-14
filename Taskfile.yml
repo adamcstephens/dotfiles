@@ -13,6 +13,11 @@ tasks:
     cmds:
       - ./install
 
+  mimeapps-fix:
+    cmds:
+      - mv ~/.config/mimeapps.list .
+      - task: dotbot
+
   terminfo-custom:
     cmds:
       - tic -x -o $HOME/.terminfo xterm-screen-256color.terminfo
