@@ -10,6 +10,8 @@
 - link:
     ~/.config/Code/User/keybindings.json: vscode/keybindings.json
     ~/.config/Code/User/settings.json: vscode/settings.json
+    ~/.config/Code - Insiders/User/keybindings.json: vscode/keybindings.json
+    ~/.config/Code - Insiders/User/settings.json: vscode/settings.json
     ~/.config/Code - OSS/User/keybindings.json: vscode/keybindings.json
     ~/.config/Code - OSS/User/settings.json: vscode/settings.json
     ~/.config/dunst/dunstrc: dunstrc
