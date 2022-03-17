@@ -65,6 +65,7 @@
     ~/.irbrc:
       if: "which irb"
       path: irbrc
+    ~/.librewolf/librewolf.overrides.cfg: librewolf.overrides.cfg
     ~/.screenrc: screenrc
     ~/.shell_generic.sh: shell_generic.sh
     ~/.shellcheckrc: shellcheckrc
