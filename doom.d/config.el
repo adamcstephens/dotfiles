@@ -148,8 +148,7 @@
 
   (setq org-latex-compiler "xelatex")
 
-  (setq my-presentation-template '("#+REVEAL_THEME: moon
-#+TITLE:
+  (setq my-presentation-template '("#+TITLE:
 #+SUBTITLE:
 #+REVEAL_TITLE_SLIDE: <h1>%t</h1><h2>%s</h2><h3>%A %a</h3>
 #+OPTIONS: toc:nil tags:nil timestamp:nil reveal_width:1680 reveal_height:1050 reveal_embed_local_resources:t reveal_klipsify_src:t
@@ -174,7 +173,39 @@
 "))
 
   (tempo-define-template "my-presentation-template" my-presentation-template "<P" "Insert presentation template")
+
+  (setq my-presentation-template-white '("#+TITLE:
+#+SUBTITLE:
+#+REVEAL_TITLE_SLIDE: <h1>%t</h1><h2>%s</h2><h3>%A %a</h3>
+#+OPTIONS: toc:nil tags:nil timestamp:nil reveal_width:1680 reveal_height:1050 reveal_embed_local_resources:t reveal_klipsify_src:t
+#+REVEAL_THEME: ../../../presentations/white.css
+#+REVEAL_TITLE_SLIDE_BACKGROUND: ../../../presentations/images/hans-isaacson-pebZGqHqg28-unsplash.jpg
+#+REVEAL_DEFAULT_SLIDE_BACKGROUND: ../../../presentations/images/almas-salakhov-DgJJh9JlcZg-unsplash.jpg
+#+REVEAL_MIN_SCALE: 1.0
+#+REVEAL_MAX_SCALE: 1.0
+#+REVEAL_CODEMIRROR_CONFIG: codemirror_options_in: {
+#+REVEAL_CODEMIRROR_CONFIG:   autoCloseBrackets: true
+#+REVEAL_CODEMIRROR_CONFIG: }
+
+* Plan :noexport:
+** Review and Bridge-In
+** Objectives
+** Points
+** Activities
+** Assessments
+** Closure
+* Reflect :noexport:
+"))
+  (tempo-define-template "my-presentation-template-white" my-presentation-template-white "<PW" "Insert presentation template (white)")
+
   (tempo-define-template "my-properties" '(":PROPERTIES:\n\n:END:\n") "<p" "Insert properties")
+
+  (defun org-slides-export ()
+    (when (string-match "slides-.*\\.org" (file-name-nondirectory (buffer-file-name)))
+      (org-re-reveal-export-to-html)
+      )
+    )
+  (add-hook 'after-save-hook 'org-slides-export)
   )
 
 (after! org-re-reveal
