@@ -6,11 +6,9 @@ PartOf=graphical-session.target
 [Service]
 Type=simple
 ExecStart=/usr/bin/swayidle -w \
-            timeout 240 'swaylock --daemonize' \
-            timeout 360 '(playerctl status | grep Playing) || systemctl suspend' \
-            timeout 600 'swaymsg "output * dpms off"' \
-                resume 'swaymsg "output * dpms on"' \
-            before-sleep 'swaylock --daemonize'
+            timeout 120 'setsid --fork waylock' \
+            timeout 300 '(playerctl status | grep Playing) || systemctl suspend' \
+            before-sleep 'pgrep waylock || setsid --fork waylock'
 
 [Install]
 WantedBy=sway-session.target

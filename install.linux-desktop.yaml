@@ -37,6 +37,7 @@
     ~/.config/systemd/user/wob.service: wob.service
     ~/.config/waybar/config: waybar.jsonc
     ~/.config/waybar/style.css: waybar.css
+    ~/.config/waylock/waylock.toml: waylock.toml
     ~/.config/wofi/config: wofi.conf
     ~/.config/wofi/style.css: wofi.css
     ~/.librewolf/librewolf.overrides.cfg: librewolf.overrides.cfg
