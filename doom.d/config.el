@@ -59,6 +59,8 @@
       doom-unicode-font (font-spec :family "JetBrainsMono Nerd Font" :size 13)
       doom-big-font (font-spec :family "JetBrainsMono Nerd Font" :size 19))
 
+(setq doom-modeline-icon nil)
+
 (setq doom-localleader-key ",")
 
 ;; (defun set-exec-path-from-shell-PATH ()
@@ -250,3 +252,17 @@
 (use-package! git-auto-commit-mode)
 (after! git-auto-commit-mode
   (setq-default gac-debounce-interval 300))
+
+(after! heaven-and-hell
+  (setq heaven-and-hell-themes
+        '((light . doom-one-light)
+          (dark . doom-old-hope)))
+  ;; Optionall, load themes without asking for confirmation.
+  (setq heaven-and-hell-load-theme-no-confirm t)
+  (map!
+   :g "<f6>" 'heaven-and-hell-toggle-theme
+   ;; Sometimes loading default theme is broken. I couldn't figured that out yet.
+   :leader "<f6>" 'heaven-and-hell-load-default-theme)
+  )
+
+(add-hook 'after-init-hook 'heaven-and-hell-init-hook)

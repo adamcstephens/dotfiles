@@ -54,3 +54,4 @@
 (package! org-re-reveal :pin "55fca47c740c50fe04cbf2b8ae90e02174626c0c")
 (package! git-auto-commit-mode)
 ;; (package! revealjs :pin "b18f12d")
+(package! heaven-and-hell)
