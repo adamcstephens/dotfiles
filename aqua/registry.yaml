@@ -1,10 +1,4 @@
 packages:
-  - type: github_release
-    repo_owner: caarlos0
-    repo_name: fork-cleaner
-    description: Quickly clean up unused forks on your github account
-    asset: "fork-cleaner_{{trimV .Version}}_{{.OS}}_{{.Arch}}.{{.Format}}"
-    format: tar.gz
   - name: ziglang/zig
     type: http
     url: https://ziglang.org/download/{{.Version}}/zig-{{.OS}}-{{.Arch}}-{{.Version}}.tar.xz
