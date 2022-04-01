@@ -24,10 +24,6 @@ backup-windows-terminal:
 	cp /mnt/c/Users/adam/AppData/Local/Packages/Microsoft.WindowsTerminalPreview_*/LocalState/settings.json ./windowsterminal-settings.json
 	chmod 644 windowsterminal-settings.json
 
-.PHONY: install-brew
-install-brew:
-	~/.dotfiles/bin/install-brew.sh
-
 .PHONY: install-asdf
 install-asdf: bootstrap-asdf update-asdf
 
@@ -38,14 +34,6 @@ bootstrap-asdf:
 .PHONY: install-packages
 install-packages:
 	~/.dotfiles/bin/install-packages.sh
-
-.PHONY: brew
-brew:
-	brew bundle
-
-.PHONY: brew-dump
-brew-dump:
-	brew bundle dump --force
 
 .PHONY: update-asdf
 update-asdf:

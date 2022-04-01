@@ -9,6 +9,18 @@ tasks:
       - task: dotbot
       - task: vim-plug
 
+  brew-bundle:
+    cmds:
+      - brew bundle
+
+  brew-bundle-dump:
+    cmds:
+      - brew bundle dump --force
+
+  brew-install:
+    cmds:
+      - ~/.dotfiles/bin/install-brew.sh
+
   dotbot:
     cmds:
       - ./install
