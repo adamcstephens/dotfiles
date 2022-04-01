@@ -24,3 +24,7 @@ set -U fish_pager_color_completion    normal
 set -U fish_pager_color_description   yellow
 set -U fish_pager_color_prefix        'white' '--bold' '--underline'
 set -U fish_pager_color_progress      'brwhite' '--background=cyan'
+
+for i in black red green yellow blue magenta cyan white brblack brred brgreen bryellow brblue brmagenta brcyan brwhite
+    set_color $i; echo $i
+end

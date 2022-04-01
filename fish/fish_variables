@@ -2,7 +2,7 @@
 # VERSION: 3.0
 SETUVAR --export GNOME_KEYRING_CONTROL:/run/user/1000/keyring/ssh
 SETUVAR --export SSH_AUTH_SOCK:/run/user/1000/keyring/ssh
-SETUVAR __fish_initialized:3100
+SETUVAR __fish_initialized:3400
 SETUVAR _fisher_PatrickF1_2F_fzf_2E_fish_files:/home/adam/\x2econfig/fish/functions/_fzf_configure_bindings_help\x2efish\x1e/home/adam/\x2econfig/fish/functions/_fzf_extract_var_info\x2efish\x1e/home/adam/\x2econfig/fish/functions/_fzf_preview_file\x2efish\x1e/home/adam/\x2econfig/fish/functions/_fzf_report_file_type\x2efish\x1e/home/adam/\x2econfig/fish/functions/_fzf_search_directory\x2efish\x1e/home/adam/\x2econfig/fish/functions/_fzf_search_git_log\x2efish\x1e/home/adam/\x2econfig/fish/functions/_fzf_search_git_status\x2efish\x1e/home/adam/\x2econfig/fish/functions/_fzf_search_history\x2efish\x1e/home/adam/\x2econfig/fish/functions/_fzf_search_processes\x2efish\x1e/home/adam/\x2econfig/fish/functions/_fzf_search_variables\x2efish\x1e/home/adam/\x2econfig/fish/functions/_fzf_wrapper\x2efish\x1e/home/adam/\x2econfig/fish/functions/fzf_configure_bindings\x2efish\x1e/home/adam/\x2econfig/fish/conf\x2ed/fzf\x2efish\x1e/home/adam/\x2econfig/fish/completions/fzf_configure_bindings\x2efish
 SETUVAR _fisher_edc_2F_bass_files:/home/adam/\x2econfig/fish/functions/__bass\x2epy\x1e/home/adam/\x2econfig/fish/functions/bass\x2efish
 SETUVAR _fisher_h_2D_matsuo_2F_fish_2D_color_2D_scheme_2D_switcher_files:/Users/astephe9/\x2econfig/fish/functions/__scheme_get_definition\x2efish\x1e/Users/astephe9/\x2econfig/fish/functions/__scheme_list\x2efish\x1e/Users/astephe9/\x2econfig/fish/functions/__scheme_preview\x2efish\x1e/Users/astephe9/\x2econfig/fish/functions/__scheme_set\x2efish\x1e/Users/astephe9/\x2econfig/fish/functions/scheme\x2efish\x1e/Users/astephe9/\x2econfig/fish/completions/scheme\x2efish
@@ -37,4 +37,5 @@ SETUVAR fish_pager_color_completion:normal
 SETUVAR fish_pager_color_description:yellow
 SETUVAR fish_pager_color_prefix:white\x1e\x2d\x2dbold\x1e\x2d\x2dunderline
 SETUVAR fish_pager_color_progress:brwhite\x1e\x2d\x2dbackground\x3dcyan
+SETUVAR fish_pager_color_selected_background:\x2dr
 SETUVAR fish_user_paths:/Users/astephe9/\x2edotfiles/bin\x1e/Users/astephe9/bin\x1e/Users/astephe9/\x2elocal/bin\x1e/Users/astephe9/\x2eemacs\x2ed/bin\x1e/home/adam/\x2edotfiles/bin\x1e/home/adam/bin\x1e/home/adam/go/bin\x1e/home/adam/\x2eemacs\x2ed/bin\x1e/home/adam/\x2elocal/share/aquaproj\x2daqua/bin\x1e/opt/homebrew/opt/python\x403\x2e10/bin\x1e/Users/astephe9/\x2elocal/share/aquaproj\x2daqua/bin
