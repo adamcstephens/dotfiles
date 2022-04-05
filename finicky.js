@@ -1,5 +1,5 @@
 module.exports = {
-  defaultBrowser: ["Firefox", "Microsoft Edge", "Safari", "Google Chrome"],
+  defaultBrowser: ["Microsoft Edge", "Firefox", "Safari", "Google Chrome"],
   options: {
     hideIcon: false,
     urlShorteners: ["applications.zoom.us", "bit.ly", "github.co", "t.co", "nam11.safelinks.protection.outlook.com"],
