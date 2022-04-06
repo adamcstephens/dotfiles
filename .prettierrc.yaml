@@ -1,0 +1,4 @@
+overrides:
+  - files: "user-overrides.js"
+    options:
+      semi: true
