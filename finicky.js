@@ -2,7 +2,13 @@ module.exports = {
   defaultBrowser: ["Microsoft Edge", "Firefox", "Safari", "Google Chrome"],
   options: {
     hideIcon: false,
-    urlShorteners: ["applications.zoom.us", "bit.ly", "github.co", "t.co", "nam11.safelinks.protection.outlook.com"],
+    urlShorteners: [
+      "applications.zoom.us",
+      "bit.ly",
+      "github.co",
+      "t.co",
+      "nam11.safelinks.protection.outlook.com",
+    ],
   },
   rewrite: [
     // { // debug stanza
@@ -15,23 +21,25 @@ module.exports = {
     {
       match: /^https?:\/\/([a-z]+\.)?bluejeans\.com\/[0-9]+/,
       url({ url }) {
-        var path = url.pathname.replace(/([0-9]+)/, "id/$1")
+        var path = url.pathname.replace(/([0-9]+)/, "id/$1");
         return {
           ...url,
           host: "meet",
           pathname: path,
           protocol: "bjnb",
-        }
+        };
       },
     },
     {
       match: ({ url }) => url.search.includes("utm_"),
       url({ url }) {
-        const search = url.search.split("&").filter((part) => !part.startsWith("utm_"))
+        const search = url.search
+          .split("&")
+          .filter((part) => !part.startsWith("utm_"));
         return {
           ...url,
           search: search.join("&"),
-        }
+        };
       },
     },
     {
@@ -44,7 +52,8 @@ module.exports = {
   ],
   handlers: [
     {
-      match: /^https:\/\/insiders.liveshare.vsengsaas.visualstudio.com\/join\?[A-Z0-9]$/,
+      match:
+        /^https:\/\/insiders.liveshare.vsengsaas.visualstudio.com\/join\?[A-Z0-9]$/,
       browser: "Visual Studio Code",
     },
     {
@@ -64,4 +73,4 @@ module.exports = {
       browser: "Microsoft Edge",
     },
   ],
-}
+};
