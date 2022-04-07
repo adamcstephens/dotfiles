@@ -1,3 +1,4 @@
+bbenoist.Nix
 bmalehorn.vscode-fish
 danielgjackson.auto-dark-mode-windows
 DavidAnson.vscode-markdownlint
