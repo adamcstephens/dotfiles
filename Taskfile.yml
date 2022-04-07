@@ -29,9 +29,8 @@ tasks:
     dir: "{{ .FIREFOX_PROFILE }}"
     cmds:
       - test -n "{{ .FIREFOX_PROFILE }}"
-      - test -d ~/git/user.js
       - "! pgrep -i firefox"
-      - cp ~/git/user.js/{prefsCleaner.sh,updater.sh,user.js} .
+      - cp ~/.dotfiles/firefox/arkenfox/{prefsCleaner.sh,updater.sh,user.js} .
       - ln -sf ~/.dotfiles/firefox/user-overrides.js .
       - ./updater.sh -s
       - bash ./prefsCleaner.sh -s
