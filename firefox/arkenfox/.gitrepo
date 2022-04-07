@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/git-commands/git-subrepo#readme
+;
+[subrepo]
+	remote = https://github.com/arkenfox/user.js
+	branch = master
+	commit = b4225baaf2f8d15f856efbaea7c936d218e5ed7d
+	parent = 182f83c2af08af2eb77ba19d68812a51259068bd
+	method = merge
+	cmdver = 0.4.3
