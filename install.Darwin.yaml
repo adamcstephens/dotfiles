@@ -9,12 +9,14 @@
     ~/.config/nixpkgs/home.nix: home.nix
     ~/.finicky.js: finicky.js
     ~/.gnupg/gpg-agent.conf: gpg-agent-mac.conf
-    ~/.librewolf/librewolf.overrides.cfg: librewolf.overrides.cfg
     ~/Library/Application Support/Code/User/keybindings.json: vscode/keybindings.json
     ~/Library/Application Support/Code/User/settings.json: vscode/settings.json
     ~/Library/LaunchAgents/homebrew.gpg.gpg-agent.plist: LaunchAgents/homebrew.gpg.gpg-agent.plist
 
 - shell:
-    - [launchctl load -F ~/Library/LaunchAgents/homebrew.gpg.gpg-agent.plist, load launchd gpg-agent]
+    - [
+        launchctl load -F ~/Library/LaunchAgents/homebrew.gpg.gpg-agent.plist,
+        load launchd gpg-agent,
+      ]
     - [launchctl start com.openssh.ssh-agent, enable launchd ssh-agent]
     - [launchctl start homebrew.gpg.gpg-agent, enable launchd gpg-agent]

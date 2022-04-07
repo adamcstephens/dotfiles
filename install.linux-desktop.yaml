@@ -40,7 +40,6 @@
     ~/.config/waylock/waylock.toml: waylock.toml
     ~/.config/wofi/config: wofi.conf
     ~/.config/wofi/style.css: wofi.css
-    ~/.librewolf/librewolf.overrides.cfg: librewolf.overrides.cfg
     ~/.local/share/applications: applications
     ~/.local/share/fonts: fonts
 
