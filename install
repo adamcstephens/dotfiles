@@ -1,35 +1,11 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
-CONFIG="install.conf.yaml"
-OSCONFIG="install.$(uname).yaml"
-DOTBOT_DIR="dotbot"
+export PATH="${PATH}:${HOME}/bin:${HOME}/.local/share/aquaproj-aqua/bin:${HOME}/.dotfiles/bin"
 
-DOTBOT_BIN="bin/dotbot"
-BASEDIR="${HOME}/.dotfiles"
+export AQUA_GLOBAL_CONFIG=${HOME}/.dotfiles/aqua/aqua.yaml
 
-PLUGINS="-p dotbot-git/git.py -p dotbot-asdf/asdf.py"
+install-aqua.sh -i ~/bin/aqua
 
-cd "${BASEDIR}"
+cd ~/.dotfiles/aqua && ~/bin/aqua install
 
-# delete some stock files
-[ -h $HOME/.bashrc ] || rm -fv $HOME/.bashrc
-[ -h $HOME/.bash_profile ] || rm -fv $HOME/.bash_profile
-
-. $HOME/.asdf/asdf.sh
-
-"${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}" $PLUGINS "${@}"
-
-if [ -e "$OSCONFIG" ]; then
-  "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${OSCONFIG}" $PLUGINS "${@}"
-fi
-
-if command -v hostname &>/dev/null; then
-  hostname="$(hostname)"
-else
-  hostname=$(uname -n)
-fi
-
-HOSTCONFIG="install.$hostname.yaml"
-if [ -e $HOSTCONFIG ]; then
-  "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${HOSTCONFIG}" $PLUGINS "${@}"
-fi
+cd ~/.dotfiles && task bootstrap

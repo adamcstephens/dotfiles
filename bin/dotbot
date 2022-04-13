@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+CONFIG="install.conf.yaml"
+OSCONFIG="install.$(uname).yaml"
+DOTBOT_DIR="dotbot"
+
+DOTBOT_BIN="bin/dotbot"
+BASEDIR="${HOME}/.dotfiles"
+
+PLUGINS="-p dotbot-git/git.py -p dotbot-asdf/asdf.py"
+
+cd "${BASEDIR}"
+
+# delete some stock files
+[ -h $HOME/.bashrc ] || rm -fv $HOME/.bashrc
+[ -h $HOME/.bash_profile ] || rm -fv $HOME/.bash_profile
+
+. $HOME/.asdf/asdf.sh
+
+"${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}" $PLUGINS "${@}"
+
+if [ -e "$OSCONFIG" ]; then
+  "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${OSCONFIG}" $PLUGINS "${@}"
+fi
+
+if command -v hostname &>/dev/null; then
+  hostname="$(hostname)"
+else
+  hostname=$(uname -n)
+fi
+
+HOSTCONFIG="install.$hostname.yaml"
+if [ -e $HOSTCONFIG ]; then
+  "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${HOSTCONFIG}" $PLUGINS "${@}"
+fi

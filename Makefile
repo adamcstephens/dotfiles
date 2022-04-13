@@ -2,16 +2,8 @@
 default: bootstrap
 
 .PHONY: bootstrap
-bootstrap: install-aqua task-bootstrap
-
-.PHONY: install-aqua
-install-aqua:
-	PATH="$(PATH):$(HOME)/bin" ~/.dotfiles/bin/install-aqua.sh -i ~/bin/aqua
-	cd ~/.dotfiles/aqua && ~/bin/aqua install
-
-.PHONY: task-bootstrap
-task-bootstrap:
-	PATH="$(PATH):$(HOME)/bin:$(HOME)/.local/share/aquaproj-aqua/bin" AQUA_GLOBAL_CONFIG=$(HOME)/.dotfiles/aqua/aqua.yaml task bootstrap
+bootstrap:
+	./install
 
 # legacy below
 

@@ -23,7 +23,7 @@ tasks:
 
   dotbot:
     cmds:
-      - ./install
+      - ./bin/dotbot
 
   firefox-patch:
     dir: "{{ .FIREFOX_PROFILE }}"
