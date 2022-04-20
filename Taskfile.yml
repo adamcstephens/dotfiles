@@ -4,6 +4,17 @@ includes:
   os: ./tasks/Taskfile_{{OS}}.yml
 
 tasks:
+  asdf-install:
+    cmds:
+      - "[ -e ~/.asdf ] || git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.10.0"
+      - $HOME/.asdf/bin/asdf plugin list | grep -q direnv || $HOME/.asdf/bin/asdf plugin add direnv
+      - $HOME/.asdf/bin/asdf global direnv system
+
+  asdf-update:
+    cmds:
+      - $HOME/.asdf/bin/asdf update
+      - "if [ -e ${HOME}/.asdf/plugins ]; then ${HOME}/.asdf/bin/asdf plugin-update --all; fi"
+
   bootstrap:
     cmds:
       - task: dotbot
@@ -21,6 +32,12 @@ tasks:
     cmds:
       - ~/.dotfiles/bin/install-brew.sh
 
+  dev:
+    cmds:
+      - task: asdf-install
+      - task: asdf-update
+      - ~/.dotfiles/bin/install-dev.sh
+
   dotbot:
     cmds:
       - ./bin/dotbot
@@ -35,6 +52,10 @@ tasks:
       - ln -sf ~/.dotfiles/firefox/user-overrides.js .
       - ./updater.sh -s
       - bash ./prefsCleaner.sh -s
+
+  fisher-update:
+    cmds:
+      - fish -c "source ~/.dotfiles/fish/functions/fisher.fish; fisher update"
 
   mimeapps-fix:
     cmds:
@@ -61,3 +82,18 @@ tasks:
   vscode:
     cmds:
       - vscode-extensions.fish
+
+  windows-terminal-backup:
+    cmds:
+      - cp /mnt/c/Users/adam/AppData/Local/Packages/Microsoft.WindowsTerminalPreview_*/LocalState/settings.json ./windowsterminal-settings.json
+      - chmod 644 windowsterminal-settings.json
+
+  zsh-prof:
+    cmds:
+      - time zsh -i -c exit
+
+  zsh-prof-setup:
+    cmds:
+      - chmod +w ~/.zshrc
+      - ex -sc '1i|zmodload zsh/zprof' -cx ~/.zshrc
+      - echo "zprof" >> ~/.zshrc
