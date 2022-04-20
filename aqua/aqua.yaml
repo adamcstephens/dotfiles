@@ -22,3 +22,4 @@ packages:
   - name: caarlos0/fork-cleaner@v2.2.1
   - name: golang/go@1.18.1
   - name: direnv/direnv@v2.31.0
+  - name: jesseduffield/lazygit@v0.34
