@@ -24,6 +24,11 @@ znap source sainnhe/sonokai zsh/.zsh-theme-sonokai-andromeda
 
 znap source MikeDacre/tmux-zsh-vim-titles
 
+asdf_direnv_zshrc="${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
+if [ -e $asdf_direnv_zshrc ]; then
+  source $asdf_direnv_zshrc
+fi
+
 # # shellcheck shell=bash
 # autoload -Uz compinit && compinit
 

@@ -79,6 +79,11 @@ if [[ -e $HOME/.asdf/asdf.sh ]]; then
   source "$HOME/.asdf/completions/asdf.bash"
 fi
 
+asdf_direnv_bashrc"${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/bashrc"
+if [ -e $asdf_direnv_bashrc ]; then
+  source $asdf_direnv_bashrc
+fi
+
 # fzf
 [[ -e ~/.fzf.bash ]] && source ~/.fzf.bash
 
