@@ -7,15 +7,18 @@ DOTBOT_DIR="dotbot"
 DOTBOT_BIN="bin/dotbot"
 BASEDIR="${HOME}/.dotfiles"
 
-PLUGINS="-p dotbot-git/git.py -p dotbot-asdf/asdf.py"
+PLUGINS="-p dotbot-git/git.py"
+
+if [ -d $HOME/.asdf ]; then
+  PLUGINS="$PLUGINS -p dotbot-asdf/asdf.py"
+  . $HOME/.asdf/asdf.sh
+fi
 
 cd "${BASEDIR}"
 
 # delete some stock files
 [ -h $HOME/.bashrc ] || rm -fv $HOME/.bashrc
 [ -h $HOME/.bash_profile ] || rm -fv $HOME/.bash_profile
-
-. $HOME/.asdf/asdf.sh
 
 "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}" $PLUGINS "${@}"
 

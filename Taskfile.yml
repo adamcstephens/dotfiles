@@ -49,6 +49,11 @@ tasks:
     cmds:
       - tic -x -o $HOME/.terminfo xterm-emacs.terminfo
 
+  test:
+    cmds:
+      - podman build --tag dotfiles-test .
+      - podman run --rm -it -v $PWD:/root/.dotfiles dotfiles-test sh -c "cd /root/.dotfiles; ./install"
+
   vim-plug:
     cmds:
       - "vim +PlugClean! +PlugUpdate +qall"
