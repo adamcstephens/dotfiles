@@ -55,7 +55,7 @@ tasks:
       - ~/.asdf/bin/asdf plugin add direnv
       - ~/.asdf/bin/asdf global direnv system
     status:
-      - test ! -d ~/.asdf || ~/.asdf/bin/asdf list direnv | grep "No versions installed"
+      - test ! -d ~/.asdf || ! asdf plugin list | grep direnv || ~/.asdf/bin/asdf list direnv | grep "No versions installed"
 
   dev:
     cmds:
