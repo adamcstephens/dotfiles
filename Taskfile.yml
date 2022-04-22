@@ -51,11 +51,11 @@ tasks:
 
   cleanup-asdf-direnv:
     cmds:
-      - ~/.asdf/bin/asdf plugin remove direnv
+      - ~/.asdf/bin/asdf plugin remove direnv || true
       - ~/.asdf/bin/asdf plugin add direnv
       - ~/.asdf/bin/asdf global direnv system
     status:
-      - test ! -d ~/.asdf || ! asdf plugin list | grep direnv || ~/.asdf/bin/asdf list direnv | grep "No versions installed"
+      - test ! -d ~/.asdf || ~/.asdf/bin/asdf list direnv 2>&1 | grep "No versions installed"
 
   dev:
     cmds:
