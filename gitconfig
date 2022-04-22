@@ -16,8 +16,11 @@
   gpgsign = true
 [core]
   editor = ~/bin/editor
-  pager = less -rFX
+  pager = delta
   excludesfile = ~/.gitignore
+[delta]
+  syntax-theme = base16
+  true-color = never
 [github]
   user = adamcstephens
 [include]
@@ -25,6 +28,8 @@
 [init]
   templateDir = ~/.config/git/template/
   defaultBranch = main
+[interactive]
+  diffFilter = delta --color-only
 [pull]
   ff = only
   rebase = false
