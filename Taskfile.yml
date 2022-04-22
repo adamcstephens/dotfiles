@@ -40,9 +40,22 @@ tasks:
 
   cleanup:
     cmds:
+      - task: cleanup-direnv
+      - task: cleanup-asdf-direnv
+
+  cleanup-direnv:
+    cmds:
       - rm -rf ~/.config/direnv
     status:
       - test -L ~/.config/direnv
+
+  cleanup-asdf-direnv:
+    cmds:
+      - ~/.asdf/bin/asdf plugin uninstall direnv
+      - ~/.asdf/bin/asdf plugin install direnv
+      - ~/.asdf/bin/asdf global direnv system
+    status:
+      - test ! -d ~/.asdf || ~/.asdf/bin/asdf list direnv | grep "No versions installed"
 
   dev:
     cmds:
