@@ -51,7 +51,7 @@ tasks:
 
   cleanup-asdf-direnv:
     cmds:
-      - ~/.asdf/bin/asdf plugin uninstall direnv
+      - ~/.asdf/bin/asdf plugin remove direnv
       - ~/.asdf/bin/asdf plugin install direnv
       - ~/.asdf/bin/asdf global direnv system
     status:
