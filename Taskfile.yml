@@ -21,6 +21,7 @@ tasks:
 
   bootstrap:
     cmds:
+      - task: cleanup
       - task: dotbot
       - task: vim-plug
       - task: fish-bootstrap
@@ -36,6 +37,12 @@ tasks:
   brew-install:
     cmds:
       - ~/.dotfiles/bin/install-brew.sh
+
+  cleanup:
+    cmds:
+      - rm -rf ~/.config/direnv
+    status:
+      - test -L ~/.config/direnv
 
   dev:
     cmds:
