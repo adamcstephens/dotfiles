@@ -7,7 +7,7 @@ PartOf=graphical-session.target
 Type=simple
 ExecStart=/usr/bin/swayidle -w \
             timeout 120 'setsid --fork waylock' \
-            timeout 300 '(playerctl status | grep Playing) || systemctl suspend' \
+            timeout 300 'systemctl suspend' \
             before-sleep 'pgrep waylock || setsid --fork waylock'
 
 [Install]

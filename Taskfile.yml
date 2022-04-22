@@ -15,10 +15,15 @@ tasks:
       - $HOME/.asdf/bin/asdf update
       - "if [ -e ${HOME}/.asdf/plugins ]; then ${HOME}/.asdf/bin/asdf plugin-update --all; fi"
 
+  aqua-install:
+    cmds:
+      - install-aqua.sh -i ~/bin/aqua
+
   bootstrap:
     cmds:
       - task: dotbot
       - task: vim-plug
+      - task: fish-bootstrap
 
   brew-bundle:
     cmds:
@@ -53,6 +58,10 @@ tasks:
       - ./updater.sh -s
       - bash ./prefsCleaner.sh -s
 
+  fish-bootstrap:
+    cmds:
+      - fish ~/.dotfiles/bin/theme.fish
+
   fisher-update:
     cmds:
       - fish -c "source ~/.dotfiles/fish/functions/fisher.fish; fisher update"
@@ -72,8 +81,19 @@ tasks:
 
   test:
     cmds:
-      - podman build --tag dotfiles-test .
+      - task: test-build
       - podman run --rm -it -v $PWD:/root/.dotfiles dotfiles-test sh -c "cd /root/.dotfiles; ./install"
+
+  test-build:
+    cmds:
+      - podman build --tag dotfiles-test .
+    status:
+      - podman images | rg dotfiles-test
+
+  test-shell:
+    cmds:
+      - task: test-build
+      - podman run --rm -it localhost/dotfiles-test fish
 
   vim-plug:
     cmds:

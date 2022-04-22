@@ -1,9 +1,7 @@
 [MIME Cache]
-application/x-code-workspace=code.desktop;
 application/x-shellscript=emacsclient.desktop;
-inode/directory=code.desktop;
 text/english=emacsclient.desktop;
-text/plain=code.desktop;emacsclient.desktop;
+text/plain=emacsclient.desktop;
 text/x-c=emacsclient.desktop;
 text/x-c++=emacsclient.desktop;
 text/x-c++hdr=emacsclient.desktop;
@@ -16,10 +14,3 @@ text/x-moc=emacsclient.desktop;
 text/x-pascal=emacsclient.desktop;
 text/x-tcl=emacsclient.desktop;
 text/x-tex=emacsclient.desktop;
-x-scheme-handler/ame=Cider.desktop;
-x-scheme-handler/cider=Cider.desktop;
-x-scheme-handler/discord-911790844204437504=Cider.desktop;
-x-scheme-handler/itms=Cider.desktop;
-x-scheme-handler/itmss=Cider.desktop;
-x-scheme-handler/music=Cider.desktop;
-x-scheme-handler/musics=Cider.desktop;
