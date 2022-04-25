@@ -1,6 +1,7 @@
 version: "3"
 
 includes:
+  migrate: ./tasks/migrate.yml
   os: ./tasks/Taskfile_{{OS}}.yml
 
 tasks:
@@ -21,7 +22,7 @@ tasks:
 
   bootstrap:
     cmds:
-      - task: cleanup
+      - task: migrate:all
       - task: dotbot
       - task: vim-plug
       - task: fish-bootstrap
@@ -37,25 +38,6 @@ tasks:
   brew-install:
     cmds:
       - ~/.dotfiles/bin/install-brew.sh
-
-  cleanup:
-    cmds:
-      - task: cleanup-direnv
-      - task: cleanup-asdf-direnv
-
-  cleanup-direnv:
-    cmds:
-      - rm -rf ~/.config/direnv
-    status:
-      - test -L ~/.config/direnv
-
-  cleanup-asdf-direnv:
-    cmds:
-      - ~/.asdf/bin/asdf plugin remove direnv || true
-      - ~/.asdf/bin/asdf plugin add direnv
-      - ~/.asdf/bin/asdf global direnv system
-    status:
-      - test ! -d ~/.asdf || ~/.asdf/bin/asdf list direnv 2>&1 | grep "No versions installed"
 
   dev:
     cmds:

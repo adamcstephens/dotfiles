@@ -1,0 +1,28 @@
+version: "3"
+
+tasks:
+  all:
+    cmds:
+      - task: asdf-direnv
+      - task: direnv
+      - task: btop
+
+  asdf-direnv:
+    cmds:
+      - ~/.asdf/bin/asdf plugin remove direnv || true
+      - ~/.asdf/bin/asdf plugin add direnv
+      - ~/.asdf/bin/asdf global direnv system
+    status:
+      - test ! -d ~/.asdf || ~/.asdf/bin/asdf list direnv 2>&1 | grep "No versions installed"
+
+  btop:
+    cmds:
+      - rm -rf ~/.config/btop
+    status:
+      - test -L ~/.config/btop
+
+  direnv:
+    cmds:
+      - rm -rf ~/.config/direnv
+    status:
+      - test -L ~/.config/direnv
