@@ -115,5 +115,9 @@
   },
   "[elixir]": {
     "editor.defaultFormatter": "JakeBecker.elixir-ls"
-  }
+  },
+  "github.gitAuthentication": false,
+  "gitlens.showWelcomeOnInstall": false,
+  "gitlens.showWhatsNewAfterUpgrades": false,
+  "gitlens.plusFeatures.enabled": false
 }

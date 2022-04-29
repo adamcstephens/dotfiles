@@ -266,3 +266,10 @@
   )
 
 (add-hook 'after-init-hook 'heaven-and-hell-init-hook)
+
+(use-package prettier
+  :hook ((typescript-mode . prettier-mode)
+         (js-mode . prettier-mode)
+         (json-mode . prettier-mode)
+         (yaml-mode . prettier-mode)
+         (ruby-mode . prettier-mode)))
