@@ -1,133 +1,133 @@
 {
-  "remote.SSH.defaultExtensions": ["esbenp.prettier-vscode"],
-  "telemetry.telemetryLevel": "off",
-  "editor.tabSize": 2,
-  "editor.bracketPairColorization.enabled": true,
-  "editor.suggest.preview": true,
-  "terminal.integrated.copyOnSelection": true,
-  "terminal.integrated.tabs.enabled": true,
-  "diffEditor.renderSideBySide": true,
-  "editor.minimap.enabled": false,
-  "shellcheck.exclude": ["SC1117", "SC2039"],
-  "editor.fontFamily": "JetBrainsMono NF, JetBrainsMono Nerd Font, JetBrains Mono",
-  "breadcrumbs.enabled": true,
-  "terminal.integrated.scrollback": 20000,
-  "search.useGlobalIgnoreFiles": true,
-  "editor.rulers": [120],
-  "git.autofetch": true,
-  "workbench.startupEditor": "newUntitledFile",
-  "extensions.ignoreRecommendations": true,
-  "zenMode.fullScreen": false,
-  "zenMode.hideLineNumbers": false,
-  "zenMode.hideTabs": false,
-  "debug.internalConsoleOptions": "neverOpen",
-  "workbench.tree.renderIndentGuides": "always",
-  "editor.renderWhitespace": "selection",
-  "files.trimTrailingWhitespace": true,
-  "window.newWindowDimensions": "inherit",
-  "[haskell]": {
-    "editor.defaultFormatter": "haskell.haskell"
+  "[elixir]": {
+    "editor.defaultFormatter": "JakeBecker.elixir-ls"
   },
-  "workbench.sideBar.location": "left",
-  "files.insertFinalNewline": true,
-  "shellcheck.disableVersionCheck": true,
-  "scm.defaultViewMode": "tree",
-  "editor.fontLigatures": false,
-  "python.formatting.provider": "black",
-  "explorer.confirmDelete": false,
-  "javascript.format.semicolons": "remove",
-  "window.restoreWindows": "none",
-  "python.languageServer": "Pylance",
-  "files.associations": {
-    "Gemfile*": "ruby",
-    "**/*.bst": "yaml",
-    "Jenkinsfile*": "groovy",
-    "*.keymap": "c",
-    "*.overlay": "c",
-    "Pipefile": "toml",
-    "*.env": "shellscript",
-    "*.yaml.gotmpl": "yaml",
-    "*.sls": "yaml"
-  },
-  "window.titleBarStyle": "custom",
-  "window.autoDetectColorScheme": true,
-  "editor.cursorBlinking": "phase",
-  "terminal.integrated.cursorBlinking": true,
-  "python.venvPath": "~/.local/share/virtualenvs",
-  "workbench.editor.showIcons": false,
-  "workbench.editor.labelFormat": "short",
-  "workbench.editor.decorations.badges": true,
-  "explorer.confirmDragAndDrop": false,
-  "editor.cursorSurroundingLines": 10,
-  "workbench.editorAssociations": {
-    "*.ipynb": "jupyter-notebook"
-  },
-  "prettier.printWidth": 120,
-  "prettier.semi": false,
-  "go.toolsManagement.autoUpdate": true,
-  "javascript.updateImportsOnFileMove.enabled": "always",
-  "workbench.colorCustomizations": {
-    "[Sonokai Andromeda]": {
-      "terminal.background": "#2b2d3a",
-      "terminal.ansiBlack": "#181a1c",
-      "terminal.ansiBrightBlack": "#7e8294",
-      "gitDecoration.ignoredResourceForeground": "#565864",
-      "quickInputList.focusBackground": "#363a4e80"
-    }
-  },
-  "remote.SSH.remotePlatform": {
-    "svc-compose": "linux",
-    "arch1": "linux",
-    "compose1": "linux"
-  },
-  "workbench.editor.untitled.hint": "hidden",
-  "window.nativeFullScreen": false,
-  "notebook.cellToolbarLocation": {
-    "default": "right",
-    "jupyter-notebook": "left"
-  },
-  "editor.inlayHints.fontFamily": "default",
-  "redhat.telemetry.enabled": false,
-  "security.workspace.trust.untrustedFiles": "open",
-  "yaml.customTags": ["!encrypted/pkcs1-oaep scalar", "!vault scalar"],
-  "git.confirmSync": false,
-  "workbench.colorTheme": "An Old Hope Italic",
-  "workbench.preferredDarkColorTheme": "An Old Hope Italic",
-  "remote.SSH.lockfilesInTmp": true,
-  "git.ignoreMissingGitWarning": true,
-  "terraform.languageServer": {
-    "external": true,
-    "pathToBinary": "",
-    "args": ["serve"],
-    "maxNumberOfProblems": 100,
-    "trace.server": "off"
-  },
-  "editor.formatOnSave": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "[go]": {
     "editor.defaultFormatter": "golang.go"
+  },
+  "[haskell]": {
+    "editor.defaultFormatter": "haskell.haskell"
   },
   "[ignore]": {
     "editor.defaultFormatter": "foxundermoon.shell-format"
   },
-  "[shellscript]": {
-    "editor.defaultFormatter": "foxundermoon.shell-format"
-  },
-  "[elixir]": {
-    "editor.defaultFormatter": "JakeBecker.elixir-ls"
-  },
-  "github.gitAuthentication": false,
-  "gitlens.showWelcomeOnInstall": false,
-  "gitlens.showWhatsNewAfterUpgrades": false,
-  "gitlens.plusFeatures.enabled": false,
-  "editor.inlayHints.enabled": "onUnlessPressed",
   "[markdown]": {
     "editor.wordBasedSuggestionsMode": "currentDocument"
+  },
+  "[shellscript]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
   },
   "[yaml]": {
     "editor.wordBasedSuggestionsMode": "currentDocument"
   },
+  "breadcrumbs.enabled": true,
+  "debug.internalConsoleOptions": "neverOpen",
+  "diffEditor.renderSideBySide": true,
   "editor.autoClosingBrackets": "beforeWhitespace",
+  "editor.bracketPairColorization.enabled": true,
+  "editor.cursorBlinking": "phase",
+  "editor.cursorSurroundingLines": 10,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.fontFamily": "JetBrainsMono NF, JetBrainsMono Nerd Font, JetBrains Mono",
+  "editor.fontLigatures": false,
+  "editor.formatOnSave": true,
   "editor.guides.bracketPairs": true,
-  "editor.guides.bracketPairsHorizontal": true
+  "editor.guides.bracketPairsHorizontal": true,
+  "editor.inlayHints.enabled": "onUnlessPressed",
+  "editor.inlayHints.fontFamily": "default",
+  "editor.minimap.enabled": false,
+  "editor.renderWhitespace": "selection",
+  "editor.rulers": [120],
+  "editor.suggest.preview": true,
+  "editor.tabSize": 2,
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  "extensions.ignoreRecommendations": true,
+  "files.associations": {
+    "*.env": "shellscript",
+    "*.keymap": "c",
+    "*.overlay": "c",
+    "*.sls": "yaml",
+    "*.yaml.gotmpl": "yaml",
+    "**/*.bst": "yaml",
+    "Gemfile*": "ruby",
+    "Jenkinsfile*": "groovy",
+    "Pipefile": "toml"
+  },
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+  "git.autofetch": true,
+  "git.confirmSync": false,
+  "git.ignoreMissingGitWarning": true,
+  "github.gitAuthentication": false,
+  "gitlens.plusFeatures.enabled": false,
+  "gitlens.showWelcomeOnInstall": false,
+  "gitlens.showWhatsNewAfterUpgrades": false,
+  "go.toolsManagement.autoUpdate": true,
+  "javascript.format.semicolons": "remove",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "notebook.cellToolbarLocation": {
+    "default": "right",
+    "jupyter-notebook": "left"
+  },
+  "prettier.printWidth": 120,
+  "prettier.semi": false,
+  "python.formatting.provider": "black",
+  "python.languageServer": "Pylance",
+  "python.venvPath": "~/.local/share/virtualenvs",
+  "redhat.telemetry.enabled": false,
+  "remote.SSH.defaultExtensions": ["esbenp.prettier-vscode"],
+  "remote.SSH.lockfilesInTmp": true,
+  "remote.SSH.remotePlatform": {
+    "arch1": "linux",
+    "compose1": "linux",
+    "svc-compose": "linux"
+  },
+  "scm.defaultViewMode": "tree",
+  "search.useGlobalIgnoreFiles": true,
+  "security.workspace.trust.untrustedFiles": "open",
+  "shellcheck.disableVersionCheck": true,
+  "shellcheck.exclude": ["SC1117", "SC2039"],
+  "telemetry.telemetryLevel": "off",
+  "terminal.integrated.copyOnSelection": true,
+  "terminal.integrated.cursorBlinking": true,
+  "terminal.integrated.scrollback": 20000,
+  "terminal.integrated.tabs.enabled": true,
+  "terraform.languageServer": {
+    "args": ["serve"],
+    "external": true,
+    "maxNumberOfProblems": 100,
+    "pathToBinary": "",
+    "trace.server": "off"
+  },
+  "window.autoDetectColorScheme": true,
+  "window.nativeFullScreen": false,
+  "window.newWindowDimensions": "inherit",
+  "window.restoreWindows": "none",
+  "window.titleBarStyle": "custom",
+  "workbench.colorCustomizations": {
+    "[Sonokai Andromeda]": {
+      "gitDecoration.ignoredResourceForeground": "#565864",
+      "quickInputList.focusBackground": "#363a4e80",
+      "terminal.ansiBlack": "#181a1c",
+      "terminal.ansiBrightBlack": "#7e8294",
+      "terminal.background": "#2b2d3a"
+    }
+  },
+  "workbench.colorTheme": "An Old Hope Italic",
+  "workbench.editor.decorations.badges": true,
+  "workbench.editor.labelFormat": "short",
+  "workbench.editor.showIcons": false,
+  "workbench.editor.untitled.hint": "hidden",
+  "workbench.editorAssociations": {
+    "*.ipynb": "jupyter-notebook"
+  },
+  "workbench.preferredDarkColorTheme": "An Old Hope Italic",
+  "workbench.sideBar.location": "left",
+  "workbench.startupEditor": "newUntitledFile",
+  "workbench.tree.renderIndentGuides": "always",
+  "yaml.customTags": ["!encrypted/pkcs1-oaep scalar", "!vault scalar"],
+  "zenMode.fullScreen": false,
+  "zenMode.hideLineNumbers": false,
+  "zenMode.hideTabs": false
 }

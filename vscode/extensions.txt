@@ -12,6 +12,7 @@ foxundermoon.shell-format
 golang.go
 hashicorp.terraform
 haskell.haskell
+JakeBecker.elixir-ls
 justusadam.language-haskell
 ms-python.python
 ms-python.vscode-pylance
@@ -21,9 +22,9 @@ ms-toolsai.jupyter-renderers
 ms-vscode-remote.remote-ssh
 ms-vscode-remote.remote-ssh-edit
 naumovs.color-highlight
-nimsaem.nimvscode
 redhat.ansible
 redhat.vscode-yaml
+richie5um2.vscode-sort-json
 ritwickdey.LiveServer
 samplavigne.p5-vscode
 samuelcolvin.jinjahtml
