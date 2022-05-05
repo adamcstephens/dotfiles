@@ -1,0 +1,6 @@
+# https://github.com/evilmartians/lefthook/blob/master/docs/full_guide.md
+post-merge:
+  commands:
+    aqua-changed:
+      glob: "aqua/*.yaml"
+      run: "task aqua-run"

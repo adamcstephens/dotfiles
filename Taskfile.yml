@@ -20,12 +20,18 @@ tasks:
     cmds:
       - install-aqua.sh -i ~/bin/aqua
 
+  aqua-run:
+    dir: "./aqua"
+    cmds:
+      - aqua install
+
   bootstrap:
     cmds:
       - task: migrate:all
       - task: dotbot
       - task: vim-plug
       - task: fish-bootstrap
+      - task: lefthook-install
 
   brew-bundle:
     cmds:
@@ -67,6 +73,10 @@ tasks:
   fisher-update:
     cmds:
       - fish -c "source ~/.dotfiles/fish/functions/fisher.fish; fisher update"
+
+  lefthook-install:
+    cmds:
+      - lefthook install
 
   mimeapps-fix:
     cmds:
