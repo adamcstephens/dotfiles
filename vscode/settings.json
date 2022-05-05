@@ -119,5 +119,15 @@
   "github.gitAuthentication": false,
   "gitlens.showWelcomeOnInstall": false,
   "gitlens.showWhatsNewAfterUpgrades": false,
-  "gitlens.plusFeatures.enabled": false
+  "gitlens.plusFeatures.enabled": false,
+  "editor.inlayHints.enabled": "onUnlessPressed",
+  "[markdown]": {
+    "editor.wordBasedSuggestionsMode": "currentDocument"
+  },
+  "[yaml]": {
+    "editor.wordBasedSuggestionsMode": "currentDocument"
+  },
+  "editor.autoClosingBrackets": "beforeWhitespace",
+  "editor.guides.bracketPairs": true,
+  "editor.guides.bracketPairsHorizontal": true
 }
