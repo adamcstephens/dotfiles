@@ -28,6 +28,7 @@ tasks:
   bootstrap:
     cmds:
       - task: migrate:all
+      - task: aqua-run
       - task: dotbot
       - task: vim-plug
       - task: fish-bootstrap
