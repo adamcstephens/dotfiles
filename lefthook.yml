@@ -4,3 +4,6 @@ post-merge:
     aqua-changed:
       glob: "aqua/*.yaml"
       run: "task aqua-run"
+    vscode-extensions:
+      glob: "vscode/extensions*"
+      run: "vscode-extensions.fish"
