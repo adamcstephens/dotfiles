@@ -1,4 +1,7 @@
 {
+  "[cabal]": {
+    "editor.defaultFormatter": "berberman.vscode-cabal-fmt"
+  },
   "[elixir]": {
     "editor.defaultFormatter": "JakeBecker.elixir-ls"
   },
@@ -13,6 +16,9 @@
   },
   "[markdown]": {
     "editor.wordBasedSuggestionsMode": "currentDocument"
+  },
+  "[properties]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
   },
   "[shellscript]": {
     "editor.defaultFormatter": "foxundermoon.shell-format"
@@ -64,6 +70,7 @@
   "gitlens.showWelcomeOnInstall": false,
   "gitlens.showWhatsNewAfterUpgrades": false,
   "go.toolsManagement.autoUpdate": true,
+  "haskell.manageHLS": "GHCup",
   "javascript.format.semicolons": "remove",
   "javascript.updateImportsOnFileMove.enabled": "always",
   "notebook.cellToolbarLocation": {
