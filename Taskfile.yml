@@ -1,6 +1,7 @@
 version: "3"
 
 includes:
+  dev: ./tasks/dev.yml
   migrate: ./tasks/migrate.yml
   os: ./tasks/Taskfile_{{OS}}.yml
 
@@ -51,10 +52,18 @@ tasks:
       - task: asdf-install
       - task: asdf-update
       - ~/.dotfiles/bin/install-dev.sh
+      - task: emacs-alpine
+      - task: dev:all
 
   dotbot:
     cmds:
       - ./bin/dotbot
+
+  emacs-alpine:
+    cmds:
+      - sudo apk add emacs ncurses ncurses-terminfo procps
+      - doom sync
+      - task: terminfo-emacs
 
   firefox-patch:
     dir: "{{ .FIREFOX_PROFILE }}"
@@ -89,6 +98,8 @@ tasks:
       - tic -x -o $HOME/.terminfo xterm-screen-256color.terminfo
 
   terminfo-emacs:
+    deps:
+      - terminfo-custom
     cmds:
       - tic -x -o $HOME/.terminfo xterm-emacs.terminfo
 

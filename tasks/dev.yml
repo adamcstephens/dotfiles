@@ -1,0 +1,10 @@
+version: "3"
+
+tasks:
+  all:
+    cmds:
+      - task: pkgs
+
+  pkgs:
+    cmds:
+      - sudo apk add cabal ghc elixir go nodejs
