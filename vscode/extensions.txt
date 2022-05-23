@@ -27,6 +27,7 @@ redhat.ansible
 redhat.vscode-yaml
 richie5um2.vscode-sort-json
 ritwickdey.LiveServer
+rust-lang.rust
 samplavigne.p5-vscode
 samuelcolvin.jinjahtml
 tamasfe.even-better-toml
