@@ -5,7 +5,7 @@ registries:
     type: local
     path: registry.yaml
 packages:
-  - name: BurntSushi/ripgrep@13.0.0
+  # - name: BurntSushi/ripgrep@13.0.0
   - name: Peltoche/lsd@0.21.0
   - name: ajeetdsouza/zoxide@v0.8.0
   - name: aristocratos/btop@v1.2.6
@@ -20,7 +20,7 @@ packages:
   - name: junegunn/fzf@0.29.0
   - name: muesli/duf@v0.8.1
   - name: mvdan/sh@v3.4.2
-  - name: sharkdp/bat@v0.19.0
-  - name: sharkdp/fd@v8.3.2
+  # - name: sharkdp/bat@v0.19.0
+  # - name: sharkdp/fd@v8.3.2
   - name: starship/starship@v1.3.0
   - name: stedolan/jq@jq-1.6
