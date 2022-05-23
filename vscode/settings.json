@@ -87,8 +87,9 @@
   "remote.SSH.lockfilesInTmp": true,
   "remote.SSH.remotePlatform": {
     "arch1": "linux",
+    "cloud1": "linux",
     "compose1": "linux",
-    "svc-compose": "linux"
+    "netdev3": "linux"
   },
   "scm.defaultViewMode": "tree",
   "search.useGlobalIgnoreFiles": true,
@@ -103,7 +104,6 @@
   "terraform.languageServer": {
     "args": ["serve"],
     "external": true,
-    "maxNumberOfProblems": 100,
     "pathToBinary": "",
     "trace.server": "off"
   },
@@ -136,5 +136,14 @@
   "yaml.customTags": ["!encrypted/pkcs1-oaep scalar", "!vault scalar"],
   "zenMode.fullScreen": false,
   "zenMode.hideLineNumbers": false,
-  "zenMode.hideTabs": false
+  "zenMode.hideTabs": false,
+  "[terraform]": {
+    "editor.defaultFormatter": "hashicorp.terraform"
+  },
+  "[dockerfile]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  },
+  "yaml.schemas": {
+    "https://json.schemastore.org/taskfile.json": "taskfiles/*"
+  }
 }
