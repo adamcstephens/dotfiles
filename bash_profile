@@ -12,7 +12,6 @@ if ! shopt -oq posix; then
   fi
 fi
 
-
 MY_COLORRESET="\[\033[0m\]"
 MY_DIM="\[\033[2m\]"
 
@@ -34,35 +33,28 @@ MY_LTPURPLE="\[\033[1;35m\]"
 MY_LTCYAN="\[\033[1;36m\]"
 MY_WHITE="\[\033[1;37m\]"
 
-
-if [ -f /usr/share/git/completion/git-prompt.sh ] # archlinux
-then
+if [ -f /usr/share/git/completion/git-prompt.sh ]; then # archlinux
   source /usr/share/git/completion/git-prompt.sh
-elif [ -f /usr/share/git-core/contrib/completion/git-prompt.sh ] # centos
-then
+elif [ -f /usr/share/git-core/contrib/completion/git-prompt.sh ]; then # centos
   source /usr/share/git-core/contrib/completion/git-prompt.sh
 fi
 
-if [[ $USER == 'root' ]]
-then
+if [[ $USER == 'root' ]]; then
   USERSTRING="${MY_LTRED}\u"
-elif [[ $USER == 'adam' || $USER == 'adam.c.stephens' ]]
-then
+elif [[ $USER == 'adam' || $USER == 'adam.c.stephens' ]]; then
   USERSTRING=""
 else
   USERSTRING="\u"
 fi
 
-if declare -f __git_ps1 > /dev/null 2>&1
-then
+if declare -f __git_ps1 >/dev/null 2>&1; then
   MYGITPROMPT="${MY_GREEN}\$(__git_ps1)"
 else
   MYGITPROMPT=''
 fi
 export PS1="\n${MY_DIM}╭─ ${USERSTRING}@\h${MY_COLORRESET} ${MY_BLUE}\w${MYGITPROMPT}${MY_COLORRESET}\n${MY_DIM}╰─${MY_BROWN}❯${MY_COLORRESET} "
 
-if [[ $TERM =~ xterm.* ]]
-then
+if [[ $TERM =~ xterm.* ]]; then
   export PROMPT_COMMAND='echo -ne "\033]0;@${HOSTNAME}\007"'
 fi
 
@@ -77,20 +69,12 @@ if [[ -e $HOME/.asdf/asdf.sh ]]; then
   # shellcheck disable=SC1090
   source "$HOME/.asdf/asdf.sh"
   source "$HOME/.asdf/completions/asdf.bash"
-fi
 
-asdf_direnv_bashrc"${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/bashrc"
-if [ -e $asdf_direnv_bashrc ]; then
-  source $asdf_direnv_bashrc
+  source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/bashrc"
 fi
 
 # fzf
 [[ -e ~/.fzf.bash ]] && source ~/.fzf.bash
-
-if [[ -e ~/.asdf/asdf.sh ]]; then
-  source ~/.asdf/asdf.sh
-  source ~/.asdf/completions/asdf.bash
-fi
 
 if command -v starship &>/dev/null; then
   eval "$(starship init bash)"
