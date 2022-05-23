@@ -35,6 +35,10 @@ tasks:
       - task: fish-bootstrap
       - task: lefthook-install
 
+  bootstrap:slim:
+    cmds:
+      - task: dotbot
+
   brew-bundle:
     cmds:
       - brew bundle

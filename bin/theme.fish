@@ -1,3 +1,10 @@
+#!/usr/bin/env fish
+
+echo "home: $HOME"
+echo "path: $PATH"
+echo "id: " (id)
+echo "pwd: $PWD"
+
 set -U fish_color_autosuggestion brblack
 set -U fish_color_cancel -r
 set -U fish_color_command green
