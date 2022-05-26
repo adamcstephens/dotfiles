@@ -88,6 +88,10 @@ tasks:
     cmds:
       - fish -c "source ~/.dotfiles/fish/functions/fisher.fish; fisher update"
 
+  git:setup:
+    cmds:
+      - git config -f ~/.gitconfig.local user.email {{.EMAIL}}
+
   lefthook-install:
     cmds:
       - lefthook install
