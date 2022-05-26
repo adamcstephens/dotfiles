@@ -31,7 +31,7 @@ tasks:
       - task: migrate:all
       - task: aqua-run
       - task: dotbot
-      - task: vim-plug
+      - task: vim:plug
       - task: fish-bootstrap
       - task: lefthook-install
 
@@ -123,7 +123,7 @@ tasks:
       - task: test-build
       - podman run --rm -it localhost/dotfiles-test fish
 
-  vim-plug:
+  vim:plug:
     cmds:
       - "vim +PlugClean! +PlugUpdate +qall"
 
