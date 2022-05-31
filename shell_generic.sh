@@ -11,7 +11,7 @@ export AQUA_GLOBAL_CONFIG=~/.config/aquaproj-aqua/aqua.yaml
 
 alias thisweek='date +%Y-%W'
 
-export PAGER='less -r'
+export PAGER='less'
 export EDITOR="$HOME/bin/editor"
 
 # ls
@@ -141,6 +141,7 @@ case $(uname) in
     alias pki="sudo apk add "
     alias pkiyy="sudo /sbin/apk add "
     alias pks="apk search "
+    alias pkls="apk info -L "
     alias pksh="apk info "
     alias pku="sudo apk -U upgrade"
     alias pkr="sudo apk del "

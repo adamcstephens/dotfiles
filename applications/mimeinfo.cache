@@ -14,3 +14,4 @@ text/x-moc=emacsclient.desktop;
 text/x-pascal=emacsclient.desktop;
 text/x-tcl=emacsclient.desktop;
 text/x-tex=emacsclient.desktop;
+x-scheme-handler/joplin=appimagekit_54b9ecb862b93aeafa302cd9a041af03-Joplin.desktop;

@@ -1,3 +1,5 @@
+#   task git:setup EMAIL=me@example.com
+#
 #   git config -f ~/.gitconfig.local user.email me@example.com
 [alias]
   ftag = push --tags --force
@@ -12,15 +14,11 @@
   frag = magenta
   old = red
   new = green
-[commit]
-  gpgsign = true
+; [commit]
+;   gpgsign = true
 [core]
   editor = ~/bin/editor
-  pager = delta
   excludesfile = ~/.gitignore
-[delta]
-  syntax-theme = base16
-  true-color = never
 [github]
   user = adamcstephens
 [include]
@@ -28,15 +26,13 @@
 [init]
   templateDir = ~/.config/git/template/
   defaultBranch = main
-[interactive]
-  diffFilter = delta --color-only
 [pull]
   ff = only
   rebase = false
 [push]
   default = tracking
-[tag]
-  gpgsign = true
+; [tag]
+;   gpgsign = true
 [url "git@github.com:adamcstephens"]
   pushInsteadOf = https://github.com/adamcstephens
 [url "git@gitlab.com:adamcstephens"]
