@@ -1,0 +1,15 @@
+version: "3"
+
+# task os:firefox-patch FIREFOX_PROFILE=C:\Users\Adam\AppData\Roaming\Mozilla\Firefox\Profiles\f2w3i0u5.default-release
+tasks:
+  firefox-patch:
+    dir: "{{ .FIREFOX_PROFILE }}"
+    cmds:
+      - test -n "{{ .FIREFOX_PROFILE }}"
+      - test -d "{{ .FIREFOX_PROFILE }}"
+      - xcopy /Y "{{.USERPROFILE}}\Documents\dotfiles\firefox\arkenfox\prefsCleaner.bat" "{{ .FIREFOX_PROFILE }}"
+      - xcopy /Y "{{.USERPROFILE}}\Documents\dotfiles\firefox\arkenfox\updater.bat" "{{ .FIREFOX_PROFILE }}"
+      - xcopy /Y "{{.USERPROFILE}}\Documents\dotfiles\firefox\arkenfox\user.js" "{{ .FIREFOX_PROFILE }}"
+      - xcopy /Y "{{.USERPROFILE}}\Documents\dotfiles\firefox\user-overrides.js" "{{ .FIREFOX_PROFILE }}"
+      - .\\updater.bat -unattended
+      - .\\prefsCleaner.bat -unattended
