@@ -1,0 +1,14 @@
+version: "3"
+
+tasks:
+  bundle:
+    cmds:
+      - brew bundle
+
+  bundle-dump:
+    cmds:
+      - brew bundle dump --force
+
+  install:
+    cmds:
+      - ~/.dotfiles/bin/install-brew.sh

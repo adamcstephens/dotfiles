@@ -1,0 +1,12 @@
+version: "3"
+
+tasks:
+  custom:
+    cmds:
+      - tic -x -o $HOME/.terminfo xterm-screen-256color.terminfo
+
+  emacs:
+    deps:
+      - custom
+    cmds:
+      - tic -x -o $HOME/.terminfo xterm-emacs.terminfo

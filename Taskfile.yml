@@ -1,23 +1,14 @@
 version: "3"
 
 includes:
-  dev: ./tasks/dev.yml
+  brew: ./taskfiles/brew.yml
+  dev: ./taskfiles/dev.yml
   fish: fish/Taskfile.yml
-  migrate: ./tasks/migrate.yml
-  os: ./tasks/Taskfile_{{OS}}.yml
+  migrate: ./taskfiles/migrate.yml
+  os: ./taskfiles/Taskfile_{{OS}}.yml
+  test: ./taskfiles/test.yml
 
 tasks:
-  asdf-install:
-    cmds:
-      - "[ -e ~/.asdf ] || git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.10.0"
-      - $HOME/.asdf/bin/asdf plugin list | grep -q direnv || $HOME/.asdf/bin/asdf plugin add direnv
-      - $HOME/.asdf/bin/asdf global direnv system
-
-  asdf-update:
-    cmds:
-      - $HOME/.asdf/bin/asdf update
-      - "if [ -e ${HOME}/.asdf/plugins ]; then ${HOME}/.asdf/bin/asdf plugin-update --all; fi"
-
   aqua-install:
     cmds:
       - install-aqua.sh -i ~/bin/aqua
@@ -34,43 +25,22 @@ tasks:
       - task: dotbot
       - task: vim:plug
       - task: fish:bootstrap
-      - task: lefthook-install
+      - task: lefthook:install
 
   bootstrap:slim:
     cmds:
       - task: dotbot
 
-  brew-bundle:
-    cmds:
-      - brew bundle
-
-  brew-bundle-dump:
-    cmds:
-      - brew bundle dump --force
-
-  brew-install:
-    cmds:
-      - ~/.dotfiles/bin/install-brew.sh
-
   dev:
     cmds:
-      - task: asdf-install
-      - task: asdf-update
       - ~/.dotfiles/bin/install-dev.sh
-      - task: emacs-alpine
       - task: dev:all
 
   dotbot:
     cmds:
       - ./bin/dotbot
 
-  emacs-alpine:
-    cmds:
-      - sudo apk add emacs ncurses ncurses-terminfo procps
-      - doom sync
-      - task: terminfo-emacs
-
-  firefox-patch:
+  firefox:patch:
     dir: "{{ .FIREFOX_PROFILE }}"
     cmds:
       - test -n "{{ .FIREFOX_PROFILE }}"
@@ -85,40 +55,18 @@ tasks:
     cmds:
       - git config -f ~/.gitconfig.local user.email {{.EMAIL}}
 
-  lefthook-install:
+  lefthook:install:
     cmds:
       - lefthook install
 
-  mimeapps-fix:
+  mimeapps:fix:
     cmds:
       - mv ~/.config/mimeapps.list .
       - task: dotbot
 
-  terminfo-custom:
-    cmds:
-      - tic -x -o $HOME/.terminfo xterm-screen-256color.terminfo
-
-  terminfo-emacs:
-    deps:
-      - terminfo-custom
-    cmds:
-      - tic -x -o $HOME/.terminfo xterm-emacs.terminfo
-
   test:
     cmds:
-      - task: test-build
-      - podman run --rm -it -v $PWD:/root/.dotfiles dotfiles-test sh -c "cd /root/.dotfiles; ./install"
-
-  test-build:
-    cmds:
-      - podman build --tag dotfiles-test .
-    status:
-      - podman images | rg dotfiles-test
-
-  test-shell:
-    cmds:
-      - task: test-build
-      - podman run --rm -it localhost/dotfiles-test fish
+      - task: test:run
 
   vim:plug:
     cmds:
