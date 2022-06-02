@@ -4,7 +4,7 @@ set extfile ~/.dotfiles/vscode/extensions.txt
 set uninstfile ~/.dotfiles/vscode/extensions-uninstall.txt
 
 for code in code code-insiders
-    if command -q $code
+    if command -q $code && ! string match "*bin/remote-cli/*" (which code) &>/dev/null
         if [ "$argv[1]" = install ]
             sed -i "/$argv[2]/d" $uninstfile
             $code --install-extension $argv[2]
