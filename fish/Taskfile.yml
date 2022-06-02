@@ -10,8 +10,6 @@ tasks:
     cmds:
       # decors/fish-colored-man
       - rm -f functions/man.fish
-      # edc/bass
-      - rm -f functions/*bass*
       # franciscolourenco/done
       - rm -f conf.d/done.fish
       # h-matsuo/fish-color-scheme-switcher
