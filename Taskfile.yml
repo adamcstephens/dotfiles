@@ -2,6 +2,7 @@ version: "3"
 
 includes:
   dev: ./tasks/dev.yml
+  fish: fish/Taskfile.yml
   migrate: ./tasks/migrate.yml
   os: ./tasks/Taskfile_{{OS}}.yml
 
@@ -32,7 +33,7 @@ tasks:
       - task: aqua-run
       - task: dotbot
       - task: vim:plug
-      - task: fish-bootstrap
+      - task: fish:bootstrap
       - task: lefthook-install
 
   bootstrap:slim:
@@ -79,14 +80,6 @@ tasks:
       - ln -sf ~/.dotfiles/firefox/user-overrides.js .
       - ./updater.sh -s
       - bash ./prefsCleaner.sh -s
-
-  fish-bootstrap:
-    cmds:
-      - fish ~/.dotfiles/bin/theme.fish
-
-  fisher-update:
-    cmds:
-      - fish -c "source ~/.dotfiles/fish/functions/fisher.fish; fisher update"
 
   git:setup:
     cmds:
