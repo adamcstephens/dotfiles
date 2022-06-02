@@ -12,7 +12,6 @@ packages:
   - name: bootandy/dust@v0.8.1-alpha.2
   - name: caarlos0/fork-cleaner@v2.2.1
   - name: cli/cli@v2.9.0
-  # - name: dandavison/delta@0.13.0
   - name: direnv/direnv@v2.31.0
   - name: evilmartians/lefthook@v0.7.7
   - name: go-task/task@v3.12.0
@@ -20,7 +19,6 @@ packages:
   - name: junegunn/fzf@0.29.0
   - name: muesli/duf@v0.8.1
   - name: mvdan/sh@v3.4.2
-  # - name: sharkdp/bat@v0.19.0
-  # - name: sharkdp/fd@v8.3.2
   - name: starship/starship@v1.3.0
   - name: stedolan/jq@jq-1.6
+  - name: earthly/earthly@v0.6.14

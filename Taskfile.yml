@@ -66,7 +66,7 @@ tasks:
 
   test:
     cmds:
-      - task: test:run
+      - task: test:build
 
   vim:plug:
     cmds:
