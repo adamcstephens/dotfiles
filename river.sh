@@ -12,6 +12,10 @@ riverctl map normal Mod4+Shift+Control E spawn 'gtk-launch emacsclient'
 riverctl map normal Mod4 D spawn 'wofi --show drun,run'
 riverctl map normal Mod4+Shift+Control D spawn 'dark-mode toggle'
 
+# bindsym print exec screenshot.sh window
+# bindsym $mod+print exec screenshot.sh screen
+# bindsym Alt+print exec screenshot.sh box
+
 # Mod+Q to close the focused view
 riverctl map normal Mod4+Shift Q close
 
@@ -125,8 +129,8 @@ for mode in normal locked; do
   riverctl map $mode None XF86Eject spawn 'eject -T'
 
   # Control pulse audio volume with pamixer (https://github.com/cdemoulins/pamixer)
-  riverctl map $mode None XF86AudioRaiseVolume spawn "amixer -D pipewire sset Master 5%+ | grep 'Front Left:' | awk '{print \$5}' | sed -r 's/(\[|\]|%)//g' >> $XDG_RUNTIME_DIR/wob.fifo"
-  riverctl map $mode None XF86AudioLowerVolume spawn "amixer -D pipewire sset Master 5%- | grep 'Front Left:' | awk '{print \$5}' | sed -r 's/(\[|\]|%)//g' >> $XDG_RUNTIME_DIR/wob.fifo"
+  riverctl map $mode None XF86AudioRaiseVolume spawn "amixer -D pipewire sset Master 3%+ | grep 'Front Left:' | awk '{print \$5}' | sed -r 's/(\[|\]|%)//g' >> $XDG_RUNTIME_DIR/wob.fifo"
+  riverctl map $mode None XF86AudioLowerVolume spawn "amixer -D pipewire sset Master 3%- | grep 'Front Left:' | awk '{print \$5}' | sed -r 's/(\[|\]|%)//g' >> $XDG_RUNTIME_DIR/wob.fifo"
   riverctl map $mode None XF86AudioMute spawn "amixer -D pipewire sset Master toggle"
 
   # Control MPRIS aware media players with playerctl (https://github.com/altdesktop/playerctl)
@@ -154,11 +158,11 @@ riverctl csd-filter-add app-id "gedit"
 
 riverctl set-repeat 100 190
 riverctl input pointer-1452-613-Apple_Inc._Magic_Trackpad natural-scroll enabled
-riverctl input pointer-1452-613-Apple_Inc._Magic_Trackpad tap enabled
+# riverctl input pointer-1452-613-Apple_Inc._Magic_Trackpad tap enabled
 riverctl input pointer-1452-613-Apple_Inc._Magic_Trackpad tap-button-map left-right-middle
 # riverctl input 1739:52619:SYNA8004:00_06CB:CD8B_Touchpad events disabled
 riverctl input pointer-1739-52619-SYNA8004:00_06CB:CD8B_Touchpad natural-scroll enabled
-riverctl input pointer-1739-52619-SYNA8004:00_06CB:CD8B_Touchpad tap enabled
+# riverctl input pointer-1739-52619-SYNA8004:00_06CB:CD8B_Touchpad tap enabled
 riverctl input pointer-1739-52619-SYNA8004:00_06CB:CD8B_Touchpad tap-button-map left-right-middle
 riverctl focus-follows-cursor normal
 

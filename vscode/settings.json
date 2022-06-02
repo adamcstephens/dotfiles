@@ -21,7 +21,7 @@
     "editor.defaultFormatter": "foxundermoon.shell-format"
   },
   "[shellscript]": {
-    "editor.defaultFormatter": "foxundermoon.shell-format"
+    "editor.defaultFormatter": "mkhl.shfmt"
   },
   "[yaml]": {
     "editor.wordBasedSuggestionsMode": "currentDocument"
@@ -89,7 +89,8 @@
     "arch1": "linux",
     "cloud1": "linux",
     "compose1": "linux",
-    "netdev3": "linux"
+    "netdev3": "linux",
+    "alpine1": "linux"
   },
   "scm.defaultViewMode": "tree",
   "search.useGlobalIgnoreFiles": true,
@@ -145,5 +146,11 @@
   },
   "yaml.schemas": {
     "https://json.schemastore.org/taskfile.json": "taskfiles/*"
+  },
+  "[fish]": {
+    "editor.defaultFormatter": "bmalehorn.vscode-fish"
+  },
+  "[nix]": {
+    "editor.defaultFormatter": "brettm12345.nixfmt-vscode"
   }
 }

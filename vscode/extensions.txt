@@ -5,6 +5,7 @@ danielgjackson.auto-dark-mode-windows
 DavidAnson.vscode-markdownlint
 dustinsanders.an-old-hope-theme-vscode
 eamodio.gitlens
+earthly.earthfile-syntax-highlighting
 EditorConfig.EditorConfig
 esbenp.prettier-vscode
 filipesabella.live-p5
