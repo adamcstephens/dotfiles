@@ -3,11 +3,16 @@ version: "3"
 tasks:
   build:
     cmds:
-      - earthly +build
+      - earthly +build-image
     status:
       - docker images | rg dotfiles-test
 
   shell:
     cmds:
       - task: build
-      - docker run --rm -it dotfiles-test fish
+      - docker run --rm -it dotfiles-test:latest fish
+
+  shell:aarch64:
+    cmds:
+      - task: build
+      - docker run --rm -it --platform=linux/aarch64 dotfiles-test:latest_linux_arm64 fish

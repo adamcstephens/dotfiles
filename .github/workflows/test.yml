@@ -1,5 +1,3 @@
-# .github/workflows/ci.yml
-
 name: CI
 
 on:
@@ -20,4 +18,4 @@ jobs:
       - name: Earthly version
         run: earthly --version
       - name: Run build
-        run: earthly --ci +build
+        run: earthly --ci +build-all-platforms
