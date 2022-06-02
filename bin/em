@@ -1,0 +1,17 @@
+#!/usr/bin/env sh
+
+OLDTERM=$TERM
+
+if [ ! -e ~/.config/systemd/user/emacs.service ] && ! pgrep -i emacs &>/dev/null; then
+  emacs --bg-daemon
+fi
+
+if [ -e ~/.terminfo/x/xterm-emacs ] || [ -e ~/.terminfo/78/xterm-emacs ]; then
+  export TERM=xterm-emacs
+else
+  export TERM=xterm-256color
+fi
+
+emacsclient -t $@
+
+export TERM=$OLDTERM
