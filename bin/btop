@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+
+export PATH=$(echo $PATH | sed -e "s,$HOME/.dotfiles/bin:,,")
+
+btop --utf-force $@
