@@ -2,7 +2,7 @@
 
 OLDTERM=$TERM
 
-if [ ! -e ~/.config/systemd/user/emacs.service ] && ! pgrep -i emacs &>/dev/null; then
+if [ ! -e ~/.config/systemd/user/emacs.service ] && ! pgrep -i emacs >/dev/null 2>&1; then
   emacs --bg-daemon
 fi
 
@@ -12,6 +12,7 @@ else
   export TERM=xterm-256color
 fi
 
-emacsclient -t $@
+emacsclient -t "$@"
 
+# shellcheck disable=SC2086
 export TERM=$OLDTERM

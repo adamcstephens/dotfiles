@@ -1,5 +1,8 @@
 #!/usr/bin/env sh
 
-export PATH=$(echo $PATH | sed -e "s,$HOME/.dotfiles/bin:,,")
+SCRIPT_PATH=$(dirname "$(realpath "$0")")
 
-btop --utf-force $@
+PATH="$(echo "$PATH" | sed -e "s,$SCRIPT_PATH:,,")"
+export PATH
+
+btop --utf-force "$@"
