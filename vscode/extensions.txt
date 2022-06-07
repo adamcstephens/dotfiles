@@ -10,12 +10,12 @@ EditorConfig.EditorConfig
 esbenp.prettier-vscode
 filipesabella.live-p5
 firefox-devtools.vscode-firefox-debug
-foxundermoon.shell-format
 golang.go
 hashicorp.terraform
 haskell.haskell
 JakeBecker.elixir-ls
 justusadam.language-haskell
+mkhl.shfmt
 ms-python.python
 ms-python.vscode-pylance
 ms-toolsai.jupyter

@@ -7,3 +7,4 @@ gitpod.gitpod-desktop
 nimsaem.nimvscode
 JulienDuchesne.vscode-jsonnet
 GitHub.codespaces
+foxundermoon.shell-format

@@ -6,4 +6,4 @@ post-merge:
       run: "task aqua-run"
     vscode-extensions:
       glob: "vscode/extensions*"
-      run: "~/.dotfiles/bin/vscode-extensions.fish"
+      run: "~/.dotfiles/bin/vscode-extensions.sh"

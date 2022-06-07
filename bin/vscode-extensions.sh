@@ -1,7 +1,5 @@
 #!/usr/bin/env sh
 
-set -x
-
 EXTENSIONS_FILE="$HOME/.dotfiles/vscode/extensions.txt"
 UNINSTALL_FILE="$HOME/.dotfiles/vscode/extensions-uninstall.txt"
 
@@ -25,7 +23,7 @@ for code in code code-insiders; do
         ;;
       esac
 
-      installed="$($code --list-extensions)"
+      installed="$($code --list-extensions 2>/dev/null)"
       repo="$(cat "$EXTENSIONS_FILE")"
       uninstall="$(cat "$UNINSTALL_FILE")"
 
@@ -36,12 +34,12 @@ for code in code code-insiders; do
       done
 
       for e in $repo; do
-        if ! (echo "$installed" | grep "e"); then
+        if ! (echo "$installed" | grep "e" >/dev/null); then
           $code --install-extension "$e"
         fi
       done
 
-      $code --list-extensions >"$EXTENSIONS_FILE"
+      $code --list-extensions >"$EXTENSIONS_FILE" 2>/dev/null
       ;;
     esac
   fi
