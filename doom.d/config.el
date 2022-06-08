@@ -273,3 +273,6 @@
          (json-mode . prettier-mode)
          (yaml-mode . prettier-mode)
          (ruby-mode . prettier-mode)))
+
+(after! telega
+  (setq telega-server-libs-prefix "/usr"))

@@ -56,3 +56,4 @@
 ;; (package! revealjs :pin "b18f12d")
 (package! heaven-and-hell)
 (package! prettier)
+(package! telega)
