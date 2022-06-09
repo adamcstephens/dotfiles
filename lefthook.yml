@@ -1,6 +1,21 @@
 # https://github.com/evilmartians/lefthook/blob/master/docs/full_guide.md
+post-checkout:
+  commands:
+    dotbot-changed:
+      glob: "install*yaml"
+      run: "task migrate:all dotbot"
+    aqua-changed:
+      glob: "aqua/*.yaml"
+      run: "task aqua-run"
+    vscode-extensions:
+      glob: "vscode/extensions*"
+      run: "~/.dotfiles/bin/vscode-extensions.sh"
+
 post-merge:
   commands:
+    dotbot-changed:
+      glob: "install*yaml"
+      run: "task migrate:all dotbot"
     aqua-changed:
       glob: "aqua/*.yaml"
       run: "task aqua-run"
