@@ -68,34 +68,6 @@ set ttymouse=
 " set colorcolumn
 set colorcolumn=100
 
-"
-" plugins
-"
-call plug#begin('~/.vim/plugged')
-
-Plug 'ConradIrwin/vim-bracketed-paste'
-Plug 'Valloric/ListToggle'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'airblade/vim-gitgutter'
-Plug 'airblade/vim-rooter'
-Plug 'blueyed/vim-qf_resize'
-Plug 'godlygeek/tabular'
-Plug 'itchyny/lightline.vim'
-Plug 'junegunn/fzf'
-Plug 'junegunn/fzf.vim'
-Plug 'scrooloose/nerdtree'
-Plug 'sheerun/vim-polyglot'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'tmux-plugins/vim-tmux-focus-events'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-dispatch'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-unimpaired'
-Plug 'dense-analysis/ale'
-Plug 'j-tom/vim-old-hope'
-
 " let g:ansible_name_highlight = 'b'
 " disable vim-json's quite hiding
 " let g:vim_json_syntax_conceal = 0
@@ -168,9 +140,6 @@ let g:qf_resize_max_ratio = 0.30
 
 " rooter
 let g:rooter_silent_chdir = 1
-
-" Add plugins to &runtimepath
-call plug#end()
 
 " must run after loaded
 syntax on

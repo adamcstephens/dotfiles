@@ -10,7 +10,6 @@
     - ~/.gnupg
     - ~/.ssh
     - ~/.tmux/plugins
-    - ~/.vim
     - ~/.znap
     - ~/bin
     - ~/git
@@ -73,7 +72,7 @@
       if: "which tmux"
       path: tzvt_config
     ~/.vimrc: vimrc
-    ~/.vim/autoload/plug.vim: vim-plug/plug.vim
+    ~/.vim: vim
     ~/.zshrc:
       force: true
       path: zshrc

@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/git-commands/git-subrepo#readme
+;
+[subrepo]
+	remote = https://github.com/j-tom/vim-old-hope
+	branch = master
+	commit = b9b7fbcafba624d2471ede354c498f41b4790405
+	parent = 13256df5a61af890508399aef6333d002f1be894
+	method = merge
+	cmdver = 0.4.3

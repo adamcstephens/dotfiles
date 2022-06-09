@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/git-commands/git-subrepo#readme
+;
+[subrepo]
+	remote = https://github.com/godlygeek/tabular
+	branch = master
+	commit = 339091ac4dd1f17e225fe7d57b48aff55f99b23a
+	parent = 5b3ba82f95c49067291e9ba716d95ec168687933
+	method = merge
+	cmdver = 0.4.3

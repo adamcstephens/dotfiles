@@ -7,6 +7,7 @@ includes:
   migrate: ./taskfiles/migrate.yml
   os: ./taskfiles/Taskfile_{{OS}}.yml
   test: ./taskfiles/test.yml
+  vim: ./taskfiles/vim.yml
 
 tasks:
   aqua-install:
@@ -23,7 +24,6 @@ tasks:
       - task: migrate:all
       - task: aqua-run
       - task: dotbot
-      - task: vim:plug
       - task: fish:bootstrap
       - task: lefthook:install
 
@@ -67,10 +67,6 @@ tasks:
   test:
     cmds:
       - task: test:build
-
-  vim:plug:
-    cmds:
-      - "vim +PlugClean! +PlugUpdate +qall"
 
   vscode:
     cmds:

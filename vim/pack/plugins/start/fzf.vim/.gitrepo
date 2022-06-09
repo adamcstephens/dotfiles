@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/git-commands/git-subrepo#readme
+;
+[subrepo]
+	remote = https://github.com/junegunn/fzf.vim
+	branch = master
+	commit = d5f1f8641b24c0fd5b10a299824362a2a1b20ae0
+	parent = 1a001c75ac4487222e2cdd191aeda88fbd70898e
+	method = merge
+	cmdver = 0.4.3

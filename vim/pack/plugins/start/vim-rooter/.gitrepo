@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/git-commands/git-subrepo#readme
+;
+[subrepo]
+	remote = https://github.com/airblade/vim-rooter
+	branch = master
+	commit = 0415be8b5989e56f6c9e382a04906b7f719cfb38
+	parent = ee388dcd7237ea85a36d24bd14b6ab41ddb87332
+	method = merge
+	cmdver = 0.4.3

@@ -1,0 +1,17 @@
+version: "3"
+
+tasks:
+  vendor:
+    cmds:
+      - git subrepo clone https://github.com/airblade/vim-gitgutter vim/pack/plugins/start/vim-gitgutter
+      - git subrepo clone https://github.com/airblade/vim-rooter vim/pack/plugins/start/vim-rooter
+      - git subrepo clone https://github.com/ConradIrwin/vim-bracketed-paste vim/pack/plugins/start/bracketed-paste
+      - git subrepo clone https://github.com/godlygeek/tabular vim/pack/plugins/start/tabular
+      - git subrepo clone https://github.com/itchyny/lightline.vim vim/pack/plugins/start/lightline.vim
+      - git subrepo clone https://github.com/j-tom/vim-old-hope vim/pack/plugins/start/old-hope
+      - git subrepo clone https://github.com/junegunn/fzf.vim vim/pack/plugins/start/fzf.vim
+      - git subrepo clone https://github.com/sheerun/vim-polyglot vim/pack/plugins/start/vim-polyglot
+      - git subrepo clone https://github.com/tpope/vim-commentary vim/pack/plugins/start/vim-commentary
+      - git subrepo clone https://github.com/tpope/vim-repeat vim/pack/plugins/start/vim-repeat
+      - git subrepo clone https://github.com/tpope/vim-surround vim/pack/plugins/start/vim-surround
+      - git subrepo clone https://github.com/tpope/vim-unimpaired vim/pack/plugins/start/vim-unimpaired

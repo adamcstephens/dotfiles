@@ -6,6 +6,7 @@ tasks:
       - task: asdf-direnv
       - task: direnv
       - task: btop
+      - task: vim-plug-delete
 
   asdf-direnv:
     cmds:
@@ -26,3 +27,9 @@ tasks:
       - rm -rf ~/.config/direnv
     status:
       - test -L ~/.config/direnv
+
+  vim-plug-delete:
+    cmds:
+      - rm -rf ~/.vim
+    status:
+      - test -L ~/.vim
