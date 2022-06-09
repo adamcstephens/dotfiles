@@ -3,3 +3,4 @@ Brewfile.lock.json
 applications/userapp*.desktop
 applications/appimagekit*desktop
 fish/fish_variables
+/.*.state

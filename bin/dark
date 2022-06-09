@@ -7,6 +7,7 @@ import platform
 import subprocess
 import sys
 
+state_file = os.getenv("HOME") + "/.dotfiles/.dark-mode.state"
 
 def run(command):
     return subprocess.run(command.split(" "), capture_output=True).stdout.decode(
@@ -77,25 +78,14 @@ def set_waybar_theme(target):
     print(run("systemctl --user restart waybar"))
 
 
-def platform_state_file():
-    os_name = platform.system()
-
-    if os_name == "Linux":
-        platform_cache = "/.cache"
-    elif os_name == "Darwin":
-        platform_cache = "/Library/Caches"
-
-    return os.getenv("HOME") + platform_cache + "/dark-mode.state"
-
-
 def set_state_data(target):
-    with open(platform_state_file(), "w") as sf:
+    with open(state_file, "w") as sf:
         json.dump(target, sf)
 
 
 def get_state_data():
     try:
-        return json.loads(open(platform_state_file()).read())
+        return json.loads(open(state_file).read())
     except FileNotFoundError:
         return {}
 
@@ -127,7 +117,7 @@ if __name__ == "__main__":
         "target",
         type=str,
         help="set the target dark state",
-        choices=["enable", "disable", "toggle"],
+        choices=["enable", "disable", "toggle", "status"],
     )
 
     args = parser.parse_args()
@@ -138,6 +128,8 @@ if __name__ == "__main__":
         set_dark(False)
     elif args.target == "toggle":
         toggle_dark()
+    elif args.target == "status":
+        print(str(get_state_data()).lower())
     else:
         print("unknown target state")
         sys.exit(1)

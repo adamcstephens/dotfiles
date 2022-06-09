@@ -25,7 +25,9 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-old-hope)
+(setq my-doom-theme-dark 'doom-old-hope)
+(setq my-doom-theme-light 'tsdh-light)
+(setq doom-theme my-doom-theme-dark)
 (setq doom-old-hope-brighter-comments t)
 
 ;; If you use `org' and don't want your org files in the default location below,
@@ -276,3 +278,21 @@
 
 (after! telega
   (setq telega-server-libs-prefix "/usr"))
+
+(defun get-string-from-file (filePath)
+  "Return file content as string."
+  (with-temp-buffer
+    (insert-file-contents filePath)
+    (buffer-string)))
+
+(setq my-dark-mode-statefile (concat (getenv "HOME") "/.dotfiles/.dark-mode.state"))
+(defun toggle-dark (&optional _)
+  "Load the current dark mode state"
+  (interactive)
+  (if (string= (string-trim (get-string-from-file my-dark-mode-statefile)) "false")
+      (load-theme my-doom-theme-light t) (load-theme my-doom-theme-dark t))
+  )
+(add-to-list 'after-make-frame-functions 'toggle-dark)
+(file-notify-add-watch my-dark-mode-statefile '(change) 'toggle-dark)
+(toggle-dark)
+                                        ; (toggle-dark)
