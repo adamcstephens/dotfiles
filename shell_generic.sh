@@ -62,126 +62,11 @@ toggle_dark() {
   fi
 }
 
-# OS-specific
-case $(uname) in
-"Darwin")
-  eval "$(/opt/homebrew/bin/brew shellenv)"
-
-  export HOMEBREW_NO_AUTO_UPDATE=1
-  alias pki="HOMEBREW_NO_AUTO_UPDATE=0 brew install "
-  alias pkls="brew list "
-  alias pks="brew search "
-  alias pksh="brew info "
-  alias pku="brew update && brew upgrade"
-  alias pkr="brew remove "
-  alias flushdns='sudo killall -HUP mDNSResponder'
-  alias syu="brew services"
-
-  # load ssh key using keychain if empty agent
-  if [[ -n $SSH_AUTH_SOCK ]] && ! ssh-add -l &>/dev/null; then
-    ssh-add -K
-  fi
-  ;;
-"FreeBSD")
-  alias pki="sudo pkg install"
-  alias pks="pkg search"
-  alias pksh="pkg info"
-  alias pku="sudo pkg upgrade"
-  alias pkr="sudo pkg remove"
-  ;;
-"Linux")
-  # systemd
-  alias jc="sudo journalctl "
-  alias jcu="journalctl --user "
-  alias sy="sudo systemctl "
-  alias syu="systemctl --user "
-
-  if [[ -e /etc/arch-release ]]; then
-    if command -v yay &>/dev/null; then
-      pkgcmd="yay"
-    else
-      pkgcmd="sudo pacman"
-    fi
-    alias pki="$pkgcmd -S"
-    alias pkiyy="$pkgcmd -S --noconfirm"
-    alias pkls="$pkgcmd -Ql"
-    alias pkp="pkgfile"
-    alias pks="$pkgcmd -Ss"
-    alias pksh="$pkgcmd -Si"
-    alias pku="$pkgcmd -Syu"
-    alias pkr="$pkgcmd -R --recursive"
-  elif [[ -e /etc/debian_version ]]; then
-    alias pki="sudo apt install"
-    alias pkiyy="sudo apt install --yes"
-    alias pkls="dpkg -L"
-    alias pkp="apt-file search"
-    alias pks="apt search"
-    alias pksh="apt show"
-    alias pku="sudo apt update && sudo apt --autoremove dist-upgrade"
-    alias pkr="sudo apt purge --autoremove"
-
-    export PATH="$PATH:/usr/sbin:/sbin"
-  elif [[ -e /etc/fedora-release ]]; then
-    alias pki="sudo dnf --color=auto install"
-    alias pkls="rpm -ql"
-    alias pkp="dnf --color=auto provides"
-    alias pks="dnf --color=auto search"
-    alias pksh="dnf --color=auto info"
-    alias pku="sudo dnf --color=auto update"
-    alias pkr="sudo dnf --color=auto remove"
-  elif [[ -e /etc/redhat-release ]]; then
-    alias pki="sudo yum --color=auto install"
-    alias pkls="rpm -ql"
-    alias pkp="yum --color=auto provides"
-    alias pks="yum --color=auto search"
-    alias pksh="yum --color=auto info"
-    alias pku="sudo yum --color=auto update"
-    alias pkr="sudo yum --color=auto remove"
-  elif [[ -e /etc/alpine-release ]]; then
-    alias pki="sudo apk add "
-    alias pkiyy="sudo /sbin/apk add "
-    alias pks="apk search "
-    alias pkls="apk info -L "
-    alias pksh="apk info "
-    alias pku="sudo apk -U upgrade"
-    alias pkr="sudo apk del "
-  elif grep -q void /etc/os-release; then
-    alias pki="sudo xbps-install "
-    alias pkls="xbps-query -f "
-    alias pkp="sudo xclocate "
-    alias pks="xbps-query -Rs "
-    alias pksh="xbps-query -RS "
-
-  elif grep -q opensuse /etc/os-release; then
-    alias zy="sudo zypper "
-
-    alias pki="sudo zypper install "
-    alias pkls="rpm -ql"
-    alias pkp="zypper search --provides --file-list "
-    alias pks="sudo zypper search "
-    alias pksh="zypper info "
-    alias pku="sudo zypper refresh && sudo zypper dist-upgrade"
-    alias pkr="sudo zypper remove --clean-deps "
-
-    export PATH="$PATH:/usr/sbin:/sbin"
-  else
-    echo "!! Unsupported Linux distribution"
-  fi
-
-  if [[ -d /run/WSL ]]; then
-    source ~/bin/wsl-ssh-relay
-    ~/bin/wsl-gpg-relay
-  fi
-  ;;
-"OpenBSD")
-  alias pki="sudo pkg_add -i -v "
-  alias pku="sudo pkg_add -u -v "
-  alias pkls="pkg_info -L "
-  ;;
-*)
-  echo "!! Unsupported OS: $(uname)"
-  ;;
-esac
+if [ -d /run/WSL ]; then
+  # shellcheck disable=SC1090
+  . ~/bin/wsl-ssh-relay
+  ~/bin/wsl-gpg-relay
+fi
 
 #
 # app specific
@@ -318,7 +203,7 @@ gitignore() {
 # gnome-keyring-daemon
 if command -v gnome-keyring-daemon &>/dev/null; then
   if [ -n "$DESKTOP_SESSION" ]; then
-    eval $(gnome-keyring-daemon --start --components=secrets,pkcs11)
+    eval "$(gnome-keyring-daemon --start --components=secrets,pkcs11)"
   fi
 fi
 

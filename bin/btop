@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
+# avoid a loop
 SCRIPT_PATH=$(dirname "$(realpath "$0")")
-
 PATH="$(echo "$PATH" | sed -e "s,$SCRIPT_PATH:,,")"
 export PATH
 
