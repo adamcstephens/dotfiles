@@ -70,7 +70,8 @@ if [[ -e $HOME/.asdf/asdf.sh ]]; then
   source "$HOME/.asdf/asdf.sh"
   source "$HOME/.asdf/completions/asdf.bash"
 
-  source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/bashrc"
+  ASDF_DIRENV="${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/bashrc"
+  [ -e $ASDF_DIRENV ] && source $ASDF_DIRENV
 fi
 
 # fzf
@@ -83,3 +84,5 @@ fi
 if command -v zoxide &>/dev/null; then
   eval "$(zoxide init bash --cmd j)"
 fi
+
+source $HOME/.dotfiles/iterm2.bash

@@ -150,3 +150,5 @@ fi
 
 # i don't care what happened above when the prompt starts
 true
+
+source $HOME/.dotfiles/iterm2.zsh
