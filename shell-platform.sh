@@ -7,22 +7,20 @@ case $(uname) in
     eval "$(/opt/homebrew/bin/brew shellenv)"
   fi
 
-  HOMEBREW_NO_AUTO_UPDATE=1
+  export HOMEBREW_NO_AUTO_UPDATE=1
   pki="HOMEBREW_NO_AUTO_UPDATE=0 brew install "
   pkls="brew list "
+  pkr="brew remove "
   pks="brew search "
   pksh="brew info "
   pku="brew update && brew upgrade"
-  pkr="brew remove "
-  flushdns='sudo killall -HUP mDNSResponder'
-  syu="brew services"
   ;;
 "FreeBSD")
   pki="sudo pkg install"
+  pkr="sudo pkg remove"
   pks="pkg search"
   pksh="pkg info"
   pku="sudo pkg upgrade"
-  pkr="sudo pkg remove"
   ;;
 "Linux")
   if [ -e /etc/arch-release ]; then
@@ -33,44 +31,45 @@ case $(uname) in
     else
       pkgcmd="sudo pacman"
     fi
+
     pki="$pkgcmd -S"
     pkls="$pkgcmd -Ql"
     pkp="pkgfile"
+    pkr="$pkgcmd -R --recursive"
     pks="$pkgcmd -Ss"
     pksh="$pkgcmd -Si"
     pku="$pkgcmd -Syu"
-    pkr="$pkgcmd -R --recursive"
   elif [ -e /etc/debian_version ]; then
     pki="sudo apt install"
     pkls="dpkg -L"
     pkp="apt-file search"
+    pkr="sudo apt purge --autoremove"
     pks="apt search"
     pksh="apt show"
     pku="sudo apt update && sudo apt --autoremove dist-upgrade"
-    pkr="sudo apt purge --autoremove"
   elif [ -e /etc/fedora-release ]; then
     pki="sudo dnf --color=auto install"
     pkls="rpm -ql"
     pkp="dnf --color=auto provides"
+    pkr="sudo dnf --color=auto remove"
     pks="dnf --color=auto search"
     pksh="dnf --color=auto info"
     pku="sudo dnf --color=auto update"
-    pkr="sudo dnf --color=auto remove"
   elif [ -e /etc/redhat-release ]; then
     pki="sudo yum --color=auto install"
     pkls="rpm -ql"
     pkp="yum --color=auto provides"
+    pkr="sudo yum --color=auto remove"
     pks="yum --color=auto search"
     pksh="yum --color=auto info"
     pku="sudo yum --color=auto update"
-    pkr="sudo yum --color=auto remove"
   elif [ -e /etc/alpine-release ]; then
     pki="sudo apk add "
-    pks="apk search "
     pkls="apk info -L "
+    pkr="sudo apk del "
+    pks="apk search "
     pksh="apk info "
     pku="sudo apk -U upgrade"
-    pkr="sudo apk del "
   elif grep -q void /etc/os-release; then
     pki="sudo xbps-install "
     pkls="xbps-query -f "
@@ -81,10 +80,10 @@ case $(uname) in
     pki="sudo zypper install "
     pkls="rpm -ql"
     pkp="zypper search --provides --file-list "
+    pkr="sudo zypper remove --clean-deps "
     pks="sudo zypper search "
     pksh="zypper info "
     pku="sudo zypper refresh && sudo zypper dist-upgrade"
-    pkr="sudo zypper remove --clean-deps "
   else
     echo "!! Unsupported Linux distribution"
   fi
@@ -99,8 +98,16 @@ case $(uname) in
   ;;
 esac
 
+export pki
+export pkls
+export pkp
+export pkr
+export pks
+export pksh
+export pku
+
 run() {
-  eval cmd='$'$1
+  eval cmd='$'"$1"
   shift 1
 
   if [ -z "$cmd" ]; then

@@ -1,4 +1,4 @@
-# shellcheck shell=bash
+# shellcheck shell=bash disable=SC1091
 
 if [[ -e ~/.terminfo/78/xterm-screen-256color ]]; then
   export TERM=xterm-screen-256color
@@ -32,9 +32,9 @@ alias esl="exec $SHELL -l"
 # custom terminal overrides
 if [[ "$TERM" == "xterm-screen-256color" ]]; then
   NEWTERM="xterm-256color"
-  alias lxc="TERM=$NEWTERM lxc"
-  alias multipass="TERM=$NEWTERM multipass"
-  alias ssh="TERM=$NEWTERM ssh"
+  alias lxc='TERM=$NEWTERM lxc'
+  alias multipass='TERM=$NEWTERM multipass'
+  alias ssh='TERM=$NEWTERM ssh'
   export TERMINFO=$HOME/.terminfo
 elif [[ "$TERM" == "xterm-kitty" ]]; then
   alias ssh="kitty +kitten ssh"
@@ -121,29 +121,15 @@ dsh() {
 }
 dcnet() {
   [[ -z $1 ]] && return 1
-  svc=$(docker-compose ps | grep $1 | awk '{print $1}')
+  svc=$(docker-compose ps | grep "$1" | awk '{print $1}')
   [[ -z $svc ]] && return 1
 
-  docker run -it --net container:$svc nicolaka/netshoot
+  docker run -it --net container:"$svc" nicolaka/netshoot
 }
 
 # emacs
 if [ -d ~/.emacs.d/bin ]; then
   export PATH="$PATH:$HOME/.emacs.d/bin"
-fi
-emacsclient() {
-  (
-    if [[ -e ~/.terminfo/78/xterm-emacs ]]; then
-      export TERM=xterm-emacs
-    else
-      export TERM=xterm-256color
-    fi
-    command emacsclient -t $@
-  )
-}
-alias em=emacsclient
-if command -p emacsclient &>/dev/null; then
-  alias vim=emacsclient
 fi
 
 # fd
@@ -152,7 +138,7 @@ if command -v fdfind &>/dev/null; then
 fi
 
 # git
-[[ -e ~/.dotfiles/git-subrepo/.rc ]] && source ~/.dotfiles/git-subrepo/.rc
+[[ -e "$HOME"/.dotfiles/git-subrepo/.rc ]] && source "$HOME"/.dotfiles/git-subrepo/.rc
 alias ga='git add'
 gac() {
   [ -z "$1" ] && echo "needs argument" && return 20
@@ -187,9 +173,7 @@ gt() {
 gitignore() {
   [ -z "$1" ] && echo "missing language to ignore" && return 1
 
-  wget --output-document=.gitignore.tmp "https://raw.githubusercontent.com/github/gitignore/master/$1.gitignore"
-
-  if [[ $? == 0 ]]; then
+  if wget --output-document=.gitignore.tmp "https://raw.githubusercontent.com/github/gitignore/master/$1.gitignore"; then
     if [ -e .gitignore ]; then
       cat .gitignore.tmp >>.gitignore
     else
@@ -213,8 +197,8 @@ if command -v gpgconf >/dev/null && [[ -n "$XDG_RUNTIME_DIR" && -d "$XDG_RUNTIME
 fi
 gpgfwd() {
   host=$1
-  scp ~/.gnupg/pubring.kbx $host:.gnupg/
-  scp ~/.gnupg/trustdb.gpg $host:.gnupg/
+  scp ~/.gnupg/pubring.kbx "$host":.gnupg/
+  scp ~/.gnupg/trustdb.gpg "$host":.gnupg/
 }
 
 # grep
@@ -241,17 +225,17 @@ if [ -e "${HOME}/.nix-profile/etc/profile.d/nix.sh" ]; then
   . "${HOME}/.nix-profile/etc/profile.d/nix.sh"
 fi
 if [ -e "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh" ]; then
-  . $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
+  . "$HOME"/.nix-profile/etc/profile.d/hm-session-vars.sh
 fi
 if [ -e "$HOME/.nix-defexpr/channels" ]; then
-  export NIX_PATH=$HOME/.nix-defexpr/channels${NIX_PATH:+:}$NIX_PATH
+  export NIX_PATH="$HOME/.nix-defexpr/channels${NIX_PATH:+:}$NIX_PATH"
 fi
 
 # python
-export PYTHONSTARTUP=$HOME/.dotfiles/pythonstartup.py
+export PYTHONSTARTUP="$HOME"/.dotfiles/pythonstartup.py
 
 # ripgrep
-export RIPGREP_CONFIG_PATH=$HOME/.config/ripgrep/ripgreprc
+export RIPGREP_CONFIG_PATH="$HOME"/.config/ripgrep/ripgreprc
 if command -v rg >/dev/null; then
   export FZF_DEFAULT_COMMAND='rg --files --hidden'
 fi
