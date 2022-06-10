@@ -56,9 +56,9 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 ;;; Add to ~/.doom.d/config.el
-(setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 13 :weight 'semi-light)
+(setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 14 :weight 'semi-light)
       doom-variable-pitch-font (font-spec :family "JetBrainsMono Nerd Font") ; inherits `doom-font''s :size
-      doom-unicode-font (font-spec :family "JetBrainsMono Nerd Font" :size 13)
+      doom-unicode-font (font-spec :family "JetBrainsMono Nerd Font" :size 14)
       doom-big-font (font-spec :family "JetBrainsMono Nerd Font" :size 19))
 
 (setq doom-modeline-icon nil)
@@ -249,7 +249,7 @@
 ;; force full ranger mode
 (after! ranger (setq ranger-override-dired 'ranger))
 
-(after! format-all (setq +format-on-save-enabled-modes '(not sgml-mode html-mode sql-mode tex-mode latex-mode org-msg-edit-mode)))
+(after! format-all (setq +format-on-save-enabled-modes '(not sgml-mode html-mode sql-mode tex-mode latex-mode org-msg-edit-mode yaml-mode)))
 
 (use-package! git-auto-commit-mode)
 (after! git-auto-commit-mode

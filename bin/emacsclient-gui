@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+
+HOSTNAME=$(hostname)
+
+emacsclient --create-frame --socket-name="$HOSTNAME" "$@"
