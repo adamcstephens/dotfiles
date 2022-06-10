@@ -2,8 +2,18 @@
 
 OLDTERM=$TERM
 
-if [ ! -e ~/.config/systemd/user/emacs.service ] && ! pgrep -i emacs >/dev/null 2>&1; then
-  emacs --bg-daemon
+if [ ! -e ~/.config/systemd/user/emacs.service ]; then
+  case $(uname -s) in
+    Darwin)
+      pgrep -i emacs >/dev/null 2>&1
+      rc=$?
+      ;;
+    *)
+      pgrep emacs >/dev/null 2>&1
+      rc=$?
+      ;;
+  esac
+  [ $rc -eq 0 ] || emacs --bg-daemon=$(hostname)
 fi
 
 if [ -e ~/.terminfo/x/xterm-emacs ] || [ -e ~/.terminfo/78/xterm-emacs ]; then
@@ -12,7 +22,7 @@ else
   export TERM=xterm-256color
 fi
 
-emacsclient -t "$@"
+emacsclient --tty --socket-name=$(hostname) "$@"
 
 # shellcheck disable=SC2086
 export TERM=$OLDTERM

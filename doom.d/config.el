@@ -282,7 +282,10 @@
 (defun get-string-from-file (filePath)
   "Return file content as string."
   (with-temp-buffer
-    (insert-file-contents filePath)
+    (if (file-exists-p filePath)
+        (insert-file-contents filePath)
+      ""
+      )
     (buffer-string)))
 
 (setq my-dark-mode-statefile (concat (getenv "HOME") "/.dotfiles/.dark-mode.state"))
@@ -293,6 +296,5 @@
       (load-theme my-doom-theme-light t) (load-theme my-doom-theme-dark t))
   )
 (add-to-list 'after-make-frame-functions 'toggle-dark)
-(file-notify-add-watch my-dark-mode-statefile '(change) 'toggle-dark)
+(if file-notify--library (file-notify-add-watch my-dark-mode-statefile '(change) 'toggle-dark))
 (toggle-dark)
-                                        ; (toggle-dark)
