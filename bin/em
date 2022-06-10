@@ -1,5 +1,10 @@
 #!/usr/bin/env sh
 
+if ! command -v emacsclient >/dev/null 2>&1; then
+  echo "No emacsclient, falling back to editor"
+  exec ~/.dotfiles/bin/editor $@
+fi
+
 OLDTERM=$TERM
 
 if [ ! -e ~/.config/systemd/user/emacs.service ]; then

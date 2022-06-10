@@ -13,6 +13,7 @@ if [ "$USER" != "root" ]; then
   elif command -v emacsclient >/dev/null 2>&1; then
     exec em $@
   fi
-else
-  exec vim $@
 fi
+
+# fallback to vim
+exec vim $@
