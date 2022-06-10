@@ -17,10 +17,6 @@
     - ~/projects
     - ~/tmp
 
-- git:
-    "~/.emacs.d":
-      url: https://github.com/hlissner/doom-emacs.git
-
 - link:
     ~/.aspell.en.pws: aspell.en.pws
     ~/.bash_profile: bash_profile
