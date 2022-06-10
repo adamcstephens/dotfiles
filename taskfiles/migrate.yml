@@ -7,6 +7,8 @@ tasks:
       - task: direnv
       - task: btop
       - task: vim-plug-delete
+      - task: dotbot-delete-asdf-plugin
+      - task: dotbot-delete-git-plugin
 
   asdf-direnv:
     cmds:
@@ -27,6 +29,18 @@ tasks:
       - rm -rf ~/.config/direnv
     status:
       - test -L ~/.config/direnv
+
+  dotbot-delete-asdf-plugin:
+    cmds:
+      - rm -rf ~/.dotfiles/dotbot-asdf
+    status:
+      - test ! -e ~/.dotfiles/dotbot-asdf
+
+  dotbot-delete-git-plugin:
+    cmds:
+      - rm -rf ~/.dotfiles/dotbot-git
+    status:
+      - test ! -e ~/.dotfiles/dotbot-git
 
   vim-plug-delete:
     cmds:
