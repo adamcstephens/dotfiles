@@ -7,12 +7,7 @@ DOTBOT_DIR="dotbot"
 DOTBOT_BIN="bin/dotbot"
 BASEDIR="${HOME}/.dotfiles"
 
-PLUGINS="-p dotbot-git/git.py"
-
-if [ -d $HOME/.asdf ]; then
-  PLUGINS="$PLUGINS -p dotbot-asdf/asdf.py"
-  . $HOME/.asdf/asdf.sh
-fi
+PLUGINS=""
 
 cd "${BASEDIR}"
 
