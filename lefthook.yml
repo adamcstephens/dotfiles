@@ -2,7 +2,7 @@
 post-checkout:
   commands:
     dotbot-changed:
-      glob: "install*yaml"
+      glob: "install.conf.yaml"
       run: "task migrate:all dotbot"
     aqua-changed:
       glob: "aqua/*.yaml"
@@ -14,7 +14,7 @@ post-checkout:
 post-merge:
   commands:
     dotbot-changed:
-      glob: "install*yaml"
+      glob: "install.conf.yaml"
       run: "task migrate:all dotbot"
     aqua-changed:
       glob: "aqua/*.yaml"
