@@ -51,6 +51,10 @@ tasks:
       - ./updater.sh -s
       - bash ./prefsCleaner.sh -s
 
+  firefox:update:
+    cmds:
+      - git subrepo pull --branch {{.VERSION}} firefox/arkenfox/
+
   git:setup:
     cmds:
       - git config -f ~/.gitconfig.local user.email {{.EMAIL}}
