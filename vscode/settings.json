@@ -151,6 +151,7 @@
     "editor.defaultFormatter": "bmalehorn.vscode-fish"
   },
   "[nix]": {
-    "editor.defaultFormatter": "brettm12345.nixfmt-vscode"
-  }
+    "editor.defaultFormatter": "jnoortheen.nix-ide"
+  },
+  "nix.enableLanguageServer": true
 }

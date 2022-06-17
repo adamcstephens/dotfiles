@@ -8,3 +8,4 @@ nimsaem.nimvscode
 JulienDuchesne.vscode-jsonnet
 GitHub.codespaces
 foxundermoon.shell-format
+bbenoist.Nix
