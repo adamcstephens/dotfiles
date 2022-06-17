@@ -1,18 +1,22 @@
 version: "3"
 
+vars:
+  RUNNER:
+    sh: command -v docker || command -v podman
+
 tasks:
   build:
     cmds:
       - earthly +build-image
     status:
-      - docker images | rg dotfiles-test
+      - "{{.RUNNER}} images | rg dotfiles-test"
 
   shell:
     cmds:
       - task: build
-      - docker run --rm -it dotfiles-test:latest fish
+      - "{{.RUNNER}} run --rm -it dotfiles-test:latest fish"
 
   shell:aarch64:
     cmds:
       - task: build
-      - docker run --rm -it --platform=linux/aarch64 dotfiles-test:latest_linux_arm64 fish
+      - "{{.RUNNER}} run --rm -it --platform=linux/aarch64 dotfiles-test:latest_linux_arm64 fish"
