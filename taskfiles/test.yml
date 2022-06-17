@@ -2,7 +2,7 @@ version: "3"
 
 vars:
   RUNNER:
-    sh: command -v docker || command -v podman
+    sh: "command -v docker || command -v podman || echo echo would run:"
 
 tasks:
   build:
