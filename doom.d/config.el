@@ -220,7 +220,8 @@
 
 (after! evil
   (setq evil-kill-on-visual-paste nil)
-  (setq evil-shift-width 2))
+  (setq evil-shift-width 2)
+  )
 
 ;; use emacs bindings in insert-mode so we can copy/paste
 ;; (setq evil-disable-insert-state-bindings t)
@@ -269,12 +270,12 @@
 
 (add-hook 'after-init-hook 'heaven-and-hell-init-hook)
 
-(use-package prettier
-  :hook ((typescript-mode . prettier-mode)
-         (js-mode . prettier-mode)
-         (json-mode . prettier-mode)
-         (yaml-mode . prettier-mode)
-         (ruby-mode . prettier-mode)))
+;; (use-package prettier
+;;   :hook ((typescript-mode . prettier-mode)
+;;          (js-mode . prettier-mode)
+;;          (json-mode . prettier-mode)
+;;          (yaml-mode . prettier-mode)
+;;          (ruby-mode . prettier-mode)))
 
 (after! telega
   (setq telega-server-libs-prefix "/usr"))

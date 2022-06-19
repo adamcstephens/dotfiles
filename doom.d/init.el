@@ -187,3 +187,6 @@
        :config
        ;;literate
        (default +bindings +smartparens))
+
+;; needs to run before evil is set up
+  (setq evil-toggle-key "C-`")
