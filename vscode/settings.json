@@ -90,6 +90,7 @@
     "cloud1": "linux",
     "compose1": "linux",
     "netdev3": "linux",
+    "nixos1": "linux",
     "alpine1": "linux"
   },
   "scm.defaultViewMode": "tree",
