@@ -7,16 +7,18 @@ fi
 
 OLDTERM=$TERM
 
+unset TMPDIR
+
 if [ ! -e ~/.config/systemd/user/emacs.service ]; then
   case $(uname -s) in
-    Darwin)
-      pgrep -i emacs >/dev/null 2>&1
-      rc=$?
-      ;;
-    *)
-      pgrep emacs >/dev/null 2>&1
-      rc=$?
-      ;;
+  Darwin)
+    pgrep -i emacs >/dev/null 2>&1
+    rc=$?
+    ;;
+  *)
+    pgrep emacs >/dev/null 2>&1
+    rc=$?
+    ;;
   esac
   [ $rc -eq 0 ] || emacs --bg-daemon=$(hostname)
 fi

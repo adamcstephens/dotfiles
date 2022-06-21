@@ -10,3 +10,4 @@
 .elixir_ls/
 .envrc
 result
+.direnv/
