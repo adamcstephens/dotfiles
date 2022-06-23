@@ -34,7 +34,7 @@ for code in code code-insiders; do
       done
 
       for e in $repo; do
-        if ! (echo "$installed" | grep "e" >/dev/null); then
+        if ! (echo "$installed" | grep "$e" >/dev/null); then
           $code --install-extension "$e"
         fi
       done
