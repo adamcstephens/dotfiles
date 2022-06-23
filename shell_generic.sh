@@ -9,6 +9,10 @@ fi
 export PATH=~/go/bin:~/.local/share/aquaproj-aqua/bin:~/.dotfiles/bin:~/bin:~/.local/bin:$PATH
 export AQUA_GLOBAL_CONFIG=~/.config/aquaproj-aqua/aqua.yaml
 
+if [ -x /opt/homebrew/bin/brew ]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
 alias thisweek='date +%Y-%W'
 
 export PAGER='less'

@@ -7,9 +7,15 @@ import platform
 import subprocess
 import sys
 
-state_file = os.getenv("HOME") + "/.dotfiles/.dark-mode.state"
+HOME = os.getenv("HOME")
+state_file = HOME + "/.dotfiles/.dark-mode.state"
+
+print(f"State file: {state_file}")
+
 
 def run(command):
+    print(f"Running: {command}")
+
     return subprocess.run(command.split(" "), capture_output=True).stdout.decode(
         "utf-8"
     )
@@ -32,10 +38,21 @@ def set_gtk_theme(target):
 
 
 def set_kitty_theme(target):
-    if target:
-        run("kitty @ set-colors --reset")
+    kitty_pid = run("pgrep -a kitty").strip()
+    tmpdir = os.getenv("TMPDIR")
+
+    cmd = f"kitty @ --to unix:{tmpdir}/kitty-{kitty_pid} set-colors --all --configured {HOME}/.config/kitty/"
+
+    if kitty_pid != "":
+        if target:
+            run(f"{cmd}theme-dark.conf")
+        else:
+            run(f"{cmd}theme-light.conf")
+
+        print("Applied kitty theme")
+
     else:
-        run("kitty @ set-colors --all --configured ~/.config/kitty/theme-light.conf")
+        print("Kitty not running")
 
 
 def set_sway_theme(target):
@@ -84,8 +101,10 @@ def set_state_data(target):
 
 
 def get_state_data():
+    current = json.loads(open(state_file).read())
+    print(f"Current state: {current}")
     try:
-        return json.loads(open(state_file).read())
+        return current
     except FileNotFoundError:
         return {}
 
@@ -95,14 +114,14 @@ def set_dark(target):
 
     os_name = platform.system()
 
-    set_kitty_theme(target)
-
     if os_name == "Linux":
         set_gtk_theme(target)
         set_sway_theme(target)
         set_waybar_theme(target)
     elif os_name == "Darwin":
         set_darwin_theme(target)
+
+    set_kitty_theme(target)
 
     set_state_data(target)
 

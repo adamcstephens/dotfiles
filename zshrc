@@ -115,13 +115,13 @@ autoload -z edit-command-line
 zle -N edit-command-line
 bindkey "^X^E" edit-command-line
 
+# shellcheck disable=SC1090
+[[ -e "$HOME/.shell_generic.sh" ]] && source "$HOME/.shell_generic.sh"
+
 # brew
 if type brew &>/dev/null; then
   FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
 fi
-
-# shellcheck disable=SC1090
-[[ -e "$HOME/.shell_generic.sh" ]] && source "$HOME/.shell_generic.sh"
 
 # prompt
 eval "$(starship init zsh)"

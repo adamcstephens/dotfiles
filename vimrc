@@ -145,8 +145,13 @@ let g:rooter_silent_chdir = 1
 syntax on
 filetype plugin indent on
 
+let darkstate = readfile(glob('~/.dotfiles/.dark-mode.state'))
 set termguicolors
-silent! colorscheme old-hope
+if darkstate[0] == "false"
+  silent! colorscheme default
+else
+  silent! colorscheme old-hope
+endif
 highlight Comment cterm=italic gui=italic
 
 set cursorline
