@@ -9,11 +9,14 @@ OLDTERM=$TERM
 
 unset TMPDIR
 
+socketname=$(hostname)
+
 if [ ! -e ~/.config/systemd/user/emacs.service ]; then
   case $(uname -s) in
   Darwin)
     pgrep -i emacs >/dev/null 2>&1
     rc=$?
+    socketname="server"
     ;;
   *)
     pgrep emacs >/dev/null 2>&1
@@ -29,7 +32,7 @@ else
   export TERM=xterm-256color
 fi
 
-emacsclient --tty --socket-name=$(hostname) "$@"
+emacsclient --tty --socket-name=$socketname "$@"
 
 # shellcheck disable=SC2086
 export TERM=$OLDTERM
