@@ -12,7 +12,6 @@ packages:
   - name: bootandy/dust@v0.8.1-alpha.2
   - name: caarlos0/fork-cleaner@v2.2.1
   - name: cli/cli@v2.12.1
-  - name: direnv/direnv@v2.31.0
   - name: evilmartians/lefthook@v1.0.1
   - name: go-task/task@v3.12.1
   - name: jesseduffield/lazygit@v0.34
