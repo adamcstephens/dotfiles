@@ -9,6 +9,7 @@ import sys
 
 HOME = os.getenv("HOME")
 state_file = HOME + "/.dotfiles/.dark-mode.state"
+os_name = platform.system()
 
 print(f"State file: {state_file}")
 
@@ -38,10 +39,15 @@ def set_gtk_theme(target):
 
 
 def set_kitty_theme(target):
-    kitty_pid = run("pgrep -a kitty").strip()
-    tmpdir = os.getenv("TMPDIR")
+    kitty_pid = run("pgrep kitty").strip()
 
-    cmd = f"kitty @ --to unix:{tmpdir}/kitty-{kitty_pid} set-colors --all --configured {HOME}/.config/kitty/"
+    if os_name == "Linux":
+      kitty_socket = f"unix:@kitty-{kitty_pid}"
+    elif os_name == "Darwin":
+      tmpdir = os.getenv("TMPDIR")
+      kitty_socket = f"unix:{tmpdir}/kitty-{kitty_pid}"
+
+    cmd = f"kitty @ --to {kitty_socket} set-colors --all --configured {HOME}/.config/kitty/"
 
     if kitty_pid != "":
         if target:
@@ -111,8 +117,6 @@ def get_state_data():
 
 def set_dark(target):
     print(f"setting dark mode to {target}")
-
-    os_name = platform.system()
 
     if os_name == "Linux":
         set_gtk_theme(target)
