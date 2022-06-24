@@ -10,7 +10,7 @@ riverctl map normal Mod4+Shift W spawn 'gtk-launch firefox'
 riverctl map normal Mod4+Shift V spawn 'gtk-launch code'
 riverctl map normal Mod4+Shift+Control E spawn 'gtk-launch emacsclient'
 riverctl map normal Mod4 D spawn 'wofi --show drun,run'
-riverctl map normal Mod4+Shift+Control D spawn 'dark-mode toggle'
+riverctl map normal Mod4+Shift+Control D spawn 'dark toggle'
 
 # bindsym print exec screenshot.sh window
 # bindsym $mod+print exec screenshot.sh screen
