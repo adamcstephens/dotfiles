@@ -9,6 +9,7 @@ tasks:
       - task: vim-plug-delete
       - task: dotbot-delete-asdf-plugin
       - task: dotbot-delete-git-plugin
+      - task: aqua-remove-bat
       - task: aqua-remove-direnv
 
   asdf-direnv:
@@ -18,6 +19,12 @@ tasks:
       - ~/.asdf/bin/asdf global direnv system
     status:
       - test ! -d ~/.asdf || ~/.asdf/bin/asdf list direnv 2>&1 | grep "No versions installed"
+
+  aqua-remove-bat:
+    cmds:
+      - rm ~/.local/share/aquaproj-aqua/bin/bat
+    status:
+      - test ! -e ~/.local/share/aquaproj-aqua/bin/bat
 
   aqua-remove-direnv:
     cmds:
