@@ -7,4 +7,4 @@ export QT_QPA_PLATFORMTHEME=gnome
 
 export DESKTOP_SESSION=sway
 
-river &> ~/.cache/river.log
+river &> ~/.cache/river.log-$(date +%Y%m%d%H%M)

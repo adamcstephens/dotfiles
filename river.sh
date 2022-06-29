@@ -129,8 +129,8 @@ for mode in normal locked; do
   riverctl map $mode None XF86Eject spawn 'eject -T'
 
   # Control pulse audio volume with pamixer (https://github.com/cdemoulins/pamixer)
-  riverctl map $mode None XF86AudioRaiseVolume spawn "amixer -D pipewire sset Master 3%+ | grep 'Front Left:' | awk '{print \$5}' | sed -r 's/(\[|\]|%)//g' >> $XDG_RUNTIME_DIR/wob.fifo"
-  riverctl map $mode None XF86AudioLowerVolume spawn "amixer -D pipewire sset Master 3%- | grep 'Front Left:' | awk '{print \$5}' | sed -r 's/(\[|\]|%)//g' >> $XDG_RUNTIME_DIR/wob.fifo"
+  riverctl map $mode None XF86AudioRaiseVolume spawn "amixer -D pipewire sset Master 3%+ | grep 'Front Left:' | awk '{print \$5}' | sed -r 's/(\[|\]|%)//g' >> $XDG_RUNTIME_DIR/wob.sock"
+  riverctl map $mode None XF86AudioLowerVolume spawn "amixer -D pipewire sset Master 3%- | grep 'Front Left:' | awk '{print \$5}' | sed -r 's/(\[|\]|%)//g' >> $XDG_RUNTIME_DIR/wob.sock"
   riverctl map $mode None XF86AudioMute spawn "amixer -D pipewire sset Master toggle"
 
   # Control MPRIS aware media players with playerctl (https://github.com/altdesktop/playerctl)
@@ -140,8 +140,8 @@ for mode in normal locked; do
   riverctl map $mode None XF86AudioNext spawn 'playerctl next'
 
   # Control screen backlight brighness with light (https://github.com/haikarainen/light)
-  riverctl map $mode None XF86MonBrightnessDown spawn 'brightnessctl -q set 5%- && ( echo $((`brightnessctl get` * 100 / `brightnessctl m`)) > $XDG_RUNTIME_DIR/wob.fifo )'
-  riverctl map $mode None XF86MonBrightnessUp spawn 'brightnessctl -q set +5% && ( echo $((`brightnessctl get` * 100 / `brightnessctl m`)) > $XDG_RUNTIME_DIR/wob.fifo )'
+  riverctl map $mode None XF86MonBrightnessDown spawn 'brightnessctl -q set 5%- && ( echo $((`brightnessctl get` * 100 / `brightnessctl m`)) > $XDG_RUNTIME_DIR/wob.sock )'
+  riverctl map $mode None XF86MonBrightnessUp spawn 'brightnessctl -q set +5% && ( echo $((`brightnessctl get` * 100 / `brightnessctl m`)) > $XDG_RUNTIME_DIR/wob.sock )'
   #riverctl map $mode None XF86MonBrightnessUp   spawn 'light -A 5'
   #riverctl map $mode None XF86MonBrightnessDown spawn 'light -U 5'
 done
@@ -165,7 +165,7 @@ riverctl input pointer-1739-52619-SYNA8004:00_06CB:CD8B_Touchpad natural-scroll 
 riverctl input pointer-1739-52619-SYNA8004:00_06CB:CD8B_Touchpad tap-button-map left-right-middle
 riverctl input pointer-1739:52619:SYNA8004:00_06CB:CD8B_Touchpad middle-emulation disabled
 
-riverctl focus-follows-cursor normal
+riverctl focus-follows-cursor always
 
 # systemd
 
