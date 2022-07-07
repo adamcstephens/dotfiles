@@ -1,5 +1,12 @@
 # windows
 
+## bootstrap
+
+```
+winget install Git.Git
+# add C:\Program Files\Git\usr\bin to path
+```
+
 ## group policies
 
 Computer Configuration > Administrative Templates > Windows Components

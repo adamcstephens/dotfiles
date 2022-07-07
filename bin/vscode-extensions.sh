@@ -28,14 +28,16 @@ for code in code code-insiders; do
       uninstall="$(cat "$UNINSTALL_FILE")"
 
       for u in $uninstall; do
-        if echo "$installed" | grep "$u" >/dev/null; then
-          $code --uninstall-extension "$u"
+        ext=$(echo $u | sed -r 's/\s+//g')
+        if echo "$installed" | grep "$ext" >/dev/null; then
+          $code --uninstall-extension "$ext"
         fi
       done
 
       for e in $repo; do
-        if ! (echo "$installed" | grep "$e" >/dev/null); then
-          $code --install-extension "$e"
+        ext=$(echo $e | sed -r 's/\s+//g')
+        if ! (echo "$installed" | grep "$ext" >/dev/null); then
+          $code --install-extension "$ext"
         fi
       done
 

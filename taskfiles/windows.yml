@@ -1,0 +1,41 @@
+version: "3"
+
+tasks:
+  fonts:
+    dir: ~/.dotfiles/fonts
+    cmds:
+      - powershell -file .\\install-windows.ps1
+
+  git:
+    cmds:
+      - gsudo powershell -Command '& {New-Item -ItemType SymbolicLink -Path "$HOME\.gitconfig" -Target "$HOME\.dotfiles\gitconfig"}'
+
+  powershell:
+    cmds:
+      - mkdir -p ~/Documents/WindowsPowerShell
+      - gsudo powershell -Command '& {New-Item -ItemType SymbolicLink -Path "$HOME\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1" -Target "$HOME\.dotfiles\PowerShell_profile.ps1"}'
+
+  terminal:backup:
+    cmds:
+      - cp /mnt/c/Users/adam/AppData/Local/Packages/Microsoft.WindowsTerminalPreview_*/LocalState/settings.json ./windowsterminal-settings.json
+      - chmod 644 windowsterminal-settings.json
+
+  vscode:extensions:
+    cmds:
+      - sh ~/.dotfiles/bin/vscode-extensions.sh
+
+  vscode:settings:
+    cmds:
+      - |
+        gsudo powershell -Command '& {
+          New-Item -ItemType SymbolicLink -Path "$HOME\AppData\Roaming\Code\User\keybindings.json" -Target "$HOME\.dotfiles\vscode\keybindings.json"
+          New-Item -ItemType SymbolicLink -Path "$HOME\AppData\Roaming\Code\User\settings.json" -Target "$HOME\.dotfiles\vscode\settings.json"
+        }'
+
+  winget:export:
+    cmds:
+      - powershell -Command '& {~/AppData/Local/Microsoft/WindowsApps/winget.exe export winget.json}'
+
+  winget:import:
+    cmds:
+      - powershell -Command '& {~/AppData/Local/Microsoft/WindowsApps/winget.exe import winget.json}'
