@@ -55,6 +55,10 @@ tasks:
       - mv ~/.config/mimeapps.list .
       - task: dotbot
 
+  ssh:keygen:
+    cmds:
+      - ssh-keygen -t ed25519
+
   test:
     cmds:
       - task: test:build
