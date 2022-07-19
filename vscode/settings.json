@@ -91,7 +91,8 @@
     "compose1": "linux",
     "netdev3": "linux",
     "nixos1": "linux",
-    "alpine1": "linux"
+    "alpine1": "linux",
+    "frank": "linux"
   },
   "scm.defaultViewMode": "tree",
   "search.useGlobalIgnoreFiles": true,
