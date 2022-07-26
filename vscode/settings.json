@@ -83,7 +83,14 @@
   "python.languageServer": "Pylance",
   "python.venvPath": "~/.local/share/virtualenvs",
   "redhat.telemetry.enabled": false,
-  "remote.SSH.defaultExtensions": ["esbenp.prettier-vscode"],
+  "remote.SSH.defaultExtensions": [
+    "esbenp.prettier-vscode",
+    "jnoortheen.nix-ide",
+    "mkhl.direnv",
+    "mkhl.shfmt",
+    "redhat.vscode-yaml",
+    "timonwong.shellcheck"
+  ],
   "remote.SSH.lockfilesInTmp": true,
   "remote.SSH.remotePlatform": {
     "arch1": "linux",
@@ -92,7 +99,8 @@
     "netdev3": "linux",
     "nixos1": "linux",
     "alpine1": "linux",
-    "frank": "linux"
+    "frank": "linux",
+    "tank": "linux"
   },
   "scm.defaultViewMode": "tree",
   "search.useGlobalIgnoreFiles": true,
@@ -155,5 +163,7 @@
   "[nix]": {
     "editor.defaultFormatter": "jnoortheen.nix-ide"
   },
-  "nix.enableLanguageServer": true
+  "nix.enableLanguageServer": true,
+  "window.commandCenter": true,
+  "git.mergeEditor": true
 }

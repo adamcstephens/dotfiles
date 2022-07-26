@@ -8,12 +8,39 @@ tasks:
 
   git:
     cmds:
-      - gsudo powershell -Command '& {New-Item -ItemType SymbolicLink -Path "$HOME\.gitconfig" -Target "$HOME\.dotfiles\gitconfig"}'
+      - task: lib:symlink
+        vars:
+          DST: 'C:\Users\adam\.gitconfig'
+          SRC: 'C:\Users\adam\.dotfiles\gitconfig'
+
+  node-exporter:
+    cmds:
+      - |
+        gsudo powershell -Command '& {
+          New-NetFirewallRule -DisplayName 'windows_exporter' -Profile 'Private' -Direction Inbound -Action Allow -Protocol TCP -LocalPort 6624
+        }'
+
+  lib:symlink:
+    cmds:
+      - "mkdir -p '{{.PARENT}}'"
+      - gsudo powershell -Command '& {New-Item -ItemType SymbolicLink -Path {{.DST}} -Target {{.SRC}}}'
+    status:
+      - "test -d '{{.PARENT}}'"
+      - "test -e '{{.DST}}'"
+    vars:
+      PARENT:
+        sh: "dirname '{{.DST}}'"
 
   powershell:
     cmds:
-      - mkdir -p ~/Documents/WindowsPowerShell
-      - gsudo powershell -Command '& {New-Item -ItemType SymbolicLink -Path "$HOME\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1" -Target "$HOME\.dotfiles\PowerShell_profile.ps1"}'
+      - task: lib:symlink
+        vars:
+          DST: 'C:\Users\adam\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1'
+          SRC: 'C:\Users\adam\.dotfiles\PowerShell_profile.ps1'
+      - task: lib:symlink
+        vars:
+          DST: 'C:\Users\adam\Documents\PowerShell\Microsoft.PowerShell_profile.ps1'
+          SRC: 'C:\Users\adam\.dotfiles\PowerShell_profile.ps1'
 
   ssh:
     cmds:
@@ -34,11 +61,14 @@ tasks:
 
   vscode:settings:
     cmds:
-      - |
-        gsudo powershell -Command '& {
-          New-Item -ItemType SymbolicLink -Path "$HOME\AppData\Roaming\Code\User\keybindings.json" -Target "$HOME\.dotfiles\vscode\keybindings.json"
-          New-Item -ItemType SymbolicLink -Path "$HOME\AppData\Roaming\Code\User\settings.json" -Target "$HOME\.dotfiles\vscode\settings.json"
-        }'
+      - task: lib:symlink
+        vars:
+          DST: 'C:\Users\adam\AppData\Roaming\Code\User\keybindings.json'
+          SRC: 'C:\Users\adam\.dotfiles\vscode\keybindings.json'
+      - task: lib:symlink
+        vars:
+          DST: 'C:\Users\adam\AppData\Roaming\Code\User\settings.json'
+          SRC: 'C:\Users\adam\.dotfiles\vscode\settings.json'
 
   winget:export:
     cmds:
