@@ -94,6 +94,7 @@
   "remote.SSH.lockfilesInTmp": true,
   "remote.SSH.remotePlatform": {
     "arch1": "linux",
+    "blank": "linux",
     "cloud1": "linux",
     "compose1": "linux",
     "netdev3": "linux",
