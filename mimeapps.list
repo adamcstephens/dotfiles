@@ -1,29 +1,14 @@
 [Default Applications]
-application/vnd.openxmlformats-officedocument.wordprocessingml.document=libreoffice-writer.desktop
+x-scheme-handler/tg=userapp-Telegram Desktop-U07HL1.desktop
 text/html=firefox.desktop
 x-scheme-handler/http=firefox.desktop
 x-scheme-handler/https=firefox.desktop
 x-scheme-handler/about=firefox.desktop
 x-scheme-handler/unknown=firefox.desktop
-video/quicktime=mpv.desktop
-video/mp4=mpv.desktop
-x-scheme-handler/ame=Cider.desktop
-Cider.desktop
-x-scheme-handler/cider=Cider.desktop
-Cider.desktop
-x-scheme-handler/itms=Cider.desktop
-Cider.desktop
-x-scheme-handler/itmss=Cider.desktop
-Cider.desktop
-x-scheme-handler/musics=Cider.desktop
-Cider.desktop
-x-scheme-handler/music=Cider.desktop
-Cider.desktop
-x-scheme-handler/discord-911790844204437504=Cider.desktop
-x-scheme-handler/tg=userapp-Telegram Desktop-5QKJJ1.desktop
+image/jpeg=imv-folder.desktop
+image/png=imv-folder.desktop
 
 [Added Associations]
-application/vnd.openxmlformats-officedocument.wordprocessingml.document=libreoffice-writer.desktop;
-video/quicktime=mpv.desktop;
-video/mp4=mpv.desktop;
-x-scheme-handler/tg=userapp-Telegram Desktop-5QKJJ1.desktop;
+x-scheme-handler/tg=userapp-Telegram Desktop-U07HL1.desktop;
+image/jpeg=imv-folder.desktop;
+image/png=imv-folder.desktop;
