@@ -1,0 +1,10 @@
+[Unit]
+PartOf=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/yambar
+
+[Install]
+WantedBy=sway-session.target
+WantedBy=river-session.target

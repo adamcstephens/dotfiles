@@ -36,18 +36,20 @@
     ~/.config/systemd/user/sway-session.target: sway-session.target
     ~/.config/systemd/user/swayidle.service: swayidle.service
     ~/.config/systemd/user/waybar.service: waybar.service
+    ~/.config/systemd/user/yambar.service: yambar.service
     ~/.config/waybar/config: waybar.jsonc
     ~/.config/waybar/style.css: waybar.css
     ~/.config/waylock/waylock.toml: waylock.toml
     ~/.config/wofi/config: wofi.conf
     ~/.config/wofi/style.css: wofi.css
+    ~/.config/yambar/config.yml: yambar.yaml
     ~/.local/share/applications: applications
     ~/.local/share/fonts: fonts
 
 - shell:
     - [systemctl --user daemon-reload]
     - [
-        systemctl --user enable --now dunst emacs gammastep gpg-agent gpg-agent.socket gpg-agent-extra.socket kanshi pipewire pipewire-pulse polkit-gnome-authentication-agent-1 ssh-agent swayidle waybar wob wob.socket,
+        systemctl --user enable --now dunst emacs gammastep gpg-agent gpg-agent.socket gpg-agent-extra.socket kanshi pipewire pipewire-pulse polkit-gnome-authentication-agent-1 ssh-agent swayidle yambar wob wob.socket,
       ]
     - [systemctl --user enable --now syncthing]
     - [systemctl --user mask gammastep-indicator]

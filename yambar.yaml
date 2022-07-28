@@ -1,0 +1,40 @@
+bar:
+  height: 64
+  spacing: 5
+  margin: 15
+  location: top
+  background: 1c1d21ff
+  foreground: 78bd65ff
+  font: JetBrainsMono Nerd Font:pixelsize=40
+
+
+  right:
+    - network:
+        name: wlan0
+        content:
+          map:
+            default:
+              string:
+                text: 
+                foreground: ffffff66
+                on-click: nm-connection-editor
+            conditions:
+              state == down:
+                string:
+                  text: 
+                  foreground: ff0000ff
+                  on-click: nm-connection-editor
+              state == up:
+                - string:
+                    text: 
+                    right-margin: 40
+                    on-click: nm-connection-editor
+                - string:
+                    text: "{ssid}"
+                    right-margin: 20
+                    on-click: nm-connection-editor
+    - clock:
+        content:
+          - string: {text: "{date}", right-margin: 20}
+          - string: {text: , right-margin: 20}
+          - string: {text: "{time}", right-margin: 20}
