@@ -145,9 +145,17 @@ let g:rooter_silent_chdir = 1
 syntax on
 filetype plugin indent on
 
-let darkstate = readfile(glob('~/.dotfiles/.dark-mode.state'))
+let darkstate = 0
+let darkstatefile = glob('~/.dotfiles/.dark-mode.state')
+if filereadable(expand(darkstatefile))
+  let darkstatefilestate = readfile(darkstatefile)
+
+  if darkstatefilestate[0] == "false"
+    let darkstate = 1
+  endif
+endif
 set termguicolors
-if darkstate[0] == "false"
+if darkstate != 0
   silent! colorscheme default
 else
   silent! colorscheme old-hope
