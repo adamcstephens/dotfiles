@@ -7,8 +7,106 @@ bar:
   foreground: 78bd65ff
   font: JetBrainsMono Nerd Font:pixelsize=40
 
+  left:
+    - river:
+        anchors:
+          - base: &river_base
+              left-margin: 10
+              right-margin: 13
+              default: { string: { text: , right-margin: 40 } }
+              conditions:
+                id == 1: { string: { text: ﳐ, right-margin: 40 } }
+                id == 2: { string: { text: , right-margin: 40 } }
+                id == 3: { string: { text: , right-margin: 40 } }
+                id == 4: { string: { text: , right-margin: 40 } }
+                id == 5: { string: { text: , right-margin: 40 } }
+                id == 10: { string: { text: "scratchpad", right-margin: 40 } }
+                id == 11: { string: { text: "work", right-margin: 40 } }
 
+        content:
+          map:
+            on-click:
+              left: sh -c "riverctl set-focused-tags $((1 << ({id} - 1)))"
+              right: sh -c "riverctl toggle-focused-tags $((1 << ({id} -1)))"
+              middle: sh -c "riverctl toggle-view-tags $((1 << ({id} -1)))"
+            conditions:
+              state == urgent:
+                map:
+                  <<: *river_base
+                  deco: { background: { color: D08770ff } }
+              state == focused:
+                map:
+                  <<: *river_base
+              state == visible:
+                map:
+                  conditions:
+                    ~occupied: { map: { <<: *river_base } }
+                    occupied: { map: { <<: *river_base } }
+              state == unfocused:
+                map:
+                  <<: *river_base
+              state == invisible:
+                map:
+                  conditions:
+                    ~occupied: { empty: {} }
+                    occupied:
+                      {
+                        map:
+                          {
+                            <<: *river_base,
+                            deco: { underline: { size: 3, color: ea6962ff } },
+                          },
+                      }
   right:
+    - battery:
+        name: BAT0
+        poll-interval: 30
+        anchors:
+          discharging: &discharging
+            list:
+              items:
+                - ramp:
+                    tag: capacity
+                    items:
+                      - string: { text: , right-margin: 40 }
+                      - string: { text: , right-margin: 40 }
+                      - string: { text: , right-margin: 40 }
+                      - string: { text: , right-margin: 40 }
+                      - string: { text: , right-margin: 40 }
+                      - string: { text: , right-margin: 40 }
+                      - string: { text: , right-margin: 40 }
+                      - string: { text: , right-margin: 40 }
+                      - string: { text: , right-margin: 40 }
+                      - string: { text: , right-margin: 40 }
+                - string: { text: "{capacity}% {estimate}", right-margin: 40 }
+        content:
+          map:
+            conditions:
+              state == unknown:
+                <<: *discharging
+              state == discharging:
+                <<: *discharging
+              state == charging:
+                - string: { text: , right-margin: 40 }
+                - string: { text: "{capacity}% {estimate}", right-margin: 40 }
+              state == full:
+                - string: { text: , right-margin: 40 }
+                - string: { text: "{capacity}% full", right-margin: 40 }
+              state == not charging:
+                - ramp:
+                    tag: capacity
+                    items:
+                      - string: { text:  , right-margin: 40 }
+                      - string: { text:  , right-margin: 40 }
+                      - string: { text:  , right-margin: 40 }
+                      - string: { text:  , right-margin: 40 }
+                      - string: { text:  , right-margin: 40 }
+                      - string: { text:  , right-margin: 40 }
+                      - string: { text:  , right-margin: 40 }
+                      - string: { text:  , right-margin: 40 }
+                      - string: { text:  , right-margin: 40 }
+                      - string: { text:  , right-margin: 40 }
+                - string: { text: "{capacity}%", right-margin: 40 }
     - network:
         name: wlan0
         content:
@@ -35,6 +133,6 @@ bar:
                     on-click: nm-connection-editor
     - clock:
         content:
-          - string: {text: "{date}", right-margin: 20}
-          - string: {text: , right-margin: 20}
-          - string: {text: "{time}", right-margin: 20}
+          - string: { text: "{date}", right-margin: 20 }
+          - string: { text: , right-margin: 20 }
+          - string: { text: "{time}", right-margin: 20 }
