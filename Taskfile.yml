@@ -65,7 +65,7 @@ tasks:
 
   vscode:
     cmds:
-      - vscode-extensions.sh
+      - sh ~/.dotfiles/bin/vscode-extensions.sh
 
   zsh-prof:
     cmds:

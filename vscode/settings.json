@@ -166,5 +166,8 @@
   },
   "nix.enableLanguageServer": true,
   "window.commandCenter": true,
-  "git.mergeEditor": true
+  "git.mergeEditor": true,
+  "[powershell]": {
+    "editor.defaultFormatter": "ms-vscode.powershell"
+  }
 }

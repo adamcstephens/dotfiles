@@ -23,6 +23,7 @@ ms-toolsai.jupyter-keymap
 ms-toolsai.jupyter-renderers
 ms-vscode-remote.remote-ssh
 ms-vscode-remote.remote-ssh-edit
+ms-vscode.powershell
 naumovs.color-highlight
 redhat.ansible
 redhat.vscode-yaml
