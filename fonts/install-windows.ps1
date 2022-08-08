@@ -8,5 +8,7 @@ foreach ($file in gci *.ttf)
         dir $file | %{ $fonts.CopyHere($_.fullname) }
     }
 }
+
+echo $null > ~/.dotfiles/fonts/.installed
 # adds idempotency, but requires elevation
 # cp *.ttf c:\windows\fonts\

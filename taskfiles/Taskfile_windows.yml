@@ -7,9 +7,9 @@ tasks:
     cmds:
       - test -n "{{ .FIREFOX_PROFILE }}"
       - test -d "{{ .FIREFOX_PROFILE }}"
-      - xcopy /Y "{{.USERPROFILE}}\Documents\dotfiles\firefox\arkenfox\prefsCleaner.bat" "{{ .FIREFOX_PROFILE }}"
-      - xcopy /Y "{{.USERPROFILE}}\Documents\dotfiles\firefox\arkenfox\updater.bat" "{{ .FIREFOX_PROFILE }}"
-      - xcopy /Y "{{.USERPROFILE}}\Documents\dotfiles\firefox\arkenfox\user.js" "{{ .FIREFOX_PROFILE }}"
-      - xcopy /Y "{{.USERPROFILE}}\Documents\dotfiles\firefox\user-overrides.js" "{{ .FIREFOX_PROFILE }}"
+      - xcopy /Y "{{.USERPROFILE}}\.dotfiles\firefox\arkenfox\prefsCleaner.bat" "{{ .FIREFOX_PROFILE }}"
+      - xcopy /Y "{{.USERPROFILE}}\.dotfiles\firefox\arkenfox\updater.bat" "{{ .FIREFOX_PROFILE }}"
+      - xcopy /Y "{{.USERPROFILE}}\.dotfiles\firefox\arkenfox\user.js" "{{ .FIREFOX_PROFILE }}"
+      - xcopy /Y "{{.USERPROFILE}}\.dotfiles\firefox\user-overrides.js" "{{ .FIREFOX_PROFILE }}"
       - .\\updater.bat -unattended
       - .\\prefsCleaner.bat -unattended

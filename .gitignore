@@ -5,3 +5,4 @@ applications/appimagekit*desktop
 fish/fish_variables
 /.*.state
 doom-emacs/.local
+.installed

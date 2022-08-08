@@ -1,10 +1,23 @@
 version: "3"
 
 tasks:
+  bootstrap:
+    - powershell
+    - fonts
+    - git
+    - ssh
+    - vscode:settings
+
+  debloat:
+    cmds:
+      - powershell -Command '& {iwr -useb https://simeononsecurity.ch/scripts/windowsoptimizeanddebloat.ps1| iex}'
+
   fonts:
     dir: ~/.dotfiles/fonts
     cmds:
       - powershell -file .\\install-windows.ps1
+    status:
+      - "test -e ~/.dotfiles/fonts/.installed"
 
   git:
     cmds:
@@ -49,6 +62,9 @@ tasks:
           Get-Service -Name ssh-agent | Set-Service -StartupType Automatic
           Start-Service ssh-agent
         }'
+      - touch $LOCALAPPDATA/.dotfiles-ssh-agent
+    status:
+      - 'test -e "$LOCALAPPDATA/.dotfiles-ssh-agent"'
 
   terminal:backup:
     cmds:
@@ -72,15 +88,15 @@ tasks:
 
   winget:export:
     cmds:
-      - powershell -Command '& {~/AppData/Local/Microsoft/WindowsApps/winget.exe export winget.json}'
+      - powershell -Command '& {~/AppData/Local/Microsoft/WindowsApps/winget.exe export --source winget --output winget.json}'
 
   winget:import:
     cmds:
       - powershell -Command '& {~/AppData/Local/Microsoft/WindowsApps/winget.exe import winget.json}'
 
-  wsl:bootstrap:
+  wsl:
     cmds:
-      - wsl --install
+      - gsudo wsl --install
       # - gsudo dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
       # - gsudo dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
       # - wsl_update_x64.msi
