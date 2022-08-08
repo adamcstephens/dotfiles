@@ -1,6 +1,6 @@
 {
 	"$schema" : "https://aka.ms/winget-packages.schema.2.0.json",
-	"CreationDate" : "2022-08-07T18:06:18.338-00:00",
+	"CreationDate" : "2022-08-07T18:16:42.425-00:00",
 	"Sources" : 
 	[
 		{
@@ -11,6 +11,9 @@
 				},
 				{
 					"PackageIdentifier" : "Canonical.Ubuntu"
+				},
+				{
+					"PackageIdentifier" : "Discord.Discord"
 				},
 				{
 					"PackageIdentifier" : "Git.Git"
