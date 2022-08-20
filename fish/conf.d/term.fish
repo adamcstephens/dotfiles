@@ -8,7 +8,7 @@ if status is-interactive
     # custom terminal overrides
     if [ $TERM = xterm-screen-256color ]
         set -l NEWTERM xterm-256color
-        for app in lxc multipass ssh
+        for app in gcloud lxc multipass ssh
             if command -v $app >/dev/null
                 alias $app="TERM=$NEWTERM command $app"
             end

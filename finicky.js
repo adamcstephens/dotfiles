@@ -72,13 +72,15 @@ module.exports = {
       match: /^https?:\/\/teams\.microsoft\.com\/l\/meetup\-join\/.*$/,
       browser: "Microsoft Edge",
     },
-    {
-      match: /reddit.com/,
-      browser: "Firefox",
-    },
-    {
-      match: /twitter.com/,
-      browser: "Firefox",
-    },
-  ],
+  ].concat(
+    [
+      /github.com/,
+      /reddit.com/,
+      /twitter.com/,
+      /youtube.com/,
+      /steampowered.com/,
+    ].map((x) => {
+      return { match: x, browser: "Firefox" };
+    })
+  ),
 };
