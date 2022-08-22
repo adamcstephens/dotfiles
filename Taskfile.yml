@@ -42,6 +42,13 @@ tasks:
     cmds:
       - ./bin/dotbot
 
+  emacs:doom:
+    cmds:
+      - git clone https://github.com/doomemacs/doomemacs ~/.emacs.d
+      - doom sync
+    status:
+      - test -d ~/.emacs.d
+
   git:setup:
     cmds:
       - git config -f ~/.gitconfig.local user.email {{.EMAIL}}
