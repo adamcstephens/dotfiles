@@ -86,3 +86,7 @@ if command -v zoxide &>/dev/null; then
 fi
 
 source $HOME/.dotfiles/iterm2.bash
+
+if [ -f "/google/devshell/bashrc.google" ]; then
+  source "/google/devshell/bashrc.google"
+fi
