@@ -169,5 +169,6 @@
   "git.mergeEditor": true,
   "[powershell]": {
     "editor.defaultFormatter": "ms-vscode.powershell"
-  }
+  },
+  "gitlens.codeLens.enabled": false
 }
