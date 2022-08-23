@@ -46,8 +46,15 @@ tasks:
     cmds:
       - git clone https://github.com/doomemacs/doomemacs ~/.emacs.d
       - doom sync
+      - task: emacs:doom:env
     status:
       - test -d ~/.emacs.d
+
+  emacs:doom:env:
+    cmds:
+      - doom env
+    status:
+      - test -f ~/.emacs.d/.local/env
 
   git:setup:
     cmds:

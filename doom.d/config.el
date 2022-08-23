@@ -65,19 +65,6 @@
 
 (setq doom-localleader-key ",")
 
-(defun set-exec-path-from-shell-PATH ()
-  "Set up Emacs' `exec-path' and PATH environment variable to match that used by the user's shell.
-
-  This is particularly useful under Mac OSX, where GUI apps are not started from a shell."
-  (interactive)
-  (setq path-separator " ")
-  (let ((path-from-shell (replace-regexp-in-string "[ \t\n]*$" "" (shell-command-to-string "fish --login -i -c 'echo $PATH' 2>/dev/null"))))
-    (setenv "PATH" path-from-shell)
-    (setq exec-path (split-string path-from-shell path-separator))))
-
-(cond (IS-MAC
-       (set-exec-path-from-shell-PATH)))
-
 ;; disable completion of words in org mode
 (defun zz/adjust-org-company-backends ()
   (remove-hook 'after-change-major-mode-hook '+company-init-backends-h)
