@@ -8,9 +8,9 @@ tap "homebrew/cask-versions"
 tap "homebrew/core"
 tap "homebrew/services"
 brew "aspell"
+brew "glib"
 brew "xz"
 brew "python@3.9"
-brew "glib"
 brew "bash"
 brew "bat"
 brew "pkg-config"
@@ -71,6 +71,7 @@ brew "d12frosted/emacs-plus/emacs-plus@28", args: ["with-native-comp"]
 cask "bettertouchtool"
 cask "bluesnooze"
 cask "brave-browser"
+cask "cameracontroller"
 cask "discord"
 cask "finicky"
 cask "firefox"
@@ -92,14 +93,11 @@ cask "telegram"
 cask "visual-studio-code"
 cask "xquartz"
 cask "yubico-yubikey-manager"
-mas "1Password 7", id: 1333542190
 mas "GarageBand", id: 682658836
 mas "Keynote", id: 409183694
 mas "Microsoft Remote Desktop", id: 1295203466
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
 mas "Parcel", id: 639968404
-mas "Tailscale", id: 1475387142
-mas "Webcam Settings", id: 533696630
 mas "WireGuard", id: 1451685025
 mas "Xcode", id: 497799835
