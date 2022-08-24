@@ -99,6 +99,7 @@
     "compose1": "linux",
     "netdev3": "linux",
     "nixos1": "linux",
+    "nixos2": "linux",
     "alpine1": "linux",
     "frank": "linux",
     "tank": "linux"
@@ -164,11 +165,11 @@
   "[nix]": {
     "editor.defaultFormatter": "jnoortheen.nix-ide"
   },
-  "nix.enableLanguageServer": true,
   "window.commandCenter": true,
   "git.mergeEditor": true,
   "[powershell]": {
     "editor.defaultFormatter": "ms-vscode.powershell"
   },
-  "gitlens.codeLens.enabled": false
+  "gitlens.codeLens.enabled": false,
+  "nix.formatterPath": "alejandra"
 }

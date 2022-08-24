@@ -1,11 +1,11 @@
 bar:
-  height: 64
+  height: 40
   spacing: 5
   margin: 15
   location: top
   background: 1c1d21ff
   foreground: 78bd65ff
-  font: JetBrainsMono Nerd Font:pixelsize=40
+  font: JetBrainsMono Nerd Font:pixelsize=26
 
   left:
     - river:
