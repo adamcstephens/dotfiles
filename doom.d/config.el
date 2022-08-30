@@ -1,69 +1,22 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
-;; Place your private configuration here! Remember, you do not need to run 'doom
-;; sync' after modifying this file!
+(setq user-full-name "Adam C Stephens")
 
-
-;; Some functionality uses this to identify you, e.g. GPG configuration, email
-;; clients, file templates and snippets.
-(setq user-full-name "Adam C Stephens"
-      user-mail-address "adam@valkor.net")
-
-;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
-;; are the three important ones:
-;;
-;; + `doom-font'
-;; + `doom-variable-pitch-font'
-;; + `doom-big-font' -- used for `doom-big-font-mode'; use this for
-;;   presentations or streaming.
-;;
-;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
-;; font string. You generally only need these two:
-;; (setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
-;;       doom-variable-pitch-font (font-spec :family "sans" :size 13))
-
-;; There are two ways to load a theme. Both assume the theme is installed and
-;; available. You can either set `doom-theme' or manually load a theme with the
-;; `load-theme' function. This is the default:
 (setq my-doom-theme-dark 'doom-old-hope)
 (setq my-doom-theme-light 'tsdh-light)
 (setq doom-theme my-doom-theme-dark)
 (setq doom-old-hope-brighter-comments t)
+(setq doom-modeline-icon nil)
+(setq doom-localleader-key ",")
 
-;; If you use `org' and don't want your org files in the default location below,
-;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org/")
 
-;; This determines the style of line numbers in effect. If set to `nil', line
-;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
 
-
-;; Here are some additional functions/macros that could help you configure Doom:
-;;
-;; - `load!' for loading external *.el files relative to this one
-;; - `use-package!' for configuring packages
-;; - `after!' for running code after a package has loaded
-;; - `add-load-path!' for adding directories to the `load-path', relative to
-;;   this file. Emacs searches the `load-path' when you load packages with
-;;   `require' or `use-package'.
-;; - `map!' for binding new keys
-;;
-;; To get information about any of these functions/macros, move the cursor over
-;; the highlighted symbol at press 'K' (non-evil users must press 'C-c c k').
-;; This will open documentation for it, including demos of how they are used.
-;;
-;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
-;; they are implemented.
-;;; Add to ~/.doom.d/config.el
 (setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 14 :weight 'semi-light)
       doom-variable-pitch-font (font-spec :family "JetBrainsMono Nerd Font") ; inherits `doom-font''s :size
       doom-unicode-font (font-spec :family "JetBrainsMono Nerd Font" :size 14)
       doom-big-font (font-spec :family "JetBrainsMono Nerd Font" :size 19))
 
-(setq doom-modeline-icon nil)
-
-(setq doom-localleader-key ",")
 
 ;; disable completion of words in org mode
 (defun zz/adjust-org-company-backends ()
@@ -74,6 +27,8 @@
 ;; automatically revert buffers to on-disk
 (global-auto-revert-mode t)
 
+;; org settings
+(setq org-directory "~/org/")
 (after! org
   (require 'ox-latex)
   (require 'org-tempo)
@@ -197,6 +152,21 @@
       )
     )
   (add-hook 'after-save-hook 'org-slides-export)
+
+  (defun org-html-export-to-mhtml (async subtree visible body)
+    (cl-letf (((symbol-function 'org-html--format-image) 'format-image-inline))
+      (org-html-export-to-html nil subtree visible body)))
+
+  (defun format-image-inline (source attributes info)
+    (let* ((ext (file-name-extension source))
+           (prefix (if (string= "svg" ext) "data:image/svg+xml;base64," "data:;base64,"))
+           (data (with-temp-buffer (url-insert-file-contents source) (buffer-string)))
+           (data-url (concat prefix (base64-encode-string data)))
+           (attributes (org-combine-plists `(:src ,data-url) attributes)))
+      (org-html-close-tag "img" (org-html--make-attribute-string attributes) info)))
+
+  (org-export-define-derived-backend 'html-inline-images 'html
+    :menu-entry '(?h "Export to HTML" ((?m "As MHTML file" org-html-export-to-mhtml))))
   )
 
 (after! org-re-reveal
@@ -209,11 +179,6 @@
   (setq evil-kill-on-visual-paste nil)
   (setq evil-shift-width 2)
   )
-
-;; use emacs bindings in insert-mode so we can copy/paste
-;; (setq evil-disable-insert-state-bindings t)
-;; (setq evil-want-keybinding nil)
-;; (setq evil-escape-key-sequence nil))
 
 ;; don't prompt on quit
 (setq confirm-kill-emacs nil)
@@ -247,22 +212,10 @@
   (setq heaven-and-hell-themes
         '((light . doom-one-light)
           (dark . doom-old-hope)))
-  ;; Optionall, load themes without asking for confirmation.
   (setq heaven-and-hell-load-theme-no-confirm t)
-  (map!
-   :g "<f6>" 'heaven-and-hell-toggle-theme
-   ;; Sometimes loading default theme is broken. I couldn't figured that out yet.
-   :leader "<f6>" 'heaven-and-hell-load-default-theme)
   )
 
 (add-hook 'after-init-hook 'heaven-and-hell-init-hook)
-
-;; (use-package prettier
-;;   :hook ((typescript-mode . prettier-mode)
-;;          (js-mode . prettier-mode)
-;;          (json-mode . prettier-mode)
-;;          (yaml-mode . prettier-mode)
-;;          (ruby-mode . prettier-mode)))
 
 (after! telega
   (setq telega-server-libs-prefix "/usr"))
