@@ -31,6 +31,7 @@
       force: true
       path: fish
     ~/.config/git/template: gittemplate
+    ~/.config/helix: helix
     ~/.config/kitty/kitty.conf: kitty/kitty.conf
     ~/.config/kitty/theme-light.conf: kitty/theme-light.conf
     ~/.config/kitty/theme-dark.conf: kitty/theme-dark.conf
