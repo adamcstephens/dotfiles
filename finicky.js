@@ -79,6 +79,7 @@ module.exports = {
       /twitter.com/,
       /youtube.com/,
       /steampowered.com/,
+      /steamcommunity.com/,
     ].map((x) => {
       return { match: x, browser: "Firefox" };
     })
