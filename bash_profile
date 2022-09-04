@@ -69,9 +69,6 @@ if [[ -e $HOME/.asdf/asdf.sh ]]; then
   # shellcheck disable=SC1090
   source "$HOME/.asdf/asdf.sh"
   source "$HOME/.asdf/completions/asdf.bash"
-
-  ASDF_DIRENV="${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/bashrc"
-  [ -e $ASDF_DIRENV ] && source $ASDF_DIRENV
 fi
 
 # fzf
@@ -90,3 +87,5 @@ source $HOME/.dotfiles/iterm2.bash
 if [ -f "/google/devshell/bashrc.google" ]; then
   source "/google/devshell/bashrc.google"
 fi
+
+[[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path bash 2>/dev/null)"

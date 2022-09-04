@@ -148,7 +148,9 @@ fi
 
 [[ -e /usr/share/google-cloud-sdk/completion.zsh.inc ]] && source /usr/share/google-cloud-sdk/completion.zsh.inc
 
-# i don't care what happened above when the prompt starts
-true
+[[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path zsh 2>/dev/null)"
 
 source $HOME/.dotfiles/iterm2.zsh
+
+# i don't care what happened above when the prompt starts
+true
