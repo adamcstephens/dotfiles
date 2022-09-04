@@ -6,9 +6,9 @@ PartOf=graphical-session.target
 [Service]
 Type=simple
 ExecStart=/usr/bin/swayidle -w \
-            timeout 120 'setsid --fork waylock' \
-            timeout 300 'systemctl suspend' \
-            before-sleep 'pgrep waylock || setsid --fork waylock'
+            timeout 120 'setsid --fork gtklock' \
+            timeout 300 'sudo systemctl suspend' \
+            before-sleep 'pgrep gtklock || setsid --fork gtklock'
 
 [Install]
 WantedBy=sway-session.target
