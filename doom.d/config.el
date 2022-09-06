@@ -242,3 +242,5 @@
 (toggle-dark)
 
 (setq projectile-enable-caching nil)
+
+(set-formatter! 'alejandra "alejandra --quiet" :modes '(nix-mode))
