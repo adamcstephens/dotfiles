@@ -19,12 +19,19 @@ format = '[$symbol$project]($style) '
 [git_branch]
 format = "[$symbol$branch]($style) "
 
+[haskell]
+disabled = true
+
 [hostname]
 style = 'bold yellow'
 format = '[$hostname]($style) '
+trim_at = ""
 
 [localip]
 disabled = true
+
+[nix_shell]
+format = '[\($name\)]($style) '
 
 [nodejs]
 disabled = true
