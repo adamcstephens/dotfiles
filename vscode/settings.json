@@ -114,12 +114,6 @@
   "terminal.integrated.cursorBlinking": true,
   "terminal.integrated.scrollback": 20000,
   "terminal.integrated.tabs.enabled": true,
-  "terraform.languageServer": {
-    "args": ["serve"],
-    "external": true,
-    "pathToBinary": "",
-    "trace.server": "off"
-  },
   "window.autoDetectColorScheme": true,
   "window.nativeFullScreen": false,
   "window.newWindowDimensions": "inherit",
@@ -171,5 +165,10 @@
     "editor.defaultFormatter": "ms-vscode.powershell"
   },
   "gitlens.codeLens.enabled": false,
-  "nix.formatterPath": "alejandra"
+  "nix.formatterPath": "alejandra",
+  "nix.serverPath": "nil",
+  "terraform.languageServer.enable": true,
+  "terraform.languageServer.path": "",
+  "nix.enableLanguageServer": true,
+  "editor.stickyScroll.enabled": true
 }

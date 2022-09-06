@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+
+if command -v helix 2>1 >/dev/null; then
+  cmd="helix"
+else
+  # avoid a loop
+  SCRIPT_PATH=$(dirname "$(realpath "$0")")
+  PATH="$(echo "$PATH" | sed -e "s,$SCRIPT_PATH:,,")"
+  export PATH
+fi
+
+exec "$cmd" "$@"
