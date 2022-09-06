@@ -7,6 +7,12 @@ else
   SCRIPT_PATH=$(dirname "$(realpath "$0")")
   PATH="$(echo "$PATH" | sed -e "s,$SCRIPT_PATH:,,")"
   export PATH
+  cmd="hx"
+fi
+
+if [ -z "$cmd" ]; then
+  echo "Didn't find helix!"
+  exit 1
 fi
 
 exec "$cmd" "$@"
