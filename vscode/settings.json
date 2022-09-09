@@ -89,7 +89,8 @@
     "mkhl.direnv",
     "mkhl.shfmt",
     "redhat.vscode-yaml",
-    "timonwong.shellcheck"
+    "timonwong.shellcheck",
+    "JakeBecker.elixir-ls"
   ],
   "remote.SSH.lockfilesInTmp": true,
   "remote.SSH.remotePlatform": {
