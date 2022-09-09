@@ -39,7 +39,8 @@ def set_gtk_theme(target):
 
 
 def set_kitty_theme(target):
-    kitty_pid = run("pgrep kitty").strip()
+    kitty_pid = run("pgrep kitty").splitlines()[0].strip()
+    print(kitty_pid)
 
     if os_name == "Linux":
       kitty_socket = f"unix:@kitty-{kitty_pid}"
