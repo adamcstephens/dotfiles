@@ -1,3 +1,3 @@
 set -U fish_greeting
-set -x EDITOR ~/bin/editor
-set -x PAGER "less -r"
+set -x EDITOR ~/.dotfiles/bin/editor
+set -x PAGER ~/.dotfiles/bin/pager

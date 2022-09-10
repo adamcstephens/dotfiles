@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+
+exec less --raw-control-chars --quit-if-one-screen --quit-at-eof --no-init --hilite-search --mouse --ignore-case "$@"

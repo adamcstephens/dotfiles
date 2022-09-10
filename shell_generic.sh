@@ -15,7 +15,7 @@ fi
 
 alias thisweek='date +%Y-%W'
 
-export PAGER='less'
+export PAGER="$HOME/bin/pager"
 export EDITOR="$HOME/bin/editor"
 
 # ls
