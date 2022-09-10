@@ -14,6 +14,7 @@ haskell.haskell
 JakeBecker.elixir-ls
 jnoortheen.nix-ide
 justusadam.language-haskell
+kamadorueda.alejandra
 mkhl.direnv
 mkhl.shfmt
 ms-python.python

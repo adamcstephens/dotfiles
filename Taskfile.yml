@@ -69,6 +69,12 @@ tasks:
       - mv ~/.config/mimeapps.list .
       - task: dotbot
 
+  nix:home-manager:
+    cmds:
+      - nix run .#update-home
+    status:
+      - nix profile list | grep home-manager-path
+
   ssh:keygen:
     cmds:
       - ssh-keygen -t ed25519

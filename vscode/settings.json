@@ -157,9 +157,7 @@
   "[fish]": {
     "editor.defaultFormatter": "bmalehorn.vscode-fish"
   },
-  "[nix]": {
-    "editor.defaultFormatter": "jnoortheen.nix-ide"
-  },
+  "[nix]": {},
   "window.commandCenter": true,
   "git.mergeEditor": true,
   "[powershell]": {
