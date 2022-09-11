@@ -28,7 +28,7 @@
   defaultBranch = main
 [pull]
   ff = only
-  rebase = false
+  rebase = true
 [push]
   default = tracking
 [tag]
