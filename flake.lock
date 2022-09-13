@@ -130,6 +130,41 @@
         "type": "github"
       }
     },
+    "flake-parts": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1663071030,
+        "narHash": "sha256-vqdGU5iR2nKiSH6Z0bhNAwg/6szAicXaopv7lpMRNRg=",
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "rev": "89cce5852d100df3d815c3c4a3fd39e55b3e1bfc",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "type": "github"
+      }
+    },
+    "flake-utils": {
+      "locked": {
+        "lastModified": 1659877975,
+        "narHash": "sha256-zllb8aq3YO3h8B/U0/J1WBgAL8EX5yWf5pMj3G0NAmc=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "c0e246b9b83f637f4681389ecabcb2681b4f3af0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
     "flake-utils-pre-commit": {
       "locked": {
         "lastModified": 1644229661,
@@ -213,6 +248,28 @@
         "type": "indirect"
       }
     },
+    "nil": {
+      "inputs": {
+        "flake-utils": "flake-utils",
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "rust-overlay": "rust-overlay"
+      },
+      "locked": {
+        "lastModified": 1662951397,
+        "narHash": "sha256-MFnhsQRba9RK81pFH/9Bg+7DhK5G4QreFPDeIeIL0Rk=",
+        "owner": "oxalica",
+        "repo": "nil",
+        "rev": "bb186c9d14f3a82376b6717b9bc8da9fb775fcb7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "oxalica",
+        "repo": "nil",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1662019588,
@@ -276,7 +333,9 @@
     "root": {
       "inputs": {
         "darwin": "darwin",
+        "flake-parts": "flake-parts",
         "home-manager": "home-manager",
+        "nil": "nil",
         "nixpkgs": "nixpkgs",
         "webcord": "webcord"
       }
@@ -295,6 +354,31 @@
         "owner": "rust-lang",
         "ref": "nightly",
         "repo": "rust-analyzer",
+        "type": "github"
+      }
+    },
+    "rust-overlay": {
+      "inputs": {
+        "flake-utils": [
+          "nil",
+          "flake-utils"
+        ],
+        "nixpkgs": [
+          "nil",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1662173844,
+        "narHash": "sha256-+ZgW98Y8fZkgFSylE+Mzalumw+kw3SVivZznbJqQaj8=",
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "rev": "8ac6d40380dc4ec86f1ff591d5c14c8ae1d77a18",
+        "type": "github"
+      },
+      "original": {
+        "owner": "oxalica",
+        "repo": "rust-overlay",
         "type": "github"
       }
     },
