@@ -18,7 +18,7 @@
     home-manager,
     ...
   }: let
-    # pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+    pkgs-darwin = nixpkgs.legacyPackages.aarch64-darwin;
     pkgs = nixpkgs.legacyPackages.x86_64-linux;
   in {
     apps.x86_64-linux.update-home = {
@@ -37,7 +37,29 @@
           echo "activating new profile"
           if ! "$(nix path-info .#homeConfigurations.$USER.activationPackage)"/activate; then
             echo "restoring old profile $old_profile"
-            ${pkgs.nix}/bin/nix profile install $old_profile
+            nix profile install $old_profile
+          fi
+        '')
+        .outPath;
+    };
+
+    apps.aarch64-darwin.update-home = {
+      type = "app";
+      program =
+        (nixpkgs.legacyPackages.aarch64-darwin.writeScript "update-home" ''
+          echo "building new profile"
+          nix build --no-link .#homeConfigurations.$USER.activationPackage
+
+          old_profile=$(nix profile list | grep home-manager-path | head -n1 | awk '{print $4}')
+          if [ -n "$old_profile" ]; then
+            echo "removing old profile: $old_profile"
+            nix profile remove $old_profile
+          fi
+
+          echo "activating new profile"
+          if ! "$(nix path-info .#homeConfigurations.$USER.activationPackage)"/activate; then
+            echo "restoring old profile $old_profile"
+            nix profile install $old_profile
           fi
         '')
         .outPath;
@@ -62,7 +84,7 @@
     };
 
     homeConfigurations.astephe9 = home-manager.lib.homeManagerConfiguration {
-      inherit pkgs;
+      pkgs = pkgs-darwin;
 
       modules = [
         (_: {
