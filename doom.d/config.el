@@ -204,10 +204,9 @@
 
 (after! format-all (setq +format-on-save-enabled-modes '(not html-helper-mode html-mode mhtml-mode nxhtml-mode nxml-mode xml-mode web-mode sql-mode tex-mode latex-mode org-msg-edit-mode)))
 
-
 (use-package! git-auto-commit-mode)
 (after! git-auto-commit-mode
-  (setq-default gac-debounce-interval 300))
+  (setq-default gac-debounce-interval 6000))
 
 (after! heaven-and-hell
   (setq heaven-and-hell-themes
