@@ -11,13 +11,17 @@
     pkgs.alejandra
     pkgs.btop
     pkgs.du-dust
+    pkgs.fd
     pkgs.fzf
     pkgs.gh
     pkgs.go-task
+    pkgs.helix
     pkgs.htop
     pkgs.jq
     pkgs.lazygit
     pkgs.lsd
+    pkgs.mtr
+    pkgs.ripgrep
     pkgs.shellcheck
     pkgs.shfmt
     pkgs.starship
