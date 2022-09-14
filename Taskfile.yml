@@ -27,7 +27,6 @@ tasks:
       - task: aqua-run
       - task: dotbot
       - task: fish:bootstrap
-      - task: lefthook:install
 
   bootstrap:slim:
     cmds:
@@ -59,10 +58,6 @@ tasks:
   git:setup:
     cmds:
       - git config -f ~/.gitconfig.local user.email {{.EMAIL}}
-
-  lefthook:install:
-    cmds:
-      - lefthook install
 
   mimeapps:fix:
     cmds:
