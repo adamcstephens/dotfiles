@@ -29,8 +29,10 @@
           type = "app";
           program =
             (pkgs.writeScript "update-home" ''
+              HMPROFILE="$USER-$(uname -m)-$(uname -s)"
+
               echo "building new profile"
-              nix --extra-experimental-features "nix-command flakes" build --no-link .#homeConfigurations.$USER.activationPackage
+              nix --extra-experimental-features "nix-command flakes" build --no-link .#homeConfigurations.$HMPROFILE.activationPackage
 
               old_profile=$(nix --extra-experimental-features "nix-command flakes" profile list | grep home-manager-path | head -n1 | awk '{print $4}')
               if [ -n "$old_profile" ]; then
@@ -39,7 +41,7 @@
               fi
 
               echo "activating new profile"
-              if ! "$(nix --extra-experimental-features "nix-command flakes" path-info .#homeConfigurations.$USER.activationPackage)"/activate; then
+              if ! "$(nix --extra-experimental-features "nix-command flakes" path-info .#homeConfigurations.$HMPROFILE.activationPackage)"/activate; then
                 echo "restoring old profile $old_profile"
                 nix --extra-experimental-features "nix-command flakes" profile install $old_profile
               fi
@@ -50,6 +52,7 @@
         devShells.default = pkgs.mkShell {
           packages = [
             pkgs.earthly
+            pkgs.python3Minimal
           ];
         };
       };

@@ -2,47 +2,48 @@
   inputs,
   withSystem,
   ...
-}: {
+}: let
+  homeConfig = {
+    username,
+    home,
+    homeSystem,
+  }:
+    withSystem homeSystem ({
+      pkgs,
+      system,
+      ...
+    }:
+      inputs.home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+
+        modules = [
+          (_: {
+            home.username = username;
+            home.homeDirectory = home;
+          })
+          ./home.nix
+        ];
+
+        extraSpecialArgs = {
+          nil = inputs.nil.packages.${system};
+        };
+      });
+in {
   flake.homeConfigurations = {
-    astephe9 = withSystem "aarch64-darwin" ({
-      pkgs,
-      system,
-      ...
-    }:
-      inputs.home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-
-        modules = [
-          (_: {
-            home.username = "astephe9";
-            home.homeDirectory = "/Users/astephe9";
-          })
-          ./home.nix
-        ];
-
-        extraSpecialArgs = {
-          nil = inputs.nil.packages.aarch64-darwin;
-        };
-      });
-    adam = withSystem "x86_64-linux" ({
-      pkgs,
-      system,
-      ...
-    }:
-      inputs.home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-
-        modules = [
-          (_: {
-            home.username = "adam";
-            home.homeDirectory = "/home/adam";
-          })
-          ./home.nix
-        ];
-
-        extraSpecialArgs = {
-          nil = inputs.nil.packages.x86_64-linux;
-        };
-      });
+    astephe9-arm64-Darwin = homeConfig {
+      username = "astephe9";
+      home = "/Users/astephe9";
+      homeSystem = "aarch64-darwin";
+    };
+    adam-x86_64-Linux = homeConfig {
+      username = "adam";
+      home = "/home/adam";
+      homeSystem = "x86_64-linux";
+    };
+    adam-aarch64-Linux = homeConfig {
+      username = "adam";
+      home = "/home/adam";
+      homeSystem = "aarch64-linux";
+    };
   };
 }
