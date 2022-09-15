@@ -1,17 +1,23 @@
 #!/usr/bin/env sh
 
-export PATH="${PATH}:${HOME}/bin:${HOME}/.local/share/aquaproj-aqua/bin:${HOME}/.dotfiles/bin"
-
-export AQUA_GLOBAL_CONFIG="${HOME}"/.dotfiles/aqua/aqua.yaml
-
-if [ -z "$1" ]; then
-  BOOTSTRAP_TASK="bootstrap"
+if [ -z "$DISABLE_NIX" ]; then
+  if ! command -v nix >/dev/null 2>&1; then
+    curl -L https://nixos.org/nix/install | sh -s - --daemon
+  fi
 else
-  BOOTSTRAP_TASK="$1"
+  export PATH="${PATH}:${HOME}/bin:${HOME}/.local/share/aquaproj-aqua/bin:${HOME}/.dotfiles/bin"
+
+  export AQUA_GLOBAL_CONFIG="${HOME}"/.dotfiles/aqua/aqua.yaml
+
+  if [ -z "$1" ]; then
+    BOOTSTRAP_TASK="bootstrap"
+  else
+    BOOTSTRAP_TASK="$1"
+  fi
+
+  install-aqua.sh -i ~/bin/aqua
+
+  cd ~/.dotfiles/aqua && ~/bin/aqua install
+
+  cd ~/.dotfiles && task "$BOOTSTRAP_TASK"
 fi
-
-install-aqua.sh -i ~/bin/aqua
-
-cd ~/.dotfiles/aqua && ~/bin/aqua install
-
-cd ~/.dotfiles && task "$BOOTSTRAP_TASK"
