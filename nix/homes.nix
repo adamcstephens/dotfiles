@@ -30,6 +30,11 @@
       });
 in {
   flake.homeConfigurations = {
+    adam-arm64-Darwin = homeConfig {
+      username = "adam";
+      home = "/Users/adam";
+      homeSystem = "aarch64-darwin";
+    };
     astephe9-arm64-Darwin = homeConfig {
       username = "astephe9";
       home = "/Users/astephe9";
