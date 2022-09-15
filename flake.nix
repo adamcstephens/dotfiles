@@ -30,18 +30,18 @@
           program =
             (pkgs.writeScript "update-home" ''
               echo "building new profile"
-              nix build --no-link .#homeConfigurations.$USER.activationPackage
+              nix --extra-experimental-features "nix-command flakes" build --no-link .#homeConfigurations.$USER.activationPackage
 
-              old_profile=$(nix profile list | grep home-manager-path | head -n1 | awk '{print $4}')
+              old_profile=$(nix --extra-experimental-features "nix-command flakes" profile list | grep home-manager-path | head -n1 | awk '{print $4}')
               if [ -n "$old_profile" ]; then
                 echo "removing old profile: $old_profile"
-                nix profile remove $old_profile
+                nix --extra-experimental-features "nix-command flakes" profile remove $old_profile
               fi
 
               echo "activating new profile"
-              if ! "$(nix path-info .#homeConfigurations.$USER.activationPackage)"/activate; then
+              if ! "$(nix --extra-experimental-features "nix-command flakes" path-info .#homeConfigurations.$USER.activationPackage)"/activate; then
                 echo "restoring old profile $old_profile"
-                nix profile install $old_profile
+                nix --extra-experimental-features "nix-command flakes" profile install $old_profile
               fi
             '')
             .outPath;
