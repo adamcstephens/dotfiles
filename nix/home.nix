@@ -10,10 +10,10 @@
   programs.home-manager.enable = true;
 
   home.activation.dotfiles-bootstrap = lib.hm.dag.entryAfter ["writeBoundary"] ''
-    source ${config.system.build.setEnvironment}
+    export PATH=${config.home.path}/bin:${config.home.path}/sbin:$PATH
 
     pushd ~/.dotfiles
-      ${pkgs.go-task}/bin/task dotbot
+      task dotbot
     popd
   '';
 

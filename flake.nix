@@ -32,7 +32,7 @@
               HMPROFILE="$USER-$(uname -m)-$(uname -s)"
 
               echo "building new profile"
-              nix --extra-experimental-features "nix-command flakes" build --no-link .#homeConfigurations.$HMPROFILE.activationPackage
+              nix --extra-experimental-features "nix-command flakes" build --no-link .#homeConfigurations.$HMPROFILE.activationPackage || exit 1
 
               old_profile=$(nix --extra-experimental-features "nix-command flakes" profile list | grep home-manager-path | head -n1 | awk '{print $4}')
               if [ -n "$old_profile" ]; then
