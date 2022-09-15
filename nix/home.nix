@@ -1,11 +1,21 @@
 {
   pkgs,
   nil,
+  config,
+  lib,
   ...
 }: {
   home.stateVersion = "22.05";
 
   programs.home-manager.enable = true;
+
+  home.activation.dotfiles-bootstrap = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    source ${config.system.build.setEnvironment}
+
+    pushd ~/.dotfiles
+      ${pkgs.go-task}/bin/task dotbot
+    popd
+  '';
 
   home.packages = [
     pkgs.alejandra
@@ -21,6 +31,7 @@
     pkgs.lazygit
     pkgs.lsd
     pkgs.mtr
+    pkgs.python3Minimal
     pkgs.ripgrep
     pkgs.shellcheck
     pkgs.shfmt
