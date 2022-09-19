@@ -16,10 +16,6 @@ end
 if test -d ~/.ghcup/bin
     fish_add_path --prepend --move ~/.ghcup/bin
 end
-if test -d ~/.local/share/aquaproj-aqua/bin
-    fish_add_path --append ~/.local/share/aquaproj-aqua/bin
-end
-
 
 fish_add_path --prepend --move ~/.local/bin
 fish_add_path --prepend --move ~/bin
