@@ -22,10 +22,10 @@
             home.homeDirectory = home;
           })
           ./home.nix
+          (pkgs.lib.optionals pkgs.stdenv.isDarwin ./darwin.nix)
         ];
 
         extraSpecialArgs = {
-          nil = inputs.nil.packages.${system};
         };
       });
 in {

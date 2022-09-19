@@ -1,6 +1,5 @@
 {
   pkgs,
-  nil,
   config,
   lib,
   ...
