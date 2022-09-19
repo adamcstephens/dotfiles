@@ -90,7 +90,8 @@
     "mkhl.shfmt",
     "redhat.vscode-yaml",
     "timonwong.shellcheck",
-    "JakeBecker.elixir-ls"
+    "JakeBecker.elixir-ls",
+    "kamadorueda.alejandra"
   ],
   "remote.SSH.lockfilesInTmp": true,
   "remote.SSH.remotePlatform": {
