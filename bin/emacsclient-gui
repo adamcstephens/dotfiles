@@ -1,5 +1,5 @@
-#!/usr/bin/env sh
+#!/bin/sh
 
-HOSTNAME=$(hostname)
+source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
 
-emacsclient --create-frame --socket-name="$HOSTNAME" "$@"
+emacsclient --create-frame "$@"
