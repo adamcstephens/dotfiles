@@ -23,6 +23,7 @@
           })
           ./home.nix
           (pkgs.lib.optionals pkgs.stdenv.isDarwin ./darwin.nix)
+          inputs.doom-emacs.hmModule
         ];
 
         extraSpecialArgs = {

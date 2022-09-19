@@ -3,6 +3,8 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
+    doom-emacs.url = "github:nix-community/nix-doom-emacs";
+    doom-emacs.inputs.nixpkgs.follows = "nixpkgs";
     emacs.url = "github:nix-community/emacs-overlay";
     emacs.inputs.nixpkgs.follows = "nixpkgs";
     flake-parts.url = "github:hercules-ci/flake-parts";
@@ -28,6 +30,19 @@
       systems = ["x86_64-linux" "aarch64-darwin"];
 
       perSystem = {pkgs, ...}: {
+        apps.build-home = {
+          type = "app";
+          program =
+            (
+              pkgs.writeScript "build-home" ''
+                HMPROFILE="$USER-${pkgs.stdenv.hostPlatform.system}"
+
+                echo "building new profile"
+                nix --extra-experimental-features "nix-command flakes" build --no-link .#homeConfigurations.$HMPROFILE.activationPackage || exit 1
+              ''
+            )
+            .outPath;
+        };
         apps.update-home = {
           type = "app";
           program =

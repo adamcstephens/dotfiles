@@ -3,6 +3,13 @@
   # services.emacs.enable = true;
 
   home.packages = [
-    pkgs.emacsNativeComp
   ];
+  programs.emacs = {
+    enable = true;
+    # package = pkgs.emacsNativeComp;
+  };
+  programs.doom-emacs = {
+    enable = true;
+    doomPrivateDir = ../doom.d;
+  };
 }
