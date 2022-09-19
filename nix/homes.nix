@@ -30,22 +30,22 @@
       });
 in {
   flake.homeConfigurations = {
-    adam-arm64-Darwin = homeConfig {
+    adam-aarch64-darwin = homeConfig {
       username = "adam";
       home = "/Users/adam";
       homeSystem = "aarch64-darwin";
     };
-    astephe9-arm64-Darwin = homeConfig {
+    astephe9-aarch64-darwin = homeConfig {
       username = "astephe9";
       home = "/Users/astephe9";
       homeSystem = "aarch64-darwin";
     };
-    adam-x86_64-Linux = homeConfig {
+    adam-x86_64-linux = homeConfig {
       username = "adam";
       home = "/home/adam";
       homeSystem = "x86_64-linux";
     };
-    adam-aarch64-Linux = homeConfig {
+    adam-aarch64-linux = homeConfig {
       username = "adam";
       home = "/home/adam";
       homeSystem = "aarch64-linux";

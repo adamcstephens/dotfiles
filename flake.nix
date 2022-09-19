@@ -4,8 +4,6 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
     flake-parts.inputs.nixpkgs.follows = "nixpkgs";
-    nil.url = "github:oxalica/nil";
-    nil.inputs.nixpkgs.follows = "nixpkgs";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     webcord.url = "github:fufexan/webcord-flake";
@@ -29,7 +27,7 @@
           type = "app";
           program =
             (pkgs.writeScript "update-home" ''
-              HMPROFILE="$USER-$(uname -m)-$(uname -s)"
+              HMPROFILE="$USER-${pkgs.stdenv.hostPlatform.system}"
 
               echo "building new profile"
               nix --extra-experimental-features "nix-command flakes" build --no-link .#homeConfigurations.$HMPROFILE.activationPackage || exit 1

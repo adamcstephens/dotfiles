@@ -31,12 +31,12 @@
     pkgs.lazygit
     pkgs.lsd
     pkgs.mtr
+    pkgs.nil
     pkgs.python3Minimal
     pkgs.ripgrep
     pkgs.shellcheck
     pkgs.shfmt
     pkgs.starship
     pkgs.zoxide
-    nil.nil
   ];
 }
