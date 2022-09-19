@@ -2,4 +2,4 @@
 
 source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
 
-emacsclient --create-frame "$@"
+exec emacsclient --create-frame "$@"
