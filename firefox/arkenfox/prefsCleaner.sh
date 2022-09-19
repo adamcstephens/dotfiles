@@ -2,7 +2,7 @@
 
 ## prefs.js cleaner for Linux/Mac
 ## author: @claustromaniac
-## version: 1.4
+## version: 1.5
 
 ## special thanks to @overdodactyl and @earthlng for a few snippets that I stol..*cough* borrowed from the updater.sh
 
@@ -69,7 +69,8 @@ fStart() {
 	fi
 
 	fFF_check
-	bakfile="prefs.js.backup.$(date +"%Y-%m-%d_%H%M")"
+	mkdir -p prefsjs_backups
+	bakfile="prefsjs_backups/prefs.js.backup.$(date +"%Y-%m-%d_%H%M")"
 	mv prefs.js "${bakfile}" || fQuit 1 "Operation aborted.\nReason: Could not create backup file $bakfile"
 	echo -e "\nprefs.js backed up: $bakfile"
 	echo "Cleaning prefs.js..."
@@ -81,7 +82,7 @@ echo -e "\n\n"
 echo "                   ╔══════════════════════════╗"
 echo "                   ║     prefs.js cleaner     ║"
 echo "                   ║    by claustromaniac     ║"
-echo "                   ║           v1.4           ║"
+echo "                   ║           v1.5           ║"
 echo "                   ╚══════════════════════════╝"
 echo -e "\nThis script should be run from your Firefox profile directory.\n"
 echo "It will remove any entries from prefs.js that also exist in user.js."

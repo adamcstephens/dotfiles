@@ -5,8 +5,8 @@
 ;
 [subrepo]
 	remote = https://github.com/arkenfox/user.js
-	branch = 102.1
-	commit = c6ab6c4b4895d533c872085ebb6f3b6c78627d80
-	parent = 806a61a93dfbb563f50cff288b2acef846162aac
+	branch = 104.0
+	commit = 3f09afdee07c5aea33f6dc4194e1425d6400a0d7
+	parent = c3106f9ac932fd5b4c16fd510336b3b10c7dc5f8
 	method = merge
 	cmdver = 0.4.3
