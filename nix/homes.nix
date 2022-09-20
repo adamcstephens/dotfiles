@@ -16,15 +16,17 @@
       inputs.home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
 
-        modules = [
-          (_: {
-            home.username = username;
-            home.homeDirectory = home;
-          })
-          ./home.nix
-          (pkgs.lib.optionals pkgs.stdenv.isDarwin ./darwin.nix)
-          inputs.doom-emacs.hmModule
-        ];
+        modules =
+          [
+            (_: {
+              home.username = username;
+              home.homeDirectory = home;
+            })
+            ./home.nix
+            inputs.doom-emacs.hmModule
+          ]
+          ++ (pkgs.lib.optionals pkgs.stdenv.isDarwin [./darwin.nix])
+          ++ (pkgs.lib.optionals pkgs.stdenv.isLinux [./linux.nix]);
 
         extraSpecialArgs = {
         };

@@ -21,15 +21,22 @@
     ...
   }:
     flake-parts.lib.mkFlake {inherit self;} {
-      flake.overlays = [(import self.inputs.emacs-overlay)];
-
       imports = [
         ./nix/homes.nix
       ];
 
       systems = ["x86_64-linux" "aarch64-darwin"];
 
-      perSystem = {pkgs, ...}: {
+      perSystem = {
+        pkgs,
+        system,
+        ...
+      }: {
+        _module.args.pkgs = import self.inputs.nixpkgs {
+          inherit system;
+          overlays = [self.inputs.emacs.overlay];
+        };
+
         apps.build-home = {
           type = "app";
           program =
