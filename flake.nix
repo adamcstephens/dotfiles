@@ -76,6 +76,7 @@
 
         devShells.default = pkgs.mkShell {
           packages = [
+            pkgs.cachix
             pkgs.earthly
             pkgs.python3Minimal
           ];
