@@ -37,11 +37,11 @@
           overlays = [self.inputs.emacs.overlay];
         };
 
-        apps.build-home = {
+        apps.hm-build = {
           type = "app";
           program =
             (
-              pkgs.writeScript "build-home" ''
+              pkgs.writeScript "hm-build" ''
                 HMPROFILE="$USER-${pkgs.stdenv.hostPlatform.system}"
 
                 echo "building new profile"
@@ -50,10 +50,10 @@
             )
             .outPath;
         };
-        apps.update-home = {
+        apps.hm-switch = {
           type = "app";
           program =
-            (pkgs.writeScript "update-home" ''
+            (pkgs.writeScript "hm-update" ''
               HMPROFILE="$USER-${pkgs.stdenv.hostPlatform.system}"
 
               echo "building new profile"
