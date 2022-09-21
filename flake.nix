@@ -37,41 +37,45 @@
           overlays = [self.inputs.emacs.overlay];
         };
 
-        apps.hm-build = {
-          type = "app";
-          program =
-            (
-              pkgs.writeScript "hm-build" ''
+        apps = let
+          nixCmd = ''nix --extra-experimental-features "nix-command flakes"'';
+        in {
+          hm-build = {
+            type = "app";
+            program =
+              (
+                pkgs.writeScript "hm-build" ''
+                  HMPROFILE="$USER-${pkgs.stdenv.hostPlatform.system}"
+
+                  echo "building new profile"
+                  ${nixCmd} build --no-link .#homeConfigurations.$HMPROFILE.activationPackage || exit 1
+                ''
+              )
+              .outPath;
+          };
+          hm-switch = {
+            type = "app";
+            program =
+              (pkgs.writeScript "hm-update" ''
                 HMPROFILE="$USER-${pkgs.stdenv.hostPlatform.system}"
 
                 echo "building new profile"
-                nix --extra-experimental-features "nix-command flakes" build --no-link .#homeConfigurations.$HMPROFILE.activationPackage || exit 1
-              ''
-            )
-            .outPath;
-        };
-        apps.hm-switch = {
-          type = "app";
-          program =
-            (pkgs.writeScript "hm-update" ''
-              HMPROFILE="$USER-${pkgs.stdenv.hostPlatform.system}"
+                ${nixCmd} build --no-link .#homeConfigurations.$HMPROFILE.activationPackage || exit 1
 
-              echo "building new profile"
-              nix --extra-experimental-features "nix-command flakes" build --no-link .#homeConfigurations.$HMPROFILE.activationPackage || exit 1
+                old_profile=$(${nixCmd} profile list | grep home-manager-path | head -n1 | awk '{print $4}')
+                if [ -n "$old_profile" ]; then
+                  echo "removing old profile: $old_profile"
+                  ${nixCmd} profile remove $old_profile
+                fi
 
-              old_profile=$(nix --extra-experimental-features "nix-command flakes" profile list | grep home-manager-path | head -n1 | awk '{print $4}')
-              if [ -n "$old_profile" ]; then
-                echo "removing old profile: $old_profile"
-                nix --extra-experimental-features "nix-command flakes" profile remove $old_profile
-              fi
-
-              echo "activating new profile"
-              if ! "$(nix --extra-experimental-features "nix-command flakes" path-info .#homeConfigurations.$HMPROFILE.activationPackage)"/activate; then
-                echo "restoring old profile $old_profile"
-                nix --extra-experimental-features "nix-command flakes" profile install $old_profile
-              fi
-            '')
-            .outPath;
+                echo "activating new profile"
+                if ! "$(${nixCmd} path-info .#homeConfigurations.$HMPROFILE.activationPackage)"/activate; then
+                  echo "restoring old profile $old_profile"
+                  ${nixCmd} profile install $old_profile
+                fi
+              '')
+              .outPath;
+          };
         };
 
         devShells.default = pkgs.mkShell {

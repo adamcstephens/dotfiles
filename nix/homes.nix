@@ -4,15 +4,19 @@
   ...
 }: let
   homeConfig = {
-    username,
-    home,
+    username ? "adam",
     homeSystem,
   }:
     withSystem homeSystem ({
       pkgs,
       system,
       ...
-    }:
+    }: let
+      homeDir =
+        if pkgs.stdenv.isDarwin
+        then "/Users/${username}"
+        else "/home/${username}";
+    in
       inputs.home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
 
@@ -20,7 +24,7 @@
           [
             (_: {
               home.username = username;
-              home.homeDirectory = home;
+              home.homeDirectory = homeDir;
             })
             ./home.nix
             inputs.doom-emacs.hmModule
@@ -34,23 +38,16 @@
 in {
   flake.homeConfigurations = {
     adam-aarch64-darwin = homeConfig {
-      username = "adam";
-      home = "/Users/adam";
       homeSystem = "aarch64-darwin";
     };
     astephe9-aarch64-darwin = homeConfig {
       username = "astephe9";
-      home = "/Users/astephe9";
       homeSystem = "aarch64-darwin";
     };
     adam-x86_64-linux = homeConfig {
-      username = "adam";
-      home = "/home/adam";
       homeSystem = "x86_64-linux";
     };
     adam-aarch64-linux = homeConfig {
-      username = "adam";
-      home = "/home/adam";
       homeSystem = "aarch64-linux";
     };
   };
