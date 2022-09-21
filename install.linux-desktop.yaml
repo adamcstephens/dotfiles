@@ -24,7 +24,6 @@
     ~/.config/sway/config: sway.conf
     ~/.config/swaylock/config: swaylock.conf
     ~/.config/systemd/user/dunst.service: dunst.service
-    ~/.config/systemd/user/emacs.service: emacs.service
     ~/.config/systemd/user/gammastep.service: gammastep.service
     ~/.config/systemd/user/gpg-agent-extra.socket: gpg-agent-extra.socket
     ~/.config/systemd/user/gpg-agent.service: gpg-agent.service
@@ -49,7 +48,7 @@
 - shell:
     - [systemctl --user daemon-reload]
     - [
-        systemctl --user enable --now dunst emacs gammastep gpg-agent gpg-agent.socket gpg-agent-extra.socket kanshi pipewire pipewire-pulse polkit-gnome-authentication-agent-1 ssh-agent swayidle waybar wob wob.socket,
+        systemctl --user enable --now dunst gammastep gpg-agent gpg-agent.socket gpg-agent-extra.socket kanshi pipewire pipewire-pulse polkit-gnome-authentication-agent-1 ssh-agent swayidle waybar wob wob.socket,
       ]
     - [systemctl --user enable --now syncthing]
     - [systemctl --user mask gammastep-indicator]
