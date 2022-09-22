@@ -31,6 +31,8 @@
   rebase = true
 [push]
   default = tracking
+[rebase]
+	autoStash = true
 [tag]
   gpgsign = true
 [url "git@github.com:adamcstephens"]
