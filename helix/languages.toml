@@ -1,0 +1,5 @@
+[[language]]
+name = "nix"
+language-server = { command = "nil" }
+auto-format = true
+formatter = { command = "alejandra" , args = [] }
