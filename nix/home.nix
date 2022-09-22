@@ -36,6 +36,7 @@
     pkgs.shellcheck
     pkgs.shfmt
     pkgs.starship
+    pkgs.tio
     pkgs.zoxide
   ];
 
