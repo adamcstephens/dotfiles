@@ -16,11 +16,8 @@ riverctl map normal Mod4+Shift+Control D spawn 'dark toggle'
 # bindsym $mod+print exec screenshot.sh screen
 # bindsym Alt+print exec screenshot.sh box
 
-# Mod+Q to close the focused view
 riverctl map normal Mod4+Shift Q close
-
-# Mod+E to exit river
-riverctl map normal Mod4+Shift E exit
+riverctl map normal Mod4+Shift+Control Q exit
 
 # Mod+J and Mod+K to focus the next/previous view in the layout stack
 riverctl map normal Mod4 J focus-view next
