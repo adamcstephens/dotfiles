@@ -53,6 +53,19 @@
               )
               .outPath;
           };
+          hm-push = {
+            type = "app";
+            program =
+              (
+                pkgs.writeScript "hm-build" ''
+                  HMPROFILE="$USER-${pkgs.stdenv.hostPlatform.system}"
+
+                  echo "building new profile"
+                  ${nixCmd} build --no-link .#homeConfigurations.$HMPROFILE.activationPackage --json | jq -r '.[].outputs | to_entries[].value' | cachix push adamcstephens-dotfiles
+                ''
+              )
+              .outPath;
+          };
           hm-switch = {
             type = "app";
             program =
