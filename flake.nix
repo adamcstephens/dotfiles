@@ -86,6 +86,8 @@
                   echo "restoring old profile $old_profile"
                   ${nixCmd} profile install $old_profile
                 fi
+
+                echo "old profile: nix profile install $old_profile"
               '')
               .outPath;
           };
