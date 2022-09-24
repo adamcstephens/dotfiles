@@ -32,6 +32,9 @@
     pkgs.mtr
     pkgs.nil
     pkgs.python3Minimal
+    pkgs.python3Packages.black
+    pkgs.python3Packages.ipython
+    pkgs.python3Packages.rich
     pkgs.ripgrep
     pkgs.shellcheck
     pkgs.shfmt

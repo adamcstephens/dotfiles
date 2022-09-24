@@ -50,11 +50,7 @@ in {
       homeSystem = "x86_64-linux";
       modules = [
         ./emacs.nix
-        {
-          programs.doom-emacs = {
-            emacsPackage = inputs.nixpkgs.legacyPackages.x86_64-linux.emacsPgtkNativeComp;
-          };
-        }
+        ./linux-gui.nix
       ];
     };
     aarch64-darwin = homeConfig {

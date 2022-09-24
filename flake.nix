@@ -30,7 +30,6 @@
       perSystem = {
         pkgs,
         system,
-        self',
         ...
       }: {
         _module.args.pkgs = import self.inputs.nixpkgs {
@@ -42,13 +41,12 @@
           packages = [
             pkgs.cachix
             pkgs.earthly
-            pkgs.elixir
             pkgs.python3Minimal
           ];
         };
 
         packages = import ./nix/hm.nix {
-          inherit pkgs self';
+          inherit pkgs;
           homeConfigurations = self.homeConfigurations;
         };
       };

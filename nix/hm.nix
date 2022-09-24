@@ -1,14 +1,11 @@
 {
-  self',
   pkgs,
   homeConfigurations,
   ...
 }: let
   cachixRepo = "adamcstephens-dotfiles";
   nixCmd = ''nix --extra-experimental-features "nix-command flakes"'';
-in {
-  hm = pkgs.writeScript "hm" (builtins.readFile ./hm.exs);
-  home-manager-profiles = pkgs.writeText "home-manager-profiles" (builtins.toJSON (builtins.attrNames homeConfigurations));
+in rec {
   home-profile-selector = pkgs.writeScriptBin "home-profile-selector" ''
     #!${pkgs.python3Minimal}/bin/python3
 
@@ -24,15 +21,15 @@ in {
   '';
 
   hm-build = pkgs.writeScriptBin "hm-build" ''
-    HMPROFILE="$(${self'.packages.home-profile-selector}/bin/home-profile-selector)"
+    HMPROFILE="$(${home-profile-selector}/bin/home-profile-selector)"
 
-    echo "building new profile for $HMPROFILE"
+    echo "🚧 Building new profile for $HMPROFILE"
     ${nixCmd} build --no-link .#homeConfigurations.$HMPROFILE.activationPackage || exit 1
   '';
 
   hm-push = pkgs.writeScriptBin "hm-push" ''
     if [ -z "$1" ]; then
-      HMPROFILE="$(${self'.packages.home-profile-selector}/bin/home-profile-selector)"
+      HMPROFILE="$(${home-profile-selector}/bin/home-profile-selector)"
     else
       HMPROFILE="$1"
     fi
@@ -42,23 +39,24 @@ in {
   '';
 
   hm-switch = pkgs.writeScriptBin "hm-update" ''
-    HMPROFILE="$(${self'.packages.home-profile-selector}/bin/home-profile-selector)"
+    HMPROFILE="$(${home-profile-selector}/bin/home-profile-selector)"
 
-    ${self'.packages.hm-build}/bin/hm-build
+    ${hm-build}/bin/hm-build
 
     old_profile=$(${nixCmd} profile list | grep home-manager-path | head -n1 | awk '{print $4}')
     if [ -n "$old_profile" ]; then
-      echo "removing old profile: $old_profile"
+      echo "❌ Removing old profile: $old_profile"
       ${nixCmd} profile remove $old_profile
     fi
 
-    echo "activating new profile"
+    echo " Activating new profile"
     if ! "$(${nixCmd} path-info .#homeConfigurations.$HMPROFILE.activationPackage)"/activate; then
-      echo "restoring old profile $old_profile"
+      echo "❗ Failed to activate new profile"
+      echo " Rolling back to old profile"
       ${nixCmd} profile install $old_profile
       exit 1
     fi
 
-    ${self'.packages.hm-push}/bin/hm-push
+    ${hm-push}/bin/hm-push
   '';
 }

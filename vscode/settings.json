@@ -170,5 +170,8 @@
   "terraform.languageServer.enable": true,
   "terraform.languageServer.path": "",
   "nix.enableLanguageServer": true,
-  "editor.stickyScroll.enabled": true
+  "editor.stickyScroll.enabled": true,
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.python"
+  }
 }

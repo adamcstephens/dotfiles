@@ -15,10 +15,10 @@ cd "${BASEDIR}"
 [ -h $HOME/.bashrc ] || rm -fv $HOME/.bashrc
 [ -h $HOME/.bash_profile ] || rm -fv $HOME/.bash_profile
 
-"${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}" $PLUGINS "${@}"
+"${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" --quiet -d "${BASEDIR}" -c "${CONFIG}" $PLUGINS "${@}"
 
 if [ -e "$OSCONFIG" ]; then
-  "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${OSCONFIG}" $PLUGINS "${@}"
+  "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" --quiet -d "${BASEDIR}" -c "${OSCONFIG}" $PLUGINS "${@}"
 fi
 
 if command -v hostname &>/dev/null; then
@@ -29,5 +29,5 @@ fi
 
 HOSTCONFIG="install.$hostname.yaml"
 if [ -e $HOSTCONFIG ]; then
-  "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${HOSTCONFIG}" $PLUGINS "${@}"
+  "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" --quiet -d "${BASEDIR}" -c "${HOSTCONFIG}" $PLUGINS "${@}"
 fi
