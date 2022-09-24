@@ -7,6 +7,8 @@
   cachixRepo = "adamcstephens-dotfiles";
   nixCmd = ''nix --extra-experimental-features "nix-command flakes"'';
 in {
+  hm = pkgs.writeScript "hm" (builtins.readFile ./hm.exs);
+  home-manager-profiles = pkgs.writeText "home-manager-profiles" (builtins.toJSON (builtins.attrNames homeConfigurations));
   home-profile-selector = pkgs.writeScriptBin "home-profile-selector" ''
     #!${pkgs.python3Minimal}/bin/python3
 

@@ -42,6 +42,7 @@
           packages = [
             pkgs.cachix
             pkgs.earthly
+            pkgs.elixir
             pkgs.python3Minimal
           ];
         };
