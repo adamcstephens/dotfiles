@@ -29,7 +29,11 @@ in {
   '';
 
   hm-push = pkgs.writeScriptBin "hm-push" ''
-    HMPROFILE="$(${self'.packages.home-profile-selector}/bin/home-profile-selector)"
+    if [ -z "$1" ]; then
+      HMPROFILE="$(${self'.packages.home-profile-selector}/bin/home-profile-selector)"
+    else
+      HMPROFILE="$1"
+    fi
 
     echo "cachix upload for $HMPROFILE"
     ${nixCmd} build --no-link .#homeConfigurations.$HMPROFILE.activationPackage --json | jq -r '.[].outputs | to_entries[].value' | cachix push ${cachixRepo}
