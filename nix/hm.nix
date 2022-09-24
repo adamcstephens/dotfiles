@@ -4,7 +4,7 @@
   ...
 }: let
   cachixRepo = "adamcstephens-dotfiles";
-  nixCmd = ''nix --extra-experimental-features "nix-command flakes"'';
+  nixCmd = ''${pkgs.nix}/bin/nix --extra-experimental-features "nix-command flakes"'';
 in rec {
   home-profile-selector = pkgs.writeScriptBin "home-profile-selector" ''
     #!${pkgs.python3Minimal}/bin/python3
@@ -35,7 +35,7 @@ in rec {
     fi
 
     echo "cachix upload for $HMPROFILE"
-    ${nixCmd} build --no-link .#homeConfigurations.$HMPROFILE.activationPackage --json | jq -r '.[].outputs | to_entries[].value' | cachix push ${cachixRepo}
+    ${nixCmd} build --no-link .#homeConfigurations.$HMPROFILE.activationPackage --json | jq -r '.[].outputs | to_entries[].value' | ${pkgs.cachix}/bin/cachix push ${cachixRepo}
   '';
 
   hm-switch = pkgs.writeScriptBin "hm-update" ''
