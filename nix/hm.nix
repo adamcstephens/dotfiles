@@ -56,7 +56,5 @@ in rec {
       ${nixCmd} profile install $old_profile
       exit 1
     fi
-
-    ${hm-push}/bin/hm-push
   '';
 }
