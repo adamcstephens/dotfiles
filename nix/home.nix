@@ -38,8 +38,22 @@
     pkgs.ripgrep
     pkgs.shellcheck
     pkgs.shfmt
-    pkgs.starship
     pkgs.tio
-    pkgs.zoxide
   ];
+
+  programs = {
+    lsd.enable = true;
+    starship = {
+      enable = true;
+      enableBashIntegration = false;
+      enableFishIntegration = false;
+      enableZshIntegration = false;
+    };
+    zoxide = {
+      enable = true;
+      enableBashIntegration = false;
+      enableFishIntegration = false;
+      enableZshIntegration = false;
+    };
+  };
 }
