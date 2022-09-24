@@ -30,67 +30,12 @@
       perSystem = {
         pkgs,
         system,
+        self',
         ...
       }: {
         _module.args.pkgs = import self.inputs.nixpkgs {
           inherit system;
           overlays = [self.inputs.emacs.overlay];
-        };
-
-        apps = let
-          nixCmd = ''nix --extra-experimental-features "nix-command flakes"'';
-        in {
-          hm-build = {
-            type = "app";
-            program =
-              (
-                pkgs.writeScript "hm-build" ''
-                  HMPROFILE="$USER-${pkgs.stdenv.hostPlatform.system}"
-
-                  echo "building new profile"
-                  ${nixCmd} build --no-link .#homeConfigurations.$HMPROFILE.activationPackage || exit 1
-                ''
-              )
-              .outPath;
-          };
-          hm-push = {
-            type = "app";
-            program =
-              (
-                pkgs.writeScript "hm-build" ''
-                  HMPROFILE="$USER-${pkgs.stdenv.hostPlatform.system}"
-
-                  echo "building new profile"
-                  ${nixCmd} build --no-link .#homeConfigurations.$HMPROFILE.activationPackage --json | jq -r '.[].outputs | to_entries[].value' | cachix push adamcstephens-dotfiles
-                ''
-              )
-              .outPath;
-          };
-          hm-switch = {
-            type = "app";
-            program =
-              (pkgs.writeScript "hm-update" ''
-                HMPROFILE="$USER-${pkgs.stdenv.hostPlatform.system}"
-
-                echo "building new profile"
-                ${nixCmd} build --no-link .#homeConfigurations.$HMPROFILE.activationPackage || exit 1
-
-                old_profile=$(${nixCmd} profile list | grep home-manager-path | head -n1 | awk '{print $4}')
-                if [ -n "$old_profile" ]; then
-                  echo "removing old profile: $old_profile"
-                  ${nixCmd} profile remove $old_profile
-                fi
-
-                echo "activating new profile"
-                if ! "$(${nixCmd} path-info .#homeConfigurations.$HMPROFILE.activationPackage)"/activate; then
-                  echo "restoring old profile $old_profile"
-                  ${nixCmd} profile install $old_profile
-                fi
-
-                echo "old profile: nix profile install $old_profile"
-              '')
-              .outPath;
-          };
         };
 
         devShells.default = pkgs.mkShell {
@@ -99,6 +44,11 @@
             pkgs.earthly
             pkgs.python3Minimal
           ];
+        };
+
+        packages = import ./nix/hm.nix {
+          inherit pkgs self';
+          homeConfigurations = self.homeConfigurations;
         };
       };
     };
