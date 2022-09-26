@@ -11,7 +11,7 @@ in rec {
 
     from socket import gethostname
 
-    hm_profiles = [${builtins.concatStringsSep "," (map (x: "'${x}'") (builtins.attrNames homeConfigurations))}]
+    hm_profiles = [${builtins.concatStringsSep "," (map (x: "'${x}'") homeConfigurations)}]
     hostname = gethostname()
 
     if hostname in hm_profiles:

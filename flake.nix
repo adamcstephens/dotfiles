@@ -47,7 +47,7 @@
 
         packages = import ./nix/hm.nix {
           inherit pkgs;
-          homeConfigurations = self.homeConfigurations;
+          homeConfigurations = builtins.attrNames self.homeConfigurations;
         };
       };
     };
