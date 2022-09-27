@@ -69,4 +69,8 @@
 in {
   flake.homeConfigurations = builtins.mapAttrs (name: value: (homeProfile value).homeConfig) homeProfiles;
   flake.homeModules = builtins.mapAttrs (name: value: (homeProfile value).homeModules) homeProfiles;
+  flake.lib.findHome = hostname: system:
+    if (builtins.elem hostname (builtins.attrNames homeProfiles))
+    then hostname
+    else system;
 }
