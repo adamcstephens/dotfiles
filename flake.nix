@@ -37,7 +37,7 @@
           overlays = [self.inputs.emacs.overlay];
         };
 
-        devShells.default = pkgs.mkShell {
+        devShells.default = pkgs.mkShellNoCC {
           packages = [
             pkgs.cachix
             pkgs.earthly
