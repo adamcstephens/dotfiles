@@ -1,8 +1,0 @@
-- defaults:
-    link:
-      relink: true
-      create: true
-
-- link:
-    ~/bin/wsl-gpg-relay: bin/wsl-gpg-relay.sh
-    ~/bin/wsl-ssh-relay: bin/wsl-ssh-relay.sh

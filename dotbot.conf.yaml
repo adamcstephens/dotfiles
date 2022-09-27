@@ -40,6 +40,9 @@
     ~/.config/nix/nix.conf: nix.conf
     ~/.config/ripgrep/ripgreprc: ripgreprc
     ~/.config/rubocop/config.yml: rubocop.yml
+    ~/.config/yay/config.json:
+      if: "which yay"
+      path: yay.json
     ~/.stack/config.yaml: stack.yaml
     ~/.config/starship.toml: starship.toml
     ~/.doom.d: doom.d
@@ -49,6 +52,9 @@
     ~/.gnupg/gpg.conf:
       if: "which gpg-agent"
       path: gpg.conf
+    ~/.gnupg/gpg-agent.conf:
+      if: '[ "$(uname -s)" = "Linux" ] && which gpg-agent'
+      path: gpg-agent-linux.conf
     ~/.hyper.js: hyper.js
     ~/.inputrc:
       if: "[ ! -e /etc/inputrc ]"

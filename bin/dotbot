@@ -1,33 +1,13 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
-CONFIG="install.conf.yaml"
-OSCONFIG="install.$(uname).yaml"
-DOTBOT_DIR="dotbot"
+: "${CONFIG:="dotbot.conf.yaml"}"
 
-DOTBOT_BIN="bin/dotbot"
 BASEDIR="${HOME}/.dotfiles"
 
-PLUGINS=""
-
-cd "${BASEDIR}"
+cd "${BASEDIR}" || exit 2
 
 # delete some stock files
-[ -h $HOME/.bashrc ] || rm -fv $HOME/.bashrc
-[ -h $HOME/.bash_profile ] || rm -fv $HOME/.bash_profile
+[ -h "$HOME/.bashrc" ] || rm -fv "$HOME/.bashrc"
+[ -h "$HOME/.bash_profile" ] || rm -fv "$HOME/.bash_profile"
 
-"${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" --quiet -d "${BASEDIR}" -c "${CONFIG}" $PLUGINS "${@}"
-
-if [ -e "$OSCONFIG" ]; then
-  "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" --quiet -d "${BASEDIR}" -c "${OSCONFIG}" $PLUGINS "${@}"
-fi
-
-if command -v hostname &>/dev/null; then
-  hostname="$(hostname)"
-else
-  hostname=$(uname -n)
-fi
-
-HOSTCONFIG="install.$hostname.yaml"
-if [ -e $HOSTCONFIG ]; then
-  "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" --quiet -d "${BASEDIR}" -c "${HOSTCONFIG}" $PLUGINS "${@}"
-fi
+"${BASEDIR}/dotbot/bin/dotbot" --quiet -d "${BASEDIR}" -c "${CONFIG}" "${@}"
