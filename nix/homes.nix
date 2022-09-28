@@ -61,6 +61,10 @@
           inherit pkgs;
 
           modules = hmModules;
+
+          extraSpecialArgs = {
+            inherit inputs system;
+          };
         };
 
         homeModules = hmModules;

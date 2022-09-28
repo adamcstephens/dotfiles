@@ -1,9 +1,15 @@
 {
   config,
+  inputs,
   lib,
   pkgs,
+  system,
   ...
 }: {
+  imports = [
+    ../apps/eww
+  ];
+
   home.packages = [
     # pkgs.cider
   ];
