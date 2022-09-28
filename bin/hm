@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+
+cd "$HOME/.dotfiles" || exit 1
+nix run ".#hm" "$@"
