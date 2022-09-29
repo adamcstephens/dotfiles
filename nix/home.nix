@@ -11,7 +11,15 @@
   home.activation.dotfiles-bootstrap = lib.hm.dag.entryAfter ["writeBoundary"] ''
     export PATH=${config.home.path}/bin:${config.home.path}/sbin:$PATH
 
+    if [ ! -d ~/.dotfiles ]; then
+      git clone https://git.sr.ht/~adamcstephens/dotfiles ~/.dotfiles
+      touch ~/.dotfiles/.nixos-managed
+    fi
+
     pushd ~/.dotfiles
+      if [ -e .nixos-managed ]; then
+        git pull
+      fi
       task dotbot
     popd
   '';
