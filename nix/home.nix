@@ -27,6 +27,7 @@
   home.packages = [
     pkgs.alejandra
     pkgs.btop
+    pkgs.direnv
     pkgs.du-dust
     pkgs.fd
     pkgs.fzf
