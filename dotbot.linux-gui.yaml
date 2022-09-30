@@ -34,15 +34,10 @@
     ~/.config/systemd/user/ssh-agent.service: ssh-agent.service
     ~/.config/systemd/user/sway-session.target: sway-session.target
     ~/.config/systemd/user/swayidle.service: swayidle.service
-    ~/.config/systemd/user/waybar.service: waybar.service
-    ~/.config/systemd/user/yambar.service: yambar.service
     ~/.config/way-displays/cfg.yaml: apps/way-displays.yaml
-    ~/.config/waybar/config: waybar.jsonc
-    ~/.config/waybar/style.css: waybar.css
     ~/.config/waylock/waylock.toml: waylock.toml
     ~/.config/wofi/config: wofi.conf
     ~/.config/wofi/style.css: wofi.css
-    ~/.config/yambar/config.yml: yambar.yaml
     ~/.local/share/applications: applications
     ~/.local/share/fonts: fonts
 

@@ -122,7 +122,7 @@ def set_dark(target):
     if os_name == "Linux":
         set_gtk_theme(target)
         set_sway_theme(target)
-        set_waybar_theme(target)
+        # set_waybar_theme(target)
     elif os_name == "Darwin":
         set_darwin_theme(target)
 
