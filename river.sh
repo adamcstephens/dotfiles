@@ -153,7 +153,7 @@ riverctl float-filter-add title "popup title with spaces"
 # Set app-ids and titles of views which should use client side decorations
 riverctl csd-filter-add app-id "gedit"
 
-riverctl set-repeat 100 190
+riverctl set-repeat 100 220
 
 riverctl input pointer-1452-613-Apple_Inc._Magic_Trackpad natural-scroll enabled
 riverctl input pointer-1452-613-Apple_Inc._Magic_Trackpad tap-button-map left-right-middle
