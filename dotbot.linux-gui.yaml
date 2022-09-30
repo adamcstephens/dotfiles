@@ -16,7 +16,7 @@
     ~/.config/Code - OSS/User/settings.json: vscode/settings.json
     ~/.config/dunst/dunstrc: dunstrc
     ~/.config/eww: apps/eww
-    ~/.config/kanshi/config: kanshi.conf
+    ~/.config/kanshi/config: apps/kanshi.conf
     ~/.config/kitty/linux.conf: kitty/kitty-linux.conf
     ~/.config/mpd/mpd.conf: mpd.conf
     ~/.config/pipewire/pipewire.conf.d: pipewire/pipewire.conf.d
@@ -29,7 +29,6 @@
     ~/.config/systemd/user/gpg-agent-extra.socket: gpg-agent-extra.socket
     ~/.config/systemd/user/gpg-agent.service: gpg-agent.service
     ~/.config/systemd/user/gpg-agent.socket: gpg-agent.socket
-    ~/.config/systemd/user/kanshi.service: kanshi.service
     ~/.config/systemd/user/polkit-gnome-authentication-agent-1.service: polkit-gnome-authentication-agent-1.service
     ~/.config/systemd/user/river-session.target: river-session.target
     ~/.config/systemd/user/ssh-agent.service: ssh-agent.service
@@ -37,6 +36,7 @@
     ~/.config/systemd/user/swayidle.service: swayidle.service
     ~/.config/systemd/user/waybar.service: waybar.service
     ~/.config/systemd/user/yambar.service: yambar.service
+    ~/.config/way-displays/cfg.yaml: apps/way-displays.yaml
     ~/.config/waybar/config: waybar.jsonc
     ~/.config/waybar/style.css: waybar.css
     ~/.config/waylock/waylock.toml: waylock.toml
@@ -49,7 +49,7 @@
 - shell:
     - [systemctl --user daemon-reload]
     - [
-        systemctl --user enable --now dunst gammastep gpg-agent gpg-agent.socket gpg-agent-extra.socket kanshi pipewire pipewire-pulse polkit-gnome-authentication-agent-1 ssh-agent swayidle wob wob.socket,
+        systemctl --user enable --now dunst gammastep gpg-agent gpg-agent.socket gpg-agent-extra.socket pipewire pipewire-pulse polkit-gnome-authentication-agent-1 ssh-agent swayidle wob wob.socket,
       ]
     - [systemctl --user enable --now syncthing]
     - [systemctl --user mask gammastep-indicator]

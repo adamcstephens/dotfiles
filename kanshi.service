@@ -1,9 +1,0 @@
-[Unit]
-Description=kanshi
-PartOf=graphical-session.target
-
-[Service]
-ExecStart=/usr/bin/kanshi
-
-[Install]
-WantedBy=river-session.target
