@@ -60,6 +60,13 @@
             };
           }
           {
+            networking.hostName = "darwin-vm";
+
+            security.sudo = {
+              enable = true;
+              wheelNeedsPassword = false;
+            };
+
             users.users.adam = {
               isNormalUser = true;
               extraGroups = ["wheel" "audio"];
