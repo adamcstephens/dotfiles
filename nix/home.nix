@@ -30,6 +30,7 @@
     pkgs.du-dust
     pkgs.fd
     pkgs.fzf
+    pkgs.git
     pkgs.gh
     pkgs.go-task
     pkgs.helix

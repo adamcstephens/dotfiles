@@ -13,6 +13,7 @@
     flake-parts.inputs.nixpkgs.follows = "nixpkgs";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    nixinate.url = "github:matthewcroughan/nixinate";
     webcord.url = "github:fufexan/webcord-flake";
     webcord.inputs.nixpkgs.follows = "nixpkgs";
   };
@@ -25,6 +26,7 @@
     flake-parts.lib.mkFlake {inherit self;} {
       imports = [
         ./nix/homes.nix
+        ./nix/nixos-darwin-vm.nix
       ];
 
       systems = ["x86_64-linux" "aarch64-darwin"];
@@ -53,5 +55,8 @@
           homeConfigurations = builtins.attrNames self.homeConfigurations;
         };
       };
+    }
+    // {
+      apps = self.inputs.nixinate.nixinate.aarch64-darwin self;
     };
 }
