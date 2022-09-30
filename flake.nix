@@ -43,6 +43,7 @@
           packages = [
             pkgs.cachix
             pkgs.earthly
+            pkgs.just
             pkgs.python3Minimal
           ];
         };
