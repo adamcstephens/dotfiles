@@ -37,8 +37,11 @@ in {
     apps.way-displays
   ];
 
+  fonts.fontconfig.enable = true;
+
   home.packages = [
     # pkgs.cider
+    (pkgs.nerdfonts.override {fonts = ["JetBrainsMono"];})
   ];
 
   programs.doom-emacs = {

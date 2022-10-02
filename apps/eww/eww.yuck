@@ -10,9 +10,9 @@
 (include "./modules/variables.yuck")
 (include "./modules/volume.yuck")
 
-; (include "./windows/calendar.yuck")
+(include "./windows/calendar.yuck")
 ; (include "./windows/music_win.yuck")
-; (include "./windows/system.yuck")
+(include "./windows/system.yuck")
 (include "./windows/volume_win.yuck")
 
 (defwidget sep []
@@ -35,7 +35,7 @@
     :halign "end"
     ; (bright)
     ; (volume)
-    ; (net)
+    (net)
     ; (bluetooth)
     (sep)
     (cpu)
