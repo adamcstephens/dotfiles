@@ -12,7 +12,7 @@
   extraBins = [
     pkgs.alejandra
     aspell
-    pkgs.corefonts
+    # pkgs.corefonts
     latex
     pkgs.nil
     pkgs.shellcheck
