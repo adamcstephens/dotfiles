@@ -33,7 +33,7 @@ in rec {
     echo " Running action $ACTION"
 
     echo "🚧 Building new profile for $HMPROFILE"
-    ${nixCmd} build --no-link .#homeConfigurations.$HMPROFILE.activationPackage || exit 1
+    ${nixCmd} build --no-link .#homeConfigurations.$HMPROFILE.activationPackage --print-build-logs || exit 1
 
     if [ "$ACTION" = "switch" ]; then
       old_profile=$(${nixCmd} profile list | grep home-manager-path | head -n1 | awk '{print $4}')

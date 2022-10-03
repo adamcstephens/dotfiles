@@ -53,7 +53,7 @@
           })
           {
             _module.args.nixinate = {
-              host = "192.168.64.31";
+              host = "darwin-vm"; # needs ssh/config
               sshUser = "root";
               buildOn = "remote";
               substituteOnTarget = true;
@@ -61,6 +61,10 @@
           }
           {
             networking.hostName = "darwin-vm";
+
+            environment.systemPackages = [
+              pkgs.git
+            ];
 
             security.sudo = {
               enable = true;
@@ -79,6 +83,10 @@
             home-manager.users.adam = {
               imports = self.homeModules.${system};
             };
+          }
+          {
+            virtualisation.docker.enable = true;
+            users.users.adam.extraGroups = ["docker"];
           }
         ];
       }

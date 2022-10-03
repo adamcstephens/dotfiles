@@ -26,7 +26,10 @@
 
   home.packages = [
     pkgs.alejandra
+    pkgs.bat
     pkgs.btop
+    pkgs.calc
+    pkgs.colordiff
     pkgs.direnv
     pkgs.du-dust
     pkgs.fd
@@ -45,10 +48,14 @@
     pkgs.python3Packages.black
     pkgs.python3Packages.ipython
     pkgs.python3Packages.rich
+    pkgs.pwgen
     pkgs.ripgrep
     pkgs.shellcheck
     pkgs.shfmt
     pkgs.tio
+    pkgs.tmux
+    pkgs.tree
+    pkgs.wget
   ];
 
   programs = {
