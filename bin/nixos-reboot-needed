@@ -4,4 +4,7 @@ booted="$(readlink /run/booted-system/{initrd,kernel,kernel-modules})"
 built="$(readlink /nix/var/nix/profiles/system/{initrd,kernel,kernel-modules})"
 if [ "$booted" != "$built" ]; then
   echo "Reboot needed"
+  exit 1
 fi
+
+exit 0
