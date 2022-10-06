@@ -1,0 +1,28 @@
+#!/usr/bin/env sh
+
+if [ -z "$1" ]; then
+  echo "Usage: $0 (up|down|mute)"
+  exit 1
+fi
+
+command=$1
+
+eww open volume_win
+
+case $command in
+up)
+  amixer -D pipewire sset Master 3%+
+  ;;
+down)
+  amixer -D pipewire sset Master 3%-
+  ;;
+mute)
+  amixer -D pipewire sset Master toggle
+  ;;
+esac
+
+# set -e
+sleep 3
+eww close volume_win
+
+#  | grep 'Front Left:' | awk '{print \$5}' | sed -r 's/(\[|\]|%)//g' >>$XDG_RUNTIME_DIR/wob.sock

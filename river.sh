@@ -126,9 +126,9 @@ for mode in normal locked; do
   riverctl map $mode None XF86Eject spawn 'eject -T'
 
   # Control pulse audio volume with pamixer (https://github.com/cdemoulins/pamixer)
-  riverctl map $mode None XF86AudioRaiseVolume spawn "amixer -D pipewire sset Master 3%+ | grep 'Front Left:' | awk '{print \$5}' | sed -r 's/(\[|\]|%)//g' >> $XDG_RUNTIME_DIR/wob.sock"
-  riverctl map $mode None XF86AudioLowerVolume spawn "amixer -D pipewire sset Master 3%- | grep 'Front Left:' | awk '{print \$5}' | sed -r 's/(\[|\]|%)//g' >> $XDG_RUNTIME_DIR/wob.sock"
-  riverctl map $mode None XF86AudioMute spawn "amixer -D pipewire sset Master toggle"
+  riverctl map $mode None XF86AudioRaiseVolume spawn "volume up"
+  riverctl map $mode None XF86AudioLowerVolume spawn "volume down"
+  riverctl map $mode None XF86AudioMute spawn "volume mute"
 
   # Control MPRIS aware media players with playerctl (https://github.com/altdesktop/playerctl)
   riverctl map $mode None XF86AudioMedia spawn 'playerctl play-pause'
