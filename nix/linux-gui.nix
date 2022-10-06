@@ -43,6 +43,12 @@ in {
     # pkgs.cider
     pkgs.material-design-icons
     (pkgs.nerdfonts.override {fonts = ["JetBrainsMono"];})
+
+    pkgs.light
+    pkgs.networkmanagerapplet
+
+    # audio
+    pkgs.wireplumber
   ];
 
   programs.doom-emacs = {

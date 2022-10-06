@@ -1,14 +1,14 @@
-@import 'css/colors';
+@import "css/colors";
 
 @mixin wshadow {
   box-shadow: 0 5px 10px $shadow;
   margin: 15px 20px 25px;
 }
 
-@import 'css/calendar';
-@import 'css/music';
-@import 'css/system';
-@import 'css/volume';
+@import "css/calendar";
+@import "css/music";
+@import "css/system";
+@import "css/volume";
 
 * {
   all: unset;
@@ -20,21 +20,37 @@
   color: $fg;
 }
 
-.module { margin: 0 5px; }
-.clock { font-size: 1.4rem; }
-.hour { font-weight: bold; }
-.date { color: $flamingo; }
-.minute { margin-right: 5px; }
+.module {
+  margin: 0 5px;
+}
+.clock {
+  font-size: 1.4rem;
+}
+.hour {
+  font-weight: bold;
+}
+.date {
+  color: $flamingo;
+}
+.minute {
+  margin-right: 5px;
+}
 
-.bright-icon { color: $yellow; }
+.bright-icon {
+  color: $yellow;
+}
 .brightbar trough highlight {
   background-image: linear-gradient(to right, $yellow 30%, $peach 100%);
   border-radius: 10px;
 }
 
 .module-ssid,
-.module-net { color: $lavender; }
-.module-bt { font-size: 1.2rem; }
+.module-net {
+  color: $orange;
+}
+.module-bt {
+  font-size: 1.2rem;
+}
 
 .separ {
   color: $surface0;
@@ -50,13 +66,17 @@ scale trough {
   min-width: 70px;
 }
 
-.ws { margin-top: .4rem; }
-.workspaces { margin-left: 10px; }
+.ws {
+  margin-top: 0.4rem;
+}
+.workspaces {
+  margin-left: 10px;
+}
 
 .launcher label {
   background-color: $blue;
   color: $bg;
   font-family: monospace;
   font-size: 1.5rem;
-  padding: 0 1.1rem 0 .5rem;
+  padding: 0 1.1rem 0 0.5rem;
 }

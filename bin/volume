@@ -11,13 +11,13 @@ eww open volume_win
 
 case $command in
 up)
-  amixer -D pipewire sset Master 3%+
+  wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 3%+
   ;;
 down)
-  amixer -D pipewire sset Master 3%-
+  wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 3%-
   ;;
 mute)
-  amixer -D pipewire sset Master toggle
+  wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
   ;;
 esac
 

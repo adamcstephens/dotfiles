@@ -7,10 +7,10 @@ while true; do
 
   icons=("󰤯" "󰤟" "󰤢" "󰤥" "󰤨")
 
-  if [ "$status" = "disconnected" ] ; then
+  if [ "$status" = "disconnected" ]; then
     icon=""
     text=""
-    color="#988ba2"
+    color="#686b78"
   else
     level=$(awk -v n="$signal" 'BEGIN{print int(n/20)}')
     if [ "$level" -gt 4 ]; then
@@ -18,7 +18,7 @@ while true; do
     fi
 
     icon=${icons[$level]}
-    color="#cba6f7"
+    color="#4fb4d8"
   fi
 
   echo '{ "essid": "'"$essid"'", "icon": "'"$icon"'", "color": "'"$color"'" }'
