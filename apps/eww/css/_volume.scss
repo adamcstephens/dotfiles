@@ -2,7 +2,7 @@
   color: $blue;
 }
 .volbar highlight {
-  background-image: linear-gradient(to right, $teal 30%, $sky 100%);
+  background-color: $orange;
   border-radius: 10px;
 }
 
@@ -14,13 +14,13 @@
 }
 
 .volume-text {
-  color: $teal;
+  color: $blue;
   font-size: 1.5rem;
   font-weight: bold;
 }
 
 .volume-icon {
-  color: $teal;
+  color: $blue;
   font-size: 5rem;
   margin: 1rem;
 }
@@ -35,7 +35,7 @@
   }
 
   highlight {
-    background-image: linear-gradient(to right, $teal 30%, $sky 100%);
+    background-color: $orange;
     border-radius: 16px;
   }
 }
