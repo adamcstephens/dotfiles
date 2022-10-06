@@ -39,7 +39,6 @@
     ~/.config/wofi/config: wofi.conf
     ~/.config/wofi/style.css: wofi.css
     ~/.local/share/applications: applications
-    ~/.local/share/fonts: fonts
 
 - shell:
     - [systemctl --user daemon-reload]

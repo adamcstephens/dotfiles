@@ -41,6 +41,7 @@ in {
 
   home.packages = [
     # pkgs.cider
+    pkgs.material-design-icons
     (pkgs.nerdfonts.override {fonts = ["JetBrainsMono"];})
   ];
 
