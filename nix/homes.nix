@@ -36,6 +36,7 @@
   }:
     withSystem homeSystem (
       {
+        inputs',
         pkgs,
         system,
         ...
@@ -63,7 +64,7 @@
           modules = hmModules;
 
           extraSpecialArgs = {
-            inherit inputs system;
+            inherit inputs' system;
           };
         };
 

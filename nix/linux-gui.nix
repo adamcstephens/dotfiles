@@ -1,9 +1,8 @@
 {
   config,
-  inputs,
+  inputs',
   lib,
   pkgs,
-  system,
   ...
 }: let
   graphicalWantedBy = ["river-session.target"];
@@ -50,6 +49,9 @@ in {
 
     # audio
     pkgs.wireplumber
+
+    # apps
+    inputs'.webcord.packages.default
   ];
 
   programs.doom-emacs = {
