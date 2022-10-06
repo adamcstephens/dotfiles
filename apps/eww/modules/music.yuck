@@ -11,7 +11,7 @@
       (button
         :class "module"
         :onclick "./scripts/pop music"
-        {music.title})
+      "${music.title} - ${music.artist}")
       (revealer
         :transition "slideright"
         :reveal music_reveal

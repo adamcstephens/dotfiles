@@ -173,5 +173,8 @@
   "editor.stickyScroll.enabled": true,
   "[python]": {
     "editor.defaultFormatter": "ms-python.python"
+  },
+  "[yuck]": {
+    "editor.defaultFormatter": "eww-yuck.yuck"
   }
 }

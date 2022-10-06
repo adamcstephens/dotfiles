@@ -44,6 +44,7 @@ in {
     pkgs.material-design-icons
     (pkgs.nerdfonts.override {fonts = ["JetBrainsMono"];})
 
+    pkgs.bluez
     pkgs.light
     pkgs.networkmanagerapplet
 

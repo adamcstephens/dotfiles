@@ -6,6 +6,7 @@ eamodio.gitlens
 earthly.earthfile-syntax-highlighting
 EditorConfig.EditorConfig
 esbenp.prettier-vscode
+eww-yuck.yuck
 filipesabella.live-p5
 firefox-devtools.vscode-firefox-debug
 golang.go

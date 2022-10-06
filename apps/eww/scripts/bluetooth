@@ -17,16 +17,16 @@ while true; do
       fi
 
       icon=""
-      color="#b4befe"
+      color="#4fb4d8"
     else
       icon=""
       text="Disconnected"
-      color="#45475a"
+      color="#686b78"
     fi
   else
     icon=""
     text="Bluetooth off"
-    color="#45475a"
+    color="#686b78"
   fi
 
   echo '{ "icon": "'"$icon"'", "text": "'"$text"'", "color": "'"$color"'" }'
