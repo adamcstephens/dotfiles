@@ -1,9 +1,9 @@
 .membar {
-  color: $peach;
+  color: $orange;
 }
 
 .cpubar {
-  color: $blue;
+  color: $green;
 }
 
 .batbar {
@@ -17,7 +17,7 @@
 }
 
 .iconmem {
-  color: $peach;
+  color: $orange;
 }
 
 .iconbat {
@@ -25,12 +25,12 @@
 }
 
 .iconcpu {
-  color: $blue;
+  color: $green;
 }
 
 .icon-text {
   font-size: 3rem;
-  padding: .7rem;
+  padding: 0.7rem;
 }
 
 .sys-text-sub {
@@ -69,13 +69,13 @@
 .sys-icon-mem,
 .sys-text-mem,
 .sys-mem {
-  color: $peach;
+  color: $orange;
 }
 
 .sys-icon-cpu,
 .sys-text-cpu,
 .sys-cpu {
-  color: $blue;
+  color: $green;
 }
 
 .sys-icon-bat,
@@ -87,5 +87,3 @@
 .sys-box {
   margin: 1em;
 }
-
-
