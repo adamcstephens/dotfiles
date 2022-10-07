@@ -39,6 +39,8 @@ in {
   fonts.fontconfig.enable = true;
 
   home.packages = [
+    pkgs.river
+
     # pkgs.cider
     pkgs.material-design-icons
     (pkgs.nerdfonts.override {fonts = ["JetBrainsMono"];})

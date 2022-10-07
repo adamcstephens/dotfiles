@@ -33,6 +33,7 @@
     pkgs.direnv
     pkgs.du-dust
     pkgs.fd
+    pkgs.fx
     pkgs.fzf
     pkgs.git
     pkgs.gh

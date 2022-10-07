@@ -22,7 +22,7 @@ in rec {
   hm = pkgs.writeScriptBin "hm" ''
     set -e
 
-    HMPROFILE="$(${home-profile-selector}/bin/home-profile-selector)"
+    : "''${HMPROFILE:=$(${home-profile-selector}/bin/home-profile-selector)}"
 
     if [ -n "$1" ]; then
      ACTION=$1
@@ -30,10 +30,17 @@ in rec {
 
     : "''${ACTION:=build}"
 
+    TARGET=".#homeConfigurations.$HMPROFILE.activationPackage"
+
     echo " Running action $ACTION"
 
     echo "🚧 Building new profile for $HMPROFILE"
-    ${nixCmd} build --no-link .#homeConfigurations.$HMPROFILE.activationPackage --print-build-logs || exit 1
+    ${nixCmd} build --no-link $TARGET --print-build-logs || exit 1
+
+    if [ "$ACTION" = "show" ]; then
+      ${nixCmd} show-derivation $TARGET
+      exit 0
+    fi
 
     if [ "$ACTION" = "switch" ]; then
       old_profile=$(${nixCmd} profile list | grep home-manager-path | head -n1 | awk '{print $4}')
@@ -43,7 +50,7 @@ in rec {
       fi
 
       echo " Activating new profile"
-      if ! "$(${nixCmd} path-info .#homeConfigurations.$HMPROFILE.activationPackage)"/activate; then
+      if ! "$(${nixCmd} path-info $TARGET)"/activate; then
         echo "❗ Failed to activate new profile"
         echo " Rolling back to old profile"
         ${nixCmd} profile install $old_profile
@@ -53,7 +60,7 @@ in rec {
 
     if [ "$ACTION" = "push" ]; then
       echo " cachix upload for $HMPROFILE"
-      ${nixCmd} build --no-link .#homeConfigurations.$HMPROFILE.activationPackage --json | jq -r '.[].outputs | to_entries[].value' | ${pkgs.cachix}/bin/cachix push ${cachixRepo}
+      ${nixCmd} build --no-link $TARGET --json | jq -r '.[].outputs | to_entries[].value' | ${pkgs.cachix}/bin/cachix push ${cachixRepo}
     fi
 
     echo "✅ Success!"
