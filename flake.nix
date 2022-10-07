@@ -58,6 +58,6 @@
     }
     // {
       apps = self.inputs.nixinate.nixinate.aarch64-darwin self;
-      overlays = import ./nix/overlays.nix self;
+      overlays = import ./nix/overlays.nix self.inputs;
     };
 }

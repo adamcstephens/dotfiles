@@ -1,7 +1,11 @@
-self: rec {
-  default = self.inputs.nixpkgs.lib.composeManyExtensions [
+{
+  emacs,
+  nixpkgs,
+  ...
+}: rec {
+  default = nixpkgs.lib.composeManyExtensions [
     river
-    self.inputs.emacs.overlay
+    emacs.overlay
   ];
 
   river = final: prev: {

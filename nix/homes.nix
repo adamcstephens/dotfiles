@@ -7,7 +7,7 @@
     darwin-vm = {
       homeSystem = "aarch64-linux";
       modules = [
-        # ./emacs.nix
+        ./emacs.nix
         ./linux-gui.nix
       ];
     };

@@ -105,6 +105,8 @@
             };
 
             home-manager.users.adam = {
+              nixpkgs.overlays = [self.overlays.default];
+
               imports = self.homeModules.darwin-vm;
             };
 
