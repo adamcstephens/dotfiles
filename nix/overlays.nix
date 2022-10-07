@@ -5,7 +5,8 @@
 }: rec {
   default = nixpkgs.lib.composeManyExtensions [
     river
-    emacs.overlay
+    emacs.overlays.emacs
+    emacs.overlays.package
   ];
 
   river = final: prev: {
