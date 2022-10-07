@@ -9,4 +9,10 @@ export XDG_DATA_DIRS="$HOME/.local/share/flatpak/exports/share:$XDG_DATA_DIRS"
 
 export DESKTOP_SESSION=sway
 
-river &> ~/.cache/river.log-$(date +%Y%m%d%H%M)
+if grep -q NixOS /etc/os-release; then
+  cmd="river"
+else
+  cmd="nix run github:guibou/nixGL#nixGLIntel -- river"
+fi
+
+$cmd &>"$HOME/.cache/river.log-$(date +%Y%m%d%H%M)"
