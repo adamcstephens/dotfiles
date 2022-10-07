@@ -8,6 +8,7 @@
     {
       pkgs,
       system,
+      inputs',
       ...
     }:
       inputs.nixpkgs.lib.nixosSystem {
@@ -20,6 +21,7 @@
             modulesPath,
             ...
           }: {
+            # core config
             imports = [
               (modulesPath + "/profiles/qemu-guest.nix")
             ];
@@ -52,6 +54,7 @@
             networking.useDHCP = lib.mkDefault true;
           })
           {
+            # nixinate settings
             _module.args.nixinate = {
               host = "darwin-vm"; # needs ssh/config
               sshUser = "root";
@@ -65,6 +68,27 @@
             environment.systemPackages = [
               pkgs.git
             ];
+
+            nix = {
+              settings = {
+                auto-optimise-store = true;
+
+                allowed-users = ["@wheel"];
+                trusted-users = ["root" "@wheel"];
+                substituters = [
+                  "https://nix-config.cachix.org"
+                  "https://nix-community.cachix.org"
+                  "https://adamcstephens-dotfiles.cachix.org"
+                  "https://webcord.cachix.org"
+                ];
+                trusted-public-keys = [
+                  "nix-config.cachix.org-1:Vd6raEuldeIZpttVQfrUbLvXJHzzzkS0pezXCVVjDG4="
+                  "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+                  "adamcstephens-dotfiles.cachix.org-1:R4yWqVbP5J+UWH4MpaxpCM0By4CKiUtbRWQ9xA278mU="
+                  "webcord.cachix.org-1:l555jqOZGHd2C9+vS8ccdh8FhqnGe8L78QrHNn+EFEs="
+                ];
+              };
+            };
 
             security.sudo = {
               enable = true;
@@ -81,7 +105,11 @@
             };
 
             home-manager.users.adam = {
-              imports = self.homeModules.${system};
+              imports = self.homeModules.darwin-vm;
+            };
+
+            home-manager.extraSpecialArgs = {
+              inherit inputs';
             };
           }
           {

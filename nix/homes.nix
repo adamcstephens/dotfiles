@@ -4,6 +4,13 @@
   ...
 }: let
   homeProfiles = {
+    darwin-vm = {
+      homeSystem = "aarch64-linux";
+      modules = [
+        # ./emacs.nix
+        ./linux-gui.nix
+      ];
+    };
     EMAT-C02G44CPQ05P = {
       username = "astephe9";
       homeSystem = "aarch64-darwin";

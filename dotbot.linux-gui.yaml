@@ -39,11 +39,10 @@
     ~/.config/wofi/config: wofi.conf
     ~/.config/wofi/style.css: wofi.css
     ~/.local/share/applications: applications
-
-- shell:
-    - [systemctl --user daemon-reload]
-    - [
-        systemctl --user enable --now dunst gammastep gpg-agent gpg-agent.socket gpg-agent-extra.socket pipewire pipewire-pulse polkit-gnome-authentication-agent-1 ssh-agent swayidle wob wob.socket,
-      ]
-    - [systemctl --user enable --now syncthing]
-    - [systemctl --user mask gammastep-indicator]
+# - shell:
+#     - [systemctl --user daemon-reload]
+#     - [
+#         systemctl --user enable --now dunst gammastep gpg-agent gpg-agent.socket gpg-agent-extra.socket pipewire pipewire-pulse polkit-gnome-authentication-agent-1 ssh-agent swayidle wob wob.socket,
+#       ]
+#     - [systemctl --user enable --now syncthing]
+#     - [systemctl --user mask gammastep-indicator]

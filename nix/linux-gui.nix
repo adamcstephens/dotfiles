@@ -62,6 +62,9 @@ in {
     export PATH=${config.home.path}/bin:${config.home.path}/sbin:$PATH
 
     pushd ~/.dotfiles
+      if [ -e .nixos-managed ]; then
+        git pull
+      fi
       CONFIG=dotbot.linux-gui.yaml task dotbot
     popd
   '';
