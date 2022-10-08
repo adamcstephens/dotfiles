@@ -8,6 +8,7 @@
   imports = [
     ../../apps/dunst
     ../../apps/eww
+    ../../apps/gammastep
     ../../apps/kanshi
     ../../apps/swayidle
   ];
