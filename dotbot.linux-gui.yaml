@@ -23,9 +23,6 @@
     ~/.config/sway/config: sway.conf
     ~/.config/swaylock/config: swaylock.conf
     ~/.config/systemd/user/gammastep.service: gammastep.service
-    ~/.config/systemd/user/gpg-agent-extra.socket: gpg-agent-extra.socket
-    ~/.config/systemd/user/gpg-agent.service: gpg-agent.service
-    ~/.config/systemd/user/gpg-agent.socket: gpg-agent.socket
     ~/.config/systemd/user/polkit-gnome-authentication-agent-1.service: polkit-gnome-authentication-agent-1.service
     ~/.config/systemd/user/river-session.target: river-session.target
     ~/.config/systemd/user/ssh-agent.service: ssh-agent.service
@@ -38,7 +35,7 @@
 # - shell:
 #     - [systemctl --user daemon-reload]
 #     - [
-#         systemctl --user enable --now gammastep gpg-agent gpg-agent.socket gpg-agent-extra.socket pipewire pipewire-pulse polkit-gnome-authentication-agent-1 ssh-agent swayidle wob wob.socket,
+#         systemctl --user enable --now gammastep pipewire pipewire-pulse polkit-gnome-authentication-agent-1 ssh-agent swayidle wob wob.socket,
 #       ]
 #     - [systemctl --user enable --now syncthing]
 #     - [systemctl --user mask gammastep-indicator]

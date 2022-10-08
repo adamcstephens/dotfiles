@@ -49,12 +49,6 @@
     ~/.editorconfig: editorconfig
     ~/.gitconfig: gitconfig
     ~/.gitignore: gitignore
-    ~/.gnupg/gpg.conf:
-      if: "which gpg-agent"
-      path: gpg.conf
-    ~/.gnupg/gpg-agent.conf:
-      if: '[ "$(uname -s)" = "Linux" ] && which gpg-agent'
-      path: gpg-agent-linux.conf
     ~/.hyper.js: hyper.js
     ~/.inputrc:
       if: "[ ! -e /etc/inputrc ]"
