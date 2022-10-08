@@ -22,7 +22,6 @@
     ~/.config/river/init: river.sh
     ~/.config/sway/config: sway.conf
     ~/.config/swaylock/config: swaylock.conf
-    ~/.config/systemd/user/polkit-gnome-authentication-agent-1.service: polkit-gnome-authentication-agent-1.service
     ~/.config/systemd/user/river-session.target: river-session.target
     ~/.config/systemd/user/ssh-agent.service: ssh-agent.service
     ~/.config/systemd/user/sway-session.target: sway-session.target
