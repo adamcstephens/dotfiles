@@ -34,7 +34,6 @@
     ~/.config/systemd/user/ssh-agent.service: ssh-agent.service
     ~/.config/systemd/user/sway-session.target: sway-session.target
     ~/.config/systemd/user/swayidle.service: swayidle.service
-    ~/.config/way-displays/cfg.yaml: apps/way-displays.yaml
     ~/.config/waylock/waylock.toml: waylock.toml
     ~/.config/wofi/config: wofi.conf
     ~/.config/wofi/style.css: wofi.css

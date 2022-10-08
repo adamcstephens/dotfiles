@@ -4,36 +4,10 @@
   lib,
   pkgs,
   ...
-}: let
-  graphicalWantedBy = ["river-session.target"];
-
-  apps = {
-    way-displays = {
-      home.packages = [
-        pkgs.way-displays
-      ];
-
-      systemd.user.services.way-displays = {
-        Unit = {
-          Description = "way-displays";
-          Documentation = ["man:way-displays(1)"];
-        };
-
-        Service = {
-          ExecStart = "${pkgs.way-displays}/bin/way-displays";
-        };
-
-        Install = {
-          WantedBy = graphicalWantedBy;
-        };
-      };
-    };
-  };
-in {
+}: {
   imports = [
-    ../apps/eww
-
-    apps.way-displays
+    ../../apps/eww
+    ../../apps/kanshi
   ];
 
   fonts.fontconfig.enable = true;
