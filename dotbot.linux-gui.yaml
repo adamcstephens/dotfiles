@@ -27,7 +27,6 @@
     ~/.config/systemd/user/river-session.target: river-session.target
     ~/.config/systemd/user/ssh-agent.service: ssh-agent.service
     ~/.config/systemd/user/sway-session.target: sway-session.target
-    ~/.config/systemd/user/swayidle.service: swayidle.service
     ~/.config/waylock/waylock.toml: waylock.toml
     ~/.config/wofi/config: wofi.conf
     ~/.config/wofi/style.css: wofi.css

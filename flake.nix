@@ -50,7 +50,7 @@
           ];
         };
 
-        packages = import ./nix/hm.nix {
+        packages = import ./nix/packages {
           inherit pkgs;
           homeConfigurations = builtins.attrNames self.homeConfigurations;
         };

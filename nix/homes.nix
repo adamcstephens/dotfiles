@@ -25,6 +25,8 @@
         ./linux-gui
       ];
     };
+
+    # generic systems
     aarch64-darwin = {
       homeSystem = "aarch64-darwin";
     };
@@ -45,6 +47,7 @@
       {
         inputs',
         pkgs,
+        self',
         system,
         ...
       }: let
@@ -52,6 +55,7 @@
           if pkgs.stdenv.isDarwin
           then "/Users/${username}"
           else "/home/${username}";
+
         hmModules =
           [
             ./home.nix
@@ -71,7 +75,7 @@
           modules = hmModules;
 
           extraSpecialArgs = {
-            inherit inputs' system;
+            inherit inputs' self' system;
           };
         };
 

@@ -9,6 +9,7 @@
     ../../apps/dunst
     ../../apps/eww
     ../../apps/kanshi
+    ../../apps/swayidle
   ];
 
   fonts.fontconfig.enable = true;
