@@ -1,2 +1,0 @@
-adam    ALL = NOPASSWD: /usr/bin/build
-adam    ALL = NOPASSWD: /usr/bin/osc

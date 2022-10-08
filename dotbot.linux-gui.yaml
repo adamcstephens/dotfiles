@@ -7,19 +7,14 @@
     - ~/.local/mpd
 
 - link:
-    ~/.config/Code/User/keybindings.json: vscode/keybindings.json
-    ~/.config/Code/User/settings.json: vscode/settings.json
-    ~/.config/Code - Insiders/User/keybindings.json: vscode/keybindings.json
-    ~/.config/Code - Insiders/User/settings.json: vscode/settings.json
-    ~/.config/Code - OSS/User/keybindings.json: vscode/keybindings.json
-    ~/.config/Code - OSS/User/settings.json: vscode/settings.json
+    ~/.config/Code/User/keybindings.json: apps/vscode/keybindings.json
+    ~/.config/Code/User/settings.json: apps/vscode/settings.json
+    ~/.config/Code - Insiders/User/keybindings.json: apps/vscode/keybindings.json
+    ~/.config/Code - Insiders/User/settings.json: apps/vscode/settings.json
+    ~/.config/Code - OSS/User/keybindings.json: apps/vscode/keybindings.json
+    ~/.config/Code - OSS/User/settings.json: apps/vscode/settings.json
     ~/.config/eww: apps/eww
+    ~/.local/share/applications: applications
     ~/.config/kitty/linux.conf: kitty/kitty-linux.conf
-    ~/.config/mpd/mpd.conf: mpd.conf
     ~/.config/pipewire/pipewire.conf.d: pipewire/pipewire.conf.d
     ~/.config/pipewire/client.conf.d: pipewire/client.conf.d
-    ~/.config/sway/config: sway.conf
-    ~/.config/swaylock/config: swaylock.conf
-    ~/.config/wofi/config: wofi.conf
-    ~/.config/wofi/style.css: wofi.css
-    ~/.local/share/applications: applications
