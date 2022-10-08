@@ -1,6 +1,6 @@
 {pkgs, ...}: {
-  xdg.configFile."wofi/wofi.conf".source = ./wofi.conf;
-  xdg.configFile."wofi/wofi.css".source = ./wofi.css;
+  xdg.configFile."wofi/config".source = ./config;
+  xdg.configFile."wofi/style.css".source = ./style.css;
 
   home.packages = [
     pkgs.wofi
