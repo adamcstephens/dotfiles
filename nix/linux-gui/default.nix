@@ -14,6 +14,13 @@
     ../../apps/swayidle
   ];
 
+  services.gnome-keyring.enable = true;
+  systemd.user.services.gnome-keyring = {
+    Install = {
+      WantedBy = ["river-session.target"];
+    };
+  };
+
   fonts.fontconfig.enable = true;
 
   home.packages = [
