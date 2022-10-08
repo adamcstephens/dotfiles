@@ -19,10 +19,8 @@
     ~/.config/mpd/mpd.conf: mpd.conf
     ~/.config/pipewire/pipewire.conf.d: pipewire/pipewire.conf.d
     ~/.config/pipewire/client.conf.d: pipewire/client.conf.d
-    ~/.config/river/init: river.sh
     ~/.config/sway/config: sway.conf
     ~/.config/swaylock/config: swaylock.conf
-    ~/.config/systemd/user/river-session.target: river-session.target
     ~/.config/systemd/user/ssh-agent.service: ssh-agent.service
     ~/.config/systemd/user/sway-session.target: sway-session.target
     ~/.config/waylock/waylock.toml: waylock.toml

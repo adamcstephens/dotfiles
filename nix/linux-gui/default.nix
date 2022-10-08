@@ -10,6 +10,7 @@
     ../../apps/eww
     ../../apps/gammastep
     ../../apps/kanshi
+    ../../apps/river
     ../../apps/swayidle
   ];
 
