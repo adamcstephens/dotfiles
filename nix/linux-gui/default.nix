@@ -6,6 +6,7 @@
   ...
 }: {
   imports = [
+    ../../apps/dunst
     ../../apps/eww
     ../../apps/kanshi
   ];
