@@ -18,6 +18,12 @@
         ./emacs.nix
       ];
     };
+    nixos2 = {
+      homeSystem = "x86_64-linux";
+      modules = [
+        ./emacs.nix
+      ];
+    };
     think = {
       homeSystem = "x86_64-linux";
       modules = [
