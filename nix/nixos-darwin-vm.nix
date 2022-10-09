@@ -97,7 +97,7 @@
 
             users.users.adam = {
               isNormalUser = true;
-              extraGroups = ["wheel" "audio"];
+              extraGroups = ["audio" "video" "tty" "wheel"];
               shell = pkgs.fish;
               openssh.authorizedKeys.keys = [
                 "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIaAFecMxP1SAxdCZvWZFNBAK6ByeG9Mvc5HUysMbJ9y emat"
