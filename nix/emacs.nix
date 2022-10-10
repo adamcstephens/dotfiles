@@ -14,6 +14,7 @@
     aspell
     # pkgs.corefonts
     latex
+    pkgs.graphicsmagick
     pkgs.nil
     pkgs.shellcheck
     pkgs.shfmt

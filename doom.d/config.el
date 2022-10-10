@@ -18,6 +18,7 @@
       doom-big-font (font-spec :family "JetBrainsMono Nerd Font" :size 19))
 
 
+(setq image-use-external-converter t)
 ;; disable completion of words in org mode
 (defun zz/adjust-org-company-backends ()
   (remove-hook 'after-change-major-mode-hook '+company-init-backends-h)
@@ -36,6 +37,9 @@
   ;; Interpret "_" and "^" for export when braces are used.
   (setq org-export-with-sub-superscripts '{})
   (setq org-link-descriptive nil)
+
+  ;; Export async
+  (setq org-export-in-background t)
 
   ;; syntax highlight latex export
   (setq org-latex-listings 'minted

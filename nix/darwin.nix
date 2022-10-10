@@ -4,10 +4,6 @@
   lib,
   ...
 }: {
-  programs.doom-emacs = {
-    emacsPackage = pkgs.emacsNativeComp;
-  };
-
   home.packages = [
     pkgs.gnugrep
     pkgs.gnused
