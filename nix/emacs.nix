@@ -13,6 +13,7 @@
     pkgs.alejandra
     aspell
     # pkgs.corefonts
+    pkgs.git
     latex
     pkgs.graphicsmagick
     pkgs.nil
