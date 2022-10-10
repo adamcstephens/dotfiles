@@ -7,8 +7,8 @@
     ~/.config/karabiner: karabiner
     ~/.config/kitty/mac.conf: kitty/kitty-mac.conf
     ~/.finicky.js: finicky.js
-    ~/Library/Application Support/Code/User/keybindings.json: vscode/keybindings.json
-    ~/Library/Application Support/Code/User/settings.json: vscode/settings.json
+    ~/Library/Application Support/Code/User/keybindings.json: apps/vscode/keybindings.json
+    ~/Library/Application Support/Code/User/settings.json: apps/vscode/settings.json
 
 - shell:
     - [launchctl start com.openssh.ssh-agent, enable launchd ssh-agent]
