@@ -1,20 +1,19 @@
-{
-  pkgs,
-  self',
-  ...
-}: {
+{pkgs, ...}: let
+  # ${self'.packages.gtklock}
+  gtklock = "${pkgs.util-linux}/bin/setsid --fork /usr/bin/gtklock";
+in {
   services.swayidle = {
     enable = true;
     events = [
       {
         event = "before-sleep";
-        command = "setsid --fork ${self'.packages.gtklock}/bin/gtklock";
+        command = "${pkgs.procps}/bin/pgrep gtklock || ${gtklock}";
       }
     ];
     timeouts = [
       {
         timeout = 120;
-        command = "setsid --fork ${self'.packages.gtklock}/bin/gtklock";
+        command = "${gtklock}";
       }
       {
         timeout = 300;
