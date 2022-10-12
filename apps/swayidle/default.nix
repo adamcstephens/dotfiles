@@ -1,13 +1,17 @@
 {pkgs, ...}: let
   # ${self'.packages.gtklock}
-  gtklock = "${pkgs.util-linux}/bin/setsid --fork /usr/bin/gtklock";
+  gtklockBin = "/usr/bin/gtklock";
+  # ${pkgs.systemdMinimal}/bin/systemctl
+  systemctlBin = "/usr/bin/systemctl";
+
+  gtklock = "${pkgs.procps}/bin/pgrep gtklock || ${pkgs.util-linux}/bin/setsid --fork ${gtklockBin}";
 in {
   services.swayidle = {
     enable = true;
     events = [
       {
         event = "before-sleep";
-        command = "${pkgs.procps}/bin/pgrep gtklock || ${gtklock}";
+        command = "${gtklock}";
       }
     ];
     timeouts = [
@@ -16,8 +20,8 @@ in {
         command = "${gtklock}";
       }
       {
-        timeout = 300;
-        command = "sudo systemctl suspend";
+        timeout = 360;
+        command = "${systemctlBin} suspend";
       }
     ];
   };
