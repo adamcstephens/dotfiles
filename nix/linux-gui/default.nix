@@ -11,6 +11,7 @@
     ../../apps/gammastep
     ../../apps/kanshi
     ../../apps/river
+    ../../apps/vscode
     ../../apps/wofi
     ../../apps/swayidle
   ];
