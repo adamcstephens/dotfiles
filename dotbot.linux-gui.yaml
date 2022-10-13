@@ -14,7 +14,6 @@
     ~/.config/Code - OSS/User/keybindings.json: apps/vscode/keybindings.json
     ~/.config/Code - OSS/User/settings.json: apps/vscode/settings.json
     ~/.config/eww: apps/eww
-    ~/.local/share/applications: applications
     ~/.config/kitty/linux.conf: kitty/kitty-linux.conf
     ~/.config/pipewire/pipewire.conf.d: pipewire/pipewire.conf.d
     ~/.config/pipewire/client.conf.d: pipewire/client.conf.d

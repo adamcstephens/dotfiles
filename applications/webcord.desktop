@@ -1,5 +1,0 @@
-[Desktop Entry]
-Name=WebCord
-Exec=webcord --unity-launch --enable-features=UseOzonePlatform --ozone-platform=wayland --ozone-platform-hint=auto --enable-features=WaylandWindowDecoration
-Type=Application
-Terminal=false
