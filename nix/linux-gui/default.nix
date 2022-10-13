@@ -16,6 +16,12 @@
     ../../apps/swayidle
   ];
 
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [
+      "slack"
+      "vscode"
+    ];
+
   services.gnome-keyring.enable = true;
   systemd.user.services.gnome-keyring = {
     Install = {
@@ -28,7 +34,6 @@
   home.packages = [
     pkgs.river
 
-    # pkgs.cider
     pkgs.material-design-icons
     (pkgs.nerdfonts.override {fonts = ["JetBrainsMono"];})
 
@@ -40,6 +45,8 @@
     pkgs.wireplumber
 
     # apps
+    pkgs.cider
+    pkgs.slack
     inputs'.webcord.packages.default
   ];
 
