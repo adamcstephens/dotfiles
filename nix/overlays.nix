@@ -4,9 +4,10 @@
   ...
 }: rec {
   default = nixpkgs.lib.composeManyExtensions [
-    river
     emacs.overlays.emacs
     emacs.overlays.package
+    river
+    vscode
   ];
 
   river = final: prev: {
@@ -19,6 +20,12 @@
         sha256 = "sha256-orKL3imxpQXrSLj12Z3Zn5UuAW7P/JeOfoWCkb98eCM=";
         fetchSubmodules = true;
       };
+    });
+  };
+
+  vscode = final: prev: {
+    vscode = prev.vscode.overrideAttrs (_: {
+      version = "1.72.1";
     });
   };
 }
