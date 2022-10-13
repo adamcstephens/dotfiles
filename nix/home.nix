@@ -41,6 +41,7 @@
     pkgs.helix
     pkgs.htop
     pkgs.jq
+    pkgs.just
     pkgs.lazygit
     pkgs.lsd
     pkgs.mtr
