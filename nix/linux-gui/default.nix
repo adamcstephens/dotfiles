@@ -46,6 +46,7 @@
 
     # apps
     pkgs.cider
+    pkgs.kitty
     pkgs.slack
     inputs'.webcord.packages.default
   ];
