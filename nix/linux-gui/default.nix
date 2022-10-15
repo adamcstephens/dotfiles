@@ -48,6 +48,7 @@
     pkgs.cider
     pkgs.kitty
     pkgs.slack
+    pkgs.tdesktop
     inputs'.webcord.packages.default
   ];
 
