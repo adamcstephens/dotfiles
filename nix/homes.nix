@@ -8,7 +8,7 @@
       homeSystem = "aarch64-linux";
       modules = [
         ./emacs.nix
-        ./linux-gui
+        ./linux-gui.nix
       ];
     };
     EMAT-C02G44CPQ05P = {
@@ -28,7 +28,7 @@
       homeSystem = "x86_64-linux";
       modules = [
         ./emacs.nix
-        ./linux-gui
+        ./linux-gui.nix
       ];
     };
 

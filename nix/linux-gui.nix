@@ -6,28 +6,23 @@
   ...
 }: {
   imports = [
-    ../../apps/dunst
-    ../../apps/eww
-    ../../apps/gammastep
-    ../../apps/kanshi
-    ../../apps/river
-    ../../apps/vscode
-    ../../apps/wofi
-    ../../apps/swayidle
+    ../apps/dunst
+    ../apps/eww
+    ../apps/gammastep
+    ../apps/kanshi
+    ../apps/river
+    ../apps/vscode
+    ../apps/wofi
+    ../apps/swayidle
   ];
 
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [
+      "1password"
+      "plexamp"
       "slack"
       "vscode"
     ];
-
-  services.gnome-keyring.enable = true;
-  systemd.user.services.gnome-keyring = {
-    Install = {
-      WantedBy = ["river-session.target"];
-    };
-  };
 
   fonts.fontconfig.enable = true;
 
@@ -37,16 +32,24 @@
     pkgs.material-design-icons
     (pkgs.nerdfonts.override {fonts = ["JetBrainsMono"];})
 
+    pkgs.brightnessctl
+    pkgs.blueberry
     pkgs.bluez
     pkgs.light
     pkgs.networkmanagerapplet
 
     # audio
+    pkgs.plexamp
+    pkgs.playerctl
     pkgs.wireplumber
 
     # apps
+    pkgs._1password-gui
     pkgs.cider
+    pkgs.firefox-wayland
     pkgs.kitty
+    pkgs.cinnamon.nemo
+    pkgs.remmina
     pkgs.slack
     pkgs.tdesktop
     inputs'.webcord.packages.default
@@ -63,5 +66,9 @@
     popd
   '';
 
+  services.gnome-keyring.enable = true;
+  services.syncthing.enable = true;
+
+  systemd.user.services.gnome-keyring.Install.WantedBy = ["river-session.target"];
   systemd.user.startServices = "sd-switch";
 }
