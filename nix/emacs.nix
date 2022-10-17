@@ -16,6 +16,7 @@
     pkgs.git
     latex
     pkgs.graphicsmagick
+    pkgs.nodePackages.mermaid-cli
     pkgs.nil
     pkgs.shellcheck
     pkgs.shfmt

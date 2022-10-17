@@ -4,6 +4,14 @@
   lib,
   ...
 }: {
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [
+      "1password"
+      "plexamp"
+      "slack"
+      "vscode"
+    ];
+
   home.stateVersion = "22.05";
 
   programs.home-manager.enable = true;

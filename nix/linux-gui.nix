@@ -16,14 +16,6 @@
     ../apps/swayidle
   ];
 
-  nixpkgs.config.allowUnfreePredicate = pkg:
-    builtins.elem (lib.getName pkg) [
-      "1password"
-      "plexamp"
-      "slack"
-      "vscode"
-    ];
-
   fonts.fontconfig.enable = true;
 
   home.packages = [
