@@ -176,6 +176,12 @@
 (after! org-re-reveal
   (setq org-re-reveal-history t))
 
+(after! ob-mermaid
+  (org-babel-do-load-languages
+      'org-babel-load-languages
+      '((mermaid . t)
+        emacs-lisp . t)))
+
 (after! ispell
   (setq ispell-personal-dictionary "~/.aspell.en.pws"))
 

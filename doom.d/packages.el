@@ -53,3 +53,4 @@
 (package! heaven-and-hell)
 (package! org-re-reveal :pin "55fca47c740c50fe04cbf2b8ae90e02174626c0c")
 (package! ssh-config-mode)
+(package! ob-mermaid)
