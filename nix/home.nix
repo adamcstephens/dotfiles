@@ -4,6 +4,10 @@
   lib,
   ...
 }: {
+
+  # https://github.com/NixOS/nixpkgs/issues/196651
+  manual.manpages.enable = false;
+
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [
       "1password"
@@ -39,6 +43,7 @@
     pkgs.calc
     pkgs.colordiff
     pkgs.direnv
+    pkgs.dogdns
     pkgs.du-dust
     pkgs.fd
     pkgs.fx
