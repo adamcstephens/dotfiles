@@ -2,7 +2,6 @@ berberman.vscode-cabal-fmt
 bmalehorn.vscode-fish
 DavidAnson.vscode-markdownlint
 dustinsanders.an-old-hope-theme-vscode
-eamodio.gitlens
 earthly.earthfile-syntax-highlighting
 EditorConfig.EditorConfig
 esbenp.prettier-vscode

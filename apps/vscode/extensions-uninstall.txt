@@ -10,3 +10,4 @@ GitHub.codespaces
 foxundermoon.shell-format
 bbenoist.Nix
 danielgjackson.auto-dark-mode-windows
+eamodio.gitlens
