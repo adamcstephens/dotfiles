@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
-EXTENSIONS_FILE="$HOME/.dotfiles/vscode/extensions.txt"
-UNINSTALL_FILE="$HOME/.dotfiles/vscode/extensions-uninstall.txt"
+EXTENSIONS_FILE="$HOME/.dotfiles/apps/vscode/extensions.txt"
+UNINSTALL_FILE="$HOME/.dotfiles/apps/vscode/extensions-uninstall.txt"
 
 for code in code code-insiders; do
   if command -v $code >/dev/null 2>&1; then
@@ -13,7 +13,7 @@ for code in code code-insiders; do
       case $1 in
       install)
         TMPFILE="$(mktemp)"
-        sed -e "/$2/d" "$UNINSTALL_FILE" > "$TMPFILE"
+        sed -e "/$2/d" "$UNINSTALL_FILE" >"$TMPFILE"
         mv "$TMPFILE" "$UNINSTALL_FILE"
         $code --install-extension "$2"
         ;;
