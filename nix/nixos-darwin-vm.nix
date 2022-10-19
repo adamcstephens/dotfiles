@@ -6,9 +6,10 @@
 }: {
   flake.nixosConfigurations.darwin-vm = withSystem "aarch64-linux" (
     {
+      inputs',
       pkgs,
       system,
-      inputs',
+      self',
       ...
     }:
       inputs.nixpkgs.lib.nixosSystem {
@@ -89,6 +90,9 @@
                 ];
               };
             };
+            # Lots of stuff that uses aarch64 that claims doesn't work, but actually works.
+            nixpkgs.config.allowUnfree = true;
+            nixpkgs.config.allowUnsupportedSystem = true;
 
             security.sudo = {
               enable = true;
@@ -104,6 +108,21 @@
               ];
             };
 
+            hardware.opengl.enable = true;
+
+            # Qemu
+            services.spice-vdagentd.enable = true;
+
+            # For now, we need this since hardware acceleration does not work.
+            environment.variables.LIBGL_ALWAYS_SOFTWARE = "1";
+
+            security.polkit.enable = true;
+
+            xdg.portal = {
+              enable = true;
+              wlr.enable = true;
+            };
+
             home-manager.users.adam = {
               nixpkgs.overlays = [self.overlays.default];
 
@@ -111,7 +130,7 @@
             };
 
             home-manager.extraSpecialArgs = {
-              inherit inputs';
+              inherit inputs' self';
             };
           }
           {
