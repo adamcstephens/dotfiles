@@ -108,8 +108,6 @@
               ];
             };
 
-            hardware.opengl.enable = true;
-
             # Qemu
             services.spice-vdagentd.enable = true;
 
@@ -122,6 +120,32 @@
               enable = true;
               wlr.enable = true;
             };
+
+            # VMware, Parallels both only support this being 0 otherwise you see
+            # "error switching console mode" on boot.
+            boot.loader.systemd-boot.consoleMode = "0";
+
+            # We expect to run the VM on hidpi machines.
+            hardware.video.hidpi.enable = true;
+
+            hardware.opengl.enable = true;
+            services.xserver = {
+              enable = true;
+              layout = "us";
+              dpi = 220;
+
+              desktopManager = {
+                xterm.enable = false;
+                wallpaper.mode = "fill";
+              };
+
+              displayManager = {
+                sessionPackages = [pkgs.river];
+                defaultSession = "river";
+                gdm.enable = true;
+              };
+            };
+            programs.sway.enable = true;
 
             home-manager.users.adam = {
               nixpkgs.overlays = [self.overlays.default];

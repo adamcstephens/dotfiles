@@ -20,6 +20,18 @@
         sha256 = "sha256-orKL3imxpQXrSLj12Z3Zn5UuAW7P/JeOfoWCkb98eCM=";
         fetchSubmodules = true;
       };
+
+      installPhase = ''
+        runHook preInstall
+        zig build -Drelease-safe -Dcpu=baseline -Dxwayland -Dman-pages --prefix $out install
+        mkdir -p $out/share/wayland-sessions
+        cp contrib/river.desktop $out/share/wayland-sessions
+        runHook postInstall
+      '';
+
+      passthru = {
+        providedSessions = ["river"];
+      };
     });
   };
 
