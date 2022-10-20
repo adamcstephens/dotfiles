@@ -24,6 +24,13 @@
         ./emacs.nix
       ];
     };
+    sank = {
+      homeSystem = "x86_64-linux";
+      modules = [
+        ./emacs.nix
+        ./linux-gui.nix
+      ];
+    };
     think = {
       homeSystem = "x86_64-linux";
       modules = [
