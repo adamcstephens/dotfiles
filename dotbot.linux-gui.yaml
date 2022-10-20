@@ -17,3 +17,4 @@
     ~/.config/kitty/linux.conf: kitty/kitty-linux.conf
     ~/.config/pipewire/pipewire.conf.d: pipewire/pipewire.conf.d
     ~/.config/pipewire/client.conf.d: pipewire/client.conf.d
+    ~/.config/sway/config: apps/sway/sway.conf
