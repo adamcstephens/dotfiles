@@ -63,6 +63,6 @@
   services.gnome-keyring.enable = true;
   services.syncthing.enable = true;
 
-  systemd.user.services.gnome-keyring.Install.WantedBy = ["river-session.target"];
+  systemd.user.services.gnome-keyring.Install.WantedBy = config.dotfiles.gui.wantedBy;
   systemd.user.startServices = "sd-switch";
 }

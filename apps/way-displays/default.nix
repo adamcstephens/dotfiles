@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  config,
+  pkgs,
+  ...
+}: {
   home.packages = [
     pkgs.way-displays
   ];
@@ -14,7 +18,7 @@
     };
 
     Install = {
-      WantedBy = ["river-session.target"];
+      WantedBy = config.dotfiles.gui.wantedBy;
     };
   };
 }

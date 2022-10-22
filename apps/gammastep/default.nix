@@ -1,4 +1,4 @@
-{...}: {
+{config, ...}: {
   services.gammastep = {
     enable = true;
     latitude = 39.9612;
@@ -11,7 +11,7 @@
 
   systemd.user.services.gammastep = {
     Install = {
-      WantedBy = ["river-session.target"];
+      WantedBy = config.dotfiles.gui.wantedBy;
     };
   };
 }

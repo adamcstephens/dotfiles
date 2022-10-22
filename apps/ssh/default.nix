@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  config,
+  pkgs,
+  ...
+}: {
   systemd.user.services.ssh-agent = {
     Unit = {
       Description = "ssh-agent";
@@ -12,7 +16,7 @@
     };
 
     Install = {
-      WantedBy = ["river-session.target"];
+      WantedBy = config.dotfiles.gui.wantedBy;
     };
   };
 }

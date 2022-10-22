@@ -38,13 +38,14 @@ in {
       Description = "Eww Daemon";
       # not yet implemented
       # PartOf = ["tray.target"];
-      PartOf = ["river-session.target"];
+      # PartOf = ["river-session.target" "hyprland-session.target"];
     };
     Service = {
       Environment = "PATH=/run/wrappers/bin:${lib.makeBinPath dependencies}";
       ExecStart = "${config.programs.eww.package}/bin/eww daemon --no-daemonize";
+      ExecStartPost = "${config.programs.eww.package}/bin/eww open bar";
       Restart = "on-failure";
     };
-    Install.WantedBy = ["river-session.target"];
+    Install.WantedBy = config.dotfiles.gui.wantedBy;
   };
 }

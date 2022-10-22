@@ -1,8 +1,18 @@
-{pkgs, ...}: let
-  # ${self'.packages.gtklock}
-  gtklockBin = "/usr/bin/gtklock";
-  # ${pkgs.systemdMinimal}/bin/systemctl
-  systemctlBin = "/usr/bin/systemctl";
+{
+  pkgs,
+  config,
+  lib,
+  self',
+  ...
+}: let
+  gtklockBin =
+    if config.dotfiles.isNixos
+    then "${self'.packages.gtklock}/bin/gtlock"
+    else "/usr/bin/gtklock";
+  systemctlBin =
+    if config.dotfiles.isNixos
+    then "${pkgs.systemdMinimal}/bin/systemctl"
+    else "/usr/bin/systemctl";
 
   gtklock = "${pkgs.procps}/bin/pgrep gtklock || ${pkgs.util-linux}/bin/setsid --fork ${gtklockBin}";
 in {
@@ -14,21 +24,24 @@ in {
         command = "${gtklock}";
       }
     ];
-    timeouts = [
-      {
-        timeout = 120;
-        command = "${gtklock}";
-      }
-      {
-        timeout = 360;
-        command = "${systemctlBin} suspend";
-      }
-    ];
+    timeouts =
+      [
+        {
+          timeout = 120;
+          command = "${gtklock}";
+        }
+      ]
+      ++ (lib.optional (!config.dotfiles.isVM) [
+        {
+          timeout = 360;
+          command = "${systemctlBin} suspend";
+        }
+      ]);
   };
 
   systemd.user.services.swayidle = {
     Install = {
-      WantedBy = ["river-session.target"];
+      WantedBy = config.dotfiles.gui.wantedBy;
     };
   };
 }

@@ -30,6 +30,11 @@
         ./emacs.nix
         ./linux-gui.nix
       ];
+      dotfiles = {
+        isNixos = true;
+        isVM = true;
+        windowManager.hyprland = true;
+      };
     };
     think = {
       homeSystem = "x86_64-linux";
@@ -37,6 +42,9 @@
         ./emacs.nix
         ./linux-gui.nix
       ];
+      dotfiles = {
+        windowManager.river = true;
+      };
     };
 
     # generic systems
@@ -54,6 +62,7 @@
   homeProfile = {
     username ? "adam",
     modules ? [],
+    dotfiles ? {},
     homeSystem,
   }:
     withSystem homeSystem (
@@ -71,6 +80,10 @@
 
         hmModules =
           [
+            ./dotfiles.nix
+            {
+              inherit dotfiles;
+            }
             ./home.nix
             inputs.doom-emacs.hmModule
             {
