@@ -37,10 +37,6 @@ tasks:
       - ~/.dotfiles/bin/install-dev.sh
       - task: dev:all
 
-  dotbot:
-    cmds:
-      - ./bin/dotbot
-
   emacs:doom:
     cmds:
       - git clone https://github.com/doomemacs/doomemacs ~/.emacs.d
@@ -69,10 +65,6 @@ tasks:
       - nix run .#update-home
     status:
       - nix profile list | grep home-manager-path
-
-  ssh:keygen:
-    cmds:
-      - ssh-keygen -t ed25519
 
   test:
     cmds:

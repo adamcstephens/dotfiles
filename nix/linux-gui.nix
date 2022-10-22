@@ -9,6 +9,7 @@
     ../apps/dunst
     ../apps/eww
     ../apps/gammastep
+    ../apps/hyprland
     ../apps/kanshi
     ../apps/river
     ../apps/vscode
@@ -54,7 +55,7 @@
       if [ -e .nixos-managed ]; then
         git pull
       fi
-      CONFIG=dotbot.linux-gui.yaml task dotbot
+      just dotbot dotbot.linux-gui.yaml
     popd
   '';
 

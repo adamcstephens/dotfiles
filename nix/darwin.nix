@@ -22,7 +22,7 @@
     export PATH=${config.home.path}/bin:${config.home.path}/sbin:$PATH
 
     pushd ~/.dotfiles
-      CONFIG=dotbot.Darwin.yaml task dotbot
+      just dotbot dotbot.Darwin.yaml
     popd
   '';
 }

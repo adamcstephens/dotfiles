@@ -1,9 +1,7 @@
 {...}: {
-  xdg.configFile."river/init".source = ./river.sh;
-
-  systemd.user.targets.river-session = {
+  systemd.user.targets.hyprland-session = {
     Unit = {
-      Description = "river compositor session";
+      Description = "hyprland compositor session";
       Documentation = ["man:systemd.special(7)"];
       BindsTo = ["graphical-session.target"];
       Wants = ["graphical-session-pre.target"];
