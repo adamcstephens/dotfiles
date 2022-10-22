@@ -35,12 +35,14 @@
 	autoStash = true
 [tag]
   gpgsign = true
-[url "git@github.com:adamcstephens"]
-  pushInsteadOf = https://github.com/adamcstephens
-[url "git@gitlab.com:adamcstephens"]
-  pushInsteadOf = https://gitlab.com/adamcstephens
+[url "git@github.com:"]
+  pushInsteadOf = https://github.com/
+[url "git@gitlab.com:"]
+  pushInsteadOf = https://gitlab.com/
 [url "git@git.sr.ht:~adamcstephens"]
   pushInsteadOf = https://git.sr.ht/~adamcstephens
+[url "git@git.sr.ht:~adamcstephens/dotfiles"]
+  pushInsteadOf = https://github.com/adamcstephens/dotfiles
 [user]
   name = Adam Stephens
 [gpg]
