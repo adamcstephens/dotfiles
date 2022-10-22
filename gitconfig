@@ -42,7 +42,7 @@
 [url "git@git.sr.ht:~adamcstephens"]
   pushInsteadOf = https://git.sr.ht/~adamcstephens
 [url "git@git.sr.ht:~adamcstephens/dotfiles"]
-  pushInsteadOf = https://github.com/adamcstephens/dotfiles
+  pushInsteadOf = https://github.com/adamcstephens/dotfiles.git
 [user]
   name = Adam Stephens
 [gpg]
