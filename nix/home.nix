@@ -2,9 +2,9 @@
   pkgs,
   config,
   lib,
+  self',
   ...
 }: {
-
   # https://github.com/NixOS/nixpkgs/issues/196651
   manual.manpages.enable = false;
 
@@ -32,11 +32,13 @@
       if [ -e .nixos-managed ]; then
         git pull
       fi
-      task dotbot
+      just dotbot
     popd
   '';
 
   home.packages = [
+    self'.packages.terminfo
+
     pkgs.alejandra
     pkgs.bat
     pkgs.btop
@@ -48,7 +50,7 @@
     pkgs.fd
     pkgs.fx
     pkgs.fzf
-    pkgs.git
+    pkgs.gitFull
     pkgs.gh
     pkgs.go-task
     pkgs.helix

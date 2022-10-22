@@ -1,19 +1,11 @@
 version: "3"
 
-includes:
-  terminfo: ./terminfo.yml
-
 tasks:
   all:
     cmds:
       - task: asdf:install
       - task: asdf:update
-      - task: pkgs
       - task: emacs:alpine
-
-  pkgs:
-    cmds:
-      - sudo apk add cabal ghc elixir go nodejs
 
   asdf:install:
     cmds:
@@ -25,10 +17,3 @@ tasks:
     cmds:
       - $HOME/.asdf/bin/asdf update
       - "if [ -e ${HOME}/.asdf/plugins ]; then ${HOME}/.asdf/bin/asdf plugin-update --all; fi"
-
-  emacs:alpine:
-    deps:
-      - terminfo:emacs
-    cmds:
-      - sudo apk add emacs ncurses ncurses-terminfo procps
-      - doom sync
