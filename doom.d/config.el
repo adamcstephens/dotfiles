@@ -227,9 +227,6 @@
 
 (add-hook 'after-init-hook 'heaven-and-hell-init-hook)
 
-(after! telega
-  (setq telega-server-libs-prefix "/usr"))
-
 (defun get-string-from-file (filePath)
   "Return file content as string."
   (with-temp-buffer

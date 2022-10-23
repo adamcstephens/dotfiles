@@ -5,7 +5,6 @@ includes:
   dev: ./taskfiles/dev.yml
   firefox: ./taskfiles/firefox.yml
   fish: fish/Taskfile.yml
-  migrate: ./taskfiles/migrate.yml
   os: ./taskfiles/Taskfile_{{OS}}.yml
   test: ./taskfiles/test.yml
   vim: ./taskfiles/vim.yml
@@ -15,22 +14,6 @@ tasks:
   aqua-install:
     cmds:
       - install-aqua.sh -i ~/bin/aqua
-
-  aqua-run:
-    dir: "./aqua"
-    cmds:
-      - aqua install
-
-  bootstrap:
-    cmds:
-      - task: migrate:all
-      - task: aqua-run
-      - task: dotbot
-      - task: fish:bootstrap
-
-  bootstrap:slim:
-    cmds:
-      - task: dotbot
 
   dev:
     cmds:

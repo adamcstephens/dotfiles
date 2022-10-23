@@ -31,7 +31,7 @@ in {
           command = "${gtklock}";
         }
       ]
-      ++ (lib.optional (!config.dotfiles.isVM) [
+      ++ (lib.optionals (!config.dotfiles.isVM) [
         {
           timeout = 360;
           command = "${systemctlBin} suspend";

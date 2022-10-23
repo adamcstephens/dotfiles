@@ -12,7 +12,7 @@ else
   export AQUA_GLOBAL_CONFIG="${HOME}"/.dotfiles/aqua/aqua.yaml
 
   if [ -z "$1" ]; then
-    BOOTSTRAP_TASK="bootstrap"
+    BOOTSTRAP_TASK="bootstrap-nonix"
   else
     BOOTSTRAP_TASK="$1"
   fi

@@ -30,6 +30,20 @@ in {
   programs.doom-emacs = {
     enable = true;
     doomPrivateDir = ../doom.d;
+    doomPackageDir = pkgs.linkFarm "dotfiles-doom-packages" [
+      {
+        name = "config.el";
+        path = pkgs.emptyFile;
+      }
+      {
+        name = "init.el";
+        path = ../doom.d/init.el;
+      }
+      {
+        name = "packages.el";
+        path = ../doom.d/packages.el;
+      }
+    ];
     extraConfig = ''
       (setq exec-path (append exec-path '( ${
         lib.concatMapStringsSep " " (x: ''"${x}/bin"'') extraBins

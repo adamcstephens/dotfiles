@@ -19,6 +19,11 @@ in rec {
     else:
         print("${pkgs.stdenv.hostPlatform.system}")
   '';
+  hm-all = pkgs.writeScriptBin "hm-all" ''
+    for profile in ${builtins.concatStringsSep " " (map (x: "'${x}'") homeConfigurations)}; do
+      HMPROFILE=$profile ${hm}/bin/hm push
+    done
+  '';
   hm = pkgs.writeScriptBin "hm" ''
     set -e
 
