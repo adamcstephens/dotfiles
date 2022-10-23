@@ -7,7 +7,7 @@
 }: let
   gtklockBin =
     if config.dotfiles.isNixos
-    then "${self'.packages.gtklock}/bin/gtlock"
+    then "${self'.packages.gtklock}/bin/gtklock"
     else "/usr/bin/gtklock";
   systemctlBin =
     if config.dotfiles.isNixos
