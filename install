@@ -21,5 +21,5 @@ else
 
   cd ~/.dotfiles/aqua && ~/bin/aqua install
 
-  cd ~/.dotfiles && task "$BOOTSTRAP_TASK"
+  cd ~/.dotfiles && just "$BOOTSTRAP_TASK"
 fi
