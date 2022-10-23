@@ -21,7 +21,7 @@ in rec {
   '';
   hm-all = pkgs.writeScriptBin "hm-all" ''
     for profile in ${builtins.concatStringsSep " " (map (x: "'${x}'") homeConfigurations)}; do
-      HMPROFILE=$profile ${hm}/bin/hm build
+      HMPROFILE=$profile ${hm}/bin/hm push
     done
   '';
   hm = pkgs.writeScriptBin "hm" ''
