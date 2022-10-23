@@ -2,6 +2,7 @@ registries:
   - type: standard
     ref: main
 packages:
-  - name: go-task/task@v3.15.2
+  - name: go-task/task@v3.17.0
   - name: ajeetdsouza/zoxide@v0.8.3
-  - name: starship/starship@v1.10.3
+  - name: starship/starship@v1.11.0
+  - name: casey/just@1.6.0
