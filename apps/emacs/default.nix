@@ -30,7 +30,7 @@ in {
 
   programs.doom-emacs = {
     enable = true;
-    doomPrivateDir = ../doom.d;
+    doomPrivateDir = ./doom.d;
     doomPackageDir = pkgs.linkFarm "dotfiles-doom-packages" [
       {
         name = "config.el";
@@ -38,11 +38,11 @@ in {
       }
       {
         name = "init.el";
-        path = ../doom.d/init.el;
+        path = ./doom.d/init.el;
       }
       {
         name = "packages.el";
-        path = ../doom.d/packages.el;
+        path = ./doom.d/packages.el;
       }
     ];
     extraConfig = ''

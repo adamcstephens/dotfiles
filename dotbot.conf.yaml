@@ -45,7 +45,7 @@
       path: yay.json
     ~/.stack/config.yaml: stack.yaml
     ~/.config/starship.toml: starship.toml
-    ~/.doom.d: doom.d
+    ~/.doom.d: apps/emacs/doom.d
     ~/.editorconfig: editorconfig
     ~/.gitconfig: gitconfig
     ~/.gitignore: gitignore

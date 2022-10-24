@@ -7,7 +7,7 @@
     darwin-vm = {
       homeSystem = "aarch64-linux";
       modules = [
-        ./emacs.nix
+        ../apps/emacs
         ./linux-gui.nix
       ];
     };
@@ -15,19 +15,19 @@
       username = "astephe9";
       homeSystem = "aarch64-darwin";
       modules = [
-        ./emacs.nix
+        ../apps/emacs
       ];
     };
     nixos2 = {
       homeSystem = "x86_64-linux";
       modules = [
-        ./emacs.nix
+        ../apps/emacs
       ];
     };
     sank = {
       homeSystem = "x86_64-linux";
       modules = [
-        ./emacs.nix
+        ../apps/emacs
         ./linux-gui.nix
       ];
       dotfiles = {
@@ -39,7 +39,7 @@
     think = {
       homeSystem = "x86_64-linux";
       modules = [
-        ./emacs.nix
+        ../apps/emacs
         ./linux-gui.nix
       ];
       dotfiles = {
