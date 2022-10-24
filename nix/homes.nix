@@ -101,7 +101,7 @@
           modules = hmModules;
 
           extraSpecialArgs = {
-            inherit inputs' self' system;
+            inherit inputs inputs' self' system;
           };
         };
 

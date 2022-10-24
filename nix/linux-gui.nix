@@ -1,6 +1,6 @@
 {
   config,
-  inputs',
+  inputs,
   lib,
   pkgs,
   ...
@@ -46,7 +46,7 @@
     pkgs.remmina
     pkgs.slack
     pkgs.tdesktop
-    inputs'.webcord.packages.default
+    inputs.webcord.packages.${config.nixpkgs.system}.default
   ];
 
   home.activation.dotfiles-bootstrap-linux-gui = lib.hm.dag.entryAfter ["writeBoundary"] ''
