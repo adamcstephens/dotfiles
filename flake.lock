@@ -87,11 +87,11 @@
         "ws-butler": "ws-butler"
       },
       "locked": {
-        "lastModified": 1666552383,
+        "lastModified": 1666606461,
         "narHash": "sha256-YNbI/dDtrzkSqJ2hi7UFbwmBRasHVE28n8IOgwhh4FA=",
-        "owner": "adamcstephens",
+        "owner": "nix-community",
         "repo": "nix-doom-emacs",
-        "rev": "76643e2962bec99fe12b99e15fc342ce45202c60",
+        "rev": "4ae03d1dc2d8bf6daeda4f28be793ed2b82147bd",
         "type": "github"
       },
       "original": {
