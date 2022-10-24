@@ -2,7 +2,6 @@
   pkgs,
   config,
   lib,
-  self',
   ...
 }: {
   # https://github.com/NixOS/nixpkgs/issues/196651
@@ -37,8 +36,6 @@
   '';
 
   home.packages = [
-    self'.packages.terminfo
-
     pkgs.alejandra
     pkgs.bat
     pkgs.btop
