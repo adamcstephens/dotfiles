@@ -18,6 +18,7 @@
     pkgs.graphicsmagick
     pkgs.nodePackages.mermaid-cli
     pkgs.nil
+    pkgs.pandoc
     pkgs.shellcheck
     pkgs.shfmt
   ];
