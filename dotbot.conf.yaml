@@ -26,7 +26,6 @@
     ~/.config/aquaproj-aqua: aqua
     ~/.config/bat/config: bat
     ~/.config/btop: btop
-    ~/.config/direnv: direnv
     ~/.config/fish:
       force: true
       path: fish

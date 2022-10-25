@@ -73,18 +73,11 @@
   ];
 
   programs = {
+    direnv.enable = true;
+    direnv.nix-direnv.enable = true;
+    fish.enable = true;
     lsd.enable = true;
-    starship = {
-      enable = true;
-      enableBashIntegration = false;
-      enableFishIntegration = false;
-      enableZshIntegration = false;
-    };
-    zoxide = {
-      enable = true;
-      enableBashIntegration = false;
-      enableFishIntegration = false;
-      enableZshIntegration = false;
-    };
+    starship.enable = true;
+    zoxide.enable = true;
   };
 }
