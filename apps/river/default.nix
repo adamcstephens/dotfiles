@@ -1,6 +1,4 @@
 {...}: {
-  xdg.configFile."river/init".source = ./river.sh;
-
   systemd.user.targets.river-session = {
     Unit = {
       Description = "river compositor session";
