@@ -18,62 +18,50 @@
     - ~/tmp
 
 - link:
-    ~/.aspell.en.pws: aspell.en.pws
-    ~/.bash_profile: bash_profile
+    ~/.aspell.en.pws: apps/aspell/aspell.en.pws
+    ~/.bash_profile: apps/bash/bash_profile
     ~/.bashrc:
       force: true
-      path: bashrc
+      path: apps/bash/bashrc
     ~/.config/aquaproj-aqua: aqua
-    ~/.config/bat/config: bat
-    ~/.config/btop: btop
+    ~/.config/bat/config: apps/bat/config
+    ~/.config/btop: apps/btop
     ~/.config/fish:
       force: true
       path: apps/fish
-    ~/.config/git/template: gittemplate
-    ~/.config/helix: helix
+    ~/.config/git/template: apps/git/template
+    ~/.config/helix: apps/helix
     ~/.config/kitty/kitty.conf: apps/kitty/kitty.conf
     ~/.config/kitty/theme-light.conf: apps/kitty/theme-light.conf
     ~/.config/kitty/theme-dark.conf: apps/kitty/theme-dark.conf
-    ~/.config/lsd: lsd
-    ~/.config/mimeapps.list: mimeapps.list
-    ~/.config/nix/nix.conf: nix.conf
-    ~/.config/ripgrep/ripgreprc: ripgreprc
-    ~/.config/rubocop/config.yml: rubocop.yml
-    ~/.config/yay/config.json:
+    ~/.config/lsd: apps/lsd
+    ~/.config/nix:
+      force: true
+      path: apps/nix
+    ~/.config/ripgrep:
+      force: true
+      path: apps/ripgrep
+    ~/.config/yay:
       if: "which yay"
-      path: yay.json
-    ~/.stack/config.yaml: stack.yaml
-    ~/.config/starship.toml: starship.toml
+      path: apps/yay
+    ~/.config/starship.toml: apps/starship/starship.toml
     ~/.doom.d: apps/emacs/doom.d
-    ~/.editorconfig: editorconfig
-    ~/.gitconfig: gitconfig
-    ~/.gitignore: gitignore
-    ~/.hyper.js: hyper.js
+    ~/.editorconfig: apps/editorconfig/editorconfig
+    ~/.gitconfig: apps/git/gitconfig
+    ~/.gitignore: apps/git/gitignore
     ~/.inputrc:
       if: "[ ! -e /etc/inputrc ]"
       path: inputrc
-    ~/.ipython/profile_default/ipython_config.py: ipython_config.py
-    ~/.irbrc:
-      if: "which irb"
-      path: irbrc
-    ~/.screenrc: screenrc
+    ~/.ipython/profile_default/ipython_config.py: apps/ipython/ipython_config.py
+    ~/.screenrc: apps/screen/screenrc
     ~/.shell_generic.sh: shell_generic.sh
     ~/.shellcheckrc: shellcheckrc
-    ~/.tmux.conf:
-      if: "which tmux"
-      path: tmux.conf
-    ~/.tmux/plugins/tpm: tpm
-    ~/.toprc: toprc
-    ~/.tzvt_config:
-      if: "which tmux"
-      path: tzvt_config
-    ~/.vimrc: vimrc
-    ~/.vim: vim
+    ~/.tmux.conf: apps/tmux/tmux.conf
+    ~/.tmux/plugins/tpm: apps/tmux/tpm
+    ~/.toprc: apps/top/toprc
+    ~/.tzvt_config: apps/tmux/tzvt_config
+    ~/.vimrc: apps/vim/vimrc
+    ~/.vim: apps/vim/vim
     ~/.zshrc:
       force: true
-      path: zshrc
-    ~/bin/cmc: cmc/cmc
-    ~/bin/editor: bin/editor
-
-- shell:
-    - [chmod 0700 ~/.gnupg, Setting gnupg to 0700]
+      path: apps/zsh/zshrc
