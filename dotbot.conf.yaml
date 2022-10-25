@@ -54,7 +54,7 @@
       path: apps/inputrc
     ~/.ipython/profile_default/ipython_config.py: apps/python/ipython_config.py
     ~/.screenrc: apps/screen/screenrc
-    ~/.shell_generic.sh: shell_generic.sh
+    ~/.shell_generic.sh: apps/shell_generic.sh
     ~/.shellcheckrc: apps/shellcheck/shellcheckrc
     ~/.tmux.conf: apps/tmux/tmux.conf
     ~/.tmux/plugins/tpm: apps/tmux/tpm

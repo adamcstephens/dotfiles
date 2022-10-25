@@ -1,6 +1,6 @@
 # bootstrap znap
 zstyle ':znap:*' repos-dir ~/.znap
-source ~/.dotfiles/zsh-snap/znap.zsh
+source ~/.dotfiles/apps/zsh/zsh-snap/znap.zsh
 
 # znap prompt
 
@@ -11,7 +11,7 @@ if [[ -e $HOME/.asdf/asdf.sh ]]; then
 fi
 
 # git-subrepo
-fpath=("$HOME/.dotfiles/zsh-completion" "$HOME/.dotfiles/git-subrepo/share/zsh-completion" $fpath)
+fpath=("$HOME/.dotfiles/git-subrepo/share/zsh-completion" $fpath)
 
 ZSH_AUTOSUGGEST_STRATEGY=( history )
 znap source zsh-users/zsh-autosuggestions

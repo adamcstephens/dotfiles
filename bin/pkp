@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
 # shellcheck disable=SC1091
-. "$HOME"/.dotfiles/shell-platform.sh
+. "$HOME"/.dotfiles/apps/shell-platform.sh
 
 run "pkp" "$@"

@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-. "$HOME"/.dotfiles/shell-lib.sh
+. "$HOME"/.dotfiles/apps/shell-lib.sh
 check_registry
 
 docker run --rm -it -v /srv/media/downloads/rip:/home/ripper "$DOCKER_REGISTRY"/streamrip rip "$@"

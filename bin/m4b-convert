@@ -1,7 +1,6 @@
 #!/usr/bin/env sh
 
-. "$HOME"/.dotfiles/shell-lib.sh
+. "$HOME"/.dotfiles/apps/shell-lib.sh
 check_registry
 
 docker run -it --rm -u nobody -v /srv/media:/srv/media "$DOCKER_REGISTRY"/m4b-tool merge --jobs=16 --output-file="$PWD/$1.m4b" "$PWD/$1"
-

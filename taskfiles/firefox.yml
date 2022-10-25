@@ -7,16 +7,16 @@ tasks:
       - test -n "{{ .FIREFOX_PROFILE }}"
       - test -d "{{ .FIREFOX_PROFILE }}"
       - "! pgrep -i firefox"
-      - cp ~/.dotfiles/firefox/arkenfox/{prefsCleaner.sh,updater.sh,user.js} .
-      - ln -sf ~/.dotfiles/firefox/user-overrides.js .
+      - cp ~/.dotfiles/apps/firefox/arkenfox/{prefsCleaner.sh,updater.sh,user.js} .
+      - ln -sf ~/.dotfiles/apps/firefox/user-overrides.js .
       - ./updater.sh -s
       - bash ./prefsCleaner.sh -s
 
   patch:windows:
     dir: C:\Users\adam\AppData\Roaming\Mozilla\Firefox\Profiles\kwocbecx.default-release
     cmds:
-      - cp ~/.dotfiles/firefox/arkenfox/{prefsCleaner.bat,updater.bat,user.js} .
-      - cp ~/.dotfiles/firefox/user-overrides.js .
+      - cp ~/.dotfiles/apps/firefox/arkenfox/{prefsCleaner.bat,updater.bat,user.js} .
+      - cp ~/.dotfiles/apps/firefox/user-overrides.js .
       - .\\updater.bat -unattended
       - .\\prefsCleaner.bat
 
