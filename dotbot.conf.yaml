@@ -28,7 +28,7 @@
     ~/.config/btop: btop
     ~/.config/fish:
       force: true
-      path: fish
+      path: apps/fish
     ~/.config/git/template: gittemplate
     ~/.config/helix: helix
     ~/.config/kitty/kitty.conf: kitty/kitty.conf

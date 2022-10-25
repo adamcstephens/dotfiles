@@ -2,7 +2,6 @@ Brewfile.lock.json
 *.zwc
 applications/userapp*.desktop
 applications/appimagekit*desktop
-fish/fish_variables
 /.*.state
 doom-emacs/.local
 .installed
