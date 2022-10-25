@@ -101,7 +101,7 @@
   (setq my-presentation-template '("#+TITLE:
 #+SUBTITLE:
 #+REVEAL_TITLE_SLIDE: <h1>%t</h1><h2>%s</h2><h3>%A %a</h3>
-#+OPTIONS: toc:nil tags:nil timestamp:nil reveal_width:1680 reveal_height:1050 reveal_klipsify_src:t
+#+OPTIONS: toc:nil tags:nil timestamp:nil reveal_width:1680 reveal_height:1050 reveal_embed_local_resources:t reveal_klipsify_src:t
 #+REVEAL_THEME: ../../../presentations/pikestreet.css
 #+REVEAL_TITLE_SLIDE_BACKGROUND: ../../../presentations/images/annie-spratt-MwbKwAZeTXs-unsplash.jpg
 #+REVEAL_DEFAULT_SLIDE_BACKGROUND: ../../../presentations/images/jeremy-bishop-G9i_plbfDgk-unsplash.jpg
@@ -127,7 +127,7 @@
   (setq my-presentation-template-white '("#+TITLE:
 #+SUBTITLE:
 #+REVEAL_TITLE_SLIDE: <h1>%t</h1><h2>%s</h2><h3>%A %a</h3>
-#+OPTIONS: toc:nil tags:nil timestamp:nil reveal_width:1680 reveal_height:1050 reveal_klipsify_src:t
+#+OPTIONS: toc:nil tags:nil timestamp:nil reveal_width:1680 reveal_height:1050 reveal_embed_local_resources:t reveal_klipsify_src:t
 #+REVEAL_THEME: ../../../presentations/white.css
 #+REVEAL_TITLE_SLIDE_BACKGROUND: ../../../presentations/images/hans-isaacson-pebZGqHqg28-unsplash.jpg
 #+REVEAL_DEFAULT_SLIDE_BACKGROUND: ../../../presentations/images/almas-salakhov-DgJJh9JlcZg-unsplash.jpg
