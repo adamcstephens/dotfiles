@@ -142,7 +142,7 @@ if command -v fdfind &>/dev/null; then
 fi
 
 # git
-[[ -e "$HOME"/.dotfiles/git-subrepo/.rc ]] && source "$HOME"/.dotfiles/git-subrepo/.rc
+[[ -e "$HOME"/.dotfiles/vendor/git-subrepo/.rc ]] && source "$HOME"/.dotfiles/vendor/git-subrepo/.rc
 alias ga='git add'
 gac() {
   [ -z "$1" ] && echo "needs argument" && return 20
