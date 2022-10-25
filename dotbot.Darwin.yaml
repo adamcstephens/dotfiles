@@ -4,9 +4,9 @@
       create: true
 
 - link:
-    ~/.config/karabiner: karabiner
-    ~/.config/kitty/mac.conf: kitty/kitty-mac.conf
-    ~/.finicky.js: finicky.js
+    ~/.config/karabiner: apps/karabiner
+    ~/.config/kitty/mac.conf: apps/kitty/kitty-mac.conf
+    ~/.finicky.js: apps/finicky/finicky.js
     ~/Library/Application Support/Code/User/keybindings.json: apps/vscode/keybindings.json
     ~/Library/Application Support/Code/User/settings.json: apps/vscode/settings.json
 

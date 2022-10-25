@@ -31,9 +31,9 @@
       path: apps/fish
     ~/.config/git/template: gittemplate
     ~/.config/helix: helix
-    ~/.config/kitty/kitty.conf: kitty/kitty.conf
-    ~/.config/kitty/theme-light.conf: kitty/theme-light.conf
-    ~/.config/kitty/theme-dark.conf: kitty/theme-dark.conf
+    ~/.config/kitty/kitty.conf: apps/kitty/kitty.conf
+    ~/.config/kitty/theme-light.conf: apps/kitty/theme-light.conf
+    ~/.config/kitty/theme-dark.conf: apps/kitty/theme-dark.conf
     ~/.config/lsd: lsd
     ~/.config/mimeapps.list: mimeapps.list
     ~/.config/nix/nix.conf: nix.conf
