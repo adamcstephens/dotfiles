@@ -90,6 +90,11 @@
               home.username = username;
               home.homeDirectory = homeDir;
             }
+            {
+              home.packages = [
+                inputs'.comma.packages.comma
+              ];
+            }
           ]
           ++ modules
           ++ (pkgs.lib.optionals pkgs.stdenv.isDarwin [./darwin.nix])
