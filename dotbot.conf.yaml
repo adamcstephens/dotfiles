@@ -51,11 +51,11 @@
     ~/.gitignore: apps/git/gitignore
     ~/.inputrc:
       if: "[ ! -e /etc/inputrc ]"
-      path: inputrc
-    ~/.ipython/profile_default/ipython_config.py: apps/ipython/ipython_config.py
+      path: apps/inputrc
+    ~/.ipython/profile_default/ipython_config.py: apps/python/ipython_config.py
     ~/.screenrc: apps/screen/screenrc
     ~/.shell_generic.sh: shell_generic.sh
-    ~/.shellcheckrc: shellcheckrc
+    ~/.shellcheckrc: apps/shellcheck/shellcheckrc
     ~/.tmux.conf: apps/tmux/tmux.conf
     ~/.tmux/plugins/tpm: apps/tmux/tpm
     ~/.toprc: apps/top/toprc

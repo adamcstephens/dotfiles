@@ -82,7 +82,7 @@ alias ap='ansible-playbook '
 alias ac='ansible-container '
 
 # asdf
-export ASDF_PYTHON_DEFAULT_PACKAGES_FILE=$HOME/.dotfiles/python-packages
+export ASDF_PYTHON_DEFAULT_PACKAGES_FILE=$HOME/.dotfiles/apps/python/python-packages
 export KERL_CONFIGURE_OPTIONS="--disable-debug --without-javac"
 
 # bundle
@@ -236,7 +236,7 @@ if [ -e "$HOME/.nix-defexpr/channels" ]; then
 fi
 
 # python
-export PYTHONSTARTUP="$HOME"/.dotfiles/pythonstartup.py
+export PYTHONSTARTUP="$HOME"/.dotfiles/apps/python/pythonstartup.py
 
 # ripgrep
 export RIPGREP_CONFIG_PATH="$HOME"/.config/ripgrep/ripgreprc
