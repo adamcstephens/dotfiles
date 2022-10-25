@@ -10,4 +10,4 @@ cd "${BASEDIR}" || exit 2
 [ -h "$HOME/.bashrc" ] || rm -fv "$HOME/.bashrc"
 [ -h "$HOME/.bash_profile" ] || rm -fv "$HOME/.bash_profile"
 
-"${BASEDIR}/dotbot/bin/dotbot" --quiet -d "${BASEDIR}" -c "${CONFIG}" "${@}"
+"${BASEDIR}/vendor/dotbot/bin/dotbot" --quiet -d "${BASEDIR}" -c "${CONFIG}" "${@}"
