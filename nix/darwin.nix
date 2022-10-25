@@ -15,6 +15,7 @@
     pkgs.mas
     pkgs.pinentry_mac
 
+    pkgs.kitty
     pkgs.wireshark
   ];
 
