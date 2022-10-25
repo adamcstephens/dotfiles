@@ -98,6 +98,7 @@
   "remote.SSH.remotePlatform": {
     "arch1": "linux",
     "blank": "linux",
+    "build1": "linux",
     "cloud1": "linux",
     "compose1": "linux",
     "netdev3": "linux",
