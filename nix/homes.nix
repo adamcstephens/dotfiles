@@ -18,6 +18,12 @@
         ../apps/emacs
       ];
     };
+    build1 = {
+      homeSystem = "x86_64-linux";
+      modules = [
+        ../apps/emacs
+      ];
+    };
     nixos2 = {
       homeSystem = "x86_64-linux";
       modules = [
