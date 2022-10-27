@@ -19,6 +19,11 @@
 
   programs.home-manager.enable = true;
 
+  home.activation.dotfiles-migrate = lib.hm.dag.entryBefore ["checkLinkTargets"] ''
+    cd ~/.dotfiles
+    ${pkgs.just}/bin/just migrate
+  '';
+
   home.activation.dotfiles-bootstrap = lib.hm.dag.entryAfter ["writeBoundary"] ''
     export PATH=${config.home.path}/bin:${config.home.path}/sbin:$PATH
 
