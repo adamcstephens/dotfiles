@@ -20,7 +20,7 @@ migrate:
     #!/usr/bin/env bash
     set -e
     if [ -h $HOME/.config/direnv ]; then rm -rfv $HOME/.config/direnv; fi
-    if [ -e $HOME/.config/fish/config.fish && ! -h $HOME/.config/fish/config.fish ]; then rm -v $HOME/.config/fish/config.fish; fi
+    if [ -e $HOME/.config/fish/config.fish ] && [ ! -h $HOME/.config/fish/config.fish ]; then rm -v $HOME/.config/fish/config.fish; fi
 
     if [ -d $HOME/.dotfiles/dotbot ]; then rm -rfv $HOME/.dotfiles/dotbot; fi
     if [ -f $HOME/.dotfiles/fish/fish_variables ]; then mv -v $HOME/.dotfiles/fish/fish_variables $HOME/.dotfiles/apps/fish/; fi
