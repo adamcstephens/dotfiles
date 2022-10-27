@@ -30,7 +30,9 @@
       force: true
       path: apps/fish
     ~/.config/git/template: apps/git/template
-    ~/.config/helix: apps/helix
+    ~/.config/helix:
+      force: true
+      path: apps/helix
     ~/.config/kitty/kitty.conf: apps/kitty/kitty.conf
     ~/.config/kitty/theme-light.conf: apps/kitty/theme-light.conf
     ~/.config/kitty/theme-dark.conf: apps/kitty/theme-dark.conf
