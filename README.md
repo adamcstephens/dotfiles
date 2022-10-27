@@ -5,16 +5,12 @@
 ``` sh
 git clone https://git.sr.ht/~adamcstephens/dotfiles ~/.dotfiles
 cd ~/.dotfiles
-make bootstrap
+./install
 ```
 
-## Mirror
+## Mirrors
 
 ```
 git clone https://github.com/adamcstephens/dotfiles ~/.dotfiles
+git clone https://codeberg.org/adamcstephens/dotfiles ~/.dotfiles
 ```
-
-## Tools
-
-* [antibody](https://getantibody.github.io/)
-* [dotbot](https://github.com/anishathalye/dotbot)
