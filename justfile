@@ -27,6 +27,8 @@ migrate:
     if [ -d $HOME/.dotfiles/fish ]; then rm -rfv $HOME/.dotfiles/fish; fi
     if [ -d $HOME/.dotfiles/btop ]; then rm -rfv $HOME/.dotfiles/btop; fi
 
+    if rg lefthook ~/.dotfiles/.git/hooks &>/dev/null; then nix run nixpkgs#lefthook -- uninstall; fi;
+
 nix-index-fetch:
     #!/usr/bin/env bash
     set -e
