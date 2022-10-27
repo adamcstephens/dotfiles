@@ -43,6 +43,7 @@
       path: apps/ripgrep
     ~/.config/yay:
       if: "which yay"
+      force: true
       path: apps/yay
     ~/.config/starship.toml: apps/starship/starship.toml
     ~/.doom.d: apps/emacs/doom.d

@@ -54,6 +54,9 @@ in rec {
         ${nixCmd} profile remove $old_profile
       fi
 
+      cd $HOME/.dotfiles
+      ${pkgs.just}/bin/just migrate
+
       echo " Activating new profile"
       if ! "$(${nixCmd} path-info $TARGET)"/activate; then
         echo "❗ Failed to activate new profile"
