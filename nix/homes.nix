@@ -99,6 +99,7 @@
             {
               home.packages = [
                 inputs'.comma.packages.comma
+                self'.packages.terminfo
               ];
             }
           ]
