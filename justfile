@@ -13,6 +13,11 @@ brew-dump:
 dotbot config="":
     CONFIG={{config}} ~/.dotfiles/bin/dotbot
 
+doomemacs:
+    test -e ~/.emacs.d || git clone https://github.com/doomemacs/doomemacs ~/.emacs.d
+    ~/.emacs.d/bin/doom sync
+    test -f ~/.emacs.d/.local/env || doom env
+
 fish-bootstrap:
     fish ~/.dotfiles/bin/theme.fish
 

@@ -13,11 +13,13 @@
     pkgs.alejandra
     aspell
     # pkgs.corefonts
+    pkgs.fd
     pkgs.git
     latex
     pkgs.graphicsmagick
     pkgs.nodePackages.mermaid-cli
     pkgs.nil
+    pkgs.ripgrep
     pkgs.pandoc
     pkgs.shellcheck
     pkgs.shfmt
@@ -26,25 +28,6 @@ in {
   programs.emacs = {
     enable = true;
     # package = pkgs.emacsNativeComp;
-  };
-
-  programs.doom-emacs = {
-    enable = true;
-    doomPrivateDir = ./doom.d;
-    doomPackageDir = pkgs.linkFarm "dotfiles-doom-packages" [
-      {
-        name = "config.el";
-        path = pkgs.emptyFile;
-      }
-      {
-        name = "init.el";
-        path = ./doom.d/init.el;
-      }
-      {
-        name = "packages.el";
-        path = ./doom.d/packages.el;
-      }
-    ];
     extraConfig = ''
       (setq exec-path (append exec-path '( ${
         lib.concatMapStringsSep " " (x: ''"${x}/bin"'') extraBins
@@ -54,6 +37,26 @@ in {
       }"))
     '';
   };
+
+  # programs.doom-emacs = {
+  #   enable = true;
+  #   doomPrivateDir = ./doom.d;
+  #   # package dir is use for buildng the straight package, so we can skip rebuilds on config changes
+  #   doomPackageDir = pkgs.linkFarm "dotfiles-doom-packages" [
+  #     {
+  #       name = "config.el";
+  #       path = pkgs.emptyFile;
+  #     }
+  #     {
+  #       name = "init.el";
+  #       path = ./doom.d/init.el;
+  #     }
+  #     {
+  #       name = "packages.el";
+  #       path = ./doom.d/packages.el;
+  #     }
+  #   ];
+  # };
 
   services.emacs.enable =
     if pkgs.stdenv.isLinux
