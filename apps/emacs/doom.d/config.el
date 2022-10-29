@@ -250,4 +250,7 @@
 (setq projectile-auto-discover t)
 (setq projectile-project-search-path '(("~/projects/" . 1) ("~/git/" . 1) ("~/.dotfiles" . 0)))
 
+(after! persp-mode
+  (setq persp-emacsclient-init-frame-behaviour-override "main"))
+
 (set-formatter! 'alejandra "alejandra --quiet" :modes '(nix-mode))
