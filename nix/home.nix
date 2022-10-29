@@ -4,6 +4,10 @@
   lib,
   ...
 }: {
+  imports = [
+    ../apps/fish
+  ];
+
   # https://github.com/NixOS/nixpkgs/issues/196651
   manual.manpages.enable = false;
 
@@ -85,7 +89,6 @@
   programs = {
     direnv.enable = true;
     direnv.nix-direnv.enable = true;
-    fish.enable = true;
     lsd.enable = true;
     starship.enable = true;
     zoxide.enable = true;
