@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+if [ -z "$1" ]; then
+  echo "supply deletion key"
+  return 2
+fi
+
+for target in $@; do
+  delip=$(grep "$target " ~/.ssh/known_hosts | awk '{print $1}' | cut -f 2 -d \, | uniq | tail -n 1)
+  [ -z "$delip" ] || ssh-keygen -f "$HOME/.ssh/known_hosts" -R "$delip"
+  ssh-keygen -f "$HOME/.ssh/known_hosts" -R "$target"
+done

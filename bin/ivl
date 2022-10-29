@@ -1,0 +1,2 @@
+#!/usr/bin/env sh
+exec sudo iptables -vnL --line-numbers "$@"

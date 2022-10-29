@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+
+if [ -z "$1" ]; then
+  ansible-doc $(ansible-doc -l 2>/dev/null | fzf --no-hscroll | awk '{print $1}')
+else
+  ansible-doc "$@"
+fi

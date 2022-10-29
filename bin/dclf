@@ -1,0 +1,2 @@
+#!/usr/bin/env sh
+exec docker-compose logs --tail=100 -f "$@"

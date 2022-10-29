@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+
+# avoid a loop
+SCRIPT_PATH=$(dirname "$(realpath "$0")")
+PATH="$(echo "$PATH" | sed -e "s,$SCRIPT_PATH:,,")"
+export PATH
+
+if command batcat >/dev/null 2>&1; then
+  exec batcat "$@"
+elif command bat >/dev/null 2>&1; then
+  exec bat "$@"
+else
+  exec cat "$@"
+fi

@@ -1,0 +1,21 @@
+#!/usr/bin/env sh
+
+if [ -z "$1" ]; then
+  echo "Must pass image/sha"
+  exit 1
+fi
+
+runimg="$1"
+if [ -z "$2" ]; then
+  runcmd="bash"
+else
+  runcmd="$2"
+fi
+
+if command podman >/dev/null 2>&1; then
+  runner="podman"
+else
+  runner="docker"
+fi
+
+eval $runner run -t -i --rm=true $runimg $runcmd

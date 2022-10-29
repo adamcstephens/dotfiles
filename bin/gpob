@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+branchname=$(git rev-parse --abbrev-ref HEAD)
+exec git push -u origin "$branchname:$branchname" "$@"

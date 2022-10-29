@@ -1,0 +1,2 @@
+#!/usr/bin/env sh
+exec git log --graph --decorate --pretty=oneline --abbrev-commit --max-count=15 "$@"

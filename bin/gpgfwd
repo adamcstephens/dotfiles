@@ -1,0 +1,5 @@
+#!/usr/bin/env/sh
+host=$1
+
+scp ~/.gnupg/pubring.kbx "$host:.gnupg/"
+scp ~/.gnupg/trustdb.gpg "$host:.gnupg/"
