@@ -43,6 +43,7 @@
         };
 
         devShells.default = pkgs.mkShellNoCC {
+          name = "d";
           packages = [
             pkgs.cachix
             pkgs.just
