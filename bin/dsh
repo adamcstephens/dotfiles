@@ -12,7 +12,7 @@ else
   runcmd="$2"
 fi
 
-if command podman >/dev/null 2>&1; then
+if command -v podman >/dev/null 2>&1; then
   runner="podman"
 else
   runner="docker"

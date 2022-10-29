@@ -5,9 +5,9 @@ SCRIPT_PATH=$(dirname "$(realpath "$0")")
 PATH="$(echo "$PATH" | sed -e "s,$SCRIPT_PATH:,,")"
 export PATH
 
-if command delta >/dev/null 2>&1; then
+if command -v delta >/dev/null 2>&1; then
   differ="delta"
-elif command colordiff >/dev/null 2>&1; then
+elif command -v colordiff >/dev/null 2>&1; then
   differ="colordiff"
 else
   differ="diff"
