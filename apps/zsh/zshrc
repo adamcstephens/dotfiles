@@ -150,7 +150,7 @@ fi
 
 [[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path zsh 2>/dev/null)"
 
-source $HOME/.dotfiles/iterm2.zsh
+source $HOME/.dotfiles/apps/iterm/iterm2.zsh
 
 # i don't care what happened above when the prompt starts
 true
