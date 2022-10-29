@@ -247,6 +247,7 @@
 (if file-notify--library (file-notify-add-watch my-dark-mode-statefile '(change) 'toggle-dark))
 (toggle-dark)
 
-(setq projectile-enable-caching nil)
+(setq projectile-auto-discover t)
+(setq projectile-project-search-path '(("~/projects/" . 1) ("~/git/" . 1) ("~/.dotfiles" . 0)))
 
 (set-formatter! 'alejandra "alejandra --quiet" :modes '(nix-mode))
