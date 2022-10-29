@@ -79,6 +79,7 @@
     pkgs.tmux
     pkgs.tree
     pkgs.wget
+    pkgs.zellij
   ];
 
   programs = {

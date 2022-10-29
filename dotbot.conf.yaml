@@ -48,6 +48,7 @@
       force: true
       path: apps/yay
     ~/.config/starship.toml: apps/starship/starship.toml
+    ~/.config/zellij: apps/zellij
     ~/.doom.d: apps/emacs/doom.d
     ~/.editorconfig: apps/editorconfig/editorconfig
     ~/.gitconfig: apps/git/gitconfig
