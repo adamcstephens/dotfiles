@@ -4,9 +4,9 @@ keybinds {
         // uncomment this and adjust key if using copy_on_select=false
         // bind "Alt c" { Copy; }
     }
-    locked {
-        bind "Ctrl g" { SwitchToMode "Normal"; }
-    }
+    // locked {
+    //     bind "Ctrl g" { SwitchToMode "Normal"; }
+    // }
     resize {
         bind "Ctrl n" { SwitchToMode "Normal"; }
         bind "h" "Left" { Resize "Left"; }
@@ -81,10 +81,10 @@ keybinds {
 }
 
 plugins {
-    tab-bar { path "tab-bar"; }
-    status-bar { path "status-bar"; }
-    strider { path "strider"; }
-    compact-bar { path "compact-bar"; }
+    // tab-bar { path "tab-bar"; }
+    // status-bar { path "status-bar"; }
+    // strider { path "strider"; }
+    // compact-bar { path "compact-bar"; }
 }
 
 // Choose what to do when zellij receives SIGTERM, SIGINT, SIGQUIT or SIGHUP
@@ -112,7 +112,7 @@ plugins {
 //   - true (default)
 //   - false
 //
-// pane_frames true
+pane_frames false
 
 // Define color themes for Zellij
 // For more examples, see: https://github.com/zellij-org/zellij/tree/main/example/themes
@@ -135,17 +135,17 @@ plugins {
 // }
 themes {
     default {
-        fg 1
-        bg 10
-        black 20
-        red 30
-        green 40
-        yellow 50
-        blue 60
-        magenta 70
-        cyan 80
-        white 90
-        orange 254
+        fg "#cbcdd2"
+        bg "#1c1d21"
+        black "#686b78"
+        red "#eb3d54"
+        green "#78bd65"
+        yellow "#e5cd52"
+        blue "#4fb4d8"
+        magenta "#ef7c2a"
+        cyan "#4fb4d8"
+        white "#cbcdd2"
+        orange "#f39660"
     }
 }
 
@@ -180,7 +180,7 @@ theme "default"
 // Valid values: positive integers
 // Default value: 10000
 //
-// scroll_buffer_size 10000
+scroll_buffer_size 100000
 
 // Provide a command to execute when copying text. The text will be piped to
 // the stdin of the program to perform the copy. This can be used with
