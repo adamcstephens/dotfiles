@@ -47,7 +47,7 @@
         };
 
         devShells.default = pkgs.mkShellNoCC {
-          name = "d";
+          name = "dots";
           packages = [
             pkgs.cachix
             pkgs.just
