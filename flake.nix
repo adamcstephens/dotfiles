@@ -5,6 +5,8 @@
 
     comma.url = "github:nix-community/comma";
     comma.inputs.nixpkgs.follows = "nixpkgs";
+    darwin.url = "github:lnl7/nix-darwin/master";
+    darwin.inputs.nixpkgs.follows = "nixpkgs";
     doom-emacs.url = "github:nix-community/nix-doom-emacs";
     doom-emacs.inputs.nixpkgs.follows = "nixpkgs";
     emacs.url = "github:nix-community/emacs-overlay";
@@ -28,6 +30,7 @@
     flake-parts.lib.mkFlake {inherit self;} {
       imports = [
         ./nix/homes.nix
+        ./nix/darwin.nix
         ./nix/nixos-darwin-vm.nix
       ];
 

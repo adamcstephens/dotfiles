@@ -1,9 +1,12 @@
 {
   pkgs,
   config,
+  inputs,
   lib,
   ...
 }: {
+  nixpkgs.overlays = [inputs.firefox-darwin.overlay];
+
   imports = [
     ../apps/vscode
   ];
@@ -15,6 +18,7 @@
     pkgs.mas
     pkgs.pinentry_mac
 
+    pkgs.firefox-bin
     pkgs.kitty
     pkgs.wireshark
   ];

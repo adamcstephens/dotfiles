@@ -63,6 +63,27 @@
         "type": "github"
       }
     },
+    "darwin": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1667294277,
+        "narHash": "sha256-YhVGYUpPZNpJZ8z3Sq9aT6n1/B8vKtfRfwaCtbsosxk=",
+        "owner": "lnl7",
+        "repo": "nix-darwin",
+        "rev": "b7177030643374e698c29e993c2808efa7b85aaf",
+        "type": "github"
+      },
+      "original": {
+        "owner": "lnl7",
+        "ref": "master",
+        "repo": "nix-darwin",
+        "type": "github"
+      }
+    },
     "devshell": {
       "flake": false,
       "locked": {
@@ -892,6 +913,7 @@
     "root": {
       "inputs": {
         "comma": "comma",
+        "darwin": "darwin",
         "doom-emacs": "doom-emacs",
         "emacs": "emacs",
         "eww": "eww",
