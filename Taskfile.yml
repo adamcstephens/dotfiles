@@ -1,13 +1,8 @@
 version: "3"
 
 includes:
-  brew: ./taskfiles/brew.yml
-  dev: ./taskfiles/dev.yml
   firefox: ./taskfiles/firefox.yml
-  fish: fish/Taskfile.yml
-  os: ./taskfiles/Taskfile_{{OS}}.yml
   test: ./taskfiles/test.yml
-  vim: ./taskfiles/vim.yml
   windows: ./taskfiles/windows.yml
 
 tasks:
@@ -15,54 +10,6 @@ tasks:
     cmds:
       - install-aqua.sh -i ~/bin/aqua
 
-  dev:
-    cmds:
-      - ~/.dotfiles/bin/install-dev.sh
-      - task: dev:all
-
-  emacs:doom:
-    cmds:
-      - git clone https://github.com/doomemacs/doomemacs ~/.emacs.d
-      - doom sync
-      - task: emacs:doom:env
-    status:
-      - test -d ~/.emacs.d
-
-  emacs:doom:env:
-    cmds:
-      - doom env
-    status:
-      - test -f ~/.emacs.d/.local/env
-
-  git:setup:
-    cmds:
-      - git config -f ~/.gitconfig.local user.email {{.EMAIL}}
-
-  mimeapps:fix:
-    cmds:
-      - mv ~/.config/mimeapps.list .
-      - task: dotbot
-
-  nix:home-manager:
-    cmds:
-      - nix run .#update-home
-    status:
-      - nix profile list | grep home-manager-path
-
   test:
     cmds:
       - task: test:build
-
-  vscode:
-    cmds:
-      - sh ~/.dotfiles/bin/vscode-extensions.sh
-
-  zsh-prof:
-    cmds:
-      - time zsh -i -c exit
-
-  zsh-prof-setup:
-    cmds:
-      - chmod +w ~/.zshrc
-      - ex -sc '1i|zmodload zsh/zprof' -cx ~/.zshrc
-      - echo "zprof" >> ~/.zshrc
