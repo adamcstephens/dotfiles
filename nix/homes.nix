@@ -104,8 +104,8 @@
             }
           ]
           ++ modules
-          ++ (pkgs.lib.optionals pkgs.stdenv.isDarwin [./darwin.nix])
-          ++ (pkgs.lib.optionals pkgs.stdenv.isLinux [./linux.nix]);
+          ++ (pkgs.lib.optionals pkgs.stdenv.isDarwin [./home-darwin.nix])
+          ++ (pkgs.lib.optionals pkgs.stdenv.isLinux [./home-linux.nix]);
       in {
         homeConfig = inputs.home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
