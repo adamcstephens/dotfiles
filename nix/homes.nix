@@ -97,6 +97,7 @@
               home.homeDirectory = homeDir;
             }
             {
+              # install packages from the dotfiles flake
               home.packages = [
                 inputs'.comma.packages.comma
                 self'.packages.terminfo
