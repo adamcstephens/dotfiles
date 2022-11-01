@@ -8,5 +8,8 @@
   programs.fish = {
     enable = true;
     plugins = [];
+    shellAliases = {
+      cat = "bat";
+    };
   };
 }
