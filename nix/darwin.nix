@@ -30,11 +30,37 @@
           services.nix-daemon.enable = true;
         }
         ({pkgs, ...}: {
-          security.pam.enableSudoTouchIdAuth = true;
-          system.defaults.dock.autohide = true;
+          system.defaults.NSGlobalDomain = {
+            InitialKeyRepeat = 15;
+            KeyRepeat = 1;
 
+            NSAutomaticCapitalizationEnabled = false;
+            NSAutomaticDashSubstitutionEnabled = false;
+            NSAutomaticPeriodSubstitutionEnabled = false;
+            NSAutomaticQuoteSubstitutionEnabled = false;
+            NSAutomaticSpellingCorrectionEnabled = false;
+          };
+          system.defaults.dock = {
+            autohide = true;
+            autohide-delay = 2.0;
+            orientation = "left";
+            showhidden = true;
+            show-recents = false;
+          };
+          system.defaults.SoftwareUpdate.AutomaticallyInstallMacOSUpdates = true;
+
+          security.pam.enableSudoTouchIdAuth = true;
+          time.timeZone = "America/New_York";
+
+          programs.fish.enable = true;
+
+          environment.shells = [pkgs.fish];
           environment.systemPackages = [
           ];
+
+          users.users.astephe9 = {
+            shell = pkgs.fish;
+          };
         })
       ];
     });
