@@ -9,7 +9,6 @@
 
       modules = [
         {
-          nixpkgs.overlays = [inputs.firefox-darwin.overlay];
           nix = {
             settings = {
               auto-optimise-store = true;
