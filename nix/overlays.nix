@@ -7,7 +7,7 @@
     emacs.overlays.emacs
     emacs.overlays.package
     river
-    vscode
+    fishPlugins
   ];
 
   river = final: prev: {
@@ -35,9 +35,11 @@
     });
   };
 
-  vscode = final: prev: {
-    vscode = prev.vscode.overrideAttrs (_: {
-      version = "1.72.1";
+  fishPlugins = final: prev: {
+    fishPlugins = prev.fishPlugins.overrideScope' (ffinal: fprev: {
+      fzf-fish = fprev.fzf-fish.overrideAttrs (_: {
+        doCheck = false;
+      });
     });
   };
 }
