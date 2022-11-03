@@ -178,6 +178,5 @@
   },
   "[yuck]": {
     "editor.defaultFormatter": "eww-yuck.yuck"
-  },
-  "update.mode": "none"
+  }
 }
