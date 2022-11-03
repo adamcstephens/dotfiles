@@ -6,7 +6,7 @@
   ...
 }: {
   imports = [
-    ../apps/vscode
+    # ../apps/vscode
   ];
 
   home.packages = [
