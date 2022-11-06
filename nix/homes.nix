@@ -49,6 +49,7 @@
         ./linux-gui.nix
       ];
       dotfiles = {
+        windowManager.hyprland = true;
         windowManager.river = true;
       };
     };
