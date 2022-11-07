@@ -10,6 +10,7 @@
     plugins = [];
     shellAliases = {
       cat = "bat";
+      nix = "nix -L";
     };
   };
 }
