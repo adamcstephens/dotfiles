@@ -53,6 +53,7 @@
   home.packages = [
     pkgs.alejandra
     pkgs.bat
+    pkgs.bc
     pkgs.btop
     pkgs.calc
     pkgs.colordiff
