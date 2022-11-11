@@ -24,12 +24,14 @@
   programs.home-manager.enable = true;
 
   home.activation.dotfiles-migrate = lib.hm.dag.entryBefore ["checkLinkTargets"] ''
-    pushd ~/.dotfiles
-      if [ -e .nixos-managed ]; then
-        git pull
-      fi
-      ${pkgs.just}/bin/just migrate
-    popd
+    if [ -d ~/.dotfiles ]; then
+      pushd ~/.dotfiles
+        if [ -e .nixos-managed ]; then
+          git pull
+        fi
+        ${pkgs.just}/bin/just migrate
+      popd
+    fi
   '';
 
   home.activation.dotfiles-bootstrap = lib.hm.dag.entryAfter ["writeBoundary"] ''
