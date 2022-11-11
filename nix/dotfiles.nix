@@ -6,7 +6,6 @@
   cfg = config.dotfiles;
 in {
   options.dotfiles = {
-    isNixos = lib.mkEnableOption "isNixos";
     isVM = lib.mkEnableOption "isVM";
 
     gui = {

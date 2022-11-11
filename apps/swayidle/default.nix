@@ -5,14 +5,8 @@
   self',
   ...
 }: let
-  gtklockBin =
-    if config.dotfiles.isNixos
-    then "${self'.packages.gtklock}/bin/gtklock"
-    else "/usr/bin/gtklock";
-  systemctlBin =
-    if config.dotfiles.isNixos
-    then "${pkgs.systemdMinimal}/bin/systemctl"
-    else "/usr/bin/systemctl";
+  gtklockBin = "${self'.packages.gtklock}/bin/gtklock";
+  systemctlBin = "${pkgs.systemdMinimal}/bin/systemctl";
 
   gtklock = "${pkgs.procps}/bin/pgrep gtklock || ${pkgs.util-linux}/bin/setsid --fork ${gtklockBin}";
 in {

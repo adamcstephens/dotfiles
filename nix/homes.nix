@@ -37,7 +37,6 @@
         ./linux-gui.nix
       ];
       dotfiles = {
-        isNixos = true;
         isVM = true;
         windowManager.hyprland = true;
       };
