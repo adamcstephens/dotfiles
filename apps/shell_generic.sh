@@ -16,7 +16,7 @@ fi
 alias thisweek='date +%Y-%W'
 
 export PAGER="$HOME/bin/pager"
-export EDITOR="$HOME/bin/editor"
+export EDITOR="$HOME/.dofiles/bin/editor"
 
 # ls
 alias ll="ls -l"
@@ -94,7 +94,10 @@ if command -v colordiff >/dev/null; then
 fi
 
 # direnv
-if command -v direnv &>/dev/null; then
+if
+  command -v direnv &
+  >/dev/null
+then
   alias da="direnv allow"
 fi
 
@@ -137,7 +140,10 @@ if [ -d ~/.emacs.d/bin ]; then
 fi
 
 # fd
-if command -v fdfind &>/dev/null; then
+if
+  command -v fdfind &
+  >/dev/null
+then
   alias fd=fdfind
 fi
 
@@ -189,7 +195,10 @@ gitignore() {
 }
 
 # gnome-keyring-daemon
-if command -v gnome-keyring-daemon &>/dev/null; then
+if
+  command -v gnome-keyring-daemon &
+  >/dev/null
+then
   if [ -n "$DESKTOP_SESSION" ]; then
     eval "$(gnome-keyring-daemon --start --components=secrets,pkcs11)"
   fi
@@ -258,7 +267,10 @@ fi
 if [[ -S "${XDG_RUNTIME_DIR}/ssh-agent.socket" ]]; then
   export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/ssh-agent.socket"
 fi
-if [[ -n $SSH_AUTH_SOCK ]] && ! ssh-add -l &>/dev/null; then
+if
+  [[ -n $SSH_AUTH_SOCK ]] && ! ssh-add -l &
+  >/dev/null
+then
   echo "Empty ssh-agent"
 fi
 delkey() {
