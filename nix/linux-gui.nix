@@ -63,6 +63,5 @@
   '';
 
   services.gnome-keyring.enable = true;
-  services.syncthing.enable = true;
   systemd.user.startServices = "sd-switch";
 }
