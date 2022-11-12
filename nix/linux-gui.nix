@@ -30,6 +30,7 @@
     pkgs.bluez
     pkgs.light
     pkgs.networkmanagerapplet
+    pkgs.wl-clipboard
 
     # audio
     pkgs.plexamp
