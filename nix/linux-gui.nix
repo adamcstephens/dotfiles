@@ -22,6 +22,8 @@
   home.packages = [
     config.programs.eww.package
 
+    pkgs.font-awesome
+    pkgs.material-icons
     pkgs.material-design-icons
     (pkgs.nerdfonts.override {fonts = ["JetBrainsMono"];})
 
