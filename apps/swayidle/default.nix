@@ -6,7 +6,7 @@
   ...
 }: let
   gtklockBin = "${self'.packages.gtklock}/bin/gtklock";
-  systemctlBin = "${pkgs.systemdMinimal}/bin/systemctl";
+  systemctlBin = "/run/current-system/sw/bin/systemctl";
 
   gtklock = "${pkgs.procps}/bin/pgrep gtklock || ${pkgs.util-linux}/bin/setsid --fork ${gtklockBin}";
 in {
