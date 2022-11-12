@@ -1,4 +1,8 @@
-{...}: {
+{pkgs, ...}: {
+  home.packages = [
+    pkgs.river
+  ];
+
   systemd.user.targets.river-session = {
     Unit = {
       Description = "river compositor session";
