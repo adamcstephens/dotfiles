@@ -14,9 +14,5 @@
       ExecStart = "${pkgs.openssh}/bin/ssh-agent -D -a $SSH_AUTH_SOCK";
       Restart = "always";
     };
-
-    Install = {
-      WantedBy = config.dotfiles.gui.wantedBy;
-    };
   };
 }

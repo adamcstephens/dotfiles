@@ -1,18 +1,6 @@
 #!/usr/bin/env bash
 
-export MOZ_DBUS_REMOTE=1
-export MOZ_ENABLE_WAYLAND=1
-export QT_QPA_PLATFORM=wayland
-export QT_QPA_PLATFORMTHEME=gnome
+river &>"$HOME/.cache/river.log-$(date +%Y%m%d%H%M)"
 
-export XDG_DATA_DIRS="$HOME/.local/share/flatpak/exports/share:$XDG_DATA_DIRS"
-
-export DESKTOP_SESSION=sway
-
-if grep -q NixOS /etc/os-release; then
-  cmd="river"
-else
-  cmd="nix run github:guibou/nixGL#nixGLIntel -- river"
-fi
-
-$cmd &>"$HOME/.cache/river.log-$(date +%Y%m%d%H%M)"
+systemctl --user stop river-session.target
+systemctl --user stop graphical-session.target

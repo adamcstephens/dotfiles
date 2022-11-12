@@ -38,7 +38,6 @@
       ];
       dotfiles = {
         isVM = true;
-        windowManager.hyprland = true;
       };
     };
     think = {
@@ -47,10 +46,6 @@
         ../apps/emacs
         ./linux-gui.nix
       ];
-      dotfiles = {
-        windowManager.hyprland = true;
-        windowManager.river = true;
-      };
     };
 
     # generic systems

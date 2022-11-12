@@ -18,7 +18,7 @@
     };
 
     Install = {
-      WantedBy = config.dotfiles.gui.wantedBy;
+      WantedBy = ["graphical-session.target"];
     };
   };
 }

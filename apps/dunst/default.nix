@@ -4,7 +4,7 @@
 
   systemd.user.services.dunst = {
     Install = {
-      WantedBy = config.dotfiles.gui.wantedBy;
+      WantedBy = ["graphical-session.target"];
     };
   };
 }

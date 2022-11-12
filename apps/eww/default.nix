@@ -36,16 +36,15 @@ in {
   systemd.user.services.eww = {
     Unit = {
       Description = "Eww Daemon";
-      # not yet implemented
-      # PartOf = ["tray.target"];
-      # PartOf = ["river-session.target" "hyprland-session.target"];
+      PartOf = ["graphical-session.target"];
     };
     Service = {
       Environment = "PATH=/run/wrappers/bin:${lib.makeBinPath dependencies}";
       ExecStart = "${config.programs.eww.package}/bin/eww daemon --no-daemonize";
       ExecStartPost = "${config.programs.eww.package}/bin/eww open bar";
+      ExecStopPre = "${config.programs.eww.package}/bin/eww close bar";
       Restart = "on-failure";
     };
-    Install.WantedBy = config.dotfiles.gui.wantedBy;
+    Install.WantedBy = ["graphical-session.target"];
   };
 }

@@ -17,7 +17,7 @@
 in {
   services.kanshi = {
     enable = true;
-    systemdTarget = "river-session.target";
+    systemdTarget = "graphical-session.target";
     profiles = {
       docked = {
         outputs = [

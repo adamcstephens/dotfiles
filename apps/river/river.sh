@@ -179,5 +179,7 @@ systemctl --user start river-session.target
 riverctl default-layout rivertile
 
 if ! pgrep rivertile; then
-  exec rivertile -main-ratio 0.5 -view-padding 2 -outer-padding 2
+  rivertile -main-ratio 0.5 -view-padding 2 -outer-padding 2
 fi
+
+systemctl --user stop river-session.target

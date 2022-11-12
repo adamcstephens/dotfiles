@@ -8,10 +8,4 @@
       night = 3000;
     };
   };
-
-  systemd.user.services.gammastep = {
-    Install = {
-      WantedBy = config.dotfiles.gui.wantedBy;
-    };
-  };
 }

@@ -12,6 +12,7 @@
 in {
   services.swayidle = {
     enable = true;
+    systemdTarget ="graphical-session.target";
     events = [
       {
         event = "before-sleep";
@@ -31,11 +32,5 @@ in {
           command = "${systemctlBin} suspend";
         }
       ]);
-  };
-
-  systemd.user.services.swayidle = {
-    Install = {
-      WantedBy = config.dotfiles.gui.wantedBy;
-    };
   };
 }
