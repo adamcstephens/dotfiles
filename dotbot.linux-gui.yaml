@@ -18,5 +18,6 @@
     ~/.config/kitty/linux.conf: apps/kitty/kitty-linux.conf
     ~/.config/pipewire/pipewire.conf.d: apps/pipewire/pipewire.conf.d
     ~/.config/pipewire/client.conf.d: apps/pipewire/client.conf.d
+    ~/.config/wireplumber: apps/wireplumber
     ~/.config/river/init: apps/river/river.sh
     ~/.config/sway/config: apps/sway/sway.conf

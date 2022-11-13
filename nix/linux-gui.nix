@@ -36,6 +36,7 @@
 
     # audio
     pkgs.plexamp
+    pkgs.pavucontrol
     pkgs.playerctl
     pkgs.wireplumber
 
