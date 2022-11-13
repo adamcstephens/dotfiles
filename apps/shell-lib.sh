@@ -1,6 +1,7 @@
 #!/usr/bin/env sh
 
-. "$HOME"/.dotfiles/.envrc
+cd "$HOME"/.dotfiles
+eval "$(direnv export bash)"
 
 check_registry() {
   if [ -z "$DOCKER_REGISTRY" ]; then
