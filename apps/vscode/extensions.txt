@@ -9,6 +9,7 @@ eww-yuck.yuck
 filipesabella.live-p5
 firefox-devtools.vscode-firefox-debug
 golang.go
+golf1052.base16-generator
 hashicorp.terraform
 haskell.haskell
 JakeBecker.elixir-ls

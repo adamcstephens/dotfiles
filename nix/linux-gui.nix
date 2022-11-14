@@ -10,6 +10,7 @@
     ../apps/gammastep
     ../apps/hyprland
     ../apps/kanshi
+    ../apps/kitty
     ../apps/river
     ../apps/vscode
     ../apps/wofi
@@ -17,6 +18,12 @@
   ];
 
   fonts.fontconfig.enable = true;
+
+  gtk = {
+    enable = true;
+    theme.name = "Adwaita-dark";
+    theme.package = pkgs.gnome.gnome-themes-extra;
+  };
 
   home.packages = [
     config.programs.eww.package
@@ -43,7 +50,6 @@
     pkgs._1password-gui
     pkgs.cider
     pkgs.firefox-wayland
-    pkgs.kitty
     pkgs.cinnamon.nemo
     pkgs.remmina
     pkgs.slack
@@ -60,6 +66,8 @@
       just dotbot dotbot.linux-gui.yaml
     popd
   '';
+
+  home.sessionVariables.NIXOS_OZONE_WL = "1";
 
   services.gnome-keyring.enable = true;
   systemd.user.startServices = "sd-switch";

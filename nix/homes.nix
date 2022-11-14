@@ -94,6 +94,12 @@
               # install packages from the dotfiles flake
               home.packages = cliPkgs;
             }
+            inputs.nix-colors.homeManagerModule
+            {
+              # colorScheme = inputs.nix-colors.colorSchemes.circus;
+              colorScheme = inputs.nix-colors.colorSchemes.tokyo-night-terminal-dark;
+              # colorScheme = inputs.nix-colors.colorSchemes.cupertino;
+            }
           ]
           ++ modules
           ++ (pkgs.lib.optionals pkgs.stdenv.isDarwin [./home-darwin.nix])

@@ -5,7 +5,7 @@
   ...
 }: {
   imports = [
-    # ../apps/vscode
+    ../apps/kitty
   ];
 
   home.packages = [
@@ -15,7 +15,6 @@
     pkgs.mas
     pkgs.pinentry_mac
 
-    pkgs.kitty
     pkgs.wireshark
   ];
 
