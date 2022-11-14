@@ -2,17 +2,16 @@
   pkgs,
   config,
   lib,
-  self',
   ...
 }: let
-  gtklockBin = "${self'.packages.gtklock}/bin/gtklock";
+  gtklockBin = "${pkgs.gtklock}/bin/gtklock";
   systemctlBin = "/run/current-system/sw/bin/systemctl";
 
   gtklock = "${pkgs.procps}/bin/pgrep gtklock || ${pkgs.util-linux}/bin/setsid --fork ${gtklockBin}";
 in {
   services.swayidle = {
     enable = true;
-    systemdTarget ="graphical-session.target";
+    systemdTarget = "graphical-session.target";
     events = [
       {
         event = "before-sleep";

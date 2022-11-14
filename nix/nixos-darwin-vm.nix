@@ -9,7 +9,6 @@
       inputs',
       pkgs,
       system,
-      self',
       ...
     }:
       inputs.nixpkgs.lib.nixosSystem {
@@ -154,7 +153,7 @@
             };
 
             home-manager.extraSpecialArgs = {
-              inherit inputs inputs' self';
+              inherit inputs inputs';
             };
           }
           {

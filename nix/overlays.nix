@@ -6,12 +6,17 @@
   default = nixpkgs.lib.composeManyExtensions [
     emacs.overlays.emacs
     emacs.overlays.package
+    gtklock
     river
     fishPlugins
+    terminfo
   ];
 
+  gtklock = _: prev: {gtklock = prev.callPackage ./packages/gtklock.nix {};};
+  terminfo = _: prev: {terminfo = prev.callPackage ./packages/terminfo {};};
+
   river = final: prev: {
-    river = prev.river.overrideAttrs (old: {
+    river = prev.river.overrideAttrs (_: {
       version = "0.1.4pre";
       src = final.fetchFromGitHub {
         owner = "riverwm";
@@ -35,8 +40,9 @@
     });
   };
 
-  fishPlugins = final: prev: {
-    fishPlugins = prev.fishPlugins.overrideScope' (ffinal: fprev: {
+  # disable tests since they broke on darwin...
+  fishPlugins = _: prev: {
+    fishPlugins = prev.fishPlugins.overrideScope' (_: fprev: {
       fzf-fish = fprev.fzf-fish.overrideAttrs (_: {
         doCheck = false;
       });

@@ -25,7 +25,7 @@
     self,
     flake-parts,
     ...
-  }:
+  } @ inputs:
     flake-parts.lib.mkFlake {inherit self;} {
       imports = [
         ./nix/homes.nix
@@ -62,6 +62,6 @@
     }
     // {
       apps = self.inputs.nixinate.nixinate.aarch64-darwin self;
-      overlays = import ./nix/overlays.nix self.inputs;
+      overlays = import ./nix/overlays.nix inputs;
     };
 }

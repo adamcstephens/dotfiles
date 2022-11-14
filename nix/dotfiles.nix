@@ -1,11 +1,6 @@
-{
-  config,
-  lib,
-  ...
-}: let
-  cfg = config.dotfiles;
-in {
+{lib, ...}: {
   options.dotfiles = {
+    linuxGui = lib.mkEnableOption "linuxGui";
     isVM = lib.mkEnableOption "isVM";
   };
 }

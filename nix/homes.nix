@@ -6,10 +6,7 @@
   homeProfiles = {
     darwin-vm = {
       homeSystem = "aarch64-linux";
-      modules = [
-        ../apps/emacs
-        ./linux-gui.nix
-      ];
+      dotfiles.linuxGui = true;
     };
     EMAT-C02G44CPQ05P = {
       username = "astephe9";
@@ -32,20 +29,14 @@
     };
     sank = {
       homeSystem = "x86_64-linux";
-      modules = [
-        ../apps/emacs
-        ./linux-gui.nix
-      ];
       dotfiles = {
         isVM = true;
+        linuxGui = true;
       };
     };
     think = {
       homeSystem = "x86_64-linux";
-      modules = [
-        ../apps/emacs
-        ./linux-gui.nix
-      ];
+      dotfiles.linuxGui = true;
     };
 
     # generic systems
@@ -79,6 +70,14 @@
           then "/Users/${username}"
           else "/home/${username}";
 
+        cliPkgs = [
+          inputs.comma.packages.${system}.comma
+          pkgs.terminfo
+        ];
+        guiPkgs = [
+          inputs.webcord.packages.${system}.default
+        ];
+
         hmModules =
           [
             ./dotfiles.nix
@@ -93,15 +92,19 @@
             }
             {
               # install packages from the dotfiles flake
-              home.packages = [
-                inputs'.comma.packages.comma
-                self'.packages.terminfo
-              ];
+              home.packages = cliPkgs;
             }
           ]
           ++ modules
           ++ (pkgs.lib.optionals pkgs.stdenv.isDarwin [./home-darwin.nix])
-          ++ (pkgs.lib.optionals pkgs.stdenv.isLinux [./home-linux.nix]);
+          ++ (pkgs.lib.optionals pkgs.stdenv.isLinux [./home-linux.nix])
+          ++ (pkgs.lib.optionals dotfiles.linuxGui [
+            ./linux-gui.nix
+            {
+              # install packages from the dotfiles flake
+              home.packages = guiPkgs;
+            }
+          ]);
       in {
         homeConfig = inputs.home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
@@ -117,8 +120,8 @@
       }
     );
 in {
-  flake.homeConfigurations = builtins.mapAttrs (name: value: (homeProfile value).homeConfig) homeProfiles;
-  flake.homeModules = builtins.mapAttrs (name: value: (homeProfile value).homeModules) homeProfiles;
+  flake.homeConfigurations = builtins.mapAttrs (_: value: (homeProfile value).homeConfig) homeProfiles;
+  flake.homeModules = builtins.mapAttrs (_: value: (homeProfile value).homeModules) homeProfiles;
   flake.lib.findHome = hostname: system:
     if (builtins.elem hostname (builtins.attrNames homeProfiles))
     then hostname
