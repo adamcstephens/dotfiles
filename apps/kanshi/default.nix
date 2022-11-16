@@ -12,6 +12,7 @@
 }: let
   execs = [
     "eww reload"
+    "eww close bar"
     "eww open bar"
   ];
 in {
