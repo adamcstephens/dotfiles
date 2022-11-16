@@ -21,6 +21,9 @@ doomemacs:
 fish-bootstrap:
     fish ~/.dotfiles/bin/theme.fish
 
+intel-check-cstate:
+    sudo cat /sys/kernel/debug/pmc_core/package_cstate_show
+
 migrate:
     #!/usr/bin/env bash
     set -e
