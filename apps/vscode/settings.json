@@ -140,7 +140,7 @@
   "workbench.editorAssociations": {
     "*.ipynb": "jupyter-notebook"
   },
-  "workbench.preferredDarkColorTheme": "An Old Hope Italic",
+  "workbench.preferredDarkColorTheme": "Base16 Ayu Dark",
   "workbench.sideBar.location": "left",
   "workbench.startupEditor": "newUntitledFile",
   "workbench.tree.renderIndentGuides": "always",
