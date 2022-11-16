@@ -534,5 +534,6 @@
     "base16-xcode-dusk-light",
     "base16-zenburn-dark",
     "base16-zenburn-light"
-  ]
+  ],
+  "terminal.integrated.enablePersistentSessions": false
 }
