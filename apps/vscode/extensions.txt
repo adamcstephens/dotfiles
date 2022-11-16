@@ -38,6 +38,7 @@ ritwickdey.LiveServer
 rust-lang.rust
 samplavigne.p5-vscode
 samuelcolvin.jinjahtml
+shaunlebron.vscode-parinfer
 skellock.just
 tamasfe.even-better-toml
 timonwong.shellcheck
