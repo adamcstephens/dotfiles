@@ -54,7 +54,7 @@
   homeProfile = {
     username ? "adam",
     modules ? [],
-    dotfiles ? {},
+    dotfiles ? {linuxGui = false;},
     homeSystem,
   }:
     withSystem homeSystem (

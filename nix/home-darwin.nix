@@ -25,6 +25,4 @@
       just dotbot dotbot.Darwin.yaml
     popd
   '';
-
-  services.syncthing.enable = true;
 }
