@@ -167,8 +167,6 @@ riverctl input pointer-1739:52619:SYNA8004:00_06CB:CD8B_Touchpad middle-emulatio
 
 riverctl focus-follows-cursor always || riverctl focus-follows-cursor normal
 
-eww open bar || true
-
 # systemd
 
 systemctl --user import-environment
