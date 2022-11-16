@@ -52,7 +52,7 @@ def set_kitty_theme(target):
 
     if kitty_pid != "":
         if target:
-            run(f"{cmd}theme-dark.conf")
+            run(f"{cmd}kitty.conf")
         else:
             run(f"{cmd}theme-light.conf")
 
