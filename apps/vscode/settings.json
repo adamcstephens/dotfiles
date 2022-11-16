@@ -132,7 +132,7 @@
       "terminal.background": "#2b2d3a"
     }
   },
-  "workbench.colorTheme": "Base16 Tokyo Night Terminal Dark",
+  "workbench.colorTheme": "Base16 Ayu Dark",
   "workbench.editor.decorations.badges": true,
   "workbench.editor.labelFormat": "short",
   "workbench.editor.showIcons": false,

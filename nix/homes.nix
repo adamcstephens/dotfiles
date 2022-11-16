@@ -97,7 +97,7 @@
             inputs.nix-colors.homeManagerModule
             {
               # colorScheme = inputs.nix-colors.colorSchemes.circus;
-              colorScheme = inputs.nix-colors.colorSchemes.tokyo-night-terminal-dark;
+              colorScheme = inputs.nix-colors.colorSchemes.ayu-dark;
               # colorScheme = inputs.nix-colors.colorSchemes.cupertino;
             }
           ]
