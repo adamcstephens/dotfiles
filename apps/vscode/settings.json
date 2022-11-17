@@ -92,7 +92,8 @@
     "timonwong.shellcheck",
     "JakeBecker.elixir-ls",
     "kamadorueda.alejandra",
-    "skellock.just"
+    "skellock.just",
+    "golf1052.base16-generator"
   ],
   "remote.SSH.lockfilesInTmp": true,
   "remote.SSH.remotePlatform": {
