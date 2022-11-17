@@ -6,7 +6,6 @@
 }: {
   imports = [
     ../apps/dunst
-    ../apps/eww
     ../apps/gammastep
     ../apps/hyprland
     ../apps/kanshi
@@ -15,6 +14,7 @@
     ../apps/vscode
     ../apps/wofi
     ../apps/swayidle
+    ../apps/waybar
   ];
 
   fonts.fontconfig.enable = true;
@@ -26,8 +26,6 @@
   };
 
   home.packages = [
-    config.programs.eww.package
-
     pkgs.font-awesome
     pkgs.material-icons
     pkgs.material-design-icons

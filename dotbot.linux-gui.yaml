@@ -21,3 +21,5 @@
     ~/.config/wireplumber: apps/wireplumber
     ~/.config/river/init: apps/river/river.sh
     ~/.config/sway/config: apps/sway/sway.conf
+    ~/.config/waybar/config: apps/waybar/waybar.jsonc
+    ~/.config/waybar/style.css: apps/waybar/waybar.css

@@ -27,6 +27,10 @@
     wofi
   ];
 in {
+  home.packages = [
+    config.programs.eww.package
+  ];
+
   programs.eww = {
     #   enable = true;
     package = pkgs.eww-wayland;

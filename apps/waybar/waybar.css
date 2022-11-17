@@ -56,7 +56,7 @@ window#waybar.solo {
 #pulseaudio,
 #bluetooth,
 #tray {
-  margin: 0px 10px;
+  /* margin: 0px 1px; */
   min-width: 10px;
 }
 
