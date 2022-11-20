@@ -38,7 +38,8 @@ migrate:
     if rg lefthook ~/.dotfiles/.git/hooks &>/dev/null; then nix run nixpkgs#lefthook -- uninstall; fi;
     if [ "$(readlink $HOME/.config/kitty/kitty.conf)" == "$HOME/.dotfiles/apps/kitty/kitty.conf" ]; then rm -v $HOME/.config/kitty/kitty.conf; fi
     if [ "$(readlink $HOME/.config/kitty/theme-dark.conf)" == "$HOME/.dotfiles/apps/kitty/theme-dark.conf" ]; then rm -v $HOME/.config/kitty/theme-dark.conf; fi
-    if [ "$(readlink $HOME/.config/kitty/theme-light.conf)" == "$HOME/.dotfiles/apps/kitty/theme-light.conf" ]; then rm -v $HOME/.config/kitty/theme-light.conf; fi
+
+    if [ "$(readlink $HOME/.config/waybar/style.css)" == "$HOME/.dotfiles/apps/waybar/waybar.css" ]; then rm -v $HOME/.config/waybar/style.css; fi
 
 nix-index-fetch:
     #!/usr/bin/env bash
