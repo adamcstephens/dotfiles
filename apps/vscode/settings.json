@@ -125,6 +125,10 @@
   "window.restoreWindows": "none",
   "window.titleBarStyle": "custom",
   "workbench.colorCustomizations": {
+    "[Base16 Ayu Dark]": {
+      "statusBar.background": "#272D38",
+      "statusBarItem.remoteBackground": "#3E4B59"
+    },
     "[Sonokai Andromeda]": {
       "gitDecoration.ignoredResourceForeground": "#565864",
       "quickInputList.focusBackground": "#363a4e80",
@@ -169,7 +173,6 @@
   },
   "gitlens.codeLens.enabled": false,
   "nix.formatterPath": "alejandra",
-  "nix.serverPath": "nil",
   "terraform.languageServer.enable": true,
   "terraform.languageServer.path": "",
   "nix.enableLanguageServer": true,
@@ -536,5 +539,6 @@
     "base16-zenburn-dark",
     "base16-zenburn-light"
   ],
-  "terminal.integrated.enablePersistentSessions": false
+  "terminal.integrated.enablePersistentSessions": false,
+  "nix.serverPath": "nil"
 }
