@@ -15,6 +15,7 @@
     ../apps/wofi
     ../apps/swayidle
     ../apps/waybar
+    ../apps/wob
   ];
 
   fonts.fontconfig.enable = true;

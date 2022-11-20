@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
 
+set -e
+
 if [ -z "$1" ]; then
   echo "Usage: $0 (up|down|mute)"
   exit 1
@@ -7,22 +9,19 @@ fi
 
 command=$1
 
-eww open volume_win
-
 case $command in
 up)
-  wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 3%+
+  wpctl set-volume --limit 1.0 @DEFAULT_AUDIO_SINK@ 3%+
   ;;
 down)
-  wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 3%-
+  wpctl set-volume --limit 1.0 @DEFAULT_AUDIO_SINK@ 3%-
   ;;
 mute)
-  wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
+  wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
   ;;
 esac
 
-# set -e
-sleep 3
-eww close volume_win
-
-#  | grep 'Front Left:' | awk '{print \$5}' | sed -r 's/(\[|\]|%)//g' >>$XDG_RUNTIME_DIR/wob.sock
+vol="$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | cut -f 2 -d ' ')"
+percentVol="$(echo "$vol*100" | bc -l | cut -f 1 -d .)"
+echo "Changing volume: $percentVol"
+echo $percentVol >$XDG_RUNTIME_DIR/wob.sock
