@@ -33,7 +33,7 @@ in {
         Description = "Wayland overlay bar";
         PartOf = ["graphical-session.target"];
         After = ["graphical-session-pre.target"];
-        ConditionPathExistsGlob = ["%t/wayland-*"];
+        # ConditionPathExistsGlob = ["%t/wayland-*"];
       };
 
       Install.WantedBy = ["graphical-session.target"];
@@ -50,7 +50,7 @@ in {
       Socket = {
         ListenFIFO = "%t/wob.sock";
         SocketMode = 0600;
-        ConditionPathExistsGlob = ["%t/wayland-*"];
+        # ConditionPathExistsGlob = ["%t/wayland-*"];
       };
 
       Install.WantedBy = ["sockets.target" "graphical-session.target"];
