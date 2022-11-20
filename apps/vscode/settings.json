@@ -127,7 +127,9 @@
   "workbench.colorCustomizations": {
     "[Base16 Ayu Dark]": {
       "statusBar.background": "#272D38",
-      "statusBarItem.remoteBackground": "#3E4B59"
+      "statusBarItem.remoteBackground": "#3E4B59",
+      "editorCodeLens.foreground": "#BFBDB6",
+      "statusBar.noFolderBackground": "#0F1419"
     },
     "[Sonokai Andromeda]": {
       "gitDecoration.ignoredResourceForeground": "#565864",
