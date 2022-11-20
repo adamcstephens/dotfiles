@@ -1,9 +1,6 @@
 #!/bin/sh
 
-# Set background and border color
-riverctl background-color 0x1c1d21
-riverctl border-color-focused 0xcbcdd2
-riverctl border-color-unfocused 0x3f4044
+~/.config/river/colors.sh
 
 riverctl map normal Mod4+Shift T spawn 'kitty --single-instance'
 riverctl map normal Mod4+Shift W spawn 'gtk-launch firefox'
