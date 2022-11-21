@@ -2,14 +2,14 @@
   pkgs,
   config,
   lib,
+  inputs,
   ...
 }: {
   imports = [
     ../apps/fish
   ];
 
-  # https://github.com/NixOS/nixpkgs/issues/196651
-  manual.manpages.enable = false;
+  nix.registry.nixpkgs.flake = inputs.nixpkgs;
 
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [
