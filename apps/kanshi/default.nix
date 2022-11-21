@@ -5,15 +5,9 @@
 #   1.32, 2909.091 x 818.1819
 #   1.35, 2844.4443 x 800
 #   1.40, 2742.8571 x 1542.8571
-{
-  config,
-  pkgs,
-  ...
-}: let
+{pkgs, ...}: let
   execs = [
-    "eww reload"
-    "eww close bar"
-    "eww open bar"
+    "~/.dotfiles/apps/river/inputs.sh"
   ];
 in {
   services.kanshi = {
@@ -50,7 +44,7 @@ in {
 
   systemd.user.services.kanshi = {
     Service = {
-      Environment = ["PATH=${config.programs.eww.package}/bin:$PATH"];
+      Environment = ["PATH=${pkgs.river}/bin:$PATH"];
     };
   };
 }

@@ -1,6 +1,7 @@
 #!/bin/sh
 
 ~/.config/river/colors.sh
+~/.dotfiles/apps/river/input.sh
 
 riverctl map normal Mod4+Shift T spawn 'kitty --single-instance'
 riverctl map normal Mod4+Shift W spawn 'gtk-launch firefox'
@@ -149,20 +150,6 @@ riverctl float-filter-add title "popup title with spaces"
 
 # Set app-ids and titles of views which should use client side decorations
 riverctl csd-filter-add app-id "gedit"
-
-riverctl set-repeat 100 220
-
-riverctl list-inputs | grep Magic_Trackpad | sort -u | while read trackpad; do
-  riverctl input $trackpad natural-scroll enabled
-  riverctl input $trackpad tap-button-map left-right-middle
-done
-
-riverctl input pointer-1739-52619-SYNA8004:00_06CB:CD8B_Touchpad events disabled
-riverctl input pointer-1739-52619-SYNA8004:00_06CB:CD8B_Touchpad natural-scroll enabled
-riverctl input pointer-1739-52619-SYNA8004:00_06CB:CD8B_Touchpad tap-button-map left-right-middle
-riverctl input pointer-1739:52619:SYNA8004:00_06CB:CD8B_Touchpad middle-emulation disabled
-
-riverctl focus-follows-cursor always || riverctl focus-follows-cursor normal
 
 # systemd
 
