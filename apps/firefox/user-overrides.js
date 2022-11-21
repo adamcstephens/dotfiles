@@ -1,4 +1,5 @@
 user_pref("browser.download.useDownloadDir", true);
+user_pref("browser.tabs.firefox-view", false);
 user_pref("browser.warnOnQuit", false);
 // * 0=blank, 1=home, 2=last visited page, 3=resume previous session
 user_pref("browser.startup.page", 3);
