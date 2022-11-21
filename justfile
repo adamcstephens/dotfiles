@@ -4,6 +4,9 @@ default:
 aqua-run:
     cd ./aqua; aqua install
 
+arkenfox-update version:
+    git subrepo pull --branch {{version}} apps/firefox/arkenfox/
+
 bootstrap-nonix: aqua-run dotbot fish-bootstrap
 
 brew-dump:
