@@ -4,7 +4,6 @@ github.classroom
 GitHub.vscode-pull-request-github
 ms-vsliveshare.vsliveshare
 gitpod.gitpod-desktop
-nimsaem.nimvscode
 JulienDuchesne.vscode-jsonnet
 GitHub.codespaces
 foxundermoon.shell-format
