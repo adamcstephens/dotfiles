@@ -1,7 +1,11 @@
 #!/usr/bin/env sh
 
+set -e
+
 if [ "$(uname)" = "Darwin" ]; then
-  PROFILES_DIR=$HOME/Library/Application\ Support/Firefox/Profiles/
+  PROFILES_DIR="$HOME/Library/Application Support/Firefox/Profiles/"
+elif [ "$(uname)" = "Linux" ]; then
+  PROFILES_DIR="$HOME/.mozilla/firefox/"
 fi
 
 if pgrep -i firefox; then
@@ -10,7 +14,10 @@ if pgrep -i firefox; then
 fi
 
 for FIREFOX_PROFILE in "$PROFILES_DIR"*; do
-  echo "Arkenfoxing: $FIREFOX_PROFILE"
+  if [ ! -e "$FIREFOX_PROFILE/cookies.sqlite" ]; then
+    continue
+  fi
+  echo ":: Arkenfoxing: $FIREFOX_PROFILE ::"
   cd "$FIREFOX_PROFILE" || exit 1
   cp ~/.dotfiles/apps/firefox/arkenfox/prefsCleaner.sh .
   cp ~/.dotfiles/apps/firefox/arkenfox/updater.sh .
