@@ -30,7 +30,11 @@ trim_at = ""
 [localip]
 disabled = true
 
+[nim]
+disabled = true
+
 [nix_shell]
+disabled = true
 format = '[\($name\)]($style) '
 
 [nodejs]
