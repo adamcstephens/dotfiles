@@ -94,6 +94,9 @@
     direnv.nix-direnv.enable = true;
     lsd.enable = true;
     starship.enable = true;
-    zoxide.enable = true;
+    zoxide = {
+      enable = true;
+      options = ["--cmd" "j"];
+    };
   };
 }
