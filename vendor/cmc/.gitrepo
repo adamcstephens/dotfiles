@@ -6,7 +6,7 @@
 [subrepo]
 	remote = https://github.com/TimidRobot/cmc
 	branch = main
-	commit = 0a0344d0ac5aec43a32f47aae2a42acf79ff6381
-	parent = 944281d26d24da2a5f51a055383ad4001e7d2870
+	commit = d5085c30d41ea1db96b1c119338fc6501fd09900
+	parent = a603074fcd8f0f34e8da4f9bf0d4aae233e45544
 	method = merge
-	cmdver = 0.4.3
+	cmdver = 0.4.5
