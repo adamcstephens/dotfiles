@@ -28,3 +28,6 @@ indent_style = tab
 
 [justfile]
 indent_size = 4
+
+[*.{nim,nims}]
+indent_size = 4
