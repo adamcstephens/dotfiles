@@ -1,7 +1,23 @@
-{config, ...}: {
+{
+  config,
+  pkgs,
+  ...
+}: {
   programs.kitty = {
     enable = true;
     extraConfig = builtins.readFile ./kitty.conf;
+    # package = pkgs.kitty.overrideAttrs (old: {
+    #   version = "0.27-pre";
+
+    #   src = pkgs.fetchFromGitHub {
+    #     owner = "kovidgoyal";
+    #     repo = "kitty";
+    #     rev = "cfc6bd4da55ab9e0220c3712a8058168f7aa7dc9";
+    #     sha256 = "sha256-36mxFksJXQPH+THwVY4oYcSjDJ4Kn0/4LUhuxDGK4X4=";
+    #   };
+
+    #   nativeBuildInputs = [pkgs.go] ++ old.nativeBuildInputs;
+    # });
 
     settings = with config.colorScheme.colors; {
       # Based on https://github.com/kdrag0n/base16-kitty/
