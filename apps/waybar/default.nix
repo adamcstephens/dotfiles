@@ -33,11 +33,14 @@
         margin: 0 5px;
       }
 
-      #tags button,
+      #tags button {
+        color: #${config.colorScheme.colors.base03};
+        padding: 0 7px;
+      }
+
       #tags button.occupied,
       #workspaces button {
-        padding: 0 7px;
-        color: #${config.colorScheme.colors.base0B};
+        color: #${config.colorScheme.colors.base04};
       }
 
       #tags button.focused,
@@ -69,6 +72,7 @@
       #tray {
         /* margin: 0px 1px; */
         min-width: 10px;
+        color: #${config.colorScheme.colors.base04};
       }
 
       #battery.warning {
