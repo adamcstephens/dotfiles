@@ -1,7 +1,8 @@
-{config, ...}: {
+{config, pkgs, ...}: {
   programs.waybar = {
     enable = true;
     systemd.enable = true;
+    package = pkgs.waybar.override {swaySupport = false;};
 
     style = ''
       * {

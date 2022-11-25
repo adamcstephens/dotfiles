@@ -10,6 +10,7 @@
     river
     fishPlugins
     terminfo
+    wlroots
     wob
   ];
 
@@ -17,32 +18,28 @@
   terminfo = _: prev: {terminfo = prev.callPackage ./packages/terminfo {};};
 
   river = final: prev: {
-    river =
-      (prev.river.overrideAttrs (_: {
-        version = "0.1.4pre1";
-        src = final.fetchFromGitHub {
-          owner = "riverwm";
-          repo = "river";
-          rev = "3141940efb7a241cc4998e7f8263533823f75ef3";
-          hash = "sha256-aa2qAkYjn3v5I2DoSm5JYKBojrR27E56+phWhK+pB7M=";
-          fetchSubmodules = true;
-        };
-
-        installPhase = ''
-          runHook preInstall
-          zig build -Drelease-safe -Dcpu=baseline -Dxwayland -Dman-pages --prefix $out install
-          mkdir -p $out/share/wayland-sessions
-          cp contrib/river.desktop $out/share/wayland-sessions
-          runHook postInstall
-        '';
-
-        passthru = {
-          providedSessions = ["river"];
-        };
-      }))
-      .override {
-        wlroots = prev.wlroots_0_16;
+    river = prev.river.overrideAttrs (_: {
+      version = "0.1.4pre1";
+      src = final.fetchFromGitHub {
+        owner = "riverwm";
+        repo = "river";
+        rev = "3141940efb7a241cc4998e7f8263533823f75ef3";
+        hash = "sha256-aa2qAkYjn3v5I2DoSm5JYKBojrR27E56+phWhK+pB7M=";
+        fetchSubmodules = true;
       };
+
+      installPhase = ''
+        runHook preInstall
+        zig build -Drelease-safe -Dcpu=baseline -Dxwayland -Dman-pages --prefix $out install
+        mkdir -p $out/share/wayland-sessions
+        cp contrib/river.desktop $out/share/wayland-sessions
+        runHook postInstall
+      '';
+
+      passthru = {
+        providedSessions = ["river"];
+      };
+    });
   };
 
   # disable tests since they broke on darwin...
@@ -52,6 +49,10 @@
         doCheck = false;
       });
     });
+  };
+
+  wlroots = _: prev: {
+    wlroots = prev.wlroots_0_16;
   };
 
   wob = _: prev: {
