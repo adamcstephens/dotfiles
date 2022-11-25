@@ -6,7 +6,6 @@
 }: {
   imports = [
     ../apps/dunst
-    ../apps/foot
     ../apps/gammastep
     ../apps/hyprland
     ../apps/kanshi

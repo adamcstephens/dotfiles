@@ -4,9 +4,6 @@
 ~/.dotfiles/apps/river/input.sh
 
 riverctl map normal Mod4+Shift T spawn 'kitty --single-instance'
-# riverctl map normal Mod4+Shift T spawn 'footclient'
-riverctl map normal Mod4+Shift W spawn 'gtk-launch firefox'
-riverctl map normal Mod4+Shift V spawn 'gtk-launch code'
 riverctl map normal Mod4+Shift+Control E spawn 'gtk-launch emacsclient'
 riverctl map normal Mod4 D spawn 'wofi --show drun,run'
 riverctl map normal Mod4+Shift+Control D spawn 'dark toggle'

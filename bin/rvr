@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-river &>"$HOME/.cache/river.log-$(date +%Y%m%d%H%M)"
+systemd-cat --identifier=river river
 
 systemctl --user stop river-session.target
 systemctl --user stop graphical-session.target
