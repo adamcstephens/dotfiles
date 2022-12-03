@@ -21,12 +21,6 @@
         ../apps/emacs
       ];
     };
-    nixos2 = {
-      homeSystem = "x86_64-linux";
-      modules = [
-        ../apps/emacs
-      ];
-    };
     sank = {
       homeSystem = "x86_64-linux";
       dotfiles = {
