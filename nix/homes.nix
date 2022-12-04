@@ -1,5 +1,6 @@
 {
   inputs,
+  lib,
   withSystem,
   ...
 }: let
@@ -77,6 +78,7 @@
             ./dotfiles.nix
             {
               inherit dotfiles;
+              nix.registry.nixpkgs.flake = lib.mkDefault inputs.nixpkgs;
             }
             ./home.nix
             inputs.doom-emacs.hmModule
