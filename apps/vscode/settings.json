@@ -129,7 +129,9 @@
       "statusBar.background": "#272D38",
       "statusBarItem.remoteBackground": "#3E4B59",
       "editorCodeLens.foreground": "#BFBDB6",
-      "statusBar.noFolderBackground": "#0F1419"
+      "statusBar.noFolderBackground": "#0F1419",
+      "tab.activeBorder": "#BFBDB6",
+      "tab.activeBackground": "#272D38"
     },
     "[Sonokai Andromeda]": {
       "gitDecoration.ignoredResourceForeground": "#565864",
@@ -148,7 +150,6 @@
     "*.ipynb": "jupyter-notebook"
   },
   "workbench.preferredDarkColorTheme": "Base16 Ayu Dark",
-  "workbench.sideBar.location": "left",
   "workbench.startupEditor": "newUntitledFile",
   "workbench.tree.renderIndentGuides": "always",
   "yaml.customTags": ["!encrypted/pkcs1-oaep scalar", "!vault scalar"],
