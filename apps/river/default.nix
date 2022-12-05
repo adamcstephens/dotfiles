@@ -2,9 +2,24 @@
   config,
   pkgs,
   ...
-}: {
+}: let
+  river =
+    (pkgs.river.override {
+      wlroots = pkgs.wlroots_0_16;
+    })
+    .overrideAttrs (_: {
+      version = "0.2.0-dev";
+      src = pkgs.fetchFromGitHub {
+        owner = "riverwm";
+        repo = "river";
+        rev = "e603c5460a27bdc8ce6c32c8ee5e53fb789bc10b";
+        hash = "sha256-x971VRWp72uNRNcBTU2H81EiqWa5kg0E5n7tK8ypaQM=";
+        fetchSubmodules = true;
+      };
+    });
+in {
   home.packages = [
-    pkgs.river
+    river
   ];
 
   systemd.user.targets.river-session = {
