@@ -149,6 +149,9 @@ riverctl float-filter-add title "popup title with spaces"
 # Set app-ids and titles of views which should use client side decorations
 riverctl csd-filter-add app-id "gedit"
 
+# warp the mouse
+riverctl set-cursor-warp on-focus-change
+
 # systemd
 
 systemctl --user import-environment
