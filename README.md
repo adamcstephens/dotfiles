@@ -2,8 +2,8 @@
 
 ## Installation
 
-``` sh
-git clone https://git.sr.ht/~adamcstephens/dotfiles ~/.dotfiles
+```sh
+git clone https://codeberg.org/adamcstephens/dotfiles ~/.dotfiles
 cd ~/.dotfiles
 ./install
 ```
@@ -12,5 +12,5 @@ cd ~/.dotfiles
 
 ```
 git clone https://github.com/adamcstephens/dotfiles ~/.dotfiles
-git clone https://codeberg.org/adamcstephens/dotfiles ~/.dotfiles
+git clone https://git.sr.ht/~adamcstephens/dotfiles ~/.dotfiles
 ```
