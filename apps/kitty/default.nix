@@ -1,12 +1,13 @@
 {
   config,
+  lib,
   pkgs,
   ...
 }: {
   programs.kitty = {
     enable = true;
     extraConfig = builtins.readFile ./kitty.conf;
-    package = pkgs.kitty.overrideAttrs (_: {
+    package = pkgs.kitty.overrideAttrs (old: {
       name = "kitty-0.26.5";
       # version = "0.26.5";
 
@@ -16,6 +17,8 @@
         rev = "v0.26.5";
         hash = "sha256-UloBlV26HnkvbzP/NynlPI77z09MBEVgtrg5SeTmwB4=";
       };
+
+      buildInputs = old.buildInputs ++ lib.optionals pkgs.stdenv.isDarwin [pkgs.UniformTypeIdentifiers];
     });
 
     settings = with config.colorScheme.colors; {
