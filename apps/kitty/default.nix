@@ -7,19 +7,23 @@
   programs.kitty = {
     enable = true;
     extraConfig = builtins.readFile ./kitty.conf;
-    package = pkgs.kitty.overrideAttrs (old: {
-      name = "kitty-0.26.5";
-      # version = "0.26.5";
+    package =
+      (pkgs.kitty.override {
+        inherit (pkgs.darwin.apple_sdk_11_0.frameworks) Cocoa CoreGraphics Foundation IOKit Kernel OpenGL;
+      })
+      .overrideAttrs (old: {
+        name = "kitty-0.26.5";
+        # version = "0.26.5";
 
-      src = pkgs.fetchFromGitHub {
-        owner = "kovidgoyal";
-        repo = "kitty";
-        rev = "v0.26.5";
-        hash = "sha256-UloBlV26HnkvbzP/NynlPI77z09MBEVgtrg5SeTmwB4=";
-      };
+        src = pkgs.fetchFromGitHub {
+          owner = "kovidgoyal";
+          repo = "kitty";
+          rev = "v0.26.5";
+          hash = "sha256-UloBlV26HnkvbzP/NynlPI77z09MBEVgtrg5SeTmwB4=";
+        };
 
-      buildInputs = old.buildInputs ++ lib.optionals pkgs.stdenv.isDarwin [pkgs.UniformTypeIdentifiers];
-    });
+        buildInputs = old.buildInputs ++ lib.optionals pkgs.stdenv.isDarwin [pkgs.darwin.apple_sdk_11_0.frameworks.UniformTypeIdentifiers];
+      });
 
     settings = with config.colorScheme.colors; {
       # Based on https://github.com/kdrag0n/base16-kitty/
