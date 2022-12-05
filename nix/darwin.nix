@@ -25,6 +25,9 @@
                 "nix-serve.junco.dev:wAHV4z39dUu7A6/PqOc9bqYxKUXqh2cogkav4+eJrkM="
               ];
             };
+            extraOptions = ''
+              extra-platforms = x86_64-darwin
+            '';
           };
           services.nix-daemon.enable = true;
         }
