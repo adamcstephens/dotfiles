@@ -40,6 +40,7 @@
 
       #tags button.occupied,
       #workspaces button {
+        padding: 0 7px;
         color: #${config.colorScheme.colors.base04};
       }
 
@@ -70,7 +71,7 @@
       #pulseaudio,
       #bluetooth,
       #tray {
-        /* margin: 0px 1px; */
+        margin: 0px 10px;
         min-width: 10px;
         color: #${config.colorScheme.colors.base04};
       }
