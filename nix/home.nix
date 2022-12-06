@@ -45,6 +45,7 @@
         git pull
       fi
       just dotbot
+      just nix-index-fetch
     popd
   '';
 
