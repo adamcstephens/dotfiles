@@ -150,7 +150,7 @@ riverctl float-filter-add title "popup title with spaces"
 riverctl csd-filter-add app-id "gedit"
 
 # warp the mouse
-riverctl set-cursor-warp on-focus-change
+riverctl set-cursor-warp on-focus-change || true
 
 # systemd
 

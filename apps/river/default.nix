@@ -5,15 +5,20 @@
 }: let
   river =
     (pkgs.river.override {
-      wlroots = pkgs.wlroots_0_16;
+      wlroots = pkgs.wlroots_0_15;
     })
     .overrideAttrs (_: {
       version = "0.2.0-dev";
       src = pkgs.fetchFromGitHub {
         owner = "riverwm";
         repo = "river";
-        rev = "e603c5460a27bdc8ce6c32c8ee5e53fb789bc10b";
-        hash = "sha256-x971VRWp72uNRNcBTU2H81EiqWa5kg0E5n7tK8ypaQM=";
+        # latest
+        # rev = "e603c5460a27bdc8ce6c32c8ee5e53fb789bc10b";
+        # hash = "sha256-x971VRWp72uNRNcBTU2H81EiqWa5kg0E5n7tK8ypaQM=";
+
+        # known-good
+        rev = "e35c147cd5b8fcd363b7ecc495292733b25d96f5";
+        hash = "sha256-orKL3imxpQXrSLj12Z3Zn5UuAW7P/JeOfoWCkb98eCM=";
         fetchSubmodules = true;
       };
     });
