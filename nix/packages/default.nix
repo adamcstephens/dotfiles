@@ -4,6 +4,7 @@
   ...
 }:
 {
+  rush-parallel = pkgs.callPackage ./rush-parallel.nix {};
   gtklock = pkgs.callPackage ./gtklock.nix {};
   terminfo = pkgs.callPackage ./terminfo {};
 }
