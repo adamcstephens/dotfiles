@@ -1,5 +1,5 @@
 module.exports = {
-  defaultBrowser: ["Brave Browser", "Firefox", "Safari", "Google Chrome"],
+  defaultBrowser: ["Firefox", "Safari", "Google Chrome", "Brave Browser"],
   options: {
     hideIcon: false,
     urlShorteners: [
@@ -31,6 +31,7 @@ module.exports = {
       },
     },
     {
+      // strip tracking params
       match: ({ url }) => url.search.includes("utm_"),
       url({ url }) {
         const search = url.search
@@ -48,6 +49,13 @@ module.exports = {
         ...url,
         host: "smile.amazon.com",
       }),
+    },
+    {
+      match: ({ url }) => url.host === "teams.microsoft.com",
+      url({ url }) {
+        // Build the URL string manually so we get the required single "/" between "msteams:" and "l/meetup-join…"
+        return "msteams:" + decodeURI(url.pathname) + "?" + url.search;
+      },
     },
   ],
   handlers: [
@@ -69,8 +77,8 @@ module.exports = {
       browser: "Spotify",
     },
     {
-      match: /^https?:\/\/teams\.microsoft\.com\/l\/meetup\-join\/.*$/,
-      browser: "Microsoft Edge",
+      match: ({ url }) => url.protocol === "msteams",
+      browser: "Microsoft Teams",
     },
   ].concat(
     [
