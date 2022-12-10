@@ -51,6 +51,7 @@
           packages = [
             pkgs.cachix
             pkgs.just
+            pkgs.alejandra
             pkgs.python3Minimal
           ];
         };
