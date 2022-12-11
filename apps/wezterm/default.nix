@@ -7,25 +7,30 @@
   colors = config.colorScheme.colors;
   slug = config.colorScheme.slug;
 
-  weztermPackage = pkgs.wezterm.overrideAttrs (old: {
+  weztermPackage = pkgs.wezterm.overrideAttrs (old: rec {
     version = "20221206";
     src = pkgs.fetchFromGitHub {
       owner = "wez";
       repo = "wezterm";
       rev = "92e851d648a0ebba5a855fcc59f7e30bb69d0ea0";
-      hash = "sha256-0YQAQ5NfUgmyNmxE2DmnPUB/LkvhMtS3N1IHTmuTgv4=";
+      hash = "sha256-SuqmPcDPSdO2hqZwxLmH3tYHYPqYyyiT/4gQMGx6554=";
       fetchSubmodules = true;
     };
-    cargoSha256 = "0000000000000000000000000000000000000000000000000000";
+    cargoDeps = old.cargoDeps.overrideAttrs (lib.const {
+      name = "${old.pname}-vendor.tar.gz";
+      inherit src;
+      outputHash = "sha256-eVA/iObrGgQomxuUSF1tUIFuNWq1rqYvVFyelX4VFKc=";
+    });
   });
-
-  wrapper = pkgs.writeScriptBin " wezterm" ''
-    ${pkgs.makeWrapper}/bin/wrapProgram ${weztermPackage}/bin/wezterm --set XDG_DATA_DIRS "${pkgs.bibata-cursors}:$XDG_DATA_DIRS" --set XCURSOR_THEME "Bibata-Original-Classic"
-  '';
 
   wezterm = pkgs.symlinkJoin {
     name = "wezterm-wrapped";
-    paths = [weztermPackage wrapper];
+    paths = [weztermPackage];
+
+    nativeBuildInputs = [pkgs.makeWrapper];
+    postBuild = ''
+      wrapProgram $out/bin/wezterm --argv0 wezterm --set XDG_DATA_DIRS "${pkgs.bibata-cursors}:$XDG_DATA_DIRS" --set XCURSOR_THEME "Bibata-Original-Classic"
+    '';
   };
 in {
   programs.wezterm = {
