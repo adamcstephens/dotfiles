@@ -3,7 +3,7 @@
 ~/.config/river/colors.sh
 ~/.dotfiles/apps/river/input.sh
 
-riverctl map normal Mod4+Shift T spawn 'systemd-cat --identifier=wezterm wezterm'
+riverctl map normal Mod4+Shift T spawn 'systemd-cat --identifier=kitty kitty --single-instance'
 riverctl map normal Mod4+Shift+Control E spawn 'systemd-cat --identifier=gtk-launch gtk-launch emacsclient'
 riverctl map normal Mod4 D spawn 'systemd-cat --identifier=wofi wofi --show drun,run'
 riverctl map normal Mod4+Shift+Control D spawn 'systemd-cat --identifier=dark dark toggle'
