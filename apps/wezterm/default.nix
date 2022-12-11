@@ -1,17 +1,32 @@
 {
   config,
+  lib,
   pkgs,
   ...
 }: let
   colors = config.colorScheme.colors;
   slug = config.colorScheme.slug;
 
-  wezterm = pkgs.writeScriptBin "wezterm" ''
-    export XDG_DATA_DIRS="${pkgs.bibata-cursors}:$XDG_DATA_DIRS"
-    export XCURSOR_THEME="Bibata-Original-Classic"
+  weztermPackage = pkgs.wezterm.overrideAttrs (old: {
+    version = "20221206";
+    src = pkgs.fetchFromGitHub {
+      owner = "wez";
+      repo = "wezterm";
+      rev = "92e851d648a0ebba5a855fcc59f7e30bb69d0ea0";
+      hash = "sha256-0YQAQ5NfUgmyNmxE2DmnPUB/LkvhMtS3N1IHTmuTgv4=";
+      fetchSubmodules = true;
+    };
+    cargoSha256 = "0000000000000000000000000000000000000000000000000000";
+  });
 
-    ${pkgs.wezterm}/bin/wezterm $@
+  wrapper = pkgs.writeScriptBin " wezterm" ''
+    ${pkgs.makeWrapper}/bin/wrapProgram ${weztermPackage}/bin/wezterm --set XDG_DATA_DIRS "${pkgs.bibata-cursors}:$XDG_DATA_DIRS" --set XCURSOR_THEME "Bibata-Original-Classic"
   '';
+
+  wezterm = pkgs.symlinkJoin {
+    name = "wezterm-wrapped";
+    paths = [weztermPackage wrapper];
+  };
 in {
   programs.wezterm = {
     enable = true;

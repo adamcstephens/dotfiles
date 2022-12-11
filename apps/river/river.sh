@@ -3,10 +3,10 @@
 ~/.config/river/colors.sh
 ~/.dotfiles/apps/river/input.sh
 
-riverctl map normal Mod4+Shift T spawn 'kitty --single-instance'
-riverctl map normal Mod4+Shift+Control E spawn 'gtk-launch emacsclient'
-riverctl map normal Mod4 D spawn 'wofi --show drun,run'
-riverctl map normal Mod4+Shift+Control D spawn 'dark toggle'
+riverctl map normal Mod4+Shift T spawn 'systemd-cat --identifier=wezterm wezterm'
+riverctl map normal Mod4+Shift+Control E spawn 'systemd-cat --identifier=gtk-launch gtk-launch emacsclient'
+riverctl map normal Mod4 D spawn 'systemd-cat --identifier=wofi wofi --show drun,run'
+riverctl map normal Mod4+Shift+Control D spawn 'systemd-cat --identifier=dark dark toggle'
 
 # bindsym print exec screenshot.sh window
 # bindsym $mod+print exec screenshot.sh screen
@@ -152,8 +152,8 @@ riverctl csd-filter-add app-id "gedit"
 # warp the mouse
 riverctl set-cursor-warp on-focus-change || true
 
-# systemd
-
+# env and systemd
+source ~/.nix-profile/bin/configure-gtk
 systemctl --user import-environment
 systemctl --user start river-session.target
 

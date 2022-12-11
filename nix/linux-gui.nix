@@ -3,7 +3,15 @@
   lib,
   pkgs,
   ...
-}: {
+}: let
+  configure-gtk = pkgs.writeScriptBin "configure-gtk" (let
+    schema = pkgs.gsettings-desktop-schemas;
+    datadir = "${schema}/share/gsettings-schemas/${schema.name}";
+  in ''
+    export XDG_DATA_DIRS=${datadir}:$XDG_DATA_DIRS
+    gnome_schema=org.gnome.desktop.interface
+  '');
+in {
   imports = [
     ../apps/dunst
     ../apps/gammastep
@@ -23,8 +31,15 @@
 
   gtk = {
     enable = true;
-    theme.name = "Adwaita-dark";
-    theme.package = pkgs.gnome.gnome-themes-extra;
+    theme = {
+      name = "Adwaita-dark";
+      package = pkgs.gnome.gnome-themes-extra;
+    };
+    cursorTheme = {
+      package = pkgs.bibata-cursors;
+      name = "Bibata-Original-Classic";
+      size = 24;
+    };
   };
 
   home.packages = [
@@ -32,6 +47,9 @@
     pkgs.material-icons
     pkgs.material-design-icons
     (pkgs.nerdfonts.override {fonts = ["JetBrainsMono"];})
+
+    configure-gtk
+    pkgs.glib
 
     pkgs.brightnessctl
     pkgs.blueberry
