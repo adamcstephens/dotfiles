@@ -33,9 +33,6 @@
     ~/.config/helix:
       force: true
       path: apps/helix
-    # ~/.config/kitty/kitty.conf: apps/kitty/kitty.conf
-    ~/.config/kitty/theme-light.conf: apps/kitty/theme-light.conf
-    # ~/.config/kitty/theme-dark.conf: apps/kitty/theme-dark.conf
     ~/.config/lsd: apps/lsd
     ~/.config/nix:
       force: true
