@@ -2,11 +2,7 @@
   "layer": "top", // Waybar at top layer
   "position": "top", // Waybar position (top|bottom|left|right)
   "height": 30,
-  "modules-left": [
-    "sway/workspaces",
-    "sway/mode",
-    "river/tags"
-  ],
+  "modules-left": ["sway/workspaces", "sway/mode", "river/tags"],
   "modules-center": [],
   "modules-right": [
     "tray",
@@ -63,13 +59,7 @@
     "format-charging": "",
     "format-plugged": "",
     "tooltip-format": "{capacity}% {time}",
-    "format-icons": [
-      "",
-      "",
-      "",
-      "",
-      ""
-    ]
+    "format-icons": ["", "", "", "", ""]
   },
   "bluetooth": {
     "format": "{icon}",
@@ -102,11 +92,7 @@
       "phone": "",
       "portable": "",
       "car": "",
-      "default": [
-        "",
-        "",
-        ""
-      ]
+      "default": ["", "", ""]
     },
     "scroll-step": 10,
     "on-click": "pavucontrol",

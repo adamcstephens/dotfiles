@@ -40,6 +40,11 @@ in {
     };
   };
 
+  xdg.configFile."river/init" = {
+    executable = true;
+    source = ./river.sh;
+  };
+
   xdg.configFile."river/colors.sh" = {
     executable = true;
     text = ''

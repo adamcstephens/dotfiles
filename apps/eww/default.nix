@@ -27,6 +27,8 @@
     wofi
   ];
 in {
+  home.file.".config/eww".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/eww";
+
   home.packages = [
     config.programs.eww.package
   ];

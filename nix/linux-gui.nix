@@ -74,17 +74,6 @@ in {
     pkgs.tdesktop
   ];
 
-  home.activation.dotfiles-bootstrap-linux-gui = lib.hm.dag.entryAfter ["writeBoundary"] ''
-    export PATH=${config.home.path}/bin:${config.home.path}/sbin:$PATH
-
-    pushd ~/.dotfiles
-      if [ -e .nixos-managed ]; then
-        git pull
-      fi
-      just dotbot dotbot.linux-gui.yaml
-    popd
-  '';
-
   home.sessionVariables.NIXOS_OZONE_WL = "1";
 
   services.gnome-keyring.enable = true;
