@@ -6,6 +6,7 @@
 }: {
   imports = [
     ../apps/kitty
+    ../apps/finicky
   ];
 
   home.packages = [

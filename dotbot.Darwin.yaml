@@ -5,7 +5,6 @@
 
 - link:
     ~/.config/karabiner: apps/karabiner
-    ~/.finicky.js: apps/finicky/finicky.js
     ~/Library/Application Support/Code/User/keybindings.json: apps/vscode/keybindings.json
     ~/Library/Application Support/Code/User/settings.json: apps/vscode/settings.json
 
