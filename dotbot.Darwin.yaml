@@ -1,9 +1,0 @@
-- defaults:
-    link:
-      relink: true
-      create: true
-
-- link: {}
-
-- shell:
-    - [launchctl start com.openssh.ssh-agent, enable launchd ssh-agent]

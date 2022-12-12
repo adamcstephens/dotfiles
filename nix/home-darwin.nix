@@ -21,11 +21,9 @@
     pkgs.wireshark
   ];
 
-  home.activation.dotfiles-bootstrap-darwin = lib.hm.dag.entryAfter ["writeBoundary"] ''
+  home.activation.enable-ssh-agent = lib.hm.dag.entryAfter ["writeBoundary"] ''
     export PATH=${config.home.path}/bin:${config.home.path}/sbin:$PATH
 
-    pushd ~/.dotfiles
-      just dotbot dotbot.Darwin.yaml
-    popd
+    launchctl start com.openssh.ssh-agent
   '';
 }
