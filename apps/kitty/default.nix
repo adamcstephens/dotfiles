@@ -35,9 +35,8 @@
         '';
       };
 in {
-  xdg.configFile."kitty/mac.conf" = lib.mkIf pkgs.stdenv.isDarwin {
-    source = ./mac.conf;
-  };
+  xdg.configFile."kitty/linux.conf" = lib.mkIf pkgs.stdenv.isLinux {source = ./linux.conf;};
+  xdg.configFile."kitty/mac.conf" = lib.mkIf pkgs.stdenv.isDarwin {source = ./mac.conf;};
 
   xdg.configFile."kitty/theme-light.conf".source = ./theme-light.conf;
 
