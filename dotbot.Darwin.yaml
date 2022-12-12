@@ -3,9 +3,7 @@
       relink: true
       create: true
 
-- link:
-    ~/Library/Application Support/Code/User/keybindings.json: apps/vscode/keybindings.json
-    ~/Library/Application Support/Code/User/settings.json: apps/vscode/settings.json
+- link: {}
 
 - shell:
     - [launchctl start com.openssh.ssh-agent, enable launchd ssh-agent]

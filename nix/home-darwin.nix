@@ -8,6 +8,7 @@
     ../apps/kitty
     ../apps/finicky
     ../apps/karabiner
+    ../apps/vscode
   ];
 
   home.packages = [
