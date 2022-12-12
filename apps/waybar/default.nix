@@ -8,7 +8,7 @@
     systemd.enable = true;
     package = pkgs.waybar.override {swaySupport = false;};
 
-    settings = builtins.readFile ./waybar.jsonc;
+    settings = import ./settings.nix;
 
     style = ''
       * {
