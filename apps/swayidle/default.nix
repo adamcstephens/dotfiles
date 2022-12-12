@@ -6,9 +6,9 @@
 }: let
   systemctlBin = "/run/current-system/sw/bin/systemctl";
 
-  # gtklock = "${pkgs.procps}/bin/pgrep gtklock || ${pkgs.util-linux}/bin/setsid --fork ${pkgs.gtklock}/bin/gtklock";
-  swaylock = "${pkgs.waylock}/bin/waylock";
-  locker = swaylock;
+  gtklock = "${pkgs.procps}/bin/pgrep gtklock || ${pkgs.util-linux}/bin/setsid --fork ${pkgs.gtklock}/bin/gtklock";
+  # swaylock = "${pkgs.waylock}/bin/waylock";
+  locker = gtklock;
 
   swayidle = pkgs.swayidle.overrideAttrs (old: rec {
     version = "1.8.0";
