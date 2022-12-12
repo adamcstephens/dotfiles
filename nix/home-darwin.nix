@@ -7,6 +7,7 @@
   imports = [
     ../apps/kitty
     ../apps/finicky
+    ../apps/karabiner
   ];
 
   home.packages = [

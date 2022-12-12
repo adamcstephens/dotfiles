@@ -4,7 +4,6 @@
       create: true
 
 - link:
-    ~/.config/karabiner: apps/karabiner
     ~/Library/Application Support/Code/User/keybindings.json: apps/vscode/keybindings.json
     ~/Library/Application Support/Code/User/settings.json: apps/vscode/settings.json
 
