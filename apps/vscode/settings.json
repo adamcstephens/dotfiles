@@ -543,5 +543,6 @@
     "base16-zenburn-light"
   ],
   "terminal.integrated.enablePersistentSessions": false,
-  "nix.serverPath": "nil"
+  "nix.serverPath": "nil",
+  "update.mode": "none"
 }
