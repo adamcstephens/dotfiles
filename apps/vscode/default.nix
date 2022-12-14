@@ -23,11 +23,11 @@ in {
   home.file."${keybindings}".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/vscode/keybindings.json";
   home.file."${settings}".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/vscode/settings.json";
 
-  home.packages = lib.mkIf pkgs.stdenv.isLinux [
+  home.packages = [
     package
   ];
 
-  programs.vscode = lib.mkIf pkgs.stdenv.isLinux {
+  programs.vscode = {
     enable = true;
     package = package;
   };
