@@ -81,7 +81,6 @@
               nix.registry.nixpkgs.flake = lib.mkDefault inputs.nixpkgs;
             }
             ./home.nix
-            inputs.doom-emacs.hmModule
             {
               home.username = username;
               home.homeDirectory = homeDir;
