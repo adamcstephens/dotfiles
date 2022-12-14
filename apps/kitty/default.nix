@@ -71,10 +71,10 @@ in {
       color7 = "#${base05}";
       color8 = "#${base03}";
       color9 = "#${base09}";
-      color10 = "#${base01}";
-      color11 = "#${base02}";
-      color12 = "#${base04}";
-      color13 = "#${base06}";
+      color10 = "#${base0B}";
+      color11 = "#${base0F}";
+      color12 = "#${base0D}";
+      color13 = "#${base0E}";
       color14 = "#${base0F}";
       color15 = "#${base07}";
     };
