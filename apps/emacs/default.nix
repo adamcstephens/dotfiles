@@ -44,26 +44,6 @@ in {
 
   home.packages = [aspell];
 
-  # programs.doom-emacs = {
-  #   enable = true;
-  #   doomPrivateDir = ./doom.d;
-  #   # package dir is use for buildng the straight package, so we can skip rebuilds on config changes
-  #   doomPackageDir = pkgs.linkFarm "dotfiles-doom-packages" [
-  #     {
-  #       name = "config.el";
-  #       path = pkgs.emptyFile;
-  #     }
-  #     {
-  #       name = "init.el";
-  #       path = ./doom.d/init.el;
-  #     }
-  #     {
-  #       name = "packages.el";
-  #       path = ./doom.d/packages.el;
-  #     }
-  #   ];
-  # };
-
   services.emacs.enable =
     if pkgs.stdenv.isLinux
     then true
