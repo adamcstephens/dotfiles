@@ -1,9 +1,16 @@
 {
   config,
+  inputs,
   pkgs,
   lib,
   ...
 }: let
+  pkgs-vscode = import inputs.nixpkgs-vscode {
+    inherit (pkgs) system;
+    config.allowUnfree = true;
+  };
+
+  package = pkgs-vscode.vscode;
   keybindings =
     if pkgs.stdenv.isDarwin
     then "Library/Application Support/Code/User/keybindings.json"
@@ -17,10 +24,11 @@ in {
   home.file."${settings}".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/vscode/settings.json";
 
   home.packages = lib.mkIf pkgs.stdenv.isLinux [
-    pkgs.vscode
+    package
   ];
 
   programs.vscode = lib.mkIf pkgs.stdenv.isLinux {
     enable = true;
+    package = package;
   };
 }
