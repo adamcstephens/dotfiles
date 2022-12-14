@@ -3,11 +3,15 @@
   pkgs,
   ...
 }: let
-  aspell =
-    pkgs.aspellWithDicts (dicts: with dicts; [en en-computers en-science]);
+  aspell = pkgs.aspellWithDicts (dicts: with dicts; [en en-computers en-science]);
   latex = pkgs.texlive.combine {
     inherit (pkgs.texlive) scheme-tetex amsmath capt-of hyperref wrapfig;
   };
+
+  package =
+    if pkgs.stdenv.isDarwin
+    then pkgs.emacs
+    else pkgs.emacsPgtk;
 
   extraBins = [
     pkgs.alejandra
@@ -27,7 +31,7 @@
 in {
   programs.emacs = {
     enable = true;
-    # package = pkgs.emacsNativeComp;
+    package = package;
     extraConfig = ''
       (setq exec-path (append exec-path '( ${
         lib.concatMapStringsSep " " (x: ''"${x}/bin"'') extraBins
