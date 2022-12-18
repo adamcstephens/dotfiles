@@ -22,6 +22,7 @@ in {
     ../apps/vscode
     ../apps/wofi
     ../apps/swayidle
+    ../apps/xmonad
     ../apps/waybar
     ../apps/wezterm
     ../apps/wob
