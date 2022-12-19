@@ -168,14 +168,15 @@
   "[fish]": {
     "editor.defaultFormatter": "bmalehorn.vscode-fish"
   },
-  "[nix]": {},
+  "[nix]": {
+    "editor.defaultFormatter": "jnoortheen.nix-ide"
+  },
   "window.commandCenter": true,
   "git.mergeEditor": true,
   "[powershell]": {
     "editor.defaultFormatter": "ms-vscode.powershell"
   },
   "gitlens.codeLens.enabled": false,
-  "nix.formatterPath": "alejandra",
   "terraform.languageServer.enable": true,
   "terraform.languageServer.path": "",
   "nix.enableLanguageServer": true,
@@ -544,5 +545,12 @@
   ],
   "terminal.integrated.enablePersistentSessions": false,
   "nix.serverPath": "nil",
-  "update.mode": "none"
+  "update.mode": "none",
+  "nix.serverSettings": {
+    "nil": {
+      "formatting": {
+        "command": ["alejandra"]
+      }
+    }
+  }
 }
