@@ -23,7 +23,7 @@
     flake-parts,
     ...
   } @ inputs:
-    flake-parts.lib.mkFlake {inherit self;} {
+    flake-parts.lib.mkFlake {inherit inputs;} {
       imports = [
         ./nix/homes.nix
         ./nix/darwin.nix
