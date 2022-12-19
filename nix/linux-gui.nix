@@ -18,6 +18,7 @@ in {
     ../apps/hyprland
     ../apps/kanshi
     ../apps/kitty
+    ../apps/polybar
     ../apps/river
     ../apps/vscode
     ../apps/wofi
