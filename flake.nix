@@ -2,7 +2,6 @@
   description = "A very basic flake";
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    nixpkgs-vscode.url = "github:bobby285271/nixpkgs/vscode";
 
     comma.url = "github:nix-community/comma";
     comma.inputs.nixpkgs.follows = "nixpkgs";
