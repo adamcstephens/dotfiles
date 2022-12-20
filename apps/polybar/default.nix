@@ -1,4 +1,9 @@
-{config, ...}: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   services.polybar = {
     enable = true;
     script = "polybar bar &";
@@ -16,4 +21,7 @@
       '')
       + (builtins.readFile ./config.ini);
   };
+
+  systemd.user.services.polybar.Install.WantedBy = lib.mkForce ["xserver-session.target"];
+  systemd.user.services.polybar.Unit.PartOf = lib.mkForce ["xserver-session.target"];
 }

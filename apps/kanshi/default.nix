@@ -12,7 +12,7 @@
 in {
   services.kanshi = {
     enable = true;
-    systemdTarget = "graphical-session.target";
+    systemdTarget = "wayland-session.target";
     profiles = {
       docked = {
         outputs = [

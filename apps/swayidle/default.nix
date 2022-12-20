@@ -30,7 +30,7 @@ in {
   services.swayidle = {
     enable = true;
     package = swayidle;
-    systemdTarget = "graphical-session.target";
+    systemdTarget = "wayland-session.target";
     events = [
       {
         event = "before-sleep";

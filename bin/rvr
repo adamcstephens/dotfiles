@@ -2,5 +2,4 @@
 
 systemd-cat --identifier=river river
 
-systemctl --user stop river-session.target
-systemctl --user stop graphical-session.target
+systemctl --user stop wayland-session.target

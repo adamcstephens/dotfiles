@@ -31,12 +31,11 @@ in {
     systemd.user.services.wob = {
       Unit = {
         Description = "Wayland overlay bar";
-        PartOf = ["graphical-session.target"];
-        After = ["graphical-session-pre.target"];
+        PartOf = ["wayland-session.target"];
         # ConditionPathExistsGlob = ["%t/wayland-*"];
       };
 
-      Install.WantedBy = ["graphical-session.target"];
+      Install.WantedBy = ["wayland-session.target"];
 
       Service = {
         ExecStart = "${pkgs.wob}/bin/wob";
@@ -53,7 +52,7 @@ in {
         # ConditionPathExistsGlob = ["%t/wayland-*"];
       };
 
-      Install.WantedBy = ["sockets.target" "graphical-session.target"];
+      Install.WantedBy = ["sockets.target" "wayland-session.target"];
     };
   };
 }

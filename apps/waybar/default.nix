@@ -6,6 +6,7 @@
   programs.waybar = {
     enable = true;
     systemd.enable = true;
+    systemd.target = "wayland-session.target";
     package = pkgs.waybar.override {swaySupport = false;};
 
     settings.main = import ./settings.nix;

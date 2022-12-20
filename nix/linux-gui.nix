@@ -80,4 +80,24 @@ in {
 
   services.gnome-keyring.enable = true;
   systemd.user.startServices = "sd-switch";
+
+  systemd.user.targets.wayland-session = {
+    Unit = {
+      Description = "wayland compositor session";
+      Documentation = ["man:systemd.special(7)"];
+      BindsTo = ["graphical-session.target"];
+      Wants = ["graphical-session-pre.target"];
+      After = ["graphical-session-pre.target"];
+    };
+  };
+
+  systemd.user.targets.xserver-session = {
+    Unit = {
+      Description = "xserver session";
+      Documentation = ["man:systemd.special(7)"];
+      BindsTo = ["graphical-session.target"];
+      Wants = ["graphical-session-pre.target"];
+      After = ["graphical-session-pre.target"];
+    };
+  };
 }

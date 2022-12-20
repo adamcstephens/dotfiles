@@ -155,7 +155,7 @@ riverctl set-cursor-warp on-focus-change || true
 # env and systemd
 source ~/.nix-profile/bin/configure-gtk
 systemctl --user import-environment
-systemctl --user start river-session.target
+systemctl --user start wayland-session.target
 
 # Set and exec into the default layout generator, rivertile.
 # River will send the process group of the init executable SIGTERM on exit.
@@ -165,4 +165,4 @@ if ! pgrep rivertile; then
   rivertile -main-ratio 0.5 -view-padding 2 -outer-padding 2
 fi
 
-systemctl --user stop river-session.target
+systemctl --user stop wayland-session.target

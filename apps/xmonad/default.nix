@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  lib,
+  pkgs,
+  ...
+}: {
   home.file.".xinitrc".source = ./xinitrc;
 
   xresources.properties = {
@@ -21,4 +25,10 @@
     inactiveInterval = 15;
     lockCmd = "${pkgs.xsecurelock}/bin/xsecurelock";
   };
+
+  systemd.user.services.xautolock-session.Install.WantedBy = lib.mkForce ["xserver-session.target"];
+  systemd.user.services.xautolock-session.Unit.PartOf = lib.mkForce ["xserver-session.target"];
+
+  systemd.user.services.xss-lock.Install.WantedBy = lib.mkForce ["xserver-session.target"];
+  systemd.user.services.xss-lock.Unit.PartOf = lib.mkForce ["xserver-session.target"];
 }
