@@ -51,4 +51,7 @@ xset r rate 300 50
 systemctl --user start xserver-session.target
 systemctl --user start tray.target
 
+systemctl --user restart dunst
+systemctl --user restart gammastep
+
 exec systemd-cat --identifier=xmonad xmonad

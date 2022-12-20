@@ -58,6 +58,7 @@ in {
     pkgs.bluez
     pkgs.light
     pkgs.networkmanagerapplet
+    pkgs.xclip
     pkgs.wl-clipboard
 
     # audio
