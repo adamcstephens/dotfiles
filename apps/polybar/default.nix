@@ -6,7 +6,9 @@
 }: {
   services.polybar = {
     enable = true;
+    package = pkgs.polybarFull;
     script = "polybar bar &";
+
     extraConfig =
       (with config.colorScheme.colors; ''
         [colors]

@@ -1,6 +1,7 @@
 import XMonad
-import XMonad.Util.EZConfig
+import XMonad.Actions.UpdatePointer
 import XMonad.Config.Desktop
+import XMonad.Util.EZConfig
 
 main = xmonad $ desktopConfig
   { terminal    = "kitty"
@@ -8,6 +9,7 @@ main = xmonad $ desktopConfig
   -- , borderWidth = 3
   , normalBorderColor = "#3E4B59"
   , focusedBorderColor = "#E6E1CF"
+  , logHook = updatePointer (0.5, 0.5) (0, 0)
   }
   `additionalKeysP`
   [ ("M-d", spawn "systemd-cat --identifier=rofi rofi -show drun -dpi 192")
