@@ -46,6 +46,8 @@ xrandr --auto
 
 xsetroot -cursor_name left_ptr
 
+xset r rate 300 50
+
 systemctl --user start graphical-session.target
 systemctl --user start tray.target
 
