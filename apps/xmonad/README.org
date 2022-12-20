@@ -1,0 +1,2 @@
+* Default Keybindings
+- M-t - Toggle floating
