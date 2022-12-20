@@ -8,9 +8,6 @@
   "[go]": {
     "editor.defaultFormatter": "golang.go"
   },
-  "[haskell]": {
-    "editor.defaultFormatter": "haskell.haskell"
-  },
   "[ignore]": {
     "editor.defaultFormatter": "foxundermoon.shell-format"
   },
@@ -70,7 +67,6 @@
   "gitlens.showWelcomeOnInstall": false,
   "gitlens.showWhatsNewAfterUpgrades": false,
   "go.toolsManagement.autoUpdate": true,
-  "haskell.manageHLS": "GHCup",
   "javascript.format.semicolons": "remove",
   "javascript.updateImportsOnFileMove.enabled": "always",
   "notebook.cellToolbarLocation": {
@@ -552,5 +548,9 @@
         "command": ["alejandra"]
       }
     }
+  },
+  "haskell.manageHLS": "PATH",
+  "[haskell]": {
+    "editor.defaultFormatter": "haskell.haskell"
   }
 }

@@ -50,6 +50,12 @@
             pkgs.just
             pkgs.alejandra
             pkgs.python3Minimal
+            (pkgs.ghc.withPackages (ps: [
+              ps.haskell-language-server
+              ps.ormolu
+              ps.xmonad
+              ps.xmonad-contrib
+            ]))
           ];
         };
 

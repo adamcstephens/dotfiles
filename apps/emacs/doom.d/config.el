@@ -254,3 +254,6 @@
   (setq persp-emacsclient-init-frame-behaviour-override "main"))
 
 (set-formatter! 'alejandra "alejandra --quiet" :modes '(nix-mode))
+
+(after! lsp-haskell
+  (setq lsp-haskell-formatting-provider "ormolu"))
