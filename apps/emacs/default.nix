@@ -8,10 +8,7 @@
     inherit (pkgs.texlive) scheme-tetex amsmath capt-of hyperref wrapfig;
   };
 
-  package =
-    if pkgs.stdenv.isDarwin
-    then pkgs.emacs
-    else pkgs.emacsPgtk;
+  package = pkgs.emacs;
 
   extraBins = [
     pkgs.alejandra
