@@ -33,6 +33,7 @@
       systems = ["x86_64-linux" "aarch64-darwin" "aarch64-linux"];
 
       perSystem = {
+        lib,
         pkgs,
         system,
         ...
@@ -45,18 +46,21 @@
 
         devShells.default = pkgs.mkShellNoCC {
           name = "dots";
-          packages = [
-            pkgs.cachix
-            pkgs.just
-            pkgs.alejandra
-            pkgs.python3Minimal
-            (pkgs.ghc.withPackages (ps: [
-              ps.haskell-language-server
-              ps.ormolu
-              ps.xmonad
-              ps.xmonad-contrib
-            ]))
-          ];
+          packages =
+            [
+              pkgs.cachix
+              pkgs.just
+              pkgs.alejandra
+              pkgs.python3Minimal
+            ]
+            ++ (lib.optionals pkgs.stdenv.isLinux [
+              (pkgs.ghc.withPackages (ps: [
+                ps.haskell-language-server
+                ps.ormolu
+                ps.xmonad
+                ps.xmonad-contrib
+              ]))
+            ]);
         };
 
         packages = import ./nix/packages {
