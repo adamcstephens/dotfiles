@@ -57,4 +57,7 @@ systemctl --user start tray.target
 systemctl --user restart dunst
 systemctl --user restart gammastep
 
-exec systemd-cat --identifier=xmonad xmonad
+systemd-cat --identifier=xmonad xmonad
+
+systemctl --user stop xserver-session.target
+systemctl --user stop tray.target
