@@ -37,11 +37,14 @@ in {
       name = "Adwaita-dark";
       package = pkgs.gnome.gnome-themes-extra;
     };
-    cursorTheme = {
-      package = pkgs.bibata-cursors;
-      name = "Bibata-Original-Classic";
-      size = 24;
-    };
+  };
+
+  home.pointerCursor = {
+    package = pkgs.bibata-cursors;
+    name = "Bibata-Original-Classic";
+    size = 24;
+    gtk.enable = true;
+    x11.enable = true;
   };
 
   home.packages = [

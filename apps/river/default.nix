@@ -40,6 +40,9 @@ in {
     text = ''
       #!/usr/bin/env sh
 
+      export XDG_DATA_DIRS="${config.home.pointerCursor.package}:$XDG_DATA_DIRS"
+      export XCURSOR_THEME="${config.home.pointerCursor.name}"
+
       # Set background and border color
       riverctl background-color 0x${config.colorScheme.colors.base00}
       riverctl border-color-focused 0x${config.colorScheme.colors.base05}

@@ -7,7 +7,7 @@
   colors = config.colorScheme.colors;
   slug = config.colorScheme.slug;
 
-  weztermPackage = pkgs.wezterm.overrideAttrs (old: rec {
+  package = pkgs.wezterm.overrideAttrs (old: rec {
     version = "20221206";
     src = pkgs.fetchFromGitHub {
       owner = "wez";
@@ -22,20 +22,10 @@
       outputHash = "sha256-eVA/iObrGgQomxuUSF1tUIFuNWq1rqYvVFyelX4VFKc=";
     });
   });
-
-  wezterm = pkgs.symlinkJoin {
-    name = "wezterm-wrapped";
-    paths = [weztermPackage];
-
-    nativeBuildInputs = [pkgs.makeWrapper];
-    postBuild = ''
-      wrapProgram $out/bin/wezterm --argv0 wezterm --set XDG_DATA_DIRS "${pkgs.bibata-cursors}:$XDG_DATA_DIRS" --set XCURSOR_THEME "Bibata-Original-Classic"
-    '';
-  };
 in {
   programs.wezterm = {
     enable = true;
-    package = wezterm;
+    package = package;
 
     colorSchemes = {
       "${slug}" = {
@@ -78,7 +68,7 @@ in {
         hide_tab_bar_if_only_one_tab = true,
         use_fancy_tab_bar = false,
         window_close_confirmation = "NeverPrompt",
-        xcursor_theme = 'Bibata-Original-Classic',
+        xcursor_theme = '${config.home.pointerCursor.name}',
         set_environment_variables = {
           TERM = 'xterm-screen-256color',
         },
