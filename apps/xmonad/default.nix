@@ -1,20 +1,17 @@
 {pkgs, ...}: {
   home.file.".xinitrc".source = ./xinitrc;
 
+  xresources.properties = {
+    "Xft.dpi" = 192;
+  };
+
   xsession = {
     enable = true;
     windowManager.xmonad = {
       enable = true;
       enableContribAndExtras = true;
 
-      config = pkgs.writeText "xmonad.hs" ''
-        import XMonad
-        main = xmonad def
-            { terminal    = "kitty"
-            , modMask     = mod4Mask
-            , borderWidth = 3
-            }
-      '';
+      config = ./xmonad.hs;
     };
   };
 }

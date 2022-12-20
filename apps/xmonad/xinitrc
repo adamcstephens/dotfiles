@@ -44,9 +44,9 @@ fi
 
 xrandr --auto
 
-kitty &
-#xsetroot -cursor_name left_ptr
+xsetroot -cursor_name left_ptr
 
 systemctl --user start graphical-session.target
+systemctl --user start tray.target
 
-exec xmonad 2>/tmp/xmonad.log
+exec systemd-cat --identifier=xmonad xmonad

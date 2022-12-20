@@ -20,6 +20,7 @@ in {
     ../apps/kitty
     ../apps/polybar
     ../apps/river
+    ../apps/rofi
     ../apps/vscode
     ../apps/wofi
     ../apps/swayidle
