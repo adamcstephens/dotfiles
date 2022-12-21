@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 export LC_CTYPE="en_US.UTF-8"
 export _JAVA_AWT_WM_NONREPARENTING=1
@@ -26,7 +26,7 @@ if [ -f "$usermodmap" ]; then
 fi
 
 if test -z "$DBUS_SESSION_BUS_ADDRESS"; then
-  eval $(dbus-launch --exit-with-session --sh-syntax)
+  eval "$(dbus-launch --exit-with-session --sh-syntax)"
 fi
 systemctl --user import-environment DISPLAY XAUTHORITY
 
@@ -40,7 +40,10 @@ if [ -x "$(command -v nvidia-smi)" ]; then
 fi
 
 # NEEDED FOR CHROMEBOOK
-[[ -f ~/.Xmodmap ]] && xmodmap ~/.Xmodmap
+[ -f ~/.Xmodmap ] && xmodmap ~/.Xmodmap
+
+# shellcheck disable=SC1091
+. "$HOME"/.nix-profile/bin/configure-gtk
 
 sudo systemctl start autorandr
 

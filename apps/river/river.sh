@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 ~/.config/river/colors.sh
 ~/.dotfiles/apps/river/input.sh
@@ -72,19 +72,19 @@ riverctl map normal Mod4+Mod1+Shift L resize horizontal 100
 # riverctl map-pointer normal Mod4 BTN_RIGHT resize-view
 
 for i in $(seq 1 9); do
-  tags=$((1 << ($i - 1)))
+  tags=$((1 << (i - 1)))
 
   # Mod+[1-9] to focus tag [0-8]
-  riverctl map normal Mod4 $i set-focused-tags $tags
+  riverctl map normal Mod4 "$i" set-focused-tags $tags
 
   # Mod+Shift+[1-9] to tag focused view with tag [0-8]
-  riverctl map normal Mod4+Shift $i set-view-tags $tags
+  riverctl map normal Mod4+Shift "$i" set-view-tags $tags
 
   # Mod+Ctrl+[1-9] to toggle focus of tag [0-8]
-  riverctl map normal Mod4+Control $i toggle-focused-tags $tags
+  riverctl map normal Mod4+Control "$i" toggle-focused-tags $tags
 
   # Mod+Shift+Ctrl+[1-9] to toggle tag [0-8] of focused view
-  riverctl map normal Mod4+Shift+Control $i toggle-view-tags $tags
+  riverctl map normal Mod4+Shift+Control "$i" toggle-view-tags $tags
 done
 
 # Mod+0 to focus all tags
@@ -133,7 +133,9 @@ for mode in normal locked; do
   riverctl map $mode None XF86AudioNext spawn 'playerctl next'
 
   # Control screen backlight brighness with light (https://github.com/haikarainen/light)
+  # shellcheck disable=SC2016
   riverctl map $mode None XF86MonBrightnessDown spawn 'brightnessctl -q set 5%- && ( echo $((`brightnessctl get` * 100 / `brightnessctl m`)) > $XDG_RUNTIME_DIR/wob.sock )'
+  # shellcheck disable=SC2016
   riverctl map $mode None XF86MonBrightnessUp spawn 'brightnessctl -q set +5% && ( echo $((`brightnessctl get` * 100 / `brightnessctl m`)) > $XDG_RUNTIME_DIR/wob.sock )'
   #riverctl map $mode None XF86MonBrightnessUp   spawn 'light -A 5'
   #riverctl map $mode None XF86MonBrightnessDown spawn 'light -U 5'
@@ -153,7 +155,8 @@ riverctl csd-filter-add app-id "gedit"
 riverctl set-cursor-warp on-focus-change || true
 
 # env and systemd
-source ~/.nix-profile/bin/configure-gtk
+# shellcheck disable=SC1091
+. "$HOME"/.nix-profile/bin/configure-gtk
 systemctl --user import-environment
 systemctl --user start wayland-session.target
 
