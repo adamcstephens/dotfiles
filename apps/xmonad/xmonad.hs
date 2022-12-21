@@ -16,5 +16,7 @@ main =
       }
       `additionalKeysP` [ ("M-d", spawn "systemd-cat --identifier=rofi rofi -show drun -dpi 192"),
                           ("M-S-t", spawn "systemd-cat --identifier=kitty kitty --single-instance"),
-                          ("M-a", windows $ W.swapMaster . W.focusDown)
+                          ("M-a", windows $ W.swapMaster . W.focusDown),
+                          ("M-s", windows W.focusDown),
+                          ("M-w", windows W.focusUp)
                         ]
