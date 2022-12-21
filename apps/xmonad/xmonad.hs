@@ -18,5 +18,10 @@ main =
                           ("M-S-t", spawn "systemd-cat --identifier=kitty kitty --single-instance"),
                           ("M-a", windows $ W.swapMaster . W.focusDown),
                           ("M-s", windows W.focusDown),
-                          ("M-w", windows W.focusUp)
+                          ("M-w", windows W.focusUp),
+                          ("<XF86AudioLowerVolume>", spawn "systemd-cat --identifier=volume volume down"),
+                          ("<XF86AudioRaiseVolume>", spawn "systemd-cat --identifier=volume volume up"),
+                          ("<XF86AudioMute>", spawn "systemd-cat --identifier=volume volume mute"),
+                          ("<XF86MonBrightnessDown>", spawn "systemd-cat --identifier=brightness brightnessctl -q set 5%-"),
+                          ("<XF86MonBrightnessUp>", spawn "systemd-cat --identifier=brightness brightnessctl -q set +5%")
                         ]
