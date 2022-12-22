@@ -82,6 +82,12 @@ in {
 
   systemd.user.startServices = "sd-switch";
 
+  systemd.user.services.polkit-gnome-authentication-agent-1 = {
+    Install.WantedBy = ["graphical-session.target"];
+    Unit.PartOf = ["graphical-session.target"];
+    Service.ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+  };
+
   systemd.user.targets.wayland-session = {
     Unit = {
       Description = "wayland compositor session";

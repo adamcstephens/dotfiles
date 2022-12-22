@@ -34,8 +34,7 @@ in {
 
   services.screen-locker = {
     enable = true;
-    xautolock.detectSleep = true;
-    inactiveInterval = 15;
+    inactiveInterval = 5;
     lockCmd = xsecurelock.outPath;
   };
 
