@@ -16,18 +16,9 @@
         ../apps/emacs
       ];
     };
-    build1 = {
+    blank = {
       homeSystem = "x86_64-linux";
-      modules = [
-        ../apps/emacs
-      ];
-    };
-    sank = {
-      homeSystem = "x86_64-linux";
-      dotfiles = {
-        isVM = true;
-        linuxGui = true;
-      };
+      dotfiles.linuxGui = true;
     };
     think = {
       homeSystem = "x86_64-linux";
