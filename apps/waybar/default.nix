@@ -15,7 +15,7 @@
       * {
         border: none;
         border-radius: 0;
-        font-family: "JetBrainsMono Nerd Font";
+        font-family: "${config.dotfiles.gui.font}";
         font-size: 14px;
         box-shadow: none;
         text-shadow: none;

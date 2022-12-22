@@ -64,6 +64,8 @@ in {
       color13 = "#${base0E}";
       color14 = "#${base0F}";
       color15 = "#${base07}";
+
+      font_family = config.dotfiles.gui.font;
     };
   };
 }

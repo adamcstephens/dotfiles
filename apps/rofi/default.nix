@@ -7,7 +7,7 @@
     enable = true;
     terminal = "${config.programs.kitty.package}/bin/kitty";
     package = with pkgs; rofi.override {plugins = [rofi-calc rofi-emoji];};
-    # font = with config.theme.fonts; "${gui.package} 14";
+    font = "${config.dotfiles.gui.font} 9";
     theme = let
       mkLiteral = config.lib.formats.rasi.mkLiteral;
     in
@@ -35,6 +35,8 @@
           border = mkLiteral "1px";
           border-color = mkLiteral "@bg1";
           border-radius = mkLiteral "6px";
+          width = mkLiteral "25%";
+          height = mkLiteral "20%";
         };
 
         "inputbar" = {
@@ -52,7 +54,7 @@
         "icon-search" = {
           expand = false;
           filename = mkLiteral "[ search-symbolic ]";
-          size = mkLiteral "14px";
+          size = mkLiteral "11px";
         };
 
         "textbox" = {
@@ -113,6 +115,7 @@
       kb-mode-next = "Shift+Right,Control+Tab";
       kb-mode-previous = "Shift+Left,Control+Shift+Tab";
       kb-remove-char-back = "BackSpace";
+      dpi = config.dotfiles.gui.dpi;
     };
   };
 }

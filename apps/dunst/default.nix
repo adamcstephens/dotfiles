@@ -6,7 +6,7 @@
       global = {
         monitor = 0;
         follow = "mouse";
-        font = "JetBrainsMono Nerd Font 11";
+        font = "${config.dotfiles.gui.font} 11";
         width = 300;
         height = 100;
         origin = "top-right";

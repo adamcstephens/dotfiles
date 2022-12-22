@@ -62,7 +62,7 @@ in {
 
     extraConfig = ''
       return {
-        font = wezterm.font("JetBrainsMono Nerd Font"),
+        font = wezterm.font("${config.dotfiles.gui.font}"),
         font_size = 10.5,
         color_scheme = "${slug}",
         hide_tab_bar_if_only_one_tab = true,

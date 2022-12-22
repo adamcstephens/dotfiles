@@ -14,7 +14,8 @@ main =
         focusedBorderColor = "#E6E1CF",
         logHook = updatePointer (0.5, 0.5) (0, 0)
       }
-      `additionalKeysP` [ ("M-d", spawn "systemd-cat --identifier=rofi rofi -show drun -dpi 192"),
+      `additionalKeysP` [ ("M-d", spawn "systemd-cat --identifier=rofi rofi -show drun"),
+                          ("M-S-d", spawn "systemd-cat --identifier=rofi rofi -show emoji"),
                           ("M-S-t", spawn "systemd-cat --identifier=kitty kitty --single-instance"),
                           ("M-a", windows $ W.swapMaster . W.focusDown),
                           ("M-s", windows W.focusDown),

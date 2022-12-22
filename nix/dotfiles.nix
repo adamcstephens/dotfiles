@@ -13,6 +13,11 @@
         type = lib.types.int;
         default = 96;
       };
+
+      font = lib.mkOption {
+        type = lib.types.str;
+        default = "JetBrainsMono Nerd Font";
+      };
     };
   };
 }
