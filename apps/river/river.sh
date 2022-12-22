@@ -155,6 +155,8 @@ riverctl csd-filter-add app-id "gedit"
 riverctl set-cursor-warp on-focus-change || true
 
 # env and systemd
+export MOZ_ENABLE_WAYLAND="1"
+export NIXOS_OZONE_WL="1"
 # shellcheck disable=SC1091
 . "$HOME"/.nix-profile/bin/configure-gtk
 systemctl --user import-environment
