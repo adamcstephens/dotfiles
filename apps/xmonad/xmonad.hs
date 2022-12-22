@@ -1,8 +1,38 @@
+import System.Exit
 import XMonad
+import XMonad.Actions.CopyWindow
 import XMonad.Actions.UpdatePointer
 import XMonad.Config.Desktop
+import XMonad.Operations
 import qualified XMonad.StackSet as W
 import XMonad.Util.EZConfig
+
+spawner exec = spawn ("systemd-cat --identifier=" ++ app ++ " " ++ exec)
+  where
+    app = head $ words exec
+
+dotWorkspaces = map show [1 .. 9]
+
+dotKeys =
+  [ ("<XF86AudioLowerVolume>", spawner "volume down"),
+    ("<XF86AudioMedia>", spawner "playerctl play-pause"),
+    ("<XF86AudioMute>", spawner "volume mute"),
+    ("<XF86AudioNext>", spawner "playerctl next"),
+    ("<XF86AudioPlay>", spawner "playerctl play-pause"),
+    ("<XF86AudioPrev>", spawner "playerctl previous"),
+    ("<XF86AudioRaiseVolume>", spawner "volume up"),
+    ("<XF86MonBrightnessDown>", spawner "brightnessctl -q set 5%-"),
+    ("<XF86MonBrightnessUp>", spawner "brightnessctl -q set +5%"),
+    ("M-a", windows $ W.swapMaster . W.focusDown),
+    ("M-d", spawner "rofi -show drun"),
+    ("M-S-d", spawner "rofi -show emoji"),
+    ("M-C-S-q", io exitSuccess),
+    ("M-S-q", kill),
+    ("M-S-t", spawner "kitty --single-instance"),
+    ("M-s", windows W.focusDown),
+    ("M-w", windows W.focusUp)
+  ]
+    ++ [("M-C-S-" ++ show i, windows $ copy ws) | (i, ws) <- zip [1 .. 9] dotWorkspaces]
 
 main =
   xmonad $
@@ -14,15 +44,4 @@ main =
         focusedBorderColor = "#E6E1CF",
         logHook = updatePointer (0.5, 0.5) (0, 0) <> logHook desktopConfig
       }
-      `additionalKeysP` [ ("M-d", spawn "systemd-cat --identifier=rofi rofi -show drun"),
-                          ("M-S-d", spawn "systemd-cat --identifier=rofi rofi -show emoji"),
-                          ("M-S-t", spawn "systemd-cat --identifier=kitty kitty --single-instance"),
-                          ("M-a", windows $ W.swapMaster . W.focusDown),
-                          ("M-s", windows W.focusDown),
-                          ("M-w", windows W.focusUp),
-                          ("<XF86AudioLowerVolume>", spawn "systemd-cat --identifier=volume volume down"),
-                          ("<XF86AudioRaiseVolume>", spawn "systemd-cat --identifier=volume volume up"),
-                          ("<XF86AudioMute>", spawn "systemd-cat --identifier=volume volume mute"),
-                          ("<XF86MonBrightnessDown>", spawn "systemd-cat --identifier=brightness brightnessctl -q set 5%-"),
-                          ("<XF86MonBrightnessUp>", spawn "systemd-cat --identifier=brightness brightnessctl -q set +5%")
-                        ]
+      `additionalKeysP` dotKeys

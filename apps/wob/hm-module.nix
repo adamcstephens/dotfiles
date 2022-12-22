@@ -52,7 +52,7 @@ in {
         # ConditionPathExistsGlob = ["%t/wayland-*"];
       };
 
-      Install.WantedBy = ["sockets.target" "wayland-session.target"];
+      Install.WantedBy = ["wayland-session.target"];
     };
   };
 }

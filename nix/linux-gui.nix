@@ -72,6 +72,7 @@ in {
 
     # apps
     pkgs._1password-gui
+    pkgs.chromium
     pkgs.cider
     pkgs.firefox-wayland
     pkgs.cinnamon.nemo
