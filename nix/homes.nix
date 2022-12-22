@@ -19,10 +19,20 @@
     blank = {
       homeSystem = "x86_64-linux";
       dotfiles.linuxGui = true;
+      modules = [
+        {
+          dotfiles.gui.dpi = 148;
+        }
+      ];
     };
     think = {
       homeSystem = "x86_64-linux";
       dotfiles.linuxGui = true;
+      modules = [
+        {
+          dotfiles.gui.dpi = 196;
+        }
+      ];
     };
 
     # generic systems

@@ -7,5 +7,12 @@
       type = lib.types.str;
       default = "https://codeberg.org/adamcstephens/dotfiles";
     };
+
+    gui = {
+      dpi = lib.mkOption {
+        type = lib.types.int;
+        default = 96;
+      };
+    };
   };
 }

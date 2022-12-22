@@ -20,6 +20,9 @@
         alert = ${base08}
         disabled = ${base03}
         border = ${base03}
+
+        [display]
+        dpi = ${toString config.dotfiles.gui.dpi}
       '')
       + (builtins.readFile ./config.ini);
   };

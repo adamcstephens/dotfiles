@@ -18,7 +18,7 @@ in {
   home.file.".xinitrc".source = ./xinitrc;
 
   xresources.properties = {
-    "Xft.dpi" = 192;
+    "Xft.dpi" = config.dotfiles.gui.dpi;
   };
 
   xsession = {
