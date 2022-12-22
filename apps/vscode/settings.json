@@ -8,14 +8,8 @@
   "[go]": {
     "editor.defaultFormatter": "golang.go"
   },
-  "[ignore]": {
-    "editor.defaultFormatter": "foxundermoon.shell-format"
-  },
   "[markdown]": {
     "editor.wordBasedSuggestionsMode": "currentDocument"
-  },
-  "[properties]": {
-    "editor.defaultFormatter": "foxundermoon.shell-format"
   },
   "[shellscript]": {
     "editor.defaultFormatter": "mkhl.shfmt"
@@ -75,7 +69,6 @@
   },
   "prettier.printWidth": 120,
   "prettier.semi": false,
-  "python.formatting.provider": "black",
   "python.languageServer": "Pylance",
   "python.venvPath": "~/.local/share/virtualenvs",
   "redhat.telemetry.enabled": false,
@@ -127,7 +120,9 @@
       "editorCodeLens.foreground": "#BFBDB6",
       "statusBar.noFolderBackground": "#0F1419",
       "tab.activeBorder": "#BFBDB6",
-      "tab.activeBackground": "#272D38"
+      "tab.activeBackground": "#272D38",
+      "button.foreground": "#272D38",
+      "button.secondaryForeground": "#272D38"
     },
     "[Sonokai Andromeda]": {
       "gitDecoration.ignoredResourceForeground": "#565864",
@@ -137,7 +132,6 @@
       "terminal.background": "#2b2d3a"
     }
   },
-  "workbench.colorTheme": "Base16 Ayu Dark",
   "workbench.editor.decorations.badges": true,
   "workbench.editor.labelFormat": "short",
   "workbench.editor.showIcons": false,
@@ -154,9 +148,6 @@
   "zenMode.hideTabs": false,
   "[terraform]": {
     "editor.defaultFormatter": "hashicorp.terraform"
-  },
-  "[dockerfile]": {
-    "editor.defaultFormatter": "foxundermoon.shell-format"
   },
   "yaml.schemas": {
     "https://json.schemastore.org/taskfile.json": "taskfiles/*"
@@ -552,5 +543,7 @@
   "haskell.manageHLS": "PATH",
   "[haskell]": {
     "editor.defaultFormatter": "haskell.haskell"
-  }
+  },
+  "workbench.colorTheme": "Base16 Ayu Dark",
+  "python.formatting.provider": "black"
 }
