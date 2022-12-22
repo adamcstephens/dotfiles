@@ -11,6 +11,7 @@
     export XSECURELOCK_AUTH_BACKGROUND_COLOR="#${colors.base00}"
     export XSECURELOCK_AUTH_FOREGROUND_COLOR="#${colors.base05}"
     export XSECURELOCK_FONT="${config.dotfiles.gui.font}"
+    export XSECURELOCK_PAM_SERVICE=xscreensaver
 
     ${pkgs.xsecurelock}/bin/xsecurelock
   '';

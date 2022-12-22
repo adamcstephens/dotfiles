@@ -80,9 +80,6 @@ in {
     pkgs.tdesktop
   ];
 
-  home.sessionVariables.NIXOS_OZONE_WL = "1";
-
-  services.gnome-keyring.enable = true;
   systemd.user.startServices = "sd-switch";
 
   systemd.user.targets.wayland-session = {
