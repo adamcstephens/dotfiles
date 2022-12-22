@@ -34,10 +34,8 @@ naumovs.color-highlight
 nimsaem.nimvscode
 redhat.ansible
 redhat.vscode-yaml
-richie5um2.vscode-sort-json
 ritwickdey.LiveServer
 rust-lang.rust-analyzer
-samplavigne.p5-vscode
 samuelcolvin.jinjahtml
 shaunlebron.vscode-parinfer
 skellock.just

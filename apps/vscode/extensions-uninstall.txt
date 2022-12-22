@@ -11,3 +11,6 @@ bbenoist.Nix
 danielgjackson.auto-dark-mode-windows
 eamodio.gitlens
 rust-lang.rust
+richie5um2.vscode-sort-json
+ritwickdey.liveserver
+samplavigne.p5-vscode
