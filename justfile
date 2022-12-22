@@ -62,6 +62,10 @@ nix-upgrade:
 ssh-keygen:
     ssh-keygen -t ed25519
 
+steam-bootstrap:
+    flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+    flatpak install flathub com.valvesoftware.Steam
+
 vim-plugins:
     git subrepo clone https://github.com/airblade/vim-gitgutter apps/vim/vim/pack/plugins/start/vim-gitgutter
     git subrepo clone https://github.com/airblade/vim-rooter apps/vim/vim/pack/plugins/start/vim-rooter
