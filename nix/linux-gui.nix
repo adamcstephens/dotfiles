@@ -71,7 +71,6 @@ in {
     pkgs.wireplumber
 
     # apps
-    pkgs._1password-gui
     pkgs.chromium
     pkgs.cider
     pkgs.firefox-wayland
