@@ -12,7 +12,7 @@ main =
         -- , borderWidth = 3
         normalBorderColor = "#3E4B59",
         focusedBorderColor = "#E6E1CF",
-        logHook = updatePointer (0.5, 0.5) (0, 0)
+        logHook = updatePointer (0.5, 0.5) (0, 0) <> logHook desktopConfig
       }
       `additionalKeysP` [ ("M-d", spawn "systemd-cat --identifier=rofi rofi -show drun"),
                           ("M-S-d", spawn "systemd-cat --identifier=rofi rofi -show emoji"),
