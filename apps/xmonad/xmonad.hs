@@ -3,6 +3,7 @@ import XMonad
 import XMonad.Actions.CopyWindow
 import XMonad.Actions.UpdatePointer
 import XMonad.Config.Desktop
+import XMonad.Hooks.ManageHelpers
 import XMonad.Operations
 import qualified XMonad.StackSet as W
 import XMonad.Util.Cursor
@@ -44,6 +45,13 @@ main =
         normalBorderColor = "#3E4B59",
         focusedBorderColor = "#E6E1CF",
         logHook = updatePointer (0.5, 0.5) (0, 0) <> logHook desktopConfig,
-        startupHook = setDefaultCursor xC_left_ptr <> spawn "xsetroot -cursor_name left_ptr" -- this is a hack, i don't know why i need it
+        startupHook = setDefaultCursor xC_left_ptr <> spawn "xsetroot -cursor_name left_ptr", -- this is a hack, i don't know why i need it
+        manageHook =
+          manageHook desktopConfig
+            <> composeAll
+              [ isDialog --> doFloat,
+                title =? "Picture-in-Picture" --> doFloat,
+                title =? "Picture-in-Picture" --> doF copyToAll
+              ]
       }
       `additionalKeysP` dotKeys
