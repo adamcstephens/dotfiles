@@ -36,6 +36,20 @@ dotKeys =
   ]
     ++ [("M-C-S-" ++ show i, windows $ copy ws) | (i, ws) <- zip [1 .. 9] dotWorkspaces]
 
+dotLayouts = Tall 1 (3 / 100) (2 / 3)
+
+dotLogHook = updatePointer (0.5, 0.5) (0, 0) <> logHook desktopConfig
+
+dotManageHook =
+  manageHook desktopConfig
+    <> composeAll
+      [ isDialog --> doFloat,
+        title =? "Picture-in-Picture" --> doFloat,
+        title =? "Picture-in-Picture" --> doF copyToAll
+      ]
+
+dotStartupHook = setDefaultCursor xC_left_ptr <> spawn "xsetroot -cursor_name left_ptr" -- this is a hack, i don't know why i need it
+
 main =
   xmonad $
     desktopConfig
@@ -44,14 +58,9 @@ main =
         -- , borderWidth = 3
         normalBorderColor = "#3E4B59",
         focusedBorderColor = "#E6E1CF",
-        logHook = updatePointer (0.5, 0.5) (0, 0) <> logHook desktopConfig,
-        startupHook = setDefaultCursor xC_left_ptr <> spawn "xsetroot -cursor_name left_ptr", -- this is a hack, i don't know why i need it
-        manageHook =
-          manageHook desktopConfig
-            <> composeAll
-              [ isDialog --> doFloat,
-                title =? "Picture-in-Picture" --> doFloat,
-                title =? "Picture-in-Picture" --> doF copyToAll
-              ]
+        logHook = dotLogHook,
+        startupHook = dotStartupHook,
+        manageHook = dotManageHook,
+        layoutHook = desktopLayoutModifiers dotLayouts
       }
       `additionalKeysP` dotKeys
