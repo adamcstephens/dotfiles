@@ -5,6 +5,7 @@ import XMonad.Actions.UpdatePointer
 import XMonad.Config.Desktop
 import XMonad.Operations
 import qualified XMonad.StackSet as W
+import XMonad.Util.Cursor
 import XMonad.Util.EZConfig
 
 spawner exec = spawn ("systemd-cat --identifier=" ++ app ++ " " ++ exec)
@@ -42,6 +43,7 @@ main =
         -- , borderWidth = 3
         normalBorderColor = "#3E4B59",
         focusedBorderColor = "#E6E1CF",
-        logHook = updatePointer (0.5, 0.5) (0, 0) <> logHook desktopConfig
+        logHook = updatePointer (0.5, 0.5) (0, 0) <> logHook desktopConfig,
+        startupHook = setDefaultCursor xC_left_ptr <> spawn "xsetroot -cursor_name left_ptr" -- this is a hack, i don't know why i need it
       }
       `additionalKeysP` dotKeys

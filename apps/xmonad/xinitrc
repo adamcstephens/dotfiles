@@ -5,8 +5,14 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 
 userresources=$HOME/.Xresources
 usermodmap=$HOME/.Xmodmap
+xprofile=$HOME/.xprofile
 sysresources=/etc/X11/xinit/.Xresources
 sysmodmap=/etc/X11/xinit/.Xmodmap
+
+if [ -f "$xprofile" ]; then
+  # shellcheck disable=SC1090
+  . "$xprofile"
+fi
 
 # merge in defaults and keymaps
 if [ -f $sysresources ]; then
@@ -28,7 +34,6 @@ fi
 if test -z "$DBUS_SESSION_BUS_ADDRESS"; then
   eval "$(dbus-launch --exit-with-session --sh-syntax)"
 fi
-systemctl --user import-environment DISPLAY XAUTHORITY XDG_SESSION_ID
 
 if command -v dbus-update-activation-environment >/dev/null 2>&1; then
   dbus-update-activation-environment DISPLAY XAUTHORITY
@@ -39,7 +44,6 @@ if [ -x "$(command -v nvidia-smi)" ]; then
   xrandr --setprovideroutputsource modesetting NVIDIA-0
 fi
 
-# NEEDED FOR CHROMEBOOK
 [ -f ~/.Xmodmap ] && xmodmap ~/.Xmodmap
 
 # shellcheck disable=SC1091

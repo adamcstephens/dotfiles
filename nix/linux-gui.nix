@@ -42,7 +42,7 @@ in {
   home.pointerCursor = {
     package = pkgs.bibata-cursors;
     name = "Bibata-Original-Classic";
-    size = 24;
+    size = 48;
     gtk.enable = true;
     x11.enable = true;
   };
