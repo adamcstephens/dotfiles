@@ -57,6 +57,10 @@ xinput disable "$touchpadid"
 xsetroot -cursor_name left_ptr
 
 xset r rate 300 50
+if [ "$(hostname)" = "blank" ];
+then
+  xset -dpms
+fi
 
 systemctl --user start xserver-session.target
 systemctl --user start tray.target
