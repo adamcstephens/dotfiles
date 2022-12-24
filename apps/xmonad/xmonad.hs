@@ -3,7 +3,9 @@ import XMonad
 import XMonad.Actions.CopyWindow
 import XMonad.Actions.UpdatePointer
 import XMonad.Config.Desktop
+import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageHelpers
+import XMonad.Layout.NoBorders
 import XMonad.Operations
 import qualified XMonad.StackSet as W
 import XMonad.Util.Cursor
@@ -36,7 +38,7 @@ dotKeys =
   ]
     ++ [("M-C-S-" ++ show i, windows $ copy ws) | (i, ws) <- zip [1 .. 9] dotWorkspaces]
 
-dotLayouts = Tall 1 (3 / 100) (2 / 3)
+dotLayouts = Tall 1 (3 / 100) (2 / 3) ||| noBorders Full
 
 dotLogHook = updatePointer (0.5, 0.5) (0, 0) <> logHook desktopConfig
 
@@ -45,14 +47,18 @@ dotManageHook =
     <> composeAll
       [ isDialog --> doFloat,
         title =? "Picture-in-Picture" --> doFloat,
-        title =? "Picture-in-Picture" --> doF copyToAll
+        title =? "Picture-in-Picture" --> doF copyToAll,
+        (className =? "Firefox" <&&> resource =? "Dialog") --> doFloat,
+        isFullscreen --> doFullFloat
       ]
 
 dotStartupHook = setDefaultCursor xC_left_ptr <> spawn "xsetroot -cursor_name left_ptr" -- this is a hack, i don't know why i need it
 
 main =
-  xmonad $
-    desktopConfig
+  xmonad
+    $ ewmhFullscreen
+      . ewmh
+    $ desktopConfig
       { terminal = "kitty",
         modMask = mod4Mask,
         -- , borderWidth = 3
@@ -61,6 +67,6 @@ main =
         logHook = dotLogHook,
         startupHook = dotStartupHook,
         manageHook = dotManageHook,
-        layoutHook = desktopLayoutModifiers dotLayouts
+        layoutHook = smartBorders $ desktopLayoutModifiers dotLayouts
       }
       `additionalKeysP` dotKeys
