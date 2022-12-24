@@ -2,6 +2,10 @@
   services.dunst = {
     enable = true;
 
+    iconTheme = {
+      inherit (config.gtk.iconTheme) name package;
+    };
+
     settings = {
       global = {
         monitor = 0;
@@ -10,18 +14,19 @@
         width = 300;
         height = 100;
         origin = "top-right";
-        offset = "20x20";
-        frame_color = "#${config.colorScheme.colors.base03}";
+        offset = "20x50";
+        frame_color = "#${config.colorScheme.colors.base05}";
+        frame_width = 1;
         separator_color = "frame";
       };
 
       urgency_low = {
-        background = "#${config.colorScheme.colors.base00}";
+        background = "#${config.colorScheme.colors.base02}";
         foreground = "#${config.colorScheme.colors.base05}";
         timeout = 10;
       };
       urgency_normal = {
-        background = "#${config.colorScheme.colors.base00}";
+        background = "#${config.colorScheme.colors.base02}";
         foreground = "#${config.colorScheme.colors.base05}";
         timeout = 10;
       };

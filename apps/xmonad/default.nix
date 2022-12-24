@@ -36,6 +36,12 @@ in {
     enable = true;
     inactiveInterval = 5;
     lockCmd = xsecurelock.outPath;
+    xautolock.extraOptions = [
+      "-notify"
+      "10"
+      "-notifier"
+      ''"${pkgs.libnotify}/bin/notify-send --expire-time=9900 --icon=dialog-information 'Locking in 10 seconds'"''
+    ];
   };
 
   systemd.user.services.xautolock-session.Install.WantedBy = lib.mkForce ["xserver-session.target"];

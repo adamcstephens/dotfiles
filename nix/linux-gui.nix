@@ -33,6 +33,10 @@ in {
 
   gtk = {
     enable = true;
+    iconTheme = {
+      name = "Papirus-Dark";
+      package = pkgs.papirus-icon-theme;
+    };
     theme = {
       name = "Adwaita-dark";
       package = pkgs.gnome.gnome-themes-extra;
@@ -55,6 +59,7 @@ in {
 
     configure-gtk
     pkgs.glib
+    pkgs.libnotify
 
     pkgs.brightnessctl
     pkgs.blueberry
