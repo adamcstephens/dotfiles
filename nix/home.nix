@@ -1,8 +1,8 @@
 {
-  pkgs,
   config,
-  lib,
   inputs,
+  lib,
+  pkgs,
   ...
 }: {
   imports = [
@@ -90,4 +90,6 @@
       options = ["--cmd" "j"];
     };
   };
+
+  xdg.enable = true;
 }

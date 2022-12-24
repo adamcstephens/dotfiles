@@ -1,4 +1,6 @@
 {
+  config,
+  inputs,
   lib,
   pkgs,
   ...
@@ -26,6 +28,12 @@
     pkgs.shfmt
   ];
 in {
+  imports = [
+    inputs.chemacs.homeModule
+  ];
+
+  home.file.".config/doom".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/emacs/doom.d";
+
   programs.emacs = {
     enable = true;
     package = package;
@@ -37,6 +45,16 @@ in {
         lib.concatMapStringsSep ":" (x: "${x}/bin") extraBins
       }"))
     '';
+
+    chemacs.profiles = {
+      default = {
+        env.DOOMDIR = "~/.config/doom";
+        userDir = "${config.programs.emacs.chemacs.defaultUserParentDir}/doom";
+      };
+      doom = {
+        env.DOOMDIR = "~/.config/doom";
+      };
+    };
   };
 
   home.packages = [aspell];

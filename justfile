@@ -17,9 +17,10 @@ dotbot config="":
     CONFIG={{config}} ~/.dotfiles/bin/dotbot
 
 doomemacs:
-    test -e ~/.emacs.d || git clone https://github.com/doomemacs/doomemacs ~/.emacs.d
-    ~/.emacs.d/bin/doom sync
-    test -f ~/.emacs.d/.local/env || doom env
+    test -d ~/.config/chemacs || mkdir -p ~/.config/chemacs
+    test -e ~/.config/chemacs/doom || git clone https://github.com/doomemacs/doomemacs ~/.config/chemacs/doom
+    DOOMDIR=~/.config/doom ~/.config/chemacs/doom/bin/doom sync
+    test -f ~/.config/chemacs/doom/.local/env || DOOMDIR=~/.config/doom ~/.config/chemacs/doom/bin/doom env
 
 fish-bootstrap:
     fish ~/.dotfiles/bin/theme.fish
