@@ -33,6 +33,7 @@ in {
   ];
 
   home.file.".config/doom".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/emacs/doom.d";
+  home.file.".config/chemacs/dotmacs".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/emacs/dotmacs";
 
   programs.emacs = {
     enable = true;
@@ -54,6 +55,7 @@ in {
       doom = {
         env.DOOMDIR = "~/.config/doom";
       };
+      dotmacs = {};
     };
   };
 

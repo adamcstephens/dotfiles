@@ -1,0 +1,3 @@
+*.elc
+dotmacs/straight/build
+dotmacs/straight/repos
