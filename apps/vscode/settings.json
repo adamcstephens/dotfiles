@@ -544,6 +544,6 @@
   "[haskell]": {
     "editor.defaultFormatter": "haskell.haskell"
   },
-  "workbench.colorTheme": "Base16 Ayu Dark",
-  "python.formatting.provider": "black"
+  "python.formatting.provider": "black",
+  "workbench.colorTheme": "Base16 Ayu Dark"
 }
