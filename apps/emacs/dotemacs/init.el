@@ -1,3 +1,4 @@
+;; bootstrap straight.el
 (defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
@@ -11,10 +12,18 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
+;; make straight.el default
 (straight-use-package 'use-package)
 (setq straight-use-package-by-default t)
 
-(add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
+;; load all elisp files
+(add-to-list 'load-path (expand-file-name "elisp" user-emacs-directory))
 
+(require 'init-emacs)
+
+(require 'init-complete)
 (require 'init-evil)
+(require 'init-git)
+(require 'init-format)
+(require 'init-project)
 (require 'init-theme)

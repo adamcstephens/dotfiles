@@ -1,3 +1,8 @@
 *.elc
-dotmacs/straight/build
-dotmacs/straight/repos
+build/
+repos/
+transient/
+build-cache.el
+history
+projects
+projectile-bookmarks.eld
