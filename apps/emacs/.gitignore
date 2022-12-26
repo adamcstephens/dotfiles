@@ -1,0 +1,8 @@
+*.elc
+build/
+repos/
+transient/
+build-cache.el
+history
+projects
+projectile-bookmarks.eld
