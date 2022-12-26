@@ -52,6 +52,7 @@ in {
 
   home.file.".config/doom".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/emacs/doom.d";
   home.file.".config/chemacs/dotemacs".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/emacs/dotemacs";
+  home.file.".config/chemacs/default".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/emacs/dotemacs";
 
   programs.emacs = {
     enable = true;
@@ -65,11 +66,8 @@ in {
       }"))
     '';
 
-    chemacs.profiles = {
-      default = {
-        env.DOOMDIR = "~/.config/doom";
-        userDir = "${config.programs.emacs.chemacs.defaultUserParentDir}/doom";
-      };
+    chemacs.profiles = rec {
+      default = {};
       doom = {
         env.DOOMDIR = "~/.config/doom";
       };
