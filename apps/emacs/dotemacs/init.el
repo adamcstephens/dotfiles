@@ -25,6 +25,9 @@
 (require 'init-evil)
 (require 'init-git)
 (require 'init-key)
+(require 'init-lsp)
 (require 'init-format)
 (require 'init-project)
 (require 'init-theme)
+
+(require 'init-nix)
