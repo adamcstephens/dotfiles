@@ -39,7 +39,6 @@
     latex
     pkgs.graphicsmagick
     pkgs.nodePackages.mermaid-cli
-    pkgs.nil
     pkgs.ripgrep
     pkgs.pandoc
     pkgs.shellcheck

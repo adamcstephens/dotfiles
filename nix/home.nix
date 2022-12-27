@@ -42,7 +42,6 @@
   '';
 
   home.packages = [
-    pkgs.alejandra
     pkgs.bat
     pkgs.bc
     pkgs.btop
@@ -64,7 +63,6 @@
     pkgs.lazygit
     pkgs.lsd
     pkgs.mtr
-    pkgs.nil
     pkgs.python3Minimal
     pkgs.python3Packages.black
     pkgs.python3Packages.ipython

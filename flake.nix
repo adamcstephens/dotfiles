@@ -49,9 +49,10 @@
           name = "dots";
           packages =
             [
+              pkgs.alejandra
               pkgs.cachix
               pkgs.just
-              pkgs.alejandra
+              pkgs.nil
               pkgs.python3Minimal
             ]
             ++ (lib.optionals pkgs.stdenv.isLinux [
@@ -71,7 +72,7 @@
       };
     }
     // {
-      apps = self.inputs.nixinate.nixinate.aarch64-darwin self;
+        apps = self.inputs.nixinate.nixinate.aarch64-darwin self;
       overlays = import ./nix/overlays.nix inputs;
     };
 }
