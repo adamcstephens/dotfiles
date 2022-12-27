@@ -10,7 +10,8 @@
     plugins = [];
     shellAliases = {
       cat = "bat";
-      nix = "nix -L";
+      nix = "nix --print-build-logs";
+      dog = "doggo";
     };
   };
 }

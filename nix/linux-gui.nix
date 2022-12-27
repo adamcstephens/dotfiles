@@ -53,9 +53,14 @@ in {
 
   home.packages = [
     pkgs.font-awesome
+    pkgs.jetbrains-mono
     pkgs.material-icons
     pkgs.material-design-icons
-    (pkgs.nerdfonts.override {fonts = ["JetBrainsMono"];})
+    pkgs.noto-fonts
+    pkgs.noto-fonts-cjk
+    pkgs.noto-fonts-emoji
+    pkgs.roboto
+    (pkgs.nerdfonts.override {fonts = ["JetBrainsMono" "NerdFontsSymbolsOnly"];})
 
     configure-gtk
     pkgs.glib
