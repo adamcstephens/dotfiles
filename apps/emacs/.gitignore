@@ -6,3 +6,5 @@ build-cache.el
 history
 projects
 projectile-bookmarks.eld
+recentf
+projectile.cache
