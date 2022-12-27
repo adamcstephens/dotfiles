@@ -6,6 +6,8 @@
 }: let
   dependencies = [
     pkgs.bash
+    pkgs.networkmanagerapplet
+    pkgs.pavucontrol
     pkgs.playerctl
   ];
   path = "PATH=${config.services.polybar.package}/bin:${lib.makeBinPath dependencies}:/run/wrappers/bin";
@@ -23,9 +25,11 @@ in {
         foreground = ${base05}
         primary = ${base0A}
         secondary = ${base0C}
-        alert = ${base08}
         disabled = ${base03}
         border = ${base03}
+        red = ${base08}
+        green = ${base0B}
+        blue = ${base0D}
 
         [display]
         dpi = ${toString config.dotfiles.gui.dpi}

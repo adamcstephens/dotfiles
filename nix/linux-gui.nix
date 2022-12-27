@@ -98,6 +98,13 @@ in {
     Service.ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
   };
 
+  systemd.user.services.blueberry-tray = {
+    Install.WantedBy = ["graphical-session.target"];
+    Unit.PartOf = ["graphical-session.target"];
+    Service.ExecStart = "${pkgs.blueberry}/bin/blueberry-tray";
+    Service.Type = "forking";
+  };
+
   systemd.user.targets.wayland-session = {
     Unit = {
       Description = "wayland compositor session";
