@@ -4,4 +4,8 @@
 		 (setq projectile-auto-discover t)
 		 (setq projectile-project-search-path '(("~/projects/" . 1) ("~/git/" . 1) ("~/.dotfiles" . 0)))))
 
+(use-package direnv
+  :config
+  (direnv-mode))
+
 (provide 'init-project)
