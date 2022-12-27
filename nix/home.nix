@@ -48,7 +48,7 @@
     pkgs.calc
     pkgs.colordiff
     pkgs.direnv
-    pkgs.dogdns
+    pkgs.doggo
     pkgs.du-dust
     pkgs.fd
     pkgs.fx
