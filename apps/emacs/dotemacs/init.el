@@ -22,10 +22,11 @@
 (require 'init-emacs)
 
 (require 'init-complete)
-(require 'init-evil)
+;; (require 'init-evil)
 (require 'init-git)
 (require 'init-key)
 (require 'init-lsp)
+(require 'init-meow)
 (require 'init-format)
 (require 'init-project)
 (require 'init-theme)

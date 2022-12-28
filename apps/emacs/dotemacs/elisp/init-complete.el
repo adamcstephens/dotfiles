@@ -1,3 +1,4 @@
+;; completion UI
 (use-package vertico
   :init
   (vertico-mode)
@@ -34,8 +35,10 @@
   ;; enabled right away. Note that this forces loading the package.
   (marginalia-mode))
 
+;; add some more searching commands
 (use-package consult)
 
+;; completion style
 (use-package fussy
   :ensure t
   :config
