@@ -1,7 +1,10 @@
 ;; completion UI
 (use-package vertico
+  :straight (:files (:defaults "extensions/*"))
   :init
   (vertico-mode)
+  :bind (:map vertico-map
+              ("C-<backspace>" . vertico-directory-up))
 
   ;; Different scroll margin
   ;; (setq vertico-scroll-margin 0)
@@ -36,7 +39,9 @@
   (marginalia-mode))
 
 ;; add some more searching commands
-(use-package consult)
+(use-package consult
+  :bind (("H-SPC" . consult-find)
+	 ("C-c b" . consult-project-buffer)))
 
 ;; completion style
 (use-package fussy
