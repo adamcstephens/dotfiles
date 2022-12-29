@@ -77,6 +77,7 @@ in {
   home.packages = [aspell];
 
   home.activation.doomemacs = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    export PATH=$PATH:${lib.makeBinPath [pkgs.git emacsPackage]}
     cd ~/.dotfiles
     ${pkgs.just}/bin/just doomemacs
   '';
