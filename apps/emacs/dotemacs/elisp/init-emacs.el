@@ -8,9 +8,10 @@
 
 (setq gc-cons-threshold (* 1024 1024 20))
 
-;; disable menu and tool bars
+;; disable menu, tool, and bars
 (menu-bar-mode -1)
 (tool-bar-mode -1)
+(scroll-bar-mode -1)
 
 ;; enable mouse mode for terminal
 (unless (display-graphic-p)
