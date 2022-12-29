@@ -34,3 +34,4 @@
 (require 'init-just)
 (require 'init-markdown)
 (require 'init-nix)
+(require 'init-ssh)
