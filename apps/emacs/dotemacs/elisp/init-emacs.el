@@ -30,6 +30,7 @@
                   (concat auto-save-list-file-prefix "tramp-\\2") t)
             (list ".*" auto-save-list-file-prefix t)))
 
+;; increase GC theshold. this can apparently be bad, but good?
 (setq gc-cons-threshold (* 1024 1024 20))
 
 ;; disable menu, tool, and bars
@@ -44,6 +45,7 @@
 ;; enable line numbers
 (global-display-line-numbers-mode)
 
+;; store recent files
 (recentf-mode 1)
 (setq recentf-max-menu-items 25)
 (setq recentf-max-saved-items 25)
@@ -53,6 +55,14 @@
 (setq inhibit-startup-message t)
 (setq initial-scratch-message nil)
 
+;; describe function is better than the faq
 (global-set-key "\C-h\ \C-f" 'describe-function)
+
+;; enable file/dired reading from disk
+(setq global-auto-revert-non-file-buffers t)
+(global-auto-revert-mode)
+
+;; try and quiet errors i can't/won't fix
+(setq native-comp-async-report-warnings-errors 'silent)
 
 (provide 'init-emacs)

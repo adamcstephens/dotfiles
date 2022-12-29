@@ -1,4 +1,5 @@
 *.elc
+autosave/
 build/
 repos/
 transient/
