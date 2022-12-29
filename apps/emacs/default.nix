@@ -10,15 +10,15 @@
     inherit (pkgs.texlive) scheme-tetex amsmath capt-of hyperref wrapfig;
   };
 
+  emacsPackage =
+    if pkgs.stdenv.isLinux
+    then pkgs.emacsGit
+    else pkgs.emacs;
   package = pkgs.symlinkJoin {
     name = "dotemacs";
 
     paths = [
-      (
-        if pkgs.stdenv.isLinux
-        then pkgs.emacsGit
-        else pkgs.emacs
-      )
+      emacsPackage
     ];
 
     nativeBuildInputs = [pkgs.makeWrapper];
@@ -55,7 +55,7 @@ in {
 
   programs.emacs = {
     enable = true;
-    package = package;
+    package = emacsPackage;
     extraConfig = ''
       (setq exec-path (append exec-path '( ${
         lib.concatMapStringsSep " " (x: ''"${x}/bin"'') extraBins
