@@ -56,6 +56,10 @@
 
           programs.fish.enable = true;
 
+          environment.etc."ssh/sshd_config.d/200-nix.conf".text = ''
+            PasswordAuthentication no
+            AllowUsers astephe9@10.3.2.* astephe9@10.20.10.*
+          '';
           environment.shells = [pkgs.fish];
           environment.systemPackages = [
           ];
