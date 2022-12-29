@@ -20,6 +20,7 @@
 (setq project-switch-commands #'project-dired)
 ;; project keys
 (global-set-key (kbd "C-c p s") 'project-switch-project)
+(global-set-key (kbd "C-c p d") 'project-dired)
 
 ;; enable tab mode but hide the bar
 (setq tab-bar-show nil)
