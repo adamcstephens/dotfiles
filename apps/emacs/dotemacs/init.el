@@ -31,5 +31,6 @@
 (require 'init-project)
 (require 'init-theme)
 
+(require 'init-just)
 (require 'init-markdown)
 (require 'init-nix)
