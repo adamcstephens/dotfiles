@@ -10,6 +10,9 @@ stdenv.mkDerivation rec {
   src = ./.;
 
   dontBuild = true;
+  dontConfigure = true;
+  dontFixup = true;
+  dontPatch = true;
 
   installPhase = ''
     export TERMINFO="$out/share/terminfo"

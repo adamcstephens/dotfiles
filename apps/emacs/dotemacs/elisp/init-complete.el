@@ -40,8 +40,7 @@
 
 ;; add some more searching commands
 (use-package consult
-  :bind (("H-SPC" . consult-find)
-	 ("C-c b" . consult-project-buffer)))
+  :bind (("C-c b" . consult-project-buffer)))
 
 ;; completion style
 (use-package fussy

@@ -86,4 +86,6 @@ in {
     if pkgs.stdenv.isLinux
     then true
     else false;
+
+  systemd.user.services.emacs.Service.Environment = ["TERM=xterm-emacs"];
 }
