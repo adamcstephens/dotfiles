@@ -33,7 +33,7 @@
 (require 'init-theme)
 
 (require 'init-just)
-(require 'init-sh)
 (require 'init-markdown)
 (require 'init-nix)
+(require 'init-sh)
 (require 'init-ssh)
