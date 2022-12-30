@@ -51,31 +51,26 @@
     pkgs.doggo
     pkgs.du-dust
     pkgs.fd
-    pkgs.fx
     pkgs.fzf
     pkgs.gitFull
     pkgs.gh
-    pkgs.go-task
-    pkgs.helix
     pkgs.htop
     pkgs.jq
     pkgs.just
     pkgs.lazygit
     pkgs.lsd
     pkgs.mtr
-    pkgs.python3Minimal
-    pkgs.python3Packages.black
-    pkgs.python3Packages.ipython
-    pkgs.python3Packages.rich
     pkgs.pwgen
     pkgs.ripgrep
-    pkgs.shellcheck
-    pkgs.shfmt
     pkgs.tio
     pkgs.tmux
     pkgs.tree
     pkgs.wget
-    pkgs.zellij
+
+    # global editor packages
+    pkgs.nil
+    pkgs.shellcheck
+    pkgs.shfmt
   ];
 
   programs = {
