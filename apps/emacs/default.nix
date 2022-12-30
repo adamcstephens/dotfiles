@@ -33,7 +33,7 @@
   extraBins = [
     pkgs.alejandra
     aspell
-    # pkgs.corefonts
+    pkgs.diffutils
     pkgs.fd
     pkgs.git
     latex
@@ -55,7 +55,7 @@ in {
 
   programs.emacs = {
     enable = true;
-    package = emacsPackage;
+    package = package;
     extraConfig = ''
       (setq exec-path (append exec-path '( ${
         lib.concatMapStringsSep " " (x: ''"${x}/bin"'') extraBins

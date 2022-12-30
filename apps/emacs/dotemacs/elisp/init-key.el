@@ -8,7 +8,6 @@
   :init
   (move-text-default-bindings))
 
-(global-set-key (kbd "C-_") 'comment-or-uncomment-region)
 (global-set-key (kbd "C-c f s") 'save-buffer)
 (global-set-key (kbd "C-r") 'undo-redo)
 
