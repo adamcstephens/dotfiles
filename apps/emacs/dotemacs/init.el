@@ -27,6 +27,7 @@
 (require 'init-key)
 (require 'init-lsp)
 (require 'init-meow)
+(require 'init-org)
 (require 'init-format)
 (require 'init-project)
 (require 'init-theme)
