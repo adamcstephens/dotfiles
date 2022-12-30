@@ -23,6 +23,7 @@
 
 (require 'init-complete)
 ;; (require 'init-evil)
+(require 'init-editor)
 (require 'init-git)
 (require 'init-key)
 (require 'init-lsp)

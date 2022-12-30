@@ -42,4 +42,10 @@
   ;; per mode with `ligature-mode'.
   (global-ligature-mode t))
 
+;; dim inactive buffers
+(use-package dimmer
+  :init
+  (dimmer-mode t)
+  (dimmer-configure-which-key))
+
 (provide 'init-theme)
