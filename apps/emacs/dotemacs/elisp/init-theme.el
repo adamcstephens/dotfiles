@@ -46,6 +46,7 @@
 (use-package dimmer
   :init
   (dimmer-mode t)
+  (dimmer-configure-magit)
   (dimmer-configure-which-key))
 
 (provide 'init-theme)
