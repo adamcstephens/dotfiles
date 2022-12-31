@@ -19,6 +19,8 @@
 ;;   ('magit-pre-refresh . diff-hl-magit-pre-refresh)
 ;;   ('magit-post-refresh . diff-hl-magit-post-refresh))
 
+(use-package git-auto-commit-mode)
+
 ;; load diff mode on cli commit
 (add-to-list 'auto-mode-alist '("/COMMIT_EDITMSG\\'" . diff-mode))
 

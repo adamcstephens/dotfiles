@@ -52,6 +52,8 @@ in {
   };
 
   home.packages = [
+    pkgs.etBook
+    pkgs.fira
     pkgs.font-awesome
     pkgs.jetbrains-mono
     pkgs.material-icons
@@ -60,6 +62,8 @@ in {
     pkgs.noto-fonts-cjk
     pkgs.noto-fonts-emoji
     pkgs.roboto
+    pkgs.source-sans
+    pkgs.vegur
     (pkgs.nerdfonts.override {fonts = ["JetBrainsMono" "NerdFontsSymbolsOnly"];})
 
     configure-gtk

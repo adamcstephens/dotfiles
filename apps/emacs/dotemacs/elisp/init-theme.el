@@ -16,6 +16,17 @@
   ;; (doom-themes-org-config)
   )
 
+;; switch to variable pitch in text modes
+(use-package mixed-pitch
+  :hook
+  (text-mode . mixed-pitch-mode)
+  :init
+  (set-face-attribute 'default nil :font "JetBrains Mono Nerd Font" :height 105)
+  (set-face-attribute 'fixed-pitch nil :font "JetBrains Mono Nerd Font")
+  (set-face-attribute 'variable-pitch nil :font "Vegur" :height 130)
+  )
+
+;; enable ligatures
 (use-package ligature
   :load-path "path-to-ligature-repo"
   :config
