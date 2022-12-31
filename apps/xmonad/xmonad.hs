@@ -1,6 +1,7 @@
 import System.Exit
 import XMonad
 import XMonad.Actions.CopyWindow
+import XMonad.Actions.CycleWS
 import XMonad.Actions.UpdatePointer
 import XMonad.Config.Desktop
 import XMonad.Hooks.EwmhDesktops
@@ -34,7 +35,8 @@ dotKeys =
     ("M-S-q", kill),
     ("M-S-t", spawner "kitty --single-instance"),
     ("M-s", windows W.focusDown),
-    ("M-w", windows W.focusUp)
+    ("M-w", windows W.focusUp),
+    ("M-`", toggleWS)
   ]
     ++ [("M-C-S-" ++ show i, windows $ copy ws) | (i, ws) <- zip [1 .. 9] dotWorkspaces]
 
