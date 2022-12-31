@@ -88,6 +88,7 @@
 (use-package meow
   :config
   (meow-setup)
-  (meow-global-mode 1))
+  (meow-global-mode 1)
+  (setq meow-use-clipboard t))
 
 (provide 'init-meow)
