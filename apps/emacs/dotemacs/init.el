@@ -19,6 +19,7 @@
 ;; load all elisp files
 (add-to-list 'load-path (expand-file-name "elisp" user-emacs-directory))
 
+(require 'init-theme)
 (require 'init-emacs)
 
 (require 'init-complete)
@@ -31,8 +32,8 @@
 (require 'init-org)
 (require 'init-format)
 (require 'init-project)
-(require 'init-theme)
 
+(require 'init-haskell)
 (require 'init-just)
 (require 'init-markdown)
 (require 'init-nix)
