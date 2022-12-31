@@ -9,6 +9,7 @@
 	org-image-actual-width '(300))
   :hook
   (org-mode . (lambda () (display-line-numbers-mode -1)))
+  ;; (org-mode . variable-pitch-mode)
   :bind
   ("C-c a" . org-agenda))
 

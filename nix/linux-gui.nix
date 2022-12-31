@@ -56,8 +56,10 @@ in {
     pkgs.fira
     pkgs.font-awesome
     pkgs.jetbrains-mono
+    pkgs.manrope
     pkgs.material-icons
     pkgs.material-design-icons
+    pkgs.norwester-font
     pkgs.noto-fonts
     pkgs.noto-fonts-cjk
     pkgs.noto-fonts-emoji

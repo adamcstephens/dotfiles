@@ -13,18 +13,21 @@
   ;; (setq doom-themes-treemacs-theme "doom-atom") ; use "doom-colors" for less minimal icon theme
   ;; (doom-themes-treemacs-config)
   ;; Corrects (and improves) org-mode's native fontification.
-  ;; (doom-themes-org-config)
+  (doom-themes-org-config)
   )
 
 ;; switch to variable pitch in text modes
-(use-package mixed-pitch
-  :hook
-  (text-mode . mixed-pitch-mode)
-  :init
-  (set-face-attribute 'default nil :font "JetBrains Mono Nerd Font" :height 105)
-  (set-face-attribute 'fixed-pitch nil :font "JetBrains Mono Nerd Font")
-  (set-face-attribute 'variable-pitch nil :font "Vegur" :height 130)
-  )
+;; (use-package mixed-pitch
+;;   :hook
+;;   (text-mode . mixed-pitch-mode)
+;;   :config
+;;   ;; (set-face-attribute 'default nil :family "JetBrains Mono Nerd Font" :height 105)
+;;   ;; (set-face-attribute 'fixed-pitch nil :family "JetBrains Mono Nerd Font")
+;;   ;; (set-face-attribute 'variable-pitch nil :family "Vegur" :height 200 :weight 'medium :width 'expanded)
+;;   (set-face-attribute 'default nil :font (font-spec :family "JetBrains Mono Nerd Font" :size 13))
+;;   (set-face-attribute 'fixed-pitch nil :font (font-spec :family "JetBrains Mono Nerd Font"))
+;;   (set-face-attribute 'variable-pitch nil :font (font-spec :family "Manrope3"))
+;;   )
 
 ;; enable ligatures
 (use-package ligature
