@@ -52,14 +52,10 @@
   (recentf-mode 1)
   (setq recentf-max-menu-items 25)
   (setq recentf-max-saved-items 25)
-  (global-set-key "\C-x\ \C-r" 'recentf-open-files)
 
   ;;disable splash screen and startup message
   (setq inhibit-startup-message t)
   (setq initial-scratch-message nil)
-
-  ;; describe function is better than the faq
-  (global-set-key "\C-h\ \C-f" 'describe-function)
 
   ;; enable file/dired reading from disk
   (setq global-auto-revert-non-file-buffers t)
@@ -68,15 +64,22 @@
   ;; try and quiet errors i can't/won't fix
   (setq native-comp-async-report-warnings-errors 'silent)
 
+  ;; store customizations in non init.el
   (setq custom-file (concat user-emacs-directory "custom.el"))
   (load custom-file)
-  )
 
-;; allow for running commands without selecting a region
-(use-package whole-line-or-region
-  :init
-  (whole-line-or-region-global-mode)
-  :bind
-  ("C-_" . whole-line-or-region-comment-dwim))
+  ;;
+  ;; keybindings to builtin functions
+  ;;
+  (global-set-key (kbd "C-c f s") 'save-buffer)
+  ;; describe function is better than the faq
+  (global-set-key "\C-h\ \C-f" 'describe-function)
+
+  (define-key minibuffer-local-map (kbd "C-j") 'next-line)
+  (define-key minibuffer-local-map (kbd "C-k") 'previous-line)
+  (define-key minibuffer-local-map (kbd "C-u") 'kill-whole-line)
+  (define-key minibuffer-local-map (kbd "C-<backspace>") 'backward-kill-word)
+
+  )
 
 (provide 'init-emacs)

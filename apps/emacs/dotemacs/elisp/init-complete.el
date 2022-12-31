@@ -82,4 +82,9 @@
   :hook
   (embark-collect-mode . consult-preview-at-point-mode))
 
+;; discover shortcuts easier in the minibuffer
+(use-package which-key
+  :init
+  (which-key-mode))
+
 (provide 'init-complete)

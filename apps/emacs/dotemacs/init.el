@@ -19,14 +19,12 @@
 ;; load all elisp files
 (add-to-list 'load-path (expand-file-name "elisp" user-emacs-directory))
 
-(require 'init-theme)
 (require 'init-emacs)
+(require 'init-theme)
 
 (require 'init-complete)
-;; (require 'init-evil)
 (require 'init-editor)
 (require 'init-git)
-(require 'init-key)
 (require 'init-lsp)
 (require 'init-meow)
 (require 'init-org)
