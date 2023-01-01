@@ -5,7 +5,7 @@ Playing)
   title="$(playerctl metadata title)"
   artist="$(playerctl metadata artist)"
   printf "%s" "$title"
-  [ -n "$artist" ] && printf '\- %s' "$artist"
+  [ -n "$artist" ] && printf -- ' - %s' "$artist"
   echo
   ;;
 *) echo "" ;;
