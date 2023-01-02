@@ -14,6 +14,9 @@
     export XSECURELOCK_PAM_SERVICE=xscreensaver
 
     ${pkgs.xsecurelock}/bin/xsecurelock
+
+    # re-run xset to re-apply key repeat settings
+    ${pkgs.xorg.xset}/bin/xset r rate 250 50
   '';
 in {
   home.file.".xinitrc".source = ./xinitrc;
