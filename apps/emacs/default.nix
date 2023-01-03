@@ -13,7 +13,8 @@
   emacsPackage =
     if pkgs.stdenv.isLinux
     then pkgs.emacsGit
-    else pkgs.emacs;
+    else pkgs.emacsGit;
+
   package = pkgs.symlinkJoin {
     name = "dotemacs";
 
@@ -65,7 +66,7 @@ in {
       }"))
     '';
 
-    chemacs.profiles = rec {
+    chemacs.profiles = {
       default = {};
       doom = {
         env.DOOMDIR = "~/.config/doom";
@@ -76,7 +77,7 @@ in {
 
   home.packages = [aspell];
 
-  home.activation.doomemacs = lib.hm.dag.entryAfter ["writeBoundary"] ''
+  home.activation.doomemacs = lib.hm.dag.entryAfter ["linkGeneration"] ''
     export PATH=$PATH:${lib.makeBinPath [pkgs.git emacsPackage]}
     cd ~/.dotfiles
     ${pkgs.just}/bin/just doomemacs
@@ -87,5 +88,5 @@ in {
     then true
     else false;
 
-  systemd.user.services.emacs.Service.Environment = ["TERM=xterm-emacs"];
+  systemd = lib.mkIf pkgs.stdenv.isLinux {user.services.emacs.Service.Environment = ["TERM=xterm-emacs"];};
 }
