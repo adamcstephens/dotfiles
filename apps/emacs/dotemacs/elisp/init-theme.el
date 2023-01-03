@@ -1,34 +1,15 @@
-(use-package doom-themes
-  :ensure t
-  :config
-  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
-        doom-themes-enable-italic t) ; if nil, italics is universally disabled
-  (load-theme 'doom-ayu-dark t)
-
-  ;; Enable flashing mode-line on errors
-  (doom-themes-visual-bell-config)
-  ;; Enable custom neotree theme (all-the-icons must be installed!)
-  ;; (doom-themes-neotree-config)
-  ;; or for treemacs users
-  ;; (setq doom-themes-treemacs-theme "doom-atom") ; use "doom-colors" for less minimal icon theme
-  ;; (doom-themes-treemacs-config)
-  ;; Corrects (and improves) org-mode's native fontification.
-  (doom-themes-org-config))
-
 (set-face-attribute 'default nil :font (font-spec :family "JetBrainsMono Nerd Font" :size 13))
 (set-face-attribute 'fixed-pitch nil :font (font-spec :family "JetBrainsMono Nerd Font"))
+;; (set-face-attribute 'variable-pitch nil :family "Vegur" :height 200 :weight 'medium :width 'expanded)
+
+(use-package modus-themes
+  :init
+  (load-theme 'modus-vivendi t))
 
 ;; switch to variable pitch in text modes
 ;; (use-package mixed-pitch
 ;;   :hook
-;;   (text-mode . mixed-pitch-mode)
-;;   :config
-;;   ;; (set-face-attribute 'default nil :family "JetBrains Mono Nerd Font" :height 105)
-;;   ;; (set-face-attribute 'fixed-pitch nil :family "JetBrains Mono Nerd Font")
-;;   ;; (set-face-attribute 'variable-pitch nil :family "Vegur" :height 200 :weight 'medium :width 'expanded)
-;; )
-;;   (set-face-attribute 'variable-pitch nil :font (font-spec :family "Manrope3"))
-;;   )
+;;   (text-mode . mixed-pitch-mode))
 
 ;; enable ligatures
 (use-package ligature
@@ -55,13 +36,8 @@
 				       "\\\\" "://"))
   (global-ligature-mode t))
 
-;; dim inactive buffers
-;; (use-package dimmer
-;;   :init
-;;   (dimmer-mode t)
-;;   (dimmer-configure-magit)
-;;   (dimmer-configure-which-key)
-;;   ;; don't dim embark buffers
-;;   (add-to-list 'dimmer-buffer-exclusion-regexps "^ \\*Embark.*\\*$"))
+;; allow visualizing colors, but don't enable it by default
+(use-package rainbow-mode
+  :commands rainbow-mode)
 
 (provide 'init-theme)
