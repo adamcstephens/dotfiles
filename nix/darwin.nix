@@ -3,12 +3,41 @@
   withSystem,
   ...
 }: {
-  flake.darwinConfigurations.mac = withSystem "aarch64-darwin" ({system, ...}:
+  flake.darwinConfigurations.mac = withSystem "aarch64-darwin" ({
+    pkgs,
+    system,
+    ...
+  }:
     inputs.darwin.lib.darwinSystem {
       inherit inputs system;
 
       modules = [
-        {
+        ({config, ...}: {
+          environment.etc."ssh/sshd_config.d/200-nix.conf".text = ''
+            PasswordAuthentication no
+            AllowUsers astephe9@10.3.2.* astephe9@10.20.10.*
+          '';
+          environment.shells = [pkgs.fish];
+          fonts = {
+            fontDir.enable = true;
+            fonts = [
+              pkgs.etBook
+              pkgs.fira
+              pkgs.font-awesome
+              pkgs.jetbrains-mono
+              pkgs.manrope
+              pkgs.material-icons
+              pkgs.material-design-icons
+              pkgs.norwester-font
+              pkgs.noto-fonts
+              pkgs.noto-fonts-cjk
+              pkgs.noto-fonts-emoji
+              pkgs.roboto
+              pkgs.source-sans
+              (pkgs.nerdfonts.override {fonts = ["JetBrainsMono" "NerdFontsSymbolsOnly"];})
+            ];
+          };
+
           nix = {
             settings = {
               auto-optimise-store = true;
@@ -29,40 +58,33 @@
               extra-platforms = x86_64-darwin
             '';
           };
-          services.nix-daemon.enable = true;
-        }
-        ({pkgs, ...}: {
-          system.defaults.NSGlobalDomain = {
-            InitialKeyRepeat = 15;
-            KeyRepeat = 1;
-
-            NSAutomaticCapitalizationEnabled = false;
-            NSAutomaticDashSubstitutionEnabled = false;
-            NSAutomaticPeriodSubstitutionEnabled = false;
-            NSAutomaticQuoteSubstitutionEnabled = false;
-            NSAutomaticSpellingCorrectionEnabled = false;
-          };
-          system.defaults.dock = {
-            autohide = true;
-            autohide-delay = 2.0;
-            orientation = "left";
-            showhidden = true;
-            show-recents = false;
-          };
-          system.defaults.SoftwareUpdate.AutomaticallyInstallMacOSUpdates = true;
-
-          security.pam.enableSudoTouchIdAuth = true;
-          time.timeZone = "America/New_York";
 
           programs.fish.enable = true;
+          security.pam.enableSudoTouchIdAuth = true;
+          services.nix-daemon.enable = true;
 
-          environment.etc."ssh/sshd_config.d/200-nix.conf".text = ''
-            PasswordAuthentication no
-            AllowUsers astephe9@10.3.2.* astephe9@10.20.10.*
-          '';
-          environment.shells = [pkgs.fish];
-          environment.systemPackages = [
-          ];
+          system.defaults = {
+            NSGlobalDomain = {
+              InitialKeyRepeat = 15;
+              KeyRepeat = 1;
+
+              NSAutomaticCapitalizationEnabled = false;
+              NSAutomaticDashSubstitutionEnabled = false;
+              NSAutomaticPeriodSubstitutionEnabled = false;
+              NSAutomaticQuoteSubstitutionEnabled = false;
+              NSAutomaticSpellingCorrectionEnabled = false;
+            };
+            dock = {
+              autohide = true;
+              autohide-delay = 2.0;
+              orientation = "left";
+              showhidden = true;
+              show-recents = false;
+            };
+            SoftwareUpdate.AutomaticallyInstallMacOSUpdates = true;
+          };
+
+          time.timeZone = "America/New_York";
 
           users.users.astephe9 = {
             shell = pkgs.fish;

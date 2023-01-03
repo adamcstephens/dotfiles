@@ -77,24 +77,14 @@
         hmModules =
           [
             ./dotfiles.nix
-            {
-              inherit dotfiles;
-              nix.registry.nixpkgs.flake = lib.mkDefault inputs.nixpkgs;
-            }
             ./home.nix
-            {
-              home.username = username;
-              home.homeDirectory = homeDir;
-            }
-            {
-              # install packages from the dotfiles flake
-              home.packages = cliPkgs;
-            }
             inputs.nix-colors.homeManagerModule
             {
-              # colorScheme = inputs.nix-colors.colorSchemes.circus;
               colorScheme = inputs.nix-colors.colorSchemes.ayu-dark;
-              # colorScheme = inputs.nix-colors.colorSchemes.cupertino;
+              home.username = username;
+              home.homeDirectory = homeDir;
+              home.packages = cliPkgs;
+              nix.registry.nixpkgs.flake = lib.mkDefault inputs.nixpkgs;
             }
           ]
           ++ modules
