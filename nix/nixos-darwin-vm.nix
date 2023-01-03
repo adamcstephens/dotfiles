@@ -60,6 +60,7 @@
               sshUser = "root";
               buildOn = "remote";
               substituteOnTarget = true;
+              hermetic = false;
             };
           }
           {
