@@ -82,4 +82,12 @@
 
   )
 
+(use-package exec-path-from-shell
+  :demand
+  :config
+  (add-to-list 'exec-path-from-shell-variables "SSH_AUTH_SOCK")
+  (when (or (daemonp) (memq window-system '(mac ns x)))
+    (exec-path-from-shell-initialize))
+  )
+
 (provide 'init-emacs)
