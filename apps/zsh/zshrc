@@ -4,30 +4,19 @@ source ~/.dotfiles/apps/zsh/zsh-snap/znap.zsh
 
 # znap prompt
 
-# asdf
-if [[ -e $HOME/.asdf/asdf.sh ]]; then
-  source $HOME/.asdf/asdf.sh
-  fpath=("${ASDF_DIR}/completions" $fpath)
-fi
-
 # git-subrepo
 fpath=("$HOME/.dotfiles/git-subrepo/share/zsh-completion" $fpath)
 
-ZSH_AUTOSUGGEST_STRATEGY=( history )
+ZSH_AUTOSUGGEST_STRATEGY=(history)
 znap source zsh-users/zsh-autosuggestions
 
-ZSH_HIGHLIGHT_HIGHLIGHTERS=( main brackets )
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 znap source zsh-users/zsh-syntax-highlighting
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#7e8294"
 znap source sainnhe/sonokai zsh/.zsh-theme-sonokai-andromeda
 
 znap source MikeDacre/tmux-zsh-vim-titles
-
-asdf_direnv_zshrc="${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
-if [ -e $asdf_direnv_zshrc ]; then
-  source $asdf_direnv_zshrc
-fi
 
 # # shellcheck shell=bash
 # autoload -Uz compinit && compinit
@@ -86,29 +75,16 @@ key[PageUp]=${terminfo[kpp]}
 key[PageDown]=${terminfo[knp]}
 
 # setup key accordingly
-[[ -n "${key[Home]}"     ]]  && bindkey  "${key[Home]}"     beginning-of-line
-[[ -n "${key[End]}"      ]]  && bindkey  "${key[End]}"      end-of-line
-[[ -n "${key[Insert]}"   ]]  && bindkey  "${key[Insert]}"   overwrite-mode
-[[ -n "${key[Delete]}"   ]]  && bindkey  "${key[Delete]}"   delete-char
-[[ -n "${key[Up]}"       ]]  && bindkey  "${key[Up]}"       up-line-or-history
-[[ -n "${key[Down]}"     ]]  && bindkey  "${key[Down]}"     down-line-or-history
-[[ -n "${key[Left]}"     ]]  && bindkey  "${key[Left]}"     backward-char
-[[ -n "${key[Right]}"    ]]  && bindkey  "${key[Right]}"    forward-char
-[[ -n "${key[PageUp]}"   ]]  && bindkey  "${key[PageUp]}"   beginning-of-buffer-or-history
-[[ -n "${key[PageDown]}" ]]  && bindkey  "${key[PageDown]}" end-of-buffer-or-history
-
-# Finally, make sure the terminal is in application mode, when zle is
-# active. Only then are the values from $terminfo valid.
-if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
-    function zle-line-init () {
-        printf '%s' "${terminfo[smkx]}"
-    }
-    function zle-line-finish () {
-        printf '%s' "${terminfo[rmkx]}"
-    }
-    zle -N zle-line-init
-    zle -N zle-line-finish
-fi
+[[ -n "${key[Home]}" ]] && bindkey "${key[Home]}" beginning-of-line
+[[ -n "${key[End]}" ]] && bindkey "${key[End]}" end-of-line
+[[ -n "${key[Insert]}" ]] && bindkey "${key[Insert]}" overwrite-mode
+[[ -n "${key[Delete]}" ]] && bindkey "${key[Delete]}" delete-char
+[[ -n "${key[Up]}" ]] && bindkey "${key[Up]}" up-line-or-history
+[[ -n "${key[Down]}" ]] && bindkey "${key[Down]}" down-line-or-history
+[[ -n "${key[Left]}" ]] && bindkey "${key[Left]}" backward-char
+[[ -n "${key[Right]}" ]] && bindkey "${key[Right]}" forward-char
+[[ -n "${key[PageUp]}" ]] && bindkey "${key[PageUp]}" beginning-of-buffer-or-history
+[[ -n "${key[PageDown]}" ]] && bindkey "${key[PageDown]}" end-of-buffer-or-history
 
 # enable edit-command-line
 autoload -z edit-command-line
@@ -123,6 +99,8 @@ if type brew &>/dev/null; then
   FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
 fi
 
+set +x
+
 # prompt
 eval "$(starship init zsh)"
 
@@ -131,22 +109,9 @@ if command -v direnv &>/dev/null; then
   eval "$(direnv hook zsh)"
 fi
 
-# fzf
-if [[ -e ~/.fzf.zsh ]]
-then
-   source ~/.fzf.zsh 2>/dev/null
-fi
-
-# kubectl
-if command -v kubectl &>/dev/null; then
-  znap compdef _kubectl 'kubectl completion zsh'
-fi
-
 if command -v zoxide &>/dev/null; then
   eval "$(zoxide init zsh --cmd j)"
 fi
-
-[[ -e /usr/share/google-cloud-sdk/completion.zsh.inc ]] && source /usr/share/google-cloud-sdk/completion.zsh.inc
 
 [[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path zsh 2>/dev/null)"
 
