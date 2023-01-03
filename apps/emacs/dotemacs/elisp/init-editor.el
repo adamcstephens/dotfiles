@@ -25,6 +25,7 @@
   :init
   (global-set-key (kbd "C-r") 'undo-fu-only-redo))
 
+;; store undo across sessions
 (use-package undo-fu-session
   :init
   (global-undo-fu-session-mode))
@@ -33,5 +34,13 @@
 (use-package move-text
   :init
   (move-text-default-bindings))
+
+;; pair handling
+(use-package smartparens
+  :init
+  (smartparens-mode t)
+  (smartparens-strict-mode t))
+
+
 
 (provide 'init-editor)

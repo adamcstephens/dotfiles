@@ -57,10 +57,12 @@
   (global-ligature-mode t))
 
 ;; dim inactive buffers
-(use-package dimmer
-  :init
-  (dimmer-mode t)
-  (dimmer-configure-magit)
-  (dimmer-configure-which-key))
+;; (use-package dimmer
+;;   :init
+;;   (dimmer-mode t)
+;;   (dimmer-configure-magit)
+;;   (dimmer-configure-which-key)
+;;   ;; don't dim embark buffers
+;;   (add-to-list 'dimmer-buffer-exclusion-regexps "^ \\*Embark.*\\*$"))
 
 (provide 'init-theme)
