@@ -1,5 +1,6 @@
 {
   config,
+  inputs,
   lib,
   pkgs,
   ...
@@ -11,6 +12,8 @@
     export XDG_DATA_DIRS=${datadir}:$XDG_DATA_DIRS
     gnome_schema=org.gnome.desktop.interface
   '');
+
+  nix-colors-contrib = inputs.nix-colors.lib-contrib {inherit pkgs;};
 in {
   imports = [
     ../apps/dunst
@@ -38,8 +41,10 @@ in {
       package = pkgs.papirus-icon-theme;
     };
     theme = {
-      name = "Adwaita-dark";
-      package = pkgs.gnome.gnome-themes-extra;
+      name = config.colorScheme.slug;
+      package = nix-colors-contrib.gtkThemeFromScheme {
+        scheme = config.colorScheme;
+      };
     };
   };
 
