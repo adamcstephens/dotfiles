@@ -81,6 +81,7 @@
 
 ;; discover shortcuts easier in the minibuffer
 (use-package which-key
+  :diminish
   :init
   (which-key-mode))
 

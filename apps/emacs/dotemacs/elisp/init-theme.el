@@ -57,4 +57,9 @@
 (use-package rainbow-mode
   :commands rainbow-mode)
 
+;; diminish the mode line
+(use-package diminish
+  :config
+  (diminish 'eldoc-mode))
+
 (provide 'init-theme)

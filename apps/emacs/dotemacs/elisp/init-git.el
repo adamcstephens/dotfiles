@@ -4,6 +4,7 @@
   (setq magit-save-repository-buffers nil))
 
 (use-package git-gutter
+  :diminish
   :init
   (global-git-gutter-mode t)
   (setq git-gutter:hide-gutter t)

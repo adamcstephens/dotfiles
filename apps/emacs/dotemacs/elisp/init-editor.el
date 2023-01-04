@@ -5,6 +5,7 @@
   (editorconfig-mode 1))
 
 (use-package whitespace
+  :diminish global-whitespace-mode
   :ensure nil
   :init
   (global-whitespace-mode)
@@ -13,6 +14,7 @@
 
 ;; allow for running commands without selecting a region
 (use-package whole-line-or-region
+  :diminish whole-line-or-region-local-mode
   :init
   (whole-line-or-region-global-mode)
   (global-unset-key (kbd "C-/"))

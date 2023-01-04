@@ -1,4 +1,5 @@
 (use-package format-all
+  :diminish
   :config
   (progn
     (add-hook 'prog-mode-hook 'format-all-mode)
