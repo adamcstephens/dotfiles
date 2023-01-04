@@ -42,7 +42,9 @@
 (use-package consult
   :bind
   (("C-c b" . consult-project-buffer)
-   ("C-c p s" . consult-ripgrep)))
+   ("C-c p s" . consult-ripgrep)
+   ("C-c p r" . consult-recent-file)
+   ))
 
 ;; completion style
 (use-package fussy
