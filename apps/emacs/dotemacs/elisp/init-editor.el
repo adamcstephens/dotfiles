@@ -39,9 +39,8 @@
 
 ;; pair handling
 (use-package smartparens
-  :demand
-  :config
-  (smartparens-mode t)
-  (smartparens-strict-mode t))
+  :init
+  (smartparens-global-mode t)
+  (smartparens-global-strict-mode t))
 
 (provide 'init-editor)
