@@ -4,6 +4,7 @@
   (setq magit-save-repository-buffers nil))
 
 (use-package git-gutter
+  :disabled
   :diminish
   :init
   (global-git-gutter-mode t)
@@ -12,7 +13,7 @@
   (add-to-list 'git-gutter:update-commands 'other-window))
 
 (use-package diff-hl
-  :disabled
+  ;; :disabled
   :init
   (global-diff-hl-mode)
   ;; (diff-hl-flydiff-mode)
