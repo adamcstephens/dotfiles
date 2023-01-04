@@ -1,5 +1,5 @@
 (defun dot-variable-font () "" (if (eq system-type 'darwin) "SF Pro" "Manrope3"))
-(defun dot-font-height () "" (if (eq system-type 'darwin) 130 110))
+(defun dot-font-height () "" (if (eq system-type 'darwin) 130 105))
 (progn
   (set-face-attribute 'default nil :font (font-spec :family "JetBrainsMono Nerd Font") :height (dot-font-height))
   (set-face-attribute 'fixed-pitch nil :family (face-attribute 'default :family))
@@ -21,11 +21,11 @@
 
    ;; custom org faces
    modus-themes-headings
-   '((1 . (variable-pitch 1.5))
-     (2 . (1.3))
-     (agenda-date . (1.3))
-     (agenda-structure . (variable-pitch light 1.8))
-     (t . (1.1))))
+   '((1 . (variable-pitch 1.1))
+     (2 . (1.05))
+     (agenda-date . (1.1))
+     (agenda-structure . (variable-pitch light 1.3))
+     (t . (1.0))))
   (load-theme 'modus-vivendi :no-confirm))
 
 ;; enable ligatures
