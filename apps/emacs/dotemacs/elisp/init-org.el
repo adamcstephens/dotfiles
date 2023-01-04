@@ -28,4 +28,6 @@
   :config
   (org-download-enable))
 
+(use-package org-re-reveal)
+
 (provide 'init-org)
