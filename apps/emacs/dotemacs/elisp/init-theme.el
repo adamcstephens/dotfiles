@@ -1,5 +1,6 @@
 (defun dot-variable-font () "" (if (eq system-type 'darwin) "SF Pro" "Manrope3"))
 (defun dot-font-height () "" (if (eq system-type 'darwin) 130 105))
+
 (progn
   (set-face-attribute 'default nil :font (font-spec :family "JetBrainsMono Nerd Font") :height (dot-font-height))
   (set-face-attribute 'fixed-pitch nil :family (face-attribute 'default :family))
@@ -8,8 +9,10 @@
   (set-face-attribute 'variable-pitch nil :font (font-spec :family (dot-variable-font)) :height 1.0)
 
   (add-hook 'text-mode-hook '(lambda () (variable-pitch-mode t)))
+  )
 
-  (require-theme 'modus-themes)
+(use-package modus-themes
+  :init
   (setq
    modus-themes-italic-constructs t
    modus-themes-bold-constructs t
@@ -26,6 +29,7 @@
      (agenda-date . (1.1))
      (agenda-structure . (variable-pitch light 1.3))
      (t . (1.0))))
+  :config
   (load-theme 'modus-vivendi :no-confirm))
 
 ;; enable ligatures
@@ -69,17 +73,17 @@
   (setq prism-num-faces 16)
 
   (prism-set-colors
-    :desaturations '(0) ; do not change---may lower the contrast ratio
-    :lightens '(0)      ; same
-    :colors (modus-themes-with-colors
-              (list fg-main
-                    magenta
-                    blue
-                    green
-                    fg-main
-                    cyan
-                    yellow
-                    yellow-faint))))
+   :desaturations '(0) ; do not change---may lower the contrast ratio
+   :lightens '(0)      ; same
+   :colors (modus-themes-with-colors
+             (list fg-main
+                   magenta
+                   blue
+                   green
+                   fg-main
+                   cyan
+                   yellow
+                   yellow-faint))))
 
 (use-package telephone-line
   :after (meow)
