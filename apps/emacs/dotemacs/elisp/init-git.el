@@ -1,5 +1,7 @@
 (use-package magit
-  :bind ("C-c G" . magit))
+  :bind ("C-c G" . magit)
+  :init
+  (setq magit-save-repository-buffers nil))
 
 (use-package git-gutter
   :init
@@ -8,16 +10,17 @@
   (add-to-list 'git-gutter:update-hooks 'focus-in-hook)
   (add-to-list 'git-gutter:update-commands 'other-window))
 
-;; (use-package diff-hl
-;;   :init
-;;   (global-diff-hl-mode)
-;;   ;; (diff-hl-flydiff-mode)
-;;   :hook
-;;   (diff-hl-mode-on . (lambda ()
-;; 		       (unless (window-system)
-;; 			 (diff-hl-margin-local-mode))))
-;;   ('magit-pre-refresh . diff-hl-magit-pre-refresh)
-;;   ('magit-post-refresh . diff-hl-magit-post-refresh))
+(use-package diff-hl
+  :disabled
+  :init
+  (global-diff-hl-mode)
+  ;; (diff-hl-flydiff-mode)
+  :hook
+  (diff-hl-mode-on . (lambda ()
+		       (unless (window-system)
+			 (diff-hl-margin-local-mode))))
+  ('magit-pre-refresh . diff-hl-magit-pre-refresh)
+  ('magit-post-refresh . diff-hl-magit-post-refresh))
 
 (use-package git-auto-commit-mode)
 

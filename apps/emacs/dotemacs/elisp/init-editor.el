@@ -37,10 +37,9 @@
 
 ;; pair handling
 (use-package smartparens
-  :init
+  :demand
+  :config
   (smartparens-mode t)
   (smartparens-strict-mode t))
-
-
 
 (provide 'init-editor)

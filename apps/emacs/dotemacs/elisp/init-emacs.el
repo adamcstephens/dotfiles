@@ -80,7 +80,8 @@
   ;;
   (global-set-key (kbd "C-c f s") 'save-buffer)
   ;; describe function is better than the faq
-  (global-set-key "\C-h\ \C-f" 'describe-function)
+  (global-set-key (kbd "C-h C-f") 'describe-function)
+  (global-set-key (kbd "C-h C-s") 'describe-symbol)
 
   (define-key minibuffer-local-map (kbd "C-j") 'next-line)
   (define-key minibuffer-local-map (kbd "C-k") 'previous-line)

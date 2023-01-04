@@ -1,9 +1,11 @@
+(defun dot-variable-font () "" (if (eq system-type 'darwin) "SF Pro" "Manrope3"))
+(defun dot-font-height () "" (if (eq system-type 'darwin) 130 110))
 (progn
-  (set-face-attribute 'default nil :font (font-spec :family "JetBrainsMono Nerd Font") :height 130)
+  (set-face-attribute 'default nil :font (font-spec :family "JetBrainsMono Nerd Font") :height (dot-font-height))
   (set-face-attribute 'fixed-pitch nil :family (face-attribute 'default :family))
   (set-face-attribute 'bold nil :family (face-attribute 'default :family))
   (set-face-attribute 'italic nil :family (face-attribute 'default :family))
-  (set-face-attribute 'variable-pitch nil :font (font-spec :family "SF Pro") :height 1.0)
+  (set-face-attribute 'variable-pitch nil :font (font-spec :family (dot-variable-font)) :height 1.0)
 
   (add-hook 'text-mode-hook '(lambda () (variable-pitch-mode t)))
 
