@@ -14,3 +14,4 @@ rust-lang.rust
 richie5um2.vscode-sort-json
 ritwickdey.liveserver
 samplavigne.p5-vscode
+golf1052.base16-generator

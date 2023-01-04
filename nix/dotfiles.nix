@@ -15,7 +15,7 @@
 
       font = lib.mkOption {
         type = lib.types.str;
-        default = "JetBrainsMono";
+        default = "JetBrainsMono Nerd Font";
       };
     };
   };

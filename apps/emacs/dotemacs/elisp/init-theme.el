@@ -1,15 +1,30 @@
-(set-face-attribute 'default nil :font (font-spec :family "JetBrainsMono Nerd Font" :size 13))
-(set-face-attribute 'fixed-pitch nil :font (font-spec :family "JetBrainsMono Nerd Font"))
-;; (set-face-attribute 'variable-pitch nil :family "Vegur" :height 200 :weight 'medium :width 'expanded)
+(progn
+  (set-face-attribute 'default nil :font (font-spec :family "JetBrainsMono Nerd Font") :height 130)
+  (set-face-attribute 'fixed-pitch nil :family (face-attribute 'default :family))
+  (set-face-attribute 'bold nil :family (face-attribute 'default :family))
+  (set-face-attribute 'italic nil :family (face-attribute 'default :family))
+  (set-face-attribute 'variable-pitch nil :font (font-spec :family "SF Pro") :height 1.0)
 
-(use-package modus-themes
-  :init
-  (load-theme 'modus-vivendi t))
+  (add-hook 'text-mode-hook '(lambda () (variable-pitch-mode t)))
 
-;; switch to variable pitch in text modes
-;; (use-package mixed-pitch
-;;   :hook
-;;   (text-mode . mixed-pitch-mode))
+  (require-theme 'modus-themes)
+  (setq
+   modus-themes-italic-constructs t
+   modus-themes-bold-constructs t
+   ;; add identifiers to code blocks
+   modus-themes-org-blocks 'gray-background ; {nil,'gray-background,'tinted-background}
+   ;; org tables/blocks should be fixed-pitch
+   modus-themes-mixed-fonts t
+   modus-themes-variable-pitch-ui t
+
+   ;; custom org faces
+   modus-themes-headings
+   '((1 . (variable-pitch 1.5))
+     (2 . (1.3))
+     (agenda-date . (1.3))
+     (agenda-structure . (variable-pitch light 1.8))
+     (t . (1.1))))
+  (load-theme 'modus-vivendi :no-confirm))
 
 ;; enable ligatures
 (use-package ligature

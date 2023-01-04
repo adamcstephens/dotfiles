@@ -45,6 +45,13 @@
   (unless (display-graphic-p)
     (xterm-mouse-mode 1))
 
+  ;; flash modeline instead of ringing the bell
+  (setq visible-bell nil
+	ring-bell-function 'flash-mode-line)
+  (defun flash-mode-line ()
+    (invert-face 'mode-line)
+    (run-with-timer 0.1 nil #'invert-face 'mode-line))
+
   ;; enable line numbers
   (global-display-line-numbers-mode)
 
@@ -84,10 +91,9 @@
 
 (use-package exec-path-from-shell
   :demand
+  :when (or (daemonp) (memq window-system '(mac ns x)))
   :config
   (add-to-list 'exec-path-from-shell-variables "SSH_AUTH_SOCK")
-  (when (or (daemonp) (memq window-system '(mac ns x)))
-    (exec-path-from-shell-initialize))
-  )
+  (exec-path-from-shell-initialize))
 
 (provide 'init-emacs)
