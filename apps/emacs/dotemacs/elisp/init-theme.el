@@ -62,4 +62,23 @@
   :config
   (diminish 'eldoc-mode))
 
+;; colored pairs
+(use-package prism
+  :disabled
+  :init
+  (setq prism-num-faces 16)
+
+  (prism-set-colors
+    :desaturations '(0) ; do not change---may lower the contrast ratio
+    :lightens '(0)      ; same
+    :colors (modus-themes-with-colors
+              (list fg-main
+                    magenta
+                    blue
+                    green
+                    fg-main
+                    cyan
+                    yellow
+                    yellow-faint))))
+
 (provide 'init-theme)
