@@ -14,7 +14,7 @@
 (use-package consult-project-extra
   :straight t
   :bind
-  (("C-c p s" . consult-project-extra-find)
+  (("C-c p f" . consult-project-extra-find)
    ("H-SPC" . consult-project-extra-find)))
 
 ;; load dired instead of prompting
