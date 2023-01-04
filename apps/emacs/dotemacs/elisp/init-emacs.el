@@ -47,8 +47,8 @@
 
   ;; flash modeline instead of ringing the bell
   (setq visible-bell nil
-	ring-bell-function 'flash-mode-line)
-  (defun flash-mode-line ()
+	ring-bell-function 'dot/flash-mode-line)
+  (defun dot/flash-mode-line ()
     (invert-face 'mode-line)
     (run-with-timer 0.1 nil #'invert-face 'mode-line))
 

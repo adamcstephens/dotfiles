@@ -30,8 +30,8 @@
 (add-to-list 'auto-mode-alist '("/COMMIT_EDITMSG\\'" . diff-mode))
 
 ;; tweak the vc output in the mode line
-(advice-add #'vc-git-mode-line-string :filter-return #'my-replace-git-status)
-(defun my-replace-git-status (tstr)
+(advice-add #'vc-git-mode-line-string :filter-return #'dot/replace-git-status)
+(defun dot/replace-git-status (tstr)
   (let* ((tstr (replace-regexp-in-string "Git" "" tstr))
          (first-char (substring tstr 0 1))
          (rest-chars (substring tstr 1)))

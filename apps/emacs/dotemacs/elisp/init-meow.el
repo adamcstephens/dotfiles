@@ -1,4 +1,4 @@
-(defun meow-setup ()
+(defun dot/meow-setup ()
   (setq meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
   (meow-motion-overwrite-define-key
    '("j" . meow-next)
@@ -87,7 +87,7 @@
 
 (use-package meow
   :config
-  (meow-setup)
+  (dot/meow-setup)
   (meow-global-mode 1)
   (setq meow-use-clipboard t))
 
