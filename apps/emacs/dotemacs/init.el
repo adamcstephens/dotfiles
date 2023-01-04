@@ -19,12 +19,16 @@
 ;; load all elisp files
 (add-to-list 'load-path (expand-file-name "elisp" user-emacs-directory))
 
-(defun dot/straight-lock-update ()
+(defun dot/freeze ()
+  (interactive)
+  (straight-freeze-versions t))
+
+(defun dot/update ()
   "Update and freeze all packages"
   (interactive)
   (straight-pull-recipe-repositories)
   (straight-pull-all)
-  (straight-freeze-versions))
+  (dot/freeze))
 
 (require 'init-emacs)
 (require 'init-theme)
