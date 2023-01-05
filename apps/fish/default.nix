@@ -21,8 +21,8 @@ in {
       dog = "doggo";
     };
 
-    interactiveShellInit = ''
-      sh ${nix-colors-contrib.shellThemeFromScheme {scheme = config.colorScheme;}}
-    '';
+    # interactiveShellInit = ''
+    #   sh ${nix-colors-contrib.shellThemeFromScheme {scheme = config.colorScheme;}}
+    # '';
   };
 }
