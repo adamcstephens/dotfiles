@@ -41,6 +41,7 @@
 (require 'init-org)
 (require 'init-format)
 (require 'init-project)
+(require 'init-term)
 
 (require 'init-haskell)
 (require 'init-just)

@@ -15,11 +15,15 @@
     then pkgs.emacsGit
     else pkgs.emacsGit;
 
+  emacsWithPackages = (pkgs.emacsPackagesFor emacsPackage).emacsWithPackages (epkgs: [
+    epkgs.vterm
+  ]);
+
   package = pkgs.symlinkJoin {
     name = "dotemacs";
 
     paths = [
-      emacsPackage
+      emacsWithPackages
     ];
 
     nativeBuildInputs = [pkgs.makeWrapper];
