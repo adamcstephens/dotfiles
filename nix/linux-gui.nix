@@ -64,6 +64,7 @@ in {
     pkgs.manrope
     pkgs.material-icons
     pkgs.material-design-icons
+    pkgs.merriweather
     pkgs.norwester-font
     pkgs.noto-fonts
     pkgs.noto-fonts-cjk

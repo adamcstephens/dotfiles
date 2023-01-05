@@ -45,9 +45,16 @@
     pkgs.shellcheck
     pkgs.shfmt
   ];
+
+  revealjs = pkgs.callPackage ./revealjs.nix {};
 in {
   imports = [
     inputs.chemacs.homeModule
+  ];
+
+  home.packages = [
+    aspell
+    revealjs
   ];
 
   home.file.".config/doom".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/emacs/doom.d";
@@ -64,6 +71,8 @@ in {
       (setenv "PATH" (concat (getenv "PATH") ":${
         lib.concatMapStringsSep ":" (x: "${x}/bin") extraBins
       }"))
+
+      (setq org-re-reveal-root "${revealjs.outPath}")
     '';
 
     chemacs.profiles = {
@@ -74,8 +83,6 @@ in {
       dotemacs = {};
     };
   };
-
-  home.packages = [aspell];
 
   home.activation.doomemacs = lib.hm.dag.entryAfter ["linkGeneration"] ''
     export PATH=$PATH:${lib.makeBinPath [pkgs.git emacsPackage]}

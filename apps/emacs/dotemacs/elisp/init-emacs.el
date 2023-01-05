@@ -88,6 +88,8 @@
   (define-key minibuffer-local-map (kbd "C-u") 'kill-whole-line)
   (define-key minibuffer-local-map (kbd "C-<backspace>") 'backward-kill-word)
 
+  (global-set-key (kbd "<mouse-8>") 'previous-buffer)
+  (global-set-key (kbd "<mouse-9>") 'next-buffer)
   )
 
 (use-package exec-path-from-shell
