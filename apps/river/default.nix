@@ -4,12 +4,12 @@
   pkgs,
   ...
 }: let
-  rev = "refs/tags/v0.2.0";
-  hash = "sha256-BrOZch6wkiBB4rk0M7Aoy8sZh8uOTQFOPxd3xLyy/K0=";
+  rev = "095749b9898cd92fa7dcaa9851457b73bdb56241";
+  hash = "sha256-QrJcKkf2093awTMgpkWCvqV4EWl/5I/GJzGa8eIYLaE=";
 
   devVer = builtins.substring 0 8 rev;
-  river = pkgs.river.overrideAttrs (_: {
-    version = "0.2.0";
+  package = pkgs.river.overrideAttrs (_: {
+    version = "0.3.0-${devVer}";
     src = pkgs.fetchFromGitHub {
       inherit rev hash;
 
@@ -20,6 +20,7 @@
   });
 in {
   home.packages = [
+    # package
     pkgs.river
   ];
 
