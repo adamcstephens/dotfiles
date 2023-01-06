@@ -29,6 +29,7 @@
       homeSystem = "x86_64-linux";
       dotfiles.linuxGui = true;
       modules = [
+        ./think.nix
         {
           dotfiles.gui.dpi = 196;
         }
