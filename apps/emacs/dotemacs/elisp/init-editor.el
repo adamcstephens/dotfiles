@@ -37,9 +37,4 @@
   :init
   (move-text-default-bindings))
 
-;; pair handling
-(use-package smartparens
-  :init
-  (smartparens-global-mode t))
-
 (provide 'init-editor)
