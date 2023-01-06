@@ -20,6 +20,7 @@
       homeSystem = "x86_64-linux";
       dotfiles.linuxGui = true;
       modules = [
+        ../apps/goldencheetah
         {
           dotfiles.gui.dpi = 148;
         }
@@ -29,7 +30,7 @@
       homeSystem = "x86_64-linux";
       dotfiles.linuxGui = true;
       modules = [
-        ./think.nix
+        ../apps/goldencheetah
         {
           dotfiles.gui.dpi = 196;
         }
