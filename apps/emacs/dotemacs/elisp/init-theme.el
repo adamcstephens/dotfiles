@@ -34,7 +34,6 @@
 
 ;; enable ligatures
 (use-package ligature
-  :load-path "path-to-ligature-repo"
   :config
   ;; Enable the "www" ligature in every possible major mode
   (ligature-set-ligatures 't '("www"))
