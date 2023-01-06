@@ -56,7 +56,6 @@ xinput disable "$touchpadid"
 
 xsetroot -cursor_name left_ptr
 
-xset r rate 250 50
 if [ "$(hostname)" = "blank" ]; then
   xset -dpms
 fi
