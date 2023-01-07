@@ -7,7 +7,7 @@
 }: let
   aspell = pkgs.aspellWithDicts (dicts: with dicts; [en en-computers en-science]);
   latex = pkgs.texlive.combine {
-    inherit (pkgs.texlive) scheme-tetex amsmath capt-of hyperref wrapfig;
+    inherit (pkgs.texlive) amsmath anyfontsize boxedminipage capt-of hyperref lastpage minted scheme-tetex sectsty wrapfig;
   };
 
   emacsPackage =
@@ -41,7 +41,8 @@
     pkgs.diffutils
     pkgs.fd
     pkgs.git
-    latex
+    # latex
+    pkgs.texlive.combined.scheme-full
     pkgs.graphicsmagick
     pkgs.nodePackages.mermaid-cli
     pkgs.ripgrep
