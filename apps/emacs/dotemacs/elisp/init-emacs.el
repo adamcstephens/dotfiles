@@ -90,6 +90,10 @@
 
   (global-set-key (kbd "<mouse-8>") 'previous-buffer)
   (global-set-key (kbd "<mouse-9>") 'next-buffer)
+
+  ;; enable hl-line but not globally since it's flaky in vterm
+  (add-hook 'prog-mode-hook #'hl-line-mode)
+  (add-hook 'text-mode-hook #'hl-line-mode)
   )
 
 (use-package exec-path-from-shell
