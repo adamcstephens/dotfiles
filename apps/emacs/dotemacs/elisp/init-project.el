@@ -5,7 +5,7 @@
   (workroom-desktop-save-mode 1)
   (workroom-auto-project-workroom-mode 1)
   :bind
-  (("C-c p p" . workroom-switch)
+  (("C-c p w" . workroom-switch)
    ("C-c b" . workroom-switch-to-buffer)))
 
 (use-package direnv
@@ -33,7 +33,7 @@
 
 ;; load dired instead of prompting
 ;; project keys
-;; (global-set-key (kbd "C-c p p") 'project-switch-project)
+(global-set-key (kbd "C-c p p") 'project-switch-project)
 (global-set-key (kbd "C-c p d") 'project-dired)
 
 ;; enable tab mode but hide the bar
