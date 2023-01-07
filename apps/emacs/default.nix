@@ -110,7 +110,13 @@ in {
       config = {
         KeepAlive = true;
         RunAtLoad = true;
-        ProgramArguments = ["${package}/bin/emacs" "--fg-daemon"];
+        ProgramArguments = [
+          "/bin/sh"
+          "-l"
+          "-c"
+          "${package}/bin/emacs"
+          "--fg-daemon"
+        ];
       };
     };
   };
