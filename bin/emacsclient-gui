@@ -1,5 +1,0 @@
-#!/bin/sh
-
-source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
-
-exec emacsclient --create-frame "$@"

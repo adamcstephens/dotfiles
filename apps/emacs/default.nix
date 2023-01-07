@@ -100,5 +100,18 @@ in {
     then true
     else false;
 
-  systemd = lib.mkIf pkgs.stdenv.isLinux {user.services.emacs.Service.Environment = ["TERM=xterm-emacs"];};
+  systemd = lib.mkIf pkgs.stdenv.isLinux {
+    user.services.emacs.Service.Environment = ["TERM=xterm-emacs"];
+  };
+
+  launchd = lib.mkIf pkgs.stdenv.isDarwin {
+    agents.emacs = {
+      enable = true;
+      config = {
+        KeepAlive = true;
+        RunAtLoad = true;
+        ProgramArguments = ["${package}/bin/emacs" "--fg-daemon"];
+      };
+    };
+  };
 }

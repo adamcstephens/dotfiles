@@ -1,5 +1,9 @@
 #!/usr/bin/env sh
 
+if [ "$(uname -s)" = "Darwin" ]; then
+  source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+fi
+
 if ! command -v emacsclient >/dev/null 2>&1; then
   echo "No emacsclient, falling back to editor"
   exec ~/.dotfiles/bin/editor $@
@@ -29,7 +33,7 @@ else
   export TERM=xterm-256color
 fi
 
-if [ -n "$DISPLAY" ]; then
+if [ -n "$DISPLAY" ] || [ "$(uname -s)" = "Darwin" ]; then
   emacsclient --create-frame --no-wait "$@"
 else
   emacsclient --tty "$@"

@@ -1,5 +1,0 @@
-#!/bin/sh
-
-source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
-
-open /Users/astephe9/.nix-profile/Applications/Emacs.app
