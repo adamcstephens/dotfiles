@@ -9,7 +9,6 @@ OLDTERM=$TERM
 
 unset TMPDIR
 
-
 if [ ! -e ~/.config/systemd/user/emacs.service ]; then
   case $(uname -s) in
   Darwin)
@@ -30,7 +29,11 @@ else
   export TERM=xterm-256color
 fi
 
-emacsclient --tty "$@"
+if [ -n "$DISPLAY" ]; then
+  emacsclient --create-frame --no-wait "$@"
+else
+  emacsclient --tty "$@"
+fi
 
 # shellcheck disable=SC2086
 export TERM=$OLDTERM
