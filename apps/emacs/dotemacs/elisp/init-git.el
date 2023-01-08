@@ -16,6 +16,7 @@
   ;; :disabled
   :init
   (global-diff-hl-mode)
+  (diff-hl-margin-mode)
   ;; (diff-hl-flydiff-mode)
   :hook
   (diff-hl-mode-on . (lambda ()
