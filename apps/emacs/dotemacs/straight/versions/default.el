@@ -44,6 +44,7 @@
  ("nix-mode" . "54e5626829168e22126b233e079f04dff3c71b90")
  ("nongnu-elpa" . "20dc70a0380f3c716bc4fd551a54778a3e5fb196")
  ("org" . "b58fbaf834dfa0e87898b9e59c8c650599223201")
+ ("org-appear" . "eb9f9db40aa529fe4b977235d86494b115281d17")
  ("org-download" . "19e166f0a8c539b4144cfbc614309d47a9b2a9b7")
  ("org-re-reveal" . "91cdd82c47b86990b5eb41fe34446a042194cc83")
  ("org-superstar-mode" . "03be6c0a3081c46a59b108deb8479ee24a6d86c0")

@@ -203,7 +203,7 @@
   :hook
   (org-mode . (lambda () (org-superstar-mode 1)))
   :init
-  (setq org-superstar-headline-bullets-list '("⁖" "◉" "○" "✸" "✿")))
+  (setq org-superstar-headline-bullets-list '("◉" "○" "✸" "✿" "⁖")))
 
 (use-package org-download
   :after (org)
@@ -213,5 +213,9 @@
 (use-package org-re-reveal
   :init
   (setq org-re-reveal-history t))
+
+;; Show hidden emphasis markers
+(use-package org-appear
+  :hook (org-mode . org-appear-mode))
 
 (provide 'init-org)
