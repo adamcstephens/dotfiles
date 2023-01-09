@@ -33,7 +33,6 @@
     ~/.config/helix:
       force: true
       path: apps/helix
-    ~/.config/lsd: apps/lsd
     ~/.config/nix:
       force: true
       path: apps/nix

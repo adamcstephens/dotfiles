@@ -7,6 +7,7 @@
 }: {
   imports = [
     ../apps/fish
+    ../apps/lsd
   ];
 
   home.stateVersion = "22.05";
@@ -76,7 +77,6 @@
   programs = {
     direnv.enable = true;
     direnv.nix-direnv.enable = true;
-    lsd.enable = true;
     starship.enable = true;
     zoxide = {
       enable = true;
