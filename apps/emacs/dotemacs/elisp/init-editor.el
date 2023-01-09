@@ -37,8 +37,12 @@
   :init
   (move-text-default-bindings))
 
+;; better dired
 (use-package dirvish
+  :init
+  (dirvish-override-dired-mode)
   :config
-  (dirvish-override-dired-mode))
+  (setq dired-mouse-drag-files t)
+  (setq mouse-drag-and-drop-region-cross-program t))
 
 (provide 'init-editor)
