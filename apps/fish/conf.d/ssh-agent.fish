@@ -1,5 +1,5 @@
 if status is-interactive
-    if [ -z $SSH_AUTH_SOCK ] && [ -S "$XDG_RUNTIME_DIR/keyring/ssh" ]
+    if [ -z "$SSH_AUTH_SOCK" ] && [ -S "$XDG_RUNTIME_DIR/keyring/ssh" ]
         set -x SSH_AUTH_SOCK "$XDG_RUNTIME_DIR/keyring/ssh"
     end
 
