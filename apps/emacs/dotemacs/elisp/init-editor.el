@@ -37,4 +37,8 @@
   :init
   (move-text-default-bindings))
 
+(use-package dirvish
+  :config
+  (dirvish-override-dired-mode))
+
 (provide 'init-editor)
