@@ -105,4 +105,10 @@
   :config
   (telephone-line-mode t))
 
+(use-package auto-dark
+  :config
+  (auto-dark-mode t)
+  (setq auto-dark-dark-theme 'modus-vivendi)
+  (setq auto-dark-light-theme 'modus-operandi))
+
 (provide 'init-theme)
