@@ -5,6 +5,7 @@
   (require 'ox-latex)
 
   (setq org-directory "~/org/")
+  (setq org-default-notes-file (concat org-directory "notes.org"))
   (setq org-startup-indented t
         org-pretty-entities t
         org-hide-emphasis-markers t
