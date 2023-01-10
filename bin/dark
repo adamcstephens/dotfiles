@@ -39,14 +39,19 @@ def set_gtk_theme(target):
 
 
 def set_kitty_theme(target):
-    kitty_pid = run("pgrep kitty").splitlines()[0].strip()
+    try:
+        kitty_pid = run("pgrep kitty").splitlines()[0].strip()
+    except IndexError:
+        print("kitty not running")
+        return
+
     print(kitty_pid)
 
     if os_name == "Linux":
-      kitty_socket = f"unix:@kitty-{kitty_pid}"
+        kitty_socket = f"unix:@kitty-{kitty_pid}"
     elif os_name == "Darwin":
-      tmpdir = os.getenv("TMPDIR")
-      kitty_socket = f"unix:{tmpdir}/kitty-{kitty_pid}"
+        tmpdir = os.getenv("TMPDIR")
+        kitty_socket = f"unix:{tmpdir}/kitty-{kitty_pid}"
 
     cmd = f"kitty @ --to {kitty_socket} set-colors --all --configured {HOME}/.config/kitty/"
 
