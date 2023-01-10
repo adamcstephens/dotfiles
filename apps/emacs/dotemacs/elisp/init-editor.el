@@ -50,7 +50,10 @@
   (ispell-program-name "aspell")
   (aspell-dictionary "en_US")
   :hook
-  (org-mode-hook . flyspell-mode)
-  )
+  (org-mode . flyspell-mode))
+
+(use-package flyspell-correct
+  :after flyspell
+  :bind (:map flyspell-mode-map ("C-;" . flyspell-correct-wrapper)))
 
 (provide 'init-editor)
