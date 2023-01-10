@@ -216,6 +216,7 @@
 
 ;; Show hidden emphasis markers
 (use-package org-appear
-  :hook (org-mode . org-appear-mode))
+  :hook
+  (org-mode . org-appear-mode))
 
 (provide 'init-org)

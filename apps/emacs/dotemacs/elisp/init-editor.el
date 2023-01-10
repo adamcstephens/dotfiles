@@ -45,4 +45,12 @@
   (setq dired-mouse-drag-files t)
   (setq mouse-drag-and-drop-region-cross-program t))
 
+(use-package flyspell
+  :custom
+  (ispell-program-name "aspell")
+  (aspell-dictionary "en_US")
+  :hook
+  (org-mode-hook . flyspell-mode)
+  )
+
 (provide 'init-editor)
