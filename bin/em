@@ -9,35 +9,16 @@ if ! command -v emacsclient >/dev/null 2>&1; then
   exec ~/.dotfiles/bin/editor $@
 fi
 
-OLDTERM=$TERM
-
 unset TMPDIR
 
-if [ ! -e ~/.config/systemd/user/emacs.service ]; then
-  case $(uname -s) in
-  Darwin)
-    pgrep -i emacs >/dev/null 2>&1
-    rc=$?
-    ;;
-  *)
-    pgrep emacs >/dev/null 2>&1
-    rc=$?
-    ;;
-  esac
-  [ $rc -eq 0 ] || emacs
+if [ "$(uname -s)" = "Darwin" ]; then
+  exec ~/.nix-profile/Applications/Emacs.app/Contents/MacOS/Emacs -init-directory ~/.config/emacs/dotemacs "$@"
 fi
 
-if [ -e /etc/profiles/per-user/$USER/share/terminfo/x/xterm-emacs ] || [ -e ~/.nix-profile/share/terminfo/x/xterm-emacs ] || [ -e ~/.terminfo/x/xterm-emacs ] || [ -e ~/.terminfo/78/xterm-emacs ]; then
-  export TERM=xterm-emacs
+if [ -n "$DISPLAY" ]; then
+  args="--create-frame --no-wait"
 else
-  export TERM=xterm-256color
+  args="--tty"
 fi
 
-if [ -n "$DISPLAY" ] || [ "$(uname -s)" = "Darwin" ]; then
-  emacsclient --create-frame --no-wait "$@"
-else
-  emacsclient --tty "$@"
-fi
-
-# shellcheck disable=SC2086
-export TERM=$OLDTERM
+exec emacsclient $args "$@"

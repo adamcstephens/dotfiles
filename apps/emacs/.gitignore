@@ -1,7 +1,9 @@
 *.elc
 autosave/
+bookmarks
 build-cache.el
 build/
+eln-cache/
 elpa/
 eshell/
 history

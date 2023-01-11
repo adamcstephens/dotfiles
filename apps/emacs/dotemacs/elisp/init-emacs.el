@@ -100,7 +100,6 @@
   :demand
   :when (or (daemonp) (memq window-system '(mac ns x)))
   :config
-  (add-to-list 'exec-path-from-shell-variables "SSH_AUTH_SOCK")
-  (exec-path-from-shell-initialize))
+  (exec-path-from-shell-copy-env "SSH_AUTH_SOCK"))
 
 (provide 'init-emacs)

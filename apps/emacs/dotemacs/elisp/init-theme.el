@@ -8,7 +8,7 @@
   (set-face-attribute 'italic nil :family (face-attribute 'default :family))
   (set-face-attribute 'variable-pitch nil :font (font-spec :family (dot/variable-font)) :height 1.0)
 
-  (add-hook 'text-mode-hook '(lambda () (variable-pitch-mode t)))
+  (add-hook 'text-mode-hook #'(lambda () (variable-pitch-mode t)))
   )
 
 (use-package modus-themes
