@@ -94,18 +94,17 @@ in {
     user.services.emacs.Service.Environment = ["TERM=xterm-emacs"];
   };
 
-  # gets confused about fonts, client loads in background, and daemon gets weird chars. but just disabling for now
   launchd = lib.mkIf pkgs.stdenv.isDarwin {
     agents.emacs = {
-      enable = false;
+      enable = true;
       config = {
         KeepAlive = true;
         RunAtLoad = true;
         ProgramArguments = [
-          "${package}/bin/emacs"
-          "--daemon"
-          "--init-directory"
-          "${config.home.homeDirectory}/.config/emacs/dotemacs"
+          "${config.home.homeDirectory}/.nix-profile/bin/fish"
+          "-l"
+          "-c"
+          "${package}/bin/emacs --daemon --init-directory ${config.home.homeDirectory}/.config/emacs/dotemacs"
         ];
       };
     };

@@ -11,11 +11,7 @@ fi
 
 unset TMPDIR
 
-if [ "$(uname -s)" = "Darwin" ]; then
-  exec fish -l -c "~/.nix-profile/Applications/Emacs.app/Contents/MacOS/Emacs -init-directory ~/.config/emacs/dotemacs $@"
-fi
-
-if [ -n "$DISPLAY" ]; then
+if [ "$(uname -s)" = "Darwin" ] || [ -n "$DISPLAY" ]; then
   args="--create-frame --no-wait"
 else
   args="--tty"

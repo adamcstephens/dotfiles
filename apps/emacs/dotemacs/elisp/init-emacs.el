@@ -36,11 +36,6 @@
   ;; increase GC theshold. this can apparently be bad, but good?
   (setq gc-cons-threshold (* 1024 1024 20))
 
-  ;; disable menu, tool, and bars
-  (menu-bar-mode -1)
-  (tool-bar-mode -1)
-  (scroll-bar-mode -1)
-
   ;; enable mouse mode for terminal
   (unless (display-graphic-p)
     (xterm-mouse-mode 1))

@@ -1,7 +1,13 @@
 (defun dot/variable-font () "" (if (eq system-type 'darwin) "SF Pro" "Manrope3"))
 (defun dot/font-height () "" (if (eq system-type 'darwin) 130 105))
 
-(progn
+(defun dot/gui-setup ()
+  (interactive)
+  ;; disable menu, tool, and bars
+  (menu-bar-mode -1)
+  (tool-bar-mode -1)
+  (scroll-bar-mode -1)
+
   (set-face-attribute 'default nil :font (font-spec :family "JetBrainsMono Nerd Font") :height (dot/font-height))
   (set-face-attribute 'fixed-pitch nil :family (face-attribute 'default :family))
   (set-face-attribute 'bold nil :family (face-attribute 'default :family))
@@ -9,10 +15,6 @@
   (set-face-attribute 'variable-pitch nil :font (font-spec :family (dot/variable-font)) :height 1.0)
 
   (add-hook 'text-mode-hook #'(lambda () (variable-pitch-mode t)))
-  )
-
-(use-package modus-themes
-  :init
   (setq
    modus-themes-italic-constructs t
    modus-themes-bold-constructs t
@@ -28,7 +30,16 @@
      (2 . (1.05))
      (agenda-date . (1.1))
      (agenda-structure . (variable-pitch light 1.3))
-     (t . (1.0))))
+     (t . (1.0)))))
+
+;; run this hook after we have initialized the first time
+(add-hook 'after-init-hook 'dot/gui-setup)
+;; re-run this hook if we create a new frame from daemonized Emacs
+(add-hook 'server-after-make-frame-hook 'dot/gui-setup)
+
+(use-package modus-themes
+  :init
+  (dot/gui-setup)
   :config
   (load-theme 'modus-vivendi :no-confirm))
 
