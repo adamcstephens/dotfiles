@@ -15,6 +15,7 @@
   (set-face-attribute 'variable-pitch nil :font (font-spec :family (dot/variable-font)) :height 1.0)
 
   (add-hook 'text-mode-hook #'(lambda () (variable-pitch-mode t)))
+
   (setq
    modus-themes-italic-constructs t
    modus-themes-bold-constructs t
@@ -30,7 +31,9 @@
      (2 . (1.05))
      (agenda-date . (1.1))
      (agenda-structure . (variable-pitch light 1.3))
-     (t . (1.0)))))
+     (t . (1.0))))
+  (load-theme 'modus-vivendi :no-confirm))
+
 
 ;; run this hook after we have initialized the first time
 (add-hook 'after-init-hook 'dot/gui-setup)
@@ -39,9 +42,7 @@
 
 (use-package modus-themes
   :init
-  (dot/gui-setup)
-  :config
-  (load-theme 'modus-vivendi :no-confirm))
+  (dot/gui-setup))
 
 ;; enable ligatures
 (use-package ligature

@@ -11,7 +11,7 @@ fi
 
 unset TMPDIR
 
-if [ "$(uname -s)" = "Darwin" ] || [ -n "$DISPLAY" ]; then
+if [ -n "$DISPLAY" ]; then
   args="--create-frame --no-wait"
 else
   args="--tty"

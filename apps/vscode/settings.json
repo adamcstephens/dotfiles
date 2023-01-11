@@ -139,7 +139,7 @@
   "workbench.editorAssociations": {
     "*.ipynb": "jupyter-notebook"
   },
-  "workbench.preferredDarkColorTheme": "Base16 Ayu Dark",
+  "workbench.preferredDarkColorTheme": "modus-vivendi",
   "workbench.startupEditor": "newUntitledFile",
   "workbench.tree.renderIndentGuides": "always",
   "yaml.customTags": ["!encrypted/pkcs1-oaep scalar", "!vault scalar"],
