@@ -39,3 +39,13 @@ cask "telegram"
 cask "utm"
 cask "xquartz"
 cask "yubico-yubikey-manager"
+mas "1Password for Safari", id: 1569813296
+mas "GarageBand", id: 682658836
+mas "Keynote", id: 409183694
+mas "Microsoft Remote Desktop", id: 1295203466
+mas "Numbers", id: 409203825
+mas "Pages", id: 409201541
+mas "Parcel", id: 639968404
+mas "Toggl Track", id: 1291898086
+mas "WireGuard", id: 1451685025
+mas "Xcode", id: 497799835
