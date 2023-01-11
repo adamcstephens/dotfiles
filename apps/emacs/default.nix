@@ -104,7 +104,7 @@ in {
           "${config.home.homeDirectory}/.nix-profile/bin/fish"
           "-l"
           "-c"
-          "${package}/bin/emacs --daemon --init-directory ${config.home.homeDirectory}/.config/emacs/dotemacs"
+          "emacs --daemon --init-directory ${config.home.homeDirectory}/.config/emacs/dotemacs"
         ];
       };
     };
