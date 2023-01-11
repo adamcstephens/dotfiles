@@ -65,20 +65,11 @@
 
   revealjs = pkgs.callPackage ./revealjs.nix {};
 
-  env =
-    ''
-      (setq exec-path (append exec-path '( ${lib.concatMapStringsSep " " (x: ''"${x}/bin"'') extraBins} )))
+  env = ''
+    (setq exec-path (append exec-path '( ${lib.concatMapStringsSep " " (x: ''"${x}/bin"'') extraBins} )))
 
-      (setq org-re-reveal-root "${revealjs.outPath}")
-    ''
-    + (
-      # darwin gets an explicit shell because fish is dropping the path when gui launched
-      if pkgs.stdenv.isDarwin
-      then ''
-        (setq shell-file-name "/bin/zsh")
-      ''
-      else ""
-    );
+    (setq org-re-reveal-root "${revealjs.outPath}")
+  '';
 in {
   home.file.".config/doom".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/emacs/doom.d";
   home.file.".config/emacs/dotemacs".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/emacs/dotemacs";
