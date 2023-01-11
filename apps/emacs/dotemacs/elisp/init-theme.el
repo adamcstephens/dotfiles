@@ -84,7 +84,16 @@
                    yellow
                    yellow-faint))))
 
+(use-package all-the-icons)
+
+(use-package doom-modeline
+  :config
+  (setq doom-modeline-buffer-encoding 'nondefault)
+  :init
+  (doom-modeline-mode 1))
+
 (use-package telephone-line
+  :disabled
   :after (meow)
   :demand
   :init
