@@ -10,6 +10,7 @@ brew "glib"
 brew "xz"
 brew "python@3.9"
 brew "pkg-config"
+brew "coreutils"
 brew "dark-mode"
 brew "ddcctl"
 brew "syncthing", restart_service: true
