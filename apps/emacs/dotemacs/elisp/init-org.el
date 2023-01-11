@@ -16,6 +16,9 @@
 	org-startup-with-inline-images t
 	org-image-actual-width '(300))
 
+  ;; don't add validate link to bottom of html files
+  (setq org-html-validation-link nil)
+
   ;; refile using my func
   (add-to-list 'org-refile-targets '(dot/org-refile-candidates :maxlevel . 3))
 
