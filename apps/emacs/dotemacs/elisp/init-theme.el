@@ -131,6 +131,7 @@
   :config
   (setq auto-dark-dark-theme 'modus-vivendi)
   (setq auto-dark-light-theme 'modus-operandi)
+  (when (and (eq system-type 'darwin) (eq window-system 'ns)) (setq auto-dark-allow-osascript t))
   (auto-dark-mode t))
 
 (provide 'init-theme)

@@ -190,5 +190,5 @@
     "editor.defaultFormatter": "haskell.haskell"
   },
   "python.formatting.provider": "black",
-  "workbench.colorTheme": "modus-vivendi"
+  "workbench.colorTheme": "An Old Hope Italic"
 }
