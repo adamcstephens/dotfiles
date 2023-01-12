@@ -13,15 +13,19 @@ for code in code code-insiders; do
       case $1 in
       install)
         TMPFILE="$(mktemp)"
-        sed -e "/$2/d" "$UNINSTALL_FILE" >"$TMPFILE"
+        sed -e "/$2/Id" "$UNINSTALL_FILE" | sort -u >"$TMPFILE"
         mv "$TMPFILE" "$UNINSTALL_FILE"
         $code --install-extension "$2"
         ;;
       remove)
-        sed -i "/$2/d" "$EXTENSIONS_FILE"
+        sed -i "/$2/Id" "$EXTENSIONS_FILE"
         $code --uninstall-extension "$2"
+        rc=$?
+        TMPFILE="$(mktemp)"
         echo "$2" >>"$UNINSTALL_FILE"
-        exit $?
+        sort -u "$UNINSTALL_FILE" >"$TMPFILE"
+        mv "$TMPFILE" "$UNINSTALL_FILE"
+        exit $rc
         ;;
       esac
 
@@ -30,14 +34,14 @@ for code in code code-insiders; do
       uninstall="$(cat "$UNINSTALL_FILE")"
 
       for u in $uninstall; do
-        ext=$(echo $u | sed -r 's/[[:space:]]+//g')
+        ext=$(echo "$u" | sed -r 's/[[:space:]]+//g')
         if echo "$installed" | grep "$ext" >/dev/null; then
           $code --uninstall-extension "$ext"
         fi
       done
 
       for e in $repo; do
-        ext=$(echo $e | sed -r 's/[[:space:]]+//g')
+        ext=$(echo "$e" | sed -r 's/[[:space:]]+//g')
         if ! (echo "$installed" | grep "$ext" >/dev/null); then
           $code --install-extension "$ext"
         fi
