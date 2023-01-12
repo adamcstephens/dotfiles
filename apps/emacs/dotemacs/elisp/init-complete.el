@@ -56,6 +56,15 @@
    completion-category-defaults nil
    completion-category-overrides nil))
 
+(use-package prescient
+  :init
+  (push 'prescient completion-styles)
+  (prescient-persist-mode 1))
+
+(use-package vertico-prescient
+  :init
+  (vertico-prescient-mode 1))
+
 ;; jump from completion to other tasks
 (use-package embark
   :ensure t

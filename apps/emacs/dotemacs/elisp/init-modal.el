@@ -1,16 +1,34 @@
 (use-package evil
-  :ensure t
   :init
   (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
   (setq evil-want-keybinding nil)
   :config
-  (evil-mode 1))
+  (evil-mode 1)
+
+  ;; set leader key in all states
+  (evil-set-leader nil (kbd "C-SPC"))
+  ;; set leader key in normal state
+  (evil-set-leader 'normal (kbd "SPC"))
+  (evil-define-key 'normal 'global (kbd "<leader>SPC") 'consult-project-extra-find)
+  (evil-define-key 'normal 'global (kbd "<leader>b") 'workroom-switch-to-buffer)
+  (evil-define-key 'normal 'global (kbd "<leader>d") 'dired-at-point)
+  (evil-define-key 'normal 'global (kbd "<leader>fs") 'save-buffer)
+  (evil-define-key 'normal 'global (kbd "<leader>gg") 'magit)
+  (evil-define-key 'normal 'global (kbd "<leader>fs") 'save-buffer)
+  (evil-define-key 'normal 'global (kbd "<leader>pf") 'consult-project-extra-find)
+  (evil-define-key 'normal 'global (kbd "<leader>ps") 'consult-ripgrep)
+  (evil-define-key 'normal 'global (kbd "<leader>pw") 'workroom-switch)
+  (evil-define-key 'normal 'global (kbd "<leader>v") 'vterm)
+  )
 
 (use-package evil-collection
   :after evil
-  :ensure t
   :config
   (evil-collection-init))
+
+(use-package evil-mc
+  :after evil
+  )
 
 (defun dot/meow-setup ()
   (setq meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
