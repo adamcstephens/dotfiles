@@ -8,6 +8,9 @@
   :init
   (require 'ox-latex)
 
+  ;; set up the undo system
+  (setq evil-undo-system 'undo-fu)
+
   ;; setup some dirs
   (setq org-directory "~/org/")
   (setq org-default-notes-file (concat org-directory "notes.org"))
