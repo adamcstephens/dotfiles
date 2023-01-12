@@ -45,6 +45,7 @@
 
 (require 'init-haskell)
 (require 'init-just)
+(require 'init-kmonad)
 (require 'init-markdown)
 (require 'init-nix)
 (require 'init-sh)
