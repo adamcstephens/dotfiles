@@ -8,13 +8,19 @@
   :init
   (require 'ox-latex)
 
+  ;; setup some dirs
   (setq org-directory "~/org/")
   (setq org-default-notes-file (concat org-directory "notes.org"))
-  (setq org-startup-indented t
-	org-pretty-entities t
-	org-hide-emphasis-markers t
-	org-startup-with-inline-images t
-	org-image-actual-width '(300))
+
+  ;; indent text according to structure
+  (setq org-startup-indented t)
+  (setq org-pretty-entities t)
+  (setq org-hide-emphasis-markers t)
+  (setq org-startup-with-inline-images t)
+  (setq org-image-actual-width '(300))
+
+  ;; enter to follow links
+  (setq org-return-follows-link t)
 
   ;; don't add validate link to bottom of html files
   (setq org-html-validation-link nil)

@@ -16,9 +16,13 @@
   (evil-define-key 'normal 'global (kbd "<leader>gg") 'magit)
   (evil-define-key 'normal 'global (kbd "<leader>fs") 'save-buffer)
   (evil-define-key 'normal 'global (kbd "<leader>pf") 'consult-project-extra-find)
+  (evil-define-key 'normal 'global (kbd "<leader>pp") 'project-switch-project)
   (evil-define-key 'normal 'global (kbd "<leader>ps") 'consult-ripgrep)
   (evil-define-key 'normal 'global (kbd "<leader>pw") 'workroom-switch)
   (evil-define-key 'normal 'global (kbd "<leader>v") 'vterm)
+
+  ;; unbind return in evil so org links can be followed
+  (with-eval-after-load 'evil-maps (define-key evil-motion-state-map (kbd "RET") nil))
   )
 
 (use-package evil-collection
@@ -28,7 +32,12 @@
 
 (use-package evil-mc
   :after evil
-  )
+  :config
+  (global-evil-mc-mode 1)
+
+  ;; override visual mode to mc every line
+  (evil-define-key 'visual evil-mc-key-map "A" #'evil-mc-make-cursor-in-visual-selection-end)
+  (evil-define-key 'visual evil-mc-key-map "I" #'evil-mc-make-cursor-in-visual-selection-beg))
 
 (defun dot/meow-setup ()
   (setq meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
