@@ -37,7 +37,7 @@
 (require 'init-editor)
 (require 'init-git)
 (require 'init-lsp)
-(require 'init-meow)
+(require 'init-modal)
 (require 'init-org)
 (require 'init-format)
 (require 'init-project)

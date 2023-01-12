@@ -1,3 +1,17 @@
+(use-package evil
+  :ensure t
+  :init
+  (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
+  (setq evil-want-keybinding nil)
+  :config
+  (evil-mode 1))
+
+(use-package evil-collection
+  :after evil
+  :ensure t
+  :config
+  (evil-collection-init))
+
 (defun dot/meow-setup ()
   (setq meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
   (meow-motion-overwrite-define-key
@@ -86,9 +100,23 @@
    '("<escape>" . ignore)))
 
 (use-package meow
+  :disabled
   :config
   (dot/meow-setup)
   (meow-global-mode 1)
   (setq meow-use-clipboard t))
 
-(provide 'init-meow)
+(use-package xah-fly-keys
+  :disabled
+  :config
+  (xah-fly-keys-set-layout "qwerty")
+  (xah-fly-keys 1))
+
+(use-package boon
+  :disabled
+  :config
+  (require 'boon-qwerty)
+  ;; (boon-mode) ;; to enable boon everywhere
+  )
+
+(provide 'init-modal)
