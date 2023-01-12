@@ -49,7 +49,7 @@
     nativeBuildInputs = [pkgs.makeWrapper];
     postBuild =
       ''
-        wrapProgram "$out/bin/emacs" --set TERM xterm-emacs --set FONTCONFIG_FILE ${fontconfig_file} --prefix PATH : ${lib.makeBinPath extraBins}
+        wrapProgram "$out/bin/emacs" --set TERM xterm-emacs --set FONTCONFIG_FILE ${fontconfig_file} --prefix PATH : ${lib.makeBinPath extraBins}:${config.home.homeDirectory}/.dotfiles/bin
         wrapProgram "$out/bin/emacsclient" --set TERM xterm-emacs
       ''
       + (
