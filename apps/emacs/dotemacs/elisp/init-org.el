@@ -8,17 +8,17 @@
   :init
   (require 'ox-latex)
 
-  ;; set up the undo system
-  (setq evil-undo-system 'undo-fu)
-
   ;; setup some dirs
   (setq org-directory "~/org/")
   (setq org-default-notes-file (concat org-directory "notes.org"))
 
+  ;; stop hiding links
+  (setq org-link-descriptive nil)
+
   ;; indent text according to structure
   (setq org-startup-indented t)
-  (setq org-pretty-entities t)
-  (setq org-hide-emphasis-markers t)
+  ;; (setq org-pretty-entities t)
+  ;; (setq org-hide-emphasis-markers t)
   (setq org-startup-with-inline-images t)
   (setq org-image-actual-width '(300))
 
@@ -123,6 +123,7 @@
 
 ;; Show hidden emphasis markers
 (use-package org-appear
+  :disabled
   :hook
   (org-mode . org-appear-mode))
 
