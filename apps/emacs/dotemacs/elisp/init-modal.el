@@ -1,9 +1,13 @@
 (use-package evil
+  :disabled
   :init
   (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
   (setq evil-want-keybinding nil)
   :config
   (evil-mode 1)
+
+  ;; set up the undo system
+  (setq evil-undo-system 'undo-fu)
 
   ;; set leader key in all states
   (evil-set-leader nil (kbd "C-SPC"))
@@ -26,11 +30,13 @@
   )
 
 (use-package evil-collection
+  :disabled
   :after evil
   :config
   (evil-collection-init))
 
 (use-package evil-mc
+  :disabled
   :after evil
   :config
   (global-evil-mc-mode 1)
@@ -127,7 +133,6 @@
    '("<escape>" . ignore)))
 
 (use-package meow
-  :disabled
   :config
   (dot/meow-setup)
   (meow-global-mode 1)
