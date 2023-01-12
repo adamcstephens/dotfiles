@@ -102,6 +102,8 @@ in {
     pkgs.tdesktop
   ];
 
+  programs.feh.enable = true;
+
   systemd.user.startServices = "sd-switch";
 
   systemd.user.services.polkit-gnome-authentication-agent-1 = {
