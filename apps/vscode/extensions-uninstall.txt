@@ -1,10 +1,9 @@
-GitHub.codespaces
+Binx.modus-vivendi-code
 GitHub.vscode-pull-request-github
 JulienDuchesne.vscode-jsonnet
 bbenoist.Nix
 berberman.vscode-cabal-fmt
 danielgjackson.auto-dark-mode-windows
-dustinsanders.an-old-hope-theme-vscode
 eamodio.gitlens
 earthly.earthfile-syntax-highlighting
 eww-yuck.yuck
@@ -13,6 +12,7 @@ foxundermoon.shell-format
 github.classroom
 gitpod.gitpod-desktop
 golf1052.base16-generator
+hashicorp.terraform
 ms-kubernetes-tools.vscode-kubernetes-tools
 ms-python.isort
 ms-toolsai.jupyter
@@ -25,7 +25,6 @@ ms-vsliveshare.vsliveshare
 redhat.ansible
 richie5um2.vscode-sort-json
 ritwickdey.liveserver
-rust-lang.rust
 samplavigne.p5-vscode
 samuelcolvin.jinjahtml
 shaunlebron.vscode-parinfer

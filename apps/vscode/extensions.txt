@@ -1,11 +1,12 @@
-Binx.modus-vivendi-code
 bmalehorn.vscode-fish
 DavidAnson.vscode-markdownlint
+dustinsanders.an-old-hope-theme-vscode
 EditorConfig.EditorConfig
 esbenp.prettier-vscode
 firefox-devtools.vscode-firefox-debug
+GitHub.codespaces
+GitHub.github-vscode-theme
 golang.go
-hashicorp.terraform
 haskell.haskell
 JakeBecker.elixir-ls
 jnoortheen.nix-ide
