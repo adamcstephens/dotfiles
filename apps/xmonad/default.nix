@@ -49,6 +49,20 @@ in {
     ];
   };
 
+  systemd.user.services.xssproxy = {
+    Unit = {
+      Description = "forward freedesktop.org Idle Inhibition Service calls to Xss";
+      After = ["graphical-session-pre.target"];
+      PartOf = ["graphical-session.target"];
+    };
+
+    Install = {WantedBy = ["graphical-session.target"];};
+
+    Service = {
+      ExecStart = "${pkgs.xssproxy}/bin/xssproxy";
+    };
+  };
+
   systemd.user.services.xautolock-session.Install.WantedBy = lib.mkForce ["xserver-session.target"];
   systemd.user.services.xautolock-session.Unit.PartOf = lib.mkForce ["xserver-session.target"];
 
