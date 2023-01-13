@@ -1,5 +1,5 @@
-(defun dot/variable-font () "" (if (eq system-type 'darwin) "SF Pro" "Manrope3"))
-(defun dot/font-height () "" (if (eq system-type 'darwin) 130 105))
+(defun dot/variable-font () "SF Pro")
+(defun dot/font-height () (if (eq system-type 'darwin) 130 105))
 
 (defun dot/gui-setup ()
   (interactive)

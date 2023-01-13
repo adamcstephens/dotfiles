@@ -1,6 +1,7 @@
 {
   config,
   inputs,
+  inputs',
   lib,
   pkgs,
   ...
@@ -36,6 +37,8 @@
       "/Library/Fonts"
       pkgs.jetbrains-mono
       pkgs.manrope
+      inputs'.apple-fonts.packages.sf-mono
+      inputs'.apple-fonts.packages.sf-pro
     ];
   };
 
