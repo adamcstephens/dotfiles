@@ -35,9 +35,9 @@
   fontconfig_file = pkgs.makeFontsConf {
     fontDirectories = [
       "/Library/Fonts"
+      pkgs.emacs-all-the-icons-fonts
       pkgs.jetbrains-mono
       pkgs.manrope
-      inputs'.apple-fonts.packages.sf-mono
       inputs'.apple-fonts.packages.sf-pro
     ];
   };
