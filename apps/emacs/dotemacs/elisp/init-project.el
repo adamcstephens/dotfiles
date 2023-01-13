@@ -1,4 +1,5 @@
 (use-package workroom
+  :disabled
   :config
   (setq workroom-command-map-prefix (kbd "C-c w"))
   (workroom-mode 1)
