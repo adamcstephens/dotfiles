@@ -3,7 +3,7 @@
   - removed from the arkenfox user.js
   - deprecated by Mozilla but listed in the arkenfox user.js in the past
 
-  Last updated: 19-November-2022
+  Last updated: 5-December-2022
 
   Instructions:
   - [optional] close Firefox and backup your profile
@@ -238,9 +238,13 @@
 
     /* REMOVED */
     /* 103+ */
+    'beacon.enabled',
     'browser.newtab.preload',
     'browser.newtabpage.activity-stream.feeds.discoverystreamfeed',
     'browser.newtabpage.activity-stream.feeds.snippets',
+    'browser.region.network.url',
+    'browser.region.update.enabled',
+    'browser.search.region',
     'browser.ssl_override_behavior',
     'browser.tabs.warnOnClose',
     'devtools.chrome.enabled',
