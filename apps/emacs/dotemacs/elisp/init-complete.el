@@ -96,7 +96,7 @@
 
 ;; snippets!
 (use-package yasnippet
-  :config
+  :init
   (yas-global-mode 1))
 
 (provide 'init-complete)
