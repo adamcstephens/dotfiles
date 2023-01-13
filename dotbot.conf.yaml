@@ -23,7 +23,6 @@
     ~/.bashrc:
       force: true
       path: apps/bash/bashrc
-    ~/.config/aquaproj-aqua: aqua
     ~/.config/bat/config: apps/bat/config
     ~/.config/btop: apps/btop
     ~/.config/fish:
