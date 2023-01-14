@@ -1,9 +1,7 @@
-(use-package vterm
-  :bind
-  ("C-c v" . vterm))
+(use-package vterm)
 
 (use-package multi-vterm
-  :commands
-  (multi-vterm multi-vterm-project multi-vterm-dedicated-toggle))
+  :bind
+  ("C-c v" . multi-vterm-project))
 
 (provide 'init-term)

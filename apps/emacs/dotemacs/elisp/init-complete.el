@@ -41,7 +41,8 @@
 ;; add some more searching commands
 (use-package consult
   :bind
-  (("C-c p s" . consult-ripgrep)
+  (("C-c b" . consult-project-buffer)
+   ("C-c p s" . consult-ripgrep)
    ("C-c p r" . consult-recent-file)))
 
 ;; completion style
@@ -56,14 +57,14 @@
    completion-category-defaults nil
    completion-category-overrides nil))
 
-(use-package prescient
-  :init
-  (push 'prescient completion-styles)
-  (prescient-persist-mode 1))
+					; (use-package prescient
+					;   :init
+					;   (push 'prescient completion-styles)
+					;   (prescient-persist-mode 1))
 
-(use-package vertico-prescient
-  :init
-  (vertico-prescient-mode 1))
+					; (use-package vertico-prescient
+					;   :init
+					;   (vertico-prescient-mode 1))
 
 ;; jump from completion to other tasks
 (use-package embark

@@ -7,10 +7,12 @@ eln-cache/
 elpa/
 eshell/
 history
+persp-confs/
 projectile-bookmarks.eld
 projectile.cache
 projects
 recentf
 repos/
+tabsession.el
 transient/
 undo-fu-session/

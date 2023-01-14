@@ -13,13 +13,11 @@
   (evil-set-leader nil (kbd "C-SPC"))
   ;; set leader key in normal state
   (evil-set-leader 'normal (kbd "SPC"))
-  (evil-define-key 'normal 'global (kbd "<leader>SPC") 'consult-project-extra-find)
   (evil-define-key 'normal 'global (kbd "<leader>b") 'workroom-switch-to-buffer)
   (evil-define-key 'normal 'global (kbd "<leader>d") 'dired-at-point)
   (evil-define-key 'normal 'global (kbd "<leader>fs") 'save-buffer)
   (evil-define-key 'normal 'global (kbd "<leader>gg") 'magit)
   (evil-define-key 'normal 'global (kbd "<leader>fs") 'save-buffer)
-  (evil-define-key 'normal 'global (kbd "<leader>pf") 'consult-project-extra-find)
   (evil-define-key 'normal 'global (kbd "<leader>pp") 'project-switch-project)
   (evil-define-key 'normal 'global (kbd "<leader>ps") 'consult-ripgrep)
   (evil-define-key 'normal 'global (kbd "<leader>pw") 'workroom-switch)

@@ -71,12 +71,40 @@
   (load custom-file)
 
   ;;
+  ;; vertico recommendations
+  ;;
+  ;; Add prompt indicator to `completing-read-multiple'.
+  ;; We display [CRM<separator>], e.g., [CRM,] if the separator is a comma.
+  (defun crm-indicator (args)
+    (cons (format "[CRM%s] %s"
+                  (replace-regexp-in-string
+                   "\\`\\[.*?]\\*\\|\\[.*?]\\*\\'" ""
+                   crm-separator)
+                  (car args))
+          (cdr args)))
+  (advice-add #'completing-read-multiple :filter-args #'crm-indicator)
+
+  ;; Do not allow the cursor in the minibuffer prompt
+  (setq minibuffer-prompt-properties
+        '(read-only t cursor-intangible t face minibuffer-prompt))
+  (add-hook 'minibuffer-setup-hook #'cursor-intangible-mode)
+
+  ;; allow running more minibuffers from a first
+  (setq enable-recursive-minibuffers t)
+
+  ;;
   ;; keybindings to builtin functions
   ;;
   (global-set-key (kbd "C-c f s") 'save-buffer)
   ;; describe function is better than the faq
   (global-set-key (kbd "C-h C-f") 'describe-function)
   (global-set-key (kbd "C-h C-s") 'describe-symbol)
+
+  (global-set-key (kbd "M-p") 'mark-paragraph)
+  (global-set-key (kbd "M-h") 'windmove-left)
+  (global-set-key (kbd "M-j") 'windmove-down)
+  (global-set-key (kbd "M-k") 'windmove-up)
+  (global-set-key (kbd "M-l") 'windmove-right)
 
   (define-key minibuffer-local-map (kbd "C-j") 'next-line)
   (define-key minibuffer-local-map (kbd "C-k") 'previous-line)
@@ -89,6 +117,12 @@
   ;; enable hl-line but not globally since it's flaky in vterm
   (add-hook 'prog-mode-hook #'hl-line-mode)
   (add-hook 'text-mode-hook #'hl-line-mode)
+
+  ;; project keys
+  (global-set-key (kbd "C-c p p") 'project-switch-project)
+  ;; load dired instead of prompting
+  (global-set-key (kbd "C-c p d") 'project-dired)
+
   )
 
 (use-package exec-path-from-shell
