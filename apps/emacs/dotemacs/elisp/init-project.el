@@ -11,7 +11,9 @@
                                         (persp-mode-project-bridge-kill-perspectives))))
   (persp-mode . persp-mode-project-bridge-mode)
   :init
-  (persp-mode-project-bridge-mode 1))
+  (persp-mode-project-bridge-mode 1)
+  :config
+  (setq persp-emacsclient-init-frame-behaviour-override "main"))
 
 (use-package direnv
   :config
