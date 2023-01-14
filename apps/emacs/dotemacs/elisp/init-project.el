@@ -13,7 +13,9 @@
   :init
   (persp-mode-project-bridge-mode 1)
   :config
-  (setq persp-emacsclient-init-frame-behaviour-override "main"))
+  (setq persp-emacsclient-init-frame-behaviour-override "main")
+  :bind
+  (("C-c p p" . persp-switch)))
 
 (use-package direnv
   :config

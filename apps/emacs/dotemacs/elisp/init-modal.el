@@ -127,9 +127,9 @@
    '("Y" . meow-sync-grab)
    '("z" . meow-pop-selection)
    '("'" . repeat)
-   '("/" . isearch-forward)
-   '("<" . whole-line-or-region-indent-rigidly-left)
-   '(">" . whole-line-or-region-indent-rigidly-right)
+   '("/" . isearch-forward-regexp)
+   '("<" . indent-rigidly-left-to-tab-stop)
+   '(">" . indent-rigidly-right-to-tab-stop)
    '("<escape>" . ignore)))
 
 (use-package meow

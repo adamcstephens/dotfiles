@@ -26,16 +26,7 @@
 
 ;; Enable rich annotations using the Marginalia package
 (use-package marginalia
-  ;; Either bind `marginalia-cycle' globally or only in the minibuffer
-  :bind (("M-A" . marginalia-cycle)
-         :map minibuffer-local-map
-         ("M-A" . marginalia-cycle))
-
-  ;; The :init configuration is always executed (Not lazy!)
   :init
-
-  ;; Must be in the :init section of use-package such that the mode gets
-  ;; enabled right away. Note that this forces loading the package.
   (marginalia-mode))
 
 ;; add some more searching commands
@@ -57,22 +48,21 @@
    completion-category-defaults nil
    completion-category-overrides nil))
 
-					; (use-package prescient
-					;   :init
-					;   (push 'prescient completion-styles)
-					;   (prescient-persist-mode 1))
+;; (use-package prescient
+;;   :init
+;;   (push 'prescient completion-styles)
+;;   (prescient-persist-mode 1))
 
-					; (use-package vertico-prescient
-					;   :init
-					;   (vertico-prescient-mode 1))
+;; (use-package vertico-prescient
+;;   :init
+;;   (vertico-prescient-mode 1))
 
 ;; jump from completion to other tasks
 (use-package embark
-  :ensure t
   :bind
-  (("C-e" . embark-act)         ;; pick some comfortable binding
-   ("C-;" . embark-dwim)        ;; good alternative: M-.
-   ("C-h B" . embark-bindings)) ;; alternative for `describe-bindings'
+  (("M-o" . embark-act)
+   ("C-;" . embark-dwim)
+   ("C-h B" . embark-bindings))
   :init
   ;; Optionally replace the key help with a completing-read interface
   (setq prefix-help-command #'embark-prefix-help-command)
@@ -85,7 +75,6 @@
 
 ;; Consult users will also want the embark-consult package.
 (use-package embark-consult
-  :ensure t ; only need to install it, embark loads it after consult if found
   :hook
   (embark-collect-mode . consult-preview-at-point-mode))
 

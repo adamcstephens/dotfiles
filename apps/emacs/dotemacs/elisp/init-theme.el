@@ -77,25 +77,6 @@
   :config
   (diminish 'eldoc-mode))
 
-;; colored pairs
-(use-package prism
-  :disabled
-  :init
-  (setq prism-num-faces 16)
-
-  (prism-set-colors
-   :desaturations '(0) ; do not change---may lower the contrast ratio
-   :lightens '(0)      ; same
-   :colors (modus-themes-with-colors
-             (list fg-main
-                   magenta
-                   blue
-                   green
-                   fg-main
-                   cyan
-                   yellow
-                   yellow-faint))))
-
 (use-package all-the-icons)
 
 (use-package doom-modeline
@@ -103,28 +84,6 @@
   (setq doom-modeline-buffer-encoding 'nondefault)
   :init
   (doom-modeline-mode 1))
-
-(use-package telephone-line
-  :disabled
-  :after (meow)
-  :demand
-  :init
-  ;; add meow support
-  (defun telephone-line-modal-face (active)
-    (cond ((not active) 'mode-line-inactive)
-          ((and meow-normal-mode (region-active-p)) 'telephone-line-evil-visual)
-          (meow-normal-mode 'telephone-line-evil-normal)
-          (meow-insert-mode 'telephone-line-evil-insert)
-          (meow-motion-mode 'telephone-line-evil-emacs)
-          (meow-keypad-mode 'telephone-line-evil-operator)
-	  (meow-beacon-mode 'telephone-line-evil-replace)))
-  ;; style the line
-  (setq telephone-line-primary-left-separator 'telephone-line-cubed-left
-	telephone-line-secondary-left-separator 'telephone-line-cubed-hollow-left
-	telephone-line-primary-right-separator 'telephone-line-cubed-right
-	telephone-line-secondary-right-separator 'telephone-line-cubed-hollow-right)
-  :config
-  (telephone-line-mode t))
 
 (use-package auto-dark
   :after (modus-themes)

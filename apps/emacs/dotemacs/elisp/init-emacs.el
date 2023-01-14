@@ -70,6 +70,9 @@
   (setq custom-file (concat user-emacs-directory "custom.el"))
   (load custom-file)
 
+  ;; wrap isearch
+  (setq isearch-wrap-pause 'no)
+
   ;;
   ;; vertico recommendations
   ;;
