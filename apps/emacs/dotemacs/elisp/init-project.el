@@ -23,7 +23,6 @@
   (setq direnv-always-show-summary nil))
 
 (use-package consult-project-extra
-  :straight t
   :init
   (setq project-switch-commands #'consult-project-extra-find)
   :bind
