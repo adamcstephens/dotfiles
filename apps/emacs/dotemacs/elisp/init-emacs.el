@@ -73,6 +73,9 @@
   ;; wrap isearch
   (setq isearch-wrap-pause 'no)
 
+  ;; this is recommended to be disabled if in ssh_config
+  (setq tramp-use-ssh-controlmaster-options nil)
+
   ;;
   ;; vertico recommendations
   ;;
