@@ -136,7 +136,10 @@
   :config
   (dot/meow-setup)
   (meow-global-mode 1)
-  (setq meow-use-clipboard t))
+  ;; use system clipboard
+  (setq meow-use-clipboard t)
+  ;; reduce delay to avoid spurious commands
+  (setq meow-esc-delay 0.05))
 
 (use-package xah-fly-keys
   :disabled
