@@ -32,7 +32,8 @@
 ;; add some more searching commands
 (use-package consult
   :bind
-  (("C-c b" . consult-project-buffer)
+  (("C-c i" . consult-imenu)
+   ("C-c b" . consult-project-buffer)
    ("C-c p s" . consult-ripgrep)
    ("C-c p r" . consult-recent-file)))
 
