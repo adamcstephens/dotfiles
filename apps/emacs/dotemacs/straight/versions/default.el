@@ -1,5 +1,6 @@
 (("all-the-icons.el" . "51bf77da1ebc3c199dfc11f54c0dce67559f5f40")
  ("auto-dark-emacs" . "88f4eb448525c8e11d00daa77ec8595b0863fd92")
+ ("clipetty" . "01b39044b9b65fa4ea7d3166f8b1ffab6f740362")
  ("compat" . "7ca7d300d1d256f674f83932d2918d8e70cd28f6")
  ("consult" . "7c514c0a2414347c4cd0482a691371625a8a1c53")
  ("consult-project-extra" . "9fdf45fa40471900b0b158d73c4b1521a13d47ef")
