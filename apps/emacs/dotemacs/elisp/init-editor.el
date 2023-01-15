@@ -56,4 +56,9 @@
   :after flyspell
   :bind (:map flyspell-mode-map ("C-;" . flyspell-correct-wrapper)))
 
+;; support clipboards in terminals
+(use-package clipetty
+  :init
+  (global-clipetty-mode 1))
+
 (provide 'init-editor)
