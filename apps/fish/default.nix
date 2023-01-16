@@ -17,6 +17,7 @@ in {
     plugins = [];
     shellAliases = {
       cat = "bat";
+      cnf = "command-not-found";
       l = "ll -a";
       nix = "nix --print-build-logs";
       dog = "doggo";
