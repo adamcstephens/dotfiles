@@ -11,6 +11,7 @@ if [ "$USER" != "root" ]; then
       ;;
     esac
   elif command -v emacsclient >/dev/null 2>&1; then
+    export IS_EDITOR=true
     exec em $@
   fi
 fi

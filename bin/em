@@ -12,9 +12,13 @@ fi
 unset TMPDIR
 
 if [ -n "$DISPLAY" ]; then
-  args="--create-frame --no-wait"
+  args="--create-frame"
 else
   args="--tty"
+fi
+
+if [ -z "$IS_EDITOR" ]; then
+  args="$args --no-wait"
 fi
 
 exec emacsclient $args "$@"
