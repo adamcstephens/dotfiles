@@ -1,4 +1,6 @@
-{self', ...}: {
+{pkgs, ...}: let
+  package = pkgs.callPackage ./package.nix {};
+in {
   xdg.configFile."xautocfg.cfg".text = ''
     [keyboard]
     delay = 250
@@ -8,7 +10,7 @@
   systemd.user.services.xautocfg = {
     Unit.BindsTo = ["xserver-session.target"];
     Service = {
-      ExecStart = "${self'.packages.xautocfg}/bin/xautocfg";
+      ExecStart = "${package}/bin/xautocfg";
       Restart = "on-failure";
     };
     Install.WantedBy = ["xserver-session.target"];

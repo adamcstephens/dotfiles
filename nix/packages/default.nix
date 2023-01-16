@@ -10,7 +10,7 @@
   s0ix-selftest-tool = pkgs.callPackage ./s0ix-selftest-tool {
     kernel = pkgs.linuxPackages_6_0;
   };
-  xautocfg = pkgs.callPackage ./xautocfg {};
+  xautocfg = pkgs.callPackage ../../apps/xautocfg/package.nix {};
 }
 // (import ./hm.nix {
   inherit homeConfigurations pkgs;
