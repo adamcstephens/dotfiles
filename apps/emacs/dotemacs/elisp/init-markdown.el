@@ -1,6 +1,9 @@
 (use-package markdown-mode
-  :ensure t
-  :mode ("\\.md\\'" . gfm-mode))
-;; :init (setq markdown-command "multimarkdown")
+  :mode
+  ("\\.md\\'" . gfm-mode)
+  :init
+  ;; not sure why code blocks aren't highlighted by default
+  (setq markdown-fontify-code-blocks-natively t)
+  (setq markdown-command "multimarkdown"))
 
 (provide 'init-markdown)

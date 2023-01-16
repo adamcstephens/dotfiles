@@ -16,6 +16,7 @@
     pkgs.git
     pkgs.texlive.combined.scheme-full
     pkgs.graphicsmagick
+    pkgs.multimarkdown
     pkgs.nodePackages.mermaid-cli
     pkgs.ripgrep
     pkgs.pandoc

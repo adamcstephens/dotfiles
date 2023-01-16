@@ -1,4 +1,8 @@
 (use-package vterm
+  :bind
+  (:map vterm-mode-map
+	("M-h" . windmove-left)
+	("M-l" . windmove-right))
   :custom
   (vterm-max-scrollback 41000))
 
