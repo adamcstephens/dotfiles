@@ -17,6 +17,8 @@
         type = lib.types.str;
         default = "JetBrainsMono Nerd Font";
       };
+
+      insecure = lib.mkEnableOption (lib.mkDoc "Insecure GUI disables locking");
     };
   };
 }

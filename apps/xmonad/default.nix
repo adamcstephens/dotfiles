@@ -35,9 +35,14 @@ in {
 
       config = ./xmonad.hs;
     };
+
+    initExtra = ''
+      systemctl --user start xserver-session.target
+      systemctl --user start tray.target
+    '';
   };
 
-  services.screen-locker = {
+  services.screen-locker = lib.mkIf (! config.dotfiles.gui.insecure) {
     enable = true;
     inactiveInterval = 5;
     lockCmd = xsecurelock.outPath;
@@ -63,9 +68,13 @@ in {
     };
   };
 
-  systemd.user.services.xautolock-session.Install.WantedBy = lib.mkForce ["xserver-session.target"];
-  systemd.user.services.xautolock-session.Unit.PartOf = lib.mkForce ["xserver-session.target"];
+  systemd.user.services.xautolock-session = lib.mkIf (! config.dotfiles.gui.insecure) {
+    Install.WantedBy = lib.mkForce ["xserver-session.target"];
+    Unit.PartOf = lib.mkForce ["xserver-session.target"];
+  };
 
-  systemd.user.services.xss-lock.Install.WantedBy = lib.mkForce ["xserver-session.target"];
-  systemd.user.services.xss-lock.Unit.PartOf = lib.mkForce ["xserver-session.target"];
+  systemd.user.services.xss-lock = lib.mkIf (! config.dotfiles.gui.insecure) {
+    Install.WantedBy = lib.mkForce ["xserver-session.target"];
+    Unit.PartOf = lib.mkForce ["xserver-session.target"];
+  };
 }

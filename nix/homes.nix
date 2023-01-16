@@ -32,6 +32,9 @@
       dotfiles.linuxGui = true;
       modules = [
         ../apps/goldencheetah
+        {
+          dotfiles.gui.insecure = true;
+        }
       ];
     };
     think = {
