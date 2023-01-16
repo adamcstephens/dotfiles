@@ -65,9 +65,4 @@ resholve.mkDerivation {
       ];
     };
   };
-
-  buildInputs = [
-    acpica-tools
-    kernel.turbostat
-  ];
 }
