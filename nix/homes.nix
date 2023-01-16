@@ -26,6 +26,13 @@
         }
       ];
     };
+    drink = {
+      homeSystem = "x86_64-linux";
+      dotfiles.linuxGui = true;
+      modules = [
+        ../apps/goldencheetah
+      ];
+    };
     think = {
       homeSystem = "x86_64-linux";
       dotfiles.linuxGui = true;
