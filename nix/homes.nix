@@ -21,6 +21,7 @@
       dotfiles.linuxGui = true;
       modules = [
         ../apps/goldencheetah
+        ../apps/emacs
         {
           dotfiles.gui.dpi = 148;
         }
@@ -38,6 +39,7 @@
       dotfiles.linuxGui = true;
       modules = [
         ../apps/goldencheetah
+        ../apps/emacs
         {
           dotfiles.gui.dpi = 196;
         }
@@ -123,7 +125,6 @@
           ++ (pkgs.lib.optionals pkgs.stdenv.isDarwin [./home-darwin.nix])
           ++ (pkgs.lib.optionals pkgs.stdenv.isLinux [./home-linux.nix])
           ++ (pkgs.lib.optionals dotfiles.linuxGui [
-            ../apps/emacs
             ./linux-gui.nix
             {
               # install packages from the dotfiles flake
