@@ -9,6 +9,9 @@
       homeSystem = "aarch64-linux";
       dotfiles.linuxGui = true;
     };
+    bonk = {
+      homeSystem = "x86_64-darwin";
+    };
     EMAT-C02G44CPQ05P = {
       username = "astephe9";
       homeSystem = "aarch64-darwin";
@@ -58,6 +61,9 @@
     };
     aarch64-linux = {
       homeSystem = "aarch64-linux";
+    };
+    x86_64-darwin = {
+      homeSystem = "x86_64-darwin";
     };
   };
 
