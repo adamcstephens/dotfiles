@@ -20,7 +20,10 @@
 (use-package direnv
   :config
   (direnv-mode)
-  (setq direnv-always-show-summary nil))
+  ;; don't display loaded env message
+  (setq direnv-always-show-summary nil)
+  ;; don't display blocked env message
+  (add-to-list 'warning-suppress-types '(direnv)))
 
 (use-package consult-project-extra
   :init
