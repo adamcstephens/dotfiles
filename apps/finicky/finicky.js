@@ -1,5 +1,5 @@
 module.exports = {
-  defaultBrowser: ["Firefox", "Safari", "Google Chrome", "Brave Browser"],
+  defaultBrowser: ["Google Chrome", "Firefox", "Safari"],
   options: {
     hideIcon: false,
     urlShorteners: [

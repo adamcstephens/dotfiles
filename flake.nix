@@ -51,6 +51,7 @@
               pkgs.cachix
               pkgs.just
               pkgs.nil
+              pkgs.nodePackages.prettier
               pkgs.python3Minimal
             ]
             ++ (lib.optionals pkgs.stdenv.isLinux [
