@@ -2,6 +2,15 @@
 (defun dot/org-refile-candidates ()
   (directory-files-recursively org-directory "^[[:alnum:]].*\\.org\\'"))
 
+(defun dot/org-slides-export ()
+  (when (string-match "slides-.*\\.org" (file-name-nondirectory (buffer-file-name)))
+    (org-re-reveal-export-to-html)))
+
+(defun dot/org-slides-export-setup ()
+  (add-hook 'after-save-hook
+	    #'dot/org-slides-export
+	    nil 'local))
+
 ;; the org package itself
 (use-package org
   :mode ("\\.org\\'" . org-mode)
@@ -38,9 +47,11 @@
   (setq org-refile-use-outline-path 'file)
 
   ;; syntax highlight latex export
-
   (setq org-latex-src-block-backend 'listings)
   ;; (setq org-latex-packages-alist '(("" "minted")))
+
+  ;; async export
+  (setq org-export-in-background t)
 
   ;; better font support
   (setq org-latex-pdf-process '("xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"
@@ -101,6 +112,7 @@
   (setq org-attach-id-dir (expand-file-name ".attach/" org-directory))
   :hook
   (org-mode . (lambda () (display-line-numbers-mode -1)))
+  (org-mode . dot/org-slides-export-setup)
   ;; (org-mode . variable-pitch-mode)
   :bind
   ("C-c a" . org-agenda))

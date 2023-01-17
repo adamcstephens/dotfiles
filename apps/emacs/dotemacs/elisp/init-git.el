@@ -17,6 +17,7 @@
 
 (use-package git-auto-commit-mode
   :init
+  (setq gac-automatically-push-p t)
   (setq-default gac-debounce-interval 6000))
 
 
