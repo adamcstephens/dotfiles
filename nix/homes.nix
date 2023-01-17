@@ -81,7 +81,6 @@
           else "/home/${username}";
 
         cliPkgs = [
-          inputs.comma.packages.${system}.comma
           pkgs.terminfo
         ];
         guiPkgs = [

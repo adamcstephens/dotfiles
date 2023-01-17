@@ -48,6 +48,7 @@
     pkgs.btop
     pkgs.calc
     pkgs.colordiff
+    pkgs.comma
     pkgs.direnv
     pkgs.doggo
     pkgs.du-dust
