@@ -1,6 +1,7 @@
 (use-package vterm
   :bind
   (:map vterm-mode-map
+	("C-u" . (lambda () (interactive) (vterm-send-key (kbd "C-u"))))
 	("M-h" . windmove-left)
 	("M-l" . windmove-right))
   :custom
