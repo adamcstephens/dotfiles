@@ -59,6 +59,13 @@ in {
     Unit.PartOf = lib.mkForce ["xserver-session.target"];
   };
 
+  xdg.desktopEntries = {
+    xprop = {
+      name = "xprop";
+      exec = "${pkgs.systemd}/bin/systemd-cat --identifier=xprop ${lib.getExe pkgs.xorg.xprop}";
+    };
+  };
+
   xresources.properties = {
     "Xft.dpi" = config.dotfiles.gui.dpi;
   };

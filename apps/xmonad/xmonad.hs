@@ -8,7 +8,7 @@ import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageHelpers
 import XMonad.Layout.NoBorders
 import XMonad.Operations
-import qualified XMonad.StackSet as W
+import XMonad.StackSet qualified as W
 import XMonad.Util.Cursor
 import XMonad.Util.EZConfig
 
@@ -47,10 +47,9 @@ dotLogHook = updatePointer (0.5, 0.5) (0, 0) <> logHook desktopConfig
 dotManageHook =
   manageHook desktopConfig
     <> composeAll
-      [ isDialog --> doFloat,
+      [ isDialog --> doCenterFloat,
         title =? "Picture-in-Picture" --> doFloat,
         title =? "Picture-in-Picture" --> doF copyToAll,
-        (className =? "Firefox" <&&> resource =? "Dialog") --> doFloat,
         isFullscreen --> doFullFloat
       ]
 
