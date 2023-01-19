@@ -31,6 +31,7 @@
  ("flymake" . "2c677b8a6105754fc353fa28ea7b0f8f8426e572")
  ("flyspell-correct" . "7d7b6b01188bd28e20a13736ac9f36c3367bd16e")
  ("fussy" . "0fbfcbace0729dba685da9b9a74566639b840ec3")
+ ("gcmh" . "0089f9c3a6d4e9a310d0791cf6fa8f35642ecfd9")
  ("git-auto-commit-mode" . "a7b59acea622a737d23c783ce7d212fefb29f7e6")
  ("gnu-elpa-mirror" . "eb1199591ec3cb8a4d1f1a20bd14ca0e52eafdd0")
  ("haskell-mode" . "a34ccdc54be15043ff0d253c3c20087524255491")

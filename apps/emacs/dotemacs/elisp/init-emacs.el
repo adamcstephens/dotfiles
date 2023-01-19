@@ -38,9 +38,6 @@
         (concat auto-save-list-file-prefix "tramp-\\2") t)
       (list ".*" auto-save-list-file-prefix t)))
 
-  ;; increase GC theshold. this can apparently be bad, but good?
-  (setq gc-cons-threshold (* 1024 1024 20))
-
   ;; enable mouse mode for terminal
   (unless (display-graphic-p)
     (xterm-mouse-mode 1))

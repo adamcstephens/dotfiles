@@ -1,13 +1,17 @@
 ;; bootstrap straight.el
 (defvar bootstrap-version)
-(let ((bootstrap-file
-       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-      (bootstrap-version 6))
+(let
+  (
+    (bootstrap-file
+      (expand-file-name "straight/repos/straight.el/bootstrap.el"
+        user-emacs-directory))
+    (bootstrap-version 6))
   (unless (file-exists-p bootstrap-file)
     (with-current-buffer
-        (url-retrieve-synchronously
-         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
-         'silent 'inhibit-cookies)
+      (url-retrieve-synchronously
+        "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
+        'silent
+        'inhibit-cookies)
       (goto-char (point-max))
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
@@ -17,7 +21,9 @@
 (setq straight-use-package-by-default t)
 
 ;; load all elisp files
-(add-to-list 'load-path (expand-file-name "elisp" user-emacs-directory))
+(add-to-list
+  'load-path
+  (expand-file-name "elisp" user-emacs-directory))
 
 (defun dot/freeze ()
   (interactive)
@@ -29,6 +35,9 @@
   (straight-pull-recipe-repositories)
   (straight-pull-all)
   (dot/freeze))
+
+;; put this before any other packages
+(use-package gcmh :init (gcmh-mode 1))
 
 (require 'init-emacs)
 (require 'init-theme)
