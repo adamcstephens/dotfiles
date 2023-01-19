@@ -1,7 +1,4 @@
-(use-package
-  editorconfig
-  :ensure
-  :config (editorconfig-mode 1))
+(use-package editorconfig :ensure :config (editorconfig-mode 1))
 
 (use-package
   whitespace
@@ -29,7 +26,13 @@
 (use-package undo-fu-session :init (global-undo-fu-session-mode))
 
 ;; moving lines up and down can be handy
-(use-package move-text :init (move-text-default-bindings))
+(use-package
+  move-dup
+  :bind
+  (("M-<up>" . move-dup-move-lines-up)
+    ("M-S-<up>" . move-dup-duplicate-up)
+    ("M-<down>" . move-dup-move-lines-down)
+    ("M-S-<down>" . move-dup-duplicate-down)))
 
 ;; better dired
 (use-package
