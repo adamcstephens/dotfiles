@@ -1,4 +1,5 @@
-(use-package emacs
+(use-package
+  emacs
   :ensure nil
   :init
   ;; Don't generate backups or lockfiles. While auto-save maintains a copy so long
@@ -6,32 +7,36 @@
   ;; written, and never again until it is killed and reopened. This is better
   ;; suited to version control, and I don't want world-readable copies of
   ;; potentially sensitive material floating around our filesystem.
-  (setq create-lockfiles nil
-	make-backup-files nil
-	;; But in case the user does enable it, some sensible defaults:
-	version-control t     ; number each backup file
-	backup-by-copying t   ; instead of renaming current file (clobbers links)
-	delete-old-versions t ; clean up after itself
-	kept-old-versions 5
-	kept-new-versions 5
-	backup-directory-alist (list (cons "." (concat user-emacs-directory "backup/")))
-	tramp-backup-directory-alist backup-directory-alist)
+  (setq
+    create-lockfiles nil
+    make-backup-files nil
+    ;; But in case the user does enable it, some sensible defaults:
+    version-control t ; number each backup file
+    backup-by-copying t ; instead of renaming current file (clobbers links)
+    delete-old-versions t ; clean up after itself
+    kept-old-versions 5
+    kept-new-versions 5
+    backup-directory-alist (list (cons "." (concat user-emacs-directory "backup/")))
+    tramp-backup-directory-alist backup-directory-alist)
 
   ;; But turn on auto-save, so we have a fallback in case of crashes or lost data.
   ;; Use `recover-file' or `recover-session' to recover them.
-  (setq auto-save-default t
-	;; Don't auto-disable auto-save after deleting big chunks. This defeats
-	;; the purpose of a failsafe. This adds the risk of losing the data we
-	;; just deleted, but I believe that's VCS's jurisdiction, not ours.
-	auto-save-include-big-deletions t
-	;; Keep it out of `doom-emacs-dir' or the local directory.
-	auto-save-list-file-prefix (concat user-emacs-directory "autosave/")
-	tramp-auto-save-directory  (concat user-emacs-directory "tramp-autosave/")
-	auto-save-file-name-transforms
-	(list (list "\\`/[^/]*:\\([^/]*/\\)*\\([^/]*\\)\\'"
-                    ;; Prefix tramp autosaves to prevent conflicts with local ones
-                    (concat auto-save-list-file-prefix "tramp-\\2") t)
-              (list ".*" auto-save-list-file-prefix t)))
+  (setq
+    auto-save-default t
+    ;; Don't auto-disable auto-save after deleting big chunks. This defeats
+    ;; the purpose of a failsafe. This adds the risk of losing the data we
+    ;; just deleted, but I believe that's VCS's jurisdiction, not ours.
+    auto-save-include-big-deletions t
+    ;; Keep it out of `doom-emacs-dir' or the local directory.
+    auto-save-list-file-prefix (concat user-emacs-directory "autosave/")
+    tramp-auto-save-directory (concat user-emacs-directory "tramp-autosave/")
+    auto-save-file-name-transforms
+    (list
+      (list
+        "\\`/[^/]*:\\([^/]*/\\)*\\([^/]*\\)\\'"
+        ;; Prefix tramp autosaves to prevent conflicts with local ones
+        (concat auto-save-list-file-prefix "tramp-\\2") t)
+      (list ".*" auto-save-list-file-prefix t)))
 
   ;; increase GC theshold. this can apparently be bad, but good?
   (setq gc-cons-threshold (* 1024 1024 20))
@@ -41,8 +46,9 @@
     (xterm-mouse-mode 1))
 
   ;; flash modeline instead of ringing the bell
-  (setq visible-bell nil
-	ring-bell-function 'dot/flash-mode-line)
+  (setq
+    visible-bell nil
+    ring-bell-function 'dot/flash-mode-line)
   (defun dot/flash-mode-line ()
     (invert-face 'mode-line)
     (run-with-timer 0.1 nil #'invert-face 'mode-line))
@@ -82,17 +88,19 @@
   ;; Add prompt indicator to `completing-read-multiple'.
   ;; We display [CRM<separator>], e.g., [CRM,] if the separator is a comma.
   (defun crm-indicator (args)
-    (cons (format "[CRM%s] %s"
-                  (replace-regexp-in-string
-                   "\\`\\[.*?]\\*\\|\\[.*?]\\*\\'" ""
-                   crm-separator)
-                  (car args))
-          (cdr args)))
+    (cons
+      (format "[CRM%s] %s"
+        (replace-regexp-in-string
+          "\\`\\[.*?]\\*\\|\\[.*?]\\*\\'"
+          ""
+          crm-separator)
+        (car args))
+      (cdr args)))
   (advice-add #'completing-read-multiple :filter-args #'crm-indicator)
 
   ;; Do not allow the cursor in the minibuffer prompt
   (setq minibuffer-prompt-properties
-        '(read-only t cursor-intangible t face minibuffer-prompt))
+    '(read-only t cursor-intangible t face minibuffer-prompt))
   (add-hook 'minibuffer-setup-hook #'cursor-intangible-mode)
 
   ;; allow running more minibuffers from a first
@@ -115,7 +123,10 @@
   (define-key minibuffer-local-map (kbd "C-j") 'next-line)
   (define-key minibuffer-local-map (kbd "C-k") 'previous-line)
   (define-key minibuffer-local-map (kbd "C-u") 'kill-whole-line)
-  (define-key minibuffer-local-map (kbd "C-<backspace>") 'backward-kill-word)
+  (define-key
+    minibuffer-local-map
+    (kbd "C-<backspace>")
+    'backward-kill-word)
 
   (global-set-key (kbd "<mouse-8>") 'previous-buffer)
   (global-set-key (kbd "<mouse-9>") 'next-buffer)
@@ -127,14 +138,12 @@
   ;; project keys
   (global-set-key (kbd "C-c p p") 'project-switch-project)
   ;; load dired instead of prompting
-  (global-set-key (kbd "C-c p d") 'project-dired)
+  (global-set-key (kbd "C-c p d") 'project-dired))
 
-  )
-
-(use-package exec-path-from-shell
+(use-package
+  exec-path-from-shell
   :demand
   :when (or (daemonp) (memq window-system '(mac ns x)))
-  :config
-  (exec-path-from-shell-copy-env "SSH_AUTH_SOCK"))
+  :config (exec-path-from-shell-copy-env "SSH_AUTH_SOCK"))
 
 (provide 'init-emacs)
