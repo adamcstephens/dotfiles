@@ -5,9 +5,16 @@
     (add-hook 'prog-mode-hook 'format-all-mode)
     (add-hook 'prog-mode-hook 'format-all-ensure-formatter)))
 
+(defun dot/elisp-format-local ()
+  (setq-local indent-tabs-mode nil)
+  (setq-local lisp-indent-function nil)
+  (setq-local lisp-indent-offset 2))
+
 (use-package
   elisp-autofmt
-  :hook (emacs-list-mode . elisp-autofmt-mode)
+  :hook
+  ((emacs-lisp-mode . elisp-autofmt-mode)
+   (emacs-lisp-mode . dot/elisp-format-local))
   :custom
   (elisp-autofmt-empty-line-max 1)
   (elisp-autofmt-on-save-p 'always)
