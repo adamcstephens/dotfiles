@@ -25,6 +25,7 @@ in {
     ../apps/polybar
     ../apps/river
     ../apps/rofi
+    ../apps/ssh
     ../apps/vscode
     ../apps/wofi
     ../apps/swayidle

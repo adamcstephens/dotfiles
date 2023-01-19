@@ -1,18 +1,12 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
-  systemd.user.services.ssh-agent = {
-    Unit = {
-      Description = "ssh-agent";
-      Documentation = ["man:ssh-agent(1)"];
-    };
+{...}: {
+  programs.ssh = {
+    enable = true;
+    controlMaster = "auto";
+    forwardAgent = true;
 
-    Service = {
-      Environment = ["SSH_AUTH_SOCK=%t/ssh-agent.socket"];
-      ExecStart = "${pkgs.openssh}/bin/ssh-agent -D -a $SSH_AUTH_SOCK";
-      Restart = "always";
-    };
+    # use header: # -*- mode: ssh-config -*-
+    includes = [
+      "local.config"
+    ];
   };
 }
