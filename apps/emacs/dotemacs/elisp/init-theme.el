@@ -72,11 +72,6 @@
 (use-package rainbow-mode
   :commands rainbow-mode)
 
-;; diminish the mode line
-(use-package diminish
-  :config
-  (diminish 'eldoc-mode))
-
 (use-package all-the-icons)
 
 (use-package doom-modeline
