@@ -51,7 +51,7 @@
   ;; (setq org-latex-packages-alist '(("" "minted")))
 
   ;; async export
-  (setq org-export-in-background t)
+  (setq org-export-in-background nil)
 
   ;; better font support
   (setq org-latex-pdf-process '("xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"
