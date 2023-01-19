@@ -23,25 +23,6 @@ in {
 
   home.file.".xinitrc".source = ./xinitrc;
 
-  xresources.properties = {
-    "Xft.dpi" = config.dotfiles.gui.dpi;
-  };
-
-  xsession = {
-    enable = true;
-    windowManager.xmonad = {
-      enable = true;
-      enableContribAndExtras = true;
-
-      config = ./xmonad.hs;
-    };
-
-    initExtra = ''
-      systemctl --user start xserver-session.target
-      systemctl --user start tray.target
-    '';
-  };
-
   services.screen-locker = lib.mkIf (! config.dotfiles.gui.insecure) {
     enable = true;
     inactiveInterval = 5;
@@ -76,5 +57,24 @@ in {
   systemd.user.services.xss-lock = lib.mkIf (! config.dotfiles.gui.insecure) {
     Install.WantedBy = lib.mkForce ["xserver-session.target"];
     Unit.PartOf = lib.mkForce ["xserver-session.target"];
+  };
+
+  xresources.properties = {
+    "Xft.dpi" = config.dotfiles.gui.dpi;
+  };
+
+  xsession = {
+    enable = true;
+    windowManager.xmonad = {
+      enable = true;
+      enableContribAndExtras = true;
+
+      config = ./xmonad.hs;
+    };
+
+    initExtra = ''
+      systemctl --user start xserver-session.target
+      systemctl --user start tray.target
+    '';
   };
 }
