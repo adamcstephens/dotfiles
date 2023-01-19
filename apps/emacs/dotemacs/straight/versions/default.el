@@ -50,6 +50,7 @@
  ("nix-mode" . "54e5626829168e22126b233e079f04dff3c71b90")
  ("nongnu-elpa" . "0e54bf5f6d048bdb87ae648237dbadc2b2217b4b")
  ("org" . "dff9565c2c8bb7fe100c5278136d3de22ce41051")
+ ("org-autolist" . "0f5dc4e00cb050b94289504925b36c7650552a1a")
  ("org-download" . "19e166f0a8c539b4144cfbc614309d47a9b2a9b7")
  ("org-re-reveal" . "91cdd82c47b86990b5eb41fe34446a042194cc83")
  ("org-superstar-mode" . "03be6c0a3081c46a59b108deb8479ee24a6d86c0")

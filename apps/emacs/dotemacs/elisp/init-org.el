@@ -139,4 +139,8 @@
   :hook
   (org-mode . org-appear-mode))
 
+;; make list entering better
+(use-package org-autolist
+  :hook (org-mode . org-autolist-mode))
+
 (provide 'init-org)
