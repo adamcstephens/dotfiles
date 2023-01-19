@@ -36,9 +36,6 @@
   (straight-pull-all)
   (dot/freeze))
 
-;; put this before any other packages
-(use-package gcmh :init (gcmh-mode 1))
-
 (require 'init-emacs)
 (require 'init-theme)
 
