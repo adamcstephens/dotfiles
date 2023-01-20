@@ -1,3 +1,4 @@
+.cache/
 *.elc
 autosave/
 bookmarks

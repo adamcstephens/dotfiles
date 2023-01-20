@@ -79,6 +79,9 @@
   ;; this is recommended to be disabled if in ssh_config
   (setq tramp-use-ssh-controlmaster-options nil)
 
+  ;; focus help
+  (setq help-window-select t)
+
   ;;
   ;; vertico recommendations
   ;;
