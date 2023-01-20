@@ -81,6 +81,9 @@
 
   ;; focus help
   (setq help-window-select t)
+  ;; focus all new windows
+  (defadvice split-window (after split-window-after activate)
+    (other-window 1))
 
   ;;
   ;; vertico recommendations
