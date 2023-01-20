@@ -57,4 +57,14 @@
 ;; support clipboards in terminals
 (use-package clipetty :init (global-clipetty-mode 1))
 
+(use-package key-chord :commands (key-chord-mode))
+
+(use-package
+  key-seq
+  :after (key-chord meow)
+  :init
+  (key-chord-mode 1)
+  (setq key-chord-two-keys-delay 0.05)
+  (key-seq-define meow-insert-state-keymap "jj" 'meow-insert-exit))
+
 (provide 'init-editor)
