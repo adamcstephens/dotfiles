@@ -9,6 +9,7 @@
       perSystem = {pkgs, ...}: {
         devShells.default = pkgs.mkShellNoCC {
           packages = [
+            pkgs.bubblewrap
             pkgs.nixpkgs-review
           ];
         };
