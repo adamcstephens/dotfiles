@@ -49,8 +49,6 @@ fi
 # shellcheck disable=SC1091
 . "$HOME"/.nix-profile/bin/configure-gtk
 
-sudo systemctl start autorandr
-
 touchpadid="$(xinput list | rg "SYNA.*Touchpad" | sort | tail -n 1 | awk '{print $6}' | cut -f 2 -d=)"
 xinput disable "$touchpadid"
 
