@@ -51,8 +51,8 @@ in {
   };
 
   home.pointerCursor = {
-    package = pkgs.bibata-cursors;
-    name = "Bibata-Original-Classic";
+    package = pkgs.catppuccin-cursors.macchiatoDark;
+    name = "Catppuccin-Macchiato-Dark-Cursors";
     size = 48;
     gtk.enable = true;
     x11.enable = true;
