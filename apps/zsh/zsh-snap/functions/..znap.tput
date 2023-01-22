@@ -1,9 +1,0 @@
-#!/bin/zsh
-zmodload -F zsh/terminfo b:echoti p:terminfo
-
-..znap.tput() {
-  [[ -v terminfo[$1] ]] &&
-      echoti $@
-}
-
-..znap.tput "$@"

@@ -1,44 +1,5 @@
-# bootstrap znap
-zstyle ':znap:*' repos-dir ~/.znap
-source ~/.dotfiles/apps/zsh/zsh-snap/znap.zsh
-
-# znap prompt
-
-# git-subrepo
-fpath=("$HOME/.dotfiles/git-subrepo/share/zsh-completion" $fpath)
-
-ZSH_AUTOSUGGEST_STRATEGY=(history)
-znap source zsh-users/zsh-autosuggestions
-
-ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
-znap source zsh-users/zsh-syntax-highlighting
-
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#7e8294"
-znap source sainnhe/sonokai zsh/.zsh-theme-sonokai-andromeda
-
-znap source MikeDacre/tmux-zsh-vim-titles
-
-# # shellcheck shell=bash
-# autoload -Uz compinit && compinit
-
-# # completion
-# zmodload zsh/complist
-# autoload -U +X bashcompinit && bashcompinit
-
-# # case-insensitive (all),partial-word and then substring completion
-# zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
-
-# # promptinit
-# autoload -U promptinit && promptinit
-
 # history
-export HISTSIZE=10000000
-export HISTFILE="$HOME/.zsh_history"
-export SAVEHIST=$HISTSIZE
-setopt hist_ignore_all_dups
-setopt hist_ignore_space
 setopt inc_append_history
-# setopt share_history
 alias history='fc -l 1 | less'
 
 # 10ms for key sequences
@@ -97,20 +58,6 @@ bindkey "^X^E" edit-command-line
 # brew
 if type brew &>/dev/null; then
   FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
-fi
-
-set +x
-
-# prompt
-eval "$(starship init zsh)"
-
-# direnv
-if command -v direnv &>/dev/null; then
-  eval "$(direnv hook zsh)"
-fi
-
-if command -v zoxide &>/dev/null; then
-  eval "$(zoxide init zsh --cmd j)"
 fi
 
 [[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path zsh 2>/dev/null)"

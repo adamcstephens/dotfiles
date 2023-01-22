@@ -8,6 +8,7 @@
   imports = [
     ../apps/fish
     ../apps/lsd
+    ../apps/zsh
   ];
 
   home.stateVersion = "22.05";

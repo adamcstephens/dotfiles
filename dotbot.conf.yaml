@@ -6,11 +6,9 @@
 - clean: ["~"]
 
 - create:
-    - ~/.cache/znap
     - ~/.gnupg
     - ~/.ssh
     - ~/.tmux/plugins
-    - ~/.znap
     - ~/bin
     - ~/git
     - ~/notes
@@ -60,6 +58,3 @@
     ~/.tzvt_config: apps/tmux/tzvt_config
     ~/.vimrc: apps/vim/vimrc
     ~/.vim: apps/vim/vim
-    ~/.zshrc:
-      force: true
-      path: apps/zsh/zshrc
