@@ -55,3 +55,4 @@
 (require 'init-nix)
 (require 'init-sh)
 (require 'init-ssh)
+(require 'init-yaml)
