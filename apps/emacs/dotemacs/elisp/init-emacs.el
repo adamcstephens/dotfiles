@@ -141,7 +141,10 @@
   ;; project keys
   (global-set-key (kbd "C-c p p") 'project-switch-project)
   ;; load dired instead of prompting
-  (global-set-key (kbd "C-c p d") 'project-dired))
+  (global-set-key (kbd "C-c p d") 'project-dired)
+
+  ;; scratch buffer
+  (global-set-key (kbd "C-c X") 'scratch-buffer))
 
 (use-package
   exec-path-from-shell
