@@ -1,4 +1,5 @@
 .cache/
+.persistent-scratch
 *.elc
 autosave/
 bookmarks

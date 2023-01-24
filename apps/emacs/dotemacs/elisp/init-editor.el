@@ -67,4 +67,8 @@
   (setq key-chord-two-keys-delay 0.05)
   (key-seq-define meow-insert-state-keymap "jj" 'meow-insert-exit))
 
+(use-package
+  persistent-scratch
+  :init (persistent-scratch-autosave-mode 1))
+
 (provide 'init-editor)
