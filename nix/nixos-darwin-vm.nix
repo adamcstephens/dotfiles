@@ -49,7 +49,11 @@
               fsType = "vfat";
             };
 
-            swapDevices = [];
+            swapDevices = [
+              {
+                device = "/dev/disk/by-uuid/f798d1ca-d368-43ec-8235-df4f2de22cca";
+              }
+            ];
 
             networking.useDHCP = lib.mkDefault true;
           })
@@ -79,15 +83,28 @@
                 substituters = [
                   "https://nix-config.cachix.org"
                   "https://nix-community.cachix.org"
-                  "https://adamcstephens-dotfiles.cachix.org"
-                  "https://webcord.cachix.org"
                 ];
                 trusted-public-keys = [
                   "nix-config.cachix.org-1:Vd6raEuldeIZpttVQfrUbLvXJHzzzkS0pezXCVVjDG4="
                   "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-                  "adamcstephens-dotfiles.cachix.org-1:R4yWqVbP5J+UWH4MpaxpCM0By4CKiUtbRWQ9xA278mU="
-                  "webcord.cachix.org-1:l555jqOZGHd2C9+vS8ccdh8FhqnGe8L78QrHNn+EFEs="
                 ];
+              };
+              extraOptions = ''
+                # builders-use-substitutes = true
+                experimental-features = nix-command flakes
+                # flake-registry = /etc/nix/registry.json
+                # don't let nix fill the disk
+                min-free = ${toString (1 * 1024 * 1024 * 1024)}
+                max-free = ${toString (3 * 1024 * 1024 * 1024)}
+              '';
+              gc = {
+                automatic = true;
+                dates = "weekly";
+                options = "--delete-older-than 21d";
+              };
+
+              registry = {
+                nixpkgs.flake = inputs.nixpkgs;
               };
             };
             # Lots of stuff that uses aarch64 that claims doesn't work, but actually works.
@@ -114,38 +131,8 @@
             # For now, we need this since hardware acceleration does not work.
             environment.variables.LIBGL_ALWAYS_SOFTWARE = "1";
 
-            security.polkit.enable = true;
-
-            xdg.portal = {
-              enable = true;
-              wlr.enable = true;
-            };
-
-            # VMware, Parallels both only support this being 0 otherwise you see
-            # "error switching console mode" on boot.
-            boot.loader.systemd-boot.consoleMode = "0";
-
             # We expect to run the VM on hidpi machines.
             hardware.video.hidpi.enable = true;
-
-            hardware.opengl.enable = true;
-            services.xserver = {
-              enable = true;
-              layout = "us";
-              dpi = 220;
-
-              desktopManager = {
-                xterm.enable = false;
-                wallpaper.mode = "fill";
-              };
-
-              displayManager = {
-                sessionPackages = [pkgs.river];
-                defaultSession = "river";
-                gdm.enable = true;
-              };
-            };
-            programs.sway.enable = true;
 
             home-manager.users.adam = {
               nixpkgs.overlays = [self.overlays.default];

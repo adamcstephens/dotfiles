@@ -7,7 +7,6 @@
   homeProfiles = {
     darwin-vm = {
       homeSystem = "aarch64-linux";
-      dotfiles.linuxGui = true;
     };
     bonk = {
       homeSystem = "x86_64-darwin";
