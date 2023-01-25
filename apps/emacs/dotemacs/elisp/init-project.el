@@ -25,7 +25,6 @@
 
 (use-package
   consult-project-extra
-  :init (setq project-switch-commands #'consult-project-extra-find)
   :bind (("H-SPC" . consult-project-extra-find)))
 
 (use-package treemacs)
