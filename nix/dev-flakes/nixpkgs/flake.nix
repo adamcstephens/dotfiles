@@ -6,12 +6,19 @@
   outputs = inputs @ {flake-parts, ...}:
     flake-parts.lib.mkFlake {inherit inputs;} {
       systems = ["x86_64-linux" "aarch64-darwin" "aarch64-linux"];
-      perSystem = {pkgs, ...}: {
+      perSystem = {
+        pkgs,
+        lib,
+        ...
+      }: {
         devShells.default = pkgs.mkShellNoCC {
-          packages = [
-            pkgs.bubblewrap
-            pkgs.nixpkgs-review
-          ];
+          packages =
+            [
+              pkgs.nixpkgs-review
+            ]
+            ++ (lib.optionals pkgs.stdenv.isLinux [
+              pkgs.bubblewrap
+            ]);
         };
       };
     };
