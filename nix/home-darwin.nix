@@ -17,8 +17,6 @@
     pkgs.gnutar
     pkgs.mas
     pkgs.pinentry_mac
-
-    pkgs.wireshark
   ];
 
   home.activation.enable-ssh-agent = lib.hm.dag.entryAfter ["writeBoundary"] ''
