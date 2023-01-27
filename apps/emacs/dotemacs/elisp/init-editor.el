@@ -101,4 +101,15 @@
   persistent-scratch
   :init (persistent-scratch-autosave-mode 1))
 
+(use-package
+  substitute
+  :straight
+  '
+  (substitute
+    :type git
+    :host sourcehut
+    :repo "protesilaos/substitute")
+  :init (setq substitute-highlight t)
+  :bind ("M-# b" . substitute-target-in-buffer))
+
 (provide 'init-editor)
