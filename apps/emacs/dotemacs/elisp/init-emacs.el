@@ -85,6 +85,9 @@
   (defadvice split-window (after split-window-after activate)
     (other-window 1))
 
+  ;; follow symlinks in vcs without prompting
+  (setq vc-follow-symlinks t)
+
   ;;
   ;; vertico recommendations
   ;;
