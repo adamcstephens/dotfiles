@@ -11,6 +11,7 @@
     kernel = pkgs.linuxPackages_6_0;
   };
   xautocfg = pkgs.callPackage ../../apps/xautocfg/package.nix {};
+  xmos_dfu = pkgs.callPackage ./xmos_dfu {};
 }
 // (import ./hm.nix {
   inherit homeConfigurations pkgs;
