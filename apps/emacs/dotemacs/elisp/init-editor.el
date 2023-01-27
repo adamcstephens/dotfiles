@@ -5,7 +5,8 @@
   :ensure nil
   :init
   (global-whitespace-mode)
-  (setq whitespace-style '(face tabs trailing)))
+  (setq whitespace-style '(face tabs trailing))
+  (add-hook 'before-save-hook 'whitespace-cleanup))
 
 ;; allow for running commands without selecting a region
 (use-package
