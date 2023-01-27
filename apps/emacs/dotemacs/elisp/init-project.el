@@ -27,6 +27,25 @@
   consult-project-extra
   :bind (("H-SPC" . consult-project-extra-find)))
 
-(use-package treemacs)
+(use-package
+  treemacs
+  :bind
+  (:map
+    global-map
+    ("M-0" . treemacs-select-window)
+    ("C-x t 1" . treemacs-delete-other-windows)
+    ("C-x t t" . treemacs)
+    ("C-x t d" . treemacs-select-directory)
+    ("C-x t B" . treemacs-bookmark)
+    ("C-x t C-t" . treemacs-find-file)
+    ("C-x t M-t" . treemacs-find-tag)))
+
+(use-package treemacs-magit :after (treemacs magit) :ensure t)
+
+(use-package
+  treemacs-persp
+  :after (treemacs persp-mode)
+  :ensure t
+  :config (treemacs-set-scope-type 'Perspectives))
 
 (provide 'init-project)
