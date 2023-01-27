@@ -9,6 +9,7 @@ eln-cache/
 elpa/
 eshell/
 history
+modified/
 persp-confs/
 projectile-bookmarks.eld
 projectile.cache
