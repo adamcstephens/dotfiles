@@ -143,4 +143,6 @@
 ;; make list entering better
 (use-package org-autolist :hook (org-mode . org-autolist-mode))
 
+(use-package ox-pandoc)
+
 (provide 'init-org)
