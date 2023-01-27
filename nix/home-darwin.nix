@@ -17,6 +17,9 @@
     pkgs.gnutar
     pkgs.mas
     pkgs.pinentry_mac
+
+    # for class
+    pkgs.nodejs
   ];
 
   home.activation.enable-ssh-agent = lib.hm.dag.entryAfter ["writeBoundary"] ''
