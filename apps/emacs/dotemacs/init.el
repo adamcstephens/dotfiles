@@ -38,6 +38,7 @@
 
 (require 'init-emacs)
 (require 'init-theme)
+(require 'init-lib)
 
 (require 'init-complete)
 (require 'init-editor)
