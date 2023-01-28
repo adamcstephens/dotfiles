@@ -98,7 +98,6 @@ in {
 
     # apps
     pkgs.chromium
-    pkgs.cider
     pkgs.firefox-wayland
     pkgs.cinnamon.nemo
     pkgs.remmina
