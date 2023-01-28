@@ -9,6 +9,13 @@
   (straight-pull-all)
   (dot/freeze))
 
+(defun dot/thaw ()
+  "Thaw pinned straight packages and check them"
+  (interactive)
+  (straight-thaw-versions)
+  (straight-prune-build)
+  (straight-check-all))
+
 (defun dot/uuid ()
   (interactive)
   (insert
