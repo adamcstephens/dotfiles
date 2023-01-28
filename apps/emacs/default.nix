@@ -95,7 +95,12 @@ in {
   };
 
   systemd = lib.mkIf pkgs.stdenv.isLinux {
-    user.services.emacs.Service.Environment = ["TERM=xterm-emacs"];
+    user.services.emacs.Service.Environment = [
+      "TERM=xterm-emacs"
+
+      # gnome-keyring-daemon
+      "SSH_AUTH_STOCK=%t/keyring/ssh"
+    ];
   };
 
   launchd = lib.mkIf pkgs.stdenv.isDarwin {
