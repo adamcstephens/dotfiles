@@ -1,5 +1,6 @@
 (use-package persp-mode :init (persp-mode 1))
 
+;; enable automatic project integration with persp
 (use-package
   persp-mode-project-bridge
   :after persp-mode
@@ -12,8 +13,7 @@
         (persp-mode-project-bridge-kill-perspectives))))
   (persp-mode . persp-mode-project-bridge-mode)
   :init (persp-mode-project-bridge-mode 1)
-  :config (setq persp-emacsclient-init-frame-behaviour-override "main")
-  :bind (("C-c p p" . persp-switch)))
+  :config (setq persp-emacsclient-init-frame-behaviour-override "main"))
 
 (use-package
   direnv

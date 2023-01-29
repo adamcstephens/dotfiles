@@ -157,7 +157,8 @@
   (setq project-switch-commands #'project-dired)
 
   ;; scratch buffer
-  (global-set-key (kbd "C-c X") 'scratch-buffer))
+  (global-set-key (kbd "C-c X") 'scratch-buffer)
+  :bind (("C-c p p" . project-switch-project)))
 
 (use-package
   exec-path-from-shell
