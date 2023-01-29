@@ -441,6 +441,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-gc": {
+      "locked": {
+        "lastModified": 1675019928,
+        "narHash": "sha256-l1g3DeahKlenbsqONywhYYh55wYOKJL4T8Ch5I7Rg44=",
+        "owner": "adamcstephens",
+        "repo": "nixpkgs",
+        "rev": "133f2623bd73eb1440d89ec3015eab3b30da4c22",
+        "type": "github"
+      },
+      "original": {
+        "owner": "adamcstephens",
+        "ref": "cheetah/3.6-rc3",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs-lib": {
       "locked": {
         "dir": "lib",
@@ -578,6 +594,7 @@
         "nix-colors": "nix-colors",
         "nixinate": "nixinate",
         "nixpkgs": "nixpkgs_3",
+        "nixpkgs-gc": "nixpkgs-gc",
         "webcord": "webcord"
       }
     },
