@@ -42,6 +42,11 @@
   (unless (display-graphic-p)
     (xterm-mouse-mode 1))
 
+  ;; don't jump when scrolling off screen
+  (setq scroll-conservatively 101)
+  ;; keep at least this many lines while scrolling
+  (setq scroll-margin 4)
+
   ;; flash modeline instead of ringing the bell
   (setq
     visible-bell nil
