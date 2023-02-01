@@ -14,6 +14,46 @@
 (defun dot/org-slides-export-setup ()
   (add-hook 'after-save-hook #'dot/org-slides-export nil 'local))
 
+(defun dot/org-html--format-image (source attributes info)
+  "Optionally embed image into html as base64."
+  (let
+    (
+      (source
+        (replace-regexp-in-string
+          "file://" ""
+          (replace-regexp-in-string "%20" " " source
+            nil 'literal)))) ;; not sure whether this is necessary
+    (if (string= "svg" (file-name-extension source))
+      (org-html--svg-image source attributes info)
+      (if t
+        (org-html-close-tag
+          "img"
+          (format "src=\"data:image/%s;base64,%s\"%s %s"
+            (or (file-name-extension source) "")
+            (base64-encode-string
+              (with-temp-buffer
+                (insert-file-contents-literally
+                  (expand-file-name source))
+                (buffer-string)))
+            (file-name-nondirectory source)
+            (org-html--make-attribute-string attributes))
+          info)
+        (org-html-close-tag
+          "img"
+          (org-html--make-attribute-string
+            (org-combine-plists
+              (list
+                :src source
+                :alt
+                (if (string-match-p "^ltxpng/" source)
+                  (org-html-encode-plain-text
+                    (org-find-text-property-in-string
+                      'org-latex-src
+                      source))
+                  (file-name-nondirectory source)))
+              attributes))
+          info)))))
+
 ;; the org package itself
 (use-package
   org
@@ -118,7 +158,21 @@
         ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
         ("\\paragraph{%s}" . "\\paragraph*{%s}"))))
 
-  :config (setq org-attach-id-dir (expand-file-name ".attach/" org-directory))
+  ;; (add-to-list
+  ;;   'org-capture-templates
+  ;;   '
+  ;;   (
+  ;;     ("m"
+  ;;       "Meeting Notes"
+  ;;       entry
+  ;;       (file+headline (concat org-directory "kent.org") "Meetings")
+  ;;       "* %T ")))
+
+  :config
+  (setq org-attach-id-dir (expand-file-name ".attach/" org-directory))
+  (advice-add
+    #'org-html--format-image
+    :override #'dot/org-html--format-image)
   :hook
   (org-mode . (lambda () (display-line-numbers-mode -1)))
   (org-mode . dot/org-slides-export-setup)
