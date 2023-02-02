@@ -7,13 +7,14 @@
   gawk,
   gnugrep,
   gnused,
-  kernel,
+  linuxPackages,
   lib,
   pciutils,
   powertop,
   resholve,
   util-linux,
   xorg,
+  xxd,
 }:
 resholve.mkDerivation {
   pname = "s0ix-selftest-tool";
@@ -51,17 +52,18 @@ resholve.mkDerivation {
         gawk
         gnugrep
         gnused
-        kernel.turbostat
+        linuxPackages.turbostat
         pciutils
         powertop
         util-linux
         xorg.xset
+        xxd
       ];
       fake.external = ["dmesg" "sudo"];
       execer = [
         "cannot:${powertop}/bin/powertop"
         "cannot:${util-linux}/bin/rtcwake"
-        "cannot:${kernel.turbostat}/bin/turbostat"
+        "cannot:${linuxPackages.turbostat}/bin/turbostat"
       ];
     };
   };
