@@ -7,7 +7,7 @@ if [ -x /opt/homebrew/bin/brew ]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
-export PAGER="$HOME/bin/pager"
+export PAGER="$HOME/.dotfiles/bin/pager"
 export EDITOR="$HOME/.dofiles/bin/editor"
 
 # shell
