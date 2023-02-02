@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+if [[ -z $1 ]]; then
+  MODE=window
+else
+  MODE=$1
+fi
+
+OUTPUT="$HOME"/Pictures/$(date +'screenshot_%Y-%m-%d-%H%M%S.png')
+
+case $MODE in
+window)
+  if [ -n "$DISPLAY" ]; then
+    maim -i $(xdotool getactivewindow) "$OUTPUT"
+  fi
+  ;;
+box)
+  if [ -n "$DISPLAY" ]; then
+    maim -s "$OUTPUT"
+  else
+    slurp | grim -g - "$OUTPUT" && cat "$OUTPUT" | wl-copy
+  fi
+  ;;
+screen)
+  if [ -n "$DISPLAY" ]; then
+    maim "$OUTPUT"
+  else
+    grim "$OUTPUT" && cat "$OUTPUT" | wl-copy
+  fi
+  ;;
+*)
+  echo "Unsupported mode $MODE"
+  exit 1
+  ;;
+esac

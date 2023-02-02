@@ -15,6 +15,7 @@
           packages =
             [
               pkgs.nixpkgs-review
+              pkgs.deadnix
             ]
             ++ (lib.optionals pkgs.stdenv.isLinux [
               pkgs.bubblewrap

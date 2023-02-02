@@ -142,6 +142,21 @@ in {
     };
   };
 
+  xdg.desktopEntries = {
+    screenshot = {
+      name = "screenshot";
+      exec = "${../bin/screenshot} screen";
+    };
+    screenshotBox = {
+      name = "screenshot box";
+      exec = "${../bin/screenshot} box";
+    };
+    screenshotWindow = {
+      name = "screenshot window";
+      exec = "${../bin/screenshot} window";
+    };
+  };
+
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {
@@ -153,6 +168,7 @@ in {
       "application/x-extension-xhtml" = ["firefox.desktop"];
       "application/xhtml+xml" = ["firefox.desktop"];
       "default-web-browser" = ["firefox.desktop"];
+      "image/png" = ["feh.desktop"];
       "text/html" = ["firefox.desktop"];
       "x-scheme-handler/about" = ["firefox.desktop"];
       "x-scheme-handler/chrome" = ["firefox.desktop"];

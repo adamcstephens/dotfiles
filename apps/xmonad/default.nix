@@ -23,6 +23,11 @@ in {
 
   home.file.".xinitrc".source = ./xinitrc;
 
+  home.packages = [
+    pkgs.maim
+    pkgs.xdotool
+  ];
+
   services.screen-locker = lib.mkIf (! config.dotfiles.gui.insecure) {
     enable = true;
     inactiveInterval = 5;
