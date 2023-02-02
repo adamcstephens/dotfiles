@@ -99,7 +99,7 @@ in {
       "TERM=xterm-emacs"
 
       # gnome-keyring-daemon
-      "SSH_AUTH_STOCK=%t/keyring/ssh"
+      "SSH_AUTH_SOCK=%t/keyring/ssh"
     ];
   };
 
