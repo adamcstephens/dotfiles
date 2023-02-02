@@ -11,16 +11,18 @@ fi
 
 unset TMPDIR
 
-if [ -z "$INSIDE_EMACS" ]; then
-  if [ -n "$DISPLAY" ]; then
-    args="--create-frame"
-  else
-    args="--tty"
-  fi
-fi
+if [ -z "$INSIDE_EMACS" ] && [ -n "$DISPLAY" ]; then
+  args="--create-frame"
 
-if [ -z "$IS_EDITOR" ]; then
-  args="$args --no-wait"
+  if [ -z "$IS_EDITOR" ]; then
+    args="$args --no-wait"
+  fi
+else
+  if [ -z "$INSIDE_EMACS" ]; then
+    args="--tty"
+  elif [ -z "$IS_EDITOR" ]; then
+    args="$args --no-wait"
+  fi
 fi
 
 exec emacsclient $args "$@"
