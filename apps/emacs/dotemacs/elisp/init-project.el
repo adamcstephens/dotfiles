@@ -1,4 +1,7 @@
-(use-package persp-mode :init (persp-mode 1))
+(use-package
+  persp-mode
+  :init (persp-mode 1)
+  :bind (("C-c p P" . persp-switch)))
 
 ;; enable automatic project integration with persp
 (use-package
