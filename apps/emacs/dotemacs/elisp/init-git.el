@@ -1,5 +1,6 @@
 (use-package
   magit
+  :commands git-commit-mode
   :bind ("C-c G" . magit)
   :init (setq magit-save-repository-buffers nil))
 
@@ -25,7 +26,9 @@
   (setq-default gac-debounce-interval 6000))
 
 ;; load diff mode on cli commit
-(add-to-list 'auto-mode-alist '("/COMMIT_EDITMSG\\'" . diff-mode))
+(add-to-list
+  'auto-mode-alist
+  '("/COMMIT_EDITMSG\\'" . git-commit-mode))
 
 ;; tweak the vc output in the mode line
 (advice-add
