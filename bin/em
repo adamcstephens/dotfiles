@@ -5,19 +5,22 @@ if [ "$(uname -s)" = "Darwin" ]; then
 fi
 
 if ! command -v emacsclient >/dev/null 2>&1; then
-  echo "No emacsclient, falling back to editor"
-  exec ~/.dotfiles/bin/editor $@
+  echo "No emacsclient, falling back to vim"
+  exec vim "$@"
 fi
 
 unset TMPDIR
 
-if [ -n "$DISPLAY" ]; then
-  args="--create-frame"
-  if [ -z "$IS_EDITOR" ]; then
-    args="$args --no-wait"
+if [ -z "$INSIDE_EMACS" ]; then
+  if [ -n "$DISPLAY" ]; then
+    args="--create-frame"
+  else
+    args="--tty"
   fi
-else
-  args="--tty"
+fi
+
+if [ -z "$IS_EDITOR" ]; then
+  args="$args --no-wait"
 fi
 
 exec emacsclient $args "$@"

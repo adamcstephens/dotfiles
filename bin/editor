@@ -15,6 +15,3 @@ if [ "$USER" != "root" ]; then
     exec em $@
   fi
 fi
-
-# fallback to vim
-exec vim $@
