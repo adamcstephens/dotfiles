@@ -199,4 +199,27 @@
 
 (use-package ox-pandoc)
 
+(use-package
+  org-present
+  :hook
+  (
+    (org-present-mode
+      .
+      (lambda ()
+        (org-present-big)
+        (org-display-inline-images)
+        (org-present-hide-cursor)
+        (org-present-read-only)
+        (hide-mode-line-mode 1)))
+    (org-present-mode-quit
+      .
+      (lambda ()
+        (org-present-small)
+        (org-remove-inline-images)
+        (org-present-show-cursor)
+        (hide-mode-line-mode -1)
+        (org-present-read-write)))))
+
+(use-package hide-mode-line)
+
 (provide 'init-org)

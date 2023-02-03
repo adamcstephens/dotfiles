@@ -156,14 +156,8 @@
   (add-hook 'prog-mode-hook #'hl-line-mode)
   (add-hook 'text-mode-hook #'hl-line-mode)
 
-  ;; project keys
-  (global-set-key (kbd "C-c p p") 'project-switch-project)
-  (global-set-key (kbd "C-c p d") 'project-dired)
-  (setq project-switch-commands #'project-dired)
-
   ;; scratch buffer
-  (global-set-key (kbd "C-c X") 'scratch-buffer)
-  :bind (("C-c p p" . project-switch-project)))
+  (global-set-key (kbd "C-c X") 'scratch-buffer))
 
 (use-package
   exec-path-from-shell

@@ -1,7 +1,13 @@
 (use-package
-  persp-mode
-  :init (persp-mode 1)
-  :bind (("C-c p P" . persp-switch)))
+  project
+  :init (setq project-switch-commands #'project-dired)
+  :bind
+  (("H-SPC" . project-find-file)
+    ("C-c p p" . project-switch-project)
+    ("C-c p p" . project-switch-project)
+    ("C-c p d" . project-dired)))
+
+(use-package persp-mode :init (persp-mode 1))
 
 ;; enable automatic project integration with persp
 (use-package
@@ -25,10 +31,6 @@
   (setq direnv-always-show-summary nil)
   ;; don't display blocked env message
   (add-to-list 'warning-suppress-types '(direnv)))
-
-(use-package
-  consult-project-extra
-  :bind (("H-SPC" . consult-project-extra-find)))
 
 (use-package
   treemacs
