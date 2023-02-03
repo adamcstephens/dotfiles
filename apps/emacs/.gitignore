@@ -5,6 +5,7 @@ autosave/
 bookmarks
 build-cache.el
 build/
+elisp-autofmt-cache/
 eln-cache/
 elpa/
 eshell/
