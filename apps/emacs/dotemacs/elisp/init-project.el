@@ -1,6 +1,6 @@
 (use-package
   project
-  :init (setq project-switch-commands #'project-dired)
+  :init (setq project-switch-commands #'project-find-file)
   :bind
   (("H-SPC" . project-find-file)
     ("C-c p p" . project-switch-project)
