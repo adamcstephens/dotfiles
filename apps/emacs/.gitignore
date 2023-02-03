@@ -20,3 +20,4 @@ tramp
 tabsession.el
 transient/
 undo-fu-session/
+var/

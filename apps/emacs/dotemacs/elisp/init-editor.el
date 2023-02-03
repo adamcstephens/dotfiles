@@ -112,4 +112,10 @@
   :init (setq substitute-highlight t)
   :bind ("M-# b" . substitute-target-in-buffer))
 
+(use-package
+  olivetti
+  :custom
+  (olivetti-margin-width 5)
+  (olivetti-style nil))
+
 (provide 'init-editor)
