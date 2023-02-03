@@ -315,12 +315,12 @@
     "when": "remoteFileDialogVisible"
   },
   {
-    "key": "alt+cmd+o",
-    "command": "workbench.action.files.openFolderViaWorkspace"
-  },
-  {
     "key": "cmd+o",
     "command": "-workbench.action.files.openFolderViaWorkspace",
     "when": "!openFolderWorkspaceSupport && workbenchState == 'workspace'"
+  },
+  {
+    "key": "alt+cmd+o",
+    "command": "workbench.action.files.openFolder"
   }
 ]
