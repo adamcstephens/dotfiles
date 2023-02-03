@@ -34,26 +34,25 @@
     ("C-c p r" . consult-recent-file)))
 
 ;; completion style
+;; (use-package
+;;   fussy
+;;   :ensure t
+;;   :config
+;;   (push 'fussy completion-styles)
+;;   (setq
+;;    ;; For example, project-find-file uses 'project-files which uses
+;;    ;; substring completion by default. Set to nil to make sure it's using
+;;    ;; flx.
+;;    completion-category-defaults nil
+;;    completion-category-overrides nil))
+
 (use-package
-  fussy
-  :ensure t
+  prescient
   :config
-  (push 'fussy completion-styles)
-  (setq
-    ;; For example, project-find-file uses 'project-files which uses
-    ;; substring completion by default. Set to nil to make sure it's using
-    ;; flx.
-    completion-category-defaults nil
-    completion-category-overrides nil))
+  (push 'prescient completion-styles)
+  (prescient-persist-mode 1))
 
-;; (use-package prescient
-;;   :init
-;;   (push 'prescient completion-styles)
-;;   (prescient-persist-mode 1))
-
-;; (use-package vertico-prescient
-;;   :init
-;;   (vertico-prescient-mode 1))
+(use-package vertico-prescient :init (vertico-prescient-mode 1))
 
 ;; jump from completion to other tasks
 (use-package
