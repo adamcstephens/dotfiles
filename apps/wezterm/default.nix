@@ -7,21 +7,22 @@
   colors = config.colorScheme.colors;
   slug = config.colorScheme.slug;
 
-  package = pkgs.wezterm.overrideAttrs (old: rec {
-    version = "20221206";
-    src = pkgs.fetchFromGitHub {
-      owner = "wez";
-      repo = "wezterm";
-      rev = "92e851d648a0ebba5a855fcc59f7e30bb69d0ea0";
-      hash = "sha256-SuqmPcDPSdO2hqZwxLmH3tYHYPqYyyiT/4gQMGx6554=";
-      fetchSubmodules = true;
-    };
-    cargoDeps = old.cargoDeps.overrideAttrs (lib.const {
-      name = "${old.pname}-vendor.tar.gz";
-      inherit src;
-      outputHash = "sha256-eVA/iObrGgQomxuUSF1tUIFuNWq1rqYvVFyelX4VFKc=";
-    });
-  });
+  package = pkgs.wezterm;
+  # package = pkgs.wezterm.overrideAttrs (old: rec {
+  #   version = "20221206";
+  #   src = pkgs.fetchFromGitHub {
+  #     owner = "wez";
+  #     repo = "wezterm";
+  #     rev = "92e851d648a0ebba5a855fcc59f7e30bb69d0ea0";
+  #     hash = "sha256-SuqmPcDPSdO2hqZwxLmH3tYHYPqYyyiT/4gQMGx6554=";
+  #     fetchSubmodules = true;
+  #   };
+  #   cargoDeps = old.cargoDeps.overrideAttrs (lib.const {
+  #     name = "${old.pname}-vendor.tar.gz";
+  #     inherit src;
+  #     outputHash = "sha256-eVA/iObrGgQomxuUSF1tUIFuNWq1rqYvVFyelX4VFKc=";
+  #   });
+  # });
 in {
   programs.wezterm = {
     enable = true;

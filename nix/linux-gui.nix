@@ -31,6 +31,7 @@ in {
     ../apps/swayidle
     ../apps/xmonad
     ../apps/waybar
+    ../apps/wezterm
     ../apps/wob
   ];
 
