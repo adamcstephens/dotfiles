@@ -44,25 +44,25 @@
           config.allowUnfree = true;
         };
 
-        devShells.default = pkgs.mkShellNoCC {
-          name = "dots";
-          packages =
-            [
-              pkgs.alejandra
-              pkgs.cachix
-              pkgs.just
-              pkgs.nil
-              pkgs.nodePackages.prettier
-              pkgs.python3Minimal
-            ]
-            ++ (lib.optionals pkgs.stdenv.isLinux [
-              (pkgs.ghc.withPackages (ps: [
-                ps.haskell-language-server
-                ps.ormolu
-                ps.xmonad
-                ps.xmonad-contrib
-              ]))
-            ]);
+        devShells = {
+          default = pkgs.mkShellNoCC {
+            name = "dots";
+            packages =
+              [
+                pkgs.alejandra
+                pkgs.just
+                pkgs.nil
+                pkgs.nodePackages.prettier
+              ]
+              ++ (lib.optionals pkgs.stdenv.isLinux [
+                (pkgs.ghc.withPackages (ps: [
+                  ps.haskell-language-server
+                  ps.ormolu
+                  ps.xmonad
+                  ps.xmonad-contrib
+                ]))
+              ]);
+          };
         };
 
         packages = import ./nix/packages {
