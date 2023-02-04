@@ -103,6 +103,7 @@ in {
     pkgs.remmina
     pkgs.slack
     pkgs.tdesktop
+    pkgs.webcord
   ];
 
   programs.feh.enable = true;

@@ -100,13 +100,6 @@
           then "/Users/${username}"
           else "/home/${username}";
 
-        cliPkgs = [
-          pkgs.terminfo
-        ];
-        guiPkgs = [
-          inputs.webcord.packages.${system}.default
-        ];
-
         hmModules =
           [
             ./dotfiles.nix
@@ -139,20 +132,13 @@
               };
               home.username = username;
               home.homeDirectory = homeDir;
-              home.packages = cliPkgs;
               nix.registry.nixpkgs.flake = lib.mkDefault inputs.nixpkgs;
             }
           ]
           ++ modules
           ++ (pkgs.lib.optionals pkgs.stdenv.isDarwin [./home-darwin.nix])
           ++ (pkgs.lib.optionals pkgs.stdenv.isLinux [./home-linux.nix])
-          ++ (pkgs.lib.optionals dotfiles.linuxGui [
-            ./linux-gui.nix
-            {
-              # install packages from the dotfiles flake
-              home.packages = guiPkgs;
-            }
-          ]);
+          ++ (pkgs.lib.optionals dotfiles.linuxGui [./linux-gui.nix]);
       in {
         homeConfig = inputs.home-manager.lib.homeManagerConfiguration {
           inherit pkgs;

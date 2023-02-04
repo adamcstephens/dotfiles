@@ -7,10 +7,7 @@
     emacs.overlays.emacs
     emacs.overlays.package
     fishPlugins
-    terminfo
   ];
-
-  terminfo = _: prev: {terminfo = prev.callPackage ./packages/terminfo {};};
 
   # disable tests since they broke on darwin...
   fishPlugins = _: prev: {

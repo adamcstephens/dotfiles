@@ -44,6 +44,9 @@
   '';
 
   home.packages = [
+    # my terms
+    (pkgs.callPackage ./packages/terminfo {})
+
     pkgs.bat
     pkgs.bc
     pkgs.btop
