@@ -1,3 +1,9 @@
+(use-package
+  avy
+  :init
+  (avy-setup-default)
+  (global-set-key (kbd "C-c C-j") 'avy-resume))
+
 (use-package editorconfig :ensure :config (editorconfig-mode 1))
 
 (use-package
@@ -21,7 +27,7 @@
 ;; better undo support
 (use-package
   undo-fu
-  :init (global-set-key (kbd "C-r") 'undo-fu-only-redo))
+  :bind (("C-x u" . undo-fu-only-undo) ("C-r" . undo-fu-only-redo)))
 
 ;; store undo across sessions
 (use-package undo-fu-session :init (global-undo-fu-session-mode))
