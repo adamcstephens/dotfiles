@@ -56,7 +56,7 @@
     (run-with-timer 0.1 nil #'invert-face 'mode-line))
 
   ;; enable line numbers
-  (global-display-line-numbers-mode)
+  ;; (global-display-line-numbers-mode)
 
   ;; store recent files
   (recentf-mode 1)
