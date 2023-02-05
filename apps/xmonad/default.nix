@@ -89,6 +89,9 @@ in {
       systemctl --user start tray.target
 
       export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/keyring/ssh
+
+      touchpadid="$(xinput list | rg "SYNA.*Touchpad" | sort | tail -n 1 | awk '{print $6}' | cut -f 2 -d=)"
+      xinput disable "$touchpadid"
     '';
   };
 }
