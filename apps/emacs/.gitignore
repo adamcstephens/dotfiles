@@ -1,4 +1,5 @@
 .cache/
+.mc-lists.el
 .persistent-scratch
 *.elc
 autosave/
