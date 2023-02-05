@@ -19,6 +19,7 @@ in {
   imports = [
     ../apps/dunst
     ../apps/gammastep
+    ../apps/gnome-keyring-daemon
     ../apps/hyprland
     ../apps/kanshi
     ../apps/kitty

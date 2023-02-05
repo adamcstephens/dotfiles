@@ -34,13 +34,6 @@ fi
 # app specific
 #
 
-# gnome-keyring-daemon
-if command -v gnome-keyring-daemon &>/dev/null; then
-  if [ -n "$DESKTOP_SESSION" ]; then
-    eval "$(gnome-keyring-daemon --start --components=secrets,pkcs11)"
-  fi
-fi
-
 # gsed
 if command -v gsed >/dev/null; then
   alias sed=gsed

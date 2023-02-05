@@ -87,6 +87,8 @@ in {
     initExtra = ''
       systemctl --user start xserver-session.target
       systemctl --user start tray.target
+
+      export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/keyring/ssh
     '';
   };
 }
