@@ -8,7 +8,7 @@ in {
   '';
 
   systemd.user.services.xautocfg = {
-    Unit.BindsTo = ["xserver-session.target"];
+    Unit.PartOf = ["xserver-session.target"];
     Service = {
       ExecStart = "${package}/bin/xautocfg";
       Restart = "on-failure";
