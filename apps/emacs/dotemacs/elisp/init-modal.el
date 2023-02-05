@@ -163,7 +163,7 @@
   ;; use system clipboard
   (setq meow-use-clipboard t)
   ;; reduce delay to avoid spurious commands
-  (setq meow-esc-delay 0.05))
+  (setq meow-esc-delay 0.1))
 
 (use-package
   xah-fly-keys
@@ -176,7 +176,8 @@
   boon
   :disabled
   :config (require 'boon-qwerty)
-  ;; (boon-mode) ;; to enable boon everywhere
+  (boon-mode) ;; to enable boon everywhere
+  ;; :bind (:boon-command-map ("r" . consult-line)))
   )
 
 (provide 'init-modal)
