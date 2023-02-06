@@ -1,3 +1,7 @@
+(defun dot/open-in-finder ()
+  (interactive)
+  (shell-command "open -R ."))
+
 (use-package
   avy
   :init
