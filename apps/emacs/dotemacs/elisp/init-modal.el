@@ -159,6 +159,7 @@
 
 (use-package
   meow
+  :disabled
   :config (dot/meow-setup) (meow-global-mode 1)
   ;; use system clipboard
   (setq meow-use-clipboard t)
