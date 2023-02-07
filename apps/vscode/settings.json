@@ -174,9 +174,6 @@
   "[yuck]": {
     "editor.defaultFormatter": "eww-yuck.yuck"
   },
-  "base16.generator.activatedThemes": [
-    "base16-ayu-dark"
-  ],
   "terminal.integrated.enablePersistentSessions": false,
   "nix.serverPath": "nil",
   "update.mode": "none",
