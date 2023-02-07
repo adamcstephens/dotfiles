@@ -24,6 +24,24 @@
 ;; Enable rich annotations using the Marginalia package
 (use-package marginalia :init (marginalia-mode))
 
+;; set consult-workspace buffer list
+(defvar dot/consult--source-workspace
+  (list
+    :name "Workspace Buffers"
+    :narrow ?w
+    :history 'buffer-name-history
+    :category 'buffer
+    :state #'consult--buffer-state
+    :default t
+    :items
+    (lambda ()
+      (consult--buffer-query
+        :predicate #'tabspaces--local-buffer-p
+        :sort 'visibility
+        :as #'buffer-name)))
+
+  "Set workspace buffer list for consult-buffer.")
+
 ;; add some more searching commands
 ;; Example configuration for Consult
 (use-package
@@ -138,7 +156,11 @@
   ;; Optionally configure the narrowing key.
   ;; Both < and C-+ work reasonably well.
   (setq consult-narrow-key "<") ;; "C-+"
-  )
+
+  (consult-customize consult--source-buffer :hidden t :default nil)
+  (add-to-list
+    'consult-buffer-sources
+    'dot/consult--source-workspace))
 
 ;; completion style
 ;; (use-package
