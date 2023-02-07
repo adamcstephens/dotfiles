@@ -1,7 +1,7 @@
 (use-package
   magit
   :commands git-commit-mode
-  :bind ("C-c G" . magit)
+  :bind (("C-c g" . magit-file-dispatch))
   :init (setq magit-save-repository-buffers nil))
 
 (use-package
