@@ -2,6 +2,7 @@
   magit
   :commands git-commit-mode
   :bind (("C-c g" . magit-file-dispatch))
+  :hook (focus-in . magit-refresh)
   :init (setq magit-save-repository-buffers nil))
 
 (use-package
