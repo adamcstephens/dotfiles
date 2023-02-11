@@ -146,6 +146,10 @@ in {
   };
 
   xdg.desktopEntries = {
+    reboot = {
+      name = "reboot";
+      exec = "/run/current-system/sw/bin/systemctl reboot";
+    };
     screenshot = {
       name = "screenshot";
       exec = "${../bin/screenshot} screen";
