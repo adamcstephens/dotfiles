@@ -98,8 +98,7 @@ in {
     user.services.emacs.Service.Environment = [
       "TERM=xterm-emacs"
 
-      # gnome-keyring-daemon
-      "SSH_AUTH_SOCK=%t/keyring/ssh"
+      "SSH_AUTH_SOCK=%t/ssh-agent"
     ];
   };
 
