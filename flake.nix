@@ -60,6 +60,13 @@
                 ]))
               ]);
           };
+          miryoku_kmonad = pkgs.mkShell {
+            name = "miryoku_kmonad";
+            packages = [
+              pkgs.gnumake
+              pkgs.gnused
+            ];
+          };
           nixpkgs = pkgs.mkShellNoCC {
             packages =
               [
