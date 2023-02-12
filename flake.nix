@@ -61,6 +61,16 @@
                 ]))
               ]);
           };
+          nixpkgs = pkgs.mkShellNoCC {
+            packages =
+              [
+                pkgs.nixpkgs-review
+                pkgs.deadnix
+              ]
+              ++ (lib.optionals pkgs.stdenv.isLinux [
+                pkgs.bubblewrap
+              ]);
+          };
         };
 
         packages = import ./nix/packages {
