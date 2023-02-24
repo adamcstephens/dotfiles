@@ -2,7 +2,6 @@
   description = "A very basic flake";
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    nixpkgs-gc.url = "github:adamcstephens/nixpkgs/cheetah/3.6-rc3";
 
     apple-fonts.url = "github:adamcstephens/apple-fonts.nix";
     darwin.url = "github:lnl7/nix-darwin/master";

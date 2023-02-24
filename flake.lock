@@ -64,11 +64,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1676659814,
-        "narHash": "sha256-D58bW6z0NjqoRCQN8eTERkeN9hs6HBQufxaCPkmyPfs=",
+        "lastModified": 1677262516,
+        "narHash": "sha256-6g76KWe/+D/afMoM4ycjbGOsTfFLP6sVaP+wMK3liAI=",
         "owner": "nix-community",
         "repo": "emacs-overlay",
-        "rev": "ab0f3828a6305fe7fd8c4909e67c1c2107292486",
+        "rev": "88e410d7f1ddef554b40f66755626e5c883487d9",
         "type": "github"
       },
       "original": {
@@ -133,11 +133,11 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1676367705,
-        "narHash": "sha256-un5UbRat9TwruyImtwUGcKF823rCEp4fQxnsaLFL7CM=",
+        "lastModified": 1677104801,
+        "narHash": "sha256-2V5nKOYVFMYlseYdDKiEaww2xqcE0GtS1ax3SoUX99I=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "da72e6fc6b7dc0c3f94edbd310aae7cd95c678b5",
+        "rev": "4295fdfa6b0005c32f2e1f0b732faf5810c1bc7f",
         "type": "github"
       },
       "original": {
@@ -199,22 +199,6 @@
         "type": "github"
       }
     },
-    "nixpkgs-gc": {
-      "locked": {
-        "lastModified": 1675019928,
-        "narHash": "sha256-l1g3DeahKlenbsqONywhYYh55wYOKJL4T8Ch5I7Rg44=",
-        "owner": "adamcstephens",
-        "repo": "nixpkgs",
-        "rev": "133f2623bd73eb1440d89ec3015eab3b30da4c22",
-        "type": "github"
-      },
-      "original": {
-        "owner": "adamcstephens",
-        "ref": "cheetah/3.6-rc3",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "nixpkgs-lib": {
       "locked": {
         "dir": "lib",
@@ -266,11 +250,11 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1676549890,
-        "narHash": "sha256-sq/WcOEAl7gWrrfGkWdnyYazRyTf+enEim/o6LOQzI8=",
+        "lastModified": 1677142198,
+        "narHash": "sha256-Y/uC2ZmkQkyrdRZ5szZilhZ/46786Wio5CGTgL+Vb/c=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "8c66bd1b68f4708c90dcc97c6f7052a5a7b33257",
+        "rev": "03fb72201639e5274fee6d77b0d9c66e98329aba",
         "type": "github"
       },
       "original": {
@@ -289,8 +273,7 @@
         "home-manager": "home-manager",
         "nix-colors": "nix-colors",
         "nixinate": "nixinate",
-        "nixpkgs": "nixpkgs_3",
-        "nixpkgs-gc": "nixpkgs-gc"
+        "nixpkgs": "nixpkgs_3"
       }
     },
     "utils": {
