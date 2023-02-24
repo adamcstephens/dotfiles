@@ -3,7 +3,6 @@
   homeConfigurations,
   ...
 }: let
-  cachixRepo = "adamcstephens-dotfiles";
   nixCmd = ''${pkgs.nix}/bin/nix --extra-experimental-features "nix-command flakes"'';
 in rec {
   home-profile-selector = pkgs.writeScriptBin "home-profile-selector" ''
@@ -61,11 +60,6 @@ in rec {
         ${nixCmd} profile install $old_profile
         exit 1
       fi
-    fi
-
-    if [ "$ACTION" = "push" ]; then
-      echo " cachix upload for $HMPROFILE"
-      ${nixCmd} build --no-link $TARGET --json | jq -r '.[].outputs | to_entries[].value' | ${pkgs.cachix}/bin/cachix push ${cachixRepo}
     fi
 
     echo "✅ Success!"
