@@ -15,6 +15,11 @@ in {
   programs.fish = {
     enable = true;
     plugins = [];
+
+    interactiveShellInit = ''
+      set -U __done_notification_urgency_level_failure normal
+    '';
+
     shellAliases = {
       cat = "bat";
       cnf = "command-not-found";
@@ -22,9 +27,5 @@ in {
       nix = "nix --print-build-logs";
       dog = "doggo";
     };
-
-    # interactiveShellInit = ''
-    #   sh ${nix-colors-contrib.shellThemeFromScheme {scheme = config.colorScheme;}}
-    # '';
   };
 }
