@@ -26,7 +26,7 @@
     };
     nix = {
       settings = {
-        auto-optimise-store = true;
+        auto-optimise-store = false;
 
         trusted-users = ["root" "astephe9"];
         substituters = [
@@ -69,6 +69,28 @@
     };
 
     time.timeZone = "America/New_York";
+
+    # While it’s possible to set `nix.settings.auto-optimise-store`, it sometimes
+    # causes problems on Darwin. So run a job periodically to optimise the store:
+    # https://github.com/NixOS/nix/issues/7273
+    launchd.daemons."nix-store-optimise".serviceConfig = {
+      ProgramArguments = [
+        "/bin/sh"
+        "-c"
+        ''
+          /bin/wait4path ${pkgs.nix}/bin/nix && \
+            exec ${pkgs.nix}/bin/nix store optimise
+        ''
+      ];
+      StartCalendarInterval = [
+        {
+          Hour = 2;
+          Minute = 30;
+        }
+      ];
+      StandardErrorPath = "/var/log/nix-store.log";
+      StandardOutPath = "/var/log/nix-store.log";
+    };
   };
 in {
   flake.darwinConfigurations.mac = withSystem "aarch64-darwin" ({
@@ -81,6 +103,7 @@ in {
 
       modules = [
         (common pkgs)
+        (inputs.darwin.outPath + "/modules/nix/nix-darwin.nix")
         {
           environment.etc."ssh/sshd_config.d/200-nix.conf".text = ''
             PasswordAuthentication no
