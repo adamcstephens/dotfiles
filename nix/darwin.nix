@@ -1,5 +1,6 @@
 {
   inputs,
+  lib,
   withSystem,
   ...
 }: let
@@ -32,7 +33,6 @@
         substituters = [
           "https://nix-config.cachix.org"
           "https://nix-community.cachix.org"
-          "https://nix-serve.junco.dev"
         ];
         trusted-public-keys = [
           "nix-config.cachix.org-1:Vd6raEuldeIZpttVQfrUbLvXJHzzzkS0pezXCVVjDG4="
@@ -114,36 +114,8 @@ in {
           programs.fish.enable = true;
           security.pam.enableSudoTouchIdAuth = true;
           users.users.astephe9 = {
-            shell = pkgs.fish;
+            shell = lib.getExe pkgs.fish;
           };
-        }
-      ];
-    });
-  flake.darwinConfigurations.bonk = withSystem "x86_64-darwin" ({
-    pkgs,
-    system,
-    ...
-  }:
-    inputs.darwin.lib.darwinSystem {
-      inherit inputs system;
-
-      modules = [
-        (common pkgs)
-        {
-          users.groups.builder = {};
-
-          users.users.builder = {
-            createHome = true;
-            isSystemUser = true;
-            openssh.authorizedKeys.keys = [
-              "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFs5NiXbHfBIVf9O0VCBhmBuOSzXpSg1skLzinA5tJhu builder@builders"
-            ];
-            useDefaultShell = true;
-            home = "/Users/builder";
-            group = "builder";
-          };
-
-          nix.settings.trusted-users = ["builder"];
         }
       ];
     });

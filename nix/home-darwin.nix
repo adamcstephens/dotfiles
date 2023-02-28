@@ -15,6 +15,7 @@
     pkgs.gnugrep
     pkgs.gnused
     pkgs.gnutar
+    pkgs.iftop
     pkgs.mas
     pkgs.pinentry_mac
 
