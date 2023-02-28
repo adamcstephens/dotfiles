@@ -7,8 +7,7 @@ case $(uname) in
     eval "$(/opt/homebrew/bin/brew shellenv)"
   fi
 
-  export HOMEBREW_NO_AUTO_UPDATE=1
-  pki="HOMEBREW_NO_AUTO_UPDATE=0 brew install "
+  pki="brew install "
   pkls="brew list "
   pkr="brew remove "
   pks="brew search "
