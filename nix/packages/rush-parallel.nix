@@ -23,5 +23,6 @@ buildGoModule rec {
     homepage = "https://github.com/shenwei356/rush";
     license = licenses.mit;
     maintainers = with maintainers; [adamcstephens];
+    mainProgram = "rush";
   };
 }
