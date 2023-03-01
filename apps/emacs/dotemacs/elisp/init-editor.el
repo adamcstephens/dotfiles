@@ -10,6 +10,8 @@
 
 (use-package editorconfig :ensure :config (editorconfig-mode 1))
 
+(use-package expand-region :bind ("C-=" . er/expand-region))
+
 (use-package
   whitespace
   :ensure nil
@@ -21,12 +23,7 @@
 ;; allow for running commands without selecting a region
 (use-package
   whole-line-or-region
-  :init
-  (whole-line-or-region-global-mode)
-  (global-unset-key (kbd "C-/"))
-  :bind
-  ("C-_" . whole-line-or-region-comment-dwim)
-  ("C-/" . whole-line-or-region-comment-dwim))
+  :init (whole-line-or-region-global-mode))
 
 ;; better undo support
 (use-package
@@ -34,7 +31,9 @@
   :bind (("C-x u" . undo-fu-only-undo) ("C-r" . undo-fu-only-redo)))
 
 ;; store undo across sessions
-(use-package undo-fu-session :init (global-undo-fu-session-mode))
+(use-package undo-fu-session :init (undo-fu-session-global-mode))
+
+(use-package vundo)
 
 ;; moving lines up and down can be handy
 (use-package

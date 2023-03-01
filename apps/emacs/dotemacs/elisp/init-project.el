@@ -25,10 +25,7 @@
   (tabspaces-use-filtered-buffers-as-default t)
   (tabspaces-default-tab "main")
   (tabspaces-remove-to-default t)
-  (tabspaces-include-buffers '("*scratch*"))
-  ;; sessions
-  (tabspaces-session t)
-  (tabspaces-session-auto-restore t))
+  (tabspaces-include-buffers '("*scratch*")))
 
 (use-package persp-mode :disabled :init (persp-mode 1))
 

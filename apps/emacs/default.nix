@@ -22,6 +22,7 @@
     pkgs.pandoc
     pkgs.shellcheck
     pkgs.shfmt
+    pkgs.sqlite
   ];
 
   emacsPackage =

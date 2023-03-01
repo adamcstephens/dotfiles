@@ -5,6 +5,8 @@
   :hook (focus-in . magit-refresh)
   :init (setq magit-save-repository-buffers nil))
 
+(use-package forge :after magit)
+
 (use-package
   diff-hl
   :init
