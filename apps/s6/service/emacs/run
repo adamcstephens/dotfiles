@@ -1,4 +1,4 @@
 #!/usr/bin/env execlineb -P
 
 fdmove -c 2 1
-exec fish -l -c "emacs --daemon --init-directory /Users/astephe9/.config/emacs/dotemacs"
+fish -l -c "exec emacs --fg-daemon --init-directory /Users/astephe9/.config/emacs/dotemacs"
