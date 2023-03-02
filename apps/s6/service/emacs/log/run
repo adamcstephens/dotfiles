@@ -1,0 +1,3 @@
+#!/usr/bin/env execlineb -P
+
+s6-log -b n20 s1000000 t /Users/astephe9/.cache/s6/log/services/emacs

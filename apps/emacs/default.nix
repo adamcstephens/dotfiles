@@ -102,20 +102,4 @@ in {
       "SSH_AUTH_SOCK=%t/ssh-agent"
     ];
   };
-
-  launchd = lib.mkIf pkgs.stdenv.isDarwin {
-    agents.emacs = {
-      enable = true;
-      config = {
-        KeepAlive = true;
-        RunAtLoad = true;
-        ProgramArguments = [
-          "${config.home.homeDirectory}/.nix-profile/bin/fish"
-          "-l"
-          "-c"
-          "emacs --daemon --init-directory ${config.home.homeDirectory}/.config/emacs/dotemacs"
-        ];
-      };
-    };
-  };
 }
