@@ -7,7 +7,6 @@
   revealjs = pkgs.callPackage ../../apps/emacs/revealjs.nix {};
   rush-parallel = pkgs.callPackage ./rush-parallel.nix {};
   terminfo = pkgs.callPackage ./terminfo {};
-  s0ix-selftest-tool = pkgs.callPackage ./s0ix-selftest-tool {};
   xautocfg = pkgs.callPackage ../../apps/xautocfg/package.nix {};
   xmos_dfu = pkgs.callPackage ./xmos_dfu {};
 }
