@@ -6,15 +6,17 @@ tap "homebrew/cask-versions"
 tap "homebrew/core"
 tap "homebrew/services"
 tap "null-dev/firefox-profile-switcher"
-brew "glib"
 brew "xz"
+brew "glib"
 brew "python@3.9"
 brew "pkg-config"
 brew "coreutils"
 brew "dark-mode"
 brew "ddcctl"
+brew "m1ddc"
 brew "syncthing", restart_service: true
 brew "null-dev/firefox-profile-switcher/firefox-profile-switcher-connector"
+cask "aldente"
 cask "bettertouchtool"
 cask "bluesnooze"
 cask "brave-browser"
@@ -30,6 +32,7 @@ cask "kap"
 cask "karabiner-elements"
 cask "libreoffice"
 cask "microsoft-auto-update"
+cask "multipass"
 cask "netnewswire"
 cask "plexamp"
 cask "pocket-casts"
@@ -46,6 +49,5 @@ mas "Microsoft Remote Desktop", id: 1295203466
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
 mas "Parcel", id: 639968404
-mas "Toggl Track", id: 1291898086
 mas "WireGuard", id: 1451685025
 mas "Xcode", id: 497799835
