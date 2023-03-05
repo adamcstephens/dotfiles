@@ -1,5 +1,9 @@
-{pkgs, ...}: let
-  package = pkgs.callPackage ./package.nix {};
+{
+  pkgs,
+  inputs,
+  ...
+}: let
+  package = inputs.sandbox.packages.${pkgs.system}.xautocfg;
 in {
   xdg.configFile."xautocfg.cfg".text = ''
     [keyboard]

@@ -13,6 +13,8 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nix-colors.url = "github:misterio77/nix-colors";
     nixinate.url = "github:matthewcroughan/nixinate";
+    sandbox.url = "github:adamcstephens/nix-sandbox";
+    sandbox.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = {
