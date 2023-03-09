@@ -98,6 +98,7 @@ in {
 
     # apps
     pkgs.chromium
+    pkgs.element-desktop
     pkgs.firefox-wayland
     pkgs.cinnamon.nemo
     pkgs.remmina
