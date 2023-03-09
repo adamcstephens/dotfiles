@@ -12,6 +12,7 @@
     ../apps/editorconfig
     ../apps/fish
     ../apps/lsd
+    ../apps/ripgrep
     ../apps/starship
     ../apps/zsh
   ];
@@ -71,7 +72,6 @@
     pkgs.mtr
     pkgs.nix-output-monitor
     pkgs.pwgen
-    pkgs.ripgrep
     pkgs.tio
     pkgs.tmux
     pkgs.tree

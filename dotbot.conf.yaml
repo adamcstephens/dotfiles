@@ -15,7 +15,6 @@
     - ~/tmp
 
 - link:
-    ~/.aspell.en.pws: apps/aspell/aspell.en.pws
     ~/.config/fish:
       force: true
       path: apps/fish
@@ -23,9 +22,6 @@
     ~/.config/nix:
       force: true
       path: apps/nix
-    ~/.config/ripgrep:
-      force: true
-      path: apps/ripgrep
     ~/.gitconfig: apps/git/gitconfig
     ~/.gitignore: apps/git/gitignore
     ~/.shellcheckrc: apps/shellcheck/shellcheckrc

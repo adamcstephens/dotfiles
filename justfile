@@ -59,14 +59,16 @@ migrate:
     if [ "$(readlink $HOME/.screenrc)" == "$HOME/.dotfiles/apps/screen/screenrc" ]; then rm -v $HOME/.screenrc; fi
     if [ "$(readlink $HOME/.toprc)" == "$HOME/.dotfiles/apps/top/toprc" ]; then rm -v $HOME/.toprc; fi
     if [ "$(readlink $HOME/.editorconfig)" == "$HOME/.dotfiles/apps/editorconfig/editorconfig" ]; then rm -v $HOME/.editorconfig; fi
+    if [ "$(readlink $HOME/.aspell.en.pws)" == "$HOME/.dotfiles/apps/aspell/aspell.en.pws" ]; then rm -v $HOME/.aspell.en.pws; fi
     if [ -d "$HOME/.ipython" ]; then rm -rfv $HOME/.ipython; fi
-    if [ -f "$HOME/.profile" ]; then rm -fv $HOME/.profile; fi
+    if [ ! -h "$HOME/.profile" ]; then rm -fv $HOME/.profile; fi
 
 
     removeDotbotConfig bat/config
     removeDotbotConfig btop
     removeDotbotConfig yay
     removeDotbotConfig zellij
+    removeDotbotConfig ripgrep
 
 nix-index-fetch:
     #!/usr/bin/env bash

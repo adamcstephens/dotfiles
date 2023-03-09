@@ -50,12 +50,6 @@ fi
 # python
 export PYTHONSTARTUP="$HOME"/.dotfiles/apps/python/pythonstartup.py
 
-# ripgrep
-export RIPGREP_CONFIG_PATH="$HOME"/.config/ripgrep/ripgreprc
-if command -v rg >/dev/null; then
-  export FZF_DEFAULT_COMMAND='rg --files --hidden'
-fi
-
 # ssh
 if [[ -n $SSH_AUTH_SOCK ]] && ! ssh-add -l &>/dev/null; then
   echo "Empty ssh-agent"
