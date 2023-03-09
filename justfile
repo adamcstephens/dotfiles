@@ -53,11 +53,15 @@ migrate:
 
     if [ "$(readlink $HOME/.shell_generic.sh)" == "$HOME/.dotfiles/apps/shell_generic.sh" ]; then rm -v $HOME/.shell_generic.sh; fi
     if [ "$(readlink $HOME/.zshrc)" == "$HOME/.dotfiles/apps/zsh/zshrc" ]; then rm -v $HOME/.zshrc; fi
+    if [ "$(readlink $HOME/.bashrc)" == "$HOME/.dotfiles/apps/bash/bashrc" ]; then rm -v $HOME/.bashrc; fi
+    if [ "$(readlink $HOME/.bash_profile)" == "$HOME/.dotfiles/apps/bash/bash_profile" ]; then rm -v $HOME/.bash_profile; fi
     if [ "$(readlink $HOME/.inputrc)" == "$HOME/.dotfiles/apps/inputrc" ]; then rm -v $HOME/.inputrc; fi
     if [ "$(readlink $HOME/.screenrc)" == "$HOME/.dotfiles/apps/screen/screenrc" ]; then rm -v $HOME/.screenrc; fi
     if [ "$(readlink $HOME/.toprc)" == "$HOME/.dotfiles/apps/top/toprc" ]; then rm -v $HOME/.toprc; fi
     if [ "$(readlink $HOME/.editorconfig)" == "$HOME/.dotfiles/apps/editorconfig/editorconfig" ]; then rm -v $HOME/.editorconfig; fi
-    rm -rfv $HOME/.ipython
+    if [ -d "$HOME/.ipython" ]; then rm -rfv $HOME/.ipython; fi
+    if [ -f "$HOME/.profile" ]; then rm -fv $HOME/.profile; fi
+
 
     removeDotbotConfig bat/config
     removeDotbotConfig btop

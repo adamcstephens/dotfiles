@@ -16,10 +16,6 @@
 
 - link:
     ~/.aspell.en.pws: apps/aspell/aspell.en.pws
-    ~/.bash_profile: apps/bash/bash_profile
-    ~/.bashrc:
-      force: true
-      path: apps/bash/bashrc
     ~/.config/fish:
       force: true
       path: apps/fish
