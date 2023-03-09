@@ -51,9 +51,14 @@ migrate:
     if [ "$(readlink $HOME/.config/waybar/style.css)" == "$HOME/.dotfiles/apps/waybar/waybar.css" ]; then rm -v $HOME/.config/waybar/style.css; fi
 
     if [ "$(readlink $HOME/.zshrc)" == "$HOME/.dotfiles/apps/zsh/zshrc" ]; then rm -v $HOME/.zshrc; fi
+    if [ "$(readlink $HOME/.inputrc)" == "$HOME/.dotfiles/apps/inputrc" ]; then rm -v $HOME/.inputrc; fi
+    if [ "$(readlink $HOME/.screenrc)" == "$HOME/.dotfiles/apps/screen/screenrc" ]; then rm -v $HOME/.screenrc; fi
+    if [ "$(readlink $HOME/.toprc)" == "$HOME/.dotfiles/apps/top/toprc" ]; then rm -v $HOME/.toprc; fi
 
     removeDotbotConfig bat/config
     removeDotbotConfig btop
+    removeDotbotConfig yay
+    removeDotbotConfig zellij
 
 nix-index-fetch:
     #!/usr/bin/env bash
