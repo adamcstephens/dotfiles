@@ -1,9 +1,0 @@
-black
-ipython
-isort
-pipenv
-poetry
-pyflakes
-pygments
-pytest
-rich

@@ -8,8 +8,10 @@
   imports = [
     ../apps/bat
     ../apps/btop
+    ../apps/editorconfig
     ../apps/fish
     ../apps/lsd
+    ../apps/starship
     ../apps/zsh
   ];
 
@@ -83,7 +85,6 @@
   programs = {
     direnv.enable = true;
     direnv.nix-direnv.enable = true;
-    starship.enable = true;
     zoxide = {
       enable = true;
       options = ["--cmd" "j"];
