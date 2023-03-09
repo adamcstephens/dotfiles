@@ -63,6 +63,8 @@ migrate:
     if [ "$(readlink $HOME/.shellcheckrc)" == "$HOME/.dotfiles/apps/shellcheck/shellcheckrc" ]; then rm -v $HOME/.shellcheckrc; fi
     if [ "$(readlink $HOME/.gitignore)" == "$HOME/.dotfiles/apps/git/gitignore" ]; then rm -v $HOME/.gitignore; fi
     if [ "$(readlink $HOME/.gitconfig)" == "$HOME/.dotfiles/apps/git/gitconfig" ]; then rm -v $HOME/.gitconfig; fi
+    if [ "$(readlink $HOME/.vim)" == "$HOME/.dotfiles/apps/vim/vim" ]; then rm -rfv $HOME/.vim; fi
+    if [ "$(readlink $HOME/.vimrc)" == "$HOME/.dotfiles/apps/vim/vimrc" ]; then rm -v $HOME/.vimrc; fi
     if [ -d "$HOME/.ipython" ]; then rm -rfv $HOME/.ipython; fi
     if [ ! -h "$HOME/.profile" ]; then rm -fv $HOME/.profile; fi
 

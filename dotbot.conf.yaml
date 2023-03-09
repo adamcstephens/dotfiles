@@ -21,5 +21,3 @@
     ~/.tmux.conf: apps/tmux/tmux.conf
     ~/.tmux/plugins/tpm: apps/tmux/tpm
     ~/.tzvt_config: apps/tmux/tzvt_config
-    ~/.vimrc: apps/vim/vimrc
-    ~/.vim: apps/vim/vim
