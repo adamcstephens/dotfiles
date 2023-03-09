@@ -11,9 +11,6 @@ brew-dump:
     brew bundle dump --all --force
     git diff Brewfile
 
-dotbot config="":
-    CONFIG={{config}} ~/.dotfiles/bin/dotbot
-
 doomemacs:
     test -d ~/.config/emacs || mkdir -p ~/.config/emacs
     test -e ~/.config/emacs/doom || git clone https://github.com/doomemacs/doomemacs ~/.config/emacs/doom

@@ -26,7 +26,18 @@
 
   home.activation.a-link-nix = lib.hm.dag.entryBefore ["checkLinkTargets"] ''
     mkdir -vp $HOME/.config/nix/
-    ln -sfv $HOME/.dotfiles/apps/nix/nix.conf $HOME/.config/nix/nix.conf
+
+    if [ ! -h $HOME/.config/nix/nix.conf ]; then
+      ln -sf $HOME/.dotfiles/apps/nix/nix.conf $HOME/.config/nix/nix.conf
+    fi
+  '';
+
+  home.activation.directories = lib.hm.dag.entryBefore ["checkLinkTargets"] ''
+    for dir in git projects tmp; do
+      if [ ! -d $HOME/$dir ]; then
+        mkdir -vp $HOME/$dir
+      fi
+    done
   '';
 
   home.activation.dotfiles-migrate = lib.hm.dag.entryBefore ["checkLinkTargets"] ''
@@ -40,22 +51,10 @@
     fi
   '';
 
-  home.activation.dotfiles-bootstrap = lib.hm.dag.entryAfter ["writeBoundary"] ''
-    export PATH=${config.home.path}/bin:${config.home.path}/sbin:$PATH
-
-    if [ ! -d ~/.dotfiles ]; then
-      git clone ${config.dotfiles.repo} ~/.dotfiles
-      touch ~/.dotfiles/.nixos-managed
-    fi
-
-    pushd ~/.dotfiles
-      if [ -e .nixos-managed ]; then
-        git pull
-      fi
-      just dotbot
-      just nix-index-fetch
-    popd
-  '';
+  home.sessionVariables = {
+    EDITOR = "~/.dotfiles/bin/editor";
+    PAGER = "~/.dotfiles/bin/pager";
+  };
 
   home.packages = [
     # my terms
