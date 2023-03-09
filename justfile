@@ -78,6 +78,7 @@ migrate:
     removeDotbotConfig zellij
     removeDotbotConfig ripgrep
     removeDotbotConfig git/template
+    removeDotbotConfig fish
 
 nix-index-fetch:
     #!/usr/bin/env bash

@@ -13,7 +13,3 @@
     - ~/projects
     - ~/tmp
 
-- link:
-    ~/.config/fish:
-      force: true
-      path: apps/fish
