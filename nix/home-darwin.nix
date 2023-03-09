@@ -24,6 +24,8 @@
 
     pkgs.execline
     pkgs.s6
+
+    pkgs.element-desktop
   ];
 
   home.activation.enable-ssh-agent = lib.hm.dag.entryAfter ["writeBoundary"] ''
