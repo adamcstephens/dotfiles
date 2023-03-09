@@ -60,6 +60,7 @@ migrate:
     if [ "$(readlink $HOME/.toprc)" == "$HOME/.dotfiles/apps/top/toprc" ]; then rm -v $HOME/.toprc; fi
     if [ "$(readlink $HOME/.editorconfig)" == "$HOME/.dotfiles/apps/editorconfig/editorconfig" ]; then rm -v $HOME/.editorconfig; fi
     if [ "$(readlink $HOME/.aspell.en.pws)" == "$HOME/.dotfiles/apps/aspell/aspell.en.pws" ]; then rm -v $HOME/.aspell.en.pws; fi
+    if [ "$(readlink $HOME/.shellcheckrc)" == "$HOME/.dotfiles/apps/shellcheck/shellcheckrc" ]; then rm -v $HOME/.shellcheckrc; fi
     if [ -d "$HOME/.ipython" ]; then rm -rfv $HOME/.ipython; fi
     if [ ! -h "$HOME/.profile" ]; then rm -fv $HOME/.profile; fi
 

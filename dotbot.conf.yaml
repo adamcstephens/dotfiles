@@ -24,7 +24,6 @@
       path: apps/nix
     ~/.gitconfig: apps/git/gitconfig
     ~/.gitignore: apps/git/gitignore
-    ~/.shellcheckrc: apps/shellcheck/shellcheckrc
     ~/.tmux.conf: apps/tmux/tmux.conf
     ~/.tmux/plugins/tpm: apps/tmux/tpm
     ~/.tzvt_config: apps/tmux/tzvt_config

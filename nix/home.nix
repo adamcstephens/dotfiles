@@ -13,6 +13,7 @@
     ../apps/fish
     ../apps/lsd
     ../apps/ripgrep
+    ../apps/shellcheck
     ../apps/starship
     ../apps/zsh
   ];
@@ -79,7 +80,6 @@
 
     # global editor packages
     pkgs.nil
-    pkgs.shellcheck
     pkgs.shfmt
   ];
 
