@@ -80,6 +80,7 @@ migrate:
     if [ -f "$HOME/.dotfiles/apps/fish/config.fish" ]; then rm -rfv $HOME/.dotfiles/apps/fish/config.fish; fi
     if [ -f "$HOME/.dotfiles/apps/fish/fish_variables" ]; then rm -rfv $HOME/.dotfiles/apps/fish/fish_variables; fi
     if [ -d "$HOME/.dotfiles/vendor/dotbot" ]; then rm -rfv $HOME/.dotfiles/vendor/dotbot; fi
+    if [ -d "$HOME/.dotfiles/apps/nix" ]; then rm -rfv $HOME/.dotfiles/apps/nix; fi
 
 nix-index-fetch:
     #!/usr/bin/env bash
