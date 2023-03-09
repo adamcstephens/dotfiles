@@ -11,5 +11,17 @@
       ignoreSpace = true;
       size = 100000;
     };
+
+    initExtra = ''
+      # shellcheck disable=SC1090
+      [[ -e "$HOME/.dotfiles/apps/shell_generic.sh" ]] && source "$HOME/.dotfiles/apps/shell_generic.sh"
+
+      # brew
+      if type brew &>/dev/null; then
+        FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+      fi
+
+      [[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path zsh 2>/dev/null)"
+    '';
   };
 }
