@@ -19,9 +19,6 @@
       force: true
       path: apps/fish
     ~/.config/git/template: apps/git/template
-    ~/.config/nix:
-      force: true
-      path: apps/nix
     ~/.gitconfig: apps/git/gitconfig
     ~/.gitignore: apps/git/gitignore
     ~/.tmux.conf: apps/tmux/tmux.conf

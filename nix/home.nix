@@ -22,6 +22,11 @@
 
   programs.home-manager.enable = true;
 
+  home.activation.a-link-nix = lib.hm.dag.entryBefore ["checkLinkTargets"] ''
+    mkdir -vp $HOME/.config/nix/
+    ln -sfv $HOME/.dotfiles/apps/nix/nix.conf $HOME/.config/nix/nix.conf
+  '';
+
   home.activation.dotfiles-migrate = lib.hm.dag.entryBefore ["checkLinkTargets"] ''
     if [ -d ~/.dotfiles ]; then
       pushd ~/.dotfiles
