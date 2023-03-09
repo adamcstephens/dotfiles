@@ -18,13 +18,11 @@
   gpgsign = true
 [core]
   editor = ~/.dotfiles/bin/editor
-  excludesfile = ~/.gitignore
 [github]
   user = adamcstephens
 [include]
-  path = .gitconfig.local
+  path = ~/.gitconfig.local
 [init]
-  templateDir = ~/.config/git/template/
   defaultBranch = main
 [pull]
   ff = only

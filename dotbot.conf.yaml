@@ -18,9 +18,6 @@
     ~/.config/fish:
       force: true
       path: apps/fish
-    ~/.config/git/template: apps/git/template
-    ~/.gitconfig: apps/git/gitconfig
-    ~/.gitignore: apps/git/gitignore
     ~/.tmux.conf: apps/tmux/tmux.conf
     ~/.tmux/plugins/tpm: apps/tmux/tpm
     ~/.tzvt_config: apps/tmux/tzvt_config

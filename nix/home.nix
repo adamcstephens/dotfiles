@@ -11,6 +11,7 @@
     ../apps/btop
     ../apps/editorconfig
     ../apps/fish
+    ../apps/git
     ../apps/lsd
     ../apps/ripgrep
     ../apps/shellcheck
@@ -68,7 +69,6 @@
     pkgs.du-dust
     pkgs.fd
     pkgs.fzf
-    pkgs.gitFull
     pkgs.gh
     pkgs.htop
     pkgs.jq

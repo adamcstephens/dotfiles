@@ -61,6 +61,8 @@ migrate:
     if [ "$(readlink $HOME/.editorconfig)" == "$HOME/.dotfiles/apps/editorconfig/editorconfig" ]; then rm -v $HOME/.editorconfig; fi
     if [ "$(readlink $HOME/.aspell.en.pws)" == "$HOME/.dotfiles/apps/aspell/aspell.en.pws" ]; then rm -v $HOME/.aspell.en.pws; fi
     if [ "$(readlink $HOME/.shellcheckrc)" == "$HOME/.dotfiles/apps/shellcheck/shellcheckrc" ]; then rm -v $HOME/.shellcheckrc; fi
+    if [ "$(readlink $HOME/.gitignore)" == "$HOME/.dotfiles/apps/git/gitignore" ]; then rm -v $HOME/.gitignore; fi
+    if [ "$(readlink $HOME/.gitconfig)" == "$HOME/.dotfiles/apps/git/gitconfig" ]; then rm -v $HOME/.gitconfig; fi
     if [ -d "$HOME/.ipython" ]; then rm -rfv $HOME/.ipython; fi
     if [ ! -h "$HOME/.profile" ]; then rm -fv $HOME/.profile; fi
 
@@ -70,6 +72,7 @@ migrate:
     removeDotbotConfig yay
     removeDotbotConfig zellij
     removeDotbotConfig ripgrep
+    removeDotbotConfig git/template
 
 nix-index-fetch:
     #!/usr/bin/env bash
