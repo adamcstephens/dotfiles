@@ -66,6 +66,7 @@
     pkgs.lazygit
     pkgs.lsd
     pkgs.mtr
+    pkgs.nix-output-monitor
     pkgs.pwgen
     pkgs.ripgrep
     pkgs.tio
