@@ -8,7 +8,6 @@
 - create:
     - ~/.gnupg
     - ~/.ssh
-    - ~/.tmux/plugins
     - ~/bin
     - ~/git
     - ~/projects
@@ -18,6 +17,3 @@
     ~/.config/fish:
       force: true
       path: apps/fish
-    ~/.tmux.conf: apps/tmux/tmux.conf
-    ~/.tmux/plugins/tpm: apps/tmux/tpm
-    ~/.tzvt_config: apps/tmux/tzvt_config

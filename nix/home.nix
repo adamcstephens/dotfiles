@@ -16,6 +16,7 @@
     ../apps/ripgrep
     ../apps/shellcheck
     ../apps/starship
+    ../apps/tmux
     ../apps/zsh
   ];
 
@@ -79,7 +80,6 @@
     pkgs.nix-output-monitor
     pkgs.pwgen
     pkgs.tio
-    pkgs.tmux
     pkgs.tree
     pkgs.wget
 

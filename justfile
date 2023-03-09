@@ -65,7 +65,10 @@ migrate:
     if [ "$(readlink $HOME/.gitconfig)" == "$HOME/.dotfiles/apps/git/gitconfig" ]; then rm -v $HOME/.gitconfig; fi
     if [ "$(readlink $HOME/.vim)" == "$HOME/.dotfiles/apps/vim/vim" ]; then rm -rfv $HOME/.vim; fi
     if [ "$(readlink $HOME/.vimrc)" == "$HOME/.dotfiles/apps/vim/vimrc" ]; then rm -v $HOME/.vimrc; fi
+    if [ "$(readlink $HOME/.tzvt_config)" == "$HOME/.dotfiles/apps/tmux/tzvt_config" ]; then rm -v $HOME/.tzvt_config; fi
+    if [ "$(readlink $HOME/.tmux.conf)" == "$HOME/.dotfiles/apps/tmux/tmux.conf" ]; then rm -v $HOME/.tmux.conf; fi
     if [ -d "$HOME/.ipython" ]; then rm -rfv $HOME/.ipython; fi
+    if [ -d "$HOME/.tmux" ]; then rm -rfv $HOME/.tmux; fi
     if [ ! -h "$HOME/.profile" ]; then rm -fv $HOME/.profile; fi
 
 
