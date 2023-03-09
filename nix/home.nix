@@ -6,6 +6,8 @@
   ...
 }: {
   imports = [
+    ../apps/bat
+    ../apps/btop
     ../apps/fish
     ../apps/lsd
     ../apps/zsh
@@ -47,9 +49,7 @@
     # my terms
     (pkgs.callPackage ./packages/terminfo {})
 
-    pkgs.bat
     pkgs.bc
-    pkgs.btop
     pkgs.calc
     pkgs.colordiff
     pkgs.comma

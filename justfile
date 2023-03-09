@@ -28,6 +28,12 @@ intel-check-cstate:
 
 migrate:
     #!/usr/bin/env bash
+
+    removeDotbotConfig() {
+      file=$1
+      if [ "$(readlink $HOME/.config/$file)" == "$HOME/.dotfiles/apps/$file" ]; then rm -v $HOME/.config/$file; fi
+    }
+
     set -e
     if [ -h $HOME/.config/direnv ]; then rm -rfv $HOME/.config/direnv; fi
     if [ -h $HOME/.config/lsd ]; then rm -rfv $HOME/.config/lsd; fi
@@ -45,6 +51,9 @@ migrate:
     if [ "$(readlink $HOME/.config/waybar/style.css)" == "$HOME/.dotfiles/apps/waybar/waybar.css" ]; then rm -v $HOME/.config/waybar/style.css; fi
 
     if [ "$(readlink $HOME/.zshrc)" == "$HOME/.dotfiles/apps/zsh/zshrc" ]; then rm -v $HOME/.zshrc; fi
+
+    removeDotbotConfig bat/config
+    removeDotbotConfig btop
 
 nix-index-fetch:
     #!/usr/bin/env bash

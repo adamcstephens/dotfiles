@@ -20,15 +20,10 @@
     ~/.bashrc:
       force: true
       path: apps/bash/bashrc
-    ~/.config/bat/config: apps/bat/config
-    ~/.config/btop: apps/btop
     ~/.config/fish:
       force: true
       path: apps/fish
     ~/.config/git/template: apps/git/template
-    ~/.config/helix:
-      force: true
-      path: apps/helix
     ~/.config/nix:
       force: true
       path: apps/nix
