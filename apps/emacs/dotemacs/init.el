@@ -42,6 +42,7 @@
 
 (require 'init-haskell)
 (require 'init-just)
+(require 'init-lisp)
 (require 'init-markdown)
 (require 'init-nix)
 (require 'init-sh)
