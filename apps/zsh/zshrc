@@ -53,7 +53,7 @@ zle -N edit-command-line
 bindkey "^X^E" edit-command-line
 
 # shellcheck disable=SC1090
-[[ -e "$HOME/.shell_generic.sh" ]] && source "$HOME/.shell_generic.sh"
+[[ -e "$HOME/.dotfiles/apps/shell_generic.sh" ]] && source "$HOME/.dotfiles/apps/shell_generic.sh"
 
 # brew
 if type brew &>/dev/null; then

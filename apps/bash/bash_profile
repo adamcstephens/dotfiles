@@ -1,4 +1,4 @@
-[[ -e "$HOME/.shell_generic.sh" ]] && . "$HOME/.shell_generic.sh"
+[[ -e "$HOME/.dotfiles/apps/shell_generic.sh" ]] && source "$HOME/.dotfiles/apps/shell_generic.sh"
 
 # shorten long paths
 export PROMPT_DIRTRIM=2

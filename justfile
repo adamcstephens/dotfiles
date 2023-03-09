@@ -51,6 +51,7 @@ migrate:
     if [ "$(readlink $HOME/.config/waybar/style.css)" == "$HOME/.dotfiles/apps/waybar/waybar.css" ]; then rm -v $HOME/.config/waybar/style.css; fi
     if [ "$(readlink $HOME/.config/starship.toml)" == "$HOME/.dotfiles/apps/starship/starship.toml" ]; then rm -v $HOME/.config/starship.toml; fi
 
+    if [ "$(readlink $HOME/.shell_generic.sh)" == "$HOME/.dotfiles/apps/shell_generic.sh" ]; then rm -v $HOME/.shell_generic.sh; fi
     if [ "$(readlink $HOME/.zshrc)" == "$HOME/.dotfiles/apps/zsh/zshrc" ]; then rm -v $HOME/.zshrc; fi
     if [ "$(readlink $HOME/.inputrc)" == "$HOME/.dotfiles/apps/inputrc" ]; then rm -v $HOME/.inputrc; fi
     if [ "$(readlink $HOME/.screenrc)" == "$HOME/.dotfiles/apps/screen/screenrc" ]; then rm -v $HOME/.screenrc; fi

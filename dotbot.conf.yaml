@@ -32,7 +32,6 @@
       path: apps/ripgrep
     ~/.gitconfig: apps/git/gitconfig
     ~/.gitignore: apps/git/gitignore
-    ~/.shell_generic.sh: apps/shell_generic.sh
     ~/.shellcheckrc: apps/shellcheck/shellcheckrc
     ~/.tmux.conf: apps/tmux/tmux.conf
     ~/.tmux/plugins/tpm: apps/tmux/tpm
