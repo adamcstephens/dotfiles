@@ -68,7 +68,6 @@ migrate:
     if [ -d "$HOME/.tmux" ]; then rm -rfv $HOME/.tmux; fi
     if [ ! -h "$HOME/.profile" ]; then rm -fv $HOME/.profile; fi
 
-
     removeDotbotConfig bat/config
     removeDotbotConfig btop
     removeDotbotConfig yay
@@ -76,6 +75,11 @@ migrate:
     removeDotbotConfig ripgrep
     removeDotbotConfig git/template
     removeDotbotConfig fish
+    removeDotbotConfig nix
+
+    if [ -f "$HOME/.dotfiles/apps/fish/config.fish" ]; then rm -rfv $HOME/.dotfiles/apps/fish/config.fish; fi
+    if [ -f "$HOME/.dotfiles/apps/fish/fish_variables" ]; then rm -rfv $HOME/.dotfiles/apps/fish/fish_variables; fi
+    if [ -d "$HOME/.dotfiles/vendor/dotbot" ]; then rm -rfv $HOME/.dotfiles/vendor/dotbot; fi
 
 nix-index-fetch:
     #!/usr/bin/env bash

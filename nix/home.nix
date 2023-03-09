@@ -24,13 +24,13 @@
 
   programs.home-manager.enable = true;
 
-  home.activation.a-link-nix = lib.hm.dag.entryBefore ["checkLinkTargets"] ''
-    mkdir -vp $HOME/.config/nix/
-
-    if [ ! -h $HOME/.config/nix/nix.conf ]; then
-      ln -sf $HOME/.dotfiles/apps/nix/nix.conf $HOME/.config/nix/nix.conf
-    fi
-  '';
+  nix = {
+    package = pkgs.nix;
+    settings = {
+      experimental-features = "nix-command flakes";
+      builders-use-substitutes = true;
+    };
+  };
 
   home.activation.directories = lib.hm.dag.entryBefore ["checkLinkTargets"] ''
     for dir in git projects tmp; do
