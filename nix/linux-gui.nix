@@ -82,14 +82,17 @@ in {
     pkgs.glib
     pkgs.libnotify
 
+    pkgs.autorandr
     pkgs.brightnessctl
     pkgs.blueberry
     pkgs.bluez
     pkgs.ddcutil
     pkgs.light
+    pkgs.lxrandr
     pkgs.networkmanagerapplet
-    pkgs.xclip
     pkgs.wl-clipboard
+    pkgs.xclip
+    pkgs.xlayoutdisplay
 
     # audio
     pkgs.plexamp

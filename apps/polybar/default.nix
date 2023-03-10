@@ -32,8 +32,7 @@ in {
         blue = ${base0D}
 
         [display]
-        dpi = ${toString config.dotfiles.gui.dpi}
-        font = ${config.dotfiles.gui.font}:size=9.5;0
+        font = ${config.dotfiles.gui.font}:size=14;0
 
         [scripts]
         player = ${./player.sh}

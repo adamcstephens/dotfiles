@@ -7,7 +7,7 @@
     enable = true;
     terminal = "${config.programs.kitty.package}/bin/kitty";
     package = with pkgs; rofi.override {plugins = [rofi-calc rofi-emoji];};
-    font = "${config.dotfiles.gui.font} 9";
+    font = "${config.dotfiles.gui.font} 14";
     theme = let
       mkLiteral = config.lib.formats.rasi.mkLiteral;
     in
@@ -115,7 +115,6 @@
       kb-mode-next = "Shift+Right,Control+Tab";
       kb-mode-previous = "Shift+Left,Control+Shift+Tab";
       kb-remove-char-back = "BackSpace";
-      dpi = config.dotfiles.gui.dpi;
     };
   };
 }
