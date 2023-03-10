@@ -44,9 +44,9 @@
     if [ -d ~/.dotfiles ]; then
       pushd ~/.dotfiles
         if [ -e .nixos-managed ]; then
-          git pull
+          ${lib.getExe pkgs.git} pull
         fi
-        ${pkgs.just}/bin/just migrate
+        ${lib.getExe pkgs.just} migrate
       popd
     fi
   '';
@@ -55,6 +55,14 @@
     EDITOR = "~/.dotfiles/bin/editor";
     PAGER = "~/.dotfiles/bin/pager";
   };
+
+  home.activation.nix-index-fetch = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    export PATH=${lib.makeBinPath [pkgs.bash pkgs.coreutils pkgs.gettext pkgs.just pkgs.wget]}
+
+    pushd ~/.dotfiles
+      just nix-index-fetch
+    popd
+  '';
 
   home.packages = [
     # my terms
