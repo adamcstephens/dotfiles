@@ -9,27 +9,27 @@
         indent_size = 2;
       };
 
-      "[*.fish]" = {
+      "*.fish" = {
         indent_size = 4;
       };
-      "[*.{js,py}]" = {
+      "*.{js,py}" = {
         charset = "utf-8";
       };
 
-      "[*.py]" = {
+      "*.py" = {
         indent_size = 4;
       };
 
       # Tab indentation (no size specified)
-      "[Makefile]" = {
+      "Makefile" = {
         indent_style = "tab";
       };
 
-      "[justfile]" = {
+      "justfile" = {
         indent_size = 4;
       };
 
-      "[*.{nim,nims}]" = {
+      "*.{nim,nims}" = {
         indent_size = 4;
       };
     };
