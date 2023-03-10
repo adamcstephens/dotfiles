@@ -19,13 +19,13 @@ spawner exec = spawn ("systemd-cat --identifier=" ++ app ++ " " ++ exec)
 dotWorkspaces = map show [1 .. 9]
 
 dotKeys =
-  [ ("<XF86AudioLowerVolume>", spawner "volume down"),
+  [ ("<XF86AudioLowerVolume>", spawner "$HOME/.dotfiles/bin/volume down"),
     ("<XF86AudioMedia>", spawner "playerctl play-pause"),
-    ("<XF86AudioMute>", spawner "volume mute"),
+    ("<XF86AudioMute>", spawner "$HOME/.dotfiles/bin/volume mute"),
     ("<XF86AudioNext>", spawner "playerctl next"),
     ("<XF86AudioPlay>", spawner "playerctl play-pause"),
     ("<XF86AudioPrev>", spawner "playerctl previous"),
-    ("<XF86AudioRaiseVolume>", spawner "volume up"),
+    ("<XF86AudioRaiseVolume>", spawner "$HOME/.dotfiles/bin/volume up"),
     ("<XF86MonBrightnessDown>", spawner "brightnessctl -q set 5%-"),
     ("<XF86MonBrightnessUp>", spawner "brightnessctl -q set +5%"),
     ("M-a", windows $ W.swapMaster . W.focusDown),
@@ -33,6 +33,7 @@ dotKeys =
     ("M-S-d", spawner "rofi -show emoji"),
     ("M-C-S-q", io exitSuccess),
     ("M-S-q", kill),
+    ("M-C-S-t", spawner "$HOME/.dotfiles/bin/monitor-toggle.sh"),
     ("M-S-t", spawner "kitty --single-instance"),
     ("M-s", windows W.focusDown),
     ("M-w", windows W.focusUp),
