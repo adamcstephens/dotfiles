@@ -25,7 +25,7 @@
   programs.home-manager.enable = true;
 
   nix = {
-    package = pkgs.nix;
+    package = lib.mkForce pkgs.nix;
     settings = {
       experimental-features = "nix-command flakes";
       builders-use-substitutes = true;
