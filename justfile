@@ -11,6 +11,13 @@ brew-dump:
     brew bundle dump --all --force
     git diff Brewfile
 
+bump:
+    nix flake update
+    git add flake.lock
+    git commit -m 'just bump'
+    nix run .#hm-all
+    git push
+
 doomemacs:
     test -d ~/.config/emacs || mkdir -p ~/.config/emacs
     test -e ~/.config/emacs/doom || git clone https://github.com/doomemacs/doomemacs ~/.config/emacs/doom
