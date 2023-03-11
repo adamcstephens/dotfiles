@@ -65,8 +65,8 @@
   '';
 
   home.sessionVariables = {
-    EDITOR = "~/.dotfiles/bin/editor";
-    PAGER = "~/.dotfiles/bin/pager";
+    EDITOR = "${config.home.homeDirectory}/.dotfiles/bin/editor";
+    PAGER = "${config.home.homeDirectory}/.dotfiles/bin/pager";
   };
 
   home.activation.nix-index-fetch = lib.hm.dag.entryAfter ["writeBoundary"] ''
