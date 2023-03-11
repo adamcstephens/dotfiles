@@ -32,7 +32,7 @@ in {
         blue = ${base0D}
 
         [display]
-        font = ${config.dotfiles.gui.font}:size=20;0
+        font = ${config.dotfiles.gui.font}:size=10;0
 
         [scripts]
         player = ${./player.sh}
