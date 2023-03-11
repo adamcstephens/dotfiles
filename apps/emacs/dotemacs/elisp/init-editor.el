@@ -2,6 +2,12 @@
   (interactive)
   (shell-command "open -R ."))
 
+(defun dot/top-join-line ()
+  "Join the current line with the line beneath it."
+  (interactive)
+  (delete-indentation 1))
+(global-set-key (kbd "C-^") 'dot/top-join-line)
+
 (use-package
   avy
   :init
@@ -99,25 +105,12 @@
 (use-package key-chord :commands (key-chord-mode))
 
 (use-package
-  key-seq
-  :after (key-chord meow)
-  :init
-  (key-chord-mode 1)
-  (setq key-chord-two-keys-delay 0.05)
-  (key-seq-define meow-insert-state-keymap "jj" 'meow-insert-exit))
-
-(use-package
   persistent-scratch
   :init (persistent-scratch-autosave-mode 1))
 
 (use-package
   substitute
-  :straight
-  '
-  (substitute
-    :type git
-    :host sourcehut
-    :repo "protesilaos/substitute")
+  :straight (substitute :type git :host sourcehut :repo "protesilaos/substitute")
   :init (setq substitute-highlight t)
   :bind ("M-# b" . substitute-target-in-buffer))
 
