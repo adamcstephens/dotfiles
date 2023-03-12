@@ -105,6 +105,7 @@ in {
     pkgs.element-desktop
     pkgs.firefox-wayland
     pkgs.cinnamon.nemo
+    pkgs.cinny-desktop
     pkgs.remmina
     pkgs.slack
     pkgs.tdesktop
