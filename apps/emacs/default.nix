@@ -20,6 +20,7 @@
     pkgs.nodePackages.mermaid-cli
     pkgs.ripgrep
     pkgs.pandoc
+    pkgs.python3Minimal
     pkgs.shellcheck
     pkgs.shfmt
     pkgs.sqlite
