@@ -110,7 +110,11 @@
 
 (use-package
   substitute
-  :straight (substitute :type git :host sourcehut :repo "protesilaos/substitute")
+  :straight
+  (substitute
+    :type git
+    :host sourcehut
+    :repo "protesilaos/substitute")
   :init (setq substitute-highlight t)
   :bind ("M-# b" . substitute-target-in-buffer))
 
@@ -119,5 +123,18 @@
   :custom
   (olivetti-margin-width 5)
   (olivetti-style nil))
+
+(use-package
+  run-command
+  :bind ("C-c c" . run-command)
+  :config
+  (defun dot/run-command-recipes ()
+    (list
+      (list
+        :command-name "bb-repl"
+        :command-line "bb --nrepl-server"
+        :display "Babashka REPL")))
+  (add-to-list 'run-command-recipes 'dot/run-command-recipes)
+  :custom (run-command-default-runner 'run-command-runner-vterm))
 
 (provide 'init-editor)
