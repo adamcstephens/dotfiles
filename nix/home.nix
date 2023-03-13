@@ -64,16 +64,10 @@
     fi
   '';
 
-  home.sessionVariables = {
-    EDITOR = "${config.home.homeDirectory}/.dotfiles/bin/editor";
-    PAGER = "${config.home.homeDirectory}/.dotfiles/bin/pager";
-  };
-
   home.activation.nix-index-fetch = lib.hm.dag.entryAfter ["writeBoundary"] ''
-    export PATH=${lib.makeBinPath [pkgs.bash pkgs.coreutils pkgs.gettext pkgs.just pkgs.wget]}
 
     pushd ~/.dotfiles
-      just nix-index-fetch
+      PATH=${lib.makeBinPath [pkgs.bash pkgs.coreutils pkgs.gettext pkgs.wget]} ${lib.getExe pkgs.just} nix-index-fetch
     popd
   '';
 
@@ -107,6 +101,11 @@
     pkgs.nil
     pkgs.shfmt
   ];
+
+  home.sessionVariables = {
+    EDITOR = "${config.home.homeDirectory}/.dotfiles/bin/editor";
+    PAGER = "${config.home.homeDirectory}/.dotfiles/bin/pager";
+  };
 
   programs = {
     fzf.enable = true;
