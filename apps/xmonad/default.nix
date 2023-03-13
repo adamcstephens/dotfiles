@@ -106,10 +106,6 @@ in {
       touchpadid="$(xinput list | rg "SYNA.*Touchpad" | sort | tail -n 1 | awk '{print $6}' | cut -f 2 -d=)"
       xinput disable "$touchpadid"
 
-      if [ "$(hostname)" = "blank" ]; then
-        xset -dpms
-      fi
-
       ${lib.getExe pkgs.feh} --bg-center ${wallpaper}/share/wallpapers/nixos-wallpaper.png &
     '';
   };
