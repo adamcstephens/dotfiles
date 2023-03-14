@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 if [[ -z $1 ]]; then
   MODE=window
 else
@@ -33,3 +35,7 @@ screen)
   exit 1
   ;;
 esac
+
+if [ -n "$DISPLAY" ]; then
+  cat "$OUTPUT" | xclip -selection clipboard -target image/png -i
+fi
