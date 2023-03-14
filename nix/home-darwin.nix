@@ -22,9 +22,6 @@
     # for class
     pkgs.nodejs
 
-    pkgs.execline
-    pkgs.s6
-
     pkgs.element-desktop
   ];
 
@@ -33,23 +30,4 @@
 
     launchctl start com.openssh.ssh-agent
   '';
-
-  launchd = {
-    agents.s6 = {
-      enable = true;
-      config = {
-        EnvironmentVariables = {
-          PATH = "/run/current-system/sw/bin:${config.home.homeDirectory}/.nix-profile/bin";
-        };
-        KeepAlive = true;
-        ProgramArguments = [
-          "${pkgs.s6}/bin/s6-svscan"
-          "${config.home.homeDirectory}/.dotfiles/apps/s6/service"
-        ];
-        RunAtLoad = true;
-        StandardErrorPath = "${config.home.homeDirectory}/.cache/s6/log/s6-stderr";
-        StandardOutPath = "${config.home.homeDirectory}/.cache/s6/log/s6-stdout";
-      };
-    };
-  };
 }
