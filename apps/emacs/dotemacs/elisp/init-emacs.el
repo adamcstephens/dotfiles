@@ -19,6 +19,9 @@
     backup-directory-alist (list (cons "." (concat user-emacs-directory "backup/")))
     tramp-backup-directory-alist backup-directory-alist)
 
+  ;; keep what's already in the clipboard before overwriting the kill ring
+  (setq save-interprogram-paste-before-kill t)
+
   ;; But turn on auto-save, so we have a fallback in case of crashes or lost data.
   ;; Use `recover-file' or `recover-session' to recover them.
   (setq
