@@ -162,15 +162,15 @@ in {
     };
     screenshot = {
       name = "screenshot";
-      exec = "${../bin/screenshot} screen";
+      exec = "/run/current-system/sw/bin/systemd-cat --identifier=screenshot ${../bin/screenshot} screen";
     };
     screenshotBox = {
       name = "screenshot box";
-      exec = "${../bin/screenshot} box";
+      exec = "/run/current-system/sw/bin/systemd-cat --identifier=screenshot ${../bin/screenshot} box";
     };
     screenshotWindow = {
       name = "screenshot window";
-      exec = "${../bin/screenshot} window";
+      exec = "/run/current-system/sw/bin/systemd-cat --identifier=screenshot ${../bin/screenshot} window";
     };
   };
 
