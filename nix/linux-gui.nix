@@ -50,6 +50,12 @@ in {
     };
   };
 
+  home.activation.fix-mimeapps = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    if [ ! -h "${config.home.homeDirectory}/.config/mimeapps.list" ]; then
+      rm -fv "${config.home.homeDirectory}/.config/mimeapps.list"
+    fi
+  '';
+
   home.pointerCursor = {
     package = pkgs.catppuccin-cursors.macchiatoDark;
     name = "Catppuccin-Macchiato-Dark-Cursors";
