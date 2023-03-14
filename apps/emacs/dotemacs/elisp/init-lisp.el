@@ -1,5 +1,7 @@
 (use-package cider)
 
+(use-package dash)
+
 (use-package
   puni
   :defer t
