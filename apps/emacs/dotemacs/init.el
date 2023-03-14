@@ -40,6 +40,7 @@
 (require 'init-project)
 (require 'init-term)
 
+(require 'init-eww)
 (require 'init-haskell)
 (require 'init-just)
 (require 'init-lisp)

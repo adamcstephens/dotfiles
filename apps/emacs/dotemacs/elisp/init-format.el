@@ -14,7 +14,9 @@
   elisp-autofmt
   :hook
   ((emacs-lisp-mode . elisp-autofmt-mode)
-   (emacs-lisp-mode . dot/elisp-format-local))
+    (emacs-lisp-mode . dot/elisp-format-local)
+    (yuck-mode . elisp-autofmt-mode)
+    (yuck-mode . dot/elisp-format-local))
   :custom
   (elisp-autofmt-empty-line-max 1)
   (elisp-autofmt-on-save-p 'always)
