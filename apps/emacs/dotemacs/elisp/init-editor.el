@@ -102,7 +102,24 @@
 ;; support clipboards in terminals
 (use-package clipetty :init (global-clipetty-mode 1))
 
-(use-package key-chord :commands (key-chord-mode))
+(use-package
+  mwim
+  :init
+  (require 'better-bw-word)
+  (global-unset-key (kbd "C-a"))
+  (global-unset-key (kbd "C-e"))
+  (global-unset-key (kbd "<home>"))
+  (global-unset-key (kbd "<end>"))
+  :bind
+  (("C-a" . mwim-beginning-of-code-or-line)
+    ("C-e" . mwim-end-of-code-or-line)
+    ("<home>" . mwim-beginning-of-line-or-code)
+    ("<end>" . mwim-end-of-line-or-code)
+    ("C-<left>" . nate/backward-word)
+    ("M-<left>" . nate/backward-word)
+    ("C-<right>" . nate/forward-word)
+    ("M-<right>" . nate/forward-word)
+    ("C-<backspace>" . nate/backward-kill-word)))
 
 (use-package
   persistent-scratch
