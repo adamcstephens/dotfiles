@@ -440,11 +440,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1678453569,
-        "narHash": "sha256-n3QuUFjMH9aEmfI+dp/jb2GRTgp4zGaweF8AXxNLMog=",
+        "lastModified": 1678758952,
+        "narHash": "sha256-OVgfKrsTqMWetqQnBosmjpCzCw5aTxoBZBuaJ5G/FkM=",
         "owner": "adamcstephens",
         "repo": "nix-sandbox",
-        "rev": "bec493fb7e4f3f919cc09d13a7d627766f6a3aa6",
+        "rev": "9882633d4b0551598ccf8ece2ccec4c08db6aec6",
         "type": "github"
       },
       "original": {

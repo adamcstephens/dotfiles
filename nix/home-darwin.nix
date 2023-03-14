@@ -1,4 +1,5 @@
 {
+  inputs',
   pkgs,
   config,
   lib,
@@ -23,6 +24,8 @@
     pkgs.nodejs
 
     pkgs.element-desktop
+
+    inputs'.sandbox.packages.m1ddc
   ];
 
   home.activation.enable-ssh-agent = lib.hm.dag.entryAfter ["writeBoundary"] ''

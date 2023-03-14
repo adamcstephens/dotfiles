@@ -13,7 +13,6 @@ brew "pkg-config"
 brew "coreutils"
 brew "dark-mode"
 brew "ddcctl"
-brew "m1ddc"
 brew "syncthing", restart_service: true
 brew "null-dev/firefox-profile-switcher/firefox-profile-switcher-connector"
 cask "aldente"
