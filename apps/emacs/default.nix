@@ -114,7 +114,7 @@ in {
           "${config.home.homeDirectory}/.nix-profile/bin/fish"
           "-l"
           "-c"
-          "emacs --daemon --init-directory ${config.home.homeDirectory}/.config/emacs/dotemacs"
+          "emacs --fg-daemon --init-directory ${config.home.homeDirectory}/.config/emacs/dotemacs"
         ];
         WatchPaths = [
           "${config.home.homeDirectory}/.nix-profile/bin/emacs"
