@@ -1,3 +1,5 @@
+{-# LANGUAGE ImportQualifiedPost #-}
+
 import System.Exit
 import XMonad
 import XMonad.Actions.CopyWindow
@@ -5,6 +7,7 @@ import XMonad.Actions.CycleWS
 import XMonad.Actions.UpdatePointer
 import XMonad.Config.Desktop
 import XMonad.Hooks.EwmhDesktops
+import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
 import XMonad.Layout.NoBorders
 import XMonad.Operations
@@ -41,12 +44,13 @@ dotKeys =
   ]
     ++ [("M-C-S-" ++ show i, windows $ copy ws) | (i, ws) <- zip [1 .. 9] dotWorkspaces]
 
-dotLayouts = Tall 1 (3 / 100) (2 / 3) ||| noBorders Full
+dotLayouts = avoidStruts (Tall 1 (3 / 100) (2 / 3)) ||| noBorders Full
 
 dotLogHook = updatePointer (0.5, 0.5) (0, 0) <> logHook desktopConfig
 
 dotManageHook =
   manageHook desktopConfig
+    <> manageDocks
     <> composeAll
       [ isDialog --> doCenterFloat,
         title =? "Picture-in-Picture" --> doFloat,
@@ -58,6 +62,7 @@ dotStartupHook = setDefaultCursor xC_left_ptr <> spawn "xsetroot -cursor_name le
 
 main =
   xmonad
+    $ docks
     $ ewmhFullscreen
       . ewmh
     $ desktopConfig
