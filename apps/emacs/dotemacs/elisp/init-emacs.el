@@ -45,6 +45,9 @@
   (unless (display-graphic-p)
     (xterm-mouse-mode 1))
 
+  ;; copy on mouse highlight
+  (setq mouse-drag-copy-region 'non-empty)
+
   ;; don't jump when scrolling off screen
   (setq scroll-conservatively 101)
   ;; keep at least this many lines while scrolling
