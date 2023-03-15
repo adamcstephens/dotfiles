@@ -96,6 +96,9 @@
   ;; follow symlinks in vcs without prompting
   (setq vc-follow-symlinks t)
 
+  ;; enable autopairs
+  (electric-pair-mode t)
+
   ;;
   ;; vertico recommendations
   ;;
