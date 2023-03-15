@@ -18,6 +18,7 @@
 in {
   imports = [
     ../apps/dunst
+    # ../apps/eww
     ../apps/gammastep
     ../apps/hyprland
     ../apps/kanshi

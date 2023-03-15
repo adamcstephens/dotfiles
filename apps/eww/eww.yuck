@@ -15,24 +15,26 @@
 (include "./windows/system.yuck")
 (include "./windows/volume_win.yuck")
 
-(defwidget sep []
-  (label :class "separ module" :text "|"))
+(defwidget sep [] (label :class "separ module" :text "|"))
 
 ; (defwidget workspaces []
-  ;   (literal :content workspace))
+;   (literal :content workspace))
 
-(defwidget left []
+(defwidget
+  left []
   (box
     :space-evenly false
     ;     :halign "start"
     ;     (launcher)
     ; (workspaces)
-  ))
+    ))
 
-(defwidget right []
+(defwidget
+  right []
   (box
     :space-evenly false
-    :halign "end"
+    :halign
+    "end"
     (bright)
     (volume)
     (net)
@@ -44,29 +46,44 @@
     (sep)
     (clock_module)))
 
-(defwidget center []
-  (box
-    :space-evenly false
-    :halign "center"
-    (music)
-  ))
+(defwidget
+  center
+  []
+  (box :space-evenly false :halign "center" (music)))
 
-(defwidget bar []
-  (centerbox
-    :class "bar"
-    (left)
-    (center)
-    (right)))
+(defwidget bar [] (centerbox :class "bar" (left) (center) (right)))
 
-(defwindow bar
+;; (defwindow test :windowtype "dock" "hello world")
+;; ;; :monitor 0
+;; :geometry
+;; (geometry
+;;   :x "0%"
+;;   :y "0%"
+;;   :width "100%"
+;;   :height "32px"
+;;   :anchor "top center")
+
+;; ;; :stacking "fg"
+;; :windowtype "dock"
+;; ;; :exclusive true
+;; ;; :wm-ignore false
+
+;; :stacking "fg"
+;; ;; :windowtype "toolbar"
+;; ;; :geometry (geometry :x "1.35%"
+;; ;;                       :y "95.8%"
+;; ;;                       :width "97%"
+;; ;;                       )
+;; :reserve (struts :side "top" :distance "40px") (bar))
+(defwindow
+  bar
   :monitor 0
-  :geometry (geometry :x "0%"
+  :windowtype "dock"
+  :geometry
+  (geometry
+    :x "0%"
     :y "0%"
     :width "100%"
-    :height "32px"
-  :anchor "top center")
-  :stacking "fg"
-  :windowtype "dock"
-  :exclusive true
-  :wm-ignore false
-  (bar))
+    :height "5px"
+    :anchor "top center")
+  :reserve (struts :side "top" :distance "4%") (bar))
