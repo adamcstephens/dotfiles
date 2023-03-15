@@ -102,6 +102,9 @@
   ;; enable autopairs
   (electric-pair-mode t)
 
+  ;; replace region with yank
+  (delete-selection-mode t)
+
   ;;
   ;; vertico recommendations
   ;;
