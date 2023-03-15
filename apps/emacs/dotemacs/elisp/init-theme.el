@@ -203,6 +203,8 @@
       "://"))
   (global-ligature-mode t))
 
+(use-package rainbow-delimiters :init (rainbow-delimiters-mode))
+
 ;; allow visualizing colors, but don't enable it by default
 (use-package rainbow-mode :commands rainbow-mode)
 
