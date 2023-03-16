@@ -51,6 +51,13 @@
         }
       ];
     };
+    silver = {
+      homeSystem = "aarch64-linux";
+      dotfiles.linuxGui = true;
+      modules = [
+        ../apps/emacs
+      ];
+    };
     think = {
       homeSystem = "x86_64-linux";
       dotfiles.linuxGui = true;
