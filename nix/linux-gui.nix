@@ -113,7 +113,6 @@ in {
     pkgs.cinnamon.nemo
     pkgs.cinny-desktop
     pkgs.remmina
-    pkgs.slack
     pkgs.tdesktop
     pkgs.webcord
   ];
