@@ -13,6 +13,7 @@
     ../apps/fish
     ../apps/git
     ../apps/lsd
+    ../apps/nushell
     ../apps/ripgrep
     ../apps/shellcheck
     ../apps/starship
