@@ -52,9 +52,40 @@
 ;; re-run this hook if we create a new frame from daemonized Emacs
 (add-hook 'server-after-make-frame-hook 'dot/gui-setup)
 
-(use-package modus-themes :init (dot/gui-setup))
+(use-package all-the-icons)
 
-;; enable ligatures
+(use-package
+  auto-dark
+  :after (modus-themes)
+  :config
+  (setq auto-dark-dark-theme 'modus-vivendi)
+  (setq auto-dark-light-theme 'modus-operandi)
+  (when (and (eq system-type 'darwin) (eq window-system 'ns))
+    (setq auto-dark-allow-osascript t))
+  (auto-dark-mode t))
+
+(use-package
+  doom-modeline
+  :config (setq doom-modeline-buffer-encoding 'nondefault)
+  :init (doom-modeline-mode 1))
+
+(defun dot/dashboard-recentf-project (list-size)
+  (insert "Custom Text"))
+
+(use-package
+  dashboard
+  :init
+  (setq dashboard-set-init-info nil)
+  (setq dashboard-set-footer nil)
+  (setq dashboard-banner-logo-title nil)
+  (setq dashboard-startup-banner 'logo)
+  (setq dashboard-center-content t)
+  ;; (setq dashboard-item-generators '((custom . dot/project-dashboard)))
+  (add-to-list
+    'dashboard-item-generators
+    '(recentf-project . dot/dashboard-recentf-project))
+  (setq dashboard-items '((recentf-project))))
+
 (use-package
   ligature
   :config
@@ -203,26 +234,13 @@
       "://"))
   (global-ligature-mode t))
 
+(use-package modus-themes :init (dot/gui-setup))
+
 (use-package rainbow-delimiters :init (rainbow-delimiters-mode))
 
-;; allow visualizing colors, but don't enable it by default
-(use-package rainbow-mode :commands rainbow-mode)
-
-(use-package all-the-icons)
-
 (use-package
-  doom-modeline
-  :config (setq doom-modeline-buffer-encoding 'nondefault)
-  :init (doom-modeline-mode 1))
-
-(use-package
-  auto-dark
-  :after (modus-themes)
-  :config
-  (setq auto-dark-dark-theme 'modus-vivendi)
-  (setq auto-dark-light-theme 'modus-operandi)
-  (when (and (eq system-type 'darwin) (eq window-system 'ns))
-    (setq auto-dark-allow-osascript t))
-  (auto-dark-mode t))
+  rainbow-mode
+  ;; allow visualizing colors, but don't enable it by default
+  :commands rainbow-mode)
 
 (provide 'init-theme)
