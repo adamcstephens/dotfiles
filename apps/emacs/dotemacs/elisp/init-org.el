@@ -85,6 +85,13 @@
     'org-refile-targets
     '(dot/org-refile-candidates :maxlevel . 3))
 
+  ;; agenda files
+  (setq org-agenda-files
+    (seq-filter
+      (lambda (x)
+        (not (string-match "/.stversions/" (file-name-directory x))))
+      (directory-files-recursively "~/org" "\\.org$")))
+
   ;; let the completion engine sort them
   (setq org-outline-path-complete-in-steps nil)
 
