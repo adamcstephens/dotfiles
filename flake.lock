@@ -203,15 +203,16 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1678967335,
-        "narHash": "sha256-oFppZaAVRA0G/aVPvjtWaQI5EQ2dZ5LgbEKfsBmKQgA=",
-        "owner": "nix-community",
+        "lastModified": 1679077781,
+        "narHash": "sha256-i9aJK3/y4H6Aq7z5QcJXPSiRijZCzDCmY37eeB5/ATY=",
+        "owner": "adamcstephens",
         "repo": "home-manager",
-        "rev": "b832390db376fbbf44115904cfab6680fb42e076",
+        "rev": "2f8b3b62097a6eac12523d5280ddd5d36b251eb4",
         "type": "github"
       },
       "original": {
-        "owner": "nix-community",
+        "owner": "adamcstephens",
+        "ref": "zoxide/nushell",
         "repo": "home-manager",
         "type": "github"
       }
