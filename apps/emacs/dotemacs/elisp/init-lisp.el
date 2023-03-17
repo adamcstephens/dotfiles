@@ -2,8 +2,11 @@
 
 (use-package dash)
 
+(use-package lispy :hook emacs-lisp-mode . (lambda () (lispy-mode 1)))
+
 (use-package
   puni
+  :disabled
   :defer t
   :init
   ;; The autoloads of Puni are set up so you can enable `puni-mode` or
