@@ -8,6 +8,7 @@
 
 (use-package
   project
+  :straight (:type built-in)
   :init (setq project-switch-commands #'project-find-file)
   :bind
   (("H-SPC" . project-find-file)
@@ -16,16 +17,14 @@
     ("C-c p d" . project-dired)))
 
 (use-package
-  tabspaces
-  :hook (after-init . tabspaces-mode)
-  :commands
-  (tabspaces-switch-or-create-workspace
-    tabspaces-open-or-create-project-and-workspace)
-  :custom
-  (tabspaces-use-filtered-buffers-as-default t)
-  (tabspaces-default-tab "main")
-  (tabspaces-remove-to-default t)
-  (tabspaces-include-buffers '("*scratch*")))
+  project-tab-groups
+  :ensure
+  :config (project-tab-groups-mode 1))
+
+(use-package
+  project-mode-line-tag
+  :ensure
+  :config (project-mode-line-tag-mode 1))
 
 (use-package persp-mode :disabled :init (persp-mode 1))
 
@@ -44,5 +43,18 @@
   (persp-mode . persp-mode-project-bridge-mode)
   :init (persp-mode-project-bridge-mode 1)
   :config (setq persp-emacsclient-init-frame-behaviour-override "main"))
+
+(use-package
+  tabspaces
+  :disabled
+  :hook (after-init . tabspaces-mode)
+  :commands
+  (tabspaces-switch-or-create-workspace
+    tabspaces-open-or-create-project-and-workspace)
+  :custom
+  (tabspaces-use-filtered-buffers-as-default t)
+  (tabspaces-default-tab "main")
+  (tabspaces-remove-to-default t)
+  (tabspaces-include-buffers '("*scratch*")))
 
 (provide 'init-project)
