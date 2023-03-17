@@ -35,6 +35,8 @@
   gpgsign = true
 [url "git@github.com:"]
   pushInsteadOf = https://github.com/
+[url "git@github.com:kentstate-emat"]
+  insteadOf = https://github.com/kentstate-emat
 [url "git@gitlab.com:"]
   pushInsteadOf = https://gitlab.com/
 [url "git@git.sr.ht:~adamcstephens"]
