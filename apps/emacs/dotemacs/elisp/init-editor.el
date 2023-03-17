@@ -148,6 +148,10 @@
   (defun dot/run-command-recipes ()
     (list
       (list
+        :command-name "nix-flake-update"
+        :command-line "nix flake update"
+        :display "nix flake update")
+      (list
         :command-name "bb-repl"
         :command-line "bb --nrepl-server"
         :display "Babashka REPL")))
