@@ -1,31 +1,15 @@
 {
-  pkgs,
-  homeConfigurations,
-  ...
+  bash,
+  home-profile-selector,
+  lib,
+  nix,
+  nix-output-monitor,
+  writeScriptBin,
 }: let
-  nixCmd = ''${pkgs.nix}/bin/nix --extra-experimental-features "nix-command flakes"'';
-in rec {
-  home-profile-selector = pkgs.writeScriptBin "home-profile-selector" ''
-    #!${pkgs.python3Minimal}/bin/python3
-
-    from socket import gethostname
-
-    hm_profiles = [${builtins.concatStringsSep "," (map (x: "'${x}'") homeConfigurations)}]
-    hostname = gethostname()
-
-    if hostname in hm_profiles:
-        print(hostname)
-    else:
-        print("${pkgs.stdenv.hostPlatform.system}")
-  '';
-  hm-all = pkgs.writeScriptBin "hm-all" ''
-    set -x
-
-    targets=$(for profile in ${builtins.concatStringsSep " " (map (x: "'${x}'") homeConfigurations)}; do echo -n "$HOME/.dotfiles#homeConfigurations.$profile.activationPackage "; done)
-
-    nom build --no-link --print-build-logs $targets
-  '';
-  hm = pkgs.writeScriptBin "hm" ''
+  nixCmd = ''${nix}/bin/nix --extra-experimental-features "nix-command flakes"'';
+in
+  writeScriptBin "hm" ''
+    #!${lib.getExe bash}
     set -e
 
     : "''${HMPROFILE:=$(${home-profile-selector}/bin/home-profile-selector)}"
@@ -41,7 +25,7 @@ in rec {
     echo " Running action $ACTION"
 
     echo "🚧 Building new profile for $HMPROFILE"
-    ${nixCmd} build --no-link $TARGET --print-build-logs || exit 1
+    ${lib.getExe nix-output-monitor} build --no-link $TARGET --print-build-logs || exit 1
 
     if [ "$ACTION" = "show" ]; then
       ${nixCmd} show-derivation $TARGET
@@ -65,5 +49,4 @@ in rec {
     fi
 
     echo "✅ Success!"
-  '';
-}
+  ''

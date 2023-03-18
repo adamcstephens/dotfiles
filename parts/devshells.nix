@@ -10,6 +10,7 @@
         packages =
           [
             pkgs.alejandra
+            pkgs.deadnix
             pkgs.just
             pkgs.nil
             pkgs.nodePackages.prettier
