@@ -15,7 +15,6 @@
     nix-colors.url = "github:misterio77/nix-colors";
     nix-wallpaper.url = "github:lunik1/nix-wallpaper";
     nix-wallpaper.inputs.nixpkgs.follows = "nixpkgs";
-    nixinate.url = "github:matthewcroughan/nixinate";
     sandbox.url = "github:adamcstephens/nix-sandbox";
     sandbox.inputs.nixpkgs.follows = "nixpkgs";
   };
@@ -29,9 +28,8 @@
       imports = [
         ./parts/home.nix
         ./home/configs.nix
-        # ./nix/homes.nix
-        # ./nix/darwin.nix
-        # ./nix/nixos-darwin-vm.nix
+
+        ./parts/darwin.nix
       ];
 
       systems = ["x86_64-linux" "aarch64-darwin" "aarch64-linux"];
@@ -93,7 +91,21 @@
       };
     }
     // {
-      apps = self.inputs.nixinate.nixinate.aarch64-darwin self;
-      overlays = import ./nix/overlays.nix inputs;
+      overlays = rec {
+        default = inputs.nixpkgs.lib.composeManyExtensions [
+          inputs.emacs.overlays.emacs
+          inputs.emacs.overlays.package
+          fishPlugins
+        ];
+
+        # disable tests since they broke on darwin...
+        fishPlugins = _: prev: {
+          fishPlugins = prev.fishPlugins.overrideScope' (_: fprev: {
+            fzf-fish = fprev.fzf-fish.overrideAttrs (_: {
+              doCheck = false;
+            });
+          });
+        };
+      };
     };
 }
