@@ -1,5 +1,4 @@
 {
-  description = "A very basic flake";
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
@@ -30,12 +29,13 @@
         ./home/configs.nix
 
         ./parts/darwin.nix
+        ./parts/devshells.nix
+        ./parts/overlays.nix
       ];
 
       systems = ["x86_64-linux" "aarch64-darwin" "aarch64-linux"];
 
       perSystem = {
-        lib,
         pkgs,
         system,
         ...
@@ -46,65 +46,9 @@
           config.allowUnfree = true;
         };
 
-        devShells = {
-          default = pkgs.mkShellNoCC {
-            name = "dots";
-            packages =
-              [
-                pkgs.alejandra
-                pkgs.just
-                pkgs.nil
-                pkgs.nodePackages.prettier
-              ]
-              ++ (lib.optionals pkgs.stdenv.isLinux [
-                (pkgs.ghc.withPackages (ps: [
-                  ps.haskell-language-server
-                  ps.ormolu
-                  ps.xmonad
-                  ps.xmonad-contrib
-                ]))
-              ]);
-          };
-          miryoku_kmonad = pkgs.mkShell {
-            name = "miryoku_kmonad";
-            packages = [
-              pkgs.gnumake
-              pkgs.gnused
-            ];
-          };
-          nixpkgs = pkgs.mkShellNoCC {
-            packages =
-              [
-                pkgs.nixpkgs-review
-                pkgs.deadnix
-              ]
-              ++ (lib.optionals pkgs.stdenv.isLinux [
-                pkgs.bubblewrap
-              ]);
-          };
-        };
-
         packages = import ./packages {
           inherit pkgs;
           homeConfigurations = builtins.attrNames self.homeConfigurations;
-        };
-      };
-    }
-    // {
-      overlays = rec {
-        default = inputs.nixpkgs.lib.composeManyExtensions [
-          inputs.emacs.overlays.emacs
-          inputs.emacs.overlays.package
-          fishPlugins
-        ];
-
-        # disable tests since they broke on darwin...
-        fishPlugins = _: prev: {
-          fishPlugins = prev.fishPlugins.overrideScope' (_: fprev: {
-            fzf-fish = fprev.fzf-fish.overrideAttrs (_: {
-              doCheck = false;
-            });
-          });
         };
       };
     };
