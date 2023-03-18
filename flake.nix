@@ -27,9 +27,11 @@
   } @ inputs:
     flake-parts.lib.mkFlake {inherit inputs;} {
       imports = [
-        ./nix/homes.nix
-        ./nix/darwin.nix
-        ./nix/nixos-darwin-vm.nix
+        ./parts/home.nix
+        ./home/configs.nix
+        # ./nix/homes.nix
+        # ./nix/darwin.nix
+        # ./nix/nixos-darwin-vm.nix
       ];
 
       systems = ["x86_64-linux" "aarch64-darwin" "aarch64-linux"];
@@ -84,7 +86,7 @@
           };
         };
 
-        packages = import ./nix/packages {
+        packages = import ./packages {
           inherit pkgs;
           homeConfigurations = builtins.attrNames self.homeConfigurations;
         };

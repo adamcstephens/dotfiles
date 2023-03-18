@@ -6,6 +6,10 @@
   ...
 }: {
   imports = [
+    ./module.nix
+
+    ./colors.nix
+
     ../apps/bash
     ../apps/bat
     ../apps/btop
@@ -32,6 +36,8 @@
       builders-use-substitutes = true;
     };
   };
+
+  nix.registry.nixpkgs.flake = lib.mkDefault inputs.nixpkgs;
 
   home.activation.dotfiles-bootstrap = lib.hm.dag.entryAfter ["writeBoundary"] ''
     if [ ! -d ~/.dotfiles ]; then
@@ -74,7 +80,7 @@
 
   home.packages = [
     # my terms
-    (pkgs.callPackage ./packages/terminfo {})
+    (pkgs.callPackage ../packages/terminfo {})
 
     pkgs.bc
     pkgs.calc
