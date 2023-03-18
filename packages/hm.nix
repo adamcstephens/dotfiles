@@ -19,10 +19,11 @@ in rec {
         print("${pkgs.stdenv.hostPlatform.system}")
   '';
   hm-all = pkgs.writeScriptBin "hm-all" ''
-    set -ex
-    for profile in ${builtins.concatStringsSep " " (map (x: "'${x}'") homeConfigurations)}; do
-      HMPROFILE=$profile ${hm}/bin/hm build
-    done
+    set -x
+
+    targets=$(for profile in ${builtins.concatStringsSep " " (map (x: "'${x}'") homeConfigurations)}; do echo -n "$HOME/.dotfiles#homeConfigurations.$profile.activationPackage "; done)
+
+    nom build --no-link --print-build-logs $targets
   '';
   hm = pkgs.writeScriptBin "hm" ''
     set -e
