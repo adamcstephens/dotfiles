@@ -1,6 +1,5 @@
 {
   config,
-  inputs,
   inputs',
   lib,
   pkgs,

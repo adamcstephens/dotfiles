@@ -1,11 +1,4 @@
-{
-  config,
-  inputs,
-  pkgs,
-  ...
-}: let
-  nix-colors-contrib = inputs.nix-colors.lib-contrib {inherit pkgs;};
-in {
+{pkgs, ...}: {
   home.packages = [
     pkgs.fishPlugins.done
     pkgs.fishPlugins.foreign-env

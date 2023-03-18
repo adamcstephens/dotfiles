@@ -64,11 +64,7 @@ in {
 
         config = {
           finalModules = withSystem config.system (
-            {
-              inputs',
-              pkgs,
-              ...
-            }:
+            {pkgs, ...}:
               [
                 ../home/core.nix
 
@@ -110,7 +106,7 @@ in {
   };
 
   config.flake.homeConfigurations = homes;
-  config.flake.homeModules = builtins.mapAttrs (_: value: cfg.finalModules) cfg;
+  config.flake.homeModules = builtins.mapAttrs (_: value: value.finalModules) cfg;
   config.flake.lib.findHome = hostname: system:
     if (builtins.elem hostname (builtins.attrNames cfg))
     then hostname

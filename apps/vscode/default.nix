@@ -1,6 +1,5 @@
 {
   config,
-  inputs,
   pkgs,
   lib,
   ...
@@ -9,7 +8,6 @@
   #   inherit (pkgs) system;
   #   config.allowUnfree = true;
   # };
-
   package = pkgs.vscode;
   keybindings =
     if pkgs.stdenv.isDarwin

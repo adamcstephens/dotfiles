@@ -10,7 +10,7 @@
   # swaylock = "${pkgs.waylock}/bin/waylock";
   locker = gtklock;
 
-  swayidle = pkgs.swayidle.overrideAttrs (old: rec {
+  swayidle = pkgs.swayidle.overrideAttrs (_: rec {
     version = "1.8.0";
 
     postPatch = null;
