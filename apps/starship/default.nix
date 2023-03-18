@@ -19,6 +19,10 @@
         trim_at = "";
       };
 
+      nix_shell = {
+        format = "[\($name\)]($style) ";
+      };
+
       username = {
         style_user = "fg:244";
         format = "[$user@]($style)";
