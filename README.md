@@ -12,5 +12,4 @@ cd ~/.dotfiles
 
 ```
 git clone https://github.com/adamcstephens/dotfiles ~/.dotfiles
-git clone https://git.sr.ht/~adamcstephens/dotfiles ~/.dotfiles
 ```
