@@ -65,68 +65,71 @@ in {
     x11.enable = true;
   };
 
-  home.packages = [
-    pkgs.etBook
-    pkgs.fira
-    pkgs.font-awesome
-    pkgs.jetbrains-mono
-    pkgs.manrope
-    pkgs.material-icons
-    pkgs.material-design-icons
-    pkgs.merriweather
-    pkgs.norwester-font
-    pkgs.noto-fonts
-    pkgs.noto-fonts-cjk
-    pkgs.noto-fonts-emoji
-    pkgs.roboto
-    inputs'.apple-fonts.packages.sf-mono
-    inputs'.apple-fonts.packages.sf-pro
-    pkgs.source-sans
-    pkgs.vegur
-    (pkgs.nerdfonts.override {fonts = ["JetBrainsMono" "NerdFontsSymbolsOnly"];})
+  home.packages =
+    [
+      pkgs.etBook
+      pkgs.fira
+      pkgs.font-awesome
+      pkgs.jetbrains-mono
+      pkgs.manrope
+      pkgs.material-icons
+      pkgs.material-design-icons
+      pkgs.merriweather
+      pkgs.norwester-font
+      pkgs.noto-fonts
+      pkgs.noto-fonts-cjk
+      pkgs.noto-fonts-emoji
+      pkgs.roboto
+      inputs'.apple-fonts.packages.sf-mono
+      inputs'.apple-fonts.packages.sf-pro
+      pkgs.source-sans
+      pkgs.vegur
+      (pkgs.nerdfonts.override {fonts = ["JetBrainsMono" "NerdFontsSymbolsOnly"];})
 
-    configure-gtk
-    pkgs.glib
-    pkgs.libnotify
+      configure-gtk
+      pkgs.glib
+      pkgs.libnotify
 
-    pkgs.autorandr
-    pkgs.brightnessctl
-    pkgs.blueberry
-    pkgs.bluez
-    pkgs.ddcutil
-    pkgs.light
-    pkgs.lxrandr
-    pkgs.networkmanagerapplet
-    pkgs.wl-clipboard
-    pkgs.xclip
-    pkgs.xlayoutdisplay
+      pkgs.autorandr
+      pkgs.brightnessctl
+      pkgs.blueberry
+      pkgs.bluez
+      pkgs.ddcutil
+      pkgs.light
+      pkgs.lxrandr
+      pkgs.networkmanagerapplet
+      pkgs.wl-clipboard
+      pkgs.xclip
+      pkgs.xlayoutdisplay
 
-    # audio
-    pkgs.pavucontrol
-    pkgs.playerctl
-    pkgs.wireplumber
+      # audio
+      pkgs.pavucontrol
+      pkgs.playerctl
+      pkgs.wireplumber
 
-    # apps
-    pkgs.chromium
-    pkgs.element-desktop
-    pkgs.firefox-wayland
-    pkgs.cinnamon.nemo
-    pkgs.cinny-desktop
-    pkgs.remmina
-    pkgs.tdesktop
+      # apps
+      pkgs.chromium
+      pkgs.element-desktop
+      pkgs.firefox-wayland
+      pkgs.cinnamon.nemo
+      pkgs.remmina
 
-    # wrap webcord to remove state file https://github.com/SpacingBat3/WebCord/issues/360
-    (pkgs.symlinkJoin {
-      name = "webcord-wrapper";
-      nativeBuildInputs = [pkgs.makeWrapper];
-      paths = [
-        pkgs.webcord
-      ];
-      postBuild = ''
-        wrapProgram "$out/bin/webcord" --run 'rm $HOME/.config/WebCord/windowState.json'
-      '';
-    })
-  ];
+      # wrap webcord to remove state file https://github.com/SpacingBat3/WebCord/issues/360
+      (pkgs.symlinkJoin {
+        name = "webcord-wrapper";
+        nativeBuildInputs = [pkgs.makeWrapper];
+        paths = [
+          pkgs.webcord
+        ];
+        postBuild = ''
+          wrapProgram "$out/bin/webcord" --run 'rm $HOME/.config/WebCord/windowState.json'
+        '';
+      })
+    ]
+    ++ (lib.optionals pkgs.stdenv.isx86_64 [
+      pkgs.cinny-desktop
+      pkgs.tdesktop
+    ]);
 
   programs.feh.enable = true;
 
