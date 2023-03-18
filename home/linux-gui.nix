@@ -114,7 +114,18 @@ in {
     pkgs.cinny-desktop
     pkgs.remmina
     pkgs.tdesktop
-    pkgs.webcord
+
+    # wrap webcord to remove state file https://github.com/SpacingBat3/WebCord/issues/360
+    (pkgs.symlinkJoin {
+      name = "webcord-wrapper";
+      nativeBuildInputs = [pkgs.makeWrapper];
+      paths = [
+        pkgs.webcord
+      ];
+      postBuild = ''
+        wrapProgram "$out/bin/webcord" --run 'rm $HOME/.config/WebCord/windowState.json'
+      '';
+    })
   ];
 
   programs.feh.enable = true;
