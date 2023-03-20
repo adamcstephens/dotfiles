@@ -1,33 +1,44 @@
-;; completion UI
 (use-package
-  vertico
-  :straight (:files (:defaults "extensions/*"))
-  :init (vertico-mode)
-  :bind (:map vertico-map ("C-<backspace>" . vertico-directory-up))
-
-  ;; Different scroll margin
-  ;; (setq vertico-scroll-margin 0)
-
-  ;; Show more candidates
-  ;; (setq vertico-count 20)
-
-  ;; Grow and shrink the Vertico minibuffer
-  ;; (setq vertico-resize t)
-
-  ;; Optionally enable cycling for `vertico-next' and `vertico-previous'.
-  ;; (setq vertico-cycle t)
+  cape
+  ;; Add extensions
+  ;; Bind dedicated completion commands
+  ;; Alternative prefix keys: C-c p, M-p, M-+, ...
+  ;; :bind
+  ;; (("C-c p p" . completion-at-point) ;; capf
+  ;;   ("C-c p t" . complete-tag) ;; etags
+  ;;   ("C-c p d" . cape-dabbrev) ;; or dabbrev-completion
+  ;;   ("C-c p h" . cape-history)
+  ;;   ("C-c p f" . cape-file)
+  ;;   ("C-c p k" . cape-keyword)
+  ;;   ("C-c p s" . cape-symbol)
+  ;;   ("C-c p a" . cape-abbrev)
+  ;;   ("C-c p i" . cape-ispell)
+  ;;   ("C-c p l" . cape-line)
+  ;;   ("C-c p w" . cape-dict)
+  ;;   ("C-c p \\" . cape-tex)
+  ;;   ("C-c p _" . cape-tex)
+  ;;   ("C-c p ^" . cape-tex)
+  ;;   ("C-c p &" . cape-sgml)
+  ;;   ("C-c p r" . cape-rfc1345))
+  :init
+  ;; Add `completion-at-point-functions', used by `completion-at-point'.
+  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
+  (add-to-list 'completion-at-point-functions #'cape-file)
+  ;;(add-to-list 'completion-at-point-functions #'cape-history)
+  ;;(add-to-list 'completion-at-point-functions #'cape-keyword)
+  ;;(add-to-list 'completion-at-point-functions #'cape-tex)
+  ;;(add-to-list 'completion-at-point-functions #'cape-sgml)
+  ;;(add-to-list 'completion-at-point-functions #'cape-rfc1345)
+  ;;(add-to-list 'completion-at-point-functions #'cape-abbrev)
+  ;;(add-to-list 'completion-at-point-functions #'cape-ispell)
+  ;;(add-to-list 'completion-at-point-functions #'cape-dict)
+  ;;(add-to-list 'completion-at-point-functions #'cape-symbol)
+  ;;(add-to-list 'completion-at-point-functions #'cape-line)
   )
 
-;; Persist history over Emacs restarts. Vertico sorts by history position.
-(use-package savehist :init (savehist-mode))
-
-;; Enable rich annotations using the Marginalia package
-(use-package marginalia :init (marginalia-mode))
-
-;; add some more searching commands
-;; Example configuration for Consult
 (use-package
   consult
+  ;; add some more searching commands
   ;; Replace bindings. Lazily loaded due by `use-package'.
   :bind
   ( ;; C-c bindings (mode-specific-map)
@@ -141,30 +152,11 @@
 
   (consult-customize consult--source-buffer :hidden t :default nil))
 
-;; completion style
-;; (use-package
-;;   fussy
-;;   :ensure t
-;;   :config
-;;   (push 'fussy completion-styles)
-;;   (setq
-;;    ;; For example, project-find-file uses 'project-files which uses
-;;    ;; substring completion by default. Set to nil to make sure it's using
-;;    ;; flx.
-;;    completion-category-defaults nil
-;;    completion-category-overrides nil))
+(use-package corfu :init (global-corfu-mode))
 
-(use-package
-  prescient
-  :config
-  (push 'prescient completion-styles)
-  (prescient-persist-mode 1))
-
-(use-package vertico-prescient :init (vertico-prescient-mode 1))
-
-;; jump from completion to other tasks
 (use-package
   embark
+  ;; jump from completion to other tasks
   :bind
   (("M-o" . embark-act)
     ("C-;" . embark-dwim)
@@ -181,54 +173,57 @@
       nil
       (window-parameters (mode-line-format . none)))))
 
-;; Consult users will also want the embark-consult package.
 (use-package
   embark-consult
+  ;; Consult users will also want the embark-consult package.
   :hook (embark-collect-mode . consult-preview-at-point-mode))
 
-;; discover shortcuts easier in the minibuffer
-(use-package which-key :init (which-key-mode))
-
-;; snippets!
-(use-package yasnippet :init (yas-global-mode 1))
-(use-package yasnippet-snippets)
-
-;; Add extensions
 (use-package
-  cape
-  ;; Bind dedicated completion commands
-  ;; Alternative prefix keys: C-c p, M-p, M-+, ...
-  ;; :bind
-  ;; (("C-c p p" . completion-at-point) ;; capf
-  ;;   ("C-c p t" . complete-tag) ;; etags
-  ;;   ("C-c p d" . cape-dabbrev) ;; or dabbrev-completion
-  ;;   ("C-c p h" . cape-history)
-  ;;   ("C-c p f" . cape-file)
-  ;;   ("C-c p k" . cape-keyword)
-  ;;   ("C-c p s" . cape-symbol)
-  ;;   ("C-c p a" . cape-abbrev)
-  ;;   ("C-c p i" . cape-ispell)
-  ;;   ("C-c p l" . cape-line)
-  ;;   ("C-c p w" . cape-dict)
-  ;;   ("C-c p \\" . cape-tex)
-  ;;   ("C-c p _" . cape-tex)
-  ;;   ("C-c p ^" . cape-tex)
-  ;;   ("C-c p &" . cape-sgml)
-  ;;   ("C-c p r" . cape-rfc1345))
-  :init
-  ;; Add `completion-at-point-functions', used by `completion-at-point'.
-  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
-  (add-to-list 'completion-at-point-functions #'cape-file)
-  ;;(add-to-list 'completion-at-point-functions #'cape-history)
-  ;;(add-to-list 'completion-at-point-functions #'cape-keyword)
-  ;;(add-to-list 'completion-at-point-functions #'cape-tex)
-  ;;(add-to-list 'completion-at-point-functions #'cape-sgml)
-  ;;(add-to-list 'completion-at-point-functions #'cape-rfc1345)
-  ;;(add-to-list 'completion-at-point-functions #'cape-abbrev)
-  ;;(add-to-list 'completion-at-point-functions #'cape-ispell)
-  ;;(add-to-list 'completion-at-point-functions #'cape-dict)
-  ;;(add-to-list 'completion-at-point-functions #'cape-symbol)
-  ;;(add-to-list 'completion-at-point-functions #'cape-line)
+  marginalia
+  ;; Enable rich annotations using the Marginalia package
+  :init (marginalia-mode))
+
+(use-package
+  prescient
+  :config
+  (push 'prescient completion-styles)
+  (prescient-persist-mode 1))
+
+(use-package
+  savehist
+  :straight (:type built-in)
+  ;; Persist history over Emacs restarts. Vertico sorts by history position.
+  :init (savehist-mode))
+
+(use-package
+  ;; completion UI
+  vertico
+  :straight (:files (:defaults "extensions/*"))
+  :init (vertico-mode)
+  :bind (:map vertico-map ("C-<backspace>" . vertico-directory-up))
+
+  ;; Different scroll margin
+  ;; (setq vertico-scroll-margin 0)
+
+  ;; Show more candidates
+  ;; (setq vertico-count 20)
+
+  ;; Grow and shrink the Vertico minibuffer
+  ;; (setq vertico-resize t)
+
+  ;; Optionally enable cycling for `vertico-next' and `vertico-previous'.
+  ;; (setq vertico-cycle t)
   )
+
+(use-package vertico-prescient :init (vertico-prescient-mode 1))
+
+(use-package
+  which-key
+  ;; discover shortcuts easier in the minibuffer
+  :init (which-key-mode))
+
+;; (use-package yasnippet :init (yas-global-mode 1))
+
+;; (use-package yasnippet-snippets)
 
 (provide 'init-complete)
