@@ -1,6 +1,12 @@
 {pkgs, ...}: {
   home.packages = [
-    pkgs.ripgrep
+    (pkgs.symlinkJoin {
+      name = "ripgrep-dotfiles-wrapped";
+      paths = [pkgs.ripgrep];
+      nativeBuildInputs = [pkgs.makeWrapper];
+      postBuild = ''
+        wrapProgram "$out/bin/rg" --set RIPGREP_CONFIG_PATH ${./ripgreprc}
+      '';
+    })
   ];
-  home.sessionVariables.RIPGREP_CONFIG_PATH = ./ripgreprc;
 }
