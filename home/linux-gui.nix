@@ -17,6 +17,7 @@
   nix-colors-contrib = inputs.nix-colors.lib-contrib {inherit pkgs;};
 in {
   imports = [
+    # actual gui apps
     ../apps/dunst
     # ../apps/eww
     ../apps/gammastep
@@ -33,6 +34,9 @@ in {
     ../apps/xmonad
     ../apps/waybar
     ../apps/wob
+
+    # dev
+    ../apps/ghc
   ];
 
   fonts.fontconfig.enable = true;
