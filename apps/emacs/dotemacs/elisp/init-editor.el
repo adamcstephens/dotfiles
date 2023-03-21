@@ -43,7 +43,12 @@
 ;; better undo support
 (use-package
   undo-fu
-  :bind (("C-x u" . undo-fu-only-undo) ("C-r" . undo-fu-only-redo)))
+  :bind
+  (("C-x u" . undo-fu-only-undo)
+    ("C-r" . undo-fu-only-redo)
+    ("<undo>" . undo-fu-only-undo)
+    ("C-_" . undo-fu-only-undo)
+    ("C-/" . undo-fu-only-undo)))
 
 ;; store undo across sessions
 (use-package undo-fu-session :init (undo-fu-session-global-mode))
