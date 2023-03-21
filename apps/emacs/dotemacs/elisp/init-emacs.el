@@ -145,6 +145,9 @@
   ;; Enable indentation+completion using the TAB key.
   (setq tab-always-indent 'complete)
 
+  ;; turn on tab line mode
+  (global-tab-line-mode t)
+
   ;;
   ;; keybindings to builtin functions
   ;;
