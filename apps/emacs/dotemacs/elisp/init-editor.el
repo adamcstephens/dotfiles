@@ -8,6 +8,15 @@
   (delete-indentation 1))
 (global-set-key (kbd "C-^") 'dot/top-join-line)
 
+(defun dot/auto-create-missing-dirs ()
+  (let ((target-dir (file-name-directory buffer-file-name)))
+    (unless (file-exists-p target-dir)
+      (make-directory target-dir t))))
+
+(add-to-list
+  'find-file-not-found-functions
+  #'dot/auto-create-missing-dirs)
+
 (use-package
   avy
   :init
