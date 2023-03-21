@@ -23,48 +23,8 @@
   (avy-setup-default)
   (global-set-key (kbd "C-c C-j") 'avy-resume))
 
-(use-package editorconfig :ensure :config (editorconfig-mode 1))
+(use-package clipetty :init (global-clipetty-mode 1))
 
-(use-package expand-region :bind ("C-=" . er/expand-region))
-
-(use-package
-  whitespace
-  :ensure nil
-  :init
-  (global-whitespace-mode)
-  (setq whitespace-style '(face tabs trailing))
-  (add-hook 'before-save-hook 'whitespace-cleanup))
-
-;; allow for running commands without selecting a region
-(use-package
-  whole-line-or-region
-  :init (whole-line-or-region-global-mode))
-
-;; better undo support
-(use-package
-  undo-fu
-  :bind
-  (("C-x u" . undo-fu-only-undo)
-    ("C-r" . undo-fu-only-redo)
-    ("<undo>" . undo-fu-only-undo)
-    ("C-_" . undo-fu-only-undo)
-    ("C-/" . undo-fu-only-undo)))
-
-;; store undo across sessions
-(use-package undo-fu-session :init (undo-fu-session-global-mode))
-
-(use-package vundo)
-
-;; moving lines up and down can be handy
-(use-package
-  move-dup
-  :bind
-  (("M-<up>" . move-dup-move-lines-up)
-    ("M-S-<up>" . move-dup-duplicate-up)
-    ("M-<down>" . move-dup-move-lines-down)
-    ("M-S-<down>" . move-dup-duplicate-down)))
-
-;; better dired
 (use-package
   dirvish
   :init (dirvish-override-dired-mode)
@@ -101,20 +61,28 @@
     ("M-e" . dirvish-emerge-menu)
     ("M-j" . dirvish-fd-jump)))
 
+(use-package editorconfig :ensure :config (editorconfig-mode 1))
+
+(use-package expand-region :bind ("C-=" . er/expand-region))
+
 (use-package
   flyspell
   :custom
   (ispell-program-name "aspell")
   (aspell-dictionary "en_US")
   :hook (org-mode . flyspell-mode))
-
 (use-package
   flyspell-correct
   :after flyspell
   :bind (:map flyspell-mode-map ("C-;" . flyspell-correct-wrapper)))
 
-;; support clipboards in terminals
-(use-package clipetty :init (global-clipetty-mode 1))
+(use-package
+  move-dup
+  :bind
+  (("M-<up>" . move-dup-move-lines-up)
+    ("M-S-<up>" . move-dup-duplicate-up)
+    ("M-<down>" . move-dup-move-lines-down)
+    ("M-S-<down>" . move-dup-duplicate-down)))
 
 (use-package
   mwim
@@ -136,24 +104,14 @@
     ("C-<backspace>" . nate/backward-kill-word)))
 
 (use-package
-  persistent-scratch
-  :init (persistent-scratch-autosave-mode 1))
-
-(use-package
-  substitute
-  :straight
-  (substitute
-    :type git
-    :host sourcehut
-    :repo "protesilaos/substitute")
-  :init (setq substitute-highlight t)
-  :bind ("M-# b" . substitute-target-in-buffer))
-
-(use-package
   olivetti
   :custom
   (olivetti-margin-width 5)
   (olivetti-style nil))
+
+(use-package
+  persistent-scratch
+  :init (persistent-scratch-autosave-mode 1))
 
 (use-package
   run-command
@@ -171,5 +129,40 @@
         :display "Babashka REPL")))
   (add-to-list 'run-command-recipes 'dot/run-command-recipes)
   :custom (run-command-default-runner 'run-command-runner-vterm))
+
+(use-package
+  substitute
+  :straight
+  (substitute
+    :type git
+    :host sourcehut
+    :repo "protesilaos/substitute")
+  :init (setq substitute-highlight t)
+  :bind ("M-# b" . substitute-target-in-buffer))
+
+(use-package
+  undo-fu
+  :bind
+  (("C-x u" . undo-fu-only-undo)
+    ("C-r" . undo-fu-only-redo)
+    ("<undo>" . undo-fu-only-undo)
+    ("C-_" . undo-fu-only-undo)
+    ("C-/" . undo-fu-only-undo)))
+
+(use-package undo-fu-session :init (undo-fu-session-global-mode))
+
+(use-package vundo)
+
+(use-package
+  whitespace
+  :ensure nil
+  :init
+  (global-whitespace-mode)
+  (setq whitespace-style '(face tabs trailing))
+  (add-hook 'before-save-hook 'whitespace-cleanup))
+
+(use-package
+  whole-line-or-region
+  :init (whole-line-or-region-global-mode))
 
 (provide 'init-editor)
