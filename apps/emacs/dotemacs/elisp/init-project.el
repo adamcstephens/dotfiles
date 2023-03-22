@@ -1,3 +1,18 @@
+(defun project-tab-groups-tab-line-tabs-window-project-buffers ()
+  "Return a list of tabs that should be displayed in the tab line.
+Same as `tab-line-tabs-window-buffers', but if the current buffer
+belongs to a project, all other buffers that don't belong to that
+project are filtered out."
+  (let ((window-buffers (tab-line-tabs-window-buffers)))
+    (if-let*
+      (
+        (pr (project-current))
+        (project-buffers (project--buffers-to-kill pr)))
+      (seq-filter
+        (lambda (buf) (member buf project-buffers))
+        window-buffers)
+      window-buffers)))
+
 (use-package
   direnv
   :config (direnv-mode)
@@ -19,7 +34,10 @@
 (use-package
   project-tab-groups
   :ensure
-  :config (project-tab-groups-mode 1))
+  :config
+  (project-tab-groups-mode 1)
+  (setq tab-line-tabs-function
+    #'project-tab-groups-tab-line-tabs-window-project-buffers))
 
 (use-package
   project-mode-line-tag
