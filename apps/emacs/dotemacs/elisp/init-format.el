@@ -1,10 +1,3 @@
-(use-package
-  format-all
-  :config
-  (progn
-    (add-hook 'prog-mode-hook 'format-all-mode)
-    (add-hook 'prog-mode-hook 'format-all-ensure-formatter)))
-
 (defun dot/elisp-format-local ()
   (setq-local indent-tabs-mode nil)
   (setq-local lisp-indent-function nil)
@@ -21,6 +14,15 @@
   (elisp-autofmt-empty-line-max 1)
   (elisp-autofmt-on-save-p 'always)
   (elisp-autofmt-style 'fixed))
+
+(use-package
+  format-all
+  :config
+  :hook
+  ((fish-mode . format-all-mode)
+    (fish-mode . format-all-ensure-formatter)
+    (sh-mode . format-all-mode)
+    (sh-mode . format-all-ensure-formatter)))
 
 ;; (use-package apheleia
 ;;   :config
