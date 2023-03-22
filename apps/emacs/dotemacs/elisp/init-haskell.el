@@ -1,6 +1,3 @@
-(use-package haskell-mode
-  :mode "\\.hs\\'"
-  :init
-  (cl-pushnew '("Haskell" ormolu) format-all-default-formatters))
+(use-package haskell-mode :mode "\\.hs\\'")
 
 (provide 'init-haskell)
