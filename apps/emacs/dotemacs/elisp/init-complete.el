@@ -152,7 +152,7 @@
 
   (consult-customize consult--source-buffer :hidden t :default nil))
 
-(use-package corfu :init (global-corfu-mode))
+(use-package corfu :init (global-corfu-mode) :custom (corfu-auto t))
 
 (use-package
   embark
