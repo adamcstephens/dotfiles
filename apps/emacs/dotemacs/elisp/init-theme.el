@@ -1,5 +1,6 @@
 (defun dot/variable-font ()
   "SF Pro")
+
 (defun dot/font-height ()
   (if (eq system-type 'darwin)
     130

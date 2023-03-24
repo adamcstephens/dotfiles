@@ -71,10 +71,15 @@
   (ispell-program-name "aspell")
   (aspell-dictionary "en_US")
   :hook (org-mode . flyspell-mode))
+
 (use-package
   flyspell-correct
   :after flyspell
-  :bind (:map flyspell-mode-map ("C-;" . flyspell-correct-wrapper)))
+  :bind
+  (:map
+    flyspell-mode-map
+    ("C-;" . flyspell-correct-wrapper)
+    ("[down-mouse-3]" . flyspell-correct-word)))
 
 (use-package
   move-dup
