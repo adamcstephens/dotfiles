@@ -126,7 +126,7 @@ in {
           pkgs.webcord
         ];
         postBuild = ''
-          wrapProgram "$out/bin/webcord" --run 'rm $HOME/.config/WebCord/windowState.json'
+          wrapProgram "$out/bin/webcord" --run 'rm -f $HOME/.config/WebCord/windowState.json'
         '';
       })
     ]
