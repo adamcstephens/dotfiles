@@ -1,5 +1,7 @@
 (use-package
-  yaml-mode
-  :hook (yaml-mode . (lambda () (variable-pitch-mode -1))))
+  yaml-ts-mode
+  :straight (:type built-in)
+
+  :hook (yaml-ts-mode . (lambda () (variable-pitch-mode -1))))
 
 (provide 'init-yaml)

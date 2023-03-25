@@ -18,4 +18,10 @@
     ((haskell (formattingProvider . "ormolu"))
       (nil (formatting (command . ["alejandra"]))))))
 
+(use-package
+  treesit-auto
+  :config
+  (setq treesit-auto-install nil)
+  (global-treesit-auto-mode))
+
 (provide 'init-lsp)
