@@ -1,5 +1,6 @@
 {
   config,
+  inputs,
   inputs',
   lib,
   pkgs,
@@ -25,10 +26,11 @@
     pkgs.sqlite
   ];
 
-  emacsPackage =
-    if pkgs.stdenv.isLinux
-    then pkgs.emacsGit
-    else pkgs.emacsGit;
+  emacsPackage = pkgs.emacsGit.overrideAttrs (_: {
+    name = "emacs29";
+    version = "29.0-${inputs.emacs-src.shortRev}";
+    src = inputs.emacs-src;
+  });
 
   emacsWithPackages = (pkgs.emacsPackagesFor emacsPackage).emacsWithPackages (epkgs: [
     epkgs.vterm

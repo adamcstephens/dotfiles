@@ -1,8 +1,8 @@
 {inputs, ...}: {
   flake.overlays = rec {
     default = inputs.nixpkgs.lib.composeManyExtensions [
-      inputs.emacs.overlays.emacs
-      inputs.emacs.overlays.package
+      inputs.emacs-overlay.overlays.emacs
+      inputs.emacs-overlay.overlays.package
       fishPlugins
     ];
 

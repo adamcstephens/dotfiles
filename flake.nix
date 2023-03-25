@@ -5,8 +5,10 @@
     apple-fonts.url = "github:adamcstephens/apple-fonts.nix";
     darwin.url = "github:lnl7/nix-darwin/master";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
-    emacs.url = "github:nix-community/emacs-overlay";
-    emacs.inputs.nixpkgs.follows = "nixpkgs";
+    emacs-overlayoverla.url = "github:nix-community/emacs-overlay";
+    emacs-overlay.inputs.nixpkgs.follows = "nixpkgs";
+    emacs-src.url = "github:emacs-mirror/emacs/emacs-29";
+    emacs-src.flake = false;
     flake-parts.url = "github:hercules-ci/flake-parts";
     # home-manager.url = "github:nix-community/home-manager";
     home-manager.url = "github:adamcstephens/home-manager/zoxide/nushell";
