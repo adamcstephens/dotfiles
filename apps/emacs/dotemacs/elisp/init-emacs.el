@@ -157,10 +157,6 @@
   (global-set-key (kbd "C-h C-s") 'describe-symbol)
 
   (global-set-key (kbd "M-p") 'mark-paragraph)
-  (global-set-key (kbd "M-h") 'windmove-left)
-  (global-set-key (kbd "M-j") 'windmove-down)
-  (global-set-key (kbd "M-k") 'windmove-up)
-  (global-set-key (kbd "M-l") 'windmove-right)
 
   (define-key minibuffer-local-map (kbd "C-j") 'next-line)
   (define-key minibuffer-local-map (kbd "C-k") 'previous-line)
