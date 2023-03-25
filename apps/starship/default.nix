@@ -9,6 +9,10 @@
         error_symbol = "[❯](bold red)";
       };
 
+      container = {
+        format = "[$symbol]($style) ";
+      };
+
       gcloud = {
         disabled = true;
       };
