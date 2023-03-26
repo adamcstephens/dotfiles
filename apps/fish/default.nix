@@ -54,8 +54,6 @@
        set -U __done_notification_urgency_level_failure normal
        set -U fish_greeting
 
-       source ~/.dotfiles/vendor/git-subrepo/.fish.rc
-
        if [ -z "$SSH_AUTH_SOCK" ] && [ -S "$XDG_RUNTIME_DIR/ssh-agent" ]
            set -x SSH_AUTH_SOCK "$XDG_RUNTIME_DIR/ssh-agent"
        end

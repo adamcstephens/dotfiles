@@ -11,6 +11,7 @@
           [
             pkgs.alejandra
             pkgs.deadnix
+            pkgs.git-subrepo
             pkgs.just
             pkgs.nil
             pkgs.nodePackages.prettier
