@@ -6,3 +6,4 @@ applications/appimagekit*desktop
 doom-emacs/.local
 .installed
 .secret.envrc
+results/
