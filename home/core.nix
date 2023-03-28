@@ -86,6 +86,8 @@
     pkgs.calc
     pkgs.colordiff
     pkgs.comma
+    pkgs.delta
+    pkgs.difftastic
     pkgs.direnv
     pkgs.doggo
     pkgs.du-dust

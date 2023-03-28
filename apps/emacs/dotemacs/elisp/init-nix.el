@@ -1,6 +1,3 @@
-(use-package
-  nix-mode
-  :mode "\\.nix\\'"
-  :config (cl-pushnew '("Nix" alejandra) format-all-default-formatters))
+(use-package nix-mode :mode "\\.nix\\'")
 
 (provide 'init-nix)

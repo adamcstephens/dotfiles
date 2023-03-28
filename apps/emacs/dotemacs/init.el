@@ -29,6 +29,7 @@
 (require 'init-emacs)
 (require 'init-theme)
 (require 'init-lib)
+;; (require 'init-key)
 
 (require 'init-complete)
 (require 'init-editor)
@@ -40,6 +41,7 @@
 (require 'init-project)
 (require 'init-term)
 
+(require 'init-go)
 (require 'init-eww)
 (require 'init-haskell)
 (require 'init-just)

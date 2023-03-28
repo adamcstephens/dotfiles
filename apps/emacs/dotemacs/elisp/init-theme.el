@@ -46,7 +46,9 @@
       (agenda-date . (1.1))
       (agenda-structure . (variable-pitch light 1.3))
       (t . (1.0))))
-  (load-theme 'modus-vivendi :no-confirm))
+  (load-theme 'modus-vivendi :no-confirm)
+
+  (dashboard-open))
 
 ;; run this hook after we have initialized the first time
 (add-hook 'after-init-hook 'dot/gui-setup)
@@ -65,10 +67,22 @@
     (setq auto-dark-allow-osascript t))
   (auto-dark-mode t))
 
+(use-package diff-ansi :commands (diff-ansi-mode diff-ansi-buffer))
+
 (use-package
   doom-modeline
   :config (setq doom-modeline-buffer-encoding 'nondefault)
   :init (doom-modeline-mode 1))
+
+(defun dot/project-dashboard ()
+  (interactive)
+  (defvar dash nil)
+  (let
+    (
+      (dashboard-set-init-info nil)
+      (dashboard-banner-logo-title nil))
+    (setq dash (lambda () (dashboard-open))))
+  (funcall dash))
 
 (defun dot/dashboard-recentf-project (list-size)
   (insert "Custom Text"))
@@ -76,16 +90,20 @@
 (use-package
   dashboard
   :init
-  (setq dashboard-set-init-info nil)
-  (setq dashboard-set-footer nil)
-  (setq dashboard-banner-logo-title nil)
-  (setq dashboard-startup-banner 'logo)
-  (setq dashboard-center-content t)
+  ;; (setq dashboard-set-init-info nil)
+  ;; (setq dashboard-set-footer nil)
+  ;; (setq dashboard-banner-logo-title nil)
+  ;; (setq dashboard-startup-banner 'logo)
+  ;; (setq dashboard-center-content t)
   ;; (setq dashboard-item-generators '((custom . dot/project-dashboard)))
-  (add-to-list
-    'dashboard-item-generators
-    '(recentf-project . dot/dashboard-recentf-project))
-  (setq dashboard-items '((recentf-project))))
+  ;; (add-to-list
+  ;;   'dashboard-item-generators
+  ;;   '(recentf-project . dot/dashboard-recentf-project))
+  ;; (setq dashboard-items '((recentf-project)))
+  (setq dashboard-center-content t)
+  (setq dashboard-projects-backend 'project-el)
+  (setq dashboard-items
+    '((projects . 5) (bookmarks . 5) (recents . 5))))
 
 (use-package
   ligature

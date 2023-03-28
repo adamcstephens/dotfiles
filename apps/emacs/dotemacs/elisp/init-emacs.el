@@ -179,7 +179,7 @@
 (use-package
   exec-path-from-shell
   :demand
-  :when (or (daemonp) (memq window-system '(mac ns x)))
+  :when (memq window-system '(mac ns))
   :config (exec-path-from-shell-copy-env "SSH_AUTH_SOCK"))
 
 (provide 'init-emacs)

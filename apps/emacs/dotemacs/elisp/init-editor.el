@@ -1,3 +1,8 @@
+(defun dot/auto-create-missing-dirs ()
+  (let ((target-dir (file-name-directory buffer-file-name)))
+    (unless (file-exists-p target-dir)
+      (make-directory target-dir t))))
+
 (defun dot/open-in-finder ()
   (interactive)
   (shell-command "open -R ."))
@@ -6,12 +11,8 @@
   "Join the current line with the line beneath it."
   (interactive)
   (delete-indentation 1))
-(global-set-key (kbd "C-^") 'dot/top-join-line)
 
-(defun dot/auto-create-missing-dirs ()
-  (let ((target-dir (file-name-directory buffer-file-name)))
-    (unless (file-exists-p target-dir)
-      (make-directory target-dir t))))
+(global-set-key (kbd "C-^") 'dot/top-join-line)
 
 (add-to-list
   'find-file-not-found-functions
@@ -41,8 +42,8 @@
   (setq dired-mouse-drag-files t)
   (setq mouse-drag-and-drop-region-cross-program t)
   :bind
-  (("C-c f" . dirvish-fd)
-    :map dirvish-mode-map ; Dirvish inherits `dired-mode-map'
+  (:map
+    dirvish-mode-map ; Dirvish inherits `dired-mode-map'
     ("a" . dirvish-quick-access)
     ("f" . dirvish-file-info-menu)
     ("y" . dirvish-yank-menu)
@@ -65,7 +66,7 @@
 
 (use-package
   edwina
-  :ensure t
+  :disabled
   :config
   (setq display-buffer-base-action '(display-buffer-below-selected))
   (edwina-setup-dwm-keys)
@@ -139,7 +140,11 @@
       (list
         :command-name "bb-repl"
         :command-line "bb --nrepl-server"
-        :display "Babashka REPL")))
+        :display "Babashka REPL"
+        :hook
+        (lambda ()
+          (sleep-for 0.25)
+          (cider-connect-clj (list :host "localhost" :port 1667))))))
   (add-to-list 'run-command-recipes 'dot/run-command-recipes)
   :custom (run-command-default-runner 'run-command-runner-vterm))
 
@@ -152,6 +157,8 @@
     :repo "protesilaos/substitute")
   :init (setq substitute-highlight t)
   :bind ("M-# b" . substitute-target-in-buffer))
+
+(use-package transpose-frame :commands transpose-frame)
 
 (use-package
   undo-fu

@@ -14,6 +14,11 @@ project are filtered out."
       window-buffers)))
 
 (use-package
+  burly
+  :straight (:host github :repo "alphapapa/burly.el")
+  :init (burly-tabs-mode t))
+
+(use-package
   direnv
   :config (direnv-mode)
   ;; don't display loaded env message
@@ -26,7 +31,7 @@ project are filtered out."
   :straight (:type built-in)
   :init (setq project-switch-commands #'project-find-file)
   :bind
-  (("H-SPC" . project-find-file)
+  (("s-f" . project-find-file)
     ("C-c p p" . project-switch-project)
     ("C-c p p" . project-switch-project)
     ("C-c p d" . project-dired)))

@@ -118,6 +118,9 @@ in {
       pkgs.cinnamon.nemo
       pkgs.remmina
 
+      # dev (too heavy for core)
+      pkgs.nodePackages.bash-language-server
+
       # wrap webcord to remove state file https://github.com/SpacingBat3/WebCord/issues/360
       (pkgs.symlinkJoin {
         name = "webcord-wrapper";
