@@ -96,6 +96,8 @@
   (defadvice split-window (after split-window-after activate)
     (other-window 1))
 
+  (windmove-default-keybindings)
+
   ;; follow symlinks in vcs without prompting
   (setq vc-follow-symlinks t)
 
@@ -103,7 +105,7 @@
   (electric-pair-mode t)
 
   ;; replace region with yank
-  (delete-selection-mode t)
+  (delete-selection-mode 1)
 
   ;;
   ;; vertico recommendations

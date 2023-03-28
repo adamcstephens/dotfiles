@@ -44,6 +44,7 @@
 (require 'init-go)
 (require 'init-eww)
 (require 'init-haskell)
+(require 'init-js)
 (require 'init-just)
 (require 'init-lisp)
 (require 'init-markdown)
