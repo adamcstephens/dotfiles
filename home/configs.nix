@@ -11,6 +11,16 @@
       ];
     };
 
+    bonk = {
+      gui = true;
+      extraModules = [
+        ../apps/emacs
+        {
+          dotfiles.gui.dpi = 148;
+        }
+      ];
+    };
+
     drink = {
       gui = true;
       extraModules = [
