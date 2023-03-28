@@ -10,8 +10,7 @@
     emacs-src.url = "github:emacs-mirror/emacs/emacs-29";
     emacs-src.flake = false;
     flake-parts.url = "github:hercules-ci/flake-parts";
-    # home-manager.url = "github:nix-community/home-manager";
-    home-manager.url = "github:adamcstephens/home-manager/zoxide/nushell";
+    home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nix-colors.url = "github:misterio77/nix-colors";
     nix-wallpaper.url = "github:lunik1/nix-wallpaper";
