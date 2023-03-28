@@ -56,7 +56,6 @@
 
     silver = {
       system = "aarch64-linux";
-      gui = true;
       extraModules = [
         ../apps/emacs
       ];
