@@ -103,7 +103,6 @@
     pkgs.nix-output-monitor
     pkgs.pwgen
     pkgs.tio
-    pkgs.tree
     pkgs.wget
 
     # global editor packages

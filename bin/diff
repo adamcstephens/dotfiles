@@ -5,11 +5,15 @@ SCRIPT_PATH=$(dirname "$(realpath "$0")")
 PATH="$(echo "$PATH" | sed -e "s,$SCRIPT_PATH:,,")"
 export PATH
 
-if command -v delta >/dev/null 2>&1; then
+if command -v difft >/dev/null 2>&1; then
+  differ="difft"
+elif command -v delta >/dev/null 2>&1; then
   differ="delta"
 elif command -v colordiff >/dev/null 2>&1; then
-  differ="colordiff"
-else
+    differ="colordiff"
+fi
+
+if [ -z "$differ" ] || [ -n "$EMACSLOADPATH" ]; then
   differ="diff"
 fi
 
