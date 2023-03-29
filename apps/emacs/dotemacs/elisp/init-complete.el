@@ -152,6 +152,10 @@
 
   (consult-customize consult--source-buffer :hidden t :default nil))
 
+(use-package
+  consult-project-extra
+  :bind (("s-v" . consult-project-extra-find)))
+
 (use-package corfu :init (global-corfu-mode) :custom (corfu-auto t))
 
 (use-package

@@ -13,10 +13,10 @@ project are filtered out."
         window-buffers)
       window-buffers)))
 
-(use-package
-  burly
-  :straight (:host github :repo "alphapapa/burly.el")
-  :init (burly-tabs-mode t))
+;; (use-package
+;;   burly
+;;   :straight (:host github :repo "alphapapa/burly.el")
+;;   :init (burly-tabs-mode t))
 
 (use-package
   direnv
@@ -32,29 +32,31 @@ project are filtered out."
   :init (setq project-switch-commands #'project-find-file)
   :bind
   (("s-f" . project-find-file)
-    ("C-c p p" . project-switch-project)
+    ("s-u" . project-switch-project)
     ("C-c p p" . project-switch-project)
     ("C-c p d" . project-dired)))
 
-(use-package
-  project-tab-groups
-  :ensure
-  :config
-  (project-tab-groups-mode 1)
-  (setq tab-line-tabs-function
-    #'project-tab-groups-tab-line-tabs-window-project-buffers))
+;; (use-package
+;;   project-tab-groups
+;;   :ensure
+;;   :config
+;;   (project-tab-groups-mode 1)
+;;   (setq tab-line-tabs-function
+;;     #'project-tab-groups-tab-line-tabs-window-project-buffers))
+
+;; (use-package
+;;   project-mode-line-tag
+;;   :ensure
+;;   :config (project-mode-line-tag-mode 1))
 
 (use-package
-  project-mode-line-tag
-  :ensure
-  :config (project-mode-line-tag-mode 1))
-
-(use-package persp-mode :disabled :init (persp-mode 1))
+  persp-mode
+  :init (persp-mode 1)
+  :bind (("s-y" . persp-switch)))
 
 ;; enable automatic project integration with persp
 (use-package
   persp-mode-project-bridge
-  :disabled
   :after persp-mode
   :hook
   (persp-mode-project-bridge-mode
