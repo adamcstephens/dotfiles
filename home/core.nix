@@ -107,7 +107,7 @@
 
     # global editor packages
     pkgs.alejandra
-    pkgs.nil
+    inputs.nil.packages.${pkgs.system}.nil
     pkgs.shfmt
   ];
 

@@ -1,4 +1,8 @@
-{perSystem, ...}: {
+{
+  inputs,
+  perSystem,
+  ...
+}: {
   perSystem = {
     lib,
     pkgs,
@@ -13,7 +17,7 @@
             pkgs.deadnix
             pkgs.git-subrepo
             pkgs.just
-            pkgs.nil
+            inputs.nil.packages.${pkgs.system}.nil
             pkgs.nodePackages.prettier
           ]
           ++ (lib.optionals pkgs.stdenv.isLinux
