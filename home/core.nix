@@ -106,6 +106,7 @@
     pkgs.wget
 
     # global editor packages
+    pkgs.alejandra
     pkgs.nil
     pkgs.shfmt
   ];

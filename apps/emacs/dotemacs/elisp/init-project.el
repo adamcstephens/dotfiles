@@ -52,7 +52,8 @@ project are filtered out."
 (use-package
   persp-mode
   :init (persp-mode 1)
-  :bind (("s-y" . persp-switch)))
+  :bind (("s-y" . persp-switch))
+  :custom (persp-kill-foreign-buffer-behaviour 'kill))
 
 ;; enable automatic project integration with persp
 (use-package
