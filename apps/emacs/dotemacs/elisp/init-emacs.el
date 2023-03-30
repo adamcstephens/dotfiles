@@ -96,8 +96,6 @@
   (defadvice split-window (after split-window-after activate)
     (other-window 1))
 
-  (windmove-default-keybindings)
-
   ;; follow symlinks in vcs without prompting
   (setq vc-follow-symlinks t)
 

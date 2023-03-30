@@ -29,7 +29,7 @@
 (require 'init-emacs)
 (require 'init-theme)
 (require 'init-lib)
-;; (require 'init-key)
+(require 'init-key)
 
 (require 'init-complete)
 (require 'init-editor)
