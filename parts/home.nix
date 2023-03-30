@@ -81,18 +81,14 @@ in {
               ++ (lib.optionals config.gui [../home/linux-gui.nix])
           );
 
-          finalHome = withSystem config.system ({
-            inputs',
-            pkgs,
-            ...
-          }:
+          finalHome = withSystem config.system ({pkgs, ...}:
             inputs.home-manager.lib.homeManagerConfiguration {
               inherit pkgs;
 
               modules = config.finalModules;
 
               extraSpecialArgs = {
-                inherit inputs inputs';
+                inherit inputs;
               };
             });
 

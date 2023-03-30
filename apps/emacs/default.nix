@@ -1,7 +1,6 @@
 {
   config,
   inputs,
-  inputs',
   lib,
   pkgs,
   ...
@@ -42,7 +41,7 @@
       pkgs.emacs-all-the-icons-fonts
       pkgs.jetbrains-mono
       pkgs.manrope
-      inputs'.apple-fonts.packages.sf-pro
+      inputs.apple-fonts.packages.${pkgs.system}.sf-pro
     ];
   };
 

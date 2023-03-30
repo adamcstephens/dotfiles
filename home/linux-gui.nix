@@ -1,7 +1,6 @@
 {
   config,
   inputs,
-  inputs',
   lib,
   pkgs,
   ...
@@ -84,8 +83,8 @@ in {
       pkgs.noto-fonts-cjk
       pkgs.noto-fonts-emoji
       pkgs.roboto
-      inputs'.apple-fonts.packages.sf-mono
-      inputs'.apple-fonts.packages.sf-pro
+      inputs.apple-fonts.packages.${pkgs.system}.sf-mono
+      inputs.apple-fonts.packages.${pkgs.system}.sf-pro
       pkgs.source-sans
       pkgs.vegur
       (pkgs.nerdfonts.override {fonts = ["JetBrainsMono" "NerdFontsSymbolsOnly"];})
