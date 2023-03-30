@@ -30,6 +30,12 @@
               ]))
             ]);
       };
+      media = pkgs.mkShellNoCC {
+        name = "media";
+        packages = [
+          pkgs.ffmpeg_5-full
+        ];
+      };
       miryoku_kmonad = pkgs.mkShell {
         name = "miryoku_kmonad";
         packages = [
