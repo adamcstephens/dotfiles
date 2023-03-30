@@ -2,7 +2,7 @@
   programs.ssh = {
     enable = true;
     controlMaster = "auto";
-    controlPersist = "20m";
+    controlPersist = "5m";
     forwardAgent = true;
 
     # use header: # -*- mode: ssh-config -*-
