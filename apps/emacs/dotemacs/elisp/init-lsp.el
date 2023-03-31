@@ -4,8 +4,8 @@
 
 (use-package
   eldoc-box
-  :commands (eldoc-box-hover-mode eldoc-box-hover-at-point-mode)
-  :custom (eldoc-box-clear-with-C-g t))
+  :custom (eldoc-box-clear-with-C-g t)
+  :hook (prog-mode . eldoc-box-hover-at-point-mode))
 
 (use-package
   eglot

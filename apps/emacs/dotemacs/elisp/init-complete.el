@@ -37,6 +37,16 @@
   )
 
 (use-package
+  cape-yasnippet
+  :after (cape yasnippet)
+  :straight (:type git :host github :repo "elken/cape-yasnippet")
+  :hook
+  (eglot-managed-mode
+    .
+    (lambda ()
+      (add-to-list 'completion-at-point-functions #'cape-yasnippet))))
+
+(use-package
   consult
   ;; add some more searching commands
   ;; Replace bindings. Lazily loaded due by `use-package'.
@@ -226,8 +236,8 @@
   ;; discover shortcuts easier in the minibuffer
   :init (which-key-mode))
 
-;; (use-package yasnippet :init (yas-global-mode 1))
+(use-package yasnippet :init (yas-global-mode 1))
 
-;; (use-package yasnippet-snippets)
+(use-package yasnippet-snippets :after yasnippet)
 
 (provide 'init-complete)
