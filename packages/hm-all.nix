@@ -12,5 +12,5 @@ writeScriptBin "hm-all" ''
 
   targets=$(for profile in ${builtins.concatStringsSep " " (map (x: "'${x}'") homeConfigurations)}; do echo -n "$HOME/.dotfiles#homeConfigurations.$profile.activationPackage "; done)
 
-  nom build --out-link ./results/$RESULTNAME --print-build-logs $targets
+  nom build --out-link ./results/$RESULTNAME --print-build-logs --keep-going $targets
 ''
