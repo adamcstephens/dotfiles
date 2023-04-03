@@ -231,6 +231,8 @@
 
 (use-package vertico-prescient :init (vertico-prescient-mode 1))
 
+(use-package wgrep)
+
 (use-package
   which-key
   ;; discover shortcuts easier in the minibuffer
