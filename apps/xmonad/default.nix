@@ -30,10 +30,6 @@
     ${pkgs.xsecurelock}/bin/xsecurelock
   '';
 in {
-  imports = [
-    ../xautocfg
-  ];
-
   home.file.".xinitrc".source = ./xinitrc;
 
   home.packages = [
