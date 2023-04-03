@@ -9,6 +9,11 @@
 
   xdg.configFile."kitty/theme-light.conf".source = ./theme-light.conf;
 
+  home.packages = [
+    pkgs.kitty.shell_integration
+    pkgs.kitty.terminfo
+  ];
+
   programs.kitty = {
     enable = true;
     extraConfig = builtins.readFile ./kitty.conf;
