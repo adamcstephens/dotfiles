@@ -164,7 +164,7 @@
 
 (use-package
   consult-project-extra
-  :bind (("s-v" . consult-project-extra-find)))
+  :bind (("s-f" . consult-project-extra-find)))
 
 (use-package corfu :init (global-corfu-mode) :custom (corfu-auto t))
 
