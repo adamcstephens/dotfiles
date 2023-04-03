@@ -30,7 +30,7 @@
       };
 
       "*.{nim,nims}" = {
-        indent_size = 4;
+        indent_size = 2;
       };
     };
   };
