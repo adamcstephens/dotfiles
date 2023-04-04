@@ -19,6 +19,7 @@
     ../apps/helix
     ../apps/lsd
     ../apps/nushell
+    ../apps/age
     ../apps/ripgrep
     ../apps/shellcheck
     ../apps/starship
