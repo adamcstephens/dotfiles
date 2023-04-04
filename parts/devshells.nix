@@ -53,6 +53,11 @@
             pkgs.bubblewrap
           ]);
       };
+      python = pkgs.mkShellNoCC {
+        packages = [
+          (pkgs.python3.withPackages (py: [py.hexdump py.paramiko]))
+        ];
+      };
     };
   };
 }
