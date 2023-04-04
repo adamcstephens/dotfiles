@@ -30,6 +30,11 @@
               ]))
             ]);
       };
+      go = pkgs.mkShellNoCC {
+        packages = [
+          pkgs.go
+        ];
+      };
       media = pkgs.mkShellNoCC {
         name = "media";
         packages = [
