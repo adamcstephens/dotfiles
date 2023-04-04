@@ -48,6 +48,7 @@
 (require 'init-just)
 (require 'init-lisp)
 (require 'init-markdown)
+(require 'init-nim)
 (require 'init-nix)
 (require 'init-sh)
 (require 'init-ssh)

@@ -16,6 +16,7 @@
   ((go-ts-mode . dot/eglot-mode-setup)
     (haskell-mode . dot/eglot-mode-setup)
     (nix-mode . dot/eglot-mode-setup)
+    (nim-mode . eglot-ensure)
     (tsx-ts-mode . dot/eglot-mode-setup)
     (typescript-mode . dot/eglot-mode-setup)
     (typescript-ts-mode . dot/eglot-mode-setup))
@@ -25,6 +26,7 @@
     ("<mouse-3>" . eglot-code-actions-at-mouse))
   :config
   (add-to-list 'eglot-server-programs '((nix-mode) "nil"))
+  (add-to-list 'eglot-server-programs '((nim-mode) "nimlsp"))
   (add-to-list
     'eglot-server-programs
     '
