@@ -16,6 +16,7 @@
     ../apps/editorconfig
     ../apps/fish
     ../apps/git
+    ../apps/helix
     ../apps/lsd
     ../apps/nushell
     ../apps/ripgrep

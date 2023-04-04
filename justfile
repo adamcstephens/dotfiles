@@ -83,6 +83,7 @@ migrate:
     removeDotbotConfig git/template
     removeDotbotConfig fish
     removeDotbotConfig nix
+    removeDotbotConfig helix
 
     if [ -f "$HOME/.dotfiles/apps/fish/config.fish" ]; then rm -rfv $HOME/.dotfiles/apps/fish/config.fish; fi
     if [ -f "$HOME/.dotfiles/apps/fish/fish_variables" ]; then rm -rfv $HOME/.dotfiles/apps/fish/fish_variables; fi
