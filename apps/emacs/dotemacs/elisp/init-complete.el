@@ -166,6 +166,23 @@
   consult-project-extra
   :bind (("s-f" . consult-project-extra-find)))
 
+(use-package
+  copilot
+  :disabled
+  :straight (:host github :repo "zerolfx/copilot.el" :files ("dist" "*.el"))
+  :commands copilot-mode
+  ;; :hook (prog-mode . copilot-mode)
+  :bind
+  (("M-S-<iso-lefttab>" . copilot-complete)
+    :map
+    copilot-completion-map
+    ("C-g" . 'copilot-clear-overlay)
+    ("M-p" . 'copilot-previous-completion)
+    ("M-n" . 'copilot-next-completion)
+    ("<tab>" . 'copilot-accept-completion)
+    ("M-f" . 'copilot-accept-completion-by-word)
+    ("M-<return>" . 'copilot-accept-completion-by-line)))
+
 (use-package corfu :init (global-corfu-mode) :custom (corfu-auto t))
 
 (use-package

@@ -16,7 +16,9 @@
     pkgs.texlive.combined.scheme-full
     pkgs.graphicsmagick
     pkgs.multimarkdown
+    pkgs.nodejs
     pkgs.nodePackages.mermaid-cli
+    pkgs.nodePackages.prettier
     pkgs.ripgrep
     pkgs.pandoc
     pkgs.python3Minimal
