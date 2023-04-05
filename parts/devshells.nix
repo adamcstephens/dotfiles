@@ -30,7 +30,7 @@
               ]))
             ]);
       };
-      go = pkgs.mkShellNoCC {
+      go = pkgs.mkShell {
         packages = [
           pkgs.go
         ];
