@@ -33,6 +33,7 @@
       go = pkgs.mkShell {
         packages = [
           pkgs.go
+          pkgs.gopls
         ];
       };
       media = pkgs.mkShellNoCC {
