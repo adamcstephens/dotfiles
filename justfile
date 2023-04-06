@@ -110,6 +110,9 @@ steam-bootstrap:
     flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
     flatpak install flathub com.valvesoftware.Steam
 
+test:
+    nix build .#homeConfigurations.blank.activationPackage .#homeConfigurations.bonk.activationPackage .#homeConfigurations.think.activationPackage
+
 vim-plugins:
     git subrepo clone https://github.com/airblade/vim-gitgutter apps/vim/vim/pack/plugins/start/vim-gitgutter
     git subrepo clone https://github.com/airblade/vim-rooter apps/vim/vim/pack/plugins/start/vim-rooter

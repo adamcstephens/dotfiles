@@ -1,0 +1,8 @@
+labels:
+  type: local
+
+pipeline:
+  build:
+    image: bash
+    commands:
+      - nix develop .# --command just -- test
