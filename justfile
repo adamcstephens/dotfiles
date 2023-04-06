@@ -12,9 +12,7 @@ brew-dump:
     git diff Brewfile
 
 bump:
-    nix flake update
-    git add flake.lock
-    git commit -m 'just bump'
+    nix flake update --commit-lock-file
     nix run .#hm-all
     git push
 
