@@ -10,8 +10,12 @@ if [ "$USER" != "root" ]; then
       exec code --wait $@
       ;;
     esac
-  elif command -v emacsclient >/dev/null 2>&1; then
+  elif command -v emacsclient >/dev/null 2>&1 && pgrep emacs; then
     export IS_EDITOR=true
     exec em $@
+  elif command -v hx >/dev/null 2>&1; then
+    exec hx $@
+  else
+    exec vim $@
   fi
 fi
