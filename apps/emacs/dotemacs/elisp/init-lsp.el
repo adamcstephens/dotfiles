@@ -13,7 +13,8 @@
   :defer t
   :commands (eglot eglot-ensure)
   :hook
-  ((go-ts-mode . dot/eglot-mode-setup)
+  ((bash-ts-mode . dot/eglot-mode-setup)
+    (go-ts-mode . dot/eglot-mode-setup)
     (haskell-mode . dot/eglot-mode-setup)
     (nix-mode . dot/eglot-mode-setup)
     (nim-mode . eglot-ensure)
