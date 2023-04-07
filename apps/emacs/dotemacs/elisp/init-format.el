@@ -18,12 +18,9 @@
 (use-package
   apheleia
   :config (add-to-list 'apheleia-formatters '(shfmt . ("shfmt")))
-  :hook ((fish-mode . apheleia-mode) (bash-ts-mode . apheleia-mode)))
-
-;; (use-package apheleia
-;;   :config
-;;   (apheleia-global-mode +1)
-;;   (cl-pushnew '(alejandra . ("alejandra")) apheleia-formatters :test #'equal)
-;;   (cl-pushnew '(nix-mode . alejandra) apheleia-mode-alist :test #'equal))
+  :hook
+  ((fish-mode . apheleia-mode)
+    (bash-ts-mode . apheleia-mode)
+    (yaml-ts-mode . apheleia-mode)))
 
 (provide 'init-format)
