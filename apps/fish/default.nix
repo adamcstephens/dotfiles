@@ -58,8 +58,13 @@
        set -U __done_notification_urgency_level_failure normal
        set -U fish_greeting
 
-       if [ -z "$SSH_AUTH_SOCK" ] && [ -S "$XDG_RUNTIME_DIR/ssh-agent" ]
-           set -x SSH_AUTH_SOCK "$XDG_RUNTIME_DIR/ssh-agent"
+       if [ -z "$SSH_AUTH_SOCK" ]
+           if [ -S "$XDG_RUNTIME_DIR/ssh-agent" ]
+             set -x SSH_AUTH_SOCK "$XDG_RUNTIME_DIR/ssh-agent"
+           end
+           if [ -S "$XDG_RUNTIME_DIR/yubikey-agent/yubikey-agent.sock" ]
+             set -x SSH_AUTH_SOCK "$XDG_RUNTIME_DIR/yubikey-agent/yubikey-agent.sock"
+           end
        end
 
        if [ -n $SSH_AUTH_SOCK ] && ! ssh-add -l &>/dev/null

@@ -103,7 +103,7 @@ in {
     user.services.emacs.Service.Environment = [
       "TERM=xterm-emacs"
 
-      "SSH_AUTH_SOCK=%t/ssh-agent"
+      "SSH_AUTH_SOCK=%t/yubikey-agent/yubikey-agent.sock"
     ];
   };
 

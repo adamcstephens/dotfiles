@@ -98,6 +98,9 @@ in {
       systemctl --user start tray.target
 
       export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent
+      if [ -S "$XDG_RUNTIME_DIR/yubikey-agent/yubikey-agent.sock" ]; then
+        export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/yubikey-agent/yubikey-agent.sock
+      fi
 
       touchpadid="$(xinput list | rg "SYNA.*Touchpad" | sort | tail -n 1 | awk '{print $6}' | cut -f 2 -d=)"
       xinput disable "$touchpadid"
