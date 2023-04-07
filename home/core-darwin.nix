@@ -9,6 +9,7 @@
     ../apps/kitty
     ../apps/finicky
     ../apps/karabiner
+    ../apps/ssh
     ../apps/vscode
   ];
 
