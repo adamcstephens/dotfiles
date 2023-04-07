@@ -67,8 +67,6 @@
     "default": "right",
     "jupyter-notebook": "left"
   },
-  "prettier.printWidth": 120,
-  "prettier.semi": false,
   "python.languageServer": "Pylance",
   "python.venvPath": "~/.local/share/virtualenvs",
   "redhat.telemetry.enabled": false,
@@ -190,5 +188,6 @@
   },
   "python.formatting.provider": "black",
   "workbench.colorTheme": "GitHub Dark Colorblind (Beta)",
-  "workbench.preferredLightColorTheme": "GitHub Light Colorblind (Beta)"
+  "workbench.preferredLightColorTheme": "GitHub Light Colorblind (Beta)",
+  "git.openRepositoryInParentFolders": "always"
 }
