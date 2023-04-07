@@ -2,8 +2,10 @@
   programs.ssh = {
     enable = true;
     controlMaster = "auto";
-    controlPersist = "5m";
+    controlPersist = "30m";
     forwardAgent = true;
+    serverAliveInterval = 60;
+    serverAliveCountMax = 2;
 
     # use header: # -*- mode: ssh-config -*-
     includes = [
