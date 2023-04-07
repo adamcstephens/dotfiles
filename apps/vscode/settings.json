@@ -189,5 +189,9 @@
   "python.formatting.provider": "black",
   "workbench.colorTheme": "GitHub Dark Colorblind (Beta)",
   "workbench.preferredLightColorTheme": "GitHub Light Colorblind (Beta)",
-  "git.openRepositoryInParentFolders": "always"
+  "git.openRepositoryInParentFolders": "always",
+  "editor.inlineSuggest.enabled": true,
+  "[nim]": {
+    "editor.defaultFormatter": "nimsaem.nimvscode"
+  }
 }
