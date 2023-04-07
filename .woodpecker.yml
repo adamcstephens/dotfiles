@@ -6,3 +6,7 @@ pipeline:
     image: bash
     commands:
       - nix develop .# --command just -- test
+    when:
+      - event: push
+      - event: cron
+    cron: daily
