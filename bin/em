@@ -1,12 +1,13 @@
 #!/usr/bin/env sh
 
 if [ "$(uname -s)" = "Darwin" ]; then
-  source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+  # shellcheck source=/dev/null
+  . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
 fi
 
-if ! command -v emacsclient >/dev/null 2>&1; then
-  echo "No emacsclient, falling back to vim"
-  exec vim "$@"
+if ! command -v emacsclient >/dev/null 2>&1 || ! pgrep emacs >/dev/null 2>&1; then
+  echo "No emacsclient, falling back to editor"
+  exec ~/.dotfiles/bin/editor "$@"
 fi
 
 unset TMPDIR
@@ -25,4 +26,9 @@ else
   fi
 fi
 
-exec emacsclient $args "$@"
+if [ "$(emacsclient -e "(getenv \"SSH_AUTH_SOCK\")")" != "$SSH_AUTH_SOCK" ]; then
+    echo "Updating SSH_AUTH_SOCK"
+    emacsclient -e "(setenv \"SSH_AUTH_SOCK\" \"$SSH_AUTH_SOCK\")" > /dev/null
+fi
+
+exec emacsclient "$args" "$@"
