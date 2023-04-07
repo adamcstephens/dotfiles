@@ -105,6 +105,11 @@
   ;; replace region with yank
   (delete-selection-mode 1)
 
+  ;; make scripts executable
+  (add-hook
+    'after-save-hook
+    'executable-make-buffer-file-executable-if-script-p)
+
   ;;
   ;; vertico recommendations
   ;;

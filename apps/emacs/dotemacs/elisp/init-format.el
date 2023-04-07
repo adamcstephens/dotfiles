@@ -17,7 +17,7 @@
 
 (use-package
   apheleia
-  :config (add-to-list 'apheleia-formatters '(shfmt . ("shfmt")))
+  :config (setf (alist-get 'shfmt apheleia-formatters) '("shfmt"))
   :hook
   ((fish-mode . apheleia-mode)
     (bash-ts-mode . apheleia-mode)
