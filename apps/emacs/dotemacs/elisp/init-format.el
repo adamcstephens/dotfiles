@@ -16,13 +16,9 @@
   (elisp-autofmt-style 'fixed))
 
 (use-package
-  format-all
-  :config
-  :hook
-  ((fish-mode . format-all-mode)
-    (fish-mode . format-all-ensure-formatter)
-    (sh-mode . format-all-mode)
-    (sh-mode . format-all-ensure-formatter)))
+  apheleia
+  :config (add-to-list 'apheleia-formatters '(shfmt . ("shfmt")))
+  :hook ((fish-mode . apheleia-mode) (bash-ts-mode . apheleia-mode)))
 
 ;; (use-package apheleia
 ;;   :config
