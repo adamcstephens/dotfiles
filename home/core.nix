@@ -107,6 +107,7 @@
     pkgs.nix-output-monitor
     pkgs.pwgen
     pkgs.tio
+    inputs.sandbox.packages.${pkgs.system}.trippy
     pkgs.wget
 
     # global editor packages
