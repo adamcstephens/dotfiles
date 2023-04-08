@@ -1,7 +1,14 @@
 #!/usr/bin/env sh
 
+ARG=$1
+
 if ! command -v nix >/dev/null 2>&1; then
-  curl -L https://nixos.org/nix/install | sh -s - --daemon
+  if [ "$ARG" = "new" ]; then
+    curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install --no-confirm
+  else
+    curl -L https://nixos.org/nix/install | sh -s - --daemon
+  fi
+  # shellcheck disable=SC1091
   . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
 fi
 nix --extra-experimental-features "nix-command flakes" run .#hm -- switch
