@@ -99,6 +99,8 @@
     pkgs.htop
     pkgs.jq
     pkgs.just
+    pkgs.kitty.shell_integration
+    pkgs.kitty.terminfo
     pkgs.lazygit
     pkgs.lsd
     pkgs.mtr

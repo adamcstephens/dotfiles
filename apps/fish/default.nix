@@ -12,6 +12,10 @@
     shellInit =
       ''
         fish_add_path --prepend --move ~/.dotfiles/bin
+
+        if ! rg nixos /etc/lsb-release
+            set -x TERMINFO $HOME/.nix-profile/share/terminfo
+        end
       ''
       + (
         if pkgs.stdenv.isDarwin
