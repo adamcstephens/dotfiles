@@ -3,6 +3,23 @@
   (setq-local lisp-indent-function nil)
   (setq-local lisp-indent-offset 2))
 
+(defun dot/no-format ()
+  (interactive)
+  (remove-hook 'before-save-hook 'eglot-format-buffer t))
+
+(use-package
+  apheleia
+  :config
+  (setf (alist-get 'shfmt apheleia-formatters) '("shfmt"))
+  (setf (alist-get 'just apheleia-formatters)
+    '("just" "--unstable" "--fmt" "--justfile" filepath))
+  (setf (alist-get 'just-mode apheleia-mode-alist) '(just))
+  :hook
+  ((bash-ts-mode . apheleia-mode)
+    (fish-mode . apheleia-mode)
+    (just-mode . apheleia-mode)
+    (yaml-ts-mode . apheleia-mode)))
+
 (use-package
   elisp-autofmt
   :hook
@@ -14,13 +31,5 @@
   (elisp-autofmt-empty-line-max 1)
   (elisp-autofmt-on-save-p 'always)
   (elisp-autofmt-style 'fixed))
-
-(use-package
-  apheleia
-  :config (setf (alist-get 'shfmt apheleia-formatters) '("shfmt"))
-  :hook
-  ((fish-mode . apheleia-mode)
-    (bash-ts-mode . apheleia-mode)
-    (yaml-ts-mode . apheleia-mode)))
 
 (provide 'init-format)
