@@ -48,7 +48,7 @@ fi
 export PYTHONSTARTUP="$HOME"/.dotfiles/apps/python/pythonstartup.py
 
 # ssh
-if [[ -n $SSH_AUTH_SOCK ]] && ! ssh-add -l &>/dev/null; then
+if [[ -n $SSH_AUTH_SOCK ]]; then
   echo "Empty ssh-agent"
 fi
 

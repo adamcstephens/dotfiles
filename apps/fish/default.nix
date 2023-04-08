@@ -71,7 +71,7 @@
            end
        end
 
-       if [ -n $SSH_AUTH_SOCK ] && ! ssh-add -l &>/dev/null
+       if [ -n $SSH_AUTH_SOCK ] && [ ! -S "$XDG_RUNTIME_DIR/yubikey-agent/yubikey-agent.sock" ] && ! ssh-add -l &>/dev/null
            if [ (uname) = Darwin ]
                ssh-add --apple-use-keychain
            else
