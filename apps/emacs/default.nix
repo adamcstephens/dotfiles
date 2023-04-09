@@ -79,6 +79,8 @@
 
     (setq org-re-reveal-root "${revealjs.outPath}")
   '';
+
+  terminfo = pkgs.callPackage ../../packages/terminfo {};
 in {
   home.file.".config/doom".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/emacs/doom.d";
   home.file.".config/emacs/dotemacs".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/emacs/dotemacs";
@@ -101,6 +103,7 @@ in {
 
   systemd = lib.mkIf pkgs.stdenv.isLinux {
     user.services.emacs.Service.Environment = [
+      "TERMINFO=${terminfo}/share/terminfo"
       "TERM=xterm-emacs"
 
       "SSH_AUTH_SOCK=%t/yubikey-agent/yubikey-agent.sock"
