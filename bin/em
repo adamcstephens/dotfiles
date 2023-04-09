@@ -27,9 +27,8 @@ else
 fi
 
 if [ "$(emacsclient -e "(getenv \"SSH_AUTH_SOCK\")")" != "$SSH_AUTH_SOCK" ]; then
-  echo "Updating SSH_AUTH_SOCK"
   emacsclient -e "(setenv \"SSH_AUTH_SOCK\" \"$SSH_AUTH_SOCK\")" >/dev/null
 fi
 
 # shellcheck disable=SC2068 disable=SC2086
-exec emacsclient $args $@
+exec emacsclient $args "$@"
