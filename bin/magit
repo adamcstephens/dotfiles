@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+exec em -e "(progn (magit-status) (delete-other-windows))"
