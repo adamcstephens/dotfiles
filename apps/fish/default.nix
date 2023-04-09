@@ -95,6 +95,10 @@
               . (code --locate-shell-integration-path fish 2>/dev/null | sed 's/shellIntegration-fish/shellIntegration/')
           end
       end
+
+      if [ -z "$XDG_RUNTIME_DIR ]
+        set -x XDG_RUNTIME_DIR /run/user/$(id -u)
+      fi
     '';
 
     shellAliases = {
