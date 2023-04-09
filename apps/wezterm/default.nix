@@ -69,9 +69,6 @@ in {
         use_fancy_tab_bar = false,
         window_close_confirmation = "NeverPrompt",
         xcursor_theme = '${config.home.pointerCursor.name}',
-        set_environment_variables = {
-          TERM = 'xterm-screen-256color',
-        },
       }
     '';
   };
