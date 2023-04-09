@@ -46,6 +46,12 @@
       ];
     };
 
+    funk = {
+      extraModules = [
+        ../apps/emacs
+      ];
+    };
+
     EMAT-C02G44CPQ05P = {
       username = "astephe9";
       system = "aarch64-darwin";
