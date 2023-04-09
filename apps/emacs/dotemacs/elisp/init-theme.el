@@ -46,7 +46,9 @@
       (agenda-date . (1.1))
       (agenda-structure . (variable-pitch light 1.3))
       (t . (1.0))))
-  (load-theme 'modus-vivendi :no-confirm))
+  (load-theme 'modus-vivendi :no-confirm)
+
+  (setq global-mode-string (system-name)))
 
 ;; run this hook after we have initialized the first time
 (add-hook 'after-init-hook 'dot/gui-setup)
