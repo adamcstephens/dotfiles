@@ -7,13 +7,17 @@
   (interactive)
   (remove-hook 'before-save-hook 'eglot-format-buffer t))
 
+(defun dot/apheleia-setup ())
+
 (use-package
   apheleia
-  :config
+  :init
+  (require 'apheleia-formatters)
   (setf (alist-get 'shfmt apheleia-formatters) '("shfmt"))
-  (setf (alist-get 'just apheleia-formatters)
-    '("just" "--unstable" "--fmt" "--justfile" filepath))
-  (setf (alist-get 'just-mode apheleia-mode-alist) '(just))
+  (add-to-list
+    'apheleia-formatters
+    '(just-fmt . ("just" "--unstable" "--fmt" "--justfile" filepath)))
+  (add-to-list 'apheleia-mode-alist '(just-mode . just-fmt))
   :hook
   ((bash-ts-mode . apheleia-mode)
     (fish-mode . apheleia-mode)
