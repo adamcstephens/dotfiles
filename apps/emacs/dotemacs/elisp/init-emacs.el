@@ -105,11 +105,6 @@
   ;; replace region with yank
   (delete-selection-mode 1)
 
-  ;; make scripts executable
-  (add-hook
-    'after-save-hook
-    'executable-make-buffer-file-executable-if-script-p)
-
   ;;
   ;; vertico recommendations
   ;;
@@ -129,7 +124,6 @@
   ;; Do not allow the cursor in the minibuffer prompt
   (setq minibuffer-prompt-properties
     '(read-only t cursor-intangible t face minibuffer-prompt))
-  (add-hook 'minibuffer-setup-hook #'cursor-intangible-mode)
 
   ;; allow running more minibuffers from a first
   (setq enable-recursive-minibuffers t)
@@ -174,12 +168,17 @@
   (global-set-key (kbd "<mouse-8>") 'previous-buffer)
   (global-set-key (kbd "<mouse-9>") 'next-buffer)
 
-  ;; enable hl-line but not globally since it's flaky in vterm
-  (add-hook 'prog-mode-hook #'hl-line-mode)
-  (add-hook 'text-mode-hook #'hl-line-mode)
-
   ;; scratch buffer
-  (global-set-key (kbd "C-c X") 'scratch-buffer))
+  (global-set-key (kbd "C-c X") 'scratch-buffer)
+
+  :hook
+  ((minibuffer-setup . cursor-intangible-mode)
+    ;; make scripts executable
+    (after-save . executable-make-buffer-file-executable-if-script-p)
+    ;; enable hl-line but not globally since it's flaky in vterm
+    (prog-mode . hl-line-mode)
+    (text-mode . hl-line-mode)
+    (prog-mode . (lambda () (display-line-numbers t)))))
 
 (use-package
   exec-path-from-shell
