@@ -1,6 +1,9 @@
+Binx.modus-vivendi-code
+GitHub.vscode-pull-request-github
+JulienDuchesne.vscode-jsonnet
+TabNine.tabnine-vscode
 bbenoist.Nix
 berberman.vscode-cabal-fmt
-Binx.modus-vivendi-code
 danielgjackson.auto-dark-mode-windows
 donjayamanne.githistory
 eamodio.gitlens
@@ -9,11 +12,9 @@ eww-yuck.yuck
 filipesabella.live-p5
 foxundermoon.shell-format
 github.classroom
-GitHub.vscode-pull-request-github
 gitpod.gitpod-desktop
 golf1052.base16-generator
 hashicorp.terraform
-JulienDuchesne.vscode-jsonnet
 ms-kubernetes-tools.vscode-kubernetes-tools
 ms-python.isort
 ms-toolsai.jupyter
