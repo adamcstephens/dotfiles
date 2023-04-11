@@ -163,10 +163,6 @@
   (consult-customize consult--source-buffer :hidden t :default nil))
 
 (use-package
-  consult-project-extra
-  :bind (("s-f" . consult-project-extra-find)))
-
-(use-package
   copilot
   :disabled
   :straight (:host github :repo "zerolfx/copilot.el" :files ("dist" "*.el"))
@@ -215,10 +211,10 @@
   :init (marginalia-mode))
 
 (use-package
-  prescient
-  :config
-  (push 'prescient completion-styles)
-  (prescient-persist-mode 1))
+  orderless
+  :custom (completion-styles '(orderless basic))
+  (completion-category-overrides
+    '((file (styles basic partial-completion)))))
 
 (use-package
   savehist

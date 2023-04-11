@@ -191,11 +191,10 @@ the cursor by ARG lines."
 
 (use-package
   whitespace
-  :ensure nil
-  :init
-  (global-whitespace-mode)
-  (setq whitespace-style '(face tabs trailing))
-  (add-hook 'before-save-hook 'whitespace-cleanup))
+  :straight (:type built-in)
+  :config (setq whitespace-style '(face tabs trailing))
+  :init (global-whitespace-mode)
+  :hook (before-save . whitespace-cleanup))
 
 (use-package
   whole-line-or-region

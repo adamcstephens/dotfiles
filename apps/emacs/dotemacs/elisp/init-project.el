@@ -31,7 +31,7 @@ project are filtered out."
   :straight (:type built-in)
   :init (setq project-switch-commands #'project-find-file)
   :bind
-  (("s-v" . project-find-file)
+  (("s-f" . project-find-file)
     ("s-u" . project-switch-project)
     ("C-c p p" . project-switch-project)
     ("C-c p d" . project-dired)))
