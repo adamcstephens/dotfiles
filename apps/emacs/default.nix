@@ -28,11 +28,7 @@
     pkgs.sqlite
   ];
 
-  emacsPackage = pkgs.emacsGit.overrideAttrs (_: {
-    name = "emacs29";
-    version = "29.0-${inputs.emacs-src.shortRev}";
-    src = inputs.emacs-src;
-  });
+  emacsPackage = pkgs.emacsUnstable;
 
   emacsWithPackages = (pkgs.emacsPackagesFor emacsPackage).emacsWithPackages (epkgs: [
     epkgs.vterm

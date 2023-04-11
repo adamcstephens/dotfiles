@@ -59,26 +59,6 @@
     "emacs-overlay": {
       "inputs": {
         "flake-utils": "flake-utils_2",
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1681165126,
-        "narHash": "sha256-Qte3CafN9PkT+hx6HBKqQoCeQAdOGi5ZEUByKQh1IX0=",
-        "owner": "nix-community",
-        "repo": "emacs-overlay",
-        "rev": "644ae3ce05ae9d42232bba9642d4eaa63bb062d3",
-        "type": "github"
-      },
-      "original": {
-        "id": "emacs-overlay",
-        "type": "indirect"
-      }
-    },
-    "emacs-overlayoverla": {
-      "inputs": {
-        "flake-utils": "flake-utils_3",
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
@@ -92,23 +72,6 @@
       "original": {
         "owner": "nix-community",
         "repo": "emacs-overlay",
-        "type": "github"
-      }
-    },
-    "emacs-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1681132198,
-        "narHash": "sha256-1ZY8zLkW7JjlPI17owF2F5TcPxrasxVygCoXqrkEhHw=",
-        "owner": "emacs-mirror",
-        "repo": "emacs",
-        "rev": "338b3718b6cf14ef13b9390928e2b13b5d4f1797",
-        "type": "github"
-      },
-      "original": {
-        "owner": "emacs-mirror",
-        "ref": "emacs-29",
-        "repo": "emacs",
         "type": "github"
       }
     },
@@ -195,21 +158,6 @@
     },
     "flake-utils_3": {
       "locked": {
-        "lastModified": 1667395993,
-        "narHash": "sha256-nuEHfE/LcWyuSWnS8t12N1wc105Qtau+/OdUAjtQ0rA=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "5aed5285a952e0b949eb3ba02c12fa4fcfef535f",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "type": "github"
-      }
-    },
-    "flake-utils_4": {
-      "locked": {
         "lastModified": 1678901627,
         "narHash": "sha256-U02riOqrKKzwjsxc/400XnElV+UtPUQWpANPlyazjH0=",
         "owner": "numtide",
@@ -223,7 +171,7 @@
         "type": "github"
       }
     },
-    "flake-utils_5": {
+    "flake-utils_4": {
       "locked": {
         "lastModified": 1667395993,
         "narHash": "sha256-nuEHfE/LcWyuSWnS8t12N1wc105Qtau+/OdUAjtQ0rA=",
@@ -283,7 +231,7 @@
     },
     "nil": {
       "inputs": {
-        "flake-utils": "flake-utils_4",
+        "flake-utils": "flake-utils_3",
         "nixpkgs": "nixpkgs_3",
         "rust-overlay": "rust-overlay"
       },
@@ -322,7 +270,7 @@
     },
     "nix-wallpaper": {
       "inputs": {
-        "flake-utils": "flake-utils_5",
+        "flake-utils": "flake-utils_4",
         "nixpkgs": [
           "nixpkgs"
         ],
@@ -506,8 +454,6 @@
         "apple-fonts": "apple-fonts",
         "darwin": "darwin",
         "emacs-overlay": "emacs-overlay",
-        "emacs-overlayoverla": "emacs-overlayoverla",
-        "emacs-src": "emacs-src",
         "flake-parts": "flake-parts",
         "home-manager": "home-manager",
         "nil": "nil",
