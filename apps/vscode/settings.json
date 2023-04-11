@@ -84,17 +84,8 @@
   ],
   "remote.SSH.lockfilesInTmp": true,
   "remote.SSH.remotePlatform": {
-    "arch1": "linux",
     "blank": "linux",
-    "build1": "linux",
-    "cloud1": "linux",
-    "compose1": "linux",
-    "netdev3": "linux",
-    "nixos1": "linux",
-    "nixos2": "linux",
-    "alpine1": "linux",
-    "frank": "linux",
-    "tank": "linux"
+    "lxd1": "linux"
   },
   "scm.defaultViewMode": "tree",
   "search.useGlobalIgnoreFiles": true,
