@@ -13,7 +13,7 @@
       ''
         fish_add_path --prepend --move ~/.dotfiles/bin
 
-        if ! rg nixos /etc/lsb-release >/dev/null
+        if ! rg nixos /etc/lsb-release >/dev/null 2>&1
             set -x TERMINFO $HOME/.nix-profile/share/terminfo
         end
       ''
