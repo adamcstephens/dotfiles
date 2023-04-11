@@ -118,6 +118,8 @@ in {
           "-c"
           "${package}/bin/emacs --fg-daemon --init-directory ${config.home.homeDirectory}/.config/emacs/dotemacs"
         ];
+        StandardErrorPath = "${config.home.homeDirectory}/.config/emacs/dotemacs/launchd.log";
+        StandardOutPath = "${config.home.homeDirectory}/.config/emacs/dotemacs/launchd.log";
         WatchPaths = [
           "${config.home.homeDirectory}/.nix-profile/bin/emacs"
         ];
