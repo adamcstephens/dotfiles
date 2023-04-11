@@ -178,7 +178,7 @@
     ;; enable hl-line but not globally since it's flaky in vterm
     (prog-mode . hl-line-mode)
     (text-mode . hl-line-mode)
-    (prog-mode . (lambda () (display-line-numbers t)))))
+    (prog-mode . (lambda () (display-line-numbers-mode t)))))
 
 (use-package
   exec-path-from-shell
