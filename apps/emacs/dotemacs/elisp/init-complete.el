@@ -47,6 +47,20 @@
       (add-to-list 'completion-at-point-functions #'cape-yasnippet))))
 
 (use-package
+  capf-tabnine
+  :disabled
+  :straight
+  (:host
+    github
+    :repo "50ways2sayhard/tabnine-capf"
+    :files ("*.el" "*.sh"))
+  :hook (kill-emacs . tabnine-capf-kill-process)
+  :config
+  (add-to-list
+    'completion-at-point-functions
+    #'tabnine-completion-at-point))
+
+(use-package
   consult
   ;; add some more searching commands
   ;; Replace bindings. Lazily loaded due by `use-package'.
