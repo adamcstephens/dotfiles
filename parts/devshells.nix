@@ -52,6 +52,7 @@
       nixpkgs = pkgs.mkShellNoCC {
         packages =
           [
+            pkgs.nix-update
             pkgs.nixpkgs-review
             pkgs.deadnix
           ]
