@@ -60,6 +60,12 @@
       ];
     };
 
+    lxd1 = {
+      extraModules = [
+        ../apps/emacs
+      ];
+    };
+
     silver = {
       system = "aarch64-linux";
       extraModules = [
