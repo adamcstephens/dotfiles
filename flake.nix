@@ -9,6 +9,8 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    kmonad.url = "git+https://github.com/kmonad/kmonad?submodules=1&dir=nix";
+    kmonad.inputs.nixpkgs.follows = "nixpkgs";
     nil.url = "github:oxalica/nil";
     nix-colors.url = "github:misterio77/nix-colors";
     nix-wallpaper.url = "github:lunik1/nix-wallpaper";

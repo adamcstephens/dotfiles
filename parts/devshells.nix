@@ -1,11 +1,8 @@
-{
-  inputs,
-  perSystem,
-  ...
-}: {
+{inputs, ...}: {
   perSystem = {
     lib,
     pkgs,
+    system,
     ...
   }: {
     devShells = {
@@ -36,17 +33,19 @@
           pkgs.gopls
         ];
       };
+      kmonad = pkgs.mkShell {
+        name = "kmonad";
+        packages = [
+          (inputs.kmonad.packages.${system}.kmonad.overrideAttrs (prev: {
+            patches = [../apps/kmonad/m2.patch];
+          }))
+          inputs.kmonad.packages.${system}.list-keyboards
+        ];
+      };
       media = pkgs.mkShellNoCC {
         name = "media";
         packages = [
           pkgs.ffmpeg_5-full
-        ];
-      };
-      miryoku_kmonad = pkgs.mkShell {
-        name = "miryoku_kmonad";
-        packages = [
-          pkgs.gnumake
-          pkgs.gnused
         ];
       };
       nixpkgs = pkgs.mkShellNoCC {

@@ -47,6 +47,7 @@
 (require 'init-js)
 (require 'init-just)
 (require 'init-lisp)
+(require 'init-kmonad)
 (require 'init-markdown)
 (require 'init-nim)
 (require 'init-nix)

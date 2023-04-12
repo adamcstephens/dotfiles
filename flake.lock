@@ -229,6 +229,30 @@
         "type": "github"
       }
     },
+    "kmonad": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "dir": "nix",
+        "lastModified": 1679982002,
+        "narHash": "sha256-P5rGqqv6yTg3gpVaiXg37DEh8pjORxek9VX+ww2Z++U=",
+        "ref": "refs/heads/master",
+        "rev": "a22e0bad9e76b01c7b9e56f193e07c615e82effa",
+        "revCount": 725,
+        "submodules": true,
+        "type": "git",
+        "url": "https://github.com/kmonad/kmonad?dir=nix"
+      },
+      "original": {
+        "dir": "nix",
+        "submodules": true,
+        "type": "git",
+        "url": "https://github.com/kmonad/kmonad?dir=nix"
+      }
+    },
     "nil": {
       "inputs": {
         "flake-utils": "flake-utils_3",
@@ -456,6 +480,7 @@
         "emacs-overlay": "emacs-overlay",
         "flake-parts": "flake-parts",
         "home-manager": "home-manager",
+        "kmonad": "kmonad",
         "nil": "nil",
         "nix-colors": "nix-colors",
         "nix-wallpaper": "nix-wallpaper",
