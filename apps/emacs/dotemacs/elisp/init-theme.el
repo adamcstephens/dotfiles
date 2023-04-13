@@ -48,7 +48,11 @@
       (t . (1.0))))
   (load-theme 'modus-vivendi :no-confirm)
 
-  (setq global-mode-string (system-name)))
+  (setq global-mode-string (system-name))
+
+  (when (and (eq system-type 'darwin) (eq window-system 'ns))
+    (setq auto-dark-allow-osascript t)
+    (auto-dark-mode t)))
 
 ;; run this hook after we have initialized the first time
 (add-hook 'after-init-hook 'dot/gui-setup)
@@ -62,10 +66,7 @@
   :after (modus-themes)
   :config
   (setq auto-dark-dark-theme 'modus-vivendi)
-  (setq auto-dark-light-theme 'modus-operandi)
-  (when (and (eq system-type 'darwin) (eq window-system 'ns))
-    (setq auto-dark-allow-osascript t))
-  (auto-dark-mode t))
+  (setq auto-dark-light-theme 'modus-operandi))
 
 (use-package diff-ansi :commands (diff-ansi-mode diff-ansi-buffer))
 
