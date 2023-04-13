@@ -36,9 +36,8 @@ the cursor by ARG lines."
 
 (use-package
   avy
-  :init
-  (avy-setup-default)
-  (global-set-key (kbd "C-c C-j") 'avy-resume))
+  :init (avy-setup-default)
+  :bind (("s-l" . avy-goto-line) ("C-c C-j" . avy-resume)))
 
 (use-package clipetty :init (global-clipetty-mode 1))
 
