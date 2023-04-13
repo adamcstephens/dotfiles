@@ -85,6 +85,9 @@ in {
     enable = true;
     package = package;
     extraConfig = env;
+    extraPackages = epkgs: [
+      epkgs.lispy
+    ];
   };
 
   services = lib.mkIf pkgs.stdenv.isLinux {
@@ -111,13 +114,13 @@ in {
       enable = true;
       config = {
         KeepAlive = true;
-        RunAtLoad = true;
         ProgramArguments = [
           "${config.home.homeDirectory}/.nix-profile/bin/fish"
           "-l"
           "-c"
-          "${package}/bin/emacs --fg-daemon --init-directory ${config.home.homeDirectory}/.config/emacs/dotemacs"
+          "${config.programs.emacs.finalPackage}/bin/emacs --fg-daemon --init-directory ${config.home.homeDirectory}/.config/emacs/dotemacs"
         ];
+        RunAtLoad = true;
         StandardErrorPath = "${config.home.homeDirectory}/.config/emacs/dotemacs/launchd.log";
         StandardOutPath = "${config.home.homeDirectory}/.config/emacs/dotemacs/launchd.log";
         WatchPaths = [
