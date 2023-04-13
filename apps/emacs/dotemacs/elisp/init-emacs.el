@@ -180,10 +180,4 @@
     (text-mode . hl-line-mode)
     (prog-mode . (lambda () (display-line-numbers-mode t)))))
 
-(use-package
-  exec-path-from-shell
-  :demand
-  :when (memq window-system '(mac ns))
-  :config (exec-path-from-shell-copy-env "SSH_AUTH_SOCK"))
-
 (provide 'init-emacs)

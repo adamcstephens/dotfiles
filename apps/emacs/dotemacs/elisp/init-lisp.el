@@ -11,6 +11,7 @@
 
 (use-package
   lispy
+  ;; :straight nil
   :hook
   ((emacs-lisp-mode . (lambda () (lispy-mode 1)))
     (clojure-mode . (lambda () (lispy-mode 1)))))
