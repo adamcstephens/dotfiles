@@ -54,52 +54,63 @@
         else ""
       );
 
-    interactiveShellInit = ''
-       if [ (uname) = Darwin ] && [ -e "$HOME/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh" ]
-         set -x SSH_AUTH_SOCK "$HOME/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh"
-       end
+    loginShellInit =
+      if pkgs.stdenv.isDarwin
+      then ''
+        if [ -e "$HOME/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh" ]
+          set -x SSH_AUTH_SOCK "$HOME/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh"
+        end
+      ''
+      else "";
 
-       set -U __done_notification_urgency_level_failure normal
-       set -U fish_greeting
+    interactiveShellInit =
+      ''
+         set -U __done_notification_urgency_level_failure normal
+         set -U fish_greeting
 
-       if [ -z "$SSH_AUTH_SOCK" ]
-           if [ -S "$XDG_RUNTIME_DIR/ssh-agent" ]
-             set -x SSH_AUTH_SOCK "$XDG_RUNTIME_DIR/ssh-agent"
-           end
-           if [ -S "$XDG_RUNTIME_DIR/yubikey-agent/yubikey-agent.sock" ]
-             set -x SSH_AUTH_SOCK "$XDG_RUNTIME_DIR/yubikey-agent/yubikey-agent.sock"
-           end
-       end
+         if [ -z "$SSH_AUTH_SOCK" ]
+             if [ -S "$XDG_RUNTIME_DIR/ssh-agent" ]
+               set -x SSH_AUTH_SOCK "$XDG_RUNTIME_DIR/ssh-agent"
+             end
+             if [ -S "$XDG_RUNTIME_DIR/yubikey-agent/yubikey-agent.sock" ]
+               set -x SSH_AUTH_SOCK "$XDG_RUNTIME_DIR/yubikey-agent/yubikey-agent.sock"
+             end
+         end
 
-       if [ -n $SSH_AUTH_SOCK ] && [ ! -S "$XDG_RUNTIME_DIR/yubikey-agent/yubikey-agent.sock" ] && ! ssh-add -l &>/dev/null
-           if [ (uname) = Darwin ]
-               ssh-add --apple-use-keychain
-           else
-               echo "Emtpy ssh-agent"
-           end
-       end
+         if [ -n $SSH_AUTH_SOCK ] && [ ! -S "$XDG_RUNTIME_DIR/yubikey-agent/yubikey-agent.sock" ] && ! ssh-add -l &>/dev/null
+             if [ (uname) = Darwin ]
+                 ssh-add --apple-use-keychain
+             else
+                 echo "Emtpy ssh-agent"
+             end
+         end
 
-       if [ -e $HOME/.shell_local.sh ]
-           fenv source $HOME/.shell_local.sh
-       end
+         if [ -e $HOME/.shell_local.sh ]
+             fenv source $HOME/.shell_local.sh
+         end
 
-      if string match -q "$TERM_PROGRAM" vscode
-          if ! command -q code
-              set VSCODE_PATH (echo $BROWSER | sed 's,helpers/browser.sh,remote-cli,')
-              if test -d $VSCODE_PATH
-                  fish_add_path $VSCODE_PATH
-              end
+        if string match -q "$TERM_PROGRAM" vscode
+            if ! command -q code
+                set VSCODE_PATH (echo $BROWSER | sed 's,helpers/browser.sh,remote-cli,')
+                if test -d $VSCODE_PATH
+                    fish_add_path $VSCODE_PATH
+                end
+            end
+
+            if command -q code
+                . (code --locate-shell-integration-path fish 2>/dev/null | sed 's/shellIntegration-fish/shellIntegration/')
+            end
+        end
+      ''
+      + (
+        if pkgs.stdenv.isDarwin
+        then ""
+        else ''
+          if [ -z "$XDG_RUNTIME_DIR" ]
+            set -x XDG_RUNTIME_DIR /run/user/(id -u)
           end
-
-          if command -q code
-              . (code --locate-shell-integration-path fish 2>/dev/null | sed 's/shellIntegration-fish/shellIntegration/')
-          end
-      end
-
-      if [ -z "$XDG_RUNTIME_DIR" ]
-        set -x XDG_RUNTIME_DIR /run/user/(id -u)
-      end
-    '';
+        ''
+      );
 
     shellAliases = {
       cat = "bat";
