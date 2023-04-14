@@ -169,7 +169,9 @@
   (global-set-key (kbd "<mouse-9>") 'next-buffer)
 
   ;; scratch buffer
-  (global-set-key (kbd "C-c X") 'scratch-buffer)
+  (global-set-key (kbd "C-c x") 'scratch-buffer)
+
+  (global-set-key (kbd "C-x B") 'switch-to-buffer)
 
   :hook
   ((minibuffer-setup . cursor-intangible-mode)
