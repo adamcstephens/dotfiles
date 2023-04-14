@@ -35,12 +35,15 @@
       };
       kmonad = pkgs.mkShell {
         name = "kmonad";
-        packages = [
-          (inputs.kmonad.packages.${system}.kmonad.overrideAttrs (prev: {
-            patches = [../apps/kmonad/m2.patch];
-          }))
-          inputs.kmonad.packages.${system}.list-keyboards
-        ];
+        packages =
+          if pkgs.stdenv.hostPlatform.isDarwin
+          then [
+            (inputs.kmonad.packages.${system}.kmonad.overrideAttrs (prev: {
+              patches = [../apps/kmonad/m2.patch];
+            }))
+            inputs.kmonad.packages.${system}.list-keyboards
+          ]
+          else [inputs.kmonad.packages.${system}.kmonad];
       };
       media = pkgs.mkShellNoCC {
         name = "media";
