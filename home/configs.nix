@@ -78,6 +78,7 @@
       extraModules = [
         ../apps/goldencheetah
         ../apps/emacs
+        ../apps/kmonad
         {
           dotfiles.gui.dpi = 196;
         }
