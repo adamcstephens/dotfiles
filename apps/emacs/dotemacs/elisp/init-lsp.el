@@ -2,6 +2,9 @@
   (eglot-ensure)
   (add-hook 'before-save-hook 'eglot-format-buffer -10 t))
 
+(defun dot/eglot-goimports ()
+  (eglot-code-actions nil nil "source.organizeImports" t))
+
 (use-package
   eldoc-box
   :custom (eldoc-box-clear-with-C-g t)
@@ -14,7 +17,11 @@
   :commands (eglot eglot-ensure)
   :hook
   ((bash-ts-mode . eglot-ensure)
+    (elixir-ts-mode . dot/eglot-mode-setup)
     (go-ts-mode . dot/eglot-mode-setup)
+    (go-ts-mode
+      .
+      (lambda () (add-hook 'before-save-hook 'dot/eglot-goimports)))
     (haskell-mode . dot/eglot-mode-setup)
     (nix-mode . dot/eglot-mode-setup)
     (nim-mode . eglot-ensure)
@@ -26,6 +33,7 @@
     eglot-diagnostics-map
     ("<mouse-3>" . eglot-code-actions-at-mouse))
   :config
+  (add-to-list 'eglot-server-programs '((elixir-ts-mode) "elixir-ls"))
   (add-to-list 'eglot-server-programs '((nix-mode) "nil"))
   (add-to-list 'eglot-server-programs '((nim-mode) "nimlsp"))
   (add-to-list

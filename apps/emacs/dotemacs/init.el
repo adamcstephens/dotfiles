@@ -41,8 +41,9 @@
 (require 'init-project)
 (require 'init-term)
 
-(require 'init-go)
+(require 'init-elixir)
 (require 'init-eww)
+(require 'init-go)
 (require 'init-haskell)
 (require 'init-js)
 (require 'init-just)
