@@ -101,12 +101,15 @@ in {
   };
 
   systemd = lib.mkIf pkgs.stdenv.isLinux {
-    user.services.emacs.Service.Environment = [
-      "TERMINFO=${terminfo}/share/terminfo"
-      "TERM=xterm-emacs"
+    user.services.emacs.Service = {
+      Environment = [
+        "TERMINFO=${terminfo}/share/terminfo"
+        "TERM=xterm-emacs"
 
-      "SSH_AUTH_SOCK=%t/yubikey-agent/yubikey-agent.sock"
-    ];
+        "SSH_AUTH_SOCK=%t/yubikey-agent/yubikey-agent.sock"
+      ];
+      TimeoutSec = 900;
+    };
   };
 
   launchd = lib.mkIf pkgs.stdenv.isDarwin {
