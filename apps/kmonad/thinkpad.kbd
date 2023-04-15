@@ -17,8 +17,12 @@
   alt_; (tap-hold-next-release 200 ; ralt)
 
   lay_v (tap-hold-next-release 200 v (layer-toggle two))
+  lay_n (tap-hold-next-release 200 n (layer-toggle two))
 
   capsesc (tap-hold-next 200 esc lctl)
+
+  ch_up S-A-up
+  ch_dn S-A-down
   )
 
 (defsrc
@@ -32,19 +36,19 @@
 
 
 (deflayer default
-  _        _       _       _       _       _  _  _       _       _       _       _  _  _  _  _  _
-  _        _       _       _       _       _  _  _       _       _       _       _  _  _
-  _        _       _       _       _       _  _  _       _       _       _       _  _  _
-  @capsesc @alt_a  @met_s  @ctl_d  @sft_f  _  _  @sft_j  @ctl_k  @met_l  @alt_;  _  _
-  _        _       _       _       @lay_v  _  _  _       _       _       _       _
-  _        _       _       _       _       _  _  _       _
+  _        _       _       _       _       _  _       _       _       _       _       _  _  _  _  _  _
+  _        _       _       _       _       _  _       _       _       _       _       _  _  _
+  _        _       _       _       _       _  _       _       _       _       _       _  _  _
+  @capsesc @alt_a  @met_s  @ctl_d  @sft_f  _  _       @sft_j  @ctl_k  @met_l  @alt_;  _  _
+  _        _       _       _       @lay_v  _  @lay_n  _       _       _       _       _
+  _        _       _       _       _       _  _       _       _
   )
 
 (deflayer two
   _        _       _       _       _       _  _     _     _       _       _       _  _  _  _  _  _
   _        _       _       _       _       _  _     _     _       _       _       _  _  del
-  _        _       _       _       _       _  _     pgup  up      pgdn    _       _  _  _
-  _        _       _       _       _       _  home  lft   down    rght    end     _  _
+  _        _       _       _       @ch_up  _  _     pgup  up      pgdn    _       _  _  _
+  _        _       _       _       @ch_dn  _  home  lft   down    rght    end     _  _
   _        _       _       _       _       _  _     _     _       _       _       _
   _        _       _       _       _       _  _     _     _
   )
