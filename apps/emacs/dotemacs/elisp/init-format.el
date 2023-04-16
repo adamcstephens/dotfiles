@@ -13,7 +13,7 @@
   apheleia
   :init
   (require 'apheleia-formatters)
-  (setf (alist-get 'shfmt apheleia-formatters) '("shfmt"))
+  (setf (alist-get 'shfmt apheleia-formatters) '("shfmt" "-i" "2"))
   (add-to-list
     'apheleia-formatters
     '(just-fmt . ("just" "--unstable" "--fmt" "--justfile" filepath)))
