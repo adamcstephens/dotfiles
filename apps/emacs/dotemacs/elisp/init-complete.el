@@ -240,8 +240,7 @@
 (use-package
   ;; completion UI
   vertico
-  :straight (:type built-in)
-  :config (vertico-mode)
+  :init (vertico-mode)
   :bind (:map vertico-map ("C-<backspace>" . vertico-directory-up))
 
   ;; Different scroll margin
