@@ -29,9 +29,16 @@
       };
       go = pkgs.mkShell {
         packages = [
+          pkgs.delve
           pkgs.go
           pkgs.gopls
+          pkgs.go-tools
+          pkgs.gotools
         ];
+
+        shellHook = ''
+          export CGO_ENABLED=1
+        '';
       };
       kmonad = pkgs.mkShell {
         name = "kmonad";
