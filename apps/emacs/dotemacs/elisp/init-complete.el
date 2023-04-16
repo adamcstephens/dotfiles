@@ -257,17 +257,22 @@
   ;; (setq vertico-cycle t)
   )
 
-(use-package vertico-prescient :init (vertico-prescient-mode 1))
-
-(use-package wgrep)
+(use-package wgrep :straight (:type built-in))
 
 (use-package
   which-key
   ;; discover shortcuts easier in the minibuffer
-  :init (which-key-mode))
+  :straight (:type built-in)
+  :config (which-key-mode))
 
-(use-package yasnippet :init (yas-global-mode 1))
+(use-package
+  yasnippet
+  :straight (:type built-in)
+  :config (yas-global-mode 1))
 
-(use-package yasnippet-snippets :after yasnippet)
+(use-package
+  yasnippet-snippets
+  :straight (:type built-in)
+  :after yasnippet)
 
 (provide 'init-complete)

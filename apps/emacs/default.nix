@@ -71,6 +71,10 @@
       lispy
       vertico
       vterm
+      wgrep
+      which-key
+      yasnippet
+      yasnippet-snippets
     ]);
 
   fontconfig_file = pkgs.makeFontsConf {
