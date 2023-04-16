@@ -60,7 +60,16 @@
   emacsWithPackages = (pkgs.emacsPackagesFor emacsPackage).emacsWithPackages (epkgs:
     with epkgs; [
       cape
+      cider
+      consult
+      corfu
+      dash
+      embark
+      embark-consult
+      marginalia
+      orderless
       lispy
+      vertico
       vterm
     ]);
 

@@ -1,6 +1,6 @@
 (use-package
   cape
-  :straight nil
+  :straight (:type built-in)
   ;; Add extensions
   ;; Bind dedicated completion commands
   ;; Alternative prefix keys: C-c p, M-p, M-+, ...
@@ -54,6 +54,7 @@
 
 (use-package
   consult
+  :straight (:type built-in)
   ;; add some more searching commands
   ;; Replace bindings. Lazily loaded due by `use-package'.
   :bind
@@ -184,10 +185,15 @@
     ("M-f" . 'copilot-accept-completion-by-word)
     ("M-<return>" . 'copilot-accept-completion-by-line)))
 
-(use-package corfu :init (global-corfu-mode) :custom (corfu-auto t))
+(use-package
+  corfu
+  :straight (:type built-in)
+  :config (global-corfu-mode)
+  :custom (corfu-auto t))
 
 (use-package
   embark
+  :straight (:type built-in)
   ;; jump from completion to other tasks
   :bind
   (("M-o" . embark-act)
@@ -208,16 +214,20 @@
 (use-package
   embark-consult
   ;; Consult users will also want the embark-consult package.
+  :straight (:type built-in)
   :hook (embark-collect-mode . consult-preview-at-point-mode))
 
 (use-package
   marginalia
   ;; Enable rich annotations using the Marginalia package
-  :init (marginalia-mode))
+  :straight (:type built-in)
+  :config (marginalia-mode))
 
 (use-package
   orderless
-  :custom (completion-styles '(orderless basic))
+  :straight (:type built-in)
+  :custom
+  (completion-styles '(orderless basic))
   (completion-category-overrides
     '((file (styles basic partial-completion)))))
 
@@ -230,8 +240,8 @@
 (use-package
   ;; completion UI
   vertico
-  :straight (:files (:defaults "extensions/*"))
-  :init (vertico-mode)
+  :straight (:type built-in)
+  :config (vertico-mode)
   :bind (:map vertico-map ("C-<backspace>" . vertico-directory-up))
 
   ;; Different scroll margin

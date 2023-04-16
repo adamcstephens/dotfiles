@@ -7,11 +7,11 @@
     ("<up>" . cider-repl-previous-input)
     ("<down>" . cider-repl-history-forward)))
 
-(use-package dash)
+(use-package dash :straight (:type built-in))
 
 (use-package
   lispy
-  ;; :straight nil
+  :straight (:type built-in)
   :hook
   ((emacs-lisp-mode . (lambda () (lispy-mode 1)))
     (clojure-mode . (lambda () (lispy-mode 1)))))
