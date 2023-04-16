@@ -57,9 +57,12 @@
     ];
   };
 
-  emacsWithPackages = (pkgs.emacsPackagesFor emacsPackage).emacsWithPackages (epkgs: [
-    epkgs.vterm
-  ]);
+  emacsWithPackages = (pkgs.emacsPackagesFor emacsPackage).emacsWithPackages (epkgs:
+    with epkgs; [
+      cape
+      lispy
+      vterm
+    ]);
 
   fontconfig_file = pkgs.makeFontsConf {
     fontDirectories = [
@@ -112,9 +115,6 @@ in {
     enable = true;
     package = package;
     extraConfig = env;
-    extraPackages = epkgs: [
-      epkgs.lispy
-    ];
   };
 
   services = lib.mkIf pkgs.stdenv.isLinux {

@@ -1,5 +1,6 @@
 (use-package
   cape
+  :straight nil
   ;; Add extensions
   ;; Bind dedicated completion commands
   ;; Alternative prefix keys: C-c p, M-p, M-+, ...
@@ -47,18 +48,9 @@
       (add-to-list 'completion-at-point-functions #'cape-yasnippet))))
 
 (use-package
-  capf-tabnine
-  :disabled
-  :straight
-  (:host
-    github
-    :repo "50ways2sayhard/tabnine-capf"
-    :files ("*.el" "*.sh"))
-  :hook (kill-emacs . tabnine-capf-kill-process)
-  :config
-  (add-to-list
-    'completion-at-point-functions
-    #'tabnine-completion-at-point))
+  chatgpt-shell
+  :straight (:type git :host github :repo "xenodium/chatgpt-shell")
+  :commands (chatgpt-shell))
 
 (use-package
   consult
@@ -178,7 +170,6 @@
 
 (use-package
   copilot
-  :disabled
   :straight (:host github :repo "zerolfx/copilot.el" :files ("dist" "*.el"))
   :commands copilot-mode
   ;; :hook (prog-mode . copilot-mode)
