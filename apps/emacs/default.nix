@@ -10,6 +10,7 @@
   extraBins = [
     pkgs.alejandra
     aspell
+    pkgs.coreutils
     pkgs.diffutils
     pkgs.fd
     pkgs.git
