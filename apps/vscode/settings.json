@@ -12,7 +12,7 @@
     "editor.wordBasedSuggestionsMode": "currentDocument"
   },
   "[shellscript]": {
-    "editor.defaultFormatter": "mkhl.shfmt"
+    "editor.defaultFormatter": "foxundermoon.shell-format"
   },
   "[yaml]": {
     "editor.wordBasedSuggestionsMode": "currentDocument"
@@ -184,5 +184,6 @@
   "editor.inlineSuggest.enabled": true,
   "[nim]": {
     "editor.defaultFormatter": "nimsaem.nimvscode"
-  }
+  },
+  "editorconfig.generateAuto": false
 }

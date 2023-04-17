@@ -4,6 +4,7 @@ dustinsanders.an-old-hope-theme-vscode
 EditorConfig.EditorConfig
 esbenp.prettier-vscode
 firefox-devtools.vscode-firefox-debug
+foxundermoon.shell-format
 GitHub.codespaces
 GitHub.github-vscode-theme
 golang.go
@@ -13,7 +14,6 @@ jnoortheen.nix-ide
 justusadam.language-haskell
 kamadorueda.alejandra
 mkhl.direnv
-mkhl.shfmt
 ms-python.python
 ms-python.vscode-pylance
 ms-vscode-remote.remote-ssh

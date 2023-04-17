@@ -10,11 +10,11 @@ eamodio.gitlens
 earthly.earthfile-syntax-highlighting
 eww-yuck.yuck
 filipesabella.live-p5
-foxundermoon.shell-format
 github.classroom
 gitpod.gitpod-desktop
 golf1052.base16-generator
 hashicorp.terraform
+mkhl.shfmt
 ms-kubernetes-tools.vscode-kubernetes-tools
 ms-python.isort
 ms-toolsai.jupyter
