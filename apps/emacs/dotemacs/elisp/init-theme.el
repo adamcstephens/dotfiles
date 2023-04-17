@@ -12,10 +12,10 @@
   (setq initial-scratch-message nil)
   (setq inhibit-startup-screen t)
 
-  (when (< (length command-line-args) 2)
-    (when (display-graphic-p)
-      (when (not (string-match-p "magit" (buffer-name)))
-        (dot/show-welcome-buffer))))
+  ;; (when (< (length command-line-args) 2)
+  ;;   (when (display-graphic-p)
+  ;;     (when (not (string-match-p "magit" (buffer-name)))
+  ;;       (dot/show-welcome-buffer))))
 
   ;; disable menu, tool, and bars
   (menu-bar-mode -1)
