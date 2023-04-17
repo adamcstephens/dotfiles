@@ -1,3 +1,9 @@
 #!/usr/bin/env bash
 
-exec em -e "(progn (magit-status) (delete-other-windows))"
+if [ -z "$1" ]; then
+  DIR="."
+else
+  DIR="$1"
+fi
+
+exec em -e "(progn (magit-status \"${DIR}\") (delete-other-windows))"
