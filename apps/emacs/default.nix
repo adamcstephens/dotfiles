@@ -66,6 +66,7 @@
       dash
       embark
       embark-consult
+      hide-mode-line
       marginalia
       orderless
       lispy

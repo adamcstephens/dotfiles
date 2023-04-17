@@ -149,6 +149,11 @@
 ;;     '((projects . 5) (bookmarks . 5) (recents . 5))))
 
 (use-package
+  hide-mode-line
+  :straight (:type built-in)
+  :hook (vterm-mode . hide-mode-line-mode))
+
+(use-package
   ligature
   :config
   ;; Enable the "www" ligature in every possible major mode
