@@ -71,7 +71,7 @@
       };
       python = pkgs.mkShellNoCC {
         packages = [
-          (pkgs.python3.withPackages (py: [py.hexdump py.paramiko]))
+          (pkgs.python3.withPackages (py: [py.black py.hexdump py.paramiko]))
         ];
       };
     };
