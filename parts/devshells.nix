@@ -31,6 +31,7 @@
         packages = [
           pkgs.delve
           pkgs.go
+          pkgs.golangci-lint
           pkgs.gopls
           pkgs.go-tools
           pkgs.gotools
