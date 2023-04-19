@@ -136,6 +136,8 @@ in {
 
   programs.feh.enable = true;
 
+  programs.ssh.forwardAgent = true;
+
   systemd.user.startServices = "sd-switch";
 
   systemd.user.services.polkit-gnome-authentication-agent-1 = {

@@ -22,6 +22,7 @@
     ../apps/age
     ../apps/ripgrep
     ../apps/shellcheck
+    ../apps/ssh
     ../apps/starship
     ../apps/tmux
     ../apps/zsh

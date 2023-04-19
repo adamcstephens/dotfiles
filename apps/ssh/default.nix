@@ -3,7 +3,6 @@
     enable = true;
     controlMaster = "auto";
     controlPersist = "30m";
-    forwardAgent = true;
     serverAliveInterval = 60;
     serverAliveCountMax = 2;
 
