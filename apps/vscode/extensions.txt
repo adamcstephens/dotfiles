@@ -1,6 +1,7 @@
 bmalehorn.vscode-fish
 DavidAnson.vscode-markdownlint
 dustinsanders.an-old-hope-theme-vscode
+eamodio.gitlens
 EditorConfig.EditorConfig
 esbenp.prettier-vscode
 firefox-devtools.vscode-firefox-debug

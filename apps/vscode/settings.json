@@ -194,5 +194,6 @@
     "markdown": false,
     "scminput": false
   },
-  "search.defaultViewMode": "tree"
+  "search.defaultViewMode": "tree",
+  "terminal.integrated.macOptionIsMeta": true
 }
