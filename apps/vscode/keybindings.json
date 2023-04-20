@@ -107,10 +107,6 @@
   },
   {
     "key": "ctrl+g",
-    "command": "-workbench.action.gotoLine"
-  },
-  {
-    "key": "ctrl+g",
     "command": "editor.action.nextMatchFindAction",
     "when": "editorFocus"
   },
@@ -322,5 +318,39 @@
   {
     "key": "alt+cmd+o",
     "command": "workbench.action.files.openFolder"
+  },
+  {
+    "key": "ctrl+up",
+    "command": "cursorMove",
+    "args": {
+      "to": "prevBlankLine"
+    },
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+down",
+    "command": "cursorMove",
+    "args": {
+      "to": "nextBlankLine"
+    },
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+meta+shift+up",
+    "command": "cursorMove",
+    "args": {
+      "to": "prevBlankLine",
+      "select": true
+    },
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+meta+shift+down",
+    "command": "cursorMove",
+    "args": {
+      "to": "nextBlankLine",
+      "select": true
+    },
+    "when": "editorTextFocus"
   }
 ]

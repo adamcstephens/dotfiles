@@ -74,7 +74,7 @@
     "esbenp.prettier-vscode",
     "jnoortheen.nix-ide",
     "mkhl.direnv",
-    "mkhl.shfmt",
+    "foxundermoon.shell-format",
     "redhat.vscode-yaml",
     "timonwong.shellcheck",
     "JakeBecker.elixir-ls",
@@ -101,7 +101,6 @@
   "window.nativeFullScreen": false,
   "window.newWindowDimensions": "inherit",
   "window.restoreWindows": "none",
-  "window.titleBarStyle": "custom",
   "workbench.colorCustomizations": {
     "[Base16 Ayu Dark]": {
       "statusBar.background": "#272D38",
@@ -147,7 +146,6 @@
   "[nix]": {
     "editor.defaultFormatter": "jnoortheen.nix-ide"
   },
-  "window.commandCenter": true,
   "git.mergeEditor": true,
   "[powershell]": {
     "editor.defaultFormatter": "ms-vscode.powershell"
@@ -185,5 +183,16 @@
   "[nim]": {
     "editor.defaultFormatter": "nimsaem.nimvscode"
   },
-  "editorconfig.generateAuto": false
+  "editorconfig.generateAuto": false,
+  "window.titleBarStyle": "custom",
+  "go.lintTool": "golangci-lint",
+  "go.lintFlags": ["--fast"],
+  "github.copilot.enable": {
+    "*": false,
+    "yaml": false,
+    "plaintext": false,
+    "markdown": false,
+    "scminput": false
+  },
+  "search.defaultViewMode": "tree"
 }

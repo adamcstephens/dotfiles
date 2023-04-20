@@ -6,6 +6,7 @@ esbenp.prettier-vscode
 firefox-devtools.vscode-firefox-debug
 foxundermoon.shell-format
 GitHub.codespaces
+GitHub.copilot
 GitHub.github-vscode-theme
 golang.go
 haskell.haskell
