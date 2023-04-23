@@ -195,5 +195,8 @@
     "scminput": false
   },
   "search.defaultViewMode": "tree",
-  "terminal.integrated.macOptionIsMeta": true
+  "terminal.integrated.macOptionIsMeta": true,
+  "[clojure]": {
+    "editor.defaultFormatter": "betterthantomorrow.calva"
+  }
 }
