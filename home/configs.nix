@@ -5,6 +5,7 @@
       extraModules = [
         ../apps/goldencheetah
         ../apps/emacs
+        ../apps/nix/nixpkgs-dev.nix
         {
           dotfiles.gui.dpi = 148;
         }
