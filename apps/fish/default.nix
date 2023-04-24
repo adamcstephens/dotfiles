@@ -78,11 +78,7 @@
          end
 
          if [ -n $SSH_AUTH_SOCK ] && [ ! -S "$XDG_RUNTIME_DIR/yubikey-agent/yubikey-agent.sock" ] && ! ssh-add -l &>/dev/null
-             if [ (uname) = Darwin ]
-                 ssh-add --apple-use-keychain
-             else
-                 echo "Emtpy ssh-agent"
-             end
+           echo "Emtpy ssh-agent"
          end
 
          if [ -e $HOME/.shell_local.sh ]
@@ -108,6 +104,10 @@
         else ''
           if [ -z "$XDG_RUNTIME_DIR" ]
             set -x XDG_RUNTIME_DIR /run/user/(id -u)
+          end
+
+          if [ -n $SSH_AUTH_SOCK ] && ! ssh-add -l &>/dev/null
+            ssh-add --apple-use-keychain
           end
         ''
       );
