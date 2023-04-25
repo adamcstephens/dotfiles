@@ -111,7 +111,7 @@ steam-bootstrap:
     flatpak install flathub com.valvesoftware.Steam
 
 test:
-    nix build --print-build-logs .#homeConfigurations.blank.activationPackage .#homeConfigurations.bonk.activationPackage .#homeConfigurations.think.activationPackage
+    nix build --print-build-logs .#homeConfigurations.blank.activationPackage .#homeConfigurations.bonk.activationPackage .#homeConfigurations.silver.activationPackage .#homeConfigurations.think.activationPackage
 
 vim-plugins:
     git subrepo clone https://github.com/airblade/vim-gitgutter apps/vim/vim/pack/plugins/start/vim-gitgutter
