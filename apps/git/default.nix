@@ -21,6 +21,9 @@
       ".elixir_ls/"
       "result"
       ".direnv/"
+      ".calva/"
+      ".clj-kondo/"
+      ".lsp/"
     ];
   };
 }
