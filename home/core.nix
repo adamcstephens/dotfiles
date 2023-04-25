@@ -115,6 +115,8 @@
     pkgs.alejandra
     inputs.nil.packages.${pkgs.system}.nil
     pkgs.shfmt
+
+    pkgs.babashka
   ];
 
   home.sessionVariables = {

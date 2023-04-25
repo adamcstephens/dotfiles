@@ -11,6 +11,7 @@
         packages =
           [
             pkgs.alejandra
+            pkgs.babashka
             pkgs.deadnix
             pkgs.git-subrepo
             pkgs.just
