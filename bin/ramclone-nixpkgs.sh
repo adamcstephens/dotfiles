@@ -2,6 +2,8 @@
 
 set -ex
 
+[ ! -e "$XDG_RUNTIME_DIR/git/nixpkgs" ] || exit 0
+
 [ -e ~/git/nixpkgs ]
 
 cd "$XDG_RUNTIME_DIR"

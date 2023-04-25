@@ -63,19 +63,7 @@
     done
   '';
 
-  home.activation.dotfiles-migrate = lib.hm.dag.entryBefore ["checkLinkTargets"] ''
-    if [ -d ~/.dotfiles ]; then
-      pushd ~/.dotfiles
-        if [ -e .nixos-managed ]; then
-          ${lib.getExe pkgs.git} pull
-        fi
-        ${lib.getExe pkgs.just} migrate
-      popd
-    fi
-  '';
-
   home.activation.nix-index-fetch = lib.hm.dag.entryAfter ["writeBoundary"] ''
-
     pushd ~/.dotfiles
       PATH=${lib.makeBinPath [pkgs.bash pkgs.coreutils pkgs.gettext pkgs.wget]} ${lib.getExe pkgs.just} nix-index-fetch
     popd
