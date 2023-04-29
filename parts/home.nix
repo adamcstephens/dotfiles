@@ -29,7 +29,7 @@ in {
           };
 
           system = lib.mkOption {
-            type = lib.types.enum ["x86_64-linux" "aarch64-linux" "aarch64-darwin"];
+            type = lib.types.enum ["x86_64-linux" "aarch64-linux" "aarch64-darwin" "armv6l-linux"];
             default = "x86_64-linux";
           };
 

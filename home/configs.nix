@@ -96,6 +96,10 @@
       system = "aarch64-linux";
     };
 
+    armv6l-linux = {
+      system = "armv6l-linux";
+    };
+
     x86_64-linux = {};
   };
 }
