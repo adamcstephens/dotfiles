@@ -1,6 +1,7 @@
 {
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
     apple-fonts.url = "github:adamcstephens/apple-fonts.nix";
     darwin.url = "github:lnl7/nix-darwin/master";
@@ -43,7 +44,7 @@
       }: {
         _module.args.pkgs = import self.inputs.nixpkgs {
           inherit system;
-          overlays = [self.overlays.default];
+          overlays = [self.overlays.default self.overlays.upstreams];
           config.allowUnfree = true;
         };
 

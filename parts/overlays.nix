@@ -1,6 +1,17 @@
 {inputs, ...}: {
+  imports = [
+    inputs.flake-parts.flakeModules.easyOverlay
+  ];
+
+  perSystem = {system, ...}: {
+    overlayAttrs = {
+      gtklock = inputs.nixpkgs-unstable.legacyPackages.${system}.gtklock;
+      webcord = inputs.nixpkgs-unstable.legacyPackages.${system}.webcord;
+    };
+  };
+
   flake.overlays = rec {
-    default = inputs.nixpkgs.lib.composeManyExtensions [
+    upstreams = inputs.nixpkgs.lib.composeManyExtensions [
       inputs.emacs-overlay.overlays.emacs
       inputs.emacs-overlay.overlays.package
       fishPlugins
