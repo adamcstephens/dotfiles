@@ -12,11 +12,13 @@
           [
             pkgs.alejandra
             pkgs.babashka
+            inputs.sandbox.packages.${pkgs.system}.cljfmt
             pkgs.deadnix
             pkgs.git-subrepo
             pkgs.just
             inputs.nil.packages.${pkgs.system}.nil
             pkgs.nodePackages.prettier
+            pkgs.nvd
           ]
           ++ (lib.optionals pkgs.stdenv.isLinux
             [
