@@ -7,12 +7,18 @@
   (interactive)
   (straight-pull-recipe-repositories)
   (straight-pull-all)
-  (dot/freeze))
+  (straight-rebuild-all)
+  (dot/freeze)
+  (dot/clean))
 
 (defun dot/thaw ()
   "Thaw pinned straight packages and check them"
   (interactive)
   (straight-thaw-versions)
+  (dot/clean))
+
+(defun dot/clean ()
+  (straight-remove-unused-repos t)
   (straight-prune-build)
   (straight-check-all))
 
