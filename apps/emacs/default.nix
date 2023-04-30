@@ -59,11 +59,10 @@
   };
 
   emacsWithPackages = (pkgs.emacsPackagesFor emacsPackage).emacsWithPackages (epkgs:
-    with epkgs; [
+    (with epkgs.melpaPackages; [
       cape
       cider
       consult
-      corfu
       dash
       embark
       embark-consult
@@ -71,13 +70,16 @@
       marginalia
       orderless
       lispy
-      vertico
       vterm
       wgrep
       which-key
       yasnippet
       yasnippet-snippets
-    ]);
+    ])
+    ++ (with epkgs.elpaPackages; [
+      corfu
+      vertico
+    ]));
 
   fontconfig_file = pkgs.makeFontsConf {
     fontDirectories = [

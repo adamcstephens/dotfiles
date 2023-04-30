@@ -1,0 +1,13 @@
+labels:
+  type: local
+
+pipeline:
+  build:
+    image: bash
+    commands:
+      - nix develop .# --command ./bin/update.bb
+    secrets:
+      - git_token
+    when:
+      event: cron
+      cron: update
