@@ -11,8 +11,7 @@
 
 (use-package
   apheleia
-  :init
-  (require 'apheleia-formatters)
+  :config
   (setf (alist-get 'shfmt apheleia-formatters) '("shfmt" "-i" "2"))
   (add-to-list
     'apheleia-formatters
