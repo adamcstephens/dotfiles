@@ -7,6 +7,7 @@
 
 (use-package
   eldoc-box
+  :straight nil
   :custom (eldoc-box-clear-with-C-g t)
   :hook (prog-mode . eldoc-box-hover-at-point-mode))
 
@@ -49,6 +50,7 @@
 
 (use-package
   treesit-auto
+  :straight nil
   :config
   (setq treesit-auto-install nil)
   (global-treesit-auto-mode))

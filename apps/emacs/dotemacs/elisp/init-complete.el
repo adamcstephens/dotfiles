@@ -47,10 +47,7 @@
     (lambda ()
       (add-to-list 'completion-at-point-functions #'cape-yasnippet))))
 
-(use-package
-  chatgpt-shell
-  :straight (:type git :host github :repo "xenodium/chatgpt-shell")
-  :commands (chatgpt-shell))
+(use-package chatgpt-shell :straight nil :commands (chatgpt-shell))
 
 (use-package
   consult

@@ -1,15 +1,18 @@
 (use-package
   magit
+  :straight nil
   :commands git-commit-mode
   :bind (("C-c g" . magit-file-dispatch))
   :hook (focus-in . magit-refresh)
-  :init (setq magit-save-repository-buffers nil))
+  :config (setq magit-save-repository-buffers nil))
 
 ;; (use-package forge :after magit)
 
 (use-package
   diff-hl
-  :init
+  :straight nil
+  :config
+  (require 'diff-hl-margin)
   (global-diff-hl-mode)
   (diff-hl-margin-mode)
   ;; (diff-hl-flydiff-mode)
@@ -24,7 +27,8 @@
 
 (use-package
   git-auto-commit-mode
-  :init
+  :straight nil
+  :config
   (setq gac-automatically-push-p t)
   (setq-default gac-debounce-interval 6000))
 

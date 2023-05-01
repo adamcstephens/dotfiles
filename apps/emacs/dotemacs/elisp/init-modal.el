@@ -1,72 +1,3 @@
-(use-package
-  evil
-  :disabled
-  :init
-  (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
-  (setq evil-want-keybinding nil)
-  :config (evil-mode 1)
-
-  ;; set up the undo system
-  (setq evil-undo-system 'undo-fu)
-
-  ;; set leader key in all states
-  (evil-set-leader nil (kbd "C-SPC"))
-  ;; set leader key in normal state
-  (evil-set-leader 'normal (kbd "SPC"))
-  (evil-define-key
-    'normal
-    'global
-    (kbd "<leader>b")
-    'workroom-switch-to-buffer)
-  (evil-define-key 'normal 'global (kbd "<leader>d") 'dired-at-point)
-  (evil-define-key 'normal 'global (kbd "<leader>fs") 'save-buffer)
-  (evil-define-key 'normal 'global (kbd "<leader>gg") 'magit)
-  (evil-define-key 'normal 'global (kbd "<leader>fs") 'save-buffer)
-  (evil-define-key
-    'normal
-    'global
-    (kbd "<leader>pp")
-    'project-switch-project)
-  (evil-define-key
-    'normal
-    'global
-    (kbd "<leader>ps")
-    'consult-ripgrep)
-  (evil-define-key
-    'normal
-    'global
-    (kbd "<leader>pw")
-    'workroom-switch)
-  (evil-define-key 'normal 'global (kbd "<leader>v") 'vterm)
-
-  ;; unbind return in evil so org links can be followed
-  (with-eval-after-load 'evil-maps
-    (define-key evil-motion-state-map (kbd "RET") nil)))
-
-(use-package
-  evil-collection
-  :disabled
-  :after evil
-  :config (evil-collection-init))
-
-(use-package
-  evil-mc
-  :disabled
-  :after evil
-  :config (global-evil-mc-mode 1)
-
-  ;; override visual mode to mc every line
-  (evil-define-key
-    'visual
-    evil-mc-key-map
-    "A"
-    #'evil-mc-make-cursor-in-visual-selection-end)
-  (evil-define-key
-    'visual
-    evil-mc-key-map
-    "I"
-    #'evil-mc-make-cursor-in-visual-selection-beg))
-
 (defun dot/meow-setup ()
   (interactive)
   (setq meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
@@ -160,6 +91,7 @@
 (use-package
   meow
   :disabled
+  :straight nil
   :config (dot/meow-setup) (meow-global-mode 1)
   ;; use system clipboard
   (setq meow-use-clipboard t)
@@ -167,15 +99,9 @@
   (setq meow-esc-delay 0.1))
 
 (use-package
-  xah-fly-keys
-  :disabled
-  :config
-  (xah-fly-keys-set-layout "qwerty")
-  (xah-fly-keys 1))
-
-(use-package
   boon
   :disabled
+  :straight nil
   :config (require 'boon-qwerty)
   (boon-mode) ;; to enable boon everywhere
   ;; :bind (:boon-command-map ("r" . consult-line)))

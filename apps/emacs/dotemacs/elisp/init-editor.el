@@ -48,9 +48,8 @@ the cursor by ARG lines."
 (use-package
   dirvish
   :straight (:type built-in)
-  :config (dirvish-override-dired-mode)
   :config
-  ;; Don't worry, Dirvish is still performant even if you enable all these attributes
+  (dirvish-override-dired-mode)
   (setq dirvish-attributes
     '
     (vc-state subtree-state
@@ -86,14 +85,6 @@ the cursor by ARG lines."
   editorconfig
   :straight (:type built-in)
   :config (editorconfig-mode 1))
-
-(use-package
-  edwina
-  :disabled
-  :config
-  (setq display-buffer-base-action '(display-buffer-below-selected))
-  (edwina-setup-dwm-keys)
-  (edwina-mode 1))
 
 (use-package
   expand-region
@@ -184,7 +175,7 @@ the cursor by ARG lines."
 (use-package
   substitute
   :straight (:type built-in)
-  :init (setq substitute-highlight t)
+  :config (setq substitute-highlight t)
   :bind ("M-# b" . substitute-target-in-buffer))
 
 (use-package

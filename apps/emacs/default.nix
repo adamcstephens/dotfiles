@@ -11,6 +11,7 @@
     pkgs.alejandra
     aspell
     pkgs.coreutils
+    pkgs.curl
     pkgs.diffutils
     pkgs.fd
     pkgs.git
@@ -60,28 +61,49 @@
 
   emacsWithPackages = (pkgs.emacsPackagesFor emacsPackage).emacsWithPackages (epkgs:
     (with epkgs.melpaPackages; [
+      apheleia
       avy
       cape
+      chatgpt-shell
       cider
       clipetty
       consult
       dash
+      diff-hl
       dirvish
       editorconfig
+      eldoc-box
+      elisp-autofmt
+      elixir-ts-mode
       embark
       embark-consult
       expand-region
       flyspell-correct
+      git-auto-commit-mode
+      haskell-mode
       hide-mode-line
+      just-mode
       lispy
+      magit
       marginalia
+      markdown-mode
       move-dup
       mwim
+      nim-mode
+      nix-mode
       olivetti
       orderless
+      org-appear
+      org-autolist
+      org-download
+      org-present
+      org-re-reveal
+      org-superstar
+      ox-pandoc
       persistent-scratch
       run-command
       transpose-frame
+      treesit-auto
       undo-fu
       undo-fu-session
       vterm
@@ -90,9 +112,11 @@
       whole-line-or-region
       yasnippet
       yasnippet-snippets
+      yuck-mode
     ])
     ++ (with epkgs.elpaPackages; [
       corfu
+      org
       substitute
       vertico
       vundo

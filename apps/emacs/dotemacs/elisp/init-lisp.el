@@ -11,6 +11,7 @@
 
 (use-package
   cider
+  :straight nil
   :config (setq cider-repl-display-help-banner nil)
   :bind
   (:map

@@ -57,8 +57,9 @@
 ;; the org package itself
 (use-package
   org
+  :straight nil
   :mode ("\\.org\\'" . org-mode)
-  :init (require 'ox-latex)
+  :config (require 'ox-latex)
 
   ;; setup some dirs
   (setq org-directory "~/org/")
@@ -175,7 +176,6 @@
   ;;       (file+headline (concat org-directory "kent.org") "Meetings")
   ;;       "* %T ")))
 
-  :config
   (setq org-attach-id-dir (expand-file-name ".attach/" org-directory))
   (advice-add
     #'org-html--format-image
@@ -188,26 +188,29 @@
   ("C-c o a" . org-agenda)
   ("C-c o c" . org-capture))
 
+(use-package org-autolist :hook (org-mode . org-autolist-mode))
+
 ;; set some better icons
 (use-package
   org-superstar
+  :straight nil
   :hook (org-mode . (lambda () (org-superstar-mode 1)))
-  :init (setq org-superstar-headline-bullets-list '("◉" "○" "✸" "✿" "⁖")))
+  :config (setq org-superstar-headline-bullets-list '("◉" "○" "✸" "✿" "⁖")))
 
-(use-package org-download :after (org) :config (org-download-enable))
+(use-package
+  org-download
+  :straight nil
+  :after (org)
+  :config (org-download-enable))
 
-(use-package org-re-reveal :init (setq org-re-reveal-history t))
-
-;; Show hidden emphasis markers
-(use-package org-appear :disabled :hook (org-mode . org-appear-mode))
-
-;; make list entering better
-(use-package org-autolist :hook (org-mode . org-autolist-mode))
-
-(use-package ox-pandoc)
+(use-package
+  org-re-reveal
+  :straight nil
+  :config (setq org-re-reveal-history t))
 
 (use-package
   org-present
+  :straight nil
   :hook
   (
     (org-present-mode
@@ -227,6 +230,6 @@
         (hide-mode-line-mode -1)
         (org-present-read-write)))))
 
-(use-package hide-mode-line)
+(use-package ox-pandoc :straight nil)
 
 (provide 'init-org)
