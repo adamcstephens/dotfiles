@@ -60,25 +60,42 @@
 
   emacsWithPackages = (pkgs.emacsPackagesFor emacsPackage).emacsWithPackages (epkgs:
     (with epkgs.melpaPackages; [
+      avy
       cape
       cider
+      clipetty
       consult
       dash
+      dirvish
+      editorconfig
       embark
       embark-consult
+      expand-region
+      flyspell-correct
       hide-mode-line
-      marginalia
-      orderless
       lispy
+      marginalia
+      move-dup
+      mwim
+      olivetti
+      orderless
+      persistent-scratch
+      run-command
+      transpose-frame
+      undo-fu
+      undo-fu-session
       vterm
       wgrep
       which-key
+      whole-line-or-region
       yasnippet
       yasnippet-snippets
     ])
     ++ (with epkgs.elpaPackages; [
       corfu
+      substitute
       vertico
+      vundo
     ]));
 
   fontconfig_file = pkgs.makeFontsConf {
