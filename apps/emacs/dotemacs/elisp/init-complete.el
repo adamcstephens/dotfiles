@@ -55,8 +55,7 @@
 (use-package
   consult
   :straight (:type built-in)
-  ;; add some more searching commands
-  ;; Replace bindings. Lazily loaded due by `use-package'.
+  :init (require 'consult-xref)
   :bind
   ( ;; C-c bindings (mode-specific-map)
     ("C-c M-x" . consult-mode-command)
