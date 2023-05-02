@@ -103,25 +103,20 @@
     (switch-to-buffer (current-buffer))
     (local-set-key (kbd "q") 'kill-this-buffer)))
 
-(use-package all-the-icons :straight nil)
+(use-package all-the-icons)
 
 (use-package
   auto-dark
-  :straight nil
   :after (modus-themes)
-  :config
+  :init
   (setq auto-dark-dark-theme 'modus-vivendi)
   (setq auto-dark-light-theme 'modus-operandi))
 
-(use-package
-  diff-ansi
-  :straight nil
-  :commands (diff-ansi-mode diff-ansi-buffer))
+(use-package diff-ansi :commands (diff-ansi-mode diff-ansi-buffer))
 
 (use-package
   doom-modeline
-  :straight nil
-  :config
+  :init
   (setq doom-modeline-buffer-encoding 'nondefault)
   (doom-modeline-mode 1))
 
@@ -156,15 +151,11 @@
 ;;   (setq dashboard-items
 ;;     '((projects . 5) (bookmarks . 5) (recents . 5))))
 
-(use-package
-  hide-mode-line
-  :straight (:type built-in)
-  :hook (vterm-mode . hide-mode-line-mode))
+(use-package hide-mode-line :hook (vterm-mode . hide-mode-line-mode))
 
 (use-package
   ligature
-  :straight nil
-  :config
+  :init
   ;; Enable the "www" ligature in every possible major mode
   (ligature-set-ligatures 't '("www"))
   ;; Enable traditional ligature support in eww-mode, if the
@@ -310,17 +301,10 @@
       "://"))
   (global-ligature-mode t))
 
-(use-package modus-themes :straight nil :config (dot/gui-setup))
+(use-package modus-themes :init (dot/gui-setup))
 
-(use-package
-  rainbow-delimiters
-  :straight nil
-  :config (rainbow-delimiters-mode))
+(use-package rainbow-delimiters :init (rainbow-delimiters-mode))
 
-(use-package
-  rainbow-mode
-  :straight nil
-  ;; allow visualizing colors, but don't enable it by default
-  :commands rainbow-mode)
+(use-package rainbow-mode :commands rainbow-mode)
 
 (provide 'init-theme)

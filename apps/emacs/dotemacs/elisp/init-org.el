@@ -57,7 +57,6 @@
 ;; the org package itself
 (use-package
   org
-  :straight nil
   :mode ("\\.org\\'" . org-mode)
   :config (require 'ox-latex)
 
@@ -188,32 +187,20 @@
   ("C-c o a" . org-agenda)
   ("C-c o c" . org-capture))
 
-(use-package
-  org-autolist
-  :straight nil
-  :hook (org-mode . org-autolist-mode))
+(use-package org-autolist :hook (org-mode . org-autolist-mode))
 
 ;; set some better icons
 (use-package
   org-superstar
-  :straight nil
   :hook (org-mode . (lambda () (org-superstar-mode 1)))
   :config (setq org-superstar-headline-bullets-list '("◉" "○" "✸" "✿" "⁖")))
 
-(use-package
-  org-download
-  :straight nil
-  :after (org)
-  :config (org-download-enable))
+(use-package org-download :after (org) :config (org-download-enable))
 
-(use-package
-  org-re-reveal
-  :straight nil
-  :config (setq org-re-reveal-history t))
+(use-package org-re-reveal :config (setq org-re-reveal-history t))
 
 (use-package
   org-present
-  :straight nil
   :hook
   (
     (org-present-mode
@@ -233,6 +220,6 @@
         (hide-mode-line-mode -1)
         (org-present-read-write)))))
 
-(use-package ox-pandoc :straight nil)
+(use-package ox-pandoc)
 
 (provide 'init-org)

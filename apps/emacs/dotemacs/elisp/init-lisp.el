@@ -11,7 +11,6 @@
 
 (use-package
   cider
-  :straight nil
   :config (setq cider-repl-display-help-banner nil)
   :bind
   (:map
@@ -19,14 +18,15 @@
     ("<up>" . cider-repl-previous-input)
     ("<down>" . cider-repl-history-forward)))
 
-(use-package comint :straight (:type built-in))
+(use-package clojure-mode :mode "\\.bb\\'")
 
-(use-package dash :straight (:type built-in))
+(use-package comint)
+
+(use-package dash)
 
 (use-package
   ielm
   :after (comint)
-  :straight (:type built-in)
   :config (advice-add 'ielm-send-input :after 'dot/ielm-write-history)
   :hook
   ((ielm-mode .eldoc-mode)
@@ -43,7 +43,6 @@
 
 (use-package
   lispy
-  :straight (:type built-in)
   :hook
   ((emacs-lisp-mode . (lambda () (lispy-mode 1)))
     (clojure-mode . (lambda () (lispy-mode 1)))))

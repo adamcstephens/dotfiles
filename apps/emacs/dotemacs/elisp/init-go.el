@@ -1,3 +1,3 @@
-(use-package go-ts-mode :straight nil :mode "\\.go\\'")
+(use-package go-ts-mode :mode "\\.go\\'")
 
 (provide 'init-go)

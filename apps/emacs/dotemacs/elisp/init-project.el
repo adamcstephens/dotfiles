@@ -20,8 +20,7 @@ project are filtered out."
 
 (use-package
   direnv
-  :straight nil
-  :config (direnv-mode)
+  :init (direnv-mode)
   ;; don't display loaded env message
   (setq direnv-always-show-summary nil)
   ;; don't display blocked env message
@@ -29,7 +28,6 @@ project are filtered out."
 
 (use-package
   project
-  :straight (:type built-in)
   :init (setq project-switch-commands #'project-find-file)
   :bind
   (("s-f" . project-find-file)

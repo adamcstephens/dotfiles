@@ -1,3 +1,3 @@
-(use-package haskell-mode :straight nil :mode "\\.hs\\'")
+(use-package haskell-mode :mode "\\.hs\\'")
 
 (provide 'init-haskell)

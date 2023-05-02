@@ -1,6 +1,5 @@
 (use-package
   magit
-  :straight nil
   :commands git-commit-mode
   :bind (("C-c g" . magit-file-dispatch))
   :hook (focus-in . magit-refresh)
@@ -10,8 +9,7 @@
 
 (use-package
   diff-hl
-  :straight nil
-  :config
+  :init
   (require 'diff-hl-margin)
   (global-diff-hl-mode)
   (diff-hl-margin-mode)
@@ -27,7 +25,6 @@
 
 (use-package
   git-auto-commit-mode
-  :straight nil
   :config
   (setq gac-automatically-push-p t)
   (setq-default gac-debounce-interval 6000))

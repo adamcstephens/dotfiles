@@ -1,3 +1,3 @@
-(use-package nix-mode :straight nil :mode "\\.nix\\'")
+(use-package nix-mode :mode "\\.nix\\'")
 
 (provide 'init-nix)

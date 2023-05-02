@@ -91,8 +91,7 @@
 (use-package
   meow
   :disabled
-  :straight nil
-  :config (dot/meow-setup) (meow-global-mode 1)
+  :init (dot/meow-setup) (meow-global-mode 1)
   ;; use system clipboard
   (setq meow-use-clipboard t)
   ;; reduce delay to avoid spurious commands
@@ -101,8 +100,7 @@
 (use-package
   boon
   :disabled
-  :straight nil
-  :config (require 'boon-qwerty)
+  :init (require 'boon-qwerty)
   (boon-mode) ;; to enable boon everywhere
   ;; :bind (:boon-command-map ("r" . consult-line)))
   )

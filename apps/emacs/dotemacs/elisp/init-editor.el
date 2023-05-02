@@ -36,19 +36,14 @@ the cursor by ARG lines."
 
 (use-package
   avy
-  :straight (:type built-in)
-  :config (avy-setup-default)
-  :bind (("s-l" . avy-goto-line) ("C-c C-j" . avy-resume)))
+  :init (avy-setup-default)
+  :bind (("s-g" . avy-goto-line) ("C-c C-j" . avy-resume)))
 
-(use-package
-  clipetty
-  :straight (:type built-in)
-  :config (global-clipetty-mode 1))
+(use-package clipetty :init (global-clipetty-mode 1))
 
 (use-package
   dirvish
-  :straight (:type built-in)
-  :config
+  :init
   (dirvish-override-dired-mode)
   (setq dirvish-attributes
     '
@@ -81,27 +76,19 @@ the cursor by ARG lines."
     ("M-e" . dirvish-emerge-menu)
     ("M-j" . dirvish-fd-jump)))
 
-(use-package
-  editorconfig
-  :straight (:type built-in)
-  :config (editorconfig-mode 1))
+(use-package editorconfig :init (editorconfig-mode 1))
 
-(use-package
-  expand-region
-  :straight (:type built-in)
-  :bind ("C-=" . er/expand-region))
+(use-package expand-region :bind ("C-=" . er/expand-region))
 
 (use-package
   flyspell
-  :straight (:type built-in)
   :custom
   (ispell-program-name "aspell")
   (aspell-dictionary "en_US")
-  :hook (org-mode . flyspell-mode))
+  :hook (text-mode . flyspell-mode))
 
 (use-package
   flyspell-correct
-  :straight (:type built-in)
   :after flyspell
   :bind
   (:map
@@ -109,9 +96,10 @@ the cursor by ARG lines."
     ("C-;" . flyspell-correct-wrapper)
     ("[down-mouse-3]" . flyspell-correct-word)))
 
+(use-package hideshow :hook (prog-mode . hs-minor-mode))
+
 (use-package
   move-dup
-  :straight (:type built-in)
   :bind
   (("M-<up>" . move-dup-move-lines-up)
     ("M-S-<up>" . move-dup-duplicate-up)
@@ -120,7 +108,6 @@ the cursor by ARG lines."
 
 (use-package
   mwim
-  :straight (:type built-in)
   :init
   (require 'better-bw-word)
   (global-unset-key (kbd "C-a"))
@@ -140,19 +127,16 @@ the cursor by ARG lines."
 
 (use-package
   olivetti
-  :straight (:type built-in)
   :custom
   (olivetti-margin-width 5)
   (olivetti-style nil))
 
 (use-package
   persistent-scratch
-  :straight (:type built-in)
-  :config (persistent-scratch-autosave-mode 1))
+  :init (persistent-scratch-autosave-mode 1))
 
 (use-package
   run-command
-  :straight (:type built-in)
   :bind ("C-c c" . run-command)
   :config
   (defun dot/run-command-recipes ()
@@ -174,18 +158,13 @@ the cursor by ARG lines."
 
 (use-package
   substitute
-  :straight (:type built-in)
   :config (setq substitute-highlight t)
   :bind ("M-# b" . substitute-target-in-buffer))
 
-(use-package
-  transpose-frame
-  :straight (:type built-in)
-  :commands transpose-frame)
+(use-package transpose-frame :commands transpose-frame)
 
 (use-package
   undo-fu
-  :straight (:type built-in)
   :bind
   (("C-x u" . undo-fu-only-undo)
     ("C-r" . undo-fu-only-redo)
@@ -193,23 +172,18 @@ the cursor by ARG lines."
     ("C-_" . undo-fu-only-undo)
     ("C-/" . undo-fu-only-undo)))
 
-(use-package
-  undo-fu-session
-  :straight (:type built-in)
-  :config (undo-fu-session-global-mode))
+(use-package undo-fu-session :init (undo-fu-session-global-mode))
 
-(use-package vundo :straight (:type built-in))
+(use-package vundo)
 
 (use-package
   whitespace
-  :straight (:type built-in)
   :config (setq whitespace-style '(face tabs trailing))
   :init (global-whitespace-mode)
   :hook (before-save . whitespace-cleanup))
 
 (use-package
   whole-line-or-region
-  :straight (:type built-in)
-  :config (whole-line-or-region-global-mode))
+  :init (whole-line-or-region-global-mode))
 
 (provide 'init-editor)

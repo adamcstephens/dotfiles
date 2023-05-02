@@ -7,14 +7,11 @@
 
 (use-package
   eldoc-box
-  :straight nil
   :custom (eldoc-box-clear-with-C-g t)
   :hook (prog-mode . eldoc-box-hover-at-point-mode))
 
 (use-package
   eglot
-  :straight (:type built-in)
-  :defer t
   :commands (eglot eglot-ensure)
   :hook
   ((bash-ts-mode . eglot-ensure)
@@ -50,7 +47,6 @@
 
 (use-package
   treesit-auto
-  :straight nil
   :config
   (setq treesit-auto-install nil)
   (global-treesit-auto-mode))

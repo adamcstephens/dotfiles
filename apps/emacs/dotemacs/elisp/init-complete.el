@@ -1,6 +1,5 @@
 (use-package
   cape
-  :straight (:type built-in)
   ;; Add extensions
   ;; Bind dedicated completion commands
   ;; Alternative prefix keys: C-c p, M-p, M-+, ...
@@ -47,11 +46,10 @@
     (lambda ()
       (add-to-list 'completion-at-point-functions #'cape-yasnippet))))
 
-(use-package chatgpt-shell :straight nil :commands (chatgpt-shell))
+(use-package chatgpt-shell :commands (chatgpt-shell))
 
 (use-package
   consult
-  :straight (:type built-in)
   :init (require 'consult-xref)
   :bind
   ( ;; C-c bindings (mode-specific-map)
@@ -134,7 +132,6 @@
   ;; Configure other variables and modes in the :config section,
   ;; after lazily loading the package.
   :config
-
   ;; Optionally configure preview. The default value
   ;; is 'any, such that any key triggers the preview.
   ;; (setq consult-preview-key 'any)
@@ -181,15 +178,10 @@
     ("M-f" . 'copilot-accept-completion-by-word)
     ("M-<return>" . 'copilot-accept-completion-by-line)))
 
-(use-package
-  corfu
-  :straight (:type built-in)
-  :config (global-corfu-mode)
-  :custom (corfu-auto t))
+(use-package corfu :init (global-corfu-mode) :custom (corfu-auto t))
 
 (use-package
   embark
-  :straight (:type built-in)
   ;; jump from completion to other tasks
   :bind
   (("M-o" . embark-act)
@@ -210,32 +202,25 @@
 (use-package
   embark-consult
   ;; Consult users will also want the embark-consult package.
-  :straight (:type built-in)
   :hook (embark-collect-mode . consult-preview-at-point-mode))
 
-(use-package
-  marginalia
-  ;; Enable rich annotations using the Marginalia package
-  :straight (:type built-in)
-  :config (marginalia-mode))
+(use-package marginalia :init (marginalia-mode))
 
 (use-package
   orderless
-  :straight (:type built-in)
-  :custom
-  (completion-styles '(orderless basic))
+  :custom (completion-styles '(orderless basic))
   (completion-category-overrides
     '((file (styles basic partial-completion)))))
 
 (use-package
   savehist
-  :straight (:type built-in)
   ;; Persist history over Emacs restarts. Vertico sorts by history position.
   :init (savehist-mode))
 
 (use-package
   ;; completion UI
   vertico
+  :straight t
   :init (vertico-mode)
   :bind (:map vertico-map ("C-<backspace>" . vertico-directory-up))
 
@@ -252,22 +237,12 @@
   ;; (setq vertico-cycle t)
   )
 
-(use-package wgrep :straight (:type built-in))
+(use-package wgrep)
 
-(use-package
-  which-key
-  ;; discover shortcuts easier in the minibuffer
-  :straight (:type built-in)
-  :config (which-key-mode))
+(use-package which-key :init (which-key-mode))
 
-(use-package
-  yasnippet
-  :straight (:type built-in)
-  :config (yas-global-mode 1))
+(use-package yasnippet :init (yas-global-mode 1))
 
-(use-package
-  yasnippet-snippets
-  :straight (:type built-in)
-  :after yasnippet)
+(use-package yasnippet-snippets :after yasnippet)
 
 (provide 'init-complete)

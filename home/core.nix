@@ -101,6 +101,7 @@
 
     # global editor packages
     pkgs.alejandra
+    inputs.sandbox.packages.${pkgs.system}.cljfmt
     inputs.nil.packages.${pkgs.system}.nil
     pkgs.shfmt
 

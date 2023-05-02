@@ -1,3 +1,3 @@
-(use-package ssh-config-mode :straight nil)
+(use-package ssh-config-mode)
 
 (provide 'init-ssh)

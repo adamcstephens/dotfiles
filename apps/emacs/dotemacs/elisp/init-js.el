@@ -18,9 +18,6 @@
     (t
       nil)))
 
-(use-package
-  typescript-ts-mode
-  :straight (:type built-in)
-  :mode "\\.ts\\'")
+(use-package typescript-ts-mode :mode "\\.ts\\'")
 
 (provide 'init-js)

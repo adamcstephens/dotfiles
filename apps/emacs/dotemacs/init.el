@@ -19,7 +19,10 @@
 
 ;; make straight.el default
 (straight-use-package 'use-package)
-(setq straight-use-package-by-default t)
+
+(require 'use-package)
+;; (require 'use-package-ensure)
+;; (setq use-package-always-ensure t)
 
 ;; load all elisp files
 (add-to-list

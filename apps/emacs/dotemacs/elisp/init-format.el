@@ -11,8 +11,8 @@
 
 (use-package
   apheleia
-  :straight nil
   :config
+  (require 'apheleia-core)
   (setf (alist-get 'shfmt apheleia-formatters) '("shfmt" "-i" "2"))
   (add-to-list
     'apheleia-formatters
@@ -26,7 +26,6 @@
 
 (use-package
   elisp-autofmt
-  :straight nil
   :hook
   ((emacs-lisp-mode . elisp-autofmt-mode)
     (emacs-lisp-mode . dot/elisp-format-local)
