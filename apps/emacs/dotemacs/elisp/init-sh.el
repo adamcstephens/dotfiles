@@ -1,6 +1,6 @@
 (use-package bash-ts-mode :straight (:type built-in) :mode "\\.sh\\'")
 
-(use-package fish-mode :mode ("\\.fish\\'" . fish-mode))
+(use-package fish-mode :straight nil :mode ("\\.fish\\'" . fish-mode))
 
 (use-package
   nushell-mode

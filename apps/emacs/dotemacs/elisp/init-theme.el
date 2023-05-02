@@ -103,21 +103,27 @@
     (switch-to-buffer (current-buffer))
     (local-set-key (kbd "q") 'kill-this-buffer)))
 
-(use-package all-the-icons)
+(use-package all-the-icons :straight nil)
 
 (use-package
   auto-dark
+  :straight nil
   :after (modus-themes)
   :config
   (setq auto-dark-dark-theme 'modus-vivendi)
   (setq auto-dark-light-theme 'modus-operandi))
 
-(use-package diff-ansi :commands (diff-ansi-mode diff-ansi-buffer))
+(use-package
+  diff-ansi
+  :straight nil
+  :commands (diff-ansi-mode diff-ansi-buffer))
 
 (use-package
   doom-modeline
-  :config (setq doom-modeline-buffer-encoding 'nondefault)
-  :init (doom-modeline-mode 1))
+  :straight nil
+  :config
+  (setq doom-modeline-buffer-encoding 'nondefault)
+  (doom-modeline-mode 1))
 
 ;; (defun dot/project-dashboard ()
 ;;   (interactive)
@@ -157,6 +163,7 @@
 
 (use-package
   ligature
+  :straight nil
   :config
   ;; Enable the "www" ligature in every possible major mode
   (ligature-set-ligatures 't '("www"))
@@ -303,12 +310,16 @@
       "://"))
   (global-ligature-mode t))
 
-(use-package modus-themes :init (dot/gui-setup))
+(use-package modus-themes :straight nil :config (dot/gui-setup))
 
-(use-package rainbow-delimiters :init (rainbow-delimiters-mode))
+(use-package
+  rainbow-delimiters
+  :straight nil
+  :config (rainbow-delimiters-mode))
 
 (use-package
   rainbow-mode
+  :straight nil
   ;; allow visualizing colors, but don't enable it by default
   :commands rainbow-mode)
 

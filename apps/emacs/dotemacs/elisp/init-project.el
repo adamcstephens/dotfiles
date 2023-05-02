@@ -20,6 +20,7 @@ project are filtered out."
 
 (use-package
   direnv
+  :straight nil
   :config (direnv-mode)
   ;; don't display loaded env message
   (setq direnv-always-show-summary nil)

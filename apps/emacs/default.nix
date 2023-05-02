@@ -61,7 +61,9 @@
 
   emacsWithPackages = (pkgs.emacsPackagesFor emacsPackage).emacsWithPackages (epkgs:
     (with epkgs.melpaPackages; [
+      all-the-icons
       apheleia
+      auto-dark
       avy
       cape
       chatgpt-shell
@@ -69,8 +71,11 @@
       clipetty
       consult
       dash
+      diff-ansi
       diff-hl
+      direnv
       dirvish
+      doom-modeline
       editorconfig
       eldoc-box
       elisp-autofmt
@@ -78,16 +83,20 @@
       embark
       embark-consult
       expand-region
+      fish-mode
       flyspell-correct
       git-auto-commit-mode
       haskell-mode
       hide-mode-line
       just-mode
+      ligature
       lispy
       magit
       marginalia
       markdown-mode
+      modus-themes
       move-dup
+      multi-vterm
       mwim
       nim-mode
       nix-mode
@@ -101,7 +110,9 @@
       org-superstar
       ox-pandoc
       persistent-scratch
+      rainbow-delimiters
       run-command
+      ssh-config-mode
       transpose-frame
       treesit-auto
       undo-fu
@@ -117,6 +128,7 @@
     ++ (with epkgs.elpaPackages; [
       corfu
       org
+      rainbow-mode
       substitute
       vertico
       vundo

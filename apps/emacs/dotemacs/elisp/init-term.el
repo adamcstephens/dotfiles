@@ -1,5 +1,6 @@
 (use-package
   vterm
+  :straight nil
   :bind
   (:map
     vterm-mode-map
@@ -11,6 +12,7 @@
 
 (use-package
   multi-vterm
+  :straight nil
   :bind
   ("C-c v" . multi-vterm-project)
   ("M-V" . multi-vterm-project))

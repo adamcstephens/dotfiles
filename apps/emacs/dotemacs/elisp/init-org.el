@@ -188,7 +188,10 @@
   ("C-c o a" . org-agenda)
   ("C-c o c" . org-capture))
 
-(use-package org-autolist :hook (org-mode . org-autolist-mode))
+(use-package
+  org-autolist
+  :straight nil
+  :hook (org-mode . org-autolist-mode))
 
 ;; set some better icons
 (use-package
