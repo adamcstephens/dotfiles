@@ -9,8 +9,7 @@
 (defun dot/ielm-write-history (&rest _args)
   (with-file-modes #o600(comint-write-input-ring)))
 
-(use-package
-  cider
+(use-package cider
   :config (setq cider-repl-display-help-banner nil)
   :bind
   (:map
@@ -24,8 +23,7 @@
 
 (use-package dash)
 
-(use-package
-  ielm
+(use-package ielm
   :after (comint)
   :config (advice-add 'ielm-send-input :after 'dot/ielm-write-history)
   :hook
@@ -41,9 +39,7 @@
    ("<down>" . comint-next-input)
    ("<up>" . comint-previous-input)))
 
-(use-package
-  lispy
-  :config
+(use-package lispy
   :hook
   ((emacs-lisp-mode . (lambda () (lispy-mode 1)))
    (clojure-mode . (lambda () (lispy-mode 1)))))
