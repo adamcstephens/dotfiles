@@ -1,5 +1,4 @@
 (("cape-yasnippet" . "a13e6c3260ad83da21635abd54a537ebf61286aa")
- ("compat" . "cd28402790821ce95ea4c3ea0de5c2d9dcfce31f")
  ("copilot.el" . "7cb7beda89145ccb86a4324860584545ec016552")
  ("dash.el" . "c30c6bea49b79d966c92ce606fea53dea647b959")
  ("editorconfig-emacs" . "cd5799a6b728cfb9995605cdceffb5bf7c97622d")
@@ -13,6 +12,5 @@
  ("nongnu-elpa" . "0120f3dfe80cffe0c3016080d9205d12be3b741d")
  ("s.el" . "dda84d38fffdaf0c9b12837b504b402af910d01d")
  ("straight.el" . "039e5c9a9b5c00749602afb41341e9e77ba09429")
- ("use-package" . "a6e856418d2ebd053b34e0ab2fda328abeba731c")
- ("vertico" . "dd8eb3aa3d0d048cc0e1bc455f42a12a4162f5bb"))
+ ("use-package" . "a6e856418d2ebd053b34e0ab2fda328abeba731c"))
 :gamma

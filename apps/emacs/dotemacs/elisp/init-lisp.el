@@ -14,9 +14,9 @@
   :config (setq cider-repl-display-help-banner nil)
   :bind
   (:map
-    cider-repl-mode-map
-    ("<up>" . cider-repl-previous-input)
-    ("<down>" . cider-repl-history-forward)))
+   cider-repl-mode-map
+   ("<up>" . cider-repl-previous-input)
+   ("<down>" . cider-repl-history-forward)))
 
 (use-package clojure-mode :mode "\\.bb\\'")
 
@@ -30,21 +30,22 @@
   :config (advice-add 'ielm-send-input :after 'dot/ielm-write-history)
   :hook
   ((ielm-mode .eldoc-mode)
-    (ielm-mode . hide-mode-line-mode)
-    (ielm-mode . dot/ielm-init-history)
-    (ielm-mode . lispy-mode))
+   (ielm-mode . hide-mode-line-mode)
+   (ielm-mode . dot/ielm-init-history)
+   (ielm-mode . lispy-mode))
   :bind
   (:map
-    inferior-emacs-lisp-mode-map
-    ("C-l" . comint-clear-buffer)
-    ("C-r" . comint-dynamic-list-input-ring)
-    ("<down>" . comint-next-input)
-    ("<up>" . comint-previous-input)))
+   inferior-emacs-lisp-mode-map
+   ("C-l" . comint-clear-buffer)
+   ("C-r" . comint-dynamic-list-input-ring)
+   ("<down>" . comint-next-input)
+   ("<up>" . comint-previous-input)))
 
 (use-package
   lispy
+  :config
   :hook
   ((emacs-lisp-mode . (lambda () (lispy-mode 1)))
-    (clojure-mode . (lambda () (lispy-mode 1)))))
+   (clojure-mode . (lambda () (lispy-mode 1)))))
 
 (provide 'init-lisp)
