@@ -303,7 +303,9 @@
 
 (use-package modus-themes :init (dot/gui-setup))
 
-(use-package rainbow-delimiters :init (rainbow-delimiters-mode))
+(use-package
+  rainbow-delimiters
+  :hook (prog-mode . rainbow-delimiters-mode))
 
 (use-package rainbow-mode :commands rainbow-mode)
 
