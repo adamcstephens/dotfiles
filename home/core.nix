@@ -14,6 +14,7 @@
     ../apps/bat
     ../apps/btop
     ../apps/editorconfig
+    ../apps/emacs
     ../apps/fish
     ../apps/git
     ../apps/helix

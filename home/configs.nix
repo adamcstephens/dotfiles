@@ -4,7 +4,6 @@
       gui = true;
       extraModules = [
         ../apps/goldencheetah
-        ../apps/emacs
         ../apps/nix/nixpkgs-dev.nix
         {
           dotfiles.gui.dpi = 148;
@@ -15,7 +14,6 @@
     bonk = {
       gui = true;
       extraModules = [
-        ../apps/emacs
         {
           dotfiles.gui.dpi = 148;
         }
@@ -47,38 +45,15 @@
       ];
     };
 
-    funk = {
-      extraModules = [
-        ../apps/emacs
-      ];
-    };
-
     EMAT-C02G44CPQ05P = {
       username = "astephe9";
       system = "aarch64-darwin";
-      extraModules = [
-        ../apps/emacs
-      ];
-    };
-
-    lxd1 = {
-      extraModules = [
-        ../apps/emacs
-      ];
-    };
-
-    silver = {
-      system = "aarch64-linux";
-      extraModules = [
-        ../apps/emacs
-      ];
     };
 
     think = {
       gui = true;
       extraModules = [
         ../apps/goldencheetah
-        ../apps/emacs
         ../apps/kmonad
         {
           dotfiles.gui.dpi = 196;
