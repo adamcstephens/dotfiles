@@ -16,10 +16,9 @@
   (dolist
       (formatter-cmd
        '
-       ((shfmt . ("shfmt" "-i" "2"))
-        (just-fmt
-         .
-         ("just" "--unstable" "--fmt" "--justfile" filepath))))
+       ((just-fmt . ("just" "--unstable" "--fmt" "--justfile" filepath))
+        (nixfmt . ("alejandra"))
+        (shfmt . ("shfmt" "-i" "2"))))
     (add-to-list #'apheleia-formatters formatter-cmd))
 
   (dolist
@@ -34,6 +33,7 @@
    (emacs-lisp-mode . apheleia-mode)
    (fish-mode . apheleia-mode)
    (just-mode . apheleia-mode)
+   (nix-mode . apheleia-mode)
    (yaml-ts-mode . apheleia-mode)))
 
 (provide 'init-format)

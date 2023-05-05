@@ -22,7 +22,7 @@
     .
     (lambda () (add-hook 'before-save-hook 'dot/eglot-goimports)))
    (haskell-mode . dot/eglot-mode-setup)
-   (nix-mode . dot/eglot-mode-setup)
+   (nix-mode . eglot-ensure)
    (nim-mode . eglot-ensure)
    (tsx-ts-mode . dot/eglot-mode-setup)
    (typescript-mode . dot/eglot-mode-setup)
