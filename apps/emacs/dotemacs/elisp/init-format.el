@@ -26,13 +26,11 @@
       (formatter-mode
        '
        ((just-mode . just-fmt)
-        (emacs-lisp-mode . lisp-indent)
-        (clojure-mode . lisp-indent)))
+        (emacs-lisp-mode . lisp-indent)))
     (add-to-list #'apheleia-mode-alist formatter-mode))
 
   :hook
   ((bash-ts-mode . apheleia-mode)
-   (clojure-mode . apheleia-mode)
    (emacs-lisp-mode . apheleia-mode)
    (fish-mode . apheleia-mode)
    (just-mode . apheleia-mode)

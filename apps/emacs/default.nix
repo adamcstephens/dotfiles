@@ -10,10 +10,12 @@
   extraBins = [
     pkgs.alejandra
     aspell
+    pkgs.clojure-lsp
     pkgs.coreutils
     pkgs.curl
     pkgs.diffutils
     pkgs.fd
+    pkgs.fzf
     pkgs.git
     pkgs.texlive.combined.scheme-full
     pkgs.graphicsmagick
