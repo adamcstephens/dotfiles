@@ -84,7 +84,6 @@
     pkgs.doggo
     pkgs.du-dust
     pkgs.fd
-    pkgs.fzf
     pkgs.gh
     pkgs.htop
     pkgs.jq
@@ -114,7 +113,6 @@
   };
 
   programs = {
-    fzf.enable = true;
     direnv.enable = true;
     direnv.nix-direnv.enable = true;
     zoxide = {
