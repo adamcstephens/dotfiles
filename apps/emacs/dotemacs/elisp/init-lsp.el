@@ -8,7 +8,7 @@
 (use-package
   eldoc-box
   :custom (eldoc-box-clear-with-C-g t)
-  :hook (prog-mode . eldoc-box-hover-at-point-mode))
+  :hook (prog-mode . eldoc-box-hover-mode))
 
 (use-package
   eglot

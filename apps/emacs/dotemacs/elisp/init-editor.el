@@ -145,14 +145,15 @@ the cursor by ARG lines."
         :command-name "nix-flake-update"
         :command-line "nix flake update"
         :display "nix flake update")
-      (list
-        :command-name "bb-repl"
-        :command-line "bb --nrepl-server"
-        :display "Babashka REPL"
-        :hook
-        (lambda ()
-          (sleep-for 0.25)
-          (cider-connect-clj (list :host "localhost" :port 1667))))))
+      (when-let
+        (
+          (project-dir
+            (locate-dominating-file default-directory "mix.exs")))
+        (list
+          :command-name "phx.server"
+          :command-line "mix phx.server"
+          :display "Phoenix Server"
+          :working-dir project-dir))))
   (add-to-list 'run-command-recipes 'dot/run-command-recipes)
   :custom (run-command-default-runner 'run-command-runner-vterm))
 

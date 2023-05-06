@@ -105,6 +105,9 @@
   ;; replace region with yank
   (delete-selection-mode 1)
 
+  ;; screens are bigger, but we still want code to be reasonable in length
+  (set-fill-column 120)
+
   ;;
   ;; vertico recommendations
   ;;
@@ -112,18 +115,12 @@
   ;; We display [CRM<separator>], e.g., [CRM,] if the separator is a comma.
   (defun crm-indicator (args)
     (cons
-      (format "[CRM%s] %s"
-        (replace-regexp-in-string
-          "\\`\\[.*?]\\*\\|\\[.*?]\\*\\'"
-          ""
-          crm-separator)
-        (car args))
+      (format "[CRM%s] %s" (replace-regexp-in-string "\\`\\[.*?]\\*\\|\\[.*?]\\*\\'" "" crm-separator) (car args))
       (cdr args)))
   (advice-add #'completing-read-multiple :filter-args #'crm-indicator)
 
   ;; Do not allow the cursor in the minibuffer prompt
-  (setq minibuffer-prompt-properties
-    '(read-only t cursor-intangible t face minibuffer-prompt))
+  (setq minibuffer-prompt-properties '(read-only t cursor-intangible t face minibuffer-prompt))
 
   ;; allow running more minibuffers from a first
   (setq enable-recursive-minibuffers t)
@@ -160,10 +157,7 @@
   (define-key minibuffer-local-map (kbd "C-j") 'next-line)
   (define-key minibuffer-local-map (kbd "C-k") 'previous-line)
   (define-key minibuffer-local-map (kbd "C-u") 'kill-whole-line)
-  (define-key
-    minibuffer-local-map
-    (kbd "C-<backspace>")
-    'backward-kill-word)
+  (define-key minibuffer-local-map (kbd "C-<backspace>") 'backward-kill-word)
 
   (global-set-key (kbd "<mouse-8>") 'previous-buffer)
   (global-set-key (kbd "<mouse-9>") 'next-buffer)
@@ -178,8 +172,6 @@
     ;; make scripts executable
     (after-save . executable-make-buffer-file-executable-if-script-p)
     ;; enable hl-line but not globally since it's flaky in vterm
-    (prog-mode . hl-line-mode)
-    (text-mode . hl-line-mode)
-    (prog-mode . (lambda () (display-line-numbers-mode t)))))
+    (prog-mode . hl-line-mode) (text-mode . hl-line-mode) (prog-mode . (lambda () (display-line-numbers-mode t)))))
 
 (provide 'init-emacs)

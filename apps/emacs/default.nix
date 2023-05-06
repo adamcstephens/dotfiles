@@ -80,6 +80,7 @@
       doom-modeline
       editorconfig
       eldoc-box
+      elisp-autofmt
       elixir-ts-mode
       embark
       embark-consult
