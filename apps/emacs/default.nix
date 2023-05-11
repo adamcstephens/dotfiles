@@ -67,6 +67,7 @@
       apheleia
       auto-dark
       avy
+      bbww
       cape
       chatgpt-shell
       cider
