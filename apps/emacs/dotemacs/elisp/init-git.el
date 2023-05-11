@@ -27,6 +27,7 @@
   git-auto-commit-mode
   :config
   (setq gac-automatically-push-p t)
+  (setq gac-commit-additional-flag "--no-gpg-sign")
   (setq-default gac-debounce-interval 6000))
 
 ;; load diff mode on cli commit

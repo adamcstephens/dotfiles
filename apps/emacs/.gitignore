@@ -25,3 +25,4 @@ transient/
 undo-fu-session/
 var/
 .emacs.desktop
+.org-id-locations
