@@ -208,8 +208,8 @@ in {
       "x-scheme-handler/chrome" = ["firefox.desktop"];
       "x-scheme-handler/http" = ["firefox.desktop"];
       "x-scheme-handler/https" = ["firefox.desktop"];
-      "video/quicktime"= ["feh.desktop"];
-      "image/jpeg"=["feh.desktop"];
+      "video/quicktime" = ["feh.desktop"];
+      "image/jpeg" = ["feh.desktop"];
     };
   };
 }
