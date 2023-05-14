@@ -5,7 +5,7 @@
 }: let
   script = pkgs.writeScript "ramclone-nixpkgs" ''
     #!${pkgs.bash}/bin/bash
-    export PATH=${lib.makeBinPath [pkgs.bash pkgs.coreutils pkgs.direnv pkgs.git pkgs.rsync]}
+    export PATH=${lib.makeBinPath [pkgs.bash pkgs.coreutils pkgs.direnv pkgs.gh pkgs.git pkgs.rsync]}
     ${../../bin/ramclone-nixpkgs.sh} || true
   '';
 in {

@@ -35,6 +35,13 @@ project are filtered out."
     ("C-c p p" . project-switch-project)
     ("C-c p d" . project-dired)))
 
+(use-package
+  project-rootfile
+  :straight t
+  :init
+  (add-to-list 'project-find-functions #'project-rootfile-try-detect
+    t))
+
 ;; (use-package workroom)
 
 ;; (use-package

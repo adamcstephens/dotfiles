@@ -21,6 +21,13 @@
           pkgs.nvd
         ];
       };
+      elixir = pkgs.mkShell {
+        packages = [
+          pkgs.elixir
+          pkgs.elixir-ls
+          pkgs.inotify-tools
+        ];
+      };
       go = pkgs.mkShell {
         packages = [
           pkgs.delve
@@ -56,6 +63,7 @@
       nixpkgs = pkgs.mkShellNoCC {
         packages =
           [
+            pkgs.nix-index
             pkgs.nix-update
             pkgs.nixpkgs-review
             pkgs.deadnix

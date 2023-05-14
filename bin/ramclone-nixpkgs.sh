@@ -25,3 +25,5 @@ git fetch upstream
 git switch master --force
 git reset --hard upstream/master
 git pull --set-upstream upstream master
+
+gh repo set-default nixos/nixpkgs
