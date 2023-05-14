@@ -15,7 +15,7 @@
 
       font = lib.mkOption {
         type = lib.types.str;
-        default = "JetBrainsMono Nerd Font";
+        default = "JetBrains Mono";
       };
 
       insecure = lib.mkEnableOption (lib.mkDoc "Insecure GUI disables locking");

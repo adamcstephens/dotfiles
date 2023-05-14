@@ -87,7 +87,6 @@ in {
       inputs.apple-fonts.packages.${pkgs.system}.sf-pro
       pkgs.source-sans
       pkgs.vegur
-      (pkgs.nerdfonts.override {fonts = ["JetBrainsMono" "NerdFontsSymbolsOnly"];})
 
       configure-gtk
       pkgs.glib
