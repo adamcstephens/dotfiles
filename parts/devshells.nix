@@ -8,28 +8,18 @@
     devShells = {
       default = pkgs.mkShellNoCC {
         name = "dots";
-        packages =
-          [
-            pkgs.alejandra
-            pkgs.babashka
-            inputs.sandbox.packages.${pkgs.system}.cljfmt
-            pkgs.curl
-            pkgs.deadnix
-            pkgs.git-subrepo
-            pkgs.just
-            inputs.nil.packages.${pkgs.system}.nil
-            pkgs.nodePackages.prettier
-            pkgs.nvd
-          ]
-          ++ (lib.optionals pkgs.stdenv.isLinux
-            [
-              (pkgs.ghc.withPackages (ps: [
-                ps.haskell-language-server
-                ps.ormolu
-                ps.xmonad
-                ps.xmonad-contrib
-              ]))
-            ]);
+        packages = [
+          pkgs.alejandra
+          pkgs.babashka
+          inputs.sandbox.packages.${pkgs.system}.cljfmt
+          pkgs.curl
+          pkgs.deadnix
+          pkgs.git-subrepo
+          pkgs.just
+          inputs.nil.packages.${pkgs.system}.nil
+          pkgs.nodePackages.prettier
+          pkgs.nvd
+        ];
       };
       go = pkgs.mkShell {
         packages = [
@@ -77,6 +67,16 @@
       python = pkgs.mkShellNoCC {
         packages = [
           (pkgs.python3.withPackages (py: [py.black py.hexdump py.paramiko]))
+        ];
+      };
+      xmonad = pkgs.mkShellNoCC {
+        packages = [
+          (pkgs.ghc.withPackages (ps: [
+            ps.haskell-language-server
+            ps.ormolu
+            ps.xmonad
+            ps.xmonad-contrib
+          ]))
         ];
       };
     };
