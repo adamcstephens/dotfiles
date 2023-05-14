@@ -113,7 +113,10 @@ def set_state_data(target):
 
 
 def get_state_data():
-    current = json.loads(open(state_file).read())
+    try:
+        current = json.loads(open(state_file).read())
+    except FileNotFoundError:
+        return {}
     print(f"Current state: {current}")
     try:
         return current
@@ -126,7 +129,7 @@ def set_dark(target):
 
     if os_name == "Linux":
         set_gtk_theme(target)
-        set_sway_theme(target)
+        # set_sway_theme(target)
         # set_waybar_theme(target)
     elif os_name == "Darwin":
         set_darwin_theme(target)
