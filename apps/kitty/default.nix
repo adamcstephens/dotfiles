@@ -59,7 +59,7 @@
           macos_option_as_alt = "both";
 
           font_size = "13";
-          listen_on = "unix:${TMPDIR}/kitty";
+          listen_on = ''unix:''${TMPDIR}/kitty'';
         }
         else {
           hide_window_decorations = "yes";

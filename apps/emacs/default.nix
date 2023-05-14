@@ -43,28 +43,28 @@
             # fix-window-role.patch
             (pkgs.fetchpatch
               {
-                url = "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/${rev}/patches/emacs-28/fix-window-role.patch";
+                url = "${inputs.emacs-plus}/patches/emacs-28/fix-window-role.patch";
                 sha256 = "sha256-+z/KfsBm1lvZTZNiMbxzXQGRTjkCFO4QPlEK35upjsE=";
               })
 
             # no-frame-refocus-cocoa.patch
             (pkgs.fetchpatch
               {
-                url = "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/${rev}/patches/emacs-28/no-frame-refocus-cocoa.patch";
+                url = "${inputs.emacs-plus}/patches/emacs-28/no-frame-refocus-cocoa.patch";
                 sha256 = "sha256-QLGplGoRpM4qgrIAJIbVJJsa4xj34axwT3LiWt++j/c=";
               })
 
             # poll.patch
             (pkgs.fetchpatch
               {
-                url = "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/${rev}/patches/emacs-29/poll.patch";
+                url = "${inputs.emacs-plus}/patches/emacs-29/poll.patch";
                 sha256 = "sha256-jN9MlD8/ZrnLuP2/HUXXEVVd6A+aRZNYFdZF8ReJGfY=";
               })
 
             # system-appearance.patch
             (pkgs.fetchpatch
               {
-                url = "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/${rev}/patches/emacs-28/system-appearance.patch";
+                url = "${inputs.emacs-plus}/patches/emacs-28/system-appearance.patch";
                 sha256 = "sha256-oM6fXdXCWVcBnNrzXmF0ZMdp8j0pzkLE66WteeCutv8=";
               })
           ]

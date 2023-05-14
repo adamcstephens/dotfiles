@@ -75,6 +75,22 @@
         "type": "github"
       }
     },
+    "emacs-plus": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1683546501,
+        "narHash": "sha256-TKxd5e7W12Mu8Mb1WtL0QREGpDgBlM8UMIgrgK44Sdw=",
+        "owner": "d12frosted",
+        "repo": "homebrew-emacs-plus",
+        "rev": "c28150477651c03b55048f9f3edc82caec861a73",
+        "type": "github"
+      },
+      "original": {
+        "owner": "d12frosted",
+        "repo": "homebrew-emacs-plus",
+        "type": "github"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -496,6 +512,7 @@
         "apple-fonts": "apple-fonts",
         "darwin": "darwin",
         "emacs-overlay": "emacs-overlay",
+        "emacs-plus": "emacs-plus",
         "flake-parts": "flake-parts",
         "home-manager": "home-manager",
         "kmonad": "kmonad",
