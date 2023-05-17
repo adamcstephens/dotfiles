@@ -147,8 +147,6 @@
   ;; Enable indentation+completion using the TAB key.
   (setq tab-always-indent 'complete)
 
-  ;; turn on tab line mode
-  ;; (global-tab-line-mode t)
   (setq display-line-numbers-grow-only t)
 
   ;;
@@ -176,6 +174,8 @@
   (global-set-key (kbd "C-c x") 'scratch-buffer)
 
   (global-set-key (kbd "C-x B") 'switch-to-buffer)
+
+  :bind (("s-t" . tab-new))
 
   :hook
   ((minibuffer-setup . cursor-intangible-mode)

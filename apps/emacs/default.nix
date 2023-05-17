@@ -17,6 +17,7 @@
     pkgs.fd
     pkgs.fzf
     pkgs.git
+    pkgs.groff
     pkgs.texlive.combined.scheme-full
     pkgs.graphicsmagick
     pkgs.multimarkdown
@@ -24,9 +25,9 @@
     pkgs.nodePackages.bash-language-server
     pkgs.nodePackages.mermaid-cli
     pkgs.nodePackages.prettier
-    pkgs.ripgrep
     pkgs.pandoc
     pkgs.python3Minimal
+    pkgs.ripgrep
     pkgs.shellcheck
     pkgs.shfmt
     pkgs.sqlite

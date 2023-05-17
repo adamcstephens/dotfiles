@@ -39,10 +39,7 @@ the cursor by ARG lines."
   :init (avy-setup-default)
   :bind (("s-g" . avy-goto-line) ("C-c C-j" . avy-resume)))
 
-(use-package bbww
-  :config
-  (bbww-mode 1)
-  (bbww-init-global-bindings))
+(use-package bbww :config (bbww-mode 1) (bbww-init-global-bindings))
 
 (use-package clipetty :init (global-clipetty-mode 1))
 

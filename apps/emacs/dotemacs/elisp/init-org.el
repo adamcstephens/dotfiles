@@ -181,6 +181,8 @@
     :override #'dot/org-html--format-image)
   :hook
   (org-mode . (lambda () (display-line-numbers-mode -1)))
+  (org-mode . (lambda () (toggle-truncate-lines -1)))
+  (org-mode . (lambda () (visual-line-mode t)))
   (org-mode . dot/org-slides-export-setup)
   ;; (org-mode . variable-pitch-mode)
   :bind
