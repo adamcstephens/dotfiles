@@ -5,7 +5,8 @@
 
 (defun dot/no-format ()
   (interactive)
-  (remove-hook 'before-save-hook 'eglot-format-buffer t))
+  (remove-hook 'before-save-hook 'eglot-format-buffer t)
+  (apheleia-mode -1))
 
 (defun dot/apheleia-setup ())
 
@@ -16,12 +17,16 @@
   (dolist
     (formatter-cmd
       '
-      ((just-fmt . ("just" "--unstable" "--fmt" "--justfile" filepath))
-        (nixfmt . ("alejandra"))
-        (shfmt . ("shfmt" "-i" "2"))))
+      (
+        (just-fmt
+          .
+          ("just" "--unstable" "--fmt" "--justfile" filepath))
+        (nixfmt . ("alejandra")) (shfmt . ("shfmt" "-i" "2"))))
     (add-to-list #'apheleia-formatters formatter-cmd))
 
-  (dolist (formatter-mode '((just-mode . just-fmt) (emacs-lisp-mode . lisp-indent)))
+  (dolist
+    (formatter-mode
+      '((just-mode . just-fmt) (emacs-lisp-mode . lisp-indent)))
     (add-to-list #'apheleia-mode-alist formatter-mode))
 
   :hook
@@ -38,6 +43,9 @@
     (emacs-lisp-mode . dot/elisp-format-local)
     (yuck-mode . elisp-autofmt-mode)
     (yuck-mode . dot/elisp-format-local))
-  :custom (elisp-autofmt-empty-line-max 1) (elisp-autofmt-on-save-p 'always) (elisp-autofmt-style 'fixed))
+  :custom
+  (elisp-autofmt-empty-line-max 1)
+  (elisp-autofmt-on-save-p 'always)
+  (elisp-autofmt-style 'fixed))
 
 (provide 'init-format)
