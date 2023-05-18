@@ -162,6 +162,7 @@
       pkgs.jetbrains-mono
       pkgs.manrope
       inputs.apple-fonts.packages.${pkgs.system}.sf-pro
+      (pkgs.nerdfonts.override {fonts = ["NerdFontsSymbolsOnly"];})
     ];
   };
 

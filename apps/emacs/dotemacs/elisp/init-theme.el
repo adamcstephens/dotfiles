@@ -24,7 +24,7 @@
   ;; (tab-bar-mode 1)
 
   (set-face-attribute 'default nil
-    :font (font-spec :family "JetBrainsMono Nerd Font")
+    :font (font-spec :family "JetBrains Mono")
     :height (dot/font-height))
   (set-face-attribute 'fixed-pitch nil
     :family (face-attribute 'default :family))
