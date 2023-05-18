@@ -25,6 +25,9 @@ doomemacs:
 fish-bootstrap:
     fish ~/.dotfiles/bin/theme.fish
 
+git-config email:
+    git config -f ~/.gitconfig.local user.email {{ email }}
+
 intel-check-cstate:
     sudo cat /sys/kernel/debug/pmc_core/package_cstate_show
 
