@@ -130,7 +130,7 @@ in {
       })
     ]
     ++ (lib.optionals pkgs.stdenv.isx86_64 [
-      pkgs.cinny-desktop
+      # pkgs.cinny-desktop
       pkgs.tdesktop
     ]);
 
