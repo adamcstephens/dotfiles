@@ -115,7 +115,6 @@ in {
       pkgs.firefox-wayland
       pkgs.cinnamon.nemo
       pkgs.remmina
-      pkgs.slack
 
       # wrap webcord to remove state file https://github.com/SpacingBat3/WebCord/issues/360
       (pkgs.symlinkJoin {
@@ -131,6 +130,7 @@ in {
     ]
     ++ (lib.optionals pkgs.stdenv.isx86_64 [
       # pkgs.cinny-desktop
+      pkgs.slack
       pkgs.tdesktop
     ]);
 

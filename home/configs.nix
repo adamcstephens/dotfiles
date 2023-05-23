@@ -52,6 +52,7 @@
 
     silver = {
       gui = true;
+      system = "aarch64-linux";
     };
 
     think = {
