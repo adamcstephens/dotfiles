@@ -6,18 +6,16 @@
       editor.color-modes = true;
     };
 
-    languages = {
-      language = [
-        {
-          name = "nix";
-          language-server = {command = "nil";};
-          auto-format = true;
-          formatter = {
-            command = "alejandra";
-            args = [];
-          };
-        }
-      ];
-    };
+    languages = [
+      {
+        name = "nix";
+        language-server = {command = "nil";};
+        auto-format = true;
+        formatter = {
+          command = "alejandra";
+          args = [];
+        };
+      }
+    ];
   };
 }
