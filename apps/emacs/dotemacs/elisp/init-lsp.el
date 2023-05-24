@@ -18,6 +18,7 @@
     (go-ts-mode
       .
       (lambda () (add-hook 'before-save-hook 'dot/eglot-goimports)))
+    (heex-ts-mode . dot/eglot-mode-setup)
     (haskell-mode . dot/eglot-mode-setup)
     (nix-mode . eglot-ensure)
     (nim-mode . eglot-ensure)
@@ -30,6 +31,7 @@
     ("<mouse-3>" . eglot-code-actions-at-mouse))
   :config
   (add-to-list 'eglot-server-programs '((elixir-ts-mode) "elixir-ls"))
+  (add-to-list 'eglot-server-programs '((heex-ts-mode) "elixir-ls"))
   (add-to-list 'eglot-server-programs '((nix-mode) "nil"))
   (add-to-list 'eglot-server-programs '((nim-mode) "nimlsp"))
   (add-to-list
