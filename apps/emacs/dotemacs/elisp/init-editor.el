@@ -52,7 +52,6 @@ the cursor by ARG lines."
     (vc-state subtree-state
       all-the-icons
       collapse
-      git-msg
       file-time
       file-size))
   (setq dired-mouse-drag-files t)
