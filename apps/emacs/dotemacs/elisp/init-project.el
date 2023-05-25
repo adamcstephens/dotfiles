@@ -37,7 +37,6 @@ project are filtered out."
 
 (use-package
   project-rootfile
-  :straight t
   :init
   (add-to-list 'project-find-functions #'project-rootfile-try-detect
     t))

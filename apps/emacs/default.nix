@@ -131,6 +131,7 @@
       org-superstar
       ox-pandoc
       persistent-scratch
+      project-rootfile
       rainbow-delimiters
       run-command
       ssh-config-mode
