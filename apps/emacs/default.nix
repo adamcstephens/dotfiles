@@ -131,8 +131,6 @@
       org-superstar
       ox-pandoc
       persistent-scratch
-      persp-mode
-      persp-mode-project-bridge
       project-rootfile
       rainbow-delimiters
       run-command
