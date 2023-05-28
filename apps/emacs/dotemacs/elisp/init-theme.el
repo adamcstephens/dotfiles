@@ -21,7 +21,7 @@
   (menu-bar-mode -1)
   (tool-bar-mode -1)
   (scroll-bar-mode -1)
-  ;; (tab-bar-mode 1)
+  (tab-bar-mode 1)
 
   (set-face-attribute 'default nil
     :font (font-spec :family "JetBrains Mono")

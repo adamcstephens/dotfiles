@@ -13,10 +13,7 @@ project are filtered out."
         window-buffers)
       window-buffers)))
 
-;; (use-package
-;;   burly
-;;   :straight (:host github :repo "alphapapa/burly.el")
-;;   :init (burly-tabs-mode t))
+(use-package burly :straight t)
 
 (use-package
   direnv
@@ -77,17 +74,17 @@ project are filtered out."
 ;;   :init (persp-mode-project-bridge-mode 1)
 ;;   :config (setq persp-emacsclient-init-frame-behaviour-override "main"))
 
-;; (use-package
-;;   tabspaces
-;;   :disabled
-;;   :hook (after-init . tabspaces-mode)
-;;   :commands
-;;   (tabspaces-switch-or-create-workspace
-;;     tabspaces-open-or-create-project-and-workspace)
-;;   :custom
-;;   (tabspaces-use-filtered-buffers-as-default t)
-;;   (tabspaces-default-tab "main")
-;;   (tabspaces-remove-to-default t)
-;;   (tabspaces-include-buffers '("*scratch*")))
+(use-package
+  tabspaces
+  :straight t
+  :hook (after-init . tabspaces-mode)
+  :commands
+  (tabspaces-switch-or-create-workspace
+    tabspaces-open-or-create-project-and-workspace)
+  :custom
+  (tabspaces-use-filtered-buffers-as-default t)
+  (tabspaces-default-tab "main")
+  (tabspaces-remove-to-default t)
+  (tabspaces-include-buffers '("*scratch*")))
 
 (provide 'init-project)
