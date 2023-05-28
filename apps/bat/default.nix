@@ -3,7 +3,7 @@
     enable = true;
     config = {
       style = "plain";
-      theme = "base16";
+      theme = "ansi";
     };
   };
 }
