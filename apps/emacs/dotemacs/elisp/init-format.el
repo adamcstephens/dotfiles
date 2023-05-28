@@ -34,6 +34,7 @@
     (fish-mode . apheleia-mode)
     (just-mode . apheleia-mode)
     (nix-mode . apheleia-mode)
+    (terraform-mode . apheleia-mode)
     (yaml-ts-mode . apheleia-mode)))
 
 (use-package

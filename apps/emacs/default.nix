@@ -135,6 +135,7 @@
       rainbow-delimiters
       run-command
       ssh-config-mode
+      terraform-mode
       transpose-frame
       treesit-auto
       undo-fu
