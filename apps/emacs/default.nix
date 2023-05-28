@@ -35,52 +35,29 @@
 
   emacsSource = pkgs.emacsUnstable;
 
-  emacsPatched =
-    if pkgs.stdenv.isDarwin
-    then
-      (emacsSource.overrideAttrs (prev: {
-        patches =
-          [
-            "${inputs.emacs-plus}/patches/emacs-28/fix-window-role.patch"
-            "${inputs.emacs-plus}/patches/emacs-28/no-frame-refocus-cocoa.patch"
-            "${inputs.emacs-plus}/patches/emacs-29/poll.patch"
-            "${inputs.emacs-plus}/patches/emacs-28/system-appearance.patch"
-          ]
-          ++ prev.patches;
-      }))
-    else emacsSource;
+  emacsPatched = emacsSource.overrideAttrs (prev: {
+    patches =
+      # [./silence-pgtk-xorg-warning.patch]
+      # ++
+      (lib.optionals pkgs.stdenv.isDarwin [
+        "${inputs.emacs-plus}/patches/emacs-28/fix-window-role.patch"
+        "${inputs.emacs-plus}/patches/emacs-28/no-frame-refocus-cocoa.patch"
+        "${inputs.emacs-plus}/patches/emacs-29/poll.patch"
+        # "${inputs.emacs-plus}/patches/emacs-30/round-undecorated-frame.patch"
+        "${inputs.emacs-plus}/patches/emacs-28/system-appearance.patch"
+      ])
+      ++ prev.patches;
 
-  emacsPackage = emacsPatched.override {
-    treeSitterPlugins = with pkgs.tree-sitter-grammars; [
-      tree-sitter-elixir
-      tree-sitter-heex
+    passthru =
+      prev.passthru
+      // {
+        treeSitter = true;
+      };
+  });
 
-      # defaults
-      tree-sitter-bash
-      tree-sitter-c
-      tree-sitter-c-sharp
-      tree-sitter-cmake
-      tree-sitter-cpp
-      tree-sitter-css
-      tree-sitter-dockerfile
-      tree-sitter-go
-      tree-sitter-gomod
-      tree-sitter-html
-      tree-sitter-java
-      tree-sitter-javascript
-      tree-sitter-json
-      tree-sitter-python
-      tree-sitter-ruby
-      tree-sitter-rust
-      tree-sitter-toml
-      tree-sitter-tsx
-      tree-sitter-typescript
-      tree-sitter-yaml
-    ];
-  };
-
-  emacsWithPackages = (pkgs.emacsPackagesFor emacsPackage).emacsWithPackages (epkgs:
-    (with epkgs.melpaPackages; [
+  emacsWithPackages = (pkgs.emacsPackagesFor emacsPatched).emacsWithPackages (epkgs:
+    [epkgs.treesit-grammars.with-all-grammars]
+    ++ (with epkgs.melpaPackages; [
       all-the-icons
       apheleia
       auto-dark
