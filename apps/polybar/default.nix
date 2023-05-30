@@ -1,5 +1,6 @@
 {
   config,
+  inputs,
   lib,
   pkgs,
   ...
@@ -10,7 +11,20 @@
     pkgs.pavucontrol
     pkgs.playerctl
   ];
+
   path = "PATH=${config.services.polybar.package}/bin:${lib.makeBinPath dependencies}:/run/wrappers/bin";
+
+  fontconfig_file = pkgs.makeFontsConf {
+    fontDirectories = [
+      (pkgs.nerdfonts.override {fonts = ["NerdFontsSymbolsOnly"];})
+      inputs.apple-fonts.packages.${pkgs.system}.sf-pro
+      pkgs.font-awesome
+      pkgs.jetbrains-mono
+      pkgs.noto-fonts
+      pkgs.noto-fonts-cjk
+      pkgs.noto-fonts-emoji
+    ];
+  };
 in {
   services.polybar = {
     enable = true;
@@ -31,9 +45,6 @@ in {
         green = ${base0B}
         blue = ${base0D}
 
-        [display]
-        font = ${config.dotfiles.gui.font}:size=10;0
-
         [scripts]
         player = ${./player.sh}
       '')
@@ -43,6 +54,9 @@ in {
   systemd.user.services.polybar = {
     Install.WantedBy = lib.mkForce ["xserver-session.target"];
     Unit.PartOf = lib.mkForce ["xserver-session.target"];
-    Service.Environment = lib.mkForce path;
+    Service.Environment = lib.mkForce [
+      path
+      "FONTCONFIG_FILE=${fontconfig_file}"
+    ];
   };
 }
