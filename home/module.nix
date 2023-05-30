@@ -32,15 +32,20 @@
         fontconfig = lib.mkOption {
           type = lib.types.unspecified;
           default = pkgs.makeFontsConf {
-            fontDirectories = [
-              (pkgs.nerdfonts.override {fonts = ["NerdFontsSymbolsOnly"];})
-              inputs.apple-fonts.packages.${pkgs.system}.sf-pro
-              pkgs.font-awesome
-              pkgs.jetbrains-mono
-              pkgs.noto-fonts
-              pkgs.noto-fonts-cjk
-              pkgs.noto-fonts-emoji
-            ];
+            fontDirectories =
+              [
+                (pkgs.nerdfonts.override {fonts = ["NerdFontsSymbolsOnly"];})
+                inputs.apple-fonts.packages.${pkgs.system}.sf-pro
+                pkgs.emacs-all-the-icons-fonts
+                pkgs.font-awesome
+                pkgs.jetbrains-mono
+                pkgs.noto-fonts
+                pkgs.noto-fonts-cjk
+                pkgs.noto-fonts-emoji
+              ]
+              ++ (lib.optionals pkgs.stdenv.isDarwin [
+                "/Library/Fonts"
+              ]);
           };
         };
       };

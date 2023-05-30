@@ -134,17 +134,6 @@
       vundo
     ]));
 
-  fontconfig_file = pkgs.makeFontsConf {
-    fontDirectories = [
-      "/Library/Fonts"
-      pkgs.emacs-all-the-icons-fonts
-      pkgs.jetbrains-mono
-      pkgs.manrope
-      inputs.apple-fonts.packages.${pkgs.system}.sf-pro
-      (pkgs.nerdfonts.override {fonts = ["NerdFontsSymbolsOnly"];})
-    ];
-  };
-
   package = pkgs.symlinkJoin {
     name = "dotemacs";
 
@@ -155,13 +144,13 @@
     nativeBuildInputs = [pkgs.makeWrapper];
     postBuild =
       ''
-        wrapProgram "$out/bin/emacs" --set TERM xterm-emacs --set FONTCONFIG_FILE ${fontconfig_file} --prefix PATH : ${lib.makeBinPath extraBins}:${config.home.homeDirectory}/.dotfiles/bin
+        wrapProgram "$out/bin/emacs" --set TERM xterm-emacs --set FONTCONFIG_FILE ${config.dotfiles.gui.font.fontconfig} --prefix PATH : ${lib.makeBinPath extraBins}:${config.home.homeDirectory}/.dotfiles/bin
         wrapProgram "$out/bin/emacsclient" --set TERM xterm-emacs
       ''
       + (
         if pkgs.stdenv.isDarwin
         then ''
-          wrapProgram "$out/Applications/Emacs.app/Contents/MacOS/Emacs" --set FONTCONFIG_FILE ${fontconfig_file} --prefix PATH : ${lib.makeBinPath extraBins}
+          wrapProgram "$out/Applications/Emacs.app/Contents/MacOS/Emacs" --set FONTCONFIG_FILE ${config.dotfiles.gui.font.fontconfig} --prefix PATH : ${lib.makeBinPath extraBins}
         ''
         else ""
       );
