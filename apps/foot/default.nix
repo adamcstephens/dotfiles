@@ -4,7 +4,7 @@
     server.enable = true;
     settings = {
       main = {
-        font = "${config.dotfiles.gui.font}:size=11";
+        font = "${config.dotfiles.gui.font.mono}:size=11";
       };
       scrollback = {
         lines = 50000;

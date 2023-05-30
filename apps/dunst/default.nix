@@ -1,4 +1,8 @@
-{config, ...}: {
+{
+  config,
+  lib,
+  ...
+}: {
   services.dunst = {
     enable = true;
 
@@ -10,7 +14,7 @@
       global = {
         monitor = 0;
         follow = "mouse";
-        font = "${config.dotfiles.gui.font} 11";
+        font = "${config.dotfiles.gui.font.variable} 11";
         width = 300;
         height = 100;
         origin = "top-right";
@@ -42,5 +46,8 @@
     Install = {
       WantedBy = ["graphical-session.target"];
     };
+    Service.Environment = lib.mkForce [
+      "FONTCONFIG_FILE=${config.dotfiles.gui.font.fontconfig}"
+    ];
   };
 }

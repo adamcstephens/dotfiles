@@ -1,4 +1,9 @@
-{lib, ...}: {
+{
+  lib,
+  inputs,
+  pkgs,
+  ...
+}: {
   options.dotfiles = {
     isVM = lib.mkEnableOption "isVM";
 
@@ -13,9 +18,31 @@
         default = 96;
       };
 
-      font = lib.mkOption {
-        type = lib.types.str;
-        default = "JetBrains Mono";
+      font = {
+        mono = lib.mkOption {
+          type = lib.types.str;
+          default = "JetBrains Mono";
+        };
+
+        variable = lib.mkOption {
+          type = lib.types.str;
+          default = "SF Pro Text";
+        };
+
+        fontconfig = lib.mkOption {
+          type = lib.types.unspecified;
+          default = pkgs.makeFontsConf {
+            fontDirectories = [
+              (pkgs.nerdfonts.override {fonts = ["NerdFontsSymbolsOnly"];})
+              inputs.apple-fonts.packages.${pkgs.system}.sf-pro
+              pkgs.font-awesome
+              pkgs.jetbrains-mono
+              pkgs.noto-fonts
+              pkgs.noto-fonts-cjk
+              pkgs.noto-fonts-emoji
+            ];
+          };
+        };
       };
 
       insecure = lib.mkEnableOption (lib.mkDoc "Insecure GUI disables locking");
