@@ -1,5 +1,7 @@
 # shellcheck shell=bash disable=SC1091
 
+export PATH="$HOME/.dotfiles/bin:$PATH"
+
 # shellcheck disable=SC1090
 [[ -e "$HOME/.shell_local.sh" ]] && . "$HOME/.shell_local.sh"
 
@@ -20,7 +22,7 @@ if [[ "$TERM" == "xterm-screen-256color" ]]; then
   export TERMINFO=$HOME/.terminfo
 elif [[ "$TERM" == "xterm-kitty" ]]; then
   alias ssh="kitty +kitten ssh"
-  export TERMINFO=$HOME/.terminfo
+  export TERMINFO=$HOME/.nix-profile/share/terminfo
 fi
 
 # passwords
