@@ -35,4 +35,8 @@
 
     launchctl start com.openssh.ssh-agent
   '';
+
+  home.sessionVariables = {
+    PATH = "$PATH:/nix/var/nix/profiles/default/bin";
+  };
 }
