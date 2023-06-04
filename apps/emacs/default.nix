@@ -33,7 +33,7 @@
     pkgs.sqlite
   ];
 
-  emacsSource = pkgs.emacsUnstable;
+  emacsSource = pkgs.emacs-unstable;
 
   emacsPatched = emacsSource.overrideAttrs (prev: {
     patches =
