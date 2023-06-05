@@ -32,6 +32,8 @@
   :hook
   ((bash-ts-mode . apheleia-mode)
     (fish-mode . apheleia-mode)
+    (js-ts-mode . apheleia-mode)
+    (json-ts-mode . apheleia-mode)
     (just-mode . apheleia-mode)
     (nix-mode . apheleia-mode)
     (terraform-mode . apheleia-mode)

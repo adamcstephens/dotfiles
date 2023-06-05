@@ -5,7 +5,11 @@
 (defun dot/eglot-goimports ()
   (eglot-code-actions nil nil "source.organizeImports" t))
 
-(use-package eldoc-box :custom (eldoc-box-clear-with-C-g t))
+(use-package
+  eldoc-box
+  :custom
+  (eldoc-box-clear-with-C-g t)
+  (eldoc-echo-area-use-multiline-p nil))
 
 (use-package
   eglot
