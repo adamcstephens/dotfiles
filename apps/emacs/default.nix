@@ -63,6 +63,7 @@
       auto-dark
       avy
       bbww
+      burly
       cape
       chatgpt-shell
       cider
@@ -112,6 +113,7 @@
       rainbow-delimiters
       run-command
       ssh-config-mode
+      tabspaces
       terraform-mode
       transpose-frame
       treesit-auto

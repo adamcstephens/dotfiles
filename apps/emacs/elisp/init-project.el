@@ -13,7 +13,7 @@ project are filtered out."
         window-buffers)
       window-buffers)))
 
-(use-package burly :straight t)
+(use-package burly)
 
 (use-package
   direnv
@@ -76,7 +76,6 @@ project are filtered out."
 
 (use-package
   tabspaces
-  :straight t
   :hook (after-init . tabspaces-mode)
   :commands
   (tabspaces-switch-or-create-workspace
