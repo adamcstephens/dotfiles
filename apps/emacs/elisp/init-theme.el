@@ -78,7 +78,7 @@
     (let*
       (
         (buffer-read-only)
-        (image-path "~/.config/emacs/dotemacs/emacs.png")
+        (image-path (concat user-emacs-directory "emacs.png"))
         (image (create-image image-path))
         (size (image-size image))
         (height (cdr size))

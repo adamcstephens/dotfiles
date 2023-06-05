@@ -175,7 +175,7 @@
 
   (global-set-key (kbd "C-x B") 'switch-to-buffer)
 
-  :bind (("s-t" . tab-new))
+  :bind (("s-t" . tab-new) ("s-j" . windmove-down))
 
   :hook
   ((minibuffer-setup . cursor-intangible-mode)

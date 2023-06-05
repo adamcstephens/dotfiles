@@ -168,9 +168,6 @@
 
   terminfo = pkgs.callPackage ../../packages/terminfo {};
 in {
-  home.file.".config/doom".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/emacs/doom.d";
-  home.file.".config/emacs/dotemacs".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/emacs/dotemacs";
-
   programs.emacs = {
     enable = true;
     package = package;
@@ -182,7 +179,7 @@ in {
       enable = true;
       extraOptions = [
         "--init-directory"
-        "${config.home.homeDirectory}/.config/emacs/dotemacs"
+        "${config.home.homeDirectory}/.dotfiles/apps/emacs"
       ];
     };
   };
@@ -208,11 +205,11 @@ in {
           "${config.home.homeDirectory}/.nix-profile/bin/fish"
           "-l"
           "-c"
-          "${config.programs.emacs.finalPackage}/bin/emacs --fg-daemon --init-directory ${config.home.homeDirectory}/.config/emacs/dotemacs"
+          "${config.programs.emacs.finalPackage}/bin/emacs --fg-daemon --init-directory ${config.home.homeDirectory}/.dotfiles/apps/emacs"
         ];
         RunAtLoad = true;
-        StandardErrorPath = "${config.home.homeDirectory}/.config/emacs/dotemacs/launchd.log";
-        StandardOutPath = "${config.home.homeDirectory}/.config/emacs/dotemacs/launchd.log";
+        StandardErrorPath = "${config.home.homeDirectory}/.dotfiles/apps/emacs/launchd.log";
+        StandardOutPath = "${config.home.homeDirectory}/.dotfiles/apps/emacs/launchd.log";
         WatchPaths = [
           "${config.home.homeDirectory}/.nix-profile/bin/emacs"
         ];

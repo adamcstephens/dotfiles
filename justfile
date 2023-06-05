@@ -16,12 +16,6 @@ bump:
     nix run .#hm-all
     git push
 
-doomemacs:
-    test -d ~/.config/emacs || mkdir -p ~/.config/emacs
-    test -e ~/.config/emacs/doom || git clone https://github.com/doomemacs/doomemacs ~/.config/emacs/doom
-    DOOMDIR=~/.config/doom ~/.config/emacs/doom/bin/doom sync
-    test -f ~/.config/emacs/doom/.local/env || DOOMDIR=~/.config/doom ~/.config/emacs/doom/bin/doom env
-
 fish-bootstrap:
     fish ~/.dotfiles/bin/theme.fish
 
