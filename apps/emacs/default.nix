@@ -134,6 +134,9 @@
       substitute
       vertico
       vundo
+    ])
+    ++ (with epkgs.nongnuPackages; [
+      eat
     ]));
 
   package = pkgs.symlinkJoin {

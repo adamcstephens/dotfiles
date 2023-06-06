@@ -1,3 +1,5 @@
+(use-package eat)
+
 (use-package
   vterm
   :bind

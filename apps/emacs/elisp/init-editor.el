@@ -146,7 +146,7 @@ the cursor by ARG lines."
           :display "Phoenix Server"
           :working-dir project-dir))))
   (add-to-list 'run-command-recipes 'dot/run-command-recipes)
-  :custom (run-command-default-runner 'run-command-runner-vterm))
+  :custom (run-command-default-runner 'run-command-runner-eat))
 
 (use-package
   substitute
