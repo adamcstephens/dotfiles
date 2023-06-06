@@ -5,7 +5,7 @@
 (require '[babashka.cli :as cli])
 (require '[clojure.java.io :as io])
 
-(def arg-parse (cli/parse-args *command-line-args* {:args->opts [:pr] :exec-args {:system ["aarch64-darwin" "x86_64-darwin"]} :require [:pr] :coerce {:system []}}))
+(def arg-parse (cli/parse-args *command-line-args* {:args->opts [:pr] :exec-args {:system ["x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin"]} :require [:pr] :coerce {:system []}}))
 (def args (get arg-parse :opts))
 (def pull-request (get args :pr))
 
