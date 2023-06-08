@@ -13,6 +13,8 @@ project are filtered out."
         window-buffers)
       window-buffers)))
 
+(use-package bufler :init (bufler-mode) (bufler-tabs-mode))
+
 (use-package burly :init (burly-tabs-mode 1))
 
 (use-package
@@ -73,17 +75,5 @@ project are filtered out."
 ;;   (persp-mode . persp-mode-project-bridge-mode)
 ;;   :init (persp-mode-project-bridge-mode 1)
 ;;   :config (setq persp-emacsclient-init-frame-behaviour-override "main"))
-
-(use-package
-  tabspaces
-  :hook (after-init . tabspaces-mode)
-  :commands
-  (tabspaces-switch-or-create-workspace
-    tabspaces-open-or-create-project-and-workspace)
-  :custom
-  (tabspaces-use-filtered-buffers-as-default t)
-  (tabspaces-default-tab "main")
-  (tabspaces-remove-to-default t)
-  (tabspaces-include-buffers '("*scratch*" "*eldoc*")))
 
 (provide 'init-project)
