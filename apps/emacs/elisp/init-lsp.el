@@ -36,7 +36,7 @@
   :config
   (add-to-list 'eglot-server-programs '((elixir-ts-mode) "elixir-ls"))
   (add-to-list 'eglot-server-programs '((heex-ts-mode) "elixir-ls"))
-  (add-to-list 'eglot-server-programs '((nix-mode) "nil"))
+  (add-to-list 'eglot-server-programs '((nix-mode) "nixd"))
   (add-to-list 'eglot-server-programs '((nim-mode) "nimlsp"))
   (add-to-list
     'eglot-server-programs
@@ -47,7 +47,8 @@
   (setq-default eglot-workspace-configuration
     '
     ((haskell (formattingProvider . "ormolu"))
-      (nil (formatting (command . ["alejandra"]))))))
+      (nil (formatting (command . ["alejandra"])))
+      (nixd (formatting (command . "alejandra"))))))
 
 (use-package
   treesit-auto

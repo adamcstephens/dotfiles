@@ -18,9 +18,9 @@
     pkgs.fzf
     pkgs.git
     pkgs.groff
-    pkgs.texlive.combined.scheme-full
     pkgs.graphicsmagick
     pkgs.multimarkdown
+    inputs.nixd.packages.${pkgs.system}.nixd
     pkgs.nodejs
     pkgs.nodePackages.bash-language-server
     pkgs.nodePackages.mermaid-cli
@@ -31,6 +31,7 @@
     pkgs.shellcheck
     pkgs.shfmt
     pkgs.sqlite
+    pkgs.texlive.combined.scheme-full
   ];
 
   emacsSource = pkgs.emacs-unstable;
