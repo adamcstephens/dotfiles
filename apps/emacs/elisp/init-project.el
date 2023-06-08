@@ -13,7 +13,7 @@ project are filtered out."
         window-buffers)
       window-buffers)))
 
-(use-package burly)
+(use-package burly :init (burly-tabs-mode 1))
 
 (use-package
   direnv
@@ -84,6 +84,6 @@ project are filtered out."
   (tabspaces-use-filtered-buffers-as-default t)
   (tabspaces-default-tab "main")
   (tabspaces-remove-to-default t)
-  (tabspaces-include-buffers '("*scratch*")))
+  (tabspaces-include-buffers '("*scratch*" "*eldoc*")))
 
 (provide 'init-project)
