@@ -34,7 +34,7 @@
     pkgs.texlive.combined.scheme-full
   ];
 
-  emacsSource = pkgs.emacs-unstable;
+  emacsSource = pkgs.emacs29;
 
   emacsPatched = emacsSource.overrideAttrs (prev: {
     patches =
@@ -48,12 +48,6 @@
         "${inputs.emacs-plus}/patches/emacs-28/system-appearance.patch"
       ])
       ++ prev.patches;
-
-    passthru =
-      prev.passthru
-      // {
-        treeSitter = true;
-      };
   });
 
   emacsWithPackages = (pkgs.emacsPackagesFor emacsPatched).emacsWithPackages (epkgs:
