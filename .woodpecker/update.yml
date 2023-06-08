@@ -1,7 +1,7 @@
 labels:
   type: local
 
-pipeline:
+steps:
   build:
     image: bash
     commands:
