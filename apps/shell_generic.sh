@@ -48,6 +48,9 @@ fi
 if [ -e /nix/var/nix/profiles/default/etc/profile.d/nix.sh ]; then
   . /nix/var/nix/profiles/default/etc/profile.d/nix.sh
 fi
+if [ -d /run/current-system/sw/bin ]; then
+  export PATH="$PATH:/run/current-system/sw/bin"
+fi
 
 # python
 export PYTHONSTARTUP="$HOME"/.dotfiles/apps/python/pythonstartup.py
