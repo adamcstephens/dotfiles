@@ -16,23 +16,28 @@
   nix-colors-contrib = inputs.nix-colors.lib-contrib {inherit pkgs;};
 in {
   imports = [
-    # actual gui apps
+    # common
     ../apps/dunst
-    # ../apps/eww
     ../apps/gammastep
-    ../apps/hyprland
+
+    # wayland
     ../apps/kanshi
-    ../apps/kitty
-    ../apps/polybar
     ../apps/river
-    ../apps/rofi
-    ../apps/ssh
-    ../apps/vscode
-    ../apps/wofi
     ../apps/swayidle
-    ../apps/xmonad
     ../apps/waybar
     ../apps/wob
+    ../apps/wofi
+
+    # xorg
+    ../apps/leftwm
+    ../apps/polybar
+    ../apps/rofi
+    # ../apps/xmonad
+
+    # apps
+    ../apps/kitty
+    ../apps/ssh
+    ../apps/vscode
 
     # dev
     ../apps/ghc
