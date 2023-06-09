@@ -108,6 +108,7 @@
       persistent-scratch
       project-rootfile
       rainbow-delimiters
+      ron-mode
       run-command
       ssh-config-mode
       terraform-mode

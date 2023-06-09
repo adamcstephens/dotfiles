@@ -55,6 +55,7 @@
 (require 'init-markdown)
 (require 'init-nim)
 (require 'init-nix)
+(require 'init-rust)
 (require 'init-sh)
 (require 'init-ssh)
 (require 'init-terraform)

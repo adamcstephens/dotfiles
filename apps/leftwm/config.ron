@@ -68,12 +68,13 @@
         (command: Execute, value: "kitty", modifier: ["modkey", "Shift"], key: "Return"),
         (command: Execute, value: "kitty", modifier: ["modkey", "Shift"], key: "t"),
 
+        // wm
         (command: SoftReload, value: "", modifier: ["modkey", "Shift"], key: "r"),
         (command: HardReload, value: "", modifier: ["modkey", "Shift", "Control"], key: "r"),
         (command: Execute, value: "loginctl kill-session $XDG_SESSION_ID", modifier: ["modkey", "Shift"], key: "x"),
 
-        (command: SwapTags, value: "", modifier: ["modkey"], key: "w"),
-
+        // windows
+        (command: CloseWindow, value: "", modifier: ["modkey", "Shift"], key: "q"),
         (command: MoveWindowDown, value: "", modifier: ["modkey", "Shift"], key: "j"),
         (command: MoveWindowDown, value: "", modifier: ["modkey", "Shift"], key: "Down"),
         (command: MoveWindowTop, value: "", modifier: ["modkey"], key: "Return"),
@@ -83,22 +84,24 @@
         (command: FocusWindowDown, value: "", modifier: ["modkey"], key: "j"),
         (command: FocusWindowUp, value: "", modifier: ["modkey"], key: "Up"),
         (command: FocusWindowDown, value: "", modifier: ["modkey"], key: "Down"),
-
-        (command: CloseWindow, value: "", modifier: ["modkey", "Shift"], key: "q"),
         (command: ToggleFloating, value: "", modifier: ["modkey", "Control"], key: "f"),
 
+        // layouts
         (command: NextLayout, value: "", modifier: ["modkey", "Control"], key: "Up"),
         (command: PreviousLayout, value: "", modifier: ["modkey", "Control"], key: "Down"),
-        (command: IncreaseMainWidth, value: "5", modifier: ["modkey", "Shift"], key: "semicolon"),
+        (command: IncreaseMainWidth, value: "5", modifier: ["modkey", "Shift"], key: "l"),
         (command: DecreaseMainWidth, value: "5", modifier: ["modkey", "Shift"], key: "h"),
 
+        // workspaces
         (command: FocusWorkspaceNext, value: "", modifier: ["modkey"], key: "l"),
         (command: FocusWorkspacePrevious, value: "", modifier: ["modkey"], key: "h"),
         (command: FocusWorkspaceNext, value: "", modifier: ["modkey"], key: "Right"),
         (command: FocusWorkspacePrevious, value: "", modifier: ["modkey"], key: "Left"),
         (command: MoveToLastWorkspace, value: "", modifier: ["modkey", "Shift"], key: "w"),
 
+        // tags
         (command: ReturnToLastTag, value: "", modifier: ["modkey"], key: "grave"),
+        (command: SwapTags, value: "", modifier: ["modkey"], key: "w"),
         (command: GotoTag, value: "1", modifier: ["modkey"], key: "1"),
         (command: GotoTag, value: "2", modifier: ["modkey"], key: "2"),
         (command: GotoTag, value: "3", modifier: ["modkey"], key: "3"),
