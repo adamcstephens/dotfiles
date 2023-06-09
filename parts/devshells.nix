@@ -63,6 +63,7 @@
       nixpkgs = pkgs.mkShellNoCC {
         packages =
           [
+            pkgs.nix-bisect
             pkgs.nix-index
             pkgs.nix-update
             pkgs.nixpkgs-review
