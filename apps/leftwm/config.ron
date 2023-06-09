@@ -26,19 +26,9 @@
     max_window_width: None,
     layouts: [
         MainAndVertStack,
-        MainAndHorizontalStack,
-        MainAndDeck,
-        GridHorizontal,
-        EvenHorizontal,
-        EvenVertical,
-        Fibonacci,
-        LeftMain,
-        CenterMain,
-        CenterMainBalanced,
-        CenterMainFluid,
-        Monocle,
-        RightWiderLeftStack,
         LeftWiderRightStack,
+        EvenHorizontal,
+        Monocle,
     ],
     layout_mode: Tag,
     insert_behavior: Bottom,
@@ -48,7 +38,7 @@
     ],
     window_rules: [],
     disable_current_tag_swap: false,
-    disable_tile_drag: false,
+    disable_tile_drag: true,
     disable_window_snap: true,
     focus_behaviour: Sloppy,
     focus_new_windows: true,
@@ -57,34 +47,58 @@
     auto_derive_workspaces: true,
     keybind: [
         (command: ToggleScratchPad, value: "emacs", modifier: ["modkey"], key: "p"),
-        (command: Execute, value: "systemd-cat --identifier=rofi rofi -show run", modifier: ["modkey"], key: "d"),
+        (command: Execute, value: "systemd-cat --identifier=rofi rofi -show drun", modifier: ["modkey"], key: "d"),
         (command: Execute, value: "systemd-cat --identifier=rofi rofi -show emoji", modifier: ["modkey", "Shift"], key: "d"),
+
+        // volume
+        (command: Execute, value: "systemd-cat --identifier=volume $HOME/.dotfiles/bin/volume down", modifier: [], key: "XF86XK_AudioLowerVolume"),
+        (command: Execute, value: "systemd-cat --identifier=volume $HOME/.dotfiles/bin/volume up", modifier: [], key: "XF86XK_AudioRaiseVolume"),
+        (command: Execute, value: "systemd-cat --identifier=volume $HOME/.dotfiles/bin/volume mute", modifier: [], key: "XF86XK_AudioMute"),
+
+        // player
+        (command: Execute, value: "systemd-cat --identifier=playerctl playerctl play-pause", modifier: [], key: "XF86XK_AudioPlay"),
+        (command: Execute, value: "systemd-cat --identifier=playerctl playerctl next", modifier: [], key: "XF86XK_AudioNext"),
+        (command: Execute, value: "systemd-cat --identifier=playerctl playerctl previous", modifier: [], key: "XF86XK_AudioPrev"),
+
+        // brightness
+        (command: Execute, value: "systemd-cat --identifier=brightnessctl brightnessctl -q set 5%-", modifier: [], key: "XF86XK_MonBrightnessDown"),
+        (command: Execute, value: "systemd-cat --identifier=brightnessctl brightnessctl -q set +5%", modifier: [], key: "XF86XK_MonBrightnessUp"),
+
+        // terminal
         (command: Execute, value: "kitty", modifier: ["modkey", "Shift"], key: "Return"),
-        (command: CloseWindow, value: "", modifier: ["modkey", "Shift"], key: "q"),
-        (command: Execute, value: "loginctl kill-session $XDG_SESSION_ID", modifier: ["modkey", "Shift", "Control"], key: "q"),
+        (command: Execute, value: "kitty", modifier: ["modkey", "Shift"], key: "t"),
+
         (command: SoftReload, value: "", modifier: ["modkey", "Shift"], key: "r"),
         (command: HardReload, value: "", modifier: ["modkey", "Shift", "Control"], key: "r"),
         (command: Execute, value: "loginctl kill-session $XDG_SESSION_ID", modifier: ["modkey", "Shift"], key: "x"),
-        (command: Execute, value: "slock", modifier: ["modkey", "Control"], key: "l"),
-        (command: MoveToLastWorkspace, value: "", modifier: ["modkey", "Shift"], key: "w"),
+
         (command: SwapTags, value: "", modifier: ["modkey"], key: "w"),
-        (command: MoveWindowUp, value: "", modifier: ["modkey", "Shift"], key: "k"),
+
         (command: MoveWindowDown, value: "", modifier: ["modkey", "Shift"], key: "j"),
+        (command: MoveWindowDown, value: "", modifier: ["modkey", "Shift"], key: "Down"),
         (command: MoveWindowTop, value: "", modifier: ["modkey"], key: "Return"),
+        (command: MoveWindowUp, value: "", modifier: ["modkey", "Shift"], key: "Up"),
+        (command: MoveWindowUp, value: "", modifier: ["modkey", "Shift"], key: "k"),
         (command: FocusWindowUp, value: "", modifier: ["modkey"], key: "k"),
         (command: FocusWindowDown, value: "", modifier: ["modkey"], key: "j"),
-        (command: NextLayout, value: "", modifier: ["modkey", "Control"], key: "k"),
-        (command: PreviousLayout, value: "", modifier: ["modkey", "Control"], key: "j"),
-        (command: FocusWorkspaceNext, value: "", modifier: ["modkey"], key: "l"),
-        (command: FocusWorkspacePrevious, value: "", modifier: ["modkey"], key: "h"),
-        (command: MoveWindowUp, value: "", modifier: ["modkey", "Shift"], key: "Up"),
-        (command: MoveWindowDown, value: "", modifier: ["modkey", "Shift"], key: "Down"),
         (command: FocusWindowUp, value: "", modifier: ["modkey"], key: "Up"),
         (command: FocusWindowDown, value: "", modifier: ["modkey"], key: "Down"),
+
+        (command: CloseWindow, value: "", modifier: ["modkey", "Shift"], key: "q"),
+        (command: ToggleFloating, value: "", modifier: ["modkey", "Control"], key: "f"),
+
         (command: NextLayout, value: "", modifier: ["modkey", "Control"], key: "Up"),
         (command: PreviousLayout, value: "", modifier: ["modkey", "Control"], key: "Down"),
+        (command: IncreaseMainWidth, value: "5", modifier: ["modkey", "Shift"], key: "semicolon"),
+        (command: DecreaseMainWidth, value: "5", modifier: ["modkey", "Shift"], key: "h"),
+
+        (command: FocusWorkspaceNext, value: "", modifier: ["modkey"], key: "l"),
+        (command: FocusWorkspacePrevious, value: "", modifier: ["modkey"], key: "h"),
         (command: FocusWorkspaceNext, value: "", modifier: ["modkey"], key: "Right"),
         (command: FocusWorkspacePrevious, value: "", modifier: ["modkey"], key: "Left"),
+        (command: MoveToLastWorkspace, value: "", modifier: ["modkey", "Shift"], key: "w"),
+
+        (command: ReturnToLastTag, value: "", modifier: ["modkey"], key: "grave"),
         (command: GotoTag, value: "1", modifier: ["modkey"], key: "1"),
         (command: GotoTag, value: "2", modifier: ["modkey"], key: "2"),
         (command: GotoTag, value: "3", modifier: ["modkey"], key: "3"),
