@@ -84,6 +84,7 @@
       haskell-mode
       hide-mode-line
       just-mode
+      kkp
       ligature
       lispy
       magit

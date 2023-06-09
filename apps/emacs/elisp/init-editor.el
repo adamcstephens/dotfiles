@@ -100,6 +100,12 @@ the cursor by ARG lines."
 (use-package hideshow :hook (prog-mode . hs-minor-mode))
 
 (use-package
+  kkp
+  :config
+  ;; (setq kkp-alt-modifier 'alt) ;; use this if you want to map the Alt keyboard modifier to Alt in Emacs (and not to Meta)
+  (global-kkp-mode +1))
+
+(use-package
   move-dup
   :bind
   (("M-<up>" . move-dup-move-lines-up)
