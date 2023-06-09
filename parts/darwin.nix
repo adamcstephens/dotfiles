@@ -29,20 +29,20 @@
       settings = {
         auto-optimise-store = false;
 
-        trusted-users = ["root" "astephe9"];
+        trusted-users = ["root" "@admin"];
+
         substituters = [
           "https://nix-config.cachix.org"
           "https://nix-community.cachix.org"
+          "https;//ci-serve.junco.dev"
         ];
         trusted-public-keys = [
           "nix-config.cachix.org-1:Vd6raEuldeIZpttVQfrUbLvXJHzzzkS0pezXCVVjDG4="
           "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-          "nix-serve.junco.dev:wAHV4z39dUu7A6/PqOc9bqYxKUXqh2cogkav4+eJrkM="
+          "ci-serve.junco.dev:wAHV4z39dUu7A6/PqOc9bqYxKUXqh2cogkav4+eJrkM="
         ];
+        extra-platforms = "x86_64-darwin";
       };
-      extraOptions = ''
-        extra-platforms = x86_64-darwin
-      '';
     };
 
     services.nix-daemon.enable = true;
@@ -107,12 +107,12 @@ in {
         {
           environment.etc."ssh/sshd_config.d/200-nix.conf".text = ''
             PasswordAuthentication no
-            AllowUsers astephe9@10.3.2.* astephe9@10.20.10.*
+            AllowUsers astephe9@10.3.2.* astephe9@10.20.10.* adam@10.3.2.* adam@10.20.10.*
           '';
 
           environment.shells = [pkgs.fish];
           programs.fish.enable = true;
-          security.pam.enableSudoTouchIdAuth = true;
+          # security.pam.enableSudoTouchIdAuth = true;
           users.users.astephe9 = {
             shell = lib.getExe pkgs.fish;
           };
