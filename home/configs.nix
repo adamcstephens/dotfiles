@@ -50,11 +50,6 @@
       system = "aarch64-darwin";
     };
 
-    silver = {
-      gui = true;
-      system = "aarch64-linux";
-    };
-
     think = {
       gui = true;
       extraModules = [
