@@ -58,8 +58,6 @@
       auto-dark
       avy
       bbww
-      bufler
-      burly
       cape
       chatgpt-shell
       cider

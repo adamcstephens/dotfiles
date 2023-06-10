@@ -13,10 +13,6 @@ project are filtered out."
         window-buffers)
       window-buffers)))
 
-(use-package bufler :init (bufler-mode) (bufler-tabs-mode))
-
-(use-package burly :init (burly-tabs-mode 1))
-
 (use-package
   direnv
   :init (direnv-mode)
