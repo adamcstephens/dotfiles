@@ -150,6 +150,15 @@ the cursor by ARG lines."
           :command-name "phx.server"
           :command-line "iex -S mix phx.server"
           :display "Phoenix Server"
+          :working-dir project-dir))
+      (when-let
+        (
+          (project-dir
+            (locate-dominating-file default-directory "mix.exs")))
+        (list
+          :command-name "mix run"
+          :command-line "iex -S mix run"
+          :display "Mix Run"
           :working-dir project-dir))))
   (add-to-list 'run-command-recipes 'dot/run-command-recipes)
   :custom (run-command-default-runner 'run-command-runner-eat))
