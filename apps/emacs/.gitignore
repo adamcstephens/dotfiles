@@ -26,3 +26,4 @@ undo-fu-session/
 var/
 .emacs.desktop
 .org-id-locations
+auto-save-list/
