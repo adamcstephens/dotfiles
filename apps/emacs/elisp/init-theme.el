@@ -59,6 +59,14 @@
 
   (setq global-mode-string (system-name))
 
+  ;; flash modeline instead of ringing the bell
+  (setq
+    visible-bell nil
+    ring-bell-function 'dot/flash-mode-line)
+  (defun dot/flash-mode-line ()
+    (invert-face 'mode-line)
+    (run-with-timer 0.1 nil #'invert-face 'mode-line))
+
   (when (and (eq system-type 'darwin) (eq window-system 'ns))
     (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
     (add-to-list 'default-frame-alist '(ns-appearance . dark))

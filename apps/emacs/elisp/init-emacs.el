@@ -53,14 +53,6 @@
   ;; keep at least this many lines while scrolling
   (setq scroll-margin 4)
 
-  ;; flash modeline instead of ringing the bell
-  (setq
-    visible-bell nil
-    ring-bell-function 'dot/flash-mode-line)
-  (defun dot/flash-mode-line ()
-    (invert-face 'mode-line)
-    (run-with-timer 0.1 nil #'invert-face 'mode-line))
-
   ;; enable line numbers
   ;; (global-display-line-numbers-mode)
 
