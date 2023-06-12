@@ -51,8 +51,8 @@
 
     pushd ~/.dotfiles
       if [ -e .nixos-managed ]; then
-        ${lib.getExe pkgs.git} restore apps/nix/nixpkgs-dev.nix
         ${lib.getExe pkgs.git} reset
+        ${lib.getExe pkgs.git} restore apps/nix/nixpkgs-dev.nix
         ${lib.getExe pkgs.git} pull
       fi
     popd
