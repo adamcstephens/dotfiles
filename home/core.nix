@@ -72,42 +72,47 @@
     popd
   '';
 
-  home.packages = [
-    # my terms
-    (pkgs.callPackage ../packages/terminfo {})
+  home.packages =
+    [
+      # my terms
+      (pkgs.callPackage ../packages/terminfo {})
 
-    pkgs.bc
-    pkgs.calc
-    pkgs.colordiff
-    pkgs.comma
-    pkgs.delta
-    pkgs.difftastic
-    pkgs.direnv
-    pkgs.doggo
-    pkgs.du-dust
-    pkgs.fd
-    pkgs.gh
-    pkgs.htop
-    pkgs.jq
-    pkgs.just
-    pkgs.kitty.shell_integration
-    pkgs.kitty.terminfo
-    pkgs.lazygit
-    pkgs.lsd
-    pkgs.mtr
-    pkgs.nix-output-monitor
-    pkgs.pwgen
-    pkgs.tio
-    inputs.sandbox.packages.${pkgs.system}.trippy
-    pkgs.wget
+      pkgs.bc
+      pkgs.colordiff
+      pkgs.comma
+      pkgs.delta
+      pkgs.difftastic
+      pkgs.direnv
+      pkgs.doggo
+      pkgs.du-dust
+      pkgs.fd
+      pkgs.gh
+      pkgs.htop
+      pkgs.jq
+      pkgs.just
+      pkgs.kitty.shell_integration
+      pkgs.kitty.terminfo
+      pkgs.lazygit
+      pkgs.lsd
+      pkgs.mtr
+      pkgs.nix-output-monitor
+      pkgs.pwgen
+      pkgs.tio
+      inputs.sandbox.packages.${pkgs.system}.trippy
+      pkgs.wget
 
-    # global editor packages
-    pkgs.alejandra
-    inputs.nil.packages.${pkgs.system}.nil
-    pkgs.shfmt
+      # global editor packages
+      pkgs.alejandra
+      inputs.nil.packages.${pkgs.system}.nil
+      pkgs.shfmt
 
-    pkgs.babashka
-  ];
+      pkgs.babashka
+    ]
+    ++ (
+      lib.optionals pkgs.stdenv.isLinux [
+        pkgs.calc
+      ]
+    );
 
   home.sessionVariables = {
     EDITOR = "${config.home.homeDirectory}/.dotfiles/bin/editor";
