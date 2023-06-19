@@ -20,7 +20,7 @@
     pkgs.groff
     pkgs.graphicsmagick
     pkgs.multimarkdown
-    inputs.nixd.packages.${pkgs.system}.nixd
+    inputs.nil.packages.${pkgs.system}.nil
     pkgs.nodejs
     pkgs.nodePackages.bash-language-server
     pkgs.nodePackages.mermaid-cli
