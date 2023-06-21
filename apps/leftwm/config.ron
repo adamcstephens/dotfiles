@@ -31,7 +31,7 @@
         Monocle,
     ],
     layout_mode: Tag,
-    insert_behavior: Bottom,
+    insert_behavior: Top,
     scratchpad: [
         (name: "emacs", value: "emacsclient --create-frame --eval '(switch-to-buffer \"*scratch*\")'", x: 860, y: 390, height: 300, width: 200),
         (name: "Alacritty", value: "alacritty", x: 860, y: 390, height: 300, width: 200),
