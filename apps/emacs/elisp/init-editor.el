@@ -97,6 +97,10 @@ the cursor by ARG lines."
     ("C-;" . flyspell-correct-wrapper)
     ("[down-mouse-3]" . flyspell-correct-word)))
 
+(use-package golden-ratio
+  :init
+  (golden-ratio-mode 1))
+
 (use-package hideshow :hook (prog-mode . hs-minor-mode))
 
 (use-package

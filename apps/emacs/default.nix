@@ -79,6 +79,7 @@
       fish-mode
       flyspell-correct
       git-auto-commit-mode
+      golden-ratio
       haskell-mode
       hide-mode-line
       just-mode
