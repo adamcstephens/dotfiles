@@ -21,12 +21,21 @@
           pkgs.nvd
         ];
       };
+
       elixir = pkgs.mkShell {
-        packages = [
-          pkgs.elixir
-          pkgs.elixir-ls
-          pkgs.inotify-tools
-        ];
+        packages =
+          [
+            pkgs.pkgs.beam.packages.erlangR25.elixir_1_15
+            pkgs.pkgs.beam.packages.erlangR25.elixir-ls
+          ]
+          ++ (
+            lib.optionals pkgs.stdenv.isLinux
+            [pkgs.inotify-tools]
+          );
+
+        shellHook = ''
+          export ERL_AFLAGS="-kernel shell_history enabled -kernel shell_history_file_bytes 1024000"
+        '';
       };
       go = pkgs.mkShell {
         packages = [
@@ -42,6 +51,7 @@
           export CGO_ENABLED=1
         '';
       };
+
       kmonad = pkgs.mkShell {
         name = "kmonad";
         packages =
@@ -54,12 +64,14 @@
           ]
           else [inputs.kmonad.packages.${system}.kmonad];
       };
+
       media = pkgs.mkShellNoCC {
         name = "media";
         packages = [
           pkgs.ffmpeg_5-full
         ];
       };
+
       nixpkgs = pkgs.mkShellNoCC {
         packages =
           [
@@ -73,11 +85,13 @@
             pkgs.bubblewrap
           ]);
       };
+
       python = pkgs.mkShellNoCC {
         packages = [
           (pkgs.python3.withPackages (py: [py.black py.hexdump py.paramiko]))
         ];
       };
+
       xmonad = pkgs.mkShellNoCC {
         packages = [
           (pkgs.ghc.withPackages (ps: [
