@@ -77,6 +77,7 @@
       # my terms
       (pkgs.callPackage ../packages/terminfo {})
 
+      pkgs.age-plugin-yubikey
       pkgs.bc
       pkgs.colordiff
       pkgs.comma
@@ -110,6 +111,7 @@
     ]
     ++ (
       lib.optionals pkgs.stdenv.isLinux [
+        inputs.nixd.packages.${pkgs.system}.nixd
         pkgs.calc
       ]
     );
