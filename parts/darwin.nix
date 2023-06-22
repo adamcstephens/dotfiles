@@ -34,7 +34,7 @@
         substituters = [
           "https://nix-config.cachix.org"
           "https://nix-community.cachix.org"
-          "https;//ci-serve.junco.dev"
+          "https://ci-serve.junco.dev"
         ];
         trusted-public-keys = [
           "nix-config.cachix.org-1:Vd6raEuldeIZpttVQfrUbLvXJHzzzkS0pezXCVVjDG4="
