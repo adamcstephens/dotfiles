@@ -11,15 +11,6 @@
       ];
     };
 
-    bonk = {
-      gui = true;
-      extraModules = [
-        {
-          dotfiles.gui.dpi = 148;
-        }
-      ];
-    };
-
     drink = {
       gui = true;
       extraModules = [
