@@ -12,6 +12,8 @@ in
     #!${lib.getExe bash}
     set -e
 
+    unset DISPLAY
+
     : "''${HMPROFILE:=$(${home-profile-selector}/bin/home-profile-selector)}"
 
     if [ -n "$1" ]; then
