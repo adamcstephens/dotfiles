@@ -31,7 +31,6 @@
     pkgs.shellcheck
     pkgs.shfmt
     pkgs.sqlite
-    pkgs.texlive.combined.scheme-full
   ];
 
   emacsSource = pkgs.emacs29;
