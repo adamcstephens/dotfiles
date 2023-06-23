@@ -36,7 +36,10 @@
         (name: "emacs", value: "emacsclient --create-frame --eval '(switch-to-buffer \"*scratch*\")'", x: 860, y: 390, height: 300, width: 200),
         (name: "Alacritty", value: "alacritty", x: 860, y: 390, height: 300, width: 200),
     ],
-    window_rules: [],
+    window_rules: [
+        ( window_class: "firefox", spawn_on_tag: 1 ),
+        ( window_class: "steam", spawn_on_tag: 5 ),
+    ],
     disable_current_tag_swap: false,
     disable_tile_drag: true,
     disable_window_snap: true,
