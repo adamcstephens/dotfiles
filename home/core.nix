@@ -105,6 +105,11 @@
       # global editor packages
       pkgs.alejandra
       inputs.nil.packages.${pkgs.system}.nil
+      (pkgs.nixfmt.overrideAttrs (old: {
+        version = "0.6.0-${builtins.substring 0 7 inputs.nixfmt-rfc.rev}";
+
+        src = inputs.nixfmt-rfc;
+      }))
       pkgs.shfmt
 
       pkgs.babashka

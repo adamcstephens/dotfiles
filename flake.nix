@@ -20,6 +20,8 @@
     nix-wallpaper.inputs.nixpkgs.follows = "nixpkgs";
     nixd.url = "github:nix-community/nixd";
     nixd.inputs.nixpkgs.follows = "nixpkgs";
+    nixfmt-rfc.url = "github:piegamesde/nixfmt/rfc101-style";
+    nixfmt-rfc.flake = false;
     sandbox.url = "github:adamcstephens/nix-sandbox";
     sandbox.inputs.nixpkgs.follows = "nixpkgs";
   };

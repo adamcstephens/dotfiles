@@ -376,6 +376,23 @@
         "type": "github"
       }
     },
+    "nixfmt-rfc": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1687695833,
+        "narHash": "sha256-7yBUgGbsBlNgWIB75guek+UWcTTbZbouuMrnmVcnP9k=",
+        "owner": "piegamesde",
+        "repo": "nixfmt",
+        "rev": "c568bfab14eeb825104ccaa02c56bca297199fab",
+        "type": "github"
+      },
+      "original": {
+        "owner": "piegamesde",
+        "ref": "rfc101-style",
+        "repo": "nixfmt",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1673226411,
@@ -598,6 +615,7 @@
         "nix-colors": "nix-colors",
         "nix-wallpaper": "nix-wallpaper",
         "nixd": "nixd",
+        "nixfmt-rfc": "nixfmt-rfc",
         "nixpkgs": "nixpkgs_4",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "sandbox": "sandbox"
