@@ -119,6 +119,7 @@ in {
       pkgs.element-desktop
       pkgs.firefox-wayland
       pkgs.cinnamon.nemo
+      pkgs.libreoffice-fresh
       pkgs.remmina
 
       # wrap webcord to remove state file https://github.com/SpacingBat3/WebCord/issues/360
