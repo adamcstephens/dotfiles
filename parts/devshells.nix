@@ -75,6 +75,7 @@
       nixpkgs = pkgs.mkShellNoCC {
         packages =
           [
+            pkgs.nixVersions.nix_2_16
             pkgs.nix-bisect
             pkgs.nix-index
             pkgs.nix-update
@@ -84,6 +85,12 @@
           ++ (lib.optionals pkgs.stdenv.isLinux [
             pkgs.bubblewrap
           ]);
+      };
+
+      js = pkgs.mkShellNoCC {
+        packages = [
+          pkgs.nodejs
+        ];
       };
 
       python = pkgs.mkShellNoCC {
