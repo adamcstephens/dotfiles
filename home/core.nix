@@ -72,54 +72,49 @@
     popd
   '';
 
-  home.packages =
-    [
-      # my terms
-      (pkgs.callPackage ../packages/terminfo {})
+  home.packages = [
+    # my terms
+    (pkgs.callPackage ../packages/terminfo {})
 
-      pkgs.age-plugin-yubikey
-      pkgs.bc
-      pkgs.colordiff
-      pkgs.comma
-      pkgs.delta
-      pkgs.difftastic
-      pkgs.direnv
-      pkgs.doggo
-      pkgs.du-dust
-      pkgs.fd
-      pkgs.gh
-      pkgs.htop
-      pkgs.jq
-      pkgs.just
-      pkgs.kitty.shell_integration
-      pkgs.kitty.terminfo
-      pkgs.lazygit
-      pkgs.lsd
-      pkgs.mtr
-      pkgs.nix-output-monitor
-      pkgs.pwgen
-      pkgs.tio
-      inputs.sandbox.packages.${pkgs.system}.trippy
-      pkgs.wget
+    pkgs.age-plugin-yubikey
+    pkgs.bc
+    pkgs.calc
+    pkgs.colordiff
+    pkgs.comma
+    pkgs.delta
+    pkgs.difftastic
+    pkgs.direnv
+    pkgs.doggo
+    pkgs.du-dust
+    pkgs.fd
+    pkgs.gh
+    pkgs.htop
+    pkgs.jq
+    pkgs.just
+    pkgs.kitty.shell_integration
+    pkgs.kitty.terminfo
+    pkgs.lazygit
+    pkgs.lsd
+    pkgs.mtr
+    pkgs.nix-output-monitor
+    pkgs.pwgen
+    pkgs.tio
+    inputs.sandbox.packages.${pkgs.system}.trippy
+    pkgs.wget
 
-      # global editor packages
-      pkgs.alejandra
-      inputs.nil.packages.${pkgs.system}.nil
-      (pkgs.nixfmt.overrideAttrs (old: {
-        version = "0.6.0-${builtins.substring 0 7 inputs.nixfmt-rfc.rev}";
+    # global editor packages
+    pkgs.alejandra
+    inputs.nil.packages.${pkgs.system}.nil
+    inputs.nixd.packages.${pkgs.system}.nixd
+    (pkgs.nixfmt.overrideAttrs (old: {
+      version = "0.6.0-${builtins.substring 0 7 inputs.nixfmt-rfc.rev}";
 
-        src = inputs.nixfmt-rfc;
-      }))
-      pkgs.shfmt
+      src = inputs.nixfmt-rfc;
+    }))
+    pkgs.shfmt
 
-      pkgs.babashka
-    ]
-    ++ (
-      lib.optionals pkgs.stdenv.isLinux [
-        inputs.nixd.packages.${pkgs.system}.nixd
-        pkgs.calc
-      ]
-    );
+    pkgs.babashka
+  ];
 
   home.sessionVariables = {
     EDITOR = "${config.home.homeDirectory}/.dotfiles/bin/editor";
