@@ -169,6 +169,11 @@
       "formatting": {
         "command": ["alejandra"]
       }
+    },
+    "nixd": {
+      "formatting": {
+        "command": "alejandra"
+      }
     }
   },
   "haskell.manageHLS": "PATH",
@@ -176,7 +181,6 @@
     "editor.defaultFormatter": "haskell.haskell"
   },
   "python.formatting.provider": "black",
-  "workbench.colorTheme": "GitHub Dark Colorblind (Beta)",
   "workbench.preferredLightColorTheme": "GitHub Light Colorblind (Beta)",
   "git.openRepositoryInParentFolders": "always",
   "editor.inlineSuggest.enabled": true,
@@ -234,5 +238,6 @@
   ],
   "[ignore]": {
     "editor.defaultFormatter": "foxundermoon.shell-format"
-  }
+  },
+  "workbench.colorTheme": "GitHub Dark Colorblind (Beta)"
 }
