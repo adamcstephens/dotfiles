@@ -38,7 +38,8 @@
     ],
     window_rules: [
         ( window_class: "firefox", spawn_on_tag: 1 ),
-        ( window_class: "steam", spawn_on_tag: 5 ),
+        ( window_class: "steam", spawn_on_tag: 7 ),
+        ( window_class: "Cities.*", spawn_on_tag: 8 ),
     ],
     disable_current_tag_swap: false,
     disable_tile_drag: true,

@@ -1,3 +1,6 @@
+a5huynh.vscode-ron
+betterthantomorrow.calva
+betterthantomorrow.calva-spritz
 bmalehorn.vscode-fish
 DavidAnson.vscode-markdownlint
 dustinsanders.an-old-hope-theme-vscode

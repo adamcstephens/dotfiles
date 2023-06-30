@@ -136,10 +136,6 @@
     "when": "editorTextFocus"
   },
   {
-    "key": "ctrl+k ctrl+p",
-    "command": "git.push"
-  },
-  {
     "key": "ctrl+k ctrl+c",
     "command": "-editor.action.addCommentLine",
     "when": "editorTextFocus && !editorReadonly"
@@ -163,7 +159,7 @@
     "command": "git.checkout"
   },
   {
-    "key": "ctrl+k ctrl+l",
+    "key": "ctrl+shift+g f",
     "command": "git.pull"
   },
   {
@@ -352,5 +348,25 @@
       "select": true
     },
     "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+a",
+    "command": "-editor.action.selectAll"
+  },
+  {
+    "key": "ctrl+e",
+    "command": "cursorLineEnd"
+  },
+  {
+    "key": "ctrl+a",
+    "command": "cursorLineStart"
+  },
+  {
+    "key": "ctrl+shift+g p",
+    "command": "git.push"
+  },
+  {
+    "key": "ctrl+shift+g y",
+    "command": "git.sync"
   }
 ]
