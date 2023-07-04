@@ -11,30 +11,30 @@
       ];
     };
 
-    drink = {
-      gui = true;
-      extraModules = [
-        ../apps/goldencheetah
-        {
-          dotfiles.gui.insecure = true;
-          home.sessionVariables = {
-            LIBVA_DRIVER_NAME = "i965";
-          };
-          programs.firefox.enable = true;
-          programs.firefox.profiles = {
-            default = {
-              id = 0;
-              settings = {
-                "media.ffmpeg.vaapi.enabled" = true;
-                "media.ffvpx.enabled" = false;
-                "media.av1.enabled" = false;
-                "gfx.webrender.all" = true;
-              };
-            };
-          };
-        }
-      ];
-    };
+    # drink = {
+    #   gui = true;
+    #   extraModules = [
+    #     ../apps/goldencheetah
+    #     {
+    #       dotfiles.gui.insecure = true;
+    #       home.sessionVariables = {
+    #         LIBVA_DRIVER_NAME = "i965";
+    #       };
+    #       programs.firefox.enable = true;
+    #       programs.firefox.profiles = {
+    #         default = {
+    #           id = 0;
+    #           settings = {
+    #             "media.ffmpeg.vaapi.enabled" = true;
+    #             "media.ffvpx.enabled" = false;
+    #             "media.av1.enabled" = false;
+    #             "gfx.webrender.all" = true;
+    #           };
+    #         };
+    #       };
+    #     }
+    #   ];
+    # };
 
     EMAT-C02G44CPQ05P = {
       username = "astephe9";
