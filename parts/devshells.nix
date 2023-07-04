@@ -79,12 +79,18 @@
             pkgs.nix-bisect
             pkgs.nix-index
             pkgs.nix-update
+            pkgs.nixpkgs-fmt
             pkgs.nixpkgs-review
             pkgs.deadnix
           ]
           ++ (lib.optionals pkgs.stdenv.isLinux [
             pkgs.bubblewrap
           ]);
+
+        shellHook = ''
+          ln -sf $HOME/.dotfiles/apps/nix/dir-locals.el $PWD/.dir-locals.el
+          ln -sf $HOME/.dotfiles/apps/nix/vscode $PWD/.vscode
+        '';
       };
 
       js = pkgs.mkShellNoCC {
