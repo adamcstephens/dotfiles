@@ -11,3 +11,7 @@ steps:
     when:
       event: cron
       cron: update
+
+when:
+  event: cron
+  cron: update
