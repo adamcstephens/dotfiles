@@ -85,7 +85,8 @@
   "remote.SSH.lockfilesInTmp": true,
   "remote.SSH.remotePlatform": {
     "blank": "linux",
-    "lxd1": "linux"
+    "lxd1": "linux",
+    "crank": "linux"
   },
   "scm.defaultViewMode": "tree",
   "search.useGlobalIgnoreFiles": true,
@@ -240,5 +241,10 @@
     "editor.defaultFormatter": "foxundermoon.shell-format"
   },
   "workbench.colorTheme": "GitHub Dark Colorblind (Beta)",
-  "calva.showCalvaSaysOnStart": false
+  "calva.showCalvaSaysOnStart": false,
+  "search.useParentIgnoreFiles": true,
+  "terminal.integrated.enableMultiLinePasteWarning": false,
+  "[phoenix-heex]": {
+    "editor.defaultFormatter": "JakeBecker.elixir-ls"
+  }
 }
