@@ -92,6 +92,7 @@
       mwim
       nim-mode
       nix-mode
+      nushell-mode
       olivetti
       orderless
       org-appear
