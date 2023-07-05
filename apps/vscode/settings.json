@@ -246,5 +246,8 @@
   "terminal.integrated.enableMultiLinePasteWarning": false,
   "[phoenix-heex]": {
     "editor.defaultFormatter": "JakeBecker.elixir-ls"
+  },
+  "[kmonad]": {
+    "editor.defaultFormatter": "entibo.vscode-kmonad-format"
   }
 }

@@ -2,10 +2,12 @@ a5huynh.vscode-ron
 betterthantomorrow.calva
 betterthantomorrow.calva-spritz
 bmalehorn.vscode-fish
+canadaduane.vscode-kmonad
 DavidAnson.vscode-markdownlint
 dustinsanders.an-old-hope-theme-vscode
 eamodio.gitlens
 EditorConfig.EditorConfig
+entibo.vscode-kmonad-format
 esbenp.prettier-vscode
 firefox-devtools.vscode-firefox-debug
 foxundermoon.shell-format
