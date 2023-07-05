@@ -105,7 +105,7 @@
     # global editor packages
     pkgs.alejandra
     inputs.nil.packages.${pkgs.system}.nil
-    inputs.nixd.packages.${pkgs.system}.nixd
+    pkgs.nixd
     (pkgs.nixfmt.overrideAttrs (old: {
       version = "0.6.0-${builtins.substring 0 7 inputs.nixfmt-rfc.rev}";
 

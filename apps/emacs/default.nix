@@ -10,7 +10,6 @@
   extraBins = [
     pkgs.alejandra
     aspell
-    pkgs.clojure-lsp
     pkgs.coreutils
     pkgs.curl
     pkgs.diffutils
@@ -20,7 +19,6 @@
     pkgs.groff
     pkgs.graphicsmagick
     pkgs.multimarkdown
-    inputs.nil.packages.${pkgs.system}.nil
     pkgs.nodejs
     pkgs.nodePackages.bash-language-server
     pkgs.nodePackages.mermaid-cli

@@ -11,7 +11,6 @@
         packages = [
           pkgs.alejandra
           pkgs.babashka
-          inputs.sandbox.packages.${pkgs.system}.cljfmt
           pkgs.curl
           pkgs.deadnix
           pkgs.git-subrepo
