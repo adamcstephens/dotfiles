@@ -75,7 +75,7 @@
 
         shellHook = ''
           ln -sf $HOME/.dotfiles/apps/nix/dir-locals.el $PWD/.dir-locals.el
-          ln -sf $HOME/.dotfiles/apps/nix/vscode $PWD/.vscode
+          ln -sfT $HOME/.dotfiles/apps/nix/vscode $PWD/.vscode
         '';
       };
 
@@ -88,6 +88,14 @@
       python = pkgs.mkShellNoCC {
         packages = [
           (pkgs.python3.withPackages (py: [py.black py.hexdump py.paramiko]))
+        ];
+      };
+
+      rust = pkgs.mkShell {
+        packages = [
+          pkgs.cargo
+          pkgs.rustc
+          pkgs.rust-analyzer
         ];
       };
 
