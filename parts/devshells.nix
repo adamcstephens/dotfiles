@@ -10,7 +10,7 @@
         name = "dots";
         packages = [
           pkgs.alejandra
-          pkgs.babashka
+          pkgs.babashka-unwrapped
           pkgs.curl
           pkgs.deadnix
           pkgs.git-subrepo

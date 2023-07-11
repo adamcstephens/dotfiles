@@ -113,7 +113,7 @@
     }))
     pkgs.shfmt
 
-    pkgs.babashka
+    pkgs.babashka-unwrapped
   ];
 
   home.sessionVariables = {
