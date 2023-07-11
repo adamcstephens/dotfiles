@@ -21,7 +21,6 @@
     pkgs.multimarkdown
     pkgs.nodejs
     pkgs.nodePackages.bash-language-server
-    pkgs.nodePackages.mermaid-cli
     pkgs.nodePackages.prettier
     pkgs.pandoc
     pkgs.python3Minimal
