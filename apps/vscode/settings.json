@@ -86,7 +86,8 @@
   "remote.SSH.remotePlatform": {
     "blank": "linux",
     "lxd1": "linux",
-    "crank": "linux"
+    "crank": "linux",
+    "funk": "linux"
   },
   "scm.defaultViewMode": "tree",
   "search.useGlobalIgnoreFiles": true,
