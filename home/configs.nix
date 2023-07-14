@@ -3,7 +3,7 @@
     blank = {
       gui = true;
       extraModules = [
-        ../apps/goldencheetah
+        ../apps/solaar
         {
           dotfiles.gui.dpi = 148;
         }
