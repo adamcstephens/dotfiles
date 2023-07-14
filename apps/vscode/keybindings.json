@@ -368,5 +368,10 @@
   {
     "key": "ctrl+shift+g y",
     "command": "git.sync"
+  },
+  {
+    "key": "alt+backspace",
+    "command": "deleteWordLeft",
+    "when": "textInputFocus && !editorReadonly"
   }
 ]
