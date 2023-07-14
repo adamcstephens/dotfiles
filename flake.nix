@@ -30,7 +30,7 @@
     flake-parts.lib.mkFlake {inherit inputs;} {
       imports = [
         ./parts/home.nix
-        ./home/configs.nix
+        ./home/profiles.nix
 
         ./parts/darwin.nix
         ./parts/devshells.nix

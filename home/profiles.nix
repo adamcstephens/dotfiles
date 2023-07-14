@@ -13,24 +13,14 @@
     # drink = {
     #   gui = true;
     #   extraModules = [
+    #     ../apps/firefox
     #     ../apps/goldencheetah
     #     {
     #       dotfiles.gui.insecure = true;
     #       home.sessionVariables = {
     #         LIBVA_DRIVER_NAME = "i965";
     #       };
-    #       programs.firefox.enable = true;
-    #       programs.firefox.profiles = {
-    #         default = {
-    #           id = 0;
-    #           settings = {
-    #             "media.ffmpeg.vaapi.enabled" = true;
-    #             "media.ffvpx.enabled" = false;
-    #             "media.av1.enabled" = false;
-    #             "gfx.webrender.all" = true;
-    #           };
-    #         };
-    #       };
+    #
     #     }
     #   ];
     # };
