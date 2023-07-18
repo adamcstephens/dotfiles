@@ -373,5 +373,15 @@
     "key": "alt+backspace",
     "command": "deleteWordLeft",
     "when": "textInputFocus && !editorReadonly"
+  },
+  {
+    "key": "alt+up",
+    "command": "-paredit.dragSexprBackward",
+    "when": "calva:keybindingsEnabled && config.calva.paredit.hijackVSCodeDefaults && editorTextFocus && !calva:cursorInComment && editorLangId == 'clojure' && paredit:keyMap =~ /original|strict/"
+  },
+  {
+    "key": "alt+down",
+    "command": "-paredit.dragSexprForward",
+    "when": "calva:keybindingsEnabled && config.calva.paredit.hijackVSCodeDefaults && editorTextFocus && !calva:cursorInComment && editorLangId == 'clojure' && paredit:keyMap =~ /original|strict/"
   }
 ]
