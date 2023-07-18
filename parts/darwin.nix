@@ -39,7 +39,7 @@
         trusted-public-keys = [
           "nix-config.cachix.org-1:Vd6raEuldeIZpttVQfrUbLvXJHzzzkS0pezXCVVjDG4="
           "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-          "ci-serve.junco.dev:wAHV4z39dUu7A6/PqOc9bqYxKUXqh2cogkav4+eJrkM="
+          "ci-serve.junco.dev:m9ef+cUMwIAKn+wslKORuF+clG9fUUrdjErp6pxC9UQ="
         ];
         extra-platforms = "x86_64-darwin";
       };
