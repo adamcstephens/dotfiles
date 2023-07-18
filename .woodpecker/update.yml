@@ -5,13 +5,15 @@ steps:
   build:
     image: bash
     commands:
-      - nix develop .# --command ./bin/update.bb
+      - flake-update --branch daily --pr-message "Daily Update"
+    environment:
+      GIT_USER_EMAIL: ruckus-ci@junco.dev
     secrets:
       - git_token
     when:
       event: cron
-      cron: update
+      cron: daily
 
 when:
   event: cron
-  cron: update
+  cron: daily
