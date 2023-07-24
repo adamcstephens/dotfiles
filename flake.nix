@@ -18,6 +18,8 @@
     nix-wallpaper.inputs.nixpkgs.follows = "nixpkgs";
     nixfmt-rfc.url = "github:piegamesde/nixfmt/rfc101-style";
     nixfmt-rfc.flake = false;
+    profile-parts.url = "git+https://codeberg.org/adamcstephens/profile-parts.git";
+    profile-parts.inputs.nixpkgs.follows = "nixpkgs";
     sandbox.url = "github:adamcstephens/nix-sandbox";
     sandbox.inputs.nixpkgs.follows = "nixpkgs";
   };
@@ -29,6 +31,7 @@
   } @ inputs:
     flake-parts.lib.mkFlake {inherit inputs;} {
       imports = [
+        inputs.profile-parts.flakeModules.home-manager
         ./parts/home.nix
         ./home/profiles.nix
 
@@ -44,12 +47,6 @@
         system,
         ...
       }: {
-        _module.args.pkgs = import self.inputs.nixpkgs {
-          inherit system;
-          overlays = [self.overlays.default self.overlays.upstreams];
-          config.allowUnfree = true;
-        };
-
         packages = import ./packages {
           inherit pkgs;
           homeConfigurations = builtins.attrNames self.homeConfigurations;

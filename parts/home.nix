@@ -3,12 +3,13 @@
   config,
   inputs,
   lib,
+  self,
   withSystem,
   ...
 }: let
-  cfg = config.dotfiles.homeConfigurations;
-  homes = builtins.mapAttrs (_: config: config.finalHome) cfg;
-  packages = builtins.attrValues (builtins.mapAttrs (_: config: config.packageModule) cfg);
+  cfgs = config.dotfiles.homeConfigurations;
+
+  homes = lib.mapAttrs (name: part: part.finalProfile) cfgs;
 in {
   options = {
     dotfiles.homeConfigurations = lib.mkOption {
@@ -23,40 +24,24 @@ in {
             default = "adam";
           };
 
-          extraModules = lib.mkOption {
-            type = lib.types.listOf lib.types.unspecified;
-            default = [];
-          };
-
           system = lib.mkOption {
             type = lib.types.enum ["x86_64-linux" "aarch64-linux" "aarch64-darwin" "armv6l-linux"];
             default = "x86_64-linux";
           };
 
+          extraModules = lib.mkOption {
+            type = lib.types.listOf lib.types.unspecified;
+            default = [];
+          };
+
           gui = lib.mkEnableOption "Enable linux gui support";
 
-          # private
-          finalHome = lib.mkOption {
+          finalProfile = lib.mkOption {
             type = lib.types.unspecified;
             readOnly = true;
           };
 
           finalModules = lib.mkOption {
-            type = lib.types.unspecified;
-            readOnly = true;
-          };
-
-          packageName = lib.mkOption {
-            type = lib.types.str;
-            readOnly = true;
-          };
-
-          finalPackage = lib.mkOption {
-            type = lib.types.package;
-            readOnly = true;
-          };
-
-          packageModule = lib.mkOption {
             type = lib.types.unspecified;
             readOnly = true;
           };
@@ -67,13 +52,12 @@ in {
             {pkgs, ...}:
               [
                 ../home/core.nix
-
                 {
-                  home.username = config.username;
-                  home.homeDirectory =
-                    if pkgs.stdenv.isDarwin
-                    then "/Users/${config.username}"
-                    else "/home/${config.username}";
+                  _module.args.pkgs = lib.mkForce (import self.inputs.nixpkgs {
+                    inherit (config) system;
+                    overlays = [self.overlays.default self.overlays.upstreams];
+                    config.allowUnfree = true;
+                  });
                 }
               ]
               ++ config.extraModules
@@ -81,31 +65,25 @@ in {
               ++ (lib.optionals config.gui [../home/linux-gui.nix])
           );
 
-          finalHome = withSystem config.system ({pkgs, ...}:
-            inputs.home-manager.lib.homeManagerConfiguration {
-              inherit pkgs;
+          finalProfile = {
+            inherit (config) system username;
 
-              modules = config.finalModules;
+            modules = config.finalModules;
 
-              extraSpecialArgs = {
-                inherit inputs;
-              };
-            });
-
-          packageName = "home/config/${name}";
-          finalPackage = config.finalHome.activationPackage;
-          packageModule = {${config.system}.${config.packageName} = config.finalPackage;};
+            specialArgs = {inherit inputs;};
+          };
         };
       }));
     };
     default = {};
   };
 
-  config.flake.homeConfigurations = homes;
-  config.flake.homeModules = builtins.mapAttrs (_: value: value.finalModules) cfg;
-  config.flake.lib.findHome = hostname: system:
-    if (builtins.elem hostname (builtins.attrNames cfg))
-    then hostname
-    else system;
-  config.flake.packages = lib.mkMerge packages;
+  config = {
+    profile-parts.home-manager = homes;
+    flake.homeModules = builtins.mapAttrs (_: value: value.finalModules) cfgs;
+    flake.lib.findHome = hostname: system:
+      if (builtins.elem hostname (builtins.attrNames cfgs))
+      then hostname
+      else system;
+  };
 }

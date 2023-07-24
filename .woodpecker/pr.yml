@@ -16,7 +16,7 @@ steps:
     settings:
       targets:
         - ".#devShells.x86_64-linux.default"
-        - ".#home/config/blank"
+        - ".#home/blank"
 
 when:
   - event: pull_request
