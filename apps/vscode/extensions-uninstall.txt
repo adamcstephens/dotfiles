@@ -3,6 +3,7 @@ berberman.vscode-cabal-fmt
 Binx.modus-vivendi-code
 danielgjackson.auto-dark-mode-windows
 donjayamanne.githistory
+eamodio.gitlens
 earthly.earthfile-syntax-highlighting
 eww-yuck.yuck
 filipesabella.live-p5

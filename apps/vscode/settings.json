@@ -250,5 +250,7 @@
   },
   "[kmonad]": {
     "editor.defaultFormatter": "entibo.vscode-kmonad-format"
-  }
+  },
+  "git.autorefresh": false,
+  "gitlens.views.repositories.autoRefresh": false
 }
