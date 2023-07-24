@@ -8,15 +8,15 @@
       "locked": {
         "lastModified": 1690223130,
         "narHash": "sha256-/a7Cz30LQuLw5m528M9yv930Je9T7M2CPSIj2xAzQMU=",
-        "owner": "adamcstephens",
-        "repo": "apple-fonts.nix",
+        "ref": "refs/heads/main",
         "rev": "0f83821330101d102e1b90864ab376434ec0689a",
-        "type": "github"
+        "revCount": 11,
+        "type": "git",
+        "url": "https://codeberg.org/adamcstephens/apple-fonts.nix"
       },
       "original": {
-        "owner": "adamcstephens",
-        "repo": "apple-fonts.nix",
-        "type": "github"
+        "type": "git",
+        "url": "https://codeberg.org/adamcstephens/apple-fonts.nix"
       }
     },
     "base16-schemes": {
@@ -592,11 +592,11 @@
         "rev": "8798ad4d93518b5c8415fa01710c91eb69189571",
         "revCount": 1,
         "type": "git",
-        "url": "https://codeberg.org/adamcstephens/profile-parts.git"
+        "url": "https://codeberg.org/adamcstephens/profile-parts"
       },
       "original": {
         "type": "git",
-        "url": "https://codeberg.org/adamcstephens/profile-parts.git"
+        "url": "https://codeberg.org/adamcstephens/profile-parts"
       }
     },
     "root": {
@@ -650,17 +650,17 @@
         ]
       },
       "locked": {
-        "lastModified": 1688748348,
-        "narHash": "sha256-ol8A4j7pe3vN/tqKcgB/g4ZWfCKIg0B6QRLgMLYzgFA=",
-        "owner": "adamcstephens",
-        "repo": "nix-sandbox",
-        "rev": "25ae1cca55ae39f21ec4a6328da5bae95070bfb1",
-        "type": "github"
+        "lastModified": 1690227521,
+        "narHash": "sha256-Xwx67AzFQJeWlm6iBf37In/gZXvp+hZ4TfXGNRP+/Ng=",
+        "ref": "refs/heads/main",
+        "rev": "f417d29df6d18eb18c59b5ae2970ebad2229ff61",
+        "revCount": 1,
+        "type": "git",
+        "url": "https://codeberg.org/adamcstephens/nix-sandbox"
       },
       "original": {
-        "owner": "adamcstephens",
-        "repo": "nix-sandbox",
-        "type": "github"
+        "type": "git",
+        "url": "https://codeberg.org/adamcstephens/nix-sandbox"
       }
     },
     "systems": {

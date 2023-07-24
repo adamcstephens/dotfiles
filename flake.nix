@@ -3,7 +3,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
-    apple-fonts.url = "github:adamcstephens/apple-fonts.nix";
+    apple-fonts.url = "git+https://codeberg.org/adamcstephens/apple-fonts.nix";
     darwin.url = "github:lnl7/nix-darwin/master";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
     emacs-overlay.url = "github:nix-community/emacs-overlay";
@@ -18,9 +18,9 @@
     nix-wallpaper.inputs.nixpkgs.follows = "nixpkgs";
     nixfmt-rfc.url = "github:piegamesde/nixfmt/rfc101-style";
     nixfmt-rfc.flake = false;
-    profile-parts.url = "git+https://codeberg.org/adamcstephens/profile-parts.git";
+    profile-parts.url = "git+https://codeberg.org/adamcstephens/profile-parts";
     profile-parts.inputs.nixpkgs.follows = "nixpkgs";
-    sandbox.url = "github:adamcstephens/nix-sandbox";
+    sandbox.url = "git+https://codeberg.org/adamcstephens/nix-sandbox";
     sandbox.inputs.nixpkgs.follows = "nixpkgs";
   };
 
