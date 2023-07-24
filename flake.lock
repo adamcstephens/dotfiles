@@ -6,11 +6,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1687876383,
-        "narHash": "sha256-NaQOzFrEPZRniMvaAO6XUAGWot54Oz3iiPlUVBA1i+o=",
+        "lastModified": 1690223130,
+        "narHash": "sha256-/a7Cz30LQuLw5m528M9yv930Je9T7M2CPSIj2xAzQMU=",
         "owner": "adamcstephens",
         "repo": "apple-fonts.nix",
-        "rev": "63d11067bbd7fd7955eaf4f24d489fb90dc22311",
+        "rev": "0f83821330101d102e1b90864ab376434ec0689a",
         "type": "github"
       },
       "original": {
