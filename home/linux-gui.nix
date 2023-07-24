@@ -29,10 +29,10 @@ in {
     ../apps/wofi
 
     # xorg
-    ../apps/leftwm
+    # ../apps/leftwm
     ../apps/polybar
     ../apps/rofi
-    # ../apps/xmonad
+    ../apps/xmonad
 
     # apps
     ../apps/kitty
