@@ -41,6 +41,7 @@ dotKeys =
     ("M-s", windows W.focusDown),
     ("M-w", windows W.focusUp),
     ("M-`", toggleWS)
+    -- M-t will return floating to tiled
   ]
     ++ [("M-C-S-" ++ show i, windows $ copy ws) | (i, ws) <- zip [1 .. 9] dotWorkspaces]
 
