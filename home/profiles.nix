@@ -34,7 +34,6 @@
       gui = true;
       extraModules = [
         ../apps/goldencheetah
-        ../apps/kanata
         {
           dotfiles.gui.dpi = 196;
         }
