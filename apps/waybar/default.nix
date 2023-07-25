@@ -32,18 +32,18 @@
         color: #${config.colorScheme.colors.base0B};
       }
 
+      #tags,
       #workspaces {
-        margin: 0 5px;
+        margin: 0 0px;
       }
 
       #tags button {
         color: #${config.colorScheme.colors.base03};
-        padding: 0 7px;
+        padding: 0 0px;
       }
 
       #tags button.occupied,
       #workspaces button {
-        padding: 0 7px;
         color: #${config.colorScheme.colors.base04};
       }
 
@@ -64,7 +64,7 @@
       /* sway mode */
       #mode {
         color: #${config.colorScheme.colors.base0E};
-        margin: 0px 6px 0px 10px;
+        margin: 0px 6px 0px 5px;
       }
 
       #battery,

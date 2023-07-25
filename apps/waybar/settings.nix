@@ -36,7 +36,7 @@
     };
   };
   "river/tags" = {
-    "num-tags" = 5;
+    "num-tags" = 8;
   };
   "idle_inhibitor" = {
     format = "{icon}";

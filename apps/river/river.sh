@@ -1,9 +1,22 @@
 #!/usr/bin/env sh
 
 ~/.config/river/colors.sh
-~/.dotfiles/apps/river/input.sh
 
+riverctl list-inputs | grep Magic_Trackpad | sort -u | while read -r trackpad; do
+  riverctl input "$trackpad" natural-scroll enabled
+  riverctl input "$trackpad" tap-button-map left-right-middle
+done
+
+riverctl set-repeat 100 220
+
+riverctl input pointer-1739-52619-SYNA8004:00_06CB:CD8B_Touchpad events disabled
+riverctl input pointer-1739-52619-SYNA8004:00_06CB:CD8B_Touchpad natural-scroll enabled
+riverctl input pointer-1739-52619-SYNA8004:00_06CB:CD8B_Touchpad tap-button-map left-right-middle
+riverctl input pointer-1739:52619:SYNA8004:00_06CB:CD8B_Touchpad middle-emulation disabled
+
+riverctl focus-follows-cursor always || riverctl focus-follows-cursor normal
 riverctl map normal Mod4+Shift T spawn 'systemd-cat --identifier=kitty kitty --single-instance'
+riverctl map normal Mod4+Shift Return spawn 'systemd-cat --identifier=kitty kitty --single-instance'
 riverctl map normal Mod4+Shift+Control E spawn 'systemd-cat --identifier=gtk-launch gtk-launch emacsclient'
 riverctl map normal Mod4 D spawn 'systemd-cat --identifier=wofi wofi --show drun,run'
 riverctl map normal Mod4+Shift+Control D spawn 'systemd-cat --identifier=dark dark toggle'
@@ -13,7 +26,7 @@ riverctl map normal Mod4+Shift+Control D spawn 'systemd-cat --identifier=dark da
 # bindsym Alt+print exec screenshot.sh box
 
 riverctl map normal Mod4+Shift Q close
-riverctl map normal Mod4+Shift+Control Q exit
+riverctl map normal Mod4+Shift X exit
 
 # Mod+J and Mod+K to focus the next/previous view in the layout stack
 riverctl map normal Mod4 J focus-view next
@@ -38,14 +51,11 @@ riverctl map normal Mod4+Shift Comma send-to-output previous
 
 # Mod+Return to bump the focused view to the top of the layout stack
 riverctl map normal Mod4 A zoom
+riverctl map normal Mod4 Return zoom
 
 # Mod+H and Mod+L to decrease/increase the main ratio of rivertile(1)
-riverctl map normal Mod4 H send-layout-cmd rivertile "main-ratio -0.05"
-riverctl map normal Mod4 L send-layout-cmd rivertile "main-ratio +0.05"
-
-# Mod+Shift+H and Mod+Shift+L to increment/decrement the main count of rivertile(1)
-riverctl map normal Mod4+Shift H send-layout-cmd rivertile "main-count +1"
-riverctl map normal Mod4+Shift L send-layout-cmd rivertile "main-count -1"
+riverctl map normal Mod4+Shift H send-layout-cmd rivertile "main-ratio -0.05"
+riverctl map normal Mod4+Shift L send-layout-cmd rivertile "main-ratio +0.05"
 
 # Mod+Alt+{H,J,K,L} to move views
 riverctl map normal Mod4+Mod1 H move left 100
@@ -92,6 +102,8 @@ done
 all_tags=$(((1 << 32) - 1))
 riverctl map normal Mod4 0 set-focused-tags $all_tags
 riverctl map normal Mod4+Shift 0 set-view-tags $all_tags
+
+riverctl map normal Mod4 Grave focus-previous-tags
 
 # Mod+Space to toggle float
 riverctl map normal Mod4+Shift Space toggle-float
@@ -148,15 +160,12 @@ riverctl set-repeat 50 300
 riverctl float-filter-add app-id float
 riverctl float-filter-add title "popup title with spaces"
 
-# Set app-ids and titles of views which should use client side decorations
-riverctl csd-filter-add app-id "gedit"
-
 # warp the mouse
-riverctl set-cursor-warp on-focus-change || true
+riverctl set-cursor-warp on-focus-change
+
+riverctl border-width 1
 
 # env and systemd
-export MOZ_ENABLE_WAYLAND="1"
-export NIXOS_OZONE_WL="1"
 # shellcheck disable=SC1091
 . "$HOME"/.nix-profile/bin/configure-gtk
 systemctl --user import-environment
