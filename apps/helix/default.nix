@@ -17,6 +17,11 @@
             args = [];
           };
         }
+        {
+          name = "clojure";
+          file-types = ["bb" "clj" "cljs" "cljc" "clje" "cljr" "cljx" "edn" "boot"];
+          auto-format = true;
+        }
       ];
     };
   };
