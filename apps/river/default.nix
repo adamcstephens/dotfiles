@@ -1,7 +1,7 @@
 {config, ...}: {
   xdg.configFile."river/init" = {
     executable = true;
-    source = ./river.sh;
+    source = ./init.sh;
   };
 
   xdg.configFile."river/colors.sh" = {
