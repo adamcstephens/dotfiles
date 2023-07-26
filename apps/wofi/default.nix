@@ -20,7 +20,8 @@
       color: #${config.colorScheme.colors.base09};
       border: 2px solid #${config.colorScheme.colors.base03};
       background-color: #${config.colorScheme.colors.base00};
-      font-size: 18px;
+      font-size: 13px;
+      font-family: SF Pro;
     }
 
     #outer-box {
@@ -29,8 +30,9 @@
 
     #scroll {
       margin: 5px 0px;
-      font-size: 16px;
-      color: #${config.colorScheme.colors.base0B};
+      font-size: 13px;
+      font-family: SF Pro;
+      color: #${config.colorScheme.colors.base06};
     }
 
     #scroll label {
@@ -38,7 +40,7 @@
     }
 
     #entry:selected {
-      color: #${config.colorScheme.colors.base0B};
+      color: #${config.colorScheme.colors.base06};
       background-color: #${config.colorScheme.colors.base00};
     }
   '';
