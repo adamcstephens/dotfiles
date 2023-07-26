@@ -97,9 +97,7 @@ the cursor by ARG lines."
     ("C-;" . flyspell-correct-wrapper)
     ("[down-mouse-3]" . flyspell-correct-word)))
 
-(use-package golden-ratio
-  :init
-  (golden-ratio-mode 1))
+(use-package golden-ratio :init (golden-ratio-mode 1))
 
 (use-package hideshow :hook (prog-mode . hs-minor-mode))
 
@@ -181,7 +179,9 @@ the cursor by ARG lines."
     ("C-r" . undo-fu-only-redo)
     ("<undo>" . undo-fu-only-undo)
     ("C-_" . undo-fu-only-undo)
-    ("C-/" . undo-fu-only-undo)))
+    ("C-/" . undo-fu-only-undo)
+    ("C-z" . undo-fu-only-undo)
+    ("C-S-z" . undo-fu-only-redo)))
 
 (use-package undo-fu-session :init (undo-fu-session-global-mode))
 
