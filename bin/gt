@@ -1,6 +1,0 @@
-#!/usr/bin/env sh
-if [ -z "$1" ]; then
-  git tag --list -n1
-else
-  git tag "$@"
-fi

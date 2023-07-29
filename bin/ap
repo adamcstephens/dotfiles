@@ -1,5 +1,0 @@
-#!/usr/bin/env sh
-if command systemd-inhibit; then
-  inhibit="systemd-inhibit"
-fi
-exec $inhibit ansible-playbook "$@"

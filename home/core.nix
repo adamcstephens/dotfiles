@@ -15,6 +15,7 @@
     ../apps/btop
     ../apps/editorconfig
     ../apps/emacs
+    ../apps/fd
     ../apps/fish
     ../apps/git
     ../apps/helix
@@ -85,7 +86,6 @@
     pkgs.direnv
     pkgs.doggo
     pkgs.du-dust
-    pkgs.fd
     pkgs.gh
     pkgs.htop
     pkgs.jq
