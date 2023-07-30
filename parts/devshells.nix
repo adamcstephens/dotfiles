@@ -64,6 +64,7 @@
             pkgs.nixVersions.nix_2_16
             pkgs.nix-bisect
             pkgs.nix-index
+            pkgs.nix-prefetch-scripts
             pkgs.nix-update
             pkgs.nixpkgs-fmt
             pkgs.nixpkgs-review

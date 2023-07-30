@@ -88,6 +88,7 @@
     pkgs.du-dust
     pkgs.gh
     pkgs.htop
+    pkgs.jless
     pkgs.jq
     pkgs.just
     pkgs.kitty.shell_integration
