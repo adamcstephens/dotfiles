@@ -34,7 +34,7 @@ dotKeys =
     ("M-a", windows $ W.swapMaster . W.focusDown),
     ("M-d", spawner "rofi -show drun"),
     ("M-S-d", spawner "rofi -show emoji"),
-    ("M-C-S-q", io exitSuccess),
+    ("M-S-x", io exitSuccess),
     ("M-S-q", kill),
     ("M-C-S-t", spawner "$HOME/.dotfiles/bin/monitor-toggle.sh"),
     ("M-S-t", spawner "kitty --single-instance"),
