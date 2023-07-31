@@ -32,6 +32,7 @@ dotKeys =
     ("<XF86MonBrightnessDown>", spawner "brightnessctl -q set 5%-"),
     ("<XF86MonBrightnessUp>", spawner "brightnessctl -q set +5%"),
     ("M-a", windows $ W.swapMaster . W.focusDown),
+    ("M-<Return>", windows $ W.swapMaster . W.focusDown),
     ("M-d", spawner "rofi -show drun"),
     ("M-S-d", spawner "rofi -show emoji"),
     ("M-S-x", io exitSuccess),
