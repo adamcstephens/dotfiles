@@ -1,5 +1,6 @@
 {
   config,
+  lib,
   pkgs,
   ...
 }: {
@@ -92,5 +93,10 @@
       }
 
     '';
+  };
+
+  systemd.user.services.waybar.Unit = {
+    PartOf = lib.mkForce ["wayland-session.target"];
+    After = lib.mkForce ["wayland-session.target"];
   };
 }

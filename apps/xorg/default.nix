@@ -102,4 +102,7 @@ in {
       ${lib.getExe pkgs.feh} --bg-center ${wallpaper}/share/wallpapers/nixos-wallpaper.png &
     '';
   };
+
+  # re-use .xsession as .xinitrc
+  home.file.".xinitrc".source = config.home.file.${config.xsession.scriptPath}.source.outPath;
 }
