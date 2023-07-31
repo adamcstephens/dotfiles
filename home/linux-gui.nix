@@ -97,17 +97,23 @@ in {
       pkgs.glib
       pkgs.libnotify
 
-      pkgs.autorandr
       pkgs.brightnessctl
       pkgs.blueberry
       pkgs.bluez
       pkgs.ddcutil
       pkgs.light
-      pkgs.lxrandr
       pkgs.networkmanagerapplet
-      pkgs.wl-clipboard
+
+      # xorg
+      pkgs.autorandr
+      pkgs.lxrandr
       pkgs.xclip
       pkgs.xlayoutdisplay
+
+      # wayland
+      pkgs.grim
+      pkgs.slurp
+      pkgs.wl-clipboard
 
       # audio
       pkgs.pavucontrol

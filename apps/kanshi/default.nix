@@ -5,11 +5,7 @@
 #   1.32, 2909.091 x 818.1819
 #   1.35, 2844.4443 x 800
 #   1.40, 2742.8571 x 1542.8571
-{pkgs, ...}: let
-  execs = [
-    "~/.dotfiles/apps/river/inputs.sh"
-  ];
-in {
+{pkgs, ...}: {
   services.kanshi = {
     enable = true;
     systemdTarget = "wayland-session.target";
@@ -25,8 +21,6 @@ in {
             scale = 1.4;
           }
         ];
-
-        exec = execs;
       };
       undocked = {
         outputs = [
@@ -36,8 +30,14 @@ in {
             status = "enable";
           }
         ];
-
-        exec = execs;
+      };
+      desktop = {
+        outputs = [
+          {
+            criteria = "Dell Inc. DELL P2715Q 54KKD79CAQNL";
+            scale = 1.45;
+          }
+        ];
       };
     };
   };

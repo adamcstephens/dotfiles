@@ -2,29 +2,35 @@
 
 set -e
 
-if [[ -z $1 ]]; then
+if [[ -z "$1" ]]; then
   MODE=window
 else
   MODE=$1
+fi
+
+if [[ -n "$WAYLAND_DISPLAY" ]]; then
+  GUI="wayland"
+else
+  GUI="xorg"
 fi
 
 OUTPUT="$HOME"/Pictures/$(date +'screenshot_%Y-%m-%d-%H%M%S.png')
 
 case $MODE in
 window)
-  if [ -n "$DISPLAY" ]; then
-    maim -i $(xdotool getactivewindow) "$OUTPUT"
+  if [ $GUI = "xorg" ]; then
+    maim -i "$(xdotool getactivewindow)" "$OUTPUT"
   fi
   ;;
 box)
-  if [ -n "$DISPLAY" ]; then
+  if [ $GUI = "xorg" ]; then
     maim -s "$OUTPUT"
   else
     slurp | grim -g - "$OUTPUT" && cat "$OUTPUT" | wl-copy
   fi
   ;;
 screen)
-  if [ -n "$DISPLAY" ]; then
+  if [ $GUI = "xorg" ]; then
     maim "$OUTPUT"
   else
     grim "$OUTPUT" && cat "$OUTPUT" | wl-copy
@@ -36,6 +42,8 @@ screen)
   ;;
 esac
 
-if [ -n "$DISPLAY" ]; then
-  cat "$OUTPUT" | xclip -selection clipboard -target image/png -i
+if [ $GUI = "xorg" ]; then
+  xclip -selection clipboard -target image/png -i <"$OUTPUT"
+else
+  wl-copy <"$OUTPUT"
 fi
