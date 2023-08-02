@@ -66,9 +66,9 @@ in {
   '';
 
   home.pointerCursor = {
-    package = pkgs.catppuccin-cursors.macchiatoDark;
-    name = "Catppuccin-Macchiato-Dark-Cursors";
-    size = 24;
+    package = pkgs.catppuccin-cursors.macchiatoPeach;
+    name = "Catppuccin-Macchiato-Peach-Cursors";
+    size = 48;
     gtk.enable = true;
     x11.enable = true;
   };
