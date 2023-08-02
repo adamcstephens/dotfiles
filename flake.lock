@@ -614,8 +614,7 @@
         "nixpkgs": "nixpkgs_4",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "profile-parts": "profile-parts",
-        "sandbox": "sandbox",
-        "wrapper-manager": "wrapper-manager"
+        "sandbox": "sandbox"
       }
     },
     "rust-overlay": {
@@ -691,26 +690,6 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
-        "type": "github"
-      }
-    },
-    "wrapper-manager": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1690217209,
-        "narHash": "sha256-qqONS2cH66fEku3OXMPIANlGnaJNhVlKTNEiwvN0yIc=",
-        "owner": "viperML",
-        "repo": "wrapper-manager",
-        "rev": "e8a9a3c9ca07b3d7638357b9a9078dd1ab76afb0",
-        "type": "github"
-      },
-      "original": {
-        "owner": "viperML",
-        "repo": "wrapper-manager",
         "type": "github"
       }
     }

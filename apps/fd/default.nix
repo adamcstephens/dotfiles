@@ -2,22 +2,17 @@
   inputs,
   pkgs,
   ...
-}: {
+}: let
+  fd = pkgs.symlinkJoin {
+    name = "fd-wrapped";
+    paths = [pkgs.fd];
+    nativeBuildInputs = [pkgs.makeWrapper];
+    postBuild = ''
+      wrapProgram $out/bin/fd --add-flags "--ignore-case --hidden --follow"
+    '';
+  };
+in {
   home.packages = [
-    (inputs.wrapper-manager.lib.build {
-      inherit pkgs;
-      modules = [
-        ({pkgs, ...}: {
-          wrappers.fd = {
-            basePackage = pkgs.fd;
-            flags = [
-              "--ignore-case"
-              "--hidden"
-              "--follow"
-            ];
-          };
-        })
-      ];
-    })
+    fd
   ];
 }

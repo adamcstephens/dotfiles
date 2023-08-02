@@ -22,8 +22,6 @@
     profile-parts.inputs.nixpkgs.follows = "nixpkgs";
     sandbox.url = "git+https://codeberg.org/adamcstephens/nix-sandbox";
     sandbox.inputs.nixpkgs.follows = "nixpkgs";
-    wrapper-manager.url = "github:viperML/wrapper-manager";
-    wrapper-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = {
