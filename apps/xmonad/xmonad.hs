@@ -5,6 +5,7 @@ import XMonad
 import XMonad.Actions.CopyWindow
 import XMonad.Actions.CycleWS
 import XMonad.Actions.UpdatePointer
+import XMonad.Actions.SwapPromote
 import XMonad.Config.Desktop
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
@@ -32,7 +33,7 @@ dotKeys =
     ("<XF86MonBrightnessDown>", spawner "brightnessctl -q set 5%-"),
     ("<XF86MonBrightnessUp>", spawner "brightnessctl -q set +5%"),
     ("M-a", windows $ W.swapMaster . W.focusDown),
-    ("M-<Return>", windows $ W.swapMaster . W.focusDown),
+    ("M-<Return>", swapHybrid' False),
     ("M-d", spawner "rofi -show drun"),
     ("M-S-d", spawner "rofi -show emoji"),
     ("M-S-x", io exitSuccess),
@@ -48,7 +49,7 @@ dotKeys =
 
 dotLayouts = avoidStruts (Tall 1 (3 / 100) (2 / 3)) ||| noBorders Full
 
-dotLogHook = updatePointer (0.5, 0.5) (0, 0) <> logHook desktopConfig
+dotLogHook = updatePointer (0.5, 0.5) (0, 0) <> logHook desktopConfig >> masterHistoryHook
 
 dotManageHook =
   manageHook desktopConfig
