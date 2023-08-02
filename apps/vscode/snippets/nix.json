@@ -1,0 +1,7 @@
+{
+  "my init": {
+    "prefix": ["init"],
+    "body": ["{$1...}: {\n  $0\n}"],
+    "description": "A for loop."
+  }
+}
