@@ -25,6 +25,7 @@
 
     shellAbbrs = {
       da = "direnv allow";
+      db = "direnv block";
       dc = "docker-compose";
       dclf = "docker-compose logs --tail=100 -f";
       dps = ''docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}\t{{.Command}}\t{{.Image}}"'';

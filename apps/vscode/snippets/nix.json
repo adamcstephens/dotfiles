@@ -2,6 +2,11 @@
   "my init": {
     "prefix": ["init"],
     "body": ["{$1...}: {\n  $0\n}"],
-    "description": "A for loop."
+    "description": "simple init"
+  },
+  "module init": {
+    "prefix": "init",
+    "body": "{\n  config,\n  lib,\n  ...\n}: let\n  cfg = config.$1;\nin {\n  options.$1 = {\n    enable = lib.mkEnableOption \"$2\";\n  };\n\n  config = lib.mkIf cfg.enable {\n    $3\n  };\n}",
+    "description": "module init"
   }
 }
