@@ -44,6 +44,7 @@
           pkgs.gopls
           pkgs.go-tools
           pkgs.gotools
+          pkgs.gnumake
         ];
 
         shellHook = ''
