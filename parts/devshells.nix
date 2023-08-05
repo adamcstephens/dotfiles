@@ -101,6 +101,12 @@
         ];
       };
 
+      terraform = pkgs.mkShellNoCC {
+        packages = [
+          pkgs.terraform
+        ];
+      };
+
       xmonad = pkgs.mkShellNoCC {
         packages = [
           (pkgs.ghc.withPackages (ps: [

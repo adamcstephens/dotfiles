@@ -5,8 +5,13 @@
     "description": "simple init"
   },
   "module init": {
-    "prefix": "init",
+    "prefix": ["init", "module"],
     "body": "{\n  config,\n  lib,\n  ...\n}: let\n  cfg = config.$1;\nin {\n  options.$1 = {\n    enable = lib.mkEnableOption \"$2\";\n  };\n\n  config = lib.mkIf cfg.enable {\n    $3\n  };\n}",
     "description": "module init"
+  },
+  "mkshell": {
+    "prefix": "mkshell",
+    "body": "pkgs.mkShellNoCC {\n  packages = [\n    pkgs.\n  ];\n};",
+    "description": "simple mkshell"
   }
 }
