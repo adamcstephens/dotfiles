@@ -19,66 +19,6 @@ git-config email:
 intel-check-cstate:
     sudo cat /sys/kernel/debug/pmc_core/package_cstate_show
 
-migrate:
-    #!/usr/bin/env bash
-
-    removeDotbotConfig() {
-      file=$1
-      if [ "$(readlink $HOME/.config/$file)" == "$HOME/.dotfiles/apps/$file" ]; then rm -v $HOME/.config/$file; fi
-    }
-
-    set -e
-    if [ -h $HOME/.config/direnv ]; then rm -rfv $HOME/.config/direnv; fi
-    if [ -h $HOME/.config/lsd ]; then rm -rfv $HOME/.config/lsd; fi
-    if [ -e $HOME/.config/fish/config.fish ] && [ ! -h $HOME/.config/fish/config.fish ]; then rm -v $HOME/.config/fish/config.fish; fi
-
-    if [ -d $HOME/.dotfiles/dotbot ]; then rm -rfv $HOME/.dotfiles/dotbot; fi
-    if [ -f $HOME/.dotfiles/fish/fish_variables ]; then mv -v $HOME/.dotfiles/fish/fish_variables $HOME/.dotfiles/apps/fish/; fi
-    if [ -d $HOME/.dotfiles/fish ]; then rm -rfv $HOME/.dotfiles/fish; fi
-    if [ -d $HOME/.dotfiles/btop ]; then rm -rfv $HOME/.dotfiles/btop; fi
-
-    if rg lefthook ~/.dotfiles/.git/hooks &>/dev/null; then nix run nixpkgs#lefthook -- uninstall; fi;
-    if [ "$(readlink $HOME/.config/kitty/kitty.conf)" == "$HOME/.dotfiles/apps/kitty/kitty.conf" ]; then rm -v $HOME/.config/kitty/kitty.conf; fi
-    if [ "$(readlink $HOME/.config/kitty/theme-dark.conf)" == "$HOME/.dotfiles/apps/kitty/theme-dark.conf" ]; then rm -v $HOME/.config/kitty/theme-dark.conf; fi
-
-    if [ "$(readlink $HOME/.config/waybar/style.css)" == "$HOME/.dotfiles/apps/waybar/waybar.css" ]; then rm -v $HOME/.config/waybar/style.css; fi
-    if [ "$(readlink $HOME/.config/starship.toml)" == "$HOME/.dotfiles/apps/starship/starship.toml" ]; then rm -v $HOME/.config/starship.toml; fi
-
-    if [ "$(readlink $HOME/.shell_generic.sh)" == "$HOME/.dotfiles/apps/shell_generic.sh" ]; then rm -v $HOME/.shell_generic.sh; fi
-    if [ "$(readlink $HOME/.zshrc)" == "$HOME/.dotfiles/apps/zsh/zshrc" ]; then rm -v $HOME/.zshrc; fi
-    if [ "$(readlink $HOME/.bashrc)" == "$HOME/.dotfiles/apps/bash/bashrc" ]; then rm -v $HOME/.bashrc; fi
-    if [ "$(readlink $HOME/.bash_profile)" == "$HOME/.dotfiles/apps/bash/bash_profile" ]; then rm -v $HOME/.bash_profile; fi
-    if [ "$(readlink $HOME/.inputrc)" == "$HOME/.dotfiles/apps/inputrc" ]; then rm -v $HOME/.inputrc; fi
-    if [ "$(readlink $HOME/.screenrc)" == "$HOME/.dotfiles/apps/screen/screenrc" ]; then rm -v $HOME/.screenrc; fi
-    if [ "$(readlink $HOME/.toprc)" == "$HOME/.dotfiles/apps/top/toprc" ]; then rm -v $HOME/.toprc; fi
-    if [ "$(readlink $HOME/.editorconfig)" == "$HOME/.dotfiles/apps/editorconfig/editorconfig" ]; then rm -v $HOME/.editorconfig; fi
-    if [ "$(readlink $HOME/.aspell.en.pws)" == "$HOME/.dotfiles/apps/aspell/aspell.en.pws" ]; then rm -v $HOME/.aspell.en.pws; fi
-    if [ "$(readlink $HOME/.shellcheckrc)" == "$HOME/.dotfiles/apps/shellcheck/shellcheckrc" ]; then rm -v $HOME/.shellcheckrc; fi
-    if [ "$(readlink $HOME/.gitignore)" == "$HOME/.dotfiles/apps/git/gitignore" ]; then rm -v $HOME/.gitignore; fi
-    if [ "$(readlink $HOME/.gitconfig)" == "$HOME/.dotfiles/apps/git/gitconfig" ]; then rm -v $HOME/.gitconfig; fi
-    if [ "$(readlink $HOME/.vim)" == "$HOME/.dotfiles/apps/vim/vim" ]; then rm -rfv $HOME/.vim; fi
-    if [ "$(readlink $HOME/.vimrc)" == "$HOME/.dotfiles/apps/vim/vimrc" ]; then rm -v $HOME/.vimrc; fi
-    if [ "$(readlink $HOME/.tzvt_config)" == "$HOME/.dotfiles/apps/tmux/tzvt_config" ]; then rm -v $HOME/.tzvt_config; fi
-    if [ "$(readlink $HOME/.tmux.conf)" == "$HOME/.dotfiles/apps/tmux/tmux.conf" ]; then rm -v $HOME/.tmux.conf; fi
-    if [ -d "$HOME/.ipython" ]; then rm -rfv $HOME/.ipython; fi
-    if [ -d "$HOME/.tmux" ]; then rm -rfv $HOME/.tmux; fi
-    if [ ! -h "$HOME/.profile" ]; then rm -fv $HOME/.profile; fi
-
-    removeDotbotConfig bat/config
-    removeDotbotConfig btop
-    removeDotbotConfig yay
-    removeDotbotConfig zellij
-    removeDotbotConfig ripgrep
-    removeDotbotConfig git/template
-    removeDotbotConfig fish
-    removeDotbotConfig nix
-    removeDotbotConfig helix
-
-    if [ -f "$HOME/.dotfiles/apps/fish/config.fish" ]; then rm -rfv $HOME/.dotfiles/apps/fish/config.fish; fi
-    if [ -f "$HOME/.dotfiles/apps/fish/fish_variables" ]; then rm -rfv $HOME/.dotfiles/apps/fish/fish_variables; fi
-    if [ -d "$HOME/.dotfiles/vendor/dotbot" ]; then rm -rfv $HOME/.dotfiles/vendor/dotbot; fi
-    if [ -d "$HOME/.dotfiles/apps/nix" ]; then rm -rfv $HOME/.dotfiles/apps/nix; fi
-
 nix-index-fetch:
     #!/usr/bin/env bash
     set -e
