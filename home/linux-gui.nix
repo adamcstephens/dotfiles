@@ -127,6 +127,7 @@ in {
       pkgs.cinnamon.nemo
       pkgs.libreoffice-fresh
       pkgs.remmina
+      pkgs.thunderbird
 
       # wrap webcord to remove state file https://github.com/SpacingBat3/WebCord/issues/360
       (pkgs.symlinkJoin {
