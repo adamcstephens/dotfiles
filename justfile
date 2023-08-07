@@ -1,12 +1,6 @@
 default:
     just --list
 
-arkenfox-update:
-    #!/usr/bin/env bash
-    set -e
-    version=$(gh release list --repo arkenfox/user.js -L 1 | tail -n 1 | awk '{print $5}')
-    git subrepo pull --branch $version apps/firefox/arkenfox/
-
 brew-dump:
     brew bundle dump --all --force
     git diff Brewfile
