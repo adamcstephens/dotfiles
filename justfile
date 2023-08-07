@@ -43,17 +43,3 @@ steam-bootstrap:
 
 test:
     nix build --print-build-logs --keep-going .#homeConfigurations.aarch64-darwin.activationPackage .#homeConfigurations.aarch64-linux.activationPackage .#homeConfigurations.think.activationPackage
-
-vim-plugins:
-    git subrepo clone https://github.com/airblade/vim-gitgutter apps/vim/vim/pack/plugins/start/vim-gitgutter
-    git subrepo clone https://github.com/airblade/vim-rooter apps/vim/vim/pack/plugins/start/vim-rooter
-    git subrepo clone https://github.com/ConradIrwin/vim-bracketed-paste apps/vim/vim/pack/plugins/start/bracketed-paste
-    git subrepo clone https://github.com/godlygeek/tabular apps/vim/vim/pack/plugins/start/tabular
-    git subrepo clone https://github.com/itchyny/lightline.vim apps/vim/vim/pack/plugins/start/lightline.vim
-    git subrepo clone https://github.com/j-tom/vim-old-hope apps/vim/vim/pack/plugins/start/old-hope
-    git subrepo clone https://github.com/junegunn/fzf.vim apps/vim/vim/pack/plugins/start/fzf.vim
-    git subrepo clone https://github.com/sheerun/vim-polyglot apps/vim/vim/pack/plugins/start/vim-polyglot
-    git subrepo clone https://github.com/tpope/vim-commentary apps/vim/vim/pack/plugins/start/vim-commentary
-    git subrepo clone https://github.com/tpope/vim-repeat apps/vim/vim/pack/plugins/start/vim-repeat
-    git subrepo clone https://github.com/tpope/vim-surround apps/vim/vim/pack/plugins/start/vim-surround
-    git subrepo clone https://github.com/tpope/vim-unimpaired apps/vim/vim/pack/plugins/start/vim-unimpaired
