@@ -10,7 +10,7 @@ riverctl list-inputs | grep Magic_Trackpad | sort -u | while read -r trackpad; d
   riverctl input "$trackpad" tap-button-map left-right-middle
 done
 
-riverctl set-repeat 100 220
+riverctl set-repeat 60 300
 
 touchpad="pointer-1739-52619-SYNA8004:00_06CB:CD8B_Touchpad"
 
