@@ -120,6 +120,7 @@ in {
       pkgs.element-desktop
       pkgs.firefox-wayland
       pkgs.cinnamon.nemo
+      pkgs.gomuks
       pkgs.libreoffice-fresh
       pkgs.remmina
       pkgs.thunderbird
