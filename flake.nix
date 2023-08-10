@@ -19,7 +19,6 @@
     nixfmt-rfc.url = "github:piegamesde/nixfmt/rfc101-style";
     nixfmt-rfc.flake = false;
     profile-parts.url = "git+https://codeberg.org/adamcstephens/profile-parts";
-    profile-parts.inputs.nixpkgs.follows = "nixpkgs";
     sandbox.url = "git+https://codeberg.org/adamcstephens/nix-sandbox";
     sandbox.inputs.nixpkgs.follows = "nixpkgs";
   };
@@ -31,8 +30,6 @@
   } @ inputs:
     flake-parts.lib.mkFlake {inherit inputs;} {
       imports = [
-        inputs.profile-parts.flakeModules.home-manager
-        ./parts/home.nix
         ./home/profiles.nix
 
         ./parts/darwin.nix
