@@ -172,13 +172,29 @@ in {
     extraConfig = env;
   };
 
+  xdg.configFile = lib.mkIf pkgs.stdenv.isLinux (
+    if config.dotfiles.nixosManaged
+    then {
+      "emacs/elisp".source = ./elisp;
+      "emacs/snippets".source = ./snippets;
+      "emacs/custom.el".source = ./custom.el;
+      "emacs/early-init.el".source = ./early-init.el;
+      "emacs/init.el".source = ./init.el;
+      "emacs/straight/versions/default.el".source = ./straight/versions/default.el;
+    }
+    else {
+      "emacs".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/emacs";
+    }
+  );
+
   services = lib.mkIf pkgs.stdenv.isLinux {
     emacs = {
       enable = true;
       extraOptions = [
         "--init-directory"
-        "${config.home.homeDirectory}/.dotfiles/apps/emacs"
+        "${config.home.homeDirectory}/.config/emacs"
       ];
+      socketActivation.enable = config.dotfiles.nixosManaged;
     };
   };
 
@@ -203,11 +219,11 @@ in {
           "${config.home.homeDirectory}/.nix-profile/bin/fish"
           "-l"
           "-c"
-          "${config.programs.emacs.finalPackage}/bin/emacs --fg-daemon --init-directory ${config.home.homeDirectory}/.dotfiles/apps/emacs"
+          "${config.programs.emacs.finalPackage}/bin/emacs --fg-daemon --init-directory ${config.home.homeDirectory}/.config/emacs"
         ];
         RunAtLoad = true;
-        StandardErrorPath = "${config.home.homeDirectory}/.dotfiles/apps/emacs/launchd.log";
-        StandardOutPath = "${config.home.homeDirectory}/.dotfiles/apps/emacs/launchd.log";
+        StandardErrorPath = "${config.home.homeDirectory}/.config/emacs/launchd.log";
+        StandardOutPath = "${config.home.homeDirectory}/.config/emacs/launchd.log";
         WatchPaths = [
           "${config.home.homeDirectory}/.nix-profile/bin/emacs"
         ];

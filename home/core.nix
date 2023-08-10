@@ -44,20 +44,6 @@
 
   nix.registry.nixpkgs.flake = lib.mkDefault inputs.nixpkgs;
 
-  home.activation.dotfiles-bootstrap = lib.hm.dag.entryAfter ["writeBoundary"] ''
-    if [ ! -d ~/.dotfiles ]; then
-      ${lib.getExe pkgs.git} clone ${config.dotfiles.repo} ~/.dotfiles
-      touch ~/.dotfiles/.nixos-managed
-    fi
-
-    pushd ~/.dotfiles
-      if [ -e .nixos-managed ]; then
-        ${lib.getExe pkgs.git} reset --hard origin/main
-        ${lib.getExe pkgs.git} pull
-      fi
-    popd
-  '';
-
   home.activation.directories = lib.hm.dag.entryBefore ["checkLinkTargets"] ''
     for dir in git projects tmp; do
       if [ ! -d $HOME/$dir ]; then

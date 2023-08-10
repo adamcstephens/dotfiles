@@ -7,10 +7,7 @@
   options.dotfiles = {
     isVM = lib.mkEnableOption "isVM";
 
-    repo = lib.mkOption {
-      type = lib.types.str;
-      default = "https://codeberg.org/adamcstephens/dotfiles";
-    };
+    nixosManaged = lib.mkEnableOption "When nixos managed dotfiles is in the read-only store";
 
     gui = {
       dpi = lib.mkOption {
