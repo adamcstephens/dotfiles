@@ -1,5 +1,10 @@
 module.exports = {
-  defaultBrowser: ["Firefox", "Safari"],
+  // get bundle id: mdls /Applications/Firefox.app/ | grep kMDItemCF
+  defaultBrowser: [
+    "org.mozilla.firefoxdeveloperedition",
+    "org.mozilla.firefox",
+    "Safari",
+  ],
   options: {
     hideIcon: false,
     urlShorteners: [
@@ -36,19 +41,12 @@ module.exports = {
       url({ url }) {
         const search = url.search
           .split("&")
-          .filter((part) => !part.startsWith("utm_"));
+          .filter((part) => !part.startsWith("utm_") || part == "t");
         return {
           ...url,
           search: search.join("&"),
         };
       },
-    },
-    {
-      match: finicky.matchDomains(["amazon.com"]),
-      url: ({ url }) => ({
-        ...url,
-        host: "smile.amazon.com",
-      }),
     },
     {
       match: ({ url }) => url.host === "teams.microsoft.com",
@@ -89,7 +87,17 @@ module.exports = {
       /steampowered.com/,
       /steamcommunity.com/,
     ].map((x) => {
-      return { match: x, browser: "Firefox" };
+      return { match: x, browser: "org.mozilla.firefoxdeveloperedition" };
+    }),
+
+    [/instructure.com/, /kent.edu/, /qualtrics.com/].map((x) => {
+      return {
+        match: x,
+        browser: ({ urlString }) => ({
+          name: "org.mozilla.firefox",
+          args: ["-P", "Kent", `${urlString}`],
+        }),
+      };
     })
   ),
 };
