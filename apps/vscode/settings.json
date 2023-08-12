@@ -9,7 +9,8 @@
     "editor.defaultFormatter": "golang.go"
   },
   "[markdown]": {
-    "editor.wordBasedSuggestionsMode": "currentDocument"
+    "editor.wordBasedSuggestionsMode": "currentDocument",
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[shellscript]": {
     "editor.defaultFormatter": "foxundermoon.shell-format"

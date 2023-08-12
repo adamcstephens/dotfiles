@@ -155,7 +155,7 @@
     "command": "-workbench.action.showAllEditors"
   },
   {
-    "key": "ctrl+k ctrl+c",
+    "key": "ctrl+shift+g b",
     "command": "git.checkout"
   },
   {
