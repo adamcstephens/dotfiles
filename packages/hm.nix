@@ -22,6 +22,10 @@ in
 
     : "''${ACTION:=build}"
 
+    if [ $ACTION != "build" ] && [ $ACTION != "switch" ]; then
+      echo "!! Unknown action, $ACTION, just building."
+    fi
+
     TARGET=".#homeConfigurations.$HMPROFILE.activationPackage"
 
     echo " Running action $ACTION"

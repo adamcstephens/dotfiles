@@ -6,7 +6,7 @@
   programs.rofi = {
     enable = true;
     terminal = "${config.programs.kitty.package}/bin/kitty";
-    package = with pkgs; rofi.override {plugins = [rofi-calc rofi-emoji];};
+    package = with pkgs; rofi-wayland.override {plugins = [rofi-calc rofi-emoji];};
     font = "${config.dotfiles.gui.font.mono} 12";
     theme = let
       mkLiteral = config.lib.formats.rasi.mkLiteral;
