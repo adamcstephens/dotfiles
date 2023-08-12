@@ -26,7 +26,7 @@
   "editor.cursorBlinking": "phase",
   "editor.cursorSurroundingLines": 10,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.fontFamily": "JetBrainsMono NF, JetBrainsMono Nerd Font, JetBrains Mono, Material Design Icons, Material Icons",
+  "editor.fontFamily": "JetBrains Mono, Noto Color Emoji, Symbols Nerd Font Mono",
   "editor.fontLigatures": true,
   "editor.formatOnSave": true,
   "editor.guides.bracketPairs": true,
