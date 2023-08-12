@@ -42,7 +42,12 @@ in {
         ./linux-gui.nix
         ../apps/solaar
 
-        {dotfiles.gui.dpi = 148;}
+        {
+          dotfiles.gui = {
+            dpi = 148;
+            dontSuspend = true;
+          };
+        }
       ];
     };
 

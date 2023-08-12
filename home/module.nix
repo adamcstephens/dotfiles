@@ -5,8 +5,6 @@
   ...
 }: {
   options.dotfiles = {
-    isVM = lib.mkEnableOption "isVM";
-
     nixosManaged = lib.mkEnableOption "When nixos managed dotfiles is in the read-only store";
 
     gui = {
@@ -48,6 +46,8 @@
       };
 
       insecure = lib.mkEnableOption (lib.mkDoc "Insecure GUI disables locking");
+
+      dontSuspend = lib.mkEnableOption (lib.mdDoc "Don't automatically suspend on idle");
     };
   };
 }
