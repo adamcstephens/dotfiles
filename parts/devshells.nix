@@ -66,6 +66,7 @@
             pkgs.nix-bisect
             pkgs.nix-index
             pkgs.nix-prefetch-scripts
+            pkgs.nix-tree
             pkgs.nix-update
             pkgs.nixpkgs-fmt
             pkgs.nixpkgs-review
