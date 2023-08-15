@@ -36,7 +36,7 @@ dotKeys =
     ("M-<Return>", swapHybrid' False),
     ("M-d", spawner "rofi -show drun"),
     ("M-S-d", spawner "rofi -show emoji"),
-    ("M-S-x", io exitSuccess),
+    ("M-S-x", spawner "loginctl kill-session $XDG_SESSION_ID"),
     ("M-S-q", kill),
     ("M-C-S-t", spawner "$HOME/.dotfiles/bin/monitor-toggle.sh"),
     ("M-S-t", spawner "kitty --single-instance"),
