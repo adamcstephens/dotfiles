@@ -14,6 +14,7 @@ GitHub.vscode-pull-request-github
 gitpod.gitpod-desktop
 golf1052.base16-generator
 hashicorp.terraform
+haskell.haskell
 JulienDuchesne.vscode-jsonnet
 mkhl.shfmt
 ms-kubernetes-tools.vscode-kubernetes-tools

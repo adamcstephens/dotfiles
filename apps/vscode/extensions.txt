@@ -12,7 +12,6 @@ firefox-devtools.vscode-firefox-debug
 foxundermoon.shell-format
 GitHub.github-vscode-theme
 golang.go
-haskell.haskell
 JakeBecker.elixir-ls
 jnoortheen.nix-ide
 justusadam.language-haskell

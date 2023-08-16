@@ -10,6 +10,7 @@ import XMonad.Config.Desktop
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
+import XMonad.Layout.Grid
 import XMonad.Layout.NoBorders
 import XMonad.Operations
 import XMonad.StackSet qualified as W
@@ -47,7 +48,7 @@ dotKeys =
   ]
     ++ [("M-C-S-" ++ show i, windows $ copy ws) | (i, ws) <- zip [1 .. 9] dotWorkspaces]
 
-dotLayouts = avoidStruts (Tall 1 (3 / 100) (2 / 3)) ||| noBorders Full
+dotLayouts = avoidStruts (Tall 1 (3 / 100) (2 / 3)) ||| noBorders Full ||| Grid
 
 dotLogHook = updatePointer (0.5, 0.5) (0, 0) <> logHook desktopConfig >> masterHistoryHook
 
