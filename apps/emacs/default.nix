@@ -172,7 +172,7 @@ in {
     extraConfig = env;
   };
 
-  xdg.configFile = lib.mkIf pkgs.stdenv.isLinux (
+  xdg.configFile =
     if config.dotfiles.nixosManaged
     then {
       "emacs/elisp".source = ./elisp;
@@ -184,8 +184,7 @@ in {
     }
     else {
       "emacs".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/emacs";
-    }
-  );
+    };
 
   services = lib.mkIf pkgs.stdenv.isLinux {
     emacs = {
