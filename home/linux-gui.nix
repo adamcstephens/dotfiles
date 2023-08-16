@@ -122,6 +122,7 @@ in {
       pkgs.cinnamon.nemo
       pkgs.gomuks
       pkgs.libreoffice-fresh
+      pkgs.mpv
       pkgs.remmina
       pkgs.thunderbird
 
