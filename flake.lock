@@ -42,11 +42,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1691275315,
-        "narHash": "sha256-9WN0IA0vNZSNxKHpy/bYvPnCw4VH/nr5iBv7c+7KUts=",
+        "lastModified": 1691963303,
+        "narHash": "sha256-zqvt4N4Ic06BrGo02itCIPTEKzVnGT0BtGbIr+aUGqE=",
         "owner": "lnl7",
         "repo": "nix-darwin",
-        "rev": "829041cf10c4f6751a53c0a11ca2fd22ff0918d6",
+        "rev": "3fcd83783a1e2ddad0f14821da4186a95bc76c50",
         "type": "github"
       },
       "original": {
@@ -63,11 +63,11 @@
         "nixpkgs-stable": "nixpkgs-stable"
       },
       "locked": {
-        "lastModified": 1691463830,
-        "narHash": "sha256-IYsrzsYzR0hypA8X2aidszuc1OJqmS4Aiqi2uA04RrM=",
+        "lastModified": 1692181692,
+        "narHash": "sha256-wpLsGJb2zEUpQ5SqZSeMCDMg8nqlsw9/bP9IcpDyMds=",
         "owner": "nix-community",
         "repo": "emacs-overlay",
-        "rev": "3c5a869494bbd768b832a4567ae93d1c1224571c",
+        "rev": "50bd61195c8f9ddbaa862a2fcf4f40f82769a5ba",
         "type": "github"
       },
       "original": {
@@ -242,11 +242,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1691312444,
-        "narHash": "sha256-J9e9dGwAPTX+UlAn8jehoyaEq6fwK+L+gunfx0cYT4E=",
+        "lastModified": 1692131549,
+        "narHash": "sha256-MFjI8NL63/6HjMZpvJgnB/Pgg2dht22t45jOYtipZig=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "903e06d734bcae48efb79b9afd51b406d2744179",
+        "rev": "75cfe974e2ca05a61b66768674032b4c079e55d4",
         "type": "github"
       },
       "original": {
@@ -420,11 +420,11 @@
     },
     "nixpkgs-stable": {
       "locked": {
-        "lastModified": 1691328192,
-        "narHash": "sha256-w59N1zyDQ7SupfMJLFvtms/SIVbdryqlw5AS4+DiH+Y=",
+        "lastModified": 1692134936,
+        "narHash": "sha256-Z68O969cioC6I3k/AFBxsuEwpJwt4l9fzwuAMUhCCs0=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "61676e4dcfeeb058f255294bcb08ea7f3bc3ce56",
+        "rev": "bfd953b2c6de4f550f75461bcc5768b6f966be10",
         "type": "github"
       },
       "original": {
@@ -452,11 +452,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1691403902,
-        "narHash": "sha256-J74y4xWtKPDPyVtF4arzrwuSOGznlFlJ+uB9RwNNnbo=",
+        "lastModified": 1692128808,
+        "narHash": "sha256-Di1Zm/P042NuwThMiZNrtmaAjd4Tm2qBOKHX7xUOfMk=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "c91024273f020df2dcb209cc133461ca17848026",
+        "rev": "4ed9856be002a730234a1a1ed9dcd9dd10cbdb40",
         "type": "github"
       },
       "original": {
@@ -468,11 +468,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1691368598,
-        "narHash": "sha256-ia7li22keBBbj02tEdqjVeLtc7ZlSBuhUk+7XTUFr14=",
+        "lastModified": 1692084312,
+        "narHash": "sha256-Za++qKVK6ovjNL9poQZtLKRM/re663pxzbJ+9M4Pgwg=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "5a8e9243812ba528000995b294292d3b5e120947",
+        "rev": "8353344d3236d3fda429bb471c1ee008857d3b7c",
         "type": "github"
       },
       "original": {
@@ -500,11 +500,11 @@
     },
     "nixpkgs_4": {
       "locked": {
-        "lastModified": 1691403902,
-        "narHash": "sha256-J74y4xWtKPDPyVtF4arzrwuSOGznlFlJ+uB9RwNNnbo=",
+        "lastModified": 1692128808,
+        "narHash": "sha256-Di1Zm/P042NuwThMiZNrtmaAjd4Tm2qBOKHX7xUOfMk=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "c91024273f020df2dcb209cc133461ca17848026",
+        "rev": "4ed9856be002a730234a1a1ed9dcd9dd10cbdb40",
         "type": "github"
       },
       "original": {
@@ -544,11 +544,11 @@
     },
     "profile-parts": {
       "locked": {
-        "lastModified": 1691628260,
-        "narHash": "sha256-Nsxo6yDJ4TTgc1WvxH/3yWqR3nFnBI1dGHN5DXaIjSA=",
+        "lastModified": 1691628697,
+        "narHash": "sha256-P6lnFl1USgRbhcnme3Ym0xMJwp06lITwJJWRODp8no0=",
         "ref": "refs/heads/main",
-        "rev": "8caca18ac6fa73cc903b9d6fb0dc6311a18a4a5d",
-        "revCount": 4,
+        "rev": "da345504b36b86dce94ccddd5c49fd02dbfd7c9d",
+        "revCount": 6,
         "type": "git",
         "url": "https://codeberg.org/adamcstephens/profile-parts"
       },
