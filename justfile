@@ -2,7 +2,7 @@ default:
     just --list
 
 brew-dump:
-    brew bundle dump --all --force
+    brew bundle dump --formula --cask --tap --mas --force
     git diff Brewfile
 
 bump:
