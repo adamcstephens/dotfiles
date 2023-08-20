@@ -1,14 +1,9 @@
 #!/usr/bin/env sh
 
-# avoid a loop
-SCRIPT_PATH=$(dirname "$(realpath "$0")")
-PATH="$(echo "$PATH" | sed -e "s,$SCRIPT_PATH:,,")"
-export PATH
-
 if [ -z $1 ]; then
   pwargs="20 12"
 else
   pwargs=$@
 fi
 
-pwgen -csn1 $pwargs
+"$HOME"/.nix-profile/bin/pwgen -csn1 "$pwargs"
