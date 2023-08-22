@@ -222,6 +222,10 @@
         (hide-mode-line-mode -1)
         (org-present-read-write)))))
 
-(use-package ox-pandoc)
+(use-package
+  ox-pandoc
+  :config
+  (setq org-pandoc-options-for-html5-pdf
+    '((pdf-engine . "weasyprint"))))
 
 (provide 'init-org)

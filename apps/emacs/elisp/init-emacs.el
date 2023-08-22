@@ -19,6 +19,9 @@
     backup-directory-alist (list (cons "." (concat user-emacs-directory "backup/")))
     tramp-backup-directory-alist backup-directory-alist)
 
+  ;; escape is too much muscle memory for me
+  (global-set-key [escape] 'keyboard-escape-quit)
+
   ;; keep what's already in the clipboard before overwriting the kill ring
   (setq save-interprogram-paste-before-kill t)
 

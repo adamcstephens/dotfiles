@@ -8,6 +8,7 @@
     fonts = {
       fontDir.enable = true;
       fonts = [
+        inputs.apple-fonts.packages.${pkgs.system}.sf-pro
         pkgs.etBook
         pkgs.fira
         pkgs.font-awesome

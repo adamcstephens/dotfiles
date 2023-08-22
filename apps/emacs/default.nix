@@ -15,6 +15,7 @@
     pkgs.diffutils
     pkgs.fd
     pkgs.fzf
+    pkgs.ghostscript
     pkgs.git
     pkgs.groff
     pkgs.graphicsmagick
@@ -24,6 +25,7 @@
     pkgs.nodePackages.prettier
     pkgs.pandoc
     pkgs.python3Minimal
+    pkgs.python3Packages.weasyprint
     pkgs.ripgrep
     pkgs.shellcheck
     pkgs.shfmt
