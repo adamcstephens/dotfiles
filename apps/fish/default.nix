@@ -34,7 +34,7 @@
       gc = "git commit";
       gd = "git diff";
       gl = "git pull";
-      glo = "git log --graph --decorate --pretty=oneline --abbrev-commit --max-count=15";
+      glo = "git log --decorate --pretty=oneline --abbrev-commit --max-count=15";
       gp = "git push";
       grh = "git reset HEAD";
       grv = "git remote -v";
