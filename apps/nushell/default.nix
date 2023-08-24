@@ -10,6 +10,11 @@
         alias l = ll -a
         alias nix = nix --print-build-logs
         alias dog = doggo
+
+        $env.config = {
+          show_banner: false,
+        }
+
       '';
     };
   };

@@ -253,5 +253,8 @@
     "editor.defaultFormatter": "entibo.vscode-kmonad-format"
   },
   "gitlens.views.repositories.autoRefresh": false,
-  "direnv.restart.automatic": true
+  "direnv.restart.automatic": true,
+  "[properties]": {
+    "editor.formatOnSave": false
+  }
 }
