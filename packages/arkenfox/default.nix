@@ -1,7 +1,6 @@
 {
   stdenvNoCC,
   fetchFromGitHub,
-  makeWrapper,
   writeScript,
 }:
 stdenvNoCC.mkDerivation rec {
@@ -19,8 +18,6 @@ stdenvNoCC.mkDerivation rec {
   dontBuild = true;
   dontConfigure = true;
   dontFixup = true;
-
-  buildInputs = [makeWrapper];
 
   installPhase = let
     script = writeScript "arkenfox-patch" ''
@@ -51,7 +48,7 @@ stdenvNoCC.mkDerivation rec {
     '';
   in ''
     mkdir -p $out/bin
-    makeWrapper ${script} $out/bin/arkenfox-patch
+    cp ${script} $out/bin/arkenfox-patch
   '';
 
   meta.mainProgram = "arkenfox-patch";
