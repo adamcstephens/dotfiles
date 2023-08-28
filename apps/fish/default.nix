@@ -40,6 +40,8 @@
       grv = "git remote -v";
       gs = "git status";
       gss = "git status --short";
+      gsw = "git switch";
+      gswc = "git switch --create";
       gt = "git tag --list -n1";
       ivl = "sudo iptables -vnL --line-numbers";
       jc = "sudo journalctl";

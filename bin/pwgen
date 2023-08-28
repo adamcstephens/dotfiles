@@ -6,4 +6,4 @@ else
   pwargs=$@
 fi
 
-"$HOME"/.nix-profile/bin/pwgen -csn1 "$pwargs"
+"$HOME"/.nix-profile/bin/pwgen -csn1 $pwargs
