@@ -14,6 +14,7 @@
   ];
 
   home.packages = [
+    pkgs.darwin.iproute2mac
     pkgs.gnugrep
     pkgs.gnused
     pkgs.gnutar
