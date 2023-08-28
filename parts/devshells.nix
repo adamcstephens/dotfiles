@@ -52,6 +52,12 @@
         '';
       };
 
+      js = pkgs.mkShellNoCC {
+        packages = [
+          pkgs.nodejs
+        ];
+      };
+
       media = pkgs.mkShellNoCC {
         name = "media";
         packages = [
@@ -60,6 +66,7 @@
       };
 
       nixpkgs = pkgs.mkShellNoCC {
+        name = "nixpkgs-devshell";
         packages =
           [
             pkgs.nixVersions.nix_2_16
@@ -80,12 +87,6 @@
           ln -sf $HOME/.dotfiles/apps/nix/dir-locals.el $PWD/.dir-locals.el
           ln -sfT $HOME/.dotfiles/apps/nix/vscode $PWD/.vscode
         '';
-      };
-
-      js = pkgs.mkShellNoCC {
-        packages = [
-          pkgs.nodejs
-        ];
       };
 
       python = pkgs.mkShellNoCC {
