@@ -35,27 +35,6 @@
         "type": "github"
       }
     },
-    "darwin": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1692248770,
-        "narHash": "sha256-tZeFpETKQGbgnaSIO1AGWD27IyTcBm4D+A9d7ulQ4NM=",
-        "owner": "lnl7",
-        "repo": "nix-darwin",
-        "rev": "511177ffe8226c78c9cf6a92a7b5f2df3684956b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "lnl7",
-        "ref": "master",
-        "repo": "nix-darwin",
-        "type": "github"
-      }
-    },
     "emacs-overlay": {
       "inputs": {
         "flake-utils": "flake-utils",
@@ -291,6 +270,27 @@
       "original": {
         "owner": "misterio77",
         "repo": "nix-colors",
+        "type": "github"
+      }
+    },
+    "nix-darwin": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1692248770,
+        "narHash": "sha256-tZeFpETKQGbgnaSIO1AGWD27IyTcBm4D+A9d7ulQ4NM=",
+        "owner": "lnl7",
+        "repo": "nix-darwin",
+        "rev": "511177ffe8226c78c9cf6a92a7b5f2df3684956b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "lnl7",
+        "ref": "master",
+        "repo": "nix-darwin",
         "type": "github"
       }
     },
@@ -544,11 +544,11 @@
     },
     "profile-parts": {
       "locked": {
-        "lastModified": 1691628697,
-        "narHash": "sha256-P6lnFl1USgRbhcnme3Ym0xMJwp06lITwJJWRODp8no0=",
+        "lastModified": 1693340701,
+        "narHash": "sha256-bW16Wuk3xEAe+qHPJc+gdMGYm5Brf/2Gro5Nm0477vo=",
         "ref": "refs/heads/main",
-        "rev": "da345504b36b86dce94ccddd5c49fd02dbfd7c9d",
-        "revCount": 6,
+        "rev": "0d40ec37a76035b07d529bc269ca6adbcb93d3d0",
+        "revCount": 7,
         "type": "git",
         "url": "https://codeberg.org/adamcstephens/profile-parts"
       },
@@ -560,13 +560,13 @@
     "root": {
       "inputs": {
         "apple-fonts": "apple-fonts",
-        "darwin": "darwin",
         "emacs-overlay": "emacs-overlay",
         "emacs-plus": "emacs-plus",
         "flake-parts": "flake-parts_2",
         "home-manager": "home-manager",
         "nil": "nil",
         "nix-colors": "nix-colors",
+        "nix-darwin": "nix-darwin",
         "nix-wallpaper": "nix-wallpaper",
         "nixfmt-rfc": "nixfmt-rfc",
         "nixpkgs": "nixpkgs_4",

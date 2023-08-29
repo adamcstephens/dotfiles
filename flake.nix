@@ -4,8 +4,6 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
     apple-fonts.url = "git+https://codeberg.org/adamcstephens/apple-fonts.nix";
-    darwin.url = "github:lnl7/nix-darwin/master";
-    darwin.inputs.nixpkgs.follows = "nixpkgs";
     emacs-overlay.url = "github:nix-community/emacs-overlay";
     emacs-plus.url = "github:d12frosted/homebrew-emacs-plus";
     emacs-plus.flake = false;
@@ -14,6 +12,8 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nil.url = "github:oxalica/nil";
     nix-colors.url = "github:misterio77/nix-colors";
+    nix-darwin.url = "github:lnl7/nix-darwin/master";
+    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     nix-wallpaper.url = "github:lunik1/nix-wallpaper";
     nix-wallpaper.inputs.nixpkgs.follows = "nixpkgs";
     nixfmt-rfc.url = "github:piegamesde/nixfmt/rfc101-style";
