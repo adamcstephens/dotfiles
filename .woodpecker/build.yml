@@ -1,0 +1,17 @@
+labels:
+  type: local
+
+steps:
+  build:
+    image: flake-build
+    environment:
+      GIT_USER_EMAIL: ruckus-ci@junco.dev
+    secrets:
+      - git_token
+      - ATTIC_TOKEN
+    settings:
+      attic_url: "https://attic.junco.dev"
+      attic_cache: default
+
+when:
+  - event: push
