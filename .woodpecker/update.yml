@@ -12,9 +12,6 @@ steps:
     settings:
       pr_title: "Daily Update"
       branch: daily
-      inputs:
-        - dotfiles
-        - sandbox
       git_email: ruckus-ci@junco.dev
       git_name: "Ruckus Roboticus"
     secrets:
