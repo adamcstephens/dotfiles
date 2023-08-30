@@ -92,7 +92,7 @@
       multi-vterm
       mwim
       nim-mode
-      nix-mode
+      nix-ts-mode
       nushell-mode
       olivetti
       orderless
