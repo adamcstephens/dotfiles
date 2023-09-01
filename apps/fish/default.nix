@@ -1,4 +1,5 @@
 {
+  config,
   lib,
   pkgs,
   ...
@@ -23,41 +24,7 @@
       (builtins.readFile ./interactive.fish)
       + (lib.optionalString pkgs.stdenv.isDarwin (builtins.readFile ./interactive-darwin.fish));
 
-    shellAbbrs = {
-      da = "direnv allow";
-      db = "direnv block";
-      dc = "docker-compose";
-      dclf = "docker-compose logs --tail=100 -f";
-      dps = ''docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}\t{{.Command}}\t{{.Image}}"'';
-      ga = "git add";
-      gbv = "git branch --all --verbose --verbose";
-      gc = "git commit";
-      gd = "git diff";
-      gl = "git pull";
-      glo = "git log --decorate --pretty=oneline --abbrev-commit --max-count=15";
-      gp = "git push";
-      grh = "git reset HEAD";
-      grv = "git remote -v";
-      gs = "git status";
-      gss = "git status --short";
-      gsw = "git switch";
-      gswc = "git switch --create";
-      gt = "git tag --list -n1";
-      ivl = "sudo iptables -vnL --line-numbers";
-      jc = "sudo journalctl";
-      jcu = "journalctl --user";
-      sy = "sudo systemctl";
-      syu = "systemctl --user";
-    };
-
-    shellAliases = {
-      cat = "bat";
-      cnf = "command-not-found";
-      l = "ll -a";
-      nix = "nix --print-build-logs";
-      dog = "doggo";
-      tree = "lsd --tree";
-    };
+    shellAbbrs = config.home.shellAliases;
 
     functions = {
       esl = "exec fish -l";

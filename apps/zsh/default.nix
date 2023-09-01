@@ -1,4 +1,4 @@
-{...}: {
+{config, ...}: {
   programs.zsh = {
     enable = true;
     enableAutosuggestions = true;
@@ -26,5 +26,7 @@
       bindkey "^[[1;5C" forward-word
       bindkey "^[[1;5D" backward-word
     '';
+
+    shellAliases = config.home.shellAliases;
   };
 }

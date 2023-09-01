@@ -1,4 +1,4 @@
-{...}: {
+{config, ...}: {
   programs.bash = {
     enable = true;
     initExtra = ''
@@ -6,5 +6,7 @@
 
       [[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path bash 2>/dev/null)"
     '';
+
+    shellAliases = config.home.shellAliases;
   };
 }
