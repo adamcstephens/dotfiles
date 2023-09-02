@@ -38,7 +38,7 @@
 
       #tags button {
         color: #${config.colorScheme.colors.base03};
-        min-width: 22px;
+        min-width: 14px;
       }
 
       #tags button.occupied {
@@ -81,6 +81,7 @@
   };
 
   systemd.user.services.waybar.Unit = {
+    Environment = ["FONTCONFIG_FILE=${config.dotfiles.gui.font.fontconfig}"];
     PartOf = lib.mkForce ["wayland-session.target"];
     After = lib.mkForce ["wayland-session.target"];
   };

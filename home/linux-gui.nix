@@ -49,6 +49,11 @@ in {
   gtk = {
     enable = true;
 
+    font = {
+      name = "SF Pro Display";
+      package = inputs.apple-fonts.packages.${pkgs.system}.sf-pro;
+    };
+
     # cursorTheme = {
     #   package = pkgs.catppuccin-cursors.macchiatoPeach;
     #   name = "Catppuccin-Macchiato-Peach-Cursors";

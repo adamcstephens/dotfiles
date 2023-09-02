@@ -57,17 +57,18 @@
       enabled = "";
       disabled = "";
     };
-    "tooltip-format" = "{}";
-    "on-click" = "blueberry";
+    tooltip-format = "{}";
+    on-click = "blueberry";
   };
   network = {
+    interface = "wlp0s20f3";
     format-wifi = "";
     format-ethernet = "";
     format-linked = "";
     format-disconnected = "⚠";
-    "tooltip-format" = "{ifname} {essid} ({signalStrength}%)";
+    tooltip-format = "{ifname} {essid} ({signalStrength}%)";
     tooltip = true;
-    "on-click" = "nm-connection-editor";
+    on-click = "nm-connection-editor";
   };
   pulseaudio = {
     format = "{icon}";
@@ -75,16 +76,16 @@
     format-alt-click = "click-right";
     format-muted = "婢";
     format-icons = {
-      "headphones" = "";
-      "handsfree" = "";
-      "headset" = "";
-      "phone" = "";
-      "portable" = "";
-      "car" = "";
-      "default" = ["" "" ""];
+      headphones = "";
+      handsfree = "";
+      headset = "";
+      phone = "";
+      portable = "";
+      car = "";
+      default = ["" "" ""];
     };
-    "scroll-step" = 10;
-    "on-click" = "pavucontrol";
+    scroll-step = 10;
+    on-click = "pavucontrol";
     tooltip = false;
   };
 }
