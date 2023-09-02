@@ -5,14 +5,17 @@
   ...
 }: let
   systemctlBin = "/run/current-system/sw/bin/systemctl";
+  colors = config.colorScheme.colors;
 
-  gtklock = "${pkgs.procps}/bin/pgrep gtklock || ${pkgs.util-linux}/bin/setsid --fork ${pkgs.gtklock}/bin/gtklock";
+  # gtklock = "${pkgs.procps}/bin/pgrep gtklock || ${pkgs.util-linux}/bin/setsid --fork ${pkgs.gtklock}/bin/gtklock";
   # swaylock = "${pkgs.waylock}/bin/waylock";
-  locker = gtklock;
+  waylock = "${lib.getExe pkgs.waylock} -fork-on-lock -init-color 0x${colors.base01} -input-color 0x${colors.base03} -fail-color 0x${colors.base08}";
+
+  locker = waylock;
 in {
-  imports = [
-    ../swaylock
-  ];
+  # imports = [
+  #   ../swaylock
+  # ];
 
   services.swayidle = {
     enable = true;
@@ -26,7 +29,7 @@ in {
     timeouts =
       [
         {
-          timeout = 120;
+          timeout = 600;
           command = "${locker}";
         }
       ]
