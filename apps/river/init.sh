@@ -28,8 +28,8 @@ riverctl focus-follows-cursor always || riverctl focus-follows-cursor normal
 riverctl map normal Mod4+Shift T spawn 'systemd-cat --identifier=kitty kitty --single-instance'
 riverctl map normal Mod4+Shift Return spawn 'systemd-cat --identifier=kitty kitty --single-instance'
 riverctl map normal Mod4+Shift+Control E spawn 'systemd-cat --identifier=gtk-launch gtk-launch emacsclient'
-riverctl map normal Mod4 D spawn 'systemd-cat --identifier=rofi rofi -show drun -font "JetBrains Mono 10"'
-riverctl map normal Mod4+Shift D spawn 'systemd-cat --identifier=rofi rofi -show emoji -font "JetBrains Mono 10"'
+riverctl map normal Mod4 D spawn 'systemd-cat --identifier=rofi rofi -show drun'
+riverctl map normal Mod4+Shift D spawn 'systemd-cat --identifier=rofi rofi -show emoji'
 riverctl map normal Mod4+Shift+Control D spawn 'systemd-cat --identifier=dark dark toggle'
 
 # bindsym print exec screenshot.sh window
