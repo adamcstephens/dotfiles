@@ -2,14 +2,12 @@
   layer = "top";
   position = "top";
   height = 30;
-  "modules-left" = [
-    "sway/workspaces"
-    "sway/mode"
+  modules-left = [
     "river/tags"
   ];
-  "modules-center" = [
+  modules-center = [
   ];
-  "modules-right" = [
+  modules-right = [
     "tray"
     "idle_inhibitor"
     "bluetooth"
@@ -18,30 +16,13 @@
     "pulseaudio"
     "clock"
   ];
-  "sway/mode" = {
-    format = " {}";
-  };
-  "sway/workspaces" = {
-    "disable-scroll" = true;
-    "all-outputs" = true;
-    format = "{icon}";
-    "format-icons" = {
-      "1" = "";
-      "2" = "";
-      "3" = "";
-      "4" = "";
-      "urgent" = "";
-      "focused" = "";
-      "default" = "";
-    };
-  };
   "river/tags" = {
-    "num-tags" = 8;
+    num-tags = 8;
   };
-  "idle_inhibitor" = {
+  idle_inhibitor = {
     format = "{icon}";
-    "format-icons" = {
-      activated = "﯈";
+    format-icons = {
+      activated = "☕";
       deactivated = "";
     };
   };
@@ -51,7 +32,7 @@
   clock = {
     interval = 60;
     format = "{:%m/%d @ %H:%M}";
-    "max-length" = 25;
+    max-length = 25;
   };
   battery = {
     states = {
@@ -59,20 +40,20 @@
       critical = 20;
     };
     format = "{capacity}% {icon}";
-    "format-charging" = "";
-    "format-plugged" = "";
-    "tooltip-format" = "{capacity}% {time}";
-    "format-icons" = [
-      ""
-      ""
-      ""
-      ""
-      ""
+    format-charging = "~";
+    format-plugged = "";
+    tooltip-format = "{capacity}% {time}";
+    format-icons = [
+      ""
+      ""
+      ""
+      ""
+      ""
     ];
   };
   bluetooth = {
     format = "{icon}";
-    "format-icons" = {
+    format-icons = {
       enabled = "";
       disabled = "";
     };
@@ -80,20 +61,20 @@
     "on-click" = "blueberry";
   };
   network = {
-    "format-wifi" = "";
-    "format-ethernet" = "";
-    "format-linked" = "";
-    "format-disconnected" = "⚠";
+    format-wifi = "";
+    format-ethernet = "";
+    format-linked = "";
+    format-disconnected = "⚠";
     "tooltip-format" = "{ifname} {essid} ({signalStrength}%)";
     tooltip = true;
     "on-click" = "nm-connection-editor";
   };
   pulseaudio = {
     format = "{icon}";
-    "format-alt" = "{volume} {icon}";
-    "format-alt-click" = "click-right";
-    "format-muted" = "婢";
-    "format-icons" = {
+    format-alt = "{volume} {icon}";
+    format-alt-click = "click-right";
+    format-muted = "婢";
+    format-icons = {
       "headphones" = "";
       "handsfree" = "";
       "headset" = "";

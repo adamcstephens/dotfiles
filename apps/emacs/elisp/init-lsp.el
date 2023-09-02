@@ -1,3 +1,4 @@
+
 (defun dot/eglot-mode-setup ()
   (eglot-ensure)
   (add-hook 'before-save-hook 'eglot-format-buffer -10 t))
@@ -24,8 +25,9 @@
       (lambda () (add-hook 'before-save-hook 'dot/eglot-goimports)))
     (heex-ts-mode . dot/eglot-mode-setup)
     (haskell-mode . dot/eglot-mode-setup)
-    (nix-mode . eglot-ensure)
     (nim-mode . eglot-ensure)
+    (nix-mode . eglot-ensure)
+    (nix-ts-mode . dot/eglot-mode-setup)
     (tsx-ts-mode . dot/eglot-mode-setup)
     (typescript-mode . dot/eglot-mode-setup)
     (typescript-ts-mode . dot/eglot-mode-setup))
@@ -36,8 +38,9 @@
   :config
   (add-to-list 'eglot-server-programs '((elixir-ts-mode) "elixir-ls"))
   (add-to-list 'eglot-server-programs '((heex-ts-mode) "elixir-ls"))
-  (add-to-list 'eglot-server-programs '((nix-mode) "nil"))
   (add-to-list 'eglot-server-programs '((nim-mode) "nimlsp"))
+  (add-to-list 'eglot-server-programs '((nix-mode) "nil"))
+  (add-to-list 'eglot-server-programs '((nix-ts-mode) "nil"))
   (add-to-list
     'eglot-server-programs
     '

@@ -13,8 +13,6 @@
       riverctl background-color 0x${config.colorScheme.colors.base00}
       riverctl border-color-focused 0x${config.colorScheme.colors.base05}
       riverctl border-color-unfocused 0x${config.colorScheme.colors.base03}
-
-      riverctl xcursor-theme ${config.home.pointerCursor.name}
     '';
 
     onChange = ''

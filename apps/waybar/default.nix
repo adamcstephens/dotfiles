@@ -16,7 +16,7 @@
       * {
         border: none;
         border-radius: 0;
-        font-family: "${config.dotfiles.gui.font.mono}";
+        font-family: "SF Pro Display";
         font-size: 14px;
         box-shadow: none;
         text-shadow: none;
@@ -33,39 +33,24 @@
         color: #${config.colorScheme.colors.base0B};
       }
 
-      #tags,
-      #workspaces {
-        margin: 0 0px;
+      #tags {
       }
 
       #tags button {
         color: #${config.colorScheme.colors.base03};
-        padding: 0 0px;
+        min-width: 22px;
       }
 
-      #tags button.occupied,
-      #workspaces button {
+      #tags button.occupied {
         color: #${config.colorScheme.colors.base04};
       }
 
-      #tags button.focused,
-      #workspaces button.focused {
+      #tags button.focused {
         color: #${config.colorScheme.colors.base09};
       }
 
-      #workspaces button.visible {
-        color: #${config.colorScheme.colors.base09};
-      }
-
-      #tags button.urgent,
-      #workspaces button.urgent {
+      #tags button.urgent {
         color: #${config.colorScheme.colors.base08};
-      }
-
-      /* sway mode */
-      #mode {
-        color: #${config.colorScheme.colors.base0E};
-        margin: 0px 6px 0px 5px;
       }
 
       #battery,

@@ -120,7 +120,7 @@ riverctl map normal Mod4 Grave focus-previous-tags
 riverctl map normal Mod4+Shift Space toggle-float
 
 # Mod+F to toggle fullscreen
-riverctl map normal Mod4 F toggle-fullscreen
+# riverctl map normal Mod4 F toggle-fullscreen
 
 # Mod+{Up,Right,Down,Left} to change layout orientation
 riverctl map normal Mod4 Up send-layout-cmd rivertile "main-location top"

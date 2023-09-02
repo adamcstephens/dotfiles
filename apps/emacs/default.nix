@@ -5,6 +5,8 @@
   pkgs,
   ...
 }: let
+  cfg = config.dotfiles.apps.emacs;
+
   aspell = pkgs.aspellWithDicts (dicts: with dicts; [en en-computers en-science]);
 
   extraBins = [
@@ -32,9 +34,7 @@
     pkgs.sqlite
   ];
 
-  emacsSource = pkgs.emacs29;
-
-  emacsPatched = emacsSource.overrideAttrs (prev: {
+  emacsPatched = cfg.package.overrideAttrs (prev: {
     patches =
       # [./silence-pgtk-xorg-warning.patch]
       # ++
@@ -168,66 +168,74 @@
 
   terminfo = pkgs.callPackage ../../packages/terminfo {};
 in {
-  programs.emacs = {
-    enable = true;
-    package = package;
-    extraConfig = env;
-  };
-
-  xdg.configFile =
-    if config.dotfiles.nixosManaged
-    then {
-      "emacs/elisp".source = ./elisp;
-      "emacs/snippets".source = ./snippets;
-      "emacs/custom.el".source = ./custom.el;
-      "emacs/early-init.el".source = ./early-init.el;
-      "emacs/init.el".source = ./init.el;
-      "emacs/straight/versions/default.el".source = ./straight/versions/default.el;
-    }
-    else {
-      "emacs".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/emacs";
+  options = {
+    dotfiles.apps.emacs.package = lib.mkOption {
+      type = lib.types.package;
+      default = pkgs.emacs29;
     };
-
-  services = lib.mkIf pkgs.stdenv.isLinux {
-    emacs = {
+  };
+  config = {
+    programs.emacs = {
       enable = true;
-      extraOptions = [
-        "--init-directory"
-        "${config.home.homeDirectory}/.config/emacs"
-      ];
-      socketActivation.enable = config.dotfiles.nixosManaged;
+      package = package;
+      extraConfig = env;
     };
-  };
 
-  systemd = lib.mkIf pkgs.stdenv.isLinux {
-    user.services.emacs.Service = {
-      Environment = [
-        "TERMINFO=${terminfo}/share/terminfo"
-        "TERM=xterm-emacs"
+    xdg.configFile =
+      if config.dotfiles.nixosManaged
+      then {
+        "emacs/elisp".source = ./elisp;
+        "emacs/snippets".source = ./snippets;
+        "emacs/custom.el".source = ./custom.el;
+        "emacs/early-init.el".source = ./early-init.el;
+        "emacs/init.el".source = ./init.el;
+        "emacs/straight/versions/default.el".source = ./straight/versions/default.el;
+      }
+      else {
+        "emacs".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/emacs";
+      };
 
-        "SSH_AUTH_SOCK=%t/yubikey-agent/yubikey-agent.sock"
-      ];
-      TimeoutSec = 900;
+    services = lib.mkIf pkgs.stdenv.isLinux {
+      emacs = {
+        enable = true;
+        extraOptions = [
+          "--init-directory"
+          "${config.home.homeDirectory}/.config/emacs"
+        ];
+        socketActivation.enable = config.dotfiles.nixosManaged;
+      };
     };
-  };
 
-  launchd = lib.mkIf pkgs.stdenv.isDarwin {
-    agents.emacs = {
-      enable = true;
-      config = {
-        KeepAlive = true;
-        ProgramArguments = [
-          "${config.home.homeDirectory}/.nix-profile/bin/fish"
-          "-l"
-          "-c"
-          "${config.programs.emacs.finalPackage}/bin/emacs --fg-daemon --init-directory ${config.home.homeDirectory}/.config/emacs"
+    systemd = lib.mkIf pkgs.stdenv.isLinux {
+      user.services.emacs.Service = {
+        Environment = [
+          "TERMINFO=${terminfo}/share/terminfo"
+          "TERM=xterm-emacs"
+
+          "SSH_AUTH_SOCK=%t/yubikey-agent/yubikey-agent.sock"
         ];
-        RunAtLoad = true;
-        StandardErrorPath = "${config.home.homeDirectory}/.config/emacs/launchd.log";
-        StandardOutPath = "${config.home.homeDirectory}/.config/emacs/launchd.log";
-        WatchPaths = [
-          "${config.home.homeDirectory}/.nix-profile/bin/emacs"
-        ];
+        TimeoutSec = 900;
+      };
+    };
+
+    launchd = lib.mkIf pkgs.stdenv.isDarwin {
+      agents.emacs = {
+        enable = true;
+        config = {
+          KeepAlive = true;
+          ProgramArguments = [
+            "${config.home.homeDirectory}/.nix-profile/bin/fish"
+            "-l"
+            "-c"
+            "${config.programs.emacs.finalPackage}/bin/emacs --fg-daemon --init-directory ${config.home.homeDirectory}/.config/emacs"
+          ];
+          RunAtLoad = true;
+          StandardErrorPath = "${config.home.homeDirectory}/.config/emacs/launchd.log";
+          StandardOutPath = "${config.home.homeDirectory}/.config/emacs/launchd.log";
+          WatchPaths = [
+            "${config.home.homeDirectory}/.nix-profile/bin/emacs"
+          ];
+        };
       };
     };
   };

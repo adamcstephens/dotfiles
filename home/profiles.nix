@@ -76,7 +76,12 @@ in {
         ./linux-gui.nix
         ../apps/goldencheetah
 
-        {dotfiles.gui.dpi = 196;}
+        ({pkgs, ...}: {
+          dotfiles.apps.emacs.package = pkgs.emacs29-pgtk;
+          services.ssh-agent.enable = true;
+          services.kanshi.enable = lib.mkForce false;
+          home.packages = [pkgs.wdisplays];
+        })
       ];
     };
 

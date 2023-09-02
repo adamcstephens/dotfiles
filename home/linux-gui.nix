@@ -48,10 +48,18 @@ in {
 
   gtk = {
     enable = true;
+
+    # cursorTheme = {
+    #   package = pkgs.catppuccin-cursors.macchiatoPeach;
+    #   name = "Catppuccin-Macchiato-Peach-Cursors";
+    #   size = 24;
+    # };
+
     iconTheme = {
       name = "Papirus-Dark";
       package = pkgs.papirus-icon-theme;
     };
+
     theme = {
       name = config.colorScheme.slug;
       package = nix-colors-contrib.gtkThemeFromScheme {
@@ -60,13 +68,13 @@ in {
     };
   };
 
-  home.pointerCursor = {
-    package = pkgs.catppuccin-cursors.macchiatoPeach;
-    name = "Catppuccin-Macchiato-Peach-Cursors";
-    size = 48;
-    gtk.enable = true;
-    x11.enable = true;
-  };
+  # home.pointerCursor = {
+  #   package = pkgs.catppuccin-cursors.macchiatoPeach;
+  #   name = "Catppuccin-Macchiato-Peach-Cursors";
+  #   size = 24;
+  #   # gtk.enable = true;
+  #   x11.enable = true;
+  # };
 
   home.packages =
     [
