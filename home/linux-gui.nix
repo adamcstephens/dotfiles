@@ -52,6 +52,7 @@ in {
     font = {
       name = "SF Pro Display";
       package = inputs.apple-fonts.packages.${pkgs.system}.sf-pro;
+      size = 11;
     };
 
     # cursorTheme = {
