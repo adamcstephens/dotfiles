@@ -42,12 +42,13 @@ in {
         ./linux-gui.nix
         ../apps/solaar
 
-        {
+        ({pkgs, ...}: {
+          dotfiles.apps.emacs.package = pkgs.emacs29-pgtk;
           dotfiles.gui = {
             dpi = 148;
             dontSuspend = true;
           };
-        }
+        })
       ];
     };
 
