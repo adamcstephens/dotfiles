@@ -94,8 +94,7 @@ the cursor by ARG lines."
   :bind
   (:map
     flyspell-mode-map
-    ("C-;" . flyspell-correct-wrapper)
-    ("[down-mouse-3]" . flyspell-correct-word)))
+    ("C-;" . flyspell-correct-wrapper)))
 
 (use-package golden-ratio :init (golden-ratio-mode 1))
 
