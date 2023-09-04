@@ -1,0 +1,9 @@
+#!/usr/bin/env nu
+
+def main [] {
+  let head = [".git/refs/remotes/origin/HEAD", ".git/refs/remotes/upstream/HEAD"] | where {|f| $f | path exists } | first | str replace '.git/' ''
+  let branch = git symbolic-ref $head | str replace --regex '.*/' ''
+
+  git switch $branch
+  git pull
+}

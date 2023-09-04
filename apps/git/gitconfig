@@ -3,7 +3,7 @@
 #
 [alias]
   ftag = push --tags --force
-  home = "!git checkout $(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'); git pull"
+  home = "!~/.dotfiles/bin/git-home"
   fixhome = remote set-head origin --auto
   subup = submodule update --remote --merge --recursive
   yolo = commit --amend --no-edit
