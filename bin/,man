@@ -1,0 +1,31 @@
+#!/usr/bin/env nu
+
+def main [package: string, --page: string] {
+  let package = (if ((nix eval $package --apply builtins.attrNames --json | from json | find --regex '^man$' | length) >= 1) {
+    $"($package).man"
+  } else {
+    $package
+  })
+
+  let page = if ($page != null) {
+    $page
+  } else {
+    let meta = nix eval  $"($package).meta" --json | complete
+    if ($meta.exit_code != 0) {
+      print $meta.stderr
+      exit $meta.exit_code
+    }
+
+    mut bin = $meta.stdout | from json | get mainProgram --ignore-errors
+    if ($bin == null) {
+      $bin = ($package | split column "#" | get column2)
+    }
+
+    $bin
+  }
+
+  let path = nix path-info $package | str trim
+  $env.MANPATH = $":($path)/share/man"
+  nix build --no-link $package
+  man $page
+}
