@@ -39,6 +39,7 @@ in {
     ../apps/mimeapps
     ../apps/ssh
     ../apps/vscode
+    ../apps/wezterm
 
     # dev
     ../apps/ghc
@@ -55,12 +56,6 @@ in {
       size = 11;
     };
 
-    cursorTheme = {
-      package = pkgs.bibata-cursors;
-      name = "Bibata-Original-Ice";
-      size = 32;
-    };
-
     iconTheme = {
       name = "Papirus-Dark";
       package = pkgs.papirus-icon-theme;
@@ -74,13 +69,13 @@ in {
     };
   };
 
-  # home.pointerCursor = {
-  #   package = pkgs.catppuccin-cursors.macchiatoPeach;
-  #   name = "Catppuccin-Macchiato-Peach-Cursors";
-  #   size = 24;
-  #   # gtk.enable = true;
-  #   x11.enable = true;
-  # };
+  home.pointerCursor = {
+    package = pkgs.bibata-cursors;
+    name = "Bibata-Original-Ice";
+    size = 32;
+    gtk.enable = true;
+    x11.enable = true;
+  };
 
   home.packages =
     [
