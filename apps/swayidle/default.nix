@@ -26,18 +26,23 @@ in {
         command = "${locker}";
       }
     ];
-    timeouts =
-      [
-        {
-          timeout = 600;
-          command = "${locker}";
+    timeouts = [
+      {
+        timeout = 600;
+        command = "${locker}";
+      }
+      (
+        if (config.dotfiles.gui.dontSuspend)
+        then {
+          timeout = 960;
+          command = "${lib.getExe pkgs.wlopm} --off *";
+          resumeCommand = "${lib.getExe pkgs.wlopm} --on *";
         }
-      ]
-      ++ (
-        lib.optional (!config.dotfiles.gui.dontSuspend) {
+        else {
           timeout = 360;
           command = "${systemctlBin} suspend";
         }
-      );
+      )
+    ];
   };
 }
