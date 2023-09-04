@@ -19,4 +19,18 @@
       ~/.config/river/colors.sh
     '';
   };
+
+  xdg.configFile."river/start" = {
+    text = ''
+      export MOZ_ENABLE_WAYLAND="1"
+      export NIXOS_OZONE_WL="1"
+      export
+
+      systemd-cat --identifier=river river
+
+      systemctl --user stop wayland-session.target
+    '';
+
+    executable = true;
+  };
 }
