@@ -109,6 +109,12 @@
         ];
       };
 
+      vscode = pkgs.mkShellNoCC {
+        packages = [
+          pkgs.vsce
+        ];
+      };
+
       xmonad = pkgs.mkShellNoCC {
         packages = [
           (pkgs.ghc.withPackages (ps: [
