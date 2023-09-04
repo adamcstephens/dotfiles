@@ -35,8 +35,8 @@ in {
         if (config.dotfiles.gui.dontSuspend)
         then {
           timeout = 960;
-          command = "${lib.getExe pkgs.wlopm} --off *";
-          resumeCommand = "${lib.getExe pkgs.wlopm} --on *";
+          command = "${lib.getExe pkgs.wlopm} --off HDMI-A-1";
+          resumeCommand = "${lib.getExe pkgs.wlopm} --on HDMI-A-1";
         }
         else {
           timeout = 360;
