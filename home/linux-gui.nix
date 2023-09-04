@@ -55,11 +55,11 @@ in {
       size = 11;
     };
 
-    # cursorTheme = {
-    #   package = pkgs.catppuccin-cursors.macchiatoPeach;
-    #   name = "Catppuccin-Macchiato-Peach-Cursors";
-    #   size = 24;
-    # };
+    cursorTheme = {
+      package = pkgs.bibata-cursors;
+      name = "Bibata-Original-Ice";
+      size = 32;
+    };
 
     iconTheme = {
       name = "Papirus-Dark";
