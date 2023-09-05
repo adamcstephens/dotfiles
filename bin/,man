@@ -1,6 +1,7 @@
 #!/usr/bin/env nu
 
 def main [package: string, ...args: string] {
+  let package = if (($package | find '#') == null) { $"nixpkgs#($package)" } else { $package }
   let package = if ((nix eval $package --apply builtins.attrNames --json | from json | find --regex '^man$' | length) >= 1) {
     $"($package).man"
   } else {
