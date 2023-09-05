@@ -118,6 +118,7 @@ in {
       pkgs.grim
       pkgs.slurp
       pkgs.wl-clipboard
+      pkgs.wl-mirror
 
       # audio
       pkgs.pavucontrol
