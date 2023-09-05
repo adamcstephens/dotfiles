@@ -109,7 +109,7 @@ in {
 
       # apps
       pkgs.chromium
-      pkgs.element-desktop
+      (pkgs.element-desktop.override {electron = pkgs.electron_24;})
       pkgs.firefox-wayland
       pkgs.cinnamon.nemo
       pkgs.gomuks
