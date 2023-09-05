@@ -19,6 +19,7 @@ in {
     # common
     ../apps/dunst
     ../apps/gammastep
+    ../apps/rofi
 
     # wayland
     ../apps/kanshi
@@ -26,13 +27,12 @@ in {
     ../apps/swayidle
     ../apps/waybar
     ../apps/wob
-    ../apps/wofi
 
     # xorg
     # ../apps/leftwm
     ../apps/polybar
-    ../apps/rofi
     ../apps/xmonad
+    ../apps/xorg
 
     # apps
     ../apps/kitty
@@ -83,19 +83,13 @@ in {
       pkgs.fira
       pkgs.font-awesome
       pkgs.jetbrains-mono
-      pkgs.manrope
       pkgs.material-icons
       pkgs.material-design-icons
-      pkgs.merriweather
-      pkgs.norwester-font
       pkgs.noto-fonts
       pkgs.noto-fonts-cjk
       pkgs.noto-fonts-emoji
-      pkgs.roboto
       inputs.apple-fonts.packages.${pkgs.system}.sf-mono
       inputs.apple-fonts.packages.${pkgs.system}.sf-pro
-      pkgs.source-sans
-      pkgs.vegur
 
       configure-gtk
       pkgs.glib
@@ -107,18 +101,6 @@ in {
       pkgs.ddcutil
       pkgs.light
       pkgs.networkmanagerapplet
-
-      # xorg
-      pkgs.autorandr
-      pkgs.lxrandr
-      pkgs.xclip
-      pkgs.xlayoutdisplay
-
-      # wayland
-      pkgs.grim
-      pkgs.slurp
-      pkgs.wl-clipboard
-      pkgs.wl-mirror
 
       # audio
       pkgs.pavucontrol
@@ -148,6 +130,19 @@ in {
         '';
       })
     ]
+    ++ (lib.optionals config.dotfiles.gui.wayland [
+      pkgs.grim
+      pkgs.slurp
+      pkgs.wl-clipboard
+      pkgs.wl-mirror
+      pkgs.wdisplays
+    ])
+    ++ (lib.optionals config.dotfiles.gui.xorg [
+      pkgs.autorandr
+      pkgs.lxrandr
+      pkgs.xclip
+      pkgs.xlayoutdisplay
+    ])
     ++ (lib.optionals pkgs.stdenv.isx86_64 [
       # pkgs.cinny-desktop
       pkgs.slack

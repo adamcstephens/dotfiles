@@ -13,36 +13,34 @@
 
   locker = waylock;
 in {
-  # imports = [
-  #   ../swaylock
-  # ];
-
-  services.swayidle = {
-    enable = true;
-    systemdTarget = "wayland-session.target";
-    events = [
-      {
-        event = "before-sleep";
-        command = "${locker}";
-      }
-    ];
-    timeouts = [
-      {
-        timeout = 600;
-        command = "${locker}";
-      }
-      (
-        if (config.dotfiles.gui.dontSuspend)
-        then {
-          timeout = 960;
-          command = "${lib.getExe pkgs.wlopm} --off HDMI-A-1";
-          resumeCommand = "${lib.getExe pkgs.wlopm} --on HDMI-A-1";
+  config = lib.mkIf config.dotfiles.gui.wayland {
+    services.swayidle = {
+      enable = true;
+      systemdTarget = "wayland-session.target";
+      events = [
+        {
+          event = "before-sleep";
+          command = "${locker}";
         }
-        else {
-          timeout = 360;
-          command = "${systemctlBin} suspend";
+      ];
+      timeouts = [
+        {
+          timeout = 600;
+          command = "${locker}";
         }
-      )
-    ];
+        (
+          if (config.dotfiles.gui.dontSuspend)
+          then {
+            timeout = 960;
+            command = "${lib.getExe pkgs.wlopm} --off HDMI-A-1";
+            resumeCommand = "${lib.getExe pkgs.wlopm} --on HDMI-A-1";
+          }
+          else {
+            timeout = 360;
+            command = "${systemctlBin} suspend";
+          }
+        )
+      ];
+    };
   };
 }

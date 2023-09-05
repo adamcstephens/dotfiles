@@ -47,6 +47,8 @@ in {
           dotfiles.gui = {
             dpi = 148;
             dontSuspend = true;
+            wayland = true;
+            xorg = true;
           };
         })
       ];
@@ -62,6 +64,7 @@ in {
           home.sessionVariables = {
             LIBVA_DRIVER_NAME = "i965";
           };
+          xorg = true;
         }
       ];
     };
@@ -79,9 +82,8 @@ in {
 
         ({pkgs, ...}: {
           dotfiles.apps.emacs.package = pkgs.emacs29-pgtk;
+          dotfiles.gui.wayland = true;
           services.ssh-agent.enable = true;
-          services.kanshi.enable = lib.mkForce false;
-          home.packages = [pkgs.wdisplays];
         })
       ];
     };

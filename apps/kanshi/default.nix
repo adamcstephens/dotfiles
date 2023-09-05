@@ -5,47 +5,54 @@
 #   1.32, 2909.091 x 818.1819
 #   1.35, 2844.4443 x 800
 #   1.40, 2742.8571 x 1542.8571
-{pkgs, ...}: {
-  services.kanshi = {
-    enable = true;
-    systemdTarget = "wayland-session.target";
-    profiles = {
-      docked = {
-        outputs = [
-          {
-            criteria = "eDP-1";
-            status = "disable";
-          }
-          {
-            criteria = "Dell Inc. DELL P2715Q 54KKD79CAQNL";
-            scale = 1.4;
-          }
-        ];
-      };
-      undocked = {
-        outputs = [
-          {
-            criteria = "eDP-1";
-            scale = 2.0;
-            status = "enable";
-          }
-        ];
-      };
-      desktop = {
-        outputs = [
-          {
-            criteria = "Dell Inc. DELL P2715Q 54KKD79CAQNL";
-            scale = 1.45;
-          }
-        ];
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
+  config = lib.mkIf config.dotfiles.gui.wayland {
+    services.kanshi = {
+      enable = true;
+      systemdTarget = "wayland-session.target";
+      profiles = {
+        docked = {
+          outputs = [
+            {
+              criteria = "eDP-1";
+              status = "disable";
+            }
+            {
+              criteria = "Dell Inc. DELL P2715Q 54KKD79CAQNL";
+              scale = 1.4;
+            }
+          ];
+        };
+        undocked = {
+          outputs = [
+            {
+              criteria = "eDP-1";
+              scale = 2.0;
+              status = "enable";
+            }
+          ];
+        };
+        desktop = {
+          outputs = [
+            {
+              criteria = "Dell Inc. DELL P2715Q 54KKD79CAQNL";
+              scale = 1.45;
+            }
+          ];
+        };
       };
     };
-  };
 
-  systemd.user.services.kanshi = {
-    Service = {
-      Environment = ["PATH=${pkgs.river}/bin:${pkgs.bash}/bin:${pkgs.gnugrep}/bin:${pkgs.coreutils}/bin:$PATH"];
-      RestartSec = "5s";
+    systemd.user.services.kanshi = {
+      Service = {
+        Environment = ["PATH=${pkgs.river}/bin:${pkgs.bash}/bin:${pkgs.gnugrep}/bin:${pkgs.coreutils}/bin:$PATH"];
+        RestartSec = "5s";
+      };
     };
   };
 }

@@ -13,6 +13,11 @@
         default = 96;
       };
 
+      dontSuspend = lib.mkEnableOption (lib.mdDoc "Don't automatically suspend on idle");
+      insecure = lib.mkEnableOption (lib.mkDoc "Insecure GUI disables locking");
+      wayland = lib.mkEnableOption (lib.mdDoc "Enable wayland resources");
+      xorg = lib.mkEnableOption (lib.mdDoc "Enable xorg resources");
+
       font = {
         mono = lib.mkOption {
           type = lib.types.str;
@@ -44,10 +49,6 @@
           };
         };
       };
-
-      insecure = lib.mkEnableOption (lib.mkDoc "Insecure GUI disables locking");
-
-      dontSuspend = lib.mkEnableOption (lib.mdDoc "Don't automatically suspend on idle");
     };
   };
 }

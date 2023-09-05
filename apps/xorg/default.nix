@@ -32,77 +32,79 @@
     ${pkgs.xsecurelock}/bin/xsecurelock
   '';
 in {
-  home.packages = [
-    pkgs.maim
-    pkgs.xdotool
-  ];
-
-  services.screen-locker = lib.mkIf (! config.dotfiles.gui.insecure) {
-    enable = true;
-    inactiveInterval = 5;
-    lockCmd = xsecurelock.outPath;
-    xautolock.extraOptions = [
-      "-notify"
-      "10"
-      "-notifier"
-      ''"${pkgs.libnotify}/bin/notify-send --expire-time=9900 --icon=dialog-information 'Locking in 10 seconds'"''
+  config = lib.mkIf config.dotfiles.gui.xorg {
+    home.packages = [
+      pkgs.maim
+      pkgs.xdotool
     ];
-  };
 
-  systemd.user.services.xssproxy = {
-    Unit = {
-      Description = "forward freedesktop.org Idle Inhibition Service calls to Xss";
-      After = ["graphical-session-pre.target"];
-      PartOf = ["graphical-session.target"];
+    services.screen-locker = lib.mkIf (! config.dotfiles.gui.insecure) {
+      enable = true;
+      inactiveInterval = 5;
+      lockCmd = xsecurelock.outPath;
+      xautolock.extraOptions = [
+        "-notify"
+        "10"
+        "-notifier"
+        ''"${pkgs.libnotify}/bin/notify-send --expire-time=9900 --icon=dialog-information 'Locking in 10 seconds'"''
+      ];
     };
 
-    Install = {WantedBy = ["graphical-session.target"];};
+    systemd.user.services.xssproxy = {
+      Unit = {
+        Description = "forward freedesktop.org Idle Inhibition Service calls to Xss";
+        After = ["graphical-session-pre.target"];
+        PartOf = ["graphical-session.target"];
+      };
 
-    Service = {
-      ExecStart = "${pkgs.xssproxy}/bin/xssproxy";
+      Install = {WantedBy = ["graphical-session.target"];};
+
+      Service = {
+        ExecStart = "${pkgs.xssproxy}/bin/xssproxy";
+      };
     };
-  };
 
-  systemd.user.services.xautolock-session = lib.mkIf (! config.dotfiles.gui.insecure) {
-    Install.WantedBy = lib.mkForce ["xserver-session.target"];
-    Unit.PartOf = lib.mkForce ["xserver-session.target"];
-  };
-
-  systemd.user.services.xss-lock = lib.mkIf (! config.dotfiles.gui.insecure) {
-    Install.WantedBy = lib.mkForce ["xserver-session.target"];
-    Unit.PartOf = lib.mkForce ["xserver-session.target"];
-  };
-
-  xdg.desktopEntries = {
-    xprop = {
-      name = "xprop";
-      exec = "${pkgs.systemd}/bin/systemd-cat --identifier=xprop ${lib.getExe pkgs.xorg.xprop}";
+    systemd.user.services.xautolock-session = lib.mkIf (! config.dotfiles.gui.insecure) {
+      Install.WantedBy = lib.mkForce ["xserver-session.target"];
+      Unit.PartOf = lib.mkForce ["xserver-session.target"];
     };
+
+    systemd.user.services.xss-lock = lib.mkIf (! config.dotfiles.gui.insecure) {
+      Install.WantedBy = lib.mkForce ["xserver-session.target"];
+      Unit.PartOf = lib.mkForce ["xserver-session.target"];
+    };
+
+    xdg.desktopEntries = {
+      xprop = {
+        name = "xprop";
+        exec = "${pkgs.systemd}/bin/systemd-cat --identifier=xprop ${lib.getExe pkgs.xorg.xprop}";
+      };
+    };
+
+    xresources.properties = {
+      "Xft.dpi" = config.dotfiles.gui.dpi;
+    };
+
+    xsession = {
+      enable = true;
+
+      initExtra = ''
+        systemctl --user start xserver-session.target
+        systemctl --user start tray.target
+
+        export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent
+        if [ -S "$XDG_RUNTIME_DIR/yubikey-agent/yubikey-agent.sock" ]; then
+          export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/yubikey-agent/yubikey-agent.sock
+        fi
+
+        touchpadid="$(xinput list | rg "SYNA.*Touchpad" | sort | tail -n 1 | awk '{print $6}' | cut -f 2 -d=)"
+        xinput disable "$touchpadid"
+
+        ${lib.getExe pkgs.feh} --bg-center ${wallpaper}/share/wallpapers/nixos-wallpaper.png &
+      '';
+    };
+
+    # re-use .xsession as .xinitrc
+    home.file.".xinitrc".source = config.home.file.${config.xsession.scriptPath}.source.outPath;
   };
-
-  xresources.properties = {
-    "Xft.dpi" = config.dotfiles.gui.dpi;
-  };
-
-  xsession = {
-    enable = true;
-
-    initExtra = ''
-      systemctl --user start xserver-session.target
-      systemctl --user start tray.target
-
-      export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent
-      if [ -S "$XDG_RUNTIME_DIR/yubikey-agent/yubikey-agent.sock" ]; then
-        export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/yubikey-agent/yubikey-agent.sock
-      fi
-
-      touchpadid="$(xinput list | rg "SYNA.*Touchpad" | sort | tail -n 1 | awk '{print $6}' | cut -f 2 -d=)"
-      xinput disable "$touchpadid"
-
-      ${lib.getExe pkgs.feh} --bg-center ${wallpaper}/share/wallpapers/nixos-wallpaper.png &
-    '';
-  };
-
-  # re-use .xsession as .xinitrc
-  home.file.".xinitrc".source = config.home.file.${config.xsession.scriptPath}.source.outPath;
 }
