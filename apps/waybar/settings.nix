@@ -1,6 +1,5 @@
 {
   layer = "top";
-  output = "eDP-1";
   position = "top";
   height = 30;
   modules-left = [
