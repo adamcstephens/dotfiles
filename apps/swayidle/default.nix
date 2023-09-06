@@ -20,19 +20,20 @@ in {
           command = "${locker}";
         }
       ];
-      timeouts = [
-        {
-          timeout = 600;
-          command = "${locker}";
-        }
-        (
-          lib.optionalAttrs (config.dotfiles.gui.dontSuspend)
+      timeouts =
+        [
+          {
+            timeout = 600;
+            command = "${locker}";
+          }
+        ]
+        ++ (
+          lib.optional (!config.dotfiles.gui.dontSuspend)
           {
             timeout = 360;
             command = "${systemctlBin} suspend";
           }
-        )
-      ];
+        );
     };
   };
 }
