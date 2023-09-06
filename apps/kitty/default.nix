@@ -17,8 +17,7 @@
 
     settings = with config.colorScheme.colors;
       {
-        # Based on https://github.com/kdrag0n/base16-active/
-        kitty_border_color = "#${base03}";
+        active_border_color = "#${base03}";
         active_tab_background = "#${base00}";
         active_tab_foreground = "#${base05}";
         background = "#${base00}";
