@@ -38,6 +38,15 @@
           ];
         };
         nix = {
+          gc = {
+            automatic = true;
+            interval = {
+              Hour = 3;
+              Minute = 15;
+            };
+            options = "--delete-older-than 21d";
+          };
+
           settings = {
             auto-optimise-store = false;
 
