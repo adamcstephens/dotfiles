@@ -79,7 +79,7 @@ in {
           home.sessionVariables = {
             LIBVA_DRIVER_NAME = "i965";
           };
-          xorg = true;
+          dotfiles.gui.xorg = true;
         }
       ];
     };
