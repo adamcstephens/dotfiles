@@ -7,10 +7,7 @@
   systemctlBin = "/run/current-system/sw/bin/systemctl";
   colors = config.colorScheme.colors;
 
-  # gtklock = "${pkgs.procps}/bin/pgrep gtklock || ${pkgs.util-linux}/bin/setsid --fork ${pkgs.gtklock}/bin/gtklock";
-  # swaylock = "${pkgs.waylock}/bin/waylock";
   waylock = "${lib.getExe pkgs.waylock} -fork-on-lock -init-color 0x${colors.base01} -input-color 0x${colors.base03} -fail-color 0x${colors.base08}";
-
   locker = waylock;
 in {
   config = lib.mkIf config.dotfiles.gui.wayland {
@@ -29,13 +26,8 @@ in {
           command = "${locker}";
         }
         (
-          if (config.dotfiles.gui.dontSuspend)
-          then {
-            timeout = 960;
-            command = "${lib.getExe pkgs.wlopm} --off HDMI-A-1";
-            resumeCommand = "${lib.getExe pkgs.wlopm} --on HDMI-A-1";
-          }
-          else {
+          lib.optionalAttrs (config.dotfiles.gui.dontSuspend)
+          {
             timeout = 360;
             command = "${systemctlBin} suspend";
           }

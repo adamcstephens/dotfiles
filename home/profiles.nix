@@ -50,6 +50,21 @@ in {
             wayland = true;
             xorg = true;
           };
+
+          services.swayidle.timeouts = [
+            {
+              timeout = 960;
+              command = lib.getExe (pkgs.writeScriptBin "output-resume" ''
+                #!${lib.getExe pkgs.bash}
+                ${lib.getExe pkgs.wlopm} --off HDMI-A-1
+              '');
+              resumeCommand = lib.getExe (pkgs.writeScriptBin "output-resume" ''
+                #!${lib.getExe pkgs.bash}
+                ${lib.getExe pkgs.wlopm} --on HDMI-A-1
+                /run/current-system/sw/bin/systemd-run --user --on-active=1 /run/current-system/sw/bin/systemctl --user restart kanshi
+              '');
+            }
+          ];
         })
       ];
     };
