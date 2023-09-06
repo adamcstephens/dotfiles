@@ -14,6 +14,7 @@
     nix-colors.url = "github:misterio77/nix-colors";
     nix-darwin.url = "github:lnl7/nix-darwin/master";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+    nix-index-database.url = "github:nix-community/nix-index-database";
     nix-wallpaper.url = "github:lunik1/nix-wallpaper";
     nix-wallpaper.inputs.nixpkgs.follows = "nixpkgs";
     nixfmt-rfc.url = "github:piegamesde/nixfmt/rfc101-style";

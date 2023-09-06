@@ -86,12 +86,6 @@
     done
   '';
 
-  home.activation.nix-index-fetch = lib.hm.dag.entryAfter ["writeBoundary"] ''
-    pushd ~/.dotfiles
-      PATH=${lib.makeBinPath [pkgs.bash pkgs.coreutils pkgs.gettext pkgs.wget]} ${lib.getExe pkgs.just} nix-index-fetch
-    popd
-  '';
-
   home.packages = [
     # my terms
     (pkgs.callPackage ../packages/terminfo {})
@@ -99,7 +93,7 @@
     pkgs.age-plugin-yubikey
     pkgs.bc
     pkgs.calc
-    pkgs.comma
+    inputs.nix-index-database.packages.${pkgs.system}.comma-with-db
     pkgs.difftastic
     pkgs.direnv
     pkgs.doggo
