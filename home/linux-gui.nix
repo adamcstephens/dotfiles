@@ -136,6 +136,7 @@ in {
       pkgs.wl-clipboard
       pkgs.wl-mirror
       pkgs.wdisplays
+      pkgs.wlopm
     ])
     ++ (lib.optionals config.dotfiles.gui.xorg [
       pkgs.autorandr

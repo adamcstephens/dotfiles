@@ -99,7 +99,7 @@ in {
           dotfiles.apps.emacs.package = pkgs.emacs29-pgtk;
           dotfiles.gui.wayland = true;
           services.ssh-agent.enable = true;
-          programs.waybar.settings.main.output = "eDP-1";
+          programs.waybar.settings.main.output = ["eDP-1" "DP-2"];
         })
       ];
     };
