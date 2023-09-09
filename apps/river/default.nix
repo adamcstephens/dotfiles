@@ -1,9 +1,23 @@
 {
   config,
   lib,
+  pkgs,
   ...
-}: {
+}: let
+  cfg = config.dotfiles.apps.river;
+in {
+  options = {
+    dotfiles.apps.river.package = lib.mkOption {
+      type = lib.types.package;
+      default = pkgs.river;
+    };
+  };
+
   config = lib.mkIf config.dotfiles.gui.wayland {
+    home.packages = [
+      cfg.package
+    ];
+
     xdg.configFile."river/init" = {
       executable = true;
       source = ./init.sh;
@@ -31,7 +45,7 @@
         export NIXOS_OZONE_WL="1"
         export
 
-        systemd-cat --identifier=river river
+        systemd-cat --identifier=river ${lib.getExe cfg.package}
 
         systemctl --user stop wayland-session.target
       '';
