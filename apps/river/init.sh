@@ -30,8 +30,9 @@ riverctl map normal Mod4+Shift Return spawn 'systemd-cat --identifier=kitty kitt
 riverctl map normal Mod4+Shift+Control E spawn 'systemd-cat --identifier=gtk-launch gtk-launch emacsclient'
 riverctl map normal Mod4 D spawn 'systemd-cat --identifier=rofi rofi -show drun'
 riverctl map normal Mod4+Shift D spawn 'systemd-cat --identifier=rofi rofi -show emoji'
-riverctl map normal Mod4+Shift+Control D spawn 'systemd-cat --identifier=dark dark toggle'
+riverctl map normal Mod4+Shift+Control D spawn 'systemd-cat --identifier=dark ~/.dotfiles/bin/dark toggle'
 
+riverctl map normal None Print spawn 'systemd-cat --identifier=screenshot ~/.dotfiles/bin/screenshot screen'
 # bindsym print exec screenshot.sh window
 # bindsym $mod+print exec screenshot.sh screen
 # bindsym Alt+print exec screenshot.sh box
