@@ -12,11 +12,12 @@ module.exports = {
       "bit.ly",
       "github.co",
       "t.co",
-      "nam11.safelinks.protection.outlook.com",
+      // "nam11.safelinks.protection.outlook.com",
     ],
   },
   rewrite: [
-    // { // debug stanza
+    // {
+    //   // debug stanza
     //   match(all) {
     //     finicky.log(JSON.stringify(all, null, 2));
     //     return false;
@@ -90,7 +91,14 @@ module.exports = {
       return { match: x, browser: "org.mozilla.firefoxdeveloperedition" };
     }),
 
-    [/instructure.com/, /kent.edu/, /qualtrics.com/].map((x) => {
+    [
+      /instructure.com/,
+      /kent.edu/,
+      /outlook.com/,
+      /p5js.org/,
+      /qualtrics.com/,
+      /office.net/,
+    ].map((x) => {
       return {
         match: x,
         browser: ({ urlString }) => ({
