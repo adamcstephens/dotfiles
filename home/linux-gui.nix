@@ -143,11 +143,6 @@ in {
       pkgs.lxrandr
       pkgs.xclip
       pkgs.xlayoutdisplay
-    ])
-    ++ (lib.optionals pkgs.stdenv.isx86_64 [
-      # pkgs.cinny-desktop
-      pkgs.slack
-      pkgs.tdesktop
     ]);
 
   programs.feh.enable = true;

@@ -71,7 +71,7 @@
           [
             pkgs.nixVersions.nix_2_16
             pkgs.nix-bisect
-            pkgs.nix-index
+            inputs.nix-index-database.packages.${pkgs.system}.nix-index-with-db
             pkgs.nix-prefetch-scripts
             pkgs.nix-tree
             pkgs.nix-update
