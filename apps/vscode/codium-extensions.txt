@@ -1,0 +1,17 @@
+bmalehorn.vscode-fish
+DavidAnson.vscode-markdownlint
+EditorConfig.EditorConfig
+esbenp.prettier-vscode
+foxundermoon.shell-format
+GitHub.github-vscode-theme
+golang.go
+jeanp413.open-remote-ssh
+jnoortheen.nix-ide
+kamadorueda.alejandra
+mkhl.direnv
+naumovs.color-highlight
+redhat.vscode-yaml
+rust-lang.rust-analyzer
+skellock.just
+tamasfe.even-better-toml
+timonwong.shellcheck

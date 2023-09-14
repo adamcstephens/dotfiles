@@ -1,11 +1,11 @@
 #!/usr/bin/env sh
 
-EXTENSIONS_FILE="$HOME/.dotfiles/apps/vscode/extensions.txt"
-UNINSTALL_FILE="$HOME/.dotfiles/apps/vscode/extensions-uninstall.txt"
+for code in codium code code-insiders; do
+  EXTENSIONS_FILE="$HOME/.dotfiles/apps/vscode/$code-extensions.txt"
+  UNINSTALL_FILE="$HOME/.dotfiles/apps/vscode/$code-extensions-uninstall.txt"
 
-for code in code code-insiders; do
   if command -v $code >/dev/null 2>&1; then
-    case "$(which code)" in
+    case "$(which $code)" in
     *bin/remote-cli/*)
       exit 0
       ;;
