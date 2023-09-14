@@ -60,7 +60,7 @@
             trusted-public-keys = [
               "nix-config.cachix.org-1:Vd6raEuldeIZpttVQfrUbLvXJHzzzkS0pezXCVVjDG4="
               "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-              "default:XtmtkFiEClz14aZLNfftvXqa1CxVa6HXhiwsPohU0W8="
+              "default:e4N+cXNPq/IUf05ld+Bhm9yX7XMeWxInftnH8FaWblA="
             ];
             extra-platforms = "x86_64-darwin";
           };
