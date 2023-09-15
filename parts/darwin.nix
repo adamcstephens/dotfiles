@@ -53,13 +53,9 @@
             trusted-users = ["root" "@admin"];
 
             substituters = [
-              "https://nix-config.cachix.org"
-              "https://nix-community.cachix.org"
               "https://attic.junco.dev/default"
             ];
             trusted-public-keys = [
-              "nix-config.cachix.org-1:Vd6raEuldeIZpttVQfrUbLvXJHzzzkS0pezXCVVjDG4="
-              "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
               "default:FmKoVBDn2qD5jBcXlBHJZwzny4x3JmGalCmI6DPbCdg="
             ];
             extra-platforms = "x86_64-darwin";
