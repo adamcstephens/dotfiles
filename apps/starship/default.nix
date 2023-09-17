@@ -3,6 +3,8 @@
     enable = true;
 
     settings = {
+      aws.disabled = true;
+
       character = {
         format = "[─](fg:244)$symbol ";
         success_symbol = "[❯](bold yellow)";
@@ -13,9 +15,7 @@
         format = "[$symbol]($style) ";
       };
 
-      gcloud = {
-        disabled = true;
-      };
+      gcloud.disabled = true;
 
       hostname = {
         style = "bold yellow";
@@ -26,6 +26,8 @@
       nix_shell = {
         format = "[\($name\)]($style) ";
       };
+
+      nodejs.disabled = true;
 
       username = {
         style_user = "fg:244";
