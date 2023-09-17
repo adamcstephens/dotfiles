@@ -133,6 +133,7 @@
   };
 
   programs = {
+    carapace.enable = true;
     fzf.enable = true;
     direnv.enable = true;
     direnv.nix-direnv.enable = true;
