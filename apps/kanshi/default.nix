@@ -45,6 +45,18 @@
             }
           ];
         };
+        desktop-plus-crashcart = {
+          outputs = [
+            {
+              criteria = "Dell Inc. DELL P2715Q 54KKD79CAQNL";
+              scale = 1.45;
+            }
+            {
+              criteria = "DP-1";
+              status = "disable";
+            }
+          ];
+        };
       };
     };
 
