@@ -361,16 +361,16 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1694593561,
-        "narHash": "sha256-WSaIQZ5s9N9bDFkEMTw6P9eaZ9bv39ZhsiW12GtTNM0=",
-        "owner": "nixos",
+        "lastModified": 1694979363,
+        "narHash": "sha256-AsHqEGhGQjs8X9W7WHq9qHpd/HuFce+dYCx/HutoLOQ=",
+        "owner": "adamcstephens",
         "repo": "nixpkgs",
-        "rev": "1697b7d480449b01111e352021f46e5879e47643",
+        "rev": "fe63b16791494dd9bf1af589f3cae75374888135",
         "type": "github"
       },
       "original": {
-        "owner": "nixos",
-        "ref": "nixpkgs-unstable",
+        "owner": "adamcstephens",
+        "ref": "atomix-unstable",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -476,22 +476,6 @@
         "type": "github"
       }
     },
-    "nixpkgs-unstable": {
-      "locked": {
-        "lastModified": 1694593561,
-        "narHash": "sha256-WSaIQZ5s9N9bDFkEMTw6P9eaZ9bv39ZhsiW12GtTNM0=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "1697b7d480449b01111e352021f46e5879e47643",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "ref": "nixpkgs-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "pre-commit-hooks": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -549,7 +533,6 @@
         "nix-wallpaper": "nix-wallpaper",
         "nixfmt-rfc": "nixfmt-rfc",
         "nixpkgs": "nixpkgs",
-        "nixpkgs-unstable": "nixpkgs-unstable",
         "profile-parts": "profile-parts",
         "sandbox": "sandbox"
       }

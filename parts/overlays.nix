@@ -3,13 +3,6 @@
     inputs.flake-parts.flakeModules.easyOverlay
   ];
 
-  perSystem = {system, ...}: {
-    overlayAttrs = {
-      gtklock = inputs.nixpkgs-unstable.legacyPackages.${system}.gtklock;
-      webcord = inputs.nixpkgs-unstable.legacyPackages.${system}.webcord;
-    };
-  };
-
   flake.overlays = rec {
     upstreams = inputs.nixpkgs.lib.composeManyExtensions [
       inputs.emacs-overlay.overlays.emacs

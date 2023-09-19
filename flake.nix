@@ -1,7 +1,6 @@
 {
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:adamcstephens/nixpkgs/atomix-unstable";
 
     apple-fonts.url = "git+https://codeberg.org/adamcstephens/apple-fonts.nix";
     apple-fonts.inputs.nixpkgs.follows = "nixpkgs";
