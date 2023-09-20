@@ -34,104 +34,114 @@
     pkgs.sqlite
   ];
 
-  emacsPatched = cfg.package.overrideAttrs (prev: {
-    patches =
-      [./silence-pgtk-xorg-warning.patch]
-      ++ (lib.optionals pkgs.stdenv.isDarwin [
-        "${inputs.emacs-plus}/patches/emacs-28/fix-window-role.patch"
-        "${inputs.emacs-plus}/patches/emacs-28/no-frame-refocus-cocoa.patch"
-        "${inputs.emacs-plus}/patches/emacs-29/poll.patch"
-        # "${inputs.emacs-plus}/patches/emacs-30/round-undecorated-frame.patch"
-        "${inputs.emacs-plus}/patches/emacs-28/system-appearance.patch"
-      ])
-      ++ prev.patches;
-  });
+  emacsPatched = cfg.package.overrideAttrs (
+    prev: {
+      patches =
+        [ ./silence-pgtk-xorg-warning.patch ]
+        ++ (lib.optionals pkgs.stdenv.isDarwin [
+          "${inputs.emacs-plus}/patches/emacs-28/fix-window-role.patch"
+          "${inputs.emacs-plus}/patches/emacs-28/no-frame-refocus-cocoa.patch"
+          "${inputs.emacs-plus}/patches/emacs-29/poll.patch"
+          # "${inputs.emacs-plus}/patches/emacs-30/round-undecorated-frame.patch"
+          "${inputs.emacs-plus}/patches/emacs-28/system-appearance.patch"
+        ])
+        ++ prev.patches
+      ;
+    }
+  );
 
-  emacsWithPackages = (pkgs.emacsPackagesFor emacsPatched).emacsWithPackages (epkgs:
-    [epkgs.treesit-grammars.with-all-grammars]
-    ++ (with epkgs.melpaPackages; [
-      all-the-icons
-      apheleia
-      auto-dark
-      avy
-      bbww
-      cape
-      chatgpt-shell
-      cider
-      clipetty
-      consult
-      dash
-      diff-ansi
-      diff-hl
-      direnv
-      dirvish
-      doom-modeline
-      editorconfig
-      eldoc-box
-      elisp-autofmt
-      elixir-ts-mode
-      embark
-      embark-consult
-      expand-region
-      fish-mode
-      flyspell-correct
-      git-auto-commit-mode
-      golden-ratio
-      haskell-mode
-      hide-mode-line
-      just-mode
-      kkp
-      ligature
-      lispy
-      magit
-      marginalia
-      markdown-mode
-      modus-themes
-      move-dup
-      multi-vterm
-      mwim
-      nim-mode
-      nix-ts-mode
-      nushell-mode
-      olivetti
-      orderless
-      org-appear
-      org-autolist
-      org-download
-      org-present
-      org-re-reveal
-      org-superstar
-      ox-pandoc
-      persistent-scratch
-      project-rootfile
-      rainbow-delimiters
-      ron-mode
-      run-command
-      ssh-config-mode
-      terraform-mode
-      transpose-frame
-      treesit-auto
-      undo-fu
-      undo-fu-session
-      vterm
-      wgrep
-      which-key
-      whole-line-or-region
-      yasnippet
-      yasnippet-snippets
-      yuck-mode
-    ])
-    ++ (with epkgs.elpaPackages; [
-      corfu
-      org
-      rainbow-mode
-      substitute
-      vertico
-      vundo
-    ])
-    ++ (with epkgs.nongnuPackages; [
-      eat
-    ]));
+  emacsWithPackages =
+    (pkgs.emacsPackagesFor (if cfg.patchForGui then emacsPatched else cfg.package))
+    .emacsWithPackages
+      (
+        epkgs:
+        [ epkgs.treesit-grammars.with-all-grammars ]
+        ++ (
+          with epkgs.melpaPackages; [
+            all-the-icons
+            apheleia
+            auto-dark
+            avy
+            bbww
+            cape
+            chatgpt-shell
+            cider
+            clipetty
+            consult
+            dash
+            diff-ansi
+            diff-hl
+            direnv
+            dirvish
+            doom-modeline
+            editorconfig
+            eldoc-box
+            elisp-autofmt
+            elixir-ts-mode
+            embark
+            embark-consult
+            expand-region
+            fish-mode
+            flyspell-correct
+            git-auto-commit-mode
+            golden-ratio
+            haskell-mode
+            hide-mode-line
+            just-mode
+            kkp
+            ligature
+            lispy
+            magit
+            marginalia
+            markdown-mode
+            modus-themes
+            move-dup
+            multi-vterm
+            mwim
+            nim-mode
+            nix-ts-mode
+            nushell-mode
+            olivetti
+            orderless
+            org-appear
+            org-autolist
+            org-download
+            org-present
+            org-re-reveal
+            org-superstar
+            ox-pandoc
+            persistent-scratch
+            project-rootfile
+            rainbow-delimiters
+            ron-mode
+            run-command
+            ssh-config-mode
+            terraform-mode
+            transpose-frame
+            treesit-auto
+            undo-fu
+            undo-fu-session
+            vterm
+            wgrep
+            which-key
+            whole-line-or-region
+            yasnippet
+            yasnippet-snippets
+            yuck-mode
+          ]
+        )
+        ++ (
+          with epkgs.elpaPackages; [
+            corfu
+            org
+            rainbow-mode
+            substitute
+            vertico
+            vundo
+          ]
+        )
+        ++ (with epkgs.nongnuPackages; [ eat ])
+      );
 
   package = pkgs.symlinkJoin {
     name = "dotemacs";
@@ -168,9 +178,13 @@
   terminfo = pkgs.callPackage ../../packages/terminfo {};
 in {
   options = {
-    dotfiles.apps.emacs.package = lib.mkOption {
-      type = lib.types.package;
-      default = pkgs.emacs29;
+    dotfiles.apps.emacs = {
+      package = lib.mkOption {
+        type = lib.types.package;
+        default = pkgs.emacs29;
+      };
+
+      patchForGui = lib.mkEnableOption "patch emacs as if for a gui install";
     };
   };
   config = {

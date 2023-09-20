@@ -43,7 +43,6 @@ in {
         ../apps/solaar
 
         ({pkgs, ...}: {
-          dotfiles.apps.emacs.package = pkgs.emacs29-pgtk;
           dotfiles.gui = {
             dpi = 148;
             dontSuspend = true;
@@ -97,7 +96,6 @@ in {
 
         ({pkgs, ...}: {
           dotfiles = {
-            apps.emacs.package = pkgs.emacs29-pgtk;
             apps.river.package = pkgs.river.overrideAttrs (_: rec {
               version = "0.3.0-${builtins.substring 0 7 src.rev}";
               src = pkgs.fetchFromGitHub {

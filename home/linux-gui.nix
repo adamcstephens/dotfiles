@@ -45,6 +45,11 @@ in {
     ../apps/ghc
   ];
 
+  dotfiles.apps.emacs = {
+    package = lib.mkDefault pkgs.emacs29-pgtk;
+    patchForGui = lib.mkDefault true;
+  };
+
   fonts.fontconfig.enable = true;
 
   gtk = {

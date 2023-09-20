@@ -1,8 +1,8 @@
 {
-  inputs,
-  pkgs,
   config,
+  inputs,
   lib,
+  pkgs,
   ...
 }: {
   imports = [
@@ -12,6 +12,11 @@
     ../apps/ssh
     ../apps/vscode
   ];
+
+  dotfiles.apps.emacs = {
+    package = pkgs.emacs29-pgtk;
+    patchForGui = true;
+  };
 
   home.packages = [
     pkgs.darwin.iproute2mac
