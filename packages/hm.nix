@@ -32,14 +32,7 @@ in
 
     echo "🚧 Building new profile for $HMPROFILE"
 
-    case "$TERM" in
-      xterm*)
-        ${lib.getExe nix-output-monitor} build --no-link $TARGET --print-build-logs || exit 1
-        ;;
-      *)
-        ${nixCmd} build --no-link $TARGET --print-build-logs || exit 1
-        ;;
-    esac
+    ${nixCmd} build --no-link $TARGET --print-build-logs || exit 1
 
     if [ "$ACTION" = "show" ]; then
       ${nixCmd} show-derivation $TARGET
