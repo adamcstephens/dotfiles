@@ -32,6 +32,7 @@
     (typescript-mode . dot/eglot-mode-setup)
     (typescript-ts-mode . dot/eglot-mode-setup))
   :bind
+  (("C-." . eglot-code-actions))
   (:map
     eglot-diagnostics-map
     ("<mouse-3>" . eglot-code-actions-at-mouse))
