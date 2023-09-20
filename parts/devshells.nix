@@ -1,4 +1,28 @@
-{inputs, ...}: {
+{
+  inputs,
+  withSystem,
+  ...
+}: {
+  flake.devShells.x86_64-linux = withSystem "x86_64-linux" ({pkgs, ...}: {
+    media = pkgs.mkShellNoCC {
+      name = "media";
+      packages = [
+        pkgs.ffmpeg_5-full
+      ];
+    };
+
+    xmonad = pkgs.mkShellNoCC {
+      packages = [
+        (pkgs.ghc.withPackages (ps: [
+          ps.haskell-language-server
+          ps.ormolu
+          ps.xmonad
+          ps.xmonad-contrib
+        ]))
+      ];
+    };
+  });
+
   perSystem = {
     lib,
     pkgs,
@@ -10,6 +34,7 @@
         name = "dots";
         packages = [
           pkgs.alejandra
+          inputs.attic.packages.${pkgs.system}.attic
           pkgs.babashka-unwrapped
           pkgs.curl
           pkgs.deadnix
@@ -36,6 +61,7 @@
           export ERL_AFLAGS="-kernel shell_history enabled -kernel shell_history_file_bytes 1024000"
         '';
       };
+
       go = pkgs.mkShell {
         packages = [
           pkgs.delve
@@ -55,13 +81,6 @@
       js = pkgs.mkShellNoCC {
         packages = [
           pkgs.nodejs
-        ];
-      };
-
-      media = pkgs.mkShellNoCC {
-        name = "media";
-        packages = [
-          pkgs.ffmpeg_5-full
         ];
       };
 
@@ -113,17 +132,6 @@
       vscode = pkgs.mkShellNoCC {
         packages = [
           pkgs.vsce
-        ];
-      };
-
-      xmonad = pkgs.mkShellNoCC {
-        packages = [
-          (pkgs.ghc.withPackages (ps: [
-            ps.haskell-language-server
-            ps.ormolu
-            ps.xmonad
-            ps.xmonad-contrib
-          ]))
         ];
       };
     };

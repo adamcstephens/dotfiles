@@ -4,6 +4,8 @@
 
     apple-fonts.url = "git+https://codeberg.org/adamcstephens/apple-fonts.nix";
     apple-fonts.inputs.nixpkgs.follows = "nixpkgs";
+    attic.url = "github:zhaofengli/attic";
+    attic.inputs.nixpkgs.follows = "nixpkgs";
     emacs-overlay.url = "github:nix-community/emacs-overlay";
     emacs-overlay.inputs.nixpkgs.follows = "nixpkgs";
     emacs-plus.url = "github:d12frosted/homebrew-emacs-plus";
