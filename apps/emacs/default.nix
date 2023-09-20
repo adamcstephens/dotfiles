@@ -9,35 +9,38 @@
 
   aspell = pkgs.aspellWithDicts (dicts: with dicts; [en en-computers en-science]);
 
-  extraBins = [
-    pkgs.alejandra
-    aspell
-    pkgs.coreutils
-    pkgs.curl
-    pkgs.diffutils
-    pkgs.fd
-    pkgs.fzf
-    pkgs.ghostscript
-    pkgs.git
-    pkgs.groff
-    pkgs.graphicsmagick
-    pkgs.multimarkdown
-    pkgs.nodejs
-    pkgs.nodePackages.bash-language-server
-    pkgs.nodePackages.prettier
-    pkgs.pandoc
-    pkgs.python3Minimal
-    pkgs.python3Packages.weasyprint
-    pkgs.ripgrep
-    pkgs.shellcheck
-    pkgs.shfmt
-    pkgs.sqlite
-  ];
+  extraBins =
+    [
+      pkgs.alejandra
+      pkgs.coreutils
+      pkgs.curl
+      pkgs.diffutils
+      pkgs.fd
+      pkgs.fzf
+      pkgs.git
+      pkgs.python3Minimal
+      pkgs.ripgrep
+      pkgs.shellcheck
+      pkgs.shfmt
+      pkgs.sqlite
+    ]
+    ++ (lib.optionals cfg.full [
+      aspell
+      pkgs.ghostscript
+      pkgs.groff
+      pkgs.graphicsmagick
+      pkgs.multimarkdown
+      pkgs.nodejs
+      pkgs.nodePackages.bash-language-server
+      pkgs.nodePackages.prettier
+      pkgs.pandoc
+      pkgs.python3Packages.weasyprint
+    ]);
 
   emacsPatched = cfg.package.overrideAttrs (
     prev: {
       patches =
-        [ ./silence-pgtk-xorg-warning.patch ]
+        [./silence-pgtk-xorg-warning.patch]
         ++ (lib.optionals pkgs.stdenv.isDarwin [
           "${inputs.emacs-plus}/patches/emacs-28/fix-window-role.patch"
           "${inputs.emacs-plus}/patches/emacs-28/no-frame-refocus-cocoa.patch"
@@ -45,17 +48,20 @@
           # "${inputs.emacs-plus}/patches/emacs-30/round-undecorated-frame.patch"
           "${inputs.emacs-plus}/patches/emacs-28/system-appearance.patch"
         ])
-        ++ prev.patches
-      ;
+        ++ prev.patches;
     }
   );
 
   emacsWithPackages =
-    (pkgs.emacsPackagesFor (if cfg.patchForGui then emacsPatched else cfg.package))
+    (pkgs.emacsPackagesFor (
+      if cfg.patchForGui
+      then emacsPatched
+      else cfg.package
+    ))
     .emacsWithPackages
-      (
-        epkgs:
-        [ epkgs.treesit-grammars.with-all-grammars ]
+    (
+      epkgs:
+        [epkgs.treesit-grammars.with-all-grammars]
         ++ (
           with epkgs.melpaPackages; [
             all-the-icons
@@ -140,8 +146,8 @@
             vundo
           ]
         )
-        ++ (with epkgs.nongnuPackages; [ eat ])
-      );
+        ++ (with epkgs.nongnuPackages; [eat])
+    );
 
   package = pkgs.symlinkJoin {
     name = "dotemacs";
@@ -172,7 +178,7 @@
   env = ''
     (setq exec-path (append exec-path '( ${lib.concatMapStringsSep " " (x: ''"${x}/bin"'') extraBins} )))
 
-    (setq org-re-reveal-root "${revealjs.outPath}")
+    ${lib.optionalString cfg.full ''(setq org-re-reveal-root "${revealjs.outPath}")''}
   '';
 
   terminfo = pkgs.callPackage ../../packages/terminfo {};
@@ -185,6 +191,8 @@ in {
       };
 
       patchForGui = lib.mkEnableOption "patch emacs as if for a gui install";
+
+      full = lib.mkEnableOption "install the full set of tools, as if a workstation";
     };
   };
   config = {

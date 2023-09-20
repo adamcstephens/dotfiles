@@ -48,6 +48,7 @@ in {
   dotfiles.apps.emacs = {
     package = lib.mkDefault pkgs.emacs29-pgtk;
     patchForGui = lib.mkDefault true;
+    full = lib.mkDefault true;
   };
 
   fonts.fontconfig.enable = true;
