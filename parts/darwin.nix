@@ -53,7 +53,7 @@
             trusted-users = ["root" "@admin"];
 
             substituters = [
-              "https://attic.junco.dev/default"
+              "https://attic.junco.dev/default?priority=41"
             ];
             trusted-public-keys = [
               "default:FmKoVBDn2qD5jBcXlBHJZwzny4x3JmGalCmI6DPbCdg="
