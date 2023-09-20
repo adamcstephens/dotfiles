@@ -133,7 +133,11 @@
   };
 
   programs = {
-    carapace.enable = true;
+    carapace = {
+      enable = true;
+      enableFishIntegration = false; # ifd...
+    };
+
     fzf.enable = true;
     direnv.enable = true;
     direnv.nix-direnv.enable = true;
