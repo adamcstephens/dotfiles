@@ -402,5 +402,13 @@
   {
     "key": "ctrl+shift+a",
     "command": "editor.action.selectAll"
+  },
+  {
+    "key": "shift+meta+left",
+    "command": "workbench.action.focusLeftGroup"
+  },
+  {
+    "key": "shift+meta+right",
+    "command": "workbench.action.focusRightGroup"
   }
 ]
