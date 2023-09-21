@@ -24,7 +24,11 @@
       (builtins.readFile ./interactive.fish)
       + (lib.optionalString pkgs.stdenv.isDarwin (builtins.readFile ./interactive-darwin.fish));
 
-    shellAbbrs = config.home.shellAliases;
+    shellAbbrs = lib.filterAttrs (k: _: !(builtins.elem k ["cat" "nix"])) config.home.shellAliases;
+    shellAliases = {
+      cat = "bat";
+      nix = "nix --print-build-logs";
+    };
 
     functions = {
       esl = "exec fish -l";
