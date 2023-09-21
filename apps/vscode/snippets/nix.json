@@ -13,5 +13,15 @@
     "prefix": "mkshell",
     "body": "pkgs.mkShellNoCC {\n  packages = [\n    pkgs.\n  ];\n};",
     "description": "simple mkshell"
+  },
+  "mkoption": {
+    "prefix": "mkoption",
+    "body": "lib.mkOption {\n  type = lib.types.$1;\n  description = \"$2\";\n  default = $3;\n};",
+    "description": ""
+  },
+  "mkenable": {
+    "prefix": "mkenable",
+    "body": "lib.mkEnableOption (lib.mdDoc \"$1\");",
+    "description": ""
   }
 }
