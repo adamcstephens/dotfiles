@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+
+staged=$(git diff --name-only --cached)
+
+commit=$(git log --color=always --decorate --pretty=oneline --abbrev-commit --max-count=30 |
+  fzf --ansi --preview="git show \$(echo {} | awk '{print \$1}') --color=always" --header="Staged:
+$staged" --header-first | awk '{print $1}')
+
+[ -z "$commit" ] && exit 1
+
+git commit --fixup $commit

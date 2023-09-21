@@ -2,6 +2,7 @@
 #   git config -f ~/.gitconfig.local user.email me@example.com
 #
 [alias]
+  fixup = "!~/.dotfiles/bin/git-fixup"
   ftag = push --tags --force
   home = "!~/.dotfiles/bin/git-home"
   fixhome = remote set-head origin --auto
