@@ -3,7 +3,7 @@
     "editor.defaultFormatter": "berberman.vscode-cabal-fmt"
   },
   "[elixir]": {
-    "editor.defaultFormatter": "JakeBecker.elixir-ls"
+    "editor.defaultFormatter": "elixir-lsp.elixir-ls"
   },
   "[go]": {
     "editor.defaultFormatter": "golang.go"
