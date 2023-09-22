@@ -42,6 +42,10 @@
     dclf = "docker-compose logs --tail=100 -f";
     dog = "doggo";
     dps = ''docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}\t{{.Command}}\t{{.Image}}"'';
+
+    f = "fossil";
+    fs = "fossil status";
+
     ga = "git add";
     gbv = "git branch --all --verbose --verbose";
     gc = "git commit";
