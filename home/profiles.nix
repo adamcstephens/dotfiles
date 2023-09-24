@@ -72,7 +72,7 @@ in {
     };
 
     drink = {
-      enable = true;
+      enable = false;
 
       modules = [
         ./linux-gui.nix

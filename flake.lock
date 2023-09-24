@@ -607,11 +607,11 @@
     },
     "profile-parts": {
       "locked": {
-        "lastModified": 1693340701,
-        "narHash": "sha256-bW16Wuk3xEAe+qHPJc+gdMGYm5Brf/2Gro5Nm0477vo=",
+        "lastModified": 1695582022,
+        "narHash": "sha256-byE00+oB5HuC7tVaUjXeuDA4qupHqhMBiQGNN0wb1Cg=",
         "ref": "refs/heads/main",
-        "rev": "0d40ec37a76035b07d529bc269ca6adbcb93d3d0",
-        "revCount": 7,
+        "rev": "79e81fa8a8cec4ef0ff93703145159947ac8ddb7",
+        "revCount": 8,
         "type": "git",
         "url": "https://codeberg.org/adamcstephens/profile-parts"
       },
