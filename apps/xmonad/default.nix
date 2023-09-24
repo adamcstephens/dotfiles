@@ -3,7 +3,7 @@
   lib,
   ...
 }: {
-  config = lib.mkIf config.dotfiles.gui.xorg {
+  config = lib.mkIf (config.dotfiles.gui.xorg.enable && config.dotfiles.gui.xorg.wm == "xmonad") {
     xsession = {
       windowManager.xmonad = {
         enable = true;

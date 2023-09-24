@@ -13,7 +13,7 @@
 
   path = "PATH=${config.services.polybar.package}/bin:${lib.makeBinPath dependencies}:/run/wrappers/bin";
 in {
-  config = lib.mkIf config.dotfiles.gui.xorg {
+  config = lib.mkIf config.dotfiles.gui.xorg.enable {
     services.polybar = {
       enable = true;
       package = pkgs.polybarFull;

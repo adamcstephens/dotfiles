@@ -47,7 +47,10 @@ in {
             dpi = 148;
             dontSuspend = true;
             wayland = true;
-            xorg = true;
+            xorg = {
+              enable = true;
+              wm = "leftwm";
+            };
           };
 
           services.swayidle.timeouts = [
@@ -69,16 +72,21 @@ in {
     };
 
     drink = {
+      enable = true;
+
       modules = [
         ./linux-gui.nix
         ../apps/firefox
         ../apps/goldencheetah
         {
-          dotfiles.gui.insecure = true;
+          dotfiles.gui = {
+            insecure = true;
+            xorg.enable = true;
+          };
+
           home.sessionVariables = {
             LIBVA_DRIVER_NAME = "i965";
           };
-          dotfiles.gui.xorg = true;
         }
       ];
     };

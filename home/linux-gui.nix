@@ -144,7 +144,7 @@ in {
       pkgs.wdisplays
       pkgs.wlopm
     ])
-    ++ (lib.optionals config.dotfiles.gui.xorg [
+    ++ (lib.optionals config.dotfiles.gui.xorg.enable [
       pkgs.autorandr
       pkgs.lxrandr
       pkgs.xclip

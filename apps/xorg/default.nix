@@ -32,7 +32,7 @@
     ${pkgs.xsecurelock}/bin/xsecurelock
   '';
 in {
-  config = lib.mkIf config.dotfiles.gui.xorg {
+  config = lib.mkIf config.dotfiles.gui.xorg.enable {
     home.packages = [
       pkgs.maim
       pkgs.xdotool

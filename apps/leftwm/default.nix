@@ -4,11 +4,11 @@
   pkgs,
   ...
 }: {
-  config = lib.mkIf config.dotfiles.gui.xorg {
-    imports = [
-      ../xorg
-    ];
+  imports = [
+    ../xorg
+  ];
 
+  config = lib.mkIf (config.dotfiles.gui.xorg.enable && config.dotfiles.gui.xorg.wm == "leftm") {
     home.packages = [
       pkgs.leftwm
     ];

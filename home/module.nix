@@ -16,7 +16,15 @@
       dontSuspend = lib.mkEnableOption (lib.mdDoc "Don't automatically suspend on idle");
       insecure = lib.mkEnableOption (lib.mkDoc "Insecure GUI disables locking");
       wayland = lib.mkEnableOption (lib.mdDoc "Enable wayland resources");
-      xorg = lib.mkEnableOption (lib.mdDoc "Enable xorg resources");
+      xorg = {
+        enable = lib.mkEnableOption (lib.mdDoc "Enable xorg resources");
+
+        wm = lib.mkOption {
+          type = lib.types.enum ["leftwm" "xmonad"];
+          description = "which xorg window manager to enable";
+          default = "xmonad";
+        };
+      };
 
       font = {
         mono = lib.mkOption {
