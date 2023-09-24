@@ -1,6 +1,7 @@
 bmalehorn.vscode-fish
 DavidAnson.vscode-markdownlint
 EditorConfig.EditorConfig
+elixir-lsp.elixir-ls
 esbenp.prettier-vscode
 foxundermoon.shell-format
 GitHub.github-vscode-theme

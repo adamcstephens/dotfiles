@@ -78,7 +78,7 @@
     "foxundermoon.shell-format",
     "redhat.vscode-yaml",
     "timonwong.shellcheck",
-    "JakeBecker.elixir-ls",
+    "elixir-lsp.elixir-ls",
     "kamadorueda.alejandra",
     "skellock.just",
     "golf1052.base16-generator"
@@ -247,7 +247,7 @@
   "search.useParentIgnoreFiles": true,
   "terminal.integrated.enableMultiLinePasteWarning": false,
   "[phoenix-heex]": {
-    "editor.defaultFormatter": "JakeBecker.elixir-ls"
+    "editor.defaultFormatter": "elixir-lsp.elixir-ls"
   },
   "[kmonad]": {
     "editor.defaultFormatter": "entibo.vscode-kmonad-format"
@@ -256,5 +256,6 @@
   "direnv.restart.automatic": true,
   "[properties]": {
     "editor.formatOnSave": false
-  }
+  },
+  "elixirLS.fetchDeps": true
 }
