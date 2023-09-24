@@ -8,8 +8,6 @@
   imports = [
     ./module.nix
 
-    ./colors.nix
-
     ../apps/bash
     ../apps/bat
     ../apps/btop
@@ -19,9 +17,7 @@
     ../apps/fish
     ../apps/git
     ../apps/helix
-    ../apps/lsd
     ../apps/nushell
-    ../apps/age
     ../apps/ripgrep
     ../apps/shellcheck
     ../apps/ssh
@@ -94,39 +90,16 @@
     # my terms
     (pkgs.callPackage ../packages/terminfo {})
 
-    pkgs.age-plugin-yubikey
-    pkgs.bc
     pkgs.calc
-    inputs.nix-index-database.packages.${pkgs.system}.comma-with-db
-    pkgs.difftastic
     pkgs.direnv
     pkgs.doggo
     pkgs.du-dust
-    pkgs.gh
-    pkgs.htop
-    pkgs.jless
-    pkgs.jq
-    pkgs.just
-    pkgs.kitty.shell_integration
     pkgs.kitty.terminfo
-    pkgs.lazygit
-    pkgs.lsd
     pkgs.mtr
-    pkgs.nix-output-monitor
-    pkgs.pwgen
     pkgs.tio
-    inputs.sandbox.packages.${pkgs.system}.trippy
     pkgs.wget
 
     # global editor packages
-    pkgs.alejandra
-    inputs.nil.packages.${pkgs.system}.nil
-    (pkgs.nixfmt.overrideAttrs (old: {
-      version = "0.6.0-${builtins.substring 0 7 inputs.nixfmt-rfc.rev}";
-
-      src = inputs.nixfmt-rfc;
-    }))
-    pkgs.shfmt
 
     pkgs.babashka-unwrapped
   ];
@@ -137,9 +110,9 @@
   };
 
   programs = {
-    carapace = {
+    eza = {
       enable = true;
-      enableFishIntegration = false; # ifd...
+      enableAliases = true;
     };
 
     fzf.enable = true;

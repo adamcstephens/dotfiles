@@ -6,17 +6,11 @@
   ...
 }: {
   imports = [
-    ../apps/kitty
+    ./core-gui.nix
+
     ../apps/finicky
     ../apps/karabiner
-    ../apps/ssh
-    ../apps/vscode
   ];
-
-  dotfiles.apps.emacs = {
-    package = pkgs.emacs29-pgtk;
-    patchForGui = true;
-  };
 
   home.packages = [
     pkgs.darwin.iproute2mac

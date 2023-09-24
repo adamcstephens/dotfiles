@@ -16,6 +16,8 @@
   nix-colors-contrib = inputs.nix-colors.lib-contrib {inherit pkgs;};
 in {
   imports = [
+    ./core-gui.nix
+
     # common
     ../apps/dunst
     ../apps/gammastep
@@ -45,11 +47,6 @@ in {
     ../apps/ghc
   ];
 
-  dotfiles.apps.emacs = {
-    package = lib.mkDefault pkgs.emacs29-pgtk;
-    patchForGui = lib.mkDefault true;
-    full = lib.mkDefault true;
-  };
 
   fonts.fontconfig.enable = true;
 
