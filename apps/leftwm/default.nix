@@ -8,7 +8,7 @@
     ../xorg
   ];
 
-  config = lib.mkIf (config.dotfiles.gui.xorg.enable && config.dotfiles.gui.xorg.wm == "leftm") {
+  config = lib.mkIf (config.dotfiles.gui.xorg.enable && config.dotfiles.gui.xorg.wm == "leftwm") {
     home.packages = [
       pkgs.leftwm
     ];

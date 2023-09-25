@@ -31,7 +31,7 @@ in {
     ../apps/wob
 
     # xorg
-    # ../apps/leftwm
+    ../apps/leftwm
     ../apps/polybar
     ../apps/xmonad
     ../apps/xorg
@@ -47,6 +47,7 @@ in {
     ../apps/ghc
   ];
 
+  dotfiles.apps.emacs.package = pkgs.emacs29-pgtk;
 
   fonts.fontconfig.enable = true;
 
