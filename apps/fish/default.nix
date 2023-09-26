@@ -35,4 +35,9 @@
       uas = "set -x SSH_AUTH_SOCK $(tmux show-environment | sed -n 's/^SSH_AUTH_SOCK=//p')";
     };
   };
+
+  xdg.configFile."fish/completions/mix.fish".source = pkgs.fetchurl {
+    url = "https://raw.githubusercontent.com/halostatue/fish-elixir/b8947ae71eb551ce5cd0d31c7084fd684a9e5289/completions/mix.fish";
+    hash = "sha256-kzbnU91ZLez0/pDgh1e14NyvtR6ST9ZXFSjAS6F6R/4=";
+  };
 }
