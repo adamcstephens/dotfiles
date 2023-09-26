@@ -105,7 +105,10 @@
         shellHook = ''
           ln -sf $HOME/.dotfiles/apps/nix/dir-locals.el $PWD/.dir-locals.el
           ln -sfT $HOME/.dotfiles/apps/nix/vscode $PWD/.vscode
+          ln -sfT $HOME/.dotfiles/apps/nix/vscode $PWD/.vscodium
           ln -sfT $HOME/.dotfiles/apps/nix/helix $PWD/.helix
+          mkdir -vp $PWD/.git/info
+          ln -sf $HOME/.dotfiles/apps/nix/exclude $PWD/.git/info/exclude
         '';
       };
 
