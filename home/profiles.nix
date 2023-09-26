@@ -49,7 +49,7 @@ in {
             wayland = true;
             xorg = {
               enable = true;
-              wm = "leftwm";
+              wm = "xmonad";
             };
           };
 
