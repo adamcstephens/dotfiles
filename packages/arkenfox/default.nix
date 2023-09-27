@@ -1,17 +1,18 @@
 {
   stdenvNoCC,
   fetchFromGitHub,
+  gitUpdater,
   writeScript,
 }:
 stdenvNoCC.mkDerivation rec {
   pname = "arkenfox";
-  version = "115.1";
+  version = "117.0";
 
   src = fetchFromGitHub {
     owner = "arkenfox";
     repo = "user.js";
     rev = "refs/tags/${version}";
-    hash = "sha256-M523JiwiZR0mwjyjNaojSERFt77Dp75cg0Ifd6wTOdU=";
+    hash = "sha256-mvQwK11nhZ9yiP9ONeHrP2by5h1UgFSABWkI25YjlN4=";
   };
 
   dontPatch = true;
@@ -50,6 +51,8 @@ stdenvNoCC.mkDerivation rec {
     mkdir -p $out/bin
     cp ${script} $out/bin/arkenfox-patch
   '';
+
+  passthru.updateScript = gitUpdater {};
 
   meta.mainProgram = "arkenfox-patch";
 }
