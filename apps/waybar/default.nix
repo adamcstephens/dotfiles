@@ -9,7 +9,10 @@
       enable = true;
       systemd.enable = true;
       systemd.target = "wayland-session.target";
-      package = pkgs.waybar.override {swaySupport = false;};
+      package = pkgs.waybar.override {
+        swaySupport = false;
+        hyprlandSupport = false;
+      };
 
       settings.main = import ./settings.nix;
 
