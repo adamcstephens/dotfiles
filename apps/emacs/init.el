@@ -60,3 +60,5 @@
 (require 'init-ssh)
 (require 'init-terraform)
 (require 'init-yaml)
+
+(require 'kill-with-intelligence)
