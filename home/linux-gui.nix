@@ -112,7 +112,6 @@ in {
       pkgs.wireplumber
 
       # apps
-      pkgs.chromium
       (pkgs.element-desktop.override {electron = pkgs.electron_24;})
       pkgs.firefox-wayland
       pkgs.cinnamon.nemo
@@ -122,17 +121,7 @@ in {
       pkgs.remmina
       pkgs.thunderbird
 
-      # wrap webcord to remove state file https://github.com/SpacingBat3/WebCord/issues/360
-      (pkgs.symlinkJoin {
-        name = "webcord-wrapper";
-        nativeBuildInputs = [pkgs.makeWrapper];
-        paths = [
-          pkgs.webcord
-        ];
-        postBuild = ''
-          wrapProgram "$out/bin/webcord" --run 'rm -f $HOME/.config/WebCord/windowState.json'
-        '';
-      })
+      pkgs.webcord
     ]
     ++ (lib.optionals config.dotfiles.gui.wayland [
       pkgs.grim
