@@ -115,19 +115,23 @@
     ];
   };
 
-  profile-parts.darwin.EMAT-C02G44CPQ05P = {
-    modules = [
-      ({pkgs, ...}: {
-        environment.etc."ssh/sshd_config.d/200-nix.conf".text = ''
-          PasswordAuthentication no
-          AllowUsers astephe9@10.3.2.* astephe9@10.20.10.* adam@10.3.2.* adam@10.20.10.*
-        '';
+  profile-parts.darwin = {
+    EMAT-C02G44CPQ05P = {
+      modules = [
+        ({pkgs, ...}: {
+          environment.etc."ssh/sshd_config.d/200-nix.conf".text = ''
+            PasswordAuthentication no
+            AllowUsers astephe9@10.3.2.* astephe9@10.20.10.* adam@10.3.2.* adam@10.20.10.*
+          '';
 
-        security.pam.enableSudoTouchIdAuth = true;
-        users.users.astephe9 = {
-          shell = lib.getExe pkgs.fish;
-        };
-      })
-    ];
+          security.pam.enableSudoTouchIdAuth = true;
+          users.users.astephe9 = {
+            shell = lib.getExe pkgs.fish;
+          };
+        })
+      ];
+    };
+
+    silver = {};
   };
 }
