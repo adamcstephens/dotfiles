@@ -1,9 +1,17 @@
-{...}: {
+{
+  lib,
+  pkgs,
+  ...
+}: {
   programs.starship = {
     enable = true;
 
     settings = {
       aws.disabled = true;
+
+      battery = lib.mkIf pkgs.stdenv.isDarwin {
+        disabled = true;
+      };
 
       character = {
         format = "[─](fg:244)$symbol ";
