@@ -42,9 +42,6 @@
   "[powershell]": {
     "editor.defaultFormatter": "ms-vscode.powershell"
   },
-  "[properties]": {
-    "editor.formatOnSave": false
-  },
   "[python]": {
     "editor.defaultFormatter": "ms-python.python"
   },
