@@ -125,6 +125,12 @@
         '';
       };
 
+      opentofu = pkgs.mkShellNoCC {
+        packages = [
+          pkgs.opentofu
+        ];
+      };
+
       python = pkgs.mkShellNoCC {
         packages = [
           (pkgs.python3.withPackages (py: [py.black py.hexdump py.paramiko]))
@@ -138,12 +144,6 @@
           pkgs.pkg-config
           pkgs.rustc
           pkgs.rust-analyzer
-        ];
-      };
-
-      terraform = pkgs.mkShellNoCC {
-        packages = [
-          pkgs.terraform
         ];
       };
 
