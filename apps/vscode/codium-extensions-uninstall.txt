@@ -1,1 +1,6 @@
+elixir-lsp.elixir-ls
+haskell.haskell
 JakeBecker.elixir-ls
+justusadam.language-haskell
+koog1000.fossil
+lexical-lsp.lexical

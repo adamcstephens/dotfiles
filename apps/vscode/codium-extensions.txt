@@ -1,7 +1,7 @@
 bmalehorn.vscode-fish
 DavidAnson.vscode-markdownlint
 EditorConfig.EditorConfig
-elixir-lsp.elixir-ls
+elixir-tools.elixir-tools
 esbenp.prettier-vscode
 foxundermoon.shell-format
 GitHub.github-vscode-theme
@@ -15,4 +15,5 @@ redhat.vscode-yaml
 rust-lang.rust-analyzer
 skellock.just
 tamasfe.even-better-toml
+TheNuProjectContributors.vscode-nushell-lang
 timonwong.shellcheck

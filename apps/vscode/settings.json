@@ -6,7 +6,7 @@
     "editor.defaultFormatter": "betterthantomorrow.calva"
   },
   "[elixir]": {
-    "editor.defaultFormatter": "elixir-lsp.elixir-ls"
+    "editor.defaultFormatter": "elixir-tools.elixir-tools"
   },
   "[fish]": {
     "editor.defaultFormatter": "bmalehorn.vscode-fish"
@@ -18,7 +18,7 @@
     "editor.defaultFormatter": "haskell.haskell"
   },
   "[html-eex]": {
-    "editor.defaultFormatter": "elixir-lsp.elixir-ls"
+    "editor.defaultFormatter": "elixir-tools.elixir-tools"
   },
   "[ignore]": {
     "editor.defaultFormatter": "foxundermoon.shell-format"
@@ -37,7 +37,7 @@
     "editor.defaultFormatter": "jnoortheen.nix-ide"
   },
   "[phoenix-heex]": {
-    "editor.defaultFormatter": "elixir-lsp.elixir-ls"
+    "editor.defaultFormatter": "elixir-tools.elixir-tools"
   },
   "[powershell]": {
     "editor.defaultFormatter": "ms-vscode.powershell"
@@ -181,7 +181,7 @@
     "foxundermoon.shell-format",
     "redhat.vscode-yaml",
     "timonwong.shellcheck",
-    "elixir-lsp.elixir-ls",
+    // "lexical-lsp.lexical",
     "kamadorueda.alejandra",
     "skellock.just",
     "golf1052.base16-generator"
