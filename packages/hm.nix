@@ -1,6 +1,7 @@
 {
   bash,
   home-profile-selector,
+  just,
   lib,
   nix,
   nix-output-monitor,
@@ -60,6 +61,9 @@ in
         ${nixCmd} profile install $old_profile
         exit 1
       fi
+
+      echo "🦾 Running migrations"
+      ${lib.getExe just} --justfile ${../justfile} migrate
     fi
 
     echo "✅ Success!"
