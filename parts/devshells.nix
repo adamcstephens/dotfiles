@@ -46,6 +46,17 @@
         ];
       };
 
+      c = pkgs.mkShell {
+        packages = [
+          pkgs.binutils
+          pkgs.gnumake
+          pkgs.gcc
+          pkgs.mtools
+          pkgs.perl
+          pkgs.xz
+        ];
+      };
+
       elixir = pkgs.mkShell {
         packages =
           [
@@ -80,7 +91,9 @@
 
       js = pkgs.mkShellNoCC {
         packages = [
+          pkgs.esbuild
           pkgs.nodejs
+          pkgs.yarn
         ];
       };
 
@@ -121,6 +134,8 @@
       rust = pkgs.mkShell {
         packages = [
           pkgs.cargo
+          pkgs.openssl.dev
+          pkgs.pkg-config
           pkgs.rustc
           pkgs.rust-analyzer
         ];
