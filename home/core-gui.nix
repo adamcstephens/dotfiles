@@ -42,6 +42,7 @@
     pkgs.just
     pkgs.pwgen
     pkgs.shfmt
+    pkgs.unzip
   ];
 
   programs = {

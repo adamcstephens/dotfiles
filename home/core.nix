@@ -63,7 +63,7 @@
     nix = "nix --print-build-logs";
     sy = "sudo systemctl";
     syu = "systemctl --user";
-    tree = "lsd --tree";
+    tree = "exa --tree";
   };
 
   programs.home-manager.enable = true;
