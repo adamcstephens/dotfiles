@@ -8,11 +8,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1690223130,
-        "narHash": "sha256-/a7Cz30LQuLw5m528M9yv930Je9T7M2CPSIj2xAzQMU=",
+        "lastModified": 1696967570,
+        "narHash": "sha256-mo4UvzdL5P9MhmpgzbSDmdwcG5UMS9L9jSINGyHry78=",
         "ref": "refs/heads/main",
-        "rev": "0f83821330101d102e1b90864ab376434ec0689a",
-        "revCount": 11,
+        "rev": "538f773302264917ea0b5acef475f3345daf1315",
+        "revCount": 13,
         "type": "git",
         "url": "https://codeberg.org/adamcstephens/apple-fonts.nix"
       },
@@ -166,11 +166,11 @@
         "nixpkgs-lib": "nixpkgs-lib"
       },
       "locked": {
-        "lastModified": 1687762428,
-        "narHash": "sha256-DIf7mi45PKo+s8dOYF+UlXHzE0Wl/+k3tXUyAoAnoGE=",
+        "lastModified": 1696343447,
+        "narHash": "sha256-B2xAZKLkkeRFG5XcHHSXXcP7To9Xzr59KXeZiRf4vdQ=",
         "owner": "hercules-ci",
         "repo": "flake-parts",
-        "rev": "37dd7bb15791c86d55c5121740a1887ab55ee836",
+        "rev": "c9afaba3dfa4085dbd2ccb38dfade5141e33d9d4",
         "type": "github"
       },
       "original": {
@@ -463,11 +463,11 @@
     "nixpkgs-lib": {
       "locked": {
         "dir": "lib",
-        "lastModified": 1685564631,
-        "narHash": "sha256-8ywr3AkblY4++3lIVxmrWZFzac7+f32ZEhH/A8pNscI=",
+        "lastModified": 1696019113,
+        "narHash": "sha256-X3+DKYWJm93DRSdC5M6K5hLqzSya9BjibtBsuARoPco=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "4f53efe34b3a8877ac923b9350c874e3dcd5dc0a",
+        "rev": "f5892ddac112a1e9b3612c39af1b72987ee5783a",
         "type": "github"
       },
       "original": {
