@@ -26,6 +26,7 @@
   perSystem = {
     lib,
     pkgs,
+    self',
     system,
     ...
   }: {
@@ -148,9 +149,11 @@
       };
 
       vscode = pkgs.mkShellNoCC {
-        packages = [
-          pkgs.vsce
-        ];
+        packages =
+          [
+            pkgs.vsce
+          ]
+          ++ self'.devShells.js.nativeBuildInputs;
       };
     };
   };
