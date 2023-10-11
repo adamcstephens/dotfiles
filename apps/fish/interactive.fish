@@ -35,3 +35,4 @@ if string match -q "$TERM_PROGRAM" vscode
 end
 
 abbr --add gco git checkout
+abbr --add deplart --set-cursor=! "nix run .#deplart/!"
