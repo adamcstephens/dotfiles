@@ -25,120 +25,128 @@ riverctl focus-follows-cursor always || riverctl focus-follows-cursor normal
 ## map
 #
 riverctl focus-follows-cursor always || riverctl focus-follows-cursor normal
-riverctl map normal Mod4+Shift T spawn 'systemd-cat --identifier=kitty kitty --single-instance'
-riverctl map normal Mod4+Shift Return spawn 'systemd-cat --identifier=kitty kitty --single-instance'
-riverctl map normal Mod4+Shift+Control E spawn 'systemd-cat --identifier=gtk-launch gtk-launch emacsclient'
-riverctl map normal Mod4 D spawn 'systemd-cat --identifier=rofi rofi -show drun'
-riverctl map normal Mod4+Shift D spawn 'systemd-cat --identifier=rofi rofi -show emoji'
-riverctl map normal Mod4+Shift+Control D spawn 'systemd-cat --identifier=dark ~/.dotfiles/bin/dark toggle'
+riverctl map normal Super+Shift T spawn 'systemd-cat --identifier=kitty kitty --single-instance'
+riverctl map normal Super+Shift Return spawn 'systemd-cat --identifier=kitty kitty --single-instance'
+riverctl map normal Super+Shift+Control E spawn 'systemd-cat --identifier=gtk-launch gtk-launch emacsclient'
+riverctl map normal Super D spawn 'systemd-cat --identifier=rofi rofi -show drun'
+riverctl map normal Super+Shift D spawn 'systemd-cat --identifier=rofi rofi -show emoji'
+riverctl map normal Super+Shift+Control D spawn 'systemd-cat --identifier=dark dark toggle'
 
-riverctl map normal None Print spawn 'systemd-cat --identifier=screenshot ~/.dotfiles/bin/screenshot screen'
+riverctl map normal None Print spawn 'systemd-cat --identifier=screenshot screenshot screen'
 # bindsym print exec screenshot.sh window
 # bindsym $mod+print exec screenshot.sh screen
 # bindsym Alt+print exec screenshot.sh box
 
-riverctl map normal Mod4+Shift Q close
-riverctl map normal Mod4+Shift X spawn 'loginctl kill-session $XDG_SESSION_ID'
+riverctl map normal Super+Shift Q close
+riverctl map normal Super+Shift X spawn 'loginctl kill-session $XDG_SESSION_ID'
 
 # Mod+J and Mod+K to focus the next/previous view in the layout stack
-riverctl map normal Mod4 J focus-view next
-riverctl map normal Mod4 K focus-view previous
-riverctl map normal Mod4 S focus-view next
-riverctl map normal Mod4 W focus-view previous
+riverctl map normal Super J focus-view next
+riverctl map normal Super K focus-view previous
+riverctl map normal Super S focus-view next
+riverctl map normal Super W focus-view previous
 
 # Mod+Shift+J and Mod+Shift+K to swap the focused view with the next/previous
 # view in the layout stack
-riverctl map normal Mod4+Shift J swap next
-riverctl map normal Mod4+Shift K swap previous
-riverctl map normal Mod4+Shift S swap next
-riverctl map normal Mod4+Shift W swap previous
+riverctl map normal Super+Shift J swap next
+riverctl map normal Super+Shift K swap previous
+riverctl map normal Super+Shift S swap next
+riverctl map normal Super+Shift W swap previous
 
 # Mod+Period and Mod+Comma to focus the next/previous output
-riverctl map normal Mod4 Period focus-output next
-riverctl map normal Mod4 Comma focus-output previous
+riverctl map normal Super Period focus-output next
+riverctl map normal Super Comma focus-output previous
 
 # Mod+Shift+{Period,Comma} to send the focused view to the next/previous output
-riverctl map normal Mod4+Shift Period send-to-output next
-riverctl map normal Mod4+Shift Comma send-to-output previous
+riverctl map normal Super+Shift Period send-to-output next
+riverctl map normal Super+Shift Comma send-to-output previous
 
 # Mod+Return to bump the focused view to the top of the layout stack
-riverctl map normal Mod4 A zoom
-riverctl map normal Mod4 Return zoom
+riverctl map normal Super A zoom
+riverctl map normal Super Return zoom
 
 # Mod+H and Mod+L to decrease/increase the main ratio of rivertile(1)
-riverctl map normal Mod4+Shift H send-layout-cmd rivertile "main-ratio -0.05"
-riverctl map normal Mod4+Shift L send-layout-cmd rivertile "main-ratio +0.05"
+riverctl map normal Super+Shift H send-layout-cmd rivertile "main-ratio -0.05"
+riverctl map normal Super+Shift L send-layout-cmd rivertile "main-ratio +0.05"
 
 # Mod+Alt+{H,J,K,L} to move views
-riverctl map normal Mod4+Mod1 H move left 100
-riverctl map normal Mod4+Mod1 J move down 100
-riverctl map normal Mod4+Mod1 K move up 100
-riverctl map normal Mod4+Mod1 L move right 100
+riverctl map normal Super+Alt H move left 100
+riverctl map normal Super+Alt J move down 100
+riverctl map normal Super+Alt K move up 100
+riverctl map normal Super+Alt L move right 100
 
 # Mod+Alt+Control+{H,J,K,L} to snap views to screen edges
-riverctl map normal Mod4+Mod1+Control H snap left
-riverctl map normal Mod4+Mod1+Control J snap down
-riverctl map normal Mod4+Mod1+Control K snap up
-riverctl map normal Mod4+Mod1+Control L snap right
+riverctl map normal Super+Alt+Control H snap left
+riverctl map normal Super+Alt+Control J snap down
+riverctl map normal Super+Alt+Control K snap up
+riverctl map normal Super+Alt+Control L snap right
 
 # Mod+Alt+Shif+{H,J,K,L} to resize views
-riverctl map normal Mod4+Mod1+Shift H resize horizontal -100
-riverctl map normal Mod4+Mod1+Shift J resize vertical 100
-riverctl map normal Mod4+Mod1+Shift K resize vertical -100
-riverctl map normal Mod4+Mod1+Shift L resize horizontal 100
+riverctl map normal Super+Alt+Shift H resize horizontal -100
+riverctl map normal Super+Alt+Shift J resize vertical 100
+riverctl map normal Super+Alt+Shift K resize vertical -100
+riverctl map normal Super+Alt+Shift L resize horizontal 100
 
 # Mod + Left Mouse Button to move views
-# riverctl map-pointer normal Mod4 BTN_LEFT move-view
+# riverctl map-pointer normal Super BTN_LEFT move-view
 
 # Mod + Right Mouse Button to resize views
-# riverctl map-pointer normal Mod4 BTN_RIGHT resize-view
+# riverctl map-pointer normal Super BTN_RIGHT resize-view
+
+focus_tag_map() {
+  if command -v river-bnf; then
+    riverctl map "$1" "$2" "$3" spawn "river-bnf $4"
+  else
+    riverctl map "$1" "$2" "$3" set-focused-tags "$4"
+  fi
+}
 
 for i in $(seq 1 9); do
   tags=$((1 << (i - 1)))
 
   # Mod+[1-9] to focus tag [0-8]
-  riverctl map normal Mod4 "$i" set-focused-tags $tags
+  focus_tag_map normal Super "$i" $tags
 
   # Mod+Shift+[1-9] to tag focused view with tag [0-8]
-  riverctl map normal Mod4+Shift "$i" set-view-tags $tags
+  riverctl map normal Super+Shift "$i" set-view-tags $tags
 
   # Mod+Ctrl+[1-9] to toggle focus of tag [0-8]
-  riverctl map normal Mod4+Control "$i" toggle-focused-tags $tags
+  riverctl map normal Super+Control "$i" toggle-focused-tags $tags
 
   # Mod+Shift+Ctrl+[1-9] to toggle tag [0-8] of focused view
-  riverctl map normal Mod4+Shift+Control "$i" toggle-view-tags $tags
+  riverctl map normal Super+Shift+Control "$i" toggle-view-tags $tags
 done
 
 # Mod+0 to focus all tags
 # Mod+Shift+0 to tag focused view with all tags
 all_tags=$(((1 << 32) - 1))
-riverctl map normal Mod4 0 set-focused-tags $all_tags
-riverctl map normal Mod4+Shift 0 set-view-tags $all_tags
+riverctl map normal Super 0 set-focused-tags $all_tags
+riverctl map normal Super+Shift 0 set-view-tags $all_tags
 
-riverctl map normal Mod4 Grave focus-previous-tags
+riverctl map normal Super Grave focus-previous-tags
 
 # Mod+Space to toggle float
-riverctl map normal Mod4+Shift Space toggle-float
+riverctl map normal Super+Shift Space toggle-float
 
 # Mod+F to toggle fullscreen
-riverctl map normal Mod4+Shift F toggle-fullscreen
-riverctl map normal Mod4+Control+Shift P spawn 'systemd-cat --identifier=wl-present wl-present mirror'
+riverctl map normal Super+Shift F toggle-fullscreen
+riverctl map normal Super+Control+Shift P spawn 'systemd-cat --identifier=wl-present wl-present mirror'
 
 # Mod+{Up,Right,Down,Left} to change layout orientation
-riverctl map normal Mod4 Up send-layout-cmd rivertile "main-location top"
-riverctl map normal Mod4 Right send-layout-cmd rivertile "main-location right"
-riverctl map normal Mod4 Down send-layout-cmd rivertile "main-location bottom"
-riverctl map normal Mod4 Left send-layout-cmd rivertile "main-location left"
+riverctl map normal Super Up send-layout-cmd rivertile "main-location top"
+riverctl map normal Super Right send-layout-cmd rivertile "main-location right"
+riverctl map normal Super Down send-layout-cmd rivertile "main-location bottom"
+riverctl map normal Super Left send-layout-cmd rivertile "main-location left"
 
 # Declare a passthrough mode. This mode has only a single mapping to return to
 # normal mode. This makes it useful for testing a nested wayland compositor
 riverctl declare-mode passthrough
 
 # Mod+F11 to enter passthrough mode
-riverctl map normal Mod4 F11 enter-mode passthrough
+riverctl map normal Super F11 enter-mode passthrough
 
 # Mod+F11 to return to normal mode
-riverctl map passthrough Mod4 F11 enter-mode normal
+riverctl map passthrough Super F11 enter-mode normal
 
 # Various media key mapping examples for both normal and locked mode which do
 # not have a modifier
@@ -147,9 +155,9 @@ for mode in normal locked; do
   riverctl map $mode None XF86Eject spawn 'eject -T'
 
   # Control pulse audio volume with pamixer (https://github.com/cdemoulins/pamixer)
-  riverctl map $mode None XF86AudioLowerVolume spawn "$HOME/.dotfiles/bin/volume down"
-  riverctl map $mode None XF86AudioRaiseVolume spawn "$HOME/.dotfiles/bin/volume up"
-  riverctl map $mode None XF86AudioMute spawn "$HOME/.dotfiles/bin/volume mute"
+  riverctl map $mode None XF86AudioLowerVolume spawn "volume down"
+  riverctl map $mode None XF86AudioRaiseVolume spawn "volume up"
+  riverctl map $mode None XF86AudioMute spawn "volume mute"
 
   # Control MPRIS aware media players with playerctl (https://github.com/altdesktop/playerctl)
   riverctl map $mode None XF86AudioMedia spawn 'playerctl play-pause'

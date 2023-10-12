@@ -5,6 +5,17 @@
   ...
 }: let
   cfg = config.dotfiles.apps.river;
+
+  dependencies = [
+    config.programs.kitty.package
+    config.programs.rofi.package
+
+    pkgs.brightnessctl
+    pkgs.gtk3 # for gtk-launch
+    pkgs.playerctl
+    pkgs.river-bnf
+    pkgs.wl-mirror # and wl-present
+  ];
 in {
   options = {
     dotfiles.apps.river.package = lib.mkOption {
@@ -43,7 +54,7 @@ in {
       text = ''
         export MOZ_ENABLE_WAYLAND="1"
         export NIXOS_OZONE_WL="1"
-        export
+        export PATH=$HOME/.dotfiles/bin:${lib.makeBinPath dependencies}
 
         systemd-cat --identifier=river ${lib.getExe cfg.package}
 

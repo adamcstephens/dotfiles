@@ -104,16 +104,27 @@ in {
 
         ({pkgs, ...}: {
           dotfiles = {
-            apps.river.package = pkgs.river.overrideAttrs (_: rec {
-              version = "0.3.0-${builtins.substring 0 7 src.rev}";
-              src = pkgs.fetchFromGitHub {
-                owner = "riverwm";
-                repo = "river";
-                rev = "7f30c655c75568ae331ed0243578d91870f3f9c6";
-                fetchSubmodules = true;
-                hash = "sha256-7cYLP2FID/DW4A06/Ujtqp2LE7NlHwaymQLiIA8xrMk=";
-              };
-            });
+            apps.river.package =
+              (pkgs.river.override {
+                wlroots_0_16 = pkgs.wlroots_0_16.overrideAttrs (prev: {
+                  patches = [
+                    (pkgs.fetchpatch {
+                      url = "https://gitlab.freedesktop.org/wlroots/wlroots/-/merge_requests/4115.patch";
+                      hash = "sha256-olhb4FEu/VB7xKy/huxUmm0Ty5SxPzd6MnHhTPaA/NQ=";
+                    })
+                  ];
+                });
+              })
+              .overrideAttrs (_: rec {
+                version = "0.3.0-${builtins.substring 0 7 src.rev}";
+                src = pkgs.fetchFromGitHub {
+                  owner = "riverwm";
+                  repo = "river";
+                  rev = "7f30c655c75568ae331ed0243578d91870f3f9c6";
+                  fetchSubmodules = true;
+                  hash = "sha256-7cYLP2FID/DW4A06/Ujtqp2LE7NlHwaymQLiIA8xrMk=";
+                };
+              });
             gui.wayland = true;
           };
           programs.waybar.settings.main.output = ["eDP-1" "DP-2"];
