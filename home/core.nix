@@ -98,10 +98,6 @@
     pkgs.mtr
     pkgs.tio
     pkgs.wget
-
-    # global editor packages
-
-    pkgs.babashka-unwrapped
   ];
 
   home.sessionVariables = {
