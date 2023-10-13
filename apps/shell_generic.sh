@@ -13,18 +13,6 @@ fi
 # shellcheck disable=SC2139
 alias esl="exec $SHELL -l"
 
-# custom terminal overrides
-if [[ "$TERM" == "xterm-screen-256color" ]]; then
-  NEWTERM="xterm-256color"
-  alias lxc='TERM=$NEWTERM lxc'
-  alias multipass='TERM=$NEWTERM multipass'
-  alias ssh='TERM=$NEWTERM ssh'
-  export TERMINFO=$HOME/.terminfo
-elif [[ "$TERM" == "xterm-kitty" ]]; then
-  alias ssh="kitty +kitten ssh"
-  export TERMINFO=$HOME/.nix-profile/share/terminfo
-fi
-
 # passwords
 if command -v pwgen >/dev/null; then
   alias pwgen='pwgen -csn1 20 12'
