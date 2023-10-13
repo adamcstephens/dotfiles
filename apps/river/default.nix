@@ -54,7 +54,7 @@ in {
       text = ''
         export MOZ_ENABLE_WAYLAND="1"
         export NIXOS_OZONE_WL="1"
-        export PATH=$HOME/.dotfiles/bin:${lib.makeBinPath dependencies}
+        export PATH=$HOME/.dotfiles/bin:${lib.makeBinPath dependencies}:$PATH
 
         systemd-cat --identifier=river ${lib.getExe cfg.package}
 
