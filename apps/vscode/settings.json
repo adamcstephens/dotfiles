@@ -115,13 +115,15 @@
   "editor.tabSize": 2,
   "editorconfig.generateAuto": false,
   "elixirLS.fetchDeps": true,
+  "emmet.includeLanguages": {
+    "html-eex": "html"
+  },
   "explorer.confirmDelete": false,
   "explorer.confirmDragAndDrop": false,
   "extensions.ignoreRecommendations": true,
   "files.associations": {
     "**/*.bst": "yaml",
     "*.env": "shellscript",
-    "*.heex": "html-eex",
     "*.keymap": "c",
     "*.overlay": "c",
     "*.sls": "yaml",
@@ -235,7 +237,6 @@
       "terminal.background": "#2b2d3a"
     }
   },
-  "workbench.colorTheme": "GitHub Dark Colorblind (Beta)",
   "workbench.editor.decorations.badges": true,
   "workbench.editor.labelFormat": "short",
   "workbench.editor.showIcons": false,
@@ -253,5 +254,6 @@
   },
   "zenMode.fullScreen": false,
   "zenMode.hideLineNumbers": false,
-  "zenMode.hideTabs": false
+  "zenMode.hideTabs": false,
+  "workbench.colorTheme": "GitHub Dark Colorblind (Beta)"
 }
