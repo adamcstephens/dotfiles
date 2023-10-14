@@ -4,7 +4,12 @@ def main [pr: string, ] {
   ["x86_64-linux", "aarch64-linux", "aarch64-darwin", "x86_64-darwin"] | par-each { |system|
     let tempfile = mktemp | split row "\n" | first
 
-    nixpkgs-review pr --run $"cat report.md >> ($tempfile)" --system $system $pr
+    (nixpkgs-review pr
+      --run $"cat report.md >> ($tempfile)"
+      --system $system
+      --build-graph nix
+      --build-args="--print-build-logs"
+      $pr)
 
     let output = open $tempfile
     rm $tempfile

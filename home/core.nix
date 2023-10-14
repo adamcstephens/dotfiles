@@ -55,6 +55,7 @@
     gss = "git status --short";
     gsw = "git switch";
     gswc = "git switch --create";
+    gw = "git worktree";
     gt = "git tag --list -n1";
     ivl = "sudo iptables -vnL --line-numbers";
     jc = "sudo journalctl";

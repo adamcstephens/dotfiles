@@ -56,14 +56,6 @@
     "when": "isDevelopment"
   },
   {
-    "key": "ctrl+shift+win+t",
-    "command": "workbench.action.terminal.new"
-  },
-  {
-    "key": "ctrl+shift+oem_3",
-    "command": "-workbench.action.terminal.new"
-  },
-  {
     "key": "ctrl+shift+j",
     "command": "-workbench.action.search.toggleQueryDetails",
     "when": "inSearchEditor || searchViewletFocus"
@@ -410,5 +402,9 @@
   {
     "key": "shift+meta+right",
     "command": "workbench.action.focusRightGroup"
+  },
+  {
+    "key": "ctrl+shift+meta+i",
+    "command": "workbench.action.toggleMaximizedPanel"
   }
 ]
