@@ -36,7 +36,6 @@
         packages = [
           pkgs.alejandra
           inputs.attic.packages.${pkgs.system}.attic
-          pkgs.babashka-unwrapped
           pkgs.curl
           pkgs.deadnix
           pkgs.git-subrepo
