@@ -42,6 +42,7 @@
           pkgs.just
           inputs.nil.packages.${pkgs.system}.nil
           pkgs.nodePackages.prettier
+          pkgs.nushell
           pkgs.nvd
         ];
       };
