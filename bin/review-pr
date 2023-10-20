@@ -1,12 +1,14 @@
 #!/usr/bin/env nu
 
 def main [pr: string, ] {
-  ["x86_64-linux", "aarch64-linux", "aarch64-darwin", "x86_64-darwin"] | par-each { |system|
+  ["x86_64-linux", "aarch64-linux", "aarch64-darwin", "x86_64-darwin"] | enumerate | par-each { |system|
+    let sleep_duration = $system.index
+    sleep ($"($sleep_duration)sec" | into duration)
     let tempfile = mktemp | split row "\n" | first
 
     (nixpkgs-review pr
       --run $"cat report.md >> ($tempfile)"
-      --system $system
+      --system $system.item
       --build-graph nix
       --build-args="--print-build-logs"
       $pr)
