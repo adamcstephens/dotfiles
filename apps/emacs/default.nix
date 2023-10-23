@@ -64,6 +64,7 @@
         [epkgs.treesit-grammars.with-all-grammars]
         ++ (
           with epkgs.melpaPackages; [
+            agenix
             all-the-icons
             apheleia
             auto-dark
@@ -106,7 +107,7 @@
             mwim
             nim-mode
             nix-ts-mode
-            nushell-mode
+            nushell-ts-mode
             olivetti
             orderless
             org-appear
