@@ -46,11 +46,6 @@
   ];
 
   programs = {
-    carapace = {
-      enable = true;
-      enableFishIntegration = false; # ifd...
-    };
-
     ssh.forwardAgent = true;
   };
 }
