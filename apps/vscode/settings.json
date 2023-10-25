@@ -107,7 +107,6 @@
   "editor.inlayHints.enabled": "onUnlessPressed",
   "editor.inlayHints.fontFamily": "default",
   "editor.inlineSuggest.enabled": true,
-  "editor.minimap.enabled": false,
   "editor.renderWhitespace": "selection",
   "editor.rulers": [120],
   "editor.stickyScroll.enabled": true,
