@@ -112,7 +112,7 @@ in {
       pkgs.wireplumber
 
       # apps
-      (pkgs.element-desktop.override {electron = pkgs.electron_24;})
+      pkgs.element-desktop
       pkgs.firefox-wayland
       pkgs.cinnamon.nemo
       pkgs.gomuks
