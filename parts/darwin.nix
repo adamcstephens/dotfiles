@@ -132,6 +132,6 @@
       ];
     };
 
-    silver = {};
+    silver = {modules = [];};
   };
 }

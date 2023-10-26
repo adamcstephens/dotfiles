@@ -97,6 +97,20 @@ in {
       modules = [./core-darwin.nix];
     };
 
+    silver = {
+      system = "aarch64-darwin";
+      modules = [
+        ./core-darwin.nix
+
+        {
+          dotfiles.apps.emacs = {
+            patchForGui = false;
+            full = false;
+          };
+        }
+      ];
+    };
+
     think = {
       modules = [
         ./linux-gui.nix
