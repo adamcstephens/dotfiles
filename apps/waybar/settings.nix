@@ -35,20 +35,27 @@
     max-length = 25;
   };
   battery = {
+    full-at = 99;
+    interval = 10;
     states = {
       warning = 35;
       critical = 20;
     };
     format = "{capacity}% {icon}";
-    format-charging = "~";
-    format-plugged = "";
+    format-charging = "󱊥";
+    format-plugged = "󰁹";
     tooltip-format = "{capacity}% {time}";
     format-icons = [
-      ""
-      ""
-      ""
-      ""
-      ""
+      "󰁺"
+      "󰁻"
+      "󰁼"
+      "󰁽"
+      "󰁾"
+      "󰁿"
+      "󰂀"
+      "󰂁"
+      "󰂂"
+      "󰁹"
     ];
   };
   bluetooth = {

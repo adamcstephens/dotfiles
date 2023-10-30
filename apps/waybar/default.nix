@@ -20,7 +20,7 @@
         * {
           border: none;
           border-radius: 0;
-          font-family: "SF Pro Display";
+          font-family: "SF Pro Display", "Symbols Nerd Font Mono";
           font-size: 14px;
           box-shadow: none;
           text-shadow: none;
@@ -81,6 +81,9 @@
           color: #${config.colorScheme.colors.base0D};
         }
 
+        #battery.plugged {
+          color: #${config.colorScheme.colors.base0B};
+        }
       '';
     };
 
