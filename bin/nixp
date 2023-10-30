@@ -1,0 +1,38 @@
+#!/usr/bin/env nu
+
+let nixpkgs_root = $env.HOME + "/git/nixpkgs"
+
+def workdir [branch: string, ] {
+  let worktree = ($nixpkgs_root + "/.worktree/" + ($branch | str replace "/" "-"))
+
+  cd $nixpkgs_root
+
+  let branch_test = do { git rev-parse --verify $branch } | complete
+  let worktree_args = (if ($branch_test.exit_code != 0) { ["-b", $branch] } else { [$branch] }) ++ ["--checkout", "--lock"]
+
+  if (not ($worktree | path exists)) {
+    git worktree add $worktree $worktree_args
+  }
+
+  if (not (($worktree + "/.envrc") | path exists)) {
+    cd $worktree
+    "use flake ~/.dotfiles#nixpkgs" | save ".envrc"
+    direnv allow
+  }
+
+  zoxide add $worktree
+
+  $worktree
+}
+
+def main [action: string, --codium (-c), ...args] {
+  if ($action == "workdir") {
+    let worktree = workdir $args.0
+    if ($codium) {
+      codium -n $worktree
+    }
+  } else {
+    print ("!! Unsupported command " + $action)
+    exit 1
+  }
+}
