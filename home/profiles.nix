@@ -25,11 +25,10 @@ in {
     }: [
       ./core.nix
       {
-        _module.args.pkgs = lib.mkForce (import profile.nixpkgs {
-          inherit (profile) system;
+        nixpkgs = {
           overlays = [self.overlays.default self.overlays.upstreams];
           config.allowUnfree = true;
-        });
+        };
       }
     ];
 
