@@ -49,9 +49,12 @@
 
       c = pkgs.mkShell {
         packages = [
+          pkgs.autoconf
+          pkgs.automake
           pkgs.binutils
           pkgs.gnumake
           pkgs.gcc
+          pkgs.libtool
           pkgs.mtools
           pkgs.perl
           pkgs.xz
