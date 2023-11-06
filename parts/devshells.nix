@@ -107,7 +107,9 @@
           [
             pkgs.nixVersions.nix_2_16
             pkgs.nix-bisect
+            pkgs.nix-generate-from-cpan
             inputs.nix-index-database.packages.${pkgs.system}.nix-index-with-db
+            pkgs.nix-prefetch-github
             pkgs.nix-prefetch-scripts
             pkgs.nix-tree
             pkgs.nix-update
