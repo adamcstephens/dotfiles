@@ -202,6 +202,8 @@
   "shellcheck.disableVersionCheck": true,
   "shellcheck.exclude": ["SC1117", "SC2039"],
   "telemetry.telemetryLevel": "off",
+  "terminal.external.linuxExec": "kitty",
+  "terminal.external.osxExec": "Kitty.app",
   "terminal.integrated.copyOnSelection": true,
   "terminal.integrated.cursorBlinking": true,
   "terminal.integrated.enableMultiLinePasteWarning": false,
