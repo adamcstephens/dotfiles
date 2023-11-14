@@ -160,13 +160,13 @@
     nativeBuildInputs = [pkgs.makeWrapper];
     postBuild =
       ''
-        wrapProgram "$out/bin/emacs" --set TERM xterm-emacs --set FONTCONFIG_FILE ${config.dotfiles.gui.font.fontconfig} --prefix PATH : ${lib.makeBinPath extraBins}:${config.home.homeDirectory}/.dotfiles/bin
+        wrapProgram "$out/bin/emacs" --set TERM xterm-emacs ${lib.optionalString cfg.full "--set FONTCONFIG_FILE ${config.dotfiles.gui.font.fontconfig}"} --prefix PATH : ${lib.makeBinPath extraBins}:${config.home.homeDirectory}/.dotfiles/bin
         wrapProgram "$out/bin/emacsclient" --set TERM xterm-emacs
       ''
       + (
         if pkgs.stdenv.isDarwin
         then ''
-          wrapProgram "$out/Applications/Emacs.app/Contents/MacOS/Emacs" --set FONTCONFIG_FILE ${config.dotfiles.gui.font.fontconfig} --prefix PATH : ${lib.makeBinPath extraBins}
+          wrapProgram "$out/Applications/Emacs.app/Contents/MacOS/Emacs" ${lib.optionalString cfg.full "--set FONTCONFIG_FILE ${config.dotfiles.gui.font.fontconfig}"} --prefix PATH : ${lib.makeBinPath extraBins}
         ''
         else ""
       );
