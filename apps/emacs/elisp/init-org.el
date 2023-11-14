@@ -118,7 +118,7 @@
       ("article"
         "\\documentclass[11pt]{article}
 \\usepackage{fontspec}
-\\setmainfont{SF Pro}
+\\setmainfont{IBM Plex Sans}
 % dont indent paragraphs
 \\usepackage{parskip}
 \\usepackage{fancyhdr}
@@ -134,7 +134,7 @@
 \\usepackage[margin=1in]{geometry}
 \\usepackage{graphicx,wrapfig,subfig}
 \\usepackage{fontspec}
-\\setmainfont{SF Pro}
+\\setmainfont{IBM Plex Sans}
 \\usepackage{caption,anyfontsize}
 \\makeatletter
 % here, adjust captions

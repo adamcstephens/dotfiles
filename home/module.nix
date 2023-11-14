@@ -34,7 +34,7 @@
 
         variable = lib.mkOption {
           type = lib.types.str;
-          default = "SF Pro Text";
+          default = "IBM Plex Sans";
         };
 
         fontconfig = lib.mkOption {
@@ -43,9 +43,9 @@
             fontDirectories =
               [
                 (pkgs.nerdfonts.override {fonts = ["NerdFontsSymbolsOnly"];})
-                inputs.apple-fonts.packages.${pkgs.system}.sf-pro
                 pkgs.emacs-all-the-icons-fonts
                 pkgs.font-awesome
+                pkgs.ibm-plex
                 pkgs.jetbrains-mono
                 pkgs.noto-fonts
                 pkgs.noto-fonts-cjk

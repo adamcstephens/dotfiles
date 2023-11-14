@@ -2,8 +2,6 @@
   inputs = {
     nixpkgs.url = "github:adamcstephens/nixpkgs/atomix-unstable";
 
-    apple-fonts.url = "git+https://codeberg.org/adamcstephens/apple-fonts.nix";
-    apple-fonts.inputs.nixpkgs.follows = "nixpkgs";
     attic.url = "github:zhaofengli/attic";
     attic.inputs.nixpkgs.follows = "nixpkgs";
     emacs-overlay.url = "github:nix-community/emacs-overlay";

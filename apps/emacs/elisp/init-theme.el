@@ -1,6 +1,3 @@
-(defun dot/variable-font ()
-  "SF Pro")
-
 (defun dot/font-height ()
   (if (eq system-type 'darwin)
     130
@@ -24,7 +21,7 @@
   (tab-bar-mode 1)
 
   (set-face-attribute 'default nil
-    :font (font-spec :family "JetBrains Mono")
+    :font (font-spec :family (dot/font-mono))
     :height (dot/font-height))
   (set-face-attribute 'fixed-pitch nil
     :family (face-attribute 'default :family))
@@ -33,7 +30,7 @@
   (set-face-attribute 'italic nil
     :family (face-attribute 'default :family))
   (set-face-attribute 'variable-pitch nil
-    :font (font-spec :family (dot/variable-font))
+    :font (font-spec :family (dot/font-variable))
     :height 1.0)
 
   (add-hook 'text-mode-hook #'(lambda () (variable-pitch-mode t)))

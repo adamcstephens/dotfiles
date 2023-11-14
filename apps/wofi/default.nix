@@ -23,7 +23,7 @@
         border: 2px solid #${config.colorScheme.colors.base03};
         background-color: #${config.colorScheme.colors.base00};
         font-size: 13px;
-        font-family: SF Pro;
+        font-family: ${config.dotfiles.gui.font.variable};
       }
 
       #outer-box {
@@ -33,7 +33,7 @@
       #scroll {
         margin: 5px 0px;
         font-size: 13px;
-        font-family: SF Pro;
+        font-family: ${config.dotfiles.gui.font.variable};
         color: #${config.colorScheme.colors.base06};
       }
 

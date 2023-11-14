@@ -7,7 +7,7 @@
     enable = true;
     terminal = "${config.programs.kitty.package}/bin/kitty";
     package = with pkgs; rofi-wayland.override {plugins = [rofi-calc rofi-emoji];};
-    font = "SF Pro Display 11";
+    font = "${config.dotfiles.gui.font.variable} 11";
     theme = let
       mkLiteral = config.lib.formats.rasi.mkLiteral;
     in

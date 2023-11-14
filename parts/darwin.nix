@@ -19,22 +19,12 @@
         fonts = {
           fontDir.enable = true;
           fonts = [
-            inputs.apple-fonts.packages.${pkgs.system}.sf-pro
-            pkgs.etBook
-            pkgs.fira
             pkgs.font-awesome
+            pkgs.ibm-plex
             pkgs.jetbrains-mono
-            pkgs.manrope
             pkgs.material-icons
             pkgs.material-design-icons
-            pkgs.merriweather
-            pkgs.norwester-font
-            pkgs.noto-fonts
-            pkgs.noto-fonts-cjk
-            pkgs.noto-fonts-emoji
-            pkgs.roboto
-            pkgs.source-sans
-            (pkgs.nerdfonts.override {fonts = ["JetBrainsMono" "NerdFontsSymbolsOnly"];})
+            (pkgs.nerdfonts.override {fonts = ["NerdFontsSymbolsOnly"];})
           ];
         };
         nix = {

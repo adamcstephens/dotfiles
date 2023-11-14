@@ -20,7 +20,7 @@
         * {
           border: none;
           border-radius: 0;
-          font-family: "SF Pro Display", "Symbols Nerd Font Mono";
+          font-family: "${config.dotfiles.gui.font.variable}", "Symbols Nerd Font Mono";
           font-size: 14px;
           box-shadow: none;
           text-shadow: none;

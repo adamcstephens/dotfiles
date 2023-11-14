@@ -179,6 +179,12 @@
   env = ''
     (setq exec-path (append exec-path '( ${lib.concatMapStringsSep " " (x: ''"${x}/bin"'') extraBins} )))
 
+    (defun dot/font-mono ()
+      "${config.dotfiles.gui.font.mono}")
+
+    (defun dot/font-variable ()
+      "${config.dotfiles.gui.font.variable}")
+
     ${lib.optionalString cfg.full ''(setq org-re-reveal-root "${revealjs.outPath}")''}
   '';
 

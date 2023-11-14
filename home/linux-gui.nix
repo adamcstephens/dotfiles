@@ -55,8 +55,8 @@ in {
     enable = true;
 
     font = {
-      name = "SF Pro Display";
-      package = inputs.apple-fonts.packages.${pkgs.system}.sf-pro;
+      name = config.dotfiles.gui.font.variable;
+      package = pkgs.ibm-plex;
       size = 11;
     };
 
@@ -92,8 +92,6 @@ in {
       pkgs.noto-fonts
       pkgs.noto-fonts-cjk
       pkgs.noto-fonts-emoji
-      inputs.apple-fonts.packages.${pkgs.system}.sf-mono
-      inputs.apple-fonts.packages.${pkgs.system}.sf-pro
 
       configure-gtk
       pkgs.glib
