@@ -90,6 +90,7 @@
             expand-region
             fish-mode
             flyspell-correct
+            gcmh
             git-auto-commit-mode
             golden-ratio
             haskell-mode

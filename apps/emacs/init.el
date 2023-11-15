@@ -24,6 +24,8 @@
 ;; (require 'use-package-ensure)
 ;; (setq use-package-always-ensure t)
 
+(use-package gcmh :init (gcmh-mode 1))
+
 ;; load all elisp files
 (add-to-list
   'load-path
