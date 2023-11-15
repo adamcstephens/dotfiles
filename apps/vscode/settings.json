@@ -260,5 +260,6 @@
   "workbench.editor.empty.hint": "hidden",
   "[properties]": {
     "editor.defaultFormatter": "foxundermoon.shell-format"
-  }
+  },
+  "editor.wordWrap": "on"
 }
