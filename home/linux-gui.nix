@@ -130,7 +130,8 @@ in {
       pkgs.wlopm
     ])
     ++ (lib.optionals config.dotfiles.gui.xorg.enable [
-      pkgs.autorandr
+      pkgs.arandr
+      pkgs.grobi
       pkgs.lxrandr
       pkgs.xclip
       pkgs.xlayoutdisplay

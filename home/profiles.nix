@@ -52,6 +52,19 @@ in {
             };
           };
 
+          services.grobi = {
+            enable = true;
+            rules = [
+              {
+                name = "desktop";
+                outputs_connected = ["HDMI-1"];
+                configure_single = "HDMI-1";
+                primary = true;
+                atomic = true;
+              }
+            ];
+          };
+
           services.swayidle.timeouts = [
             {
               timeout = 960;
