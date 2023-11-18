@@ -262,7 +262,7 @@ in {
             "${config.home.homeDirectory}/.nix-profile/bin/fish"
             "-l"
             "-c"
-            "${config.programs.emacs.finalPackage}/bin/emacs --fg-daemon --init-directory ${config.home.homeDirectory}/.config/emacs"
+            "${package}/bin/emacs --fg-daemon --init-directory ${config.home.homeDirectory}/.config/emacs"
           ];
           RunAtLoad = true;
           StandardErrorPath = "${config.home.homeDirectory}/.config/emacs/launchd.log";
