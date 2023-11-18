@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+
+# avoid a loop
+SCRIPT_PATH=$(dirname "$(realpath "$0")")
+PATH="$(echo "$PATH" | sed -e "s,$SCRIPT_PATH:,,")"
+export PATH
+
+if [ "$TERM_PROGRAM" != "vscode" ] || [ -z "$SSH_CONNECTION" ]; then
+  exec ~/.nix-profile/bin/codium "$@"
+else
+  exec $(which codium) "$@"
+fi
