@@ -47,13 +47,15 @@
                 pkgs.font-awesome
                 pkgs.ibm-plex
                 pkgs.jetbrains-mono
+              ]
+              ++ lib.optionals pkgs.stdenv.isLinux [
                 pkgs.noto-fonts
                 pkgs.noto-fonts-cjk
                 pkgs.noto-fonts-emoji
               ]
-              ++ (lib.optionals pkgs.stdenv.isDarwin [
+              ++ lib.optionals pkgs.stdenv.isDarwin [
                 "/Library/Fonts"
-              ]);
+              ];
           };
         };
       };
