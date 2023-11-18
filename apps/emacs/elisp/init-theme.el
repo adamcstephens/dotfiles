@@ -31,7 +31,7 @@
     :family (face-attribute 'default :family))
   (set-face-attribute 'variable-pitch nil
     :font (font-spec :family (dot/font-variable))
-    :height 1.0)
+    :height (dot/font-height))
 
   (add-hook 'text-mode-hook #'(lambda () (variable-pitch-mode t)))
 
@@ -44,14 +44,16 @@
     modus-themes-mixed-fonts t
     ;; modus-themes-variable-pitch-ui nil
 
+    ;; breaks emacsclient???
     ;; custom org faces
-    modus-themes-headings
-    '
-    ((1 . (variable-pitch 1.1))
-      (2 . (1.05))
-      (agenda-date . (1.1))
-      (agenda-structure . (variable-pitch light 1.3))
-      (t . (1.0))))
+    ;;modus-themes-headings
+    ;;'
+    ;;((1 . (variable-pitch 1.1))
+    ;;  (2 . (1.05))
+    ;;  (agenda-date . (1.1))
+    ;;  (agenda-structure . (variable-pitch light 1.3))
+    ;;  (t . (1.0)))
+    )
   (load-theme 'modus-vivendi :no-confirm)
 
   (setq global-mode-string (system-name))

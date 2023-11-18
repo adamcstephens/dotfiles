@@ -52,128 +52,10 @@
     }
   );
 
-  emacsWithPackages =
-    (pkgs.emacsPackagesFor (
-      if cfg.patchForGui
-      then emacsPatched
-      else cfg.package
-    ))
-    .emacsWithPackages
-    (
-      epkgs:
-        [epkgs.treesit-grammars.with-all-grammars]
-        ++ (
-          with epkgs.melpaPackages; [
-            agenix
-            all-the-icons
-            apheleia
-            auto-dark
-            avy
-            bbww
-            cape
-            chatgpt-shell
-            cider
-            clipetty
-            consult
-            dash
-            diff-ansi
-            diff-hl
-            direnv
-            dirvish
-            doom-modeline
-            editorconfig
-            eldoc-box
-            elisp-autofmt
-            elixir-ts-mode
-            embark
-            embark-consult
-            expand-region
-            fish-mode
-            flyspell-correct
-            gcmh
-            git-auto-commit-mode
-            golden-ratio
-            haskell-mode
-            hide-mode-line
-            just-mode
-            kkp
-            ligature
-            lispy
-            magit
-            marginalia
-            markdown-mode
-            modus-themes
-            move-dup
-            multi-vterm
-            mwim
-            nim-mode
-            nix-ts-mode
-            nushell-ts-mode
-            olivetti
-            orderless
-            org-appear
-            org-autolist
-            org-download
-            org-present
-            org-re-reveal
-            org-superstar
-            ox-pandoc
-            persistent-scratch
-            project-rootfile
-            rainbow-delimiters
-            ron-mode
-            run-command
-            ssh-config-mode
-            terraform-mode
-            transpose-frame
-            treesit-auto
-            undo-fu
-            undo-fu-session
-            vterm
-            wgrep
-            which-key
-            whole-line-or-region
-            yasnippet
-            yasnippet-snippets
-            yuck-mode
-          ]
-        )
-        ++ (
-          with epkgs.elpaPackages; [
-            corfu
-            org
-            rainbow-mode
-            substitute
-            vertico
-            vundo
-          ]
-        )
-        ++ (with epkgs.nongnuPackages; [eat])
-    );
-
-  package = pkgs.symlinkJoin {
-    name = "dotemacs";
-
-    paths = [
-      emacsWithPackages
-    ];
-
-    nativeBuildInputs = [pkgs.makeWrapper];
-    postBuild =
-      ''
-        wrapProgram "$out/bin/emacs" --set TERM xterm-emacs ${lib.optionalString cfg.full "--set FONTCONFIG_FILE ${config.dotfiles.gui.font.fontconfig}"} --prefix PATH : ${lib.makeBinPath extraBins}:${config.home.homeDirectory}/.dotfiles/bin
-        wrapProgram "$out/bin/emacsclient" --set TERM xterm-emacs
-      ''
-      + (
-        if pkgs.stdenv.isDarwin
-        then ''
-          wrapProgram "$out/Applications/Emacs.app/Contents/MacOS/Emacs" ${lib.optionalString cfg.full "--set FONTCONFIG_FILE ${config.dotfiles.gui.font.fontconfig}"} --prefix PATH : ${lib.makeBinPath extraBins}
-        ''
-        else ""
-      );
-
-    inherit (pkgs.emacs) meta;
-  };
+  selectedPackage =
+    if cfg.patchForGui
+    then emacsPatched
+    else cfg.package;
 
   revealjs = pkgs.callPackage ./revealjs.nix {};
 
@@ -187,7 +69,132 @@
       "${config.dotfiles.gui.font.variable}")
 
     ${lib.optionalString cfg.full ''(setq org-re-reveal-root "${revealjs.outPath}")''}
+
+    (provide 'dotemacs-nix-env)
   '';
+
+  emacsPackages = epkgs:
+    [
+      (epkgs.trivialBuild {
+        pname = "dotemacs-nix-env";
+        src = pkgs.writeText "dotemacs-nix-env.el" env;
+        version = "0.1.0";
+      })
+      epkgs.treesit-grammars.with-all-grammars
+    ]
+    ++ (
+      with epkgs.melpaPackages; [
+        agenix
+        all-the-icons
+        apheleia
+        auto-dark
+        avy
+        bbww
+        cape
+        chatgpt-shell
+        cider
+        clipetty
+        consult
+        dash
+        diff-ansi
+        diff-hl
+        direnv
+        dirvish
+        doom-modeline
+        editorconfig
+        eldoc-box
+        elisp-autofmt
+        elixir-ts-mode
+        embark
+        embark-consult
+        expand-region
+        fish-mode
+        flyspell-correct
+        gcmh
+        git-auto-commit-mode
+        golden-ratio
+        haskell-mode
+        hide-mode-line
+        just-mode
+        kkp
+        ligature
+        lispy
+        magit
+        marginalia
+        markdown-mode
+        modus-themes
+        move-dup
+        multi-vterm
+        mwim
+        nim-mode
+        nix-ts-mode
+        nushell-ts-mode
+        olivetti
+        orderless
+        org-appear
+        org-autolist
+        org-download
+        org-present
+        org-re-reveal
+        org-superstar
+        ox-pandoc
+        persistent-scratch
+        project-rootfile
+        rainbow-delimiters
+        ron-mode
+        run-command
+        ssh-config-mode
+        terraform-mode
+        transpose-frame
+        treesit-auto
+        undo-fu
+        undo-fu-session
+        vterm
+        wgrep
+        which-key
+        whole-line-or-region
+        yasnippet
+        yasnippet-snippets
+        yuck-mode
+      ]
+    )
+    ++ (
+      with epkgs.elpaPackages; [
+        corfu
+        org
+        rainbow-mode
+        substitute
+        vertico
+        vundo
+      ]
+    )
+    ++ (with epkgs.nongnuPackages; [eat]);
+
+  emacsPackage = (pkgs.emacsPackagesFor selectedPackage).emacsWithPackages emacsPackages;
+
+  package = let
+    path = "${lib.makeBinPath extraBins}:${config.home.homeDirectory}/.dotfiles/bin";
+    args = "${lib.optionalString cfg.full "--set FONTCONFIG_FILE ${config.dotfiles.gui.font.fontconfig}"} --prefix PATH : ${path}";
+  in
+    pkgs.symlinkJoin {
+      name = "dotemacs";
+
+      paths = [
+        emacsPackage
+      ];
+
+      nativeBuildInputs = [pkgs.makeWrapper];
+
+      postBuild = ''
+        wrapProgram "$out/bin/emacs" --set TERM xterm-emacs ${args}
+        wrapProgram "$out/bin/emacsclient" --set TERM xterm-emacs
+        ${lib.optionalString pkgs.stdenv.isDarwin ''
+          wrapProgram "$out/Applications/Emacs.app/Contents/MacOS/Emacs" ${args}
+        ''}
+      '';
+
+      inherit (emacsPackage) meta;
+    };
 
   terminfo = pkgs.callPackage ../../packages/terminfo {};
 in {
@@ -204,11 +211,9 @@ in {
     };
   };
   config = {
-    programs.emacs = {
-      enable = true;
-      package = package;
-      extraConfig = env;
-    };
+    home.packages = [
+      package
+    ];
 
     xdg.configFile =
       if config.dotfiles.nixosManaged
@@ -231,6 +236,7 @@ in {
           "--init-directory"
           "${config.home.homeDirectory}/.config/emacs"
         ];
+        package = package;
         socketActivation.enable = config.dotfiles.nixosManaged;
       };
     };

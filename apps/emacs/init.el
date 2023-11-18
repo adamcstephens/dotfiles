@@ -24,6 +24,7 @@
 ;; (require 'use-package-ensure)
 ;; (setq use-package-always-ensure t)
 
+(use-package dotemacs-nix-env)
 (use-package gcmh :init (gcmh-mode 1))
 
 ;; load all elisp files
