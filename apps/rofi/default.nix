@@ -96,6 +96,7 @@
 
         "element-text" = {
           text-color = mkLiteral "inherit";
+          highlight = mkLiteral "bold";
         };
 
         "scrollbar" = {
