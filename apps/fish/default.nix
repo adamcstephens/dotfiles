@@ -22,7 +22,12 @@
 
     interactiveShellInit =
       (builtins.readFile ./interactive.fish)
-      + (lib.optionalString pkgs.stdenv.isDarwin (builtins.readFile ./interactive-darwin.fish));
+      + (lib.optionalString pkgs.stdenv.isDarwin (builtins.readFile ./interactive-darwin.fish))
+      + ''
+        set --global KITTY_SHELL_INTEGRATION enabled
+        source "${pkgs.kitty.shell_integration}/fish/vendor_conf.d/kitty-shell-integration.fish"
+        set --prepend fish_complete_path "${pkgs.kitty.shell_integration}/fish/vendor_completions.d"
+      '';
 
     shellAbbrs = lib.filterAttrs (k: _: !(builtins.elem k ["cat" "nix"])) config.home.shellAliases;
     shellAliases = {

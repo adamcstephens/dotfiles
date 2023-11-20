@@ -6,7 +6,6 @@
   xdg.configFile."kitty/theme-light.conf".source = ./theme-light.conf;
 
   home.packages = [
-    pkgs.kitty.shell_integration
     pkgs.kitty.terminfo
   ];
 
@@ -69,5 +68,7 @@
           listen_on = "unix:@kitty";
         }
       );
+
+    shellIntegration.enableFishIntegration = false;
   };
 }
