@@ -42,21 +42,27 @@
       critical = 20;
     };
     format = "{capacity}% {icon}";
-    format-charging = "󱊥";
-    format-plugged = "󰁹";
+    format-icons = {
+      charging = [
+        "󱊤"
+        "󱊥"
+        "󱊦"
+      ];
+      plugged = "󱟢";
+      default = [
+        "󰁺"
+        "󰁻"
+        "󰁼"
+        "󰁽"
+        "󰁾"
+        "󰁿"
+        "󰂀"
+        "󰂁"
+        "󰂂"
+        "󰁹"
+      ];
+    };
     tooltip-format = "{capacity}% {time}";
-    format-icons = [
-      "󰁺"
-      "󰁻"
-      "󰁼"
-      "󰁽"
-      "󰁾"
-      "󰁿"
-      "󰂀"
-      "󰂁"
-      "󰂂"
-      "󰁹"
-    ];
   };
   bluetooth = {
     format = "{icon}";
