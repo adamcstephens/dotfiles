@@ -241,7 +241,6 @@
   "workbench.editor.decorations.badges": true,
   "workbench.editor.labelFormat": "short",
   "workbench.editor.showIcons": false,
-  "workbench.editor.untitled.hint": "hidden",
   "workbench.editorAssociations": {
     "*.ipynb": "jupyter-notebook"
   },
@@ -255,11 +254,10 @@
   },
   "zenMode.fullScreen": false,
   "zenMode.hideLineNumbers": false,
-  "zenMode.hideTabs": false,
-  "workbench.colorTheme": "GitHub Dark Colorblind (Beta)",
   "workbench.editor.empty.hint": "hidden",
   "[properties]": {
     "editor.defaultFormatter": "foxundermoon.shell-format"
   },
-  "editor.wordWrap": "on"
+  "editor.wordWrap": "on",
+  "workbench.colorTheme": "GitHub Dark Colorblind (Beta)"
 }
