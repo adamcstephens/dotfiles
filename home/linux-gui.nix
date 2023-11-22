@@ -135,6 +135,11 @@ in {
       pkgs.lxrandr
       pkgs.xclip
       pkgs.xlayoutdisplay
+    ])
+    ++ (lib.optionals pkgs.stdenv.isx86_64 [
+      pkgs.bitwarden
+      pkgs.bitwarden-cli
+      pkgs.bitwarden-menu
     ]);
 
   programs.feh.enable = true;
