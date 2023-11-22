@@ -60,7 +60,10 @@ dotManageHook =
       [ isDialog --> doCenterFloat,
         title =? "Picture-in-Picture" --> doFloat,
         title =? "Picture-in-Picture" --> doF copyToAll,
-        isFullscreen --> doFullFloat
+        isFullscreen --> doFullFloat,
+        appName =? "Navigator" --> doF (W.shift "1:web"),
+        appName =? "element" --> doF (W.shift "6:comm"),
+        appName =? "webcord" --> doF (W.shift "6:comm")
       ]
 
 dotStartupHook = setDefaultCursor xC_left_ptr <> spawn "xsetroot -cursor_name left_ptr" -- this is a hack, i don't know why i need it
@@ -73,12 +76,12 @@ main =
     $ desktopConfig
       { terminal = "kitty",
         modMask = mod4Mask,
-        -- , borderWidth = 3
-        normalBorderColor = "#3E4B59",
-        focusedBorderColor = "#E6E1CF",
+        normalBorderColor = "#595959",
+        focusedBorderColor = "#FFFFFF",
         logHook = dotLogHook,
         startupHook = dotStartupHook,
         manageHook = dotManageHook,
-        layoutHook = smartBorders $ desktopLayoutModifiers dotLayouts
+        layoutHook = smartBorders $ desktopLayoutModifiers dotLayouts,
+        workspaces = ["1:web","2:dev","3","4","5","6:comm","7:game","8","9"]
       }
       `additionalKeysP` dotKeys
