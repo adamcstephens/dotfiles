@@ -49,7 +49,7 @@ dotKeys =
   ]
     ++ [("M-C-S-" ++ show i, windows $ copy ws) | (i, ws) <- zip [1 .. 9] dotWorkspaces]
 
-dotLayouts = avoidStruts (Tall 1 (3 / 100) (2 / 3)) ||| noBorders Full ||| Grid
+dotLayouts = avoidStruts (Tall 1 (3 / 100) (2 / 3)) ||| noBorders Full ||| (Tall 1 (10 / 100) (1 / 2)) ||| Grid
 
 dotLogHook = updatePointer (0.5, 0.5) (0, 0) <> logHook desktopConfig >> masterHistoryHook
 
