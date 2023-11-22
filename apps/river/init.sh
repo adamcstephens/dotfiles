@@ -38,7 +38,7 @@ riverctl map normal None Print spawn 'systemd-cat --identifier=screenshot screen
 # bindsym Alt+print exec screenshot.sh box
 
 riverctl map normal Super+Shift Q close
-riverctl map normal Super+Shift X spawn 'loginctl kill-session $XDG_SESSION_ID'
+riverctl map normal Super+Shift+Control X exit
 
 # Mod+J and Mod+K to focus the next/previous view in the layout stack
 riverctl map normal Super J focus-view next
