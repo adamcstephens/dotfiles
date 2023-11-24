@@ -1,6 +1,10 @@
 default:
     just --list
 
+arkenfox-update:
+    nix run nixpkgs#nix-update -- --flake arkenfox --commit
+    nix run .#arkenfox
+
 brew-dump:
     brew bundle dump --formula --cask --tap --mas --force
     git diff Brewfile
