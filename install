@@ -4,7 +4,7 @@ ARG=$1
 
 if ! command -v nix >/dev/null 2>&1; then
   if [ "$ARG" = "new" ]; then
-    curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install --no-confirm
+    curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install --no-confirm --diagnostic-endpoint=""
   else
     curl -L https://nixos.org/nix/install | sh -s - --daemon
   fi
