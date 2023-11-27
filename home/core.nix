@@ -95,6 +95,7 @@
     pkgs.direnv
     pkgs.doggo
     pkgs.du-dust
+    pkgs.gdu
     pkgs.kitty.terminfo
     pkgs.mtr
     pkgs.tio
