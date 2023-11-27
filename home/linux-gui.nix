@@ -13,6 +13,15 @@
     gnome_schema=org.gnome.desktop.interface
   '');
 
+  gsettings-wrapper = pkgs.writeScriptBin "gsettings-wrapper" (let
+    schema = pkgs.gsettings-desktop-schemas;
+    datadir = "${schema}/share/gsettings-schemas/${schema.name}";
+  in ''
+    export XDG_DATA_DIRS=${datadir}:$XDG_DATA_DIRS
+    export gnome_schema=org.gnome.desktop.interface
+    gsettings $@
+  '');
+
   nix-colors-contrib = inputs.nix-colors.lib-contrib {inherit pkgs;};
 in {
   imports = [
@@ -94,6 +103,7 @@ in {
       pkgs.noto-fonts-emoji
 
       configure-gtk
+      gsettings-wrapper
       pkgs.glib
       pkgs.libnotify
 
