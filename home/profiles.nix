@@ -61,8 +61,15 @@ in {
                 configure_single = "HDMI-1";
                 primary = true;
                 atomic = true;
+                execute_after = [
+                  "/run/current-system/sw/bin/systemd-run --user --on-active=5 /run/current-system/sw/bin/systemctl --user start xserver-session.target"
+                ];
               }
             ];
+          };
+          systemd.user.services.grobi = {
+            Install.WantedBy = lib.mkForce ["xserver-session.target"];
+            Unit.PartOf = lib.mkForce ["xserver-session.target"];
           };
 
           services.swayidle.timeouts = [
