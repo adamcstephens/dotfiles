@@ -192,6 +192,10 @@ in {
   };
 
   xdg.desktopEntries = {
+    prj = {
+      name = "prj";
+      exec = "/run/current-system/sw/bin/systemd-cat --identifier=prj ${../bin/prj}";
+    };
     reboot = {
       name = "reboot";
       exec = "/run/current-system/sw/bin/systemctl reboot";

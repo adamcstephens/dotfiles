@@ -1,0 +1,7 @@
+#!/usr/bin/env nu
+
+def main [] {
+  let prj = zoxide query --list | rofi -dmenu
+  kitty --single-instance $prj
+  codium -n $prj
+}
