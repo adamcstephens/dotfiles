@@ -1,8 +1,11 @@
 #!/usr/bin/env nu
 
-def main [--linux: bool = true, --mac: bool = true, pr: string, ...systems: string] {
+def main [--linux: bool = true, --mac: bool = true, pr: string, --system: string, ...args: string] {
+  git switch master
+  git pull
+
   let default_systems: list<string> = [] ++ (if $linux {["x86_64-linux", "aarch64-linux"]} else {[]}) ++ (if $mac {["aarch64-darwin", "x86_64-darwin"]} else {[]})
-  (if $systems == [] { $default_systems } else { $systems }) | enumerate | par-each { |system|
+  (if $system == null { $default_systems } else { [$system] }) | enumerate | par-each { |system|
     let sleep_duration = $system.index * 2
     sleep ($"($sleep_duration)sec" | into duration)
     let tempfile = mktemp | split row "\n" | first
@@ -12,6 +15,7 @@ def main [--linux: bool = true, --mac: bool = true, pr: string, ...systems: stri
       --system $system.item
       --build-graph nix
       --build-args="--print-build-logs"
+      $args
       $pr)
 
     let output = open $tempfile
