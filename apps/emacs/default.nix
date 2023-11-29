@@ -83,6 +83,11 @@
       epkgs.treesit-grammars.with-all-grammars
     ]
     ++ (
+      with epkgs.melpaStablePackages; [
+        (org-re-reveal.overrideAttrs (prev: {src = prev.src.overrideAttrs (_: {outputHash = "1szfd2lhnxn9nrk4s0q8nd9knyhv7dmr07jx1g5s4jiwhv29fmzz";});}))
+      ]
+    )
+    ++ (
       with epkgs.melpaPackages; [
         agenix
         all-the-icons
@@ -135,7 +140,6 @@
         org-autolist
         org-download
         org-present
-        org-re-reveal
         org-superstar
         ox-pandoc
         persistent-scratch
