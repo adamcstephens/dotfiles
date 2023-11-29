@@ -25,11 +25,18 @@ def workdir [branch: string, ] {
   $worktree
 }
 
-def main [action: string, --codium (-c), ...args] {
+def main [action: string, --codium (-c), --emacs (-e) ...args] {
   if ($action == "workdir") {
     let worktree = workdir $args.0
-    if ($codium) {
+    if $emacs {
+      em $worktree
+    } else if ($codium) {
       codium -n $worktree
+    }
+
+    if "KITTY_WINDOW_ID" in $env and ("DISPLAY" in $env or "WAYLAND_DISPLAY" in $env) {
+      kitty --single-instance $worktree
+      exec kitty @ close-window -m ("id:" + $env.KITTY_WINDOW_ID)
     }
   } else {
     print ("!! Unsupported command " + $action)
