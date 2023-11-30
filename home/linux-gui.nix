@@ -128,8 +128,12 @@ in {
       pkgs.mpv
       pkgs.remmina
       pkgs.thunderbird
-
       pkgs.webcord
+
+      # bitwarden
+      pkgs.pinentry.curses
+      pkgs.rbw
+      pkgs.rofi-rbw
     ]
     ++ (lib.optionals config.dotfiles.gui.wayland [
       pkgs.grim
@@ -148,8 +152,6 @@ in {
     ])
     ++ (lib.optionals pkgs.stdenv.isx86_64 [
       pkgs.bitwarden
-      pkgs.bitwarden-cli
-      pkgs.bitwarden-menu
     ]);
 
   programs.feh.enable = true;

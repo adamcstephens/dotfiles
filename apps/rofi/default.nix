@@ -5,8 +5,14 @@
 }: {
   programs.rofi = {
     enable = true;
+    package = pkgs.rofi-wayland.override {
+      plugins = [
+        pkgs.rofi-calc
+        pkgs.rofi-emoji
+      ];
+    };
+
     terminal = "${config.programs.kitty.package}/bin/kitty";
-    package = with pkgs; rofi-wayland.override {plugins = [rofi-calc rofi-emoji];};
     font = "${config.dotfiles.gui.font.variable} 11";
     theme = let
       mkLiteral = config.lib.formats.rasi.mkLiteral;
