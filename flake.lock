@@ -284,6 +284,26 @@
         "type": "github"
       }
     },
+    "nh": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1701344951,
+        "narHash": "sha256-F0jd1tbSFreIpxNGtqVCxzUHKdSxjKLl2XFZPiz83zY=",
+        "owner": "viperML",
+        "repo": "nh",
+        "rev": "c192a4a937ed3ab974e14c09b90092b226188281",
+        "type": "github"
+      },
+      "original": {
+        "owner": "viperML",
+        "repo": "nh",
+        "type": "github"
+      }
+    },
     "nil": {
       "inputs": {
         "flake-utils": "flake-utils_3",
@@ -570,6 +590,7 @@
         "emacs-plus": "emacs-plus",
         "flake-parts": "flake-parts",
         "home-manager": "home-manager",
+        "nh": "nh",
         "nil": "nil",
         "nix-colors": "nix-colors",
         "nix-darwin": "nix-darwin",
