@@ -3,6 +3,7 @@
   home-profile-selector,
   just,
   lib,
+  nh,
   nix,
   nix-output-monitor,
   writeScriptBin,
@@ -36,7 +37,7 @@ in
         esac
       ;;
       switch)
-        nh home switch --configuration $HMPROFILE ~/.dotfiles
+        ${lib.getExe nh} home switch --configuration $HMPROFILE ~/.dotfiles
       ;;
       *)
         echo "⚠️ Invalid action $ACTION, ibailout."

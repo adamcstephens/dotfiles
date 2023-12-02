@@ -51,7 +51,7 @@
         ...
       }: {
         packages = import ./packages {
-          inherit pkgs;
+          inherit inputs pkgs;
           homeConfigurations = builtins.attrNames self.homeConfigurations;
         };
       };
