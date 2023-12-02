@@ -14,6 +14,9 @@ bump:
     nix run .#hm-all
     git push
 
+nix-darwin-bootstrap:
+    eval $(nix build .#darwin/$(hostname) --print-out-paths)/sw/bin/darwin-rebuild switch --flake ~/.dotfiles
+
 fish-bootstrap:
     fish ~/.dotfiles/bin/theme.fish
 
