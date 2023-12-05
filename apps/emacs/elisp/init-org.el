@@ -64,6 +64,9 @@
   (setq org-directory "~/org/")
   (setq org-default-notes-file (concat org-directory "notes.org"))
 
+  ;; change scratch to default of org-mode
+  (setq initial-major-mode 'org-mode)
+
   ;; stop hiding links
   (setq org-link-descriptive nil)
 
