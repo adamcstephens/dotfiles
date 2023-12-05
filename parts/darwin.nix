@@ -46,7 +46,7 @@
               "https://attic.junco.dev/default?priority=41"
             ];
             trusted-public-keys = [
-              "default:FmKoVBDn2qD5jBcXlBHJZwzny4x3JmGalCmI6DPbCdg="
+              "default:sMQjcuRXHFczHLa2lqmmNSI7TuFic8hnfJAs59fVpAg="
             ];
             extra-platforms = "x86_64-darwin";
           };
