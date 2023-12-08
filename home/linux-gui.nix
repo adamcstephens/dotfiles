@@ -155,7 +155,7 @@ in {
       pkgs.xlayoutdisplay
     ])
     ++ (lib.optionals pkgs.stdenv.isx86_64 [
-      pkgs.bitwarden
+      # pkgs.bitwarden
     ]);
 
   programs.feh.enable = true;
