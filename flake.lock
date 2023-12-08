@@ -427,11 +427,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1702042003,
+        "lastModified": 1702042753,
         "narHash": "sha256-4trp0opVPJ9EjeKPhm1aUyOXSjPuk6aKrB12moioIxE=",
         "owner": "adamcstephens",
         "repo": "nixpkgs",
-        "rev": "686f4b5cfd131e8c4fd773b329236cf8009b6882",
+        "rev": "4e33d627a78c6ac5202dd18deca2239a1485a638",
         "type": "github"
       },
       "original": {
