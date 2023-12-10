@@ -50,6 +50,7 @@ in {
         path
         "FONTCONFIG_FILE=${config.dotfiles.gui.font.fontconfig}"
       ];
+      Service.RestartSec = "1s";
     };
   };
 }

@@ -62,7 +62,6 @@ in {
                 primary = true;
                 atomic = true;
                 execute_after = [
-                  "/run/current-system/sw/bin/systemd-run --user --on-active=5 /run/current-system/sw/bin/systemctl --user start xserver-session.target"
                 ];
               }
             ];
