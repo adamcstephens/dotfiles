@@ -35,13 +35,7 @@
       src = inputs.nixfmt-rfc;
     }))
 
-    pkgs.difftastic
-    pkgs.fx
-    pkgs.gh
-    pkgs.jq
-    pkgs.just
     pkgs.pwgen
-    pkgs.shfmt
     pkgs.unzip
   ];
 

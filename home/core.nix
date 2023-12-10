@@ -92,10 +92,15 @@
     (pkgs.callPackage ../packages/terminfo {})
 
     pkgs.calc
+    pkgs.difftastic
     pkgs.direnv
     pkgs.doggo
     pkgs.du-dust
+    pkgs.fx
     pkgs.gdu
+    pkgs.gh
+    pkgs.jq
+    pkgs.just
     pkgs.kitty.terminfo
     pkgs.mtr
     pkgs.tio
