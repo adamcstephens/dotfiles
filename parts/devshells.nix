@@ -93,6 +93,9 @@
           pkgs.go-tools
           pkgs.gotools
           pkgs.gnumake
+
+          pkgs.pkg-config
+          pkgs.pcsclite
         ];
 
         shellHook = ''
