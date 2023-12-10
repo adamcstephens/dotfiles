@@ -30,7 +30,7 @@ riverctl map normal Super+Shift Return spawn 'systemd-cat --identifier=kitty kit
 riverctl map normal Super+Shift+Control E spawn 'systemd-cat --identifier=gtk-launch gtk-launch emacsclient'
 riverctl map normal Super D spawn 'systemd-cat --identifier=rofi rofi -show drun'
 riverctl map normal Super+Shift D spawn 'systemd-cat --identifier=rofi rofi -show emoji'
-riverctl map normal Super+Shift+Control D spawn 'systemd-cat --identifier=dark dark toggle'
+riverctl map normal Super+Shift+Control D spawn 'systemd-cat --identifier=prj prj'
 
 riverctl map normal None Print spawn 'systemd-cat --identifier=screenshot screenshot screen'
 # bindsym print exec screenshot.sh window

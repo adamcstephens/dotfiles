@@ -37,6 +37,7 @@ dotKeys =
     ("M-<Return>", swapHybrid' False),
     ("M-d", spawner "rofi -show drun"),
     ("M-S-d", spawner "rofi -show emoji"),
+    ("M-S-C-d", spawner "prj"),
     ("M-S-C-x", io exitSuccess),
     ("M-S-q", kill),
     ("M-C-S-t", spawner "$HOME/.dotfiles/bin/monitor-toggle.sh"),

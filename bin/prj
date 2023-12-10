@@ -1,7 +1,14 @@
 #!/usr/bin/env nu
 
 def main [] {
-  let prj = zoxide query --list | rofi -dmenu
-  kitty --single-instance $prj
-  codium -n $prj
+  let prj = do { zoxide query --list | rofi -dmenu } | complete
+  if $prj.exit_code == 0 and $prj.stdout != "" {
+    let $project = $prj.stdout | str trim
+    echo $"opening project ($project)"
+    kitty --single-instance $project
+    codium -n $project
+  } else {
+    echo "no project found, exiting"
+    exit 1
+  }
 }
