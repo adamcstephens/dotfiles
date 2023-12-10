@@ -12,43 +12,33 @@
 
 (use-package
   apheleia
-  ;; :init (apheleia-global-mode)
-  :config (require 'apheleia-core)
+  :config
   (dolist
-    (formatter-cmd
-      '
-      (
-        (just-fmt
-          .
-          ("just" "--unstable" "--fmt" "--justfile" filepath))
-        (nixfmt . ("alejandra")) (shfmt . ("shfmt" "-i" "2"))))
+    (formatter-cmd '((just-fmt . ("just" "--unstable" "--fmt" "--justfile" filepath))
+                      (nixfmt . ("alejandra"))
+                      (shfmt . ("shfmt" "-i" "2"))
+                      (biome . ("biome" "format" "--stdin-file-path" filepath))))
     (add-to-list #'apheleia-formatters formatter-cmd))
 
   (dolist
     (formatter-mode
-      '((just-mode . just-fmt) (emacs-lisp-mode . lisp-indent)))
+      '((js-jsx-mode . biome)
+         (js-ts-mode . biome)
+         (json-ts-mode . biome)
+         (just-mode . just-fmt)
+         (emacs-lisp-mode . lisp-indent)))
     (add-to-list #'apheleia-mode-alist formatter-mode))
 
   :hook
   ((bash-ts-mode . apheleia-mode)
+    (emacs-lisp-mode . apheleia-mode)
     (fish-mode . apheleia-mode)
+    (js-jsx-mode . apheleia-mode)
     (js-ts-mode . apheleia-mode)
     (json-ts-mode . apheleia-mode)
     (just-mode . apheleia-mode)
     (nix-mode . apheleia-mode)
     (terraform-mode . apheleia-mode)
     (yaml-ts-mode . apheleia-mode)))
-
-(use-package
-  elisp-autofmt
-  :hook
-  ((emacs-lisp-mode . elisp-autofmt-mode)
-    (emacs-lisp-mode . dot/elisp-format-local)
-    (yuck-mode . elisp-autofmt-mode)
-    (yuck-mode . dot/elisp-format-local))
-  :custom
-  (elisp-autofmt-empty-line-max 1)
-  (elisp-autofmt-on-save-p 'always)
-  (elisp-autofmt-style 'fixed))
 
 (provide 'init-format)

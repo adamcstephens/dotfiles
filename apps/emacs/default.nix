@@ -12,6 +12,7 @@
   extraBins =
     [
       pkgs.alejandra
+      pkgs.biome
       pkgs.coreutils
       pkgs.curl
       pkgs.diffutils
@@ -32,7 +33,6 @@
       pkgs.multimarkdown
       pkgs.nodejs
       pkgs.nodePackages.bash-language-server
-      pkgs.nodePackages.prettier
       pkgs.pandoc
       pkgs.python3Packages.weasyprint
     ]);
