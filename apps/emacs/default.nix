@@ -199,8 +199,6 @@
 
       inherit (emacsPackage) meta;
     };
-
-  terminfo = pkgs.callPackage ../../packages/terminfo {};
 in {
   options = {
     dotfiles.apps.emacs = {
@@ -248,9 +246,6 @@ in {
     systemd = lib.mkIf pkgs.stdenv.isLinux {
       user.services.emacs.Service = {
         Environment = [
-          "TERMINFO=${terminfo}/share/terminfo"
-          "TERM=xterm-emacs"
-
           "SSH_AUTH_SOCK=%t/yubikey-agent/yubikey-agent.sock"
         ];
         TimeoutSec = 900;
