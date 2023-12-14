@@ -1,14 +1,26 @@
 #!/usr/bin/env nu
 
-def main [] {
-  let prj = do { zoxide query --list | rofi -dmenu } | complete
-  if $prj.exit_code == 0 and $prj.stdout != "" {
-    let $project = $prj.stdout | str trim
-    echo $"opening project ($project)"
+def main [ path:string ] {
+  let prj = if path != null { $path | path expand } else {
+    let lookup = do { zoxide query --list | rofi -dmenu } | complete
+
+    if $lookup.exit_code != 0 {
+      echo "!! Failed to select project"
+      echo $lookup
+      exit 1
+    }
+
+    $lookup.stdout
+  }
+
+  if $prj != "" {
+    let $project = $prj | str trim
+
+    echo $":: Opening project ($project)"
     kitty --single-instance $project
     codium -n $project
   } else {
-    echo "no project found, exiting"
+    echo $"!! No project found, \"($prj)\", exiting"
     exit 1
   }
 }
