@@ -97,6 +97,9 @@ in {
           export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/yubikey-agent/yubikey-agent.sock
         fi
 
+        # unfortunately these are mutually exclusive
+        /run/current-system/sw/bin/systemctl --user unset-environment WAYLAND_DISPLAY
+
         touchpadid="$(xinput list | rg "SYNA.*Touchpad" | sort | tail -n 1 | awk '{print $6}' | cut -f 2 -d=)"
         xinput disable "$touchpadid"
 

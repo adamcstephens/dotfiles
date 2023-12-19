@@ -6,6 +6,7 @@ import XMonad.Actions.CopyWindow
 import XMonad.Actions.CycleWS
 import XMonad.Actions.UpdatePointer
 import XMonad.Actions.SwapPromote
+import XMonad.Actions.WithAll
 import XMonad.Config.Desktop
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
@@ -40,6 +41,7 @@ dotKeys =
     ("M-S-C-d", spawner "prj"),
     ("M-S-C-x", io exitSuccess),
     ("M-S-q", kill),
+    ("M-C-S-q", killAll),
     ("M-C-S-t", spawner "$HOME/.dotfiles/bin/monitor-toggle.sh"),
     ("M-S-t", spawner "kitty --single-instance"),
     ("M-s", windows W.focusDown),
