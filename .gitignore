@@ -1,9 +1,5 @@
 Brewfile.lock.json
-*.zwc
-applications/userapp*.desktop
-applications/appimagekit*desktop
 /.*.state
-doom-emacs/.local
-.installed
 .secret.envrc
+gcroot/
 results/

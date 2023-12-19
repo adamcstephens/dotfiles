@@ -88,9 +88,6 @@
   '';
 
   home.packages = [
-    # my terms
-    (pkgs.callPackage ../packages/terminfo {})
-
     pkgs.calc
     pkgs.difftastic
     pkgs.direnv

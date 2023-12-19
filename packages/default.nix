@@ -16,5 +16,4 @@
     inherit homeConfigurations;
   };
   revealjs = pkgs.callPackage ../apps/emacs/revealjs.nix {};
-  terminfo = pkgs.callPackage ./terminfo {};
 }
