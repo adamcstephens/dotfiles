@@ -4,10 +4,12 @@
   lib,
   self,
   ...
-}: let
+}:
+let
   cfgs = config.profile-parts.home-manager;
-in {
-  imports = [inputs.profile-parts.flakeModules.home-manager];
+in
+{
+  imports = [ inputs.profile-parts.flakeModules.home-manager ];
 
   profile-parts.default.home-manager = {
     inherit (inputs) home-manager nixpkgs;
@@ -17,21 +19,20 @@ in {
   };
 
   profile-parts.global.home-manager = {
-    modules = {
-      name,
-      profile,
-    }: [
-      ./core.nix
-      {
-        nixpkgs = {
-          overlays = [
-            self.overlays.default
-            self.overlays.upstreams
-          ];
-          config.allowUnfree = true;
-        };
-      }
-    ];
+    modules =
+      { name, profile }:
+      [
+        ./core.nix
+        {
+          nixpkgs = {
+            overlays = [
+              self.overlays.default
+              self.overlays.upstreams
+            ];
+            config.allowUnfree = true;
+          };
+        }
+      ];
 
     specialArgs = {
       inherit inputs;
@@ -46,9 +47,11 @@ in {
         ../apps/goldencheetah
 
         (
-          {pkgs, ...}: {
+          { pkgs, ... }:
+          {
             dotfiles = {
               gui.wayland = true;
+              gui.dpi = 144;
             };
             programs.waybar.settings.main.output = [
               "eDP-1"
@@ -58,7 +61,7 @@ in {
               outputs = [
                 {
                   criteria = "eDP-1";
-                  scale = 1.4;
+                  scale = 1.15;
                   status = "enable";
                 }
               ];
@@ -74,7 +77,8 @@ in {
         ../apps/solaar
 
         (
-          {pkgs, ...}: {
+          { pkgs, ... }:
+          {
             dotfiles.gui = {
               dpi = 148;
               dontSuspend = true;
@@ -90,7 +94,7 @@ in {
               rules = [
                 {
                   name = "desktop";
-                  outputs_connected = ["HDMI-1"];
+                  outputs_connected = [ "HDMI-1" ];
                   configure_single = "HDMI-1";
                   primary = true;
                   atomic = true;
@@ -101,8 +105,8 @@ in {
               ];
             };
             systemd.user.services.grobi = {
-              Install.WantedBy = lib.mkForce ["xserver-session.target"];
-              Unit.PartOf = lib.mkForce ["xserver-session.target"];
+              Install.WantedBy = lib.mkForce [ "xserver-session.target" ];
+              Unit.PartOf = lib.mkForce [ "xserver-session.target" ];
             };
 
             services.swayidle.timeouts = [
@@ -151,7 +155,7 @@ in {
     EMAT-C02G44CPQ05P = {
       username = "astephe9";
       system = "aarch64-darwin";
-      modules = [./core-darwin.nix];
+      modules = [ ./core-darwin.nix ];
     };
 
     silver = {
@@ -174,7 +178,8 @@ in {
         ../apps/goldencheetah
 
         (
-          {pkgs, ...}: {
+          { pkgs, ... }:
+          {
             dotfiles = {
               # apps.river.package =
               #   (pkgs.river.override {
@@ -212,19 +217,17 @@ in {
 
     aarch64-darwin = {
       system = "aarch64-darwin";
-      modules = [./core-darwin.nix];
+      modules = [ ./core-darwin.nix ];
     };
 
     aarch64-linux = {
       system = "aarch64-linux";
     };
 
-    x86_64-linux = {};
+    x86_64-linux = { };
   };
 
   flake.homeModules = builtins.mapAttrs (_: profile: profile.finalModules) cfgs;
-  flake.lib.findHome = hostname: system:
-    if (builtins.elem hostname (builtins.attrNames cfgs))
-    then hostname
-    else system;
+  flake.lib.findHome =
+    hostname: system: if (builtins.elem hostname (builtins.attrNames cfgs)) then hostname else system;
 }

@@ -12,7 +12,7 @@ done
 
 riverctl set-repeat 60 300
 
-touchpad="pointer-1739-52619-SYNA8004:00_06CB:CD8B_Touchpad"
+touchpad="$(riverctl list-inputs | rg Touchpad | head -n 1)"
 
 riverctl input $touchpad events disabled
 riverctl input $touchpad natural-scroll enabled
