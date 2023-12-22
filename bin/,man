@@ -1,6 +1,6 @@
 #!/usr/bin/env nu
 
-def main [package: string, --list: bool, ...args: string] {
+def main [package: string, --list: bool = false, ...args: string] {
   let package = if (($package | find '#') == null) { $"nixpkgs#($package)" } else { $package }
   let package = if ((nix eval $package --apply builtins.attrNames --json | from json | find --regex '^man$' | length) >= 1) {
     $"($package).man"
@@ -25,6 +25,7 @@ def main [package: string, --list: bool, ...args: string] {
     $bin
   }
 
+  nix build --no-link $package
   let path = nix path-info $package | str trim
   $env.MANPATH = $"($path)/share/man"
   print $env.MANPATH
@@ -32,7 +33,6 @@ def main [package: string, --list: bool, ...args: string] {
   if ($list) {
     ls $"($env.MANPATH)/man*/*" | select name | each {|m| $m.name | str replace $"($env.MANPATH)/man" "" | str replace --regex "\\.[0-9]\\..*" "" | split column "/" | rename section page} | flatten
   } else {
-    nix build --no-link $package
     man $page
   }
 }
