@@ -8,9 +8,10 @@ def workdir [branch: string, ] {
   cd $nixpkgs_root
 
   let branch_test = do { git rev-parse --verify $branch } | complete
-  let worktree_args = (if ($branch_test.exit_code != 0) { ["-b", $branch] } else { [$branch] }) ++ ["--checkout", "--lock"]
+  let worktree_args = (if ($branch_test.exit_code != 0) { ["-b", $branch] } else { [$branch] }) ++ ["--checkout", "--lock", "--track", "--guess-remote" "upstream/master"]
 
   if (not ($worktree | path exists)) {
+    git fetch upstream
     git worktree add $worktree $worktree_args
   }
 
@@ -34,7 +35,7 @@ def main [action: string, --codium (-c), --emacs (-e) ...args] {
       codium -n $worktree
     }
 
-    if "KITTY_WINDOW_ID" in $env and ("DISPLAY" in $env or "WAYLAND_DISPLAY" in $env) {
+    if ($env.PWD != ($worktree | path expand)) and ("KITTY_WINDOW_ID" in $env) and ("DISPLAY" in $env or "WAYLAND_DISPLAY" in $env) {
       kitty --single-instance $worktree
       exec kitty @ close-window -m ("id:" + $env.KITTY_WINDOW_ID)
     }
