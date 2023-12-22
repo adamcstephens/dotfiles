@@ -10,6 +10,7 @@ jeanp413.open-remote-ssh
 jnoortheen.nix-ide
 mkhl.direnv
 naumovs.color-highlight
+phoenixframework.phoenix
 redhat.vscode-yaml
 rust-lang.rust-analyzer
 skellock.just

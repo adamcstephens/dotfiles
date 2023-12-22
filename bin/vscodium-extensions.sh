@@ -1,8 +1,8 @@
 #!/usr/bin/env sh
 
 for code in codium code code-insiders; do
-  EXTENSIONS_FILE="$HOME/.dotfiles/apps/vscode/$code-extensions.txt"
-  UNINSTALL_FILE="$HOME/.dotfiles/apps/vscode/$code-extensions-uninstall.txt"
+  EXTENSIONS_FILE="$HOME/.dotfiles/apps/vscodium/$code-extensions.txt"
+  UNINSTALL_FILE="$HOME/.dotfiles/apps/vscodium/$code-extensions-uninstall.txt"
 
   if command -v $code >/dev/null 2>&1; then
     case "$(which $code)" in

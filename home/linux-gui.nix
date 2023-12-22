@@ -4,26 +4,34 @@
   lib,
   pkgs,
   ...
-}: let
-  configure-gtk = pkgs.writeScriptBin "configure-gtk" (let
-    schema = pkgs.gsettings-desktop-schemas;
-    datadir = "${schema}/share/gsettings-schemas/${schema.name}";
-  in ''
-    export XDG_DATA_DIRS=${datadir}:$XDG_DATA_DIRS
-    gnome_schema=org.gnome.desktop.interface
-  '');
+}:
+let
+  configure-gtk = pkgs.writeScriptBin "configure-gtk" (
+    let
+      schema = pkgs.gsettings-desktop-schemas;
+      datadir = "${schema}/share/gsettings-schemas/${schema.name}";
+    in
+    ''
+      export XDG_DATA_DIRS=${datadir}:$XDG_DATA_DIRS
+      gnome_schema=org.gnome.desktop.interface
+    ''
+  );
 
-  gsettings-wrapper = pkgs.writeScriptBin "gsettings-wrapper" (let
-    schema = pkgs.gsettings-desktop-schemas;
-    datadir = "${schema}/share/gsettings-schemas/${schema.name}";
-  in ''
-    export XDG_DATA_DIRS=${datadir}:$XDG_DATA_DIRS
-    export gnome_schema=org.gnome.desktop.interface
-    gsettings $@
-  '');
+  gsettings-wrapper = pkgs.writeScriptBin "gsettings-wrapper" (
+    let
+      schema = pkgs.gsettings-desktop-schemas;
+      datadir = "${schema}/share/gsettings-schemas/${schema.name}";
+    in
+    ''
+      export XDG_DATA_DIRS=${datadir}:$XDG_DATA_DIRS
+      export gnome_schema=org.gnome.desktop.interface
+      gsettings $@
+    ''
+  );
 
-  nix-colors-contrib = inputs.nix-colors.lib-contrib {inherit pkgs;};
-in {
+  nix-colors-contrib = inputs.nix-colors.lib-contrib { inherit pkgs; };
+in
+{
   imports = [
     ./core-gui.nix
 
@@ -49,7 +57,6 @@ in {
     ../apps/kitty
     ../apps/mimeapps
     ../apps/ssh
-    ../apps/vscode
     ../apps/wezterm
 
     # dev
@@ -76,9 +83,7 @@ in {
 
     theme = {
       name = config.colorScheme.slug;
-      package = nix-colors-contrib.gtkThemeFromScheme {
-        scheme = config.colorScheme;
-      };
+      package = nix-colors-contrib.gtkThemeFromScheme { scheme = config.colorScheme; };
     };
   };
 
@@ -154,9 +159,11 @@ in {
       pkgs.xclip
       pkgs.xlayoutdisplay
     ])
-    ++ (lib.optionals pkgs.stdenv.isx86_64 [
-      # pkgs.bitwarden
-    ]);
+    ++ (lib.optionals pkgs.stdenv.isx86_64
+      [
+        # pkgs.bitwarden
+      ]
+    );
 
   programs.feh.enable = true;
 
@@ -165,14 +172,14 @@ in {
   systemd.user.startServices = "sd-switch";
 
   systemd.user.services.polkit-gnome-authentication-agent-1 = {
-    Install.WantedBy = ["graphical-session.target"];
-    Unit.PartOf = ["graphical-session.target"];
+    Install.WantedBy = [ "graphical-session.target" ];
+    Unit.PartOf = [ "graphical-session.target" ];
     Service.ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
   };
 
   systemd.user.services.blueberry-tray = {
-    Install.WantedBy = ["graphical-session.target"];
-    Unit.PartOf = ["graphical-session.target"];
+    Install.WantedBy = [ "graphical-session.target" ];
+    Unit.PartOf = [ "graphical-session.target" ];
     Service.ExecStart = "${pkgs.blueberry}/bin/blueberry-tray";
     Service.Type = "forking";
   };
@@ -180,20 +187,20 @@ in {
   systemd.user.targets.wayland-session = {
     Unit = {
       Description = "wayland compositor session";
-      Documentation = ["man:systemd.special(7)"];
-      BindsTo = ["graphical-session.target"];
-      Wants = ["graphical-session-pre.target"];
-      After = ["graphical-session-pre.target"];
+      Documentation = [ "man:systemd.special(7)" ];
+      BindsTo = [ "graphical-session.target" ];
+      Wants = [ "graphical-session-pre.target" ];
+      After = [ "graphical-session-pre.target" ];
     };
   };
 
   systemd.user.targets.xserver-session = {
     Unit = {
       Description = "xserver session";
-      Documentation = ["man:systemd.special(7)"];
-      BindsTo = ["graphical-session.target"];
-      Wants = ["graphical-session-pre.target"];
-      After = ["graphical-session-pre.target"];
+      Documentation = [ "man:systemd.special(7)" ];
+      BindsTo = [ "graphical-session.target" ];
+      Wants = [ "graphical-session-pre.target" ];
+      After = [ "graphical-session-pre.target" ];
     };
   };
 

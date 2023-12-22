@@ -254,8 +254,8 @@
   "zenMode.hideLineNumbers": false,
   "workbench.editor.empty.hint": "hidden",
   "editor.wordWrap": "on",
-  "workbench.colorTheme": "GitHub Dark Colorblind (Beta)",
   "[jsonc]": {
     "editor.defaultFormatter": "vscode.json-language-features"
-  }
+  },
+  "workbench.colorTheme": "GitHub Dark Colorblind (Beta)"
 }
