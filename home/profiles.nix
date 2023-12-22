@@ -36,6 +36,20 @@ in {
   };
 
   profile-parts.home-manager = {
+    ark = {
+      modules = [
+        ./linux-gui.nix
+        ../apps/goldencheetah
+
+        ({pkgs, ...}: {
+          dotfiles = {
+            gui.wayland = true;
+          };
+          programs.waybar.settings.main.output = ["eDP-1" "DP-2"];
+        })
+      ];
+    };
+
     blank = {
       modules = [
         ./linux-gui.nix
