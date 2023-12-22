@@ -8,7 +8,6 @@ GitHub.github-vscode-theme
 golang.go
 jeanp413.open-remote-ssh
 jnoortheen.nix-ide
-kamadorueda.alejandra
 mkhl.direnv
 naumovs.color-highlight
 redhat.vscode-yaml

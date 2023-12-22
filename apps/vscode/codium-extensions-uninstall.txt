@@ -4,3 +4,4 @@ JakeBecker.elixir-ls
 justusadam.language-haskell
 koog1000.fossil
 lexical-lsp.lexical
+kamadorueda.alejandra

@@ -1,12 +1,12 @@
 {
-  "[nix]": {
-    "editor.formatOnSave": false
-  },
-  "nix.serverSettings": {
-    "nil": {
-      "formatting": {
-        "command": ["alejandra"]
-      }
-    }
-  }
+	"[nix]": {
+		"editor.formatOnSave": false
+	},
+	"nix.serverSettings": {
+		"nil": {
+			"formatting": {
+				"command": ["nixfmt"]
+			}
+		}
+	}
 }

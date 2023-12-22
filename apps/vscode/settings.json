@@ -1,10 +1,4 @@
 {
-  "[cabal]": {
-    "editor.defaultFormatter": "berberman.vscode-cabal-fmt"
-  },
-  "[clojure]": {
-    "editor.defaultFormatter": "betterthantomorrow.calva"
-  },
   "[elixir]": {
     "editor.defaultFormatter": "elixir-tools.elixir-tools"
   },
@@ -23,15 +17,9 @@
   "[ignore]": {
     "editor.defaultFormatter": "foxundermoon.shell-format"
   },
-  "[kmonad]": {
-    "editor.defaultFormatter": "entibo.vscode-kmonad-format"
-  },
   "[markdown]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.wordBasedSuggestionsMode": "currentDocument"
-  },
-  "[nim]": {
-    "editor.defaultFormatter": "nimsaem.nimvscode"
   },
   "[nix]": {
     "editor.defaultFormatter": "jnoortheen.nix-ide"
@@ -39,8 +27,8 @@
   "[phoenix-heex]": {
     "editor.defaultFormatter": "elixir-tools.elixir-tools"
   },
-  "[powershell]": {
-    "editor.defaultFormatter": "ms-vscode.powershell"
+  "[properties]": {
+    "editor.formatOnSave": false
   },
   "[python]": {
     "editor.defaultFormatter": "ms-python.python"
@@ -98,7 +86,6 @@
   "editor.bracketPairColorization.enabled": true,
   "editor.cursorBlinking": "phase",
   "editor.cursorSurroundingLines": 10,
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.fontFamily": "JetBrains Mono, Noto Color Emoji, Symbols Nerd Font Mono",
   "editor.fontLigatures": true,
   "editor.formatOnSave": true,
@@ -108,7 +95,9 @@
   "editor.inlayHints.fontFamily": "default",
   "editor.inlineSuggest.enabled": true,
   "editor.renderWhitespace": "selection",
-  "editor.rulers": [120],
+  "editor.rulers": [
+    120
+  ],
   "editor.stickyScroll.enabled": true,
   "editor.suggest.preview": true,
   "editor.tabSize": 2,
@@ -147,7 +136,9 @@
   "gitlens.showWelcomeOnInstall": false,
   "gitlens.showWhatsNewAfterUpgrades": false,
   "gitlens.views.repositories.autoRefresh": false,
-  "go.lintFlags": ["--fast"],
+  "go.lintFlags": [
+    "--fast"
+  ],
   "go.lintTool": "golangci-lint",
   "go.toolsManagement.autoUpdate": true,
   "haskell.manageHLS": "PATH",
@@ -158,12 +149,14 @@
   "nix.serverSettings": {
     "nil": {
       "formatting": {
-        "command": ["alejandra"]
+        "command": [
+          "nixfmt"
+        ]
       }
     },
     "nixd": {
       "formatting": {
-        "command": "alejandra"
+        "command": "nixfmt"
       }
     }
   },
@@ -183,7 +176,6 @@
     "redhat.vscode-yaml",
     "timonwong.shellcheck",
     // "lexical-lsp.lexical",
-    "kamadorueda.alejandra",
     "skellock.just",
     "golf1052.base16-generator"
   ],
@@ -200,7 +192,10 @@
   "search.useParentIgnoreFiles": true,
   "security.workspace.trust.untrustedFiles": "open",
   "shellcheck.disableVersionCheck": true,
-  "shellcheck.exclude": ["SC1117", "SC2039"],
+  "shellcheck.exclude": [
+    "SC1117",
+    "SC2039"
+  ],
   "telemetry.telemetryLevel": "off",
   "terminal.external.linuxExec": "kitty",
   "terminal.external.osxExec": "Kitty.app",
@@ -248,16 +243,19 @@
   "workbench.preferredLightColorTheme": "GitHub Light Colorblind (Beta)",
   "workbench.startupEditor": "newUntitledFile",
   "workbench.tree.renderIndentGuides": "always",
-  "yaml.customTags": ["!encrypted/pkcs1-oaep scalar", "!vault scalar"],
+  "yaml.customTags": [
+    "!encrypted/pkcs1-oaep scalar",
+    "!vault scalar"
+  ],
   "yaml.schemas": {
     "https://json.schemastore.org/taskfile.json": "taskfiles/*"
   },
   "zenMode.fullScreen": false,
   "zenMode.hideLineNumbers": false,
   "workbench.editor.empty.hint": "hidden",
-  "[properties]": {
-    "editor.defaultFormatter": "foxundermoon.shell-format"
-  },
   "editor.wordWrap": "on",
-  "workbench.colorTheme": "GitHub Dark Colorblind (Beta)"
+  "workbench.colorTheme": "GitHub Dark Colorblind (Beta)",
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  }
 }

@@ -5,7 +5,7 @@
   ...
 }: {
   home.activation.fix-mimeapps = lib.hm.dag.entryBefore ["checkLinkTargets"] ''
-    export PATH="$PATH:${lib.makeBinPath [pkgs.alejandra pkgs.gnused pkgs.ripgrep]}"
+    export PATH="$PATH:${lib.makeBinPath [pkgs.gnused pkgs.ripgrep]}"
     export HOME="${config.home.homeDirectory}"
 
     ${./switch-cleanup.sh}

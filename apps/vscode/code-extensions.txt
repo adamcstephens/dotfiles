@@ -15,7 +15,6 @@ golang.go
 JakeBecker.elixir-ls
 jnoortheen.nix-ide
 justusadam.language-haskell
-kamadorueda.alejandra
 mkhl.direnv
 ms-python.python
 ms-python.vscode-pylance

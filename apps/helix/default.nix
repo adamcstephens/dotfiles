@@ -13,7 +13,7 @@
           name = "nix";
           auto-format = true;
           formatter = {
-            command = "alejandra";
+            command = "nixfmt";
             args = [];
           };
         }

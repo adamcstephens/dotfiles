@@ -4,14 +4,21 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.dotfiles.apps.emacs;
 
-  aspell = pkgs.aspellWithDicts (dicts: with dicts; [en en-computers en-science]);
+  aspell = pkgs.aspellWithDicts (
+    dicts:
+    with dicts; [
+      en
+      en-computers
+      en-science
+    ]
+  );
 
   extraBins =
     [
-      pkgs.alejandra
       pkgs.biome
       pkgs.coreutils
       pkgs.curl
@@ -40,7 +47,7 @@
   emacsPatched = cfg.package.overrideAttrs (
     prev: {
       patches =
-        [./silence-pgtk-xorg-warning.patch]
+        [ ./silence-pgtk-xorg-warning.patch ]
         ++ (lib.optionals pkgs.stdenv.isDarwin [
           "${inputs.emacs-plus}/patches/emacs-28/fix-window-role.patch"
           "${inputs.emacs-plus}/patches/emacs-28/no-frame-refocus-cocoa.patch"
@@ -52,15 +59,14 @@
     }
   );
 
-  selectedPackage =
-    if cfg.patchForGui
-    then emacsPatched
-    else cfg.package;
+  selectedPackage = if cfg.patchForGui then emacsPatched else cfg.package;
 
-  revealjs = pkgs.callPackage ./revealjs.nix {};
+  revealjs = pkgs.callPackage ./revealjs.nix { };
 
   env = ''
-    (setq exec-path (append exec-path '( ${lib.concatMapStringsSep " " (x: ''"${x}/bin"'') extraBins} )))
+    (setq exec-path (append exec-path '( ${
+      lib.concatMapStringsSep " " (x: ''"${x}/bin"'') extraBins
+    } )))
 
     (defun dot/font-mono ()
       "${config.dotfiles.gui.font.mono}")
@@ -73,7 +79,8 @@
     (provide 'dotemacs-nix-env)
   '';
 
-  emacsPackages = epkgs:
+  emacsPackages =
+    epkgs:
     [
       (epkgs.trivialBuild {
         pname = "dotemacs-nix-env";
@@ -84,7 +91,13 @@
     ]
     ++ (
       with epkgs.melpaStablePackages; [
-        (org-re-reveal.overrideAttrs (prev: {src = prev.src.overrideAttrs (_: {outputHash = "1szfd2lhnxn9nrk4s0q8nd9knyhv7dmr07jx1g5s4jiwhv29fmzz";});}))
+        (org-re-reveal.overrideAttrs (
+          prev: {
+            src = prev.src.overrideAttrs (
+              _: { outputHash = "1szfd2lhnxn9nrk4s0q8nd9knyhv7dmr07jx1g5s4jiwhv29fmzz"; }
+            );
+          }
+        ))
       ]
     )
     ++ (
@@ -172,26 +185,24 @@
         vundo
       ]
     )
-    ++ (with epkgs.nongnuPackages; [eat]);
+    ++ (with epkgs.nongnuPackages; [ eat ]);
 
   emacsPackage = (pkgs.emacsPackagesFor selectedPackage).emacsWithPackages emacsPackages;
 
-  package = let
-    path = "${lib.makeBinPath extraBins}:${config.home.homeDirectory}/.dotfiles/bin";
-    args = "${lib.optionalString cfg.full "--set FONTCONFIG_FILE ${config.dotfiles.gui.font.fontconfig}"} --prefix PATH : ${path}";
-  in
+  package =
+    let
+      path = "${lib.makeBinPath extraBins}:${config.home.homeDirectory}/.dotfiles/bin";
+      args = "${lib.optionalString cfg.full "--set FONTCONFIG_FILE ${config.dotfiles.gui.font.fontconfig}"} --prefix PATH : ${path}";
+    in
     pkgs.symlinkJoin {
       name = "dotemacs";
 
-      paths = [
-        emacsPackage
-      ];
+      paths = [ emacsPackage ];
 
-      nativeBuildInputs = [pkgs.makeWrapper];
+      nativeBuildInputs = [ pkgs.makeWrapper ];
 
       postBuild = ''
-        wrapProgram "$out/bin/emacs" --set TERM xterm-emacs ${args}
-        wrapProgram "$out/bin/emacsclient" --set TERM xterm-emacs
+        wrapProgram "$out/bin/emacs" ${args}
         ${lib.optionalString pkgs.stdenv.isDarwin ''
           wrapProgram "$out/Applications/Emacs.app/Contents/MacOS/Emacs" ${args}
         ''}
@@ -199,7 +210,8 @@
 
       inherit (emacsPackage) meta;
     };
-in {
+in
+{
   options = {
     dotfiles.apps.emacs = {
       package = lib.mkOption {
@@ -213,23 +225,22 @@ in {
     };
   };
   config = {
-    home.packages = [
-      package
-    ];
+    home.packages = [ package ];
 
     xdg.configFile =
-      if config.dotfiles.nixosManaged
-      then {
-        "emacs/elisp".source = ./elisp;
-        "emacs/snippets".source = ./snippets;
-        "emacs/custom.el".source = ./custom.el;
-        "emacs/early-init.el".source = ./early-init.el;
-        "emacs/init.el".source = ./init.el;
-        "emacs/straight/versions/default.el".source = ./straight/versions/default.el;
-      }
-      else {
-        "emacs".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/emacs";
-      };
+      if config.dotfiles.nixosManaged then
+        {
+          "emacs/elisp".source = ./elisp;
+          "emacs/snippets".source = ./snippets;
+          "emacs/custom.el".source = ./custom.el;
+          "emacs/early-init.el".source = ./early-init.el;
+          "emacs/init.el".source = ./init.el;
+          "emacs/straight/versions/default.el".source = ./straight/versions/default.el;
+        }
+      else
+        {
+          "emacs".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/emacs";
+        };
 
     services = lib.mkIf pkgs.stdenv.isLinux {
       emacs = {
@@ -245,9 +256,7 @@ in {
 
     systemd = lib.mkIf pkgs.stdenv.isLinux {
       user.services.emacs.Service = {
-        Environment = [
-          "SSH_AUTH_SOCK=%t/yubikey-agent/yubikey-agent.sock"
-        ];
+        Environment = [ "SSH_AUTH_SOCK=%t/yubikey-agent/yubikey-agent.sock" ];
         TimeoutSec = 900;
       };
     };
@@ -266,9 +275,7 @@ in {
           RunAtLoad = true;
           StandardErrorPath = "${config.home.homeDirectory}/.config/emacs/launchd.log";
           StandardOutPath = "${config.home.homeDirectory}/.config/emacs/launchd.log";
-          WatchPaths = [
-            "${config.home.homeDirectory}/.nix-profile/bin/emacs"
-          ];
+          WatchPaths = [ "${config.home.homeDirectory}/.nix-profile/bin/emacs" ];
         };
       };
     };

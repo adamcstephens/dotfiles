@@ -25,7 +25,6 @@
     pkgs.rage
 
     # nix
-    pkgs.alejandra
     inputs.nil.packages.${pkgs.system}.nil
     inputs.nix-index-database.packages.${pkgs.system}.comma-with-db
     pkgs.nix-output-monitor

@@ -17,22 +17,22 @@
   :commands (eglot eglot-ensure)
   :hook
   ((bash-ts-mode . eglot-ensure)
-    (clojure-mode . dot/eglot-mode-setup)
-    (elixir-ts-mode . dot/eglot-mode-setup)
-    (go-ts-mode . dot/eglot-mode-setup)
-    (go-ts-mode . (lambda () (add-hook 'before-save-hook 'dot/eglot-goimports)))
-    (heex-ts-mode . dot/eglot-mode-setup)
-    (haskell-mode . dot/eglot-mode-setup)
-    (nim-mode . eglot-ensure)
-    (nix-mode . eglot-ensure)
-    (nix-ts-mode . dot/eglot-mode-setup)
-    (tsx-ts-mode . dot/eglot-mode-setup)
-    (typescript-mode . dot/eglot-mode-setup)
-    (typescript-ts-mode . dot/eglot-mode-setup))
+   (clojure-mode . dot/eglot-mode-setup)
+   (elixir-ts-mode . dot/eglot-mode-setup)
+   (go-ts-mode . dot/eglot-mode-setup)
+   (go-ts-mode . (lambda () (add-hook 'before-save-hook 'dot/eglot-goimports)))
+   (heex-ts-mode . dot/eglot-mode-setup)
+   (haskell-mode . dot/eglot-mode-setup)
+   (nim-mode . eglot-ensure)
+   (nix-mode . eglot-ensure)
+   (nix-ts-mode . dot/eglot-mode-setup)
+   (tsx-ts-mode . dot/eglot-mode-setup)
+   (typescript-mode . dot/eglot-mode-setup)
+   (typescript-ts-mode . dot/eglot-mode-setup))
   :bind
   (("C-." . eglot-code-actions))
   (:map eglot-diagnostics-map
-    ("<mouse-3>" . eglot-code-actions-at-mouse))
+	("<mouse-3>" . eglot-code-actions-at-mouse))
   :config
   (add-to-list 'eglot-server-programs '((elixir-ts-mode) "elixir-ls"))
   (add-to-list 'eglot-server-programs '((heex-ts-mode) "elixir-ls"))
@@ -41,8 +41,8 @@
   (add-to-list 'eglot-server-programs '((nix-ts-mode) "nil"))
   (add-to-list 'eglot-server-programs '((js-ts-mode tsx-ts-mode typescript-ts-mode) . dot/ecma-server-program))
   (setq-default eglot-workspace-configuration '((haskell (formattingProvider . "ormolu"))
-                                                 (nil (formatting (command . ["alejandra"])))
-                                                 (nixd (formatting (command . "alejandra"))))))
+                                                (nil (formatting (command . ["nixfmt"])))
+                                                (nixd (formatting (command . "nixfmt"))))))
 
 (use-package
   treesit-auto
