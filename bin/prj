@@ -1,7 +1,7 @@
 #!/usr/bin/env nu
 
-def main [ path:string ] {
-  let prj = if path != null { $path | path expand } else {
+def main [ project_path: string = "" ] {
+  let prj = if $project_path != "" { $project_path | path expand } else {
     let lookup = do { zoxide query --list | rofi -dmenu } | complete
 
     if $lookup.exit_code != 0 {
