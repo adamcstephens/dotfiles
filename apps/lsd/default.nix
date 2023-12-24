@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   xdg.configFile."lsd/colors.yaml".source = ./themes/terminal.yaml;
 
   programs.lsd = {

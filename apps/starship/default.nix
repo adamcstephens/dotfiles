@@ -1,17 +1,12 @@
+{ lib, pkgs, ... }:
 {
-  lib,
-  pkgs,
-  ...
-}: {
   programs.starship = {
     enable = true;
 
     settings = {
       aws.disabled = true;
 
-      battery = lib.mkIf pkgs.stdenv.isDarwin {
-        disabled = true;
-      };
+      battery = lib.mkIf pkgs.stdenv.isDarwin { disabled = true; };
 
       character = {
         format = "[─](fg:244)$symbol ";
@@ -32,7 +27,7 @@
       };
 
       nix_shell = {
-        format = "[\($name\)]($style) ";
+        format = "[($name)]($style) ";
       };
 
       nodejs.disabled = true;

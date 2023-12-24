@@ -1,7 +1,6 @@
-{config, ...}: {
-  imports = [
-    ./hm-module.nix
-  ];
+{ config, ... }:
+{
+  imports = [ ./hm-module.nix ];
 
   services.xob = {
     enable = true;

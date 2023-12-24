@@ -4,7 +4,8 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   colors = config.colorScheme.colors;
 
   wallpaper = inputs.nix-wallpaper.packages.${pkgs.system}.default.override {
@@ -31,14 +32,15 @@
 
     ${pkgs.xsecurelock}/bin/xsecurelock
   '';
-in {
+in
+{
   config = lib.mkIf config.dotfiles.gui.xorg.enable {
     home.packages = [
       pkgs.maim
       pkgs.xdotool
     ];
 
-    services.screen-locker = lib.mkIf (! config.dotfiles.gui.insecure) {
+    services.screen-locker = lib.mkIf (!config.dotfiles.gui.insecure) {
       enable = true;
       inactiveInterval = 5;
       lockCmd = xsecurelock.outPath;
@@ -53,25 +55,27 @@ in {
     systemd.user.services.xssproxy = {
       Unit = {
         Description = "forward freedesktop.org Idle Inhibition Service calls to Xss";
-        After = ["graphical-session-pre.target"];
-        PartOf = ["graphical-session.target"];
+        After = [ "graphical-session-pre.target" ];
+        PartOf = [ "graphical-session.target" ];
       };
 
-      Install = {WantedBy = ["graphical-session.target"];};
+      Install = {
+        WantedBy = [ "graphical-session.target" ];
+      };
 
       Service = {
         ExecStart = "${pkgs.xssproxy}/bin/xssproxy";
       };
     };
 
-    systemd.user.services.xautolock-session = lib.mkIf (! config.dotfiles.gui.insecure) {
-      Install.WantedBy = lib.mkForce ["xserver-session.target"];
-      Unit.PartOf = lib.mkForce ["xserver-session.target"];
+    systemd.user.services.xautolock-session = lib.mkIf (!config.dotfiles.gui.insecure) {
+      Install.WantedBy = lib.mkForce [ "xserver-session.target" ];
+      Unit.PartOf = lib.mkForce [ "xserver-session.target" ];
     };
 
-    systemd.user.services.xss-lock = lib.mkIf (! config.dotfiles.gui.insecure) {
-      Install.WantedBy = lib.mkForce ["xserver-session.target"];
-      Unit.PartOf = lib.mkForce ["xserver-session.target"];
+    systemd.user.services.xss-lock = lib.mkIf (!config.dotfiles.gui.insecure) {
+      Install.WantedBy = lib.mkForce [ "xserver-session.target" ];
+      Unit.PartOf = lib.mkForce [ "xserver-session.target" ];
     };
 
     xdg.desktopEntries = {

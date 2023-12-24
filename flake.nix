@@ -29,12 +29,9 @@
     sandbox.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = {
-    self,
-    flake-parts,
-    ...
-  } @ inputs:
-    flake-parts.lib.mkFlake {inherit inputs;} {
+  outputs =
+    { self, flake-parts, ... }@inputs:
+    flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [
         ./home/profiles.nix
 
@@ -43,17 +40,19 @@
         ./parts/overlays.nix
       ];
 
-      systems = ["x86_64-linux" "aarch64-darwin" "aarch64-linux"];
+      systems = [
+        "x86_64-linux"
+        "aarch64-darwin"
+        "aarch64-linux"
+      ];
 
-      perSystem = {
-        pkgs,
-        system,
-        ...
-      }: {
-        packages = import ./packages {
-          inherit inputs pkgs;
-          homeConfigurations = builtins.attrNames self.homeConfigurations;
+      perSystem =
+        { pkgs, system, ... }:
+        {
+          packages = import ./packages {
+            inherit inputs pkgs;
+            homeConfigurations = builtins.attrNames self.homeConfigurations;
+          };
         };
-      };
     };
 }

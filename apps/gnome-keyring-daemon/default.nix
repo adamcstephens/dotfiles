@@ -1,9 +1,10 @@
-{...}: {
+{ ... }:
+{
   systemd.user.services.gnome-keyring-daemon = {
     Unit = {
       Description = "gnome-keyring-daemon";
-      Documentation = ["man:gnome-keyring-daemon(1)"];
-      PartOf = ["default.target"];
+      Documentation = [ "man:gnome-keyring-daemon(1)" ];
+      PartOf = [ "default.target" ];
     };
 
     Service = {
@@ -15,7 +16,7 @@
     };
 
     Install = {
-      WantedBy = ["default.target"];
+      WantedBy = [ "default.target" ];
     };
   };
 }

@@ -10,7 +10,8 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   config = lib.mkIf config.dotfiles.gui.wayland {
     services.kanshi = {
       enable = true;
@@ -62,7 +63,9 @@
 
     systemd.user.services.kanshi = {
       Service = {
-        Environment = ["PATH=${pkgs.river}/bin:${pkgs.bash}/bin:${pkgs.gnugrep}/bin:${pkgs.coreutils}/bin:$PATH"];
+        Environment = [
+          "PATH=${pkgs.river}/bin:${pkgs.bash}/bin:${pkgs.gnugrep}/bin:${pkgs.coreutils}/bin:$PATH"
+        ];
         RestartSec = "5s";
       };
     };

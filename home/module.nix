@@ -3,7 +3,8 @@
   inputs,
   pkgs,
   ...
-}: {
+}:
+{
   options.dotfiles = {
     nixosManaged = lib.mkEnableOption "When nixos managed dotfiles is in the read-only store";
 
@@ -20,7 +21,10 @@
         enable = lib.mkEnableOption (lib.mdDoc "Enable xorg resources");
 
         wm = lib.mkOption {
-          type = lib.types.enum ["leftwm" "xmonad"];
+          type = lib.types.enum [
+            "leftwm"
+            "xmonad"
+          ];
           description = "which xorg window manager to enable";
           default = "xmonad";
         };
@@ -42,7 +46,7 @@
           default = pkgs.makeFontsConf {
             fontDirectories =
               [
-                (pkgs.nerdfonts.override {fonts = ["NerdFontsSymbolsOnly"];})
+                (pkgs.nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" ]; })
                 pkgs.emacs-all-the-icons-fonts
                 pkgs.font-awesome
                 pkgs.ibm-plex
@@ -53,9 +57,7 @@
                 pkgs.noto-fonts-cjk
                 pkgs.noto-fonts-emoji
               ]
-              ++ lib.optionals pkgs.stdenv.isDarwin [
-                "/Library/Fonts"
-              ];
+              ++ lib.optionals pkgs.stdenv.isDarwin [ "/Library/Fonts" ];
           };
         };
       };

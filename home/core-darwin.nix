@@ -4,7 +4,8 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   imports = [
     ./core-gui.nix
 
@@ -32,7 +33,7 @@
     inputs.sandbox.packages.${pkgs.system}.firefox-profile-switcher-connector
   ];
 
-  home.activation.enable-ssh-agent = lib.hm.dag.entryAfter ["writeBoundary"] ''
+  home.activation.enable-ssh-agent = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     export PATH=${config.home.path}/bin:${config.home.path}/sbin:$PATH
 
     launchctl start com.openssh.ssh-agent || true

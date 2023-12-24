@@ -4,7 +4,8 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   imports = [
     ./module.nix
 
@@ -79,7 +80,7 @@
 
   nix.registry.nixpkgs.flake = lib.mkDefault inputs.nixpkgs;
 
-  home.activation.directories = lib.hm.dag.entryBefore ["checkLinkTargets"] ''
+  home.activation.directories = lib.hm.dag.entryBefore [ "checkLinkTargets" ] ''
     for dir in git projects tmp; do
       if [ ! -d $HOME/$dir ]; then
         mkdir -vp $HOME/$dir
@@ -120,7 +121,10 @@
     direnv.nix-direnv.enable = true;
     zoxide = {
       enable = true;
-      options = ["--cmd" "j"];
+      options = [
+        "--cmd"
+        "j"
+      ];
     };
   };
 

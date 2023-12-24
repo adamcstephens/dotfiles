@@ -3,15 +3,12 @@
   lib,
   pkgs,
   ...
-}: {
-  imports = [
-    ../xorg
-  ];
+}:
+{
+  imports = [ ../xorg ];
 
   config = lib.mkIf (config.dotfiles.gui.xorg.enable && config.dotfiles.gui.xorg.wm == "leftwm") {
-    home.packages = [
-      pkgs.leftwm
-    ];
+    home.packages = [ pkgs.leftwm ];
 
     xdg.configFile."leftwm/config.ron".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/leftwm/config.ron";
 

@@ -3,7 +3,8 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.dotfiles.apps.river;
 
   dependencies = [
@@ -16,7 +17,8 @@
     pkgs.river-bnf
     pkgs.wl-mirror # and wl-present
   ];
-in {
+in
+{
   options = {
     dotfiles.apps.river.package = lib.mkOption {
       type = lib.types.package;
@@ -25,9 +27,7 @@ in {
   };
 
   config = lib.mkIf config.dotfiles.gui.wayland {
-    home.packages = [
-      cfg.package
-    ];
+    home.packages = [ cfg.package ];
 
     xdg.configFile."river/init" = {
       executable = true;

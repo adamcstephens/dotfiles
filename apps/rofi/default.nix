@@ -1,8 +1,5 @@
+{ config, pkgs, ... }:
 {
-  config,
-  pkgs,
-  ...
-}: {
   programs.rofi = {
     enable = true;
     package = pkgs.rofi-wayland.override {
@@ -14,9 +11,10 @@
 
     terminal = "${config.programs.kitty.package}/bin/kitty";
     font = "${config.dotfiles.gui.font.variable} 11";
-    theme = let
-      mkLiteral = config.lib.formats.rasi.mkLiteral;
-    in
+    theme =
+      let
+        mkLiteral = config.lib.formats.rasi.mkLiteral;
+      in
       with config.colorScheme.colors; {
         "*" = {
           bg0 = mkLiteral "#${base00}";
@@ -88,7 +86,7 @@
         };
 
         "element selected" = {
-          text-color = mkLiteral "@bg0"; #1
+          text-color = mkLiteral "@bg0"; # 1
           background-color = mkLiteral "@fg1";
         };
 

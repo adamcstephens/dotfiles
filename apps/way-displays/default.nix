@@ -1,12 +1,11 @@
-{pkgs, ...}: {
-  home.packages = [
-    pkgs.way-displays
-  ];
+{ pkgs, ... }:
+{
+  home.packages = [ pkgs.way-displays ];
 
   systemd.user.services.way-displays = {
     Unit = {
       Description = "way-displays";
-      Documentation = ["man:way-displays(1)"];
+      Documentation = [ "man:way-displays(1)" ];
     };
 
     Service = {
@@ -14,7 +13,7 @@
     };
 
     Install = {
-      WantedBy = ["graphical-session.target"];
+      WantedBy = [ "graphical-session.target" ];
     };
   };
 }

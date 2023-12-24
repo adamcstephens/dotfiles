@@ -1,10 +1,8 @@
-{
-  pkgs,
-  inputs,
-  ...
-}: let
+{ pkgs, inputs, ... }:
+let
   package = inputs.sandbox.packages.${pkgs.system}.xautocfg;
-in {
+in
+{
   xdg.configFile."xautocfg.cfg".text = ''
     [keyboard]
     delay = 250
@@ -12,11 +10,11 @@ in {
   '';
 
   systemd.user.services.xautocfg = {
-    Unit.PartOf = ["xserver-session.target"];
+    Unit.PartOf = [ "xserver-session.target" ];
     Service = {
       ExecStart = "${package}/bin/xautocfg";
       Restart = "on-failure";
     };
-    Install.WantedBy = ["xserver-session.target"];
+    Install.WantedBy = [ "xserver-session.target" ];
   };
 }

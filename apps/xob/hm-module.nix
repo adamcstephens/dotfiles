@@ -3,24 +3,32 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.services.xob;
 
-  generate = lib.generators.toPretty {};
-  stylesCfg = builtins.toString (builtins.map (name: "${name} = ${generate cfg.styles.${name}};\n") (builtins.attrNames cfg.styles));
+  generate = lib.generators.toPretty { };
+  stylesCfg = builtins.toString (
+    builtins.map
+      (name: ''
+        ${name} = ${generate cfg.styles.${name}};
+      '')
+      (builtins.attrNames cfg.styles)
+  );
 
   script = pkgs.writeScript "xob-script" ''
     #!${lib.getExe pkgs.bash}
 
     ${pkgs.coreutils}/bin/tail -F $XDG_RUNTIME_DIR/xob.sock | ${pkgs.xob}/bin/xob
   '';
-in {
+in
+{
   options.services.xob = {
     enable = lib.mkEnableOption "X overlay bar";
 
     styles = lib.mkOption {
       type = lib.types.attrs;
-      default = {};
+      default = { };
       description = "Styles configuration for xob";
     };
 
@@ -35,19 +43,17 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    assertions = [
-      (lib.hm.assertions.assertPlatform "services.xob" pkgs lib.platforms.linux)
-    ];
+    assertions = [ (lib.hm.assertions.assertPlatform "services.xob" pkgs lib.platforms.linux) ];
 
     xdg.configFile."xob/styles.cfg".text = stylesCfg;
 
     systemd.user.services.xob = {
       Unit = {
         Description = "X overlay bar";
-        PartOf = [cfg.systemdTarget];
+        PartOf = [ cfg.systemdTarget ];
       };
 
-      Install.WantedBy = [cfg.systemdTarget];
+      Install.WantedBy = [ cfg.systemdTarget ];
 
       Service = {
         ExecStart = script.outPath;
@@ -60,10 +66,10 @@ in {
     systemd.user.sockets.xob = {
       Socket = {
         ListenFIFO = "%t/xob.sock";
-        SocketMode = 0600;
+        SocketMode = 600;
       };
 
-      Install.WantedBy = [cfg.systemdTarget];
+      Install.WantedBy = [ cfg.systemdTarget ];
     };
   };
 }

@@ -1,4 +1,5 @@
-{config, ...}: {
+{ config, ... }:
+{
   programs.swaylock.settings = {
     color = config.colorScheme.colors.base00;
 

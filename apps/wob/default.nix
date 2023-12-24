@@ -1,11 +1,6 @@
+{ config, lib, ... }:
 {
-  config,
-  lib,
-  ...
-}: {
-  imports = [
-    ./hm-module.nix
-  ];
+  imports = [ ./hm-module.nix ];
 
   config = lib.mkIf config.dotfiles.gui.wayland {
     programs.wob = {
@@ -20,7 +15,7 @@
           border_color = "${config.colorScheme.colors.base03}";
           bar_color = "${config.colorScheme.colors.base09}";
         };
-        sections = {};
+        sections = { };
       };
     };
   };

@@ -1,19 +1,15 @@
+{ config, pkgs, ... }:
 {
-  config,
-  pkgs,
-  ...
-}: {
   xdg.configFile."kitty/theme-light.conf".source = ./theme-light.conf;
 
-  home.packages = [
-    pkgs.kitty.terminfo
-  ];
+  home.packages = [ pkgs.kitty.terminfo ];
 
   programs.kitty = {
     enable = true;
     extraConfig = builtins.readFile ./kitty.conf;
 
-    settings = with config.colorScheme.colors;
+    settings =
+      with config.colorScheme.colors;
       {
         active_border_color = "#${base03}";
         active_tab_background = "#${base00}";
@@ -50,23 +46,24 @@
         allow_remote_control = "socket-only";
       }
       // (
-        if pkgs.stdenv.isDarwin
-        then {
-          mouse_map = "cmd+left release grabbed,ungrabbed mouse_click_url";
-          macos_option_as_alt = "both";
+        if pkgs.stdenv.isDarwin then
+          {
+            mouse_map = "cmd+left release grabbed,ungrabbed mouse_click_url";
+            macos_option_as_alt = "both";
 
-          font_size = "13";
-          listen_on = ''unix:''${TMPDIR}/kitty'';
-        }
-        else {
-          hide_window_decorations = "yes";
-          font_size = "10.5";
-          touch_scroll_multiplier = "20.0";
-          kitty_mod = "ctrl+shift";
+            font_size = "13";
+            listen_on = "unix:\${TMPDIR}/kitty";
+          }
+        else
+          {
+            hide_window_decorations = "yes";
+            font_size = "10.5";
+            touch_scroll_multiplier = "20.0";
+            kitty_mod = "ctrl+shift";
 
-          allow_remote_control = "socket-only";
-          listen_on = "unix:@kitty";
-        }
+            allow_remote_control = "socket-only";
+            listen_on = "unix:@kitty";
+          }
       );
 
     shellIntegration.enableFishIntegration = false;

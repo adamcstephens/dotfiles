@@ -3,7 +3,8 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   home.packages = [
     pkgs.fishPlugins.done
     pkgs.fishPlugins.foreign-env
@@ -12,7 +13,7 @@
 
   programs.fish = {
     enable = true;
-    plugins = [];
+    plugins = [ ];
 
     shellInit =
       (builtins.readFile ./init.fish)
@@ -29,7 +30,16 @@
         set --prepend fish_complete_path "${pkgs.kitty.shell_integration}/fish/vendor_completions.d"
       '';
 
-    shellAbbrs = lib.filterAttrs (k: _: !(builtins.elem k ["cat" "nix"])) config.home.shellAliases;
+    shellAbbrs =
+      lib.filterAttrs
+        (
+          k: _:
+          !(builtins.elem k [
+            "cat"
+            "nix"
+          ])
+        )
+        config.home.shellAliases;
     shellAliases = {
       cat = "bat";
       nix = "nix --print-build-logs";

@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   programs.helix = {
     enable = true;
     settings = {
@@ -14,7 +15,7 @@
           auto-format = true;
           formatter = {
             command = "nixfmt";
-            args = [];
+            args = [ ];
           };
         }
       ];

@@ -1,7 +1,6 @@
-{inputs, ...}: {
-  imports = [
-    inputs.flake-parts.flakeModules.easyOverlay
-  ];
+{ inputs, ... }:
+{
+  imports = [ inputs.flake-parts.flakeModules.easyOverlay ];
 
   flake.overlays = rec {
     upstreams = inputs.nixpkgs.lib.composeManyExtensions [
@@ -12,11 +11,9 @@
 
     # disable tests since they broke on darwin...
     fishPlugins = _: prev: {
-      fishPlugins = prev.fishPlugins.overrideScope' (_: fprev: {
-        fzf-fish = fprev.fzf-fish.overrideAttrs (_: {
-          doCheck = false;
-        });
-      });
+      fishPlugins = prev.fishPlugins.overrideScope' (
+        _: fprev: { fzf-fish = fprev.fzf-fish.overrideAttrs (_: { doCheck = false; }); }
+      );
     };
   };
 }

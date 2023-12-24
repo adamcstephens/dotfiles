@@ -1,7 +1,4 @@
-{
-  fetchFromGitHub,
-  stdenv,
-}:
+{ fetchFromGitHub, stdenv }:
 stdenv.mkDerivation rec {
   name = "revealjs";
   version = "4.4.0";

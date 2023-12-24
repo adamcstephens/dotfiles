@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   programs.ssh = {
     enable = true;
     controlMaster = "auto";
@@ -7,8 +8,6 @@
     serverAliveCountMax = 2;
 
     # use header: # -*- mode: ssh-config -*-
-    includes = [
-      "local.config"
-    ];
+    includes = [ "local.config" ];
   };
 }

@@ -4,11 +4,13 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.programs.wob;
 
-  generate = lib.generators.toINIWithGlobalSection {};
-in {
+  generate = lib.generators.toINIWithGlobalSection { };
+in
+{
   options.programs.wob = {
     enable = lib.mkEnableOption "Wayland overlay bar";
 
@@ -16,26 +18,24 @@ in {
     # section inside my config.
     settings = lib.mkOption {
       type = lib.types.attrs;
-      default = {};
+      default = { };
       description = "Configuration for wob";
     };
   };
 
   config = lib.mkIf cfg.enable {
-    assertions = [
-      (lib.hm.assertions.assertPlatform "programs.wob" pkgs lib.platforms.linux)
-    ];
+    assertions = [ (lib.hm.assertions.assertPlatform "programs.wob" pkgs lib.platforms.linux) ];
 
     xdg.configFile."wob/wob.ini".text = generate cfg.settings;
 
     systemd.user.services.wob = {
       Unit = {
         Description = "Wayland overlay bar";
-        PartOf = ["wayland-session.target"];
+        PartOf = [ "wayland-session.target" ];
         # ConditionPathExistsGlob = ["%t/wayland-*"];
       };
 
-      Install.WantedBy = ["wayland-session.target"];
+      Install.WantedBy = [ "wayland-session.target" ];
 
       Service = {
         ExecStart = "${pkgs.wob}/bin/wob";
@@ -48,11 +48,11 @@ in {
     systemd.user.sockets.wob = {
       Socket = {
         ListenFIFO = "%t/wob.sock";
-        SocketMode = 0600;
+        SocketMode = 600;
         # ConditionPathExistsGlob = ["%t/wayland-*"];
       };
 
-      Install.WantedBy = ["wayland-session.target"];
+      Install.WantedBy = [ "wayland-session.target" ];
     };
   };
 }

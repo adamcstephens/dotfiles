@@ -1,4 +1,5 @@
-{config, ...}: {
+{ config, ... }:
+{
   programs.bash = {
     enable = true;
     initExtra = ''

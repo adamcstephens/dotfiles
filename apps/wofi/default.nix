@@ -3,7 +3,8 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   config = lib.mkIf config.dotfiles.gui.wayland {
     xdg.configFile."wofi/config".text = ''
       width=800
@@ -47,8 +48,6 @@
       }
     '';
 
-    home.packages = [
-      pkgs.wofi
-    ];
+    home.packages = [ pkgs.wofi ];
   };
 }

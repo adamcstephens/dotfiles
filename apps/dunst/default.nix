@@ -1,8 +1,5 @@
+{ config, lib, ... }:
 {
-  config,
-  lib,
-  ...
-}: {
   services.dunst = {
     enable = true;
 
@@ -44,10 +41,8 @@
 
   systemd.user.services.dunst = {
     Install = {
-      WantedBy = ["graphical-session.target"];
+      WantedBy = [ "graphical-session.target" ];
     };
-    Service.Environment = lib.mkForce [
-      "FONTCONFIG_FILE=${config.dotfiles.gui.font.fontconfig}"
-    ];
+    Service.Environment = lib.mkForce [ "FONTCONFIG_FILE=${config.dotfiles.gui.font.fontconfig}" ];
   };
 }
