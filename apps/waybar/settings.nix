@@ -1,12 +1,10 @@
+{ lib }:
 {
   layer = "top";
   position = "top";
   height = 30;
-  modules-left = [
-    "river/tags"
-  ];
-  modules-center = [
-  ];
+  modules-left = [ "river/tags" ];
+  modules-center = [ ];
   modules-right = [
     "tray"
     "idle_inhibitor"
@@ -74,7 +72,7 @@
     on-click = "blueberry";
   };
   network = {
-    interface = "wlp0s20f3";
+    interface = lib.mkDefault "wlp0s20f3";
     format-wifi = "";
     format-ethernet = "";
     format-linked = "";
@@ -95,7 +93,11 @@
       phone = "";
       portable = "";
       car = "";
-      default = ["" "" ""];
+      default = [
+        ""
+        ""
+        ""
+      ];
     };
     scroll-step = 10;
     on-click = "pavucontrol";

@@ -3,7 +3,8 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   config = lib.mkIf config.dotfiles.gui.wayland {
     programs.waybar = {
       enable = true;
@@ -14,7 +15,7 @@
         hyprlandSupport = false;
       };
 
-      settings.main = import ./settings.nix;
+      settings.main = import ./settings.nix { inherit lib; };
 
       style = ''
         * {
@@ -88,9 +89,9 @@
     };
 
     systemd.user.services.waybar.Unit = {
-      Environment = ["FONTCONFIG_FILE=${config.dotfiles.gui.font.fontconfig}"];
-      PartOf = lib.mkForce ["wayland-session.target"];
-      After = lib.mkForce ["wayland-session.target"];
+      Environment = [ "FONTCONFIG_FILE=${config.dotfiles.gui.font.fontconfig}" ];
+      PartOf = lib.mkForce [ "wayland-session.target" ];
+      After = lib.mkForce [ "wayland-session.target" ];
     };
   };
 }

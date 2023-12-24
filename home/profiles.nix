@@ -53,10 +53,15 @@ in
               gui.wayland = true;
               gui.dpi = 144;
             };
-            programs.waybar.settings.main.output = [
-              "eDP-1"
-              "DP-2"
-            ];
+
+            programs.waybar.settings.main = {
+              output = [
+                "eDP-1"
+                "DP-2"
+              ];
+              network.interface = "wlP6p1s0";
+            };
+
             services.kanshi.profiles.undocked = lib.mkForce {
               outputs = [
                 {
@@ -204,10 +209,14 @@ in
               #   });
               gui.wayland = true;
             };
-            programs.waybar.settings.main.output = [
-              "eDP-1"
-              "DP-2"
-            ];
+
+            programs.waybar.settings.main = {
+              output = [
+                "eDP-1"
+                "DP-2"
+              ];
+              network.interface = "wlp0s20f3";
+            };
           }
         )
       ];
