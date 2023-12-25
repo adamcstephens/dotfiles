@@ -29,9 +29,23 @@ in
     enable = true;
     package = pkgs.vscodium;
 
-    extensions = [
-      pkgs.vscode-extensions.phoenixframework.phoenix
-      pkgs.vscode-extensions.thenuprojectcontributors.vscode-nushell-lang
+    extensions = with pkgs.vscode-extensions; [
+      bmalehorn.vscode-fish
+      davidanson.vscode-markdownlint
+      editorconfig.editorconfig
+      esbenp.prettier-vscode
+      foxundermoon.shell-format
+      github.github-vscode-theme
+      jnoortheen.nix-ide
+      mkhl.direnv
+      naumovs.color-highlight
+      phoenixframework.phoenix
+      redhat.vscode-yaml
+      rust-lang.rust-analyzer
+      skellock.just
+      tamasfe.even-better-toml
+      thenuprojectcontributors.vscode-nushell-lang
+      timonwong.shellcheck
     ];
   };
 }
