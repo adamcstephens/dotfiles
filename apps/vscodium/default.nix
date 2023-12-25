@@ -5,6 +5,25 @@
   ...
 }:
 let
+  # patch vscodium to enable copilot support
+  package = pkgs.symlinkJoin {
+    name = "vscodium-patched";
+
+    inherit (pkgs.vscodium)
+      pname
+      version
+      passthru
+      meta
+      ;
+
+    paths = [ pkgs.vscodium ];
+
+    postBuild = ''
+      rm $out/lib/vscode/resources/app/product.json
+      ${lib.getExe pkgs.gnused} -e 's/"GitHub.copilot": \["inlineCompletionsAdditions"\]/"GitHub.copilot": ["inlineCompletions","inlineCompletionsNew","inlineCompletionsAdditions","textDocumentNotebook","interactive","terminalDataWriteEvent"]/' ${pkgs.vscodium}/lib/vscode/resources/app/product.json > $out/lib/vscode/resources/app/product.json
+    '';
+  };
+
   prefix = if pkgs.stdenv.isDarwin then "Library/Application Support" else ".config";
 in
 {
@@ -27,7 +46,7 @@ in
 
   programs.vscode = {
     enable = true;
-    package = pkgs.vscodium;
+    package = package;
 
     extensions = with pkgs.vscode-extensions; [
       bmalehorn.vscode-fish
@@ -35,6 +54,7 @@ in
       editorconfig.editorconfig
       esbenp.prettier-vscode
       foxundermoon.shell-format
+      github.copilot
       github.github-vscode-theme
       jnoortheen.nix-ide
       mkhl.direnv
