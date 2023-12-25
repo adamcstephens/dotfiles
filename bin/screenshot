@@ -16,6 +16,10 @@ fi
 
 OUTPUT="$HOME"/Pictures/$(date +'screenshot_%Y-%m-%d-%H%M%S.png')
 
+if [ ! -d "$HOME/Pictures" ]; then
+  mkdir -vp "$HOME/Pictures"
+fi
+
 case $MODE in
 window)
   if [ $GUI = "xorg" ]; then
