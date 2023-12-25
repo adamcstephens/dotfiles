@@ -62,6 +62,9 @@ in
               network.interface = "wlP6p1s0";
             };
 
+            # no gamma support on x13s
+            services.gammastep.enable = lib.mkForce false;
+
             services.kanshi.profiles.undocked = lib.mkForce {
               outputs = [
                 {
