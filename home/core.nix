@@ -18,6 +18,7 @@
     ../apps/fish
     ../apps/git
     ../apps/helix
+    ../apps/neovim
     ../apps/nushell
     ../apps/ripgrep
     ../apps/shellcheck
