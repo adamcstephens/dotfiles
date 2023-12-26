@@ -22,6 +22,6 @@ mute)
 esac
 
 vol="$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | cut -f 2 -d ' ')"
-percentVol="$(echo "$vol*100" | bc -l | cut -f 1 -d .)"
+percentVol="$(calc "$vol*100" | cut -f 1 -d . | awk '{print $1}')"
 echo "Changing volume: $percentVol"
 echo $percentVol >$XDG_RUNTIME_DIR/wob.sock
