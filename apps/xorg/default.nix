@@ -93,16 +93,22 @@ in
       enable = true;
 
       initExtra = ''
+        # cleanup any wayland
+        systemctl --user stop wayland-session.target
+        systemctl --user unset-environment WAYLAND_DISPLAY
+
+        # start xserver session
         systemctl --user start xserver-session.target
         systemctl --user start tray.target
+        systemctl --user import-environment
 
         export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent
         if [ -S "$XDG_RUNTIME_DIR/yubikey-agent/yubikey-agent.sock" ]; then
           export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/yubikey-agent/yubikey-agent.sock
         fi
 
-        # unfortunately these are mutually exclusive
-        /run/current-system/sw/bin/systemctl --user unset-environment WAYLAND_DISPLAY
+        # chrome and vscode use this to find the secret service
+        export XDG_CURRENT_DESKTOP=GNOME
 
         touchpadid="$(xinput list | rg "SYNA.*Touchpad" | sort | tail -n 1 | awk '{print $6}' | cut -f 2 -d=)"
         xinput disable "$touchpadid"
