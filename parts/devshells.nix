@@ -3,6 +3,9 @@
   flake.devShells.x86_64-linux = withSystem "x86_64-linux" (
     { pkgs, ... }:
     {
+      distrobuilder = import ./devshells/distrobuilder.nix { inherit pkgs; };
+      incus = import ./devshells/incus.nix { inherit pkgs; };
+
       media = pkgs.mkShellNoCC {
         name = "media";
         packages = [ pkgs.ffmpeg_5-full ];
@@ -57,9 +60,6 @@
             pkgs.nvd
           ];
         };
-
-        distrobuilder = import ./devshells/distrobuilder.nix { inherit pkgs; };
-        incus = import ./devshells/incus.nix { inherit pkgs; };
 
         c = pkgs.mkShell {
           packages = [
