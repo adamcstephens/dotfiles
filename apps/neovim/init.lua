@@ -13,7 +13,8 @@ require('rainbow-delimiters.setup').setup {}
 local lspconfig = require('lspconfig')
 require("lsp-format").setup {}
 
-lspconfig.gopls.setup {on_attach = require("lsp-format").on_attach}
+lspconfig.lua_ls.setup { on_attach = require("lsp-format").on_attach }
+lspconfig.gopls.setup { on_attach = require("lsp-format").on_attach }
 lspconfig.nil_ls.setup {
   on_attach = require("lsp-format").on_attach,
   settings = {

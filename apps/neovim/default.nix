@@ -5,25 +5,37 @@
   ...
 }:
 let
-  package = pkgs.wrapNeovimUnstable pkgs.neovim-unwrapped (
-    pkgs.neovimUtils.makeNeovimConfig {
-      plugins = with pkgs.vimPlugins; [
-        lsp-format-nvim
-        nvim-lspconfig
-        nvim-treesitter.withAllGrammars
-        rainbow-delimiters-nvim
-        telescope-nvim
-        which-key-nvim
-      ];
-      withPython3 = true;
-      extraPython3Packages = _: [ ];
-      withRuby = true;
-      viAlias = true;
-      vimAlias = true;
+  dependencies = [ pkgs.lua-language-server ];
 
-      customRC = ''
-        luafile ${config.home.homeDirectory}/.dotfiles/apps/neovim/init.lua
-      '';
+  neovimConfig = pkgs.neovimUtils.makeNeovimConfig {
+    plugins = with pkgs.vimPlugins; [
+      lsp-format-nvim
+      nvim-lspconfig
+      nvim-treesitter.withAllGrammars
+      rainbow-delimiters-nvim
+      telescope-nvim
+      which-key-nvim
+    ];
+    withPython3 = true;
+    extraPython3Packages = _: [ ];
+    withRuby = true;
+    viAlias = true;
+    vimAlias = true;
+
+    customRC = ''
+      luafile ${config.home.homeDirectory}/.dotfiles/apps/neovim/init.lua
+    '';
+  };
+
+  package = pkgs.wrapNeovimUnstable pkgs.neovim-unwrapped (
+    neovimConfig
+    // {
+      wrapperArgs = neovimConfig.wrapperArgs ++ [
+        "--prefix"
+        "PATH"
+        ":"
+        "${lib.makeBinPath dependencies}"
+      ];
     }
   );
 in
