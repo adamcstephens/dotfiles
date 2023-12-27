@@ -58,6 +58,9 @@
           ];
         };
 
+        distrobuilder = import ./devshells/distrobuilder.nix { inherit pkgs; };
+        incus = import ./devshells/incus.nix { inherit pkgs; };
+
         c = pkgs.mkShell {
           packages = [
             pkgs.autoconf
