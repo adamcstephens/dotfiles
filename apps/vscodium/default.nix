@@ -6,7 +6,11 @@
 }:
 let
   # patch vscodium to enable copilot support
-  productJson = if pkgs.stdenv.isDarwin then "Applications/VSCodium.app/Contents/Resources/app/product.json" else "lib/vscode/resources/app/product.json";
+  productJson =
+    if pkgs.stdenv.isDarwin then
+      "Applications/VSCodium.app/Contents/Resources/app/product.json"
+    else
+      "lib/vscode/resources/app/product.json";
   package = pkgs.symlinkJoin {
     name = "vscodium-patched";
 
@@ -20,7 +24,7 @@ let
     paths = [ pkgs.vscodium ];
 
     postBuild = ''
-      rm $out/lib/vscode/resources/app/product.json
+      rm $out/${productJson}
       ${lib.getExe pkgs.gnused} -e 's/"GitHub.copilot": \["inlineCompletionsAdditions"\]/"GitHub.copilot": ["inlineCompletions","inlineCompletionsNew","inlineCompletionsAdditions","textDocumentNotebook","interactive","terminalDataWriteEvent"]/' ${pkgs.vscodium}/${productJson} > $out/${productJson}
     '';
   };

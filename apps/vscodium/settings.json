@@ -128,7 +128,10 @@
   "git.mergeEditor": true,
   "git.openRepositoryInParentFolders": "always",
   "github.copilot.enable": {
-    "*": false
+    "*": false,
+    "plaintext": false,
+    "markdown": false,
+    "scminput": false
   },
   "github.gitAuthentication": false,
   "gitlens.codeLens.enabled": false,
