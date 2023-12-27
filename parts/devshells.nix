@@ -52,6 +52,7 @@
             inputs.nil.packages.${pkgs.system}.nil
             pkgs.nix-eval-jobs
             pkgs.nodePackages.prettier
+            pkgs.npins
             pkgs.nushell
             pkgs.nvd
           ];
