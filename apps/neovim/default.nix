@@ -1,10 +1,17 @@
-{ config, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
-    package = pkgs.wrapNeovimUnstable pkgs.neovim-unwrapped (
+  package = pkgs.wrapNeovimUnstable pkgs.neovim-unwrapped (
     pkgs.neovimUtils.makeNeovimConfig {
       plugins = with pkgs.vimPlugins; [
+        lsp-format-nvim
         nvim-lspconfig
         nvim-treesitter.withAllGrammars
+        rainbow-delimiters-nvim
         telescope-nvim
         which-key-nvim
       ];
