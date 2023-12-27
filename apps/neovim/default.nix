@@ -6,17 +6,26 @@
 }:
 let
   dependencies = [ pkgs.lua-language-server ];
+  pins = import ./npins;
+  npinsPlugins =
+    lib.mapAttrsToList (name: src: (pkgs.vimUtils.buildVimPlugin { inherit name src; }))
+      pins;
 
   neovimConfig = pkgs.neovimUtils.makeNeovimConfig {
-    plugins = with pkgs.vimPlugins; [
-      comment-nvim
-      lsp-format-nvim
-      nvim-lspconfig
-      nvim-treesitter.withAllGrammars
-      rainbow-delimiters-nvim
-      telescope-nvim
-      which-key-nvim
-    ];
+    plugins =
+      with pkgs.vimPlugins;
+      [
+        comment-nvim
+        gitsigns-nvim
+        lsp-format-nvim
+        modus-themes-nvim
+        nvim-lspconfig
+        nvim-treesitter.withAllGrammars
+        rainbow-delimiters-nvim
+        telescope-nvim
+        which-key-nvim
+      ]
+      ++ npinsPlugins;
     withPython3 = true;
     extraPython3Packages = _: [ ];
     withRuby = true;

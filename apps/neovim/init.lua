@@ -1,3 +1,8 @@
+vim.opt.number = true
+vim.opt.cursorline = true
+
+vim.cmd([[colorscheme modus]])
+
 require("which-key").setup({})
 
 -- map leader to <Space>
@@ -15,6 +20,18 @@ vim.keymap.set("n", "<leader>j", find_jump)
 require('rainbow-delimiters.setup').setup {}
 
 require('Comment').setup()
+require('gitsigns').setup()
+require('neovim-project').setup({})
+require('nvim-tmux-navigation').setup({
+  keybindings = {
+    left = "<C-h>",
+    down = "<C-j>",
+    up = "<C-k>",
+    right = "<C-l>",
+    last_active = "<C-\\>",
+    next = "<C-Space>",
+  }
+})
 
 -- Setup language servers.
 local lspconfig = require('lspconfig')

@@ -1,0 +1,41 @@
+{
+  "pins": {
+    "neovim-project": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "coffebar",
+        "repo": "neovim-project"
+      },
+      "branch": "main",
+      "revision": "e7868b38f402be94e859d479002df1418bc1e954",
+      "url": "https://github.com/coffebar/neovim-project/archive/e7868b38f402be94e859d479002df1418bc1e954.tar.gz",
+      "hash": "0hccydzncrc7c98lqixv1r1qc1sf0lc201pw9mfm77w8216fzfzm"
+    },
+    "neovim-session-manager": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "Shatur",
+        "repo": "neovim-session-manager"
+      },
+      "branch": "master",
+      "revision": "68dde355a4304d83b40cf073f53915604bdd8e70",
+      "url": "https://github.com/Shatur/neovim-session-manager/archive/68dde355a4304d83b40cf073f53915604bdd8e70.tar.gz",
+      "hash": "0jqa8ji40y28bbl5maxb44sgdi6522lszczrz3rfcv122blm1qjq"
+    },
+    "nvim-tmux-navigation": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "alexghergh",
+        "repo": "nvim-tmux-navigation"
+      },
+      "branch": "main",
+      "revision": "d9efffa413a530bdea3783af4fea86be84940283",
+      "url": "https://github.com/alexghergh/nvim-tmux-navigation/archive/d9efffa413a530bdea3783af4fea86be84940283.tar.gz",
+      "hash": "0zdybpx4asv69r0aj5q1qdq1dm4zmmvp5w568j9ryxzaiy05wqdw"
+    }
+  },
+  "version": 3
+}
