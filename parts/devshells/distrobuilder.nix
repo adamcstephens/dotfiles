@@ -10,11 +10,7 @@ pkgs.mkShellNoCC {
 
     pkgs.gptfdisk
     pkgs.qemu-utils
-    pkgs.e2fsprogrs
+    pkgs.e2fsprogs
     pkgs.btrfs-progs
   ];
-
-  shellHook = ''
-    export CGO_ENABLED=1
-  '';
 }
