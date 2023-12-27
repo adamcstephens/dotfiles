@@ -9,6 +9,7 @@ let
 
   neovimConfig = pkgs.neovimUtils.makeNeovimConfig {
     plugins = with pkgs.vimPlugins; [
+      comment-nvim
       lsp-format-nvim
       nvim-lspconfig
       nvim-treesitter.withAllGrammars

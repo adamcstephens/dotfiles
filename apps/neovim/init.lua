@@ -7,7 +7,14 @@ vim.g.mapleader = " "
 vim.keymap.set("n", "<leader>p", "<cmd> Telescope find_files<CR>")
 vim.keymap.set("n", "<leader>b", "<cmd> Telescope buffers<CR>")
 
+local builtin = require("telescope.builtin")
+local utils = require("telescope.utils")
+local find_jump = function() builtin.find_files({ cwd = utils.buffer_dir() }) end
+vim.keymap.set("n", "<leader>j", find_jump)
+
 require('rainbow-delimiters.setup').setup {}
+
+require('Comment').setup()
 
 -- Setup language servers.
 local lspconfig = require('lspconfig')
