@@ -10,8 +10,9 @@ require("which-key").setup({})
 vim.keymap.set("n", " ", "<Nop>", { silent = true, remap = false })
 vim.g.mapleader = " "
 
-vim.keymap.set("n", "<leader>p", "<cmd> Telescope find_files<CR>")
 vim.keymap.set("n", "<leader>b", "<cmd> Telescope buffers<CR>")
+vim.keymap.set("n", "<leader>p", "<cmd> Telescope find_files<CR>")
+vim.keymap.set("n", "<leader>s", "<cmd> write<CR>")
 
 local builtin = require("telescope.builtin")
 local utils = require("telescope.utils")
