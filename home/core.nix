@@ -49,7 +49,7 @@
     gc = "git commit";
     gd = "git diff";
     gl = "git pull";
-    glo = ''git log --date=iso --format=\"%C(auto)%h %C(auto,blue)[%ar]%C(auto)%d %s\" --max-count=15'';
+    glo = ''git log --date=iso --format="%C(auto)%h %C(auto,blue)[%ar]%C(auto)%d %s" --max-count=15'';
     gp = "git push";
     grh = "git reset HEAD";
     grv = "git remote -v";
