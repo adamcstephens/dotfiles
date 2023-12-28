@@ -31,6 +31,10 @@ else
   fi
 fi
 
+if [ -n "$TMUX" ]; then
+  export SSH_AUTH_SOCK=$(tmux show-environment | sed -n 's/^SSH_AUTH_SOCK=//p')
+fi
+
 if [ "$(emacsclient -e "(getenv \"SSH_AUTH_SOCK\")")" != "$SSH_AUTH_SOCK" ]; then
   emacsclient -e "(setenv \"SSH_AUTH_SOCK\" \"$SSH_AUTH_SOCK\")" >/dev/null
 fi
