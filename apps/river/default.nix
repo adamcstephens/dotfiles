@@ -58,7 +58,6 @@ in
 
         # start wayland session
         . "$HOME"/.nix-profile/bin/configure-gtk
-        systemctl --user import-environment
         systemctl --user start wayland-session.target
 
         export MOZ_ENABLE_WAYLAND="1"
@@ -70,7 +69,7 @@ in
 
         systemd-cat --identifier=river ${lib.getExe cfg.package}
 
-        systemctl --user stop wayland-session.target
+        systemctl --user stop wayland-session.target graphical-session.target
       '';
 
       executable = true;

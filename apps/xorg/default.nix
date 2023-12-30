@@ -100,7 +100,7 @@ in
         # start xserver session
         systemctl --user start xserver-session.target
         systemctl --user start tray.target
-        systemctl --user import-environment
+        systemctl --user import-environment DISPLAY
 
         export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent
         if [ -S "$XDG_RUNTIME_DIR/yubikey-agent/yubikey-agent.sock" ]; then

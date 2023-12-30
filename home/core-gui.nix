@@ -24,6 +24,7 @@
     pkgs.age-plugin-yubikey
     pkgs.passage
     pkgs.rage
+    pkgs.yubikey-manager
 
     # nix
     inputs.nil.packages.${pkgs.system}.nil
