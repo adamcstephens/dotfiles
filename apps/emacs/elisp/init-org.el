@@ -1,14 +1,14 @@
 ;; allow refiling to any org file
 (defun dot/org-refile-candidates ()
   (directory-files-recursively
-    org-directory
-    "^[[:alnum:]].*\\.org\\'"))
+   org-directory
+   "^[[:alnum:]].*\\.org\\'"))
 
 (defun dot/org-slides-export ()
   (when
-    (string-match
-      "slides-.*\\.org"
-      (file-name-nondirectory (buffer-file-name)))
+      (string-match
+       "slides-.*\\.org"
+       (file-name-nondirectory (buffer-file-name)))
     (org-re-reveal-export-to-html)))
 
 (defun dot/org-slides-export-setup ()
@@ -17,42 +17,42 @@
 (defun dot/org-html--format-image (source attributes info)
   "Optionally embed image into html as base64."
   (let
-    (
-      (source
+      (
+       (source
         (replace-regexp-in-string
-          "file://" ""
-          (replace-regexp-in-string "%20" " " source
-            nil 'literal)))) ;; not sure whether this is necessary
+         "file://" ""
+         (replace-regexp-in-string "%20" " " source
+				   nil 'literal)))) ;; not sure whether this is necessary
     (if (string= "svg" (file-name-extension source))
-      (org-html--svg-image source attributes info)
+	(org-html--svg-image source attributes info)
       (if t
+          (org-html-close-tag
+           "img"
+           (format "src=\"data:image/%s;base64,%s\"%s %s"
+		   (or (file-name-extension source) "")
+		   (base64-encode-string
+		    (with-temp-buffer
+                      (insert-file-contents-literally
+                       (expand-file-name source))
+                      (buffer-string)))
+		   (file-name-nondirectory source)
+		   (org-html--make-attribute-string attributes))
+           info)
         (org-html-close-tag
-          "img"
-          (format "src=\"data:image/%s;base64,%s\"%s %s"
-            (or (file-name-extension source) "")
-            (base64-encode-string
-              (with-temp-buffer
-                (insert-file-contents-literally
-                  (expand-file-name source))
-                (buffer-string)))
-            (file-name-nondirectory source)
-            (org-html--make-attribute-string attributes))
-          info)
-        (org-html-close-tag
-          "img"
-          (org-html--make-attribute-string
-            (org-combine-plists
-              (list
-                :src source
-                :alt
-                (if (string-match-p "^ltxpng/" source)
-                  (org-html-encode-plain-text
-                    (org-find-text-property-in-string
-                      'org-latex-src
-                      source))
-                  (file-name-nondirectory source)))
-              attributes))
-          info)))))
+         "img"
+         (org-html--make-attribute-string
+          (org-combine-plists
+           (list
+            :src source
+            :alt
+            (if (string-match-p "^ltxpng/" source)
+                (org-html-encode-plain-text
+                 (org-find-text-property-in-string
+                  'org-latex-src
+                  source))
+              (file-name-nondirectory source)))
+           attributes))
+         info)))))
 
 ;; the org package itself
 (use-package
@@ -85,15 +85,15 @@
 
   ;; refile using my func
   (add-to-list
-    'org-refile-targets
-    '(dot/org-refile-candidates :maxlevel . 3))
+   'org-refile-targets
+   '(dot/org-refile-candidates :maxlevel . 3))
 
   ;; agenda files
   (setq org-agenda-files
-    (seq-filter
-      (lambda (x)
-        (not (string-match "/.stversions/" (file-name-directory x))))
-      (directory-files-recursively "~/org" "\\.org$")))
+	(seq-filter
+	 (lambda (x)
+           (not (string-match "/.stversions/" (file-name-directory x))))
+	 (directory-files-recursively "~/org" "\\.org$")))
 
   ;; let the completion engine sort them
   (setq org-outline-path-complete-in-steps nil)
@@ -110,16 +110,16 @@
 
   ;; better font support
   (setq org-latex-pdf-process
-    '
-    ("xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"
-      "xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+	'
+	("xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+	 "xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
 
   ;; custom article for syllabus
   (setq org-latex-classes
-    '
-    (
-      ("article"
-        "\\documentclass[11pt]{article}
+	'
+	(
+	 ("article"
+          "\\documentclass[11pt]{article}
 \\usepackage{fontspec}
 \\setmainfont{IBM Plex Sans}
 % dont indent paragraphs
@@ -127,13 +127,13 @@
 \\usepackage{fancyhdr}
 [DEFAULT-PACKAGES]
 \\hypersetup{colorlinks = true, urlcolor = blue, linkcolor = black}"
-        ("\\section{%s}" . "\\section*{%s}")
-        ("\\subsection{%s}" . "\\subsection*{%s}")
-        ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-        ("\\paragraph{%s}" . "\\paragraph*{%s}")
-        ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))
-      ("syllabus"
-        "\\documentclass[11pt]{article}
+          ("\\section{%s}" . "\\section*{%s}")
+          ("\\subsection{%s}" . "\\subsection*{%s}")
+          ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+          ("\\paragraph{%s}" . "\\paragraph*{%s}")
+          ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))
+	 ("syllabus"
+          "\\documentclass[11pt]{article}
 \\usepackage[margin=1in]{geometry}
 \\usepackage{graphicx,wrapfig,subfig}
 \\usepackage{fontspec}
@@ -163,10 +163,10 @@
 [DEFAULT-PACKAGES]
 % customize link colors
 \\hypersetup{colorlinks = true, urlcolor = blue, linkcolor = black}"
-        ("\\section{%s}" . "\\section*{%s}")
-        ("\\subsection{%s}" . "\\subsection*{%s}")
-        ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-        ("\\paragraph{%s}" . "\\paragraph*{%s}"))))
+          ("\\section{%s}" . "\\section*{%s}")
+          ("\\subsection{%s}" . "\\subsection*{%s}")
+          ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+          ("\\paragraph{%s}" . "\\paragraph*{%s}"))))
 
   ;; (add-to-list
   ;;   'org-capture-templates
@@ -180,8 +180,8 @@
 
   (setq org-attach-id-dir (expand-file-name ".attach/" org-directory))
   (advice-add
-    #'org-html--format-image
-    :override #'dot/org-html--format-image)
+   #'org-html--format-image
+   :override #'dot/org-html--format-image)
   :hook
   (org-mode . (lambda () (display-line-numbers-mode -1)))
   (org-mode . (lambda () (toggle-truncate-lines -1)))
@@ -191,6 +191,10 @@
   :bind
   ("C-c o a" . org-agenda)
   ("C-c o c" . org-capture))
+
+(use-package
+  persistent-scratch
+  :init (persistent-scratch-autosave-mode 1))
 
 (use-package org-autolist :hook (org-mode . org-autolist-mode))
 
@@ -208,27 +212,27 @@
   org-present
   :hook
   (
-    (org-present-mode
-      .
-      (lambda ()
-        (org-present-big)
-        (org-display-inline-images)
-        (org-present-hide-cursor)
-        (org-present-read-only)
-        (hide-mode-line-mode 1)))
-    (org-present-mode-quit
-      .
-      (lambda ()
-        (org-present-small)
-        (org-remove-inline-images)
-        (org-present-show-cursor)
-        (hide-mode-line-mode -1)
-        (org-present-read-write)))))
+   (org-present-mode
+    .
+    (lambda ()
+      (org-present-big)
+      (org-display-inline-images)
+      (org-present-hide-cursor)
+      (org-present-read-only)
+      (hide-mode-line-mode 1)))
+   (org-present-mode-quit
+    .
+    (lambda ()
+      (org-present-small)
+      (org-remove-inline-images)
+      (org-present-show-cursor)
+      (hide-mode-line-mode -1)
+      (org-present-read-write)))))
 
 (use-package
   ox-pandoc
   :config
   (setq org-pandoc-options-for-html5-pdf
-    '((pdf-engine . "weasyprint"))))
+	'((pdf-engine . "weasyprint"))))
 
 (provide 'init-org)
