@@ -14,12 +14,8 @@
   "[html-eex]": {
     "editor.defaultFormatter": "elixir-tools.elixir-tools"
   },
-  "[ignore]": {
-    "editor.defaultFormatter": "foxundermoon.shell-format"
-  },
   "[markdown]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.wordBasedSuggestionsMode": "currentDocument"
   },
   "[nix]": {
     "editor.defaultFormatter": "jnoortheen.nix-ide"
@@ -39,46 +35,8 @@
   "[terraform]": {
     "editor.defaultFormatter": "hashicorp.terraform"
   },
-  "[yaml]": {
-    "editor.wordBasedSuggestionsMode": "currentDocument"
-  },
-  "[yuck]": {
-    "editor.defaultFormatter": "eww-yuck.yuck"
-  },
+  "[yaml]": {},
   "breadcrumbs.enabled": true,
-  "calva.autoConnectRepl": true,
-  "calva.projectRootsSearchExclude": [
-    "bower_components",
-    ".bzr",
-    ".cache",
-    ".ccls-cache",
-    ".clangd",
-    ".classpath",
-    "*.code-search",
-    ".cpcache",
-    "_darcs",
-    ".DS_Store",
-    ".ensime_cache",
-    ".eunit",
-    "flow-typed",
-    "_FOSSIL_",
-    ".fslckout",
-    ".git",
-    ".hg",
-    ".idea",
-    ".joyride",
-    "node_modules",
-    ".pijul",
-    ".project",
-    ".shadow-cljs",
-    ".stack-work",
-    ".svn",
-    "target",
-    ".tox",
-    ".vscode",
-    ".direnv"
-  ],
-  "calva.showCalvaSaysOnStart": false,
   "debug.internalConsoleOptions": "neverOpen",
   "diffEditor.renderSideBySide": true,
   "direnv.restart.automatic": true,
@@ -134,11 +92,6 @@
     "scminput": false
   },
   "github.gitAuthentication": false,
-  "gitlens.codeLens.enabled": false,
-  "gitlens.plusFeatures.enabled": false,
-  "gitlens.showWelcomeOnInstall": false,
-  "gitlens.showWhatsNewAfterUpgrades": false,
-  "gitlens.views.repositories.autoRefresh": false,
   "go.lintFlags": [
     "--fast"
   ],
@@ -167,22 +120,14 @@
     "default": "right",
     "jupyter-notebook": "left"
   },
-  "python.formatting.provider": "black",
-  "python.languageServer": "Pylance",
-  "python.venvPath": "~/.local/share/virtualenvs",
   "redhat.telemetry.enabled": false,
   "remote.SSH.defaultExtensions": [
-    "esbenp.prettier-vscode",
     "jnoortheen.nix-ide",
     "mkhl.direnv",
     "foxundermoon.shell-format",
-    "redhat.vscode-yaml",
     "timonwong.shellcheck",
-    // "lexical-lsp.lexical",
     "skellock.just",
-    "golf1052.base16-generator"
   ],
-  "remote.SSH.lockfilesInTmp": true,
   "remote.SSH.remotePlatform": {
     "blank": "linux",
     "crank": "linux",
@@ -213,7 +158,6 @@
   "terraform.languageServer.path": "",
   "update.mode": "none",
   "window.autoDetectColorScheme": true,
-  "window.nativeFullScreen": false,
   "window.newWindowDimensions": "inherit",
   "window.restoreWindows": "none",
   "window.titleBarStyle": "custom",
