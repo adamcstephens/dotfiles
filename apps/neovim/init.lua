@@ -1,3 +1,7 @@
+-- map leader to <Space> before we do anything else
+vim.keymap.set("n", " ", "<Nop>", { silent = true, remap = false })
+vim.g.mapleader = " "
+
 -- packages
 --
 require('Comment').setup()
@@ -11,7 +15,6 @@ require('neovim-project').setup({
     "~/projects/*",
   },
 })
-require('nu').setup({})
 require('nvim-surround').setup({})
 require('nvim-tmux-navigation').setup({
   keybindings = {
@@ -44,10 +47,6 @@ vim.keymap.set("i", "<C-e>", "<C-o>$")
 vim.keymap.set("i", "<C-a>", "<C-o>0")
 vim.keymap.set("n", "<C-e>", "$")
 vim.keymap.set("n", "<C-a>", "0")
-
--- map leader to <Space>
-vim.keymap.set("n", " ", "<Nop>", { silent = true, remap = false })
-vim.g.mapleader = " "
 
 vim.keymap.set("n", "<leader>b", builtin.buffers, {})
 vim.keymap.set("n", "<leader>f", builtin.find_files, {})

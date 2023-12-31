@@ -19,13 +19,13 @@ let
         gitsigns-nvim
         lsp-format-nvim
         modus-themes-nvim
-        null-ls-nvim
-        nvim-nu
         nvim-lspconfig
         nvim-treesitter.withAllGrammars
         nvim-surround
         rainbow-delimiters-nvim
         telescope-nvim
+        vim-just
+        vim-lastplace
         which-key-nvim
       ]
       ++ npinsPlugins;
