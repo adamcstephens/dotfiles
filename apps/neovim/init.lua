@@ -8,6 +8,7 @@ require('Comment').setup()
 require('gitsigns').setup()
 require("lsp-format").setup({})
 local lspconfig = require('lspconfig')
+local luasnip = require('luasnip')
 require('neovim-project').setup({
   projects = {
     "~/.dotfiles",
@@ -38,6 +39,7 @@ require("which-key").setup({})
 vim.opt.cursorline = true
 vim.opt.number = true
 vim.opt.undofile = true
+vim.opt.whichwrap = "<,>,[,]"
 
 vim.cmd([[colorscheme modus]])
 
@@ -49,14 +51,14 @@ vim.keymap.set("i", "<C-a>", "<C-o>0")
 vim.keymap.set("n", "<C-e>", "$")
 vim.keymap.set("n", "<C-a>", "0")
 
-vim.keymap.set("n", "<leader>b", builtin.buffers, { desc = "Buffers" })
+vim.keymap.set("n", "<leader>b", function() builtin.buffers({ sort_lastused = true }) end, { desc = "Buffers" })
 vim.keymap.set("n", "<leader>f", builtin.find_files, { desc = "Find Files" })
 vim.keymap.set("n", "<leader>h", builtin.help_tags, { desc = "Help" })
 vim.keymap.set("n", "<leader>j", function() builtin.find_files({ cwd = utils.buffer_dir() }) end, { desc = "Jump Files" })
 vim.keymap.set("n", "<leader>p", "<cmd> Telescope neovim-project history<CR>", { desc = "Project History" })
 vim.keymap.set("n", "<leader>P", "<cmd> Telescope neovim-project discover<CR>", { desc = "Project Discover" })
 vim.keymap.set("n", "<leader>r", builtin.live_grep, { desc = "Search" })
-vim.keymap.set("n", "<leader>s", function() vim.cmd("write") end, { desc = "Save File" })
+vim.keymap.set("n", "<leader>s", function() vim.cmd("write ++p") end, { desc = "Save File" })
 
 -- Setup language servers.
 --
@@ -78,6 +80,7 @@ lspconfig.efm.setup({
     documentRangeFormatting = true,
   },
 })
+lspconfig.gopls.setup({ on_attach = require("lsp-format").on_attach })
 lspconfig.lua_ls.setup({
   on_attach = require("lsp-format").on_attach,
   settings = {
@@ -88,7 +91,6 @@ lspconfig.lua_ls.setup({
     }
   }
 })
-lspconfig.gopls.setup({ on_attach = require("lsp-format").on_attach })
 lspconfig.nil_ls.setup {
   on_attach = require("lsp-format").on_attach,
   settings = {
@@ -100,3 +102,13 @@ lspconfig.nil_ls.setup {
   },
 }
 lspconfig.nushell.setup({})
+
+-- snippets
+--
+require("luasnip.loaders.from_vscode").lazy_load({ paths = "~/.dotfiles/apps/vscodium/snippets", })
+vim.keymap.set({ "i" }, "<C-s>", function() luasnip.expand() end, { silent = true })
+vim.keymap.set({ "i", "s" }, "<C-E>", function()
+  if luasnip.choice_active() then
+    luasnip.change_choice(1)
+  end
+end, { silent = true })

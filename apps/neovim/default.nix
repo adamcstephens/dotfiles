@@ -22,6 +22,7 @@ let
         comment-nvim
         efmls-configs-nvim
         gitsigns-nvim
+        luasnip
         lsp-format-nvim
         modus-themes-nvim
         nvim-lspconfig
