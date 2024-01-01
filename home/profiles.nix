@@ -76,6 +76,9 @@ in
             };
 
             services.ssh-agent.enable = true;
+            systemd.user.services.ssh-agent.Service.Environment = [
+              "SSH_ASKPASS=${pkgs.x11_ssh_askpass}/libexec/ssh-askpass"
+            ];
           }
         )
       ];
