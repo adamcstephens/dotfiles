@@ -60,7 +60,34 @@ vim.keymap.set("n", "<leader>s", function() vim.cmd("write") end, { desc = "Save
 
 -- Setup language servers.
 --
-lspconfig.lua_ls.setup({ on_attach = require("lsp-format").on_attach })
+local languages = {
+  fish = {
+    require('efmls-configs.linters.fish'),
+    require('efmls-configs.formatters.fish_indent')
+  }
+}
+lspconfig.efm.setup({
+  on_attach = require("lsp-format").on_attach,
+  filetypes = vim.tbl_keys(languages),
+  settings = {
+    rootMarkers = { '.git/' },
+    languages = languages,
+  },
+  init_options = {
+    documentFormatting = true,
+    documentRangeFormatting = true,
+  },
+})
+lspconfig.lua_ls.setup({
+  on_attach = require("lsp-format").on_attach,
+  settings = {
+    Lua = {
+      diagnostics = {
+        globals = { "vim" },
+      },
+    }
+  }
+})
 lspconfig.gopls.setup({ on_attach = require("lsp-format").on_attach })
 lspconfig.nil_ls.setup {
   on_attach = require("lsp-format").on_attach,

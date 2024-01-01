@@ -5,7 +5,11 @@
   ...
 }:
 let
-  dependencies = [ pkgs.lua-language-server ];
+  dependencies = [
+    pkgs.efm-langserver
+    pkgs.lua-language-server
+    pkgs.nil
+  ];
   pins = import ./npins;
   npinsPlugins =
     lib.mapAttrsToList (name: src: (pkgs.vimUtils.buildVimPlugin { inherit name src; }))
@@ -16,6 +20,7 @@ let
       with pkgs.vimPlugins;
       [
         comment-nvim
+        efmls-configs-nvim
         gitsigns-nvim
         lsp-format-nvim
         modus-themes-nvim
