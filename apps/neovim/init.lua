@@ -49,12 +49,14 @@ vim.keymap.set("i", "<C-a>", "<C-o>0")
 vim.keymap.set("n", "<C-e>", "$")
 vim.keymap.set("n", "<C-a>", "0")
 
-vim.keymap.set("n", "<leader>b", builtin.buffers, {})
-vim.keymap.set("n", "<leader>f", builtin.find_files, {})
-vim.keymap.set("n", "<leader>j", function() builtin.find_files({ cwd = utils.buffer_dir() }) end)
-vim.keymap.set("n", "<leader>p", "<cmd> Telescope neovim-project history<CR>")
-vim.keymap.set("n", "<leader>P", "<cmd> Telescope neovim-project discover<CR>")
-vim.keymap.set("n", "<leader>s", "<cmd> write<CR>")
+vim.keymap.set("n", "<leader>b", builtin.buffers, { desc = "Buffers" })
+vim.keymap.set("n", "<leader>f", builtin.find_files, { desc = "Find Files" })
+vim.keymap.set("n", "<leader>h", builtin.help_tags, { desc = "Help" })
+vim.keymap.set("n", "<leader>j", function() builtin.find_files({ cwd = utils.buffer_dir() }) end, { desc = "Jump Files" })
+vim.keymap.set("n", "<leader>p", "<cmd> Telescope neovim-project history<CR>", { desc = "Project History" })
+vim.keymap.set("n", "<leader>P", "<cmd> Telescope neovim-project discover<CR>", { desc = "Project Discover" })
+vim.keymap.set("n", "<leader>r", builtin.live_grep, { desc = "Search" })
+vim.keymap.set("n", "<leader>s", function() vim.cmd("write") end, { desc = "Save File" })
 
 -- Setup language servers.
 --
