@@ -27,13 +27,14 @@ require('nvim-tmux-navigation').setup({
   }
 })
 require('rainbow-delimiters.setup').setup({})
+require('remember').setup({})
 local builtin = require("telescope.builtin")
 local utils = require("telescope.utils")
 require("which-key").setup({})
 
 -- vim settings
 --
-vim.opt.clipboard = "unnamedplus"
+-- vim.opt.clipboard = "unnamedplus"
 vim.opt.cursorline = true
 vim.opt.number = true
 vim.opt.undofile = true

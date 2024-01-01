@@ -23,9 +23,9 @@ let
         nvim-treesitter.withAllGrammars
         nvim-surround
         rainbow-delimiters-nvim
+        remember-nvim
         telescope-nvim
         vim-just
-        vim-lastplace
         which-key-nvim
       ]
       ++ npinsPlugins;
