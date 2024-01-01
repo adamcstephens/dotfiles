@@ -3,7 +3,7 @@
   programs.ssh = {
     enable = true;
     controlMaster = "auto";
-    controlPersist = "60m";
+    controlPersist = "600m";
     serverAliveInterval = 60;
     serverAliveCountMax = 2;
 
