@@ -2,17 +2,27 @@
 
 let nixpkgs_root = $env.HOME + "/git/nixpkgs"
 
+def get_worktree [branch: string] {
+  $nixpkgs_root + "/.worktree/" + ($branch | str replace "/" "-")
+}
+
 def workdir [branch: string, ] {
-  let worktree = ($nixpkgs_root + "/.worktree/" + ($branch | str replace "/" "-"))
+  let worktree = get_worktree $branch
 
   cd $nixpkgs_root
 
   let branch_test = do { git rev-parse --verify $branch } | complete
-  let worktree_args = (if ($branch_test.exit_code != 0) { ["-b", $branch] } else { [$branch] }) ++ ["--checkout", "--lock", "--track", "--guess-remote" "upstream/master"]
+  let worktree_args = (if ($branch_test.exit_code != 0) { ["-b", $branch] } else { [$branch] }) ++ ["--checkout", "--lock", "--track", "--guess-remote", "upstream/master"]
 
   if (not ($worktree | path exists)) {
-    git fetch upstream
+    git switch master
+    git pull upstream master
+    echo $worktree_args
     git worktree add $worktree $worktree_args
+
+    cd $worktree
+    git push --set-upstream origin $"($branch):($branch)"
+    cd -
   }
 
   if (not (($worktree + "/.envrc") | path exists)) {
@@ -26,9 +36,17 @@ def workdir [branch: string, ] {
   $worktree
 }
 
-def main [action: string, --codium (-c), --emacs (-e) ...args] {
+def clean_workdir [branch: string] {
+  let worktree = get_worktree $branch
+  cd $nixpkgs_root
+
+  git worktree remove -ff $worktree
+  git branch -D $branch
+}
+
+def main [--codium (-c), --emacs (-e), action: string, name: string] {
   if ($action == "workdir") {
-    let worktree = workdir $args.0
+    let worktree = workdir $name
     if $emacs {
       em $worktree
     } else if ($codium) {
@@ -39,6 +57,8 @@ def main [action: string, --codium (-c), --emacs (-e) ...args] {
       kitty --single-instance $worktree
       exec kitty @ close-window -m ("id:" + $env.KITTY_WINDOW_ID)
     }
+  } else if ($action == "clean") {
+    clean_workdir $name
   } else {
     print ("!! Unsupported command " + $action)
     exit 1
