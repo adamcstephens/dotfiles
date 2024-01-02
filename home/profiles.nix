@@ -50,6 +50,35 @@ in
           { pkgs, ... }:
           {
             dotfiles = {
+              apps.river.package =
+                (pkgs.river.override {
+                  wlroots_0_16 = pkgs.wlroots_0_17.overrideAttrs (
+                    prev: rec {
+                      version = "0.17.1";
+                      src = pkgs.fetchFromGitLab {
+                        domain = "gitlab.freedesktop.org";
+                        owner = "wlroots";
+                        repo = "wlroots";
+                        rev = version;
+                        hash = "sha256-Z0gWM7AQqJOSr2maUtjdgk/MF6pyeyFMMTaivgt+RMI=";
+                      };
+                      patches = [ ];
+                    }
+                  );
+                }).overrideAttrs
+                  (
+                    _: rec {
+                      version = "0.3.0-${builtins.substring 0 7 src.rev}";
+                      src = pkgs.fetchFromGitHub {
+                        owner = "riverwm";
+                        repo = "river";
+                        rev = "be4dbe3fe7faad4943b8148e3c19a19ff0181048";
+                        fetchSubmodules = true;
+                        hash = "sha256-/dL6jMHwb3swVvLOJCOwsEVLEpYPQGVMibqYykYqCTM=";
+                      };
+                    }
+                  );
+
               gui.wayland = true;
               gui.dpi = 144;
             };
