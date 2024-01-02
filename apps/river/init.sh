@@ -4,6 +4,7 @@
 ~/.config/river/colors.sh
 # ensure WAYLAND_DISPLAY gets to user systemd env
 systemctl --user import-environment DISPLAY WAYLAND_DISPLAY
+systemctl --user start wayland-session.target
 
 #
 ## input

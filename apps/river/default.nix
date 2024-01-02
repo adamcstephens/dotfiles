@@ -58,7 +58,6 @@ in
 
         # start wayland session
         . "$HOME"/.nix-profile/bin/configure-gtk
-        systemctl --user start wayland-session.target
 
         export MOZ_ENABLE_WAYLAND="1"
         export NIXOS_OZONE_WL="1"
