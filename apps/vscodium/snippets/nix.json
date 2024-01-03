@@ -6,7 +6,7 @@
   },
   "module init": {
     "prefix": ["module"],
-    "body": "{\n  config,\n  lib,\n  ...\n}: let\n  cfg = config.$1;\nin {\n  options.$1 = {\n    enable = lib.mkEnableOption \"Enable the $2 service\";\n  };\n\n  config = lib.mkIf cfg.enable {\n    #$3\n  };\n}",
+    "body": "{\n  config,\n  lib,\n  pkgs,\n  ...\n}: let\n  cfg = config.$1;\nin {\n  options.$1 = {\n    enable = lib.mkEnableOption \"Enable the $2 service\";\n  };\n\n  config = lib.mkIf cfg.enable {\n    #$3\n  };\n}",
     "description": "module init"
   },
   "mkshell": {
