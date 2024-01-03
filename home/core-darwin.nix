@@ -30,7 +30,6 @@
     pkgs.libreoffice-bin
 
     inputs.sandbox.packages.${pkgs.system}.m1ddc
-    inputs.sandbox.packages.${pkgs.system}.firefox-profile-switcher-connector
   ];
 
   home.activation.enable-ssh-agent = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
