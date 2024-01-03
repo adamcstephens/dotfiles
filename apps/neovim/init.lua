@@ -1,3 +1,6 @@
+-- use experiemental lua loader
+vim.loader.enable()
+
 -- map leader to <Space> before we do anything else
 vim.keymap.set("n", " ", "<Nop>", { silent = true, remap = false })
 vim.g.mapleader = " "
@@ -8,6 +11,10 @@ require('Comment').setup()
 require('gitsigns').setup()
 require("lsp-format").setup({})
 local lspconfig = require('lspconfig')
+require('lualine').setup({
+  options = { theme = "modus-vivendi" },
+})
+
 local luasnip = require('luasnip')
 require('neovim-project').setup({
   projects = {
@@ -16,6 +23,7 @@ require('neovim-project').setup({
     "~/projects/*",
   },
 })
+
 require('nvim-surround').setup({})
 require('nvim-tmux-navigation').setup({
   keybindings = {
@@ -27,6 +35,7 @@ require('nvim-tmux-navigation').setup({
     next = "<C-Space>",
   }
 })
+
 require('rainbow-delimiters.setup').setup({})
 require('remember').setup({})
 local builtin = require("telescope.builtin")
