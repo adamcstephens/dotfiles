@@ -141,7 +141,7 @@ in
       pkgs.rofi-rbw
 
       # nix
-      inputs.nh.packages.${pkgs.system}.nh
+      pkgs.nh
       inputs.nix-index-database.packages.${pkgs.system}.nix-index-with-db
     ]
     ++ (lib.optionals config.dotfiles.gui.wayland [
