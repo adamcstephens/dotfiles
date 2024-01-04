@@ -29,9 +29,11 @@ let
         nvim-lspconfig
         nvim-treesitter.withAllGrammars
         nvim-surround
+        nvim-web-devicons
         rainbow-delimiters-nvim
         remember-nvim
         telescope-nvim
+        trouble-nvim
         vim-just
         which-key-nvim
       ]

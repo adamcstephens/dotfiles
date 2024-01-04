@@ -36,10 +36,12 @@ require('nvim-tmux-navigation').setup({
   }
 })
 
+require('nvim-web-devicons').setup({})
 require('rainbow-delimiters.setup').setup({})
 require('remember').setup({})
 local builtin = require("telescope.builtin")
 local utils = require("telescope.utils")
+require('trouble').setup()
 require("which-key").setup({})
 
 -- vim settings
@@ -68,6 +70,12 @@ vim.keymap.set("n", "<leader>p", "<cmd> Telescope neovim-project history<CR>", {
 vim.keymap.set("n", "<leader>P", "<cmd> Telescope neovim-project discover<CR>", { desc = "Project Discover" })
 vim.keymap.set("n", "<leader>r", builtin.live_grep, { desc = "Search" })
 vim.keymap.set("n", "<leader>s", function() vim.cmd("write ++p") end, { desc = "Save File" })
+vim.keymap.set("n", "<leader>xx", function() require("trouble").toggle() end)
+vim.keymap.set("n", "<leader>xw", function() require("trouble").toggle("workspace_diagnostics") end)
+vim.keymap.set("n", "<leader>xd", function() require("trouble").toggle("document_diagnostics") end)
+vim.keymap.set("n", "<leader>xq", function() require("trouble").toggle("quickfix") end)
+vim.keymap.set("n", "<leader>xl", function() require("trouble").toggle("loclist") end)
+vim.keymap.set("n", "gR", function() require("trouble").toggle("lsp_references") end)
 
 -- Setup language servers.
 --
