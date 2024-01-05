@@ -8,6 +8,7 @@ vim.g.mapleader = " "
 -- packages
 --
 require('Comment').setup()
+require("focus").setup()
 require('gitsigns').setup()
 require("lsp-format").setup({})
 local lspconfig = require('lspconfig')
@@ -16,6 +17,10 @@ require('lualine').setup({
 })
 
 local luasnip = require('luasnip')
+require("modus-themes").setup({
+  dim_inactive = false,
+})
+
 require('neovim-project').setup({
   projects = {
     "~/.dotfiles",
@@ -76,6 +81,11 @@ vim.keymap.set("n", "<leader>xd", function() require("trouble").toggle("document
 vim.keymap.set("n", "<leader>xq", function() require("trouble").toggle("quickfix") end)
 vim.keymap.set("n", "<leader>xl", function() require("trouble").toggle("loclist") end)
 vim.keymap.set("n", "gR", function() require("trouble").toggle("lsp_references") end)
+
+-- auto commands
+--
+vim.api.nvim_create_autocmd('BufEnter', { callback = function(ev) vim.cmd('set cursorline') end })
+vim.api.nvim_create_autocmd('BufLeave', { callback = function(ev) vim.cmd('set nocursorline') end })
 
 -- Setup language servers.
 --
