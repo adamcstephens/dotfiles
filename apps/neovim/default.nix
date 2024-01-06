@@ -1,5 +1,6 @@
 {
   config,
+  inputs,
   lib,
   pkgs,
   ...
@@ -7,6 +8,7 @@
 let
   dependencies = [
     pkgs.efm-langserver
+    pkgs.lua
     pkgs.lua-language-server
     pkgs.nil
   ];
@@ -52,7 +54,7 @@ let
     '';
   };
 
-  package = pkgs.wrapNeovimUnstable pkgs.neovim-unwrapped (
+  package = pkgs.wrapNeovimUnstable inputs.neovim-nightly.packages.${pkgs.system}.neovim (
     neovimConfig
     // {
       wrapperArgs = neovimConfig.wrapperArgs ++ [

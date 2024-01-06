@@ -131,6 +131,20 @@ vim.keymap.set("n", "gR", function() require("trouble").toggle("lsp_references")
 -- auto commands
 --
 vim.api.nvim_create_autocmd('BufEnter', { callback = function() vim.cmd('set cursorline') end })
+vim.api.nvim_create_autocmd('BufEnter', {
+  desc = "update ssh auth sock in tmux",
+  callback = function()
+    if not vim.env.TMUX then return nil end
+
+    local tmuxEnv = vim.gsplit(vim.fn.system('tmux showenv'), '\n')
+    local tmuxEnvSSH = vim.iter(tmuxEnv):filter(function(v) return string.match(v, "SSH_AUTH_SOCK") end):totable()
+    local tmuxEnvSSHAuthSock = (vim.split(tmuxEnvSSH[1], '='))[2]
+
+    if vim.env.SSH_AUTH_SOCK ~= tmuxEnvSSHAuthSock then
+      vim.env.SSH_AUTH_SOCK = tmuxEnvSSHAuthSock
+    end
+  end
+})
 vim.api.nvim_create_autocmd('BufLeave', { callback = function() vim.cmd('set nocursorline') end })
 
 -- Setup language servers.
@@ -161,6 +175,13 @@ lspconfig.lua_ls.setup({
       diagnostics = {
         globals = { "vim" },
       },
+      workspace = {
+        -- global gitignore isn't processed
+        ignoreDir = {
+          ".direnv/",
+        },
+        useGitIgnore = true,
+      }
     }
   }
 })
