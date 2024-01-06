@@ -89,17 +89,7 @@ let
       })
       epkgs.treesit-grammars.with-all-grammars
     ]
-    ++ (
-      with epkgs.melpaStablePackages; [
-        (org-re-reveal.overrideAttrs (
-          prev: {
-            src = prev.src.overrideAttrs (
-              _: { outputHash = "1szfd2lhnxn9nrk4s0q8nd9knyhv7dmr07jx1g5s4jiwhv29fmzz"; }
-            );
-          }
-        ))
-      ]
-    )
+    ++ (with epkgs.melpaStablePackages; [ org-re-reveal ])
     ++ (
       with epkgs.melpaPackages; [
         agenix
