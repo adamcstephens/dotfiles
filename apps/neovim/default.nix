@@ -19,13 +19,16 @@ let
     plugins =
       with pkgs.vimPlugins;
       [
+        actions-preview-nvim
         comment-nvim
+        direnv-vim
         efmls-configs-nvim
         gitsigns-nvim
         lualine-nvim
         luasnip
         lsp-format-nvim
         modus-themes-nvim
+        neogit
         nvim-lspconfig
         nvim-treesitter.withAllGrammars
         nvim-surround
