@@ -131,10 +131,11 @@ vim.keymap.set("n", "gR", function() require("trouble").toggle("lsp_references")
 -- auto commands
 --
 vim.api.nvim_create_autocmd('BufEnter', { callback = function() vim.cmd('set cursorline') end })
-vim.api.nvim_create_autocmd('BufEnter', {
+vim.api.nvim_create_autocmd('BufLeave', { callback = function() vim.cmd('set nocursorline') end })
+vim.api.nvim_create_autocmd('FocusGained', {
   desc = "update ssh auth sock in tmux",
   callback = function()
-    if not vim.env.TMUX then return nil end
+    -- if not vim.env.TMUX then return nil end
 
     local tmuxEnv = vim.gsplit(vim.fn.system('tmux showenv'), '\n')
     local tmuxEnvSSH = vim.iter(tmuxEnv):filter(function(v) return string.match(v, "SSH_AUTH_SOCK") end):totable()
@@ -145,7 +146,6 @@ vim.api.nvim_create_autocmd('BufEnter', {
     end
   end
 })
-vim.api.nvim_create_autocmd('BufLeave', { callback = function() vim.cmd('set nocursorline') end })
 
 -- Setup language servers.
 --
