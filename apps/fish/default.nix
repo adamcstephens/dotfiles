@@ -47,7 +47,16 @@
 
     functions = {
       esl = "exec fish -l";
-      uas = "set -x SSH_AUTH_SOCK $(tmux show-environment | sed -n 's/^SSH_AUTH_SOCK=//p')";
+      uas = {
+        body = ''
+          if [ -z "$TMUX" ]
+            return 0
+          end
+
+          ${lib.getExe pkgs.tmux} showenv -s | string replace -rf '^((?:SSH|DISPLAY).*?)=(".*?"); export.*' 'set -gx $1 $2' | source
+        '';
+        onEvent = "fish_preexec";
+      };
     };
   };
 
