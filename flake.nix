@@ -4,8 +4,6 @@
 
     attic.url = "github:zhaofengli/attic";
     attic.inputs.nixpkgs.follows = "nixpkgs";
-    emacs-overlay.url = "github:nix-community/emacs-overlay";
-    emacs-overlay.inputs.nixpkgs.follows = "nixpkgs";
     emacs-plus.url = "github:d12frosted/homebrew-emacs-plus";
     emacs-plus.flake = false;
     flake-parts.url = "github:hercules-ci/flake-parts";

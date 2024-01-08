@@ -3,11 +3,7 @@
   imports = [ inputs.flake-parts.flakeModules.easyOverlay ];
 
   flake.overlays = rec {
-    upstreams = inputs.nixpkgs.lib.composeManyExtensions [
-      inputs.emacs-overlay.overlays.emacs
-      inputs.emacs-overlay.overlays.package
-      fishPlugins
-    ];
+    upstreams = inputs.nixpkgs.lib.composeManyExtensions [ fishPlugins ];
 
     # disable tests since they broke on darwin...
     fishPlugins = _: prev: {
