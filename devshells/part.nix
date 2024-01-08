@@ -3,8 +3,8 @@
   flake.devShells.x86_64-linux = withSystem "x86_64-linux" (
     { pkgs, ... }:
     {
-      distrobuilder = import ./devshells/distrobuilder.nix { inherit pkgs; };
-      incus = import ./devshells/incus.nix { inherit pkgs; };
+      distrobuilder = import ./distrobuilder.nix { inherit pkgs; };
+      incus = import ./incus.nix { inherit pkgs; };
 
       media = pkgs.mkShellNoCC {
         name = "media";

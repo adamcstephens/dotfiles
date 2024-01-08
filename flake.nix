@@ -33,10 +33,10 @@
     { self, flake-parts, ... }@inputs:
     flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [
+        ./devshells/part.nix
         ./home/profiles.nix
 
         ./parts/darwin.nix
-        ./parts/devshells.nix
         ./parts/overlays.nix
       ];
 
