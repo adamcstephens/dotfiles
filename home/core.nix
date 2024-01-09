@@ -63,10 +63,11 @@
     jc = "sudo journalctl";
     jcu = "journalctl --user";
     l = "ll -a";
+    ll = "eza -l";
     nix = "nix --print-build-logs";
     sy = "sudo systemctl";
     syu = "systemctl --user";
-    tree = "exa --tree";
+    tree = "eza --tree";
   };
 
   programs.home-manager.enable = true;
@@ -114,7 +115,6 @@
   programs = {
     eza = {
       enable = true;
-      enableAliases = true;
     };
 
     fzf.enable = true;
