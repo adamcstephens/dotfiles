@@ -58,14 +58,6 @@ require("modus-themes").setup({
 
 local neogit = require('neogit')
 neogit.setup()
-require('neovim-project').setup({
-  projects = {
-    "~/.dotfiles",
-    "~/git/*",
-    "~/projects/*",
-  },
-})
-
 require('nvim-surround').setup({})
 require('nvim-tmux-navigation').setup({
   keybindings = {
@@ -77,7 +69,15 @@ require('nvim-tmux-navigation').setup({
     next = "<C-Space>",
   }
 })
-
+require('nvim-treesitter.configs').setup({
+  incremental_selection = {
+    enable = true,
+    keymaps = {
+      node_incremental = "v",
+      node_decremental = "V",
+    },
+  },
+})
 require('nvim-web-devicons').setup({})
 require('rainbow-delimiters.setup').setup({})
 require('remember').setup({})
@@ -116,17 +116,20 @@ vim.keymap.set("n", "<leader>f", builtin.find_files, { desc = "Find Files" })
 vim.keymap.set("n", "<leader>g", neogit.open, { desc = "Find Files" })
 vim.keymap.set("n", "<leader>h", builtin.help_tags, { desc = "Help" })
 vim.keymap.set("n", "<leader>j", function() builtin.find_files({ cwd = utils.buffer_dir() }) end, { desc = "Jump Files" })
-vim.keymap.set({ "v", "n" }, "<leader>la", require("actions-preview").code_actions)
-vim.keymap.set("n", "<leader>p", "<cmd> Telescope neovim-project history<CR>", { desc = "Project History" })
-vim.keymap.set("n", "<leader>P", "<cmd> Telescope neovim-project discover<CR>", { desc = "Project Discover" })
+vim.keymap.set({ "v", "n" }, "<leader>la", require("actions-preview").code_actions, { desc = "Code actions" })
+vim.keymap.set("n", "<leader>lf", function() require("trouble").toggle("lsp_references") end,
+  { desc = "Find References" })
+vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, { desc = "Rename symbol" })
 vim.keymap.set("n", "<leader>r", builtin.live_grep, { desc = "Search" })
 vim.keymap.set("n", "<leader>s", function() vim.cmd("write ++p") end, { desc = "Save File" })
+vim.keymap.set("n", "<leader>S", function() vim.cmd("noautocmd write ++p") end, { desc = "Save File (No autocmd)" })
 vim.keymap.set("n", "<leader>xx", function() require("trouble").toggle() end)
 vim.keymap.set("n", "<leader>xw", function() require("trouble").toggle("workspace_diagnostics") end)
 vim.keymap.set("n", "<leader>xd", function() require("trouble").toggle("document_diagnostics") end)
 vim.keymap.set("n", "<leader>xq", function() require("trouble").toggle("quickfix") end)
 vim.keymap.set("n", "<leader>xl", function() require("trouble").toggle("loclist") end)
-vim.keymap.set("n", "gR", function() require("trouble").toggle("lsp_references") end)
+
+vim.keymap.set("n", "<C-p>", builtin.find_files, { desc = "Find Files" })
 
 -- auto commands
 --
