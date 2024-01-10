@@ -23,12 +23,12 @@ let
       [
         actions-preview-nvim
         comment-nvim
+        conform-nvim
         direnv-vim
         efmls-configs-nvim
         gitsigns-nvim
         lualine-nvim
         luasnip
-        lsp-format-nvim
         modus-themes-nvim
         neogit
         nvim-lspconfig

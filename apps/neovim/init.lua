@@ -24,9 +24,15 @@ require("actions-preview").setup {
 }
 
 require('Comment').setup()
+require("conform").setup({
+  format_on_save = {
+    timeout_ms = 500,
+    lsp_fallback = true,
+  },
+})
+
 require("focus").setup()
 require('gitsigns').setup()
-require("lsp-format").setup({})
 local lspconfig = require('lspconfig')
 require('lualine').setup({
   options = { theme = "modus-vivendi" },
@@ -159,7 +165,6 @@ local languages = {
   }
 }
 lspconfig.efm.setup({
-  on_attach = require("lsp-format").on_attach,
   filetypes = vim.tbl_keys(languages),
   settings = {
     rootMarkers = { '.git/' },
@@ -170,9 +175,8 @@ lspconfig.efm.setup({
     documentRangeFormatting = true,
   },
 })
-lspconfig.gopls.setup({ on_attach = require("lsp-format").on_attach })
+lspconfig.gopls.setup({})
 lspconfig.lua_ls.setup({
-  on_attach = require("lsp-format").on_attach,
   settings = {
     Lua = {
       diagnostics = {
@@ -189,7 +193,6 @@ lspconfig.lua_ls.setup({
   }
 })
 lspconfig.nil_ls.setup {
-  on_attach = require("lsp-format").on_attach,
   settings = {
     ["nil"] = {
       formatting = {
