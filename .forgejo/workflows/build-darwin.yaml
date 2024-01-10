@@ -2,19 +2,15 @@ on: [push]
 
 env:
   ATTIC_KEY: ${{ secrets.ATTIC_KEY }}
-  NIX_EVAL_ARGS: "--eval-store unix:///host/nix/var/nix/daemon-socket/socket?root=/host"
 
 jobs:
   flake-build:
     runs-on: stop/${{ matrix.system }}
-    container:
-      options: "--volume /nix:/host/nix"
 
     strategy:
       matrix:
         system:
-          - x86_64-linux
-          - aarch64-linux
+          - aarch64-darwin
 
     steps:
       - uses: actions/checkout@v4
