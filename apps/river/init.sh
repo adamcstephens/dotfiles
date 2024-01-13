@@ -190,9 +190,8 @@ riverctl set-cursor-warp on-focus-change
 
 riverctl border-width 1
 
-# Set and exec into the default layout generator, rivertile.
-# River will send the process group of the init executable SIGTERM on exit.
 riverctl default-layout rivertile
+riverctl attach-mode bottom
 
 if ! pgrep rivertile; then
   rivertile -main-ratio 0.5 -view-padding 2 -outer-padding 2
