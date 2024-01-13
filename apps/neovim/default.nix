@@ -22,6 +22,9 @@ let
       with pkgs.vimPlugins;
       [
         actions-preview-nvim
+        cmp-nvim-lsp
+        cmp-path
+        cmp_luasnip
         comment-nvim
         conform-nvim
         direnv-vim
@@ -31,6 +34,7 @@ let
         luasnip
         modus-themes-nvim
         neogit
+        nvim-cmp
         nvim-lspconfig
         nvim-treesitter.withAllGrammars
         nvim-surround
@@ -43,9 +47,9 @@ let
         which-key-nvim
       ]
       ++ npinsPlugins;
-    withPython3 = true;
+    withPython3 = false;
     extraPython3Packages = _: [ ];
-    withRuby = true;
+    withRuby = false;
     viAlias = true;
     vimAlias = true;
 
