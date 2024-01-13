@@ -83,6 +83,9 @@ require('nvim-treesitter.configs').setup({
       node_decremental = "V",
     },
   },
+  matchup = {
+    enable = true,
+  },
 })
 require('nvim-web-devicons').setup({})
 require('rainbow-delimiters.setup').setup({})

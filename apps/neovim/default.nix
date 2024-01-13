@@ -44,6 +44,7 @@ let
         telescope-nvim
         trouble-nvim
         vim-just
+        vim-matchup
         which-key-nvim
       ]
       ++ npinsPlugins;
