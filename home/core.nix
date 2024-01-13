@@ -13,7 +13,6 @@
     ../apps/bat
     ../apps/btop
     ../apps/editorconfig
-    ../apps/emacs
     ../apps/fd
     ../apps/fish
     ../apps/git

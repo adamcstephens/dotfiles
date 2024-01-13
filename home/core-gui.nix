@@ -8,6 +8,7 @@
   imports = [
     ./colors.nix
 
+    ../apps/emacs
     ../apps/kitty
     ../apps/ssh
     ../apps/vscodium
