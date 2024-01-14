@@ -11,6 +11,7 @@ let
     pkgs.lua
     pkgs.lua-language-server
     pkgs.nil
+    pkgs.nodejs-slim
   ];
   pins = import ./npins;
   npinsPlugins =
@@ -27,8 +28,10 @@ let
         cmp_luasnip
         comment-nvim
         conform-nvim
+        copilot-lua
         direnv-vim
         efmls-configs-nvim
+        elixir-tools-nvim
         gitsigns-nvim
         lualine-nvim
         luasnip

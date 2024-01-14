@@ -31,6 +31,12 @@ require("conform").setup({
   },
 })
 
+require("elixir").setup({
+  elixirls = {
+    -- don't prompt to install elixir-ls, get it from path
+    cmd = "elixir-ls",
+  },
+})
 require("focus").setup()
 require('gitsigns').setup()
 local lspconfig = require('lspconfig')
@@ -76,6 +82,9 @@ require('nvim-tmux-navigation').setup({
   }
 })
 require('nvim-treesitter.configs').setup({
+  highlight = {
+    enable = true,
+  },
   incremental_selection = {
     enable = true,
     keymaps = {
@@ -99,13 +108,14 @@ require("which-key").setup({})
 --
 local cmp = require('cmp')
 cmp.setup({
-  mapping = cmp.mapping.preset.insert({
-    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<Escape>'] = cmp.mapping.abort(),
-    ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-  }),
+  experimental = {
+    ghost_text = true
+  },
+  mapping = {
+    ["<C-j>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
+    ["<C-k>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
+    ["<CR>"] = cmp.mapping.confirm({ select = true, behavior = cmp.ConfirmBehavior.Replace }),
+  },
   snippet = {
     expand = function(args)
       require('luasnip').lsp_expand(args.body)
@@ -117,6 +127,12 @@ cmp.setup({
     { name = 'path' },
   })
 })
+require("copilot").setup {
+  filetypes = {
+    elixir = true,
+    ["*"] = false,
+  },
+}
 
 -- vim settings
 --
