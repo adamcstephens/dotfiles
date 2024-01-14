@@ -5,9 +5,7 @@
         "crane": "crane",
         "flake-compat": "flake-compat",
         "flake-utils": "flake-utils",
-        "nixpkgs": [
-          "nixpkgs"
-        ],
+        "nixpkgs": "nixpkgs",
         "nixpkgs-stable": "nixpkgs-stable"
       },
       "locked": {
@@ -504,16 +502,16 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1705133751,
-        "narHash": "sha256-rCIsyE80jgiOU78gCWN3A0wE0tR2GI5nH6MlS+HaaSQ=",
-        "owner": "adamcstephens",
+        "lastModified": 1704842529,
+        "narHash": "sha256-OTeQA+F8d/Evad33JMfuXC89VMetQbsU4qcaePchGr4=",
+        "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "9b19f5e77dd906cb52dade0b7bd280339d2a1f3d",
+        "rev": "eabe8d3eface69f5bb16c18f8662a702f50c20d5",
         "type": "github"
       },
       "original": {
-        "owner": "adamcstephens",
-        "ref": "atomix-unstable",
+        "owner": "NixOS",
+        "ref": "nixpkgs-unstable",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -601,6 +599,22 @@
         "type": "github"
       }
     },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1705133751,
+        "narHash": "sha256-rCIsyE80jgiOU78gCWN3A0wE0tR2GI5nH6MlS+HaaSQ=",
+        "owner": "adamcstephens",
+        "repo": "nixpkgs",
+        "rev": "9b19f5e77dd906cb52dade0b7bd280339d2a1f3d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "adamcstephens",
+        "ref": "atomix-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "pre-commit-hooks": {
       "inputs": {
         "flake-compat": "flake-compat_3",
@@ -657,7 +671,7 @@
         "nix-index-database": "nix-index-database",
         "nix-wallpaper": "nix-wallpaper",
         "nixfmt-rfc": "nixfmt-rfc",
-        "nixpkgs": "nixpkgs",
+        "nixpkgs": "nixpkgs_2",
         "profile-parts": "profile-parts",
         "sandbox": "sandbox"
       }
