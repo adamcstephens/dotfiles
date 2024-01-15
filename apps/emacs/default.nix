@@ -115,6 +115,10 @@ let
         elixir-ts-mode
         embark
         embark-consult
+        evil
+        evil-collection
+        evil-commentary
+        evil-org
         expand-region
         fish-mode
         flyspell-correct

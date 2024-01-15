@@ -2,17 +2,17 @@
 (defvar bootstrap-version)
 (setq straight-repository-branch "develop")
 (let
-  (
-    (bootstrap-file
+    (
+     (bootstrap-file
       (expand-file-name "straight/repos/straight.el/bootstrap.el"
-        user-emacs-directory))
-    (bootstrap-version 6))
+			user-emacs-directory))
+     (bootstrap-version 6))
   (unless (file-exists-p bootstrap-file)
     (with-current-buffer
-      (url-retrieve-synchronously
-        "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
-        'silent
-        'inhibit-cookies)
+	(url-retrieve-synchronously
+         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
+         'silent
+         'inhibit-cookies)
       (goto-char (point-max))
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
@@ -29,8 +29,8 @@
 
 ;; load all elisp files
 (add-to-list
-  'load-path
-  (expand-file-name "elisp" user-emacs-directory))
+ 'load-path
+ (expand-file-name "elisp" user-emacs-directory))
 
 (require 'init-emacs)
 (require 'init-theme)
@@ -40,28 +40,28 @@
 (require 'init-complete)
 (require 'init-editor)
 (require 'init-git)
-(require 'init-lsp)
+;; (require 'init-lsp)
 (require 'init-modal)
 (require 'init-org)
 (require 'init-format)
 (require 'init-project)
-(require 'init-term)
+;; (require 'init-term)
 
-(require 'init-elixir)
-(require 'init-eww)
-(require 'init-go)
-(require 'init-haskell)
-(require 'init-js)
-(require 'init-just)
-(require 'init-lisp)
-(require 'init-kmonad)
+;; (require 'init-elixir)
+;; (require 'init-eww)
+;; (require 'init-go)
+;; (require 'init-haskell)
+;; (require 'init-js)
+;; (require 'init-just)
+;; (require 'init-lisp)
+;; (require 'init-kmonad)
 (require 'init-markdown)
-(require 'init-nim)
+;; (require 'init-nim)
 (require 'init-nix)
-(require 'init-rust)
-(require 'init-sh)
-(require 'init-ssh)
-(require 'init-terraform)
-(require 'init-yaml)
+;; (require 'init-rust)
+;; (require 'init-sh)
+;; (require 'init-ssh)
+;; (require 'init-terraform)
+;; (require 'init-yaml)
 
 (require 'kill-with-intelligence)
