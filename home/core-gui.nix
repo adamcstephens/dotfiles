@@ -39,8 +39,12 @@
       }
     ))
 
+    # tools
     pkgs.pwgen
     pkgs.unzip
+
+    # apps
+    pkgs.senpai
   ];
 
   programs = {
