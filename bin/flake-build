@@ -1,12 +1,5 @@
 #!/usr/bin/env nu
 
-let eval_args = [
-  "--gc-roots-dir", "gcroot",
-] ++ (if $env.NIX_EVAL_ARGS? != null { 
-  # dirty, but 🤷
-  $env.NIX_EVAL_ARGS | split row " "
-} else { [ ] })
-
 def attic-setup [url: string, cache: string, token: string] {
   try {
     attic cache info $"main:($cache)"
@@ -22,7 +15,7 @@ def attic-use [cache: string] {
 }
 
 export def attic-upload [cache: string] {
-  let paths = $in 
+  let paths = $in
 
   if ($paths  | length) == 0 {
     print "‼️ No targets to push to attic. Skipping push"
@@ -33,12 +26,13 @@ export def attic-upload [cache: string] {
 }
 
 export def build-targets [--nom: bool = true] {
-  let targets = $in | each { |target| $target | update drvPath ($target.drvPath | str replace --regex ".drv$" ".drv^*") }
+  let targets = $in
 
   let command = if $nom { "nom" } else { "nix" }
   $targets | par-each --threads 2 { |target|
     let outPath = try {
-      run-external --redirect-stdout $command build "--no-link" "--fallback" "--keep-going" "--json" $target.drvPath | from json | select outputs | flatten | get out
+      let drv = $target | update drvPath ($target.drvPath | str replace --regex ".drv$" ".drv^*") | get drvPath
+      run-external --redirect-stdout $command build "--no-link" "--fallback" "--keep-going" "--json" $drv | from json | select outputs | flatten | get out
     } catch {
       null
     }
@@ -47,9 +41,15 @@ export def build-targets [--nom: bool = true] {
 }
 
 export def eval-targets [] {
-  let targets = $in 
+  let targets = $in
+  let eval_args = [
+    "--gc-roots-dir", "gcroot",
+  ] ++ (if $env.NIX_EVAL_ARGS? != null {
+    # dirty, but 🤷
+    $env.NIX_EVAL_ARGS | split row " "
+  } else { [ ] })
 
-  $targets | par-each --threads 4 { |target| 
+  $targets | par-each --threads 4 { |target|
     nix-eval-jobs --workers 1 --flake $target $eval_args | lines | each {|l|
       $l | from json | select name drvPath
     }
@@ -57,20 +57,26 @@ export def eval-targets [] {
 }
 
 export def flake-input-targets [] {
-  nix flake archive --json | from json | get inputs | transpose | select column0 column1.path | each { |c| 
+  nix flake archive --json | from json | get inputs | transpose | select column0 column1.path | each { |c|
     {name: $c.column0, outPath: [$c.column1_path], drvPath: null}
   }
 }
 
 export def gen-targets [--system: string] {
   try { rm -r gcroot/* }
+  let eval_args = [
+    "--gc-roots-dir", "gcroot",
+  ] ++ (if $env.NIX_EVAL_ARGS? != null {
+    # dirty, but 🤷
+    $env.NIX_EVAL_ARGS | split row " "
+  } else { [ ] })
 
   ['.#devShells', '.#packages'] | each {|target|
     nix eval $target --apply builtins.attrNames --json | from json | each { |sys|
       if $system != null and $system != $sys { continue }
       print $"🛗 Evaluating ($target).($sys)"
 
-      nix-eval-jobs --workers 12 --flake $"($target).($sys)" $eval_args | lines | each {|l| 
+      nix-eval-jobs --workers 12 --flake $"($target).($sys)" $eval_args | lines | each {|l|
         $l | from json | select name drvPath
       }
     } | flatten
@@ -78,7 +84,7 @@ export def gen-targets [--system: string] {
 }
 
 export def result-paths [] {
-  $in | where outPath != null | get outPath | flatten 
+  $in | where outPath != null | get outPath | flatten
 }
 
 def main [--attic-upload: bool = true, --attic-use: bool = false, --eval-only, --nom: bool = true, --system: string, ...targets: string ] {
@@ -113,12 +119,12 @@ def main [--attic-upload: bool = true, --attic-use: bool = false, --eval-only, -
     exit 1
   }
 
-  let built_targets = $targets | build-targets --nom=$nom 
+  let built_targets = $targets | build-targets --nom=$nom | append (flake-input-targets)
   print "🎯 Built targets"
   print $built_targets
 
   if $attic_upload {
-    flake-input-targets | merge $built_targets | result-paths | attic-upload $attic_cache
+    $built_targets | result-paths | attic-upload $attic_cache
   }
 
   if ($built_targets | any { |t| $t.outPath == null }) {
