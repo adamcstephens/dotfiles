@@ -16,7 +16,7 @@
 
   dotfiles.apps.emacs = {
     package = lib.mkDefault pkgs.emacs29;
-    patchForGui = lib.mkDefault true;
+    patchForGui = lib.mkDefault false;
     full = lib.mkDefault true;
   };
 

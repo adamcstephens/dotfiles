@@ -85,14 +85,9 @@
     format = "{icon}";
     format-alt = "{volume} {icon}";
     format-alt-click = "click-right";
-    format-muted = "婢";
+    format-muted = "󰝟";
     format-icons = {
       headphones = "";
-      handsfree = "";
-      headset = "";
-      phone = "";
-      portable = "";
-      car = "";
       default = [
         ""
         ""
