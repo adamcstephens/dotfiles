@@ -45,6 +45,7 @@ let
         rainbow-delimiters-nvim
         remember-nvim
         telescope-nvim
+        trim-nvim
         trouble-nvim
         vim-just
         vim-matchup

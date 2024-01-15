@@ -101,6 +101,7 @@ require('rainbow-delimiters.setup').setup({})
 require('remember').setup({})
 local builtin = require("telescope.builtin")
 local utils = require("telescope.utils")
+require('trim').setup({})
 require('trouble').setup()
 require("which-key").setup({})
 
