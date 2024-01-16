@@ -1,9 +1,11 @@
 bmalehorn.vscode-fish
+Continue.continue
 DavidAnson.vscode-markdownlint
 EditorConfig.EditorConfig
 elixir-tools.elixir-tools
 esbenp.prettier-vscode
 foxundermoon.shell-format
+GitHub.copilot
 GitHub.github-vscode-theme
 golang.go
 jeanp413.open-remote-ssh
