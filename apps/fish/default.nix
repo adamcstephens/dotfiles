@@ -1,5 +1,6 @@
 {
   config,
+  inputs,
   lib,
   pkgs,
   ...
@@ -13,6 +14,7 @@
 
   programs.fish = {
     enable = true;
+    package = inputs.sandbox.packages.${pkgs.system}.fish;
     plugins = [ ];
 
     shellInit =

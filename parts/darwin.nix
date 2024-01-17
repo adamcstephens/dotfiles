@@ -11,7 +11,7 @@
     modules = [
       (inputs.nix-darwin.outPath + "/modules/nix/nix-darwin.nix") # install darwin-rebuild
       (
-        { pkgs, ... }:
+        { config, pkgs, ... }:
         {
           fonts = {
             fontDir.enable = true;
@@ -95,8 +95,12 @@
             StandardOutPath = "/var/log/nix-store.log";
           };
 
-          environment.shells = [ pkgs.fish ];
-          programs.fish.enable = true;
+          environment.shells = [ config.programs.fish.package ];
+
+          programs.fish = {
+            enable = true;
+            package = inputs.sandbox.packages.${pkgs.system}.fish;
+          };
         }
       )
     ];
