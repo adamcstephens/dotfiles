@@ -15,6 +15,7 @@
       ".DS_Store"
       ".direnv/"
       ".lsp/"
+      ".worktree/"
       "result"
     ];
   };
