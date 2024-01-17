@@ -18,4 +18,20 @@ $env.config = {
       }
     }
   ]
+  menus: [
+    {
+      name: completion_menu
+      only_buffer_difference: false
+      marker: ""
+      style: {
+        text: foreground
+      }
+      type: {
+        layout: columnar
+        columns: 4
+        col_width: 20
+        col_padding: 2
+      }
+    }
+  ]
 }

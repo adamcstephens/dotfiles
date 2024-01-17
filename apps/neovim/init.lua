@@ -162,7 +162,7 @@ vim.keymap.set("n", "<leader><space>", function() builtin.buffers({ sort_lastuse
 vim.keymap.set("n", "<leader>bb", function() builtin.buffers({ sort_lastused = true }) end, { desc = "Switch buffers" })
 vim.keymap.set("n", "<leader>bd", function() vim.cmd("bdelete") end, { desc = "Delete" })
 vim.keymap.set("n", "<leader>f", builtin.find_files, { desc = "Find Files" })
-vim.keymap.set("n", "<leader>g", neogit.open, { desc = "Find Files" })
+vim.keymap.set("n", "<leader>g", neogit.open, { desc = "Open Neogit" })
 vim.keymap.set("n", "<leader>h", builtin.help_tags, { desc = "Help" })
 vim.keymap.set("n", "<leader>j", function() builtin.find_files({ cwd = utils.buffer_dir() }) end, { desc = "Jump Files" })
 vim.keymap.set({ "v", "n" }, "<leader>la", require("actions-preview").code_actions, { desc = "Code actions" })
