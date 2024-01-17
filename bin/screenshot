@@ -14,10 +14,10 @@ else
   GUI="xorg"
 fi
 
-OUTPUT="$HOME"/Pictures/$(date +'screenshot_%Y-%m-%d-%H%M%S.png')
+OUTPUT="$HOME"/sync/pictures/$(date +'screenshot_%Y-%m-%d-%H%M%S.png')
 
-if [ ! -d "$HOME/Pictures" ]; then
-  mkdir -vp "$HOME/Pictures"
+if [ ! -d "$(dirname $OUTPUT)" ]; then
+  mkdir -vp "$(dirname $OUTPUT)"
 fi
 
 case $MODE in
