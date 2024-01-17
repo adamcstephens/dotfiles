@@ -106,7 +106,7 @@
   ;; (setq org-latex-packages-alist '(("" "minted")))
 
   ;; async export
-  (setq org-export-in-background nil)
+  (setq org-export-in-background t)
 
   ;; better font support
   (setq org-latex-pdf-process
