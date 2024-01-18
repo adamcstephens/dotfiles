@@ -36,6 +36,7 @@
 
             settings = {
               auto-optimise-store = false;
+              experimental-features = "nix-command flakes";
 
               trusted-users = [
                 "root"
@@ -124,7 +125,54 @@
     };
 
     silver = {
-      modules = [ ];
+      modules = [
+        inputs.sandbox.darwinModules.forgejo-actions-runner
+        (
+          { config, pkgs, ... }:
+          {
+            services.forgejo-actions-runner.instances.default = {
+              labels = [ "stop/${pkgs.system}:host" ];
+              name = config.networking.hostName;
+              tokenFile = "/etc/forgejo-token.env";
+              url = "https://git.junco.dev";
+              settings.runner.envs = {
+                ATTIC_URL = "https://attic.junco.dev";
+                ATTIC_CACHE = "default";
+              };
+              hostPackages = [
+                pkgs.bash
+                pkgs.coreutils
+                pkgs.curl
+                pkgs.gawk
+                pkgs.gitMinimal
+                pkgs.gnused
+                pkgs.nodejs
+                pkgs.wget
+                (pkgs.runCommandNoCC "flake-tools"
+                  {
+                    nativeBuildInputs = [ pkgs.makeWrapper ];
+                    buildInputs = [ pkgs.nushell ];
+                  }
+                  ''
+                    mkdir -p $out/bin
+                    cp ${../bin/flake-build} $out/bin/flake-build
+                    patchShebangs $out/bin
+
+                    wrapProgram $out/bin/flake-build --prefix PATH : ${
+                      lib.makeBinPath [
+                        inputs.attic.packages.${pkgs.system}.attic
+                        pkgs.coreutils
+                        pkgs.nix
+                        pkgs.nix-eval-jobs
+                      ]
+                    }
+                  ''
+                )
+              ];
+            };
+          }
+        )
+      ];
     };
   };
 }
