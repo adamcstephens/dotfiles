@@ -32,6 +32,13 @@
 
       nodejs.disabled = true;
 
+      shell = {
+        disabled = false;
+        fish_indicator = "";
+        format = "[$indicator]($style)";
+        style = "fg:244";
+      };
+
       username = {
         style_user = "fg:244";
         format = "[$user@]($style)";
