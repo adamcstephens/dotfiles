@@ -89,7 +89,6 @@
     };
 
     systemd.user.services.waybar.Unit = {
-      Environment = [ "FONTCONFIG_FILE=${config.dotfiles.gui.font.fontconfig}" ];
       PartOf = lib.mkForce [ "wayland-session.target" ];
       After = lib.mkForce [ "wayland-session.target" ];
     };
