@@ -6,25 +6,11 @@
   ...
 }:
 let
-  config-script =
-    pkgs.runCommandNoCC "dunst-config-setup"
-      {
-        nativeBuildInputs = [ pkgs.makeWrapper ];
-        buildInputs = [ pkgs.nushell ];
-      }
-      ''
-        mkdir -p $out/bin
-        cp ${./dunst-config-setup} $out/bin/dunst-config-setup
-        patchShebangs $out/bin
-
-        wrapProgram $out/bin/flake-build --prefix PATH : ${
-          lib.makeBinPath [
-            pkgs.coreutils
-            pkgs.nix
-            pkgs.nix-eval-jobs
-          ]
-        }
-      '';
+  config-script = pkgs.runCommandNoCC "dunst-config-setup" { buildInputs = [ pkgs.nushell ]; } ''
+    mkdir -p $out/bin
+    cp ${./dunst-config-setup} $out/bin/dunst-config-setup
+    patchShebangs $out/bin
+  '';
 in
 {
   services.dunst = {

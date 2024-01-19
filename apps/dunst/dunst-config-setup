@@ -1,11 +1,11 @@
 #!/usr/bin/env nu
 
 let dark_state = if ("~/.dotfiles/.dark-mode.state" | path exists) {
-  open ~/.dotfiles/.dark-mode.state | lines | into bool
+  open ~/.dotfiles/.dark-mode.state | lines | first | into bool
 } else { true }
 
-if dark_state {
-  open ~/.config/dunst/theme-dark.conf ~/.config/dunst/dunstrc | safe --force ~/.config/dunst/final.dunstrc
+if $dark_state {
+  open ~/.config/dunst/theme-dark.conf ~/.config/dunst/dunstrc | save --force ~/.config/dunst/final.dunstrc
 } else {
-  open ~/.config/dunst/theme-light.conf ~/.config/dunst/dunstrc | safe --force ~/.config/dunst/final.dunstrc
+  open ~/.config/dunst/theme-light.conf ~/.config/dunst/dunstrc | save --force ~/.config/dunst/final.dunstrc
 }
