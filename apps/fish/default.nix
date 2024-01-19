@@ -30,6 +30,7 @@
         set --global KITTY_SHELL_INTEGRATION enabled
         source "${pkgs.kitty.shell_integration}/fish/vendor_conf.d/kitty-shell-integration.fish"
         set --prepend fish_complete_path "${pkgs.kitty.shell_integration}/fish/vendor_completions.d"
+        source ${config.xdg.configHome}/fish/functions/uas.fish
       '';
 
     shellAbbrs =
