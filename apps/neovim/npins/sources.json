@@ -1,5 +1,16 @@
 {
   "pins": {
+    "auto-dark-mode.nvim": {
+      "type": "Git",
+      "repository": {
+        "type": "Git",
+        "url": "https://github.com/f-person/auto-dark-mode.nvim"
+      },
+      "branch": "master",
+      "revision": "76e8d40d1e1544bae430f739d827391cbcb42fcc",
+      "url": null,
+      "hash": "1xn9xw47dlwkxn8iw71vva2g0v7v263invi180d5wnp0rk2hp7mq"
+    },
     "focus.nvim": {
       "type": "Git",
       "repository": {

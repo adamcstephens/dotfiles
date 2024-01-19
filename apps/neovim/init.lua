@@ -23,6 +23,16 @@ require("actions-preview").setup {
   },
 }
 
+require('auto-dark-mode').setup({
+  update_interval = 5000,
+  set_dark_mode = function()
+    vim.opt.background = 'dark'
+  end,
+  set_light_mode = function()
+    vim.opt.background = 'light'
+  end,
+})
+
 require('Comment').setup()
 require("conform").setup({
   format_on_save = {
@@ -148,7 +158,8 @@ vim.opt.foldmethod = "expr"
 vim.opt.foldexpr   = "nvim_treesitter#foldexpr()"
 vim.cmd('set nofoldenable')
 
-vim.cmd([[colorscheme modus]])
+-- use modus auto light/dark, switch with vim.opt.background
+vim.cmd('colorscheme modus')
 
 -- mappings
 --
