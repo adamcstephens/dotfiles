@@ -23,15 +23,18 @@ require("actions-preview").setup {
   },
 }
 
-require('auto-dark-mode').setup({
-  update_interval = 5000,
-  set_dark_mode = function()
-    vim.opt.background = 'dark'
-  end,
-  set_light_mode = function()
-    vim.opt.background = 'light'
-  end,
-})
+if vim.loop.os_uname().sysname ~= "Linux"
+    or os.getenv("XDG_CURRENT_DESKTOP") ~= nil then
+  require('auto-dark-mode').setup({
+    update_interval = 5000,
+    set_dark_mode = function()
+      vim.opt.background = 'dark'
+    end,
+    set_light_mode = function()
+      vim.opt.background = 'light'
+    end,
+  })
+end
 
 require('Comment').setup()
 require("conform").setup({
