@@ -7,6 +7,8 @@
 }:
 let
   cfgs = config.profile-parts.home-manager;
+
+  npins = import ../npins;
 in
 {
   imports = [ inputs.profile-parts.flakeModules.home-manager ];
@@ -35,7 +37,7 @@ in
       ];
 
     specialArgs = {
-      inherit inputs;
+      inherit inputs npins;
     };
   };
 

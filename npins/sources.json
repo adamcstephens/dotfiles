@@ -1,0 +1,19 @@
+{
+  "pins": {
+    "modus-themes.nvim": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "GitHub",
+        "owner": "miikanissi",
+        "repo": "modus-themes.nvim"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "version": "v1.1.1",
+      "revision": "86e352db09b90b0522f5b1c0fc9c2e0aadcea61c",
+      "url": "https://api.github.com/repos/miikanissi/modus-themes.nvim/tarball/v1.1.1",
+      "hash": "187w5p26n034kyfpfakwdvh1ywljs24q0qzakhcdv6k4dfcck1nw"
+    }
+  },
+  "version": 3
+}
