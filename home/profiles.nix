@@ -86,6 +86,7 @@ in
             programs.waybar.settings.main = {
               output = [
                 "eDP-1"
+                "DP-1"
                 "DP-2"
               ];
               network.interface = "wlP6p1s0";
@@ -105,7 +106,7 @@ in
             };
 
             services.ssh-agent.enable = true;
-            systemd.user.services.ssh-agent.Install.WantedBy = lib.mkForce ["graphical-session.target"];
+            systemd.user.services.ssh-agent.Install.WantedBy = lib.mkForce [ "graphical-session.target" ];
             systemd.user.services.ssh-agent.Service.Environment = [
               "SSH_ASKPASS=${pkgs.x11_ssh_askpass}/libexec/ssh-askpass"
             ];
@@ -249,10 +250,6 @@ in
             };
 
             programs.waybar.settings.main = {
-              output = [
-                "eDP-1"
-                "DP-2"
-              ];
               network.interface = "wlp0s20f3";
             };
           }
