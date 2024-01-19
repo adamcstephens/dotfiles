@@ -1,0 +1,16 @@
+{
+  "pins": {
+    "tree-sitter-nu": {
+      "type": "Git",
+      "repository": {
+        "type": "Git",
+        "url": "https://github.com/nushell/tree-sitter-nu"
+      },
+      "branch": "main",
+      "revision": "4e5567e8b36f39b3484e20ad76c2e0149bb07957",
+      "url": null,
+      "hash": "1rqpiipgw9b0wmil7ymxs7m5jlwkvlpsiqlwsscbjv1y0q3wgf00"
+    }
+  },
+  "version": 3
+}

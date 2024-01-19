@@ -14,9 +14,15 @@ let
     pkgs.nodejs-slim
   ];
   pins = import ./npins;
+  pins-ext = import ./npins-ext;
   npinsPlugins =
     lib.mapAttrsToList (name: src: (pkgs.vimUtils.buildVimPlugin { inherit name src; }))
       pins;
+
+  nvim-treesitter-nu = pkgs.callPackage ./nvim-treesitter-nu.nix {
+    inherit (pkgs.tree-sitter) buildGrammar;
+    src = pins-ext.tree-sitter-nu;
+  };
 
   neovimConfig = pkgs.neovimUtils.makeNeovimConfig {
     plugins =
@@ -40,6 +46,7 @@ let
         nvim-cmp
         nvim-lspconfig
         nvim-treesitter.withAllGrammars
+        (nvim-treesitter.withPlugins (plugins: [ nvim-treesitter-nu ]))
         nvim-surround
         nvim-web-devicons
         rainbow-delimiters-nvim
@@ -76,6 +83,8 @@ let
   );
 in
 {
-  home.file.".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/neovim";
+  home.file.".config/nvim/init.lua".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/neovim/init.lua";
   home.packages = [ package ];
+
+  home.file.".config/nvim/queries/nu".source = pins-ext.tree-sitter-nu + "/queries/nu";
 }
