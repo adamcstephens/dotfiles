@@ -52,6 +52,7 @@ let
         rainbow-delimiters-nvim
         remember-nvim
         telescope-nvim
+        telescope-frecency-nvim
         trim-nvim
         trouble-nvim
         vim-just
