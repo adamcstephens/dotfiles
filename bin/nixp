@@ -3,21 +3,23 @@
 let nixpkgs_root = $env.HOME + "/git/nixpkgs"
 
 def get_worktree [branch: string] {
-  $nixpkgs_root + "/.worktree/" + ($branch | str replace "/" "-")
+  $nixpkgs_root + "-worktree/" + ($branch | str replace "/" "-")
 }
 
 def workdir [branch: string, ] {
   let worktree = get_worktree $branch
 
+  if not ($worktree | path dirname | path exists) {
+    mkdir -v ($worktree | path dirname)
+  }
+
   cd $nixpkgs_root
 
   let branch_test = do { git rev-parse --verify $branch } | complete
-  let worktree_args = (if ($branch_test.exit_code != 0) { ["-b", $branch] } else { [$branch] }) ++ ["--checkout", "--lock", "--track", "--guess-remote", "upstream/master"]
+  let worktree_args = (if ($branch_test.exit_code != 0) { ["-b", $branch, "--track"] } else { [$branch] }) ++ ["--checkout", "--lock"]
 
-  if (not ($worktree | path exists)) {
-    git switch master
-    git pull upstream master
-    echo $worktree_args
+  if not ($worktree | path exists) {
+    print ($worktree_args | prepend $worktree)
     git worktree add $worktree $worktree_args
 
     cd $worktree
@@ -25,7 +27,7 @@ def workdir [branch: string, ] {
     cd -
   }
 
-  if (not (($worktree + "/.envrc") | path exists)) {
+  if not (($worktree + "/.envrc") | path exists) {
     cd $worktree
     "use flake ~/.dotfiles#nixpkgs" | save ".envrc"
     direnv allow
