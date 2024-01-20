@@ -276,4 +276,15 @@ in
   flake.homeModules = builtins.mapAttrs (_: profile: profile.finalModules) cfgs;
   flake.lib.findHome =
     hostname: system: if (builtins.elem hostname (builtins.attrNames cfgs)) then hostname else system;
+
+  flake.sower = {
+    nixos = { };
+    home-manager = {
+      ark = { };
+      think = { };
+      # this is not a system! but it's my smallest home
+      x86_64-linux = { };
+    };
+    darwin = { };
+  };
 }

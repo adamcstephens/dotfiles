@@ -62,6 +62,33 @@ export def flake-input-targets [] {
   }
 }
 
+export def load-seeds [] {
+  nix eval .#sower --json | from json
+}
+
+export def build-configs [--system: string] {
+  let configs = $in
+
+  $configs.home-manager | items { |name, config|
+    # let name = $hm | columns | first
+    # let config = $hm | get $name
+
+
+    # nix build $config.activationPackage
+    let result = nix build --no-link --fallback --keep-going --json $".#homeConfigurations.($name).activationPackage" | from json
+    { name: $name, build: $result }
+  }
+}
+
+export def upload-configs [--attic-cache: string = "default"] {
+  let configs = $in
+
+  $configs | par-each { |c|
+    $c.build | get outputs | get out | attic-upload $attic_cache
+    $c
+  }
+}
+
 export def gen-targets [--system: string] {
   try { rm -r gcroot/* }
   let eval_args = [
