@@ -247,6 +247,10 @@ lspconfig.efm.setup({
   },
 })
 lspconfig.gopls.setup({})
+
+require('ionide').setup({})
+vim.g["fsharp#lsp_auto_setup"] = 0
+
 lspconfig.lua_ls.setup({
   settings = {
     Lua = {

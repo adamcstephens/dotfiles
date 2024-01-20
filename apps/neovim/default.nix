@@ -39,6 +39,7 @@ let
         efmls-configs-nvim
         elixir-tools-nvim
         gitsigns-nvim
+        Ionide-vim
         lualine-nvim
         luasnip
         modus-themes-nvim
