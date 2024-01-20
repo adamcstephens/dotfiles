@@ -34,7 +34,7 @@ def main [ project_path: string = "" ] {
       tmux new-window -c $project -n $wname
       tmux select-window -t $wname
       tmux send-keys 'vim' 'C-m'
-      tmux split-window -h
+      tmux split-window -h -c $project
       tmux select-pane -l
     } else {
       kitty --single-instance $project
