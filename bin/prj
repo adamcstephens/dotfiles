@@ -1,8 +1,14 @@
 #!/usr/bin/env nu
 
 def main [ project_path: string = "" ] {
+  let is_tmux = if $env.TMUX != null { true } else { false }
+
   let prj = if $project_path != "" { $project_path | path expand } else {
-    let lookup = do { zoxide query --list | rofi -dmenu } | complete
+    let lookup = if $is_tmux {
+      zoxide query --list | fzf | complete
+    } else {
+      do { zoxide query --list | rofi -dmenu } | complete
+    }
 
     if $lookup.exit_code != 0 {
       echo "!! Failed to select project"
@@ -17,8 +23,23 @@ def main [ project_path: string = "" ] {
     let $project = $prj | str trim
 
     echo $":: Opening project ($project)"
-    kitty --single-instance $project
-    codium -n $project
+    if $is_tmux {
+      let wname = ($project | path basename | str replace --regex '[^a-zA-Z]' '')
+
+      if (tmux list-windows -F '#{window_name}' | lines | find --regex $'^($wname)$' | length) > 0 {
+        print $"⚠️ tmux session already exists for ($project), exiting"
+        exit 0
+      }
+
+      tmux new-window -c $project -n $wname
+      tmux select-window -t $wname
+      tmux send-keys 'vim' 'C-m'
+      tmux split-window -h
+      tmux select-pane -l
+    } else {
+      kitty --single-instance $project
+      codium -n $project
+    }
   } else {
     echo $"!! No project found, \"($prj)\", exiting"
     exit 1
