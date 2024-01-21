@@ -45,10 +45,8 @@ require("conform").setup({
 })
 
 require("elixir").setup({
-  elixirls = {
-    -- don't prompt to install elixir-ls, get it from path
-    cmd = "elixir-ls",
-  },
+  elixirls = { enable = false, cmd = "elixir-ls", },
+  nextls = { enable = true, cmd = "nextls", },
 })
 require("focus").setup()
 require('gitsigns').setup()
