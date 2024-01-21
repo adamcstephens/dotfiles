@@ -88,7 +88,7 @@ export def build-configs [] {
   let configs = $in
 
   $configs | each { |c|
-    $c | update targets ($c.targets | each { |i|
+    $c | update targets ($c.targets | par-each --threads 4 { |i|
       let buildTarget = if $c.type == "darwin" {
         $".#darwinConfigurations.($i.name).system"
       } else if $c.type == "dev-shell" {
@@ -102,7 +102,11 @@ export def build-configs [] {
         exit 1
       }
 
-      let result = nix build --no-link --fallback --keep-going --json $buildTarget | from json
+      let result = try {
+        nix build --no-link --fallback --keep-going --json $buildTarget | from json
+      } catch {
+        null
+      }
 
       $i | insert build $result
     })
@@ -113,8 +117,42 @@ export def upload-configs [--attic-cache: string = "default"] {
   let configs = $in
 
   $configs | reduce --fold [] { |c, acc|
-    $acc ++ ($c.targets | get build | flatten | get outputs.out)
+    $acc ++ ($c.targets | filter { |t| $t.build != null } | get build | flatten | get outputs.out)
   } | attic-upload $attic_cache
+
+  $configs
+}
+
+export def get-config-failures [] {
+  let configs = $in
+
+  $configs | filter { |c|
+    # filter top-levels down to failed ones
+    $c.targets | any { |t|
+      $t.build == null
+    }
+  } | each { |c|
+    # filter targets down to failed ones
+    $c | update targets ($c.targets | filter { |t|
+      $t.build == null
+    })
+  } | each { |c|
+    # simplify for output
+    $c.targets | each { |t|
+      { type: $c.type, name: $t.name }
+    }
+  } | flatten
+}
+
+export def get-config-outputs [] {
+  let configs = $in
+
+  $configs | each { |c|
+    # simplify for output
+    $c.targets | filter { |t| $t.build != null } | each { |t|
+      { type: $c.type, name: $t.name, output: $t.build.outputs.out.0 }
+    }
+  } | flatten
 }
 
 export def gen-targets [--system: string] {
@@ -142,14 +180,14 @@ export def result-paths [] {
   $in | where outPath != null | get outPath | flatten
 }
 
-def main [--attic-upload: bool = true, --attic-use: bool = false, --eval-only, --nom: bool = true, --system: string, ...targets: string ] {
+def main [--v2: bool = true, --attic-upload: bool = true, --attic-use: bool = false, --eval-only, --nom: bool = true, --system: string, ...targets: string ] {
   let attic_url = $env.ATTIC_URL?
   let attic_cache = $env.ATTIC_CACHE?
   let attic_token = $env.ATTIC_KEY?
 
   if $attic_use or $attic_upload {
     if ($attic_url == null) or ($attic_cache == null) or ($attic_token == null)) {
-      print "‼️ attic information missing, abut ttic-use or attic-upload are set to true"
+      print "‼️ attic information missing, but attic-use or attic-upload are set to true"
       exit 1
     }
 
@@ -160,33 +198,53 @@ def main [--attic-upload: bool = true, --attic-use: bool = false, --eval-only, -
     }
   }
 
-  let targets = if $targets != [] { $targets | eval-targets } else { gen-targets --system=$system }
+  if $v2 {
+    let seeds = load-seeds | filter-configs --system $system
+    let built_seeds = $seeds | build-configs
 
-  print "🏛️ Targets"
-  print $targets
+    if $attic_upload {
+      $built_seeds | upload-configs --attic-cache $attic_cache
+    }
 
-  if $eval_only {
-    exit 0
-  }
+    print "🎯 Built seeds"
+    print ($built_seeds | get-config-outputs)
 
-  if ($targets | is-empty) {
-    print $"⁉️ (ansi red)!! No targets from env PLUGIN_TARGETS or detected in flake, exiting(ansi reset)"
-    exit 1
-  }
-
-  let built_targets = $targets | build-targets --nom=$nom | append (flake-input-targets)
-  print "🎯 Built targets"
-  print $built_targets
-
-  if $attic_upload {
-    $built_targets | result-paths | attic-upload $attic_cache
-  }
-
-  if ($built_targets | any { |t| $t.outPath == null }) {
-    print "💀 Failed targets"
-    print ($built_targets | where outPath == null)
-    exit 1
+    if ($built_seeds | any { |c| $c.targets | any { |t| $t.build == null } }) {
+      print "💀 Failed targets"
+      print ($built_seeds | get-config-failures)
+      exit 1
+    } else {
+      print "🥳 Success!"
+    }
   } else {
-    print "🥳 Success!"
+    let targets = if $targets != [] { $targets | eval-targets } else { gen-targets --system=$system }
+
+    print "🏛️ Targets"
+    print $targets
+
+    if $eval_only {
+      exit 0
+    }
+
+    if ($targets | is-empty) {
+      print $"⁉️ (ansi red)!! No targets from env PLUGIN_TARGETS or detected in flake, exiting(ansi reset)"
+      exit 1
+    }
+
+    let built_targets = $targets | build-targets --nom=$nom | append (flake-input-targets)
+    print "🎯 Built targets"
+    print $built_targets
+
+    if $attic_upload {
+      $built_targets | result-paths | attic-upload $attic_cache
+    }
+
+    if ($built_targets | any { |t| $t.outPath == null }) {
+      print "💀 Failed targets"
+      print ($built_targets | where outPath == null)
+      exit 1
+    } else {
+      print "🥳 Success!"
+    }
   }
 }

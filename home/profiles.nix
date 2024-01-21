@@ -317,7 +317,7 @@ in
             systems = [ v.pkgs.hostPlatform.system ];
           })
           self.darwinConfigurations;
-      home =
+      home-manager =
         lib.mapAttrs
           (n: v: {
             systems = [ v.pkgs.hostPlatform.system ];
