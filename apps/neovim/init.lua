@@ -232,7 +232,11 @@ local languages = {
   fish = {
     require('efmls-configs.linters.fish'),
     require('efmls-configs.formatters.fish_indent')
-  }
+  },
+  sh = {
+    require('efmls-configs.linters.shellcheck'),
+    require('efmls-configs.formatters.shfmt'),
+  },
 }
 lspconfig.efm.setup({
   filetypes = vim.tbl_keys(languages),

@@ -12,6 +12,8 @@ let
     pkgs.lua-language-server
     pkgs.nil
     pkgs.nodejs-slim
+    pkgs.shellcheck
+    pkgs.shfmt
   ];
   pins = import ./npins;
   pins-ext = import ./npins-ext;
