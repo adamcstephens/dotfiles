@@ -110,6 +110,7 @@ require('nvim-treesitter.configs').setup({
   },
 })
 require('nvim-web-devicons').setup({})
+require("oil").setup()
 require('rainbow-delimiters.setup').setup({})
 require('remember').setup({})
 local builtin = require("telescope.builtin")

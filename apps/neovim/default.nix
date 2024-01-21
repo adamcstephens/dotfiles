@@ -50,6 +50,7 @@ let
         (nvim-treesitter.withPlugins (plugins: [ nvim-treesitter-nu ]))
         nvim-surround
         nvim-web-devicons
+        oil-nvim
         rainbow-delimiters-nvim
         remember-nvim
         telescope-nvim
