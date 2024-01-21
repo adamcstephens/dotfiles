@@ -63,20 +63,35 @@ export def flake-input-targets [] {
 }
 
 export def load-seeds [] {
-  nix eval .#sower --json | from json
+  nix eval .#sower --json | from json | transpose type targets | each {|type| $type | update targets ($type.targets | transpose name config) }
 }
 
-export def build-configs [--system: string] {
+export def filter-configs [--system: string] {
   let configs = $in
 
-  $configs.home-manager | items { |name, config|
-    # let name = $hm | columns | first
-    # let config = $hm | get $name
+  if $system == null {
+    $configs
+  } else {
+    $configs | each { |c|
+      $c | update targets (
+        $c.targets | filter { |i|
+          $i.config.system == "aarch64-linux"
+        }
+      )
+    }
+  }
+}
 
+export def build-configs [] {
+  let configs = $in
 
-    # nix build $config.activationPackage
-    let result = nix build --no-link --fallback --keep-going --json $".#homeConfigurations.($name).activationPackage" | from json
-    { name: $name, build: $result }
+  $configs | each { |c|
+    $c.targets | each { |i| 
+      if $c.type == "home-manager" {
+        let result = nix build --no-link --fallback --keep-going --json $".#homeConfigurations.($i.name).activationPackage" | from json
+      $i | insert build $result
+      }
+    }
   }
 }
 

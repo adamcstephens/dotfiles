@@ -280,10 +280,11 @@ in
   flake.sower = {
     nixos = { };
     home-manager = {
-      ark = { };
-      think = { };
+      ark = { system = self.homeConfigurations.ark.pkgs.hostPlatform.system; };
+      think = { system = self.homeConfigurations.think.pkgs.hostPlatform.system; };
       # this is not a system! but it's my smallest home
-      x86_64-linux = { };
+      aarch64-linux = { system = self.homeConfigurations.aarch64-linux.pkgs.hostPlatform.system; };
+      x86_64-linux = { system = self.homeConfigurations.x86_64-linux.pkgs.hostPlatform.system; };
     };
     darwin = { };
   };
