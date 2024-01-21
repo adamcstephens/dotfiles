@@ -114,9 +114,9 @@ require('remember').setup({})
 local builtin = require("telescope.builtin")
 local utils = require("telescope.utils")
 require("telescope").load_extension("frecency")
-require('trim').setup({})
 require('trouble').setup()
 require("which-key").setup({})
+require('whitespace-nvim').setup({})
 
 -- cmp
 --
@@ -224,6 +224,24 @@ vim.api.nvim_create_autocmd('FocusGained', {
     end
   end,
   group = autoid
+})
+vim.api.nvim_create_autocmd('FileType', {
+  desc = "quit help with q",
+  pattern = "help",
+  callback = function()
+    vim.keymap.set("", "q", function()
+      vim.api.nvim_buf_delete(0, {})
+    end, { buffer = true, noremap = true, })
+  end,
+  group = autoid,
+})
+vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+  desc = "delete trailing whitespace",
+  callback = function()
+    local save_cursor = vim.fn.getpos(".")
+    require('whitespace-nvim').trim()
+    vim.fn.setpos(".", save_cursor)
+  end
 })
 
 -- Setup language servers.

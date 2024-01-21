@@ -57,11 +57,11 @@ let
         remember-nvim
         telescope-nvim
         telescope-frecency-nvim
-        trim-nvim
         trouble-nvim
         vim-just
         vim-matchup
         which-key-nvim
+        whitespace-nvim
       ]
       ++ npinsPlugins;
     withPython3 = false;
@@ -88,6 +88,11 @@ let
   );
 in
 {
+  home.sessionVariables = {
+    MANPAGER = "nvim +Man!";
+    MANWIDTH = "999";
+  };
+
   home.file.".config/nvim/init.lua".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/neovim/init.lua";
   home.packages = [ package ];
 
