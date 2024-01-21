@@ -82,16 +82,6 @@ require("modus-themes").setup({
 local neogit = require('neogit')
 neogit.setup()
 require('nvim-surround').setup({})
-require('nvim-tmux-navigation').setup({
-  keybindings = {
-    left = "<C-h>",
-    down = "<C-j>",
-    up = "<C-k>",
-    right = "<C-l>",
-    last_active = "<C-\\>",
-    next = "<C-Space>",
-  }
-})
 require('nvim-treesitter.configs').setup({
   highlight = {
     enable = true,
@@ -114,6 +104,7 @@ require('remember').setup({})
 local builtin = require("telescope.builtin")
 local utils = require("telescope.utils")
 require("telescope").load_extension("frecency")
+require("tmux").setup({})
 require('trouble').setup()
 require("which-key").setup({})
 require('whitespace-nvim').setup({})

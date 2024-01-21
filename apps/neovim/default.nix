@@ -57,6 +57,7 @@ let
         remember-nvim
         telescope-nvim
         telescope-frecency-nvim
+        tmux-nvim
         trouble-nvim
         vim-just
         vim-matchup

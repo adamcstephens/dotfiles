@@ -22,18 +22,6 @@
       "revision": "5269ea70e2003d9dac199584b093323752a472ba",
       "url": "https://github.com/nvim-focus/focus.nvim/archive/5269ea70e2003d9dac199584b093323752a472ba.tar.gz",
       "hash": "1fwam2cg19mi2c2mnlfvmmw3l3bviq8iwz63rivwfk9i2v62dghh"
-    },
-    "nvim-tmux-navigation": {
-      "type": "Git",
-      "repository": {
-        "type": "GitHub",
-        "owner": "alexghergh",
-        "repo": "nvim-tmux-navigation"
-      },
-      "branch": "main",
-      "revision": "d9efffa413a530bdea3783af4fea86be84940283",
-      "url": "https://github.com/alexghergh/nvim-tmux-navigation/archive/d9efffa413a530bdea3783af4fea86be84940283.tar.gz",
-      "hash": "0zdybpx4asv69r0aj5q1qdq1dm4zmmvp5w568j9ryxzaiy05wqdw"
     }
   },
   "version": 3
