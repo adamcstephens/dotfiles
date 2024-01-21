@@ -75,7 +75,9 @@ export def filter-configs [--system: string] {
     $configs | each { |c|
       $c | update targets (
         $c.targets | filter { |i|
-          $i.config.system == $system
+          $system in $i.config.systems
+        } | each { |i|
+          $i | update config.systems [$system]
         }
       )
     }
@@ -87,11 +89,22 @@ export def build-configs [] {
 
   $configs | each { |c|
     $c | update targets ($c.targets | each { |i|
-      if $c.type == "home-manager" {
-        let result = nix build --no-link --fallback --keep-going --json $".#homeConfigurations.($i.name).activationPackage" | from json
-
-        $i | insert build $result
+      let buildTarget = if $c.type == "darwin" {
+        $".#darwinConfigurations.($i.name).system"
+      } else if $c.type == "dev-shell" {
+        $i.config.systems | each {|t| $".#devShells.($t).($i.name)" }
+      } else if $c.type == "home-manager" {
+        $".#homeConfigurations.($i.name).activationPackage"
+      } else if $c.type == "nixos" {
+        $".#nixosConfigurations.($i.name).config.system.build.toplevel"
+      } else {
+        print $"!! Unsupported type ($c.type)"
+        exit 1
       }
+
+      let result = nix build --no-link --fallback --keep-going --json $buildTarget | from json
+
+      $i | insert build $result
     })
   }
 }

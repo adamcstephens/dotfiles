@@ -277,15 +277,51 @@ in
   flake.lib.findHome =
     hostname: system: if (builtins.elem hostname (builtins.attrNames cfgs)) then hostname else system;
 
-  flake.sower = {
-    nixos = { };
-    home-manager = {
-      ark = { system = self.homeConfigurations.ark.pkgs.hostPlatform.system; };
-      think = { system = self.homeConfigurations.think.pkgs.hostPlatform.system; };
-      # this is not a system! but it's my smallest home
-      aarch64-linux = { system = self.homeConfigurations.aarch64-linux.pkgs.hostPlatform.system; };
-      x86_64-linux = { system = self.homeConfigurations.x86_64-linux.pkgs.hostPlatform.system; };
+  flake.sower =
+    let
+      systemShells = lib.mapAttrs (on: ov: (lib.mapAttrs (n: v: n) ov)) self.devShells;
+      allShells =
+        lib.foldlAttrs
+          (
+            acc: n: v:
+            acc
+            ++
+              builtins.map
+                (dsv: {
+                  name = dsv;
+                  system = n;
+                })
+                (builtins.attrNames v)
+          )
+          [ ]
+          systemShells;
+      devShells =
+        lib.foldl
+          (
+            acc: n:
+            acc
+            // {
+              "${n.name}" = {
+                systems = (acc.${n.name}.systems or [ ]) ++ [ n.system ];
+              };
+            }
+          )
+          { }
+          allShells;
+    in
+    {
+      dev-shell = devShells;
+      darwin =
+        lib.mapAttrs
+          (n: v: {
+            systems = [ v.pkgs.hostPlatform.system ];
+          })
+          self.darwinConfigurations;
+      home =
+        lib.mapAttrs
+          (n: v: {
+            systems = [ v.pkgs.hostPlatform.system ];
+          })
+          self.homeConfigurations;
     };
-    darwin = { };
-  };
 }
