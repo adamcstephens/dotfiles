@@ -24,16 +24,17 @@ def main [ project_path: string = "" ] {
 
     echo $":: Opening project ($project)"
     if $is_tmux {
-      let wname = ($project | path basename | str replace --regex '[^a-zA-Z]' '')
+      let wname = $project | path basename | str replace --regex '[^a-zA-Z]' ''
+      let tmux_windows = tmux list-windows -F '#{window_index},#{window_name}'  | from csv --trim all | rename index name
+      let prj_windows = $tmux_windows| filter { |w| $w.name == $wname} | get index
 
-      if (tmux list-windows -F '#{window_name}' | lines | find --regex $'^($wname)$' | length) > 0 {
-        print $"⚠️ tmux session already exists for ($project), exiting"
-        exit 0
+      if ($prj_windows | length) > 0 {
+        exec tmux select-window -t $wname
       }
 
       tmux new-window -c $project -n $wname
       tmux select-window -t $wname
-      tmux send-keys 'vim' 'C-m'
+      tmux send-keys 'vim .' 'C-m'
       tmux split-window -h -c $project
       tmux select-pane -l
     } else {
