@@ -31,7 +31,7 @@ export def build-targets [--nom: bool = true] {
   let command = if $nom { "nom" } else { "nix" }
   $targets | par-each --threads 2 { |target|
     let outPath = try {
-      let drv = $target | update drvPath ($target.drvPath | str replace --regex ".drv$" ".drv^*") | get drvPath
+      let drv = $target | update drvPath ($target.drvPath| str replace --regex ".drv$" ".drv^*") | get drvPath
       run-external --redirect-stdout $command build "--no-link" "--fallback" "--keep-going" "--json" $drv | from json | select outputs | flatten | get out
     } catch {
       null
@@ -75,7 +75,7 @@ export def filter-configs [--system: string] {
     $configs | each { |c|
       $c | update targets (
         $c.targets | filter { |i|
-          $i.config.system == "aarch64-linux"
+          $i.config.system == $system
         }
       )
     }
@@ -86,22 +86,22 @@ export def build-configs [] {
   let configs = $in
 
   $configs | each { |c|
-    $c.targets | each { |i| 
+    $c | update targets ($c.targets | each { |i|
       if $c.type == "home-manager" {
         let result = nix build --no-link --fallback --keep-going --json $".#homeConfigurations.($i.name).activationPackage" | from json
-      $i | insert build $result
+
+        $i | insert build $result
       }
-    }
+    })
   }
 }
 
 export def upload-configs [--attic-cache: string = "default"] {
   let configs = $in
 
-  $configs | par-each { |c|
-    $c.build | get outputs | get out | attic-upload $attic_cache
-    $c
-  }
+  $configs | reduce --fold [] { |c, acc|
+    $acc ++ ($c.targets | get build | flatten | get outputs.out)
+  } | attic-upload $attic_cache
 }
 
 export def gen-targets [--system: string] {
