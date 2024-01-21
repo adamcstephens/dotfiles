@@ -44,10 +44,15 @@
       ];
 
       perSystem =
-        { pkgs, system, ... }:
+        {
+          lib,
+          pkgs,
+          system,
+          ...
+        }:
         {
           packages = import ./packages {
-            inherit inputs pkgs;
+            inherit inputs lib pkgs;
             homeConfigurations = builtins.attrNames self.homeConfigurations;
           };
         };

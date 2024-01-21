@@ -58,6 +58,8 @@
             pkgs.npins
             pkgs.nushell
             pkgs.nvd
+
+            self'.packages.seed-ci
           ];
         };
 

@@ -1,4 +1,9 @@
-{ inputs, lib, ... }:
+{
+  inputs,
+  lib,
+  self,
+  ...
+}:
 {
   imports = [ inputs.profile-parts.flakeModules.darwin ];
 
@@ -148,26 +153,8 @@
                 pkgs.gnused
                 pkgs.nodejs
                 pkgs.wget
-                (pkgs.runCommandNoCC "flake-tools"
-                  {
-                    nativeBuildInputs = [ pkgs.makeWrapper ];
-                    buildInputs = [ pkgs.nushell ];
-                  }
-                  ''
-                    mkdir -p $out/bin
-                    cp ${../bin/flake-build} $out/bin/flake-build
-                    patchShebangs $out/bin
 
-                    wrapProgram $out/bin/flake-build --prefix PATH : ${
-                      lib.makeBinPath [
-                        inputs.attic.packages.${pkgs.system}.attic
-                        pkgs.coreutils
-                        pkgs.nix
-                        pkgs.nix-eval-jobs
-                      ]
-                    }
-                  ''
-                )
+                self.packages.${pkgs.system}.seed-ci
               ];
             };
           }
