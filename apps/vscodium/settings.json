@@ -1,6 +1,6 @@
 {
   "[elixir]": {
-    "editor.defaultFormatter": "elixir-tools.elixir-tools"
+    "editor.defaultFormatter": "elixir-lsp.elixir-ls"
   },
   "[fish]": {
     "editor.defaultFormatter": "bmalehorn.vscode-fish"

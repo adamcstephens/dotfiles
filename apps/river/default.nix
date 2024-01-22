@@ -52,6 +52,8 @@ in
 
     xdg.configFile."river/start" = {
       text = ''
+        #!${lib.getExe pkgs.bash}
+
         # cleanup any xserver
         systemctl --user stop xserver-session.target
         systemctl --user unset-environment DISPLAY
