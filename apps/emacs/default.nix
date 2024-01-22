@@ -10,7 +10,8 @@ let
 
   aspell = pkgs.aspellWithDicts (
     dicts:
-    with dicts; [
+    with dicts;
+    [
       en
       en-computers
       en-science
@@ -90,95 +91,91 @@ let
       epkgs.treesit-grammars.with-all-grammars
     ]
     ++ (with epkgs.melpaStablePackages; [ org-re-reveal ])
-    ++ (
-      with epkgs.melpaPackages; [
-        agenix
-        all-the-icons
-        apheleia
-        auto-dark
-        avy
-        bbww
-        cape
-        chatgpt-shell
-        cider
-        clipetty
-        consult
-        dash
-        diff-ansi
-        diff-hl
-        direnv
-        dirvish
-        doom-modeline
-        editorconfig
-        eldoc-box
-        elisp-autofmt
-        elixir-ts-mode
-        embark
-        embark-consult
-        evil
-        evil-collection
-        evil-commentary
-        evil-org
-        expand-region
-        fish-mode
-        flyspell-correct
-        gcmh
-        git-auto-commit-mode
-        golden-ratio
-        haskell-mode
-        hide-mode-line
-        just-mode
-        kkp
-        ligature
-        lispy
-        magit
-        marginalia
-        markdown-mode
-        modus-themes
-        move-dup
-        multi-vterm
-        mwim
-        nim-mode
-        nix-ts-mode
-        nushell-ts-mode
-        olivetti
-        orderless
-        org-appear
-        org-autolist
-        org-download
-        org-present
-        org-superstar
-        ox-pandoc
-        persistent-scratch
-        project-rootfile
-        rainbow-delimiters
-        ron-mode
-        run-command
-        ssh-config-mode
-        terraform-mode
-        transpose-frame
-        treesit-auto
-        undo-fu
-        undo-fu-session
-        vterm
-        wgrep
-        which-key
-        whole-line-or-region
-        yasnippet
-        yasnippet-snippets
-        yuck-mode
-      ]
-    )
-    ++ (
-      with epkgs.elpaPackages; [
-        corfu
-        org
-        rainbow-mode
-        substitute
-        vertico
-        vundo
-      ]
-    )
+    ++ (with epkgs.melpaPackages; [
+      agenix
+      all-the-icons
+      apheleia
+      auto-dark
+      avy
+      bbww
+      cape
+      chatgpt-shell
+      cider
+      clipetty
+      consult
+      dash
+      diff-ansi
+      diff-hl
+      direnv
+      dirvish
+      doom-modeline
+      editorconfig
+      eldoc-box
+      elisp-autofmt
+      elixir-ts-mode
+      embark
+      embark-consult
+      evil
+      evil-collection
+      evil-commentary
+      evil-org
+      expand-region
+      fish-mode
+      flyspell-correct
+      gcmh
+      git-auto-commit-mode
+      golden-ratio
+      haskell-mode
+      hide-mode-line
+      just-mode
+      kkp
+      ligature
+      lispy
+      magit
+      marginalia
+      markdown-mode
+      modus-themes
+      move-dup
+      multi-vterm
+      mwim
+      nim-mode
+      nix-ts-mode
+      nushell-ts-mode
+      olivetti
+      orderless
+      org-appear
+      org-autolist
+      org-download
+      org-present
+      org-superstar
+      ox-pandoc
+      persistent-scratch
+      project-rootfile
+      rainbow-delimiters
+      ron-mode
+      run-command
+      ssh-config-mode
+      terraform-mode
+      transpose-frame
+      treesit-auto
+      undo-fu
+      undo-fu-session
+      vterm
+      wgrep
+      which-key
+      whole-line-or-region
+      yasnippet
+      yasnippet-snippets
+      yuck-mode
+    ])
+    ++ (with epkgs.elpaPackages; [
+      corfu
+      org
+      rainbow-mode
+      substitute
+      vertico
+      vundo
+    ])
     ++ (with epkgs.nongnuPackages; [ eat ]);
 
   emacsPackage = (pkgs.emacsPackagesFor selectedPackage).emacsWithPackages emacsPackages;

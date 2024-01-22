@@ -22,28 +22,26 @@ in
       script = "polybar bar &";
 
       extraConfig =
-        (
-          with config.colorScheme.colors; ''
-            [colors]
-            background = ${base00}
-            background-alt = ${base00}
-            foreground = ${base05}
-            primary = ${base0A}
-            secondary = ${base0C}
-            disabled = ${base03}
-            border = ${base03}
-            red = ${base08}
-            green = ${base0B}
-            blue = ${base0D}
+        (with config.colorScheme.colors; ''
+          [colors]
+          background = ${base00}
+          background-alt = ${base00}
+          foreground = ${base05}
+          primary = ${base0A}
+          secondary = ${base0C}
+          disabled = ${base03}
+          border = ${base03}
+          red = ${base08}
+          green = ${base0B}
+          blue = ${base0D}
 
-            [display]
-            font-mono = ${config.dotfiles.gui.font.mono}:size=10;0
-            font-variable = ${config.dotfiles.gui.font.variable}:size=11;0
+          [display]
+          font-mono = ${config.dotfiles.gui.font.mono}:size=10;0
+          font-variable = ${config.dotfiles.gui.font.variable}:size=11;0
 
-            [scripts]
-            player = ${./player.sh}
-          ''
-        )
+          [scripts]
+          player = ${./player.sh}
+        '')
         + (builtins.readFile ./config.ini);
     };
 
