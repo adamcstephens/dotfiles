@@ -45,14 +45,17 @@ require("conform").setup({
 })
 
 require("elixir").setup({
-  elixirls = { enable = false, cmd = "elixir-ls", },
-  nextls = { enable = true, cmd = "nextls", },
+  elixirls = { enable = true, cmd = "elixir-ls", },
+  nextls = { enable = false, cmd = "nextls", },
 })
 require("focus").setup()
 require('gitsigns').setup()
 local lspconfig = require('lspconfig')
 require('lualine').setup({
   options = { theme = "modus-vivendi" },
+  sections = {
+    lualine_c = { { 'filename', path = 1 } },
+  }
 })
 
 local luasnip = require('luasnip')
@@ -98,7 +101,28 @@ require('nvim-treesitter.configs').setup({
   },
 })
 require('nvim-web-devicons').setup({})
-require("oil").setup()
+local oil = require("oil")
+oil.setup({
+  use_default_keymaps = false,
+  keymaps = {
+    ["g?"] = "actions.show_help",
+    ["<CR>"] = "actions.select",
+    -- ["<C-s>"] = "actions.select_vsplit",
+    -- ["<C-h>"] = "actions.select_split",
+    -- ["<C-t>"] = "actions.select_tab",
+    ["<C-p>"] = "actions.preview",
+    -- ["<C-c>"] = "actions.close",
+    -- ["<C-l>"] = "actions.refresh",
+    ["-"] = "actions.parent",
+    ["_"] = "actions.open_cwd",
+    ["`"] = "actions.cd",
+    ["~"] = "actions.tcd",
+    ["gs"] = "actions.change_sort",
+    ["gx"] = "actions.open_external",
+    ["g."] = "actions.toggle_hidden",
+    ["g\\"] = "actions.toggle_trash",
+  },
+})
 require('rainbow-delimiters.setup').setup({})
 require('remember').setup({})
 local builtin = require("telescope.builtin")
@@ -170,7 +194,7 @@ vim.keymap.set("n", "<leader>f", builtin.find_files, { desc = "Find Files" })
 vim.keymap.set("n", "<leader>g", neogit.open, { desc = "Open Neogit" })
 vim.keymap.set("n", "<leader>hk", builtin.keymaps, { desc = "Keymaps" })
 vim.keymap.set("n", "<leader>ho", builtin.help_tags, { desc = "Help Tags" })
-vim.keymap.set("n", "<leader>j", function() builtin.find_files({ cwd = utils.buffer_dir() }) end, { desc = "Jump Files" })
+vim.keymap.set("n", "<leader>j", oil.open, { desc = "Jump Files" })
 vim.keymap.set({ "v", "n" }, "<leader>la", require("actions-preview").code_actions, { desc = "Code actions" })
 vim.keymap.set("n", "<leader>lf", function() require("trouble").toggle("lsp_references") end,
   { desc = "Find References" })

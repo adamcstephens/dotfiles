@@ -89,7 +89,9 @@
     "*": false,
     "plaintext": false,
     "markdown": false,
-    "scminput": false
+    "scminput": false,
+    "elixir": true,
+    "phoenix-heex": true
   },
   "github.gitAuthentication": false,
   "go.lintFlags": [
