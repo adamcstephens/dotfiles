@@ -47,6 +47,7 @@ let
         modus-themes-nvim
         neogit
         nvim-cmp
+        nvim-highlight-colors
         nvim-lspconfig
         nvim-treesitter.withAllGrammars
         (nvim-treesitter.withPlugins (plugins: [ nvim-treesitter-nu ]))

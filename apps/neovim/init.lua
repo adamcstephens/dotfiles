@@ -84,6 +84,9 @@ require("modus-themes").setup({
 
 local neogit = require('neogit')
 neogit.setup()
+require('nvim-highlight-colors').setup({
+  render = "first_column",
+})
 require('nvim-surround').setup({})
 require('nvim-treesitter.configs').setup({
   highlight = {
