@@ -233,7 +233,7 @@ def main [--v2: bool = true, --attic-upload: bool = true, --attic-use: bool = fa
 
     let built_targets = $targets | build-targets --nom=$nom | append (flake-input-targets)
     print "🎯 Built targets"
-    print $built_targets
+    print $built_targets | table -w 200
 
     if $attic_upload {
       $built_targets | result-paths | attic-upload $attic_cache

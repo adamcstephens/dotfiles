@@ -30,6 +30,10 @@
 
   home.stateVersion = "22.05";
 
+  home.activation.dotfiles-migrate = lib.hm.dag.entryBefore ["checkLinkTargets"] ''
+    ${lib.getExe pkgs.just} --justfile ${../justfile} migrate
+  '';
+
   home.shellAliases = {
     cat = "bat";
     cnf = "command-not-found";

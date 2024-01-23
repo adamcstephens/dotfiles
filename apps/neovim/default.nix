@@ -95,8 +95,13 @@ in
     MANWIDTH = "999";
   };
 
-  home.file.".config/nvim/init.lua".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/neovim/init.lua";
   home.packages = [ package ];
+
+  home.file.".config/nvim/init.lua".source =
+    if config.dotfiles.nixosManaged then
+      ./init.lua
+    else
+      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/neovim/init.lua";
 
   home.file.".config/nvim/queries/nu".source = pins-ext.tree-sitter-nu + "/queries/nu";
 }

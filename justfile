@@ -28,6 +28,7 @@ intel-check-cstate:
 
 migrate:
     [ ! -e $HOME/.cache/nix-index ] || rm -rf $HOME/.cache/nix-index
+    [ ! -h $HOME/.config/nvim ] || rm $HOME/.config/nvim
 
 nix-upgrade:
     sudo nix-channel --update
