@@ -63,9 +63,7 @@
 
     systemd.user.services.kanshi = {
       Service = {
-        Environment = [
-          "PATH=${pkgs.river}/bin:${pkgs.bash}/bin:${pkgs.gnugrep}/bin:${pkgs.coreutils}/bin:$PATH"
-        ];
+        Environment = [ "PATH=${pkgs.bash}/bin:${pkgs.gnugrep}/bin:${pkgs.coreutils}/bin:$PATH" ];
         RestartSec = "5s";
       };
     };

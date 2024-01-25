@@ -5,8 +5,6 @@
   ...
 }:
 let
-  cfg = config.dotfiles.apps.river;
-
   dependencies = [
     config.programs.kitty.package
     config.programs.rofi.package
@@ -19,15 +17,7 @@ let
   ];
 in
 {
-  options = {
-    dotfiles.apps.river.package = lib.mkOption {
-      type = lib.types.package;
-      default = pkgs.river;
-    };
-  };
-
   config = lib.mkIf config.dotfiles.gui.wayland {
-    home.packages = [ cfg.package ];
 
     xdg.configFile."river/init" = {
       executable = true;
@@ -54,6 +44,11 @@ in
       text = ''
         #!${lib.getExe pkgs.bash}
 
+        if ! command -v river &>/dev/null; then
+          echo "!! No river binary found in path"
+          exit 1
+        fi
+
         # cleanup any xserver
         systemctl --user stop xserver-session.target
         systemctl --user unset-environment DISPLAY
@@ -68,7 +63,7 @@ in
         # chrome and vscode use this to find the secret service
         export XDG_CURRENT_DESKTOP=GNOME
 
-        systemd-cat --identifier=river ${lib.getExe cfg.package}
+        systemd-cat --identifier=river river
 
         systemctl --user stop wayland-session.target graphical-session.target
       '';
