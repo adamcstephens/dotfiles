@@ -6,4 +6,6 @@ else
   DIR="$1"
 fi
 
+unset DISPLAY
+
 exec ~/.dotfiles/bin/em -e "(progn (magit-status \"${DIR}\") (delete-other-windows))"
