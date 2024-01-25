@@ -9,6 +9,7 @@
     ./colors.nix
 
     ../apps/emacs
+    ../apps/ghostty
     ../apps/kitty
     ../apps/ssh
     ../apps/vscodium
