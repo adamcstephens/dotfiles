@@ -45,6 +45,7 @@ def set_gnome_scheme(target):
         theme = "prefer-light"
 
     run(f"bash -c gsettings-wrapper set org.gnome.desktop.interface color-scheme {theme}")
+    run(f"dconf write /org/gnome/desktop/interface/color-scheme \'{theme}\'")
 
 
 def set_kitty_theme(target):
@@ -74,31 +75,6 @@ def set_kitty_theme(target):
 
     else:
         print("Kitty not running")
-
-
-def set_sway_theme(target):
-    if target:
-        theme = {
-            "client.focused": "#9ed06c #2b2d3a #9ed06c #f89860",
-            "client.unfocused": "#7e8294 #2b2d3a #7e8294 #f89860",
-            "client.focused_inactive": "#7e8294 #2b2d3a #7e8294 #f89860",
-        }
-
-        background = "#181a1c solid_color"
-    else:
-        theme = {
-            "client.focused": "#001080 #ffffff #a31515 #f89860",
-            "client.unfocused": "#2b2d3a #ffffff #7e8294 #f89860",
-            "client.focused_inactive": "#001080 #ffffff #7e8294 #f89860",
-        }
-
-        background = "#7e8294 solid_color"
-    for setting, value in theme.items():
-        subprocess.run(["swaymsg", setting, value], capture_output=True)
-
-    subprocess.run(
-        ["swaymsg", "output", "eDP-1", "background", background], capture_output=True
-    )
 
 
 def set_waybar_theme(target):
@@ -139,7 +115,6 @@ def set_dark(target):
     if os_name == "Linux":
         set_gnome_scheme(target)
         set_gtk_theme(target)
-        # set_sway_theme(target)
         # set_waybar_theme(target)
     elif os_name == "Darwin":
         set_darwin_theme(target)
