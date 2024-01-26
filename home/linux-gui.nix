@@ -48,7 +48,6 @@ in
     ../apps/wob
 
     # xorg
-    ../apps/leftwm
     ../apps/polybar
     ../apps/xmonad
     ../apps/xorg
@@ -57,10 +56,6 @@ in
     ../apps/kitty
     ../apps/mimeapps
     ../apps/ssh
-    ../apps/wezterm
-
-    # dev
-    ../apps/ghc
   ];
 
   dotfiles.apps.emacs.package = pkgs.emacs29-pgtk;

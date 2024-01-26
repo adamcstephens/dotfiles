@@ -16,7 +16,6 @@
     ../apps/fd
     ../apps/fish
     ../apps/git
-    ../apps/helix
     ../apps/neovim
     ../apps/nushell
     ../apps/ripgrep
@@ -24,13 +23,12 @@
     ../apps/ssh
     ../apps/starship
     ../apps/tmux
-    ../apps/zellij
     ../apps/zsh
   ];
 
   home.stateVersion = "22.05";
 
-  home.activation.dotfiles-migrate = lib.hm.dag.entryBefore ["checkLinkTargets"] ''
+  home.activation.dotfiles-migrate = lib.hm.dag.entryBefore [ "checkLinkTargets" ] ''
     ${lib.getExe pkgs.just} --justfile ${../justfile} migrate
   '';
 
