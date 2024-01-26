@@ -46,13 +46,15 @@ def clean_workdir [branch: string] {
   git branch -D $branch
 }
 
-def main [--codium (-c), --emacs (-e), action: string, name: string] {
+def main [--codium (-c), --emacs (-e), --prj (-p), action: string, name: string] {
   if ($action == "workdir") {
     let worktree = workdir $name
     if $emacs {
       em $worktree
     } else if ($codium) {
       codium -n $worktree
+    } else if ($prj) {
+      prj $worktree
     }
 
     if ($env.PWD != ($worktree | path expand)) and ("KITTY_WINDOW_ID" in $env) and ("DISPLAY" in $env or "WAYLAND_DISPLAY" in $env) {

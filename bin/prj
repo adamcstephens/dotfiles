@@ -24,7 +24,7 @@ def main [ project_path: string = "" ] {
 
     echo $":: Opening project ($project)"
     if $is_tmux {
-      let wname = $project | path basename | str replace --regex '[^a-zA-Z]' ''
+      let wname = $project | path basename | str replace --all --regex '[^a-zA-Z0-9]' ''
       let tmux_windows = tmux list-windows -F '#{window_index},#{window_name}'  | from csv --trim all | rename index name
       let prj_windows = $tmux_windows| filter { |w| $w.name == $wname} | get index
 
