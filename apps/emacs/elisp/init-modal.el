@@ -14,6 +14,8 @@
 
   ;; allow return to open links
   (define-key evil-motion-state-map (kbd "RET") nil)
+
+  (evil-set-undo-system 'undo-redo)
   )
 
 (use-package evil-collection

@@ -106,7 +106,7 @@
   ;; (setq org-latex-packages-alist '(("" "minted")))
 
   ;; async export
-  (setq org-export-in-background t)
+  (setq org-export-in-background nil)
 
   ;; better font support
   (setq org-latex-pdf-process
@@ -232,6 +232,7 @@
 (use-package
   ox-pandoc
   :config
+  (setq org-pandoc-options '((standalone . t)(self-contained . t)))
   (setq org-pandoc-options-for-html5-pdf
 	'((pdf-engine . "weasyprint"))))
 
