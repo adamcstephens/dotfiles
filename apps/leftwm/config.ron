@@ -69,8 +69,8 @@
         (command: Execute, value: "systemd-cat --identifier=brightnessctl brightnessctl -q set +5%", modifier: [], key: "XF86XK_MonBrightnessUp"),
 
         // terminal
-        (command: Execute, value: "kitty", modifier: ["modkey", "Shift"], key: "Return"),
-        (command: Execute, value: "kitty", modifier: ["modkey", "Shift"], key: "t"),
+        (command: Execute, value: "ghostty", modifier: ["modkey", "Shift"], key: "Return"),
+        (command: Execute, value: "ghostty", modifier: ["modkey", "Shift"], key: "t"),
 
         // wm
         (command: SoftReload, value: "", modifier: ["modkey", "Shift"], key: "r"),

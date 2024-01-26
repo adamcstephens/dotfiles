@@ -9,7 +9,7 @@
       ];
     };
 
-    terminal = "${config.programs.kitty.package}/bin/kitty";
+    terminal = "ghostty";
     font = "${config.dotfiles.gui.font.variable} 11";
     theme =
       let

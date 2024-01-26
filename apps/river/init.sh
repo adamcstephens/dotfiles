@@ -29,8 +29,8 @@ riverctl focus-follows-cursor always || riverctl focus-follows-cursor normal
 ## map
 #
 riverctl focus-follows-cursor always || riverctl focus-follows-cursor normal
-riverctl map normal Super+Shift T spawn 'systemd-cat --identifier=kitty kitty --single-instance'
-riverctl map normal Super+Shift Return spawn 'systemd-cat --identifier=kitty kitty --single-instance'
+riverctl map normal Super+Shift T spawn 'systemd-cat --identifier=ghostty ghostty'
+riverctl map normal Super+Shift Return spawn 'systemd-cat --identifier=ghostty ghostty'
 riverctl map normal Super+Shift+Control E spawn 'systemd-cat --identifier=gtk-launch gtk-launch emacsclient'
 riverctl map normal Super D spawn 'systemd-cat --identifier=rofi rofi -show drun'
 riverctl map normal Super+Shift D spawn 'systemd-cat --identifier=rofi rofi -show emoji'

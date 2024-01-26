@@ -43,7 +43,7 @@ dotKeys =
     ("M-S-q", kill),
     ("M-C-S-q", killAll),
     ("M-C-S-t", spawner "$HOME/.dotfiles/bin/monitor-toggle.sh"),
-    ("M-S-t", spawner "kitty --single-instance"),
+    ("M-S-t", spawner "ghostty"),
     ("M-s", windows W.focusDown),
     ("M-w", windows W.focusUp),
     ("M-`", toggleWS)
@@ -77,7 +77,7 @@ main =
     $ ewmhFullscreen
       . ewmh
     $ desktopConfig
-      { terminal = "kitty",
+      { terminal = "ghostty",
         modMask = mod4Mask,
         normalBorderColor = "#595959",
         focusedBorderColor = "#FFFFFF",

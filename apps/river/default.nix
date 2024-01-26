@@ -6,7 +6,6 @@
 }:
 let
   dependencies = [
-    config.programs.kitty.package
     config.programs.rofi.package
 
     pkgs.brightnessctl
