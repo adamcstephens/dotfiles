@@ -5,6 +5,10 @@
   ...
 }:
 {
+  programs.fish.interactiveShellInit = lib.optionalString pkgs.stdenv.isDarwin ''
+    fish_add_path --append --move ${config.home.homeDirectory}/Applications/Ghostty.app/Contents/MacOS
+  '';
+
   xdg.configFile."ghostty/config".text =
     ''
       font-family = "${config.dotfiles.gui.font.mono}"
