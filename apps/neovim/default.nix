@@ -56,8 +56,8 @@ let
         oil-nvim
         rainbow-delimiters-nvim
         remember-nvim
+        sqlite-lua
         telescope-nvim
-        telescope-frecency-nvim
         tmux-nvim
         trouble-nvim
         vim-just
@@ -73,6 +73,7 @@ let
     vimAlias = true;
 
     customRC = ''
+      let g:sqlite_clib_path = '${pkgs.sqlite.out}/lib/libsqlite3.so'
       luafile ${config.home.homeDirectory}/.dotfiles/apps/neovim/init.lua
     '';
   };
