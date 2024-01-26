@@ -87,6 +87,7 @@ neogit.setup()
 require('nvim-highlight-colors').setup({
   render = "first_column",
 })
+require('nvim-highlight-colors').turnOff()
 require('nvim-surround').setup({})
 require('nvim-treesitter.configs').setup({
   highlight = {
