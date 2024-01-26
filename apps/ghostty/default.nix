@@ -38,11 +38,18 @@
       palette = 13=#ff66ff
       palette = 14=#00eff0
       palette = 15=#989898
+
+      copy-on-select = clipboard
     ''
     + lib.optionalString pkgs.stdenv.isLinux ''
       gtk-single-instance = true
       window-decoration = false
 
       font-size = 11
+    ''
+    + lib.optionalString pkgs.stdenv.isDarwin ''
+      macos-option-as-alt = true
+      window-padding-x = 5
+      window-padding-y = 5
     '';
 }
