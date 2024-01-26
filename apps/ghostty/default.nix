@@ -30,7 +30,7 @@
       palette = 7=#ffffff
 
       # bright
-      palette = 8=#1e1e1e
+      palette = 8=#535353
       palette = 9=#ff5f5f
       palette = 10=#44df44
       palette = 11=#efef00
