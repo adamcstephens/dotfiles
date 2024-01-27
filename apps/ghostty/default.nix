@@ -39,6 +39,9 @@
       palette = 14=#00eff0
       palette = 15=#989898
 
+      window-padding-x = 5
+      window-padding-y = 5
+
       copy-on-select = clipboard
     ''
     + lib.optionalString pkgs.stdenv.isLinux ''
@@ -49,7 +52,5 @@
     ''
     + lib.optionalString pkgs.stdenv.isDarwin ''
       macos-option-as-alt = true
-      window-padding-x = 5
-      window-padding-y = 5
     '';
 }
