@@ -185,6 +185,10 @@ riverctl set-repeat 50 300
 riverctl float-filter-add app-id float
 riverctl float-filter-add title "popup title with spaces"
 
+# add ssd for some apps
+riverctl rule-add -app-id 'com.mitchellh.ghostty' ssd
+riverctl rule-add -app-id 'firefox' ssd
+
 # warp the mouse
 riverctl set-cursor-warp on-focus-change
 
