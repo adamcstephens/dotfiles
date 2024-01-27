@@ -1,15 +1,10 @@
-{ ... }:
+{ lib, pkgs, ... }:
 {
-  programs.git = {
-    enable = true;
+  home.packages = [ pkgs.git ];
+  xdg.configFile = {
+    "git/config".source = ./gitconfig;
 
-    extraConfig = {
-      include = {
-        path = "${./gitconfig}";
-      };
-    };
-
-    ignores = [
+    "git/ignore".text = lib.concatStringsSep "\n" [
       "*.log"
       "*.retry"
       ".DS_Store"
