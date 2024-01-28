@@ -130,7 +130,6 @@ oil.setup({
 require('rainbow-delimiters.setup').setup({})
 require('remember').setup({})
 local builtin = require("telescope.builtin")
-local utils = require("telescope.utils")
 require("tmux").setup({})
 require('trouble').setup()
 require("which-key").setup({})
@@ -204,6 +203,7 @@ vim.keymap.set("n", "<leader>lf", function() require("trouble").toggle("lsp_refe
   { desc = "Find References" })
 vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, { desc = "Rename symbol" })
 vim.keymap.set("n", "<leader>r", builtin.live_grep, { desc = "Search" })
+vim.keymap.set("v", "<leader>r", builtin.grep_string, { desc = "Search selection" })
 vim.keymap.set("n", "<leader>s", function() vim.cmd("write ++p") end, { desc = "Save File" })
 vim.keymap.set("n", "<leader>S", function() vim.cmd("noautocmd write ++p") end, { desc = "Save File (No autocmd)" })
 vim.keymap.set("n", "<leader>xx", function() require("trouble").toggle() end)
@@ -312,6 +312,12 @@ lspconfig.nil_ls.setup {
     ["nil"] = {
       formatting = {
         command = { "nixfmt", "--quiet" },
+      },
+      nix = {
+        flake = {
+          autoArchive = true,
+          autoEvalInputs = true,
+        },
       },
     },
   },
