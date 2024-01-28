@@ -291,6 +291,10 @@ lspconfig.gopls.setup({})
 require('ionide').setup({})
 vim.g["fsharp#lsp_auto_setup"] = 0
 
+require('lspconfig')['hls'].setup({
+  filetypes = { 'haskell', 'lhaskell', 'cabal' },
+})
+
 lspconfig.lua_ls.setup({
   settings = {
     Lua = {

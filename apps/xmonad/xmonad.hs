@@ -4,11 +4,12 @@ import System.Exit
 import XMonad
 import XMonad.Actions.CopyWindow
 import XMonad.Actions.CycleWS
-import XMonad.Actions.UpdatePointer
 import XMonad.Actions.SwapPromote
+import XMonad.Actions.UpdatePointer
 import XMonad.Actions.WithAll
 import XMonad.Config.Desktop
 import XMonad.Hooks.EwmhDesktops
+import XMonad.Hooks.InsertPosition
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
 import XMonad.Layout.Grid
@@ -52,9 +53,19 @@ dotKeys =
   ]
     ++ [("M-C-S-" ++ show i, windows $ copy ws) | (i, ws) <- zip [1 .. 9] dotWorkspaces]
 
-dotLayouts = avoidStruts (Tall 1 (3 / 100) (2 / 3)) ||| noBorders Full ||| (Tall 1 (10 / 100) (1 / 2)) ||| Grid
+dotLayouts = avoidStruts (Tall 1 (3 / 100) (2 / 3)) ||| noBorders Full ||| Tall 1 (10 / 100) (1 / 2) ||| Grid
 
 dotLogHook = updatePointer (0.5, 0.5) (0, 0) <> logHook desktopConfig >> masterHistoryHook
+
+-- https://github.com/alternateved/nixos-config/blob/f18647045b6dd9eef27b3076131595b8518b4299/config/xmonad/xmonad.hs
+-- willFloat :: Query Bool
+-- willFloat =
+--   ask >>= \w -> liftX $
+--     withDisplay $ \d -> do
+--       sh <- io $ getWMNormalHints d w
+--       let isFixedSize = isJust (sh_min_size sh) && sh_min_size sh == sh_max_size sh
+--       isTransient <- isJust <$> io (getTransientForHint d w)
+--       return (isFixedSize || isTransient)
 
 dotManageHook =
   manageHook desktopConfig
@@ -66,7 +77,8 @@ dotManageHook =
         isFullscreen --> doFullFloat,
         appName =? "Navigator" --> doF (W.shift "1:web"),
         appName =? "element" --> doF (W.shift "6:comm"),
-        appName =? "webcord" --> doF (W.shift "6:comm")
+        appName =? "webcord" --> doF (W.shift "6:comm"),
+        fmap not willFloat --> insertPosition Below Newer
       ]
 
 dotStartupHook = setDefaultCursor xC_left_ptr <> spawn "xsetroot -cursor_name left_ptr" -- this is a hack, i don't know why i need it
@@ -85,6 +97,6 @@ main =
         startupHook = dotStartupHook,
         manageHook = dotManageHook,
         layoutHook = smartBorders $ desktopLayoutModifiers dotLayouts,
-        workspaces = ["1:web","2:dev","3","4","5","6:comm","7:game","8","9"]
+        workspaces = ["1:web", "2:dev", "3", "4", "5", "6:comm", "7:game", "8", "9"]
       }
       `additionalKeysP` dotKeys
