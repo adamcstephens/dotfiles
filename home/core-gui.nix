@@ -32,13 +32,7 @@
     inputs.nil.packages.${pkgs.system}.nil
     inputs.nix-index-database.packages.${pkgs.system}.comma-with-db
     pkgs.nix-output-monitor
-    (pkgs.nixfmt.overrideAttrs (
-      old: {
-        version = "0.6.0-${builtins.substring 0 7 inputs.nixfmt-rfc.rev}";
-
-        src = inputs.nixfmt-rfc;
-      }
-    ))
+    pkgs.nixfmt-rfc-style
 
     # tools
     pkgs.pwgen

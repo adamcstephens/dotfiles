@@ -483,23 +483,6 @@
         "type": "github"
       }
     },
-    "nixfmt-rfc": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1706048169,
-        "narHash": "sha256-jiFbX7vefrEK+oaLb7/50UCqD+FQcA7lxEm+Pt+FtKM=",
-        "owner": "piegamesde",
-        "repo": "nixfmt",
-        "rev": "96c1e8da1e4cd08ef5cfe0590b350ebdb24e8bb0",
-        "type": "github"
-      },
-      "original": {
-        "owner": "piegamesde",
-        "ref": "rfc101-style",
-        "repo": "nixfmt",
-        "type": "github"
-      }
-    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1702539185,
@@ -601,11 +584,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1705856552,
-        "narHash": "sha256-JXfnuEf5Yd6bhMs/uvM67/joxYKoysyE3M2k6T3eWbg=",
+        "lastModified": 1706549023,
+        "narHash": "sha256-7+yEQ76DXtGf3f4RrgvJ1Ms6HbEpOna7MLwRIfpOEaE=",
         "owner": "adamcstephens",
         "repo": "nixpkgs",
-        "rev": "612f97239e2cc474c13c9dafa0df378058c5ad8d",
+        "rev": "88a02c7ae843de80ff4dab1d4b468b2c98f50872",
         "type": "github"
       },
       "original": {
@@ -670,7 +653,6 @@
         "nix-darwin": "nix-darwin",
         "nix-index-database": "nix-index-database",
         "nix-wallpaper": "nix-wallpaper",
-        "nixfmt-rfc": "nixfmt-rfc",
         "nixpkgs": "nixpkgs_2",
         "profile-parts": "profile-parts",
         "sandbox": "sandbox"

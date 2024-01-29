@@ -19,8 +19,6 @@
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
     nix-wallpaper.url = "github:lunik1/nix-wallpaper";
     nix-wallpaper.inputs.nixpkgs.follows = "nixpkgs";
-    nixfmt-rfc.url = "github:piegamesde/nixfmt/rfc101-style";
-    nixfmt-rfc.flake = false;
     profile-parts.url = "git+https://codeberg.org/adamcstephens/profile-parts";
     sandbox.url = "git+https://codeberg.org/adamcstephens/nix-sandbox";
     sandbox.inputs.nixpkgs.follows = "nixpkgs";
