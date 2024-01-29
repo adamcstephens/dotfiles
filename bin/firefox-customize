@@ -1,0 +1,33 @@
+#!/usr/bin/env nu
+
+let exceptions = [
+  "https://git.junco.dev"
+  "https://id.junco.dev"
+  "https://id.robins.wtf"
+]
+
+if (ps | find --ignore-case firefox | length) > 0 {
+  print "!! Quit all Firefox processes first"
+  exit 1
+}
+
+let profiles_dir = $env.HOME + (match (uname) {
+  "Linux" => "/.mozilla/firefox"
+  "Darwin" => "/Library/Application Support/Firefox/Profiles/"
+})
+
+let profiles = ls -d $profiles_dir | filter { |p| $p.type == "dir" and (($p.name + "/cookies.sqlite") | path exists) }
+
+$profiles | each { |p|
+  let permissions_db = $p.name + "/permissions.sqlite"
+  $exceptions | each { |e|
+    let columns = "origin,type,permission,expireType,expireTime,modificationTime"
+    let values = $"'($e)','cookie',1,0,0,(date now | format date "%s")"
+
+    if (open $permissions_db | query db $"SELECT * FROM moz_perms WHERE origin = '($e)'" | length) == 0 {
+      open $permissions_db | query db $"INSERT INTO moz_perms\(($columns)\) VALUES\(($values)\)"
+    }
+
+    open $permissions_db | query db $"SELECT * FROM moz_perms WHERE origin = '($e)'"
+  } | flatten
+} | flatten

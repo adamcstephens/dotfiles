@@ -1,9 +1,11 @@
 default:
     just --list
 
-arkenfox-update:
-    nix run nixpkgs#nix-update -- --flake arkenfox --commit
+arkenfox:
     nix run .#arkenfox
+
+arkenfox-update: && arkenfox
+    nix run nixpkgs#nix-update -- --flake arkenfox --commit
 
 brew-dump:
     brew bundle dump --formula --cask --tap --mas --force
@@ -13,6 +15,9 @@ bump:
     nix flake update --commit-lock-file
     nix run .#hm-all
     git push
+
+firefox-config: arkenfox
+    ~/.dotfiles/bin/firefox-customize
 
 nix-darwin-bootstrap:
     eval $(nix build .#darwin/$(hostname) --print-out-paths)/sw/bin/darwin-rebuild switch --flake ~/.dotfiles
