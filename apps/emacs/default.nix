@@ -9,9 +9,7 @@ let
   cfg = config.dotfiles.apps.emacs;
 
   aspell = pkgs.aspellWithDicts (
-    dicts:
-    with dicts;
-    [
+    dicts: with dicts; [
       en
       en-computers
       en-science

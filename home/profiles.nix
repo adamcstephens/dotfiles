@@ -263,16 +263,10 @@ in
     {
       dev-shell = devShells;
       darwin =
-        lib.mapAttrs
-          (n: v: {
-            systems = [ v.pkgs.hostPlatform.system ];
-          })
+        lib.mapAttrs (n: v: { systems = [ v.pkgs.hostPlatform.system ]; })
           self.darwinConfigurations;
       home-manager =
-        lib.mapAttrs
-          (n: v: {
-            systems = [ v.pkgs.hostPlatform.system ];
-          })
+        lib.mapAttrs (n: v: { systems = [ v.pkgs.hostPlatform.system ]; })
           self.homeConfigurations;
     };
 }

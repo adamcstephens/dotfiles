@@ -8,13 +8,7 @@
     # disable tests since they broke on darwin...
     fishPlugins = _: prev: {
       fishPlugins = prev.fishPlugins.overrideScope' (
-        _: fprev: {
-          fzf-fish = fprev.fzf-fish.overrideAttrs (
-            _: {
-              doCheck = false;
-            }
-          );
-        }
+        _: fprev: { fzf-fish = fprev.fzf-fish.overrideAttrs (_: { doCheck = false; }); }
       );
     };
   };
