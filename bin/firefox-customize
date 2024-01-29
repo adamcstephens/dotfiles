@@ -1,9 +1,14 @@
 #!/usr/bin/env nu
 
 let exceptions = [
+  "https://codeberg.org"
   "https://git.junco.dev"
+  "https://github.com"
   "https://id.junco.dev"
   "https://id.robins.wtf"
+  "https://meta.sr.ht"
+  "https://mixcloud.com"
+  "https://play.qobuz.com"
 ]
 
 if (ps | find --ignore-case firefox | length) > 0 {

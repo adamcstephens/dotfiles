@@ -15,7 +15,8 @@ stdenvNoCC.mkDerivation rec {
     hash = "sha256-MAerYaRbaQBqS8WJ3eaq6uxVqQg8diymPbLCU72nDjM=";
   };
 
-  dontPatch = true;
+  patches = [ ./shhh.patch ];
+
   dontBuild = true;
   dontConfigure = true;
   dontFixup = true;
@@ -24,6 +25,8 @@ stdenvNoCC.mkDerivation rec {
     let
       script = writeScript "arkenfox-patch" ''
         set -e
+        SCRIPT_DIR=$( cd -- "$( dirname -- "''${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
         if [ "$(uname)" = "Darwin" ]; then
           PROFILES_DIR="$HOME/Library/Application Support/Firefox/Profiles/"
         elif [ "$(uname)" = "Linux" ]; then
@@ -39,19 +42,22 @@ stdenvNoCC.mkDerivation rec {
           fi
           echo ":: Arkenfoxing: $FIREFOX_PROFILE ::"
           cd "$FIREFOX_PROFILE" || exit 1
-          cp ${src}/prefsCleaner.sh .
-          cp ${src}/updater.sh .
-          cp ${src}/user.js .
+          cp $SCRIPT_DIR/../src/prefsCleaner.sh .
+          cp $SCRIPT_DIR/../src/updater.sh .
+          cp $SCRIPT_DIR/../src/user.js .
           chmod +w ./prefsCleaner.sh ./updater.sh ./user.js
           ln -sf ~/.dotfiles/apps/firefox/user-overrides.js .
-          ./updater.sh -s
+          ./updater.sh -s -d
           bash ./prefsCleaner.sh -s
         done
       '';
     in
     ''
-      mkdir -p $out/bin
+      mkdir -p $out/{bin,src}
       cp ${script} $out/bin/arkenfox-patch
+      cp prefsCleaner.sh $out/src
+      cp updater.sh $out/src
+      cp user.js $out/src
     '';
 
   passthru.updateScript = gitUpdater { };

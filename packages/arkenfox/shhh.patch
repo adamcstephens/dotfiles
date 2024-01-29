@@ -1,0 +1,35 @@
+diff --git a/prefsCleaner.sh b/prefsCleaner.sh
+index 6586609..946f8df 100755
+--- a/prefsCleaner.sh
++++ b/prefsCleaner.sh
+@@ -135,7 +135,7 @@ cd "$(dirname "${SCRIPT_FILE}")"
+ # Check if running as root and if any files have the owner/group as root/wheel.
+ if [ "${EUID:-"$(id -u)"}" -eq 0 ]; then
+ 	fQuit 1 "You shouldn't run this with elevated privileges (such as with doas/sudo)."
+-elif [ -n "$(find ./ -user 0 -o -group 0)" ]; then
++elif false; then
+ 	printf 'It looks like this script was previously run with elevated privileges,
+ you will need to change ownership of the following files to your user:\n'
+ 	find . -user 0 -o -group 0
+diff --git a/updater.sh b/updater.sh
+index 88e6e33..7867301 100755
+--- a/updater.sh
++++ b/updater.sh
+@@ -35,7 +35,7 @@ CYAN='\033[0;36m'
+ NC='\033[0m' # No Color
+ 
+ # Argument defaults
+-UPDATE='check'
++UPDATE='no'
+ CONFIRM='yes'
+ OVERRIDE='user-overrides.js'
+ BACKUP='multiple'
+@@ -394,7 +394,7 @@ getProfilePath # updates PROFILE_PATH or exits on error
+ cd "$PROFILE_PATH" || exit 1
+ 
+ # Check if any files have the owner/group as root/wheel.
+-if [ -n "$(find ./ -user 0 -o -group 0)" ]; then
++if false; then
+ 	printf 'It looks like this script was previously run with elevated privileges,
+ you will need to change ownership of the following files to your user:\n'
+ 	find . -user 0 -o -group 0
