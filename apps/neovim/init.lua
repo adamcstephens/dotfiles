@@ -320,7 +320,8 @@ lspconfig.nil_ls.setup {
       nix = {
         flake = {
           autoArchive = true,
-          autoEvalInputs = true,
+          -- autoEvalInputs = true,
+          maxMemoryMB = 8192,
         },
       },
     },
