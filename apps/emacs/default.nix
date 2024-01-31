@@ -168,7 +168,6 @@ let
     ])
     ++ (with epkgs.elpaPackages; [
       corfu
-      ement
       org
       rainbow-mode
       substitute
