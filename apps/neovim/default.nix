@@ -8,10 +8,12 @@
 let
   dependencies = [
     pkgs.efm-langserver
+    pkgs.hurl
     pkgs.lua
     pkgs.lua-language-server
+    pkgs.jq
     pkgs.nil
-    pkgs.nodejs-slim
+    pkgs.nodejs
     pkgs.shellcheck
     pkgs.shfmt
   ];
@@ -40,12 +42,14 @@ let
         direnv-vim
         efmls-configs-nvim
         elixir-tools-nvim
+        friendly-snippets
         gitsigns-nvim
         Ionide-vim
         lualine-nvim
         luasnip
         modus-themes-nvim
         neogit
+        nui-nvim
         nvim-cmp
         nvim-highlight-colors
         nvim-lspconfig
@@ -103,6 +107,12 @@ in
       ./init.lua
     else
       config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/neovim/init.lua";
+
+  home.file.".config/nvim/lua".source =
+    if config.dotfiles.nixosManaged then
+      ./lua
+    else
+      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/neovim/lua";
 
   home.file.".config/nvim/queries/nu".source = pins-ext.tree-sitter-nu + "/queries/nu";
 }

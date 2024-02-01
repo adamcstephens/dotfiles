@@ -1,93 +1,36 @@
 -- use experiemental lua loader
 vim.loader.enable()
 
+-- vim.opt.runtimepath:append(',~/.config/nvim/lua')
+
 -- map leader to <Space> before we do anything else
 vim.keymap.set("n", " ", "<Nop>", { silent = true, remap = false })
 vim.g.mapleader = " "
 
+-- includes
+--
+require("aid")
+require("theme")
+
 -- packages
 --
-require("actions-preview").setup {
-  telescope = {
-    sorting_strategy = "ascending",
-    layout_strategy = "vertical",
-    layout_config = {
-      width = 0.8,
-      height = 0.9,
-      prompt_position = "top",
-      preview_cutoff = 20,
-      preview_height = function(_, _, max_lines)
-        return max_lines - 15
-      end,
-    },
-  },
-}
-
-if vim.loop.os_uname().sysname ~= "Linux"
-    or os.getenv("XDG_CURRENT_DESKTOP") ~= nil then
-  require('auto-dark-mode').setup({
-    update_interval = 5000,
-    set_dark_mode = function()
-      vim.opt.background = 'dark'
-    end,
-    set_light_mode = function()
-      vim.opt.background = 'light'
-    end,
-  })
-end
-
 require('Comment').setup()
-require("conform").setup({
-  format_on_save = {
-    timeout_ms = 500,
-    lsp_fallback = true,
-  },
-})
-
 require("elixir").setup({
   elixirls = { enable = true, cmd = "elixir-ls", },
   nextls = { enable = false, cmd = "nextls", },
 })
+-- split handling
 require("focus").setup()
 require('gitsigns').setup()
 local lspconfig = require('lspconfig')
-require('lualine').setup({
-  options = { theme = "modus-vivendi" },
-  sections = {
-    lualine_c = { { 'filename', path = 1 } },
-  }
-})
 
-local luasnip = require('luasnip')
-require("modus-themes").setup({
-  dim_inactive = false,
-  on_highlights = function(highlights, colors)
-    highlights.NeogitBranch = { fg = colors.blue }
-    highlights.NeogitRemote = { fg = colors.magenta }
-    highlights.NeogitSectionHeader = { fg = colors.fg_main }
-    highlights.NeogitChangeModified = { fg = colors.blue }
-
-    highlights.NeogitHunkHeader = { bg = colors.bg_active }
-    highlights.NeogitDiffContext = { fg = colors.fg_dim }
-    highlights.NeogitDiffAdd = { bg = colors.bg_added, fg = colors.fg_added }
-    highlights.NeogitDiffDelete = { bg = colors.bg_removed, fg = colors.fg_removed }
-
-    highlights.NeogitHunkHeaderHighlight = { bg = colors.bg_active, bold = true }
-    highlights.NeogitDiffContextHightlight = { bg = colors.bg_dim, fg = colors.fg }
-    highlights.NeogitDiffAddHighlight = { bg = colors.bg_added, fg = colors.fg_added }
-    highlights.NeogitDiffDeleteHighlight = { bg = colors.bg_removed, fg = colors.fg_removed }
-
-    highlights.NeogitFilePath = { fg = colors.green_faint }
-    highlights.NeogitCommitViewHeader = { fg = colors.blue }
-  end,
+require('hurl').setup({
+  show_notification = true,
+  mode = "popup",
 })
 
 local neogit = require('neogit')
 neogit.setup()
-require('nvim-highlight-colors').setup({
-  render = "first_column",
-})
-require('nvim-highlight-colors').turnOff()
 require('nvim-surround').setup({})
 require('nvim-treesitter.configs').setup({
   highlight = {
@@ -111,8 +54,8 @@ oil.setup({
   keymaps = {
     ["g?"] = "actions.show_help",
     ["<CR>"] = "actions.select",
-    -- ["<C-s>"] = "actions.select_vsplit",
-    -- ["<C-h>"] = "actions.select_split",
+    ["<C-s>"] = "actions.select_vsplit",
+    ["<C-h>"] = "actions.select_split",
     -- ["<C-t>"] = "actions.select_tab",
     ["<C-p>"] = "actions.preview",
     -- ["<C-c>"] = "actions.close",
@@ -127,43 +70,12 @@ oil.setup({
     ["g\\"] = "actions.toggle_trash",
   },
 })
-require('rainbow-delimiters.setup').setup({})
 require('remember').setup({})
 local builtin = require("telescope.builtin")
 require("tmux").setup({})
 require('trouble').setup()
 require("which-key").setup({})
 require('whitespace-nvim').setup({})
-
--- cmp
---
-local cmp = require('cmp')
-cmp.setup({
-  experimental = {
-    ghost_text = true
-  },
-  mapping = {
-    ["<C-j>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
-    ["<C-k>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
-    ["<CR>"] = cmp.mapping.confirm({ select = true, behavior = cmp.ConfirmBehavior.Replace }),
-  },
-  snippet = {
-    expand = function(args)
-      require('luasnip').lsp_expand(args.body)
-    end,
-  },
-  sources = cmp.config.sources({
-    { name = 'luasnip' },
-    { name = 'nvim_lsp' },
-    { name = 'path' },
-  })
-})
-require("copilot").setup {
-  filetypes = {
-    elixir = true,
-    ["*"] = false,
-  },
-}
 
 -- vim settings
 --
@@ -176,9 +88,6 @@ vim.opt.whichwrap  = "<,>,[,]"
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr   = "nvim_treesitter#foldexpr()"
 vim.cmd('set nofoldenable')
-
--- use modus auto light/dark, switch with vim.opt.background
-vim.cmd('colorscheme modus')
 
 -- mappings
 --
@@ -193,6 +102,8 @@ vim.keymap.set("n", "<leader><leader>", function()
 end, { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>bb", function() builtin.buffers({ sort_lastused = true }) end, { desc = "Switch buffers" })
 vim.keymap.set("n", "<leader>bd", function() vim.cmd("bdelete") end, { desc = "Delete" })
+vim.keymap.set("n", "<leader>dr", "<cmd>HurlRunnerAt<CR>", { desc = "Hurl Under Cursor" })
+vim.keymap.set("n", "<leader>dR", "<cmd>HurlRunner<CR>", { desc = "Hurl File" })
 vim.keymap.set("n", "<leader>f", builtin.find_files, { desc = "Find Files" })
 vim.keymap.set("n", "<leader>g", neogit.open, { desc = "Open Neogit" })
 vim.keymap.set("n", "<leader>hk", builtin.keymaps, { desc = "Keymaps" })
@@ -328,13 +239,3 @@ lspconfig.nil_ls.setup {
   },
 }
 lspconfig.nushell.setup({})
-
--- snippets
---
-require("luasnip.loaders.from_vscode").lazy_load({ paths = "~/.dotfiles/apps/vscodium/snippets", })
-vim.keymap.set({ "i" }, "<C-s>", function() luasnip.expand() end, { silent = true })
-vim.keymap.set({ "i", "s" }, "<C-E>", function()
-  if luasnip.choice_active() then
-    luasnip.change_choice(1)
-  end
-end, { silent = true })
