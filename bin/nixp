@@ -20,7 +20,7 @@ def workdir [branch: string, ] {
 
   if not ($worktree | path exists) {
     print ($worktree_args | prepend $worktree)
-    git worktree add $worktree $worktree_args
+    git worktree add $worktree ...$worktree_args
 
     cd $worktree
     git push --set-upstream origin $"($branch):($branch)"

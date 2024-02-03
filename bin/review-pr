@@ -1,7 +1,11 @@
 #!/usr/bin/env nu
 
 def main [--linux: bool = true, --mac: bool = true, pr: string, --system: string, ...args: string] {
-  git fetch upstream master:master
+  if (git rev-parse --abbrev-ref HEAD) == "master" {
+    git pull upstream master
+  } else {
+    git fetch upstream master:master
+  }
 
   let default_systems: list<string> = [] ++ (if $linux {["x86_64-linux", "aarch64-linux"]} else {[]}) ++ (if $mac {["aarch64-darwin", "x86_64-darwin"]} else {[]})
   (if $system == null { $default_systems } else { [$system] }) | enumerate | par-each { |system|
@@ -14,7 +18,7 @@ def main [--linux: bool = true, --mac: bool = true, pr: string, --system: string
       --system $system.item
       --build-graph nix
       --build-args="--print-build-logs"
-      $args
+      ...$args
       $pr)
 
     let output = open $tempfile
