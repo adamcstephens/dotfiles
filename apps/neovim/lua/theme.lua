@@ -56,14 +56,7 @@ require('nvim-highlight-colors').setup({
 })
 
 require('nvim-highlight-colors').turnOff()
-require('lualine').setup({
-  options = { theme = "modus-vivendi" },
-  sections = {
-    lualine_c = { { 'filename', path = 1 } },
-  }
-})
 
 require('rainbow-delimiters.setup').setup({})
 
--- use modus auto light/dark, switch with vim.opt.background
 vim.cmd('colorscheme github_dark_colorblind')
