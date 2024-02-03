@@ -92,7 +92,6 @@ in
       modules = [
         ./linux-gui.nix
         ../apps/solaar
-        ../apps/pantalaimon
 
         (
           { pkgs, ... }:
