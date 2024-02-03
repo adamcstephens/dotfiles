@@ -10,19 +10,15 @@ vim.g.mapleader = " "
 -- includes
 --
 require("aid")
+require("lang")
 require("theme")
 
 -- packages
 --
 require('Comment').setup()
-require("elixir").setup({
-  elixirls = { enable = true, cmd = "elixir-ls", },
-  nextls = { enable = false, cmd = "nextls", },
-})
 -- split handling
 require("focus").setup()
 require('gitsigns').setup()
-local lspconfig = require('lspconfig')
 
 require('hurl').setup({
   show_notification = true,
@@ -173,69 +169,3 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
     vim.fn.setpos(".", save_cursor)
   end
 })
-
--- Setup language servers.
---
-local languages = {
-  fish = {
-    require('efmls-configs.linters.fish'),
-    require('efmls-configs.formatters.fish_indent')
-  },
-  sh = {
-    require('efmls-configs.linters.shellcheck'),
-    require('efmls-configs.formatters.shfmt'),
-  },
-}
-lspconfig.efm.setup({
-  filetypes = vim.tbl_keys(languages),
-  settings = {
-    rootMarkers = { '.git/' },
-    languages = languages,
-  },
-  init_options = {
-    documentFormatting = true,
-    documentRangeFormatting = true,
-  },
-})
-lspconfig.gopls.setup({})
-
-require('ionide').setup({})
-vim.g["fsharp#lsp_auto_setup"] = 0
-
-require('lspconfig')['hls'].setup({
-  filetypes = { 'haskell', 'lhaskell', 'cabal' },
-})
-
-lspconfig.lua_ls.setup({
-  settings = {
-    Lua = {
-      diagnostics = {
-        globals = { "vim" },
-      },
-      workspace = {
-        -- global gitignore isn't processed
-        ignoreDir = {
-          ".direnv/",
-        },
-        useGitIgnore = true,
-      }
-    }
-  }
-})
-lspconfig.nil_ls.setup {
-  settings = {
-    ["nil"] = {
-      formatting = {
-        command = { "nixfmt", "--quiet" },
-      },
-      nix = {
-        flake = {
-          autoArchive = true,
-          -- autoEvalInputs = true,
-          maxMemoryMB = 8192,
-        },
-      },
-    },
-  },
-}
-lspconfig.nushell.setup({})
