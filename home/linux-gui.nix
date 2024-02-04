@@ -141,6 +141,7 @@ in
     ]
     ++ (lib.optionals config.dotfiles.gui.wayland [
       pkgs.grim
+      pkgs.lswt
       pkgs.slurp
       pkgs.wl-clipboard
       pkgs.wl-mirror
