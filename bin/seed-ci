@@ -21,7 +21,7 @@ export def attic-upload [cache: string] {
     print "‼️ No targets to push to attic. Skipping push"
   } else {
     print $"📤 Pushing to attic cache ($cache)"
-    attic push --ignore-upstream-cache-filter --jobs 10 $"main:($cache)" $paths
+    attic push --ignore-upstream-cache-filter --jobs 10 $"main:($cache)" ...$paths
   }
 }
 
@@ -103,7 +103,7 @@ export def build-configs [] {
       }
 
       let result = try {
-        nix build --no-link --fallback --keep-going --json $buildTarget | from json
+        nix build --no-link --fallback --keep-going --json ...$buildTarget | from json
       } catch {
         null
       }
