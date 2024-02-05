@@ -15,8 +15,6 @@ stdenvNoCC.mkDerivation rec {
     hash = "sha256-624Giuo1TfeXQGzcGK9ETW86esNFhFZ5a46DCjT6K5I=";
   };
 
-  patches = [ ./shhh.patch ];
-
   dontBuild = true;
   dontConfigure = true;
   dontFixup = true;
