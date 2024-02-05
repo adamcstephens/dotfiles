@@ -97,6 +97,8 @@ export def build-configs [] {
         $".#homeConfigurations.($i.name).activationPackage"
       } else if $c.type == "nixos" {
         $".#nixosConfigurations.($i.name).config.system.build.toplevel"
+      } else if $c.type == "package" {
+        $i.config.systems | each {|t| $".#packages.($t).($i.name)" }
       } else {
         print $"!! Unsupported type ($c.type)"
         exit 1
