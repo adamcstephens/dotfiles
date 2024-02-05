@@ -19,4 +19,4 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - run: seed-ci --attic-use=true --nom=false --system ${{ matrix.system }}
+      - run: nix shell nixpkgs#nushell -c seed-ci --attic-use=true --nom=false --system ${{ matrix.system }}

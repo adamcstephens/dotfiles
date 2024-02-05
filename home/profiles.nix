@@ -229,23 +229,27 @@ in
 
   flake.sower =
     let
-      systemShells = lib.mapAttrs (on: ov: (lib.mapAttrs (n: v: n) ov)) self.devShells;
-      allShells =
-        lib.foldlAttrs
-          (
-            acc: n: v:
-            acc
-            ++
-              builtins.map
-                (dsv: {
-                  name = dsv;
-                  system = n;
-                })
-                (builtins.attrNames v)
-          )
-          [ ]
-          systemShells;
-      devShells =
+      perSystemTopToSower =
+        top:
+        let
+          systemTops = lib.mapAttrs (on: ov: (lib.mapAttrs (n: v: n) ov)) top;
+          allTops =
+            lib.foldlAttrs
+              (
+                acc: n: v:
+                acc
+                ++
+                  builtins.map
+                    (dsv: {
+                      name = dsv;
+                      system = n;
+                    })
+                    (builtins.attrNames v)
+              )
+              [ ]
+              systemTops;
+        in
+
         lib.foldl
           (
             acc: n:
@@ -257,15 +261,16 @@ in
             }
           )
           { }
-          allShells;
+          allTops;
     in
     {
-      dev-shell = devShells;
-      darwin =
-        lib.mapAttrs (n: v: { systems = [ v.pkgs.hostPlatform.system ]; })
-          self.darwinConfigurations;
-      home-manager =
-        lib.mapAttrs (n: v: { systems = [ v.pkgs.hostPlatform.system ]; })
-          self.homeConfigurations;
+      dev-shell = perSystemTopToSower self.devShells;
+      # darwin =
+      #   lib.mapAttrs (n: v: { systems = [ v.pkgs.hostPlatform.system ]; })
+      #     self.darwinConfigurations;
+      # home-manager =
+      #   lib.mapAttrs (n: v: { systems = [ v.pkgs.hostPlatform.system ]; })
+      #     self.homeConfigurations;
+      package = perSystemTopToSower self.packages;
     };
 }
