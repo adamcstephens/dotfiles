@@ -31,6 +31,8 @@ require('lualine').setup({
 require("modus-themes").setup({
   dim_inactive = false,
   on_highlights = function(highlights, colors)
+    highlights.Identifier = { fg = colors.fg_main }
+
     highlights.NeogitBranch = { fg = colors.blue }
     highlights.NeogitRemote = { fg = colors.magenta }
     highlights.NeogitSectionHeader = { fg = colors.fg_main }
@@ -59,4 +61,4 @@ require('nvim-highlight-colors').turnOff()
 
 require('rainbow-delimiters.setup').setup({})
 
-vim.cmd('colorscheme github_dark_colorblind')
+vim.cmd('colorscheme modus')
