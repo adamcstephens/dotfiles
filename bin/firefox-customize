@@ -6,6 +6,7 @@ let exceptions = [
   "https://github.com"
   "https://id.junco.dev"
   "https://id.robins.wtf"
+  "https://kagi.com"
   "https://meta.sr.ht"
   "https://mixcloud.com"
   "https://play.qobuz.com"
