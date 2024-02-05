@@ -5,13 +5,10 @@ belongs to a project, all other buffers that don't belong to that
 project are filtered out."
   (let ((window-buffers (tab-line-tabs-window-buffers)))
     (if-let*
-      (
-        (pr (project-current))
-        (project-buffers (project--buffers-to-kill pr)))
-      (seq-filter
-        (lambda (buf) (member buf project-buffers))
-        window-buffers)
-      window-buffers)))
+	((pr (project-current)) (project-buffers (project--buffers-to-kill pr)))
+	(seq-filter (lambda (buf)
+                      (member buf project-buffers))
+		    window-buffers) window-buffers)))
 
 (use-package
   direnv
@@ -26,50 +23,13 @@ project are filtered out."
   :init (setq project-switch-commands #'project-find-file)
   :bind
   (("s-f" . project-find-file)
-    ("s-u" . project-switch-project)
-    ("C-c p p" . project-switch-project)
-    ("C-c p d" . project-dired)))
+   ("s-u" . project-switch-project)
+   ("C-c p p" . project-switch-project)
+   ("C-c p d" . project-dired)))
 
 (use-package
   project-rootfile
   :init
-  (add-to-list 'project-find-functions #'project-rootfile-try-detect
-    t))
-
-;; (use-package workroom)
-
-;; (use-package
-;;   project-tab-groups
-;;   :ensure
-;;   :config
-;;   (project-tab-groups-mode 1)
-;;   (setq tab-line-tabs-function
-;;     #'project-tab-groups-tab-line-tabs-window-project-buffers))
-
-;; (use-package
-;;   project-mode-line-tag
-;;   :ensure
-;;   :config (project-mode-line-tag-mode 1))
-
-;; (use-package
-;;   persp-mode
-;;   :init (persp-mode 1)
-;;   :bind (("s-y" . persp-switch))
-;;   :custom (persp-kill-foreign-buffer-behaviour 'kill))
-
-;; ;; enable automatic project integration with persp
-;; (use-package
-;;   persp-mode-project-bridge
-;;   :after persp-mode
-;;   :hook
-;;   (persp-mode-project-bridge-mode
-;;     .
-;;     (lambda ()
-;;       (if persp-mode-project-bridge-mode
-;;         (persp-mode-project-bridge-find-perspectives-for-all-buffers)
-;;         (persp-mode-project-bridge-kill-perspectives))))
-;;   (persp-mode . persp-mode-project-bridge-mode)
-;;   :init (persp-mode-project-bridge-mode 1)
-;;   :config (setq persp-emacsclient-init-frame-behaviour-override "main"))
+  (add-to-list 'project-find-functions #'project-rootfile-try-detect t))
 
 (provide 'init-project)

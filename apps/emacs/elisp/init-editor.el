@@ -7,29 +7,6 @@
   (interactive)
   (shell-command "open -R ."))
 
-(defun dot/select-current-line-and-forward-line (arg)
-  "Select the current line and move the cursor by ARG lines IF
-no region is selected.
-
-If a region is already selected when calling this command, only move
-the cursor by ARG lines."
-  (interactive "p")
-  (when (not (use-region-p))
-    (forward-line 0)
-    (set-mark-command nil))
-  (forward-line arg))
-
-(global-set-key
- (kbd "C-!")
- #'dot/select-current-line-and-forward-line)
-
-(defun dot/top-join-line ()
-  "Join the current line with the line beneath it."
-  (interactive)
-  (delete-indentation 1))
-
-(global-set-key (kbd "C-^") 'dot/top-join-line)
-
 (add-to-list
  'find-file-not-found-functions
  #'dot/auto-create-missing-dirs)
@@ -38,8 +15,6 @@ the cursor by ARG lines."
   avy
   :init (avy-setup-default)
   :bind (("s-g" . avy-goto-line) ("C-c C-j" . avy-resume)))
-
-(use-package bbww :config (bbww-mode 1) (bbww-init-global-bindings))
 
 (use-package clipetty :init (global-clipetty-mode 1))
 
@@ -96,10 +71,6 @@ the cursor by ARG lines."
    flyspell-mode-map
    ("C-;" . flyspell-correct-wrapper)))
 
-(use-package golden-ratio :init (golden-ratio-mode 1))
-
-;; (use-package hideshow :hook (prog-mode . hs-minor-mode))
-
 (use-package
   kkp
   :config
@@ -124,48 +95,9 @@ the cursor by ARG lines."
    ("<end>" . mwim-end-of-line-or-code)))
 
 (use-package
-  olivetti
-  :custom
-  (olivetti-margin-width 5)
-  (olivetti-style nil))
-
-(use-package
-  run-command
-  :bind ("C-c c" . run-command)
-  :config
-  (defun dot/run-command-recipes ()
-    (list
-     (list
-      :command-name "nix-flake-update"
-      :command-line "nix flake update"
-      :display "nix flake update")
-     (when-let
-         (
-          (project-dir
-           (locate-dominating-file default-directory "mix.exs")))
-       (list
-        :command-name "phx.server"
-        :command-line "iex -S mix phx.server"
-        :display "Phoenix Server"
-        :working-dir project-dir))
-     (when-let
-         (
-          (project-dir
-           (locate-dominating-file default-directory "mix.exs")))
-       (list
-        :command-name "mix run"
-        :command-line "iex -S mix run"
-        :display "Mix Run"
-        :working-dir project-dir))))
-  (add-to-list 'run-command-recipes 'dot/run-command-recipes)
-  :custom (run-command-default-runner 'run-command-runner-eat))
-
-(use-package
   substitute
   :config (setq substitute-highlight t)
   :bind ("M-# b" . substitute-target-in-buffer))
-
-(use-package transpose-frame :commands transpose-frame)
 
 (use-package
   undo-fu
@@ -187,9 +119,5 @@ the cursor by ARG lines."
   :config (setq whitespace-style '(face tabs trailing))
   :init (global-whitespace-mode)
   :hook (before-save . whitespace-cleanup))
-
-(use-package
-  whole-line-or-region
-  :init (whole-line-or-region-global-mode))
 
 (provide 'init-editor)
