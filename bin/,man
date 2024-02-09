@@ -1,38 +1,51 @@
 #!/usr/bin/env nu
 
-def main [package: string, --list: bool = false, ...args: string] {
-  let package = if (($package | find '#') == null) { $"nixpkgs#($package)" } else { $package }
-  let package = if ((nix eval $package --apply builtins.attrNames --json | from json | find --regex '^man$' | length) >= 1) {
+def find_bin [package: string] {
+  let meta = nix eval $"($package).meta" --json | complete
+  if ($meta.exit_code != 0) {
+    print $meta.stderr
+    exit $meta.exit_code
+  }
+
+  mut bin = $meta.stdout | from json | get mainProgram --ignore-errors
+  if ($bin == null) {
+    $bin = ($package | split column "#" | get column2)
+  }
+
+  print $"Found mainProgram ($bin | first)"
+  $bin | first
+}
+
+def main [page: string, --list (-l), ...args: string] {
+  let package = if (($page | find '#') == null) { $"nixpkgs#($page)" } else { $page }
+  let man_package = if ((nix eval $package --apply builtins.attrNames --json | from json | find --regex '^man$' | length) >= 1) {
     $"($package).man"
   } else {
     $package
   }
 
-  let page = if ($args != []) {
-    $args
-  } else {
-    let meta = nix eval  $"($package).meta" --json | complete
-    if ($meta.exit_code != 0) {
-      print $meta.stderr
-      exit $meta.exit_code
-    }
-
-    mut bin = $meta.stdout | from json | get mainProgram --ignore-errors
-    if ($bin == null) {
-      $bin = ($package | split column "#" | get column2)
-    }
-
-    $bin
-  }
-
-  nix build --no-link $package
-  let path = nix path-info $package | str trim
+  # hydrate the necessary package
+  nix build --no-link $man_package
+  let path = nix path-info $man_package | str trim
   $env.MANPATH = $"($path)/share/man"
-  print $env.MANPATH
+  print $"Setting MANPATH = ($env.MANPATH)"
 
   if ($list) {
     ls $"($env.MANPATH)/man*/*" | select name | each {|m| $m.name | str replace $"($env.MANPATH)/man" "" | str replace --regex "\\.[0-9]\\..*" "" | split column "/" | rename section page} | flatten
   } else {
+    let page = if ($args != []) {
+      if ($args | length) == 1 {
+        try {
+          let section = $args.0 | into int
+          [ $args.0, (find_bin $package) ]
+        }
+      } else {
+        $args
+      }
+    } else {
+      find_bin $package
+    }
+
     man $page
   }
 }
