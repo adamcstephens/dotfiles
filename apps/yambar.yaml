@@ -1,11 +1,20 @@
+symbols: &symbols Symbols Nerd Font Mono:pixelsize=13
+bg_default: &bg_default {stack: [{background: {color: 000000FF}}, {underline: {size: 4, color: 595959ff}}]}
 bar:
   height: 40
-  spacing: 5
-  margin: 15
   location: top
-  background: 1c1d21ff
-  foreground: 78bd65ff
-  font: JetBrainsMono Nerd Font:pixelsize=26
+  font: IBM Plex Sans Medium:pixelsize=24
+  spacing: 2
+  margin: 0
+  layer: bottom
+  foreground: eeeeeeff
+  background: 000000FF
+
+  border:
+    width: 1
+    color: 595959ff
+    margin: 5
+    top-margin: 0
 
   left:
     - river:
@@ -13,15 +22,15 @@ bar:
           - base: &river_base
               left-margin: 10
               right-margin: 13
-              default: { string: { text: , right-margin: 40 } }
+              default: {string: {text: , font: *symbols}}
               conditions:
-                id == 1: { string: { text: ﳐ, right-margin: 40 } }
-                id == 2: { string: { text: , right-margin: 40 } }
-                id == 3: { string: { text: , right-margin: 40 } }
-                id == 4: { string: { text: , right-margin: 40 } }
-                id == 5: { string: { text: , right-margin: 40 } }
-                id == 10: { string: { text: "scratchpad", right-margin: 40 } }
-                id == 11: { string: { text: "work", right-margin: 40 } }
+                id == 1: {string: {text: ﳐ, font: *symbols}}
+                id == 2: {string: {text: , font: *symbols}}
+                id == 3: {string: {text: , font: *symbols}}
+                id == 4: {string: {text: , font: *symbols}}
+                id == 5: {string: {text: , font: *symbols}}
+                id == 10: {string: {text: "scratchpad", font: *symbols}}
+                id == 11: {string: {text: "work", font: *symbols}}
 
         content:
           map:
@@ -33,106 +42,33 @@ bar:
               state == urgent:
                 map:
                   <<: *river_base
-                  deco: { background: { color: D08770ff } }
+                  deco: {background: {color: D08770ff}}
               state == focused:
                 map:
                   <<: *river_base
-              state == visible:
+                  deco: *bg_default
+              state == visible && ~occupied:
                 map:
-                  conditions:
-                    ~occupied: { map: { <<: *river_base } }
-                    occupied: { map: { <<: *river_base } }
+                  <<: *river_base
+              state == visible && occupied:
+                map:
+                  <<: *river_base
+                  deco: *bg_default
               state == unfocused:
                 map:
                   <<: *river_base
-              state == invisible:
+              state == invisible && ~occupied: {empty: {}}
+              state == invisible && occupied:
                 map:
-                  conditions:
-                    ~occupied: { empty: {} }
-                    occupied:
-                      {
-                        map:
-                          {
-                            <<: *river_base,
-                            deco: { underline: { size: 3, color: ea6962ff } },
-                          },
-                      }
+                  <<: *river_base
+                  deco: {underline: {size: 3, color: ea6962ff}}
+
   right:
-    - battery:
-        name: BAT0
-        poll-interval: 30
-        anchors:
-          discharging: &discharging
-            list:
-              items:
-                - ramp:
-                    tag: capacity
-                    items:
-                      - string: { text: , right-margin: 40 }
-                      - string: { text: , right-margin: 40 }
-                      - string: { text: , right-margin: 40 }
-                      - string: { text: , right-margin: 40 }
-                      - string: { text: , right-margin: 40 }
-                      - string: { text: , right-margin: 40 }
-                      - string: { text: , right-margin: 40 }
-                      - string: { text: , right-margin: 40 }
-                      - string: { text: , right-margin: 40 }
-                      - string: { text: , right-margin: 40 }
-                - string: { text: "{capacity}% {estimate}", right-margin: 40 }
-        content:
-          map:
-            conditions:
-              state == unknown:
-                <<: *discharging
-              state == discharging:
-                <<: *discharging
-              state == charging:
-                - string: { text: , right-margin: 40 }
-                - string: { text: "{capacity}% {estimate}", right-margin: 40 }
-              state == full:
-                - string: { text: , right-margin: 40 }
-                - string: { text: "{capacity}% full", right-margin: 40 }
-              state == not charging:
-                - ramp:
-                    tag: capacity
-                    items:
-                      - string: { text:  , right-margin: 40 }
-                      - string: { text:  , right-margin: 40 }
-                      - string: { text:  , right-margin: 40 }
-                      - string: { text:  , right-margin: 40 }
-                      - string: { text:  , right-margin: 40 }
-                      - string: { text:  , right-margin: 40 }
-                      - string: { text:  , right-margin: 40 }
-                      - string: { text:  , right-margin: 40 }
-                      - string: { text:  , right-margin: 40 }
-                      - string: { text:  , right-margin: 40 }
-                - string: { text: "{capacity}%", right-margin: 40 }
-    - network:
-        name: wlan0
-        content:
-          map:
-            default:
-              string:
-                text: 
-                foreground: ffffff66
-                on-click: nm-connection-editor
-            conditions:
-              state == down:
-                string:
-                  text: 
-                  foreground: ff0000ff
-                  on-click: nm-connection-editor
-              state == up:
-                - string:
-                    text: 
-                    right-margin: 40
-                    on-click: nm-connection-editor
-                - string:
-                    text: "{ssid}"
-                    right-margin: 20
-                    on-click: nm-connection-editor
+
     - clock:
+        time-format: "%H:%M %Z"
         content:
-          - string: { text: "{date}", right-margin: 20 }
-          - string: { text: , right-margin: 20 }
-          - string: { text: "{time}", right-margin: 20 }
+          - string: {text: , font: *symbols}
+          - string: {text: "{date}", right-margin: 5}
+          - string: {text: , font: *symbols}
+          - string: {text: "{time}"}
