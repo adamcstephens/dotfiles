@@ -11,10 +11,20 @@ brew-dump:
     brew bundle dump --formula --cask --tap --mas --force
     git diff Brewfile
 
-bump:
+bump: bump-flake bump-npins flake-check
+
+bump-flake:
     nix flake update --commit-lock-file
-    nix run .#hm-all
-    git push
+
+flake-check:
+    nix flake check --no-build --all-systems
+
+bump-npins:
+    npins update -d npins/
+    npins update -d apps/neovim/npins/
+    npins update -d apps/neovim/npins-ext/
+    git add npins/ apps/neovim/npins/ apps/neovim/npins-ext/
+    git commit -m 'chore: npins update' -- npins/ apps/neovim/npins/ apps/neovim/npins-ext/
 
 firefox-config: arkenfox
     ~/.dotfiles/bin/firefox-customize
