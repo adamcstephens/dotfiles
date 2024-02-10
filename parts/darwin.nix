@@ -41,6 +41,7 @@
 
             settings = {
               auto-optimise-store = false;
+              accept-flake-config = false;
               experimental-features = "nix-command flakes";
 
               trusted-users = [
