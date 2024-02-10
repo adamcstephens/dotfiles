@@ -4,11 +4,9 @@ if vim.loop.os_uname().sysname ~= "Linux"
     update_interval = 5000,
     set_dark_mode = function()
       vim.opt.background = 'dark'
-      vim.cmd('colorscheme github_dark_colorblind')
     end,
     set_light_mode = function()
       vim.opt.background = 'light'
-      vim.cmd('colorscheme github_light_colorblind')
     end,
   })
 end
@@ -31,6 +29,7 @@ require('lualine').setup({
 require("modus-themes").setup({
   dim_inactive = false,
   on_highlights = function(highlights, colors)
+    -- default is too much blue
     highlights.Identifier = { fg = colors.fg_main }
 
     highlights.NeogitBranch = { fg = colors.blue }

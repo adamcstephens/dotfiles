@@ -82,6 +82,7 @@ require('whitespace-nvim').setup({})
 -- vim.opt.clipboard = "unnamedplus"
 vim.opt.cursorline = true
 vim.opt.number     = true
+vim.opt.spell      = true
 vim.opt.undofile   = true
 vim.opt.whichwrap  = "<,>,[,]"
 
@@ -98,7 +99,7 @@ vim.keymap.set("n", "<C-e>", "$")
 vim.keymap.set("n", "<C-a>", "0")
 
 vim.keymap.set("n", "<leader><leader>", function()
-  require("telescope").extensions.smart_open.smart_open()
+  require("telescope").extensions.smart_open.smart_open({ cwd_only = true, })
 end, { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>bb", function() builtin.buffers({ sort_lastused = true }) end, { desc = "Switch buffers" })
 vim.keymap.set("n", "<leader>bd", function() vim.cmd("bdelete") end, { desc = "Delete" })
@@ -122,5 +123,6 @@ vim.keymap.set("n", "<leader>xw", function() require("trouble").toggle("workspac
 vim.keymap.set("n", "<leader>xd", function() require("trouble").toggle("document_diagnostics") end)
 vim.keymap.set("n", "<leader>xq", function() require("trouble").toggle("quickfix") end)
 vim.keymap.set("n", "<leader>xl", function() require("trouble").toggle("loclist") end)
+vim.keymap.set("n", "<leader>y", builtin.registers, { desc = "Registers" })
 
 vim.keymap.set("n", "<C-p>", builtin.find_files, { desc = "Find Files" })
