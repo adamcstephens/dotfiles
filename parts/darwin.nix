@@ -159,7 +159,7 @@
               services.forgejo-actions-runner.instances.default = {
                 labels = [
                   "stop/${pkgs.system}:host"
-                  "sower/seed/${pkgs.system}:host"
+                  "sower/seed-ci/${pkgs.system}:host"
                   "local/${pkgs.system}:host"
                 ];
                 name = config.networking.hostName;
