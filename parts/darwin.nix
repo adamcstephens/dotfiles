@@ -142,17 +142,26 @@
           (
             { config, pkgs, ... }:
             {
-              users.users.adam = { home = "/Users/adam"; uid=501; };
+              users.users.adam = {
+                home = "/Users/adam";
+                uid = 501;
+              };
+
               home-manager.users.adam = {
                 imports = homeModules;
               };
+
               home-manager.extraSpecialArgs = {
                 inherit inputs;
                 npins = import ../npins;
               };
 
               services.forgejo-actions-runner.instances.default = {
-                labels = [ "stop/${pkgs.system}:host" ];
+                labels = [
+                  "stop/${pkgs.system}:host"
+                  "sower/seed/${pkgs.system}:host"
+                  "local/${pkgs.system}:host"
+                ];
                 name = config.networking.hostName;
                 tokenFile = "/etc/forgejo-token.env";
                 url = "https://git.junco.dev";
