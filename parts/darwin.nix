@@ -1,7 +1,7 @@
 {
+  config,
   inputs,
   lib,
-  self,
   ...
 }:
 {
@@ -130,43 +130,58 @@
       ];
     };
 
-    silver = {
-      modules = [
-        inputs.sandbox.darwinModules.forgejo-actions-runner
-        (
-          { config, pkgs, ... }:
-          {
-            services.forgejo-actions-runner.instances.default = {
-              labels = [ "stop/${pkgs.system}:host" ];
-              name = config.networking.hostName;
-              tokenFile = "/etc/forgejo-token.env";
-              url = "https://git.junco.dev";
-              settings.runner.envs = {
-                ATTIC_URL = "https://attic.junco.dev";
-                ATTIC_CACHE = "default";
+    silver =
+      let
+        homeModules = config.profile-parts.home-manager.silver.finalModules;
+      in
+      {
+        modules = [
+          inputs.home-manager.darwinModules.home-manager
+
+          inputs.sandbox.darwinModules.forgejo-actions-runner
+          (
+            { config, pkgs, ... }:
+            {
+              users.users.adam = { home = "/Users/adam"; uid=501; };
+              home-manager.users.adam = {
+                imports = homeModules;
               };
-              hostPackages = [
-                config.nix.package
+              home-manager.extraSpecialArgs = {
+                inherit inputs;
+                npins = import ../npins;
+              };
 
-                inputs.attic.packages.${pkgs.system}.attic
-                inputs.sower.packages.${pkgs.system}.seed-ci
+              services.forgejo-actions-runner.instances.default = {
+                labels = [ "stop/${pkgs.system}:host" ];
+                name = config.networking.hostName;
+                tokenFile = "/etc/forgejo-token.env";
+                url = "https://git.junco.dev";
+                settings.runner.envs = {
+                  ATTIC_URL = "https://attic.junco.dev";
+                  ATTIC_CACHE = "default";
+                };
+                hostPackages = [
+                  config.nix.package
 
-                pkgs.bash
-                pkgs.cachix
-                pkgs.coreutils
-                pkgs.curl
-                pkgs.gawk
-                pkgs.gitMinimal
-                pkgs.gnused
-                pkgs.jq
-                pkgs.nodejs
-                pkgs.nushell
-                pkgs.wget
-              ];
-            };
-          }
-        )
-      ];
-    };
+                  inputs.attic.packages.${pkgs.system}.attic
+                  inputs.sower.packages.${pkgs.system}.seed-ci
+
+                  pkgs.bash
+                  pkgs.cachix
+                  pkgs.coreutils
+                  pkgs.curl
+                  pkgs.gawk
+                  pkgs.gitMinimal
+                  pkgs.gnused
+                  pkgs.jq
+                  pkgs.nodejs
+                  pkgs.nushell
+                  pkgs.wget
+                ];
+              };
+            }
+          )
+        ];
+      };
   };
 }
