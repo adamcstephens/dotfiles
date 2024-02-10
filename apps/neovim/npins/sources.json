@@ -19,9 +19,9 @@
         "repo": "focus.nvim"
       },
       "branch": "master",
-      "revision": "5269ea70e2003d9dac199584b093323752a472ba",
-      "url": "https://github.com/nvim-focus/focus.nvim/archive/5269ea70e2003d9dac199584b093323752a472ba.tar.gz",
-      "hash": "1fwam2cg19mi2c2mnlfvmmw3l3bviq8iwz63rivwfk9i2v62dghh"
+      "revision": "4135f976afe5d6e1fe66dff121db9d06643f439f",
+      "url": "https://github.com/nvim-focus/focus.nvim/archive/4135f976afe5d6e1fe66dff121db9d06643f439f.tar.gz",
+      "hash": "0cz0rjw22zwilss4sai9znpkdadxmlqzdhf31amqvjnc884narwa"
     },
     "github-nvim-theme": {
       "type": "Git",
@@ -30,9 +30,9 @@
         "url": "https://github.com/projekt0n/github-nvim-theme"
       },
       "branch": "main",
-      "revision": "067cb69b93957ace0d0d83811453b401d1fb672c",
+      "revision": "d92e1143e5aaa0d7df28a26dd8ee2102df2cadd8",
       "url": null,
-      "hash": "1n24rby87akhjzn593andiaxmq7p858jw5bfniiafs8jhpg7jxsb"
+      "hash": "1nlwjdv241837cgjg6srh2x639g41m65pqjlinnkpain2v0jdvhl"
     },
     "hurl.nvim": {
       "type": "Git",
@@ -41,9 +41,9 @@
         "url": "https://github.com/jellydn/hurl.nvim"
       },
       "branch": "main",
-      "revision": "ab43ee76f9b4796320821dec531ccb023d6e1781",
+      "revision": "fe043c1b67714a78a77e22c8d4e652bc0451453c",
       "url": null,
-      "hash": "0y0qiqj9r90i3nggmg8qjcamxxbyjjrlkm9aivvqrgslsjbl7rv9"
+      "hash": "07rzqgvgzfb28z7yn0q7jdbdhfzhavpf0gkb2k1r9fi36c1i2xqi"
     },
     "smart-open.nvim": {
       "type": "Git",
@@ -52,9 +52,9 @@
         "url": "https://github.com/danielfalk/smart-open.nvim"
       },
       "branch": "main",
-      "revision": "cf8cbaab3b802f4690eda3b1cc6dfc606d313695",
+      "revision": "f6febdf198119531baa23c98203ff37aa54f77dc",
       "url": null,
-      "hash": "0jd4d7ypp1qpkirirc9qk29ynkrxag132lrbxgdvzqsxi0p2ddg7"
+      "hash": "0m25mmsvygs6s8n6r8f17j3z9c4wrkrlp2cnmf6wg69ixxygkzj2"
     }
   },
   "version": 3
