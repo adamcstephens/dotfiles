@@ -879,11 +879,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1707511211,
-        "narHash": "sha256-FCzC6Q29Y3pHz+reVCjV68MPcJ+Nu2RLtnAdshdfaDo=",
+        "lastModified": 1707534277,
+        "narHash": "sha256-38HD2LYWfDgjLaEL6lYy0VdmmO+x0/SLFxSNoElpjG4=",
         "ref": "refs/heads/main",
-        "rev": "87c0b06a556a290d10744e7f0207af9dc6ba2104",
-        "revCount": 45,
+        "rev": "0760489e4864f343fdbc0523addd1f75c5cfbf61",
+        "revCount": 46,
         "type": "git",
         "url": "https://codeberg.org/adamcstephens/sower"
       },
