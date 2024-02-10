@@ -58,9 +58,7 @@
             pkgs.npins
             pkgs.nushell
             pkgs.nvd
-
-            self'.packages.seed-ci
-          ];
+          ] ++ lib.optionals pkgs.stdenv.isLinux [ inputs.sower.packages.${pkgs.system}.seed-ci ];
         };
 
         c = pkgs.mkShell {

@@ -22,6 +22,8 @@
     profile-parts.url = "git+https://codeberg.org/adamcstephens/profile-parts";
     sandbox.url = "git+https://codeberg.org/adamcstephens/nix-sandbox";
     sandbox.inputs.nixpkgs.follows = "nixpkgs";
+    sower.url = "git+https://codeberg.org/adamcstephens/sower";
+    sower.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
@@ -33,6 +35,8 @@
 
         ./parts/darwin.nix
         ./parts/overlays.nix
+
+        inputs.sower.flakeModules.seed
       ];
 
       systems = [

@@ -145,16 +145,22 @@
                 ATTIC_CACHE = "default";
               };
               hostPackages = [
+                config.nix.package
+
+                inputs.attic.packages.${pkgs.system}.attic
+                inputs.sower.packages.${pkgs.system}.seed-ci
+
                 pkgs.bash
+                pkgs.cachix
                 pkgs.coreutils
                 pkgs.curl
                 pkgs.gawk
                 pkgs.gitMinimal
                 pkgs.gnused
+                pkgs.jq
                 pkgs.nodejs
+                pkgs.nushell
                 pkgs.wget
-
-                self.packages.${pkgs.system}.seed-ci
               ];
             };
           }
