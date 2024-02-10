@@ -11,9 +11,9 @@
           height = 40;
           margin = 40;
           anchor = "bottom right";
-          background_color = "${config.colorScheme.colors.base00}";
-          border_color = "${config.colorScheme.colors.base03}";
-          bar_color = "${config.colorScheme.colors.base09}";
+          background_color = "${config.colorScheme.palette.base00}";
+          border_color = "${config.colorScheme.palette.base03}";
+          bar_color = "${config.colorScheme.palette.base09}";
         };
         sections = { };
       };

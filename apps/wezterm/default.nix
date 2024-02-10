@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
 let
-  colors = config.colorScheme.colors;
+  colors = config.colorScheme.palette;
   slug = config.colorScheme.slug;
 
   package = pkgs.wezterm;

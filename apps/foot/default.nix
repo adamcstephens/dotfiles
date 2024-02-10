@@ -10,7 +10,7 @@
       scrollback = {
         lines = 50000;
       };
-      colors = with config.colorScheme.colors; {
+      colors = with config.colorScheme.palette; {
         background = base00;
         foreground = base05;
         regular0 = base00; # black

@@ -6,7 +6,7 @@
     slug = "modus-vivendi";
     name = "Modus Vivendi";
     author = "https://git.sr.ht/~protesilaos/modus-themes";
-    colors = {
+    palette = {
       base00 = "#000000";
       base01 = "#100323";
       base02 = "#3C3C3C";

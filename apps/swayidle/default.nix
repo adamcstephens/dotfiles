@@ -6,7 +6,7 @@
 }:
 let
   systemctlBin = "/run/current-system/sw/bin/systemctl";
-  colors = config.colorScheme.colors;
+  colors = config.colorScheme.palette;
 
   waylock = "${lib.getExe pkgs.waylock} -fork-on-lock -init-color 0x${colors.base01} -input-color 0x${colors.base03} -fail-color 0x${colors.base08}";
   locker = waylock;

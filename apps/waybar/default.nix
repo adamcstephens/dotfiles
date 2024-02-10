@@ -29,33 +29,33 @@
         }
 
         window#waybar {
-          color: #${config.colorScheme.colors.base0B};
-          background-color: #${config.colorScheme.colors.base00};
-          border-bottom: 2px solid #${config.colorScheme.colors.base03};
+          color: #${config.colorScheme.palette.base0B};
+          background-color: #${config.colorScheme.palette.base00};
+          border-bottom: 2px solid #${config.colorScheme.palette.base03};
         }
 
         window#waybar.solo {
-          color: #${config.colorScheme.colors.base0B};
+          color: #${config.colorScheme.palette.base0B};
         }
 
         #tags {
         }
 
         #tags button {
-          color: #${config.colorScheme.colors.base03};
+          color: #${config.colorScheme.palette.base03};
           min-width: 14px;
         }
 
         #tags button.occupied {
-          color: #${config.colorScheme.colors.base04};
+          color: #${config.colorScheme.palette.base04};
         }
 
         #tags button.focused {
-          color: #${config.colorScheme.colors.base09};
+          color: #${config.colorScheme.palette.base09};
         }
 
         #tags button.urgent {
-          color: #${config.colorScheme.colors.base08};
+          color: #${config.colorScheme.palette.base08};
         }
 
         #battery,
@@ -67,23 +67,23 @@
         #tray {
           margin: 0px 10px;
           min-width: 10px;
-          color: #${config.colorScheme.colors.base04};
+          color: #${config.colorScheme.palette.base04};
         }
 
         #battery.warning {
-          color: #${config.colorScheme.colors.base0A};
+          color: #${config.colorScheme.palette.base0A};
         }
 
         #battery.critical {
-          color: #${config.colorScheme.colors.base08};
+          color: #${config.colorScheme.palette.base08};
         }
 
         #battery.charging {
-          color: #${config.colorScheme.colors.base0D};
+          color: #${config.colorScheme.palette.base0D};
         }
 
         #battery.plugged {
-          color: #${config.colorScheme.colors.base0B};
+          color: #${config.colorScheme.palette.base0B};
         }
       '';
     };

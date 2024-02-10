@@ -31,7 +31,7 @@ in
         height = 100;
         origin = "top-right";
         offset = "20x50";
-        frame_color = "#${config.colorScheme.colors.base05}";
+        frame_color = "#${config.colorScheme.palette.base05}";
         frame_width = 1;
         separator_color = "frame";
       };

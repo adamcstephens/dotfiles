@@ -12,7 +12,7 @@
 
     xdg.configFile."leftwm/config.ron".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/leftwm/config.ron";
 
-    xdg.configFile."leftwm/themes/current/theme.ron".text = with config.colorScheme.colors; ''
+    xdg.configFile."leftwm/themes/current/theme.ron".text = with config.colorScheme.palette; ''
       (border_width: 1,
       margin: 0,
       background_color: "#${base00}",

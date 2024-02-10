@@ -6,7 +6,7 @@
   ...
 }:
 let
-  colors = config.colorScheme.colors;
+  colors = config.colorScheme.palette;
 
   wallpaper = inputs.nix-wallpaper.packages.${pkgs.system}.default.override {
     logoSize = 12;

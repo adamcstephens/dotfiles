@@ -15,14 +15,14 @@
 
     xdg.configFile."wofi/style.css".text = ''
       window {
-        border: 2px solid #${config.colorScheme.colors.base03};
-        background-color: #${config.colorScheme.colors.base00};
+        border: 2px solid #${config.colorScheme.palette.base03};
+        background-color: #${config.colorScheme.palette.base00};
       }
 
       #input {
-        color: #${config.colorScheme.colors.base09};
-        border: 2px solid #${config.colorScheme.colors.base03};
-        background-color: #${config.colorScheme.colors.base00};
+        color: #${config.colorScheme.palette.base09};
+        border: 2px solid #${config.colorScheme.palette.base03};
+        background-color: #${config.colorScheme.palette.base00};
         font-size: 13px;
         font-family: ${config.dotfiles.gui.font.variable};
       }
@@ -35,7 +35,7 @@
         margin: 5px 0px;
         font-size: 13px;
         font-family: ${config.dotfiles.gui.font.variable};
-        color: #${config.colorScheme.colors.base06};
+        color: #${config.colorScheme.palette.base06};
       }
 
       #scroll label {
@@ -43,8 +43,8 @@
       }
 
       #entry:selected {
-        color: #${config.colorScheme.colors.base06};
-        background-color: #${config.colorScheme.colors.base00};
+        color: #${config.colorScheme.palette.base06};
+        background-color: #${config.colorScheme.palette.base00};
       }
     '';
 

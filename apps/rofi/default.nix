@@ -15,7 +15,7 @@
       let
         mkLiteral = config.lib.formats.rasi.mkLiteral;
       in
-      with config.colorScheme.colors;
+      with config.colorScheme.palette;
       {
         "*" = {
           bg0 = mkLiteral "#${base00}";

@@ -22,7 +22,7 @@ in
       script = "polybar bar &";
 
       extraConfig =
-        (with config.colorScheme.colors; ''
+        (with config.colorScheme.palette; ''
           [colors]
           background = ${base00}
           background-alt = ${base00}
