@@ -117,6 +117,7 @@ let
       evil-collection
       evil-commentary
       evil-org
+      evil-terminal-cursor-changer
       expand-region
       fish-mode
       flyspell-correct

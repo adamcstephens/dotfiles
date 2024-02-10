@@ -33,4 +33,9 @@
   :hook
   (org-mode . evil-org-mode))
 
+(use-package evil-terminal-cursor-changer
+  :after evil
+  :init
+  (evil-terminal-cursor-changer-activate))
+
 (provide 'init-modal)
