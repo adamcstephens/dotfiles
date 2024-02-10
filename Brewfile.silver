@@ -1,0 +1,14 @@
+tap "homebrew/bundle"
+tap "homebrew/cask"
+tap "homebrew/core"
+tap "homebrew/services"
+brew "dark-mode"
+brew "syncthing", restart_service: true
+cask "bettertouchtool"
+cask "finicky"
+cask "firefox"
+cask "istat-menus"
+cask "raycast"
+cask "utm"
+cask "xquartz"
+mas "Xcode", id: 497799835
