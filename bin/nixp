@@ -16,11 +16,12 @@ def workdir [branch: string, ] {
   cd $nixpkgs_root
 
   let branch_test = do { git rev-parse --verify $branch } | complete
-  let worktree_args = (if ($branch_test.exit_code != 0) { ["-b", $branch, "--track"] } else { [$branch] }) ++ ["--checkout", "--lock"]
+  let worktree_args = ["-B", $branch, "--checkout", "--lock", $worktree, "upstream/master"]
 
   if not ($worktree | path exists) {
     print ($worktree_args | prepend $worktree)
-    git worktree add $worktree ...$worktree_args
+    git fetch upstream master
+    git worktree add ...$worktree_args
 
     cd $worktree
     git push --set-upstream origin $"($branch):($branch)"
