@@ -25,6 +25,9 @@ verbose = true
 [core]
 editor = ~/.dotfiles/bin/editor
 
+[credential]
+helper = rbw
+
 [github]
 user = adamcstephens
 
