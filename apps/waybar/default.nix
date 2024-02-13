@@ -88,9 +88,18 @@
       '';
     };
 
-    systemd.user.services.waybar.Unit = {
-      PartOf = lib.mkForce [ "wayland-session.target" ];
-      After = lib.mkForce [ "wayland-session.target" ];
+    systemd.user.services.waybar = {
+      Service.Environment = "PATH=${
+        lib.makeBinPath [
+          pkgs.blueberry
+          pkgs.networkmanagerapplet
+          pkgs.pavucontrol
+        ]
+      }";
+      Unit = {
+        PartOf = lib.mkForce [ "wayland-session.target" ];
+        After = lib.mkForce [ "wayland-session.target" ];
+      };
     };
   };
 }
