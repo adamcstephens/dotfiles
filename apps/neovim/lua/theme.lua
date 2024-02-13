@@ -60,4 +60,7 @@ require('nvim-highlight-colors').turnOff()
 
 require('rainbow-delimiters.setup').setup({})
 
+require("timed-highlight").setup({
+  highlight_timeout_ms = 2000
+})
 vim.cmd('colorscheme modus')

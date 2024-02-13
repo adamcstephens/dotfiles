@@ -55,6 +55,17 @@
       "revision": "f6febdf198119531baa23c98203ff37aa54f77dc",
       "url": null,
       "hash": "0m25mmsvygs6s8n6r8f17j3z9c4wrkrlp2cnmf6wg69ixxygkzj2"
+    },
+    "timed-highlight": {
+      "type": "Git",
+      "repository": {
+        "type": "Git",
+        "url": "https://github.com/sahlte/timed-highlight.nvim"
+      },
+      "branch": "main",
+      "revision": "c1f5fd7b39d139900762fbb5ff12fcf7f379cec5",
+      "url": null,
+      "hash": "1hfjanc9h10k5qjvicw14gsch6fdimym6yf7maj2h4z867jdfj43"
     }
   },
   "version": 3
