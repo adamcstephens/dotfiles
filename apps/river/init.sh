@@ -188,6 +188,9 @@ riverctl float-filter-add title "popup title with spaces"
 # add ssd for some apps
 riverctl rule-add -app-id 'com.mitchellh.ghostty' ssd
 riverctl rule-add -app-id 'firefox' ssd
+riverctl rule-add -app-id firefox tags $((2#1))
+riverctl rule-add -app-id Element tags $((2#100000))
+riverctl rule-add -app-id WebCord tags $((2#100000))
 
 # warp the mouse
 riverctl set-cursor-warp on-focus-change
