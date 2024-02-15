@@ -64,6 +64,7 @@ let
         telescope-nvim
         tmux-nvim
         trouble-nvim
+        vim-illuminate
         vim-just
         vim-matchup
         which-key-nvim
