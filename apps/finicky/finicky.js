@@ -80,16 +80,16 @@ module.exports = {
       browser: "Microsoft Teams",
     },
   ].concat(
-    [
-      /github.com/,
-      /reddit.com/,
-      /twitter.com/,
-      /youtube.com/,
-      /steampowered.com/,
-      /steamcommunity.com/,
-    ].map((x) => {
-      return { match: x, browser: "org.mozilla.firefoxdeveloperedition" };
-    }),
+    // [
+    //   /github.com/,
+    //   /reddit.com/,
+    //   /twitter.com/,
+    //   /youtube.com/,
+    //   /steampowered.com/,
+    //   /steamcommunity.com/,
+    // ].map((x) => {
+    //   return { match: x, browser: "org.mozilla.firefoxdeveloperedition" };
+    // }),
 
     [
       /instructure.com/,
