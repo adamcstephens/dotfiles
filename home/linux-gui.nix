@@ -129,7 +129,6 @@ in
 
       # bitwarden
       pkgs.pinentry.curses
-      pkgs.rbw
       pkgs.rofi-rbw
 
       # nix

@@ -26,6 +26,7 @@
     pkgs.age-plugin-yubikey
     pkgs.passage
     pkgs.rage
+    pkgs.rbw
     pkgs.yubikey-manager
 
     # nix
