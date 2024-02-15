@@ -40,6 +40,7 @@
 
     # apps
     pkgs.senpai
+    pkgs.spotify
   ];
 
   programs = {
