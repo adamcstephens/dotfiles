@@ -41,7 +41,6 @@ let
         copilot-lua
         direnv-vim
         efmls-configs-nvim
-        elixir-tools-nvim
         friendly-snippets
         gitsigns-nvim
         Ionide-vim
