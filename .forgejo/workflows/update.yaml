@@ -1,0 +1,22 @@
+on:
+  schedule:
+    - cron: '30 0 * * *'
+
+env:
+  ATTIC_KEY: ${{ secrets.ATTIC_KEY }}
+  GIT_RW_TOKEN: ${{ secrets.GIT_RW_TOKEN }}
+
+jobs:
+  flake-update:
+    runs-on: local/x86_64-linux
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - run: |
+          export HOME=$PWD
+          git fetch --unshallow
+          nix develop .# --command bin/forgejo-flake-update
+        env:
+          NIX_CONFIG: "access-tokens = github.com=${{ secrets.REAL_GITHUB_TOKEN }}"
+

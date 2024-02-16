@@ -1,0 +1,67 @@
+#!/usr/bin/env nu
+
+use flake-lib.nu [forgejo-post-to-pr, git-ensure-email, git-prep-workdir]
+
+def build-flake-update-command [inputs: list<string> = []] {
+  ["flake"] ++ (if $inputs == [] or $inputs == null {
+    ["update", "--commit-lock-file"]
+  } else {
+    ["lock", "--commit-lock-file"] ++ ($inputs | each {|i| ["--update-input", $i]} | flatten)
+  })
+}
+
+def run-update [] {
+  let command = $in
+  print $"🏃 Running update command: ($command)"
+
+  let result = do { nix ...$command } | complete
+
+  if ($result.exit_code != 0) {
+    print $result.stderr
+    print $"‼️ (ansi red)Failed to run update(ansi reset)"
+    exit 1
+  }
+
+  $result.stderr | ansi strip | str trim | lines | find --invert --regex "(updating lock file|committed new revision)" | str join "\n"
+}
+
+def main [-c: string] {
+  let repo_link: string = $"($env.GITHUB_API_URL)/repos/($env.GITHUB_REPOSITORY)"
+  let git_token: string = $env.GIT_RW_TOKEN
+  let pr_title: string = if $env.UPDATE_PR_TITLE? == null { "Flake Update" } else {$env.UPDATE_PR_TITLE }
+  let branch: string = if $env.UPDATE_BRANCH? == null { "bump" } else {$env.UPDATE_BRANCH }
+  let push_url: string = ($env.GITHUB_SERVER_URL | str replace --regex "https://" $"https://($git_token)@") + $"/($env.GITHUB_REPOSITORY)"
+
+  let just_tasks = ["bump-npins"];
+
+  cd (git-prep-workdir --base-remote=origin --base main $branch)
+  git-ensure-email "Ruckus Roboticus" ruckus-ci@junco.dev
+
+  let output = build-flake-update-command | run-update
+
+  if (git diff --exit-code HEAD origin/main | complete | get exit_code) != 1 {
+    print "No changes to commit"
+    exit 0
+  }
+
+  print "💨 Running just tasks"
+  let just = just ...$just_tasks | complete
+  if $just.exit_code != 0 {
+    print "!! Failed to run just tasks"
+    exit 1
+  }
+
+  print "🔍 Running flake check"
+  let check = nix flake check --no-build --all-systems | complete
+  if $check.exit_code != 0 {
+    print "!! Failed to verify updates evaluate"
+    exit 1
+  }
+
+  print $"⤴️ Pushing changes to branch ($branch)"
+  git push -f $push_url $branch
+
+  forgejo-post-to-pr $repo_link $git_token $branch $"```\n($output)\n```" $pr_title
+
+  print "✅ Complete"
+}
