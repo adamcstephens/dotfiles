@@ -40,8 +40,7 @@
 
     # apps
     pkgs.senpai
-    pkgs.spotify
-  ];
+  ] ++ lib.optionals (builtins.elem pkgs.system pkgs.spotify.meta.platforms) [ pkgs.spotify ];
 
   programs = {
     ssh.forwardAgent = true;
