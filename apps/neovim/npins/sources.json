@@ -41,9 +41,9 @@
         "url": "https://github.com/jellydn/hurl.nvim"
       },
       "branch": "main",
-      "revision": "fe043c1b67714a78a77e22c8d4e652bc0451453c",
+      "revision": "e3c0fb4ed2a0dcda7508cb22a74aa2fa8d91f5eb",
       "url": null,
-      "hash": "07rzqgvgzfb28z7yn0q7jdbdhfzhavpf0gkb2k1r9fi36c1i2xqi"
+      "hash": "12j6q9g3q0caphmy5q60r9v3ggsi1y439d199dmnpsq3cszsxj57"
     },
     "smart-open.nvim": {
       "type": "Git",
