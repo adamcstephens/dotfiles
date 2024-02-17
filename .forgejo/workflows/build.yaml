@@ -1,13 +1,8 @@
 on: [push]
 
-env:
-  ATTIC_KEY: ${{ secrets.ATTIC_KEY }}
-
 jobs:
   flake-build:
-    runs-on: sower/seed-ci/${{ matrix.system }}
-    container:
-      options: "--volume /nix:/host/nix"
+    runs-on: local/${{ matrix.system }}
 
     strategy:
       matrix:
@@ -19,4 +14,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - run: seed-ci --attic-use=true --nom=false --system ${{ matrix.system }}
+      - run: |
+          export HOME=$PWD
+          nix develop .# --command seed-ci --attic-use=true --nom=false --system ${{ matrix.system }}
+        env:
+          ATTIC_KEY: ${{ secrets.ATTIC_KEY }}
+          ATTIC_URL: ${{ vars.ATTIC_ENDPOINT }}
+          ATTIC_CACHE: ${{ vars.ATTIC_CACHE }}
