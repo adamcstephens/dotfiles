@@ -81,7 +81,7 @@ export def git-prep-workdir [--base-remote: string = "upstream", branch: string,
     do { git branch -D $branch } | complete
     do { git push $dest_remote --delete $branch } | complete
 
-    git fetch $base_remote $"($base):($base)"
+    git fetch $base_remote $base
   }
 
   if not ($worktree_dir | path exists) {
