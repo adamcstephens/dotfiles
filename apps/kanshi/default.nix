@@ -25,7 +25,7 @@
             }
             {
               criteria = "Dell Inc. DELL P2715Q 54KKD79CAQNL";
-              scale = 1.4;
+              scale = 1.25;
             }
           ];
         };
