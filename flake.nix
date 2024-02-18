@@ -39,6 +39,10 @@
         inputs.sower.flakeModules.seed
       ];
 
+      # helpful for limiting seed building until seed-ci has better options
+      # sower.seed.buildOutputs = [ ];
+      # flake.sower.home-manager.think.systems = [ "x86_64-linux" ];
+
       systems = [
         "x86_64-linux"
         "aarch64-darwin"
