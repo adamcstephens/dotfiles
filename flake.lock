@@ -279,6 +279,24 @@
         "type": "github"
       }
     },
+    "flake-parts_6": {
+      "inputs": {
+        "nixpkgs-lib": "nixpkgs-lib_5"
+      },
+      "locked": {
+        "lastModified": 1701473968,
+        "narHash": "sha256-YcVE5emp1qQ8ieHUnxt1wCZCC3ZfAS+SRRWZ2TMda7E=",
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "rev": "34fed993f1674c8d06d58b37ce1e0fe5eebcb9f5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "type": "github"
+      }
+    },
     "flake-utils": {
       "locked": {
         "lastModified": 1667395993,
@@ -421,6 +439,29 @@
       "original": {
         "owner": "nix-community",
         "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "lexical": {
+      "inputs": {
+        "flake-parts": "flake-parts_6",
+        "nixpkgs": [
+          "sower",
+          "nixpkgs"
+        ],
+        "systems": "systems_3"
+      },
+      "locked": {
+        "lastModified": 1707928555,
+        "narHash": "sha256-7v69wPzjbYxujy5OQ76spZLYjt94DDHgwG+7dEP44pA=",
+        "owner": "lexical-lsp",
+        "repo": "lexical",
+        "rev": "261d70552eb5138068ecfa0c1dce74f040945afb",
+        "type": "github"
+      },
+      "original": {
+        "owner": "lexical-lsp",
+        "repo": "lexical",
         "type": "github"
       }
     },
@@ -682,6 +723,24 @@
         "type": "github"
       }
     },
+    "nixpkgs-lib_5": {
+      "locked": {
+        "dir": "lib",
+        "lastModified": 1701253981,
+        "narHash": "sha256-ztaDIyZ7HrTAfEEUt9AtTDNoCYxUdSd6NrRHaYOIxtk=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "e92039b55bcd58469325ded85d4f58dd5a4eaf58",
+        "type": "github"
+      },
+      "original": {
+        "dir": "lib",
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs-stable": {
       "locked": {
         "lastModified": 1702780907,
@@ -873,17 +932,18 @@
       "inputs": {
         "attic": "attic_2",
         "flake-parts": "flake-parts_5",
+        "lexical": "lexical",
         "next-ls": "next-ls",
         "nixpkgs": [
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1707617455,
-        "narHash": "sha256-JiyX3kBZ68n2ONjSGuLKbEuUCZGaOIFPkT7qD7VZgIU=",
+        "lastModified": 1708229882,
+        "narHash": "sha256-1z/4SbqSPGxjd9s9Ddbbwp2Vaf6U5eCcwoXtddrSqoI=",
         "ref": "refs/heads/main",
-        "rev": "10d5749789eeabb7e4d518e62efaf16bcec6e7d0",
-        "revCount": 51,
+        "rev": "e3d06cf7ccf95f9918675a62c641745bdf827b30",
+        "revCount": 55,
         "type": "git",
         "url": "https://codeberg.org/adamcstephens/sower"
       },
@@ -908,6 +968,21 @@
       }
     },
     "systems_2": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    },
+    "systems_3": {
       "locked": {
         "lastModified": 1681028828,
         "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
