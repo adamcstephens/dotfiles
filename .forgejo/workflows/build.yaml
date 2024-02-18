@@ -16,8 +16,9 @@ jobs:
 
       - run: |
           export HOME=$PWD
-          nix develop .# --command seed-ci --attic-use=true --nom=false --system ${{ matrix.system }}
+          nix develop .# --command seed-ci --attic-upload=true --attic-use=true --nom=false --sower-seed=true --system ${{ matrix.system }}
         env:
           ATTIC_KEY: ${{ secrets.ATTIC_KEY }}
           ATTIC_URL: ${{ vars.ATTIC_ENDPOINT }}
           ATTIC_CACHE: ${{ vars.ATTIC_CACHE }}
+          SOWER_URL: ${{ vars.SOWER_URL }}
