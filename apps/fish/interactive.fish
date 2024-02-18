@@ -15,7 +15,9 @@ end
 
 if [ -n $SSH_AUTH_SOCK ] && [ ! -S "$XDG_RUNTIME_DIR/yubikey-agent/yubikey-agent.sock" ] && ! ssh-add -l &>/dev/null
     ssh-add || true
-    ssh-add ~/.ssh/id_ed25519_sk_rk || true
+    if [ -e ~/.ssh/id_ed25519_sk_rk ]
+        ssh-add ~/.ssh/id_ed25519_sk_rk || true
+    end
 
     if ! ssh-add -l
         echo "Emtpy ssh-agent"
