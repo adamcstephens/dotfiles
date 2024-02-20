@@ -43,6 +43,8 @@
       window-padding-y = 5
 
       copy-on-select = clipboard
+
+      keybind = ctrl+shift+delete=reset
     ''
     + lib.optionalString pkgs.stdenv.isLinux ''
       gtk-single-instance = true
