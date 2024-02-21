@@ -124,6 +124,8 @@ in
       pkgs.firefox-wayland
       pkgs.cinnamon.nemo
       pkgs.gomuks
+      pkgs.hunspell
+      pkgs.hunspellDicts.en_us
       pkgs.libreoffice-fresh
       pkgs.mpv
       pkgs.remmina
