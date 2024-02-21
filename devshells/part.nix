@@ -89,7 +89,7 @@
           '';
         };
 
-        go = import ./go.nix { inherit pkgs; };
+        go = pkgs.callPackage ./go.nix { };
 
         js = pkgs.mkShellNoCC {
           packages = [

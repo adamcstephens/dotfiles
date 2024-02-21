@@ -120,7 +120,7 @@ in
       pkgs.cinnamon.nemo
       pkgs.gomuks
       pkgs.hunspell
-      pkgs.hunspellDicts.en_us
+      pkgs.hunspellDicts.en_US
       pkgs.libreoffice-fresh
       pkgs.mpv
       pkgs.remmina
