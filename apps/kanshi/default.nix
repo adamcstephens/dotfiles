@@ -11,6 +11,9 @@
   pkgs,
   ...
 }:
+let
+  dell_scale = 1.32;
+in
 {
   config = lib.mkIf config.dotfiles.gui.wayland {
     services.kanshi = {
@@ -25,7 +28,7 @@
             }
             {
               criteria = "Dell Inc. DELL P2715Q 54KKD79CAQNL";
-              scale = 1.25;
+              scale = dell_scale;
             }
           ];
         };
@@ -42,7 +45,7 @@
           outputs = [
             {
               criteria = "Dell Inc. DELL P2715Q 54KKD79CAQNL";
-              scale = 1.25;
+              scale = dell_scale;
             }
           ];
         };
@@ -50,7 +53,7 @@
           outputs = [
             {
               criteria = "Dell Inc. DELL P2715Q 54KKD79CAQNL";
-              scale = 1.25;
+              scale = dell_scale;
             }
             {
               criteria = "DP-1";
