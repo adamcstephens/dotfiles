@@ -117,6 +117,7 @@ vim.keymap.set("n", "<leader>j", oil.open, { desc = "Jump Files" })
 vim.keymap.set({ "v", "n" }, "<leader>la", require("actions-preview").code_actions, { desc = "Code actions" })
 vim.keymap.set("n", "<leader>lf", function() require("trouble").toggle("lsp_references") end,
   { desc = "Find References" })
+vim.keymap.set("n", "<leader>li", vim.lsp.buf.hover, { desc = "Show hover" })
 vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, { desc = "Rename symbol" })
 vim.keymap.set("n", "<leader>r", builtin.live_grep, { desc = "Search" })
 vim.keymap.set("v", "<leader>r", builtin.grep_string, { desc = "Search selection" })
