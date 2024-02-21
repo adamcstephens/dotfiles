@@ -75,11 +75,6 @@ in
       name = "Papirus-Dark";
       package = pkgs.papirus-icon-theme;
     };
-
-    theme = {
-      name = config.colorScheme.slug;
-      package = nix-colors-contrib.gtkThemeFromScheme { scheme = config.colorScheme; };
-    };
   };
 
   home.pointerCursor = {
