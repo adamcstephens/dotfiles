@@ -53,6 +53,10 @@ require("modus-themes").setup({
     highlights.IlluminatedWordRead = { underline = true }
     highlights.IlluminatedWordWrite = { underline = true }
     highlights.IlluminatedWordText = { underline = true }
+
+    -- remove background from floating windows
+    highlights.NormalFloat = { fg = "none", bg = "none" }
+    highlights.FloatBorder = { fg = "none", bg = "none" }
   end,
 })
 
