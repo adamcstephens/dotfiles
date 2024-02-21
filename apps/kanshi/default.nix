@@ -50,7 +50,7 @@
           outputs = [
             {
               criteria = "Dell Inc. DELL P2715Q 54KKD79CAQNL";
-              scale = 1.45;
+              scale = 1.25;
             }
             {
               criteria = "DP-1";
