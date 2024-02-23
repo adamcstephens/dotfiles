@@ -73,14 +73,20 @@ let
     withPython3 = false;
     extraPython3Packages = _: [ ];
     withRuby = false;
-    viAlias = true;
     vimAlias = true;
 
-    customRC = ''
-      let g:sqlite_clib_path = '${pkgs.sqlite.out}/lib/libsqlite3.${
+    luaRcContent = ''
+      vim.g.sqlite_clib_path = '${pkgs.sqlite.out}/lib/libsqlite3.${
         if pkgs.stdenv.isDarwin then "dylib" else "so"
       }'
-      luafile ${config.home.homeDirectory}/.dotfiles/apps/neovim/init.lua
+
+      vim.opt.rtp:append("${pins-ext.tree-sitter-nu}")
+
+      vim.opt.rtp:append("${
+        if config.dotfiles.nixosManaged then ./. else "${config.home.homeDirectory}/.dotfiles/apps/neovim"
+      }")
+
+      require('dotinit')
     '';
   };
 
@@ -103,18 +109,4 @@ in
   };
 
   home.packages = [ package ];
-
-  home.file.".config/nvim/init.lua".source =
-    if config.dotfiles.nixosManaged then
-      ./init.lua
-    else
-      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/neovim/init.lua";
-
-  home.file.".config/nvim/lua".source =
-    if config.dotfiles.nixosManaged then
-      ./lua
-    else
-      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/neovim/lua";
-
-  home.file.".config/nvim/queries/nu".source = pins-ext.tree-sitter-nu + "/queries/nu";
 }

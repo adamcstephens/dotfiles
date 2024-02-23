@@ -1,8 +1,6 @@
 -- use experiemental lua loader
 vim.loader.enable()
 
--- vim.opt.runtimepath:append(',~/.config/nvim/lua')
-
 -- map leader to <Space> before we do anything else
 vim.keymap.set("n", " ", "<Nop>", { silent = true, remap = false })
 vim.g.mapleader = " "
@@ -42,6 +40,17 @@ require('nvim-treesitter.configs').setup({
   },
   matchup = {
     enable = true,
+  },
+  textobjects = {
+    lsp_interop = {
+      enable = true,
+      border = 'none',
+      floating_preview_opts = {},
+      peek_definition_code = {
+        ["<leader>df"] = "@function.outer",
+        ["<leader>dF"] = "@class.outer",
+      },
+    },
   },
 })
 require('nvim-web-devicons').setup({})
