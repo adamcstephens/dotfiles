@@ -1,10 +1,11 @@
 #!/usr/bin/env nu
 
 def main [ project_path: string = "" ] {
-  let is_tmux = if $env.TMUX != null { true } else { false }
+  let is_tmux = if $env.TMUX? != null { true } else { false }
+  let is_zellij = if $env.ZELLIJ? != null { true } else { false }
 
   let prj = if $project_path != "" { $project_path | path expand } else {
-    let lookup = if $is_tmux {
+    let lookup = if $is_tmux or $is_zellij {
       zoxide query --list | fzf | complete
     } else {
       do { zoxide query --list | rofi -dmenu } | complete
@@ -37,6 +38,13 @@ def main [ project_path: string = "" ] {
       tmux send-keys 'vim .' 'C-m'
       tmux split-window -h -c $project
       tmux select-pane -l
+    } else if $is_zellij {
+      let tabname = $project | path basename
+      if (zellij action query-tab-names | lines | find --regex $"^($tabname)$" | length) == 0 {
+        zellij action new-tab --name $tabname --cwd $project --layout prj
+      } else {
+        zellij action go-to-tab-name $tabname
+      }
     } else {
       ghostty $project
       codium -n $project

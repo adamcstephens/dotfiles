@@ -1,0 +1,18 @@
+layout {
+    pane size=1 borderless=true {
+        plugin location="zellij:tab-bar"
+    }
+    pane split_direction="vertical" {
+        pane {
+          command "vim"
+          args "."
+          focus true
+          name "vim"
+          close_on_exit true
+        }
+        pane split_direction="horizontal" {
+            pane
+            pane
+        }
+    }
+}
