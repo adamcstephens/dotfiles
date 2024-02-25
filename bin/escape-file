@@ -1,0 +1,20 @@
+#!/usr/bin/env nu
+
+def main [file: string, --keep-owner] {
+  if ($file | path type) != "symlink" {
+    print $"($file) is not a symlink, exiting."
+    exit 1
+  }
+
+  let tmpfile = mktemp | split row "\n" | first
+
+  cp $file $tmpfile
+
+  if ($env.USER == "root") {
+    chown $"--reference=($file)" $tmpfile
+  }
+  chmod +w $tmpfile
+
+  rm $file
+  mv $tmpfile $file
+}
