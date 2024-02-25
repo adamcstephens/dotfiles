@@ -23,6 +23,7 @@
     ../apps/ssh
     ../apps/starship
     ../apps/tmux
+    ../apps/zellij
     ../apps/zsh
   ];
 
