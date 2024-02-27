@@ -40,11 +40,12 @@ def main [ project_path: string = "" ] {
       tmux select-pane -l
     } else if $is_zellij {
       let tabname = $project | path basename
+
       if (zellij action query-tab-names | lines | find --regex $"^($tabname)$" | length) == 0 {
         zellij action new-tab --name $tabname --cwd $project --layout prj
-      } else {
-        zellij action go-to-tab-name $tabname
       }
+
+      zellij action go-to-tab-name $tabname
     } else {
       ghostty $project
       codium -n $project
