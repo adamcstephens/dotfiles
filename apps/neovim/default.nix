@@ -59,9 +59,10 @@ let
         oil-nvim
         rainbow-delimiters-nvim
         remember-nvim
+        smart-splits-nvim
         sqlite-lua
+        telescope-fzy-native-nvim
         telescope-nvim
-        tmux-nvim
         trouble-nvim
         vim-illuminate
         vim-just
