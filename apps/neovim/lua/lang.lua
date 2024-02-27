@@ -93,8 +93,16 @@ lspconfig.nil_ls.setup {
 -- nushell
 lspconfig.nushell.setup({})
 
+-- ocaml
 lspconfig.ocamllsp.setup({
   settings = {
     codelens = { enable = true },
   },
 })
+
+-- rust
+lspconfig.rust_analyzer.setup {
+  settings = {
+    ['rust-analyzer'] = {},
+  },
+}
