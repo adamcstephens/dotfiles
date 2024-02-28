@@ -101,8 +101,11 @@ lspconfig.ocamllsp.setup({
 })
 
 -- rust
-lspconfig.rust_analyzer.setup {
+lspconfig.rust_analyzer.setup({
   settings = {
     ['rust-analyzer'] = {},
   },
-}
+})
+
+-- zig
+lspconfig.zls.setup({})
