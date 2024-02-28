@@ -28,12 +28,13 @@
       (builtins.readFile ./interactive.fish)
       + (lib.optionalString pkgs.stdenv.isDarwin (builtins.readFile ./interactive-darwin.fish))
       + ''
+        source ${config.xdg.configHome}/fish/functions/ssh-auth-sock.fish
+
         if test -n "$KITTY_WINDOW_ID"
             set --global KITTY_SHELL_INTEGRATION enabled
             source "${pkgs.kitty.shell_integration}/fish/vendor_conf.d/kitty-shell-integration.fish"
             set --prepend fish_complete_path "${pkgs.kitty.shell_integration}/fish/vendor_completions.d"
             source ${config.xdg.configHome}/fish/functions/autodark.fish
-            source ${config.xdg.configHome}/fish/functions/uas.fish
         end
       '';
 
@@ -76,16 +77,6 @@
         onEvent = "fish_prompt";
       };
       esl = "exec fish -l";
-      uas = {
-        body = ''
-          if [ -z "$TMUX" ]
-            return 0
-          end
-
-          ${lib.getExe pkgs.tmux} showenv -s | string replace -rf '^((?:SSH|DISPLAY).*?)=(".*?"); export.*' 'set -gx $1 $2' | source
-        '';
-        onEvent = "fish_preexec";
-      };
     };
   };
 
@@ -96,6 +87,7 @@
 
   # remove > 3.6.1
   xdg.configFile."fish/functions/__fish_is_zfs_feature_enabled.fish".source = ./zfs-completion-fix.fish;
+  xdg.configFile."fish/functions/ssh-auth-sock.fish".source = ./ssh-auth-sock.fish;
 
   xdg.configFile."fish/theme-dark.fish".source =
     npins."modus-themes.nvim" + "/extras/fish/modus_vivendi.fish";
