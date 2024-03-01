@@ -41,9 +41,9 @@
         "url": "https://github.com/jellydn/hurl.nvim"
       },
       "branch": "main",
-      "revision": "e3c0fb4ed2a0dcda7508cb22a74aa2fa8d91f5eb",
+      "revision": "eb4385a87d6663a18bfdd75eda2f1408c161285f",
       "url": null,
-      "hash": "12j6q9g3q0caphmy5q60r9v3ggsi1y439d199dmnpsq3cszsxj57"
+      "hash": "0nfidsyqkb3w1gc3hlfcf2i7c7gqb5girfqa2pc6slhwama68xwk"
     },
     "smart-open.nvim": {
       "type": "Git",
@@ -63,9 +63,9 @@
         "url": "https://github.com/LukasPietzschmann/telescope-tabs"
       },
       "branch": "master",
-      "revision": "c3572358e60817f40f0de31bc01906af0993d4c4",
+      "revision": "0a678eefcb71ebe5cb0876aa71dd2e2583d27fd3",
       "url": null,
-      "hash": "0mdh71rjpn89icdddwcb7hdjk11akd4lmpnqycfhlycfy4bl6rg2"
+      "hash": "1xkl1w4cg3bimda400id301s8bfqad4ww43ja7rrj0pdfda5kz12"
     },
     "timed-highlight": {
       "type": "Git",
