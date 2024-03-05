@@ -88,6 +88,17 @@
       "revision": "c1f5fd7b39d139900762fbb5ff12fcf7f379cec5",
       "url": null,
       "hash": "1hfjanc9h10k5qjvicw14gsch6fdimym6yf7maj2h4z867jdfj43"
+    },
+    "workspace-diagnotics-nvim": {
+      "type": "Git",
+      "repository": {
+        "type": "Git",
+        "url": "https://github.com/artemave/workspace-diagnostics.nvim"
+      },
+      "branch": "main",
+      "revision": "429174d53652dbef56868a2cbeb8b28cb5d44fdd",
+      "url": null,
+      "hash": "0hb1p7n06xvrvfbvd6wdcxjm06vz016zxdqgqq3jfh4y51fgh66x"
     }
   },
   "version": 3
