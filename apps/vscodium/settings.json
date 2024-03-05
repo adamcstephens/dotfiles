@@ -86,12 +86,13 @@
   "git.mergeEditor": true,
   "git.openRepositoryInParentFolders": "always",
   "github.copilot.enable": {
-    "*": false,
+    "*": true,
     "plaintext": false,
     "markdown": false,
     "scminput": false,
     "elixir": true,
-    "phoenix-heex": true
+    "phoenix-heex": true,
+    "zig": true
   },
   "github.gitAuthentication": false,
   "go.lintFlags": [
@@ -206,5 +207,9 @@
   "[jsonc]": {
     "editor.defaultFormatter": "vscode.json-language-features"
   },
-  "workbench.colorTheme": "GitHub Dark Colorblind (Beta)"
+  "workbench.colorTheme": "GitHub Dark Colorblind (Beta)",
+  "zig.path": "",
+  "zig.zls.path": "",
+  "zig.initialSetupDone": true,
+  "zig.zls.enableInlayHints": false
 }

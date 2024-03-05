@@ -53,6 +53,7 @@ require("conform").setup({
 require("copilot").setup {
   filetypes = {
     elixir = true,
+    zig = true,
     ["*"] = false,
   },
 }
