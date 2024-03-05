@@ -45,6 +45,17 @@
       "url": null,
       "hash": "0nfidsyqkb3w1gc3hlfcf2i7c7gqb5girfqa2pc6slhwama68xwk"
     },
+    "move-nvim": {
+      "type": "Git",
+      "repository": {
+        "type": "Git",
+        "url": "https://github.com/fedepujol/move.nvim.git"
+      },
+      "branch": "main",
+      "revision": "cccbd4ea9049ca5f99f025ffaddb7392359c7d6a",
+      "url": null,
+      "hash": "1425mbyvax63m6l7vkwbfi1l863mr86ba11gxa3hqxcgvjpvp638"
+    },
     "smart-open.nvim": {
       "type": "Git",
       "repository": {

@@ -24,6 +24,15 @@ require('hurl').setup({
   mode = "popup",
 })
 
+require('move').setup({
+  block = {
+    enable = true,
+    indent = true,
+  },
+  char = {
+    enable = true
+  }
+})
 local neogit = require('neogit')
 neogit.setup()
 require('nvim-surround').setup({})
@@ -142,6 +151,12 @@ vim.keymap.set('n', '<leader><leader>h', require('smart-splits').swap_buf_left)
 vim.keymap.set('n', '<leader><leader>j', require('smart-splits').swap_buf_down)
 vim.keymap.set('n', '<leader><leader>k', require('smart-splits').swap_buf_up)
 vim.keymap.set('n', '<leader><leader>l', require('smart-splits').swap_buf_right)
+
+-- moves
+vim.keymap.set('n', '<A-Down>', ':MoveLine(1)<CR>')
+vim.keymap.set('n', '<A-Up>', ':MoveLine(-1)<CR>')
+vim.keymap.set('v', '<A-Down>', ':MoveBlock(1)<CR>')
+vim.keymap.set('v', '<A-Up>', ':MoveBlock(-1)<CR>')
 
 vim.keymap.set("n", "<leader><leader>", function()
   require("telescope").extensions.smart_open.smart_open({ cwd_only = true, })
