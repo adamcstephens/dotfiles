@@ -35,6 +35,8 @@ def main [-c: string] {
   let just_tasks = ["bump-npins"];
 
   cd (git-prep-workdir --base-remote=origin --base main $branch)
+  get fetch origin
+  git pull origin main
   git-ensure-email "Ruckus Roboticus" ruckus-ci@junco.dev
 
   let output = build-flake-update-command | run-update
