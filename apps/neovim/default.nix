@@ -64,6 +64,7 @@ let
         sqlite-lua
         telescope-fzy-native-nvim
         telescope-nvim
+        tmux-nvim
         trouble-nvim
         vim-illuminate
         vim-just

@@ -93,6 +93,15 @@ require('smart-splits').setup({})
 local builtin = require("telescope.builtin")
 require('telescope').load_extension('telescope-tabs')
 require('telescope-tabs').setup({})
+require('tmux').setup({
+  -- use smart-splits for navigation
+  navigation = {
+    enable_default_keybindings = false
+  },
+  resize = {
+    enable_default_keybindings = false
+  },
+})
 require('trouble').setup()
 require("which-key").setup({})
 require('whitespace-nvim').setup({})
