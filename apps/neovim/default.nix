@@ -40,6 +40,7 @@ let
         conform-nvim
         copilot-lua
         direnv-vim
+        editorconfig-nvim
         efmls-configs-nvim
         friendly-snippets
         gitsigns-nvim
