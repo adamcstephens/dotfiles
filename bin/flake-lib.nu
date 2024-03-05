@@ -1,4 +1,4 @@
-def arg-or-env [arg: any, key: string, --required: bool = false] {
+def arg-or-env [arg: any, key: string, --required = false] {
   if $arg != null and $arg != "" {
     $arg
   } else if $key != null and $key != "" {
@@ -67,7 +67,7 @@ export def git-ensure-email [name: string, email: string] {
   }
 }
 
-export def git-prep-workdir [--base-remote: string = "upstream", branch: string, --reset: bool = true, --base: string, --dest-remote: string = "origin"] {
+export def git-prep-workdir [--base-remote: string = "upstream", branch: string, --reset = true, --base: string, --dest-remote: string = "origin"] {
   let worktree_dir: string = $".worktree/($branch)"
 
   let worktree_args = ["--lock", "-b", $branch, $"($base_remote)/($base)"]
