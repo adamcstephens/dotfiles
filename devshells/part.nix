@@ -13,14 +13,12 @@
 
       xmonad = pkgs.mkShellNoCC {
         packages = [
-          (pkgs.ghc.withPackages (
-            ps: [
-              ps.haskell-language-server
-              ps.ormolu
-              ps.xmonad
-              ps.xmonad-contrib
-            ]
-          ))
+          (pkgs.ghc.withPackages (ps: [
+            ps.haskell-language-server
+            ps.ormolu
+            ps.xmonad
+            ps.xmonad-contrib
+          ]))
         ];
       };
     }
@@ -39,15 +37,13 @@
         default = pkgs.mkShellNoCC {
           name = "dots";
           packages = [
-            (inputs.attic.packages.${pkgs.system}.attic.overrideAttrs (
-              prev: {
-                env =
-                  lib.optionalAttrs pkgs.stdenv.cc.isClang {
-                    NIX_LDFLAGS = "-l${pkgs.stdenv.cc.libcxx.cxxabi.libName}";
-                  }
-                  // (prev.env or { });
-              }
-            ))
+            (inputs.attic.packages.${pkgs.system}.attic.overrideAttrs (prev: {
+              env =
+                lib.optionalAttrs pkgs.stdenv.cc.isClang {
+                  NIX_LDFLAGS = "-l${pkgs.stdenv.cc.libcxx.cxxabi.libName}";
+                }
+                // (prev.env or { });
+            }))
             pkgs.curl
             pkgs.deadnix
             pkgs.git-subrepo
@@ -130,13 +126,11 @@
 
         python = pkgs.mkShellNoCC {
           packages = [
-            (pkgs.python3.withPackages (
-              py: [
-                py.black
-                py.hexdump
-                py.paramiko
-              ]
-            ))
+            (pkgs.python3.withPackages (py: [
+              py.black
+              py.hexdump
+              py.paramiko
+            ]))
           ];
         };
 

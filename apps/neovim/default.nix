@@ -19,9 +19,9 @@ let
   ];
   pins = import ./npins;
   pins-ext = import ./npins-ext;
-  npinsPlugins =
-    lib.mapAttrsToList (name: src: (pkgs.vimUtils.buildVimPlugin { inherit name src; }))
-      pins;
+  npinsPlugins = lib.mapAttrsToList (
+    name: src: (pkgs.vimUtils.buildVimPlugin { inherit name src; })
+  ) pins;
 
   nvim-treesitter-nu = pkgs.callPackage ./nvim-treesitter-nu.nix {
     inherit (pkgs.tree-sitter) buildGrammar;

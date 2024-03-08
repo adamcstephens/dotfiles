@@ -9,11 +9,9 @@ let
 
   generate = lib.generators.toPretty { };
   stylesCfg = builtins.toString (
-    builtins.map
-      (name: ''
-        ${name} = ${generate cfg.styles.${name}};
-      '')
-      (builtins.attrNames cfg.styles)
+    builtins.map (name: ''
+      ${name} = ${generate cfg.styles.${name}};
+    '') (builtins.attrNames cfg.styles)
   );
 
   script = pkgs.writeScript "xob-script" ''

@@ -38,16 +38,13 @@
         end
       '';
 
-    shellAbbrs =
-      lib.filterAttrs
-        (
-          k: _:
-          !(builtins.elem k [
-            "cat"
-            "nix"
-          ])
-        )
-        config.home.shellAliases;
+    shellAbbrs = lib.filterAttrs (
+      k: _:
+      !(builtins.elem k [
+        "cat"
+        "nix"
+      ])
+    ) config.home.shellAliases;
     shellAliases = {
       cat = "bat";
       nix = "nix --print-build-logs";
