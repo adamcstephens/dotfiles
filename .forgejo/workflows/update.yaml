@@ -1,4 +1,8 @@
 on:
+  push:
+    paths:
+      - 'bin/forgejo-flake-update'
+      - '.forgejo/workflows/update.yaml'
   schedule:
     - cron: '30 0 * * *'
 
