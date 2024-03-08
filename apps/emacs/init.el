@@ -47,8 +47,8 @@
 (require 'init-project)
 
 ;; (require 'init-lisp)
+(require 'init-lang)
 (require 'init-markdown)
-(require 'init-nix)
 (require 'init-sh)
 ;; (require 'init-yaml)
 
