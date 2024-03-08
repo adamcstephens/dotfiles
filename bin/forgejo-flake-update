@@ -39,7 +39,7 @@ def main [-c: string] {
   git pull origin main
   git-ensure-email "Ruckus Roboticus" ruckus-ci@junco.dev
 
-  let output = build-flake-update-command | run-update
+  let flake_update_out = build-flake-update-command | run-update
 
   if (git diff --exit-code HEAD origin/main | complete | get exit_code) != 1 {
     print "No changes to commit"
@@ -62,7 +62,7 @@ def main [-c: string] {
   print $"⤴️ Pushing changes to branch ($branch)"
   git push -f $push_url $branch
 
-  forgejo-post-to-pr $repo_link $git_token $branch $"```\n($output)\n```" $pr_title
+  forgejo-post-to-pr $repo_link $git_token $branch $"```\n($flake_update_out)\n($just.stdout)\n```" $pr_title
 
   print "✅ Complete"
 }
