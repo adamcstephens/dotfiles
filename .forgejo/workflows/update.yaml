@@ -16,6 +16,8 @@ jobs:
       - run: |
           export HOME=$PWD
           git fetch --unshallow
+          git switch main
+          git pull
           nix develop .# --command bin/forgejo-flake-update
         env:
           NIX_CONFIG: "access-tokens = github.com=${{ secrets.REAL_GITHUB_TOKEN }}"
