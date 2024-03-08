@@ -31,11 +31,11 @@
         "nixpkgs-stable": "nixpkgs-stable_3"
       },
       "locked": {
-        "lastModified": 1705617092,
-        "narHash": "sha256-n9PK4O4X4S1JkwpkMuYm1wHZYJzRqif8g3RuVIPD+rY=",
+        "lastModified": 1707922053,
+        "narHash": "sha256-wSZjK+rOXn+UQiP1NbdNn5/UW6UcBxjvlqr2wh++MbM=",
         "owner": "zhaofengli",
         "repo": "attic",
-        "rev": "fbe252a5c21febbe920c025560cbd63b20e24f3b",
+        "rev": "6eabc3f02fae3683bffab483e614bebfcd476b21",
         "type": "github"
       },
       "original": {
@@ -455,11 +455,11 @@
         "systems": "systems_4"
       },
       "locked": {
-        "lastModified": 1707928555,
-        "narHash": "sha256-7v69wPzjbYxujy5OQ76spZLYjt94DDHgwG+7dEP44pA=",
+        "lastModified": 1708167699,
+        "narHash": "sha256-MN8yoFIn2P0x8eMY9HGzP10WTRgRpVRFCrbHtSaom58=",
         "owner": "lexical-lsp",
         "repo": "lexical",
-        "rev": "261d70552eb5138068ecfa0c1dce74f040945afb",
+        "rev": "a028a549e22f036d413334a42b67c9bb3cbdd13c",
         "type": "github"
       },
       "original": {
@@ -524,11 +524,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1706748877,
-        "narHash": "sha256-rhFuPKx2+NArG6pPit12xHRIgb9vowlcRRhnmSxpZb0=",
+        "lastModified": 1708360866,
+        "narHash": "sha256-oxpWzHpZgCrIK80TM0sdEVI0E3TYYGmGfJI+OQ8RuDk=",
         "owner": "elixir-tools",
         "repo": "next-ls",
-        "rev": "3c0d79459aa7a1865b3f5233fb3b3ed9ecdf5ba7",
+        "rev": "6f4c522456d877538417d5c910be4adba8a0703b",
         "type": "github"
       },
       "original": {
@@ -945,11 +945,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1708287743,
-        "narHash": "sha256-Z3m5tdhXUssuDkenk1Yjr8Kbc7I/RcdIJJtzd0dL1Tc=",
+        "lastModified": 1709933703,
+        "narHash": "sha256-r5sYGt/gTD9g9z3ANn6fPPhWM71gdC+62d24F5m9Oco=",
         "ref": "refs/heads/main",
-        "rev": "f0742bf10d75bffe1b3e94e96ebf2e4218cb99ab",
-        "revCount": 59,
+        "rev": "56c4059e3522c3c150a80a69c0e592a51f33bb46",
+        "revCount": 82,
         "type": "git",
         "url": "https://codeberg.org/adamcstephens/sower"
       },
