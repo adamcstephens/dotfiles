@@ -129,9 +129,10 @@ vim.opt.spell      = true
 vim.opt.undofile   = true
 vim.opt.whichwrap  = "<,>,[,]"
 
+-- folding
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr   = "v:lua.vim.treesitter.foldexpr()"
-vim.opt.foldtext   = "v:lua.vim.treesitter.foldtext()"
+-- vim.opt.foldtext   = "v:lua.vim.treesitter.foldtext()"
 vim.cmd('set nofoldenable')
 
 
