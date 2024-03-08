@@ -1,12 +1,18 @@
+--
+-- set the color and enable auto dark
+--
+vim.cmd.colorscheme 'moonfly'
 if vim.loop.os_uname().sysname ~= "Linux"
     or os.getenv("XDG_CURRENT_DESKTOP") ~= nil then
   require('auto-dark-mode').setup({
     update_interval = 5000,
     set_dark_mode = function()
       vim.opt.background = 'dark'
+      vim.cmd.colorscheme 'moonfly'
     end,
     set_light_mode = function()
       vim.opt.background = 'light'
+      vim.cmd.colorscheme 'github_light_colorblind'
     end,
   })
 end
@@ -54,6 +60,8 @@ require("modus-themes").setup({
     highlights.IlluminatedWordWrite = { underline = true }
     highlights.IlluminatedWordText = { underline = true }
 
+    highlights.DiagnosticWarn = { bg = colors.bg_active }
+
     -- remove background from floating windows
     highlights.NormalFloat = { fg = "none", bg = "none" }
     highlights.FloatBorder = { fg = "none", bg = "none" }
@@ -85,5 +93,3 @@ require('illuminate').configure({
   min_count_to_highlight = 1,
   under_cursor = true,
 })
-
-vim.cmd('colorscheme modus')

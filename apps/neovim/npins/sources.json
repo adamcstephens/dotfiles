@@ -89,6 +89,17 @@
       "url": null,
       "hash": "1hfjanc9h10k5qjvicw14gsch6fdimym6yf7maj2h4z867jdfj43"
     },
+    "vim-moonfly-colors": {
+      "type": "Git",
+      "repository": {
+        "type": "Git",
+        "url": "https://github.com/bluz71/vim-moonfly-colors"
+      },
+      "branch": "master",
+      "revision": "a1a0dfc621f41ffb4e98a813e021ba41e8199adc",
+      "url": null,
+      "hash": "0wa46r8fygmz1r4v2nhc3mvhslwaaicc10zmhsj8kq64shhkmcf2"
+    },
     "workspace-diagnotics-nvim": {
       "type": "Git",
       "repository": {
