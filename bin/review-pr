@@ -1,6 +1,6 @@
 #!/usr/bin/env nu
 
-def main [--linux: bool = true, --mac: bool = true, pr: string, --system: string, ...args: string] {
+def main [--linux = true, --mac = true, pr: string, --system: string, ...args: string] {
   if (git rev-parse --abbrev-ref HEAD) == "master" {
     git pull upstream master
   } else {
