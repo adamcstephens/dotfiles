@@ -102,7 +102,6 @@
         nixpkgs = pkgs.mkShellNoCC {
           name = "nixpkgs-devshell";
           packages = [
-            pkgs.nixVersions.nix_2_16
             pkgs.nix-bisect
             pkgs.nix-generate-from-cpan
             pkgs.nix-prefetch-github
