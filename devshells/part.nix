@@ -34,6 +34,18 @@
     }:
     {
       devShells = {
+        ci = pkgs.mkShellNoCC {
+          name = "ci";
+          packages = [
+            inputs.sower.packages.${pkgs.system}.seed-ci
+
+            pkgs.git
+            pkgs.just
+            pkgs.npins
+            pkgs.nushell
+          ];
+        };
+
         default = pkgs.mkShellNoCC {
           name = "dots";
           packages = [
@@ -54,7 +66,9 @@
             pkgs.npins
             pkgs.nushell
             pkgs.nvd
-          ] ++ lib.optionals pkgs.stdenv.isLinux [ inputs.sower.packages.${pkgs.system}.seed-ci ];
+
+            inputs.sower.packages.${pkgs.system}.seed-ci
+          ];
         };
 
         c = pkgs.mkShell {
