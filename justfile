@@ -11,7 +11,7 @@ brew-dump:
     brew bundle dump --formula --cask --tap --mas --force
     git diff Brewfile
 
-bump: bump-flake bump-npins flake-check
+bump: bump-flake bump-pins flake-check
 
 bump-flake:
     nix flake update --commit-lock-file
@@ -19,7 +19,7 @@ bump-flake:
 flake-check:
     nix flake check --no-build --all-systems
 
-bump-npins:
+bump-pins:
     npins update -d npins/
     npins update -d apps/neovim/npins/
     npins update -d apps/neovim/npins-ext/
