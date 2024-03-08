@@ -115,9 +115,10 @@ in
       pkgs.wireplumber
 
       # apps
+      pkgs.cinnamon.nemo
       pkgs.element-desktop
       pkgs.firefox-wayland
-      pkgs.cinnamon.nemo
+      pkgs.fractal
       pkgs.gomuks
       pkgs.hunspell
       pkgs.hunspellDicts.en_US

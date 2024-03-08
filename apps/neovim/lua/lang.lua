@@ -6,9 +6,6 @@ local efm_languages = {
     require('efmls-configs.linters.fish'),
     require('efmls-configs.formatters.fish_indent')
   },
-  go = {
-    require('efmls-configs.formatters.goimports')
-  },
   sh = {
     require('efmls-configs.linters.shellcheck'),
     require('efmls-configs.formatters.shfmt'),

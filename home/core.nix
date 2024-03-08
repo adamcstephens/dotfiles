@@ -7,6 +7,8 @@
 }:
 {
   imports = [
+    inputs.nix-index-database.hmModules.nix-index
+
     ./module.nix
 
     ../apps/bash
@@ -72,13 +74,12 @@
     tree = "eza --tree";
   };
 
-  programs.home-manager.enable = true;
-
   nix = {
     package = lib.mkForce pkgs.nix;
     settings = {
       experimental-features = "nix-command flakes";
       builders-use-substitutes = true;
+      accept-flake-config = false;
     };
   };
 
@@ -115,13 +116,12 @@
   };
 
   programs = {
-    eza = {
-      enable = true;
-    };
-
+    eza.enable = true;
     fzf.enable = true;
     direnv.enable = true;
     direnv.nix-direnv.enable = true;
+    home-manager.enable = true;
+    nix-index.enable = true;
     zoxide = {
       enable = true;
       options = [
