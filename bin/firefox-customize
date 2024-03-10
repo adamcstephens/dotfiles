@@ -1,8 +1,10 @@
 #!/usr/bin/env nu
 
 let exceptions = [
+  "https://app.fastmail.com"
   "https://chat.openai.com"
   "https://codeberg.org"
+  "https://devdocs.io"
   "https://git.junco.dev"
   "https://github.com"
   "https://id.junco.dev"
@@ -29,10 +31,13 @@ $profiles | each { |p|
   let permissions_db = $p.name + "/permissions.sqlite"
   $exceptions | each { |e|
     let columns = "origin,type,permission,expireType,expireTime,modificationTime"
-    let values = $"'($e)','cookie',1,0,0,(date now | format date "%s")"
 
-    if (open $permissions_db | query db $"SELECT * FROM moz_perms WHERE origin = '($e)'" | length) == 0 {
-      open $permissions_db | query db $"INSERT INTO moz_perms\(($columns)\) VALUES\(($values)\)"
+    [ "cookie" ] | each { |type|
+      let values = $"'($e)','($type)',1,0,0,(date now | format date "%s")"
+
+      if (open $permissions_db | query db $"SELECT * FROM moz_perms WHERE origin = '($e)' AND type = 'cookie'" | length) == 0 {
+        open $permissions_db | query db $"INSERT INTO moz_perms\(($columns)\) VALUES\(($values)\)"
+      }
     }
 
     open $permissions_db | query db $"SELECT * FROM moz_perms WHERE origin = '($e)'"
