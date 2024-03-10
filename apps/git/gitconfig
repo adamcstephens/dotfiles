@@ -23,7 +23,7 @@ gpgsign = true
 verbose = true
 
 [core]
-editor = ~/.dotfiles/bin/editor
+editor = ~/.dotfiles/bin/giteditor
 
 [credential]
 helper = rbw

@@ -8,4 +8,7 @@ fi
 
 unset DISPLAY
 
+# wait
+export IS_EDITOR=true
+
 exec ~/.dotfiles/bin/em -e "(progn (magit-status \"${DIR}\") (delete-other-windows))"
