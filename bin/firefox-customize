@@ -1,6 +1,7 @@
 #!/usr/bin/env nu
 
 let exceptions = [
+  "https://chat.openai.com"
   "https://codeberg.org"
   "https://git.junco.dev"
   "https://github.com"
