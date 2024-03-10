@@ -62,7 +62,7 @@ let
         remember-nvim
         smart-splits-nvim
         sqlite-lua
-        telescope-fzy-native-nvim
+        telescope-zf-native-nvim
         telescope-nvim
         tmux-nvim
         trouble-nvim

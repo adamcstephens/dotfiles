@@ -108,6 +108,7 @@
     pkgs.mtr
     pkgs.tio
     pkgs.wget
+    pkgs.zf
   ];
 
   home.sessionVariables = {

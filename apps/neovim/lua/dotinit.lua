@@ -92,6 +92,7 @@ require('remember').setup({})
 require('smart-splits').setup({})
 local builtin = require("telescope.builtin")
 require('telescope').load_extension('telescope-tabs')
+require("telescope").load_extension("zf-native")
 require('telescope-tabs').setup({})
 require('tmux').setup({
   -- use smart-splits for navigation
