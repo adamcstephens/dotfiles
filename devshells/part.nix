@@ -1,5 +1,12 @@
 { inputs, withSystem, ... }:
 {
+  flake.devShells.aarch64-linux = withSystem "aarch64-linux" (
+    { pkgs, ... }:
+    {
+      incus = import ./incus.nix { inherit pkgs; };
+    }
+  );
+
   flake.devShells.x86_64-linux = withSystem "x86_64-linux" (
     { pkgs, ... }:
     {
