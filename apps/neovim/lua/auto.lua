@@ -50,18 +50,18 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   end
 })
 
-vim.api.nvim_create_autocmd({ "FocusLost" }, {
-  desc = "disable mouse input",
-  callback = function()
-    vim.opt.mouse = ""
-  end,
-  group = autoid
-})
-
-vim.api.nvim_create_autocmd({ "FocusGained" }, {
-  desc = "re-enable mouse input",
-  callback = function()
-    vim.defer_fn(function() vim.opt.mouse = "nvi" end, 100)
-  end,
-  group = autoid
-})
+-- vim.api.nvim_create_autocmd({ "FocusLost" }, {
+--   desc = "disable mouse input",
+--   callback = function()
+--     vim.opt.mouse = ""
+--   end,
+--   group = autoid
+-- })
+--
+-- vim.api.nvim_create_autocmd({ "FocusGained" }, {
+--   desc = "re-enable mouse input",
+--   callback = function()
+--     vim.defer_fn(function() vim.opt.mouse = "nvi" end, 100)
+--   end,
+--   group = autoid
+-- })
