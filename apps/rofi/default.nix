@@ -4,8 +4,8 @@
     enable = true;
     package = pkgs.rofi-wayland.override {
       plugins = [
-        pkgs.rofi-calc
-        pkgs.rofi-emoji
+        (pkgs.rofi-calc.override { rofi-unwrapped = pkgs.rofi-wayland-unwrapped; })
+        (pkgs.rofi-emoji.override { rofi-unwrapped = pkgs.rofi-wayland-unwrapped; })
       ];
     };
 
@@ -121,6 +121,7 @@
       kb-mode-next = "Shift+Right,Control+Tab";
       kb-mode-previous = "Shift+Left,Control+Shift+Tab";
       kb-remove-char-back = "BackSpace";
+      run-command = "bash -c 'systemd-run --user --unit=app-rofi-\$(systemd-escape {cmd})-\$RANDOM {cmd}'";
     };
   };
 }
