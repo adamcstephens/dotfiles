@@ -70,7 +70,7 @@ export def git-ensure-email [name: string, email: string] {
 export def git-prep-workdir [--base-remote: string = "upstream", branch: string, --reset = true, --base: string, --dest-remote: string = "origin"] {
   let worktree_dir: string = $".worktree/($branch)"
 
-  let worktree_args = ["--lock", "-b", $branch, $"($base_remote)/($base)"]
+  let worktree_args = ["--quiet", "--lock", "-b", $branch, $"($base_remote)/($base)"]
 
   if ($reset) {
     if ($worktree_dir | path exists) {
@@ -81,7 +81,7 @@ export def git-prep-workdir [--base-remote: string = "upstream", branch: string,
     do { git branch -D $branch } | complete
     do { git push $dest_remote --delete $branch } | complete
 
-    git fetch $base_remote $base
+    git fetch --quiet $base_remote $base
   }
 
   if not ($worktree_dir | path exists) {

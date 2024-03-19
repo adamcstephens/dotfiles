@@ -35,8 +35,8 @@ def main [-c: string] {
   let just_tasks = ["bump-pins"];
 
   cd (git-prep-workdir --base-remote=origin --base main $branch)
-  git fetch origin
-  git pull origin main
+  git fetch --quiet origin
+  git pull --quiet origin main
   git-ensure-email "Ruckus Roboticus" ruckus-ci@junco.dev
 
   let flake_update_out = build-flake-update-command | run-update
@@ -60,7 +60,7 @@ def main [-c: string] {
   }
 
   print $"⤴️ Pushing changes to branch ($branch)"
-  git push -f $push_url $branch
+  git push --quiet -f $push_url $branch
 
   forgejo-post-to-pr $repo_link $git_token $branch $"```\n($flake_update_out)\n($just.stdout)\n```" $pr_title
 
