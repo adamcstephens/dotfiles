@@ -41,9 +41,9 @@
         "url": "https://github.com/jellydn/hurl.nvim"
       },
       "branch": "main",
-      "revision": "470b59f90532689c3ac77fe4cd69164ebad2229e",
+      "revision": "2531f2a11891ab28097edd6762116e78a26fed52",
       "url": null,
-      "hash": "057mn78xar2d5w7mqnrpc57x9zzlhyalpfnzdlnw74zw0nji83zk"
+      "hash": "1m0maqkwzq5ghaw8hrf9bb7ihp4r1whg92a65vf19whx3jaw0y5n"
     },
     "move-nvim": {
       "type": "Git",
@@ -96,9 +96,9 @@
         "url": "https://github.com/bluz71/vim-moonfly-colors"
       },
       "branch": "master",
-      "revision": "3469ee3e54e676deafd9dc29beddfde3643b4d0d",
+      "revision": "7f89ca0d2396718078780c802fa18738533a43f1",
       "url": null,
-      "hash": "1cmi4s9zn8qf8lgmfhkclsqhj1d2xychdlsngir593bzm7yl6bdw"
+      "hash": "0kqsl6gsfzpip120paxkm6sfvz78xrg9hk0q57skqv7n60cmkpxg"
     },
     "workspace-diagnotics-nvim": {
       "type": "Git",
