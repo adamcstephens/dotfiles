@@ -93,6 +93,16 @@
     done
   '';
 
+  home.activation.dotfiles-pull = lib.mkIf (!config.dotfiles.nixosManaged) (
+    lib.hm.dag.entryBefore [ "checkLinkTargets" ] ''
+      if [ ! -h ${config.home.homeDirectory}/.dotfiles ]; then
+        pushd ${config.home.homeDirectory}/.dotfiles || exit 1
+        # git pull, but don't error on failure
+        git pull || true
+      fi
+    ''
+  );
+
   home.packages = [
     pkgs.calc
     pkgs.difftastic
