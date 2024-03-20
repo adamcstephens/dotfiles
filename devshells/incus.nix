@@ -20,6 +20,13 @@ pkgs.mkShell {
     pkgs.udev.dev
 
     # dev deps
+    (pkgs.aspellWithDicts (
+      dicts: with dicts; [
+        en
+        en-computers
+        en-science
+      ]
+    ))
     pkgs.debianutils
     pkgs.gettext
     pkgs.go-swagger
