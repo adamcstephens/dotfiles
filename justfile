@@ -58,5 +58,15 @@ steam-bootstrap:
     flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
     flatpak install flathub com.valvesoftware.Steam
 
+systemd-networkd-debug:
+    sudo mkdir -p /run/systemd/system/systemd-networkd.service.d
+    echo -e "[Service]\nEnvironment=SYSTEMD_LOG_LEVEL=debug" | sudo tee /run/systemd/system/systemd-networkd.service.d/override.conf
+    sudo systemctl daemon-reload
+
+systemd-networkd-debug-reset:
+    sudo rm /run/systemd/system/systemd-networkd.service.d/override.conf
+    sudo systemctl daemon-reload
+    sudo systemctl systemd-networkd
+
 test:
     nix build --print-build-logs --keep-going .#homeConfigurations.aarch64-darwin.activationPackage .#homeConfigurations.aarch64-linux.activationPackage .#homeConfigurations.think.activationPackage
