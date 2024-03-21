@@ -99,6 +99,9 @@ lspconfig.ocamllsp.setup({
 
 -- rust
 lspconfig.rust_analyzer.setup({
+  on_attach = function(client)
+    client.server_capabilities.semanticTokensProvider = nil
+  end,
   settings = {
     ['rust-analyzer'] = {},
   },
