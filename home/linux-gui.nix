@@ -123,6 +123,7 @@ in
       pkgs.hunspell
       pkgs.hunspellDicts.en_US
       pkgs.libreoffice-fresh
+      pkgs.mosh
       pkgs.mpv
       pkgs.remmina
       pkgs.thunderbird
