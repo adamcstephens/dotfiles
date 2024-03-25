@@ -117,7 +117,8 @@ in
       # apps
       pkgs.cinnamon.nemo
       pkgs.element-desktop
-      pkgs.firefox-wayland
+      pkgs.firefoxpwa
+      (pkgs.firefox-wayland.override { nativeMessagingHosts = [ pkgs.firefoxpwa ]; })
       pkgs.fractal
       pkgs.gomuks
       pkgs.hunspell
