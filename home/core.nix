@@ -104,6 +104,8 @@
   );
 
   home.packages = [
+    inputs.sower.packages.${pkgs.system}.cli
+
     pkgs.calc
     pkgs.difftastic
     pkgs.direnv
