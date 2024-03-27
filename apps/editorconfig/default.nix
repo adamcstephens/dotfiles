@@ -17,6 +17,10 @@
         indent_size = 2;
       };
 
+      "*.nu" = {
+        indent_size = 2;
+      };
+
       "*.py" = {
         indent_size = 4;
       };

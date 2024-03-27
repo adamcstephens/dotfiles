@@ -42,6 +42,7 @@ let
         direnv-vim
         editorconfig-nvim
         efmls-configs-nvim
+        elixir-tools-nvim
         friendly-snippets
         gitsigns-nvim
         Ionide-vim

@@ -25,19 +25,31 @@ lspconfig.efm.setup({
 })
 
 -- elixir
-if os.getenv("LEXICAL_START_PATH") then
-  configs.lexical = {
-    default_config = {
-      filetypes = { "elixir", "eelixir", "heex" },
-      cmd = { os.getenv("LEXICAL_START_PATH") },
-      root_dir = function(fname)
-        return lspconfig.util.root_pattern("mix.exs", ".git")(fname) or vim.loop.os_homedir()
-      end,
-      settings = {},
-    },
-  }
-end
-lspconfig.lexical.setup({})
+require("elixir").setup({
+  nextls = { enable = true },
+  credo = { enable = true },
+  elixirls = { enable = false },
+})
+-- lspconfig.elixirls.setup({
+--   cmd = { "elixir-ls" },
+--   on_attach = function(client)
+--     client.server_capabilities.semanticTokensProvider = nil
+--   end,
+-- })
+-- if os.getenv("LEXICAL_START_PATH") then
+--   configs.lexical = {
+--     default_config = {
+--       filetypes = { "elixir", "eelixir", "heex" },
+--       cmd = { os.getenv("LEXICAL_START_PATH") },
+--       root_dir = function(fname)
+--         return lspconfig.util.root_pattern("mix.exs", ".git")(fname) or vim.loop.os_homedir()
+--       end,
+--       settings = {},
+--     },
+--   }
+--
+--   lspconfig.lexical.setup({})
+-- end
 
 -- go
 lspconfig.gopls.setup({})
