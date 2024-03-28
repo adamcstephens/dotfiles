@@ -142,10 +142,7 @@
           (
             { config, pkgs, ... }:
             {
-              users.users.adam = {
-                home = "/Users/adam";
-                uid = 501;
-              };
+              dotfiles.nixosManaged = true;
 
               home-manager.users.adam = {
                 imports = homeModules;
@@ -157,9 +154,7 @@
               };
 
               services.forgejo-actions-runner.instances.default = {
-                labels = [
-                  "local/${pkgs.system}:host"
-                ];
+                labels = [ "local/${pkgs.system}:host" ];
                 name = config.networking.hostName;
                 tokenFile = "/etc/forgejo-token.env";
                 url = "https://git.junco.dev";
@@ -185,6 +180,11 @@
                   pkgs.nushell
                   pkgs.wget
                 ];
+              };
+
+              users.users.adam = {
+                home = "/Users/adam";
+                uid = 501;
               };
             }
           )
