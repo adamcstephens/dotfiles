@@ -22,6 +22,7 @@
     ../apps/nushell
     ../apps/ripgrep
     ../apps/shellcheck
+    ../apps/sower
     ../apps/ssh
     ../apps/starship
     ../apps/tmux
@@ -98,7 +99,7 @@
       if [ ! -h ${config.home.homeDirectory}/.dotfiles ]; then
         pushd ${config.home.homeDirectory}/.dotfiles || exit 1
         # git pull, but don't error on failure
-        git pull || true
+        ${lib.getExe pkgs.git} pull || true
       fi
     ''
   );

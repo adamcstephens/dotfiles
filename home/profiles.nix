@@ -33,6 +33,8 @@ in
             ];
             config.allowUnfree = true;
           };
+
+          services.sower.config.name = name;
         }
       ];
 
