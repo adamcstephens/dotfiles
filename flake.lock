@@ -557,17 +557,14 @@
     },
     "next-ls": {
       "inputs": {
-        "nixpkgs": [
-          "sower",
-          "nixpkgs"
-        ]
+        "nixpkgs": "nixpkgs_4"
       },
       "locked": {
-        "lastModified": 1710518542,
-        "narHash": "sha256-Cl2hZhwQ89cqPv5WSx7zdMOgE+Fi/iTy15e5MTPu+hE=",
+        "lastModified": 1711480341,
+        "narHash": "sha256-5kLenWv6XbDPlmQhFrHXdP8AS6Bbcymb+EUKaGK8xDs=",
         "owner": "elixir-tools",
         "repo": "next-ls",
-        "rev": "4151895cc009fa4ab0344ed1fe455ed40e666830",
+        "rev": "fa959875ffabf77bb9763842d2600ddf8ccacbcb",
         "type": "github"
       },
       "original": {
@@ -863,6 +860,22 @@
         "type": "github"
       }
     },
+    "nixpkgs_4": {
+      "locked": {
+        "lastModified": 1711333969,
+        "narHash": "sha256-5PiWGn10DQjMZee5NXzeA6ccsv60iLu+Xtw+mfvkUAs=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "57e6b3a9e4ebec5aa121188301f04a6b8c354c9b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "pre-commit-hooks": {
       "inputs": {
         "flake-compat": "flake-compat_3",
@@ -1008,11 +1021,11 @@
         "rust-overlay": "rust-overlay_2"
       },
       "locked": {
-        "lastModified": 1711489863,
-        "narHash": "sha256-gwSqbHoQFPJrymQt/+zE6FeGWNmTnyKv9plul1om4Ak=",
+        "lastModified": 1711631677,
+        "narHash": "sha256-EsEkUMIYsb9OY4gWuLFPKRPvUooQ+J7Gufg34Hw1ipQ=",
         "ref": "refs/heads/main",
-        "rev": "a5366615f40e642d7ba6680492b160581b8c7b9f",
-        "revCount": 90,
+        "rev": "1ad3afe8ce1ea5cfc485d2d2f63e343c7484a906",
+        "revCount": 99,
         "type": "git",
         "url": "https://codeberg.org/adamcstephens/sower"
       },
