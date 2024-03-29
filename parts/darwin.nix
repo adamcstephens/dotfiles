@@ -142,10 +142,9 @@
           (
             { config, pkgs, ... }:
             {
-              dotfiles.nixosManaged = true;
 
               home-manager.users.adam = {
-                imports = homeModules;
+                imports = homeModules ++ [ { dotfiles.nixosManaged = true; } ];
               };
 
               home-manager.extraSpecialArgs = {
