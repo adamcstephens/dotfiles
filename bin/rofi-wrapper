@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+set -x
+
+UNIT=$(systemd-escape "$(echo "$@" | awk '{print $1}')")
+systemd-run --user --unit="app-rofi-$UNIT-$RANDOM" "$@"

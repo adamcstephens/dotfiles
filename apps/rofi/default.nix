@@ -121,7 +121,7 @@
       kb-mode-next = "Shift+Right,Control+Tab";
       kb-mode-previous = "Shift+Left,Control+Shift+Tab";
       kb-remove-char-back = "BackSpace";
-      run-command = "bash -c 'systemd-run --user --unit=app-rofi-\$(systemd-escape {cmd})-\$RANDOM {cmd}'";
+      run-command = "rofi-wrapper {cmd}";
     };
   };
 }
