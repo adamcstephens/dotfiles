@@ -29,7 +29,7 @@ in
 
       Service = {
         Type = "simple";
-        ExecStart = "${lib.getExe pkgs.ssh-tpm-agent} -l %t/ssh-agent";
+        ExecStart = "${lib.getExe pkgs.ssh-tpm-agent} -l %t/ssh-tpm-agent -A %t/ssh-agent ";
         RestartSec = 3;
         Restart = "on-abort";
       };

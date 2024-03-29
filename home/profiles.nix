@@ -199,6 +199,7 @@ in
         (
           { pkgs, ... }:
           {
+            apps.ssh.tpm = true;
             dotfiles = {
               gui.wayland = true;
             };
