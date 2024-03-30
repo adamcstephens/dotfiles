@@ -15,14 +15,14 @@ if [ -S "$HOME/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/sock
 fi
 
 if ! ssh-add -l &>/dev/null; then
-  ssh-add >&1 || true
+  ssh-add >&2 || true
 
   if [ -e ~/.ssh/id_ed25519_sk_rk ]; then
-    ssh-add ~/.ssh/id_ed25519_sk_rk >&1 || true
+    ssh-add ~/.ssh/id_ed25519_sk_rk >&2 || true
   fi
 
   if [ "$(uname)" = "Darwin" ]; then
-    ssh-add --apple-use-keychain
+    ssh-add --apple-use-keychain >&2 || true
   fi
 fi
 
