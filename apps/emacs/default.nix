@@ -244,7 +244,6 @@ in
 
     systemd = lib.mkIf pkgs.stdenv.isLinux {
       user.services.emacs.Service = {
-        Environment = [ "SSH_AUTH_SOCK=%t/yubikey-agent/yubikey-agent.sock" ];
         TimeoutSec = 900;
       };
     };

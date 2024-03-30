@@ -97,10 +97,7 @@ in
         systemctl --user stop wayland-session.target
         systemctl --user unset-environment WAYLAND_DISPLAY
 
-        export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent
-        if [ -S "$XDG_RUNTIME_DIR/yubikey-agent/yubikey-agent.sock" ]; then
-          export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/yubikey-agent/yubikey-agent.sock
-        fi
+        export SSH_AUTH_SOCK=$(~/.dotfiles/bin/ssh-agent-mgr)
 
         # chrome and vscode use this to find the secret service
         export XDG_CURRENT_DESKTOP=GNOME

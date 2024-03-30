@@ -22,11 +22,8 @@
       (builtins.readFile ./init.fish)
       + (lib.optionalString pkgs.stdenv.isDarwin (builtins.readFile ./init-darwin.fish));
 
-    loginShellInit = lib.optionalString pkgs.stdenv.isDarwin (builtins.readFile ./login-darwin.fish);
-
     interactiveShellInit =
       (builtins.readFile ./interactive.fish)
-      + (lib.optionalString pkgs.stdenv.isDarwin (builtins.readFile ./interactive-darwin.fish))
       + ''
         source ${config.xdg.configHome}/fish/functions/ssh-auth-sock.fish
 

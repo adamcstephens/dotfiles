@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+socket="$XDG_RUNTIME_DIR/ssh-agent"
+
+if [ -S "$XDG_RUNTIME_DIR/yubikey-agent/yubikey-agent.sock" ]; then
+  socket="$XDG_RUNTIME_DIR/yubikey-agent/yubikey-agent.sock"
+fi
+
+if [ -S "$XDG_RUNTIME_DIR/ssh-tpm-agent" ]; then
+  socket="$XDG_RUNTIME_DIR/ssh-tpm-agent"
+fi
+
+if [ -S "$HOME/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh" ]; then
+  socket="$HOME/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh"
+fi
+
+if ! ssh-add -l &>/dev/null; then
+  ssh-add >&1 || true
+
+  if [ -e ~/.ssh/id_ed25519_sk_rk ]; then
+    ssh-add ~/.ssh/id_ed25519_sk_rk >&1 || true
+  fi
+
+  if [ "$(uname)" = "Darwin" ]; then
+    ssh-add --apple-use-keychain
+  fi
+fi
+
+export SSH_AUTH_SOCK="$socket"
+if ! ssh-add -l &>/dev/null; then
+  echo "Emtpy ssh-agent" >&2
+fi
+
+echo -n "$socket"

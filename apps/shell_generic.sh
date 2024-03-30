@@ -47,16 +47,3 @@ export PYTHONSTARTUP="$HOME"/.dotfiles/apps/python/pythonstartup.py
 if [[ -z $SSH_AUTH_SOCK ]]; then
   echo "Empty ssh-agent"
 fi
-
-# tmux
-update_auth_sock() {
-  socket_path="$(tmux show-environment | sed -n 's/^SSH_AUTH_SOCK=//p')"
-
-  if ! [ -e "$socket_path" ]; then
-    echo 'no socket path' >&2
-    return 1
-  else
-    export SSH_AUTH_SOCK="$socket_path"
-  fi
-}
-alias uas=update_auth_sock

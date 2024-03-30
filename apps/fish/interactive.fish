@@ -4,25 +4,7 @@ set -U fish_greeting
 fzf_configure_bindings --directory=\ct
 set fzf_fd_opts --hidden --exclude=.git
 
-if [ -z "$SSH_AUTH_SOCK" ]
-    if [ -S "$XDG_RUNTIME_DIR/ssh-agent" ]
-        set -x SSH_AUTH_SOCK "$XDG_RUNTIME_DIR/ssh-agent"
-    end
-    if [ -S "$XDG_RUNTIME_DIR/yubikey-agent/yubikey-agent.sock" ]
-        set -x SSH_AUTH_SOCK "$XDG_RUNTIME_DIR/yubikey-agent/yubikey-agent.sock"
-    end
-end
-
-if [ -n $SSH_AUTH_SOCK ] && [ ! -S "$XDG_RUNTIME_DIR/yubikey-agent/yubikey-agent.sock" ] && ! ssh-add -l &>/dev/null
-    ssh-add || true
-    if [ -e ~/.ssh/id_ed25519_sk_rk ]
-        ssh-add ~/.ssh/id_ed25519_sk_rk || true
-    end
-
-    if ! ssh-add -l
-        echo "Emtpy ssh-agent"
-    end
-end
+set -x SSH_AUTH_SOCK (~/.dotfiles/bin/ssh-agent-mgr)
 
 if [ -e $HOME/.shell_local.sh ]
     fenv source $HOME/.shell_local.sh
