@@ -144,6 +144,7 @@ in
       pkgs.slurp
       pkgs.wl-clipboard
       pkgs.wl-mirror
+      pkgs.wl-screenrec
       pkgs.wdisplays
       pkgs.wlopm
     ])
