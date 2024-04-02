@@ -39,16 +39,33 @@ def workdir [branch: string, ] {
   $worktree
 }
 
-def clean_workdir [branch: string] {
-  let worktree = get_worktree $branch
+def clean [confirm = false] {
   cd $nixpkgs_root
+  git switch master
+  git pull
 
-  git worktree remove -ff $worktree
-  git branch -D $branch
+  let worktrees = git worktree list | lines | parse '{path} {commit} [{branch}] {rest}' | each { |w|
+    let commit = $w.commit | str trim
+    $w | merge {
+      commit: $commit,
+      merged: ((git branch --contains $commit master | find master | length) > 0)
+    }
+  } | filter { |w|
+    ($w.path != $env.PWD) and $w.branch != "master" and $w.merged == true
+  } | par-each --threads 4 { |w|
+    print $":: removing ($w.branch)"
+    git worktree remove -ff $w.path
+    git branch -D $w.branch
+  }
 }
 
-def main [--codium (-c), --emacs (-e), --prj (-p), action: string, name: string] {
+def main [--codium (-c), --emacs (-e), --prj (-p), action: string, name: string = ""] {
   if ($action == "workdir") {
+    if name? == "" {
+      print "!! must provide name"
+      exit 1
+    }
+
     let worktree = workdir $name
     if $emacs {
       em $worktree
@@ -63,7 +80,7 @@ def main [--codium (-c), --emacs (-e), --prj (-p), action: string, name: string]
       exec kitty @ close-window -m ("id:" + $env.KITTY_WINDOW_ID)
     }
   } else if ($action == "clean") {
-    clean_workdir $name
+    clean
   } else {
     print ("!! Unsupported command " + $action)
     exit 1
