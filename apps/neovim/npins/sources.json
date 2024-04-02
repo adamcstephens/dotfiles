@@ -42,10 +42,10 @@
       },
       "pre_releases": false,
       "version_upper_bound": null,
-      "version": "v1.2.1",
-      "revision": "60a038c4356aff77c289b8c8096eff5037fc1ca4",
+      "version": "v1.3.0",
+      "revision": "e526b7576cb149259efc930497e0cbabe4b25991",
       "url": null,
-      "hash": "17cdp6j6p7hvsjl0jz1mlhgk6f0q1xk13pks5vr5mp61wq1ddp36"
+      "hash": "1x6z9kdpb0alfw85c62inr52ln1jm9cmdc4089l4rni7inaxlk5f"
     },
     "move-nvim": {
       "type": "Git",
@@ -98,9 +98,9 @@
         "url": "https://github.com/bluz71/vim-moonfly-colors"
       },
       "branch": "master",
-      "revision": "b027635777683c8c255843bab67edb3a210b91e2",
+      "revision": "339fbb83a1bf2fb77305b20c37686b3224adfb8f",
       "url": null,
-      "hash": "19sspfzikvfkl7zxdarqbbjp14zkkgqs16vw81823gvgva8cl5h8"
+      "hash": "0cwxazn0cha2ggixqisb536sbwbmr2xzdy7glfa5bafshyz8jyf4"
     },
     "workspace-diagnotics-nvim": {
       "type": "Git",
