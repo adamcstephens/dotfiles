@@ -139,6 +139,7 @@
           inputs.home-manager.darwinModules.home-manager
 
           inputs.sandbox.darwinModules.forgejo-actions-runner
+          inputs.sandbox.darwinModules.woodpecker-agents
           (
             { config, pkgs, ... }:
             {
@@ -178,6 +179,30 @@
                   pkgs.nodejs
                   pkgs.nushell
                   pkgs.wget
+                ];
+              };
+
+              services.woodpecker-agents.agents.default = {
+                enable = true;
+
+                environment = {
+                  WOODPECKER_BACKEND = "local";
+                  WOODPECKER_FILTER_LABELS = "type=local,system=${pkgs.system}";
+                  WOODPECKER_MAX_WORKFLOWS = "1";
+                  WOODPECKER_SERVER = "woodpecker-grpc.junco.dev:9000";
+                  WOODPECKER_GRPC_SECURE = "false";
+                };
+                environmentFile = [ "/etc/woodpecker-agent.env" ];
+
+                path = [
+                  config.nix.package
+                  pkgs.woodpecker-plugin-git
+                  pkgs.bash
+                  pkgs.coreutils
+                  pkgs.git
+                  pkgs.git-lfs
+                  pkgs.gnutar
+                  pkgs.gzip
                 ];
               };
 
