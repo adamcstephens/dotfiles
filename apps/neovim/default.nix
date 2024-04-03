@@ -8,7 +8,6 @@
 let
   dependencies = [
     pkgs.efm-langserver
-    pkgs.hurl
     pkgs.lua
     pkgs.lua-language-server
     pkgs.jq

@@ -34,19 +34,6 @@
       "url": null,
       "hash": "1nlwjdv241837cgjg6srh2x639g41m65pqjlinnkpain2v0jdvhl"
     },
-    "hurl.nvim": {
-      "type": "GitRelease",
-      "repository": {
-        "type": "Git",
-        "url": "https://github.com/jellydn/hurl.nvim"
-      },
-      "pre_releases": false,
-      "version_upper_bound": null,
-      "version": "v1.3.0",
-      "revision": "e526b7576cb149259efc930497e0cbabe4b25991",
-      "url": null,
-      "hash": "1x6z9kdpb0alfw85c62inr52ln1jm9cmdc4089l4rni7inaxlk5f"
-    },
     "move-nvim": {
       "type": "Git",
       "repository": {

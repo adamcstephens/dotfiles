@@ -19,11 +19,6 @@ require('Comment').setup()
 require("focus").setup()
 require('gitsigns').setup()
 
-require('hurl').setup({
-  show_notification = true,
-  mode = "popup",
-})
-
 require('move').setup({
   block = {
     enable = true,
@@ -174,8 +169,6 @@ vim.keymap.set('v', '<A-Up>', ':MoveBlock(-1)<CR>')
 -- end, { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>bb", function() builtin.buffers({ sort_lastused = true }) end, { desc = "Switch buffers" })
 vim.keymap.set("n", "<leader>bd", function() vim.cmd("bdelete") end, { desc = "Delete" })
-vim.keymap.set("n", "<leader>dr", "<cmd>HurlRunnerAt<CR>", { desc = "Hurl Under Cursor" })
-vim.keymap.set("n", "<leader>dR", "<cmd>HurlRunner<CR>", { desc = "Hurl File" })
 vim.keymap.set("n", "<leader>f", builtin.find_files, { desc = "Find Files" })
 vim.keymap.set("n", "<leader>g", neogit.open, { desc = "Open Neogit" })
 vim.keymap.set("n", "<leader>hk", builtin.keymaps, { desc = "Keymaps" })
