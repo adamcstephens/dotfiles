@@ -26,30 +26,35 @@ lspconfig.efm.setup({
 
 -- elixir
 require("elixir").setup({
-  nextls = { enable = true },
+  nextls = {
+    enable = true,
+    cmd = "nextls"
+  },
   credo = { enable = true },
-  elixirls = { enable = false },
+  elixirls = {
+    -- disable this and use lspconfig instead
+    enable = false,
+    cmd = "elixir-ls",
+    settings = require("elixir.elixirls").settings {
+      dialyzerEnabled = false,
+      enableTestLenses = false,
+    },
+  }
 })
--- lspconfig.elixirls.setup({
---   cmd = { "elixir-ls" },
---   on_attach = function(client)
---     client.server_capabilities.semanticTokensProvider = nil
---   end,
+lspconfig.elixirls.setup({
+  capabilities = require('cmp_nvim_lsp').default_capabilities(),
+  cmd = { "elixir-ls" },
+  on_attach = function(client)
+    client.server_capabilities.semanticTokensProvider = nil
+    vim.keymap.set("n", "<space>fp", ":ElixirFromPipe<cr>", { buffer = true, noremap = true })
+    vim.keymap.set("n", "<space>tp", ":ElixirToPipe<cr>", { buffer = true, noremap = true })
+    vim.keymap.set("v", "<space>em", ":ElixirExpandMacro<cr>", { buffer = true, noremap = true })
+  end,
+
+})
+-- lspconfig.lexical.setup({
+--   cmd = { "lexical" },
 -- })
--- if os.getenv("LEXICAL_START_PATH") then
---   configs.lexical = {
---     default_config = {
---       filetypes = { "elixir", "eelixir", "heex" },
---       cmd = { os.getenv("LEXICAL_START_PATH") },
---       root_dir = function(fname)
---         return lspconfig.util.root_pattern("mix.exs", ".git")(fname) or vim.loop.os_homedir()
---       end,
---       settings = {},
---     },
---   }
---
---   lspconfig.lexical.setup({})
--- end
 
 -- go
 lspconfig.gopls.setup({})
