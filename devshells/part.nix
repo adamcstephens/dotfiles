@@ -56,13 +56,7 @@
         default = pkgs.mkShellNoCC {
           name = "dots";
           packages = [
-            (inputs.attic.packages.${pkgs.system}.attic.overrideAttrs (prev: {
-              env =
-                lib.optionalAttrs pkgs.stdenv.cc.isClang {
-                  NIX_LDFLAGS = "-l${pkgs.stdenv.cc.libcxx.cxxabi.libName}";
-                }
-                // (prev.env or { });
-            }))
+            inputs.attic.packages.${pkgs.system}.attic
             pkgs.curl
             pkgs.deadnix
             pkgs.git-subrepo
