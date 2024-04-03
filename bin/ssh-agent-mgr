@@ -1,17 +1,21 @@
 #!/usr/bin/env bash
 
-socket="$XDG_RUNTIME_DIR/ssh-agent"
+socket="$SSH_AUTH_SOCK"
 
-if [ -S "$XDG_RUNTIME_DIR/yubikey-agent/yubikey-agent.sock" ]; then
-  socket="$XDG_RUNTIME_DIR/yubikey-agent/yubikey-agent.sock"
-fi
+if [ ! -e "$socket" ]; then
+  socket="$XDG_RUNTIME_DIR/ssh-agent"
 
-if [ -S "$XDG_RUNTIME_DIR/ssh-tpm-agent" ]; then
-  socket="$XDG_RUNTIME_DIR/ssh-tpm-agent"
-fi
+  if [ -S "$XDG_RUNTIME_DIR/yubikey-agent/yubikey-agent.sock" ]; then
+    socket="$XDG_RUNTIME_DIR/yubikey-agent/yubikey-agent.sock"
+  fi
 
-if [ -S "$HOME/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh" ]; then
-  socket="$HOME/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh"
+  if [ -S "$XDG_RUNTIME_DIR/ssh-tpm-agent" ]; then
+    socket="$XDG_RUNTIME_DIR/ssh-tpm-agent"
+  fi
+
+  if [ -S "$HOME/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh" ]; then
+    socket="$HOME/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh"
+  fi
 fi
 
 if ! ssh-add -l &>/dev/null; then
