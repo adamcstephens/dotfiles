@@ -1,5 +1,9 @@
 function ssh-auth-sock --on-event="fish_preexec"
-    set sockfile $XDG_RUNTIME_DIR/ssh-auth.sock
+    if [ -z "$XDG_RUNTIME_DIR" ]
+        set sockfile $HOME/.ssh/ssh-auth.sock
+    else
+        set sockfile $XDG_RUNTIME_DIR/ssh-auth.sock
+    end
 
     if [ -z "$SSH_AUTH_SOCK" ]
         rm -f $sockfile
