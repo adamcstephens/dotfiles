@@ -189,9 +189,11 @@ riverctl float-filter-add title "popup title with spaces"
 riverctl rule-add -app-id 'com.mitchellh.ghostty' ssd
 riverctl rule-add -app-id 'firefox' ssd
 riverctl rule-add -app-id 'FFPWA-*' ssd
-riverctl rule-add -app-id firefox tags $((2#1))
-riverctl rule-add -app-id Element tags $((2#100000))
-riverctl rule-add -app-id WebCord tags $((2#100000))
+riverctl rule-add -app-id firefox tags $((2#00000001))
+riverctl rule-add -app-id Element tags $((2#00100000))
+riverctl rule-add -app-id WebCord tags $((2#00100000))
+riverctl rule-add -title '*Element*' tags $((2#00100000))
+riverctl rule-add -title '*Discord*' tags $((2#00100000))
 
 # warp the mouse
 riverctl set-cursor-warp on-focus-change
