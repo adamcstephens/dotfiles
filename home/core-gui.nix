@@ -40,6 +40,7 @@
     pkgs.unzip
 
     # apps
+    pkgs.eternal-terminal
     pkgs.senpai
   ] ++ lib.optionals (builtins.elem pkgs.system pkgs.spotify.meta.platforms) [ pkgs.spotify ];
 
