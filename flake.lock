@@ -1021,11 +1021,11 @@
         "rust-overlay": "rust-overlay_2"
       },
       "locked": {
-        "lastModified": 1712319456,
-        "narHash": "sha256-ta6TpPdcsy9nwcMopd1hc0K5ib9FOk39dqfrqio/FNg=",
+        "lastModified": 1712344308,
+        "narHash": "sha256-x/X7HEjPgvHnQt71rbhPRJBSTmDUQ0c2/5YjV3VcEac=",
         "ref": "refs/heads/main",
-        "rev": "09a7a4bc5e34b9ccf871d526b21ea5ed09d4a226",
-        "revCount": 108,
+        "rev": "9b4d492441c7f66465a4271d6e7fe542ae648c1b",
+        "revCount": 110,
         "type": "git",
         "url": "https://codeberg.org/adamcstephens/sower"
       },
