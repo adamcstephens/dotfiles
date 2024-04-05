@@ -2,20 +2,15 @@
 
 socket="$SSH_AUTH_SOCK"
 
-if [ ! -e "$socket" ]; then
-  socket="$XDG_RUNTIME_DIR/ssh-agent"
-
-  if [ -S "$XDG_RUNTIME_DIR/yubikey-agent/yubikey-agent.sock" ]; then
-    socket="$XDG_RUNTIME_DIR/yubikey-agent/yubikey-agent.sock"
-  fi
-
-  if [ -S "$XDG_RUNTIME_DIR/ssh-tpm-agent" ]; then
-    socket="$XDG_RUNTIME_DIR/ssh-tpm-agent"
-  fi
-
-  if [ -S "$HOME/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh" ]; then
-    socket="$HOME/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh"
-  fi
+if [ -z "$SSH_AUTH_SOCK" ] || [ -z "$SSH_TTY" ]; then
+  for sock in "$XDG_RUNTIME_DIR/ssh-agent" \
+    "$XDG_RUNTIME_DIR/yubikey-agent/yubikey-agent.sock" \
+    "$XDG_RUNTIME_DIR/ssh-tpm-agent" \
+    "$HOME/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh"; do
+    if [ -S "$sock" ]; then
+      socket=$sock
+    fi
+  done
 fi
 
 if ! ssh-add -l &>/dev/null; then
@@ -26,7 +21,7 @@ if ! ssh-add -l &>/dev/null; then
   fi
 
   if [ "$(uname)" = "Darwin" ]; then
-    ssh-add --apple-use-keychain >&2 || true
+    /usr/bin/ssh-add --apple-use-keychain >&2 || true
   fi
 fi
 

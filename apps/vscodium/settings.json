@@ -104,7 +104,6 @@
   "javascript.format.semicolons": "remove",
   "javascript.updateImportsOnFileMove.enabled": "always",
   "nix.enableLanguageServer": true,
-  "nix.serverPath": "nil",
   "nix.serverSettings": {
     "nil": {
       "formatting": {
