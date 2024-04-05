@@ -55,12 +55,12 @@ in
     systemd.user.services.xssproxy = {
       Unit = {
         Description = "forward freedesktop.org Idle Inhibition Service calls to Xss";
-        After = [ "graphical-session-pre.target" ];
-        PartOf = [ "graphical-session.target" ];
+        After = [ "xserver-session-pre.target" ];
+        PartOf = [ "xserver-session.target" ];
       };
 
       Install = {
-        WantedBy = [ "graphical-session.target" ];
+        WantedBy = [ "xserver-session.target" ];
       };
 
       Service = {
