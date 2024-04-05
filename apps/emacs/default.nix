@@ -99,6 +99,7 @@ let
       cider
       clipetty
       consult
+      corfu
       dash
       diff-ansi
       diff-hl
@@ -157,6 +158,7 @@ let
       treesit-auto
       undo-fu
       undo-fu-session
+      vertico
       vterm
       wgrep
       which-key
@@ -166,11 +168,9 @@ let
       yuck-mode
     ])
     ++ (with epkgs.elpaPackages; [
-      corfu
       org
       rainbow-mode
       substitute
-      vertico
       vundo
     ])
     ++ (with epkgs.nongnuPackages; [ eat ]);
