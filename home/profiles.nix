@@ -34,7 +34,7 @@ in
             config.allowUnfree = true;
           };
 
-          services.sower.config.name = name;
+          services.sower.client.config.name = name;
         }
       ];
 
