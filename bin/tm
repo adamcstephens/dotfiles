@@ -1,4 +1,9 @@
 #!/usr/bin/env sh
 
 cd ~ || exit 0
-tmux -u attach-session || tmux -u new-session
+if tmux has-session >/dev/null; then
+  tmux detach-client
+  exec tmux -u attach-session
+else
+  exec tmux -u new-session
+fi
