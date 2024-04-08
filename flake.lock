@@ -269,11 +269,11 @@
         "nixpkgs-lib": "nixpkgs-lib_3"
       },
       "locked": {
-        "lastModified": 1709336216,
-        "narHash": "sha256-Dt/wOWeW6Sqm11Yh+2+t0dfEWxoMxGBvv3JpIocFl9E=",
+        "lastModified": 1712014858,
+        "narHash": "sha256-sB4SWl2lX95bExY2gMFG5HIzvva5AVMJd4Igm+GpZNw=",
         "owner": "hercules-ci",
         "repo": "flake-parts",
-        "rev": "f7b3c975cf067e56e7cda6cb098ebe3fb4d74ca2",
+        "rev": "9126214d0a59633752a136528f5f3b9aa8565b7d",
         "type": "github"
       },
       "original": {
@@ -729,11 +729,11 @@
     "nixpkgs-lib_3": {
       "locked": {
         "dir": "lib",
-        "lastModified": 1709237383,
-        "narHash": "sha256-cy6ArO4k5qTx+l5o+0mL9f5fa86tYUX3ozE1S+Txlds=",
+        "lastModified": 1711703276,
+        "narHash": "sha256-iMUFArF0WCatKK6RzfUJknjem0H9m4KgorO/p3Dopkk=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "1536926ef5621b09bba54035ae2bb6d806d72ac8",
+        "rev": "d8fe5e6c92d0d190646fb9f1056741a229980089",
         "type": "github"
       },
       "original": {
@@ -995,11 +995,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1712151039,
-        "narHash": "sha256-lB6zyeqcUsl5xv9/3zAO3AdIsLOa3wIOYLbQFxey15c=",
+        "lastModified": 1712546481,
+        "narHash": "sha256-zIwwnlITIL7rDI8AWx3WdIEl3JDSDhOT5Zr2S4iM4fI=",
         "ref": "refs/heads/main",
-        "rev": "c8e4061843ac7555d35b1cfad1db869d6b2effca",
-        "revCount": 59,
+        "rev": "5b9baee621fa09708472d605216e39b9740f1717",
+        "revCount": 64,
         "type": "git",
         "url": "https://codeberg.org/adamcstephens/nix-sandbox"
       },
