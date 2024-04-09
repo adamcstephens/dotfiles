@@ -15,6 +15,10 @@ if (! pgrep emacs >/dev/null 2>&1 && [ ! -S "$XDG_RUNTIME_DIR/emacs/server" ]); 
   exec ~/.dotfiles/bin/editor "$@"
 fi
 
+if [ -n "$SSH_TTY" ] || [ -n "$ET_VERSION" ]; then
+  unset DISPLAY
+fi
+
 unset TMPDIR
 
 if [ -z "$INSIDE_EMACS" ] && [ -n "$DISPLAY" ]; then

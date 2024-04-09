@@ -61,7 +61,7 @@
   :config (require 'ox-latex)
 
   ;; setup some dirs
-  (setq org-directory "~/org/")
+  (setq org-directory "~/sync/org/")
   (setq org-default-notes-file (concat org-directory "notes.org"))
 
   ;; change scratch to default of org-mode
@@ -93,7 +93,7 @@
 	(seq-filter
 	 (lambda (x)
            (not (string-match "/.stversions/" (file-name-directory x))))
-	 (directory-files-recursively "~/org" "\\.org$")))
+	 (directory-files-recursively "~/sync/org" "\\.org$")))
 
   ;; let the completion engine sort them
   (setq org-outline-path-complete-in-steps nil)
