@@ -21,7 +21,7 @@ in
   config = lib.mkIf cfg.enable {
     services.sower.client = {
       enable = true;
-      package = inputs.sower.packages.${pkgs.system}.cli;
+      package = inputs.sower.packages.${pkgs.system}.client;
 
       config = {
         url = "https://sower.junco.dev";
