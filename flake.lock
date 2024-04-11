@@ -974,6 +974,21 @@
         "type": "github"
       }
     },
+    "process-compose-flake": {
+      "locked": {
+        "lastModified": 1708624100,
+        "narHash": "sha256-zZPheCD9JGg2EtK4A9BsIdyl8447egOow4fjIfHFHRg=",
+        "owner": "Platonic-Systems",
+        "repo": "process-compose-flake",
+        "rev": "44d260ddba5a51570dee54d5cd4d8984edaf98c2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Platonic-Systems",
+        "repo": "process-compose-flake",
+        "type": "github"
+      }
+    },
     "profile-parts": {
       "locked": {
         "lastModified": 1697078626,
@@ -1101,6 +1116,21 @@
         "url": "https://codeberg.org/adamcstephens/nix-sandbox"
       }
     },
+    "services-flake": {
+      "locked": {
+        "lastModified": 1712209475,
+        "narHash": "sha256-dcCCUS6R7gCyeVZyUcbuftVfwzN7luKBijeQxmDTUmw=",
+        "owner": "juspay",
+        "repo": "services-flake",
+        "rev": "eb4364c92a6bb8ed0534b4b6eedcd5605161fa39",
+        "type": "github"
+      },
+      "original": {
+        "owner": "juspay",
+        "repo": "services-flake",
+        "type": "github"
+      }
+    },
     "sower": {
       "inputs": {
         "attic": "attic_2",
@@ -1111,15 +1141,17 @@
         "nixpkgs": [
           "nixpkgs"
         ],
+        "process-compose-flake": "process-compose-flake",
         "rust-overlay": "rust-overlay_2",
+        "services-flake": "services-flake",
         "typhon": "typhon"
       },
       "locked": {
-        "lastModified": 1712624741,
-        "narHash": "sha256-/I2VcLRVNZ53ZXKkwpDDjaF5MKBazGm1WuyG8mLLO4A=",
+        "lastModified": 1712772026,
+        "narHash": "sha256-zNynRuE2JTN9RwvXuzHD6p9A+gsa7JqDpywfhfL56gk=",
         "ref": "refs/heads/main",
-        "rev": "ecb464747f835fc2fe823dc70b8826cafefabe93",
-        "revCount": 125,
+        "rev": "ed17435ac7b7e28be4777b77b81d88fb46e4aedd",
+        "revCount": 129,
         "type": "git",
         "url": "https://codeberg.org/adamcstephens/sower"
       },
