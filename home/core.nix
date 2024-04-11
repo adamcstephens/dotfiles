@@ -105,7 +105,7 @@
   );
 
   home.packages = [
-    inputs.sower.packages.${pkgs.system}.cli
+    inputs.sower.packages.${pkgs.system}.client
 
     pkgs.calc
     pkgs.difftastic

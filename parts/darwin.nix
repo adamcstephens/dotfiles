@@ -49,8 +49,8 @@
                 "@admin"
               ];
 
-              substituters = [ "https://attic.junco.dev/default?priority=41" ];
-              trusted-public-keys = [ "default:sMQjcuRXHFczHLa2lqmmNSI7TuFic8hnfJAs59fVpAg=" ];
+              substituters = [ "https://attic.junco.dev/default?priority=41" "https://cache.junco.dev/v3?priority=41" ];
+              trusted-public-keys = [ "default:sMQjcuRXHFczHLa2lqmmNSI7TuFic8hnfJAs59fVpAg="  "v3:aMXMnngJoGU8dpELPyNAhADrOgrn5GiXWP90NiB4aFY="];
               extra-platforms = "x86_64-darwin";
             };
           };
