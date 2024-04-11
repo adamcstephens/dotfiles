@@ -53,7 +53,7 @@ in
       editorconfig.editorconfig
       esbenp.prettier-vscode
       foxundermoon.shell-format
-      github.copilot
+      # github.copilot
       github.github-vscode-theme
       jnoortheen.nix-ide
       mkhl.direnv
