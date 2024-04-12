@@ -16,7 +16,7 @@ require("theme")
 --
 require('Comment').setup()
 -- split handling
-require("focus").setup()
+-- require("focus").setup()
 require('gitsigns').setup()
 
 require('move').setup({

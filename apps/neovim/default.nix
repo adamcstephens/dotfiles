@@ -66,6 +66,9 @@ let
         telescope-nvim
         tmux-nvim
         trouble-nvim
+        vim-dadbod
+        vim-dadbod-completion
+        vim-dadbod-ui
         vim-illuminate
         vim-just
         vim-matchup
