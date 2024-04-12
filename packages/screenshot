@@ -1,5 +1,4 @@
-#!/usr/bin/env nix-shell
-#! nix-shell -i bash -p bash xdotool maim slurp grim wl-clipboard-rs xclip
+#!/usr/bin/env bash
 
 set -e
 

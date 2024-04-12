@@ -136,6 +136,8 @@ in
       # nix
       pkgs.nh
       inputs.nix-index-database.packages.${pkgs.system}.nix-index-with-db
+
+      (pkgs.callPackage ../packages/screenshot.nix { })
     ]
     ++ (lib.optionals config.dotfiles.gui.wayland [
       pkgs.grim
@@ -208,15 +210,15 @@ in
     };
     screenshot = {
       name = "screenshot";
-      exec = "/run/current-system/sw/bin/systemd-cat --identifier=screenshot ${../bin/screenshot} screen";
+      exec = "/run/current-system/sw/bin/systemd-cat --identifier=screenshot screenshot screen";
     };
     screenshotBox = {
       name = "screenshot box";
-      exec = "/run/current-system/sw/bin/systemd-cat --identifier=screenshot ${../bin/screenshot} box";
+      exec = "/run/current-system/sw/bin/systemd-cat --identifier=screenshot screenshot box";
     };
     screenshotWindow = {
       name = "screenshot window";
-      exec = "/run/current-system/sw/bin/systemd-cat --identifier=screenshot ${../bin/screenshot} window";
+      exec = "/run/current-system/sw/bin/systemd-cat --identifier=screenshot screenshot window";
     };
   };
 }
