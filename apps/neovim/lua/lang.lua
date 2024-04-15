@@ -27,7 +27,7 @@ lspconfig.efm.setup({
 -- elixir
 require("elixir").setup({
   nextls = {
-    enable = true,
+    enable = false,
     cmd = "nextls"
   },
   credo = { enable = true },
