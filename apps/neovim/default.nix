@@ -50,6 +50,8 @@ let
         neogit
         nui-nvim
         nvim-cmp
+        nvim-dap
+        nvim-dap-go
         nvim-highlight-colors
         nvim-lspconfig
         nvim-treesitter.withAllGrammars
