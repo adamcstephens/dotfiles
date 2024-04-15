@@ -1147,11 +1147,11 @@
         "typhon": "typhon"
       },
       "locked": {
-        "lastModified": 1712957717,
-        "narHash": "sha256-wdid/J95/PGosCiJ06yWiaFfx2SZprOjgzY2qAYXJo4=",
+        "lastModified": 1713151040,
+        "narHash": "sha256-3HJZdEbLhe+enJoggh56BECer0hHfYyzOLnVbGd6mz8=",
         "ref": "refs/heads/main",
-        "rev": "f7cc272021bb0cd856f6f9a0f8887dde3788f4eb",
-        "revCount": 148,
+        "rev": "38746abd1e57a922a6a96e6c2746877430a7721d",
+        "revCount": 145,
         "type": "git",
         "url": "https://codeberg.org/adamcstephens/sower"
       },
