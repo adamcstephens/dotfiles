@@ -34,6 +34,9 @@ pkgs.mkShell {
     (pkgs.callPackage ./xgettext-go.nix { })
   ];
 
+  # delve fix
+  hardeningDisable = [ "fortify" ];
+
   shellHook = ''
     export CGO_ENABLED=1
   '';
