@@ -14,7 +14,6 @@ require("theme")
 
 -- packages
 --
-require('Comment').setup()
 -- split handling
 -- require("focus").setup()
 require('gitsigns').setup()

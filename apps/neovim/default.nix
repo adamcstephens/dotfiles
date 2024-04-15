@@ -35,7 +35,6 @@ let
         cmp-nvim-lsp
         cmp-path
         cmp_luasnip
-        comment-nvim
         conform-nvim
         copilot-lua
         direnv-vim
