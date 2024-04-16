@@ -19,6 +19,9 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    home.packages = [
+      inputs.sower.packages.${pkgs.system}.client
+    ];
     services.sower.client = {
       enable = true;
       package = inputs.sower.packages.${pkgs.system}.client;

@@ -26,8 +26,8 @@
     ../apps/ssh
     ../apps/starship
     ../apps/tmux
-    ../apps/zellij
     ../apps/zsh
+    ../apps/yamlfmt
   ];
 
   home.stateVersion = "22.05";
@@ -105,8 +105,6 @@
   );
 
   home.packages = [
-    inputs.sower.packages.${pkgs.system}.client
-
     pkgs.calc
     pkgs.difftastic
     pkgs.direnv
@@ -115,6 +113,7 @@
     pkgs.fx
     pkgs.gdu
     pkgs.gh
+    pkgs.hut
     pkgs.jq
     pkgs.just
     pkgs.kitty.terminfo

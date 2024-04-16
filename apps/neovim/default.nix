@@ -16,6 +16,7 @@ let
     pkgs.shellcheck
     pkgs.shfmt
   ];
+
   pins = import ./npins;
   pins-ext = import ./npins-ext;
   npinsPlugins = lib.mapAttrsToList (
