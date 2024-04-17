@@ -73,5 +73,8 @@ pushInsteadOf = https://gitlab.com/
 [url "git@git.sr.ht:~adamcstephens"]
 pushInsteadOf = https://git.sr.ht/~adamcstephens
 
+[url "git@codeberg.org:adamcstephens"]
+pushInsteadOf = https://codeberg.org/adamcstephens
+
 [user]
 name = Adam Stephens
