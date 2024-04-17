@@ -38,10 +38,6 @@ cmp.setup({
   })
 })
 
--- dap
---
-require('dap-go').setup()
-
 -- formatting
 --
 require("conform").setup({
