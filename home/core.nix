@@ -112,8 +112,6 @@
     pkgs.du-dust
     pkgs.fx
     pkgs.gdu
-    pkgs.gh
-    pkgs.hut
     pkgs.jq
     pkgs.just
     pkgs.kitty.terminfo
@@ -121,6 +119,10 @@
     pkgs.tio
     pkgs.wget
     pkgs.zf
+
+    pkgs.gh
+    pkgs.hut
+    pkgs.tea
   ];
 
   home.sessionVariables = {
