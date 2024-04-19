@@ -24,6 +24,6 @@ writeShellScriptBin "screenshot" ''
     ]
   }
 
-  exec ${./screenshot}
+  exec ${./screenshot} $@
   "
 ''
