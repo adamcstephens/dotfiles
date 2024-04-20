@@ -1,6 +1,14 @@
-{ lib, pkgs, ... }:
 {
-  home.packages = [ pkgs.git ];
+  inputs,
+  lib,
+  pkgs,
+  ...
+}:
+{
+  home.packages = [
+    pkgs.git
+    inputs.sandbox.packages.${pkgs.system}.git-toolbelt
+  ];
   xdg.configFile = {
     "git/config".source = ./gitconfig;
 
