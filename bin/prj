@@ -4,26 +4,16 @@ def main [ project_path: string = "" ] {
   let is_tmux = if $env.TMUX? != null { true } else { false }
   let is_zellij = if $env.ZELLIJ? != null { true } else { false }
 
-  let prj = if $project_path != "" { $project_path | path expand } else {
-    let lookup = if $is_tmux or $is_zellij {
-      zoxide query --list | fzf | complete
+  let project = if $project_path != "" { $project_path | path expand } else {
+    if $is_tmux or $is_zellij {
+      zoxide query --list | zf --height 22
     } else {
-      do { zoxide query --list | rofi -dmenu } | complete
+      zoxide query --list | rofi -dmenu
     }
+  } | str trim
 
-    if $lookup.exit_code != 0 {
-      echo "!! Failed to select project"
-      echo $lookup
-      exit 1
-    }
-
-    $lookup.stdout
-  }
-
-  if $prj != "" {
-    let $project = $prj | str trim
-
-    echo $":: Opening project ($project)"
+  if $project != null and $project != "" {
+    print $":: Opening project ($project)"
     if $is_tmux {
       let wname = $project | path basename | str replace --all --regex '[^a-zA-Z0-9]' ''
       let tmux_windows = tmux list-windows -F '#{window_index},#{window_name}'  | from csv --trim all | rename index name
@@ -51,7 +41,7 @@ def main [ project_path: string = "" ] {
       codium -n $project
     }
   } else {
-    echo $"!! No project found, \"($prj)\", exiting"
+    echo $"!! No project found, \"($project)\", exiting"
     exit 1
   }
 }
