@@ -37,7 +37,7 @@ writeScriptBin "hm" ''
           ;;
       esac
     ;;
-    switch)
+    switch|sw)
       ${lib.getExe nh} home switch --configuration $HMPROFILE ~/.dotfiles -- --max-substitution-jobs 128
     ;;
     *)
