@@ -56,20 +56,9 @@
         default = pkgs.mkShellNoCC {
           name = "dots";
           packages = [
+            # local only
             inputs.attic.packages.${pkgs.system}.attic
-            pkgs.curl
-            pkgs.deadnix
-            pkgs.git-subrepo
-            pkgs.just
-            inputs.nil.packages.${pkgs.system}.nil
-            pkgs.nix-eval-jobs
-            pkgs.nodePackages.prettier
-            pkgs.npins
-            pkgs.nushell
-            pkgs.nvd
-
-            inputs.sower.packages.${pkgs.system}.seed-ci
-          ];
+          ] ++ self'.devShells.ci.nativeBuildInputs;
         };
 
         c = pkgs.mkShell {

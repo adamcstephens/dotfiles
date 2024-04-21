@@ -33,6 +33,7 @@
     inputs.nil.packages.${pkgs.system}.nil
     inputs.nix-index-database.packages.${pkgs.system}.comma-with-db
     pkgs.nix-output-monitor
+    pkgs.nix-tree
     pkgs.nixfmt-rfc-style
 
     # tools
