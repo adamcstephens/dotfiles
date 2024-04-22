@@ -11,9 +11,7 @@
     pkgs.fishPlugins.done
     pkgs.fishPlugins.foreign-env
     pkgs.fishPlugins.fzf-fish
-    (pkgs.fishPlugins.pure.overrideAttrs (_: {
-      checkPhase = "true";
-    }))
+    pkgs.fishPlugins.pure
   ];
 
   programs.fish = {
