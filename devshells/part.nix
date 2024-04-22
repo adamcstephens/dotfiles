@@ -99,32 +99,7 @@
           ];
         };
 
-        nixpkgs = pkgs.mkShellNoCC {
-          name = "nixpkgs-devshell";
-          packages = [
-            pkgs.nix-bisect
-            pkgs.nix-generate-from-cpan
-            pkgs.nix-prefetch-github
-            pkgs.nix-prefetch-scripts
-            pkgs.nix-tree
-            pkgs.nix-update
-            pkgs.nixpkgs-fmt
-            pkgs.nixpkgs-review
-            pkgs.deadnix
-          ] ++ (lib.optionals pkgs.stdenv.isLinux [ pkgs.bubblewrap ]);
-
-          shellHook = ''
-            ln -sf $HOME/.dotfiles/apps/nix/dir-locals.el $PWD/.dir-locals.el
-            ln -sfT $HOME/.dotfiles/apps/nix/vscode $PWD/.vscode
-            ln -sfT $HOME/.dotfiles/apps/nix/vscode $PWD/.vscodium
-            ln -sfT $HOME/.dotfiles/apps/nix/helix $PWD/.helix
-
-            if [ -d .git ]; then
-              mkdir -vp $PWD/.git/info
-              ln -sf $HOME/.dotfiles/apps/nix/exclude $PWD/.git/info/exclude
-            fi
-          '';
-        };
+        nixpkgs = pkgs.callPackage ./nixpkgs.nix { };
 
         opentofu = pkgs.mkShellNoCC { packages = [ pkgs.opentofu ]; };
 
