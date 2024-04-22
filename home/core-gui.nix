@@ -8,6 +8,7 @@
   imports = [
     ./colors.nix
 
+    ../apps/atuin
     ../apps/emacs
     ../apps/ghostty
     ../apps/kitty
