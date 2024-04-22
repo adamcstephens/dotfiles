@@ -11,6 +11,7 @@
     pkgs.fishPlugins.done
     pkgs.fishPlugins.foreign-env
     pkgs.fishPlugins.fzf-fish
+    pkgs.fishPlugins.pure
   ];
 
   programs.fish = {

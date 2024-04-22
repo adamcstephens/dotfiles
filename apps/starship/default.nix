@@ -2,6 +2,7 @@
 {
   programs.starship = {
     enable = true;
+    enableFishIntegration = false;
 
     settings = {
       aws.disabled = true;
