@@ -31,3 +31,4 @@ set -g pure_color_git_branch magenta
 set -g pure_color_git_stash magenta
 
 set -x PAGER ~/.dotfiles/bin/pager
+set -x EDITOR ~/.dotfiles/bin/editor
