@@ -67,17 +67,27 @@ def main [--codium (-c), --emacs (-e), --prj (-p), action: string, name: string 
     }
 
     let worktree = workdir $name
-    if $emacs {
-      em $worktree
-    } else if ($codium) {
-      codium -n $worktree
-    } else if ($prj) {
+    if ($prj) {
       prj $worktree
     }
 
     if ($env.PWD != ($worktree | path expand)) and ("KITTY_WINDOW_ID" in $env) and ("DISPLAY" in $env or "WAYLAND_DISPLAY" in $env) {
       kitty --single-instance $worktree
       exec kitty @ close-window -m ("id:" + $env.KITTY_WINDOW_ID)
+    }
+  } else if ($action == "pr") {
+    if name? == "" {
+      print "!! must provide name"
+      exit 1
+    }
+
+    let worktree = workdir $"pr($name)"
+
+    cd $worktree
+    gh pr checkout -f $name
+
+    if ($prj) {
+      prj $worktree
     }
   } else if ($action == "clean") {
     clean
