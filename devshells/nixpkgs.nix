@@ -8,6 +8,7 @@
   hydra-check,
   nix-bisect,
   nix-generate-from-cpan,
+  nix-prefetch,
   nix-prefetch-github,
   nix-prefetch-scripts,
   nix-tree,
@@ -22,6 +23,7 @@ mkShellNoCC {
     deadnix
     hydra-check
     nix-bisect
+    nix-prefetch
     nix-generate-from-cpan
     nix-prefetch-github
     nix-prefetch-scripts
