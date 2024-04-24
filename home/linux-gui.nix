@@ -75,6 +75,11 @@ in
       name = "Papirus-Dark";
       package = pkgs.papirus-icon-theme;
     };
+
+    theme = {
+      name = "Adwaita-dark";
+      package = pkgs.gnome-themes-extra;
+    };
   };
 
   home.pointerCursor = {
@@ -163,6 +168,14 @@ in
   programs.feh.enable = true;
 
   programs.ssh.forwardAgent = true;
+
+  qt = {
+    enable = true;
+    platformTheme = "gtk";
+    style = {
+      name = "gtk2";
+    };
+  };
 
   systemd.user.startServices = "sd-switch";
 
