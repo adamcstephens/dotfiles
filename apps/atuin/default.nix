@@ -12,6 +12,8 @@
       ];
     });
 
+    flags = [ "--disable-up-arrow" ];
+
     settings = {
       enter_accept = false;
       filter_mode = "directory";
