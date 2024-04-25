@@ -171,7 +171,7 @@ in
 
   qt = {
     enable = true;
-    platformTheme = "gtk";
+    platformTheme.name = "gtk";
     style = {
       name = "gtk2";
     };
