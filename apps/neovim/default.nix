@@ -12,6 +12,7 @@ let
     pkgs.lua-language-server
     pkgs.jq
     pkgs.nil
+    pkgs.nixd
     pkgs.nodejs
     pkgs.shellcheck
     pkgs.shfmt
