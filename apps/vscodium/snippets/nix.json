@@ -21,7 +21,7 @@
   },
   "mkenable": {
     "prefix": "mkenable",
-    "body": "lib.mkEnableOption (lib.mdDoc \"$1\");",
+    "body": "lib.mkEnableOption \"$1\";",
     "description": ""
   }
 }

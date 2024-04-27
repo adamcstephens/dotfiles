@@ -14,11 +14,11 @@
         default = 96;
       };
 
-      dontSuspend = lib.mkEnableOption (lib.mdDoc "Don't automatically suspend on idle");
-      insecure = lib.mkEnableOption (lib.mkDoc "Insecure GUI disables locking");
-      wayland = lib.mkEnableOption (lib.mdDoc "Enable wayland resources");
+      dontSuspend = lib.mkEnableOption "Don't automatically suspend on idle";
+      insecure = lib.mkEnableOption "Insecure GUI disables locking";
+      wayland = lib.mkEnableOption "Enable wayland resources";
       xorg = {
-        enable = lib.mkEnableOption (lib.mdDoc "Enable xorg resources");
+        enable = lib.mkEnableOption "Enable xorg resources";
 
         wm = lib.mkOption {
           type = lib.types.enum [
