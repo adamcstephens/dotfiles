@@ -7,6 +7,7 @@
 }:
 let
   dependencies = [
+    pkgs.biome
     pkgs.efm-langserver
     pkgs.lua
     pkgs.lua-language-server

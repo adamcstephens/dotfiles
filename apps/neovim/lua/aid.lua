@@ -46,9 +46,18 @@ require("conform").setup({
     lsp_fallback = true,
   },
   formatters_by_ft = {
+    json = { "biome" },
     yaml = { "yamlfmt" }
   }
 })
+require("conform").formatters.biome = {
+  args = {
+    "format",
+    ("--config-path=" .. os.getenv("HOME") .. "/.dotfiles/apps/biome/"),
+    "--stdin-file-path",
+    "$FILENAME"
+  }
+}
 
 -- llm
 --
