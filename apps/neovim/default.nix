@@ -17,6 +17,7 @@ let
     pkgs.nodejs
     pkgs.shellcheck
     pkgs.shfmt
+    pkgs.stylua
   ];
 
   pins = import ./npins;
