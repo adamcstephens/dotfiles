@@ -1,35 +1,34 @@
 --
 -- set the color and enable auto dark
 --
-vim.cmd.colorscheme 'moonfly'
-if vim.loop.os_uname().sysname ~= "Linux"
-    or os.getenv("XDG_CURRENT_DESKTOP") ~= nil then
-  require('auto-dark-mode').setup({
+vim.cmd.colorscheme("moonfly")
+if vim.loop.os_uname().sysname ~= "Linux" or os.getenv("XDG_CURRENT_DESKTOP") ~= nil then
+  require("auto-dark-mode").setup({
     update_interval = 5000,
     set_dark_mode = function()
-      vim.opt.background = 'dark'
-      vim.cmd.colorscheme 'moonfly'
+      vim.opt.background = "dark"
+      vim.cmd.colorscheme("moonfly")
     end,
     set_light_mode = function()
-      vim.opt.background = 'light'
-      vim.cmd.colorscheme 'github_light_colorblind'
+      vim.opt.background = "light"
+      vim.cmd.colorscheme("github_light_colorblind")
     end,
   })
 end
 
-require('github-theme').setup({
+require("github-theme").setup({
   options = {
     styles = {
-      comments = 'italic',
-    }
-  }
+      comments = "italic",
+    },
+  },
 })
 
-require('lualine').setup({
+require("lualine").setup({
   options = { theme = "auto" },
   sections = {
-    lualine_c = { { 'filename', path = 1 } },
-  }
+    lualine_c = { { "filename", path = 1 } },
+  },
 })
 
 require("modus-themes").setup({
@@ -68,23 +67,23 @@ require("modus-themes").setup({
   end,
 })
 
-require('nvim-highlight-colors').setup({
+require("nvim-highlight-colors").setup({
   render = "first_column",
 })
 
-require('nvim-highlight-colors').turnOff()
+require("nvim-highlight-colors").turnOff()
 
-require('rainbow-delimiters.setup').setup({})
+require("rainbow-delimiters.setup").setup({})
 
 require("timed-highlight").setup({
-  highlight_timeout_ms = 2000
+  highlight_timeout_ms = 2000,
 })
 
 -- show matches of hovered word
-require('illuminate').configure({
+require("illuminate").configure({
   providers = {
-    'lsp',
-    'treesitter',
+    "lsp",
+    "treesitter",
   },
   case_insensitive_regex = false,
   delay = 100,

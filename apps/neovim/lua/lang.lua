@@ -1,22 +1,22 @@
-local dap = require('dap')
-local lspconfig = require('lspconfig')
+local dap = require("dap")
+local lspconfig = require("lspconfig")
 local configs = require("lspconfig.configs")
 
 local efm_languages = {
   fish = {
-    require('efmls-configs.linters.fish'),
-    require('efmls-configs.formatters.fish_indent')
+    require("efmls-configs.linters.fish"),
+    require("efmls-configs.formatters.fish_indent"),
   },
   sh = {
-    require('efmls-configs.linters.shellcheck'),
-    require('efmls-configs.formatters.shfmt'),
+    require("efmls-configs.linters.shellcheck"),
+    require("efmls-configs.formatters.shfmt"),
   },
 }
 
 lspconfig.efm.setup({
   filetypes = vim.tbl_keys(efm_languages),
   settings = {
-    rootMarkers = { '.git/' },
+    rootMarkers = { ".git/" },
     languages = efm_languages,
   },
   init_options = {
@@ -59,7 +59,7 @@ lspconfig.lexical.setup({
 
 -- go
 lspconfig.gopls.setup({})
-require('dap-go').setup({
+require("dap-go").setup({
   dap_configurations = {
     {
       type = "go",
@@ -71,12 +71,12 @@ require('dap-go').setup({
 })
 
 -- fsharp
-require('ionide').setup({})
+require("ionide").setup({})
 vim.g["fsharp#lsp_auto_setup"] = 0
 
 -- haskell
-require('lspconfig')['hls'].setup({
-  filetypes = { 'haskell', 'lhaskell', 'cabal' },
+require("lspconfig")["hls"].setup({
+  filetypes = { "haskell", "lhaskell", "cabal" },
 })
 
 -- lua
@@ -92,14 +92,14 @@ lspconfig.lua_ls.setup({
           ".direnv/",
         },
         useGitIgnore = true,
-      }
-    }
-  }
+      },
+    },
+  },
 })
-require('lspconfig').teal_ls.setup({})
+require("lspconfig").teal_ls.setup({})
 
 -- nix
-lspconfig.nil_ls.setup {
+lspconfig.nil_ls.setup({
   settings = {
     ["nil"] = {
       formatting = {
@@ -114,7 +114,7 @@ lspconfig.nil_ls.setup {
       },
     },
   },
-}
+})
 
 -- nushell
 lspconfig.nushell.setup({})
@@ -132,7 +132,7 @@ lspconfig.rust_analyzer.setup({
     client.server_capabilities.semanticTokensProvider = nil
   end,
   settings = {
-    ['rust-analyzer'] = {},
+    ["rust-analyzer"] = {},
   },
 })
 
