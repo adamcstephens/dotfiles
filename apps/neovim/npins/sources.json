@@ -52,9 +52,9 @@
         "url": "https://github.com/danielfalk/smart-open.nvim"
       },
       "branch": "main",
-      "revision": "3cff486c7074a23c92339a8916ebe42bb0ffd2bf",
+      "revision": "028bb71d20e8212da3514bf6dabfb17038d81ee4",
       "url": null,
-      "hash": "1lv55grvw2wxsfqgrjrxgrma1nllb7fds2b08f4ayqw7i14l6j9p"
+      "hash": "1v8ifhgpm4x504617mxcjjm1ipv57j4025c32j9z2gkklicsy4ws"
     },
     "telescope-tabs": {
       "type": "Git",
