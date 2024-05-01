@@ -133,6 +133,7 @@ in
       pkgs.remmina
       pkgs.thunderbird
       pkgs.webcord
+      pkgs.zathura
 
       # bitwarden
       pkgs.pinentry.curses
