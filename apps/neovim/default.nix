@@ -15,6 +15,7 @@ let
     pkgs.nil
     pkgs.nixd
     pkgs.nodejs
+    pkgs.ruff
     pkgs.shellcheck
     pkgs.shfmt
     pkgs.stylua
@@ -45,6 +46,7 @@ let
         editorconfig-nvim
         efmls-configs-nvim
         elixir-tools-nvim
+        fidget-nvim
         friendly-snippets
         gitsigns-nvim
         Ionide-vim

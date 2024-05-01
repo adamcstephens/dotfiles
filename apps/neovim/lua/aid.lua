@@ -40,8 +40,10 @@ require("conform").setup({
     lsp_fallback = true,
   },
   formatters_by_ft = {
+    elixir = { "mix" },
     json = { "biome" },
     lua = { "stylua" },
+    python = { "ruff_lint", "ruff_format" },
     teal = { "stylua" },
     yaml = { "yamlfmt" },
   },
