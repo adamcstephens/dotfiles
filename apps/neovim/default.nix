@@ -48,6 +48,7 @@ let
         elixir-tools-nvim
         fidget-nvim
         friendly-snippets
+        fugitive
         gitsigns-nvim
         Ionide-vim
         lualine-nvim
