@@ -20,7 +20,6 @@ new = green
 
 [commit]
 gpgsign = true
-verbose = true
 
 [core]
 editor = ~/.dotfiles/bin/giteditor
