@@ -30,9 +30,9 @@
         "url": "https://github.com/projekt0n/github-nvim-theme"
       },
       "branch": "main",
-      "revision": "d92e1143e5aaa0d7df28a26dd8ee2102df2cadd8",
+      "revision": "66dcec1bd3d12f8b0bf3c885069888551a650049",
       "url": null,
-      "hash": "1nlwjdv241837cgjg6srh2x639g41m65pqjlinnkpain2v0jdvhl"
+      "hash": "19nm0jfhckkgqk56vc6gkn4vbfnbk0hbmn4r6pnd3xs8c2iwjvbp"
     },
     "move-nvim": {
       "type": "Git",
@@ -74,9 +74,9 @@
         "url": "https://github.com/sahlte/timed-highlight.nvim"
       },
       "branch": "main",
-      "revision": "c1f5fd7b39d139900762fbb5ff12fcf7f379cec5",
+      "revision": "b0ddbee97641d817a35a4a5dc1679436b4dec955",
       "url": null,
-      "hash": "1hfjanc9h10k5qjvicw14gsch6fdimym6yf7maj2h4z867jdfj43"
+      "hash": "1m7ig8w967nhrrmg9696c5pd7xsgxi44v3mxia4ks79gdg1vvsal"
     },
     "vim-moonfly-colors": {
       "type": "Git",
