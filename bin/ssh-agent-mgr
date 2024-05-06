@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 
-socket="$SSH_AUTH_SOCK"
+if [ -n "$SSH_TTY" ] && [ -n "$ET_VERSION" ]; then
+  socket="$SSH_AUTH_SOCK"
+fi
 
-if [ -z "$SSH_AUTH_SOCK" ] && [ -z "$SSH_TTY" ] && [ -z "$ET_VERSION" ]; then
+if [ -z "$socket" ] ; then
   for sock in "$XDG_RUNTIME_DIR/ssh-agent" \
     "$XDG_RUNTIME_DIR/yubikey-agent/yubikey-agent.sock" \
     "$XDG_RUNTIME_DIR/ssh-tpm-agent" \
