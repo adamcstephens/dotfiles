@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 cd ~ || exit 0
-if tmux has-session >/dev/null; then
+if tmux has-session >/dev/null 2>&1; then
   tmux detach-client
   exec tmux -u attach-session
 else
