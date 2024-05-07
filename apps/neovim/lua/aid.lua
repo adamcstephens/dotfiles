@@ -42,6 +42,7 @@ require("conform").setup({
     elixir = { "mix" },
     json = { "biome" },
     lua = { "stylua" },
+    nix = { "nixfmt" },
     python = { "ruff_lint", "ruff_format" },
     teal = { "stylua" },
     yaml = { "yamlfmt" },

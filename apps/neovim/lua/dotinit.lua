@@ -123,6 +123,7 @@ vim.opt.cursorline = true
 vim.opt.number = true
 vim.opt.scrolloff = 8
 vim.opt.spell = true
+vim.opt.spelllang = "en_us"
 vim.opt.undofile = true
 vim.opt.whichwrap = "<,>,[,]"
 
