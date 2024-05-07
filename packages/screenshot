@@ -16,30 +16,36 @@ fi
 
 OUTPUT="$HOME"/sync/pictures/$(date +'screenshot_%Y-%m-%d-%H%M%S.png')
 
-if [ ! -d "$(dirname $OUTPUT)" ]; then
-  mkdir -vp "$(dirname $OUTPUT)"
+if [ ! -d "$(dirname "$OUTPUT")" ]; then
+  mkdir -vp "$(dirname "$OUTPUT")"
 fi
 
 case $MODE in
 window)
   if [ $GUI = "xorg" ]; then
     maim -i "$(xdotool getactivewindow)" "$OUTPUT"
+  else
+    echo "window mode unsupported on wayland"
+    exit 1
   fi
   ;;
+
 box)
   if [ $GUI = "xorg" ]; then
     maim -s "$OUTPUT"
   else
-    slurp | grim -g - "$OUTPUT" && cat "$OUTPUT" | wl-copy
+    wayshot --file "$OUTPUT" --slurp "$(slurp)"
   fi
   ;;
+
 screen)
   if [ $GUI = "xorg" ]; then
     maim "$OUTPUT"
   else
-    grim "$OUTPUT" && cat "$OUTPUT" | wl-copy
+    wayshot --file "$OUTPUT"
   fi
   ;;
+
 *)
   echo "Unsupported mode $MODE"
   exit 1

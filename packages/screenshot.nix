@@ -1,29 +1,25 @@
 {
-  lib,
-
   bash,
   xdotool,
   maim,
   slurp,
-  grim,
+  wayshot,
   wl-clipboard-rs,
   xclip,
-  writeShellScriptBin,
+  writeShellApplication,
 }:
-writeShellScriptBin "screenshot" ''
-  export PATH="${
-    lib.makeBinPath [
 
-      bash
-      xdotool
-      maim
-      slurp
-      grim
-      wl-clipboard-rs
-      xclip
-    ]
-  }
+writeShellApplication {
+  runtimeInputs = [
+    bash
+    xdotool
+    maim
+    slurp
+    wayshot
+    wl-clipboard-rs
+    xclip
+  ];
 
-  exec ${./screenshot} $@
-  "
-''
+  text = builtins.readFile ./screenshot;
+  name = "screenshot";
+}

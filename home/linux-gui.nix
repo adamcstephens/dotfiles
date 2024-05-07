@@ -30,6 +30,8 @@ let
   );
 
   nix-colors-contrib = inputs.nix-colors.lib-contrib { inherit pkgs; };
+
+  screenshot = pkgs.callPackage ../packages/screenshot.nix { };
 in
 {
   imports = [
@@ -143,12 +145,13 @@ in
       pkgs.nh
       inputs.nix-index-database.packages.${pkgs.system}.nix-index-with-db
 
-      (pkgs.callPackage ../packages/screenshot.nix { })
+      screenshot
     ]
     ++ (lib.optionals config.dotfiles.gui.wayland [
       pkgs.grim
       pkgs.lswt
       pkgs.slurp
+      pkgs.wayshot
       pkgs.wl-clipboard
       pkgs.wl-mirror
       pkgs.wl-screenrec
@@ -224,15 +227,15 @@ in
     };
     screenshot = {
       name = "screenshot";
-      exec = "/run/current-system/sw/bin/systemd-cat --identifier=screenshot screenshot screen";
+      exec = "/run/current-system/sw/bin/systemd-cat --identifier=screenshot ${lib.getExe screenshot} screen";
     };
     screenshotBox = {
       name = "screenshot box";
-      exec = "/run/current-system/sw/bin/systemd-cat --identifier=screenshot screenshot box";
+      exec = "/run/current-system/sw/bin/systemd-cat --identifier=screenshot ${lib.getExe screenshot} box";
     };
     screenshotWindow = {
       name = "screenshot window";
-      exec = "/run/current-system/sw/bin/systemd-cat --identifier=screenshot screenshot window";
+      exec = "/run/current-system/sw/bin/systemd-cat --identifier=screenshot ${lib.getExe screenshot} window";
     };
   };
 }
