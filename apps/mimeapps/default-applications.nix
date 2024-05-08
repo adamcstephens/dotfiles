@@ -8,13 +8,13 @@
   "application/x-extension-xhtml" = [ "firefox.desktop" ];
   "application/xhtml+xml" = [ "firefox.desktop" ];
   "default-web-browser" = [ "firefox.desktop" ];
-  "image/jpeg" = [ "feh.desktop" ];
-  "image/png" = [ "feh.desktop" ];
+  "image/jpeg" = [ "org.gnome.eog.desktop" ];
+  "image/png" = [ "org.gnome.eog.desktop" ];
   "inode/directory" = [ "nemo.desktop" ];
   "message/rfc822" = [ "userapp-Thunderbird-MZZQ81.desktop" ];
   "text/calendar" = [ "userapp-Thunderbird-7WSQ81.desktop" ];
   "text/html" = [ "firefox.desktop" ];
-  "video/quicktime" = [ "feh.desktop" ];
+  "video/quicktime" = [ "org.gnome.eog.desktop" ];
   "x-scheme-handler/about" = [ "firefox.desktop" ];
   "x-scheme-handler/chrome" = [ "firefox.desktop" ];
   "x-scheme-handler/http" = [ "firefox.desktop" ];
