@@ -28,7 +28,7 @@ lspconfig.efm.setup({
 -- elixir
 require("elixir").setup({
   nextls = {
-    enable = true,
+    enable = false,
     cmd = "nextls",
   },
   credo = { enable = true },
@@ -129,6 +129,23 @@ lspconfig.ocamllsp.setup({
 require("lspconfig").pyright.setup({})
 
 -- rust
+dap.adapters.gdb = {
+  type = "executable",
+  command = "gdb",
+  args = { "-i", "dap" },
+}
+dap.configurations.rust = {
+  {
+    name = "Launch",
+    type = "gdb",
+    request = "launch",
+    program = function()
+      return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+    end,
+    cwd = "${workspaceFolder}",
+    stopAtBeginningOfMainSubprogram = false,
+  },
+}
 lspconfig.rust_analyzer.setup({
   on_attach = function(client)
     client.server_capabilities.semanticTokensProvider = nil

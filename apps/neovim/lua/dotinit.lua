@@ -87,6 +87,7 @@ oil.setup({
 require("remember").setup({})
 require("smart-splits").setup({})
 local builtin = require("telescope.builtin")
+require("telescope").load_extension("dap")
 require("telescope").load_extension("telescope-tabs")
 require("telescope").load_extension("zf-native")
 require("telescope-tabs").setup({})
@@ -174,6 +175,16 @@ end, { desc = "Switch buffers" })
 vim.keymap.set("n", "<leader>bd", function()
   vim.cmd("bdelete")
 end, { desc = "Delete" })
+vim.keymap.set("n", "<leader>db", require("dap").toggle_breakpoint, { desc = "dap toggle breakpoint" })
+vim.keymap.set(
+  "n",
+  "<leader>dB",
+  require("telescope").extensions.dap.list_breakpoints,
+  { desc = "dap list breakpoints" }
+)
+vim.keymap.set("n", "<leader>dc", require("dap").continue, { desc = "dap continue (start)" })
+vim.keymap.set("n", "<leader>dh", require("telescope").extensions.dap.commands, { desc = "dap commands" })
+vim.keymap.set("n", "<leader>dr", require("dap").repl.open, { desc = "dap repl" })
 vim.keymap.set("n", "<leader>f", builtin.find_files, { desc = "Find Files" })
 vim.keymap.set("n", "<leader>g", neogit.open, { desc = "Open Neogit" })
 vim.keymap.set("n", "<leader>hk", builtin.keymaps, { desc = "Keymaps" })

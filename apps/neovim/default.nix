@@ -70,6 +70,7 @@ let
         remember-nvim
         smart-splits-nvim
         sqlite-lua
+        telescope-dap-nvim
         telescope-zf-native-nvim
         telescope-nvim
         tmux-nvim

@@ -36,7 +36,7 @@ cmp.setup({
 --
 require("conform").setup({
   format_after_save = {
-    -- lsp_fallback = "always",
+    lsp_fallback = true,
   },
   formatters_by_ft = {
     elixir = { "mix" },
