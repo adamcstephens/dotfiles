@@ -1,6 +1,6 @@
 #!/usr/bin/env nu
 
-def main [ project_path: string = "" ] {
+def main [ project_path: string = "", --replace (-r) ] {
   let is_tmux = if $env.TMUX? != null { true } else { false }
   let is_zellij = if $env.ZELLIJ? != null { true } else { false }
 
@@ -18,16 +18,26 @@ def main [ project_path: string = "" ] {
       let wname = $project | path basename | str replace --all --regex '[^a-zA-Z0-9]' ''
       let tmux_windows = tmux list-windows -F '#{window_index},#{window_name}'  | from csv --trim all | rename index name
       let prj_windows = $tmux_windows| filter { |w| $w.name == $wname} | get index
+      let current_window_panes = tmux list-panes -t (tmux display-message -p '#{window_id}') -F '#{pane_id},#{pane_active}' | from csv --noheaders | rename id active
 
       if ($prj_windows | length) > 0 {
         exec tmux select-window -t $wname
       }
 
-      tmux new-window -c $project -n $wname
-      tmux select-window -t $wname
-      tmux send-keys 'vim .' 'C-m'
-      tmux split-window -h -c $project
-      tmux select-pane -l
+      if $replace {
+        tmux rename-window $wname
+        $current_window_panes | filter { |p| $p.active != 1 } | each { |p| tmux kill-pane -t $p.id }
+        tmux split-window -h -c $project
+        tmux select-pane -l
+        exec tmux respawn-pane -c $project -k "vim . "
+      } else {
+        tmux new-window -c $project -n $wname
+        tmux select-window -t $wname
+        tmux send-keys 'vim .' 'C-m'
+        tmux split-window -h -c $project
+        tmux select-pane -l
+      }
+
     } else if $is_zellij {
       let tabname = $project | path basename
 

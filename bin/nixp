@@ -59,7 +59,7 @@ def clean [confirm = false] {
   }
 }
 
-def main [--codium (-c), --emacs (-e), --prj (-p), action: string, name: string = ""] {
+def main [--codium (-c), --emacs (-e), --prj (-p), --replace (-r), action: string, name: string = ""] {
   if ($action == "workdir") {
     if name? == "" {
       print "!! must provide name"
@@ -87,7 +87,11 @@ def main [--codium (-c), --emacs (-e), --prj (-p), action: string, name: string 
     gh pr checkout -f $name
 
     if ($prj) {
-      prj $worktree
+      if $replace {
+        prj --replace $worktree
+      } else {
+        prj $worktree
+      }
     }
   } else if ($action == "clean") {
     clean
