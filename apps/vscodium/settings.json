@@ -210,5 +210,9 @@
   "zig.path": "",
   "zig.zls.path": "",
   "zig.initialSetupDone": true,
-  "zig.zls.enableInlayHints": false
+  "zig.zls.enableInlayHints": false,
+  "editor.fontSize": 14.5,
+  "extensions.experimental.affinity": {
+    "asvetliakov.vscode-neovim": 1
+  }
 }
