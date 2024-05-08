@@ -59,8 +59,8 @@ in
         export NIXOS_OZONE_WL="1"
         export PATH=$HOME/.dotfiles/bin:${lib.makeBinPath dependencies}:$PATH
 
-        # chrome and vscode use this to find the secret service
-        export XDG_CURRENT_DESKTOP=GNOME
+        export XDG_CURRENT_DESKTOP=river
+        systemctl --user import-environment XDG_CURRENT_DESKTOP
 
         systemd-cat --identifier=river river
 
