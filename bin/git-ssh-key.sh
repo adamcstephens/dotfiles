@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-export SSH_AUTH_SOCK="$(~/.dotfiles/bin/ssh-agent-mgr)"
+SSH_AUTH_SOCK="$(~/.dotfiles/bin/ssh-agent-mgr)"
 
 if [ -n "$SSH_AUTH_SOCK" ]; then
   key="$(ssh-add -L | head -n 1)"
