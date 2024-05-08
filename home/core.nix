@@ -68,7 +68,7 @@
     jc = "sudo journalctl";
     jcu = "journalctl --user";
     l = "ll -a";
-    ll = "eza -l";
+    ll = "eza -lg";
     nix = "nix --print-build-logs";
     sy = "sudo systemctl";
     syu = "systemctl --user";
