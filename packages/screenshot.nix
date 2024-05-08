@@ -1,23 +1,24 @@
 {
+  writeShellApplication,
+
   bash,
-  xdotool,
+  grim,
   maim,
   slurp,
-  wayshot,
   wl-clipboard-rs,
   xclip,
-  writeShellApplication,
+  xdotool,
 }:
 
 writeShellApplication {
   runtimeInputs = [
     bash
-    xdotool
+    grim
     maim
     slurp
-    wayshot
     wl-clipboard-rs
     xclip
+    xdotool
   ];
 
   text = builtins.readFile ./screenshot;

@@ -34,7 +34,7 @@ box)
   if [ $GUI = "xorg" ]; then
     maim -s "$OUTPUT"
   else
-    wayshot --file "$OUTPUT" --slurp "$(slurp)"
+    slurp | grim -g - "$OUTPUT"
   fi
   ;;
 
@@ -42,7 +42,7 @@ screen)
   if [ $GUI = "xorg" ]; then
     maim "$OUTPUT"
   else
-    wayshot --file "$OUTPUT"
+    grim "$OUTPUT"
   fi
   ;;
 
