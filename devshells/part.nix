@@ -78,16 +78,7 @@
           ];
         };
 
-        elixir = pkgs.mkShell {
-          packages = [
-            pkgs.pkgs.beam.packages.erlangR25.elixir_1_15
-            pkgs.pkgs.beam.packages.erlangR25.elixir-ls
-          ] ++ (lib.optionals pkgs.stdenv.isLinux [ pkgs.inotify-tools ]);
-
-          shellHook = ''
-            export ERL_AFLAGS="-kernel shell_history enabled -kernel shell_history_file_bytes 1024000"
-          '';
-        };
+        elixir = pkgs.callPackage ./elixir.nix { };
 
         go = pkgs.callPackage ./go.nix { };
 
