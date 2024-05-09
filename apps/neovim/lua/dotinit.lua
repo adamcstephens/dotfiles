@@ -205,6 +205,8 @@ vim.keymap.set("n", "<leader>S", function()
   vim.cmd("noautocmd write ++p")
 end, { desc = "Save File (No autocmd)" })
 vim.keymap.set("n", "<leader>t", require("telescope-tabs").list_tabs, { desc = "Tabs" })
+
+-- diagnostics
 vim.keymap.set("n", "<leader>xx", function()
   require("trouble").toggle()
 end)
@@ -214,6 +216,9 @@ end)
 vim.keymap.set("n", "<leader>xd", function()
   require("trouble").toggle("document_diagnostics")
 end)
+vim.keymap.set("n", "]g", vim.diagnostic.goto_next)
+vim.keymap.set("n", "[g", vim.diagnostic.goto_prev)
+
 vim.keymap.set("n", "<leader>xq", function()
   require("trouble").toggle("quickfix")
 end)
