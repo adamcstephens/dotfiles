@@ -60,25 +60,40 @@ let
 
   revealjs = pkgs.callPackage ./revealjs.nix { };
 
-  env = ''
-    (setq exec-path (append exec-path '( ${
-      lib.concatMapStringsSep " " (x: ''"${x}/bin"'') extraBins
-    } )))
-
-    (defun dot/font-mono ()
-      "${config.dotfiles.gui.font.mono}")
-
-    (defun dot/font-variable ()
-      "${config.dotfiles.gui.font.variable}")
-
-    ${lib.optionalString cfg.full ''(setq org-re-reveal-root "${revealjs.outPath}")''}
-
-    (provide 'dotemacs-nix-env)
-  '';
-
   emacsPackages =
     epkgs:
-    [
+
+    let
+      pins-packages = import ./npins-packages;
+      npinsPackages = lib.mapAttrsToList (
+        name: src:
+        (epkgs.trivialBuild {
+          pname = name;
+          inherit src;
+          version = "unstable-${builtins.substring 0 8 src.revision}";
+        })
+      ) pins-packages;
+
+      env = ''
+        (setq exec-path (append exec-path '( ${
+          lib.concatMapStringsSep " " (x: ''"${x}/bin"'') extraBins
+        } )))
+
+        (defun dot/font-mono ()
+          "${config.dotfiles.gui.font.mono}")
+
+        (defun dot/font-variable ()
+          "${config.dotfiles.gui.font.variable}")
+
+        ${lib.optionalString cfg.full ''(setq org-re-reveal-root "${revealjs.outPath}")''}
+
+        (add-to-list 'custom-theme-load-path "${pins-packages.doom-moonfly-theme}")
+
+        (provide 'dotemacs-nix-env)
+      '';
+    in
+    npinsPackages
+    ++ [
       (epkgs.trivialBuild {
         pname = "dotemacs-nix-env";
         src = pkgs.writeText "dotemacs-nix-env.el" env;
@@ -106,6 +121,7 @@ let
       direnv
       dirvish
       doom-modeline
+      doom-themes
       editorconfig
       eldoc-box
       elisp-autofmt

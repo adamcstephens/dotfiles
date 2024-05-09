@@ -1,0 +1,16 @@
+{
+  "pins": {
+    "doom-moonfly-theme": {
+      "type": "Git",
+      "repository": {
+        "type": "Git",
+        "url": "https://github.com/stackmystack/doom-moonfly-theme"
+      },
+      "branch": "master",
+      "revision": "2db10808f8f941cf934b69626699e621ac72c8c8",
+      "url": null,
+      "hash": "050drl0lgmsm1idj90vsgcz3nnk0l04w0i328kscmb95ml900fkd"
+    }
+  },
+  "version": 3
+}

@@ -54,7 +54,7 @@
     ;;  (agenda-structure . (variable-pitch light 1.3))
     ;;  (t . (1.0)))
     )
-  (load-theme 'modus-vivendi :no-confirm)
+  (load-theme 'doom-moonfly :no-confirm)
 
   (setq global-mode-string (system-name))
 
@@ -116,7 +116,7 @@
   auto-dark
   :after (modus-themes)
   :init
-  (setq auto-dark-dark-theme 'modus-vivendi)
+  (setq auto-dark-dark-theme 'doom-moonfly)
   (setq auto-dark-light-theme 'modus-operandi))
 
 (use-package diff-ansi :commands (diff-ansi-mode diff-ansi-buffer))
