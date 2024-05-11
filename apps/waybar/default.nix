@@ -51,7 +51,7 @@
         }
 
         #tags button.focused {
-          color: #${config.colorScheme.palette.base09};
+          color: #${config.colorScheme.palette.base05};
         }
 
         #tags button.urgent {
