@@ -25,7 +25,11 @@ in
     };
 
     systemd.user.services.ssh-tpm-agent = lib.mkIf cfg.tpm {
-      Unit.PartOf = [ "default.target" ];
+      Unit = {
+        PartOf = [ "default.target" ];
+        After = [ "ssh-agent.service" ];
+        Requires = [ "ssh-agent.service" ];
+      };
 
       Service = {
         Type = "simple";
