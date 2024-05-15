@@ -28,7 +28,7 @@ lspconfig.efm.setup({
 -- elixir
 require("elixir").setup({
   nextls = {
-    enable = false,
+    enable = true,
     cmd = "nextls",
   },
   credo = { enable = true },
@@ -45,6 +45,9 @@ require("elixir").setup({
 lspconfig.elixirls.setup({
   capabilities = require("cmp_nvim_lsp").default_capabilities(),
   cmd = { "elixir-ls" },
+  init = {
+    provideFormatter = false,
+  },
   on_attach = function(client)
     client.server_capabilities.semanticTokensProvider = nil
     vim.keymap.set("n", "<space>fp", ":ElixirFromPipe<cr>", { buffer = true, noremap = true })
