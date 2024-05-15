@@ -44,7 +44,6 @@ require("conform").setup({
     lua = { "stylua" },
     nix = { "nixfmt" },
     python = { "ruff_lint", "ruff_format" },
-    rust = { "rustfmt" },
     teal = { "stylua" },
     yaml = { "yamlfmt" },
   },
