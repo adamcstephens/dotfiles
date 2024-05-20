@@ -45,7 +45,7 @@ in
     # wayland
     ../apps/kanshi
     ../apps/river
-    ../apps/swayidle
+    ../apps/sleepwatcher-rs
     ../apps/waybar
     ../apps/wob
 

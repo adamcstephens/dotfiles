@@ -8,7 +8,7 @@
 let
   colors = config.colorScheme.palette;
   locker = pkgs.writeShellScriptBin "locker" ''
-    exec ${lib.getExe pkgs.waylock} -fork-on-lock -init-color 0x${colors.base01} -input-color 0x${colors.base03} -fail-color 0x${colors.base08}";
+    exec ${lib.getExe pkgs.waylock} -fork-on-lock -init-color 0x${colors.base01} -input-color 0x${colors.base03} -fail-color 0x${colors.base08}
   '';
 in
 {
@@ -24,7 +24,6 @@ in
         config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/sleepwatcher-rs/idle_config.lua";
 
     dependencies = [
-      "/run/current-system/sw"
       locker
       pkgs.playerctl
       pkgs.wlopm
