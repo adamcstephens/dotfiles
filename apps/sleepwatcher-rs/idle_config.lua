@@ -62,9 +62,10 @@ end
 DbusHandler:PrepareSleep("LockScreen")
 DbusHandler:LockHandler("LockHandler")
 -- DbusHandler:UnlockHandler("UnlockHandler")
-IdleNotifier:get_notification(300, "ScreenLockBattery")
-IdleNotifier:get_notification(30, "ScreenDpmsBattery")
-IdleNotifier:get_notification(600, "SleepBattery")
+IdleNotifier:get_notification(240, "ScreenLockBattery")
+-- IdleNotifier:get_notification(30, "ScreenDpmsBattery")
+IdleNotifier:get_notification(300, "SleepBattery")
+
 IdleNotifier:get_notification(600, "ScreenLockAC")
 IdleNotifier:get_notification(900, "ScreenDpmsAC")
 
