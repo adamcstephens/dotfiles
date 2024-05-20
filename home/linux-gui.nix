@@ -29,8 +29,6 @@ let
     ''
   );
 
-  nix-colors-contrib = inputs.nix-colors.lib-contrib { inherit pkgs; };
-
   screenshot = pkgs.callPackage ../packages/screenshot.nix { };
 in
 {

@@ -4,7 +4,18 @@
   pkgs,
   ...
 }:
+let
+  cfg = config.dotfiles.apps.waybar;
+in
 {
+  options.dotfiles.apps.waybar.battery = lib.mkOption {
+    type = lib.types.enum [
+      "battery"
+      "upower"
+    ];
+    default = "battery";
+  };
+
   config = lib.mkIf config.dotfiles.gui.wayland {
     programs.waybar = {
       enable = true;
@@ -15,7 +26,10 @@
         hyprlandSupport = false;
       };
 
-      settings.main = import ./settings.nix { inherit lib; };
+      settings.main = import ./settings.nix {
+        inherit lib;
+        inherit (cfg) battery;
+      };
 
       style = ''
         * {
@@ -64,7 +78,8 @@
         #network,
         #pulseaudio,
         #bluetooth,
-        #tray {
+        #tray,
+        #upower {
           margin: 0px 10px;
           min-width: 10px;
           color: #${config.colorScheme.palette.base04};
@@ -84,6 +99,14 @@
 
         #battery.plugged {
           color: #${config.colorScheme.palette.base0B};
+        }
+
+        #upower.charging {
+          color: #${config.colorScheme.palette.base0D};
+        }
+
+        #upower.discharging {
+          color: #${config.colorScheme.palette.base0A};
         }
       '';
     };

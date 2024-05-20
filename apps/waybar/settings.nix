@@ -1,4 +1,4 @@
-{ lib }:
+{ lib, battery }:
 {
   layer = "top";
   position = "top";
@@ -10,7 +10,7 @@
     "idle_inhibitor"
     "bluetooth"
     "network"
-    "battery"
+    battery
     "pulseaudio"
     "clock"
   ];
@@ -76,7 +76,7 @@
     format-wifi = "";
     format-ethernet = "";
     format-linked = "";
-    format-disconnected = "⚠";
+    format-disconnected = lib.mkDefault "⚠";
     tooltip-format = "{ifname} {essid} ({signalStrength}%)";
     tooltip = true;
     on-click = "nm-connection-editor";

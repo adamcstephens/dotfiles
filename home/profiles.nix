@@ -108,6 +108,9 @@ in
               };
             };
 
+            dotfiles.apps.waybar.battery = "upower";
+            programs.waybar.settings.main.network.format-disconnected = "";
+
             services.grobi = {
               enable = true;
               rules = [
