@@ -16,6 +16,7 @@ let
 in
 mkShell {
   packages = [
+    beamPackages.erlang
     elixir
     lexical-ls
     elixir-ls

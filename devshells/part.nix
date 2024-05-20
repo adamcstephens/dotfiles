@@ -61,6 +61,13 @@
           ] ++ self'.devShells.ci.nativeBuildInputs;
         };
 
+        elixir = pkgs.callPackage ./elixir.nix { };
+        go = pkgs.callPackage ./go.nix { };
+        nixpkgs = pkgs.callPackage ./nixpkgs.nix { };
+        zig = pkgs.callPackage ./zig.nix { };
+
+        # inline
+
         c = pkgs.mkShell {
           packages = [
             pkgs.autoconf
@@ -78,10 +85,6 @@
           ];
         };
 
-        elixir = pkgs.callPackage ./elixir.nix { };
-
-        go = pkgs.callPackage ./go.nix { };
-
         js = pkgs.mkShellNoCC {
           packages = [
             pkgs.esbuild
@@ -89,8 +92,6 @@
             pkgs.yarn
           ];
         };
-
-        nixpkgs = pkgs.callPackage ./nixpkgs.nix { };
 
         opentofu = pkgs.mkShellNoCC { packages = [ pkgs.opentofu ]; };
 
