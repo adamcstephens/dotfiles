@@ -73,6 +73,7 @@ let
         telescope-dap-nvim
         telescope-zf-native-nvim
         telescope-nvim
+        telescope-undo-nvim
         tmux-nvim
         trouble-nvim
         vim-dadbod

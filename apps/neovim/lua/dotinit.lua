@@ -87,8 +87,14 @@ oil.setup({
 require("remember").setup({})
 require("smart-splits").setup({})
 local builtin = require("telescope.builtin")
+require("telescope").setup({
+  pickers = {
+    ["buffers"] = { sort_mru = true, ignore_current_buffer = true },
+  },
+})
 require("telescope").load_extension("dap")
 require("telescope").load_extension("telescope-tabs")
+require("telescope").load_extension("undo")
 require("telescope").load_extension("zf-native")
 require("telescope-tabs").setup({})
 require("tmux").setup({
@@ -205,6 +211,7 @@ vim.keymap.set("n", "<leader>S", function()
   vim.cmd("noautocmd write ++p")
 end, { desc = "Save File (No autocmd)" })
 vim.keymap.set("n", "<leader>t", require("telescope-tabs").list_tabs, { desc = "Tabs" })
+vim.keymap.set("n", "<leader>u", "<cmd>Telescope undo<cr>")
 
 -- diagnostics
 vim.keymap.set("n", "<leader>xx", function()
