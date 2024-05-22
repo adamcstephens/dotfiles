@@ -7,9 +7,9 @@
         "url": "https://github.com/f-person/auto-dark-mode.nvim"
       },
       "branch": "master",
-      "revision": "e328dc463d238cb7d690fb4daf068eba732a5a14",
+      "revision": "2b8c938da9a7c9432120266b92936b2c22e8cfb8",
       "url": null,
-      "hash": "01nbj7yn8d6ycriqx6bi5sdz9s5giv8i2ybq6qdn37g2z0jhf74m"
+      "hash": "0x3j40c3cbvabilg1gs2vsciszgj981lg8w569x6h9lhidn8j5k5"
     },
     "focus.nvim": {
       "type": "Git",
@@ -85,9 +85,9 @@
         "url": "https://github.com/bluz71/vim-moonfly-colors"
       },
       "branch": "master",
-      "revision": "d43001d901599ba7273dc5700db26948ffc0bac6",
+      "revision": "522514d6325373c779ec38649059279693d5af9a",
       "url": null,
-      "hash": "0mdnar6vjrymppp7gv5qs4fj5wp8rdba7q9gzcpykw7jrycnkl3w"
+      "hash": "1wbhfgz2mla9s3386npqmr9j30l2q7hbphcfji0r4da4xxmnpjqg"
     },
     "workspace-diagnotics-nvim": {
       "type": "Git",
