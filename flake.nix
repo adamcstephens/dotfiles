@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs.url = "github:adamcstephens/nixpkgs/atomix-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
 
     attic.url = "github:zhaofengli/attic";
     flake-parts.url = "github:hercules-ci/flake-parts";
