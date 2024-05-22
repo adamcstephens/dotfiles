@@ -55,9 +55,9 @@ lspconfig.elixirls.setup({
     vim.keymap.set("v", "<space>em", ":ElixirExpandMacro<cr>", { buffer = true, noremap = true })
   end,
 })
-lspconfig.lexical.setup({
-  cmd = { "lexical" },
-})
+-- lspconfig.lexical.setup({
+--   cmd = { "lexical" },
+-- })
 
 -- go
 lspconfig.gopls.setup({})
@@ -101,6 +101,7 @@ lspconfig.lua_ls.setup({
 require("lspconfig").teal_ls.setup({})
 
 -- nix
+-- lspconfig.nixd.setup({})
 lspconfig.nil_ls.setup({
   settings = {
     ["nil"] = {
@@ -154,7 +155,14 @@ lspconfig.rust_analyzer.setup({
     client.server_capabilities.semanticTokensProvider = nil
   end,
   settings = {
-    ["rust-analyzer"] = {},
+    ["rust-analyzer"] = {
+      imports = {
+        granularity = {
+          group = "module",
+        },
+        prefix = "self",
+      },
+    },
   },
 })
 
