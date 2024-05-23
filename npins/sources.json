@@ -9,6 +9,7 @@
       },
       "pre_releases": false,
       "version_upper_bound": null,
+      "release_prefix": null,
       "version": "v1.2.1",
       "revision": "05aff2a9026e92b1f03a4bd5f3b76651f206b74a",
       "url": "https://api.github.com/repos/miikanissi/modus-themes.nvim/tarball/v1.2.1",
