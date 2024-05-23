@@ -16,7 +16,7 @@ windows:
         -
 
   - dotfiles:
-      root: ~/projects/.dotfiles
+      root: ~/.dotfiles
       layout: even-horizontal
       panes:
         - vim .
