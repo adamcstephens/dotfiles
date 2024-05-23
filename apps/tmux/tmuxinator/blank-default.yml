@@ -1,0 +1,37 @@
+name: default
+root: ~/
+
+windows:
+  - general:
+      layout: main-vertical
+      panes:
+        - senpai
+        - cd ~/projects/sower; nix run .#
+
+  - stop:
+      root: ~/projects/stop
+      layout: even-horizontal
+      panes:
+        - vim .
+        -
+
+  - dotfiles:
+      root: ~/projects/.dotfiles
+      layout: even-horizontal
+      panes:
+        - vim .
+        -
+
+  - sower:
+      root: ~/projects/sower
+      layout: even-horizontal
+      panes:
+        - vim .
+        -
+
+  - nixpkgs:
+      root: ~/git/nixpkgs
+      layout: even-horizontal
+      panes:
+        - vim .
+        -

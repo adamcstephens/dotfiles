@@ -5,5 +5,9 @@ if tmux has-session >/dev/null 2>&1; then
   tmux detach-client
   exec tmux -u attach-session
 else
-  exec tmux -u new-session
+  if [ -e "$XDG_CONFIG_HOME/tmuxinator/$(hostname)-default.yml" ]; then
+    tmuxinator "$(hostname)-default"
+  else
+    exec tmux -u new-session
+  fi
 fi
