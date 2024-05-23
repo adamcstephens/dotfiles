@@ -31,7 +31,13 @@ in
               self.overlays.default
               self.overlays.upstreams
             ];
-            config.allowUnfree = true;
+
+            config.allowUnfreePredicate =
+              pkg:
+              builtins.elem (lib.getName pkg) [
+                "obsidian"
+                "spotify"
+              ];
           };
 
           services.sower.client.config.name = name;
