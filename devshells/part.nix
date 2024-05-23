@@ -64,6 +64,7 @@
         elixir = pkgs.callPackage ./elixir.nix { };
         go = pkgs.callPackage ./go.nix { };
         nixpkgs = pkgs.callPackage ./nixpkgs.nix { };
+        python = pkgs.callPackage ./python.nix { };
         zig = pkgs.callPackage ./zig.nix { };
 
         # inline
@@ -94,16 +95,6 @@
         };
 
         opentofu = pkgs.mkShellNoCC { packages = [ pkgs.opentofu ]; };
-
-        python = pkgs.mkShellNoCC {
-          packages = [
-            (pkgs.python3.withPackages (py: [
-              py.black
-              py.hexdump
-              py.paramiko
-            ]))
-          ];
-        };
 
         rust = pkgs.mkShell {
           packages = [
