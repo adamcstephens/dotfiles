@@ -23,8 +23,9 @@ bump-pins:
     npins update -d npins/
     npins update -d apps/emacs/npins-packages/
     npins update -d apps/neovim/npins/
-    git add npins/ apps/emacs/npins-packages/ apps/neovim/npins/
-    git commit -m 'chore: npins update' -- npins/ apps/neovim/npins/ || true
+    npins update -d apps/neovim/npins-ext/
+    git add npins/ apps/emacs/npins-packages/ apps/neovim/npins/ apps/neovim/npins-ext/
+    git commit -m 'chore: npins update' -- npins/ apps/neovim/npins/ apps/neovim/npins-ext/ || true
 
 firefox-config: arkenfox
     ~/.dotfiles/bin/firefox-customize

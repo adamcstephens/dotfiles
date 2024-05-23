@@ -22,9 +22,15 @@ let
   ];
 
   pins = import ./npins;
+  pins-ext = import ./npins-ext;
   npinsPlugins = lib.mapAttrsToList (
     name: src: (pkgs.vimUtils.buildVimPlugin { inherit name src; })
   ) pins;
+
+  nvim-treesitter-nu = pkgs.callPackage ./nvim-treesitter-nu.nix {
+    inherit (pkgs.tree-sitter) buildGrammar;
+    src = pins-ext.tree-sitter-nu;
+  };
 
   neovimConfig = pkgs.neovimUtils.makeNeovimConfig {
     plugins =
@@ -56,6 +62,7 @@ let
         nvim-highlight-colors
         nvim-lspconfig
         nvim-treesitter.withAllGrammars
+        (nvim-treesitter.withPlugins (plugins: [ nvim-treesitter-nu ]))
         nvim-surround
         nvim-web-devicons
         oil-nvim
@@ -88,6 +95,8 @@ let
       vim.g.sqlite_clib_path = '${pkgs.sqlite.out}/lib/libsqlite3.${
         if pkgs.stdenv.isDarwin then "dylib" else "so"
       }'
+
+      vim.opt.rtp:append("${pins-ext.tree-sitter-nu}")
 
       vim.opt.rtp:append("${
         if config.dotfiles.nixosManaged then ./. else "${config.home.homeDirectory}/.dotfiles/apps/neovim"
