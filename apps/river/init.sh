@@ -18,10 +18,12 @@ riverctl set-repeat 60 300
 
 touchpad="$(riverctl list-inputs | rg Touchpad | head -n 1)"
 
-riverctl input $touchpad events disabled
-riverctl input $touchpad natural-scroll enabled
-riverctl input $touchpad tap-button-map left-right-middle
-riverctl input $touchpad middle-emulation disabled
+if [ -n "$touchpad" ]; then
+  riverctl input "$touchpad" events disabled
+  riverctl input "$touchpad" natural-scroll enabled
+  riverctl input "$touchpad" tap-button-map left-right-middle
+  riverctl input "$touchpad" middle-emulation disabled
+fi
 
 riverctl focus-follows-cursor always || riverctl focus-follows-cursor normal
 
@@ -29,8 +31,8 @@ riverctl focus-follows-cursor always || riverctl focus-follows-cursor normal
 ## map
 #
 riverctl focus-follows-cursor always || riverctl focus-follows-cursor normal
-riverctl map normal Super+Shift T spawn 'GDK_DEBUG=gl-disable-gles systemd-cat --identifier=ghostty ghostty'
-riverctl map normal Super+Shift Return spawn 'GDK_DEBUG=gl-disable-gles systemd-cat --identifier=ghostty ghostty'
+riverctl map normal Super+Shift T spawn 'GDK_DEBUG=gl-disable-gles systemd-cat --identifier=terminal terminal'
+riverctl map normal Super+Shift Return spawn 'GDK_DEBUG=gl-disable-gles systemd-cat --identifier=terminal terminal'
 riverctl map normal Super+Shift+Control E spawn 'systemd-cat --identifier=gtk-launch gtk-launch emacsclient'
 riverctl map normal Super D spawn 'systemd-cat --identifier=rofi rofi -show drun'
 riverctl map normal Super+Shift D spawn 'systemd-cat --identifier=rofi rofi -show emoji'
@@ -98,7 +100,7 @@ riverctl map normal Super+Alt+Shift L resize horizontal 100
 # riverctl map-pointer normal Super BTN_RIGHT resize-view
 
 focus_tag_map() {
-  if command -v river-bnf; then
+  if command -v river-bnf >/dev/null; then
     riverctl map "$1" "$2" "$3" spawn "river-bnf $4"
   else
     riverctl map "$1" "$2" "$3" set-focused-tags "$4"
@@ -181,12 +183,9 @@ done
 # Set repeat rate
 riverctl set-repeat 50 300
 
-# Make certain views start floating
-riverctl float-filter-add app-id float
-riverctl float-filter-add title "popup title with spaces"
-
 # add ssd for some apps
 riverctl rule-add -app-id 'com.mitchellh.ghostty' ssd
+riverctl rule-add -app-id kitty ssd
 riverctl rule-add -app-id 'firefox' ssd
 riverctl rule-add -app-id 'FFPWA-*' ssd
 riverctl rule-add -app-id firefox tags $((2#00000001))

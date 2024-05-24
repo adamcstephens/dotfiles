@@ -9,7 +9,7 @@
       ];
     };
 
-    terminal = "ghostty";
+    terminal = "terminal";
     font = "${config.dotfiles.gui.font.variable} 11";
     theme =
       let

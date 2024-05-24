@@ -44,7 +44,7 @@ dotKeys =
     ("M-S-q", kill),
     ("M-C-S-q", killAll),
     ("M-C-S-t", spawner "$HOME/.dotfiles/bin/monitor-toggle.sh"),
-    ("M-S-t", spawner "ghostty"),
+    ("M-S-t", spawner "terminal"),
     ("M-s", windows W.focusDown),
     ("M-w", windows W.focusUp),
     ("M-`", toggleWS)

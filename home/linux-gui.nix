@@ -92,6 +92,8 @@ in
 
   home.packages =
     [
+      (pkgs.writeShellScriptBin "terminal" "${lib.getExe pkgs.kitty} --single-instance")
+
       pkgs.etBook
       pkgs.fira
       pkgs.font-awesome

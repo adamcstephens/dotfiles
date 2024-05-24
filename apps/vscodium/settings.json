@@ -147,7 +147,7 @@
     "SC2039"
   ],
   "telemetry.telemetryLevel": "off",
-  "terminal.external.linuxExec": "ghostty",
+  "terminal.external.linuxExec": "terminal",
   "terminal.external.osxExec": "Ghostty.app",
   "terminal.integrated.copyOnSelection": true,
   "terminal.integrated.cursorBlinking": true,

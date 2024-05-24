@@ -47,7 +47,7 @@ def main [ project_path: string = "", --replace (-r) ] {
 
       zellij action go-to-tab-name $tabname
     } else {
-      ghostty $project
+      terminal $project
       codium -n $project
     }
   } else {
