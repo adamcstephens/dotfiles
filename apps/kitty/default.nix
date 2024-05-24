@@ -34,7 +34,7 @@
         else
           {
             hide_window_decorations = "yes";
-            font_size = "10.5";
+            font_size = "11";
             touch_scroll_multiplier = "20.0";
             kitty_mod = "ctrl+shift";
 
