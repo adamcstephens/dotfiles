@@ -24,9 +24,10 @@ windows:
 
   - sower:
       root: ~/projects/sower
-      layout: even-horizontal
+      layout: "2833,339x80,0,0{169x80,0,0,3,169x80,170,0[169x40,170,0,8,169x39,170,41,17]}"
       panes:
         - vim .
+        -
         -
 
   - nixpkgs:
