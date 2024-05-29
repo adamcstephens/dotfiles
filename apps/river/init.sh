@@ -72,8 +72,8 @@ riverctl map normal Super A zoom
 riverctl map normal Super Return zoom
 
 # Mod+H and Mod+L to decrease/increase the main ratio of rivertile(1)
-riverctl map normal Super+Shift H send-layout-cmd rivertile "main-ratio -0.05"
-riverctl map normal Super+Shift L send-layout-cmd rivertile "main-ratio +0.05"
+riverctl map normal Super+Shift L send-layout-cmd rivertile "main-ratio -0.05"
+riverctl map normal Super+Shift H send-layout-cmd rivertile "main-ratio +0.05"
 
 # Mod+Alt+{H,J,K,L} to move views
 riverctl map normal Super+Alt H move left 100
