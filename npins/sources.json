@@ -14,6 +14,21 @@
       "revision": "05aff2a9026e92b1f03a4bd5f3b76651f206b74a",
       "url": "https://api.github.com/repos/miikanissi/modus-themes.nvim/tarball/v1.2.1",
       "hash": "0mnlx4kzp74h899rki4j48id340ryx98jvm2pv1l9dps94gknnv0"
+    },
+    "nixd": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "GitHub",
+        "owner": "nix-community",
+        "repo": "nixd"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "version": "2.2.0",
+      "revision": "567ce46ecee4f325c4da9d6821e269d52875e0a6",
+      "url": "https://api.github.com/repos/nix-community/nixd/tarball/2.2.0",
+      "hash": "0v4c05qngf4spsymn5fczi5lg8b9hkjvg7fpi62zblkpipag5i7z"
     }
   },
   "version": 3

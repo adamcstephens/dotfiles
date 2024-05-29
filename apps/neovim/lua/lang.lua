@@ -101,7 +101,7 @@ lspconfig.lua_ls.setup({
 require("lspconfig").teal_ls.setup({})
 
 -- nix
--- lspconfig.nixd.setup({})
+lspconfig.nixd.setup({})
 lspconfig.nil_ls.setup({
   settings = {
     ["nil"] = {

@@ -2,6 +2,7 @@
   config,
   inputs,
   lib,
+  npins,
   pkgs,
   ...
 }:
@@ -13,7 +14,10 @@ let
     pkgs.lua-language-server
     pkgs.jq
     pkgs.nil
-    pkgs.nixd
+    (pkgs.nixd.overrideAttrs {
+      inherit (npins.nixd) version;
+      src = npins.nixd;
+    })
     pkgs.nodejs
     pkgs.ruff
     pkgs.shellcheck
