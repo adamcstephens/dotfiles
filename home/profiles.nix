@@ -89,7 +89,7 @@ in
             services.ssh-agent.enable = true;
             systemd.user.services.ssh-agent.Install.WantedBy = lib.mkForce [ "graphical-session.target" ];
             systemd.user.services.ssh-agent.Service.Environment = [
-              "SSH_ASKPASS=${pkgs.x11_ssh_askpass}/libexec/ssh-askpass"
+              "SSH_ASKPASS=${pkgs.gnome.seahorse}/libexec/seahorse/ssh-askpass"
             ];
           }
         )
