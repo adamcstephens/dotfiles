@@ -113,7 +113,7 @@ let
     if lib.versionOlder pkgs.neovim.version "0.10.0" then
       pkgs.neovim
     else
-      pkgs.wrapNeovimUnstable pkgs.neovim (
+      pkgs.wrapNeovimUnstable pkgs.neovim-unwrapped (
         neovimConfig
         // {
           wrapperArgs = neovimConfig.wrapperArgs ++ [
