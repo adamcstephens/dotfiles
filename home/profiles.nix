@@ -52,6 +52,8 @@ in
   profile-parts.home-manager = {
     ark = {
       system = "aarch64-linux";
+      nixpkgs = inputs.nixpkgs-unstable;
+      home-manager = inputs.home-manager-unstable;
       modules = [
         ./linux-gui.nix
         ../apps/goldencheetah
@@ -97,6 +99,9 @@ in
     };
 
     blank = {
+      nixpkgs = inputs.nixpkgs-unstable;
+      home-manager = inputs.home-manager-unstable;
+
       modules = [
         ./linux-gui.nix
         ../apps/solaar
@@ -201,6 +206,9 @@ in
     };
 
     think = {
+      nixpkgs = inputs.nixpkgs-unstable;
+      home-manager = inputs.home-manager-unstable;
+
       modules = [
         ./linux-gui.nix
         ../apps/goldencheetah

@@ -1,6 +1,5 @@
 {
   config,
-  inputs,
   lib,
   npins,
   pkgs,
@@ -110,17 +109,21 @@ let
     '';
   };
 
-  package = pkgs.wrapNeovimUnstable inputs.neovim-nightly.packages.${pkgs.system}.neovim (
-    neovimConfig
-    // {
-      wrapperArgs = neovimConfig.wrapperArgs ++ [
-        "--prefix"
-        "PATH"
-        ":"
-        "${lib.makeBinPath dependencies}"
-      ];
-    }
-  );
+  package =
+    if lib.versionOlder pkgs.neovim.version "0.10.0" then
+      pkgs.neovim
+    else
+      pkgs.wrapNeovimUnstable pkgs.neovim (
+        neovimConfig
+        // {
+          wrapperArgs = neovimConfig.wrapperArgs ++ [
+            "--prefix"
+            "PATH"
+            ":"
+            "${lib.makeBinPath dependencies}"
+          ];
+        }
+      );
 in
 {
   home.sessionVariables = {
