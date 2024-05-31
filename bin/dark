@@ -51,7 +51,7 @@ def set_gnome_scheme(target):
 
 def set_kitty_theme(target):
     try:
-        kitty_pid = run("pgrep -af kitty").splitlines()[0].strip()
+        kitty_pid = run("pgrep -f kitty").splitlines()[0].strip()
     except IndexError:
         print("kitty not running")
         return
