@@ -1,3 +1,4 @@
+asvetliakov.vscode-neovim
 bmalehorn.vscode-fish
 continue.continue
 davidanson.vscode-markdownlint

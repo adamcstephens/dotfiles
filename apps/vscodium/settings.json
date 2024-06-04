@@ -214,5 +214,6 @@
   "editor.fontSize": 14.5,
   "extensions.experimental.affinity": {
     "asvetliakov.vscode-neovim": 1
-  }
+  },
+  "vscode-neovim.neovimInitVimPaths.linux": "~/.dotfiles/apps/neovim-vscode"
 }
