@@ -188,7 +188,14 @@ vim.keymap.set(
   require("telescope").extensions.dap.list_breakpoints,
   { desc = "dap list breakpoints" }
 )
-vim.keymap.set("n", "<leader>dc", require("dap").continue, { desc = "dap continue (start)" })
+vim.keymap.set("n", "<leader>dc", function()
+  -- (Re-)reads launch.json if present
+  if vim.fn.filereadable(".vscode/launch.json") then
+    require("dap.ext.vscode").load_launchjs(nil, { lldb = { "rust" } })
+  end
+  require("dap").continue()
+end, { desc = "dap continue (start)" })
+
 vim.keymap.set("n", "<leader>dh", require("telescope").extensions.dap.commands, { desc = "dap commands" })
 vim.keymap.set("n", "<leader>dr", require("dap").repl.open, { desc = "dap repl" })
 vim.keymap.set("n", "<leader>f", builtin.find_files, { desc = "Find Files" })

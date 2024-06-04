@@ -132,39 +132,5 @@ lspconfig.ocamllsp.setup({
 -- python
 require("lspconfig").pyright.setup({})
 
--- rust
-dap.adapters.gdb = {
-  type = "executable",
-  command = "gdb",
-  args = { "-i", "dap" },
-}
-dap.configurations.rust = {
-  {
-    name = "Launch",
-    type = "gdb",
-    request = "launch",
-    program = function()
-      return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
-    end,
-    cwd = "${workspaceFolder}",
-    stopAtBeginningOfMainSubprogram = false,
-  },
-}
-lspconfig.rust_analyzer.setup({
-  on_attach = function(client)
-    client.server_capabilities.semanticTokensProvider = nil
-  end,
-  settings = {
-    ["rust-analyzer"] = {
-      imports = {
-        granularity = {
-          group = "module",
-        },
-        prefix = "self",
-      },
-    },
-  },
-})
-
 -- zig
 lspconfig.zls.setup({})

@@ -71,6 +71,7 @@ let
         oil-nvim
         rainbow-delimiters-nvim
         remember-nvim
+        rustaceanvim
         smart-splits-nvim
         sqlite-lua
         telescope-dap-nvim
