@@ -123,10 +123,8 @@ in
 
       # apps
       pkgs.cinnamon.nemo
-      pkgs.element-desktop
       pkgs.firefoxpwa
       (pkgs.firefox-wayland.override { nativeMessagingHosts = [ pkgs.firefoxpwa ]; })
-      pkgs.fractal
       pkgs.gnome.eog
       pkgs.hunspell
       pkgs.hunspellDicts.en_US
@@ -134,8 +132,6 @@ in
       pkgs.mpv
       pkgs.remmina
       pkgs.thunderbird
-      pkgs.webcord
-      pkgs.zathura
 
       # bitwarden
       pkgs.pinentry.curses
