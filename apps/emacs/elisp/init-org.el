@@ -192,10 +192,6 @@
   ("C-c o a" . org-agenda)
   ("C-c o c" . org-capture))
 
-(use-package
-  persistent-scratch
-  :init (persistent-scratch-autosave-mode 1))
-
 (use-package org-autolist :hook (org-mode . org-autolist-mode))
 
 ;; set some better icons

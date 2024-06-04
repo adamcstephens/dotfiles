@@ -1,10 +1,17 @@
+(defun dot/ssh-agent-setup ()
+  (interactive)
+  (setenv "SSH_AUTH_SOCK" (shell-command-to-string "ssh-agent-mgr")))
+(add-hook 'server-after-make-frame-hook 'dot/ssh-agent-setup)
+
 (use-package
   magit
   :commands git-commit-mode
   :bind (("C-c g" . magit-file-dispatch))
   :hook ((focus-in . magit-refresh)
          (git-commit-mode . evil-insert-state))
-  :config (setq magit-save-repository-buffers nil))
+  :config
+  (setq magit-save-repository-buffers nil)
+  (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1))
 
 ;; (use-package forge :after magit)
 

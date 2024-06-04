@@ -29,7 +29,20 @@ fi
 
 export SSH_AUTH_SOCK="$socket"
 if ! ssh-add -l &>/dev/null; then
-  echo "Emtpy ssh-agent" >&2
+  # if still no keys found, try and run through the local hardware again as a fallback
+  for sock in "$XDG_RUNTIME_DIR/ssh-agent" \
+    "$XDG_RUNTIME_DIR/yubikey-agent/yubikey-agent.sock" \
+    "$XDG_RUNTIME_DIR/ssh-tpm-agent" \
+    "$HOME/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh"; do
+    if [ -S "$sock" ]; then
+      socket=$sock
+    fi
+  done
+
+  export SSH_AUTH_SOCK="$socket"
+  if ! ssh-add -l &>/dev/null; then
+    echo "Empty ssh-agent" >&2
+  fi
 fi
 
 echo -n "$socket"

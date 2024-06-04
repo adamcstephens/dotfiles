@@ -95,6 +95,10 @@
    ("<end>" . mwim-end-of-line-or-code)))
 
 (use-package
+  persistent-scratch
+  :init (persistent-scratch-autosave-mode 1))
+
+(use-package
   substitute
   :config (setq substitute-highlight t)
   :bind ("M-# b" . substitute-target-in-buffer))
