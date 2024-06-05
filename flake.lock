@@ -111,11 +111,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1715274763,
-        "narHash": "sha256-3Iv1PGHJn9sV3HO4FlOVaaztOxa9uGLfOmUWrH7v7+A=",
+        "lastModified": 1716745752,
+        "narHash": "sha256-8K1R9Yg4r08rYk86Yq+lu3E9L3uRUb4xMqYHgl0VGS0=",
         "owner": "ipetkov",
         "repo": "crane",
-        "rev": "27025ab71bdca30e7ed0a16c88fd74c5970fc7f5",
+        "rev": "19ca94ec2d288de334ae932107816b4a97736cd8",
         "type": "github"
       },
       "original": {
@@ -251,11 +251,11 @@
         "nixpkgs-lib": "nixpkgs-lib_4"
       },
       "locked": {
-        "lastModified": 1714641030,
-        "narHash": "sha256-yzcRNDoyVP7+SCNX0wmuDju1NUCt8Dz9+lyUXEI0dbI=",
+        "lastModified": 1715865404,
+        "narHash": "sha256-/GJvTdTpuDjNn84j82cU6bXztE0MSkdnTWClUCRub78=",
         "owner": "hercules-ci",
         "repo": "flake-parts",
-        "rev": "e5d10a24b66c3ea8f150e47dfdb0416ab7c3390e",
+        "rev": "8dc45382d5206bd292f9c2768b8058a8fd8311d9",
         "type": "github"
       },
       "original": {
@@ -431,11 +431,11 @@
         "nixpkgs": "nixpkgs_4"
       },
       "locked": {
-        "lastModified": 1716206908,
-        "narHash": "sha256-AyQ5dVzTF1YCVKNmYD41syfMaBgAd5c/KwivlZqCMfU=",
+        "lastModified": 1716689325,
+        "narHash": "sha256-vnZGYg/I2OA8RJjRS181oblablSsARtCSEBLnvEYGqg=",
         "owner": "elixir-tools",
         "repo": "next-ls",
-        "rev": "3236e14733d8d59fb81656e7e5e6d2c8689031d7",
+        "rev": "4c0d5821abe7f9c1d0ad9fb98b71136962ef2c68",
         "type": "github"
       },
       "original": {
@@ -788,11 +788,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1715652909,
-        "narHash": "sha256-aCLEDvzL1j51Rf2mCFOqK1mieMO3pAn5ItCIdr5h2LA=",
+        "lastModified": 1716949111,
+        "narHash": "sha256-ms3aD3Z2jKd1dk8qd0D/N7C8vFxn6z6LQ1G7cvNTVJ8=",
         "owner": "oxalica",
         "repo": "rust-overlay",
-        "rev": "1d8fcbbfcfd3476c2665384a46ee9d07ef2b4dd9",
+        "rev": "2e7ccf572ce0f0547d4cf4426de4482936882d0e",
         "type": "github"
       },
       "original": {
@@ -850,11 +850,11 @@
     },
     "services-flake": {
       "locked": {
-        "lastModified": 1715582151,
-        "narHash": "sha256-UsN5G1qbaLidfXuq9szt9t7BeBAfRGaCAhTGNRXZwwk=",
+        "lastModified": 1716920880,
+        "narHash": "sha256-oEMynPWhXKvsisIpCP+PxfkZyK/4UnPiUo3K+JYBYio=",
         "owner": "juspay",
         "repo": "services-flake",
-        "rev": "9fc3e72216aa5b446add37c3c5a3e6de40c0c22a",
+        "rev": "5d5e5fa514a220da9075414615554cd194691978",
         "type": "github"
       },
       "original": {
@@ -878,11 +878,11 @@
         "typhon": "typhon"
       },
       "locked": {
-        "lastModified": 1716989591,
-        "narHash": "sha256-I0HDnHIcGV5YB4HNyPTUZevAT5TiN4bIE0eFwMIQSAI=",
+        "lastModified": 1717474773,
+        "narHash": "sha256-Ech4AETqDyYl2u+6YYGowymFUIhJSxGtBOnILqjd/2g=",
         "ref": "refs/heads/main",
-        "rev": "9128aa063f156d6197807831ded4120d5cfdd3df",
-        "revCount": 209,
+        "rev": "218c05478386b023ae51cd00f66684f332e3daf5",
+        "revCount": 222,
         "type": "git",
         "url": "https://codeberg.org/adamcstephens/sower"
       },
