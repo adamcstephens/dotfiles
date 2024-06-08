@@ -114,7 +114,9 @@
     },
     "nixd": {
       "formatting": {
-        "command": "nixfmt"
+        "command": [
+          "nixfmt"
+        ]
       }
     }
   },
@@ -215,5 +217,10 @@
   "extensions.experimental.affinity": {
     "asvetliakov.vscode-neovim": 1
   },
-  "vscode-neovim.neovimInitVimPaths.linux": "~/.dotfiles/apps/neovim-vscode"
+  "vscode-neovim.neovimInitVimPaths.linux": "~/.dotfiles/apps/neovim-vscodium/init.lua",
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "elixir-tools.nextLS.experimental.completions.enable": true,
+  "nix.serverPath": "nixd"
 }
