@@ -212,7 +212,15 @@ vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, { desc = "Rename symbol" }
 vim.keymap.set("n", "<leader>r", builtin.live_grep, { desc = "Search" })
 vim.keymap.set("v", "<leader>r", builtin.grep_string, { desc = "Search selection" })
 vim.keymap.set("n", "<leader>s", function()
-  vim.cmd("write ++p")
+  local function starts_with(str, start)
+    return str:sub(1, #start) == start
+  end
+
+  if starts_with(vim.api.nvim_buf_get_name(0), "oil:///") then
+    vim.cmd("write")
+  else
+    vim.cmd("write ++p")
+  end
 end, { desc = "Save File" })
 vim.keymap.set("n", "<leader>S", function()
   vim.cmd("noautocmd write ++p")
