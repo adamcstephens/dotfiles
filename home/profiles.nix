@@ -32,12 +32,7 @@ in
               self.overlays.upstreams
             ];
 
-            config.allowUnfreePredicate =
-              pkg:
-              builtins.elem (lib.getName pkg) [
-                "obsidian"
-                "spotify"
-              ];
+            config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ ];
           };
 
           services.sower.client.config.name = name;

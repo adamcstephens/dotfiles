@@ -22,31 +22,28 @@
     full = lib.mkDefault true;
   };
 
-  home.packages =
-    [
-      # crypt
-      pkgs.age-plugin-yubikey
-      pkgs.passage
-      pkgs.rage
-      pkgs.rbw
-      pkgs.yubikey-manager
+  home.packages = [
+    # crypt
+    pkgs.age-plugin-yubikey
+    pkgs.passage
+    pkgs.rage
+    pkgs.rbw
+    pkgs.yubikey-manager
 
-      # nix
-      inputs.nix-index-database.packages.${pkgs.system}.comma-with-db
-      pkgs.nix-output-monitor
-      pkgs.nix-tree
-      pkgs.nixfmt-rfc-style
+    # nix
+    inputs.nix-index-database.packages.${pkgs.system}.comma-with-db
+    pkgs.nix-output-monitor
+    pkgs.nix-tree
+    pkgs.nixfmt-rfc-style
 
-      # tools
-      pkgs.pwgen
-      pkgs.unzip
+    # tools
+    pkgs.pwgen
+    pkgs.unzip
 
-      # apps
-      pkgs.eternal-terminal
-      pkgs.senpai
-    ]
-    ++ lib.optionals (builtins.elem pkgs.system pkgs.spotify.meta.platforms) [ pkgs.spotify ]
-    ++ lib.optionals (builtins.elem pkgs.system pkgs.obsidian.meta.platforms) [ pkgs.obsidian ];
+    # apps
+    pkgs.eternal-terminal
+    pkgs.senpai
+  ];
 
   programs = {
     ssh.forwardAgent = true;
