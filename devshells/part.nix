@@ -32,13 +32,7 @@
   );
 
   perSystem =
-    {
-      lib,
-      pkgs,
-      self',
-      system,
-      ...
-    }:
+    { pkgs, self', ... }:
     {
       devShells = {
         ci = pkgs.mkShellNoCC {
@@ -48,6 +42,7 @@
 
             pkgs.git
             pkgs.just
+            pkgs.nix-update
             pkgs.npins
             pkgs.nushell
           ];
