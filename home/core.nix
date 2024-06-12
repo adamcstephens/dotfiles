@@ -104,26 +104,31 @@
     ''
   );
 
-  home.packages = [
-    pkgs.calc
-    pkgs.difftastic
-    pkgs.direnv
-    pkgs.doggo
-    pkgs.du-dust
-    pkgs.fx
-    pkgs.gdu
-    pkgs.jq
-    pkgs.just
-    pkgs.kitty.terminfo
-    pkgs.mtr
-    pkgs.tio
-    pkgs.wget
-    pkgs.zf
+  home.packages =
+    [
+      pkgs.calc
+      pkgs.difftastic
+      pkgs.direnv
+      pkgs.doggo
+      pkgs.du-dust
+      pkgs.fx
+      pkgs.gdu
+      pkgs.jq
+      pkgs.just
+      pkgs.kitty.terminfo
+      pkgs.mtr
+      pkgs.tio
+      pkgs.wget
 
-    pkgs.gh
-    pkgs.hut
-    pkgs.tea
-  ];
+      pkgs.gh
+      pkgs.hut
+      pkgs.tea
+    ]
+    ++ lib.optionals (!pkgs.stdenv.isDarwin) [
+      # zig broken on darwin
+      pkgs.ncdu
+      pkgs.zf
+    ];
 
   home.sessionVariables = {
     EDITOR = "${config.home.homeDirectory}/.dotfiles/bin/editor";
