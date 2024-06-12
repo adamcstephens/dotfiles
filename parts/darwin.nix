@@ -138,7 +138,6 @@
         modules = [
           inputs.home-manager.darwinModules.home-manager
 
-          inputs.sandbox.darwinModules.forgejo-actions-runner
           inputs.sandbox.darwinModules.woodpecker-agents
           (
             { config, pkgs, ... }:
@@ -151,35 +150,6 @@
               home-manager.extraSpecialArgs = {
                 inherit inputs;
                 npins = import ../npins;
-              };
-
-              services.forgejo-actions-runner.instances.default = {
-                labels = [ "local/${pkgs.system}:host" ];
-                name = config.networking.hostName;
-                tokenFile = "/etc/forgejo-token.env";
-                url = "https://git.junco.dev";
-                settings.runner.envs = {
-                  ATTIC_URL = "https://attic.junco.dev";
-                  ATTIC_CACHE = "default";
-                };
-                hostPackages = [
-                  config.nix.package
-
-                  inputs.attic.packages.${pkgs.system}.attic
-                  inputs.sower.packages.${pkgs.system}.seed-ci
-
-                  pkgs.bash
-                  pkgs.cachix
-                  pkgs.coreutils
-                  pkgs.curl
-                  pkgs.gawk
-                  pkgs.gitMinimal
-                  pkgs.gnused
-                  pkgs.jq
-                  pkgs.nodejs
-                  pkgs.nushell
-                  pkgs.wget
-                ];
               };
 
               services.woodpecker-agents.agents.default = {
