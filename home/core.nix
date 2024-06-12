@@ -116,6 +116,7 @@
     pkgs.just
     pkgs.kitty.terminfo
     pkgs.mtr
+    pkgs.ncdu
     pkgs.tio
     pkgs.wget
     pkgs.zf
