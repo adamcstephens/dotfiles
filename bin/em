@@ -35,9 +35,8 @@ else
   fi
 fi
 
-if [ "$(emacsclient -e "(getenv \"SSH_AUTH_SOCK\")")" != "$SSH_AUTH_SOCK" ]; then
-  emacsclient -e "(setenv \"SSH_AUTH_SOCK\" \"$SSH_AUTH_SOCK\")" >/dev/null
-fi
+export SSH_AUTH_SOCK="$(ssh-agent-mgr)"
+emacsclient -e "(setenv \"SSH_AUTH_SOCK\" \"$SSH_AUTH_SOCK\")" >/dev/null
 
 # shellcheck disable=SC2068 disable=SC2086
 exec emacsclient $args "$@"

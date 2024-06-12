@@ -1,5 +1,6 @@
 (defun dot/ssh-agent-setup ()
   (interactive)
+  (setenv "INSIDE_EMACS" "yes")
   (setenv "SSH_AUTH_SOCK" (shell-command-to-string "ssh-agent-mgr")))
 (add-hook 'server-after-make-frame-hook 'dot/ssh-agent-setup)
 
