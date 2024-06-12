@@ -135,8 +135,9 @@
         homeModules = config.profile-parts.home-manager.silver.finalModules;
       in
       {
+        nixpkgs = inputs.nixpkgs-unstable;
         modules = [
-          inputs.home-manager.darwinModules.home-manager
+          inputs.home-manager-unstable.darwinModules.home-manager
 
           inputs.sandbox.darwinModules.woodpecker-agents
           (
