@@ -21,7 +21,7 @@
     sandbox.url = "git+https://codeberg.org/adamcstephens/nix-sandbox";
     sandbox.inputs.nixpkgs.follows = "nixpkgs";
     sandbox.inputs.sower.follows = "sower";
-    sower.url = "git+https://codeberg.org/adamcstephens/sower";
+    sower.url = "git+https://codeberg.org/adamcstephens/sower?ref=release-2";
     sower.inputs.nixpkgs.follows = "nixpkgs";
   };
 
@@ -49,12 +49,7 @@
       ];
 
       perSystem =
-        {
-          lib,
-          pkgs,
-          system,
-          ...
-        }:
+        { lib, pkgs, ... }:
         {
           packages = import ./packages {
             inherit inputs lib pkgs;
