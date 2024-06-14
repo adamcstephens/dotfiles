@@ -38,7 +38,6 @@ let
       pkgs.graphicsmagick
       pkgs.multimarkdown
       pkgs.nodejs
-      pkgs.nodePackages.bash-language-server
       pkgs.pandoc
       pkgs.python3Packages.weasyprint
     ]);
