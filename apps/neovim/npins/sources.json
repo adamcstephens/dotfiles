@@ -52,9 +52,9 @@
         "url": "https://github.com/danielfalk/smart-open.nvim"
       },
       "branch": "main",
-      "revision": "028bb71d20e8212da3514bf6dabfb17038d81ee4",
+      "revision": "f4e39e9a1b05a6b82b1182a013677acc44b27abb",
       "url": null,
-      "hash": "1v8ifhgpm4x504617mxcjjm1ipv57j4025c32j9z2gkklicsy4ws"
+      "hash": "15i03ba6la6xric3g0i8sg8418s6phqb447zvhsq2yj7pfkkjjkc"
     },
     "telescope-tabs": {
       "type": "Git",
@@ -85,9 +85,9 @@
         "url": "https://github.com/bluz71/vim-moonfly-colors"
       },
       "branch": "master",
-      "revision": "522514d6325373c779ec38649059279693d5af9a",
+      "revision": "ed4b1b1220a6f040bd17043ae7c9458af0a3b16b",
       "url": null,
-      "hash": "1wbhfgz2mla9s3386npqmr9j30l2q7hbphcfji0r4da4xxmnpjqg"
+      "hash": "17fj9y5ixkd7kns7raxv4ldri3zgknj3fk11hcsamzrfsis7qbc9"
     },
     "workspace-diagnotics-nvim": {
       "type": "Git",
@@ -96,9 +96,9 @@
         "url": "https://github.com/artemave/workspace-diagnostics.nvim"
       },
       "branch": "main",
-      "revision": "0f0dad6cc3fbc2c9c2d850eb7611917cf66d4595",
+      "revision": "d9954248992f9e3cbe6fae7b87b96c0b73ebe946",
       "url": null,
-      "hash": "1iqhvabi6z4yp1m05f0nq6na760rnxnbjmbzma3i2nvaj6j2kxmr"
+      "hash": "1k25r61x1ga5zv6qwknjk36pvlvdfljp6jhdlcpz5jhibf3yw253"
     }
   },
   "version": 3
