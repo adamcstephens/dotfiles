@@ -1,4 +1,9 @@
-{ lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   programs.atuin = {
     enable = true;
@@ -24,6 +29,24 @@
       inline_height = 30;
       style = "compact";
       update_check = false;
+      daemon.enabled = true;
+      local_timeout = 15;
+    };
+  };
+
+  systemd.user.services.atuin = lib.mkIf (lib.versionAtLeast pkgs.atuin.version "18.3.0") {
+    Unit = {
+      PartOf = [ "default.target" ];
+    };
+
+    Service = {
+      Type = "simple";
+      ExecStart = "${lib.getExe config.programs.atuin.package} daemon";
+      Restart = "on-abort";
+    };
+
+    Install = {
+      WantedBy = [ "default.target" ];
     };
   };
 }
