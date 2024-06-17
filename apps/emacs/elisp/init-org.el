@@ -95,6 +95,8 @@
            (not (string-match "/.stversions/" (file-name-directory x))))
 	 (directory-files-recursively "~/sync/org" "\\.org$")))
 
+  (setq org-agenda-window-setup 'current-window)
+
   ;; let the completion engine sort them
   (setq org-outline-path-complete-in-steps nil)
 
