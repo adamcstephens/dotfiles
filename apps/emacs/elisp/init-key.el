@@ -9,6 +9,9 @@
     (define-key map (kbd "M-L") 'windmove-right)
     (define-key map (kbd "M-S-<return>") 'split-window-right)
     (define-key map (kbd "M-C") 'delete-window)
+
+    (define-key map (kbd "C-+") 'text-scale-increase)
+    (define-key map (kbd "C--") 'text-scale-decrease)
     map))
 
 (dot/keys-mode t)

@@ -1,8 +1,15 @@
+(defun dot/text-scale-reset () (interactive) (text-scale-set 0))
+
+(defun dot/open-inbox ()
+  (interactive)
+  (find-file "~/sync/org/inbox.org"))
+
 (use-package evil
   :init
   (setq evil-want-keybinding nil)
   (evil-mode 1)
   (evil-set-leader nil (kbd "SPC"))
+  (evil-define-key 'normal 'global (kbd "<leader>0") 'dot/text-scale-reset)
   (evil-define-key 'normal 'global (kbd "<leader>bb") 'consult-project-buffer)
   (evil-define-key 'normal 'global (kbd "<leader>bk") 'kill-buffer)
   (evil-define-key 'normal 'global (kbd "<leader>e") 'org-export-dispatch)
@@ -10,9 +17,11 @@
   (evil-define-key 'normal 'global (kbd "<leader>p") 'project-switch-project)
   (evil-define-key 'normal 'global (kbd "<leader>g") 'magit)
   (evil-define-key 'normal 'global (kbd "<leader>j") 'dired-jump)
+  (evil-define-key 'normal 'global (kbd "<leader>n") 'dot/open-inbox)
   (evil-define-key 'normal 'global (kbd "<leader>oa") 'org-agenda-list)
   (evil-define-key 'normal 'global (kbd "<leader>oc") 'org-capture)
   (evil-define-key 'normal 'global (kbd "<leader>or") 'org-refile)
+  (evil-define-key 'normal 'global (kbd "<leader>oz") 'org-archive-subtree)
   (evil-define-key 'normal 'global (kbd "<leader>r") 'consult-ripgrep)
   (evil-define-key 'normal 'global (kbd "<leader>s") 'save-buffer)
   (evil-define-key 'normal 'global (kbd "<leader>tn") 'tab-new)
