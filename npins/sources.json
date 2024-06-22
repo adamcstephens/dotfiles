@@ -25,10 +25,10 @@
       "pre_releases": false,
       "version_upper_bound": null,
       "release_prefix": null,
-      "version": "2.2.0",
-      "revision": "567ce46ecee4f325c4da9d6821e269d52875e0a6",
-      "url": "https://api.github.com/repos/nix-community/nixd/tarball/2.2.0",
-      "hash": "0v4c05qngf4spsymn5fczi5lg8b9hkjvg7fpi62zblkpipag5i7z"
+      "version": "2.2.1",
+      "revision": "df2d89ecca494400ebaf30d1ac0a241dc95ddcc3",
+      "url": "https://api.github.com/repos/nix-community/nixd/tarball/2.2.1",
+      "hash": "04x1yfkv7a74dhjsgpwdj2c96lbkw9d9w7jxzfg48ih12kf034v3"
     }
   },
   "version": 3
