@@ -59,6 +59,9 @@ in
         export NIXOS_OZONE_WL="1"
         export PATH=$HOME/.dotfiles/bin:${lib.makeBinPath dependencies}:$PATH
 
+        # gnome-keyring unlock needs this
+        export XDG_RUNTIME_DIR="/run/user/$(id -u)"
+
         export XDG_CURRENT_DESKTOP=river
         systemctl --user import-environment XDG_CURRENT_DESKTOP
 
