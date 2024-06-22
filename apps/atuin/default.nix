@@ -4,6 +4,14 @@
   pkgs,
   ...
 }:
+let
+  atuinSockDir = "${config.home.homeDirectory}/.local/share/atuin";
+  atuinSock = "${atuinSockDir}/atuin.sock";
+  unitConfig = {
+    Description = "Atuin Magical Shell History Daemon";
+    ConditionPathIsDirectory = atuinSockDir;
+  };
+in
 {
   programs.atuin = {
     enable = true;
@@ -24,29 +32,38 @@
     flags = [ "--disable-up-arrow" ];
 
     settings = {
+      daemon = {
+        enabled = true;
+        systemd_socket = true;
+      };
+
       enter_accept = false;
       filter_mode = "directory";
       inline_height = 30;
       style = "compact";
       update_check = false;
-      daemon.enabled = true;
       local_timeout = 15;
     };
   };
 
-  systemd.user.services.atuin = lib.mkIf (lib.versionAtLeast pkgs.atuin.version "18.3.0") {
-    Unit = {
-      PartOf = [ "default.target" ];
+  systemd.user = lib.mkIf (lib.versionAtLeast pkgs.atuin.version "18.3.0") {
+    sockets.atuin = {
+      Unit = unitConfig;
+      Install.WantedBy = [ "default.target" ];
+      Socket = {
+        ListenStream = "${config.home.homeDirectory}/.local/share/atuin/atuin.sock";
+        Accept = false;
+        SocketMode = "0600";
+      };
     };
 
-    Service = {
-      Type = "simple";
-      ExecStart = "${lib.getExe config.programs.atuin.package} daemon";
-      Restart = "on-abort";
-    };
-
-    Install = {
-      WantedBy = [ "default.target" ];
+    services.atuin = {
+      Unit = unitConfig;
+      Service = {
+        Type = "simple";
+        ExecStart = "${lib.getExe config.programs.atuin.package} daemon";
+        Restart = "on-abort";
+      };
     };
   };
 }
