@@ -32,7 +32,7 @@ in
               self.overlays.upstreams
             ];
 
-            config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ ];
+            config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ "aspell-dict-en-science" ];
           };
 
           services.sower.client.config.name = name;
