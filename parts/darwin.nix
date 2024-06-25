@@ -18,17 +18,14 @@
       (
         { pkgs, ... }:
         {
-          fonts = {
-            fontDir.enable = true;
-            fonts = [
-              pkgs.font-awesome
-              pkgs.ibm-plex
-              pkgs.jetbrains-mono
-              pkgs.material-icons
-              pkgs.material-design-icons
-              (pkgs.nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" ]; })
-            ];
-          };
+          fonts.packages = [
+            pkgs.font-awesome
+            pkgs.ibm-plex
+            pkgs.jetbrains-mono
+            pkgs.material-icons
+            pkgs.material-design-icons
+            (pkgs.nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" ]; })
+          ];
           nix = {
             gc = {
               automatic = true;
@@ -155,6 +152,8 @@
 
               services.woodpecker-agents.agents.default = {
                 enable = true;
+                # use release version since that's what's on the server
+                package = inputs.nixpkgs.legacyPackages.${pkgs.system}.woodpecker-agent;
 
                 environment = {
                   WOODPECKER_BACKEND = "local";
