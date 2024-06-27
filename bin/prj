@@ -57,7 +57,7 @@ def main [ project_path: string = "", --replace (-r) ] {
         kitty @ focus-tab -m $"id:($existing_tab | first)"
       }
     } else {
-      terminal $project
+      terminal prj $project
     }
   } else {
     echo $"!! No project found, \"($project)\", exiting"
