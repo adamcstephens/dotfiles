@@ -5,10 +5,19 @@
   ...
 }:
 {
+  # themes
   xdg.configFile."kitty/theme-dark.conf".source =
     npins."modus-themes.nvim" + "/extras/kitty/modus_vivendi.conf";
   xdg.configFile."kitty/theme-light.conf".source =
     npins."modus-themes.nvim" + "/extras/kitty/modus_operandi.conf";
+
+  # smart-splits.nvim
+  xdg.configFile."kitty/neighboring_window.py".source =
+    pkgs.vimPlugins.smart-splits-nvim + "/kitty/neighboring_window.py";
+  xdg.configFile."kitty/relative_resize.py".source =
+    pkgs.vimPlugins.smart-splits-nvim + "/kitty/relative_resize.py";
+  xdg.configFile."kitty/split_window.py".source =
+    pkgs.vimPlugins.smart-splits-nvim + "/kitty/split_window.py";
 
   home.packages = [ pkgs.kitty.terminfo ];
 
@@ -29,7 +38,7 @@
             macos_option_as_alt = "both";
 
             font_size = "13";
-            listen_on = "unix:\${TMPDIR}/kitty";
+            listen_on = "unix:@dotkitty";
           }
         else
           {
