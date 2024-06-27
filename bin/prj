@@ -1,6 +1,7 @@
 #!/usr/bin/env nu
 
 def main [ project_path: string = "", --replace (-r) ] {
+  let is_kitty = if $env.KITTY_PID? != null { true } else { false }
   let is_tmux = if $env.TMUX? != null { true } else { false }
   let is_zellij = if $env.ZELLIJ? != null { true } else { false }
 
@@ -11,11 +12,11 @@ def main [ project_path: string = "", --replace (-r) ] {
       zoxide query --list | rofi -dmenu
     }
   } | str trim
+  let wname = $project | path basename | str replace --all --regex '[^a-zA-Z0-9]' ''
 
   if $project != null and $project != "" {
     print $":: Opening project ($project)"
     if $is_tmux {
-      let wname = $project | path basename | str replace --all --regex '[^a-zA-Z0-9]' ''
       let tmux_windows = tmux list-windows -F '#{window_index},#{window_name}'  | from csv --trim all | rename index name
       let prj_windows = $tmux_windows| filter { |w| $w.name == $wname} | get index
       let current_window_panes = tmux list-panes -t (tmux display-message -p '#{window_id}') -F '#{pane_id},#{pane_active}' | from csv --noheaders | rename id active
@@ -46,6 +47,15 @@ def main [ project_path: string = "", --replace (-r) ] {
       }
 
       zellij action go-to-tab-name $tabname
+    } else if $is_kitty {
+      let existing_tab = kitty @ ls | from json | get tabs | first | where {|t| $t.title == $wname} | get id
+      if $existing_tab == [] {
+        let vim_window = kitty @ launch --tab-title $wname --type tab --cwd $project -- vim .
+        let shell_window = kitty @ new-window --match $"id:($vim_window)" --cwd $project
+        kitty @ focus-window -m $"id:($vim_window)"
+      } else {
+        kitty @ focus-tab -m $"id:($existing_tab | first)"
+      }
     } else {
       terminal $project
     }
