@@ -92,9 +92,6 @@ in
 
   home.packages =
     [
-      (pkgs.writeShellScriptBin "terminal" "exec ${lib.getExe pkgs.kitty} --single-instance")
-      # (pkgs.writeShellScriptBin "terminal" "exec ghostty")
-
       pkgs.python3
 
       pkgs.etBook

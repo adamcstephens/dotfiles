@@ -48,7 +48,6 @@ def main [ project_path: string = "", --replace (-r) ] {
       zellij action go-to-tab-name $tabname
     } else {
       terminal $project
-      codium -n $project
     }
   } else {
     echo $"!! No project found, \"($project)\", exiting"
