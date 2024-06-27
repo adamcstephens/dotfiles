@@ -5,6 +5,12 @@
   ...
 }:
 {
+  xdg.configFile."kitty/dotfiles.conf".source =
+    if config.dotfiles.nixosManaged then
+      ./dotfiles.conf
+    else
+      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/kitty/dotfiles.conf";
+
   # themes
   xdg.configFile."kitty/theme-dark.conf".source =
     npins."modus-themes.nvim" + "/extras/kitty/modus_vivendi.conf";
@@ -23,11 +29,13 @@
 
   programs.kitty = {
     enable = true;
-    extraConfig = builtins.readFile ./kitty.conf;
+    extraConfig = ''
+      include ${npins."modus-themes.nvim"}/extras/kitty/modus_vivendi.conf
+      include ${config.xdg.configHome}/kitty/dotfiles.conf
+    '';
 
     settings =
       {
-        include = npins."modus-themes.nvim" + "/extras/kitty/modus_vivendi.conf";
         font_family = config.dotfiles.gui.font.mono;
         allow_remote_control = "socket-only";
       }
@@ -38,7 +46,7 @@
             macos_option_as_alt = "both";
 
             font_size = "13";
-            listen_on = "unix:@dotkitty";
+            listen_on = "unix:\${TMPDIR}/dotkitty";
           }
         else
           {
