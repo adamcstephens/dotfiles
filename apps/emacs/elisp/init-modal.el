@@ -28,6 +28,8 @@
   (evil-define-key 'normal 'global (kbd "<leader>td") 'tab-close)
   (evil-define-key 'normal 'global (kbd "<leader>v") 'multi-vterm-project)
 
+  (evil-define-key 'insert 'global (kbd "C-S-v") 'yank)
+
   ;; allow return to open links
   (define-key evil-motion-state-map (kbd "RET") nil)
 
