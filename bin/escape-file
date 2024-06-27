@@ -8,7 +8,7 @@ def main [file: string, --keep-owner] {
 
   let tmpfile = mktemp | split row "\n" | first
 
-  cp $file $tmpfile
+  cp --recursive $file $tmpfile
 
   if ($env.USER == "root") {
     chown $"--reference=($file)" $tmpfile
