@@ -6,7 +6,7 @@ def main [ project_path: string = "", --replace (-r) ] {
   let is_zellij = if $env.ZELLIJ? != null { true } else { false }
 
   let project = if $project_path != "" { $project_path | path expand } else {
-    if $is_tmux or $is_zellij {
+    if $is_kitty or $is_tmux or $is_zellij {
       zoxide query --list | zf --height 22
     } else {
       zoxide query --list | rofi -dmenu
@@ -50,9 +50,9 @@ def main [ project_path: string = "", --replace (-r) ] {
     } else if $is_kitty {
       let existing_tab = kitty @ ls | from json | get tabs | first | where {|t| $t.title == $wname} | get id
       if $existing_tab == [] {
-        let vim_window = kitty @ launch --tab-title $wname --type tab --cwd $project -- vim .
-        let shell_window = kitty @ new-window --match $"id:($vim_window)" --cwd $project
-        kitty @ focus-window -m $"id:($vim_window)"
+        let vim_window = kitty @ launch --tab-title $wname --type tab --cwd $project
+        kitty @ send-text --match $"id:($vim_window)" "vim .\n"
+        let shell_window = kitty @ new-window --match $"id:($vim_window)" --cwd $project --dont-take-focus
       } else {
         kitty @ focus-tab -m $"id:($existing_tab | first)"
       }
