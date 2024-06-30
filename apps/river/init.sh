@@ -36,6 +36,7 @@ riverctl map normal Super+Shift Return spawn 'GDK_DEBUG=gl-disable-gles systemd-
 riverctl map normal Super+Shift+Control E spawn 'systemd-cat --identifier=gtk-launch gtk-launch emacsclient'
 riverctl map normal Super D spawn 'systemd-cat --identifier=rofi rofi -show drun'
 riverctl map normal Super+Shift D spawn 'systemd-cat --identifier=rofi rofi -show emoji'
+riverctl map normal Super+Shift+Control F spawn 'systemd-cat --identifier=rofi rofi -show filebrowser'
 riverctl map normal Super+Shift+Control D spawn 'systemd-cat --identifier=prj prj'
 
 riverctl map normal None Print spawn 'systemd-cat --identifier=screenshot screenshot screen'
