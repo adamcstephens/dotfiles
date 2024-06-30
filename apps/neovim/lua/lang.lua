@@ -135,5 +135,8 @@ lspconfig.ocamllsp.setup({
 -- python
 require("lspconfig").pyright.setup({})
 
+-- tofu
+require("lspconfig").terraformls.setup({})
+
 -- zig
 lspconfig.zls.setup({})

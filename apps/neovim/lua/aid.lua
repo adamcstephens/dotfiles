@@ -46,6 +46,7 @@ require("conform").setup({
     nix = { "nixfmt" },
     python = { "ruff_lint", "ruff_format" },
     teal = { "stylua" },
+    terraform = { "tofu_fmt" },
     yaml = { "yamlfmt" },
   },
 })
