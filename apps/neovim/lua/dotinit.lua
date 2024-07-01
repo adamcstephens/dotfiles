@@ -86,8 +86,16 @@ oil.setup({
 })
 require("remember").setup({})
 require("smart-splits").setup({})
+
 local builtin = require("telescope.builtin")
+local open_with_trouble = require("trouble.sources.telescope").open
 require("telescope").setup({
+  defaults = {
+    mappings = {
+      i = { ["<c-t>"] = open_with_trouble },
+      n = { ["<c-t>"] = open_with_trouble },
+    },
+  },
   pickers = {
     ["buffers"] = { sort_mru = true, ignore_current_buffer = true },
   },
@@ -97,6 +105,7 @@ require("telescope").load_extension("telescope-tabs")
 require("telescope").load_extension("undo")
 require("telescope").load_extension("zf-native")
 require("telescope-tabs").setup({})
+
 require("tmux").setup({
   -- use smart-splits for navigation
   navigation = {
@@ -229,15 +238,7 @@ vim.keymap.set("n", "<leader>t", require("telescope-tabs").list_tabs, { desc = "
 vim.keymap.set("n", "<leader>u", "<cmd>Telescope undo<cr>")
 
 -- diagnostics
-vim.keymap.set("n", "<leader>xx", function()
-  require("trouble").toggle()
-end)
-vim.keymap.set("n", "<leader>xw", function()
-  require("trouble").toggle("workspace_diagnostics")
-end)
-vim.keymap.set("n", "<leader>xd", function()
-  require("trouble").toggle("document_diagnostics")
-end)
+vim.keymap.set("n", "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", { desc = "Trouble Toggle" })
 vim.keymap.set("n", "]g", vim.diagnostic.goto_next)
 vim.keymap.set("n", "[g", vim.diagnostic.goto_prev)
 
