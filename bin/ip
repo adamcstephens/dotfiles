@@ -1,3 +1,8 @@
 #!/usr/bin/env sh
 
-exec /run/current-system/sw/bin/ip --color "$@"
+# avoid a loop
+SCRIPT_PATH=$(dirname "$(realpath "$0")")
+PATH="$(echo "$PATH" | sed -e "s,$SCRIPT_PATH:,,")"
+export PATH
+
+exec $(which ip) --color "$@"
