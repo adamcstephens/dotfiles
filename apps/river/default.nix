@@ -43,6 +43,8 @@ in
       text = ''
         #!${lib.getExe pkgs.bash}
 
+        source $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
+
         if ! command -v river &>/dev/null; then
           echo "!! No river binary found in path"
           exit 1
@@ -63,7 +65,16 @@ in
         export XDG_RUNTIME_DIR="/run/user/$(id -u)"
 
         export XDG_CURRENT_DESKTOP=river
-        systemctl --user import-environment XDG_CURRENT_DESKTOP
+        systemctl --user import-environment \
+          PATH \
+          XDG_CACHE_HOME \
+          XDG_CONFIG_DIRS \
+          XDG_CONFIG_HOME \
+          XDG_CURRENT_DESKTOP \
+          XDG_DATA_DIRS \
+          XDG_DATA_HOME \
+          XDG_RUNTIME_DIR \
+          XDG_STATE_HOME
 
         systemd-cat --identifier=river river
 
