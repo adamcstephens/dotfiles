@@ -189,7 +189,6 @@
   (org-mode . (lambda () (toggle-truncate-lines -1)))
   (org-mode . (lambda () (visual-line-mode t)))
   (org-mode . dot/org-slides-export-setup)
-  ;; (org-mode . variable-pitch-mode)
   :bind
   ("C-c o a" . org-agenda)
   ("C-c o c" . org-capture))

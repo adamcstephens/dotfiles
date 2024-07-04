@@ -1,6 +1,6 @@
 (defun dot/font-height ()
   (if (eq system-type 'darwin)
-    130
+      130
     105))
 
 (defun dot/gui-setup ()
@@ -21,47 +21,52 @@
   (tab-bar-mode 1)
 
   (set-face-attribute 'default nil
-    :font (font-spec :family (dot/font-mono))
-    :height (dot/font-height))
+                      :font (font-spec :family (dot/font-mono))
+                      :height (dot/font-height))
   (set-face-attribute 'fixed-pitch nil
-    :family (face-attribute 'default :family))
+                      :family (face-attribute 'default :family))
   (set-face-attribute 'bold nil
-    :family (face-attribute 'default :family))
+                      :family (face-attribute 'default :family))
   (set-face-attribute 'italic nil
-    :family (face-attribute 'default :family))
+                      :family (face-attribute 'default :family))
   (set-face-attribute 'variable-pitch nil
-    :font (font-spec :family (dot/font-variable))
-    :height (dot/font-height))
+                      :font (font-spec :family (dot/font-variable))
+                      :height (dot/font-height))
 
-  (add-hook 'text-mode-hook #'(lambda () (variable-pitch-mode t)))
+  (add-hook 'text-mode-hook #'(lambda () (
+                                          (set-face-attribute 'org-block nil
+                                                              :family (face-attribute 'default :family))
+                                          (set-face-attribute 'org-table nil
+                                                              :family (face-attribute 'default :family))
+                                          variable-pitch-mode t)))
 
   (setq
-    modus-themes-italic-constructs t
-    modus-themes-bold-constructs t
-    ;; add identifiers to code blocks
-    modus-themes-org-blocks 'gray-background ; {nil,'gray-background,'tinted-background}
-    ;; org tables/blocks should be fixed-pitch
-    modus-themes-mixed-fonts t
-    ;; modus-themes-variable-pitch-ui nil
+   modus-themes-italic-constructs t
+   modus-themes-bold-constructs t
+   ;; add identifiers to code blocks
+   modus-themes-org-blocks 'gray-background ; {nil,'gray-background,'tinted-background}
+   ;; org tables/blocks should be fixed-pitch
+   modus-themes-mixed-fonts t
+   ;; modus-themes-variable-pitch-ui nil
 
-    ;; breaks emacsclient???
-    ;; custom org faces
-    ;;modus-themes-headings
-    ;;'
-    ;;((1 . (variable-pitch 1.1))
-    ;;  (2 . (1.05))
-    ;;  (agenda-date . (1.1))
-    ;;  (agenda-structure . (variable-pitch light 1.3))
-    ;;  (t . (1.0)))
-    )
+   ;; breaks emacsclient???
+   ;; custom org faces
+   ;;modus-themes-headings
+   ;;'
+   ;;((1 . (variable-pitch 1.1))
+   ;;  (2 . (1.05))
+   ;;  (agenda-date . (1.1))
+   ;;  (agenda-structure . (variable-pitch light 1.3))
+   ;;  (t . (1.0)))
+   )
   (load-theme 'doom-moonfly :no-confirm)
 
   (setq global-mode-string (system-name))
 
   ;; flash modeline instead of ringing the bell
   (setq
-    visible-bell nil
-    ring-bell-function 'dot/flash-mode-line)
+   visible-bell nil
+   ring-bell-function 'dot/flash-mode-line)
   (defun dot/flash-mode-line ()
     (invert-face 'mode-line)
     (run-with-timer 0.1 nil #'invert-face 'mode-line))
@@ -83,16 +88,16 @@
   (with-current-buffer (get-buffer-create "*Welcome*")
     (setq truncate-lines t)
     (let*
-      (
-        (buffer-read-only)
-        (image-path (concat user-emacs-directory "emacs.png"))
-        (image (create-image image-path))
-        (size (image-size image))
-        (height (cdr size))
-        (width (car size))
-        (top-margin (floor (/ (- (window-height) height) 2)))
-        (left-margin (floor (/ (- (window-width) width) 2)))
-        (title "Welcome to Emacs!"))
+        (
+         (buffer-read-only)
+         (image-path (concat user-emacs-directory "emacs.png"))
+         (image (create-image image-path))
+         (size (image-size image))
+         (height (cdr size))
+         (width (car size))
+         (top-margin (floor (/ (- (window-height) height) 2)))
+         (left-margin (floor (/ (- (window-width) width) 2)))
+         (title "Welcome to Emacs!"))
       (erase-buffer)
       (setq mode-line-format nil)
       (goto-char (point-min))
@@ -101,9 +106,9 @@
       (insert-image image)
       (insert "\n\n\n")
       (insert
-        (make-string
-          (floor (/ (- (window-width) (string-width title)) 2))
-          ?\ ))
+       (make-string
+        (floor (/ (- (window-width) (string-width title)) 2))
+        ?\ ))
       (insert title))
     (setq cursor-type nil)
     (read-only-mode +1)
@@ -170,142 +175,142 @@
   (ligature-set-ligatures 'eww-mode '("ff" "fi" "ffi"))
   ;; Enable all Cascadia Code ligatures in programming modes
   (ligature-set-ligatures
-    'prog-mode
-    '
-    ("|||>"
-      "<|||"
-      "<==>"
-      "<!--"
-      "####"
-      "~~>"
-      "***"
-      "||="
-      "||>"
-      ":::"
-      "::="
-      "=:="
-      "==="
-      "==>"
-      "=!="
-      "=>>"
-      "=<<"
-      "=/="
-      "!=="
-      "!!."
-      ">=>"
-      ">>="
-      ">>>"
-      ">>-"
-      ">->"
-      "->>"
-      "-->"
-      "---"
-      "-<<"
-      "<~~"
-      "<~>"
-      "<*>"
-      "<||"
-      "<|>"
-      "<$>"
-      "<=="
-      "<=>"
-      "<=<"
-      "<->"
-      "<--"
-      "<-<"
-      "<<="
-      "<<-"
-      "<<<"
-      "<+>"
-      "</>"
-      "###"
-      "#_("
-      "..<"
-      "..."
-      "+++"
-      "/=="
-      "///"
-      "_|_"
-      "www"
-      "&&"
-      "^="
-      "~~"
-      "~@"
-      "~="
-      "~>"
-      "~-"
-      "**"
-      "*>"
-      "*/"
-      "||"
-      "|}"
-      "|]"
-      "|="
-      "|>"
-      "|-"
-      "{|"
-      "[|"
-      "]#"
-      "::"
-      ":="
-      ":>"
-      ":<"
-      "$>"
-      "=="
-      "=>"
-      "!="
-      "!!"
-      ">:"
-      ">="
-      ">>"
-      ">-"
-      "-~"
-      "-|"
-      "->"
-      "--"
-      "-<"
-      "<~"
-      "<*"
-      "<|"
-      "<:"
-      "<$"
-      "<="
-      "<>"
-      "<-"
-      "<<"
-      "<+"
-      "</"
-      "#{"
-      "#["
-      "#:"
-      "#="
-      "#!"
-      "##"
-      "#("
-      "#?"
-      "#_"
-      "%%"
-      ".="
-      ".-"
-      ".."
-      ".?"
-      "+>"
-      "++"
-      "?:"
-      "?="
-      "?."
-      "??"
-      ";;"
-      "/*"
-      "/="
-      "/>"
-      "//"
-      "__"
-      "~~"
-      "(*"
-      "*)"
-      "\\\\"
-      "://"))
+   'prog-mode
+   '
+   ("|||>"
+    "<|||"
+    "<==>"
+    "<!--"
+    "####"
+    "~~>"
+    "***"
+    "||="
+    "||>"
+    ":::"
+    "::="
+    "=:="
+    "==="
+    "==>"
+    "=!="
+    "=>>"
+    "=<<"
+    "=/="
+    "!=="
+    "!!."
+    ">=>"
+    ">>="
+    ">>>"
+    ">>-"
+    ">->"
+    "->>"
+    "-->"
+    "---"
+    "-<<"
+    "<~~"
+    "<~>"
+    "<*>"
+    "<||"
+    "<|>"
+    "<$>"
+    "<=="
+    "<=>"
+    "<=<"
+    "<->"
+    "<--"
+    "<-<"
+    "<<="
+    "<<-"
+    "<<<"
+    "<+>"
+    "</>"
+    "###"
+    "#_("
+    "..<"
+    "..."
+    "+++"
+    "/=="
+    "///"
+    "_|_"
+    "www"
+    "&&"
+    "^="
+    "~~"
+    "~@"
+    "~="
+    "~>"
+    "~-"
+    "**"
+    "*>"
+    "*/"
+    "||"
+    "|}"
+    "|]"
+    "|="
+    "|>"
+    "|-"
+    "{|"
+    "[|"
+    "]#"
+    "::"
+    ":="
+    ":>"
+    ":<"
+    "$>"
+    "=="
+    "=>"
+    "!="
+    "!!"
+    ">:"
+    ">="
+    ">>"
+    ">-"
+    "-~"
+    "-|"
+    "->"
+    "--"
+    "-<"
+    "<~"
+    "<*"
+    "<|"
+    "<:"
+    "<$"
+    "<="
+    "<>"
+    "<-"
+    "<<"
+    "<+"
+    "</"
+    "#{"
+    "#["
+    "#:"
+    "#="
+    "#!"
+    "##"
+    "#("
+    "#?"
+    "#_"
+    "%%"
+    ".="
+    ".-"
+    ".."
+    ".?"
+    "+>"
+    "++"
+    "?:"
+    "?="
+    "?."
+    "??"
+    ";;"
+    "/*"
+    "/="
+    "/>"
+    "//"
+    "__"
+    "~~"
+    "(*"
+    "*)"
+    "\\\\"
+    "://"))
   (global-ligature-mode t))
 
 (use-package modus-themes :init (dot/gui-setup))
