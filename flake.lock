@@ -124,28 +124,6 @@
         "type": "github"
       }
     },
-    "crane_4": {
-      "inputs": {
-        "nixpkgs": [
-          "sower",
-          "typhon",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1706473964,
-        "narHash": "sha256-Fq6xleee/TsX6NbtoRuI96bBuDHMU57PrcK9z1QEKbk=",
-        "owner": "ipetkov",
-        "repo": "crane",
-        "rev": "c798790eabec3e3da48190ae3698ac227aab770c",
-        "type": "github"
-      },
-      "original": {
-        "owner": "ipetkov",
-        "repo": "crane",
-        "type": "github"
-      }
-    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -186,22 +164,6 @@
         "owner": "edolstra",
         "repo": "flake-compat",
         "rev": "35bb57c0c8d8b62bbfd284272c928ceb64ddbde9",
-        "type": "github"
-      },
-      "original": {
-        "owner": "edolstra",
-        "repo": "flake-compat",
-        "type": "github"
-      }
-    },
-    "flake-compat_4": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1696426674,
-        "narHash": "sha256-kvjfFW7WAETZlt09AgDn1MrtKzP7t90Vf7vypd3OL1U=",
-        "owner": "edolstra",
-        "repo": "flake-compat",
-        "rev": "0f9255e01c2351cc7d116c072cb317785dd33b33",
         "type": "github"
       },
       "original": {
@@ -264,21 +226,6 @@
         "type": "github"
       }
     },
-    "flake-schemas": {
-      "locked": {
-        "lastModified": 1697467827,
-        "narHash": "sha256-j8SR19V1SRysyJwpOBF4TLuAvAjF5t+gMiboN4gYQDU=",
-        "owner": "determinatesystems",
-        "repo": "flake-schemas",
-        "rev": "764932025c817d4e500a8d2a4d8c565563923d29",
-        "type": "github"
-      },
-      "original": {
-        "owner": "determinatesystems",
-        "repo": "flake-schemas",
-        "type": "github"
-      }
-    },
     "flake-utils": {
       "locked": {
         "lastModified": 1667395993,
@@ -337,24 +284,6 @@
         "owner": "numtide",
         "repo": "flake-utils",
         "rev": "1ef2e671c3b0c19053962c07dbda38332dcebf26",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "type": "github"
-      }
-    },
-    "flake-utils_5": {
-      "inputs": {
-        "systems": "systems_3"
-      },
-      "locked": {
-        "lastModified": 1681202837,
-        "narHash": "sha256-H+Rh19JDwRtpVPAWp64F+rlEtxUWBAQW28eAi3SRSzg=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "cfacdce06f30d2b68473a46042957675eebb3401",
         "type": "github"
       },
       "original": {
@@ -704,6 +633,22 @@
         "type": "github"
       }
     },
+    "nixpkgs_5": {
+      "locked": {
+        "lastModified": 1720031269,
+        "narHash": "sha256-rwz8NJZV+387rnWpTYcXaRNvzUSnnF9aHONoJIYmiUQ=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "9f4128e00b0ae8ec65918efeba59db998750ead6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "pre-commit-hooks": {
       "inputs": {
         "flake-compat": "flake-compat_2",
@@ -801,29 +746,6 @@
         "type": "github"
       }
     },
-    "rust-overlay_2": {
-      "inputs": {
-        "flake-utils": "flake-utils_5",
-        "nixpkgs": [
-          "sower",
-          "typhon",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1706494265,
-        "narHash": "sha256-4ilEUJEwNaY9r/8BpL3VmZiaGber0j09lvvx0e/bosA=",
-        "owner": "oxalica",
-        "repo": "rust-overlay",
-        "rev": "246ba7102553851af60e0382f558f6bc5f63fa13",
-        "type": "github"
-      },
-      "original": {
-        "owner": "oxalica",
-        "repo": "rust-overlay",
-        "type": "github"
-      }
-    },
     "sandbox": {
       "inputs": {
         "flake-parts": "flake-parts_2",
@@ -869,25 +791,22 @@
         "crane": "crane_3",
         "flake-parts": "flake-parts_3",
         "next-ls": "next-ls",
-        "nixpkgs": [
-          "nixpkgs"
-        ],
+        "nixpkgs": "nixpkgs_5",
         "process-compose-flake": "process-compose-flake",
         "rust-overlay": "rust-overlay",
-        "services-flake": "services-flake",
-        "typhon": "typhon"
+        "services-flake": "services-flake"
       },
       "locked": {
-        "lastModified": 1718218859,
-        "narHash": "sha256-SPPfc3+ahxLAeVdxHFf+yDPb9I8Ubu4YN4FeeU4QRRQ=",
-        "ref": "release-2",
-        "rev": "d97542398919e49993b39c48ebc12c8625e33f4c",
-        "revCount": 220,
+        "lastModified": 1720216518,
+        "narHash": "sha256-dBBslNf//cjT3u43p4LC1ae2lwUQf30jsxzmnoX/8gg=",
+        "ref": "release-3",
+        "rev": "52529fd5378f6b989f38303c290fc56bf703c9ea",
+        "revCount": 237,
         "type": "git",
         "url": "https://codeberg.org/adamcstephens/sower"
       },
       "original": {
-        "ref": "release-2",
+        "ref": "release-3",
         "type": "git",
         "url": "https://codeberg.org/adamcstephens/sower"
       }
@@ -919,46 +838,6 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
-        "type": "github"
-      }
-    },
-    "systems_3": {
-      "locked": {
-        "lastModified": 1681028828,
-        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
-        "owner": "nix-systems",
-        "repo": "default",
-        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-systems",
-        "repo": "default",
-        "type": "github"
-      }
-    },
-    "typhon": {
-      "inputs": {
-        "crane": "crane_4",
-        "flake-compat": "flake-compat_4",
-        "flake-schemas": "flake-schemas",
-        "nixpkgs": [
-          "sower",
-          "nixpkgs"
-        ],
-        "rust-overlay": "rust-overlay_2"
-      },
-      "locked": {
-        "lastModified": 1708693001,
-        "narHash": "sha256-1jRuMCCSabHPcaNvkcyd+4HdDFnn4Wr2JiB57kwba40=",
-        "owner": "typhon-ci",
-        "repo": "typhon",
-        "rev": "f4bafa37cc195831d7ed6f52ef69b0de5b880b9f",
-        "type": "github"
-      },
-      "original": {
-        "owner": "typhon-ci",
-        "repo": "typhon",
         "type": "github"
       }
     }
