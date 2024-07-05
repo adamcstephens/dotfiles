@@ -125,6 +125,7 @@ in
       pkgs.cinnamon.nemo
       pkgs.firefoxpwa
       (pkgs.firefox-wayland.override { nativeMessagingHosts = [ pkgs.firefoxpwa ]; })
+      pkgs.fractal
       pkgs.gnome.eog
       pkgs.hunspell
       pkgs.hunspellDicts.en_US
@@ -161,9 +162,7 @@ in
       pkgs.xclip
       pkgs.xlayoutdisplay
     ])
-    ++ (lib.optionals pkgs.stdenv.isx86_64 [
-      # pkgs.bitwarden
-    ]);
+    ++ (lib.optionals pkgs.stdenv.isx86_64 [ pkgs.simplex-chat-desktop ]);
 
   programs.feh.enable = true;
 

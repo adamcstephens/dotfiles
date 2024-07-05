@@ -184,12 +184,15 @@ done
 # Set repeat rate
 riverctl set-repeat 50 300
 
-# add ssd for some apps
-riverctl rule-add -app-id 'codium*' ssd
-riverctl rule-add -app-id 'com.mitchellh.ghostty' ssd
-riverctl rule-add -app-id kitty ssd
-riverctl rule-add -app-id 'firefox' ssd
+# add ssd
 riverctl rule-add -app-id 'FFPWA-*' ssd
+riverctl rule-add -app-id 'codium*' ssd
+riverctl rule-add -app-id com.mitchellh.ghostty ssd
+riverctl rule-add -app-id firefox ssd
+riverctl rule-add -app-id kitty ssd
+riverctl rule-add -app-id org.gnome.Fractal ssd
+
+# default tags
 riverctl rule-add -app-id firefox tags $((2#00000001))
 riverctl rule-add -app-id Element tags $((2#00100000))
 riverctl rule-add -app-id WebCord tags $((2#00100000))
