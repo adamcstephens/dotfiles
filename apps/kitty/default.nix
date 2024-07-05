@@ -12,8 +12,7 @@
       config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/kitty/dotfiles.conf";
 
   # themes
-  xdg.configFile."kitty/theme-dark.conf".source =
-    npins."modus-themes.nvim" + "/extras/kitty/modus_vivendi.conf";
+  xdg.configFile."kitty/theme-dark.conf".source = ./theme-dark.conf;
   xdg.configFile."kitty/theme-light.conf".source =
     npins."modus-themes.nvim" + "/extras/kitty/modus_operandi.conf";
 
@@ -30,7 +29,7 @@
   programs.kitty = {
     enable = true;
     extraConfig = ''
-      include ${npins."modus-themes.nvim"}/extras/kitty/modus_vivendi.conf
+      include ${config.xdg.configHome}/kitty/theme-dark.conf
       include ${config.xdg.configHome}/kitty/dotfiles.conf
     '';
 

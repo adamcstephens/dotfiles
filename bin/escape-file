@@ -8,12 +8,16 @@ def main [file: string, --keep-owner] {
 
   let tmpfile = mktemp | split row "\n" | first
 
-  cp --recursive $file $tmpfile
+  if ($file | path type) == "dir" {
+    cp --recursive $file $tmpfile
+  } else {
+    cp $file $tmpfile
+  }
 
   if ($env.USER == "root") {
     chown $"--reference=($file)" $tmpfile
   }
-  chmod +w $tmpfile
+  chmod u+w $tmpfile
 
   rm $file
   mv $tmpfile $file
