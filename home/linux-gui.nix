@@ -126,7 +126,7 @@ in
       pkgs.firefoxpwa
       (pkgs.firefox-wayland.override { nativeMessagingHosts = [ pkgs.firefoxpwa ]; })
       pkgs.fractal
-      pkgs.gnome.eog
+      pkgs.eog
       pkgs.hunspell
       pkgs.hunspellDicts.en_US
       pkgs.libreoffice-fresh
