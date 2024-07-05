@@ -149,6 +149,28 @@
                 inherit inputs;
                 npins = import ../npins;
               };
+              nix = {
+                distributedBuilds = true;
+                buildMachines = [
+                  {
+                    hostName = "silver-vm";
+                    maxJobs = 4;
+                    protocol = "ssh";
+                    sshKey = "/Users/adam/.ssh/id_nix_distributed_builds";
+                    sshUser = "builder";
+                    systems = [ "aarch64-linux" ];
+                    supportedFeatures = [ "big-parallel" ];
+                    speedFactor = 80;
+                  }
+                ];
+              };
+
+              programs.ssh.knownHosts = {
+                silver-vm = {
+                  # extraHostNames = [ "silver-vm.h.junco.dev" ];
+                  publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEcDcbnOXw4PBtGX7qSpBK46vEsuH4CPp5s1q6tpv2mJ silver-vm";
+                };
+              };
 
               services.woodpecker-agents.agents.default = {
                 enable = true;
@@ -157,7 +179,7 @@
 
                 environment = {
                   WOODPECKER_BACKEND = "local";
-                  WOODPECKER_FILTER_LABELS = "type=local,system=${pkgs.system}";
+                  WOODPECKER_FILTER_LABELS = "type=local,system=aarch64-*";
                   WOODPECKER_MAX_WORKFLOWS = "1";
                   WOODPECKER_SERVER = "woodpecker-grpc.junco.dev:9000";
                   WOODPECKER_GRPC_SECURE = "false";
