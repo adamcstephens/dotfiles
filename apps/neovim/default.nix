@@ -14,6 +14,7 @@ let
     pkgs.nil
     pkgs.nixd
     pkgs.nodejs
+    pkgs.nodePackages.vscode-json-languageserver
     pkgs.ruff
     pkgs.shellcheck
     pkgs.shfmt

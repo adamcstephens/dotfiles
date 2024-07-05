@@ -81,6 +81,15 @@ require("lspconfig")["hls"].setup({
   filetypes = { "haskell", "lhaskell", "cabal" },
 })
 
+-- json
+--Enable (broadcasting) snippet capability for completion
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+require("lspconfig").jsonls.setup({
+  capabilities = capabilities,
+  cmd = { "vscode-json-languageserver", "--stdio" },
+})
+
 -- lua
 lspconfig.lua_ls.setup({
   settings = {

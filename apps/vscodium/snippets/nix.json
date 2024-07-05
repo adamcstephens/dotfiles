@@ -23,7 +23,7 @@
     "prefix": "mkenable",
     "body": "lib.mkEnableOption \"$1\";",
     "description": ""
-  }
+  },
   "mkpackage": {
     "prefix": "mkenable",
     "body": "lib.mkPackageOption pkgs \"$1\" { };",
