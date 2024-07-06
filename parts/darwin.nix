@@ -179,7 +179,7 @@
 
                 environment = {
                   WOODPECKER_BACKEND = "local";
-                  WOODPECKER_FILTER_LABELS = "type=local,system=aarch64-*";
+                  WOODPECKER_FILTER_LABELS = "type=local,system=aarch64-darwin";
                   WOODPECKER_MAX_WORKFLOWS = "1";
                   WOODPECKER_SERVER = "woodpecker-grpc.junco.dev:9000";
                   WOODPECKER_GRPC_SECURE = "false";
