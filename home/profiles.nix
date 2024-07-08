@@ -32,7 +32,13 @@ in
               self.overlays.upstreams
             ];
 
-            config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ "aspell-dict-en-science" ];
+            config.allowUnfreePredicate =
+              pkg:
+              builtins.elem (lib.getName pkg) [
+                "aspell-dict-en-science"
+                "slack"
+                "zoom"
+              ];
           };
 
           services.sower.client.config.name = name;
@@ -214,9 +220,15 @@ in
           { pkgs, ... }:
           {
             apps.ssh.tpm = true;
+
             dotfiles = {
               gui.wayland = true;
             };
+
+            home.packages = [
+              pkgs.slack
+              pkgs.zoom-us
+            ];
 
             programs.waybar.settings.main = {
               network.interface = "wlp0s20f3";
