@@ -105,7 +105,7 @@ in
 
       modules = [
         ./linux-gui.nix
-        ../apps/solaar
+        # ../apps/solaar
 
         (
           { pkgs, ... }:
