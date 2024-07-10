@@ -337,25 +337,6 @@
         "type": "github"
       }
     },
-    "next-ls": {
-      "inputs": {
-        "nixpkgs": "nixpkgs_4",
-        "zigpkgs": "zigpkgs"
-      },
-      "locked": {
-        "lastModified": 1720036593,
-        "narHash": "sha256-jI7/BcS9CimCQskXd7Cq3EGPuc9l4L7Gre8hor58ags=",
-        "owner": "elixir-tools",
-        "repo": "next-ls",
-        "rev": "fb979c3c9f9afc7b3469ca2a433be302742317db",
-        "type": "github"
-      },
-      "original": {
-        "owner": "elixir-tools",
-        "repo": "next-ls",
-        "type": "github"
-      }
-    },
     "nix-colors": {
       "inputs": {
         "base16-schemes": "base16-schemes",
@@ -603,32 +584,16 @@
     },
     "nixpkgs_4": {
       "locked": {
-        "lastModified": 1719075281,
-        "narHash": "sha256-CyyxvOwFf12I91PBWz43iGT1kjsf5oi6ax7CrvaMyAo=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "a71e967ef3694799d0c418c98332f7ff4cc5f6af",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixos-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs_5": {
-      "locked": {
-        "lastModified": 1719848872,
-        "narHash": "sha256-H3+EC5cYuq+gQW8y0lSrrDZfH71LB4DAf+TDFyvwCNA=",
+        "lastModified": 1720571246,
+        "narHash": "sha256-nkUXwunTck+hNMt2wZuYRN+jf2ySRjKTzI0fo5TDH78=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "00d80d13810dbfea8ab4ed1009b09100cca86ba8",
+        "rev": "16e401f01842c5bb2499e78c1fe227f939c0c474",
         "type": "github"
       },
       "original": {
         "owner": "nixos",
-        "ref": "nixos-unstable",
+        "ref": "nixpkgs-unstable",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -773,23 +738,21 @@
         "attic": "attic_2",
         "crane": "crane_3",
         "flake-parts": "flake-parts_3",
-        "next-ls": "next-ls",
-        "nixpkgs": "nixpkgs_5",
+        "nixpkgs": "nixpkgs_4",
         "process-compose-flake": "process-compose-flake",
         "rust-overlay": "rust-overlay",
         "services-flake": "services-flake"
       },
       "locked": {
-        "lastModified": 1720216518,
-        "narHash": "sha256-dBBslNf//cjT3u43p4LC1ae2lwUQf30jsxzmnoX/8gg=",
-        "ref": "release-3",
-        "rev": "52529fd5378f6b989f38303c290fc56bf703c9ea",
-        "revCount": 237,
+        "lastModified": 1720618218,
+        "narHash": "sha256-gaZWQJcX0BxFwhtoIl6TsBFyzMiuICfM4FnQHWbStqc=",
+        "ref": "refs/heads/main",
+        "rev": "23e58dfcd1a31e783eef63afccbea0a29b20ca57",
+        "revCount": 249,
         "type": "git",
         "url": "https://codeberg.org/adamcstephens/sower"
       },
       "original": {
-        "ref": "release-3",
         "type": "git",
         "url": "https://codeberg.org/adamcstephens/sower"
       }
@@ -806,22 +769,6 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
-        "type": "github"
-      }
-    },
-    "zigpkgs": {
-      "locked": {
-        "lastModified": 1704057613,
-        "narHash": "sha256-5tPUpZlCpgqDQVUDlmhDhKn1h0A68jba8/DYie+yNC4=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "592a779f3c5e7bce1a02027abe11b7996816223f",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "592a779f3c5e7bce1a02027abe11b7996816223f",
         "type": "github"
       }
     }
