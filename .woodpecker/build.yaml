@@ -2,7 +2,7 @@ matrix:
   system:
     - aarch64-linux
     - x86_64-linux
-    - aarch64-darwin
+    # - aarch64-darwin
 
 labels:
   type: local
@@ -12,7 +12,7 @@ steps:
   - name: build ${system}
     image: bash
     commands:
-    - nix develop .# --command seed-ci --attic-upload=true --attic-use=true --nom=false --sower-seed=true --system ${system}
+      - nix develop .# --command seed-ci --attic-upload=true --attic-use=true --nom=false --sower-seed=true --system ${system}
     environment:
       ATTIC_KEY:
         from_secret: ATTIC_KEY
