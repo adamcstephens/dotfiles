@@ -195,6 +195,7 @@ riverctl rule-add -app-id org.gnome.Fractal ssd
 # default tags
 riverctl rule-add -app-id firefox tags $((2#00000001))
 riverctl rule-add -app-id Element tags $((2#00100000))
+riverctl rule-add -app-id Slack tags $((2#00100000))
 riverctl rule-add -app-id WebCord tags $((2#00100000))
 riverctl rule-add -title '*Element*' tags $((2#00100000))
 riverctl rule-add -title '*Discord*' tags $((2#00100000))
