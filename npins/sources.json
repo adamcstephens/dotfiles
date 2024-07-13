@@ -10,10 +10,10 @@
       "pre_releases": false,
       "version_upper_bound": null,
       "release_prefix": null,
-      "version": "v1.3.1",
-      "revision": "181dc38ddbcf9ad94d454cb06b13c859d4ff28d1",
-      "url": "https://api.github.com/repos/miikanissi/modus-themes.nvim/tarball/v1.3.1",
-      "hash": "0q6r73irr5fk4z4garfx7h15bfxlacn2qynk0gg4jjrh6my0vdy8"
+      "version": "v1.3.2",
+      "revision": "f978043c34f4e967a5496b4fa78c2ad092315b00",
+      "url": "https://api.github.com/repos/miikanissi/modus-themes.nvim/tarball/v1.3.2",
+      "hash": "137pzp3i2yldarz6ynygfkm3yif1r76ahs5l9cy5bml817rhyshi"
     }
   },
   "version": 3

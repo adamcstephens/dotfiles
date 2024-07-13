@@ -30,9 +30,9 @@
         "url": "https://github.com/projekt0n/github-nvim-theme"
       },
       "branch": "main",
-      "revision": "4f44a5c930372c85483d02700f332d34417e50b2",
+      "revision": "e682243a297b92d4f74c5a1bf84056dafcfd7f92",
       "url": null,
-      "hash": "1la0bbr4g6dw8flz8ba0d6yxhc36d50mxfcmiv7j96kgsx0daz4y"
+      "hash": "1hky5hn3v0z5z9h38mbfdjj4hdy56rcmb1f8b2zi03kqhamjh1q0"
     },
     "move-nvim": {
       "type": "Git",
@@ -85,9 +85,9 @@
         "url": "https://github.com/bluz71/vim-moonfly-colors"
       },
       "branch": "master",
-      "revision": "18d39acaa202e7cb772a674bc6238ec514cdd012",
+      "revision": "31f65a1bbddd7de9a639d8d0e32b8066c0de1da1",
       "url": null,
-      "hash": "18swi3l1nw3a7zpfsjg8akgr93akivxjc0xckqqcicmx8vyfb2x5"
+      "hash": "15kpvpcqfm4m7vklckx44zq103xxbyjfpfbiqk657lyzr5ynmdf7"
     },
     "workspace-diagnotics-nvim": {
       "type": "Git",
