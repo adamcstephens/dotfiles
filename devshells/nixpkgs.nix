@@ -4,6 +4,7 @@
   stdenv,
 
   bubblewrap,
+  common-updater-scripts,
   deadnix,
   hydra-check,
   nix-bisect,
@@ -15,11 +16,13 @@
   nix-update,
   nixpkgs-fmt,
   nixpkgs-review,
+  nurl,
 }:
 mkShellNoCC {
   name = "nixpkgs-devshell";
 
   packages = [
+    common-updater-scripts
     deadnix
     hydra-check
     nix-bisect
@@ -31,6 +34,7 @@ mkShellNoCC {
     nix-update
     nixpkgs-fmt
     nixpkgs-review
+    nurl
   ] ++ (lib.optionals stdenv.isLinux [ bubblewrap ]);
 
   shellHook = ''
