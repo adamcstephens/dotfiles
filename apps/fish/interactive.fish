@@ -10,6 +10,10 @@ if [ -e $HOME/.shell_local.sh ]
     fenv source $HOME/.shell_local.sh
 end
 
+if [ -e $HOME/.shell_local.fish ]
+    source $HOME/.shell_local.fish
+end
+
 if string match -q "$TERM_PROGRAM" vscode
     if ! command -q code
         set VSCODE_PATH (echo $BROWSER | sed 's,helpers/browser.sh,remote-cli,')
