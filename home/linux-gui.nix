@@ -121,10 +121,18 @@ in
       pkgs.playerctl
       pkgs.wireplumber
 
+      # firefox
+      inputs.sandbox.packages.${pkgs.system}.firefox-profile-switcher-connector
+      pkgs.firefoxpwa
+      (pkgs.firefox-wayland.override {
+        nativeMessagingHosts = [
+          pkgs.firefoxpwa
+          inputs.sandbox.packages.${pkgs.system}.firefox-profile-switcher-connector
+        ];
+      })
+
       # apps
       pkgs.cinnamon.nemo
-      pkgs.firefoxpwa
-      (pkgs.firefox-wayland.override { nativeMessagingHosts = [ pkgs.firefoxpwa ]; })
       pkgs.fractal
       pkgs.eog
       pkgs.hunspell
@@ -209,6 +217,10 @@ in
       Wants = [ "graphical-session-pre.target" ];
       After = [ "graphical-session-pre.target" ];
     };
+  };
+
+  xdg.configFile."firefoxprofileswitcher/config.json".text = builtins.toJSON {
+    browser_binary = "${config.home.profileDirectory}/bin/firefox";
   };
 
   xdg.desktopEntries = {
