@@ -185,9 +185,10 @@ done
 riverctl set-repeat 50 300
 
 # add ssd
-riverctl rule-add -app-id 'FFPWA-*' ssd
 riverctl rule-add -app-id 'codium*' ssd
+riverctl rule-add -app-id emacs ssd
 riverctl rule-add -app-id com.mitchellh.ghostty ssd
+riverctl rule-add -app-id 'FFPWA-*' ssd
 riverctl rule-add -app-id firefox ssd
 riverctl rule-add -app-id kitty ssd
 riverctl rule-add -app-id org.gnome.Fractal ssd
