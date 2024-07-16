@@ -36,6 +36,7 @@ in
               pkg:
               builtins.elem (lib.getName pkg) [
                 "aspell-dict-en-science"
+                "microsoft-edge-stable"
                 "slack"
                 "zoom"
               ];
@@ -231,7 +232,6 @@ in
 
       modules = [
         ./linux-gui.nix
-        ../apps/goldencheetah
 
         (
           { pkgs, ... }:
@@ -243,6 +243,7 @@ in
             };
 
             home.packages = [
+              pkgs.microsoft-edge
               pkgs.slack
               pkgs.zoom-us
             ];
