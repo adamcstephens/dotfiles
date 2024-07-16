@@ -104,6 +104,8 @@
     ''
   );
 
+  home.file.".terminfo".source = config.lib.file.mkOutOfStoreSymlink "${config.home.profileDirectory}/share/terminfo";
+
   home.packages =
     [
       pkgs.calc
