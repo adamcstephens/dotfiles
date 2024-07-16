@@ -16,6 +16,7 @@ user_pref("privacy.clearOnShutdown.history", false);
 user_pref("privacy.clearOnShutdown.cookies", false);
 user_pref("privacy.clearOnShutdown.sessions", false);
 user_pref("privacy.clearOnShutdown_v2.cookiesAndStorage", false);
+user_pref("privacy.clearOnShutdown_v2.historyFormDataAndDownloads", false);
 user_pref("privacy.resistFingerprinting.letterboxing", false);
 user_pref("privacy.resistFingerprinting", false);
 user_pref("signon.rememberSignons", false);
