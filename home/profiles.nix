@@ -102,6 +102,18 @@ in
     ava = {
       nixpkgs = inputs.nixpkgs-unstable;
       home-manager = inputs.home-manager-unstable;
+
+      modules = [
+        (
+          { pkgs, ... }:
+          {
+            dotfiles.apps.emacs.full = true;
+            home.packages = [ pkgs.nixfmt-rfc-style ];
+          }
+        )
+        ../apps/atuin
+        ../apps/emacs
+      ];
     };
 
     blank = {
