@@ -186,12 +186,15 @@ riverctl set-repeat 50 300
 
 # add ssd
 riverctl rule-add -app-id 'codium*' ssd
+riverctl rule-add -app-id code-url-handler ssd
 riverctl rule-add -app-id emacs ssd
 riverctl rule-add -app-id com.mitchellh.ghostty ssd
-riverctl rule-add -app-id 'FFPWA-*' ssd
 riverctl rule-add -app-id firefox ssd
-riverctl rule-add -app-id kitty ssd
+riverctl rule-add -app-id 'FFPWA-*' ssd
 riverctl rule-add -app-id org.gnome.Fractal ssd
+riverctl rule-add -app-id kitty ssd
+riverctl rule-add -app-id seahourse ssd
+riverctl rule-add -app-id zoom ssd
 
 # default tags
 riverctl rule-add -app-id firefox tags $((2#00000001))
