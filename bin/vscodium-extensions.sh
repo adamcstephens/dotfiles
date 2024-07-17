@@ -1,8 +1,8 @@
 #!/usr/bin/env sh
 
-for codium in codium; do
-  EXTENSIONS_FILE="$HOME/.dotfiles/apps/vscodium/$codium-extensions.txt"
-  UNINSTALL_FILE="$HOME/.dotfiles/apps/vscodium/$codium-extensions-uninstall.txt"
+for codium in code codium; do
+  EXTENSIONS_FILE="$HOME/.dotfiles/apps/vs$codium/$codium-extensions.txt"
+  UNINSTALL_FILE="$HOME/.dotfiles/apps/vs$codium/$codium-extensions-uninstall.txt"
 
   if command -v $codium >/dev/null 2>&1; then
     case "$(which $codium)" in

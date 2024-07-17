@@ -38,6 +38,9 @@ in
                 "aspell-dict-en-science"
                 "microsoft-edge-stable"
                 "slack"
+                "vscode"
+                "vscode-extension-github-copilot"
+                "vscode-extension-ms-vsliveshare-vsliveshare"
                 "zoom"
               ];
           };
@@ -240,6 +243,7 @@ in
 
             dotfiles = {
               gui.wayland = true;
+              vscode.enable = true;
             };
 
             home.packages = [

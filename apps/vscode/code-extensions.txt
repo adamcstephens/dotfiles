@@ -1,0 +1,2 @@
+elixir-lsp.elixir-ls
+elixir-tools.elixir-tools

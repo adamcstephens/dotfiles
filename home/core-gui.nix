@@ -13,6 +13,7 @@
     ../apps/ghostty
     ../apps/kitty
     ../apps/ssh
+    ../apps/vscode
     ../apps/vscodium
   ];
 

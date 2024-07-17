@@ -5,6 +5,7 @@
   ...
 }:
 let
+  cfg = config.dotfiles.vscodium;
   # patch vscodium to enable copilot support
   productJson =
     if pkgs.stdenv.isDarwin then
@@ -32,39 +33,49 @@ let
   prefix = if pkgs.stdenv.isDarwin then "Library/Application Support" else ".config";
 in
 {
-  home.file."${prefix}/VSCodium/User/keybindings.json".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/vscodium/keybindings.json";
-  home.file."${prefix}/VSCodium/User/settings.json".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/vscodium/settings.json";
+  options.dotfiles.vscodium.enable = lib.mkEnableOption "vscodium";
 
-  # they say you shouldn't modify the system in this phase, but... 🤷‍♂️
-  home.activation.own-vscode-snippets = lib.hm.dag.entryBefore [ "checkLinkTargets" ] ''
-    if [ ! -h "${config.home.homeDirectory}/${prefix}/VSCodium/User/snippets" ]; then
-      rm -rfv "${config.home.homeDirectory}/${prefix}/VSCodium/User/snippets"
-    fi
-  '';
-  home.file."${prefix}/VSCodium/User/snippets".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/vscodium/snippets";
+  config = lib.mkMerge [
+    {
+      # set default extensions for both vscode and vscodium
+      programs.vscode.extensions = with pkgs.vscode-extensions; [
+        bmalehorn.vscode-fish
+        davidanson.vscode-markdownlint
+        editorconfig.editorconfig
+        # elixir-lsp.elixir-ls
+        # elixir-tools.elixir-tools
+        esbenp.prettier-vscode
+        foxundermoon.shell-format
+        golang.go
+        github.github-vscode-theme
+        jnoortheen.nix-ide
+        mkhl.direnv
+        naumovs.color-highlight
+        phoenixframework.phoenix
+        redhat.vscode-yaml
+        skellock.just
+        tamasfe.even-better-toml
+        thenuprojectcontributors.vscode-nushell-lang
+        timonwong.shellcheck
+      ];
+    }
+    (lib.mkIf cfg.enable {
+      home.file."${prefix}/VSCodium/User/keybindings.json".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/vscodium/keybindings.json";
+      home.file."${prefix}/VSCodium/User/settings.json".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/vscodium/settings.json";
 
-  programs.vscode = {
-    enable = true;
-    package = package;
+      # they say you shouldn't modify the system in this phase, but... 🤷‍♂️
+      home.activation.own-vscodium-snippets = lib.hm.dag.entryBefore [ "checkLinkTargets" ] ''
+        if [ ! -h "${config.home.homeDirectory}/${prefix}/VSCodium/User/snippets" ]; then
+          rm -rfv "${config.home.homeDirectory}/${prefix}/VSCodium/User/snippets"
+        fi
+      '';
+      home.file."${prefix}/VSCodium/User/snippets".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/vscodium/snippets";
 
-    extensions = with pkgs.vscode-extensions; [
-      bmalehorn.vscode-fish
-      davidanson.vscode-markdownlint
-      editorconfig.editorconfig
-      esbenp.prettier-vscode
-      foxundermoon.shell-format
-      # github.copilot
-      github.github-vscode-theme
-      jnoortheen.nix-ide
-      mkhl.direnv
-      naumovs.color-highlight
-      phoenixframework.phoenix
-      redhat.vscode-yaml
-      rust-lang.rust-analyzer
-      skellock.just
-      tamasfe.even-better-toml
-      thenuprojectcontributors.vscode-nushell-lang
-      timonwong.shellcheck
-    ];
-  };
+      programs.vscode = {
+        enable = true;
+        package = package;
+
+      };
+    })
+  ];
 }
