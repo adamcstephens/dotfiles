@@ -55,7 +55,7 @@
             kitty_mod = "ctrl+shift";
 
             allow_remote_control = "socket-only";
-            listen_on = "unix:@kitty";
+            listen_on = "unix:@dotkitty";
           }
       );
 

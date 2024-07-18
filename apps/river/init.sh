@@ -37,6 +37,7 @@ riverctl map normal Super+Shift+Control E spawn 'systemd-cat --identifier=gtk-la
 riverctl map normal Super D spawn 'systemd-cat --identifier=rofi rofi -show drun'
 riverctl map normal Super+Shift D spawn 'systemd-cat --identifier=rofi rofi -show emoji'
 riverctl map normal Super+Shift+Control F spawn 'systemd-cat --identifier=rofi rofi -show filebrowser'
+riverctl map normal Super+Shift+Control T spawn 'dark toggle'
 riverctl map normal Super+Shift+Control D spawn 'systemd-cat --identifier=prj prj'
 
 riverctl map normal None Print spawn 'systemd-cat --identifier=screenshot screenshot screen'
