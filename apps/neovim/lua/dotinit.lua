@@ -2,8 +2,8 @@
 vim.loader.enable()
 
 -- map leader to <Space> before we do anything else
-vim.keymap.set("n", " ", "<Nop>", { silent = true, remap = false })
-vim.g.mapleader = " "
+-- vim.keymap.set("n", " ", "<Nop>", { silent = true, remap = false })
+vim.g.mapleader = ","
 
 -- includes
 --
