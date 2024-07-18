@@ -35,7 +35,9 @@
   "[terraform]": {
     "editor.defaultFormatter": "hashicorp.terraform"
   },
-  "[yaml]": {},
+  "[yaml]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
   "breadcrumbs.enabled": true,
   "debug.internalConsoleOptions": "neverOpen",
   "diffEditor.renderSideBySide": true,
