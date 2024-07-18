@@ -8,7 +8,7 @@
   :init
   (setq evil-want-keybinding nil)
   (evil-mode 1)
-  (evil-set-leader nil (kbd "SPC"))
+  (evil-set-leader nil (kbd ","))
   (evil-define-key 'normal 'global (kbd "<leader>0") 'dot/text-scale-reset)
   (evil-define-key 'normal 'global (kbd "<leader>bb") 'consult-project-buffer)
   (evil-define-key 'normal 'global (kbd "<leader>bk") 'kill-buffer)
