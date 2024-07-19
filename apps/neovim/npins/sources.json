@@ -19,9 +19,9 @@
         "repo": "focus.nvim"
       },
       "branch": "master",
-      "revision": "948b32e35f54b6900632312d51a1706fabdc12b8",
-      "url": "https://github.com/nvim-focus/focus.nvim/archive/948b32e35f54b6900632312d51a1706fabdc12b8.tar.gz",
-      "hash": "1dc11skiw76gvc8mr94xbvjf391zvvhind31gw3vv0kd1pa9a4p1"
+      "revision": "3841a38df972534567e85840d7ead20d3a26faa6",
+      "url": "https://github.com/nvim-focus/focus.nvim/archive/3841a38df972534567e85840d7ead20d3a26faa6.tar.gz",
+      "hash": "06zalm74di9p05i9z8kf5v2vz0yq6qsyqgnia296nvqsxpif80cs"
     },
     "github-nvim-theme": {
       "type": "Git",
@@ -30,9 +30,9 @@
         "url": "https://github.com/projekt0n/github-nvim-theme"
       },
       "branch": "main",
-      "revision": "e682243a297b92d4f74c5a1bf84056dafcfd7f92",
+      "revision": "f02d52425b2cf5412ce73cdf403b28d2800f4ac2",
       "url": null,
-      "hash": "1hky5hn3v0z5z9h38mbfdjj4hdy56rcmb1f8b2zi03kqhamjh1q0"
+      "hash": "193l2yrrrp60hzr194jyz83ibicc5crpw8wq4jciyw3fcd9g7h0v"
     },
     "move-nvim": {
       "type": "Git",
