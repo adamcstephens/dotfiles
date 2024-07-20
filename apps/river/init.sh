@@ -186,6 +186,7 @@ done
 riverctl set-repeat 50 300
 
 # add ssd
+riverctl rule-add -app-id blueberry.py ssd
 riverctl rule-add -app-id 'codium*' ssd
 riverctl rule-add -app-id code-url-handler ssd
 riverctl rule-add -app-id emacs ssd
