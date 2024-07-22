@@ -143,6 +143,11 @@ require("lspconfig").pyright.setup({})
 
 -- tofu
 require("lspconfig").terraformls.setup({})
+vim.filetype.add({
+  extension = {
+    tf = "terraform",
+  },
+})
 
 -- zig
 lspconfig.zls.setup({})

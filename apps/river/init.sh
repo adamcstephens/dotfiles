@@ -40,6 +40,10 @@ riverctl map normal Super+Shift+Control F spawn 'systemd-cat --identifier=rofi r
 riverctl map normal Super+Shift+Control T spawn 'dark toggle'
 riverctl map normal Super+Shift+Control D spawn 'systemd-cat --identifier=prj prj'
 
+riverctl map normal Super+Shift+Control 0 spawn 'wlr-scale reset'
+riverctl map normal Super+Shift minus spawn 'wlr-scale up'
+riverctl map normal Super+Shift+Control minus spawn 'wlr-scale down'
+
 riverctl map normal None Print spawn 'systemd-cat --identifier=screenshot screenshot screen'
 # bindsym print exec screenshot.sh window
 # bindsym $mod+print exec screenshot.sh screen

@@ -53,6 +53,7 @@
           packages = [
             # local only
             inputs.attic.packages.${pkgs.system}.attic
+            pkgs.pyright
           ] ++ self'.devShells.ci.nativeBuildInputs;
         };
 

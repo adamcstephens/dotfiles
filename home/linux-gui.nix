@@ -160,6 +160,7 @@ in
       pkgs.wl-clipboard
       pkgs.wl-mirror
       pkgs.wl-screenrec
+      pkgs.wlr-randr
       pkgs.wdisplays
       pkgs.wlopm
     ])
