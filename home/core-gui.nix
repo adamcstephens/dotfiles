@@ -35,6 +35,7 @@
     inputs.nix-index-database.packages.${pkgs.system}.comma-with-db
     pkgs.nix-output-monitor
     pkgs.nix-tree
+    pkgs.nixd
     pkgs.nixfmt-rfc-style
 
     # tools
