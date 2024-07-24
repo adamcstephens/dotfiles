@@ -45,7 +45,7 @@
             macos_option_as_alt = "both";
 
             font_size = "13";
-            listen_on = "unix:\${TMPDIR}/dotkitty";
+            listen_on = "unix:\${TMPDIR}/kitty";
           }
         else
           {
@@ -54,8 +54,7 @@
             touch_scroll_multiplier = "20.0";
             kitty_mod = "ctrl+shift";
 
-            allow_remote_control = "socket-only";
-            listen_on = "unix:@dotkitty";
+            listen_on = "unix:@kitty";
           }
       );
 

@@ -60,10 +60,10 @@ def set_kitty_theme(target):
     print(kitty_pid)
 
     if os_name == "Linux":
-        kitty_socket = f"unix:@dotkitty"
+        kitty_socket = f"unix:@kitty-{kitty_pid}"
     elif os_name == "Darwin":
         tmpdir = os.getenv("TMPDIR")
-        kitty_socket = f"unix:{tmpdir}/dotkitty"
+        kitty_socket = f"unix:{tmpdir}/kitty"
 
     cmd = f"kitty @ --to {kitty_socket} set-colors --all --configured {HOME}/.config/kitty/"
 

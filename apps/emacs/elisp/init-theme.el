@@ -74,8 +74,9 @@
   (when (and (eq system-type 'darwin) (eq window-system 'ns))
     (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
     (add-to-list 'default-frame-alist '(ns-appearance . dark))
-    (setq auto-dark-allow-osascript t)
-    (auto-dark-mode t)))
+    (setq auto-dark-allow-osascript t))
+
+  (auto-dark-mode t))
 
 ;; run this hook after we have initialized the first time
 ;; (add-hook 'after-init-hook 'dot/gui-setup)
