@@ -243,7 +243,10 @@ in
 
             dotfiles = {
               gui.wayland = true;
-              vscode.enable = true;
+              apps = {
+                vscode.enable = true;
+                vscodium.enable = false;
+              };
             };
 
             home.packages = [

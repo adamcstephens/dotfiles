@@ -5,11 +5,11 @@
   ...
 }:
 let
-  cfg = config.dotfiles.vscode;
+  cfg = config.dotfiles.apps.vscode;
   prefix = if pkgs.stdenv.isDarwin then "Library/Application Support" else ".config";
 in
 {
-  options.dotfiles.vscode.enable = lib.mkEnableOption "vscode";
+  options.dotfiles.apps.vscode.enable = lib.mkEnableOption "vscode";
 
   config = lib.mkIf cfg.enable {
     assertions = [

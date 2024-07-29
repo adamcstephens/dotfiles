@@ -5,7 +5,7 @@
   ...
 }:
 let
-  cfg = config.dotfiles.vscodium;
+  cfg = config.dotfiles.apps.vscodium;
   # patch vscodium to enable copilot support
   productJson =
     if pkgs.stdenv.isDarwin then
@@ -33,7 +33,7 @@ let
   prefix = if pkgs.stdenv.isDarwin then "Library/Application Support" else ".config";
 in
 {
-  options.dotfiles.vscodium.enable = lib.mkEnableOption "vscodium";
+  options.dotfiles.apps.vscodium.enable = lib.mkEnableOption "vscodium";
 
   config = lib.mkMerge [
     {

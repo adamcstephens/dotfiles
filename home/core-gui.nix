@@ -17,10 +17,14 @@
     ../apps/vscodium
   ];
 
-  dotfiles.apps.emacs = {
-    package = lib.mkDefault pkgs.emacs29;
-    patchForGui = lib.mkDefault false;
-    full = lib.mkDefault true;
+  dotfiles.apps = {
+    emacs = {
+      package = lib.mkDefault pkgs.emacs29;
+      patchForGui = lib.mkDefault false;
+      full = lib.mkDefault true;
+    };
+    neovim.full = true;
+    vscodium.enable = lib.mkDefault true;
   };
 
   home.packages = [
