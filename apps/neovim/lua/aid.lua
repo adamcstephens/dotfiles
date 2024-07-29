@@ -46,6 +46,7 @@ require("conform").setup({
     lua = { "stylua" },
     nix = { "nixfmt" },
     python = { "ruff_lint", "ruff_format" },
+    sql = { "sqlfluff" },
     teal = { "stylua" },
     terraform = { "tofu_fmt" },
     yaml = { "yamlfmt" },

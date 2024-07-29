@@ -6,3 +6,8 @@ toml
 websocket
 url
 endPoint
+nixos
+stdout
+stderr
+StdoutPipe
+StderrPipe

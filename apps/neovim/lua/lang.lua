@@ -33,28 +33,16 @@ require("elixir").setup({
   },
   credo = { enable = true },
   elixirls = {
-    -- disable this and use lspconfig instead
     enable = false,
-    cmd = "elixir-ls",
-    settings = require("elixir.elixirls").settings({
-      dialyzerEnabled = false,
-      enableTestLenses = false,
-    }),
   },
 })
 lspconfig.elixirls.setup({
-  capabilities = require("cmp_nvim_lsp").default_capabilities(),
+  -- capabilities = require("cmp_nvim_lsp").default_capabilities(),
   cmd = { "elixir-ls" },
   on_attach = function(client)
     client.server_capabilities.semanticTokensProvider = nil
-    vim.keymap.set("n", "<space>fp", ":ElixirFromPipe<cr>", { buffer = true, noremap = true })
-    vim.keymap.set("n", "<space>tp", ":ElixirToPipe<cr>", { buffer = true, noremap = true })
-    vim.keymap.set("v", "<space>em", ":ElixirExpandMacro<cr>", { buffer = true, noremap = true })
   end,
 })
--- lspconfig.lexical.setup({
---   cmd = { "lexical" },
--- })
 
 -- go
 lspconfig.gopls.setup({})

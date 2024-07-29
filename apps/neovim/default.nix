@@ -5,21 +5,25 @@
   ...
 }:
 let
-  dependencies = [
-    pkgs.biome
-    pkgs.efm-langserver
-    pkgs.lua
-    pkgs.lua-language-server
-    pkgs.jq
-    pkgs.nil
-    pkgs.nixd
-    pkgs.nodejs
-    pkgs.nodePackages.vscode-json-languageserver
-    pkgs.ruff
-    pkgs.shellcheck
-    pkgs.shfmt
-    pkgs.stylua
-  ];
+  cfg = config.dotfiles.apps.neovim;
+
+  dependencies =
+    [ pkgs.jq ]
+    ++ lib.optionals cfg.full [
+      pkgs.biome
+      pkgs.efm-langserver
+      pkgs.lua
+      pkgs.lua-language-server
+      pkgs.nil
+      pkgs.nixd
+      pkgs.nodejs
+      pkgs.nodePackages.vscode-json-languageserver
+      pkgs.ruff
+      pkgs.shellcheck
+      pkgs.shfmt
+      pkgs.sqlfluff
+      pkgs.stylua
+    ];
 
   pins = import ./npins;
   pins-ext = import ./npins-ext;
@@ -124,10 +128,14 @@ let
       );
 in
 {
-  home.sessionVariables = {
-    MANPAGER = "nvim +Man!";
-    MANWIDTH = "999";
-  };
+  options.dotfiles.apps.neovim.full = lib.mkEnableOption "install the full set of tools, as if a workstation";
 
-  home.packages = [ package ];
+  config = {
+    home.sessionVariables = {
+      MANPAGER = "nvim +Man!";
+      MANWIDTH = "999";
+    };
+
+    home.packages = [ package ];
+  };
 }
