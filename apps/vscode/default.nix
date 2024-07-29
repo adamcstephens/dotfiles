@@ -14,7 +14,7 @@ in
   config = lib.mkIf cfg.enable {
     assertions = [
       {
-        assertion = !config.dotfiles.vscodium.enable;
+        assertion = !config.dotfiles.apps.vscodium.enable;
         message = "vscodium and vscode are mutually exclusive";
       }
     ];
