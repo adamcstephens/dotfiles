@@ -36,6 +36,7 @@ let
       pkgs.ghostscript
       pkgs.groff
       pkgs.graphicsmagick
+      pkgs.mermaid-cli
       pkgs.multimarkdown
       pkgs.nodejs
       pkgs.pandoc
@@ -154,6 +155,7 @@ let
       nim-mode
       nix-ts-mode
       nushell-ts-mode
+      ob-mermaid
       olivetti
       orderless
       org-appear

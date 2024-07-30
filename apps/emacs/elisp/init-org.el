@@ -212,6 +212,7 @@
    (org-present-mode
     .
     (lambda ()
+      (toggle-truncate-lines -1)
       (org-present-big)
       (org-display-inline-images)
       (org-present-hide-cursor)
@@ -220,6 +221,7 @@
    (org-present-mode-quit
     .
     (lambda ()
+      (toggle-truncate-lines 1)
       (org-present-small)
       (org-remove-inline-images)
       (org-present-show-cursor)
