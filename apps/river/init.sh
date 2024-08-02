@@ -192,6 +192,7 @@ riverctl set-repeat 50 300
 # add ssd
 riverctl rule-add -app-id blueberry.py ssd
 riverctl rule-add -app-id 'codium*' ssd
+riverctl rule-add -app-id chromium-browser ssd
 riverctl rule-add -app-id code-url-handler ssd
 riverctl rule-add -app-id emacs ssd
 riverctl rule-add -app-id com.mitchellh.ghostty ssd
@@ -205,6 +206,7 @@ riverctl rule-add -app-id zoom ssd
 # default tags
 riverctl rule-add -app-id firefox tags $((2#00000001))
 riverctl rule-add -app-id ssh-askpass tags $((2#11111111))
+riverctl rule-add -title "Huddle:*" tags $((2#11111111))
 riverctl rule-add -app-id Element tags $((2#00100000))
 riverctl rule-add -app-id Slack tags $((2#00100000))
 riverctl rule-add -app-id WebCord tags $((2#00100000))
