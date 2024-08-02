@@ -139,9 +139,13 @@ in
       pkgs.hunspellDicts.en_US
       pkgs.libreoffice-fresh
       pkgs.localsend
+      pkgs.mediainfo
       pkgs.mpv
+      pkgs.nmap
       pkgs.remmina
+      pkgs.streamrip
       pkgs.thunderbird
+      pkgs.yt-dlp
 
       # bitwarden
       pkgs.pinentry.curses
