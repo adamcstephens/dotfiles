@@ -52,6 +52,7 @@ let
         cmp_luasnip
         conform-nvim
         copilot-lua
+        copilot-cmp
         direnv-vim
         editorconfig-nvim
         efmls-configs-nvim

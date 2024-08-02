@@ -27,6 +27,7 @@ cmp.setup({
     end,
   },
   sources = cmp.config.sources({
+    { name = "copilot" },
     { name = "luasnip" },
     { name = "nvim_lsp" },
     { name = "path" },
@@ -65,12 +66,17 @@ require("conform").formatters.biome = {
 -- llm
 --
 require("copilot").setup({
+  suggestion = { enabled = false },
+  panel = { enabled = false },
+
   filetypes = {
+    go = true,
     elixir = true,
     zig = true,
     ["*"] = false,
   },
 })
+require("copilot_cmp").setup()
 
 -- lsp
 --
