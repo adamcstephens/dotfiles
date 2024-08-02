@@ -45,6 +45,7 @@ lspconfig.elixirls.setup({
 })
 
 -- go
+lspconfig.golangci_lint_ls.setup({})
 lspconfig.gopls.setup({})
 require("dap-go").setup({
   dap_configurations = {

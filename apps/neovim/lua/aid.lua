@@ -20,6 +20,7 @@ cmp.setup({
     ["<C-k>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
     ["<CR>"] = cmp.mapping.confirm({ select = false }),
   },
+  preselect = cmp.PreselectMode.None,
   snippet = {
     expand = function(args)
       require("luasnip").lsp_expand(args.body)

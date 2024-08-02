@@ -10,6 +10,12 @@ let
   dependencies =
     [ pkgs.jq ]
     ++ lib.optionals cfg.full [
+      pkgs.errcheck
+      pkgs.golangci-lint
+      pkgs.golangci-lint-langserver
+      # pkgs.ineffassign
+      pkgs.go-tools
+
       pkgs.biome
       pkgs.efm-langserver
       pkgs.lua
