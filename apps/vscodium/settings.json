@@ -224,5 +224,8 @@
     "editor.defaultFormatter": "vscode.json-language-features"
   },
   "elixir-tools.nextLS.experimental.completions.enable": true,
-  "nix.serverPath": "nixd"
+  "nix.serverPath": "nixd",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }
