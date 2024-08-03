@@ -744,15 +744,16 @@
         "services-flake": "services-flake"
       },
       "locked": {
-        "lastModified": 1721650016,
-        "narHash": "sha256-+juBbZXViiE2UcKGRQXeA3f8VeCotKyQCxOgDx4uy4k=",
-        "ref": "refs/heads/main",
-        "rev": "03e28ed19517a5d1e8c5582cc556ae023cb5dc6c",
-        "revCount": 261,
+        "lastModified": 1722647981,
+        "narHash": "sha256-3rnCPr6FZo+d1zjsOJyvb0JcAY3le9GtJCypuq29ldw=",
+        "ref": "release-3",
+        "rev": "e0e7c6335fe33d65b06eb823077fa656d51ddd25",
+        "revCount": 275,
         "type": "git",
         "url": "https://codeberg.org/adamcstephens/sower"
       },
       "original": {
+        "ref": "release-3",
         "type": "git",
         "url": "https://codeberg.org/adamcstephens/sower"
       }
