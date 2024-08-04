@@ -133,10 +133,12 @@ in
 
       # apps
       pkgs.cinnamon.nemo
+      pkgs.finamp
       pkgs.fractal
       pkgs.eog
       pkgs.hunspell
       pkgs.hunspellDicts.en_US
+      pkgs.kid3
       pkgs.libreoffice-fresh
       pkgs.localsend
       pkgs.mediainfo

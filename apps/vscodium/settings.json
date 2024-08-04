@@ -227,5 +227,6 @@
   "nix.serverPath": "nixd",
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  },
+  "elixirLS.suggestSpecs": false
 }
