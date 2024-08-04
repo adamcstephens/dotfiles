@@ -140,7 +140,6 @@ in
       pkgs.hunspellDicts.en_US
       pkgs.kid3
       pkgs.libreoffice-fresh
-      pkgs.localsend
       pkgs.mediainfo
       pkgs.mpv
       pkgs.nmap
