@@ -7,9 +7,9 @@
         "url": "https://github.com/f-person/auto-dark-mode.nvim"
       },
       "branch": "master",
-      "revision": "2b8c938da9a7c9432120266b92936b2c22e8cfb8",
+      "revision": "14cad96b80a07e9e92a0dcbe235092ed14113fb2",
       "url": null,
-      "hash": "0x3j40c3cbvabilg1gs2vsciszgj981lg8w569x6h9lhidn8j5k5"
+      "hash": "16w7q7z7i77dh8qhl1vm0y96il6zda5ib3x7il1c8i74h3c14abd"
     },
     "focus.nvim": {
       "type": "Git",
@@ -30,9 +30,9 @@
         "url": "https://github.com/projekt0n/github-nvim-theme"
       },
       "branch": "main",
-      "revision": "890b29596d77605467d5b302f76b5e9a9194f3a4",
+      "revision": "80b7f448d7f7fa36070ffbe2a43458e57058bb72",
       "url": null,
-      "hash": "1alrbgp7x4sxgxxy4qqyyzqm0r8lql1435g92rvmwdsjprjnc55w"
+      "hash": "0a9np6xkimd2240ravmmkjn5a4x38fx5ic46zh1hpv7krpzdf6zv"
     },
     "move-nvim": {
       "type": "Git",
