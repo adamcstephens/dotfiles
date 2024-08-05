@@ -6,7 +6,10 @@ else
   DIR="$1"
 fi
 
-unset DISPLAY
+# strip display unless we're in kitty, until we can find a fix for terminal corruption
+if [ -z "$KITTY_PID" ]; then
+  unset DISPLAY
+fi
 
 # wait
 export IS_EDITOR=true
