@@ -34,7 +34,7 @@ user = adamcstephens
 format = ssh
 
 [gpg "ssh"]
-defaultKeyCommand = git-ssh-key.sh
+defaultKeyCommand = /home/adam/.dotfiles/bin/git-ssh-key.sh
 allowedSignersFile = ~/.dotfiles/apps/ssh/ssh-signers.txt
 
 [include]
