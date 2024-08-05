@@ -21,6 +21,10 @@
         indent_size = 2;
       };
 
+      "*.org" = {
+        indent_size = 8;
+      };
+
       "*.py" = {
         indent_size = 4;
       };
