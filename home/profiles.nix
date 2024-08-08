@@ -257,7 +257,7 @@ in
             ];
 
             programs.waybar.settings.main = {
-              network.interface = "wlp0s20f3";
+              network.interface = "wlp1s0";
             };
 
             services.kanshi.profiles.undocked = lib.mkForce {
