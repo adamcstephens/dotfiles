@@ -54,7 +54,7 @@ in
     };
   };
 
-  profile-parts.home-manager = {
+  profile-parts.home-manager = rec {
     ark = {
       system = "aarch64-linux";
       nixpkgs = inputs.nixpkgs-unstable;
@@ -228,6 +228,8 @@ in
         }
       ];
     };
+
+    seek = think;
 
     think = {
       nixpkgs = inputs.nixpkgs-unstable;
