@@ -54,7 +54,7 @@ in
     };
   };
 
-  profile-parts.home-manager = rec {
+  profile-parts.home-manager = {
     ark = {
       system = "aarch64-linux";
       nixpkgs = inputs.nixpkgs-unstable;
@@ -229,7 +229,50 @@ in
       ];
     };
 
-    seek = think;
+    seek = {
+      nixpkgs = inputs.nixpkgs-unstable;
+      home-manager = inputs.home-manager-unstable;
+
+      modules = [
+        ./linux-gui.nix
+
+        (
+          { pkgs, ... }:
+          {
+            apps.ssh.tpm = true;
+
+            dotfiles = {
+              gui.wayland = true;
+              apps = {
+                vscode.enable = true;
+                vscodium.enable = false;
+              };
+            };
+
+            home.packages = [
+              pkgs.microsoft-edge
+              pkgs.slack
+              pkgs.ungoogled-chromium
+              pkgs.zoom-us
+            ];
+
+            programs.waybar.settings.main = {
+              network.interface = "wlp0s20f3";
+            };
+
+            services.kanshi.profiles.undocked = lib.mkForce {
+              outputs = [
+                {
+                  criteria = "eDP-1";
+                  scale = 1.42;
+                  status = "enable";
+                }
+              ];
+            };
+          }
+        )
+      ];
+    };
 
     think = {
       nixpkgs = inputs.nixpkgs-unstable;
