@@ -6,6 +6,18 @@
 }:
 let
   cfg = config.dotfiles.apps.vscode;
+
+  # wrap vscode so we can trick it to use proper secrets storage
+  vscode = pkgs.symlinkJoin {
+    name = "vscode";
+    pname = "vscode";
+    version = pkgs.vscode.version;
+    paths = [ pkgs.vscode ];
+    nativeBuildInputs = [ pkgs.makeWrapper ];
+    postBuild = ''
+      wrapProgram $out/bin/code --set XDG_CURRENT_DESKTOP GNOME
+    '';
+  };
   prefix = if pkgs.stdenv.isDarwin then "Library/Application Support" else ".config";
 in
 {
@@ -32,6 +44,7 @@ in
 
     programs.vscode = {
       enable = true;
+      package = vscode;
 
       extensions = with pkgs.vscode-extensions; [
         github.copilot
