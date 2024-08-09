@@ -5,6 +5,7 @@
 
   bubblewrap,
   common-updater-scripts,
+  cntr,
   deadnix,
   hydra-check,
   nix-bisect,
@@ -22,6 +23,7 @@ mkShellNoCC {
   name = "nixpkgs-devshell";
 
   packages = [
+    cntr
     common-updater-scripts
     deadnix
     hydra-check
