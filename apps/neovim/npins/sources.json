@@ -30,9 +30,9 @@
         "url": "https://github.com/projekt0n/github-nvim-theme"
       },
       "branch": "main",
-      "revision": "80b7f448d7f7fa36070ffbe2a43458e57058bb72",
+      "revision": "742c7015134248ed49605bdbb309a3a220ce4e3b",
       "url": null,
-      "hash": "0a9np6xkimd2240ravmmkjn5a4x38fx5ic46zh1hpv7krpzdf6zv"
+      "hash": "0pbprb321qhksykrqfxk0bhwf3bs0x9kckgnla8n57j26gxb2s2s"
     },
     "move-nvim": {
       "type": "Git",
@@ -96,9 +96,9 @@
         "url": "https://github.com/artemave/workspace-diagnostics.nvim"
       },
       "branch": "main",
-      "revision": "29ed948a84076e9bed63ce298b5cc5264b72b341",
+      "revision": "40bd000abbfb40947023c57bc0017d52c53f971e",
       "url": null,
-      "hash": "18280dkfxa1k3kn6hmxh4irg3c9gc4w6c74b79h611lkm33k5s4b"
+      "hash": "1m3arch2zsrjlgxhwls0h9gb3i4446n6jf7vnz2w24273yr400ah"
     }
   },
   "version": 3
