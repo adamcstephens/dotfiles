@@ -9,21 +9,26 @@
     Unit = {
       BindsTo = [ "graphical-session.target" ];
       Wants = [ "graphical-session-pre.target" ];
-      After = [ "graphical-session-pre.target" ];
-      Requires = [ "hypridle.service" ];
+      After = [
+        "graphical-session-pre.target"
+        "wayland-session.target"
+      ];
+      Conflicts = [ "wayland-session.target" ];
+
+      Requires = [
+        "dunst.service"
+        "gammastep.service"
+        "hypridle.service"
+        "hypridle.service"
+        "waybar.service"
+        "wob.service"
+        "wob.socket"
+      ];
     };
   };
 
   systemd.user.services.hypridle = {
-    # Install.WantedBy = [ "graphical-session.target" ];
-    # Unit.PartOf = [ "graphical-session.target" ];
-    Service = {
-      # Environment = [
-      #   "HOME=${config.home.homeDirectory}"
-      #   "PATH=${lib.makeBinPath [ pkgs.hyprlock ]}:/run/current-system/sw/bin"
-      # ];
-      ExecStart = lib.getExe pkgs.hypridle;
-    };
+    Service.ExecStart = lib.getExe pkgs.hypridle;
   };
 
   home.packages = [ pkgs.hyprlock ];
@@ -56,7 +61,7 @@
       }
 
       misc {
-        background_color = rgb(000000)
+        background_color = rgb(${config.colorScheme.palette.base00})
       }
     '';
 
