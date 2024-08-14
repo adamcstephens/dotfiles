@@ -202,29 +202,41 @@ in
   };
 
   systemd.user.services.blueberry-tray = {
-    Install.WantedBy = [ "graphical-session.target" ];
-    Unit.PartOf = [ "graphical-session.target" ];
+    Install.WantedBy = [ "xserver-session.target" ];
+    Unit.PartOf = [ "xserver-session.target" ];
     Service.ExecStart = "${pkgs.blueberry}/bin/blueberry-tray";
     Service.Type = "forking";
   };
 
   systemd.user.targets.wayland-session = {
     Unit = {
-      Description = "wayland compositor session";
-      Documentation = [ "man:systemd.special(7)" ];
       BindsTo = [ "graphical-session.target" ];
       Wants = [ "graphical-session-pre.target" ];
-      After = [ "graphical-session-pre.target" ];
+      After = [
+        "graphical-session-pre.target"
+        "hyprland-session.target"
+        "xserver-session.target"
+      ];
+      Conflicts = [
+        "wayland-session.target"
+        "xserver-session.target"
+      ];
     };
   };
 
   systemd.user.targets.xserver-session = {
     Unit = {
-      Description = "xserver session";
-      Documentation = [ "man:systemd.special(7)" ];
       BindsTo = [ "graphical-session.target" ];
       Wants = [ "graphical-session-pre.target" ];
-      After = [ "graphical-session-pre.target" ];
+      After = [
+        "graphical-session-pre.target"
+        "wayland-session.target"
+        "xserver-session.target"
+      ];
+      Conflicts = [
+        "hyprland-session.target"
+        "wayland-session.target"
+      ];
     };
   };
 

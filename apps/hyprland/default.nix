@@ -17,8 +17,12 @@
       After = [
         "graphical-session-pre.target"
         "wayland-session.target"
+        "xserver-session.target"
       ];
-      Conflicts = [ "wayland-session.target" ];
+      Conflicts = [
+        "wayland-session.target"
+        "xserver-session.target"
+      ];
 
       Requires = [
         "dunst.service"
