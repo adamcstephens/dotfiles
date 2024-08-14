@@ -5,6 +5,11 @@
   ...
 }:
 {
+  home.packages = [
+    pkgs.gtklock
+    # pkgs.hyprlock
+  ];
+
   systemd.user.targets.hyprland-session = {
     Unit = {
       BindsTo = [ "graphical-session.target" ];
@@ -31,8 +36,6 @@
     Service.ExecStart = lib.getExe pkgs.hypridle;
   };
 
-  home.packages = [ pkgs.hyprlock ];
-
   xdg.configFile."hypr/hypridle.conf".source =
     if config.dotfiles.nixosManaged then
       ./hypridle.conf
@@ -45,11 +48,11 @@
     else
       config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/hyprland/hyprland.conf";
 
-  xdg.configFile."hypr/hyprlock.conf".source =
-    if config.dotfiles.nixosManaged then
-      ./hyprlock.conf
-    else
-      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/hyprland/hyprlock.conf";
+  # xdg.configFile."hypr/hyprlock.conf".source =
+  #   if config.dotfiles.nixosManaged then
+  #     ./hyprlock.conf
+  #   else
+  #     config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/hyprland/hyprlock.conf";
 
   xdg.configFile."hypr/colors.conf" = {
     executable = true;
