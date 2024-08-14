@@ -101,7 +101,9 @@ require("actions-preview").setup({
 
 local luasnip = require("luasnip")
 -- load friendly-snippets
-require("luasnip.loaders.from_vscode").lazy_load()
+require("luasnip.loaders.from_vscode").lazy_load({
+  exclude = { "terraform" },
+})
 -- load my snippets
 require("luasnip.loaders.from_vscode").lazy_load({ paths = "~/.dotfiles/apps/vscodium/snippets" })
 
