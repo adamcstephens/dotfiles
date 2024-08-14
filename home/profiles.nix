@@ -242,10 +242,18 @@ in
             apps.ssh.tpm = true;
 
             dotfiles = {
-              gui.wayland = true;
               apps = {
                 vscode.enable = true;
                 vscodium.enable = false;
+              };
+
+              gui = {
+                wayland = true;
+
+                xorg = {
+                  enable = true;
+                  wm = "xmonad";
+                };
               };
             };
 

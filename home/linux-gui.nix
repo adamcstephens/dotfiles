@@ -41,6 +41,7 @@ in
     ../apps/rofi
 
     # wayland
+    ../apps/hyprland
     ../apps/kanshi
     ../apps/river
     ../apps/sleepwatcher-rs

@@ -28,6 +28,10 @@ in
       text = ''
         #!/usr/bin/env sh
 
+        if ! command -v riverctl &>/dev/null; then
+          exit 0
+        fi
+
         # Set background and border color
         riverctl background-color 0x${config.colorScheme.palette.base00}
         riverctl border-color-focused 0x${config.colorScheme.palette.base05}

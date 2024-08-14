@@ -3,7 +3,10 @@
   layer = "top";
   position = "top";
   height = 30;
-  modules-left = [ "river/tags" ];
+  modules-left = [
+    "hyprland/workspaces"
+    "river/tags"
+  ];
   modules-center = [ ];
   modules-right = [
     "tray"
@@ -14,6 +17,12 @@
     "pulseaudio"
     "clock"
   ];
+  "hyprland/workspaces" = {
+    "persistent-workspaces" = {
+      "*" = 6;
+    };
+  };
+
   "river/tags" = {
     num-tags = 8;
   };
