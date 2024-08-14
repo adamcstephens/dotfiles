@@ -54,6 +54,7 @@ in
     ../apps/xorg
 
     # apps
+    ../apps/1password
     ../apps/kitty
     ../apps/mimeapps
     ../apps/ssh
