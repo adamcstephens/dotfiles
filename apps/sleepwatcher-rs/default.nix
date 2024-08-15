@@ -8,7 +8,18 @@
 let
   colors = config.colorScheme.palette;
   locker = pkgs.writeShellScriptBin "locker" ''
-    exec ${lib.getExe pkgs.waylock} -fork-on-lock -init-color 0x${colors.base01} -input-color 0x${colors.base03} -fail-color 0x${colors.base08}
+    export PATH=$PATH:${
+      lib.makeBinPath [
+        pkgs.gtklock
+        pkgs.waylock
+      ]
+    }
+
+    if [[ "$XDG_CURRENT_DESKTOP" == "Hyprland" ]]; then
+      pidof gtklock || exec gtklock
+    else
+      pidof waylock || exec waylock -fork-on-lock -init-color 0x${colors.base01} -input-color 0x${colors.base03} -fail-color 0x${colors.base08}
+    fi
   '';
 in
 {
