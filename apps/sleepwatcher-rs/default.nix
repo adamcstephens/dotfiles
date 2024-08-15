@@ -42,4 +42,6 @@ in
 
     systemdTarget = "wayland-session.target";
   };
+
+  # systemd.user.services.sleepwatcher-rs.Service.Environment = [ "RUST_LOG=debug" ];
 }
