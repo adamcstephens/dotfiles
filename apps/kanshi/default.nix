@@ -12,7 +12,7 @@
   ...
 }:
 let
-  dell_scale = 1.32;
+  dell_scale = 1.333333;
 in
 {
   config = lib.mkIf config.dotfiles.gui.wayland {
