@@ -51,19 +51,25 @@ in
         #tags {
         }
 
+        #workspaces button.empty,
         #tags button {
-          color: #${config.colorScheme.palette.base03};
+          color: #${config.colorScheme.palette.base02};
           min-width: 14px;
         }
 
+        #workspaces button,
         #tags button.occupied {
           color: #${config.colorScheme.palette.base04};
         }
 
+        #workspaces button.visible,
+        #workspaces button.active,
         #tags button.focused {
-          color: #${config.colorScheme.palette.base05};
+          color: #${config.colorScheme.palette.base06};
+          background-color: #${config.colorScheme.palette.base03};
         }
 
+        #workspaces button.urgent,
         #tags button.urgent {
           color: #${config.colorScheme.palette.base08};
         }

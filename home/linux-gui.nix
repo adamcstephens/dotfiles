@@ -165,6 +165,7 @@ in
       pkgs.lswt
       pkgs.slurp
       pkgs.wayshot
+      pkgs.wev
       pkgs.wl-clipboard
       pkgs.wl-mirror
       pkgs.wl-screenrec
