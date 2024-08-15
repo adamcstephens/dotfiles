@@ -13,27 +13,13 @@
 
     systemd.user.targets.hyprland-session = {
       Unit = {
-        BindsTo = [ "graphical-session.target" ];
+        BindsTo = [ "wayland-session.target" ];
         Wants = [ "graphical-session-pre.target" ];
-        After = [
-          "graphical-session-pre.target"
-          "wayland-session.target"
-          "xserver-session.target"
-        ];
-        Conflicts = [
-          "wayland-session.target"
-          "xserver-session.target"
-        ];
+        After = [ "graphical-session-pre.target" ];
 
-        Requires = [
-          "dunst.service"
-          "gammastep.service"
-          "kanshi.service"
-          "sleepwatcher-rs.service"
-          "waybar.service"
-          "wob.service"
-          "wob.socket"
-        ];
+        Conflicts = [ "xserver-session.target" ];
+
+        Requires = [ ];
       };
     };
 

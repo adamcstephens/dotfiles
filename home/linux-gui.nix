@@ -213,10 +213,7 @@ in
       BindsTo = [ "graphical-session.target" ];
       Wants = [ "graphical-session-pre.target" ];
       After = [ "graphical-session-pre.target" ];
-      Conflicts = [
-        "wayland-session.target"
-        "xserver-session.target"
-      ];
+      Conflicts = [ "xserver-session.target" ];
     };
   };
 
