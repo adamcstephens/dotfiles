@@ -17,11 +17,7 @@
     "pulseaudio"
     "clock"
   ];
-  "hyprland/workspaces" = {
-    "persistent-workspaces" = {
-      "*" = 6;
-    };
-  };
+  "hyprland/workspaces" = { };
 
   "river/tags" = {
     num-tags = 8;
