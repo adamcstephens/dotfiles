@@ -163,6 +163,7 @@ in
     ++ (lib.optionals config.dotfiles.gui.wayland [
       pkgs.grim
       pkgs.lswt
+      pkgs.qt6.qtwayland
       pkgs.slurp
       pkgs.wayshot
       pkgs.wev
@@ -188,10 +189,8 @@ in
 
   qt = {
     enable = true;
-    platformTheme.name = "gtk";
-    style = {
-      name = "gtk2";
-    };
+    platformTheme.name = "qtct";
+    style.name = "kvantum";
   };
 
   systemd.user.startServices = "sd-switch";
