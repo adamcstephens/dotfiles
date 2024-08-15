@@ -212,11 +212,7 @@ in
     Unit = {
       BindsTo = [ "graphical-session.target" ];
       Wants = [ "graphical-session-pre.target" ];
-      After = [
-        "graphical-session-pre.target"
-        "hyprland-session.target"
-        "xserver-session.target"
-      ];
+      After = [ "graphical-session-pre.target" ];
       Conflicts = [
         "wayland-session.target"
         "xserver-session.target"
@@ -228,11 +224,7 @@ in
     Unit = {
       BindsTo = [ "graphical-session.target" ];
       Wants = [ "graphical-session-pre.target" ];
-      After = [
-        "graphical-session-pre.target"
-        "wayland-session.target"
-        "xserver-session.target"
-      ];
+      After = [ "graphical-session-pre.target" ];
       Conflicts = [
         "hyprland-session.target"
         "wayland-session.target"
