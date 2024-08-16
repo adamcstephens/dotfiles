@@ -195,10 +195,10 @@ in
 
   systemd.user.startServices = "sd-switch";
 
-  systemd.user.services.polkit-gnome-authentication-agent-1 = {
+  systemd.user.services.polkit-agent = {
     Install.WantedBy = [ "graphical-session.target" ];
     Unit.PartOf = [ "graphical-session.target" ];
-    Service.ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+    Service.ExecStart = "${pkgs.mate.mate-polkit}/libexec/polkit-mate-authentication-agent-1";
   };
 
   systemd.user.services.blueberry-tray = {
