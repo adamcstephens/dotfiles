@@ -30,9 +30,9 @@
         "url": "https://github.com/projekt0n/github-nvim-theme"
       },
       "branch": "main",
-      "revision": "742c7015134248ed49605bdbb309a3a220ce4e3b",
+      "revision": "6b461635230ccb5d0037f378fbe05a27c4ccf7cd",
       "url": null,
-      "hash": "0pbprb321qhksykrqfxk0bhwf3bs0x9kckgnla8n57j26gxb2s2s"
+      "hash": "0ks0c0cq1spy8q58ahqv7kdslllzpz3vb6d6xgxld6y1lrx4x0hs"
     },
     "move-nvim": {
       "type": "Git",
