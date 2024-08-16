@@ -273,7 +273,8 @@ in
               outputs = [
                 {
                   criteria = "eDP-1";
-                  scale = 1.42;
+                  mode = "2880x1800@60Hz";
+                  scale = 1.5;
                   status = "enable";
                 }
               ];
