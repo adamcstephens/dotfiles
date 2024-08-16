@@ -83,7 +83,7 @@ in
 
         systemd-cat --identifier=river river
 
-        systemctl --user stop wayland-session.target graphical-session.target
+        systemctl --user stop wayland-session.target
       '';
 
       executable = true;
