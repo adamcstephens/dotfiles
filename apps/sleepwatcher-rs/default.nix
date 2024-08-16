@@ -36,6 +36,7 @@ in
 
     dependencies = [
       locker
+      pkgs.hyprland
       pkgs.playerctl
       pkgs.wlopm
     ];

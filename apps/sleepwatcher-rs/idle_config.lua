@@ -13,11 +13,13 @@ end
 function DpmsOn()
   Helpers:log("Turning screen on")
   IdleNotifier:run("wlopm --on *")
+  IdleNotifier:run("hyprctl dispatch dpms on")
 end
 
 function DpmsOff()
   Helpers:log("Turning screen off")
   IdleNotifier:run("wlopm --off *")
+  IdleNotifier:run("hyprctl dispatch dpms off")
 end
 
 function Suspend()
