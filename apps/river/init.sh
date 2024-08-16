@@ -214,7 +214,7 @@ riverctl rule-add -title '*Element*' tags $((2#00100000))
 riverctl rule-add -title '*Discord*' tags $((2#00100000))
 
 riverctl rule-add -app-id Kid3 no-float
-riverctl rule-add -title "Open File" no-float
+riverctl rule-add -title "*File*" no-float
 
 # warp the mouse
 riverctl set-cursor-warp on-focus-change
