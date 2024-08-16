@@ -15,6 +15,8 @@
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
+    nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
+    nix-vscode-extensions.inputs.nixpkgs.follows = "nixpkgs";
     nix-wallpaper.url = "github:lunik1/nix-wallpaper";
     nix-wallpaper.inputs.nixpkgs.follows = "nixpkgs";
     profile-parts.url = "git+https://codeberg.org/adamcstephens/profile-parts";

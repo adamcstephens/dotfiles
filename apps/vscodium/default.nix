@@ -1,5 +1,6 @@
 {
   config,
+  inputs,
   lib,
   pkgs,
   ...
@@ -38,26 +39,31 @@ in
   config = lib.mkMerge [
     {
       # set default extensions for both vscode and vscodium
-      programs.vscode.extensions = with pkgs.vscode-extensions; [
-        bmalehorn.vscode-fish
-        davidanson.vscode-markdownlint
-        editorconfig.editorconfig
-        # elixir-lsp.elixir-ls
-        # elixir-tools.elixir-tools
-        esbenp.prettier-vscode
-        foxundermoon.shell-format
-        golang.go
-        github.github-vscode-theme
-        jnoortheen.nix-ide
-        mkhl.direnv
-        naumovs.color-highlight
-        phoenixframework.phoenix
-        redhat.vscode-yaml
-        skellock.just
-        tamasfe.even-better-toml
-        thenuprojectcontributors.vscode-nushell-lang
-        timonwong.shellcheck
-      ];
+      programs.vscode.extensions =
+        (with inputs.nix-vscode-extensions.extensions.${pkgs.system}.open-vsx; [
+          bmalehorn.vscode-fish
+          davidanson.vscode-markdownlint
+          editorconfig.editorconfig
+          elixir-lsp.elixir-ls
+          elixir-tools.elixir-tools
+          esbenp.prettier-vscode
+          foxundermoon.shell-format
+          golang.go
+          github.github-vscode-theme
+          jnoortheen.nix-ide
+          mkhl.direnv
+          naumovs.color-highlight
+          redhat.vscode-yaml
+          skellock.just
+          tamasfe.even-better-toml
+          timonwong.shellcheck
+        ])
+        ++ (with inputs.nix-vscode-extensions.extensions.${pkgs.system}.vscode-marketplace; [
+          github.copilot
+          github.copilot-chat
+          ms-vsliveshare.vsliveshare
+          # phoenixframework.phoenix
+        ]);
     }
     (lib.mkIf cfg.enable {
       home.file."${prefix}/VSCodium/User/keybindings.json".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/vscodium/keybindings.json";

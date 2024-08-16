@@ -1,5 +1,6 @@
 {
   config,
+  inputs,
   lib,
   pkgs,
   ...
@@ -46,7 +47,7 @@ in
       enable = true;
       package = vscode;
 
-      extensions = with pkgs.vscode-extensions; [
+      extensions = with inputs.nix-vscode-extensions.extensions.${pkgs.system}.vscode-marketplace; [
         github.copilot
         ms-vsliveshare.vsliveshare
       ];
