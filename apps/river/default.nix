@@ -67,6 +67,7 @@ in
 
         # gnome-keyring unlock needs this
         export XDG_RUNTIME_DIR="/run/user/$(id -u)"
+        dbus-update-activation-environment DISPLAY XAUTHORITY WAYLAND_DISPLAY
 
         export XDG_CURRENT_DESKTOP=river
         systemctl --user import-environment \
