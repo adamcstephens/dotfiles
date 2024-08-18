@@ -192,7 +192,6 @@
   "workbench.editorAssociations": {
     "*.ipynb": "jupyter-notebook"
   },
-  "workbench.preferredDarkColorTheme": "GitHub Dark Colorblind (Beta)",
   "workbench.preferredLightColorTheme": "GitHub Light Colorblind (Beta)",
   "workbench.startupEditor": "newUntitledFile",
   "workbench.tree.renderIndentGuides": "always",
@@ -228,5 +227,6 @@
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "elixirLS.suggestSpecs": false
+  "elixirLS.suggestSpecs": false,
+  "workbench.preferredDarkColorTheme": "GitHub Dark Colorblind (Beta)"
 }

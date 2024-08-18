@@ -32,7 +32,12 @@
   );
 
   perSystem =
-    { pkgs, self', ... }:
+    {
+      inputs',
+      pkgs,
+      self',
+      ...
+    }:
     {
       devShells = {
         ci = pkgs.mkShellNoCC {
@@ -58,7 +63,7 @@
         };
 
         elixir = pkgs.callPackage ./elixir.nix { };
-        go = pkgs.callPackage ./go.nix { };
+        go = inputs'.nixpkgs-unstable.legacyPackages.callPackage ./go.nix { };
         nixpkgs = pkgs.callPackage ./nixpkgs.nix { };
         python = pkgs.callPackage ./python.nix { };
         zig = pkgs.callPackage ./zig.nix { };

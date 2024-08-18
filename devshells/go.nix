@@ -3,7 +3,7 @@
 
   delve,
   gnumake,
-  go,
+  go_1_23,
   go-tools,
   golangci-lint,
   gopls,
@@ -14,7 +14,7 @@
 mkShell {
   packages = [
     delve
-    go
+    go_1_23
     golangci-lint
     gopls
     go-tools
