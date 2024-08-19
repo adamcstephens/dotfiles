@@ -17,6 +17,17 @@ let
 in
 {
   config = lib.mkIf config.dotfiles.gui.wayland {
+    systemd.user.targets.river-session = {
+      Unit = {
+        BindsTo = [ "wayland-session.target" ];
+        Wants = [ "graphical-session-pre.target" ];
+        After = [ "graphical-session-pre.target" ];
+
+        Conflicts = [ "xserver-session.target" ];
+
+        Requires = [ "sleepwatcher-rs.service" ];
+      };
+    };
 
     xdg.configFile."river/init" = {
       executable = true;
@@ -54,9 +65,8 @@ in
           exit 1
         fi
 
-        # cleanup any xserver
-        systemctl --user stop xserver-session.target
-        systemctl --user unset-environment DISPLAY
+        # cleanup any previous sessions
+        systemctl --user stop wayland-session.target xserver-session.target
 
         # start wayland session
         . "$HOME"/.nix-profile/bin/configure-gtk
@@ -70,6 +80,7 @@ in
         dbus-update-activation-environment DISPLAY XAUTHORITY WAYLAND_DISPLAY
 
         export XDG_CURRENT_DESKTOP=river
+
         systemctl --user import-environment \
           PATH \
           XDG_CACHE_HOME \

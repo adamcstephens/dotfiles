@@ -7,6 +7,7 @@
 {
   config = {
     home.packages = [
+      pkgs.brightnessctl
       pkgs.gtklock
       # pkgs.hyprlock
     ];
@@ -19,7 +20,7 @@
 
         Conflicts = [ "xserver-session.target" ];
 
-        Requires = [ ];
+        Requires = [ "hypridle.service" ];
       };
     };
 
@@ -48,15 +49,15 @@
       '';
     };
 
-    # xdg.configFile."hypr/hypridle.conf".source =
-    #   if config.dotfiles.nixosManaged then
-    #     ./hypridle.conf
-    #   else
-    #     config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/hyprland/hypridle.conf";
+    xdg.configFile."hypr/hypridle.conf".source =
+      if config.dotfiles.nixosManaged then
+        ./hypridle.conf
+      else
+        config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/hyprland/hypridle.conf";
 
-    # systemd.user.services.hypridle = {
-    #   Service.ExecStart = lib.getExe pkgs.hypridle;
-    # };
+    systemd.user.services.hypridle = {
+      Service.ExecStart = lib.getExe pkgs.hypridle;
+    };
 
     # xdg.configFile."hypr/hyprlock.conf".source =
     #   if config.dotfiles.nixosManaged then
