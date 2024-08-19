@@ -11,14 +11,15 @@ let
     export PATH=$PATH:${
       lib.makeBinPath [
         pkgs.gtklock
+        pkgs.procps
         pkgs.waylock
       ]
     }
 
     if [[ "$XDG_CURRENT_DESKTOP" == "Hyprland" ]]; then
-      pidof gtklock || exec gtklock
+      pgrep -f gtklock || exec gtklock
     else
-      pidof waylock || exec waylock -fork-on-lock -init-color 0x${colors.base01} -input-color 0x${colors.base03} -fail-color 0x${colors.base08}
+      pgrep -f waylock || exec waylock -fork-on-lock -init-color 0x${colors.base01} -input-color 0x${colors.base03} -fail-color 0x${colors.base08}
     fi
   '';
 in
