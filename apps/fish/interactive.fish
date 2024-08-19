@@ -30,10 +30,6 @@ end
 abbr --add gco git checkout
 
 set -g async_prompt_functions _pure_prompt_git
-set -g pure_color_mute 696969
-set -g pure_color_hostname yellow
-set -g pure_color_git_branch magenta
-set -g pure_color_git_stash magenta
 
 set -x PAGER ~/.dotfiles/bin/pager
 set -x EDITOR ~/.dotfiles/bin/editor
