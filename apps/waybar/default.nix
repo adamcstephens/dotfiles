@@ -123,7 +123,10 @@ in
       }";
       Unit = {
         PartOf = lib.mkForce [ "wayland-session.target" ];
-        After = lib.mkForce [ "wayland-session.target" ];
+        After = lib.mkForce [
+          "wayland-session.target"
+          "xdg-desktop-portal.service"
+        ];
       };
     };
   };
