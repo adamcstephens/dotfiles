@@ -17,9 +17,9 @@ let
     }
 
     if [[ "$XDG_CURRENT_DESKTOP" == "Hyprland" ]]; then
-      pgrep -f gtklock || exec gtklock
+      gtklock
     else
-      pgrep -f waylock || exec waylock -fork-on-lock -init-color 0x${colors.base01} -input-color 0x${colors.base03} -fail-color 0x${colors.base08}
+      waylock -fork-on-lock -init-color 0x${colors.base01} -input-color 0x${colors.base03} -fail-color 0x${colors.base08}
     fi
   '';
 in
@@ -33,7 +33,7 @@ in
       if config.dotfiles.nixosManaged then
         ./idle_config.lua
       else
-        config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/sleepwatcher-rs/idle_config.lua";
+        "${config.home.homeDirectory}/.dotfiles/apps/sleepwatcher-rs/idle_config.lua";
 
     dependencies = [
       locker
@@ -45,5 +45,5 @@ in
     systemdTarget = "river-session.target";
   };
 
-  # systemd.user.services.sleepwatcher-rs.Service.Environment = [ "RUST_LOG=debug" ];
+  systemd.user.services.sleepwatcher-rs.Service.Environment = [ "RUST_LOG=debug" ];
 }
