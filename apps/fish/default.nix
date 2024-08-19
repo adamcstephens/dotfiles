@@ -8,6 +8,7 @@
 }:
 {
   home.packages = [
+    pkgs.fishPlugins.async-prompt
     pkgs.fishPlugins.done
     pkgs.fishPlugins.foreign-env
     pkgs.fishPlugins.fzf-fish
@@ -19,7 +20,8 @@
     package = inputs.sandbox.packages.${pkgs.system}.fish;
     plugins = [ ];
 
-    shellInit = (builtins.readFile ./init.fish)
+    shellInit =
+      (builtins.readFile ./init.fish)
       + (lib.optionalString pkgs.stdenv.isDarwin (builtins.readFile ./init-darwin.fish));
 
     interactiveShellInit =
