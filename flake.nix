@@ -8,7 +8,6 @@
     home-manager-unstable.url = "github:nix-community/home-manager";
     home-manager-unstable.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
-    attic.url = "github:zhaofengli/attic";
     flake-parts.url = "github:hercules-ci/flake-parts";
     nix-colors.url = "github:misterio77/nix-colors";
     nix-darwin.url = "github:lnl7/nix-darwin/master";

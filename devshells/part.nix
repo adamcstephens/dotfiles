@@ -57,7 +57,7 @@
           name = "dots";
           packages = [
             # local only
-            inputs.attic.packages.${pkgs.system}.attic
+            pkgs.attic-client
             pkgs.pyright
           ] ++ self'.devShells.ci.nativeBuildInputs;
         };
