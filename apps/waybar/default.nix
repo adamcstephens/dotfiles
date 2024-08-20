@@ -118,7 +118,7 @@ in
         lib.makeBinPath [
           pkgs.blueberry
           pkgs.networkmanagerapplet
-          pkgs.pavucontrol
+          pkgs.pwvucontrol
         ]
       }";
       Unit = {

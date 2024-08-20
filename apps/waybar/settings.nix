@@ -100,7 +100,7 @@
       ];
     };
     scroll-step = 10;
-    on-click = "pavucontrol";
+    on-click = "pwvucontrol";
     tooltip = false;
   };
 }

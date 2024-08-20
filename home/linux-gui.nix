@@ -119,8 +119,8 @@ in
       pkgs.networkmanagerapplet
 
       # audio
-      pkgs.pavucontrol
       pkgs.playerctl
+      pkgs.pwvucontrol
       pkgs.wireplumber
 
       # firefox

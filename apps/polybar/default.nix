@@ -8,7 +8,7 @@ let
   dependencies = [
     pkgs.bash
     pkgs.networkmanagerapplet
-    pkgs.pavucontrol
+    pkgs.pwvucontrol
     pkgs.playerctl
   ];
 
