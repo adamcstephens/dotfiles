@@ -62,7 +62,7 @@
           ] ++ self'.devShells.ci.nativeBuildInputs;
         };
 
-        elixir = pkgs.callPackage ./elixir.nix { };
+        elixir = inputs'.nixpkgs-unstable.legacyPackages.callPackage ./elixir.nix { };
         go = inputs'.nixpkgs-unstable.legacyPackages.callPackage ./go.nix { };
         nixpkgs = pkgs.callPackage ./nixpkgs.nix { };
         python = pkgs.callPackage ./python.nix { };
