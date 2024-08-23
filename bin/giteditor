@@ -2,10 +2,7 @@
 
 unset DISPLAY
 
-if command -v emacsclient >/dev/null 2>&1 && pgrep emacs; then
-  export IS_EDITOR=true
-  exec em $@
-elif command -v nvim 2>&1; then
+if command -v nvim 2>&1; then
   exec nvim $@
 elif command -v vim 2>&1; then
   exec vim $@
