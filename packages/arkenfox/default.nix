@@ -2,7 +2,7 @@
   stdenvNoCC,
   fetchFromGitHub,
   gitUpdater,
-  writeScript,
+  writeShellScript,
 }:
 stdenvNoCC.mkDerivation rec {
   pname = "arkenfox";
@@ -21,7 +21,7 @@ stdenvNoCC.mkDerivation rec {
 
   installPhase =
     let
-      script = writeScript "arkenfox-patch" ''
+      script = writeShellScript "arkenfox-patch" ''
         set -e
         SCRIPT_DIR=$( cd -- "$( dirname -- "''${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
