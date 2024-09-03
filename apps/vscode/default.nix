@@ -10,9 +10,13 @@ let
 
   # wrap vscode so we can trick it to use proper secrets storage
   vscode = pkgs.symlinkJoin {
-    name = "vscode";
-    pname = "vscode";
-    version = pkgs.vscode.version;
+    inherit (pkgs.vscode)
+      meta
+      name
+      pname
+      version
+      ;
+
     paths = [ pkgs.vscode ];
     nativeBuildInputs = [ pkgs.makeWrapper ];
     postBuild = ''
