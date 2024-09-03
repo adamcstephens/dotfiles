@@ -2,8 +2,15 @@
 
 # load config from nix, such as colors
 ~/.config/river/colors.sh
-# ensure WAYLAND_DISPLAY gets to user systemd env
-systemctl --user import-environment DISPLAY WAYLAND_DISPLAY
+
+# env
+# shellcheck disable=SC1091
+# . "$HOME"/.nix-profile/bin/configure-gtk
+export MOZ_ENABLE_WAYLAND="1"
+export NIXOS_OZONE_WL="1"
+
+dbus-update-activation-environment --systemd DISPLAY XAUTHORITY WAYLAND_DISPLAY XDG_CONFIG_DIRS XDG_DATA_HOME XDG_CONFIG_HOME XDG_STATE_HOME XDG_CACHE_HOME XDG_DATA_DIRS XDG_CURRENT_DESKTOP XDG_SESSION_TYPE XDG_SESSION_DESKTOP XDG_RUNTIME_DIR
+
 systemctl --user start river-session.target
 
 #

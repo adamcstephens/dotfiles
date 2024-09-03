@@ -109,6 +109,7 @@ in
       configure-gtk
       gsettings-wrapper
       pkgs.glib
+      pkgs.gtk3 # for gtk-launch
       pkgs.libnotify
 
       pkgs.brightnessctl

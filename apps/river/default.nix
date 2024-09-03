@@ -4,19 +4,10 @@
   pkgs,
   ...
 }:
-let
-  dependencies = [
-    config.programs.rofi.package
-
-    pkgs.brightnessctl
-    pkgs.gtk3 # for gtk-launch
-    pkgs.playerctl
-    pkgs.river-bnf
-    pkgs.wl-mirror # and wl-present
-  ];
-in
 {
   config = lib.mkIf config.dotfiles.gui.wayland {
+    home.packages = [ pkgs.river-bnf ];
+
     systemd.user.targets.river-session = {
       Unit = {
         BindsTo = [ "wayland-session.target" ];
@@ -59,6 +50,7 @@ in
         #!${lib.getExe pkgs.bash}
 
         source $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
+        export PATH=$PATH:$HOME/.dotfiles/bin
 
         if ! command -v river &>/dev/null; then
           echo "!! No river binary found in path"
@@ -67,30 +59,6 @@ in
 
         # cleanup any previous sessions
         systemctl --user stop wayland-session.target xserver-session.target
-
-        # start wayland session
-        . "$HOME"/.nix-profile/bin/configure-gtk
-
-        export MOZ_ENABLE_WAYLAND="1"
-        export NIXOS_OZONE_WL="1"
-        export PATH=$HOME/.dotfiles/bin:${lib.makeBinPath dependencies}:$PATH
-
-        # gnome-keyring unlock needs this
-        export XDG_RUNTIME_DIR="/run/user/$(id -u)"
-        dbus-update-activation-environment DISPLAY XAUTHORITY WAYLAND_DISPLAY
-
-        export XDG_CURRENT_DESKTOP=river
-
-        systemctl --user import-environment \
-          PATH \
-          XDG_CACHE_HOME \
-          XDG_CONFIG_DIRS \
-          XDG_CONFIG_HOME \
-          XDG_CURRENT_DESKTOP \
-          XDG_DATA_DIRS \
-          XDG_DATA_HOME \
-          XDG_RUNTIME_DIR \
-          XDG_STATE_HOME
 
         systemd-cat --identifier=river river
 

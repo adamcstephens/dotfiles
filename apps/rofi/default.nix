@@ -1,5 +1,7 @@
 { config, pkgs, ... }:
 {
+  home.packages = [ config.programs.rofi.package ];
+
   programs.rofi = {
     enable = true;
     package = pkgs.rofi-wayland.override {
