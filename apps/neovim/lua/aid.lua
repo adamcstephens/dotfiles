@@ -51,7 +51,7 @@ require("conform").setup({
     sql = { "sqlfluff" },
     teal = { "stylua" },
     terraform = { "tofu_fmt" },
-    yaml = { "yamlfmt" },
+    yaml = { "prettier" },
   },
 })
 require("conform").formatters.biome = {
