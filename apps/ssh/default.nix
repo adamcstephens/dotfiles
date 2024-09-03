@@ -33,7 +33,9 @@ in
 
       Service = {
         Type = "simple";
-        Environment = [ "PATH=${lib.makeBinPath [ pkgs.pinentry.gnome3 ]}" ];
+        Environment = [
+          "SSH_ASKPASS=${pkgs.gnome.seahorse}/libexec/seahorse/ssh-askpass"
+        ];
         ExecStart = "${lib.getExe pkgs.ssh-tpm-agent} -l %t/ssh-tpm-agent -A %t/ssh-agent ";
         RestartSec = 3;
         Restart = "on-abort";
