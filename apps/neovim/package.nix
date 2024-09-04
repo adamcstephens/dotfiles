@@ -1,5 +1,6 @@
 {
   full ? false,
+  dotvimPlugin ? ./.,
   mnw,
   neovim,
 
@@ -30,17 +31,10 @@
   sqlfluff,
   sqlite,
   stylua,
-  tree-sitter,
 }:
 let
   pins = import ./npins;
-  pins-ext = import ./npins-ext;
   npinsPlugins = lib.mapAttrsToList (name: src: (vimUtils.buildVimPlugin { inherit name src; })) pins;
-
-  nvim-treesitter-nu = callPackage ./nvim-treesitter-nu.nix {
-    inherit (tree-sitter) buildGrammar;
-    src = pins-ext.tree-sitter-nu;
-  };
 in
 
 mnw.lib.wrap pkgs {
@@ -56,7 +50,7 @@ mnw.lib.wrap pkgs {
   initLua = ''
     vim.g.sqlite_clib_path = '${sqlite.out}/lib/libsqlite3.${if stdenv.isDarwin then "dylib" else "so"}'
 
-    vim.opt.rtp:append("${pins-ext.tree-sitter-nu}")
+    vim.opt.rtp:append("${dotvimPlugin}")
 
     require('dotinit')
   '';
@@ -64,8 +58,6 @@ mnw.lib.wrap pkgs {
   plugins =
     with vimPlugins;
     [
-      ./.
-
       actions-preview-nvim
       cmp-nvim-lsp
       cmp-path
@@ -92,8 +84,7 @@ mnw.lib.wrap pkgs {
       nvim-dap-go
       nvim-highlight-colors
       nvim-lspconfig
-      nvim-treesitter.withAllGrammars
-      (nvim-treesitter.withPlugins (plugins: [ nvim-treesitter-nu ]))
+      nvim-treesitter
       nvim-surround
       nvim-web-devicons
       oil-nvim
@@ -117,6 +108,7 @@ mnw.lib.wrap pkgs {
       which-key-nvim
       whitespace-nvim
     ]
+    ++ (builtins.attrValues nvim-treesitter.grammarPlugins)
     ++ npinsPlugins;
 
   extraBinPath =

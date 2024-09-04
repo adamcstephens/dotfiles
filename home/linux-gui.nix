@@ -140,7 +140,7 @@ in
       pkgs.fractal
       pkgs.eog
       pkgs.hunspell
-      pkgs.hunspellDicts.en_US
+      pkgs.hunspellDicts.en-us-large
       pkgs.kid3
       pkgs.libreoffice-fresh
       pkgs.mediainfo
