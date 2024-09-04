@@ -41,7 +41,7 @@ require("conform").setup({
     lsp_fallback = true,
   },
   formatters_by_ft = {
-    elixir = { "mix" },
+    -- elixir = { "mix" },
     heex = { "mix" },
     javascript = { "biome" },
     json = { "biome" },
