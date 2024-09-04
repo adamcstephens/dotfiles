@@ -66,6 +66,7 @@
         go = inputs'.nixpkgs-unstable.legacyPackages.callPackage ./go.nix { };
         nixpkgs = pkgs.callPackage ./nixpkgs.nix { };
         python = pkgs.callPackage ./python.nix { };
+        rust = inputs'.nixpkgs-unstable.legacyPackages.callPackage ./rust.nix { };
         zig = pkgs.callPackage ./zig.nix { };
 
         # inline
@@ -96,16 +97,6 @@
         };
 
         opentofu = pkgs.mkShellNoCC { packages = [ pkgs.opentofu ]; };
-
-        rust = pkgs.mkShell {
-          packages = [
-            pkgs.cargo
-            pkgs.openssl.dev
-            pkgs.pkg-config
-            pkgs.rustc
-            pkgs.rust-analyzer
-          ];
-        };
 
         vscode = pkgs.mkShellNoCC { packages = [ pkgs.vsce ] ++ self'.devShells.js.nativeBuildInputs; };
       };
