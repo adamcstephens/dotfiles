@@ -1,0 +1,21 @@
+{ inputs, ... }:
+{
+  perSystem =
+    {
+      inputs',
+      ...
+    }:
+    let
+      pkgs = inputs'.nixpkgs-unstable.legacyPackages;
+    in
+    {
+      packages = rec {
+        neovim = pkgs.callPackage ./package.nix {
+          inherit (inputs) mnw;
+          neovim = pkgs.neovim-unwrapped;
+        };
+
+        neovim-full = neovim.override { full = true; };
+      };
+    };
+}

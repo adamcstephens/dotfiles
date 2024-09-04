@@ -52,6 +52,7 @@ in
 
     specialArgs = {
       inherit inputs npins;
+      flake = self;
     };
   };
 
