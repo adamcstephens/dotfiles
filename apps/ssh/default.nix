@@ -26,7 +26,7 @@ in
 
     systemd.user.services.ssh-tpm-agent = lib.mkIf cfg.tpm {
       Unit = {
-        PartOf = [ "default.target" ];
+        PartOf = [ "graphical-session.target" ];
         After = [ "ssh-agent.service" ];
         Requires = [ "ssh-agent.service" ];
       };
@@ -41,7 +41,7 @@ in
         Restart = "on-abort";
       };
 
-      Install.WantedBy = [ "default.target" ];
+      Install.WantedBy = [ "graphical-session.target" ];
     };
   };
 }
