@@ -14,7 +14,7 @@
         default = 96;
       };
 
-      dontSuspend = lib.mkEnableOption "Don't automatically suspend on idle";
+      dontSleep = lib.mkEnableOption "Don't automatically sleep on idle";
       insecure = lib.mkEnableOption "Insecure GUI disables locking";
       wayland = lib.mkEnableOption "Enable wayland resources";
       xorg = {

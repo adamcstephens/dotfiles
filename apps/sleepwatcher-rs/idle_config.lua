@@ -22,8 +22,8 @@ function DpmsOff()
   IdleNotifier:run("hyprctl dispatch dpms off")
 end
 
-function Suspend()
-  IdleNotifier:run("systemctl suspend")
+function Sleep()
+  IdleNotifier:run("systemctl sleep")
 end
 
 function ScreenLockBattery(event)
@@ -34,7 +34,7 @@ end
 
 function SleepBattery(event)
   if event == "idled" and Helpers:on_battery() then
-    Suspend()
+    Sleep()
   end
 end
 

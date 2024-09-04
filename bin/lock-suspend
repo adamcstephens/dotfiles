@@ -6,8 +6,8 @@ if [[ $AC -eq 1 ]]; then
   exec pkill -SIGUSR1 swayidle
 fi
 if playerctl status | grep -q Playing; then
-  echo "Playing audio, not suspending"
+  echo "Playing audio, not sleeping"
   exit 0
 fi
 
-exec systemctl suspend
+exec systemctl sleep

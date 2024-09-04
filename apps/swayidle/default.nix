@@ -29,9 +29,9 @@ in
             command = "${locker}";
           }
         ]
-        ++ (lib.optional (!config.dotfiles.gui.dontSuspend) {
+        ++ (lib.optional (!config.dotfiles.gui.dontSleep) {
           timeout = 360;
-          command = "${systemctlBin} suspend";
+          command = "${systemctlBin} sleep";
         });
     };
   };

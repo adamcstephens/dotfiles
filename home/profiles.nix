@@ -135,7 +135,7 @@ in
           {
             dotfiles.gui = {
               dpi = 148;
-              dontSuspend = true;
+              dontSleep = true;
               wayland = true;
               xorg = {
                 enable = true;
