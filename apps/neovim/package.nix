@@ -127,6 +127,7 @@ mnw.lib.wrap pkgs {
       nil
       nixd
       nodejs
+      nodePackages.prettier
       nodePackages.vscode-json-languageserver
       ruff
       shellcheck
