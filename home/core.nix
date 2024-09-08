@@ -118,6 +118,7 @@
       pkgs.jq
       pkgs.just
       pkgs.kitty.terminfo
+      pkgs.moar
       pkgs.mtr
       pkgs.tio
       pkgs.wget

@@ -1,3 +1,7 @@
 #!/usr/bin/env sh
 
-exec less --raw-control-chars --quit-if-one-screen --quit-at-eof --no-init --hilite-search --mouse --ignore-case "$@"
+if command -v moar >/dev/null 2>&1; then
+  exec moar -no-clear-on-exit -no-linenumbers -quit-if-one-screen "$@"
+else
+  exec less --raw-control-chars --quit-if-one-screen --quit-at-eof --no-init --hilite-search --mouse --ignore-case "$@"
+fi
