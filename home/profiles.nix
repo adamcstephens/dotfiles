@@ -57,71 +57,6 @@ in
   };
 
   profile-parts.home-manager = {
-    ark = {
-      system = "aarch64-linux";
-      nixpkgs = inputs.nixpkgs-unstable;
-      home-manager = inputs.home-manager-unstable;
-      modules = [
-        ./linux-gui.nix
-        ../apps/goldencheetah
-
-        (
-          { pkgs, ... }:
-          {
-            dotfiles = {
-              gui.wayland = true;
-              gui.dpi = 144;
-            };
-
-            programs.waybar.settings.main = {
-              output = [
-                "eDP-1"
-                "DP-1"
-                "DP-2"
-              ];
-              network.interface = "wlP6p1s0";
-            };
-
-            # no gamma support on x13s
-            services.gammastep.enable = lib.mkForce false;
-
-            services.kanshi.profiles.undocked = lib.mkForce {
-              outputs = [
-                {
-                  criteria = "eDP-1";
-                  scale = 1.15;
-                  status = "enable";
-                }
-              ];
-            };
-
-            services.ssh-agent.enable = true;
-            systemd.user.services.ssh-agent.Install.WantedBy = lib.mkForce [ "graphical-session.target" ];
-            systemd.user.services.ssh-agent.Service.Environment = [
-              "SSH_ASKPASS=${pkgs.gnome.seahorse}/libexec/seahorse/ssh-askpass"
-            ];
-          }
-        )
-      ];
-    };
-
-    ava = {
-      nixpkgs = inputs.nixpkgs-unstable;
-      home-manager = inputs.home-manager-unstable;
-
-      modules = [
-        (
-          { pkgs, ... }:
-          {
-            dotfiles.apps.emacs.full = true;
-            home.packages = [ pkgs.nixfmt-rfc-style ];
-          }
-        )
-        ../apps/atuin
-        ../apps/emacs
-      ];
-    };
-
     blank = {
       nixpkgs = inputs.nixpkgs-unstable;
       home-manager = inputs.home-manager-unstable;
@@ -189,48 +124,6 @@ in
       ];
     };
 
-    drink = {
-      enable = false;
-
-      modules = [
-        ./linux-gui.nix
-        ../apps/firefox
-        ../apps/goldencheetah
-        {
-          dotfiles.gui = {
-            insecure = true;
-            xorg.enable = true;
-          };
-
-          home.sessionVariables = {
-            LIBVA_DRIVER_NAME = "i965";
-          };
-        }
-      ];
-    };
-
-    EMAT-C02G44CPQ05P = {
-      username = "astephe9";
-      system = "aarch64-darwin";
-      modules = [ ./core-darwin.nix ];
-    };
-
-    silver = {
-      system = "aarch64-darwin";
-      nixpkgs = inputs.nixpkgs-unstable;
-      home-manager = inputs.home-manager-unstable;
-      modules = [
-        ./core-darwin.nix
-
-        {
-          dotfiles.apps.emacs = {
-            patchForGui = false;
-            full = false;
-          };
-        }
-      ];
-    };
-
     seek = {
       nixpkgs = inputs.nixpkgs-unstable;
       home-manager = inputs.home-manager-unstable;
@@ -279,41 +172,6 @@ in
                   status = "enable";
                 }
               ];
-            };
-          }
-        )
-      ];
-    };
-
-    think = {
-      nixpkgs = inputs.nixpkgs-unstable;
-      home-manager = inputs.home-manager-unstable;
-
-      modules = [
-        ./linux-gui.nix
-
-        (
-          { pkgs, ... }:
-          {
-            apps.ssh.tpm = true;
-
-            dotfiles = {
-              gui.wayland = true;
-              apps = {
-                vscode.enable = true;
-                vscodium.enable = false;
-              };
-            };
-
-            home.packages = [
-              pkgs.microsoft-edge
-              pkgs.slack
-              pkgs.ungoogled-chromium
-              pkgs.zoom-us
-            ];
-
-            programs.waybar.settings.main = {
-              network.interface = "wlp0s20f3";
             };
           }
         )
