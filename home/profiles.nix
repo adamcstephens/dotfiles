@@ -26,6 +26,8 @@ in
       [
         ./core.nix
         {
+          nix.registry.nixpkgs.flake = lib.mkDefault profile.nixpkgs;
+
           nixpkgs = {
             overlays = [
               self.overlays.default

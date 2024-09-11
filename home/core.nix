@@ -84,8 +84,6 @@
     };
   };
 
-  nix.registry.nixpkgs.flake = lib.mkDefault inputs.nixpkgs;
-
   home.activation.directories = lib.hm.dag.entryBefore [ "checkLinkTargets" ] ''
     for dir in git projects tmp; do
       if [ ! -d $HOME/$dir ]; then
