@@ -138,5 +138,16 @@ vim.filetype.add({
   },
 })
 
+-- yaml
+require("lspconfig").yamlls.setup({
+  settings = {
+    redhat = {
+      telemetry = {
+        enabled = false,
+      },
+    },
+  },
+})
+
 -- zig
 lspconfig.zls.setup({})

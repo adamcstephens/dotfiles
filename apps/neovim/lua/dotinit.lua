@@ -250,7 +250,7 @@ end)
 vim.keymap.set("n", "<leader>xl", function()
   require("trouble").toggle("loclist")
 end)
-vim.keymap.set("n", "<leader>y", builtin.registers, { desc = "Registers" })
+vim.keymap.set({ "n", "v" }, "<leader>y", builtin.registers, { desc = "Registers" })
 
 vim.keymap.set("n", "<C-p>", builtin.find_files, { desc = "Find Files" })
 

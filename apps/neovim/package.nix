@@ -4,9 +4,8 @@
   mnw,
   neovim,
 
-  callPackage,
   lib,
-  pkgs,
+  pkgs, # for mnw
   stdenv,
 
   vimPlugins,
@@ -31,6 +30,7 @@
   sqlfluff,
   sqlite,
   stylua,
+  yaml-language-server,
 }:
 let
   pins = import ./npins;
@@ -134,5 +134,6 @@ mnw.lib.wrap pkgs {
       shfmt
       sqlfluff
       stylua
+      yaml-language-server
     ];
 }
