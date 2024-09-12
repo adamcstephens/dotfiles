@@ -157,7 +157,6 @@ in
 
       # nix
       pkgs.nh
-      inputs.nix-index-database.packages.${pkgs.system}.nix-index-with-db
 
       screenshot
     ]

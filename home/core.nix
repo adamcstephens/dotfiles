@@ -7,8 +7,6 @@
 }:
 {
   imports = [
-    inputs.nix-index-database.hmModules.nix-index
-
     ./module.nix
 
     ../apps/bash
@@ -142,7 +140,6 @@
     direnv.enable = true;
     direnv.nix-direnv.enable = true;
     home-manager.enable = true;
-    nix-index.enable = true;
     zoxide = {
       enable = true;
       options = [

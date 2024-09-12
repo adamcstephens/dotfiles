@@ -46,8 +46,7 @@ intel-check-cstate:
     sudo cat /sys/kernel/debug/pmc_core/package_cstate_show
 
 migrate:
-    [ ! -e $HOME/.cache/nix-index ] || rm -rf $HOME/.cache/nix-index
-    [ ! -e $HOME/.config/nvim ] || rm -rf $HOME/.config/nvim
+    true
 
 nix-upgrade:
     sudo nix-channel --update

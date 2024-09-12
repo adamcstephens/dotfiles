@@ -36,7 +36,6 @@
     pkgs.yubikey-manager
 
     # nix
-    inputs.nix-index-database.packages.${pkgs.system}.comma-with-db
     pkgs.nix-output-monitor
     pkgs.nix-tree
     pkgs.nixd
