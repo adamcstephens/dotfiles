@@ -76,9 +76,9 @@
   };
 
   nix = {
-    package = lib.mkForce pkgs.nix;
+    package = lib.mkForce pkgs.nixVersions.nix_2_24;
     settings = {
-      experimental-features = "nix-command flakes";
+      experimental-features = "nix-command flakes pipe-operators";
       builders-use-substitutes = true;
       accept-flake-config = false;
     };
