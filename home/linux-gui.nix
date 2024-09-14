@@ -155,9 +155,6 @@ in
       pkgs.pinentry.curses
       pkgs.rofi-rbw
 
-      # nix
-      pkgs.nh
-
       screenshot
     ]
     ++ (lib.optionals config.dotfiles.gui.wayland [
