@@ -76,7 +76,10 @@
   nix = {
     package = lib.mkForce pkgs.nixVersions.nix_2_24;
     settings = {
-      experimental-features = "nix-command flakes pipe-operators";
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ] ++ lib.optionals (lib.versionAtLeast config.nix.package.version "2.24") [ "pipe-operators" ];
       builders-use-substitutes = true;
       accept-flake-config = false;
     };
