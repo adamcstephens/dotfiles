@@ -11,6 +11,20 @@
       "url": null,
       "hash": "16w7q7z7i77dh8qhl1vm0y96il6zda5ib3x7il1c8i74h3c14abd"
     },
+    "codecompanion": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "Git",
+        "url": "https://github.com/olimorris/codecompanion.nvim"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "version": "v2.7.0",
+      "revision": "489b5fc551d562142d5914f26d2481024479e0b2",
+      "url": null,
+      "hash": "0ycix2kpg969cmr569v0srb33illyvb3w9108db5wgz0py8hbvvv"
+    },
     "focus.nvim": {
       "type": "Git",
       "repository": {
