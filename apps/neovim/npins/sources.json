@@ -48,6 +48,17 @@
       "url": null,
       "hash": "0ks0c0cq1spy8q58ahqv7kdslllzpz3vb6d6xgxld6y1lrx4x0hs"
     },
+    "minuet-ai": {
+      "type": "Git",
+      "repository": {
+        "type": "Git",
+        "url": "https://github.com/milanglacier/minuet-ai.nvim"
+      },
+      "branch": "main",
+      "revision": "e96ea460386309bd3d36c13ee9e92e80cf735671",
+      "url": null,
+      "hash": "0jbasd32wvic3cjqrlgklrg9fj30wfzrxijff3is8sh7a450f8qz"
+    },
     "move-nvim": {
       "type": "Git",
       "repository": {
