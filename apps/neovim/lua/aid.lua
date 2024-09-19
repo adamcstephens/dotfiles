@@ -11,6 +11,11 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.s
 -- cmp
 --
 local cmp = require("cmp")
+local cmp_default_sources = {
+  { name = "luasnip" },
+  { name = "nvim_lsp" },
+  { name = "path" },
+}
 cmp.setup({
   experimental = {
     ghost_text = true,
@@ -27,13 +32,14 @@ cmp.setup({
       require("luasnip").lsp_expand(args.body)
     end,
   },
+  sources = cmp.config.sources(cmp_default_sources),
+})
+
+cmp.setup.filetype({ "elixir", "go" }, {
   sources = cmp.config.sources({
     { name = "minuet" },
-    -- { name = "copilot" },
-    { name = "luasnip" },
-    { name = "nvim_lsp" },
-    { name = "path" },
-  }),
+    { name = "copilot" },
+  }, cmp_default_sources),
 })
 
 require("codecompanion").setup({
