@@ -97,25 +97,25 @@ require("lspconfig").teal_ls.setup({})
 
 -- nix
 lspconfig.nixd.setup({})
-lspconfig.nil_ls.setup({
-  on_attach = function(client)
-    client.server_capabilities.semanticTokensProvider = nil
-  end,
-  settings = {
-    ["nil"] = {
-      formatting = {
-        command = { "nixfmt", "--quiet" },
-      },
-      nix = {
-        flake = {
-          autoArchive = true,
-          -- autoEvalInputs = true,
-          maxMemoryMB = 8192,
-        },
-      },
-    },
-  },
-})
+-- lspconfig.nil_ls.setup({
+--   on_attach = function(client)
+--     client.server_capabilities.semanticTokensProvider = nil
+--   end,
+--   settings = {
+--     ["nil"] = {
+--       formatting = {
+--         command = { "nixfmt", "--quiet" },
+--       },
+--       nix = {
+--         flake = {
+--           autoArchive = true,
+--           -- autoEvalInputs = true,
+--           maxMemoryMB = 8192,
+--         },
+--       },
+--     },
+--   },
+-- })
 
 -- nushell
 lspconfig.nushell.setup({})
