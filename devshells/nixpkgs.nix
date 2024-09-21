@@ -1,43 +1,32 @@
 {
   lib,
   mkShellNoCC,
+  pkgs,
   stdenv,
-
-  bubblewrap,
-  common-updater-scripts,
-  cntr,
-  deadnix,
-  hydra-check,
-  nix-bisect,
-  nix-generate-from-cpan,
-  nix-prefetch,
-  nix-prefetch-github,
-  nix-prefetch-scripts,
-  nix-tree,
-  nix-update,
-  nixpkgs-fmt,
-  nixpkgs-review,
-  nurl,
 }:
 mkShellNoCC {
   name = "nixpkgs-devshell";
 
-  packages = [
-    cntr
-    common-updater-scripts
-    deadnix
-    hydra-check
-    nix-bisect
-    nix-prefetch
-    nix-generate-from-cpan
-    nix-prefetch-github
-    nix-prefetch-scripts
-    nix-tree
-    nix-update
-    nixpkgs-fmt
-    nixpkgs-review
-    nurl
-  ] ++ (lib.optionals stdenv.isLinux [ bubblewrap ]);
+  packages =
+    with pkgs;
+    [
+      cntr
+      common-updater-scripts
+      deadnix
+      hydra-check
+      nix-bisect
+      nix-prefetch
+      nix-generate-from-cpan
+      nix-prefetch-github
+      nix-prefetch-scripts
+      nix-tree
+      nix-update
+      nixpkgs-fmt
+      nixpkgs-review
+      nurl
+      pyright
+    ]
+    ++ (lib.optionals stdenv.isLinux [ bubblewrap ]);
 
   shellHook = ''
     ln -sf $HOME/.dotfiles/apps/nix/dir-locals.el $PWD/.dir-locals.el
