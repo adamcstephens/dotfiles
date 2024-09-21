@@ -11,11 +11,6 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.s
 -- cmp
 --
 local cmp = require("cmp")
-local cmp_default_sources = {
-  { name = "luasnip" },
-  { name = "nvim_lsp" },
-  { name = "path" },
-}
 cmp.setup({
   experimental = {
     ghost_text = true,
@@ -32,26 +27,36 @@ cmp.setup({
       require("luasnip").lsp_expand(args.body)
     end,
   },
-  sources = cmp.config.sources(cmp_default_sources),
+  sources = cmp.config.sources({
+    { name = "luasnip" },
+    { name = "nvim_lsp" },
+    { name = "path" },
+  }),
 })
 
 cmp.setup.filetype({ "elixir", "go" }, {
   sources = cmp.config.sources({
-    { name = "minuet" },
-    { name = "copilot" },
-  }, cmp_default_sources),
+    -- { name = "minuet" },
+    -- { name = "copilot" },
+    { name = "luasnip" },
+    { name = "nvim_lsp" },
+    { name = "path" },
+  }),
+  performance = {
+    fetching_timeout = 4000,
+  },
 })
 
 require("codecompanion").setup({
   strategies = {
     chat = {
-      adapter = "copilot",
+      adapter = "openai",
     },
     inline = {
-      adapter = "copilot",
+      adapter = "openai",
     },
     agent = {
-      adapter = "copilot",
+      adapter = "openai",
     },
   },
 })
@@ -101,8 +106,22 @@ require("copilot").setup({
 require("copilot_cmp").setup()
 require("minuet").setup({
   enabled = true,
-  provider = "openai",
+  provider = "claude",
   provider_options = {
+    claude = {
+      max_tokens = 512,
+      -- model = "claude-3-5-sonnet-20240620",
+      model = "claude-3-haiku-20240307",
+      -- system = system,
+      -- few_shots = default_few_shots,
+      stream = true,
+      optional = {
+        -- pass any additional parameters you want to send to claude request,
+        -- e.g.
+        -- stop_sequences = nil,
+      },
+    },
+
     openai = {
       model = "gpt-4o-mini",
       -- system = system,
