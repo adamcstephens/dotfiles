@@ -26,16 +26,16 @@ lspconfig.efm.setup({
 })
 
 -- elixir
--- require("elixir").setup({
---   nextls = {
---     enable = true,
---     cmd = "nextls",
---   },
---   credo = { enable = true },
---   elixirls = {
---     enable = false,
---   },
--- })
+require("elixir").setup({
+  nextls = {
+    enable = true,
+    cmd = "nextls",
+  },
+  credo = { enable = true },
+  elixirls = {
+    enable = false,
+  },
+})
 lspconfig.elixirls.setup({
   -- capabilities = require("cmp_nvim_lsp").default_capabilities(),
   cmd = { "elixir-ls" },
