@@ -37,7 +37,7 @@ cmp.setup({
 cmp.setup.filetype({ "elixir", "go" }, {
   sources = cmp.config.sources({
     -- { name = "minuet" },
-    -- { name = "copilot" },
+    { name = "copilot" },
     { name = "luasnip" },
     { name = "nvim_lsp" },
     { name = "path" },

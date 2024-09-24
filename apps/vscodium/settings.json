@@ -12,7 +12,7 @@
     "editor.defaultFormatter": "haskell.haskell"
   },
   "[html-eex]": {
-    "editor.defaultFormatter": "elixir-tools.elixir-tools"
+    "editor.defaultFormatter": "elixir-lsp.elixir-ls"
   },
   "[markdown]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
