@@ -46,24 +46,30 @@
     };
 
     xdg.configFile."river/start" = {
-      text = ''
-        #!${lib.getExe pkgs.bash}
+      text =
+        let
+          drmDevices = lib.concatStringsSep ":" config.dotfiles.gui.drmDevices;
+        in
+        ''
+          #!${lib.getExe pkgs.bash}
 
-        source $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
-        export PATH=$PATH:$HOME/.dotfiles/bin
+          ${lib.optionalString (config.dotfiles.gui.drmDevices != [ ]) "export WLR_DRM_DEVICES=${drmDevices}"}
 
-        if ! command -v river &>/dev/null; then
-          echo "!! No river binary found in path"
-          exit 1
-        fi
+          source $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
+          export PATH=$PATH:$HOME/.dotfiles/bin
 
-        # cleanup any previous sessions
-        systemctl --user stop wayland-session.target xserver-session.target
+          if ! command -v river &>/dev/null; then
+            echo "!! No river binary found in path"
+            exit 1
+          fi
 
-        systemd-cat --identifier=river river
+          # cleanup any previous sessions
+          systemctl --user stop wayland-session.target xserver-session.target
 
-        systemctl --user stop wayland-session.target
-      '';
+          systemd-cat --identifier=river river
+
+          systemctl --user stop wayland-session.target
+        '';
 
       executable = true;
     };

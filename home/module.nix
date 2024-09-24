@@ -9,6 +9,12 @@
     nixosManaged = lib.mkEnableOption "When nixos managed dotfiles is in the read-only store";
 
     gui = {
+      drmDevices = lib.mkOption {
+        type = lib.types.listOf lib.types.str;
+        description = "list of DRM device paths to use with wayland compositors";
+        default = [ ];
+      };
+
       dpi = lib.mkOption {
         type = lib.types.int;
         default = 96;

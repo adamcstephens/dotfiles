@@ -73,6 +73,9 @@ in
             dotfiles.gui = {
               dpi = 148;
               dontSleep = true;
+              drmDevices = [
+                "/dev/dri/card1"
+              ];
               wayland = true;
               xorg = {
                 enable = true;
