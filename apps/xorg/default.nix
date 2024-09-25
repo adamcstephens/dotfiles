@@ -38,6 +38,8 @@ in
     home.packages = [
       pkgs.maim
       pkgs.xdotool
+      pkgs.xorg.xev
+      pkgs.xorg.xdpyinfo
     ];
 
     services.screen-locker = lib.mkIf (!config.dotfiles.gui.insecure) {
@@ -95,22 +97,26 @@ in
       initExtra = ''
         # cleanup any wayland
         systemctl --user stop wayland-session.target
-        systemctl --user unset-environment WAYLAND_DISPLAY
+        systemctl --user unset-environment DISPLAY WAYLAND_DISPLAY
 
         export SSH_AUTH_SOCK=$(~/.dotfiles/bin/ssh-agent-mgr)
+        export PATH=$HOME/.dotfiles/bin:$PATH
 
         # chrome and vscode use this to find the secret service
         export XDG_CURRENT_DESKTOP=GNOME
 
-        # start xserver session
-        systemctl --user import-environment DISPLAY SSH_AUTH_SOCK
+        export XDG_SESSION_TYPE=x11
+
+        dbus-update-activation-environment --systemd DISPLAY XAUTHORITY XDG_CONFIG_DIRS XDG_DATA_HOME XDG_CONFIG_HOME XDG_STATE_HOME XDG_CACHE_HOME XDG_DATA_DIRS XDG_CURRENT_DESKTOP XDG_SESSION_TYPE XDG_SESSION_DESKTOP XDG_RUNTIME_DIR
+
         systemctl --user start tray.target
         systemctl --user start xserver-session.target
 
         touchpadid="$(xinput list | rg "SYNA.*Touchpad" | sort | tail -n 1 | awk '{print $6}' | cut -f 2 -d=)"
         xinput disable "$touchpadid"
 
-        ${lib.getExe pkgs.feh} --bg-center ${wallpaper}/share/wallpapers/nixos-wallpaper.png &
+        xsetroot -solid "#000000"
+        xset r rate 160 80
       '';
     };
 
