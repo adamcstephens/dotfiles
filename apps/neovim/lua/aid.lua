@@ -69,7 +69,7 @@ require("conform").setup({
   },
   formatters_by_ft = {
     -- elixir = { "mix" },
-    heex = { "mix" },
+    -- heex = { "mix" },
     javascript = { "biome" },
     json = { "biome" },
     lua = { "stylua" },
