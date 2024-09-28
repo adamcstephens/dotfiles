@@ -20,10 +20,10 @@
       "pre_releases": false,
       "version_upper_bound": null,
       "release_prefix": null,
-      "version": "v3.3.2",
-      "revision": "9e3112dc6613431377bbed28fc8eda9ccf00bfdb",
+      "version": "v4.0.0",
+      "revision": "fa4f959d6af1506acdfc024489762995f1692098",
       "url": null,
-      "hash": "0ii74gypp2ychvlqphlk8hmz8isfvw7ws2dfcm2097lh86m1xwhx"
+      "hash": "16y4a74zhay469ql92bpdd2744qp2xnj294v9kjgrr7aspvibcjh"
     },
     "focus.nvim": {
       "type": "Git",
@@ -44,9 +44,9 @@
         "url": "https://github.com/projekt0n/github-nvim-theme"
       },
       "branch": "main",
-      "revision": "6b461635230ccb5d0037f378fbe05a27c4ccf7cd",
+      "revision": "0e4636f556880d13c00d8a8f686fae8df7c9845f",
       "url": null,
-      "hash": "0ks0c0cq1spy8q58ahqv7kdslllzpz3vb6d6xgxld6y1lrx4x0hs"
+      "hash": "1an2il6j82drkf5gbj4fnwiaqswbvf13navgwds79zdsg2x8idqj"
     },
     "minuet-ai": {
       "type": "Git",
@@ -55,9 +55,9 @@
         "url": "https://github.com/milanglacier/minuet-ai.nvim"
       },
       "branch": "main",
-      "revision": "e96ea460386309bd3d36c13ee9e92e80cf735671",
+      "revision": "bd5a7ae2bda3a4f57e8a94e3229f41647c77c69e",
       "url": null,
-      "hash": "0jbasd32wvic3cjqrlgklrg9fj30wfzrxijff3is8sh7a450f8qz"
+      "hash": "19bjqj9w85ab4z4dgh40x9g0vbb05wybpgi0wak5dy78g4m5wqg1"
     },
     "move-nvim": {
       "type": "Git",
@@ -110,9 +110,9 @@
         "url": "https://github.com/bluz71/vim-moonfly-colors"
       },
       "branch": "master",
-      "revision": "4f7d18cb471ede7407dd966c7563868cae7f4f99",
+      "revision": "e06add9696c8e70fa91cc59883459505b6aab49d",
       "url": null,
-      "hash": "102kmb20mq21b831s8j0r3qx6m1vh2li9m17as84r88c1513qr8p"
+      "hash": "1qzpaklz59v1jjn70yi9dzw2nqis8hhnlf9fwk2p9fmgar5indjz"
     },
     "workspace-diagnotics-nvim": {
       "type": "Git",
