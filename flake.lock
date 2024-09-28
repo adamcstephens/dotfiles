@@ -537,11 +537,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1727458663,
-        "narHash": "sha256-eZVmagNR3k6K7cRRpK5z4IUW3NwD4Y9sa0FDd1zUtdo=",
+        "lastModified": 1727526994,
+        "narHash": "sha256-5ktMVgZ3XrJyfezhH8AyWF/SsUSRBvGU2Fx+twz0B5E=",
         "ref": "refs/heads/main",
-        "rev": "c59ef22ccbc6fd711e2f4d8c16d265c76dc5ba5d",
-        "revCount": 156,
+        "rev": "3a4e386f9428faf1a373e69ad43ee13096281b1d",
+        "revCount": 157,
         "type": "git",
         "url": "https://codeberg.org/adamcstephens/nix-sandbox"
       },
