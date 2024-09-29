@@ -1,15 +1,17 @@
 {
   mkShellNoCC,
 
-  python3,
+  pkgs,
 }:
 
 mkShellNoCC {
   packages = [
-    (python3.withPackages (py: [
+    (pkgs.python3.withPackages (py: [
       py.black
       py.hexdump
       py.paramiko
     ]))
+
+    pkgs.poetry
   ];
 }

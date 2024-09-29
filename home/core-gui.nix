@@ -43,6 +43,7 @@
 
     # tools
     pkgs.pwgen
+    pkgs.restish
     pkgs.unzip
 
     # apps
