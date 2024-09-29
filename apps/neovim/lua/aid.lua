@@ -37,7 +37,7 @@ cmp.setup({
 cmp.setup.filetype({ "elixir", "go" }, {
   sources = cmp.config.sources({
     -- { name = "minuet" },
-    { name = "copilot" },
+    -- { name = "copilot" },
     { name = "luasnip" },
     { name = "nvim_lsp" },
     { name = "path" },
@@ -92,18 +92,18 @@ require("conform").formatters.biome = {
 
 -- llm
 --
-require("copilot").setup({
-  suggestion = { enabled = false },
-  panel = { enabled = false },
-
-  filetypes = {
-    go = true,
-    elixir = true,
-    zig = true,
-    ["*"] = false,
-  },
-})
-require("copilot_cmp").setup()
+-- require("copilot").setup({
+--   suggestion = { enabled = false },
+--   panel = { enabled = false },
+--
+--   filetypes = {
+--     go = true,
+--     elixir = true,
+--     zig = true,
+--     ["*"] = false,
+--   },
+-- })
+-- require("copilot_cmp").setup()
 require("minuet").setup({
   enabled = true,
   provider = "claude",
