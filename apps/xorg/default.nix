@@ -21,7 +21,7 @@ let
     };
   };
 
-  xsecurelock = pkgs.writeScript "xsecurelock" ''
+  xsecurelock = pkgs.writeShellScript "xsecurelock" ''
     export XSECURELOCK_COMPOSITE_OBSCURER=0
     export XSECURELOCK_BACKGROUND_COLOR="#${colors.base00}"
     export XSECURELOCK_AUTH_BACKGROUND_COLOR="#${colors.base00}"

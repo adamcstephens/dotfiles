@@ -9,13 +9,12 @@
   nixVersions,
   nix-output-monitor,
   nvd,
-  writeScriptBin,
+  writeShellScriptBin,
 }:
 let
   nixArgs = ''--extra-experimental-features "nix-command flakes" --print-build-logs'';
 in
-writeScriptBin "hm" ''
-  #!${lib.getExe bash}
+writeShellScriptBin "hm" ''
   set -e
 
   export PATH="${

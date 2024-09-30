@@ -14,9 +14,7 @@ let
     '') (builtins.attrNames cfg.styles)
   );
 
-  script = pkgs.writeScript "xob-script" ''
-    #!${lib.getExe pkgs.bash}
-
+  script = pkgs.writeShellScript "xob-script" ''
     ${pkgs.coreutils}/bin/tail -F $XDG_RUNTIME_DIR/xob.sock | ${pkgs.xob}/bin/xob
   '';
 in

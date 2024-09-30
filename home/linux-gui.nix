@@ -6,7 +6,7 @@
   ...
 }:
 let
-  configure-gtk = pkgs.writeScriptBin "configure-gtk" (
+  configure-gtk = pkgs.writeShellScriptBin "configure-gtk" (
     let
       schema = pkgs.gsettings-desktop-schemas;
       datadir = "${schema}/share/gsettings-schemas/${schema.name}";
@@ -17,7 +17,7 @@ let
     ''
   );
 
-  gsettings-wrapper = pkgs.writeScriptBin "gsettings-wrapper" (
+  gsettings-wrapper = pkgs.writeShellScriptBin "gsettings-wrapper" (
     let
       schema = pkgs.gsettings-desktop-schemas;
       datadir = "${schema}/share/gsettings-schemas/${schema.name}";
