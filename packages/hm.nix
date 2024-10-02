@@ -6,7 +6,7 @@
   home-profile-selector,
   jq,
   just,
-  nixVersions,
+  lix,
   nix-output-monitor,
   nvd,
   writeShellScriptBin,
@@ -24,7 +24,7 @@ writeShellScriptBin "hm" ''
       home-profile-selector
       jq
       just
-      nixVersions.nix_2_24
+      lix
       nix-output-monitor
       nvd
     ]
