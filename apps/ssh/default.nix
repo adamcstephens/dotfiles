@@ -8,7 +8,13 @@ let
   cfg = config.apps.ssh;
 in
 {
-  options.apps.ssh.tpm = lib.mkEnableOption "ssh-tpm-agent";
+  options.apps.ssh = {
+    agent = {
+      enable = lib.mkEnableOption "ssh-agent";
+      askpass = lib.mkEnableOption "askpass support";
+    };
+    tpm = lib.mkEnableOption "ssh-tpm-agent";
+  };
 
   config = {
     home.packages = lib.optionals cfg.tpm [ pkgs.ssh-tpm-agent ];
@@ -22,6 +28,15 @@ in
 
       # use header: # -*- mode: ssh-config -*-
       includes = [ "local.config" ];
+    };
+
+    services.ssh-agent.enable = cfg.agent.enable;
+
+    systemd.user.services.ssh-agent = lib.mkIf cfg.agent.askpass {
+      Install.WantedBy = lib.mkForce [ "graphical-session.target" ];
+      Service.Environment = [
+        "SSH_ASKPASS=${pkgs.gnome.seahorse}/libexec/seahorse/ssh-askpass"
+      ];
     };
 
     systemd.user.services.ssh-tpm-agent = lib.mkIf cfg.tpm {
