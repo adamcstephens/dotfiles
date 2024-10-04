@@ -68,9 +68,7 @@ require("conform").setup({
     lsp_fallback = true,
   },
   formatters_by_ft = {
-    -- elixir = { "mix" },
-    -- heex = { "mix" },
-    javascript = { "biome" },
+    javascript = { "prettier" },
     json = { "biome" },
     lua = { "stylua" },
     nix = { "nixfmt" },
@@ -78,6 +76,7 @@ require("conform").setup({
     sql = { "sqlfluff" },
     teal = { "stylua" },
     terraform = { "tofu_fmt" },
+    typescript = { "prettier" },
     yaml = { "prettier" },
   },
 })
