@@ -149,6 +149,7 @@ in
       pkgs.remmina
       pkgs.streamrip
       pkgs.thunderbird
+      pkgs.ungoogled-chromium
       pkgs.yt-dlp
 
       # bitwarden

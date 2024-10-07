@@ -159,7 +159,6 @@ in
             home.packages = [
               pkgs.microsoft-edge
               pkgs.slack
-              pkgs.ungoogled-chromium
               pkgs.zoom-us
             ];
 
