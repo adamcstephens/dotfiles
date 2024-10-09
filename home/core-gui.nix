@@ -49,6 +49,13 @@
     # apps
     pkgs.eternal-terminal
     pkgs.senpai
+
+    # dev
+    pkgs.gh
+    pkgs.hut
+    pkgs.lazygit
+    (pkgs.writeShellScriptBin "lg" "exec ${lib.getExe pkgs.lazygit} $@")
+    pkgs.tea
   ];
 
   programs = {

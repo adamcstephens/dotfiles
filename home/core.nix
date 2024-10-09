@@ -128,10 +128,6 @@
       pkgs.mtr
       pkgs.tio
       pkgs.wget
-
-      pkgs.gh
-      pkgs.hut
-      pkgs.tea
     ]
     ++ lib.optionals (!pkgs.stdenv.isDarwin) [
       # zig broken on darwin
