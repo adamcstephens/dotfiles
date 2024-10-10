@@ -7,9 +7,9 @@
         "url": "https://github.com/f-person/auto-dark-mode.nvim"
       },
       "branch": "master",
-      "revision": "14cad96b80a07e9e92a0dcbe235092ed14113fb2",
+      "revision": "d365beccca05ffcb01e50109f2adca2459c3995a",
       "url": null,
-      "hash": "16w7q7z7i77dh8qhl1vm0y96il6zda5ib3x7il1c8i74h3c14abd"
+      "hash": "0ps17gzxyjzghdpr98sdfcgmqjggzpdh60r5w3xiqmxhj5klb6m5"
     },
     "codecompanion": {
       "type": "GitRelease",
@@ -20,10 +20,10 @@
       "pre_releases": false,
       "version_upper_bound": null,
       "release_prefix": null,
-      "version": "v6.0.1",
-      "revision": "fc583dc1d27a95a2bab410ceac3097923eab0e36",
+      "version": "v8.3.0",
+      "revision": "2c0ff9c301fe5af563a41f9947b2cc683ce24bfe",
       "url": null,
-      "hash": "0qwkph3ndbvzby4sq5wm6fl28yxm3sf1q8n7l21r2qxr91asv4rd"
+      "hash": "00dyfd70w79lwyifzkb2hg063vz59zsnazz3b2wnp4qs112s2v7s"
     },
     "focus.nvim": {
       "type": "Git",
