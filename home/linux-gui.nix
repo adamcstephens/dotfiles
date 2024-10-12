@@ -179,7 +179,7 @@ in
       pkgs.xclip
       pkgs.xlayoutdisplay
     ])
-    ++ (lib.optionals pkgs.stdenv.isx86_64 [ pkgs.simplex-chat-desktop ]);
+    ++ (lib.optionals pkgs.stdenv.isx86_64 [ pkgs.bitwarden-desktop ]);
 
   programs.feh.enable = true;
 
