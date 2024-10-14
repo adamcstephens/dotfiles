@@ -26,9 +26,6 @@
     # for class
     pkgs.nodejs
 
-    pkgs.element-desktop
-    pkgs.libreoffice-bin
-
     inputs.sandbox.packages.${pkgs.system}.m1ddc
   ];
 
