@@ -130,7 +130,16 @@ in
     maple = {
       system = "aarch64-darwin";
       nixpkgs = inputs.nixpkgs-unstable;
-      modules = [ ./core-darwin.nix ];
+      modules = [
+        ./core-darwin.nix
+        (
+          { pkgs, ... }:
+          {
+            home.packages = [ inputs.devbox.packages.${pkgs.system}.default ];
+            nix.package = lib.mkForce pkgs.nixVersions.latest;
+          }
+        )
+      ];
     };
 
     seek = {

@@ -112,28 +112,24 @@
 
   home.file.".terminfo".source = config.lib.file.mkOutOfStoreSymlink "${config.home.profileDirectory}/share/terminfo";
 
-  home.packages =
-    [
-      pkgs.calc
-      pkgs.difftastic
-      pkgs.direnv
-      pkgs.doggo
-      pkgs.du-dust
-      pkgs.fx
-      pkgs.gdu
-      pkgs.jq
-      pkgs.just
-      pkgs.kitty.terminfo
-      pkgs.moar
-      pkgs.mtr
-      pkgs.tio
-      pkgs.wget
-    ]
-    ++ lib.optionals (!pkgs.stdenv.isDarwin) [
-      # zig broken on darwin
-      pkgs.ncdu
-      pkgs.zf
-    ];
+  home.packages = [
+    pkgs.calc
+    pkgs.difftastic
+    pkgs.direnv
+    pkgs.doggo
+    pkgs.du-dust
+    pkgs.fx
+    pkgs.gdu
+    pkgs.jq
+    pkgs.just
+    pkgs.kitty.terminfo
+    pkgs.moar
+    pkgs.mtr
+    pkgs.ncdu
+    pkgs.tio
+    pkgs.wget
+    pkgs.zf
+  ];
 
   home.sessionVariables = {
     EDITOR = "${config.home.homeDirectory}/.dotfiles/bin/editor";

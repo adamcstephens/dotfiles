@@ -1,11 +1,17 @@
 tap "homebrew/bundle"
+tap "homebrew/services"
 brew "dark-mode"
+cask "1password"
+cask "1password-cli"
 cask "bettertouchtool"
 cask "bluesnooze"
+cask "docker"
 cask "finicky"
 cask "firefox"
+cask "firefox@developer-edition"
 cask "istat-menus"
 cask "karabiner-elements"
+cask "notion"
 cask "raycast"
 cask "secretive"
 cask "slack"
@@ -13,7 +19,6 @@ cask "tidal"
 cask "utm"
 cask "visual-studio-code"
 cask "zoom"
-mas "1Password 7", id: 1333542190
 mas "Bitwarden", id: 1352778147
 mas "GarageBand", id: 682658836
 mas "iMovie", id: 408981434

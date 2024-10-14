@@ -120,33 +120,25 @@
         modules = [
           inputs.home-manager-unstable.darwinModules.home-manager
 
-          (
-            { pkgs, ... }:
-            {
-              home-manager.users.adam = {
-                imports = homeModules ++ [
-                  {
-                    nix.package = lib.mkForce pkgs.nixVersions.latest;
-                  }
-                ];
-              };
+          {
+            home-manager.users.adam = {
+              imports = homeModules;
+            };
 
-              home-manager.extraSpecialArgs = {
-                inherit inputs;
-                npins = import ../npins;
-                flake = self;
-              };
+            home-manager.extraSpecialArgs = {
+              inherit inputs;
+              npins = import ../npins;
+              flake = self;
+            };
 
-              networking.computerName = "maple";
-              security.pam.enableSudoTouchIdAuth = true;
-              system.stateVersion = 5;
-              users.users.adam = {
-                home = "/Users/adam";
-                shell = "/home/adam/.nix-profile/bin/fish";
-              };
-
-            }
-          )
+            networking.computerName = "maple";
+            security.pam.enableSudoTouchIdAuth = true;
+            system.stateVersion = 5;
+            users.users.adam = {
+              home = "/Users/adam";
+              shell = "/home/adam/.nix-profile/bin/fish";
+            };
+          }
         ];
       };
   };

@@ -8,6 +8,8 @@
     home-manager-unstable.url = "github:nix-community/home-manager";
     home-manager-unstable.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
+    devbox.url = "github:jetify-com/devbox/latest";
+    devbox.inputs.nixpkgs.follows = "nixpkgs-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
     mnw.url = "github:Gerg-L/mnw?ref=962d34fed1b1586a45406eb729a4dc941da8a7b6";
     nix-colors.url = "github:misterio77/nix-colors";
