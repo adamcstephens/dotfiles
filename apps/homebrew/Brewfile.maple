@@ -1,0 +1,24 @@
+tap "homebrew/bundle"
+brew "dark-mode"
+cask "bettertouchtool"
+cask "bluesnooze"
+cask "finicky"
+cask "firefox"
+cask "istat-menus"
+cask "karabiner-elements"
+cask "raycast"
+cask "secretive"
+cask "slack"
+cask "tidal"
+cask "utm"
+cask "visual-studio-code"
+cask "zoom"
+mas "1Password 7", id: 1333542190
+mas "Bitwarden", id: 1352778147
+mas "GarageBand", id: 682658836
+mas "iMovie", id: 408981434
+mas "Keynote", id: 409183694
+mas "Numbers", id: 409203825
+mas "Pages", id: 409201541
+mas "Parcel", id: 639968404
+mas "WireGuard", id: 1451685025

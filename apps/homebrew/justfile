@@ -1,0 +1,11 @@
+brewfile := "Brewfile." + `hostname -s`
+
+bootstrap:
+    NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+
+dump:
+    brew bundle dump --formula --cask --tap --mas --force --file {{ brewfile }}
+
+install:
+    brew bundle --file {{ brewfile }}

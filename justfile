@@ -7,10 +7,6 @@ arkenfox:
 arkenfox-update: && arkenfox
     nix run nixpkgs#nix-update -- --flake arkenfox --commit
 
-brew-dump:
-    brew bundle dump --formula --cask --tap --mas --force
-    git diff Brewfile
-
 bump: bump-flake bump-pins bump-packages
 
 bump-flake:
