@@ -1,8 +1,8 @@
 module.exports = {
   // get bundle id: mdls /Applications/Firefox.app/ | grep kMDItemCF
   defaultBrowser: [
-    "org.mozilla.firefox",
     "org.mozilla.firefoxdeveloperedition",
+    "org.mozilla.firefox",
     "Safari",
   ],
   options: {
@@ -106,6 +106,6 @@ module.exports = {
           args: ["-P", "Kent", `${urlString}`],
         }),
       };
-    })
+    }),
   ),
 };
