@@ -127,6 +127,12 @@ in
       ];
     };
 
+    maple = {
+      system = "aarch64-darwin";
+      nixpkgs = inputs.nixpkgs-unstable;
+      modules = [ ./core-darwin.nix ];
+    };
+
     seek = {
       nixpkgs = inputs.nixpkgs-unstable;
       home-manager = inputs.home-manager-unstable;

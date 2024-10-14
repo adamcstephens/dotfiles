@@ -2,6 +2,7 @@
   config,
   inputs,
   lib,
+  self,
   ...
 }:
 {
@@ -108,100 +109,36 @@
   };
 
   profile-parts.darwin = {
-    EMAT-C02G44CPQ05P = {
-      modules = [
-        (
-          { pkgs, ... }:
-          {
-            environment.etc."ssh/sshd_config.d/200-nix.conf".text = ''
-              PasswordAuthentication no
-              AllowUsers astephe9@10.3.2.* astephe9@10.20.10.* adam@10.3.2.* adam@10.20.10.*
-            '';
-
-            security.pam.enableSudoTouchIdAuth = true;
-            users.users.astephe9 = {
-              shell = lib.getExe pkgs.fish;
-            };
-          }
-        )
-      ];
-    };
-
-    silver =
+    maple =
       let
-        homeModules = config.profile-parts.home-manager.silver.finalModules;
+        homeModules = config.profile-parts.home-manager.maple.finalModules;
       in
       {
         nixpkgs = inputs.nixpkgs-unstable;
         modules = [
           inputs.home-manager-unstable.darwinModules.home-manager
 
-          inputs.sandbox.darwinModules.woodpecker-agents
           (
-            { config, pkgs, ... }:
+            { pkgs, ... }:
             {
-
               home-manager.users.adam = {
-                imports = homeModules ++ [ { dotfiles.nixosManaged = true; } ];
+                imports = homeModules;
               };
 
               home-manager.extraSpecialArgs = {
                 inherit inputs;
                 npins = import ../npins;
-              };
-              nix = {
-                distributedBuilds = true;
-                buildMachines = [
-                  {
-                    hostName = "silver-vm";
-                    maxJobs = 4;
-                    protocol = "ssh";
-                    sshKey = "/Users/adam/.ssh/id_nix_distributed_builds";
-                    sshUser = "builder";
-                    systems = [ "aarch64-linux" ];
-                    supportedFeatures = [ "big-parallel" ];
-                    speedFactor = 80;
-                  }
-                ];
+                flake = self;
               };
 
-              programs.ssh.knownHosts = {
-                silver-vm = {
-                  # extraHostNames = [ "silver-vm.h.junco.dev" ];
-                  publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEcDcbnOXw4PBtGX7qSpBK46vEsuH4CPp5s1q6tpv2mJ silver-vm";
-                };
-              };
-
-              services.woodpecker-agents.agents.default = {
-                enable = true;
-                # use release version since that's what's on the server
-                package = inputs.nixpkgs.legacyPackages.${pkgs.system}.woodpecker-agent;
-
-                environment = {
-                  WOODPECKER_BACKEND = "local";
-                  WOODPECKER_FILTER_LABELS = "type=local,system=aarch64-darwin";
-                  WOODPECKER_MAX_WORKFLOWS = "1";
-                  WOODPECKER_SERVER = "woodpecker-grpc.junco.dev:9000";
-                  WOODPECKER_GRPC_SECURE = "false";
-                };
-                environmentFile = [ "/etc/woodpecker-agent.env" ];
-
-                path = [
-                  config.nix.package
-                  pkgs.woodpecker-plugin-git
-                  pkgs.bash
-                  pkgs.coreutils
-                  pkgs.git
-                  pkgs.git-lfs
-                  pkgs.gnutar
-                  pkgs.gzip
-                ];
-              };
-
+              networking.computerName = "maple";
+              security.pam.enableSudoTouchIdAuth = true;
+              system.stateVersion = 5;
               users.users.adam = {
                 home = "/Users/adam";
-                uid = 501;
+                shell = "/home/adam/.nix-profile/bin/fish";
               };
+
             }
           )
         ];
