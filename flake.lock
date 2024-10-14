@@ -227,8 +227,8 @@
       },
       "original": {
         "owner": "Gerg-L",
+        "ref": "962d34fed1b1586a45406eb729a4dc941da8a7b6",
         "repo": "mnw",
-        "rev": "962d34fed1b1586a45406eb729a4dc941da8a7b6",
         "type": "github"
       }
     },
@@ -254,7 +254,7 @@
     "nix-darwin": {
       "inputs": {
         "nixpkgs": [
-          "nixpkgs"
+          "nixpkgs-unstable"
         ]
       },
       "locked": {
@@ -538,13 +538,13 @@
         ]
       },
       "locked": {
-        "lastModified": 1728566046,
-        "narHash": "sha256-tiwSGgypEq7ZqiwZzlNZJBSzlBmOiJqrDn59dMkmVXs=",
+        "lastModified": 1728790688,
+        "narHash": "sha256-PycsvfDNfc/avihf3t0UIaOxcIQiWHQEL2u2f8gNK9k=",
         "ref": "refs/heads/main",
-        "rev": "257fa3e86163c505528e21ddfe8f64f00d732d3f",
-        "revCount": 163,
+        "rev": "45cdde39987d53bf92e4c206cdb5ce48b4c6f900",
+        "revCount": 164,
         "type": "git",
-        "url": "https://codeberg.org/adamcstephens/nix-sandbox"
+        "url": "file:///Users/adam/projects/nix-sandbox"
       },
       "original": {
         "type": "git",

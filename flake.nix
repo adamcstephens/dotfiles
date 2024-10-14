@@ -12,7 +12,7 @@
     mnw.url = "github:Gerg-L/mnw?ref=962d34fed1b1586a45406eb729a4dc941da8a7b6";
     nix-colors.url = "github:misterio77/nix-colors";
     nix-darwin.url = "github:lnl7/nix-darwin/master";
-    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+    nix-darwin.inputs.nixpkgs.follows = "nixpkgs-unstable";
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
     nix-vscode-extensions.inputs.nixpkgs.follows = "nixpkgs";
     nix-wallpaper.url = "github:lunik1/nix-wallpaper";
