@@ -26,27 +26,33 @@ lspconfig.efm.setup({
 })
 
 -- elixir
-require("elixir").setup({
-  nextls = {
-    enable = true,
-    cmd = "nextls",
-  },
-  credo = { enable = true },
-  elixirls = {
-    enable = false,
-  },
-})
-lspconfig.elixirls.setup({
-  -- capabilities = require("cmp_nvim_lsp").default_capabilities(),
-  cmd = { "elixir-ls" },
-  on_attach = function(client)
-    client.server_capabilities.semanticTokensProvider = nil
-  end,
-})
+if vim.fn.executable("nextls") == 1 then
+  require("elixir").setup({
+    nextls = {
+      enable = true,
+      cmd = "nextls",
+    },
+    credo = { enable = true },
+    elixirls = {
+      enable = false,
+    },
+  })
+end
+if vim.fn.executable("elixir-ls") == 1 then
+  lspconfig.elixirls.setup({
+    -- capabilities = require("cmp_nvim_lsp").default_capabilities(),
+    cmd = { "elixir-ls" },
+    on_attach = function(client)
+      client.server_capabilities.semanticTokensProvider = nil
+    end,
+  })
+end
 
 -- go
 lspconfig.golangci_lint_ls.setup({})
-lspconfig.gopls.setup({})
+if vim.fn.executable("gopls") == 1 then
+  lspconfig.gopls.setup({})
+end
 require("dap-go").setup({
   dap_configurations = {
     {
@@ -63,9 +69,11 @@ require("ionide").setup({})
 vim.g["fsharp#lsp_auto_setup"] = 0
 
 -- haskell
-require("lspconfig")["hls"].setup({
-  filetypes = { "haskell", "lhaskell", "cabal" },
-})
+if vim.fn.executable("haskell-language-server-wrapper") == 1 then
+  lspconfig.hls.setup({
+    filetypes = { "haskell", "lhaskell", "cabal" },
+  })
+end
 
 -- json
 --Enable (broadcasting) snippet capability for completion
@@ -128,15 +136,19 @@ lspconfig.ocamllsp.setup({
 })
 
 -- python
-require("lspconfig").pyright.setup({})
+if vim.fn.executable("pyright") == 1 then
+  require("lspconfig").pyright.setup({})
+end
 
 -- tofu
-require("lspconfig").terraformls.setup({})
-vim.filetype.add({
-  extension = {
-    tf = "terraform",
-  },
-})
+if vim.fn.executable("terraformls") == 1 then
+  require("lspconfig").terraformls.setup({})
+  vim.filetype.add({
+    extension = {
+      tf = "terraform",
+    },
+  })
+end
 
 -- yaml
 require("lspconfig").yamlls.setup({
