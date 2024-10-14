@@ -1,16 +1,31 @@
 {
+  config,
   inputs,
   lib,
   pkgs,
   ...
 }:
+let
+  os = pkgs.hostPlatform.uname.system;
+in
 {
   home.packages = [
     pkgs.git
     inputs.sandbox.packages.${pkgs.system}.git-toolbelt
   ];
+
   xdg.configFile = {
-    "git/config".source = ./gitconfig;
+    "git/config".source =
+      if config.dotfiles.nixosManaged then
+        ./gitconfig
+      else
+        config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/git/gitconfig";
+
+    "git/config.os".source = pkgs.writeText "git-config-${os}" ''
+      [gpg "ssh"]
+      defaultKeyCommand = ${config.home.homeDirectory}/.dotfiles/bin/git-ssh-key.sh
+      allowedSignersFile = ${config.home.homeDirectory}/.dotfiles/apps/ssh/ssh-signers.txt
+    '';
 
     "git/ignore".text = lib.concatStringsSep "\n" [
       "*.log"
