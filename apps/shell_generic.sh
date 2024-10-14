@@ -44,6 +44,7 @@ fi
 export PYTHONSTARTUP="$HOME"/.dotfiles/apps/python/pythonstartup.py
 
 # ssh
+export SSH_AUTH_SOCK="$(ssh-agent-mgr)"
 if [[ -z $SSH_AUTH_SOCK ]]; then
   echo "Empty ssh-agent"
 fi
