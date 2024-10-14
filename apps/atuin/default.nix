@@ -46,6 +46,20 @@ in
     };
   };
 
+  launchd = lib.mkIf pkgs.stdenv.isDarwin {
+    agents.atuin = {
+      enable = true;
+      config = {
+        KeepAlive = true;
+        ProgramArguments = [
+          "${lib.getExe config.programs.atuin.package}"
+          "daemon"
+        ];
+        RunAtLoad = true;
+      };
+    };
+  };
+
   systemd.user = lib.mkIf (lib.versionAtLeast pkgs.atuin.version "18.3.0") {
     sockets.atuin = {
       Unit = unitConfig;
