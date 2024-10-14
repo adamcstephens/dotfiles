@@ -1,12 +1,6 @@
 default:
     just --list
 
-arkenfox:
-    nix run .#arkenfox
-
-arkenfox-update: && arkenfox
-    nix run nixpkgs#nix-update -- --flake arkenfox --commit
-
 bump: bump-flake bump-pins bump-packages
 
 bump-flake:
@@ -25,9 +19,6 @@ bump-pins:
 
 bump-packages:
     nix-update --flake arkenfox --commit
-
-firefox-config: arkenfox
-    ~/.dotfiles/bin/firefox-customize
 
 nix-darwin-bootstrap:
     eval $(nix build .#darwin/$(hostname -s) --print-out-paths)/sw/bin/darwin-rebuild switch --flake ~/.dotfiles
