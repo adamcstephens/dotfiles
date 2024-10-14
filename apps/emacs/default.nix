@@ -231,7 +231,7 @@ in
       full = lib.mkEnableOption "install the full set of tools, as if a workstation";
     };
   };
-  config = {
+  config = lib.mkIf cfg.enable {
     home.packages = [ package ];
 
     xdg.configFile =
