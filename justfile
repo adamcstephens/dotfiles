@@ -30,7 +30,7 @@ firefox-config: arkenfox
     ~/.dotfiles/bin/firefox-customize
 
 nix-darwin-bootstrap:
-    eval $(nix build .#darwin/$(hostname) --print-out-paths)/sw/bin/darwin-rebuild switch --flake ~/.dotfiles
+    eval $(nix build .#darwin/$(hostname -s) --print-out-paths)/sw/bin/darwin-rebuild switch --flake ~/.dotfiles
 
 fish-bootstrap:
     fish ~/.dotfiles/bin/theme.fish

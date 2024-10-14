@@ -1,12 +1,21 @@
 #!/usr/bin/env sh
 
-ARG=$1
-
 if ! command -v nix >/dev/null 2>&1; then
-    curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install --no-confirm --diagnostic-endpoint=""
+  curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install --no-confirm --diagnostic-endpoint=""
 
   # shellcheck disable=SC1091
   . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
 fi
 rm -rf ~/.config/fish
-nix --extra-experimental-features "nix-command flakes" run .#hm -- switch
+
+case "$(uname)" in
+Darwin)
+  nix --extra-experimental-features "nix-command flakes" develop .# -c just nix-darwin-bootstrap
+  ;;
+Linux)
+  nix --extra-experimental-features "nix-command flakes" run .#hm -- switch
+  ;;
+*)
+  echo "nope, unsupported platform"
+  ;;
+esac
