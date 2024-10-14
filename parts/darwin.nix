@@ -37,6 +37,8 @@
               options = "--delete-older-than 21d";
             };
 
+            package = pkgs.nixVersions.latest;
+
             settings = {
               auto-optimise-store = false;
               accept-flake-config = false;
@@ -122,7 +124,11 @@
             { pkgs, ... }:
             {
               home-manager.users.adam = {
-                imports = homeModules;
+                imports = homeModules ++ [
+                  {
+                    nix.package = lib.mkForce pkgs.nixVersions.latest;
+                  }
+                ];
               };
 
               home-manager.extraSpecialArgs = {

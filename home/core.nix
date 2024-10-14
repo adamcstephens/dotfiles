@@ -74,7 +74,7 @@
   };
 
   nix = {
-    package = lib.mkForce pkgs.lix;
+    package = pkgs.lix;
     settings = {
       experimental-features =
         [
