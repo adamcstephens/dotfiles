@@ -11,7 +11,10 @@ function ssh-auth-sock --on-event="fish_preexec"
     end
 
     if [ -z "$TMUX" ] && [ -z "$ZELLIJ" ]
-        ln -sf $SSH_AUTH_SOCK $sockfile
+        if [ "$SSH_AUTH_SOCK" != (readlink $sockfile) ]
+            ln -sf $SSH_AUTH_SOCK $sockfile
+            ssh-add -L | head -n 1 >~/.ssh/signing-key.pub
+        end
     else
         set -x SSH_AUTH_SOCK $sockfile
     end

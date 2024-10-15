@@ -1,5 +1,4 @@
 {
-  inputs,
   lib,
   pkgs,
   ...
@@ -11,20 +10,25 @@
     ../apps/atuin
     ../apps/emacs
     ../apps/ghostty
+    ../apps/jujutsu
     ../apps/kitty
     ../apps/ssh
     ../apps/vscode
     ../apps/vscodium
   ];
 
-  dotfiles.apps = {
-    emacs = {
-      package = lib.mkDefault pkgs.emacs29;
-      patchForGui = lib.mkDefault false;
-      full = lib.mkDefault true;
+  dotfiles = {
+    apps = {
+      emacs = {
+        package = lib.mkDefault pkgs.emacs29;
+        patchForGui = lib.mkDefault false;
+        full = lib.mkDefault true;
+      };
+      neovim.full = true;
+      vscodium.enable = lib.mkDefault true;
     };
-    neovim.full = true;
-    vscodium.enable = lib.mkDefault true;
+
+    gui.enable = true;
   };
 
   home.packages = [
@@ -49,13 +53,6 @@
     # apps
     pkgs.eternal-terminal
     pkgs.senpai
-
-    # dev
-    pkgs.gh
-    pkgs.hut
-    pkgs.lazygit
-    (pkgs.writeShellScriptBin "lg" "exec ${lib.getExe pkgs.lazygit} $@")
-    pkgs.tea
   ];
 
   programs = {

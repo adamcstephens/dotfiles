@@ -1,6 +1,5 @@
 {
   lib,
-  inputs,
   pkgs,
   ...
 }:
@@ -9,6 +8,8 @@
     nixosManaged = lib.mkEnableOption "When nixos managed dotfiles is in the read-only store";
 
     gui = {
+      enable = lib.mkEnableOption "gui configuration";
+
       drmDevices = lib.mkOption {
         type = lib.types.listOf lib.types.str;
         description = "list of DRM device paths to use with wayland compositors";

@@ -11,7 +11,7 @@
     devbox.url = "github:jetify-com/devbox/latest";
     devbox.inputs.nixpkgs.follows = "nixpkgs-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
-    mnw.url = "github:Gerg-L/mnw?ref=962d34fed1b1586a45406eb729a4dc941da8a7b6";
+    mnw.url = "github:Gerg-L/mnw";
     nix-colors.url = "github:misterio77/nix-colors";
     nix-darwin.url = "github:lnl7/nix-darwin/master";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs-unstable";

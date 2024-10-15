@@ -9,10 +9,18 @@ let
   os = pkgs.hostPlatform.uname.system;
 in
 {
-  home.packages = [
-    pkgs.git
-    inputs.sandbox.packages.${pkgs.system}.git-toolbelt
-  ];
+  home.packages =
+    [
+      pkgs.git
+      inputs.sandbox.packages.${pkgs.system}.git-toolbelt
+    ]
+    ++ lib.optionals config.dotfiles.gui.enable [
+      pkgs.gh
+      pkgs.hut
+      pkgs.lazygit
+      (pkgs.writeShellScriptBin "lg" "exec ${lib.getExe pkgs.lazygit} $@")
+      pkgs.tea
+    ];
 
   xdg.configFile = {
     "git/config".source =

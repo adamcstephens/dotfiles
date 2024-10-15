@@ -1,0 +1,11 @@
+[user]
+name = "Adam C. Stephens"
+email = "adam.jj@valkor.net"
+
+[ui]
+default-command = "log"
+
+[signing]
+sign-all = true
+backend = "ssh"
+key = "~/.ssh/signing-key.pub"
