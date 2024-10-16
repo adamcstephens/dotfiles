@@ -44,9 +44,6 @@ defaultBranch = main
 ff = only
 rebase = true
 
-[push]
-default = tracking
-
 [rebase]
 autoStash = true
 updateRefs = true
