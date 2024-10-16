@@ -71,11 +71,20 @@ require("conform").setup({
     javascript = { "prettier" },
     json = { "biome" },
     lua = { "stylua" },
+    just = { "just" },
     nix = { "nixfmt" },
     python = { "ruff_lint", "ruff_format" },
     sql = { "sqlfluff" },
     teal = { "stylua" },
-    terraform = { "tofu_fmt" },
+    terraform = function()
+      if vim.fn.executable("tofu") == 1 then
+        return { "tofu_fmt" }
+      elseif vim.fn.executable("terraform") == 1 then
+        return { "terraform_fmt" }
+      else
+        return {}
+      end
+    end,
     typescript = { "prettier" },
     yaml = { "prettier" },
   },
