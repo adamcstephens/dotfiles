@@ -2,7 +2,10 @@
   "entries": {
     "tap": {
       "homebrew/bundle": {
-        "revision": "836b67f84a21deec9016253f41f994c2a98cea15"
+        "revision": "7b8dc37ca3c79bf386b59d75076ab977731b2432"
+      },
+      "homebrew/services": {
+        "revision": "fa388d6744b2919f51b76c3a33c489387b9313b1"
       }
     },
     "brew": {
@@ -73,7 +76,7 @@
     },
     "cask": {
       "bettertouchtool": {
-        "version": "4.765,2024101301",
+        "version": "4.769,2024101604",
         "options": {
           "full_name": "bettertouchtool"
         }
@@ -91,7 +94,7 @@
         }
       },
       "firefox": {
-        "version": "131.0.2",
+        "version": "131.0.3",
         "options": {
           "full_name": "firefox"
         }
@@ -109,7 +112,7 @@
         }
       },
       "raycast": {
-        "version": "1.84.2",
+        "version": "1.84.3",
         "options": {
           "full_name": "raycast"
         }
@@ -148,6 +151,42 @@
         "version": "6.2.3.40682",
         "options": {
           "full_name": "zoom"
+        }
+      },
+      "1password": {
+        "version": "8.10.48",
+        "options": {
+          "full_name": "1password"
+        }
+      },
+      "1password-cli": {
+        "version": "2.30.0",
+        "options": {
+          "full_name": "1password-cli"
+        }
+      },
+      "docker": {
+        "version": "4.34.3,170107",
+        "options": {
+          "full_name": "docker"
+        }
+      },
+      "firefox@developer-edition": {
+        "version": "132.0b7",
+        "options": {
+          "full_name": "firefox@developer-edition"
+        }
+      },
+      "notion": {
+        "version": "3.16.0",
+        "options": {
+          "full_name": "notion"
+        }
+      },
+      "tailscale": {
+        "version": "1.76.0",
+        "options": {
+          "full_name": "tailscale"
         }
       }
     },
@@ -193,7 +232,7 @@
   "system": {
     "macos": {
       "sequoia": {
-        "HOMEBREW_VERSION": "4.4.0",
+        "HOMEBREW_VERSION": "4.4.1",
         "HOMEBREW_PREFIX": "/opt/homebrew",
         "Homebrew/homebrew-core": "api",
         "CLT": "16.0.0.0.1.1724870825",

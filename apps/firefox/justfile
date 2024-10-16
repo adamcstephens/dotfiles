@@ -1,3 +1,5 @@
+default:
+    just -l
+
 arkenfox:
     nix run .#arkenfox
-

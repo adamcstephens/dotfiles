@@ -3,6 +3,7 @@ tap "homebrew/services"
 brew "dark-mode"
 cask "1password"
 cask "1password-cli"
+cask "aldente"
 cask "bettertouchtool"
 cask "bluesnooze"
 cask "docker"
@@ -12,15 +13,18 @@ cask "firefox@developer-edition"
 cask "istat-menus"
 cask "karabiner-elements"
 cask "notion"
+cask "proxy-audio-device"
 cask "raycast"
 cask "secretive"
 cask "slack"
+cask "tailscale"
 cask "tidal"
 cask "utm"
 cask "visual-studio-code"
 cask "zoom"
 mas "Bitwarden", id: 1352778147
 mas "GarageBand", id: 682658836
+mas "Hidden Bar", id: 1452453066
 mas "iMovie", id: 408981434
 mas "Keynote", id: 409183694
 mas "Numbers", id: 409203825
