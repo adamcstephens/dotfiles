@@ -29,6 +29,11 @@
     inputs.sandbox.packages.${pkgs.system}.m1ddc
   ];
 
+  dotfiles.apps = {
+    vscodium.enable = false;
+    vscode.enable = true;
+  };
+
   home.activation.enable-ssh-agent = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     export PATH=${config.home.path}/bin:${config.home.path}/sbin:$PATH
 

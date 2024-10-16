@@ -47,7 +47,7 @@ in
     '';
     home.file."${prefix}/Code/User/snippets".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/vscodium/snippets";
 
-    programs.vscode = {
+    programs.vscode = lib.mkIf pkgs.stdenv.isLinux {
       enable = true;
       package = vscode;
 
