@@ -8,9 +8,11 @@ if [ -z "$socket" ]; then
   for sock in "$XDG_RUNTIME_DIR/ssh-agent" \
     "$XDG_RUNTIME_DIR/yubikey-agent/yubikey-agent.sock" \
     "$XDG_RUNTIME_DIR/ssh-tpm-agent" \
-    "$HOME/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh"; do
+    "$HOME/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh" \
+    "$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"; do
     if [ -S "$sock" ]; then
       socket=$sock
+      break
     fi
   done
 fi
