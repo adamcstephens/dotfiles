@@ -158,7 +158,7 @@ in
 
       screenshot
     ]
-    ++ (lib.optionals config.dotfiles.gui.wayland [
+    ++ lib.optionals config.dotfiles.gui.wayland [
       pkgs.grim
       pkgs.lswt
       pkgs.qt6.qtwayland
@@ -171,15 +171,14 @@ in
       pkgs.wlr-randr
       pkgs.wdisplays
       pkgs.wlopm
-    ])
-    ++ (lib.optionals config.dotfiles.gui.xorg.enable [
+    ]
+    ++ lib.optionals config.dotfiles.gui.xorg.enable [
       pkgs.arandr
       pkgs.grobi
       pkgs.lxrandr
       pkgs.xclip
       pkgs.xlayoutdisplay
-    ])
-    ++ (lib.optionals pkgs.stdenv.isx86_64 [ pkgs.bitwarden-desktop ]);
+    ];
 
   programs.feh.enable = true;
 
