@@ -20,10 +20,10 @@
       "pre_releases": false,
       "version_upper_bound": null,
       "release_prefix": null,
-      "version": "v8.3.0",
-      "revision": "2c0ff9c301fe5af563a41f9947b2cc683ce24bfe",
+      "version": "v8.4.1",
+      "revision": "873c4eb7e1d8002ac1248ce1ada0761be8185d07",
       "url": null,
-      "hash": "00dyfd70w79lwyifzkb2hg063vz59zsnazz3b2wnp4qs112s2v7s"
+      "hash": "1f3npssr4zgh9yzw41l8nhqm7nwkc6mmin3hi8afgxqcr0m5lsqw"
     },
     "focus.nvim": {
       "type": "Git",
@@ -77,9 +77,9 @@
         "url": "https://github.com/danielfalk/smart-open.nvim"
       },
       "branch": "main",
-      "revision": "f4e39e9a1b05a6b82b1182a013677acc44b27abb",
+      "revision": "7770b01ce4d551c143d7ec8589879320796621b9",
       "url": null,
-      "hash": "15i03ba6la6xric3g0i8sg8418s6phqb447zvhsq2yj7pfkkjjkc"
+      "hash": "1yyz1c8v0laxd9xddsfdngpsjlaiap1lsfck2l90kwvqxbj82xbj"
     },
     "telescope-tabs": {
       "type": "Git",
