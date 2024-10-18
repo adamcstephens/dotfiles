@@ -1,7 +1,6 @@
 {
   config,
   inputs,
-  lib,
   self,
   ...
 }:
@@ -28,6 +27,25 @@
             (pkgs.nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" ]; })
           ];
           nix = {
+            buildMachines = [
+              {
+                hostName = "nixos1.local";
+                maxJobs = 4;
+                sshUser = "root";
+                supportedFeatures = [
+                  "big-parallel"
+                  "kvm"
+                  "nixos-test"
+                ];
+                systems = [
+                  "aarch64-linux"
+                  "x86_64-linux"
+                ];
+              }
+            ];
+
+            distributedBuilds = true;
+
             gc = {
               automatic = true;
               interval = {
