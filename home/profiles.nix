@@ -130,6 +130,7 @@ in
     maple = {
       system = "aarch64-darwin";
       nixpkgs = inputs.nixpkgs-unstable;
+      home-manager = inputs.home-manager-unstable;
       modules = [
         ./core-darwin.nix
         (
