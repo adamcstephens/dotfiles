@@ -1,6 +1,9 @@
 [user]
 name = "Adam C. Stephens"
-email = "adam.jj@valkor.net"
+email = "adam@valkor.net"
+
+[core]
+fsmonitor = "watchman"
 
 [ui]
 default-command = "log"

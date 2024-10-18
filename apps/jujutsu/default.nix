@@ -1,10 +1,14 @@
 { config, pkgs, ... }:
+let
+  configDir = if pkgs.stdenv.isLinux then ".config/jj" else "Library/Application Support/jj";
+in
 {
   home.packages = [
     pkgs.jujutsu
+    pkgs.watchman
   ];
 
-  xdg.configFile."jj/config.toml".source =
+  home.file."${configDir}/config.toml".source =
     if config.dotfiles.nixosManaged then
       ./config.toml
     else
