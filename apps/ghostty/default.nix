@@ -6,7 +6,15 @@
 }:
 {
   programs.fish.interactiveShellInit = lib.optionalString pkgs.stdenv.isDarwin ''
-    fish_add_path --append --move ${config.home.homeDirectory}/Applications/Ghostty.app/Contents/MacOS
+    if test -d "${config.home.homeDirectory}/Applications/Ghostty.app"
+      fish_add_path --append --move "${config.home.homeDirectory}/Applications/Ghostty.app/Contents/MacOS"
+      set --prepend fish_complete_path "${config.home.homeDirectory}/Applications/Ghostty.app/Contents/Resources/fish/vendor_completions.d"
+    else if test -d "/Applications/Ghostty.app"
+      fish_add_path --append --move /Applications/Ghostty.app/Contents/MacOS
+      set --prepend fish_complete_path "/Applications/Ghostty.app/Contents/Resources/fish/vendor_completions.d"
+    end
+
+    source $GHOSTTY_RESOURCES_DIR/shell-integration/fish/vendor_conf.d/ghostty-shell-integration.fish
   '';
 
   xdg.configFile."ghostty/config".text =
@@ -18,6 +26,8 @@
       selection-foreground = #ffffff
       cursor-color = #ffffff
       cursor-text = #000000
+
+      shell-integration = none
 
       # normal
       palette = 0=#000000
@@ -45,6 +55,11 @@
       copy-on-select = clipboard
 
       keybind = ctrl+shift+delete=reset
+
+      keybind = alt+h=goto_split:left
+      keybind = alt+l=goto_split:right
+      keybind = alt+k=goto_split:top
+      keybind = alt+j=goto_split:bottom
     ''
     + lib.optionalString pkgs.stdenv.isLinux ''
       gtk-single-instance = true
