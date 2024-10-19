@@ -4,9 +4,7 @@ import json, os, re, subprocess, sys
 
 
 def run(command: str):
-    return (
-        subprocess.run(command, shell=True, capture_output=True).stdout.decode().strip()
-    )
+    return subprocess.run(command, shell=True, capture_output=True).stdout.decode().strip()
 
 
 def existing_tab_index(tabs: list[dict]) -> int:
@@ -63,11 +61,7 @@ elif is_kitty:
     if existing_tab > 0:
         run(f"kitty @ focus-tab -m id:{existing_tab}")
     else:
-        vim_window = run(
-            f"kitty @ launch --tab-title {wname} --type tab --cwd {project}"
-        )
+        vim_window = run(f"kitty @ launch --tab-title {wname} --type tab --cwd {project}")
         print(vim_window)
         run(f'kitty @ send-text --match id:{vim_window} "vim .\\n"')
-        run(
-            f"kitty @ new-window --match id:{vim_window} --cwd {project} --dont-take-focus"
-        )
+        run(f"kitty @ new-window --match id:{vim_window} --cwd {project} --dont-take-focus")
