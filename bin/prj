@@ -1,13 +1,16 @@
 #!/usr/bin/env python3
 
-import json, os, re, subprocess, sys
+import argparse, json, os, re, subprocess, sys
+
+is_kitty = "KITTY_PID" in os.environ
+is_tmux = "TMUX" in os.environ
 
 
 def run(command: str):
     return subprocess.run(command, shell=True, capture_output=True).stdout.decode().strip()
 
 
-def existing_tab_index(tabs: list[dict]) -> int:
+def existing_tab_index(tabs: list[dict], wname: str) -> int:
     return next(filter(lambda tab: tab["title"] == wname, tabs), {"id": -1})["id"]
 
 
@@ -17,51 +20,62 @@ def tmux_to_kitty(tab: str) -> dict:
     return {"id": int(tab_split[0]), "title": tab_split[1]}
 
 
-is_kitty = "KITTY_PID" in os.environ
-is_tmux = "TMUX" in os.environ
-is_zellij = "ZELLIJ" in os.environ
+def prj_finder() -> str:
+    command: str
+    if is_kitty or is_tmux:
+        command = "zoxide query --list | zf --height 22 --keep-order"
+    else:
+        command = "zoxide query --list | rofi -dmenu"
 
-prj_finder: str
-if is_kitty or is_tmux or is_zellij:
-    prj_finder = "zoxide query --list | zf --height 22 --keep-order"
-else:
-    prj_finder = "zoxide query --list | rofi -dmenu"
+    return run(command)
 
-project = run(prj_finder)
-if project == "":
-    print("no project selected")
-    sys.exit(1)
 
-print(f":: Opening project {project}")
+def open_project(project: str):
+    wname = re.sub("[^a-zA-Z0-9]", "", os.path.basename(project))
 
-wname = re.sub("[^a-zA-Z0-9]", "", os.path.basename(project))
-
-if is_tmux:
-    tabs = list(
-        map(
-            tmux_to_kitty,
-            run("tmux list-windows -F '#{window_index},#{window_name}'").split("\n"),
+    if is_tmux:
+        tabs = list(
+            map(
+                tmux_to_kitty,
+                run("tmux list-windows -F '#{window_index},#{window_name}'").split("\n"),
+            )
         )
-    )
-    existing_tab: int = existing_tab_index(tabs)
+        existing_tab: int = existing_tab_index(tabs, wname)
 
-    if existing_tab > 0:
-        run(f"tmux select-window -t {wname}")
-    else:
-        run(f"tmux new-window -c {project} -n {wname}")
-        run(f"tmux select-window -t {wname}")
-        run(f"tmux send-keys 'vim .' 'C-m'")
-        run(f"tmux split-window -h -c {project}")
-        run(f"tmux select-pane -l")
+        if existing_tab > 0:
+            run(f"tmux select-window -t {wname}")
+        else:
+            run(f"tmux new-window -c {project} -n {wname}")
+            run(f"tmux select-window -t {wname}")
+            run(f"tmux send-keys 'vim .' 'C-m'")
+            run(f"tmux split-window -h -c {project}")
+            run(f"tmux select-pane -l")
 
-elif is_kitty:
-    # needs to come after tmux in case tmux in kitty
-    existing_tab: int = existing_tab_index(json.loads(run("kitty @ ls"))[0]["tabs"])
+    elif is_kitty:
+        # needs to come after tmux in case tmux in kitty
+        existing_tab: int = existing_tab_index(json.loads(run("kitty @ ls"))[0]["tabs"], wname)
 
-    if existing_tab > 0:
-        run(f"kitty @ focus-tab -m id:{existing_tab}")
-    else:
-        vim_window = run(f"kitty @ launch --tab-title {wname} --type tab --cwd {project}")
-        print(vim_window)
-        run(f'kitty @ send-text --match id:{vim_window} "vim .\\n"')
-        run(f"kitty @ new-window --match id:{vim_window} --cwd {project} --dont-take-focus")
+        if existing_tab > 0:
+            run(f"kitty @ focus-tab -m id:{existing_tab}")
+        else:
+            vim_window = run(f"kitty @ launch --tab-title {wname} --type tab --cwd {project}")
+            print(vim_window)
+            run(f'kitty @ send-text --match id:{vim_window} "vim .\\n"')
+            run(f"kitty @ new-window --match id:{vim_window} --cwd {project} --dont-take-focus")
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("project", default="", type=str, nargs="?", help="path")
+    args = parser.parse_args()
+
+    project = args.project
+
+    if project == "":
+        project = prj_finder()
+        if project == "":
+            print("no project selected")
+            sys.exit(1)
+
+    print(f":: Opening project {project}")
+    open_project(project)
