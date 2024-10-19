@@ -23,7 +23,7 @@ is_zellij = "ZELLIJ" in os.environ
 
 prj_finder: str
 if is_kitty or is_tmux or is_zellij:
-    prj_finder = "zoxide query --list | zf --height 22"
+    prj_finder = "zoxide query --list | zf --height 22 --keep-order"
 else:
     prj_finder = "zoxide query --list | rofi -dmenu"
 
