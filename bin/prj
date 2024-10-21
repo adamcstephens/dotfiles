@@ -7,7 +7,14 @@ is_tmux = "TMUX" in os.environ
 
 
 def run(command: str):
-    return subprocess.run(command, shell=True, capture_output=True).stdout.decode().strip()
+    result = subprocess.run(command, shell=True, capture_output=True)
+
+    if result.returncode != 0:
+        print(result.stderr.decode())
+        print(f"Failed to run [{command}]")
+        sys.exit(1)
+
+    return result.stdout.decode().strip()
 
 
 def existing_tab_index(tabs: list[dict], wname: str) -> int:
@@ -31,7 +38,7 @@ def prj_finder() -> str:
 
 
 def open_project(project: str):
-    wname = re.sub("[^a-zA-Z0-9]", "", os.path.basename(project))
+    wname = re.sub("[^a-zA-Z0-9]", "", os.path.basename(os.path.abspath(project)))
 
     if is_tmux:
         tabs = list(
@@ -59,7 +66,6 @@ def open_project(project: str):
             run(f"kitty @ focus-tab -m id:{existing_tab}")
         else:
             vim_window = run(f"kitty @ launch --tab-title {wname} --type tab --cwd {project}")
-            print(vim_window)
             run(f'kitty @ send-text --match id:{vim_window} "vim .\\n"')
             run(f"kitty @ new-window --match id:{vim_window} --cwd {project} --dont-take-focus")
 
