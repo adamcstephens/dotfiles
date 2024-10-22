@@ -1,10 +1,36 @@
 {
   config,
+  lib,
   npins,
   pkgs,
   ...
 }:
 {
+  home.packages = [ pkgs.kitty.terminfo ] ++ lib.optionals (!pkgs.stdenv.isDarwin) [ pkgs.kitty ];
+
+  xdg.configFile."kitty/kitty.conf".text =
+    ''
+      include ${config.xdg.configHome}/kitty/theme-dark.conf
+      include ${config.xdg.configHome}/kitty/dotfiles.conf
+
+      allow_remote_control socket-only
+      font_family ${config.dotfiles.gui.font.mono}
+      shell_integration no-rc
+    ''
+    + lib.optionalString pkgs.stdenv.isDarwin ''
+      font_size 13
+      listen_on unix:''${TMPDIR}/kitty
+      macos_option_as_alt both
+      mouse_map cmd+left release grabbed,ungrabbed mouse_click_url
+    ''
+    + lib.optionalString pkgs.stdenv.isLinux ''
+      font_size 11
+      hide_window_decorations yes
+      kitty_mod ctrl+shift
+      listen_on unix:@kitty
+      touch_scroll_multiplier 20.0
+    '';
+
   xdg.configFile."kitty/dotfiles.conf".source =
     if config.dotfiles.nixosManaged then
       ./dotfiles.conf
@@ -23,41 +49,4 @@
     pkgs.vimPlugins.smart-splits-nvim + "/kitty/relative_resize.py";
   xdg.configFile."kitty/split_window.py".source =
     pkgs.vimPlugins.smart-splits-nvim + "/kitty/split_window.py";
-
-  home.packages = [ pkgs.kitty.terminfo ];
-
-  programs.kitty = {
-    enable = true;
-    extraConfig = ''
-      include ${config.xdg.configHome}/kitty/theme-dark.conf
-      include ${config.xdg.configHome}/kitty/dotfiles.conf
-    '';
-
-    settings =
-      {
-        font_family = config.dotfiles.gui.font.mono;
-        allow_remote_control = "socket-only";
-      }
-      // (
-        if pkgs.stdenv.isDarwin then
-          {
-            mouse_map = "cmd+left release grabbed,ungrabbed mouse_click_url";
-            macos_option_as_alt = "both";
-
-            font_size = "13";
-            listen_on = "unix:\${TMPDIR}/kitty";
-          }
-        else
-          {
-            hide_window_decorations = "yes";
-            font_size = "11";
-            touch_scroll_multiplier = "20.0";
-            kitty_mod = "ctrl+shift";
-
-            listen_on = "unix:@kitty";
-          }
-      );
-
-    shellIntegration.enableFishIntegration = false;
-  };
 }
