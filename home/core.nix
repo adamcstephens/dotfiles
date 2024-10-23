@@ -123,7 +123,6 @@
     pkgs.jq
     pkgs.just
     pkgs.kitty.terminfo
-    pkgs.moar
     pkgs.mtr
     pkgs.ncdu
     pkgs.tio
