@@ -136,7 +136,11 @@ in
         (
           { pkgs, ... }:
           {
-            home.packages = [ inputs.devbox.packages.${pkgs.system}.default ];
+            home.packages = [
+              inputs.devbox.packages.${pkgs.system}.default
+              pkgs.elixir-ls
+              pkgs.next-ls
+            ];
             nix.package = lib.mkForce pkgs.nixVersions.latest;
           }
         )
