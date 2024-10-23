@@ -5,6 +5,13 @@
   pkgs,
   ...
 }:
+let
+  prj =
+    if (config.dotfiles.nixosManaged || pkgs.stdenv.isDarwin) then
+      pkgs.callPackage ../../packages/prj.nix { } |> lib.getExe
+    else
+      "${config.home.homeDirectory}/.dotfiles/bin/prj";
+in
 {
   home.packages = [ pkgs.kitty.terminfo ] ++ lib.optionals (!pkgs.stdenv.isDarwin) [ pkgs.kitty ];
 
@@ -15,13 +22,17 @@
 
       allow_remote_control socket-only
       font_family ${config.dotfiles.gui.font.mono}
+      map ctrl+shift+p launch --type=overlay-main ${prj}
       shell_integration no-rc
+
     ''
     + lib.optionalString pkgs.stdenv.isDarwin ''
       font_size 13
       listen_on unix:''${TMPDIR}/kitty
       macos_option_as_alt both
+      macos_show_window_title_in window
       mouse_map cmd+left release grabbed,ungrabbed mouse_click_url
+
     ''
     + lib.optionalString pkgs.stdenv.isLinux ''
       font_size 11
