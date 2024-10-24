@@ -20,10 +20,10 @@
       "pre_releases": false,
       "version_upper_bound": null,
       "release_prefix": null,
-      "version": "v8.6.0",
-      "revision": "c5373bfdb357f063b5ca99caa5c2e22c3197355e",
+      "version": "v8.11.2",
+      "revision": "efe90f61b05f6c11009dc7af204ad0e201578552",
       "url": null,
-      "hash": "0ml6f5pmqzgq0zl1cblxwb2gz4jp1wfwb0798jv1l3mq3zkrvga7"
+      "hash": "0w8q3rbd3r7yydjfy71b615jkr3yl4345hk6bd7jlsrjngsbrk7h"
     },
     "focus.nvim": {
       "type": "Git",
@@ -55,9 +55,9 @@
         "url": "https://github.com/milanglacier/minuet-ai.nvim"
       },
       "branch": "main",
-      "revision": "bd5a7ae2bda3a4f57e8a94e3229f41647c77c69e",
+      "revision": "25b43e6b6f28c444de663953b29a362eae12240c",
       "url": null,
-      "hash": "19bjqj9w85ab4z4dgh40x9g0vbb05wybpgi0wak5dy78g4m5wqg1"
+      "hash": "1zyknnmf05mwil73bbfy92rmrh361hgdb3mhhgxsw1chj7sayyjs"
     },
     "move-nvim": {
       "type": "Git",
