@@ -6,7 +6,6 @@
   home-profile-selector,
   jq,
   just,
-  nixVersions,
   nix-output-monitor,
   nvd,
   writeShellScriptBin,
@@ -24,11 +23,10 @@ writeShellScriptBin "hm" ''
       home-profile-selector
       jq
       just
-      nixVersions.latest
       nix-output-monitor
       nvd
     ]
-  }"
+  }:$PATH"
 
   unset DISPLAY
 
