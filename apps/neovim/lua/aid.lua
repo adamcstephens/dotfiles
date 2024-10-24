@@ -73,7 +73,13 @@ require("conform").setup({
     lua = { "stylua" },
     just = { "just" },
     nix = { "nixfmt" },
-    python = { "ruff_lint", "ruff_format" },
+    python = function(bufnr)
+      if require("conform").get_formatter_info("black", bufnr).available then
+        return { "black" }
+      elseif require("conform").get_formatter_info("ruff_format", bufnr).available then
+        return { "ruff_lint", "ruff_format" }
+      end
+    end,
     sql = { "sqlfluff" },
     teal = { "stylua" },
     terraform = function()

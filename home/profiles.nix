@@ -140,6 +140,12 @@ in
               inputs.devbox.packages.${pkgs.system}.default
               pkgs.elixir-ls
               pkgs.next-ls
+              (pkgs.python3.withPackages (
+                ps: with ps; [
+                  python-lsp-server
+                  pylsp-mypy
+                ]
+              ))
             ];
             nix.package = lib.mkForce pkgs.nixVersions.latest;
           }

@@ -136,6 +136,17 @@ lspconfig.ocamllsp.setup({
 })
 
 -- python
+if vim.fn.executable("pylsp") == 1 then
+  require("lspconfig").pylsp.setup({
+    settings = {
+      pylsp = {
+        plugins = {
+          mypy = { enabled = true },
+        },
+      },
+    },
+  })
+end
 if vim.fn.executable("pyright") == 1 then
   require("lspconfig").pyright.setup({})
 end
