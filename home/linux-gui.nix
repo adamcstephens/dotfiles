@@ -103,7 +103,6 @@ in
       pkgs.material-icons
       pkgs.material-design-icons
       pkgs.noto-fonts
-      pkgs.noto-fonts-cjk
       pkgs.noto-fonts-emoji
 
       configure-gtk

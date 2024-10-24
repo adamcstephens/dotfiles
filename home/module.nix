@@ -61,7 +61,6 @@
               ]
               ++ lib.optionals pkgs.stdenv.isLinux [
                 pkgs.noto-fonts
-                pkgs.noto-fonts-cjk
                 pkgs.noto-fonts-emoji
               ]
               ++ lib.optionals pkgs.stdenv.isDarwin [ "/Library/Fonts" ];
