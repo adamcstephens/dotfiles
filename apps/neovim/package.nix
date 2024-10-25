@@ -88,6 +88,7 @@ mnw.lib.wrap pkgs {
       nvim-surround
       nvim-web-devicons
       oil-nvim
+      openingh-nvim
       rainbow-delimiters-nvim
       remember-nvim
       rustaceanvim
