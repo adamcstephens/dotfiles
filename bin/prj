@@ -38,7 +38,7 @@ def prj_finder() -> str:
 
 
 def open_project(project: str):
-    wname = re.sub("[^a-zA-Z0-9]", "", os.path.basename(os.path.abspath(project)))
+    wname = re.sub("[^a-zA-Z0-9]", "", os.path.basename(project))
 
     if is_tmux:
         tabs = list(
@@ -75,7 +75,7 @@ if __name__ == "__main__":
     parser.add_argument("project", default="", type=str, nargs="?", help="path")
     args = parser.parse_args()
 
-    project = args.project
+    project = os.path.abspath(args.project)
 
     if project == "":
         project = prj_finder()
