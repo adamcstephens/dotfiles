@@ -11,8 +11,9 @@
     settings = {
       experimental-features =
         [
-          "nix-command"
+          "fetch-closure"
           "flakes"
+          "nix-command"
         ]
         ++ lib.optionals (
           config.nix.package.pname == "nix" && lib.versionAtLeast config.nix.package.version "2.24"
