@@ -44,6 +44,8 @@
               }
             ];
 
+            channel.enable = false;
+
             distributedBuilds = true;
 
             gc = {
