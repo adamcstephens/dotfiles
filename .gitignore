@@ -3,3 +3,4 @@ Brewfile.lock.json
 .secret.envrc
 gcroot/
 results/
+*.pyc

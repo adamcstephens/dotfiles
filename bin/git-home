@@ -1,20 +1,48 @@
-#!/usr/bin/env nu
+#!/usr/bin/env python3
 
-def main [] {
-  let head = [
-    ".git/refs/remotes/origin/HEAD",
-    ".git/refs/remotes/upstream/HEAD"
+import os, sys
+from dotlib import run
 
-  ] | where {|f| $f | path exists }
 
-  if ($head | length) < 1 {
-    print "No HEAD found"
-    git remote set-head origin -a
-    exec git home
-  }
+def find_git_up():
+    dir = os.path.abspath(os.path.curdir)
 
-  let branch = git symbolic-ref ($head | first | str replace '.git/' '') | str replace --regex '.*/' ''
+    while not os.path.exists(os.path.join(dir, ".git")):
+        if dir == "/":
+            print("Could not find git root")
+            sys.exit(1)
 
-  git switch $branch
-  git pull
-}
+        dir = os.path.dirname(dir)
+
+    print(f"Found git at {dir}")
+    os.chdir(dir)
+
+
+find_git_up()
+
+heads = [".git/refs/remotes/origin/HEAD", ".git/refs/remotes/upstream/HEAD"]
+
+head: str = ""
+
+for h in heads:
+    if os.path.exists(h):
+        head = h
+        break
+
+if head == "":
+    print("Failed to find git HEAD")
+    sys.exit(1)
+
+head = head.replace(".git/", "")
+
+ref = run(f"git symbolic-ref {head}")
+
+if ref is None:
+    print("Failed to load symbolic-ref")
+    sys.exit(1)
+
+branch = os.path.basename(ref)
+
+run(f"git switch {branch}", capture_output=False)
+run("git pull", capture_output=False)
+print(f"Switched and updated to {branch}")
