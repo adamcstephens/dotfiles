@@ -39,6 +39,7 @@ def prj_finder() -> str:
 
 def open_project(project: str):
     wname = re.sub("[^a-zA-Z0-9]", "", os.path.basename(project))
+    existing_tab: int
 
     if is_tmux:
         tabs = list(
@@ -47,7 +48,7 @@ def open_project(project: str):
                 run("tmux list-windows -F '#{window_index},#{window_name}'").split("\n"),
             )
         )
-        existing_tab: int = existing_tab_index(tabs, wname)
+        existing_tab = existing_tab_index(tabs, wname)
 
         if existing_tab > 0:
             run(f"tmux select-window -t {wname}")
@@ -60,7 +61,7 @@ def open_project(project: str):
 
     elif is_kitty:
         # needs to come after tmux in case tmux in kitty
-        existing_tab: int = existing_tab_index(json.loads(run("kitty @ ls"))[0]["tabs"], wname)
+        existing_tab = existing_tab_index(json.loads(run("kitty @ ls"))[0]["tabs"], wname)
 
         if existing_tab > 0:
             run(f"kitty @ focus-tab -m id:{existing_tab}")
@@ -75,13 +76,15 @@ if __name__ == "__main__":
     parser.add_argument("project", default="", type=str, nargs="?", help="path")
     args = parser.parse_args()
 
-    project = os.path.abspath(args.project)
+    project: str
 
-    if project == "":
+    if args.project == "":
         project = prj_finder()
         if project == "":
             print("no project selected")
             sys.exit(1)
+    else:
+        project = os.path.abspath(args.project)
 
     print(f":: Opening project {project}")
     open_project(project)
