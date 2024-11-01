@@ -27,22 +27,22 @@
             (pkgs.nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" ]; })
           ];
           nix = {
-            buildMachines = [
-              {
-                hostName = "nixos1.local";
-                maxJobs = 4;
-                sshUser = "root";
-                supportedFeatures = [
-                  "big-parallel"
-                  "kvm"
-                  "nixos-test"
-                ];
-                systems = [
-                  "aarch64-linux"
-                  "x86_64-linux"
-                ];
-              }
-            ];
+            # buildMachines = [
+            #   {
+            #     hostName = "nixos1.local";
+            #     maxJobs = 4;
+            #     sshUser = "root";
+            #     supportedFeatures = [
+            #       "big-parallel"
+            #       "kvm"
+            #       "nixos-test"
+            #     ];
+            #     systems = [
+            #       "aarch64-linux"
+            #       "x86_64-linux"
+            #     ];
+            #   }
+            # ];
 
             channel.enable = false;
 
@@ -140,25 +140,40 @@
         modules = [
           inputs.home-manager-unstable.darwinModules.home-manager
 
-          {
-            home-manager.users.adam = {
-              imports = homeModules;
-            };
+          (
+            { lib, pkgs, ... }:
+            {
+              home-manager.users.adam = {
+                imports = homeModules;
+              };
 
-            home-manager.extraSpecialArgs = {
-              inherit inputs;
-              npins = import ../npins;
-              flake = self;
-            };
+              home-manager.extraSpecialArgs = {
+                inherit inputs;
+                npins = import ../npins;
+                flake = self;
+              };
 
-            networking.computerName = "maple";
-            security.pam.enableSudoTouchIdAuth = true;
-            system.stateVersion = 5;
-            users.users.adam = {
-              home = "/Users/adam";
-              shell = "/home/adam/.nix-profile/bin/fish";
-            };
-          }
+              networking.computerName = "maple";
+
+              nix.linux-builder = {
+                enable = true;
+                config = {
+                  virtualisation = {
+                    diskSize = lib.mkForce (128 * 1024);
+                    memorySize = lib.mkForce (16 * 1024);
+                    cores = 6;
+                  };
+                };
+              };
+
+              security.pam.enableSudoTouchIdAuth = true;
+              system.stateVersion = 5;
+              users.users.adam = {
+                home = "/Users/adam";
+                shell = "/home/adam/.nix-profile/bin/fish";
+              };
+            }
+          )
         ];
       };
   };
