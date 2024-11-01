@@ -20,10 +20,10 @@
       "pre_releases": false,
       "version_upper_bound": null,
       "release_prefix": null,
-      "version": "v8.12.2",
-      "revision": "77e04c5e6c58dea6bd3bbdc4cc45dd099ba6a38a",
+      "version": "v8.13.0",
+      "revision": "9eea4b16cbc509922aa1f104d7df1495d4f0b8ce",
       "url": null,
-      "hash": "1hvqf81ikbniy6fjavhyb43pb25j6q8wbql0mwh1ijc16f0s7cv4"
+      "hash": "17jhgv8dp44q6qqik7fa31r47nj82mhjlxc0mql0gj54qzap5xb3"
     },
     "focus.nvim": {
       "type": "Git",
