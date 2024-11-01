@@ -141,6 +141,7 @@ in
               inputs.devbox.packages.${pkgs.system}.default
               pkgs.elixir-ls
               pkgs.next-ls
+              pkgs.pgcli
               (pkgs.python3.withPackages (
                 ps: with ps; [
                   python-lsp-server
