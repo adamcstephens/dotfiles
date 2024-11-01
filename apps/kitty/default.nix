@@ -35,7 +35,7 @@ in
 
     ''
     + lib.optionalString pkgs.stdenv.isLinux ''
-      font_size 11
+      font_size 10
       hide_window_decorations yes
       kitty_mod ctrl+shift
       listen_on unix:@kitty
