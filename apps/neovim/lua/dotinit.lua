@@ -10,6 +10,7 @@ vim.g.mapleader = ","
 require("aid")
 require("auto")
 require("lang")
+require("org")
 require("theme")
 
 -- packages
@@ -101,6 +102,7 @@ require("telescope").setup({
   },
 })
 require("telescope").load_extension("dap")
+require("telescope").load_extension("orgmode")
 require("telescope").load_extension("telescope-tabs")
 require("telescope").load_extension("undo")
 require("telescope").load_extension("zf-native")

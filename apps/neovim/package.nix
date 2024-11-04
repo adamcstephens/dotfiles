@@ -89,6 +89,7 @@ mnw.lib.wrap pkgs {
       nvim-web-devicons
       oil-nvim
       openingh-nvim
+      orgmode
       rainbow-delimiters-nvim
       remember-nvim
       rustaceanvim
