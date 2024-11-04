@@ -49,7 +49,7 @@ writeShellScriptBin "hm" ''
       ;;
   esac
   PREVIOUS="$HOME/.local/state/nix/profiles/home-manager"
-  NEXT=$($BUILDER build --no-link $TARGET ${nixArgs} --print-out-paths)
+  NEXT=$($BUILDER build --no-link $TARGET ${nixArgs} --print-out-paths --keep-going)
 
   if [ -z "$NEXT" ]; then
     echo "⚠️ Build failure, ibailout."
