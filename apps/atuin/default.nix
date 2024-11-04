@@ -48,17 +48,23 @@ in
   };
 
   launchd = lib.mkIf pkgs.stdenv.isDarwin {
-    agents.atuin = {
-      enable = true;
-      config = {
-        KeepAlive = true;
-        ProgramArguments = [
-          "${lib.getExe config.programs.atuin.package}"
-          "daemon"
-        ];
-        RunAtLoad = true;
+    agents.atuin =
+      let
+        program = pkgs.writeShellScriptBin "atuin-daemon" ''
+          # force clean atuin socket in case of crash https://github.com/atuinsh/atuin/issues/2289
+          rm -f ${config.home.homeDirectory}/.local/share/atuin/atuin.sock
+
+          exec ${lib.getExe config.programs.atuin.package} daemon
+        '';
+      in
+      {
+        enable = true;
+        config = {
+          KeepAlive = true;
+          Program = lib.getExe program;
+          RunAtLoad = true;
+        };
       };
-    };
   };
 
   systemd.user = lib.mkIf (lib.versionAtLeast pkgs.atuin.version "18.3.0") {
