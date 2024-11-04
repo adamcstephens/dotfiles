@@ -1,20 +1,20 @@
 {
   bash,
+  fzf,
   kitty,
   lib,
   python3,
   tmux,
   writeScriptBin,
-  zf,
   zoxide,
 }:
 writeScriptBin "prj" ''
   #!${lib.getExe bash}
   export PATH="${
     lib.makeBinPath [
+      fzf
       kitty
       tmux
-      zf
       zoxide
     ]
   }"

@@ -30,7 +30,7 @@ def tmux_to_kitty(tab: str) -> dict:
 def prj_finder() -> str:
     command: str
     if is_kitty or is_tmux:
-        command = "zoxide query --list | zf --height 22 --keep-order"
+        command = "zoxide query --list | fzf --height 22 --no-sort --filepath-word --reverse"
     else:
         command = "zoxide query --list | rofi -dmenu"
 
