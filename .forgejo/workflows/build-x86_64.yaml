@@ -18,5 +18,3 @@ jobs:
       - run: |
           export HOME=$PWD
           nix develop .# --command seed-ci --attic-upload=true --attic-use=true --nom=false --sower-seed=true --system x86_64-linux
-          nix develop .#ci --command just upload-build-deps $ATTIC_CACHE
-
