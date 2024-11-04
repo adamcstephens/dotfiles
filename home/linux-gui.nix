@@ -166,7 +166,7 @@ in
       pkgs.wev
       pkgs.wl-clipboard
       pkgs.wl-mirror
-      pkgs.wl-screenrec
+      inputs.nixpkgs-unstable-small.legacyPackages.${pkgs.system}.wl-screenrec
       pkgs.wlr-randr
       pkgs.wdisplays
       pkgs.wlopm
