@@ -10,7 +10,6 @@ mkShellNoCC {
   packages =
     with pkgs;
     [
-      cntr
       common-updater-scripts
       deadnix
       hydra-check
@@ -26,7 +25,10 @@ mkShellNoCC {
       nurl
       pyright
     ]
-    ++ (lib.optionals stdenv.isLinux [ bubblewrap ]);
+    ++ (lib.optionals stdenv.isLinux [
+      bubblewrap
+      cntr
+    ]);
 
   shellHook = ''
     ln -sf $HOME/.dotfiles/apps/nix/dir-locals.el $PWD/.dir-locals.el

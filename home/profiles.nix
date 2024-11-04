@@ -148,6 +148,7 @@ in
                   pylsp-mypy
                 ]
               ))
+              pkgs.watchexec
             ];
             nix.package = lib.mkForce pkgs.nixVersions.latest;
           }
