@@ -1,0 +1,21 @@
+on:
+  push:
+
+env:
+  ATTIC_URL: ${{ vars.ATTIC_URL }}
+  ATTIC_CACHE: ${{ vars.ATTIC_CACHE }}
+  ATTIC_KEY: ${{ secrets.ATTIC_KEY }}
+  NIX_CONFIG: "access-tokens = github.com=${{ secrets.REAL_GITHUB_TOKEN }}"
+  SOWER_URL: ${{ vars.SOWER_URL }}
+
+jobs:
+  build-and-seed-aarch64:
+    runs-on: local/aarch64-linux
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - run: |
+          export HOME=$PWD
+          nix develop .# --command seed-ci --attic-upload=true --attic-use=true --nom=false --sower-seed=true --system aarch64-linux
+
