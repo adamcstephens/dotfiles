@@ -161,9 +161,17 @@
                   virtualisation = {
                     diskSize = lib.mkForce (128 * 1024);
                     memorySize = lib.mkForce (16 * 1024);
-                    cores = 6;
+                    cores = 8;
                   };
                 };
+                maxJobs = 2;
+                supportedFeatures = [
+                  "apple-virt"
+                  "benchmark"
+                  "big-parallel"
+                  "kvm"
+                  "nixos-test"
+                ];
               };
 
               security.pam.enableSudoTouchIdAuth = true;
