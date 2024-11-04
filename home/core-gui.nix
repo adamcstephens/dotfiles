@@ -1,4 +1,5 @@
 {
+  inputs,
   lib,
   pkgs,
   ...
@@ -37,7 +38,7 @@
     pkgs.passage
     pkgs.rage
     pkgs.rbw
-    pkgs.yubikey-manager
+    inputs.nixpkgs-unstable-small.legacyPackages.${pkgs.system}.yubikey-manager
 
     # nix
     pkgs.nix-output-monitor
