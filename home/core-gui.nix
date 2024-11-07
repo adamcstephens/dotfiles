@@ -34,7 +34,7 @@
 
   home.packages = [
     # crypt
-    pkgs.age-plugin-yubikey
+    inputs.nixpkgs-unstable-small.legacyPackages.${pkgs.system}.age-plugin-yubikey
     pkgs.passage
     pkgs.rage
     pkgs.rbw
