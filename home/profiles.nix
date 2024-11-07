@@ -39,12 +39,9 @@ in
               builtins.elem (lib.getName pkg) [
                 "1password"
                 "aspell-dict-en-science"
-                "microsoft-edge-stable"
-                "slack"
                 "vscode"
                 "vscode-extension-github-copilot"
                 "vscode-extension-ms-vsliveshare-vsliveshare"
-                "zoom"
               ];
           };
 
@@ -184,12 +181,6 @@ in
                 };
               };
             };
-
-            home.packages = [
-              pkgs.microsoft-edge
-              pkgs.slack
-              pkgs.zoom-us
-            ];
 
             programs.waybar.settings.main = {
               network.interface = "wlp1s0";
