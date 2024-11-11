@@ -130,6 +130,9 @@ in
       home-manager = inputs.home-manager-unstable;
       modules = [
         ./core-dev.nix
+        {
+          dotfiles.dev.enable = true;
+        }
       ];
     };
 

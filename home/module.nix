@@ -1,11 +1,21 @@
 {
+  config,
   lib,
   pkgs,
   ...
 }:
+let
+  cfg = config.dotfiles;
+in
 {
   options.dotfiles = {
     nixosManaged = lib.mkEnableOption "When nixos managed dotfiles is in the read-only store";
+
+    dev.enable = lib.mkOption {
+      type = lib.types.bool;
+      description = "enable dev tools";
+      default = cfg.gui.enable;
+    };
 
     gui = {
       enable = lib.mkEnableOption "gui configuration";

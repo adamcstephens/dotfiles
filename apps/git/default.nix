@@ -14,7 +14,7 @@ in
       pkgs.git
       inputs.sandbox.packages.${pkgs.system}.git-toolbelt
     ]
-    ++ lib.optionals config.dotfiles.gui.enable [
+    ++ lib.optionals config.dotfiles.dev.enable [
       pkgs.gh
       pkgs.hut
       pkgs.lazygit
