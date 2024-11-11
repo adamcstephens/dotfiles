@@ -7,7 +7,8 @@ fsmonitor = "watchman"
 
 [ui]
 default-command = "log"
-diff.tool = ["difft", "--color=always", "$left", "$right"]
+# diff.tool = ["difft", "--color=always", "$left", "$right"]
+diff-editor = ":builtin"
 editor = "nvim"
 # paginate = "never"
 
