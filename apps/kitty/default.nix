@@ -23,6 +23,7 @@ in
       allow_remote_control socket-only
       font_family ${config.dotfiles.gui.font.mono}
       map ctrl+shift+p launch --type=overlay-main ${prj}
+      map super+shift+p launch --type=overlay-main ${prj} --remote
       shell_integration no-rc
 
     ''

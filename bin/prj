@@ -6,6 +6,12 @@ is_kitty = "KITTY_PID" in os.environ
 is_tmux = "TMUX" in os.environ
 
 
+def gen_remotes():
+    hosts = ["dev1"]
+
+    return str.join("\n", hosts)
+
+
 def run(command: str):
     result = subprocess.run(command, shell=True, capture_output=True)
 
@@ -27,21 +33,44 @@ def tmux_to_kitty(tab: str) -> dict:
     return {"id": int(tab_split[0]), "title": tab_split[1]}
 
 
-def prj_finder() -> str:
+def prj_finder(remote: bool = False) -> str:
     command: str
-    if is_kitty or is_tmux:
-        command = "zoxide query --list | fzf --height 22 --no-sort --filepath-word --reverse"
+    project: str
+
+    if remote:
+        selected_remote = run(f"echo '{gen_remotes()}' | fzf --height 22 --no-sort --filepath-word --reverse")
+        project = run(
+            f"ssh {selected_remote} zoxide query --list | fzf --height 22 --no-sort --filepath-word --reverse"
+        )
+        project = f"{selected_remote}:{project}"
     else:
-        command = "zoxide query --list | rofi -dmenu"
+        if is_kitty or is_tmux:
+            command = "zoxide query --list | fzf --height 22 --no-sort --filepath-word --reverse"
+        else:
+            command = "zoxide query --list | rofi -dmenu"
 
-    return run(command)
+        project = run(command)
+
+    return project
 
 
-def open_project(project: str):
-    wname = re.sub("[^a-zA-Z0-9]", "", os.path.basename(project))
+def open_project(project: str, remote: bool = False):
+    wname: str
+    project_s: list[str]
+
+    if remote:
+        project_s = project.split(":")
+        wname = re.sub("[^a-zA-Z0-9:]", "", f"{project_s[0]}:{os.path.basename(project_s[1])}")
+    else:
+        wname = re.sub("[^a-zA-Z0-9]", "", os.path.basename(project))
+
     existing_tab: int
 
     if is_tmux:
+        if remote:
+            print("unsupported tmux + remote")
+            sys.exit(1)
+
         tabs = list(
             map(
                 tmux_to_kitty,
@@ -62,24 +91,39 @@ def open_project(project: str):
     elif is_kitty:
         # needs to come after tmux in case tmux in kitty
         existing_tab = existing_tab_index(json.loads(run("kitty @ ls"))[0]["tabs"], wname)
+        new_tab_command = f"kitty @ launch --tab-title {wname} --type tab"
+        if not remote:
+            new_tab_command = new_tab_command + "--cwd {project}"
 
         if existing_tab > 0:
             run(f"kitty @ focus-tab -m id:{existing_tab}")
         else:
-            vim_window = run(f"kitty @ launch --tab-title {wname} --type tab --cwd {project}")
-            run(f'kitty @ send-text --match id:{vim_window} "vim .\\n"')
-            run(f"kitty @ new-window --match id:{vim_window} --cwd {project} --dont-take-focus")
+            new_tab = run(new_tab_command)
+            if remote:
+                run(f'kitty @ send-text --match id:{new_tab} "ssh {project_s[0]}\\n"')
+                run(f'kitty @ send-text --match id:{new_tab} "cd {project_s[1]}\\n"')
+                run(f'kitty @ send-text --match id:{new_tab} "vim .\\n"')
+                second_window = run(f"kitty @ new-window --match id:{new_tab} --dont-take-focus")
+                run(f'kitty @ send-text --match id:{second_window} "ssh {project_s[0]}\\n"')
+                run(f'kitty @ send-text --match id:{second_window} "cd {project_s[1]}\\n"')
+                third_window = run(f"kitty @ new-window --match id:{new_tab} --dont-take-focus")
+                run(f'kitty @ send-text --match id:{third_window} "ssh {project_s[0]}\\n"')
+                run(f'kitty @ send-text --match id:{third_window} "cd {project_s[1]}\\n"')
+            else:
+                run(f'kitty @ send-text --match id:{new_tab} "vim .\\n"')
+                run(f"kitty @ new-window --match id:{new_tab} --cwd {project} --dont-take-focus")
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("project", default="", type=str, nargs="?", help="path")
+    parser.add_argument("project", nargs="?", help="path")
+    parser.add_argument("--remote", action="store_true", help="remote")
     args = parser.parse_args()
 
     project: str
 
-    if args.project == "":
-        project = prj_finder()
+    if args.project == None:
+        project = prj_finder(remote=args.remote)
         if project == "":
             print("no project selected")
             sys.exit(1)
@@ -87,4 +131,4 @@ if __name__ == "__main__":
         project = os.path.abspath(args.project)
 
     print(f":: Opening project {project}")
-    open_project(project)
+    open_project(project=project, remote=args.remote)
