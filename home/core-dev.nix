@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 {
 
   imports = [
@@ -9,27 +9,31 @@
 
   dotfiles.apps.neovim.full = true;
 
-  home.packages = [
-    # crypt
-    pkgs.passage
-    pkgs.rage
-    pkgs.rbw
+  home.packages =
+    [
+      # crypt
+      pkgs.passage
+      pkgs.rage
+      pkgs.rbw
 
-    # nix
-    pkgs.nix-output-monitor
-    pkgs.nix-tree
-    pkgs.nixd
-    pkgs.nixfmt-rfc-style
+      # nix
+      pkgs.nix-output-monitor
+      pkgs.nix-tree
+      pkgs.nixd
+      pkgs.nixfmt-rfc-style
 
-    # tools
-    pkgs.pwgen
-    pkgs.restish
-    pkgs.unzip
+      # tools
+      pkgs.pwgen
+      pkgs.restish
+      pkgs.unzip
 
-    # apps
-    pkgs.eternal-terminal
-    pkgs.senpai
-  ];
+      # apps
+      pkgs.eternal-terminal
+      pkgs.senpai
+    ]
+    ++ lib.optionals pkgs.stdenv.isLinux [
+      pkgs._1password-cli
+    ];
 
   programs = {
     ssh.forwardAgent = true;

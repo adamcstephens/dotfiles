@@ -38,6 +38,7 @@ in
               pkg:
               builtins.elem (lib.getName pkg) [
                 "1password"
+                "1password-cli"
                 "aspell-dict-en-science"
                 "vscode"
                 "vscode-extension-github-copilot"
