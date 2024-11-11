@@ -107,6 +107,7 @@ mnw.lib.wrap pkgs {
       vim-illuminate
       vim-just
       vim-matchup
+      vim-repeat
       which-key-nvim
       whitespace-nvim
     ]

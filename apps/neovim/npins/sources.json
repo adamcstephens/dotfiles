@@ -25,6 +25,20 @@
       "url": null,
       "hash": "0i3b0svgd9mk6vfqmm8s8mcx60rgh9amwd3q64s9wrahq86cmqxg"
     },
+    "focus-nvim": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "Git",
+        "url": "https://github.com/nvim-focus/focus.nvim"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "version": "v1.0.2",
+      "revision": "d954b0c4063fb33e5e3761512ad94fda53111193",
+      "url": null,
+      "hash": "0cz0rjw22zwilss4sai9znpkdadxmlqzdhf31amqvjnc884narwa"
+    },
     "focus.nvim": {
       "type": "Git",
       "repository": {

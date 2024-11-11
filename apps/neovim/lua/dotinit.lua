@@ -16,7 +16,7 @@ require("theme")
 -- packages
 --
 -- split handling
--- require("focus").setup()
+require("focus").setup()
 -- notifications
 require("fidget").setup({})
 require("gitsigns").setup()
@@ -86,7 +86,9 @@ oil.setup({
   },
 })
 require("remember").setup({})
-require("smart-splits").setup({})
+require("smart-splits").setup({
+  at_edge = "stop",
+})
 
 local builtin = require("telescope.builtin")
 local open_with_trouble = require("trouble.sources.telescope").open
@@ -117,7 +119,12 @@ require("tmux").setup({
     enable_default_keybindings = false,
   },
 })
-require("trouble").setup()
+require("trouble").setup({
+  win = {
+    type = "split",
+    position = "right",
+  },
+})
 require("which-key").setup({})
 require("whitespace-nvim").setup({})
 
