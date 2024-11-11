@@ -41,6 +41,7 @@ in
       filter_mode = "directory";
       inline_height = 30;
       style = "compact";
+      sync_address = "https://atuin.junco.dev";
       update_check = false;
       local_timeout = 15;
     };
