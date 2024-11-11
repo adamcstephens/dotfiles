@@ -1,6 +1,5 @@
 {
   config,
-  inputs,
   lib,
   pkgs,
   ...
@@ -12,7 +11,7 @@ in
   home.packages =
     [
       pkgs.git
-      inputs.sandbox.packages.${pkgs.system}.git-toolbelt
+      pkgs.git-extras
     ]
     ++ lib.optionals config.dotfiles.dev.enable [
       pkgs.gh
