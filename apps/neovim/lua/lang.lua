@@ -1,3 +1,6 @@
+-- print lsp info
+-- lua =vim.lsp.get_active_clients()[5]
+
 local dap = require("dap")
 local lspconfig = require("lspconfig")
 local configs = require("lspconfig.configs")
@@ -34,19 +37,22 @@ if vim.fn.executable("nextls") == 1 then
     },
     credo = { enable = true },
     elixirls = {
-      enable = false,
+      enable = true,
     },
   })
 end
-if vim.fn.executable("elixir-ls") == 1 then
-  lspconfig.elixirls.setup({
-    -- capabilities = require("cmp_nvim_lsp").default_capabilities(),
-    cmd = { "elixir-ls" },
-    on_attach = function(client)
-      client.server_capabilities.semanticTokensProvider = nil
-    end,
-  })
-end
+-- if vim.fn.executable("elixir-ls") == 1 then
+--   lspconfig.elixirls.setup({
+--     -- capabilities = require("cmp_nvim_lsp").default_capabilities(),
+--     cmd = { "elixir-ls" },
+--     on_attach = function(client)
+--       client.server_capabilities = {
+--         semanticTokensProvider = nil,
+--         referencesProvider = nil,
+--       }
+--     end,
+--   })
+-- end
 
 -- go
 lspconfig.golangci_lint_ls.setup({})
