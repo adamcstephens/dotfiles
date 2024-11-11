@@ -7,25 +7,17 @@
 {
   imports = [
     ./colors.nix
+    ./core-dev.nix
 
-    ../apps/atuin
     ../apps/emacs
     ../apps/ghostty
-    ../apps/jujutsu
     ../apps/kitty
-    ../apps/ssh
     ../apps/vscode
     ../apps/vscodium
   ];
 
   dotfiles = {
     apps = {
-      emacs = {
-        package = lib.mkDefault pkgs.emacs29;
-        patchForGui = lib.mkDefault false;
-        full = lib.mkDefault true;
-      };
-      neovim.full = true;
       vscodium.enable = lib.mkDefault true;
     };
 
@@ -33,30 +25,7 @@
   };
 
   home.packages = [
-    # crypt
     inputs.nixpkgs-unstable-small.legacyPackages.${pkgs.system}.age-plugin-yubikey
-    pkgs.passage
-    pkgs.rage
-    pkgs.rbw
     inputs.nixpkgs-unstable-small.legacyPackages.${pkgs.system}.yubikey-manager
-
-    # nix
-    pkgs.nix-output-monitor
-    pkgs.nix-tree
-    pkgs.nixd
-    pkgs.nixfmt-rfc-style
-
-    # tools
-    pkgs.pwgen
-    pkgs.restish
-    pkgs.unzip
-
-    # apps
-    pkgs.eternal-terminal
-    pkgs.senpai
   ];
-
-  programs = {
-    ssh.forwardAgent = true;
-  };
 }
