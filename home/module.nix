@@ -51,19 +51,13 @@
         fontconfig = lib.mkOption {
           type = lib.types.unspecified;
           default = pkgs.makeFontsConf {
-            fontDirectories =
-              [
-                (pkgs.nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" ]; })
-                pkgs.emacs-all-the-icons-fonts
-                pkgs.font-awesome
-                pkgs.ibm-plex
-                pkgs.jetbrains-mono
-              ]
-              ++ lib.optionals pkgs.stdenv.isLinux [
-                pkgs.noto-fonts
-                pkgs.noto-fonts-emoji
-              ]
-              ++ lib.optionals pkgs.stdenv.isDarwin [ "/Library/Fonts" ];
+            fontDirectories = [
+              (pkgs.nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" ]; })
+              pkgs.emacs-all-the-icons-fonts
+              pkgs.font-awesome
+              pkgs.ibm-plex
+              pkgs.jetbrains-mono
+            ] ++ lib.optionals pkgs.stdenv.isDarwin [ "/Library/Fonts" ];
           };
         };
       };

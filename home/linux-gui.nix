@@ -102,8 +102,6 @@ in
       pkgs.jetbrains-mono
       pkgs.material-icons
       pkgs.material-design-icons
-      pkgs.noto-fonts
-      pkgs.noto-fonts-emoji
 
       configure-gtk
       gsettings-wrapper
