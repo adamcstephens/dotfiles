@@ -105,7 +105,7 @@ def open_project(project: str, remote: bool = False):
         existing_tab = existing_tab_index(json.loads(run("kitty @ ls"))[0]["tabs"], wname)
         new_tab_command = f"kitty @ launch --tab-title {wname} --type tab"
         if not remote:
-            new_tab_command = new_tab_command + " --cwd {project}"
+            new_tab_command = f"{new_tab_command} --cwd {project}"
 
         if existing_tab > 0:
             run(f"kitty @ focus-tab -m id:{existing_tab}")
