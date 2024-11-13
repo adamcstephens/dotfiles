@@ -16,6 +16,9 @@
       pkgs.rage
       pkgs.rbw
 
+      # lang
+      pkgs.python3
+
       # nix
       pkgs.nix-output-monitor
       pkgs.nix-tree
