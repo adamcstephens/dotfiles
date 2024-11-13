@@ -150,6 +150,9 @@ end
 if vim.fn.executable("pyright") == 1 then
   require("lspconfig").pyright.setup({})
 end
+if vim.fn.executable("ruff") == 1 then
+  require("lspconfig").ruff.setup({})
+end
 
 -- tofu
 if vim.fn.executable("terraformls") == 1 then
