@@ -7,6 +7,7 @@ import os
 import re
 import subprocess
 import sys
+import time
 
 logger = logging.getLogger(__name__)
 
@@ -112,18 +113,30 @@ def open_project(project: str, remote: bool = False):
         else:
             new_tab = run(new_tab_command)
             if remote:
-                run(f'kitty @ send-text --match id:{new_tab} "ssh {project_s[0]}\\n"')
-                run(f'kitty @ send-text --match id:{new_tab} "cd {project_s[1]}\\n"')
-                run(f'kitty @ send-text --match id:{new_tab} "vim .\\n"')
                 second_window = run(f"kitty @ new-window --match id:{new_tab} --dont-take-focus")
-                run(f'kitty @ send-text --match id:{second_window} "ssh {project_s[0]}\\n"')
-                run(f'kitty @ send-text --match id:{second_window} "cd {project_s[1]}\\n"')
                 third_window = run(f"kitty @ new-window --match id:{new_tab} --dont-take-focus")
-                run(f'kitty @ send-text --match id:{third_window} "ssh {project_s[0]}\\n"')
+
+                run(f'''kitty @ send-text --match id:{new_tab} "{connect_command('one')} {project_s[0]}\\n"''')
+                run(f'''kitty @ send-text --match id:{second_window} "{connect_command('two')} {project_s[0]}\\n"''')
+                run(f'''kitty @ send-text --match id:{third_window} "{connect_command('three')} {project_s[0]}\\n"''')
+
+                time.sleep(1)
+
+                run(f'kitty @ send-text --match id:{new_tab} "cd {project_s[1]}\\n"')
+                run(f'kitty @ send-text --match id:{second_window} "cd {project_s[1]}\\n"')
                 run(f'kitty @ send-text --match id:{third_window} "cd {project_s[1]}\\n"')
+
+                run(f'kitty @ send-text --match id:{new_tab} "vim .\\n"')
             else:
                 run(f'kitty @ send-text --match id:{new_tab} "vim .\\n"')
                 run(f"kitty @ new-window --match id:{new_tab} --cwd {project} --dont-take-focus")
+
+
+def connect_command(identifier: str) -> str:
+    rundir = f"{os.getenv('XDG_RUNTIME_DIR')}/et/{identifier}"
+    if not os.path.exists(rundir):
+        os.makedirs(rundir)
+    return f"et --forward-ssh-agent --silent --logdir {rundir}"
 
 
 if __name__ == "__main__":
