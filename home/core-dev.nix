@@ -17,7 +17,7 @@
       pkgs.rbw
 
       # lang
-      pkgs.python3
+      pkgs.python313
 
       # nix
       pkgs.nix-output-monitor
