@@ -1,5 +1,5 @@
-{ pkgs }:
-pkgs.mkShell {
+{ mkShell, pkgs }:
+mkShell {
   packages = [
     # go
     pkgs.delve

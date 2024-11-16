@@ -1,17 +1,13 @@
 { inputs, withSystem, ... }:
 {
-  flake.devShells.aarch64-linux = withSystem "aarch64-linux" (
-    { inputs', pkgs, ... }:
-    {
-      incus = import ./incus.nix { pkgs = inputs'.nixpkgs-unstable.legacyPackages; };
-    }
-  );
-
   flake.devShells.x86_64-linux = withSystem "x86_64-linux" (
-    { inputs', pkgs, ... }:
+    { inputs', ... }:
+    let
+      pkgs = inputs'.nixpkgs-unstable.legacyPackages;
+    in
     {
-      distrobuilder = import ./distrobuilder.nix { pkgs = inputs'.nixpkgs-unstable.legacyPackages; };
-      incus = import ./incus.nix { pkgs = inputs'.nixpkgs-unstable.legacyPackages; };
+      distrobuilder = pkgs.callPackage ./distrobuilder.nix { };
+      incus = pkgs.callPackage ./incus.nix { };
 
       media = pkgs.mkShellNoCC {
         name = "media";
@@ -34,10 +30,12 @@
   perSystem =
     {
       inputs',
-      pkgs,
       self',
       ...
     }:
+    let
+      pkgs = inputs'.nixpkgs-unstable.legacyPackages;
+    in
     {
       devShells = {
         ci = pkgs.mkShellNoCC {
@@ -62,43 +60,17 @@
           ] ++ self'.devShells.ci.nativeBuildInputs;
         };
 
-        elixir = inputs'.nixpkgs-unstable.legacyPackages.callPackage ./elixir.nix { };
-        go = inputs'.nixpkgs-unstable.legacyPackages.callPackage ./go.nix { };
-        nixpkgs = inputs'.nixpkgs-unstable.legacyPackages.callPackage ./nixpkgs.nix { };
-        python = inputs'.nixpkgs-unstable.legacyPackages.callPackage ./python.nix { };
-        rust = inputs'.nixpkgs-unstable.legacyPackages.callPackage ./rust.nix { };
-        zig = inputs'.nixpkgs-unstable.legacyPackages.callPackage ./zig.nix { };
-
-        # inline
-
-        c = pkgs.mkShell {
-          packages = [
-            pkgs.autoconf
-            pkgs.automake
-            pkgs.binutils
-            pkgs.cmake
-            pkgs.gnumake
-            pkgs.gcc
-            pkgs.libtool
-            pkgs.meson
-            pkgs.ninja
-            pkgs.mtools
-            pkgs.perl
-            pkgs.xz
-          ];
+        c = pkgs.callPackage ./c.nix { };
+        elixir = pkgs.callPackage ./elixir.nix { };
+        go = pkgs.callPackage ./go.nix { };
+        js = pkgs.callPackage ./js.nix { };
+        nixpkgs = pkgs.callPackage ./nixpkgs.nix { };
+        python = pkgs.callPackage ./python.nix { };
+        rust = pkgs.callPackage ./rust.nix { };
+        zig = pkgs.callPackage ./zig.nix { };
+        vscode = pkgs.callPackage ./vscode.nix {
+          devShells = self'.devShells;
         };
-
-        js = pkgs.mkShellNoCC {
-          packages = [
-            pkgs.esbuild
-            pkgs.nodejs
-            pkgs.yarn
-          ];
-        };
-
-        opentofu = pkgs.mkShellNoCC { packages = [ pkgs.opentofu ]; };
-
-        vscode = pkgs.mkShellNoCC { packages = [ pkgs.vsce ] ++ self'.devShells.js.nativeBuildInputs; };
       };
     };
 }

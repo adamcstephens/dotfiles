@@ -1,5 +1,5 @@
-{ pkgs }:
-pkgs.mkShellNoCC {
+{ mkShellNoCC, pkgs }:
+mkShellNoCC {
   packages = [
     pkgs.delve
     pkgs.go
