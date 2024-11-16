@@ -1,17 +1,17 @@
 { inputs, withSystem, ... }:
 {
   flake.devShells.aarch64-linux = withSystem "aarch64-linux" (
-    { pkgs, ... }:
+    { inputs', pkgs, ... }:
     {
-      incus = import ./incus.nix { inherit pkgs; };
+      incus = import ./incus.nix { pkgs = inputs'.nixpkgs-unstable.legacyPackages; };
     }
   );
 
   flake.devShells.x86_64-linux = withSystem "x86_64-linux" (
-    { pkgs, ... }:
+    { inputs', pkgs, ... }:
     {
-      distrobuilder = import ./distrobuilder.nix { inherit pkgs; };
-      incus = import ./incus.nix { inherit pkgs; };
+      distrobuilder = import ./distrobuilder.nix { pkgs = inputs'.nixpkgs-unstable.legacyPackages; };
+      incus = import ./incus.nix { pkgs = inputs'.nixpkgs-unstable.legacyPackages; };
 
       media = pkgs.mkShellNoCC {
         name = "media";
@@ -64,10 +64,10 @@
 
         elixir = inputs'.nixpkgs-unstable.legacyPackages.callPackage ./elixir.nix { };
         go = inputs'.nixpkgs-unstable.legacyPackages.callPackage ./go.nix { };
-        nixpkgs = pkgs.callPackage ./nixpkgs.nix { };
-        python = pkgs.callPackage ./python.nix { };
+        nixpkgs = inputs'.nixpkgs-unstable.legacyPackages.callPackage ./nixpkgs.nix { };
+        python = inputs'.nixpkgs-unstable.legacyPackages.callPackage ./python.nix { };
         rust = inputs'.nixpkgs-unstable.legacyPackages.callPackage ./rust.nix { };
-        zig = pkgs.callPackage ./zig.nix { };
+        zig = inputs'.nixpkgs-unstable.legacyPackages.callPackage ./zig.nix { };
 
         # inline
 
