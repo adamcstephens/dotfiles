@@ -147,7 +147,7 @@ in
           { pkgs, ... }:
           {
             home.packages = [
-              inputs.devbox.packages.${pkgs.system}.default
+              pkgs.devbox
               pkgs.elixir-ls
               pkgs.next-ls
               pkgs.pgcli
