@@ -94,8 +94,6 @@ in
 
   home.packages =
     [
-      pkgs.python3
-
       pkgs.etBook
       pkgs.fira
       pkgs.font-awesome

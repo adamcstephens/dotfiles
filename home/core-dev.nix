@@ -18,7 +18,7 @@
 
       # lang
       pkgs.python313
-      # (pkgs.python3.withPackages (
+      # (pkgs.python313.withPackages (
       #   ps: with ps; [
       #     python-lsp-server
       #     pylsp-mypy
