@@ -138,7 +138,7 @@ in
 
     maple = {
       system = "aarch64-darwin";
-      nixpkgs = inputs.nixpkgs-unstable;
+      nixpkgs = inputs.nixpkgs-unstable-small;
       home-manager = inputs.home-manager-unstable;
       modules = [
         ./core-darwin.nix
@@ -151,12 +151,6 @@ in
               pkgs.elixir-ls
               pkgs.next-ls
               pkgs.pgcli
-              (pkgs.python3.withPackages (
-                ps: with ps; [
-                  python-lsp-server
-                  pylsp-mypy
-                ]
-              ))
               pkgs.watchexec
             ];
             nix.package = lib.mkForce pkgs.nixVersions.latest;

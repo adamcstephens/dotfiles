@@ -18,6 +18,12 @@
 
       # lang
       pkgs.python313
+      # (pkgs.python3.withPackages (
+      #   ps: with ps; [
+      #     python-lsp-server
+      #     pylsp-mypy
+      #   ]
+      # ))
 
       # nix
       pkgs.nix-output-monitor
