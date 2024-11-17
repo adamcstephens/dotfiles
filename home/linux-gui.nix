@@ -60,8 +60,7 @@ in
     ../apps/ssh
   ];
 
-  dotfiles.apps.emacs.package = pkgs.emacs29-pgtk;
-
+  # reads fonts from home.packages
   fonts.fontconfig.enable = true;
 
   gtk = {
@@ -93,7 +92,8 @@ in
   };
 
   home.packages =
-    [
+    config.dotfiles.gui.font.fontconfig.fontDirectories
+    ++ [
       pkgs.etBook
       pkgs.fira
       pkgs.font-awesome
