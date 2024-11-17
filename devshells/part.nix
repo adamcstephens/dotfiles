@@ -9,11 +9,6 @@
       distrobuilder = pkgs.callPackage ./distrobuilder.nix { };
       incus = pkgs.callPackage ./incus.nix { };
 
-      media = pkgs.mkShellNoCC {
-        name = "media";
-        packages = [ pkgs.ffmpeg_5-full ];
-      };
-
       xmonad = pkgs.mkShellNoCC {
         packages = [
           (pkgs.ghc.withPackages (ps: [
