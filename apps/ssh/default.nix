@@ -35,7 +35,7 @@ in
     systemd.user.services.ssh-agent = lib.mkIf cfg.agent.askpass {
       Install.WantedBy = lib.mkForce [ "graphical-session.target" ];
       Service.Environment = [
-        "SSH_ASKPASS=${pkgs.gnome.seahorse}/libexec/seahorse/ssh-askpass"
+        "SSH_ASKPASS=${pkgs.seahorse}/libexec/seahorse/ssh-askpass"
       ];
     };
 
@@ -49,7 +49,7 @@ in
       Service = {
         Type = "simple";
         Environment = [
-          "SSH_ASKPASS=${pkgs.gnome.seahorse}/libexec/seahorse/ssh-askpass"
+          "SSH_ASKPASS=${pkgs.seahorse}/libexec/seahorse/ssh-askpass"
         ];
         ExecStart = "${lib.getExe pkgs.ssh-tpm-agent} -l %t/ssh-tpm-agent -A %t/ssh-agent ";
         RestartSec = 3;
