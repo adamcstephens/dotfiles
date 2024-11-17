@@ -130,7 +130,7 @@ in
       })
 
       # apps
-      pkgs.cinnamon.nemo
+      pkgs.nemo
       pkgs.finamp
       pkgs.fractal
       pkgs.eog

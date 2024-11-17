@@ -6,11 +6,13 @@
   ...
 }:
 let
-  config-script = pkgs.runCommandNoCC "dunst-config-setup" { buildInputs = [ pkgs.nushell ]; } ''
-    mkdir -p $out/bin
-    cp ${./dunst-config-setup} $out/bin/dunst-config-setup
-    patchShebangs $out/bin
-  '';
+  config-script = pkgs.writeShellApplication {
+    name = "dunst-config-setup";
+
+    runtimeInputs = [ pkgs.nushell ];
+
+    text = builtins.readFile ./dunst-config-setup;
+  };
 in
 {
   services.dunst = {
