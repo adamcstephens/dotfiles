@@ -233,16 +233,19 @@ in
               ];
             };
 
-            services.kanshi.profiles.undocked = lib.mkForce {
-              outputs = [
-                {
-                  criteria = "eDP-1";
-                  mode = "2880x1800@60Hz";
-                  scale = 1.5;
-                  status = "enable";
-                }
-              ];
-            };
+            services.kanshi.settings = [
+              {
+                profile.name = "undocked";
+                profile.outputs = [
+                  {
+                    criteria = "eDP-1";
+                    mode = "2880x1800@60Hz";
+                    scale = 1.5;
+                    status = "enable";
+                  }
+                ];
+              }
+            ];
           }
         )
       ];

@@ -19,9 +19,10 @@ in
     services.kanshi = {
       enable = true;
       systemdTarget = "wayland-session.target";
-      profiles = {
-        docked = {
-          outputs = [
+      settings = [
+        {
+          profile.name = "docked";
+          profile.outputs = [
             {
               criteria = "eDP-1";
               status = "disable";
@@ -31,26 +32,19 @@ in
               scale = dell_scale;
             }
           ];
-        };
-        undocked = {
-          outputs = [
-            {
-              criteria = "eDP-1";
-              scale = 2.0;
-              status = "enable";
-            }
-          ];
-        };
-        desktop = {
-          outputs = [
+        }
+        {
+          profile.name = "desktop";
+          profile.outputs = [
             {
               criteria = "Dell Inc. DELL P2715Q 54KKD79CAQNL";
               scale = dell_scale;
             }
           ];
-        };
-        desktop-plus-crashcart = {
-          outputs = [
+        }
+        {
+          profile.name = "desktop-plus-crashcart";
+          profile.outputs = [
             {
               criteria = "Dell Inc. DELL P2715Q 54KKD79CAQNL";
               scale = dell_scale;
@@ -60,8 +54,8 @@ in
               status = "disable";
             }
           ];
-        };
-      };
+        }
+      ];
     };
 
     systemd.user.services.kanshi = {
