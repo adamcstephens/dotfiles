@@ -24,7 +24,6 @@ mkShell {
       dicts: with dicts; [
         en
         en-computers
-        en-science
       ]
     ))
     pkgs.debianutils
