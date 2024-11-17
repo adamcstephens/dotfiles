@@ -6,9 +6,11 @@
   ...
 }:
 let
-  config-script = pkgs.writeShellScriptBin "dunst-config-setup" (
-    builtins.readFile ./dunst-config-setup
-  );
+  config-script = pkgs.writeShellApplication {
+    name = "dunst-config-setup";
+    runtimeInputs = [ pkgs.coreutils ];
+    text = builtins.readFile ./dunst-config-setup;
+  };
 in
 {
   services.dunst = {
