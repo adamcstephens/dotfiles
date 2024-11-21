@@ -34,8 +34,8 @@
                       :height (dot/font-height))
 
   (add-hook 'text-mode-hook #'(lambda () (
-                                          ;(set-face-attribute 'org-block nil :family (face-attribute 'default :family))
-                                          ;(set-face-attribute 'org-table nil :family (face-attribute 'default :family))
+                                        ;(set-face-attribute 'org-block nil :family (face-attribute 'default :family))
+                                        ;(set-face-attribute 'org-table nil :family (face-attribute 'default :family))
                                           variable-pitch-mode t)))
 
   (setq
@@ -49,13 +49,13 @@
 
    ;; breaks emacsclient???
    ;; custom org faces
-   ;;modus-themes-headings
-   ;;'
-   ;;((1 . (variable-pitch 1.1))
-   ;;  (2 . (1.05))
-   ;;  (agenda-date . (1.1))
-   ;;  (agenda-structure . (variable-pitch light 1.3))
-   ;;  (t . (1.0)))
+   modus-themes-headings
+   '
+   ((1 . (variable-pitch 1.1))
+    (2 . (1.05))
+    (agenda-date . (1.1))
+    (agenda-structure . (variable-pitch light 1.3))
+    (t . (1.0)))
    )
   (load-theme 'doom-moonfly :no-confirm)
 
@@ -74,7 +74,7 @@
     (add-to-list 'default-frame-alist '(ns-appearance . dark))
     (setq auto-dark-allow-osascript t))
 
-  ;(auto-dark-mode t)
+                                        ;(auto-dark-mode t)
   )
 
 ;; run this hook after we have initialized the first time
