@@ -27,22 +27,22 @@
             (pkgs.nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" ]; })
           ];
           nix = {
-            # buildMachines = [
-            #   {
-            #     hostName = "nixos1.local";
-            #     maxJobs = 4;
-            #     sshUser = "root";
-            #     supportedFeatures = [
-            #       "big-parallel"
-            #       "kvm"
-            #       "nixos-test"
-            #     ];
-            #     systems = [
-            #       "aarch64-linux"
-            #       "x86_64-linux"
-            #     ];
-            #   }
-            # ];
+            buildMachines = [
+              {
+                hostName = "nixos1.local";
+                maxJobs = 4;
+                sshUser = "root";
+                supportedFeatures = [
+                  "big-parallel"
+                  "kvm"
+                  "nixos-test"
+                ];
+                systems = [
+                  "aarch64-linux"
+                  "x86_64-linux"
+                ];
+              }
+            ];
 
             channel.enable = false;
 
@@ -155,24 +155,24 @@
 
               networking.computerName = "maple";
 
-              nix.linux-builder = {
-                enable = true;
-                config = {
-                  virtualisation = {
-                    diskSize = lib.mkForce (128 * 1024);
-                    memorySize = lib.mkForce (16 * 1024);
-                    cores = 8;
-                  };
-                };
-                maxJobs = 2;
-                supportedFeatures = [
-                  "apple-virt"
-                  "benchmark"
-                  "big-parallel"
-                  "kvm"
-                  "nixos-test"
-                ];
-              };
+              # nix.linux-builder = {
+              #   enable = true;
+              #   config = {
+              #     virtualisation = {
+              #       diskSize = lib.mkForce (128 * 1024);
+              #       memorySize = lib.mkForce (16 * 1024);
+              #       cores = 8;
+              #     };
+              #   };
+              #   maxJobs = 2;
+              #   supportedFeatures = [
+              #     "apple-virt"
+              #     "benchmark"
+              #     "big-parallel"
+              #     "kvm"
+              #     "nixos-test"
+              #   ];
+              # };
 
               security.pam.enableSudoTouchIdAuth = true;
               system.stateVersion = 5;

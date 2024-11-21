@@ -158,6 +158,35 @@ in
       ];
     };
 
+    nixos1 = {
+      nixpkgs = inputs.nixpkgs-unstable;
+      home-manager = inputs.home-manager-unstable;
+      modules = [
+        ./linux-gui.nix
+        {
+          dotfiles = {
+            gui = {
+              dpi = 120;
+              wayland = true;
+            };
+          };
+
+          services.kanshi.settings = [
+            {
+              profile.name = "virtual";
+              profile.outputs = [
+                {
+                  criteria = "Virtual-1";
+                  status = "enable";
+                  scale = 1.333333;
+                }
+              ];
+            }
+          ];
+        }
+      ];
+    };
+
     seek = {
       nixpkgs = inputs.nixpkgs-unstable;
       home-manager = inputs.home-manager-unstable;

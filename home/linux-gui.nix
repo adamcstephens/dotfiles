@@ -1,6 +1,6 @@
 {
   config,
-  inputs,
+  flake,
   lib,
   pkgs,
   ...
@@ -120,14 +120,7 @@ in
       pkgs.wireplumber
 
       # firefox
-      inputs.sandbox.packages.${pkgs.system}.firefox-profile-switcher-connector
-      pkgs.firefoxpwa
-      (pkgs.firefox-wayland.override {
-        nativeMessagingHosts = [
-          pkgs.firefoxpwa
-          inputs.sandbox.packages.${pkgs.system}.firefox-profile-switcher-connector
-        ];
-      })
+      pkgs.firefox-wayland
 
       # apps
       pkgs.nemo
@@ -173,6 +166,9 @@ in
       pkgs.lxrandr
       pkgs.xclip
       pkgs.xlayoutdisplay
+    ]
+    ++ lib.optionals config.dotfiles.nixosManaged [
+      flake.packages.${pkgs.system}.rofi-wrapper
     ];
 
   programs.feh.enable = true;
