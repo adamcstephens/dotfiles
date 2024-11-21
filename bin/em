@@ -1,8 +1,10 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 if [ "$(uname -s)" = "Darwin" ]; then
   # shellcheck source=/dev/null
-  . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+  source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+
+  export PATH="$HOME/.dotfiles/bin:$PATH"
 fi
 
 if ! command -v emacsclient >/dev/null 2>&1; then
@@ -21,7 +23,7 @@ fi
 
 unset TMPDIR
 
-if [ -z "$INSIDE_EMACS" ] && [ -n "$DISPLAY" ]; then
+if [ -z "$INSIDE_EMACS" ] && [ -n "$DISPLAY" ] || [ -z "$KITTY_PID" ]; then
   args="--create-frame"
 
   if [ -z "$IS_EDITOR" ]; then
@@ -34,7 +36,6 @@ else
     args="$args --no-wait"
   fi
 fi
-
 export SSH_AUTH_SOCK="$(ssh-agent-mgr)"
 emacsclient -e "(setenv \"SSH_AUTH_SOCK\" \"$SSH_AUTH_SOCK\")" >/dev/null
 

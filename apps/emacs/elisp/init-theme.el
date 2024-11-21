@@ -34,10 +34,8 @@
                       :height (dot/font-height))
 
   (add-hook 'text-mode-hook #'(lambda () (
-                                          (set-face-attribute 'org-block nil
-                                                              :family (face-attribute 'default :family))
-                                          (set-face-attribute 'org-table nil
-                                                              :family (face-attribute 'default :family))
+                                          ;(set-face-attribute 'org-block nil :family (face-attribute 'default :family))
+                                          ;(set-face-attribute 'org-table nil :family (face-attribute 'default :family))
                                           variable-pitch-mode t)))
 
   (setq
@@ -76,7 +74,8 @@
     (add-to-list 'default-frame-alist '(ns-appearance . dark))
     (setq auto-dark-allow-osascript t))
 
-  (auto-dark-mode t))
+  ;(auto-dark-mode t)
+  )
 
 ;; run this hook after we have initialized the first time
 ;; (add-hook 'after-init-hook 'dot/gui-setup)
