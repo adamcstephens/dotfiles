@@ -1,6 +1,5 @@
 {
   config,
-  inputs,
   lib,
   pkgs,
   ...
@@ -44,14 +43,14 @@ let
 
   emacsPatched = cfg.package.overrideAttrs (prev: {
     patches =
-      [ ./silence-pgtk-xorg-warning.patch ]
-      ++ (lib.optionals pkgs.stdenv.isDarwin [
+      lib.optionals pkgs.stdenv.isLinux [ ./silence-pgtk-xorg-warning.patch ]
+      ++ lib.optionals pkgs.stdenv.isDarwin [
         # "${inputs.emacs-plus}/patches/emacs-28/fix-window-role.patch"
         # "${inputs.emacs-plus}/patches/emacs-28/no-frame-refocus-cocoa.patch"
         # "${inputs.emacs-plus}/patches/emacs-29/poll.patch"
         # # "${inputs.emacs-plus}/patches/emacs-30/round-undecorated-frame.patch"
         # "${inputs.emacs-plus}/patches/emacs-28/system-appearance.patch"
-      ])
+      ]
       ++ prev.patches;
   });
 
