@@ -152,12 +152,7 @@ in
 
             home.packages = [
               pkgs.devbox
-              pkgs.elixir-ls
-              pkgs.next-ls
-              pkgs.pgcli
-              pkgs.watchexec
             ];
-            nix.package = lib.mkForce pkgs.nixVersions.latest;
           }
         )
       ];

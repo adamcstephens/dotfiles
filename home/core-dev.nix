@@ -17,6 +17,8 @@
       pkgs.rbw
 
       # lang
+      pkgs.elixir-ls
+      pkgs.next-ls
       pkgs.python313
       # (pkgs.python313.withPackages (
       #   ps: with ps; [
@@ -32,9 +34,11 @@
       pkgs.nixfmt-rfc-style
 
       # tools
+      pkgs.pgcli
       pkgs.pwgen
       pkgs.restish
       pkgs.unzip
+      pkgs.watchexec
 
       # apps
       pkgs.eternal-terminal
