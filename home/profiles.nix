@@ -60,68 +60,68 @@ in
       nixpkgs = inputs.nixpkgs-unstable;
       home-manager = inputs.home-manager-unstable;
 
-      modules = [
-        ./linux-gui.nix
-        # ../apps/solaar
-
-        (
-          { pkgs, ... }:
-          {
-            dotfiles.gui = {
-              dpi = 148;
-              dontSleep = true;
-              drmDevices = [
-                "/dev/dri/card1"
-              ];
-              wayland = true;
-              xorg = {
-                enable = true;
-                wm = "xmonad";
-              };
-            };
-
-            dotfiles.apps.waybar.battery = "upower";
-            programs.waybar.settings.main.network.format-disconnected = "";
-
-            services.grobi = {
-              enable = true;
-              rules = [
-                {
-                  name = "desktop";
-                  outputs_connected = [ "HDMI-1" ];
-                  configure_single = "HDMI-1";
-                  primary = true;
-                  atomic = true;
-                  execute_after = [
-                    "/run/current-system/sw/bin/systemd-run --user --on-active=5s ${lib.getExe pkgs.xorg.xset} r rate 160 80"
-                  ];
-                }
-              ];
-            };
-            systemd.user.services.grobi = {
-              Install.WantedBy = lib.mkForce [ "xserver-session.target" ];
-              Unit.PartOf = lib.mkForce [ "xserver-session.target" ];
-            };
-
-            services.swayidle.timeouts = [
-              {
-                timeout = 960;
-                command = lib.getExe (
-                  pkgs.writeShellScriptBin "output-resume" ''
-                    ${lib.getExe pkgs.wlopm} --off HDMI-A-1
-                  ''
-                );
-                resumeCommand = lib.getExe (
-                  pkgs.writeShellScriptBin "output-resume" ''
-                    ${lib.getExe pkgs.wlopm} --on HDMI-A-1
-                    /run/current-system/sw/bin/systemd-run --user --on-active=1 /run/current-system/sw/bin/systemctl --user restart kanshi
-                  ''
-                );
-              }
-            ];
-          }
-        )
-      ];
+      # modules = [
+      #   ./linux-gui.nix
+      #   # ../apps/solaar
+      #
+      #   (
+      #     { pkgs, ... }:
+      #     {
+      #       dotfiles.gui = {
+      #         dpi = 148;
+      #         dontSleep = true;
+      #         drmDevices = [
+      #           "/dev/dri/card1"
+      #         ];
+      #         wayland = true;
+      #         xorg = {
+      #           enable = true;
+      #           wm = "xmonad";
+      #         };
+      #       };
+      #
+      #       dotfiles.apps.waybar.battery = "upower";
+      #       programs.waybar.settings.main.network.format-disconnected = "";
+      #
+      #       services.grobi = {
+      #         enable = true;
+      #         rules = [
+      #           {
+      #             name = "desktop";
+      #             outputs_connected = [ "HDMI-1" ];
+      #             configure_single = "HDMI-1";
+      #             primary = true;
+      #             atomic = true;
+      #             execute_after = [
+      #               "/run/current-system/sw/bin/systemd-run --user --on-active=5s ${lib.getExe pkgs.xorg.xset} r rate 160 80"
+      #             ];
+      #           }
+      #         ];
+      #       };
+      #       systemd.user.services.grobi = {
+      #         Install.WantedBy = lib.mkForce [ "xserver-session.target" ];
+      #         Unit.PartOf = lib.mkForce [ "xserver-session.target" ];
+      #       };
+      #
+      #       services.swayidle.timeouts = [
+      #         {
+      #           timeout = 960;
+      #           command = lib.getExe (
+      #             pkgs.writeShellScriptBin "output-resume" ''
+      #               ${lib.getExe pkgs.wlopm} --off HDMI-A-1
+      #             ''
+      #           );
+      #           resumeCommand = lib.getExe (
+      #             pkgs.writeShellScriptBin "output-resume" ''
+      #               ${lib.getExe pkgs.wlopm} --on HDMI-A-1
+      #               /run/current-system/sw/bin/systemd-run --user --on-active=1 /run/current-system/sw/bin/systemctl --user restart kanshi
+      #             ''
+      #           );
+      #         }
+      #       ];
+      #     }
+      #   )
+      # ];
     };
 
     dev1 = {
