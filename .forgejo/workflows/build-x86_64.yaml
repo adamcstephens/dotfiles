@@ -5,7 +5,6 @@ env:
   ATTIC_URL: ${{ vars.ATTIC_URL }}
   ATTIC_CACHE: ${{ vars.ATTIC_CACHE }}
   ATTIC_KEY: ${{ secrets.ATTIC_KEY }}
-  NIX_CONFIG: "access-tokens = github.com=${{ secrets.REAL_GITHUB_TOKEN }}"
   SOWER_URL: ${{ vars.SOWER_URL }}
 
 jobs:
