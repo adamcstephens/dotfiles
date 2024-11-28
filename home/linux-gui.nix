@@ -141,7 +141,6 @@ in
       pkgs.yt-dlp
 
       # bitwarden
-      pkgs.pinentry.curses
       pkgs.rofi-rbw
 
       screenshot

@@ -13,6 +13,7 @@
     [
       # crypt
       pkgs.passage
+      pkgs.pinentry.curses
       pkgs.rage
       pkgs.rbw
 
