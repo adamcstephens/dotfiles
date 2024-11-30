@@ -72,8 +72,14 @@ pushInsteadOf = https://git.sr.ht/~adamcstephens
 [url "git@codeberg.org:adamcstephens"]
 pushInsteadOf = https://codeberg.org/adamcstephens
 
+[includeIf "hasconfig:remote.*.url:git@github.com:lxc/**"]
+  path = ~/.dotfiles/apps/git/config-lxc
+
+[includeIf "hasconfig:remote.*.url:https://github.com/lxc/**"]
+  path = ~/.dotfiles/apps/git/config-lxc
+
 [user]
-name = Adam Stephens
+name = Adam C. Stephens
 
 [filter "lfs"]
 clean = git-lfs clean -- %f
