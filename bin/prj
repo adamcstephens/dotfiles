@@ -79,6 +79,8 @@ def open_project(project: str, remote: bool = False):
 
     existing_tab: int
 
+    run(f"zoxide add {project}")
+
     if is_tmux:
         if remote:
             print("unsupported tmux + remote")
