@@ -1,6 +1,7 @@
 {
   config,
   flake,
+  inputs,
   lib,
   pkgs,
   ...
@@ -84,7 +85,7 @@ in
   };
 
   home.pointerCursor = {
-    package = pkgs.bibata-cursors;
+    package = inputs.nixpkgs-unstable-small.legacyPackages.${pkgs.system}.bibata-cursors;
     name = "Bibata-Original-Ice";
     size = 32;
     gtk.enable = true;
