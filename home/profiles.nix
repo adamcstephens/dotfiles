@@ -185,6 +185,7 @@ in
               profile.outputs = [
                 {
                   criteria = "Virtual-1";
+                  mode = "3840x2160";
                   status = "enable";
                   scale = 1.333333;
                 }
