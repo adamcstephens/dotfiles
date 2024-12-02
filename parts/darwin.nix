@@ -24,7 +24,7 @@
             pkgs.jetbrains-mono
             pkgs.material-icons
             pkgs.material-design-icons
-            (pkgs.nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" ]; })
+            inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.nerd-fonts.symbols-only
           ];
           nix = {
             buildMachines = [

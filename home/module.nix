@@ -64,7 +64,7 @@ in
           default = pkgs.makeFontsConf {
             fontDirectories =
               [
-                (pkgs.nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" ]; })
+                inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.nerd-fonts.symbols-only
                 pkgs.emacs-all-the-icons-fonts
                 pkgs.font-awesome
                 pkgs.ibm-plex
