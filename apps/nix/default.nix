@@ -7,7 +7,8 @@
 {
 
   nix = {
-    package = pkgs.nix;
+    package = lib.mkForce pkgs.nix;
+
     settings = {
       experimental-features =
         [
