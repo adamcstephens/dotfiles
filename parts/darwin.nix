@@ -16,7 +16,7 @@
     modules = [
       (inputs.nix-darwin.outPath + "/modules/nix/nix-darwin.nix") # install darwin-rebuild
       (
-        { pkgs, ... }:
+        { lib, pkgs, ... }:
         {
           fonts.packages = [
             pkgs.font-awesome
@@ -57,12 +57,14 @@
               options = "--delete-older-than 21d";
             };
 
-            package = pkgs.nixVersions.latest;
-
             settings = {
               auto-optimise-store = false;
               accept-flake-config = false;
               experimental-features = "nix-command flakes";
+
+              download-buffer-size = lib.mkDefault (256 * 1024 * 1024);
+              http-connections = lib.mkDefault 128;
+              max-substitution-jobs = lib.mkDefault 128;
 
               trusted-users = [
                 "root"
