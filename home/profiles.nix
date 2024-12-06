@@ -153,11 +153,6 @@ in
         (
           { pkgs, ... }:
           {
-            dotfiles.apps.emacs = {
-              enable = true;
-              full = true;
-            };
-
             home.packages = [
               pkgs.devbox
             ];

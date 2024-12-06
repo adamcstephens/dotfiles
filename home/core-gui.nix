@@ -9,7 +9,6 @@
     ./colors.nix
     ./core-dev.nix
 
-    ../apps/emacs
     ../apps/ghostty
     ../apps/kitty
     ../apps/vscode

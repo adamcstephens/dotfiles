@@ -3,11 +3,19 @@
 
   imports = [
     ../apps/atuin
+    ../apps/emacs
     ../apps/jujutsu
     ../apps/ssh
   ];
 
-  dotfiles.apps.neovim.full = true;
+  dotfiles.apps = {
+    emacs = {
+      enable = true;
+      full = true;
+    };
+
+    neovim.full = true;
+  };
 
   home.packages =
     [

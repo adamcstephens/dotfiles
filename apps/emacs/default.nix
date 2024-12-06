@@ -221,7 +221,7 @@ in
 
       package = lib.mkOption {
         type = lib.types.package;
-        default = pkgs.emacs29;
+        default = if pkgs.stdenv.isLinux then pkgs.emacs29-pgtk else pkgs.emacs29;
       };
 
       patchForGui = lib.mkEnableOption "patch emacs as if for a gui install";
