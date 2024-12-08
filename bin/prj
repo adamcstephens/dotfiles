@@ -67,6 +67,10 @@ def prj_finder(remote: bool = False) -> str:
     return project
 
 
+def kitty_active_window() -> dict:
+    return [i for i in json.loads(run("kitty @ ls")) if i["is_active"]][0]
+
+
 def open_project(project: str, remote: bool = False):
     wname: str
     project_s: list[str] = []
@@ -105,7 +109,7 @@ def open_project(project: str, remote: bool = False):
 
     elif is_kitty:
         # needs to come after tmux in case tmux in kitty
-        existing_tab = existing_tab_index(json.loads(run("kitty @ ls"))[0]["tabs"], wname)
+        existing_tab = existing_tab_index(kitty_active_window()["tabs"], wname)
         new_tab_command = f"kitty @ launch --tab-title {wname} --type tab"
         if not remote:
             new_tab_command = f"{new_tab_command} --cwd {project}"
