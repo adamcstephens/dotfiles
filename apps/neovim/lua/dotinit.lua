@@ -120,10 +120,10 @@ require("tmux").setup({
   },
 })
 require("trouble").setup({
-  win = {
-    type = "split",
-    position = "right",
-  },
+  -- win = {
+  --   type = "split",
+  --   position = "right",
+  -- },
 })
 require("which-key").setup({})
 require("whitespace-nvim").setup({})
