@@ -7,9 +7,9 @@
         "url": "https://github.com/f-person/auto-dark-mode.nvim"
       },
       "branch": "master",
-      "revision": "d365beccca05ffcb01e50109f2adca2459c3995a",
+      "revision": "4531f8b2b09ed8f0b8875a706419f9cecda1d969",
       "url": null,
-      "hash": "0ps17gzxyjzghdpr98sdfcgmqjggzpdh60r5w3xiqmxhj5klb6m5"
+      "hash": "1lbzfv8lpw3naxc125j7nbi1fhanp10kisk9367d49q33i2k5yi4"
     },
     "codecompanion": {
       "type": "GitRelease",
@@ -20,10 +20,10 @@
       "pre_releases": false,
       "version_upper_bound": null,
       "release_prefix": null,
-      "version": "v9.5.0",
-      "revision": "9906e3a7e0c101678147d2449c131214f29367d2",
+      "version": "v10.4.4",
+      "revision": "1a420d46105d3d1f25b393024e70b82e9b924602",
       "url": null,
-      "hash": "0i3b0svgd9mk6vfqmm8s8mcx60rgh9amwd3q64s9wrahq86cmqxg"
+      "hash": "0vd7l0v0h80kwfp4a479rjkqgfwlimqd0ns5qc5p9q8rj0xqnan3"
     },
     "focus-nvim": {
       "type": "GitRelease",
@@ -47,9 +47,9 @@
         "repo": "focus.nvim"
       },
       "branch": "master",
-      "revision": "3841a38df972534567e85840d7ead20d3a26faa6",
-      "url": "https://github.com/nvim-focus/focus.nvim/archive/3841a38df972534567e85840d7ead20d3a26faa6.tar.gz",
-      "hash": "06zalm74di9p05i9z8kf5v2vz0yq6qsyqgnia296nvqsxpif80cs"
+      "revision": "d76338e58e49f844e8f6a7aff16a74a2a55a80ef",
+      "url": "https://github.com/nvim-focus/focus.nvim/archive/d76338e58e49f844e8f6a7aff16a74a2a55a80ef.tar.gz",
+      "hash": "1nf0f9wl6w0bgnrwv4i98m4wzp14giriswf1gb7xn5zrgxjm23h9"
     },
     "github-nvim-theme": {
       "type": "Git",
@@ -69,9 +69,9 @@
         "url": "https://github.com/milanglacier/minuet-ai.nvim"
       },
       "branch": "main",
-      "revision": "ea8561c47880f1650bd3650e3fd668cbe49cb751",
+      "revision": "ea06ce3c9631ceed2eed079fa3cbffdc4dd376f7",
       "url": null,
-      "hash": "0fc2l1g709ilrhjxvzz10ay721s22nm4a4n5x9qq48isv2nbp6xh"
+      "hash": "0n98igdzlbz4vh39064q726sd8ppiagmhv3cy9h6w157wx7xyv41"
     },
     "move-nvim": {
       "type": "Git",
@@ -149,9 +149,9 @@
         "url": "https://github.com/bluz71/vim-moonfly-colors"
       },
       "branch": "master",
-      "revision": "63f20d657c9fd46ecdd75bd45c321f74ef9b11fe",
+      "revision": "39b243261fc8ea839356ed4ee10aab57ce688670",
       "url": null,
-      "hash": "0yah83wbrr4j01kl5zrpjgqfi6sani4zx8ndl7ygdl0ywylqgrbk"
+      "hash": "1zd1snnjc61xlbf8qjwidzr8c1c4xb6w7xj1zhifjdfdnddhdb1j"
     },
     "workspace-diagnotics-nvim": {
       "type": "Git",
