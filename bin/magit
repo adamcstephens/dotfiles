@@ -1,10 +1,19 @@
 #!/usr/bin/env bash
 
 if [ -z "$1" ]; then
-  DIR="."
+  DIR="$PWD"
 else
   DIR="$1"
 fi
+
+while [ ! -d "$DIR/.git" ]; do
+  DIR=$(dirname "$DIR")
+
+  if [ "$DIR" == "$HOME" ]; then
+    echo "Reached HOME, exiting."
+    exit 1
+  fi
+done
 
 # strip display unless we're in kitty, until we can find a fix for terminal corruption
 if [ -z "$KITTY_PID" ]; then
