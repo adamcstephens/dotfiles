@@ -28,13 +28,12 @@
       # lang
       pkgs.elixir-ls
       pkgs.next-ls
-      pkgs.python313
-      # (pkgs.python313.withPackages (
-      #   ps: with ps; [
-      #     python-lsp-server
-      #     pylsp-mypy
-      #   ]
-      # ))
+      (pkgs.python312.withPackages (
+        ps: with ps; [
+          python-lsp-server
+          pylsp-mypy
+        ]
+      ))
 
       # nix
       pkgs.nix-output-monitor
