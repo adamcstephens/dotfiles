@@ -92,10 +92,10 @@
     ''
   );
 
-  home.file.".terminfo".source = config.lib.file.mkOutOfStoreSymlink "${config.home.profileDirectory}/share/terminfo";
+  home.file.".terminfo".source =
+    config.lib.file.mkOutOfStoreSymlink "${config.home.profileDirectory}/share/terminfo";
 
   home.packages = [
-    pkgs.calc
     pkgs.difftastic
     pkgs.direnv
     pkgs.doggo
@@ -104,6 +104,7 @@
     pkgs.gdu
     pkgs.jq
     pkgs.just
+    pkgs.kalker
     pkgs.kitty.terminfo
     pkgs.mtr
     pkgs.ncdu
