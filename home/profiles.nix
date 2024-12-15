@@ -155,6 +155,7 @@ in
           {
             home.packages = [
               pkgs.devbox
+              pkgs.entr
             ];
           }
         )
