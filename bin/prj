@@ -22,15 +22,15 @@ def gen_remotes():
     return str.join("\n", hosts)
 
 
-def run(command: str):
-    result = subprocess.run(command, shell=True, capture_output=True)
+def run(command: str, input: str | None = None):
+    result = subprocess.run(command, shell=True, capture_output=True, input=input, encoding="UTF-8")
 
     if result.returncode != 0:
-        print(result.stderr.decode())
+        print(result.stderr)
         print(f"Failed to run [{command}]")
         sys.exit(1)
 
-    return result.stdout.decode().strip()
+    return result.stdout.strip()
 
 
 def existing_tab_index(tabs: list[dict], wname: str) -> int:
@@ -48,21 +48,23 @@ def prj_finder(remote: bool = False) -> str:
     project: str
 
     if remote:
-        selected_remote = run(f"echo '{gen_remotes()}' | fzf --height 22 --no-sort --filepath-word --reverse")
+        selected_remote = run("fzf --height 22 --no-sort --filepath-word --reverse", input=gen_remotes())
+        run(f"ssh {selected_remote} true")
         project = run(
-            f"ssh {selected_remote} zoxide query --list | fzf --height 22 --no-sort --filepath-word --reverse"
+            "fzf --height 22 --no-sort --filepath-word --reverse",
+            input=run(f"ssh {selected_remote} zoxide query --list"),
         )
         project = f"{selected_remote}:{project}"
     else:
         if is_kitty or is_tmux:
-            command = "zoxide query --list | fzf --height 22 --no-sort --filepath-word --reverse"
+            command = "fzf --height 22 --no-sort --filepath-word --reverse"
         elif is_wayland:
-            command = "zoxide query --list | rofi -dmenu"
+            command = "rofi -dmenu"
         else:
             logger.error("unsupported environment")
             sys.exit(1)
 
-        project = run(command)
+        project = run(command, input="zoxide query --list")
 
     return project
 
@@ -80,10 +82,9 @@ def open_project(project: str, remote: bool = False):
         wname = re.sub("[^a-zA-Z0-9:]", "", f"{project_s[0]}:{os.path.basename(project_s[1])}")
     else:
         wname = re.sub("[^a-zA-Z0-9]", "", os.path.basename(project))
+        run(f"zoxide add {project}")
 
     existing_tab: int
-
-    run(f"zoxide add {project}")
 
     if is_tmux:
         if remote:
@@ -139,9 +140,18 @@ def open_project(project: str, remote: bool = False):
 
 
 def connect_command(identifier: str) -> str:
-    rundir = f"{os.getenv('XDG_RUNTIME_DIR')}/et/{identifier}"
+    rundir: str
+    if "XDG_RUNTIME_DIR" in os.environ:
+        rundir = f"{os.getenv('XDG_RUNTIME_DIR')}/et/{identifier}"
+    elif "TMPDIR" in os.environ:
+        rundir = f"{os.getenv('TMPDIR')}et/{identifier}"
+    else:
+        rundir = f"/tmp/et/{identifier}"
+
     if not os.path.exists(rundir):
         os.makedirs(rundir)
+        os.chmod(rundir, 0o0700)
+
     return f"et --forward-ssh-agent --silent --logdir {rundir}"
 
 
