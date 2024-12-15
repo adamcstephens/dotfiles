@@ -141,6 +141,17 @@ lspconfig.ocamllsp.setup({
   },
 })
 
+-- protobuf
+-- if vim.fn.executable("buf") == 1 then
+--   require("lspconfig").buf_ls.setup({
+--     on_attach = function(client)
+--       client.server_capabilities = {
+--         semanticTokensProvider = nil,
+--       }
+--     end,
+--   })
+-- end
+
 -- python
 if vim.fn.executable("pylsp") == 1 then
   require("lspconfig").pylsp.setup({

@@ -73,6 +73,7 @@ require("conform").setup({
     lua = { "stylua" },
     just = { "just" },
     nix = { "nixfmt" },
+    proto = { "buf" },
     python = function(bufnr)
       if require("conform").get_formatter_info("black", bufnr).available then
         return { "black" }
