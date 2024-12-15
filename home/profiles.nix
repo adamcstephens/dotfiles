@@ -156,6 +156,7 @@ in
             home.packages = [
               pkgs.devbox
               pkgs.entr
+              pkgs.git-lfs
             ];
           }
         )
