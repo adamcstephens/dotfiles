@@ -23,6 +23,9 @@ def gen_remotes():
 
 
 def run(command: str, input: str | None = None):
+    if input is not None:
+        input = run(input)
+
     result = subprocess.run(command, shell=True, capture_output=True, input=input, encoding="UTF-8")
 
     if result.returncode != 0:
