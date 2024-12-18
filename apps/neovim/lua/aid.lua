@@ -16,7 +16,6 @@ cmp.setup({
     ghost_text = true,
   },
   mapping = {
-    ["<A-y>"] = require("minuet").make_cmp_map(),
     ["<C-j>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
     ["<C-k>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
     ["<CR>"] = cmp.mapping.confirm({ select = false }),
@@ -36,7 +35,6 @@ cmp.setup({
 
 cmp.setup.filetype({ "elixir", "go" }, {
   sources = cmp.config.sources({
-    -- { name = "minuet" },
     -- { name = "copilot" },
     { name = "luasnip" },
     { name = "nvim_lsp" },
@@ -119,40 +117,7 @@ require("conform").formatters.biome = {
 --   },
 -- })
 -- require("copilot_cmp").setup()
-require("minuet").setup({
-  enabled = true,
-  provider = "claude",
-  provider_options = {
-    claude = {
-      max_tokens = 512,
-      -- model = "claude-3-5-sonnet-20240620",
-      model = "claude-3-haiku-20240307",
-      -- system = system,
-      -- few_shots = default_few_shots,
-      stream = true,
-      optional = {
-        -- pass any additional parameters you want to send to claude request,
-        -- e.g.
-        -- stop_sequences = nil,
-      },
-    },
-
-    openai = {
-      model = "gpt-4o-mini",
-      -- system = system,
-      -- few_shots = default_few_shots,
-      stream = true,
-      optional = {
-        -- pass any additional parameters you want to send to OpenAI request,
-        -- e.g.
-        -- stop = { 'end' },
-        max_tokens = 256,
-        -- top_p = 0.9,
-      },
-    },
-  },
-})
-
+--
 -- lsp
 --
 require("actions-preview").setup({
