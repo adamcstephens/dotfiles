@@ -109,6 +109,7 @@
     pkgs.mtr
     pkgs.ncdu
     pkgs.tio
+    pkgs.viddy
     pkgs.wget
     pkgs.zf
   ];
