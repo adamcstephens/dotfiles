@@ -20,10 +20,10 @@
       "pre_releases": false,
       "version_upper_bound": null,
       "release_prefix": null,
-      "version": "v10.7.0",
-      "revision": "9f19ade90dd916bc1f51731465be8fb50eecc12a",
+      "version": "v10.8.1",
+      "revision": "4d61b3fb58e98c0a68713608c789f6b32e69c729",
       "url": null,
-      "hash": "0nfqwpbkhwhdv02wdw2093qxk74k9g08haz8qq3iijvxfd9zn2a4"
+      "hash": "1p50hwjdjch8jrfp3iva7wql2rglv03727jjndzhfwkfrrdjznw9"
     },
     "focus-nvim": {
       "type": "GitRelease",
