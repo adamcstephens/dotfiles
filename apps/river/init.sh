@@ -167,30 +167,21 @@ riverctl map normal Super F11 enter-mode passthrough
 # Mod+F11 to return to normal mode
 riverctl map passthrough Super F11 enter-mode normal
 
-# Various media key mapping examples for both normal and locked mode which do
-# not have a modifier
 for mode in normal locked; do
-  # Eject the optical drive
   riverctl map $mode None XF86Eject spawn 'eject -T'
 
-  # Control pulse audio volume with pamixer (https://github.com/cdemoulins/pamixer)
-  riverctl map $mode None XF86AudioLowerVolume spawn "volume down"
-  riverctl map $mode None XF86AudioRaiseVolume spawn "volume up"
-  riverctl map $mode None XF86AudioMute spawn "volume mute"
+  riverctl map $mode None XF86AudioLowerVolume spawn "swayosd-client --output-volume -5"
+  riverctl map $mode None XF86AudioRaiseVolume spawn "swayosd-client --output-volume 5"
+  riverctl map $mode None XF86AudioMute spawn "swayosd-client --output-volume mute-toggle"
+  riverctl map $mode None XF86AudioMicMute spawn "swayosd-client --input-volume mute-toggle"
 
-  # Control MPRIS aware media players with playerctl (https://github.com/altdesktop/playerctl)
   riverctl map $mode None XF86AudioMedia spawn 'playerctl play-pause'
   riverctl map $mode None XF86AudioPlay spawn 'playerctl play-pause'
   riverctl map $mode None XF86AudioPrev spawn 'playerctl previous'
   riverctl map $mode None XF86AudioNext spawn 'playerctl next'
 
-  # Control screen backlight brighness with light (https://github.com/haikarainen/light)
-  # shellcheck disable=SC2016
-  riverctl map $mode None XF86MonBrightnessDown spawn 'brightnessctl -q set 5%- && ( echo $((`brightnessctl get` * 100 / `brightnessctl m`)) > $XDG_RUNTIME_DIR/wob.sock )'
-  # shellcheck disable=SC2016
-  riverctl map $mode None XF86MonBrightnessUp spawn 'brightnessctl -q set +5% && ( echo $((`brightnessctl get` * 100 / `brightnessctl m`)) > $XDG_RUNTIME_DIR/wob.sock )'
-  #riverctl map $mode None XF86MonBrightnessUp   spawn 'light -A 5'
-  #riverctl map $mode None XF86MonBrightnessDown spawn 'light -U 5'
+  riverctl map $mode None XF86MonBrightnessDown spawn 'swayosd-client --brightness lower'
+  riverctl map $mode None XF86MonBrightnessUp spawn 'swayosd-client --brightness raise'
 done
 
 # Set repeat rate

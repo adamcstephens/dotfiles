@@ -46,8 +46,8 @@ in
     ../apps/kanshi
     ../apps/river
     ../apps/sleepwatcher-rs
+    ../apps/swayosd
     ../apps/waybar
-    ../apps/wob
 
     # xorg
     ../apps/polybar
