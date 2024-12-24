@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+if [ -z "$1" ]; then
+  echo "usage: git jjpr <number>"
+  exit 1
+fi
+
+PR="$1"
+
+git fetch upstream pull/$PR/head:review/$PR && jj new review/$PR
