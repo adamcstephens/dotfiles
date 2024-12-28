@@ -1,10 +1,15 @@
 {
   config,
+  inputs,
   lib,
   pkgs,
   ...
 }:
 {
+  home.packages = lib.optionals pkgs.stdenv.isLinux [
+    inputs.nixpkgs-unstable-small.legacyPackages.${pkgs.system}.ghostty
+  ];
+
   programs.fish.interactiveShellInit = lib.optionalString pkgs.stdenv.isDarwin ''
     if test -d "${config.home.homeDirectory}/Applications/Ghostty.app"
       fish_add_path --append --move "${config.home.homeDirectory}/Applications/Ghostty.app/Contents/MacOS"
