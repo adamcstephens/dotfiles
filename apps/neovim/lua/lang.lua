@@ -85,10 +85,12 @@ end
 --Enable (broadcasting) snippet capability for completion
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
-require("lspconfig").jsonls.setup({
-  capabilities = capabilities,
-  cmd = { "vscode-json-languageserver", "--stdio" },
-})
+if vim.fn.executable("vscode-json-languageserver") == 1 then
+  require("lspconfig").jsonls.setup({
+    capabilities = capabilities,
+    cmd = { "vscode-json-languageserver", "--stdio" },
+  })
+end
 
 -- lua
 lspconfig.lua_ls.setup({
@@ -110,7 +112,9 @@ lspconfig.lua_ls.setup({
 require("lspconfig").teal_ls.setup({})
 
 -- nix
-lspconfig.nixd.setup({})
+if vim.fn.executable("nixd") == 1 then
+  lspconfig.nixd.setup({})
+end
 -- lspconfig.nil_ls.setup({
 --   on_attach = function(client)
 --     client.server_capabilities.semanticTokensProvider = nil
@@ -182,15 +186,17 @@ if vim.fn.executable("terraformls") == 1 then
 end
 
 -- yaml
-require("lspconfig").yamlls.setup({
-  settings = {
-    redhat = {
-      telemetry = {
-        enabled = false,
+if vim.fn.executable("yaml-language-server") == 1 then
+  require("lspconfig").yamlls.setup({
+    settings = {
+      redhat = {
+        telemetry = {
+          enabled = false,
+        },
       },
     },
-  },
-})
+  })
+end
 
 -- zig
 lspconfig.zls.setup({})
