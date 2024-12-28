@@ -45,20 +45,6 @@ cmp.setup.filetype({ "elixir", "go" }, {
   },
 })
 
-require("codecompanion").setup({
-  strategies = {
-    chat = {
-      adapter = "openai",
-    },
-    inline = {
-      adapter = "openai",
-    },
-    agent = {
-      adapter = "openai",
-    },
-  },
-})
-
 -- formatting
 --
 require("conform").setup({

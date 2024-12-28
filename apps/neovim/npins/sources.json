@@ -11,20 +11,6 @@
       "url": null,
       "hash": "1lbzfv8lpw3naxc125j7nbi1fhanp10kisk9367d49q33i2k5yi4"
     },
-    "codecompanion": {
-      "type": "GitRelease",
-      "repository": {
-        "type": "Git",
-        "url": "https://github.com/olimorris/codecompanion.nvim"
-      },
-      "pre_releases": false,
-      "version_upper_bound": null,
-      "release_prefix": null,
-      "version": "v10.8.1",
-      "revision": "4d61b3fb58e98c0a68713608c789f6b32e69c729",
-      "url": null,
-      "hash": "1p50hwjdjch8jrfp3iva7wql2rglv03727jjndzhfwkfrrdjznw9"
-    },
     "focus-nvim": {
       "type": "GitRelease",
       "repository": {
@@ -73,17 +59,6 @@
       "url": null,
       "hash": "1425mbyvax63m6l7vkwbfi1l863mr86ba11gxa3hqxcgvjpvp638"
     },
-    "org-bullets-nvim": {
-      "type": "Git",
-      "repository": {
-        "type": "Git",
-        "url": "https://github.com/nvim-orgmode/org-bullets.nvim"
-      },
-      "branch": "main",
-      "revision": "46ae687e22192fb806b5977d664ec98af9cf74f6",
-      "url": null,
-      "hash": "1p1grp2yg3qgfc7rj3a9i2888s79zmdl6vvyzifgzlnq638hw5vi"
-    },
     "smart-open.nvim": {
       "type": "Git",
       "repository": {
@@ -94,20 +69,6 @@
       "revision": "7770b01ce4d551c143d7ec8589879320796621b9",
       "url": null,
       "hash": "1yyz1c8v0laxd9xddsfdngpsjlaiap1lsfck2l90kwvqxbj82xbj"
-    },
-    "telescope-orgmode-nvim": {
-      "type": "GitRelease",
-      "repository": {
-        "type": "Git",
-        "url": "https://github.com/nvim-orgmode/telescope-orgmode.nvim"
-      },
-      "pre_releases": false,
-      "version_upper_bound": null,
-      "release_prefix": null,
-      "version": "1.3.2",
-      "revision": "ce4e92de4311394295c54350cc132132f518b0b6",
-      "url": null,
-      "hash": "1c2v05rsyrj7mkk3rkkw9fcl0cgrmvqa0bgn89mrk8q75grlg01p"
     },
     "timed-highlight": {
       "type": "Git",
