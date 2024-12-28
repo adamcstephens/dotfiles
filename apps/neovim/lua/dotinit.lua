@@ -105,10 +105,8 @@ require("telescope").setup({
 })
 require("telescope").load_extension("dap")
 require("telescope").load_extension("orgmode")
-require("telescope").load_extension("telescope-tabs")
 require("telescope").load_extension("undo")
 require("telescope").load_extension("zf-native")
-require("telescope-tabs").setup({})
 
 require("tmux").setup({
   -- use smart-splits for navigation
@@ -250,7 +248,6 @@ end, { desc = "Save File" })
 vim.keymap.set("n", "<leader>S", function()
   vim.cmd("noautocmd write ++p")
 end, { desc = "Save File (No autocmd)" })
-vim.keymap.set("n", "<leader>t", require("telescope-tabs").list_tabs, { desc = "Tabs" })
 vim.keymap.set("n", "<leader>u", "<cmd>Telescope undo<cr>")
 
 -- diagnostics

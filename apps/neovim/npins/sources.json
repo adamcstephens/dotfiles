@@ -109,17 +109,6 @@
       "url": null,
       "hash": "1c2v05rsyrj7mkk3rkkw9fcl0cgrmvqa0bgn89mrk8q75grlg01p"
     },
-    "telescope-tabs": {
-      "type": "Git",
-      "repository": {
-        "type": "Git",
-        "url": "https://github.com/LukasPietzschmann/telescope-tabs"
-      },
-      "branch": "master",
-      "revision": "0a678eefcb71ebe5cb0876aa71dd2e2583d27fd3",
-      "url": null,
-      "hash": "1xkl1w4cg3bimda400id301s8bfqad4ww43ja7rrj0pdfda5kz12"
-    },
     "timed-highlight": {
       "type": "Git",
       "repository": {
