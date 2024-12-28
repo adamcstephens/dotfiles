@@ -11,32 +11,6 @@
       "url": null,
       "hash": "1lbzfv8lpw3naxc125j7nbi1fhanp10kisk9367d49q33i2k5yi4"
     },
-    "focus-nvim": {
-      "type": "GitRelease",
-      "repository": {
-        "type": "Git",
-        "url": "https://github.com/nvim-focus/focus.nvim"
-      },
-      "pre_releases": false,
-      "version_upper_bound": null,
-      "release_prefix": null,
-      "version": "v1.0.2",
-      "revision": "d954b0c4063fb33e5e3761512ad94fda53111193",
-      "url": null,
-      "hash": "0cz0rjw22zwilss4sai9znpkdadxmlqzdhf31amqvjnc884narwa"
-    },
-    "focus.nvim": {
-      "type": "Git",
-      "repository": {
-        "type": "GitHub",
-        "owner": "nvim-focus",
-        "repo": "focus.nvim"
-      },
-      "branch": "master",
-      "revision": "d76338e58e49f844e8f6a7aff16a74a2a55a80ef",
-      "url": "https://github.com/nvim-focus/focus.nvim/archive/d76338e58e49f844e8f6a7aff16a74a2a55a80ef.tar.gz",
-      "hash": "1nf0f9wl6w0bgnrwv4i98m4wzp14giriswf1gb7xn5zrgxjm23h9"
-    },
     "github-nvim-theme": {
       "type": "Git",
       "repository": {
@@ -58,17 +32,6 @@
       "revision": "cccbd4ea9049ca5f99f025ffaddb7392359c7d6a",
       "url": null,
       "hash": "1425mbyvax63m6l7vkwbfi1l863mr86ba11gxa3hqxcgvjpvp638"
-    },
-    "smart-open.nvim": {
-      "type": "Git",
-      "repository": {
-        "type": "Git",
-        "url": "https://github.com/danielfalk/smart-open.nvim"
-      },
-      "branch": "main",
-      "revision": "7770b01ce4d551c143d7ec8589879320796621b9",
-      "url": null,
-      "hash": "1yyz1c8v0laxd9xddsfdngpsjlaiap1lsfck2l90kwvqxbj82xbj"
     },
     "timed-highlight": {
       "type": "Git",

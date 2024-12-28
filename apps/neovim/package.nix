@@ -76,6 +76,7 @@ mnw.lib.wrap pkgs {
       efmls-configs-nvim
       elixir-tools-nvim
       fidget-nvim
+      focus-nvim
       friendly-snippets
       fugitive
       gitsigns-nvim
@@ -98,6 +99,7 @@ mnw.lib.wrap pkgs {
       rainbow-delimiters-nvim
       remember-nvim
       rustaceanvim
+      smart-open
       smart-splits-nvim
       sqlite-lua
       telescope-dap-nvim
