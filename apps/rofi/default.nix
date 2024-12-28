@@ -8,7 +8,6 @@
       plugins = [
         (pkgs.rofi-calc.override { rofi-unwrapped = pkgs.rofi-wayland-unwrapped; })
         pkgs.rofi-emoji-wayland
-        (pkgs.rofi-file-browser.override { rofi = pkgs.rofi-wayland-unwrapped; })
       ];
     };
 
