@@ -3,11 +3,12 @@
   imports = [ inputs.flake-parts.flakeModules.easyOverlay ];
 
   flake.overlays = rec {
-    pamtester = _: prev: {
+    dotfiles = _: prev: {
       pamtester = prev.pamtester.overrideAttrs {
         nativeBuildInputs = [ prev.autoreconfHook ];
       };
     };
+
     upstreams = inputs.nixpkgs.lib.composeManyExtensions [ fishPlugins ];
 
     # disable tests since they broke on darwin...

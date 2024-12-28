@@ -31,6 +31,7 @@ in
           nixpkgs = {
             overlays = [
               self.overlays.default
+              self.overlays.dotfiles
               self.overlays.upstreams
             ];
 

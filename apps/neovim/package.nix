@@ -99,7 +99,7 @@ mnw.lib.wrap pkgs {
       rainbow-delimiters-nvim
       remember-nvim
       rustaceanvim
-      smart-open
+      smart-open-nvim
       smart-splits-nvim
       sqlite-lua
       telescope-dap-nvim
