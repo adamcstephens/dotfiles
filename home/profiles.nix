@@ -287,6 +287,18 @@ in
       ];
     };
 
+    worker1 = {
+      nixpkgs = inputs.nixpkgs-unstable;
+      home-manager = inputs.home-manager-unstable;
+
+      modules = [
+        ./linux-gui.nix
+        {
+          dotfiles.dev.enable = true;
+        }
+      ];
+    };
+
     # generic systems
 
     aarch64-darwin = {
