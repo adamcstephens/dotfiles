@@ -3,6 +3,7 @@
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-24.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     nixpkgs-unstable-small.url = "github:nixos/nixpkgs?ref=nixos-unstable-small";
+    nixpkgs-fish.url = "github:nixos/nixpkgs?ref=fish";
 
     home-manager.url = "github:nix-community/home-manager?ref=release-24.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";

@@ -17,7 +17,7 @@
 
   programs.fish = {
     enable = true;
-    package = inputs.sandbox.packages.${pkgs.system}.fish;
+    package = inputs.nixpkgs-fish.legacyPackages.${pkgs.system}.fish;
     plugins = [ ];
 
     shellInit =
@@ -82,7 +82,8 @@
   };
 
   # remove > 3.6.1
-  xdg.configFile."fish/functions/__fish_is_zfs_feature_enabled.fish".source = ./zfs-completion-fix.fish;
+  xdg.configFile."fish/functions/__fish_is_zfs_feature_enabled.fish".source =
+    ./zfs-completion-fix.fish;
   xdg.configFile."fish/functions/ssh-auth-sock.fish".source = ./ssh-auth-sock.fish;
 
   xdg.configFile."fish/theme-dark.fish".source =
