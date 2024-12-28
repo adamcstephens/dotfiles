@@ -34,7 +34,13 @@
 }:
 let
   pins = import ./npins;
-  npinsPlugins = lib.mapAttrsToList (name: src: (vimUtils.buildVimPlugin { inherit name src; })) pins;
+  npinsPlugins = lib.mapAttrsToList (
+    name: src:
+    (vimUtils.buildVimPlugin {
+      inherit name src;
+      doCheck = false;
+    })
+  ) pins;
 in
 
 mnw.lib.wrap pkgs {
