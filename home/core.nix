@@ -96,6 +96,13 @@
     config.lib.file.mkOutOfStoreSymlink "${config.home.profileDirectory}/share/terminfo";
 
   home.packages = [
+    (pkgs.python312.withPackages (
+      ps: with ps; [
+        python-lsp-server
+        pylsp-mypy
+      ]
+    ))
+
     pkgs.difftastic
     pkgs.direnv
     pkgs.doggo
