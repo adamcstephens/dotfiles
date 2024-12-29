@@ -26,6 +26,8 @@ in
       serverAliveInterval = 60;
       serverAliveCountMax = 2;
 
+      forwardAgent = config.dotfiles.dev.enable;
+
       # use header: # -*- mode: ssh-config -*-
       includes = [ "local.config" ];
     };

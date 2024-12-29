@@ -8,13 +8,17 @@
     ../apps/ssh
   ];
 
-  dotfiles.apps = {
-    emacs = {
-      enable = true;
-      full = true;
+  dotfiles = {
+    apps = {
+      emacs = {
+        enable = true;
+        full = true;
+      };
+
+      neovim.full = true;
     };
 
-    neovim.full = true;
+    dev.enable = true;
   };
 
   home.packages =
@@ -49,8 +53,4 @@
     ++ lib.optionals pkgs.stdenv.isLinux [
       pkgs._1password-cli
     ];
-
-  programs = {
-    ssh.forwardAgent = true;
-  };
 }

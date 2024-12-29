@@ -69,10 +69,6 @@ in
       modules = [
         ./core-dev.nix
         ./linux-gui.nix
-        {
-          dotfiles.dev.enable = true;
-        }
-        # ../apps/solaar
 
         (
           { pkgs, ... }:
@@ -292,10 +288,7 @@ in
       home-manager = inputs.home-manager-unstable;
 
       modules = [
-        ./linux-gui.nix
-        {
-          dotfiles.dev.enable = true;
-        }
+        ./core-dev.nix
       ];
     };
 
