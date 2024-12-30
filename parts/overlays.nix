@@ -3,11 +3,7 @@
   imports = [ inputs.flake-parts.flakeModules.easyOverlay ];
 
   flake.overlays = rec {
-    dotfiles = _: prev: {
-      pamtester = prev.pamtester.overrideAttrs {
-        nativeBuildInputs = [ prev.autoreconfHook ];
-      };
-    };
+    dotfiles = _: prev: { };
 
     upstreams = inputs.nixpkgs.lib.composeManyExtensions [ fishPlugins ];
 
