@@ -57,86 +57,24 @@ in
   };
 
   profile-parts.home-manager = {
-    blank = {
+    deck = {
       nixpkgs = inputs.nixpkgs-unstable;
       home-manager = inputs.home-manager-unstable;
 
-    };
-
-    dev1 = {
-      nixpkgs = inputs.nixpkgs-unstable;
-      home-manager = inputs.home-manager-unstable;
       modules = [
         ./core-dev.nix
         ./linux-gui.nix
 
-        (
-          { pkgs, ... }:
-          {
-            dotfiles.gui = {
-              dpi = 148;
-              dontSleep = true;
-              wayland = true;
-              # xorg = {
-              #   enable = true;
-              #   wm = "xmonad";
-              # };
-            };
+        {
+          dotfiles.gui = {
+            dpi = 148;
+            dontSleep = true;
+            wayland = true;
+          };
 
-            dotfiles.apps.waybar.battery = "upower";
-            programs.waybar.settings.main.network.format-disconnected = "";
-
-            services.kanshi.settings = [
-              {
-                profile.name = "desktop";
-                profile.outputs = [
-                  {
-                    criteria = "Unknown-1";
-                    scale = 1.333333;
-                    mode = "3840x2160@60Hz";
-                  }
-                ];
-              }
-            ];
-
-            # services.grobi = {
-            #   enable = true;
-            #   rules = [
-            #     {
-            #       name = "desktop";
-            #       outputs_connected = [ "HDMI-1" ];
-            #       configure_single = "HDMI-1";
-            #       primary = true;
-            #       atomic = true;
-            #       execute_after = [
-            #         "/run/current-system/sw/bin/systemd-run --user --on-active=5s ${lib.getExe pkgs.xorg.xset} r rate 160 80"
-            #       ];
-            #     }
-            #   ];
-            # };
-            # systemd.user.services.grobi = {
-            #   Install.WantedBy = lib.mkForce [ "xserver-session.target" ];
-            #   Unit.PartOf = lib.mkForce [ "xserver-session.target" ];
-            # };
-
-            services.swayidle.timeouts = [
-              {
-                timeout = 960;
-                command = lib.getExe (
-                  pkgs.writeShellScriptBin "output-resume" ''
-                    ${lib.getExe pkgs.wlopm} --off HDMI-A-1
-                  ''
-                );
-                resumeCommand = lib.getExe (
-                  pkgs.writeShellScriptBin "output-resume" ''
-                    ${lib.getExe pkgs.wlopm} --on HDMI-A-1
-                    /run/current-system/sw/bin/systemd-run --user --on-active=1 /run/current-system/sw/bin/systemctl --user restart kanshi
-                  ''
-                );
-              }
-            ];
-          }
-        )
+          # dotfiles.apps.waybar.battery = "upower";
+          programs.waybar.settings.main.network.format-disconnected = "";
+        }
       ];
     };
 

@@ -39,6 +39,7 @@ in
             {
               criteria = "Dell Inc. DELL P2715Q 54KKD79CAQNL";
               scale = dell_scale;
+              mode = "3840x2160@60Hz";
             }
           ];
         }
