@@ -42,6 +42,7 @@ in
       inline_height = 30;
       style = "compact";
       sync_address = "https://atuin.junco.dev";
+      sync.records = true;
       update_check = false;
       local_timeout = 15;
     };
