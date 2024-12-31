@@ -209,6 +209,7 @@ riverctl rule-add -app-id Slack tags $((2#00100000))
 riverctl rule-add -app-id WebCord tags $((2#00100000))
 riverctl rule-add -title '*Element*' tags $((2#00100000))
 riverctl rule-add -title '*Discord*' tags $((2#00100000))
+riverctl rule-add -app-id steam tags $((2#01000000))
 
 riverctl rule-add -app-id Kid3 no-float
 riverctl rule-add -title "*File*" no-float
