@@ -7,4 +7,4 @@ fi
 
 PR="$1"
 
-git fetch upstream pull/$PR/head:review/$PR && jj new review/$PR
+git fetch --force upstream pull/$PR/head:review/$PR && jj new review/$PR
