@@ -139,11 +139,13 @@ end
 lspconfig.nushell.setup({})
 
 -- ocaml
-lspconfig.ocamllsp.setup({
-  settings = {
-    codelens = { enable = true },
-  },
-})
+if vim.fn.executable("ocamllsp") == 1 then
+  lspconfig.ocamllsp.setup({
+    settings = {
+      codelens = { enable = true },
+    },
+  })
+end
 
 -- protobuf
 -- if vim.fn.executable("buf") == 1 then

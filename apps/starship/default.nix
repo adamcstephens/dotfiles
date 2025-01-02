@@ -31,7 +31,7 @@
       ];
 
       character = {
-        format = "[](fg:244)$symbol ";
+        format = "[ ](fg:244)$symbol ";
         success_symbol = "[➜](bold yellow)";
         error_symbol = "[✗](bold red)";
       };
