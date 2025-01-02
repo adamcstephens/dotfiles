@@ -115,6 +115,14 @@ require("lspconfig").teal_ls.setup({})
 if vim.fn.executable("nixd") == 1 then
   lspconfig.nixd.setup({})
 end
+-- ignore nix in shebangs
+local match_contents = require("vim.filetype.detect").match_contents
+require("vim.filetype.detect").match_contents = function(...)
+  local result = match_contents(...)
+  if result ~= "nix" then -- just don't ever return nix
+    return result
+  end
+end
 -- lspconfig.nil_ls.setup({
 --   on_attach = function(client)
 --     client.server_capabilities.semanticTokensProvider = nil
