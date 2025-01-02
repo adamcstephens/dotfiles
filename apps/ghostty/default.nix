@@ -19,7 +19,9 @@
       set --prepend fish_complete_path "/Applications/Ghostty.app/Contents/Resources/fish/vendor_completions.d"
     end
 
-    source $GHOSTTY_RESOURCES_DIR/shell-integration/fish/vendor_conf.d/ghostty-shell-integration.fish
+    if test -n "$GHOSTTY_RESOURCES_DIR"
+      source $GHOSTTY_RESOURCES_DIR/shell-integration/fish/vendor_conf.d/ghostty-shell-integration.fish
+    end
   '';
 
   xdg.configFile."ghostty/config".text =
