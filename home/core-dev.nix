@@ -43,6 +43,7 @@
       pkgs.pgcli
       pkgs.pwgen
       pkgs.restish
+      pkgs.step-cli
       pkgs.unzip
       pkgs.watchexec
 
