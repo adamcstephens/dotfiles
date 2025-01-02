@@ -14,9 +14,6 @@
           fzf-fish = fprev.fzf-fish.overrideAttrs (_: {
             doCheck = false;
           });
-          pure = fprev.pure.overrideAttrs (_: {
-            doCheck = false;
-          });
         }
       );
     };

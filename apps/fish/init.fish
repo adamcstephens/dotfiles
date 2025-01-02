@@ -21,8 +21,3 @@ if ! grep nixos /etc/os-release >/dev/null 2>&1
 
     source $HOME/.nix-profile/share/fish/config.fish
 end
-
-set -g pure_color_mute 696969
-set -g pure_color_hostname yellow
-set -g pure_color_git_branch magenta
-set -g pure_color_git_stash magenta

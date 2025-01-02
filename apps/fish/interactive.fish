@@ -29,7 +29,5 @@ end
 
 abbr --add gco git checkout
 
-set -g async_prompt_functions _pure_prompt_git
-
 set -x PAGER ~/.dotfiles/bin/pager
 set -x EDITOR ~/.dotfiles/bin/editor
