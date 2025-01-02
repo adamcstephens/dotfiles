@@ -6,11 +6,7 @@ set fzf_fd_opts --hidden --exclude=.git
 
 set -x SSH_AUTH_SOCK (~/.dotfiles/bin/ssh-agent-mgr)
 
-if [ -e $HOME/.shell_local.sh ]
-    fenv source $HOME/.shell_local.sh
-end
-
-if [ -e $HOME/.shell_local.fish ]
+if test -e $HOME/.shell_local.fish
     source $HOME/.shell_local.fish
 end
 
