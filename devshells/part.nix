@@ -51,7 +51,6 @@
           packages = [
             # local only
             pkgs.attic-client
-            pkgs.pyright
           ] ++ self'.devShells.ci.nativeBuildInputs;
         };
 

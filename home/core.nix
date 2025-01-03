@@ -95,31 +95,82 @@
   home.file.".terminfo".source =
     config.lib.file.mkOutOfStoreSymlink "${config.home.profileDirectory}/share/terminfo";
 
-  home.packages = [
-    (pkgs.python312.withPackages (
-      ps: with ps; [
-        python-lsp-server
-        pylsp-mypy
-      ]
-    ))
+  home.packages =
+    let
+      python = pkgs.python313.override {
+        self = python;
+        packageOverrides = pyfinal: pyprev: {
+          astroid = pyprev.astroid.overrideAttrs (prev: rec {
+            version = "3.3.8";
+            src = pkgs.fetchFromGitHub {
+              owner = "PyCQA";
+              repo = "astroid";
+              tag = "v${version}";
+              hash = "sha256-KKQuLomCHhVYMX1gE9WuqbXOfsf2izGlLE0Ml62gY3k=";
+            };
+          });
+          mypy = pyprev.mypy.overrideAttrs (_: rec {
+            version = "1.14.1";
+            src = pkgs.fetchFromGitHub {
+              owner = "python";
+              repo = "mypy";
+              rev = "refs/tags/v${version}";
+              hash = "sha256-Ha7icLFc4BL7a3NECcwX4dtWmkXctANCqu/IbrEnmjw=";
+            };
+          });
+          pylint = pyprev.pylint.overrideAttrs (_: rec {
+            version = "3.3.3";
+            src = pkgs.fetchFromGitHub {
+              owner = "pylint-dev";
+              repo = "pylint";
+              tag = "v${version}";
+              hash = "sha256-ldeosRAjh60aB5db/ojtttvevhpKQa3wk7u8MpTq13Q=";
+            };
+          });
+          python-lsp-server = pyprev.python-lsp-server.overrideAttrs (_: {
+            preCheck = ''
+              export HOME=$(mktemp -d);
+              substituteInPlace test/conftest.py --replace-fail logging.DEBUG logging.INFO
+            '';
+          });
+          rope = pyprev.rope.overrideAttrs (_: {
+            disabledTests = [
+              "test_search_submodule"
+              "test_get_package_source_pytest"
+              "test_get_modname_folder"
+              "test_skipping_directories_not_accessible_because_of_permission_error"
+              "test_hint_parametrized_iterable"
+              "test_hint_parametrized_iterator"
+            ];
+          });
+        };
+      };
+    in
+    [
+      (python.withPackages (
+        ps: with ps; [
+          python-lsp-server
+          pylsp-mypy
+        ]
+      ))
 
-    pkgs.difftastic
-    pkgs.direnv
-    pkgs.doggo
-    pkgs.du-dust
-    pkgs.fx
-    pkgs.gdu
-    pkgs.jq
-    pkgs.just
-    pkgs.kalker
-    pkgs.kitty.terminfo
-    pkgs.mtr
-    pkgs.ncdu
-    pkgs.tio
-    pkgs.viddy
-    pkgs.wget
-    pkgs.zf
-  ];
+      pkgs.difftastic
+      pkgs.direnv
+      pkgs.doggo
+      pkgs.du-dust
+      pkgs.fx
+      pkgs.gdu
+      pkgs.jq
+      pkgs.just
+      pkgs.kalker
+      pkgs.kitty.terminfo
+      pkgs.mtr
+      pkgs.ncdu
+      pkgs.tio
+      pkgs.viddy
+      pkgs.wget
+      pkgs.zf
+    ];
 
   home.sessionVariables = {
     EDITOR = "${config.home.homeDirectory}/.dotfiles/bin/editor";
