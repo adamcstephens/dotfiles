@@ -37,6 +37,7 @@
           name = "ci";
           packages = [
             inputs.sower.packages.${pkgs.system}.seed-ci
+            inputs.sower.packages.${pkgs.system}.client
 
             pkgs.git
             pkgs.just
