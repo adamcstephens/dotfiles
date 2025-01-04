@@ -6,6 +6,7 @@ env:
   ATTIC_CACHE: ${{ vars.ATTIC_CACHE }}
   ATTIC_KEY: ${{ secrets.ATTIC_KEY }}
   SOWER_ENDPOINT: ${{ vars.SOWER_ENDPOINT }}
+  SOWER_API_TOKEN: ${{ secrets.SOWER_API_TOKEN }}
 
 jobs:
   build-and-seed-x86_64:
