@@ -1,5 +1,4 @@
 {
-  lib,
   buildGoModule,
   fetchFromGitHub,
 }:
@@ -19,5 +18,5 @@ buildGoModule rec {
 
   subPackages = [ "i18n/xgettext-go" ];
 
-  CGO_ENABLED = 0;
+  env.CGO_ENABLED = 0;
 }
