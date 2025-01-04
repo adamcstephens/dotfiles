@@ -567,17 +567,17 @@
         "services-flake": "services-flake"
       },
       "locked": {
-        "lastModified": 1735964920,
-        "narHash": "sha256-+QCb80OndOLxB5hKTT+zIueUa2xDc2Yi85vJ2EhDnLg=",
+        "lastModified": 1736008151,
+        "narHash": "sha256-2PWW1Eo3Pr4zivdybSJwSpJvE8WLV62i1wHoBLNLM7s=",
         "ref": "refs/heads/main",
-        "rev": "14509297fb36c38f93264921bd1aa2ab79f899d8",
-        "revCount": 413,
+        "rev": "725a08baa57e5292501f4b6e380132933a8b2355",
+        "revCount": 417,
         "type": "git",
-        "url": "https://codeberg.org/adamcstephens/sower?tag=v0.4.0"
+        "url": "https://codeberg.org/adamcstephens/sower?tag=v0.4.1"
       },
       "original": {
         "type": "git",
-        "url": "https://codeberg.org/adamcstephens/sower?tag=v0.4.0"
+        "url": "https://codeberg.org/adamcstephens/sower?tag=v0.4.1"
       }
     },
     "systems": {
