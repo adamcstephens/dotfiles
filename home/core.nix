@@ -1,6 +1,5 @@
 {
   config,
-  inputs,
   lib,
   pkgs,
   ...
@@ -16,6 +15,7 @@
     ../apps/fd
     ../apps/fish
     ../apps/git
+    ../apps/helix
     ../apps/nix
     ../apps/neovim
     ../apps/nushell
@@ -28,6 +28,10 @@
     ../apps/zsh
     ../apps/yamlfmt
   ];
+
+  dotfiles = {
+    helix.enable = true;
+  };
 
   home.stateVersion = "22.05";
 
