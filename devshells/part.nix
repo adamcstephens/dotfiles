@@ -60,6 +60,7 @@
         go = pkgs.callPackage ./go.nix { };
         js = pkgs.callPackage ./js.nix { };
         nixpkgs = pkgs.callPackage ./nixpkgs.nix { };
+        ocaml = pkgs.callPackage ./ocaml.nix { };
         python = pkgs.callPackage ./python.nix { };
         rust = pkgs.callPackage ./rust.nix { };
         zig = pkgs.callPackage ./zig.nix { };
