@@ -16,6 +16,7 @@
     ../apps/fish
     ../apps/git
     ../apps/helix
+    ../apps/zellij
     ../apps/nix
     ../apps/neovim
     ../apps/nushell
