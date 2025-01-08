@@ -171,7 +171,6 @@
       pkgs.just
       pkgs.kalker
       pkgs.kitty.terminfo
-      pkgs.mtr
       pkgs.ncdu
       pkgs.tio
       pkgs.viddy
