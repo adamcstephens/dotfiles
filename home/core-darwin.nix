@@ -22,6 +22,7 @@
     pkgs.mas
     pkgs.openssh
     pkgs.pinentry_mac
+    pkgs.trippy
 
     # for class
     pkgs.nodejs
