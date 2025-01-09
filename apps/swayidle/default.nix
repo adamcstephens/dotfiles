@@ -5,34 +5,42 @@
   ...
 }:
 let
-  systemctlBin = "/run/current-system/sw/bin/systemctl";
-  colors = config.colorScheme.palette;
-
-  waylock = "${lib.getExe pkgs.waylock} -fork-on-lock -init-color 0x${colors.base01} -input-color 0x${colors.base03} -fail-color 0x${colors.base08}";
-  locker = waylock;
+  cfg = config.dotfiles.apps.swayidle;
 in
 {
-  config = lib.mkIf config.dotfiles.gui.wayland {
+  options.dotfiles.apps.swayidle.enable = lib.mkEnableOption "swayidle";
+
+  config = lib.mkIf cfg.enable {
     services.swayidle = {
       enable = true;
       systemdTarget = "wayland-session.target";
       events = [
         {
           event = "before-sleep";
-          command = "${locker}";
+          command = "${lib.getExe config.dotfiles.gui.wayland.locker}";
+        }
+        {
+          event = "after-resume";
+          command = "${lib.getExe pkgs.wlopm} --on *";
         }
       ];
       timeouts =
         [
           {
             timeout = 600;
-            command = "${locker}";
+            command = "${lib.getExe config.dotfiles.gui.wayland.locker}";
+          }
+          {
+            timeout = 900;
+            command = "${lib.getExe pkgs.wlopm} --off *";
           }
         ]
-        ++ (lib.optional (!config.dotfiles.gui.dontSleep) {
-          timeout = 360;
-          command = "${systemctlBin} sleep";
-        });
+        ++ lib.optionals (!config.dotfiles.gui.dontSleep) [
+          {
+            timeout = 360;
+            command = "/run/current-system/sw/bin/systemctl sleep";
+          }
+        ];
     };
   };
 }

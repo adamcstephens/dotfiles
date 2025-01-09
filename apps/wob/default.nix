@@ -2,7 +2,7 @@
 {
   imports = [ ./hm-module.nix ];
 
-  config = lib.mkIf config.dotfiles.gui.wayland {
+  config = lib.mkIf config.dotfiles.gui.wayland.enable {
     programs.wob = {
       enable = true;
       settings = {

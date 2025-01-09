@@ -66,10 +66,15 @@ in
         ./linux-gui.nix
 
         {
-          dotfiles.gui = {
-            dpi = 148;
-            dontSleep = true;
-            wayland = true;
+          dotfiles = {
+            apps.sleepwatcher-rs.enable = false;
+            apps.swayidle.enable = true;
+
+            gui = {
+              dpi = 148;
+              dontSleep = true;
+              wayland.enable = true;
+            };
           };
 
           # dotfiles.apps.waybar.battery = "upower";
@@ -107,7 +112,7 @@ in
           dotfiles = {
             gui = {
               dpi = 120;
-              wayland = true;
+              wayland.enable = true;
             };
           };
 
@@ -148,7 +153,7 @@ in
 
               gui = {
                 dpi = 120;
-                wayland = true;
+                wayland.enable = true;
 
                 xorg = {
                   enable = true;

@@ -5,7 +5,7 @@
   ...
 }:
 {
-  config = lib.mkIf config.dotfiles.gui.wayland {
+  config = lib.mkIf config.dotfiles.gui.wayland.enable {
     home.packages = [ pkgs.river-bnf ];
 
     systemd.user.targets.river-session = {
@@ -16,7 +16,9 @@
 
         Conflicts = [ "xserver-session.target" ];
 
-        Requires = [ "sleepwatcher-rs.service" ];
+        Requires =
+          lib.optionals config.dotfiles.apps.sleepwatcher-rs.enable [ "sleepwatcher-rs.service" ]
+          ++ lib.optionals config.dotfiles.apps.swayidle.enable [ "swayidle.service" ];
       };
     };
 

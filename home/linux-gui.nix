@@ -46,6 +46,7 @@ in
     ../apps/kanshi
     ../apps/river
     ../apps/sleepwatcher-rs
+    ../apps/swayidle
     ../apps/swayosd
     ../apps/waybar
 
@@ -60,6 +61,8 @@ in
     ../apps/mimeapps
     ../apps/ssh
   ];
+
+  dotfiles.apps.sleepwatcher-rs.enable = lib.mkDefault config.dotfiles.gui.wayland.enable;
 
   # reads fonts from home.packages
   fonts.fontconfig.enable = true;
@@ -146,7 +149,7 @@ in
 
       screenshot
     ]
-    ++ lib.optionals config.dotfiles.gui.wayland [
+    ++ lib.optionals config.dotfiles.gui.wayland.enable [
       pkgs.grim
       pkgs.lswt
       pkgs.qt6.qtwayland

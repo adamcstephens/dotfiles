@@ -15,7 +15,7 @@ let
   dell_scale = 1.333333;
 in
 {
-  config = lib.mkIf config.dotfiles.gui.wayland {
+  config = lib.mkIf config.dotfiles.gui.wayland.enable {
     services.kanshi = {
       enable = true;
       systemdTarget = "wayland-session.target";

@@ -16,7 +16,7 @@ in
     default = "battery";
   };
 
-  config = lib.mkIf config.dotfiles.gui.wayland {
+  config = lib.mkIf config.dotfiles.gui.wayland.enable {
     programs.waybar = {
       enable = true;
       systemd.enable = true;

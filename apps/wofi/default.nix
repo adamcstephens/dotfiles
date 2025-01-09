@@ -5,7 +5,7 @@
   ...
 }:
 {
-  config = lib.mkIf config.dotfiles.gui.wayland {
+  config = lib.mkIf config.dotfiles.gui.wayland.enable {
     xdg.configFile."wofi/config".text = ''
       width=800
       height=400

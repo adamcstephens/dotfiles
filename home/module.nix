@@ -7,6 +7,23 @@
 }:
 let
   cfg = config.dotfiles;
+
+  colors = config.colorScheme.palette;
+  waylandLocker = pkgs.writeShellScriptBin "wayland-locker" ''
+    export PATH=$PATH:${
+      lib.makeBinPath [
+        pkgs.gtklock
+        pkgs.procps
+        pkgs.waylock
+      ]
+    }
+
+    if [[ "$XDG_CURRENT_DESKTOP" == "Hyprland" ]]; then
+      gtklock
+    else
+      waylock -fork-on-lock -init-color 0x${colors.base01} -input-color 0x${colors.base03} -fail-color 0x${colors.base08}
+    fi
+  '';
 in
 {
   options.dotfiles = {
@@ -34,7 +51,16 @@ in
 
       dontSleep = lib.mkEnableOption "Don't automatically sleep on idle";
       insecure = lib.mkEnableOption "Insecure GUI disables locking";
-      wayland = lib.mkEnableOption "Enable wayland resources";
+
+      wayland = {
+        enable = lib.mkEnableOption "Enable wayland resources";
+        locker = lib.mkOption {
+          type = lib.types.package;
+          description = "package for locking screen";
+          default = waylandLocker;
+        };
+      };
+
       xorg = {
         enable = lib.mkEnableOption "Enable xorg resources";
 

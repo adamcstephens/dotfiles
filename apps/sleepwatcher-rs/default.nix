@@ -6,44 +6,33 @@
   ...
 }:
 let
-  colors = config.colorScheme.palette;
-  locker = pkgs.writeShellScriptBin "locker" ''
-    export PATH=$PATH:${
-      lib.makeBinPath [
-        pkgs.gtklock
-        pkgs.procps
-        pkgs.waylock
-      ]
-    }
-
-    if [[ "$XDG_CURRENT_DESKTOP" == "Hyprland" ]]; then
-      gtklock
-    else
-      waylock -fork-on-lock -init-color 0x${colors.base01} -input-color 0x${colors.base03} -fail-color 0x${colors.base08}
-    fi
-  '';
+  cfg = config.dotfiles.apps.sleepwatcher-rs;
 in
 {
   imports = [ inputs.sandbox.homeModules.sleepwatcher-rs ];
 
-  services.sleepwatcher-rs = {
-    enable = true;
+  options.dotfiles.apps.sleepwatcher-rs.enable = lib.mkEnableOption "sleepwatcher-rs";
 
-    configFile =
-      if config.dotfiles.nixosManaged then
-        ./idle_config.lua
-      else
-        "${config.home.homeDirectory}/.dotfiles/apps/sleepwatcher-rs/idle_config.lua";
+  config = lib.mkIf cfg.enable {
+    services.sleepwatcher-rs = {
+      enable = true;
 
-    dependencies = [
-      locker
-      pkgs.hyprland
-      pkgs.playerctl
-      pkgs.wlopm
-    ];
+      configFile =
+        if config.dotfiles.nixosManaged then
+          ./idle_config.lua
+        else
+          "${config.home.homeDirectory}/.dotfiles/apps/sleepwatcher-rs/idle_config.lua";
 
-    systemdTarget = "river-session.target";
+      dependencies = [
+        config.dotfiles.gui.wayland.locker
+        pkgs.hyprland
+        pkgs.playerctl
+        pkgs.wlopm
+      ];
+
+      systemdTarget = "river-session.target";
+    };
+
+    systemd.user.services.sleepwatcher-rs.Service.Environment = [ "RUST_LOG=debug" ];
   };
-
-  systemd.user.services.sleepwatcher-rs.Service.Environment = [ "RUST_LOG=debug" ];
 }
