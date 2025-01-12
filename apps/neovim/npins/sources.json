@@ -33,17 +33,6 @@
       "url": null,
       "hash": "1425mbyvax63m6l7vkwbfi1l863mr86ba11gxa3hqxcgvjpvp638"
     },
-    "timed-highlight": {
-      "type": "Git",
-      "repository": {
-        "type": "Git",
-        "url": "https://github.com/sahlte/timed-highlight.nvim"
-      },
-      "branch": "main",
-      "revision": "b0ddbee97641d817a35a4a5dc1679436b4dec955",
-      "url": null,
-      "hash": "1m7ig8w967nhrrmg9696c5pd7xsgxi44v3mxia4ks79gdg1vvsal"
-    },
     "vim-moonfly-colors": {
       "type": "Git",
       "repository": {

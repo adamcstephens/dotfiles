@@ -30,6 +30,7 @@
   sqlfluff,
   sqlite,
   stylua,
+  superhtml,
   yaml-language-server,
 }:
 let
@@ -65,12 +66,8 @@ mnw.lib.wrap pkgs {
     with vimPlugins;
     [
       actions-preview-nvim
-      cmp-nvim-lsp
-      cmp-path
-      cmp_luasnip
+      blink-cmp
       conform-nvim
-      copilot-lua
-      copilot-cmp
       direnv-vim
       editorconfig-nvim
       efmls-configs-nvim
@@ -82,16 +79,15 @@ mnw.lib.wrap pkgs {
       gitsigns-nvim
       Ionide-vim
       lualine-nvim
-      luasnip
       modus-themes-nvim
       neogit
       nui-nvim
-      nvim-cmp
       nvim-dap
       nvim-dap-go
       nvim-highlight-colors
       nvim-lspconfig
       nvim-treesitter
+      nvim-treesitter-endwise
       nvim-surround
       nvim-web-devicons
       oil-nvim
@@ -144,6 +140,7 @@ mnw.lib.wrap pkgs {
       shfmt
       sqlfluff
       stylua
+      superhtml
       yaml-language-server
     ];
 }
