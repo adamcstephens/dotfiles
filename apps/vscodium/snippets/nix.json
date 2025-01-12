@@ -28,5 +28,28 @@
     "prefix": "mkpackage",
     "body": "lib.mkPackageOption pkgs \"$1\" { };",
     "description": ""
+  },
+  "builddune": {
+    "prefix": "builddune",
+    "body": [
+      "{",
+      "  buildDunePackage,",
+      "}:",
+      "",
+      "buildDunePackage {",
+      "  pname = \"$1\";",
+      "",
+      "  inherit ($2) meta src version;",
+      "",
+      "  buildInputs = [$3];",
+      "",
+      "  propagatedBuildInputs = [$3];",
+      "",
+      "  checkInputs = [$4];",
+      "}"
+    ]
+  },
+  "buildinputs": {
+    "body": "buildInputs = [ ];"
   }
 }
