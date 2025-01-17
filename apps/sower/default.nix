@@ -14,7 +14,7 @@ in
   options.apps.sower = {
     enable = lib.mkOption {
       type = lib.types.bool;
-      default = !config.dotfiles.nixosManaged;
+      default = !config.dotfiles.nixosManaged && pkgs.stdenv.isLinux;
     };
   };
 
