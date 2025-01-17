@@ -37,6 +37,7 @@ require("conform").setup({
     lsp_fallback = true,
   },
   formatters_by_ft = {
+    dune = { "format-dune-file" },
     javascript = { "prettier" },
     json = { "biome" },
     lua = { "stylua" },
