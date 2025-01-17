@@ -24,6 +24,7 @@ in
     modules =
       { name, profile }:
       [
+        inputs.nix-doom-emacs-unstraightened.hmModule
         ./core.nix
         {
           nix.registry.nixpkgs.flake = lib.mkDefault profile.nixpkgs;

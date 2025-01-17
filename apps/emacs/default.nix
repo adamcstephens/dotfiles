@@ -1,5 +1,6 @@
 {
   config,
+  inputs,
   lib,
   pkgs,
   ...
@@ -230,58 +231,66 @@ in
     };
   };
   config = lib.mkIf cfg.enable {
-    home.packages = [ package ];
-
-    xdg.configFile =
-      if config.dotfiles.nixosManaged then
-        {
-          "emacs/elisp".source = ./elisp;
-          "emacs/snippets".source = ./snippets;
-          "emacs/custom.el".source = ./custom.el;
-          "emacs/early-init.el".source = ./early-init.el;
-          "emacs/init.el".source = ./init.el;
-          "emacs/straight/versions/default.el".source = ./straight/versions/default.el;
-        }
-      else
-        {
-          "emacs".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/emacs";
-        };
-
-    services = lib.mkIf pkgs.stdenv.isLinux {
-      emacs = {
-        enable = true;
-        extraOptions = [
-          "--init-directory"
-          "${config.home.homeDirectory}/.config/emacs"
-        ];
-        package = package;
-        socketActivation.enable = config.dotfiles.nixosManaged;
-      };
+    programs.doom-emacs = {
+      enable = true;
+      doomDir = ./doom.d;
+      # if config.dotfiles.nixosManaged then
+      #   ./doom.d
+      # else
+      #   config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/emacs/doom.d";
     };
-
-    systemd = lib.mkIf pkgs.stdenv.isLinux {
-      user.services.emacs.Service = {
-        TimeoutSec = 900;
-      };
-    };
-
-    launchd = lib.mkIf pkgs.stdenv.isDarwin {
-      agents.emacs = {
-        enable = true;
-        config = {
-          KeepAlive = true;
-          ProgramArguments = [
-            "${config.home.homeDirectory}/.nix-profile/bin/fish"
-            "-l"
-            "-c"
-            "${package}/bin/emacs --fg-daemon --init-directory ${config.home.homeDirectory}/.config/emacs"
-          ];
-          RunAtLoad = true;
-          StandardErrorPath = "${config.home.homeDirectory}/.config/emacs/launchd.log";
-          StandardOutPath = "${config.home.homeDirectory}/.config/emacs/launchd.log";
-          WatchPaths = [ "${config.home.homeDirectory}/.nix-profile/bin/emacs" ];
-        };
-      };
-    };
+    # home.packages = [ package ];
+    #
+    # xdg.configFile =
+    #   if config.dotfiles.nixosManaged then
+    #     {
+    #       "emacs/elisp".source = ./elisp;
+    #       "emacs/snippets".source = ./snippets;
+    #       "emacs/custom.el".source = ./custom.el;
+    #       "emacs/early-init.el".source = ./early-init.el;
+    #       "emacs/init.el".source = ./init.el;
+    #       "emacs/straight/versions/default.el".source = ./straight/versions/default.el;
+    #     }
+    #   else
+    #     {
+    #       "emacs".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/emacs";
+    #     };
+    #
+    # services = lib.mkIf pkgs.stdenv.isLinux {
+    #   emacs = {
+    #     enable = true;
+    #     extraOptions = [
+    #       "--init-directory"
+    #       "${config.home.homeDirectory}/.config/emacs"
+    #     ];
+    #     package = package;
+    #     socketActivation.enable = config.dotfiles.nixosManaged;
+    #   };
+    # };
+    #
+    # systemd = lib.mkIf pkgs.stdenv.isLinux {
+    #   user.services.emacs.Service = {
+    #     TimeoutSec = 900;
+    #   };
+    # };
+    #
+    # launchd = lib.mkIf pkgs.stdenv.isDarwin {
+    #   agents.emacs = {
+    #     enable = true;
+    #     config = {
+    #       KeepAlive = true;
+    #       ProgramArguments = [
+    #         "${config.home.homeDirectory}/.nix-profile/bin/fish"
+    #         "-l"
+    #         "-c"
+    #         "${package}/bin/emacs --fg-daemon --init-directory ${config.home.homeDirectory}/.config/emacs"
+    #       ];
+    #       RunAtLoad = true;
+    #       StandardErrorPath = "${config.home.homeDirectory}/.config/emacs/launchd.log";
+    #       StandardOutPath = "${config.home.homeDirectory}/.config/emacs/launchd.log";
+    #       WatchPaths = [ "${config.home.homeDirectory}/.nix-profile/bin/emacs" ];
+    #     };
+    #   };
+    # };
   };
 }
