@@ -55,7 +55,9 @@ writeShellScriptBin "hm" ''
     echo "⚠️ Build failure, ibailout."
   fi
 
-  nvd diff $PREVIOUS $NEXT
+  if [ -e "$PREVIOUS" ]; then
+    nvd diff $PREVIOUS $NEXT
+  fi
 
   case "$ACTION" in
     build)
