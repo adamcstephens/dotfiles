@@ -59,20 +59,22 @@ let
 
   revealjs = pkgs.callPackage ./revealjs.nix { };
 
+  pins-packages = import ./npins-packages;
+  npinsPackages =
+    epkgs:
+    lib.mapAttrsToList (
+      name: src:
+      (epkgs.trivialBuild {
+        pname = name;
+        inherit src;
+        version = "unstable-${builtins.substring 0 8 src.revision}";
+      })
+    ) pins-packages;
+
   emacsPackages =
     epkgs:
 
     let
-      pins-packages = import ./npins-packages;
-      npinsPackages = lib.mapAttrsToList (
-        name: src:
-        (epkgs.trivialBuild {
-          pname = name;
-          inherit src;
-          version = "unstable-${builtins.substring 0 8 src.revision}";
-        })
-      ) pins-packages;
-
       env = ''
         (setq exec-path (append exec-path '( ${
           lib.concatMapStringsSep " " (x: ''"${x}/bin"'') extraBins
@@ -91,7 +93,7 @@ let
         (provide 'dotemacs-nix-env)
       '';
     in
-    npinsPackages
+    (npinsPackages epkgs)
     ++ [
       (epkgs.trivialBuild {
         pname = "dotemacs-nix-env";
@@ -234,10 +236,8 @@ in
     programs.doom-emacs = {
       enable = true;
       doomDir = ./doom.d;
-      # if config.dotfiles.nixosManaged then
-      #   ./doom.d
-      # else
-      #   config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/emacs/doom.d";
+      doomLocalDir = "${config.home.homeDirectory}/.dotfiles/apps/emacs/doom.d";
+      # extraPackages = epkgs: [ epkgs.modus-themes ];
     };
     # home.packages = [ package ];
     #
