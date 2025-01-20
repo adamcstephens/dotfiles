@@ -25,6 +25,7 @@
   perSystem =
     {
       inputs',
+      lib,
       self',
       ...
     }:
@@ -35,16 +36,18 @@
       devShells = {
         ci = pkgs.mkShellNoCC {
           name = "ci";
-          packages = [
-            inputs.sower.packages.${pkgs.system}.seed-ci
-            inputs.sower.packages.${pkgs.system}.client
-
-            pkgs.git
-            pkgs.just
-            pkgs.nix-update
-            pkgs.npins
-            pkgs.nushell
-          ];
+          packages =
+            [
+              pkgs.git
+              pkgs.just
+              pkgs.nix-update
+              pkgs.npins
+              pkgs.nushell
+            ]
+            ++ lib.optionals pkgs.stdenv.isLinux [
+              inputs.sower.packages.${pkgs.system}.seed-ci
+              inputs.sower.packages.${pkgs.system}.client
+            ];
         };
 
         default = pkgs.mkShellNoCC {
