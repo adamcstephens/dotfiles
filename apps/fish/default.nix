@@ -32,8 +32,6 @@
             set --prepend fish_complete_path "${pkgs.kitty.shell_integration}/fish/vendor_completions.d"
             source ${config.xdg.configHome}/fish/functions/autodark.fish
         end
-
-        source ${npins.vim-moonfly-colors}/extras/moonfly.fish
       '';
 
     shellAbbrs = lib.filterAttrs (
@@ -85,7 +83,7 @@
     ./zfs-completion-fix.fish;
   xdg.configFile."fish/functions/ssh-auth-sock.fish".source = ./ssh-auth-sock.fish;
 
-  xdg.configFile."fish/theme-dark.fish".source = npins.vim-moonfly-colors + "extras/moonfly.fish";
+  xdg.configFile."fish/theme-dark.fish".source = npins.vim-moonfly-colors + "/extras/moonfly.fish";
   xdg.configFile."fish/theme-light.fish".source =
     npins."modus-themes.nvim" + "/extras/fish/modus_operandi.fish";
 }
