@@ -17,7 +17,7 @@ in
 
   xdg.configFile."kitty/kitty.conf".text =
     ''
-      include ${config.xdg.configHome}/kitty/theme-dark.conf
+      include ${npins.vim-moonfly-colors}/extras/moonfly-kitty.conf
       include ${config.xdg.configHome}/kitty/dotfiles.conf
 
       allow_remote_control socket-only
@@ -50,7 +50,8 @@ in
       config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/kitty/dotfiles.conf";
 
   # themes
-  xdg.configFile."kitty/theme-dark.conf".source = ./theme-dark.conf;
+  xdg.configFile."kitty/theme-dark.conf".source =
+    npins.vim-moonfly-colors + "/extras/moonfly-kitty.conf";
   xdg.configFile."kitty/theme-light.conf".source =
     npins."modus-themes.nvim" + "/extras/kitty/modus_operandi.conf";
 

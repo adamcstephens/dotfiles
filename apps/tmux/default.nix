@@ -16,7 +16,6 @@
   programs.tmux = {
     enable = true;
     extraConfig =
-      builtins.readFile "${npins."modus-themes.nvim"}/extras/tmux/modus_vivendi.tmux"
-      + builtins.readFile ./tmux.conf;
+      builtins.readFile "${npins.vim-moonfly-colors}/extras/moonfly.tmux" + builtins.readFile ./tmux.conf;
   };
 }
