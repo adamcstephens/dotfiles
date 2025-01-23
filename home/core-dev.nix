@@ -34,6 +34,7 @@
       pkgs.next-ls
 
       # nix
+      pkgs.hydra-check
       pkgs.nix-output-monitor
       pkgs.nix-tree
       pkgs.nixd
