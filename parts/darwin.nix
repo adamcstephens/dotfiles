@@ -34,7 +34,7 @@
           nix = {
             buildMachines = [
               {
-                hostName = "nixos1.local";
+                hostName = "nixos2.local";
                 maxJobs = 4;
                 sshUser = "root";
                 supportedFeatures = [
