@@ -2,7 +2,7 @@ Helpers:log("Loading idle_config.lua")
 
 function LockScreen()
   Helpers:log("Locking Screen")
-  IdleNotifier:run_once("locker")
+  IdleNotifier:run_once("wayland-locker")
 end
 
 function LockHandler()
