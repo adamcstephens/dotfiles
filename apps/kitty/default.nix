@@ -33,7 +33,7 @@ in
       macos_option_as_alt both
       macos_show_window_title_in window
       mouse_map cmd+left release grabbed,ungrabbed mouse_click_url
-
+      confirm_os_window_close 1
     ''
     + lib.optionalString pkgs.stdenv.isLinux ''
       font_size 10
@@ -41,6 +41,7 @@ in
       kitty_mod ctrl+shift
       listen_on unix:@kitty
       touch_scroll_multiplier 20.0
+      confirm_os_window_close 0
     '';
 
   xdg.configFile."kitty/dotfiles.conf".source =
