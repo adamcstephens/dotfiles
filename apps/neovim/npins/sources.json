@@ -7,9 +7,9 @@
         "url": "https://github.com/f-person/auto-dark-mode.nvim"
       },
       "branch": "master",
-      "revision": "4531f8b2b09ed8f0b8875a706419f9cecda1d969",
+      "revision": "02ef9553e2a1d6e861bc6955d58ce5883d28a6ad",
       "url": null,
-      "hash": "1lbzfv8lpw3naxc125j7nbi1fhanp10kisk9367d49q33i2k5yi4"
+      "hash": "1rrlv3i20cm4qgjrmfrd2avapgz0ihp13wvq26gsibjl169dld8m"
     },
     "github-nvim-theme": {
       "type": "Git",
