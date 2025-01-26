@@ -17,7 +17,7 @@
     ../apps/git
     ../apps/helix
     ../apps/zellij
-    ../apps/nix
+    # ../apps/nix
     ../apps/neovim
     ../apps/nushell
     ../apps/ripgrep
