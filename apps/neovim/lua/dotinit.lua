@@ -142,6 +142,9 @@ require("whitespace-nvim").setup({})
 --   },
 -- }
 
+-- disable end of line diagnostic message
+vim.diagnostic.config({ virtual_text = false })
+
 vim.opt.clipboard = "unnamedplus"
 vim.opt.autoread = true
 vim.opt.cursorline = true
@@ -149,7 +152,9 @@ vim.opt.number = true
 vim.opt.scrolloff = 8
 vim.opt.spell = true
 vim.opt.spelllang = "en_us"
+vim.opt.swapfile = false
 vim.opt.undofile = true
+vim.opt.updatetime = 750 -- swapfile and cursorhold
 vim.opt.whichwrap = "<,>,[,]"
 
 -- folding
