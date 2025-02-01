@@ -10,10 +10,10 @@
       "pre_releases": false,
       "version_upper_bound": null,
       "release_prefix": null,
-      "version": "v1.3.10",
-      "revision": "9f0343bcb3be4dd5545624db135f2b1c369e7ce4",
-      "url": "https://api.github.com/repos/miikanissi/modus-themes.nvim/tarball/v1.3.10",
-      "hash": "0pswimi14m2srr1njvyg0wbmzsr3g039xvwwwsm5v77zvq71nmyl"
+      "version": "v1.3.11",
+      "revision": "417a482a7691ba4093f90f215e846fe2fb498ccf",
+      "url": "https://api.github.com/repos/miikanissi/modus-themes.nvim/tarball/v1.3.11",
+      "hash": "1w9z88d3knji4qdqjblbwqy30mq61ywm1znffhwxdwlifh6fsnz4"
     },
     "vim-moonfly-colors": {
       "type": "Git",
@@ -22,9 +22,9 @@
         "url": "https://github.com/bluz71/vim-moonfly-colors"
       },
       "branch": "master",
-      "revision": "7d0e393d78871482afa8db715cde541453b8cabc",
+      "revision": "0d92fd7436709d0fe91e9899091b810aa9d7fdfa",
       "url": null,
-      "hash": "0ds4al4hjyqq1hzdayb97khyclrcmjff758l8lpiv577cbv3jjdf"
+      "hash": "1n71mklbiansinzvka54nxgywkqv2a86m6057lr7k0hlazj1vfa8"
     }
   },
   "version": 3
