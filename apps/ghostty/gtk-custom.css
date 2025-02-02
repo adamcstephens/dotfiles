@@ -1,0 +1,23 @@
+tabbar tabbox {
+  margin: 10;
+  padding: 5;
+  min-height: 20px;
+  background-color: #080808;
+  font-family: "JetBrains Mono";
+}
+
+tabbar tabbox tab {
+  margin: 0;
+  padding: 0;
+  color: #bdbdbd;
+  border: #323437;
+}
+
+tabbar tabbox tab:selected {
+  background-color: #323437;
+  color: #ffffff;
+}
+
+tabbar tabbox tab label {
+  font-size: 13px;
+}

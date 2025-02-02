@@ -2,6 +2,7 @@
   config,
   inputs,
   lib,
+  npins,
   pkgs,
   ...
 }:
@@ -27,54 +28,43 @@
   xdg.configFile."ghostty/config".text =
     ''
       font-family = "${config.dotfiles.gui.font.mono}"
-      background = #000000
-      foreground = #ffffff
-      selection-background = #7030af
-      selection-foreground = #ffffff
-      cursor-color = #ffffff
-      cursor-text = #000000
-
-      shell-integration = none
-
-      # normal
-      palette = 0=#000000
-      palette = 1=#ff5f59
-      palette = 2=#44bc44
-      palette = 3=#d0bc00
-      palette = 4=#2fafff
-      palette = 5=#feacd0
-      palette = 6=#00d3d0
-      palette = 7=#ffffff
-
-      # bright
-      palette = 8=#535353
-      palette = 9=#ff5f5f
-      palette = 10=#44df44
-      palette = 11=#efef00
-      palette = 12=#338fff
-      palette = 13=#ff66ff
-      palette = 14=#00eff0
-      palette = 15=#989898
-
-      window-padding-x = 5
-      window-padding-y = 5
-
-      copy-on-select = clipboard
-
-      keybind = ctrl+shift+delete=reset
-
-      keybind = alt+h=goto_split:left
-      keybind = alt+l=goto_split:right
-      keybind = alt+k=goto_split:top
-      keybind = alt+j=goto_split:bottom
+      config-file = ${npins.vim-moonfly-colors}/extras/moonfly-ghostty.conf
+      config-file = dotfiles.conf
     ''
     + lib.optionalString pkgs.stdenv.isLinux ''
-      gtk-single-instance = true
-      window-decoration = false
-
-      font-size = 11
+      config-file = linux.conf
     ''
     + lib.optionalString pkgs.stdenv.isDarwin ''
-      macos-option-as-alt = true
+      config-file = mac.conf
     '';
+
+  xdg.configFile."ghostty/dotfiles.conf".source =
+    if config.dotfiles.nixosManaged then
+      ./dotfiles.conf
+    else
+      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/ghostty/dotfiles.conf";
+
+  xdg.configFile."ghostty/linux.conf" = lib.mkIf pkgs.stdenv.isLinux {
+    source =
+      if config.dotfiles.nixosManaged then
+        ./linux.conf
+      else
+        config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/ghostty/linux.conf";
+  };
+
+  xdg.configFile."ghostty/gtk-custom.css" = lib.mkIf pkgs.stdenv.isLinux {
+    source =
+      if config.dotfiles.nixosManaged then
+        ./gtk-custom.css
+      else
+        config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/ghostty/gtk-custom.css";
+  };
+
+  xdg.configFile."ghostty/mac.conf" = lib.mkIf pkgs.stdenv.isLinux {
+    source =
+      if config.dotfiles.nixosManaged then
+        ./mac.conf
+      else
+        config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/ghostty/mac.conf";
+  };
 }
