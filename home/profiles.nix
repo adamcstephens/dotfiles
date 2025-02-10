@@ -98,6 +98,7 @@ in
               pkgs.devbox
               pkgs.entr
               pkgs.git-lfs
+              pkgs.terraform-lsp
             ];
           }
         )

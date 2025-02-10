@@ -203,14 +203,9 @@ if vim.fn.executable("ruff") == 1 then
 end
 
 -- tofu
-if vim.fn.executable("terraformls") == 1 then
-  require("lspconfig").terraformls.setup({
+if vim.fn.executable("terraform-lsp") == 1 then
+  require("lspconfig").terraform_lsp.setup({
     capabilities = capabilities,
-  })
-  vim.filetype.add({
-    extension = {
-      tf = "terraform",
-    },
   })
 end
 
