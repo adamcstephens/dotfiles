@@ -1,0 +1,6 @@
+{
+  "phony": {
+    "body": [".PHONY: $1", "$1:"],
+    "description": "simple init"
+  }
+}
