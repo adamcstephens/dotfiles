@@ -1,9 +1,13 @@
-[user]
-name = "Adam C. Stephens"
-email = "adam@valkor.net"
-
 [core]
 fsmonitor = "watchman"
+
+[git]
+subprocess = true
+
+[signing]
+sign-all = true
+backend = "ssh"
+key = "~/.ssh/signing-key.pub"
 
 [ui]
 default-command = "log"
@@ -12,7 +16,6 @@ diff-editor = ":builtin"
 editor = "nvim"
 # paginate = "never"
 
-[signing]
-sign-all = true
-backend = "ssh"
-key = "~/.ssh/signing-key.pub"
+[user]
+name = "Adam C. Stephens"
+email = "adam@valkor.net"
