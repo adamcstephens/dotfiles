@@ -31,6 +31,7 @@
             pkgs.material-design-icons
             inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.nerd-fonts.symbols-only
           ];
+
           nix = {
             buildMachines = [
               {
@@ -52,6 +53,8 @@
             channel.enable = false;
 
             distributedBuilds = true;
+
+            enable = true;
 
             gc = {
               automatic = true;
@@ -91,8 +94,6 @@
               extra-platforms = "x86_64-darwin";
             };
           };
-
-          services.nix-daemon.enable = true;
 
           system.defaults = {
             NSGlobalDomain = {
