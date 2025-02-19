@@ -172,6 +172,9 @@ in
     ]
     ++ lib.optionals config.dotfiles.nixosManaged [
       flake.packages.${pkgs.system}.rofi-wrapper
+    ]
+    ++ lib.optionals config.dotfiles.dev.enable [
+      pkgs.jetbrains.datagrip
     ];
 
   programs.feh.enable = true;

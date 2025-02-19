@@ -17,7 +17,7 @@
 
   dotfiles = {
     apps = {
-      vscodium.enable = lib.mkDefault true;
+      vscodium.enable = lib.mkDefault false;
     };
 
     gui.enable = true;
