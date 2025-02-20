@@ -149,11 +149,6 @@ in
             apps.ssh.tpm = true;
 
             dotfiles = {
-              apps = {
-                vscode.enable = true;
-                vscodium.enable = false;
-              };
-
               gui = {
                 dpi = 120;
                 wayland.enable = true;
