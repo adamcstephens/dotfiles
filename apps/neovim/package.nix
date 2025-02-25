@@ -126,7 +126,7 @@ mnw.lib.wrap pkgs {
       # ineffassign
       go-tools
 
-      biome
+      # biome
       efm-langserver
       lua
       lua-language-server
