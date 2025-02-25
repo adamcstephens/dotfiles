@@ -34,6 +34,29 @@ in
               self.overlays.default
               self.overlays.dotfiles
               self.overlays.upstreams
+              (self: super: {
+                # https://github.com/NixOS/nixpkgs/pull/384904
+                biome = super.biome.overrideAttrs (old: {
+                  cargoTestFlags = old.cargoTestFlags ++ [
+                    "--skip=commands::check::print_json"
+                    "--skip=commands::check::print_json_pretty"
+                    "--skip=commands::explain::explain_logs"
+                    "--skip=commands::format::print_json"
+                    "--skip=commands::format::print_json_pretty"
+                    "--skip=commands::format::should_format_files_in_folders_ignored_by_linter"
+                  ];
+                });
+                # https://github.com/NixOS/nixpkgs/pull/384853
+                main = super.maim.overrideAttrs (_: {
+                  patches = [
+                    (super.fetchpatch {
+                      name = "maim-c++-17.patch";
+                      url = "https://github.com/naelstrof/maim/commit/e7fe09b6734baeb59081b8805be542c92178cf0f.patch";
+                      sha256 = "0z9zvrr8msfli88jmhxm5knysi385s48j2w7zpacc7qhf4c5zh8c";
+                    })
+                  ];
+                });
+              })
             ];
 
             config.allowUnfreePredicate =
