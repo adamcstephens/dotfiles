@@ -9,6 +9,9 @@ fixhome = remote set-head origin --auto
 subup = submodule update --remote --merge --recursive
 yolo = commit --amend --no-edit
 
+[branch]
+sort = committerdate
+
 [color]
 ui = true
 
@@ -18,17 +21,34 @@ frag = magenta
 old = red
 new = green
 
+[column]
+ui = auto
+
 [commit]
 gpgsign = true
+verbose = true
 
 [core]
 editor = ~/.dotfiles/bin/giteditor
+fsmonitor = true
+untrackedCache = true
 
 [credential]
 helper = rbw
 
+[diff]
+algorithm = histogram
+colorMoved = plain
+mnemonicPrefix = true
+renames = true
+
+[feature]
+experimental = true
+
 [fetch]
+all = true
 prune = true
+pruneTags = true
 
 [github]
 user = adamcstephens
@@ -43,16 +63,29 @@ path = config.os
 [init]
 defaultBranch = main
 
+[merge]
+conflictstyle = zdiff3
+
 [pull]
 ff = only
 rebase = true
 
+[push]
+autoSetupRemote = true
+followTags = true
+
 [rebase]
+autoSquash = true
 autoStash = true
 updateRefs = true
 
+[rerere]
+enabled = true
+autoupdate = true
+
 [tag]
 gpgsign = true
+sort = version:refname
 
 [url "git@github.com:"]
 pushInsteadOf = "https://github.com/"
