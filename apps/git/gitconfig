@@ -50,6 +50,12 @@ all = true
 prune = true
 pruneTags = true
 
+[filter "lfs"]
+smudge = git-lfs smudge -- %f
+process = git-lfs filter-process
+required = true
+clean = git-lfs clean -- %f
+
 [github]
 user = adamcstephens
 
@@ -57,7 +63,6 @@ user = adamcstephens
 format = ssh
 
 [include]
-path = ~/.gitconfig.local
 path = config.os
 
 [init]
@@ -109,8 +114,6 @@ pushInsteadOf = https://codeberg.org/adamcstephens
 name = Adam C. Stephens
 email = adam@valkor.net
 
-[filter "lfs"]
-clean = git-lfs clean -- %f
-smudge = git-lfs smudge -- %f
-process = git-lfs filter-process
-required = true
+[includeIf "gitdir:~/git/calmwave/"]
+path = ~/git/calmwave/.gitconfig
+
