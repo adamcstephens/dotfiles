@@ -36,7 +36,7 @@ in
 {
   config = lib.mkIf config.dotfiles.gui.xorg.enable {
     home.packages = [
-      # pkgs.maim
+      pkgs.maim
       pkgs.xdotool
       pkgs.xorg.xev
       pkgs.xorg.xdpyinfo

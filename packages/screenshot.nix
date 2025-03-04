@@ -14,7 +14,7 @@ writeShellApplication {
   runtimeInputs = [
     bash
     grim
-    # maim
+    maim
     slurp
     wl-clipboard-rs
     xclip
