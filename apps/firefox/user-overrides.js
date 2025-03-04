@@ -1,4 +1,5 @@
 user_pref("browser.download.useDownloadDir", true);
+user_pref("browser.ml.chat.enabled", false);
 user_pref("browser.tabs.closeWindowWithLastTab", false);
 user_pref("browser.tabs.firefox-view", false);
 // * 0=blank, 1=home, 2=last visited page, 3=resume previous session
@@ -20,4 +21,5 @@ user_pref("privacy.clearOnShutdown_v2.historyFormDataAndDownloads", false);
 user_pref("privacy.resistFingerprinting.letterboxing", false);
 user_pref("privacy.resistFingerprinting", false);
 user_pref("signon.rememberSignons", false);
+user_pref("sidebar.verticalTabs", true);
 user_pref("webgl.disabled", false);
