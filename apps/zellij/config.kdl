@@ -5,6 +5,12 @@
 keybinds clear-defaults=true {
     locked {
         bind "Ctrl g" { SwitchToMode "normal"; }
+        bind "Super p" {
+          Run "prj" {
+            close_on_exit true
+            floating true
+          }
+        }
     }
     pane {
         bind "left" { MoveFocus "left"; }
