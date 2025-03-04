@@ -101,6 +101,11 @@ in
               pkgs.git-lfs
               pkgs.terraform-lsp
             ];
+
+            xdg.configFile."direnv/direnv.toml".text = ''
+              [whitelist]
+              prefix = [ "~/git/calmwave/cw" ]
+            '';
           }
         )
       ];
