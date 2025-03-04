@@ -33,6 +33,20 @@
       "url": null,
       "hash": "1425mbyvax63m6l7vkwbfi1l863mr86ba11gxa3hqxcgvjpvp638"
     },
+    "multiple-cursors-nvim": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "Git",
+        "url": "https://github.com/brenton-leighton/multiple-cursors.nvim"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "version": "v0.15",
+      "revision": "1ac15d047a4b265cc2389957bcc56ee561b29e02",
+      "url": null,
+      "hash": "04b915wr8gj2vxfjs6qsq67wp8vyqz4ndbv152zrpf7m2a3nhfw9"
+    },
     "vim-moonfly-colors": {
       "type": "Git",
       "repository": {

@@ -29,6 +29,7 @@ require("move").setup({
     enable = true,
   },
 })
+require("multiple-cursors").setup({})
 local neogit = require("neogit")
 neogit.setup()
 require("nvim-surround").setup({})
@@ -194,6 +195,33 @@ vim.keymap.set("n", "<A-Down>", ":MoveLine(1)<CR>")
 vim.keymap.set("n", "<A-Up>", ":MoveLine(-1)<CR>")
 vim.keymap.set("v", "<A-Down>", ":MoveBlock(1)<CR>")
 vim.keymap.set("v", "<A-Up>", ":MoveBlock(-1)<CR>")
+
+-- multiple-cursors
+vim.keymap.set({ "n", "x" }, "<C-j>", "<Cmd>MultipleCursorsAddDown<CR>", { desc = "Add cursor and move down" })
+vim.keymap.set({ "n", "x" }, "<C-k>", "<Cmd>MultipleCursorsAddUp<CR>", { desc = "Add cursor and move up" })
+vim.keymap.set({ "n", "i", "x" }, "<C-Down>", "<Cmd>MultipleCursorsAddDown<CR>", { desc = "Add cursor and move down" })
+vim.keymap.set({ "n", "i", "x" }, "<C-Up>", "<Cmd>MultipleCursorsAddUp<CR>", { desc = "Add cursor and move up" })
+vim.keymap.set(
+  { "x" },
+  "<Leader>m",
+  "<Cmd>MultipleCursorsAddVisualArea<CR>",
+  { desc = "Add cursors to the lines of the visual area" }
+)
+vim.keymap.set({ "n", "x" }, "<Leader>a", "<Cmd>MultipleCursorsAddMatches<CR>", { desc = "Add cursors to cword" })
+vim.keymap.set(
+  { "n", "x" },
+  "<Leader>A",
+  "<Cmd>MultipleCursorsAddMatchesV<CR>",
+  { desc = "Add cursors to cword in previous area" }
+)
+vim.keymap.set(
+  { "n", "x" },
+  "<Leader>d",
+  "<Cmd>MultipleCursorsAddJumpNextMatch<CR>",
+  { desc = "Add cursor and jump to next cword" }
+)
+vim.keymap.set({ "n", "x" }, "<Leader>D", "<Cmd>MultipleCursorsJumpNextMatch<CR>", { desc = "Jump to next cword" })
+vim.keymap.set({ "n", "x" }, "<Leader>L", "<Cmd>MultipleCursorsLock<CR>", { desc = "Lock virtual cursors" })
 
 -- vim.keymap.set("n", "<leader><leader>", function()
 --   require("telescope").extensions.smart_open.smart_open({ cwd_only = true, })
