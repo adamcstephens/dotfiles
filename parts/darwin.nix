@@ -176,6 +176,12 @@
 
               networking.computerName = "maple";
 
+              nixpkgs.overlays = [
+                self.overlays.default
+                self.overlays.dotfiles
+                self.overlays.upstreams
+              ];
+
               # nix.linux-builder = {
               #   enable = true;
               #   config = {
