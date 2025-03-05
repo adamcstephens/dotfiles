@@ -141,6 +141,14 @@ in
       ];
     };
 
+    nixos2 = {
+      nixpkgs = inputs.nixpkgs-unstable;
+      home-manager = inputs.home-manager-unstable;
+      modules = [
+        ./core-dev.nix
+      ];
+    };
+
     seek = {
       nixpkgs = inputs.nixpkgs-unstable;
       home-manager = inputs.home-manager-unstable;
