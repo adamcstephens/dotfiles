@@ -144,7 +144,7 @@
 
           programs.fish = {
             enable = true;
-            package = inputs.nixpkgs-fish.legacyPackages.${pkgs.system}.fish;
+            package = inputs.nixpkgs-unstable-small.legacyPackages.${pkgs.system}.fish;
           };
         }
       )

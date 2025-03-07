@@ -361,22 +361,6 @@
         "type": "github"
       }
     },
-    "nixpkgs-fish": {
-      "locked": {
-        "lastModified": 1741273211,
-        "narHash": "sha256-Zb+sGLmIdZxlQodOE0mDMCN1OPSsdpU/IW+WZDR02xE=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "2478cfdea967040757053df384655d0d5d6e02df",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "ref": "fish",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "nixpkgs-lib": {
       "locked": {
         "lastModified": 1740872140,
@@ -558,7 +542,6 @@
         "nix-vscode-extensions": "nix-vscode-extensions",
         "nix-wallpaper": "nix-wallpaper",
         "nixpkgs": "nixpkgs",
-        "nixpkgs-fish": "nixpkgs-fish",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nixpkgs-unstable-small": "nixpkgs-unstable-small",
         "profile-parts": "profile-parts",
