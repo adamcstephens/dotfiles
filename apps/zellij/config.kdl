@@ -9,6 +9,10 @@ keybinds clear-defaults=true {
           Run "prj" {
             close_on_exit true
             floating true
+            x "10%"
+            y "15%"
+            width "80%"
+            height "70%"
           }
         }
     }
