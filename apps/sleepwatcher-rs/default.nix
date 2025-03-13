@@ -30,7 +30,7 @@ in
         pkgs.wlopm
       ];
 
-      systemdTarget = "river-session.target";
+      systemdTarget = "wayland-session.target";
     };
 
     systemd.user.services.sleepwatcher-rs.Service.Environment = [ "RUST_LOG=debug" ];
