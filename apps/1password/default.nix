@@ -6,6 +6,7 @@
     Unit.After = [
       "graphical-session.target"
       "waybar.service"
+      "xwayland-satellite.service"
     ];
   };
 }

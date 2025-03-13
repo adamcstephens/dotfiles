@@ -94,6 +94,9 @@ input {
     // automatically.
     position x=1280 y=0
 }
+output "eDP-1" {
+  background-color "#000000"
+}
 
 // Settings that influence how windows are positioned and sized.
 // Find more information on the wiki:
@@ -260,7 +263,7 @@ spawn-at-startup "systemctl" "--user" "import-environment" "DISPLAY"
 // Additionally, clients will be informed that they are tiled, removing some client-side rounded corners.
 // This option will also fix border/focus ring drawing behind some semitransparent windows.
 // After enabling or disabling this, you need to restart the apps for this to take effect.
-// prefer-no-csd
+prefer-no-csd
 
 // You can change the path where screenshots are saved.
 // A ~ at the front will be expanded to the home directory.
@@ -309,7 +312,7 @@ window-rule {
 // Example: enable rounded corners for all windows.
 // (This example rule is commented out with a "/-" in front.)
 window-rule {
-    geometry-corner-radius 8
+    // geometry-corner-radius 8
     clip-to-geometry true
 }
 

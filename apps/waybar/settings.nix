@@ -6,6 +6,7 @@
   modules-left = [
     "hyprland/workspaces"
     "river/tags"
+    "niri/workspaces"
   ];
   modules-center = [ ];
   modules-right = [
