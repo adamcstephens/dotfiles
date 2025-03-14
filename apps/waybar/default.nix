@@ -1,5 +1,6 @@
 {
   config,
+  inputs,
   lib,
   pkgs,
   ...
@@ -118,7 +119,7 @@ in
         lib.makeBinPath [
           pkgs.blueberry
           pkgs.networkmanagerapplet
-          pkgs.pwvucontrol
+          inputs.nixpkgs-unstable-small.legacyPackages.x86_64-linux.pwvucontrol
         ]
       }";
       Unit = {

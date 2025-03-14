@@ -121,7 +121,7 @@ in
 
       # audio
       pkgs.playerctl
-      pkgs.pwvucontrol
+      inputs.nixpkgs-unstable-small.legacyPackages.x86_64-linux.pwvucontrol
       pkgs.wireplumber
 
       # firefox

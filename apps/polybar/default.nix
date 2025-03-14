@@ -1,5 +1,6 @@
 {
   config,
+  inputs,
   lib,
   pkgs,
   ...
@@ -8,7 +9,7 @@ let
   dependencies = [
     pkgs.bash
     pkgs.networkmanagerapplet
-    pkgs.pwvucontrol
+    inputs.nixpkgs-unstable-small.legacyPackages.x86_64-linux.pwvucontrol
     pkgs.playerctl
   ];
 
