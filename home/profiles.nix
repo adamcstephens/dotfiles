@@ -26,30 +26,36 @@ in
       [
         inputs.nix-doom-emacs-unstraightened.hmModule
         ./core.nix
-        {
-          nix.registry.nixpkgs.flake = lib.mkDefault profile.nixpkgs;
-
-          nixpkgs = {
-            overlays = [
-              self.overlays.default
-              self.overlays.dotfiles
-              self.overlays.upstreams
+        (
+          { pkgs, ... }:
+          {
+            home.packages = [
+              self.packages.${pkgs.system}.dotfiles
             ];
+            nix.registry.nixpkgs.flake = lib.mkDefault profile.nixpkgs;
 
-            config.allowUnfreePredicate =
-              pkg:
-              builtins.elem (lib.getName pkg) [
-                "1password"
-                "1password-cli"
-                "datagrip"
-                "vscode"
-                "vscode-extension-github-copilot"
-                "vscode-extension-ms-vsliveshare-vsliveshare"
+            nixpkgs = {
+              overlays = [
+                self.overlays.default
+                self.overlays.dotfiles
+                self.overlays.upstreams
               ];
-          };
 
-          services.sower.client.config.name = name;
-        }
+              config.allowUnfreePredicate =
+                pkg:
+                builtins.elem (lib.getName pkg) [
+                  "1password"
+                  "1password-cli"
+                  "datagrip"
+                  "vscode"
+                  "vscode-extension-github-copilot"
+                  "vscode-extension-ms-vsliveshare-vsliveshare"
+                ];
+            };
+
+            services.sower.client.config.name = name;
+          }
+        )
       ];
 
     specialArgs = {

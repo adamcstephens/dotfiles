@@ -1,0 +1,12 @@
+(rule
+ (with-stdout-to
+  link_flags.linux
+  (bash
+   "if [ \"${BUILD_STATIC:-0}\" = '1' ]; then echo '(-cclib -static)'; else echo '()'; fi")))
+
+(executables
+ (names escape_file)
+ (public_names escape-file)
+ (libraries unix fileutils)
+ (link_flags
+  (:include link_flags.%{system})))

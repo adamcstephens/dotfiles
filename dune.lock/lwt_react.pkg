@@ -1,0 +1,11 @@
+(version 1.2.0)
+
+(build
+ (run dune build -p %{pkg-self:name} -j %{jobs}))
+
+(depends dune lwt ocaml react cppo)
+
+(source
+ (fetch
+  (url https://github.com/ocsigen/lwt/archive/5.6.0.tar.gz)
+  (checksum md5=e63979ee40a80d5b9e9e5545f33323b4)))

@@ -1,0 +1,16 @@
+(version 3.2.3)
+
+(build
+ (progn
+  (when
+   %{pkg-self:dev}
+   (run dune subst))
+  (run dune build -p %{pkg-self:name} -j %{jobs} @install)))
+
+(depends dune ocaml react result uchar uutf uucp uuseg)
+
+(source
+ (fetch
+  (url https://github.com/ocaml-community/zed/archive/refs/tags/3.2.3.tar.gz)
+  (checksum
+   sha512=637f75129550f6459417549d44bed16bdc62721d2e9e0c6bb5bfab30c5bc6478de15faece8c091b56f238375cb79a7bc176375400e543120bb31d7ea626b7c5b)))

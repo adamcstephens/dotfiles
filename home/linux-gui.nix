@@ -42,7 +42,6 @@ in
     ../apps/rofi
 
     # wayland
-    ../apps/hyprland
     ../apps/kanshi
     ../apps/niri
     ../apps/river
@@ -50,6 +49,7 @@ in
     ../apps/swayidle
     ../apps/swayosd
     ../apps/waybar
+    ../apps/wayland
 
     # xorg
     ../apps/polybar
@@ -149,27 +149,6 @@ in
       pkgs.rofi-rbw
 
       screenshot
-    ]
-    ++ lib.optionals config.dotfiles.gui.wayland.enable [
-      pkgs.grim
-      pkgs.lswt
-      pkgs.qt6.qtwayland
-      pkgs.slurp
-      pkgs.wayshot
-      pkgs.wev
-      pkgs.wl-clipboard
-      pkgs.wl-mirror
-      # inputs.nixpkgs-unstable-small.legacyPackages.${pkgs.system}.wl-screenrec
-      pkgs.wlr-randr
-      pkgs.wdisplays
-      pkgs.wlopm
-    ]
-    ++ lib.optionals config.dotfiles.gui.xorg.enable [
-      pkgs.arandr
-      pkgs.grobi
-      pkgs.lxrandr
-      pkgs.xclip
-      pkgs.xlayoutdisplay
     ]
     ++ lib.optionals config.dotfiles.nixosManaged [
       flake.packages.${pkgs.system}.rofi-wrapper

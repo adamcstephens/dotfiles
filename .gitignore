@@ -4,3 +4,7 @@ Brewfile.lock.json
 gcroot/
 results/
 *.pyc
+
+_build/
+*.cmi
+*.cmo

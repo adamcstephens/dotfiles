@@ -1,0 +1,12 @@
+(version 1.2.2)
+
+(build
+ (run ocaml pkg/pkg.ml build --dev-pkg %{pkg-self:dev}))
+
+(depends ocaml ocamlfind ocamlbuild topkg)
+
+(source
+ (fetch
+  (url https://erratique.ch/software/react/releases/react-1.2.2.tbz)
+  (checksum
+   sha512=18cdd544d484222ba02db6bd9351571516532e7a1c107b59bbe39193837298f5c745eab6754f8bc6ff125b387be7018c6d6e6ac99f91925a5e4f53af688522b1)))

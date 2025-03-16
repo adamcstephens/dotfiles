@@ -2,7 +2,6 @@
   config,
   inputs,
   lib,
-  pkgs,
   ...
 }:
 let
@@ -24,10 +23,7 @@ in
           "${config.home.homeDirectory}/.dotfiles/apps/sleepwatcher-rs/idle_config.lua";
 
       dependencies = [
-        config.dotfiles.gui.wayland.locker
-        pkgs.hyprland
-        pkgs.playerctl
-        pkgs.wlopm
+        config.home.profileDirectory
       ];
 
       systemdTarget = "wayland-session.target";

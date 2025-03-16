@@ -25,8 +25,15 @@ window)
   if [ $GUI = "xorg" ]; then
     maim -i "$(xdotool getactivewindow)" "$OUTPUT"
   else
-    echo "window mode unsupported on wayland"
-    exit 1
+    case "$XDG_CURRENT_DESKTOP" in
+    niri)
+      niri msg action screenshot-window
+      ;;
+    *)
+      echo "window mode unsupported on wayland"
+      exit 1
+      ;;
+    esac
   fi
   ;;
 
@@ -34,7 +41,14 @@ box)
   if [ $GUI = "xorg" ]; then
     maim -s "$OUTPUT"
   else
-    slurp | grim -g - "$OUTPUT"
+    case "$XDG_CURRENT_DESKTOP" in
+    niri)
+      niri msg action screenshot
+      ;;
+    *)
+      slurp | grim -g - "$OUTPUT"
+      ;;
+    esac
   fi
   ;;
 
@@ -42,7 +56,14 @@ screen)
   if [ $GUI = "xorg" ]; then
     maim "$OUTPUT"
   else
-    grim "$OUTPUT"
+    case "$XDG_CURRENT_DESKTOP" in
+    niri)
+      niri msg action screenshot
+      ;;
+    *)
+      grim "$OUTPUT"
+      ;;
+    esac
   fi
   ;;
 
@@ -55,5 +76,12 @@ esac
 if [ $GUI = "xorg" ]; then
   xclip -selection clipboard -target image/png -i <"$OUTPUT"
 else
-  wl-copy <"$OUTPUT"
+  case "$XDG_CURRENT_DESKTOP" in
+  niri)
+    niri msg action screenshot
+    ;;
+  *)
+    wl-copy <"$OUTPUT"
+    ;;
+  esac
 fi

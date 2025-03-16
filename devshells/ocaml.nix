@@ -1,15 +1,24 @@
 {
+  inputs,
   mkShell,
   pkgs,
 }:
+let
+  pkgs' = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system};
+  ocamlPackages = pkgs'.ocaml-ng.ocamlPackages_5_3;
+in
 mkShell {
   packages = [
-    pkgs.ocaml
-    pkgs.ocamlPackages.dune_3
-    pkgs.ocamlPackages.ocamlformat
-    pkgs.ocamlPackages.ocaml-lsp
-    pkgs.ocamlPackages.odig
-    pkgs.ocamlPackages.utop
-    pkgs.opam
+    ocamlPackages.ocaml
+    ocamlPackages.dune_3
+    ocamlPackages.ocamlformat
+    ocamlPackages.ocaml-lsp
+    ocamlPackages.odig
+    ocamlPackages.utop
+    pkgs'.opam
+    ocamlPackages.ocamlscript
+  ];
+  nativeBuildInputs = [
+    ocamlPackages.fileutils
   ];
 }

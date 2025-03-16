@@ -34,12 +34,30 @@ let
   '';
 in
 {
+  options.dotfiles.gui.xorg = {
+    enable = lib.mkEnableOption "Enable xorg resources";
+
+    wm = lib.mkOption {
+      type = lib.types.enum [
+        "leftwm"
+        "xmonad"
+      ];
+      description = "which xorg window manager to enable";
+      default = "xmonad";
+    };
+  };
+
   config = lib.mkIf config.dotfiles.gui.xorg.enable {
     home.packages = [
+      pkgs.arandr
+      pkgs.grobi
+      pkgs.lxrandr
       pkgs.maim
+      pkgs.xclip
       pkgs.xdotool
-      pkgs.xorg.xev
+      pkgs.xlayoutdisplay
       pkgs.xorg.xdpyinfo
+      pkgs.xorg.xev
     ];
 
     services.screen-locker = lib.mkIf (!config.dotfiles.gui.insecure) {

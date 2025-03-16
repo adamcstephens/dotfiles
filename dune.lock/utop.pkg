@@ -1,0 +1,30 @@
+(version 2.15.0-1)
+
+(build
+ (progn
+  (when
+   %{pkg-self:dev}
+   (run dune subst))
+  (run dune build -p %{pkg-self:name} -j %{jobs} @install)))
+
+(depends
+ dune
+ ocaml
+ base-unix
+ base-threads
+ ocamlfind
+ lambda-term
+ logs
+ lwt
+ lwt_react
+ zed
+ react
+ cppo
+ xdg)
+
+(source
+ (fetch
+  (url
+   https://github.com/ocaml-community/utop/releases/download/2.15.0/utop-2.15.0-1.tar.gz)
+  (checksum
+   sha256=a11844563c36efefc466076f6f5f114d30eff6f032aec2fbe0dcbd20255d204d)))

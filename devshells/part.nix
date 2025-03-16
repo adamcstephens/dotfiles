@@ -42,7 +42,6 @@
               pkgs.just
               pkgs.nix-update
               pkgs.npins
-              pkgs.nushell
             ]
             ++ lib.optionals pkgs.stdenv.isLinux [
               inputs.sower.packages.${pkgs.system}.seed-ci
@@ -63,7 +62,7 @@
         go = pkgs.callPackage ./go.nix { };
         js = pkgs.callPackage ./js.nix { };
         nixpkgs = pkgs.callPackage ./nixpkgs.nix { };
-        ocaml = pkgs.callPackage ./ocaml.nix { };
+        ocaml = pkgs.callPackage ./ocaml.nix { inherit inputs; };
         python = pkgs.callPackage ./python.nix { };
         rust = pkgs.callPackage ./rust.nix { };
         zig = pkgs.callPackage ./zig.nix { };
