@@ -44,8 +44,12 @@ in
     systemd.user.services.ssh-tpm-agent = lib.mkIf cfg.tpm {
       Unit = {
         PartOf = [ "graphical-session.target" ];
-        After = [ "ssh-agent.service" ];
+        After = [
+          "ssh-agent.service"
+          "graphical-session.target"
+        ];
         Requires = [ "ssh-agent.service" ];
+        ConditionEnvironment = "WAYLAND_DISPLAY";
       };
 
       Service = {
