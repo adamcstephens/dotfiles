@@ -8,4 +8,4 @@
 
 (package
  (name dotfiles)
- (depends ocaml fileutils utop))
+ (depends ocaml fileutils utop yojson))

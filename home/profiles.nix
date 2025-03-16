@@ -29,9 +29,14 @@ in
         (
           { pkgs, ... }:
           {
+            dotfiles.gui.wayland.locker = self.packages.${pkgs.system}.dotfiles.overrideAttrs (_: {
+              meta.mainProgram = "wayland-locker";
+            });
+
             home.packages = [
               self.packages.${pkgs.system}.dotfiles
             ];
+
             nix.registry.nixpkgs.flake = lib.mkDefault profile.nixpkgs;
 
             nixpkgs = {

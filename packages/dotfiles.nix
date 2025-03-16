@@ -20,5 +20,8 @@ ocamlPackages.buildDunePackage {
       ];
     };
 
-  buildInputs = with ocamlPackages; [ fileutils ];
+  buildInputs = with ocamlPackages; [
+    fileutils
+    yojson
+  ];
 }

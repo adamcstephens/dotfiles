@@ -1,7 +1,7 @@
-{ inputs, ... }:
+{ config, inputs, ... }:
 {
   imports = [ inputs.nix-colors.homeManagerModule ];
-  # colorScheme = inputs.nix-colors.colorSchemes.ayu-dark;
+
   colorScheme = {
     slug = "modus-vivendi";
     name = "Modus Vivendi";
@@ -25,4 +25,6 @@
       base0F = "#B6A0FF";
     };
   };
+
+  xdg.configFile."colorscheme.json".text = builtins.toJSON config.colorScheme;
 }
