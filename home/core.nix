@@ -24,8 +24,10 @@
     ../apps/ssh
     ../apps/starship
     ../apps/tmux
-    ../apps/zsh
+    ../apps/wayland
+    ../apps/xorg
     ../apps/yamlfmt
+    ../apps/zsh
   ];
 
   dotfiles = {

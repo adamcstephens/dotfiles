@@ -176,11 +176,6 @@ in
               gui = {
                 dpi = 120;
                 wayland.enable = true;
-
-                xorg = {
-                  enable = true;
-                  wm = "xmonad";
-                };
               };
             };
 

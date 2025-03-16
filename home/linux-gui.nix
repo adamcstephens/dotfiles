@@ -49,12 +49,10 @@ in
     ../apps/swayidle
     ../apps/swayosd
     ../apps/waybar
-    ../apps/wayland
 
     # xorg
     ../apps/polybar
     ../apps/xmonad
-    ../apps/xorg
 
     # apps
     ../apps/1password
