@@ -602,16 +602,16 @@
         "services-flake": "services-flake"
       },
       "locked": {
-        "lastModified": 1736021363,
-        "narHash": "sha256-FrD7f3C135hkSKAvtOv0w5udq9dP/Toe3OQ5rNPVq08=",
-        "ref": "refs/tags/v0.4.2",
-        "rev": "482fa638d448f95040db87387df8e03f750c2b95",
-        "revCount": 423,
+        "lastModified": 1742153246,
+        "narHash": "sha256-qWnbPp18/IeRT1zFxI9ShPsMKgS4GLoBIT83HlAN4yY=",
+        "ref": "refs/tags/v0.4.4",
+        "rev": "e6cdeeccef454204040e42388ff5518307292161",
+        "revCount": 435,
         "type": "git",
         "url": "https://codeberg.org/adamcstephens/sower"
       },
       "original": {
-        "ref": "refs/tags/v0.4.2",
+        "ref": "refs/tags/v0.4.4",
         "type": "git",
         "url": "https://codeberg.org/adamcstephens/sower"
       }
