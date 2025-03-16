@@ -61,6 +61,12 @@ in
     ../apps/ssh
   ];
 
+  dconf.settings = {
+    "org/gnome/desktop/interface" = {
+      color-scheme = "prefer-dark";
+    };
+  };
+
   dotfiles.apps.sleepwatcher-rs.enable = lib.mkDefault config.dotfiles.gui.wayland.enable;
 
   # reads fonts from home.packages
