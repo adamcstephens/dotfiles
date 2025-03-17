@@ -122,36 +122,6 @@ in
       ];
     };
 
-    nixos1 = {
-      nixpkgs = inputs.nixpkgs-unstable;
-      home-manager = inputs.home-manager-unstable;
-      modules = [
-        ./linux-gui.nix
-        {
-          dotfiles = {
-            gui = {
-              dpi = 120;
-              wayland.enable = true;
-            };
-          };
-
-          services.kanshi.settings = [
-            {
-              profile.name = "virtual";
-              profile.outputs = [
-                {
-                  criteria = "Virtual-1";
-                  mode = "3840x2160";
-                  status = "enable";
-                  scale = 1.333333;
-                }
-              ];
-            }
-          ];
-        }
-      ];
-    };
-
     nixos2 = {
       system = "aarch64-linux";
       nixpkgs = inputs.nixpkgs-unstable;
