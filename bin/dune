@@ -4,6 +4,11 @@
   (bash
    "if [ \"${BUILD_STATIC:-0}\" = '1' ]; then echo '(-cclib -static)'; else echo '()'; fi")))
 
+(rule
+ (with-stdout-to
+  link_flags.macosx
+  (bash "echo '()'")))
+
 (executables
  (names escape_file wayland_locker)
  (public_names escape-file wayland-locker)
