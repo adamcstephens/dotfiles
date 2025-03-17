@@ -1,13 +1,16 @@
 {
   lib,
   ocamlPackages,
+  static ? false,
 }:
 
 ocamlPackages.buildDunePackage {
   pname = "dotfiles";
   version = "0.1.0";
 
-  env.BUILD_STATIC = "1";
+  env = lib.optionalAttrs static {
+    BUILD_STATIC = "1";
+  };
 
   src =
     with lib.fileset;
