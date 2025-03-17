@@ -116,6 +116,7 @@
       pkgs.direnv
       pkgs.doggo
       pkgs.du-dust
+      pkgs.file
       pkgs.fx
       pkgs.gdu
       pkgs.jq
