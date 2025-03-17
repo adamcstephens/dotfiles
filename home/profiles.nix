@@ -153,6 +153,7 @@ in
     };
 
     nixos2 = {
+      system = "aarch64-linux";
       nixpkgs = inputs.nixpkgs-unstable;
       home-manager = inputs.home-manager-unstable;
       modules = [
