@@ -31,7 +31,6 @@ in
     "git/config.os".source = pkgs.writeText "git-config-${os}" ''
       [gpg "ssh"]
       defaultKeyCommand = ${config.home.homeDirectory}/.dotfiles/bin/git-ssh-key.sh
-      allowedSignersFile = ${config.home.homeDirectory}/.dotfiles/apps/ssh/ssh-signers.txt
     '';
 
     "git/ignore".text = lib.concatStringsSep "\n" [

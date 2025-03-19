@@ -29,7 +29,10 @@ in
       forwardAgent = config.dotfiles.dev.enable;
 
       # use header: # -*- mode: ssh-config -*-
-      includes = [ "local.config" ];
+      includes = [
+        "local.config"
+        "${./dotfiles.config}"
+      ];
     };
 
     services.ssh-agent.enable = cfg.agent.enable;

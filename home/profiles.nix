@@ -16,7 +16,7 @@ in
   profile-parts.default.home-manager = {
     inherit (inputs) home-manager nixpkgs;
 
-    username = "adam";
+    username = lib.mkDefault "adam";
     exposePackages = true;
   };
 
@@ -119,6 +119,17 @@ in
             '';
           }
         )
+      ];
+    };
+
+    nix-community-aarch64-linux = {
+      system = "aarch64-linux";
+      modules = [
+        {
+          home.username = "adamcstephens";
+          home.homeDirectory = "/home/adamcstephens";
+          apps.sower.enable = false;
+        }
       ];
     };
 
