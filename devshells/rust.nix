@@ -1,16 +1,11 @@
 {
   mkShell,
-
-  cargo,
-  openssl,
-  pkg-config,
-  rustc,
-  rust-analyzer,
-  rustfmt,
+  pkgs,
 }:
 mkShell {
-  packages = [
+  packages = with pkgs; [
     cargo
+    cmake
     openssl.dev
     pkg-config
     rustc
