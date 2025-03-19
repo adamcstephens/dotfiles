@@ -17,30 +17,36 @@ in
       events = [
         {
           event = "before-sleep";
-          command = "${lib.getExe config.dotfiles.gui.wayland.locker}";
+          command = "wayland-locker";
         }
         {
           event = "after-resume";
-          command = "${lib.getExe pkgs.wlopm} --on *";
+          # command = "wlopm --on *";
+          command = "niri msg action power-on-monitors";
         }
       ];
       timeouts =
         [
           {
             timeout = 600;
-            command = "${lib.getExe config.dotfiles.gui.wayland.locker}";
+            command = "wayland-locker";
           }
           {
             timeout = 900;
-            command = "${lib.getExe pkgs.wlopm} --off *";
+            # command = "wlopm --off *";
+            command = "niri msg action power-off-monitors";
           }
         ]
         ++ lib.optionals (!config.dotfiles.gui.dontSleep) [
           {
             timeout = 360;
-            command = "/run/current-system/sw/bin/systemctl sleep";
+            command = "systemctl sleep";
           }
         ];
     };
+
+    systemd.user.services.swayidle.Service.Environment = lib.mkForce [
+      "PATH=${config.home.profileDirectory}/bin:/run/current-system/sw/bin"
+    ];
   };
 }
