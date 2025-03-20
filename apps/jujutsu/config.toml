@@ -2,10 +2,11 @@
 fsmonitor = "watchman"
 
 [git]
+sign-on-push = true
 subprocess = true
 
 [signing]
-sign-all = true
+behavior = "drop"
 backend = "ssh"
 key = "~/.ssh/signing-key.pub"
 
