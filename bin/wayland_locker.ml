@@ -18,7 +18,7 @@ let locker desktop =
   | "river" ->
       Some waylock
   | "niri" ->
-      Some "gtklock"
+      Some "gtklock --daemonize"
   | _ ->
       None
 
