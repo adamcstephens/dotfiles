@@ -49,10 +49,11 @@ mnw.lib.wrap pkgs {
 
   appName = "dotvim";
 
-  withPython3 = false;
-  extraPython3Packages = _: [ ];
-  withRuby = false;
-  vimAlias = true;
+  aliases = [ "vim" ];
+  providers = {
+    ruby.enable = false;
+    python3.enable = false;
+  };
 
   initLua = ''
     vim.g.sqlite_clib_path = '${sqlite.out}/lib/libsqlite3.${if stdenv.isDarwin then "dylib" else "so"}'
