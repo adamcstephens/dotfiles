@@ -74,3 +74,7 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
+
+(after! doom-ui
+  (setq! auto-dark-themes '((modus-vivendi) (doom-one-light)))
+  (auto-dark-mode))

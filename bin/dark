@@ -17,9 +17,7 @@ print(f"State file: {state_file}")
 def run(command):
     print(f"Running: {command}")
 
-    return subprocess.run(command.split(" "), capture_output=True).stdout.decode(
-        "utf-8"
-    )
+    return subprocess.run(command.split(" "), capture_output=True).stdout.decode("utf-8")
 
 
 def set_darwin_theme(target):
@@ -44,39 +42,8 @@ def set_gnome_scheme(target):
     else:
         theme = "prefer-light"
 
-    run(
-        f"bash -c gsettings-wrapper set org.gnome.desktop.interface color-scheme {theme}"
-    )
+    run(f"bash -c gsettings-wrapper set org.gnome.desktop.interface color-scheme {theme}")
     run(f"dconf write /org/gnome/desktop/interface/color-scheme '{theme}'")
-
-
-def set_kitty_theme(target):
-    try:
-        kitty_pid = run("pgrep -f kitty").splitlines()[0].strip()
-    except IndexError:
-        print("kitty not running")
-        return
-
-    print(kitty_pid)
-
-    if os_name == "Linux":
-        kitty_socket = f"unix:@kitty-{kitty_pid}"
-    elif os_name == "Darwin":
-        tmpdir = os.getenv("TMPDIR")
-        kitty_socket = f"unix:{tmpdir}/kitty"
-
-    cmd = f"kitty @ --to {kitty_socket} set-colors --all --configured {HOME}/.config/kitty/"
-
-    if kitty_pid != "":
-        if target:
-            run(f"{cmd}theme-dark.conf")
-        else:
-            run(f"{cmd}theme-light.conf")
-
-        print("Applied kitty theme")
-
-    else:
-        print("Kitty not running")
 
 
 def set_waybar_theme(target):
@@ -120,8 +87,6 @@ def set_dark(target):
         # set_waybar_theme(target)
     elif os_name == "Darwin":
         set_darwin_theme(target)
-
-    set_kitty_theme(target)
 
     set_state_data(target)
 
