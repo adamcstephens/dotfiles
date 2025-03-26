@@ -335,6 +335,7 @@ binds {
     Mod+Shift+T { spawn "systemd-cat" "--identifier=terminal" "terminal"; }
     Mod+Shift+Return { spawn "systemd-cat" "--identifier=terminal" "terminal"; }
     Mod+D { spawn "systemd-cat" "--identifier=rofi" "rofi" "-show" "drun"; }
+    Mod+Shift+Ctrl+D { spawn "dark" "toggle"; }
     Super+Alt+L { spawn "waylock"; }
 
     // You can also use a shell. Do this if you need pipes, multiple commands, etc.
