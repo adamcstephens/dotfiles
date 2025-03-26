@@ -1,5 +1,6 @@
 tap "homebrew/bundle"
 tap "homebrew/services"
+brew "colima", restart_service: :changed
 brew "dark-mode"
 brew "mas"
 cask "1password"

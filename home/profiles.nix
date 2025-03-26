@@ -107,7 +107,7 @@ in
           { pkgs, ... }:
           {
             home.packages = [
-              pkgs.devbox
+              pkgs.docker
               pkgs.entr
               pkgs.git-lfs
               pkgs.terraform-lsp
