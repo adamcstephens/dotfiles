@@ -11,17 +11,6 @@
       "url": null,
       "hash": "0ipix0fnnmvly2xrr6s97h54mx4m9nigksz53c782miyf2m649b4"
     },
-    "github-nvim-theme": {
-      "type": "Git",
-      "repository": {
-        "type": "Git",
-        "url": "https://github.com/projekt0n/github-nvim-theme"
-      },
-      "branch": "main",
-      "revision": "c106c9472154d6b2c74b74565616b877ae8ed31d",
-      "url": null,
-      "hash": "1w7lz4bgfm8hq1mir4hcr8ik585d4l4w7bjl8yl3g3zklj8223pw"
-    },
     "move-nvim": {
       "type": "Git",
       "repository": {

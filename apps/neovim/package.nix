@@ -69,6 +69,7 @@ mnw.lib.wrap pkgs {
       actions-preview-nvim
       blink-cmp
       conform-nvim
+      cyberdream-nvim
       direnv-vim
       editorconfig-nvim
       efmls-configs-nvim
@@ -80,7 +81,6 @@ mnw.lib.wrap pkgs {
       gitsigns-nvim
       Ionide-vim
       lualine-nvim
-      modus-themes-nvim
       neogit
       nui-nvim
       nvim-dap
