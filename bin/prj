@@ -18,7 +18,7 @@ is_zellij = "ZELLIJ" in os.environ
 
 
 def gen_remotes():
-    hosts = ["dev1"]
+    hosts = ["nixos2"]
 
     return str.join("\n", hosts)
 
