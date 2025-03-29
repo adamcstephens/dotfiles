@@ -18,6 +18,7 @@
     ../apps/helix
     ../apps/zellij
     ../apps/neovim
+    ../apps/nix
     ../apps/ripgrep
     ../apps/shellcheck
     ../apps/sower
