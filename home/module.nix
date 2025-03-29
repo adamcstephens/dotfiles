@@ -12,6 +12,12 @@ in
   options.dotfiles = {
     nixosManaged = lib.mkEnableOption "When nixos managed dotfiles is in the read-only store";
 
+    profile = lib.mkOption {
+      type = lib.types.str;
+      description = "name of home profile from flake";
+      default = pkgs.system;
+    };
+
     dev.enable = lib.mkOption {
       type = lib.types.bool;
       description = "enable dev tools";

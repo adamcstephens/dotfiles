@@ -22,14 +22,17 @@ in
     home.packages = [
       inputs.sower.packages.${pkgs.system}.client
     ];
+
     services.sower.client = {
       enable = true;
       package = inputs.sower.packages.${pkgs.system}.client;
 
       config = {
-        url = "https://sower.junco.dev";
+        # get the token from the host-managed location
+        api-token-file = "/run/agenix/sower-api-token";
+        endpoint = "https://sower.junco.dev";
+        seed.name = config.dotfiles.profile;
       };
     };
-    #
   };
 }

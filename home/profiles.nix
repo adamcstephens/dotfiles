@@ -29,9 +29,13 @@ in
         (
           { pkgs, ... }:
           {
-            dotfiles.gui.wayland.locker = self.packages.${pkgs.system}.dotfiles.overrideAttrs (_: {
-              meta.mainProgram = "wayland-locker";
-            });
+            dotfiles = {
+              profile = name;
+
+              gui.wayland.locker = self.packages.${pkgs.system}.dotfiles.overrideAttrs (_: {
+                meta.mainProgram = "wayland-locker";
+              });
+            };
 
             home.packages = [
               self.packages.${pkgs.system}.dotfiles
