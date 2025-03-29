@@ -39,6 +39,7 @@
       pkgs.nix-tree
       pkgs.nixd
       pkgs.nixfmt-rfc-style
+      pkgs.nvd
 
       # tools
       pkgs.pgcli
