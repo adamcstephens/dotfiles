@@ -31,8 +31,8 @@
       ];
 
       character = {
-        success_symbol = "[𑁱](bold yellow)";
-        error_symbol = "[𑁱](bold red)";
+        success_symbol = "[→](bold yellow)";
+        error_symbol = "[→](bold red)";
       };
 
       git_branch.symbol = "";
