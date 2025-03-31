@@ -30,7 +30,6 @@ verbose = true
 
 [core]
 editor = ~/.dotfiles/bin/giteditor
-fsmonitor = true
 untrackedCache = true
 
 [credential]
