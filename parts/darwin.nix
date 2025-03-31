@@ -24,6 +24,7 @@
         }:
         {
           fonts.packages = [
+            pkgs.noto-fonts
             pkgs.font-awesome
             pkgs.ibm-plex
             pkgs.jetbrains-mono
