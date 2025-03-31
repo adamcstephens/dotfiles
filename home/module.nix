@@ -62,6 +62,7 @@ in
                 pkgs.font-awesome
                 pkgs.ibm-plex
                 pkgs.jetbrains-mono
+                pkgs.noto-fonts
               ]
               ++ lib.optionals pkgs.stdenv.isLinux [
                 inputs.sandbox.packages.${pkgs.system}.apple-emoji-linux
