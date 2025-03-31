@@ -11,11 +11,9 @@ flake-check:
 
 bump-pins:
     npins update -d npins/
-    npins update -d apps/emacs/npins-packages/
     npins update -d apps/neovim/npins/
-    npins update -d apps/neovim/npins-ext/
-    git add npins/ apps/emacs/npins-packages/ apps/neovim/npins/ apps/neovim/npins-ext/
-    git commit -m 'chore: npins update' -- npins/ apps/emacs/npins-packages/ apps/neovim/npins/ apps/neovim/npins-ext/ || true
+    git add npins/ apps/neovim/npins/
+    git commit -m 'chore: npins update' -- npins/ apps/neovim/npins/ || true
 
 bump-packages:
     nix-update --flake arkenfox --commit
