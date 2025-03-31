@@ -23,6 +23,5 @@ rec {
     inherit homeConfigurations;
   };
   prj = pkgs.callPackage ./prj.nix { };
-  revealjs = pkgs.callPackage ../apps/emacs/revealjs.nix { };
   rofi-wrapper = pkgs.callPackage ./rofi-wrapper.nix { };
 }
