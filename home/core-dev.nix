@@ -10,11 +10,7 @@
 
   dotfiles = {
     apps = {
-      emacs = {
-        enable = true;
-        full = true;
-      };
-
+      emacs.enable = true;
       neovim.full = true;
     };
 
