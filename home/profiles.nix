@@ -84,9 +84,6 @@ in
 
         {
           dotfiles = {
-            apps.sleepwatcher-rs.enable = false;
-            apps.swayidle.enable = true;
-
             gui = {
               dpi = 148;
               dontSleep = true;

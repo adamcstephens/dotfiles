@@ -67,7 +67,7 @@ in
     };
   };
 
-  dotfiles.apps.sleepwatcher-rs.enable = lib.mkDefault config.dotfiles.gui.wayland.enable;
+  dotfiles.apps.swayidle.enable = lib.mkDefault config.dotfiles.gui.wayland.enable;
 
   # reads fonts from home.packages
   fonts.fontconfig.enable = true;
