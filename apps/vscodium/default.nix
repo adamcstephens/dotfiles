@@ -37,9 +37,9 @@ in
   options.dotfiles.apps.vscodium.enable = lib.mkEnableOption "vscodium";
 
   config = lib.mkMerge [
-    {
+    (lib.mkIf (cfg.enable || config.dotfiles.apps.vscode.enable) {
       # set default extensions for both vscode and vscodium
-      programs.vscode.extensions =
+      programs.vscode.profiles.default.extensions =
         (with inputs.nix-vscode-extensions.extensions.${pkgs.system}.open-vsx; [
           bmalehorn.vscode-fish
           davidanson.vscode-markdownlint
@@ -64,10 +64,12 @@ in
           ms-vsliveshare.vsliveshare
           # phoenixframework.phoenix
         ]);
-    }
+    })
     (lib.mkIf cfg.enable {
-      home.file."${prefix}/VSCodium/User/keybindings.json".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/vscodium/keybindings.json";
-      home.file."${prefix}/VSCodium/User/settings.json".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/vscodium/settings.json";
+      home.file."${prefix}/VSCodium/User/keybindings.json".source =
+        config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/vscodium/keybindings.json";
+      home.file."${prefix}/VSCodium/User/settings.json".source =
+        config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/vscodium/settings.json";
 
       # they say you shouldn't modify the system in this phase, but... 🤷‍♂️
       home.activation.own-vscodium-snippets = lib.hm.dag.entryBefore [ "checkLinkTargets" ] ''
@@ -75,7 +77,8 @@ in
           rm -rfv "${config.home.homeDirectory}/${prefix}/VSCodium/User/snippets"
         fi
       '';
-      home.file."${prefix}/VSCodium/User/snippets".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/vscodium/snippets";
+      home.file."${prefix}/VSCodium/User/snippets".source =
+        config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/vscodium/snippets";
 
       programs.vscode = {
         enable = true;
