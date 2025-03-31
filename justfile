@@ -10,8 +10,8 @@ flake-check:
     nix flake check --no-build --all-systems
 
 bump-pins:
-    npins update -d npins/
-    npins update -d apps/neovim/npins/
+    npins -d npins/ update
+    npins -d apps/neovim/npins/ update
     git add npins/ apps/neovim/npins/
     git commit -m 'chore: npins update' -- npins/ apps/neovim/npins/ || true
 

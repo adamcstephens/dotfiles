@@ -7,6 +7,7 @@
         "url": "https://github.com/f-person/auto-dark-mode.nvim"
       },
       "branch": "master",
+      "submodules": false,
       "revision": "c31de126963ffe9403901b4b0990dde0e6999cc6",
       "url": null,
       "hash": "0ipix0fnnmvly2xrr6s97h54mx4m9nigksz53c782miyf2m649b4"
@@ -18,6 +19,7 @@
         "url": "https://github.com/fedepujol/move.nvim.git"
       },
       "branch": "main",
+      "submodules": false,
       "revision": "cccbd4ea9049ca5f99f025ffaddb7392359c7d6a",
       "url": null,
       "hash": "1425mbyvax63m6l7vkwbfi1l863mr86ba11gxa3hqxcgvjpvp638"
@@ -31,6 +33,7 @@
       "pre_releases": false,
       "version_upper_bound": null,
       "release_prefix": null,
+      "submodules": false,
       "version": "v0.15",
       "revision": "1ac15d047a4b265cc2389957bcc56ee561b29e02",
       "url": null,
@@ -43,9 +46,10 @@
         "url": "https://github.com/bluz71/vim-moonfly-colors"
       },
       "branch": "master",
-      "revision": "77f9b30584547de15b9c1c30247945c19c1243bf",
+      "submodules": false,
+      "revision": "c63fa231bd7e92e449a7a931f03f384f26815475",
       "url": null,
-      "hash": "1dypnf242yyd3chzi0abm5pfgj8vqwf53jxpwm916ixdc2nmhkk6"
+      "hash": "0lh4qp12hhiaj8qbjz1lvlrcdk0v4h5x4yd9hfwp99lzrg69p8dw"
     },
     "workspace-diagnotics-nvim": {
       "type": "Git",
@@ -54,10 +58,11 @@
         "url": "https://github.com/artemave/workspace-diagnostics.nvim"
       },
       "branch": "main",
+      "submodules": false,
       "revision": "573ff93c47898967efdfbc6587a1a39e3c2d365e",
       "url": null,
       "hash": "0zbr2ppb7n4zf8ldnhvzwzxihg39x7qwn97ngmlip6p68clzh64l"
     }
   },
-  "version": 3
+  "version": 5
 }

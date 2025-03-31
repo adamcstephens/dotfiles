@@ -10,6 +10,7 @@
       "pre_releases": false,
       "version_upper_bound": null,
       "release_prefix": null,
+      "submodules": false,
       "version": "v1.4.0",
       "revision": "b6c46f8066b2d96cb75d5bc7202a9a4c097b5e9f",
       "url": "https://api.github.com/repos/miikanissi/modus-themes.nvim/tarball/v1.4.0",
@@ -22,10 +23,11 @@
         "url": "https://github.com/bluz71/vim-moonfly-colors"
       },
       "branch": "master",
-      "revision": "77f9b30584547de15b9c1c30247945c19c1243bf",
+      "submodules": false,
+      "revision": "c63fa231bd7e92e449a7a931f03f384f26815475",
       "url": null,
-      "hash": "1dypnf242yyd3chzi0abm5pfgj8vqwf53jxpwm916ixdc2nmhkk6"
+      "hash": "0lh4qp12hhiaj8qbjz1lvlrcdk0v4h5x4yd9hfwp99lzrg69p8dw"
     }
   },
-  "version": 3
+  "version": 5
 }
