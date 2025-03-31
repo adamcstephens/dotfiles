@@ -39,7 +39,7 @@ in
   config = lib.mkMerge [
     (lib.mkIf (cfg.enable || config.dotfiles.apps.vscode.enable) {
       # set default extensions for both vscode and vscodium
-      programs.vscode.profiles.default.extensions =
+      programs.vscode.extensions =
         (with inputs.nix-vscode-extensions.extensions.${pkgs.system}.open-vsx; [
           bmalehorn.vscode-fish
           davidanson.vscode-markdownlint
