@@ -3,26 +3,26 @@
   imports = [ inputs.nix-colors.homeManagerModule ];
 
   colorScheme = {
-    slug = "modus-vivendi";
-    name = "Modus Vivendi";
-    author = "https://git.sr.ht/~protesilaos/modus-themes";
+    slug = "moonfly";
+    name = "moonfly";
+    author = "https://github.com/bluz71/vim-moonfly-colors";
     palette = {
-      base00 = "#000000";
+      base00 = "#080808";
       base01 = "#100323";
-      base02 = "#3C3C3C";
-      base03 = "#595959";
-      base04 = "#BEBCBF";
-      base05 = "#FFFFFF";
-      base06 = "#EDEAEF";
-      base07 = "#FFFFFF";
-      base08 = "#FF8059";
-      base09 = "#EF8B50";
-      base0A = "#D0BC00";
-      base0B = "#44BC44";
-      base0C = "#00D3D0";
-      base0D = "#2FAFFF";
-      base0E = "#FEACD0";
-      base0F = "#B6A0FF";
+      base02 = "#323437";
+      base03 = "#949494";
+      base04 = "#9E9E9E";
+      base05 = "#EEEEEE";
+      base06 = "#E4E4EF";
+      base07 = "#EEEEEE";
+      base08 = "#FF5D5D";
+      base09 = "#FF5189";
+      base0A = "#E3C78A";
+      base0B = "#8CC85F";
+      base0C = "#79DAC8";
+      base0D = "#80A0FF";
+      base0E = "#CF87E8";
+      base0F = "#AE81FF";
     };
   };
 
