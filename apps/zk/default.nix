@@ -15,6 +15,10 @@ in
   config = lib.mkIf cfg.enable {
     home.packages = [ pkgs.zk ];
 
+    home.sessionVariables = {
+      ZK_NOTEBOOK_DIR = "${config.home.homeDirectory}/notebook";
+    };
+
     xdg.configFile."zk/config.toml".source = (pkgs.formats.toml { }).generate "zk-config-toml" {
       alias = {
         recent = "zk edit --sort created- --created-after 'last two weeks' --interactive";
