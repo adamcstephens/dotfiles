@@ -6,6 +6,7 @@
     ../apps/emacs
     ../apps/jujutsu
     ../apps/ssh
+    ../apps/zk
   ];
 
   dotfiles = {

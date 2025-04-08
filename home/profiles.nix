@@ -84,6 +84,7 @@ in
 
         {
           dotfiles = {
+            apps.zk.enable = true;
             gui = {
               dpi = 148;
               dontSleep = true;
@@ -156,6 +157,7 @@ in
             apps.ssh.tpm = true;
 
             dotfiles = {
+              apps.zk.enable = true;
               gui = {
                 dpi = 120;
                 wayland.enable = true;

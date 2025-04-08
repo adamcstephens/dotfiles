@@ -227,3 +227,11 @@ end
 
 -- zig
 lspconfig.zls.setup({})
+
+-- zk
+require("zk").setup({
+  picker = "minipick",
+})
+if vim.fn.executable("zk") == 1 then
+  lspconfig.zk.setup({})
+end

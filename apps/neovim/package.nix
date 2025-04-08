@@ -81,6 +81,7 @@ mnw.lib.wrap pkgs {
       gitsigns-nvim
       Ionide-vim
       lualine-nvim
+      mini-pick
       neogit
       nui-nvim
       nvim-dap
@@ -114,6 +115,7 @@ mnw.lib.wrap pkgs {
       vim-repeat
       which-key-nvim
       whitespace-nvim
+      zk-nvim
     ]
     ++ (builtins.attrValues nvim-treesitter.grammarPlugins)
     ++ npinsPlugins;
