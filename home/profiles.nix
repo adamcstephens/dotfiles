@@ -106,8 +106,10 @@ in
         ./core-darwin.nix
         ../apps/postgresql
         (
-          { pkgs, ... }:
+          { config, pkgs, ... }:
           {
+            dotfiles.apps.zk.defaultNotebook = "${config.home.homeDirectory}/git/calmwave/notebook";
+
             home.packages = [
               pkgs.docker
               pkgs.entr
