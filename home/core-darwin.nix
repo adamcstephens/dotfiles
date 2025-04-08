@@ -31,6 +31,7 @@
   ];
 
   dotfiles.apps = {
+    zk.enable = true;
     vscodium.enable = false;
     vscode.enable = false;
   };
