@@ -28,6 +28,7 @@ in
     xdg.configFile."zk/config.toml".source = (pkgs.formats.toml { }).generate "zk-config-toml" {
       alias = {
         recent = "zk edit --sort created- --created-after 'last two weeks' --interactive";
+        push = ''git add . && git commit -m "checkpoint-$(date -u +'%Y-%m-%dT%H:%M:%SZ')" && git push'';
       };
 
       extra.author = "Adam C. Stephens";
