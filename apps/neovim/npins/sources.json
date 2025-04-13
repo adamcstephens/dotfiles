@@ -47,9 +47,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "2a60f5560846d27dc908c9dcfb00d13c30cb9439",
+      "revision": "bfa6b2486a72784b7546d0d3e9322aef70e07b03",
       "url": null,
-      "hash": "1idz4dvd5vi17jbnsd28bqrcr7p89yl4ih37ldqx6kkspksfi1f2"
+      "hash": "1cx62ky3sljzsdj5g8p7slmbszizxhaphvnlzwgk20d0amjhhd33"
     },
     "workspace-diagnotics-nvim": {
       "type": "Git",
