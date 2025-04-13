@@ -115,7 +115,7 @@ in
     };
 
     systemd.user.services.waybar = {
-      Service.Environment = "PATH=${
+      Service.Environment = lib.mkForce "PATH=${
         lib.makeBinPath [
           pkgs.blueberry
           pkgs.networkmanagerapplet
