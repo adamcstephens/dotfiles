@@ -41,7 +41,7 @@ require("conform").setup({
     dune = { "format-dune-file" },
     javascript = { "prettier" },
     json = { "biome" },
-    kdlfmt = { "kdlfmt" },
+    kdl = { "kdlfmt" },
     lua = { "stylua" },
     just = { "just" },
     nix = { "nixfmt" },
