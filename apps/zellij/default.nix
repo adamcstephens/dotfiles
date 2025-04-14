@@ -1,13 +1,27 @@
-{ config, pkgs, ... }:
+{
+  config,
+  npins,
+  pkgs,
+  ...
+}:
 {
   home.packages = [
     pkgs.kdlfmt
     pkgs.zellij
   ];
 
-  home.file.".config/zellij".source =
+  home.file.".config/zellij/config.kdl".source =
     if config.dotfiles.nixosManaged then
-      ./.
+      ./config.kdl
     else
-      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/zellij";
+      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/zellij/config.kdl";
+
+  home.file.".config/zellij/layouts".source =
+    if config.dotfiles.nixosManaged then
+      ./layouts
+    else
+      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/zellij/layouts";
+
+  home.file.".config/zellij/themes/moonfly.kdl".source =
+    npins.vim-moonfly-colors + "/extras/moonfly-zellij.kdl";
 }
