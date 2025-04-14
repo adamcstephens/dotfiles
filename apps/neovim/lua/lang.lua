@@ -124,26 +124,26 @@ if vim.fn.executable("nixd") == 1 then
     capabilities = capabilities,
   })
 end
-if vim.fn.executable("nil") == 1 then
-  lspconfig.nil_ls.setup({
-    capabilities = capabilities,
-    on_attach = function(client)
-      client.server_capabilities.semanticTokensProvider = nil
-      client.server_capabilities.documentFormattingProvider = nil
-    end,
-    settings = {
-      ["nil"] = {
-        nix = {
-          flake = {
-            autoArchive = true,
-            -- autoEvalInputs = true,
-            maxMemoryMB = 8192,
-          },
-        },
-      },
-    },
-  })
-end
+-- if vim.fn.executable("nil") == 1 then
+--   lspconfig.nil_ls.setup({
+--     capabilities = capabilities,
+--     on_attach = function(client)
+--       client.server_capabilities.semanticTokensProvider = nil
+--       client.server_capabilities.documentFormattingProvider = nil
+--     end,
+--     settings = {
+--       ["nil"] = {
+--         nix = {
+--           flake = {
+--             autoArchive = true,
+--             -- autoEvalInputs = true,
+--             maxMemoryMB = 8192,
+--           },
+--         },
+--       },
+--     },
+--   })
+-- end
 -- ignore nix in shebangs
 local match_contents = require("vim.filetype.detect").match_contents
 require("vim.filetype.detect").match_contents = function(...)
