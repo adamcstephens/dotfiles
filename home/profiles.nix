@@ -115,6 +115,7 @@ in
               pkgs.entr
               pkgs.git-lfs
               pkgs.terraform-lsp
+              pkgs.typescript-language-server
             ];
 
             xdg.configFile."direnv/direnv.toml".text = ''

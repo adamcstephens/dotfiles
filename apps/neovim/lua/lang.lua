@@ -211,6 +211,11 @@ if vim.fn.executable("terraform-lsp") == 1 then
   })
 end
 
+-- typescript and javascript
+if vim.fn.executable("typescript-language-server") == 1 then
+  require("lspconfig").ts_ls.setup({})
+end
+
 -- yaml
 if vim.fn.executable("yaml-language-server") == 1 then
   require("lspconfig").yamlls.setup({
