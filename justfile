@@ -31,7 +31,9 @@ intel-check-cstate:
     sudo cat /sys/kernel/debug/pmc_core/package_cstate_show
 
 migrate:
-    true
+    # 2025-03-14
+    @if [ -h "$HOME/.config/zellij" ]; then rm -v "$HOME/.config/zellij"; fi
+    @true
 
 nix-upgrade:
     sudo nix-channel --update
