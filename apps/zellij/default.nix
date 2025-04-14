@@ -1,6 +1,9 @@
 { config, pkgs, ... }:
 {
-  home.packages = [ pkgs.zellij ];
+  home.packages = [
+    pkgs.kdlfmt
+    pkgs.zellij
+  ];
 
   home.file.".config/zellij".source =
     if config.dotfiles.nixosManaged then

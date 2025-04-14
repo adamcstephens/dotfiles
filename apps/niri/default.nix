@@ -1,8 +1,13 @@
 {
   config,
+  pkgs,
   ...
 }:
 {
+  home.packages = [
+    pkgs.kdlfmt
+  ];
+
   xdg.configFile."niri/config.kdl".source =
     if config.dotfiles.nixosManaged then
       ./config.kdl
