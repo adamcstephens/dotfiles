@@ -60,7 +60,7 @@ def prj_finder(remote: bool = False) -> str:
         )
         project = f"{selected_remote}:{project}"
     else:
-        if is_kitty or is_tmux:
+        if is_kitty or is_tmux or is_zellij:
             command = "fzf --height 22 --no-sort --filepath-word --reverse"
         elif is_wayland:
             command = "rofi -dmenu"
@@ -113,8 +113,12 @@ def open_project(project: str, remote: bool = False):
             run("tmux select-pane -l")
 
     elif is_zellij:
-        print("zellij not yet supported")
-        sys.exit(1)
+        tabs = run("zellij action query-tab-names").splitlines()
+
+        if wname in tabs:
+            run(f"zellij action go-to-tab-name {wname}")
+        else:
+            run(f"zellij action new-tab --name {wname} --layout prj")
 
     elif is_kitty:
         # needs to come after tmux in case tmux in kitty
