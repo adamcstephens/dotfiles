@@ -68,7 +68,6 @@ mnw.lib.wrap pkgs {
     [
       actions-preview-nvim
       blink-cmp
-      conform-nvim
       cyberdream-nvim
       direnv-vim
       editorconfig-nvim
@@ -98,7 +97,6 @@ mnw.lib.wrap pkgs {
       remember-nvim
       rustaceanvim
       smart-open-nvim
-      smart-splits-nvim
       sqlite-lua
       telescope-dap-nvim
       telescope-zf-native-nvim
