@@ -121,7 +121,7 @@ def open_project(project: str, remote: bool = False):
             run(f"zellij action new-tab --name {wname} --layout prj --cwd {project}")
             run("zellij action write-chars 'vim .'")
             # send newline
-            run(f"zellij action write 13")
+            run("zellij action write 13")
 
     elif is_kitty:
         # needs to come after tmux in case tmux in kitty

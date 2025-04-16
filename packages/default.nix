@@ -24,4 +24,5 @@ rec {
   };
   prj = pkgs.callPackage ./prj.nix { };
   rofi-wrapper = pkgs.callPackage ./rofi-wrapper.nix { };
+  vim-zellij-navigator = pkgs.callPackage ./vim-zellij-navigator.nix { };
 }
