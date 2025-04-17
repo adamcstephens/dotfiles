@@ -102,6 +102,7 @@ require("telescope").setup({
       i = { ["<c-q>"] = open_with_trouble },
       n = { ["<c-q>"] = open_with_trouble },
     },
+    preview = false,
   },
   pickers = {
     ["buffers"] = { sort_mru = true, ignore_current_buffer = true },
