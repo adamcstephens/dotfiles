@@ -99,6 +99,8 @@ in
     };
 
     leaf = {
+      nixpkgs = inputs.nixpkgs-unstable;
+      home-manager = inputs.home-manager-unstable;
       modules = [
         ./core-dev.nix
       ];
