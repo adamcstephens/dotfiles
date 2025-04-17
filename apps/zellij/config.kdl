@@ -377,41 +377,36 @@ keybinds clear-defaults=true {
       ToggleFloatingPanes
     }
     bind "Alt h" {
-      MoveFocus "left"
+      MessagePlugin "vim-zellij-navigator" {
+        name "move_focus"
+        payload "left"
+        move_mod "alt"
+      }
     }
     bind "Alt j" {
-      MoveFocus "down"
+      MessagePlugin "vim-zellij-navigator" {
+        name "move_focus"
+        payload "down"
+        move_mod "alt"
+      }
     }
     bind "Alt k" {
-      MoveFocus "up"
+      MessagePlugin "vim-zellij-navigator" {
+        name "move_focus"
+        payload "up"
+        move_mod "alt"
+      }
     }
     bind "Alt l" {
-      MoveFocus "right"
+      MessagePlugin "vim-zellij-navigator" {
+        name "move_focus"
+        payload "right"
+        move_mod "alt"
+      }
     }
-    // bind "Alt h" {
-    //   MessagePlugin "vim-zellij-navigator" {
-    //     name "move_focus"
-    //     payload "left"
-    //   }
-    // }
-    // bind "Alt j" {
-    //   MessagePlugin "vim-zellij-navigator" {
-    //     name "move_focus"
-    //     payload "down"
-    //   }
-    // }
-    // bind "Alt k" {
-    //   MessagePlugin "vim-zellij-navigator" {
-    //     name "move_focus"
-    //     payload "up"
-    //   }
-    // }
-    // bind "Alt l" {
-    //   MessagePlugin "vim-zellij-navigator" {
-    //     name "move_focus"
-    //     payload "right"
-    //   }
-    // }
+    bind "Super e" {
+      EditScrollback
+    }
     bind "Alt n" {
       NewPane
     }

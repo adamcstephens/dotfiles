@@ -1,0 +1,43 @@
+layout {
+  tab_template name="project-tab" {
+    pane size=1 borderless=true {
+      plugin location="zellij:tab-bar"
+    }
+    pane split_direction="vertical" {
+      pane {
+        focus true
+        command "vim"
+        args "."
+      }
+      pane split_direction="horizontal" {
+        children
+      }
+    }
+    pane size=1 borderless=true {
+      plugin location="zellij:status-bar"
+    }
+  }
+  project-tab name="cw" cwd="~/git/calmwave/cw" {
+    pane split_direction="vertical" {
+      pane split_direction="horizontal" {
+        pane {
+          focus true
+          command "lazygit"
+        }
+      }
+    }
+  }
+  project-tab name="cwx" cwd="~/git/calmwave/cw/calmwavex" {
+    pane
+    pane
+  }
+  project-tab name="cli" cwd="~/git/calmwave/cw/cli" {
+    pane
+    pane
+  }
+  project-tab name="infra" cwd="~/git/calmwave/cw/infra" {
+    pane
+    pane
+  }
+}
+
