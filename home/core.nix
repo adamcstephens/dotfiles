@@ -122,7 +122,7 @@
       pkgs.gdu
       pkgs.jq
       pkgs.just
-      pkgs.kalker
+      # pkgs.kalker
       pkgs.kitty.terminfo
       pkgs.ncdu
       pkgs.tio
