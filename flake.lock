@@ -471,11 +471,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1743689281,
-        "narHash": "sha256-y7Hg5lwWhEOgflEHRfzSH96BOt26LaYfrYWzZ+VoVdg=",
+        "lastModified": 1744536153,
+        "narHash": "sha256-awS2zRgF4uTwrOKwwiJcByDzDOdo3Q1rPZbiHQg/N38=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "2bfc080955153be0be56724be6fa5477b4eefabb",
+        "rev": "18dd725c29603f582cf1900e0d25f9f1063dbf11",
         "type": "github"
       },
       "original": {
@@ -584,11 +584,11 @@
     },
     "services-flake": {
       "locked": {
-        "lastModified": 1743763431,
-        "narHash": "sha256-MWxk4ol7PsaM3ozY8G+DnVRK7aQmbB1tXVLKQlDszGY=",
+        "lastModified": 1744506128,
+        "narHash": "sha256-lrtYrPuLBX6sdBFlNDTTMVp1OQxnjB8ETrmVR0jqeoU=",
         "owner": "juspay",
         "repo": "services-flake",
-        "rev": "773d111d9c9299c6a959242f3e917dd9e615343e",
+        "rev": "20c12d726c8f37c52a625771fbb164f12ab4eae4",
         "type": "github"
       },
       "original": {
@@ -605,11 +605,11 @@
         "services-flake": "services-flake"
       },
       "locked": {
-        "lastModified": 1743866083,
-        "narHash": "sha256-BJICVO49rREmMH7W2cJM/wzsqxp9lwy8lyQ3GT/962c=",
+        "lastModified": 1745023536,
+        "narHash": "sha256-J8OusKtiEwwjUtZP+/O97IeyiTcc8oRktmVgpLJ/8Mk=",
         "ref": "refs/heads/main",
-        "rev": "16ae31b3f561b3bb0be4262a11297d605d42c8f8",
-        "revCount": 487,
+        "rev": "bb9db4de03bf39a073152239ea806e1f93ef77ca",
+        "revCount": 490,
         "type": "git",
         "url": "https://codeberg.org/adamcstephens/sower.git"
       },
