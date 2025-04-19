@@ -144,7 +144,6 @@ in
       pkgs.mpv
       pkgs.nmap
       pkgs.remmina
-      pkgs.streamrip
       pkgs.thunderbird
       pkgs.ungoogled-chromium
       pkgs.yt-dlp
