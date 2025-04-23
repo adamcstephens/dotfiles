@@ -5,7 +5,9 @@ if [ -n "$TMUX" ] || [ -n "$SSH_TTY" ] || [ -n "$ET_VERSION" ] || [ -n "$INSIDE_
 fi
 
 if [ -z "$socket" ]; then
-  for sock in "$XDG_RUNTIME_DIR/ssh-agent" \
+  for sock in \
+    "$XDG_RUNTIME_DIR/ssh-auth.sock" \
+    "$XDG_RUNTIME_DIR/ssh-agent" \
     "$XDG_RUNTIME_DIR/yubikey-agent/yubikey-agent.sock" \
     "$XDG_RUNTIME_DIR/ssh-tpm-agent" \
     "$HOME/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh" \
