@@ -14,8 +14,6 @@ require("theme")
 
 -- packages
 --
--- split handling
-require("focus").setup()
 -- notifications
 require("fidget").setup({})
 require("gitsigns").setup()

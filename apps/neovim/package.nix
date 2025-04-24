@@ -74,7 +74,6 @@ mnw.lib.wrap pkgs {
       efmls-configs-nvim
       elixir-tools-nvim
       fidget-nvim
-      focus-nvim
       friendly-snippets
       fugitive
       gitsigns-nvim
