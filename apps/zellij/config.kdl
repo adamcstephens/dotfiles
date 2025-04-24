@@ -407,6 +407,10 @@ keybinds clear-defaults=true {
     bind "Super e" {
       EditScrollback
     }
+    bind "Super t" {
+      NewTab
+      SwitchToMode "locked"
+    }
     bind "Alt n" {
       NewPane
     }
