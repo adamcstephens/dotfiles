@@ -6,6 +6,17 @@ keybinds clear-defaults=true {
     bind "Ctrl g" {
       SwitchToMode "normal"
     }
+    bind "Super g" {
+      Run "lazygit" {
+        floating true
+        hold_on_close false
+        close_on_exit true
+        x "5%"
+        y "5%"
+        width "90%"
+        height "90%"
+      }
+    }
     bind "Super p" {
       Run "prj" {
         floating true
