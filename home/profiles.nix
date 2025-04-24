@@ -168,7 +168,11 @@ in
             apps.ssh.tpm = true;
 
             dotfiles = {
-              apps.zk.enable = true;
+              apps = {
+                hypridle.enable = true;
+                swayidle.enable = false;
+                zk.enable = true;
+              };
               gui = {
                 dpi = 120;
                 wayland.enable = true;

@@ -4,7 +4,6 @@
   position = "top";
   height = 30;
   modules-left = [
-    "hyprland/workspaces"
     "river/tags"
     "niri/workspaces"
   ];
@@ -18,7 +17,6 @@
     "pulseaudio"
     "clock"
   ];
-  "hyprland/workspaces" = { };
 
   "river/tags" = {
     num-tags = 8;

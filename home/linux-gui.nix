@@ -42,6 +42,7 @@ in
     ../apps/rofi
 
     # wayland
+    ../apps/hypridle
     ../apps/kanshi
     ../apps/niri
     ../apps/river
@@ -199,10 +200,7 @@ in
       BindsTo = [ "graphical-session.target" ];
       Wants = [ "graphical-session-pre.target" ];
       After = [ "graphical-session-pre.target" ];
-      Conflicts = [
-        "hyprland-session.target"
-        "wayland-session.target"
-      ];
+      Conflicts = [ config.wayland.systemd.target ];
     };
   };
 
