@@ -1,0 +1,10 @@
+urls-source "miniflux"
+miniflux-url "https://rss.junco.dev/"
+miniflux-tokeneval "rbw get miniflux-api"
+
+bind k feedlist,articlelist,urlview up
+bind j feedlist,articlelist,urlview down
+
+auto-reload yes
+
+define-filter unread "unread_count > 0"

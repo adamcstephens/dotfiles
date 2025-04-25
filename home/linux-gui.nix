@@ -59,6 +59,7 @@ in
     ../apps/1password
     ../apps/kitty
     ../apps/mimeapps
+    ../apps/newsboat
     ../apps/ssh
   ];
 
