@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  options,
   pkgs,
   ...
 }:
@@ -31,6 +32,9 @@
       pkgs.wlr-randr
     ];
 
-    wayland.systemd.target = "wayland-session.target";
+    # remove guard 25.05
+    wayland = lib.optionalAttrs (builtins.hasAttr "system" options.wayland) {
+      systemd.target = "wayland-session.target";
+    };
   };
 }
