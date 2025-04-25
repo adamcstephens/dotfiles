@@ -54,6 +54,36 @@
       "url": null,
       "hash": "04b915wr8gj2vxfjs6qsq67wp8vyqz4ndbv152zrpf7m2a3nhfw9"
     },
+    "nvim-ufo": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "Git",
+        "url": "https://github.com/kevinhwang91/nvim-ufo"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "submodules": false,
+      "version": "v1.5.0",
+      "revision": "61463090a4f55f5d080236ea62f09d1cd8976ff3",
+      "url": null,
+      "hash": "0ri5nwv9zzwzar0k78avirr8dnsqz7bc8lnspdd5m3gvafj20r48"
+    },
+    "promise-async": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "Git",
+        "url": "https://github.com/kevinhwang91/promise-async"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "submodules": false,
+      "version": "v1.0.0",
+      "revision": "38a4575da9497326badd3995e768b4ccf0bb153e",
+      "url": null,
+      "hash": "19kyjzjvlj0c5w3d7r7pfrd5w5w2jv10y4xahiy4iyxa1qz50vsp"
+    },
     "smart-splits.nvim": {
       "type": "GitRelease",
       "repository": {

@@ -159,10 +159,28 @@ vim.opt.updatetime = 750 -- swapfile and cursorhold
 vim.opt.whichwrap = "<,>,[,]"
 
 -- folding
-vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
--- vim.opt.foldtext   = "v:lua.vim.treesitter.foldtext()"
-vim.cmd("set nofoldenable")
+vim.o.fillchars = [[eob: ,fold: ,foldopen:-,foldsep: ,foldclose:⏵]]
+vim.o.foldcolumn = "1"
+vim.o.foldlevel = 99
+vim.o.foldlevelstart = 99
+vim.o.foldenable = true
+require("ufo").setup({
+  provider_selector = function()
+    return { "treesitter", "indent" }
+  end,
+})
+local statuscol = require("statuscol.builtin")
+require("statuscol").setup({
+  segments = {
+    { text = { "%s" }, click = "v:lua.ScSa" },
+    { text = { statuscol.lnumfunc }, click = "v:lua.ScLa" },
+    {
+      text = { " ", statuscol.foldfunc, " " },
+      condition = { statuscol.not_empty, true, statuscol.not_empty },
+      click = "v:lua.ScFa",
+    },
+  },
+})
 
 -- mappings
 --

@@ -20,7 +20,6 @@
   efm-langserver,
   lua,
   lua-language-server,
-  nil,
   nixd,
   nodejs,
   nodePackages,
@@ -97,6 +96,7 @@ mnw.lib.wrap pkgs {
       rustaceanvim
       smart-open-nvim
       sqlite-lua
+      statuscol-nvim
       telescope-dap-nvim
       telescope-zf-native-nvim
       telescope-nvim
@@ -130,7 +130,6 @@ mnw.lib.wrap pkgs {
       efm-langserver
       lua
       lua-language-server
-      nil
       nixd
       nodejs
       nodePackages.prettier
