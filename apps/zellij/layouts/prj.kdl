@@ -1,5 +1,5 @@
 layout {
-  tab max_panes=3 {
+  tab max_panes=5 {
     pane size=1 borderless=true {
       plugin location="zellij:tab-bar"
     }
