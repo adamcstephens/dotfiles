@@ -1,10 +1,20 @@
 urls-source "miniflux"
 miniflux-url "https://rss.junco.dev/"
 miniflux-tokeneval "rbw get miniflux-api"
+define-filter released "tags =~ \"Released\""
 
 bind k feedlist,articlelist,urlview up
 bind j feedlist,articlelist,urlview down
+bind j article next-unread
+bind k article prev-unread
 
 auto-reload yes
 
-define-filter unread "unread_count > 0"
+show-read-feeds no
+show-read-articles no
+
+color info black white
+color listfocus black yellow bold
+color listfocus_unread black yellow bold
+color listnormal default default dim
+color listnormal_unread default default bold
