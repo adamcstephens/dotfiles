@@ -1,38 +1,52 @@
 layout {
-  tab max_panes=5 {
+  tab {
     pane size=1 borderless=true {
       plugin location="zellij:tab-bar"
     }
     pane split_direction="vertical" {
-      pane {
-        focus true
-      }
-      pane split_direction="horizontal" {
-        pane
-        pane
+      pane focus=true size="50%"
+      pane size="50%" {
+        pane size="50%"
+        pane size="50%"
       }
     }
     pane size=1 borderless=true {
       plugin location="zellij:status-bar"
     }
   }
-  swap_tiled_layout name="stack" {
-    tab {
+  swap_tiled_layout name="default" {
+    tab max_panes=5 {
       pane size=1 borderless=true {
-        plugin location="zellij:tab-bar"
+        plugin location="tab-bar"
       }
-      pane split_direction="vertical" {
-        pane {
-          focus true
-        }
-        pane stacked=true {
+      pane {
+        pane split_direction="vertical" {
           pane
-          pane
-          pane
+          pane {
+            children
+          }
         }
       }
       pane size=1 borderless=true {
-        plugin location="zellij:status-bar"
+        plugin location="status-bar"
+      }
+    }
+  }
+  swap_tiled_layout name="stacked" {
+    tab min_panes=5 {
+      pane size=1 borderless=true {
+        plugin location="tab-bar"
+      }
+      pane {
+        pane split_direction="vertical" {
+          pane
+          pane stacked=true {
+            children
+          }
+        }
+      }
+      pane size=1 borderless=true {
+        plugin location="status-bar"
       }
     }
   }
