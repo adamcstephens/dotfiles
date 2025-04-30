@@ -172,7 +172,6 @@ in
               zk.enable = true;
             };
             gui = {
-              dpi = 120;
               wayland.enable = true;
             };
           };
@@ -187,7 +186,7 @@ in
               profile.outputs = [
                 {
                   criteria = "eDP-1";
-                  scale = 1.4;
+                  scale = 1.75;
                   status = "enable";
                 }
               ];
