@@ -1,4 +1,15 @@
 { lib, pkgs, ... }:
+let
+  eternal-terminal = pkgs.symlinkJoin {
+    name = "eternal-terminal-wrapped";
+    paths = [ pkgs.eternal-terminal ];
+    nativeBuildInputs = [ pkgs.makeWrapper ];
+    postBuild = ''
+      wrapProgram $out/bin/et --set ET_NO_TELEMETRY "true";
+    '';
+    meta.mainProgram = "et";
+  };
+in
 {
 
   imports = [
@@ -47,7 +58,7 @@
       pkgs.watchexec
 
       # apps
-      pkgs.eternal-terminal
+      eternal-terminal
       pkgs.senpai
     ]
     ++ lib.optionals pkgs.stdenv.isLinux [
