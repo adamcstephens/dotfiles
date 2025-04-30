@@ -141,7 +141,7 @@ in
       pkgs.hunspell
       pkgs.hunspellDicts.en-us-large
       pkgs.kid3
-      # pkgs.libreoffice-fresh
+      pkgs.libreoffice-qt6-fresh
       pkgs.mediainfo
       pkgs.mpv
       pkgs.nmap
