@@ -155,6 +155,48 @@ in
       ];
     };
 
+    punk = {
+      nixpkgs = inputs.nixpkgs-unstable;
+      home-manager = inputs.home-manager-unstable;
+
+      modules = [
+        ./linux-gui.nix
+
+        {
+          apps.ssh.tpm = true;
+
+          dotfiles = {
+            apps = {
+              hypridle.enable = true;
+              swayidle.enable = false;
+              zk.enable = true;
+            };
+            gui = {
+              dpi = 120;
+              wayland.enable = true;
+            };
+          };
+
+          programs.waybar.settings.main = {
+            network.interface = "wlp0s20f3";
+          };
+
+          services.kanshi.settings = [
+            {
+              profile.name = "undocked";
+              profile.outputs = [
+                {
+                  criteria = "eDP-1";
+                  scale = 1.4;
+                  status = "enable";
+                }
+              ];
+            }
+          ];
+        }
+      ];
+    };
+
     seek = {
       nixpkgs = inputs.nixpkgs-unstable;
       home-manager = inputs.home-manager-unstable;
