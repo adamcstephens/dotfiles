@@ -1,4 +1,7 @@
 #!/usr/bin/env sh
 
+# strip et before starting
+unset ET_VERSION
+
 cd ~ || exit 0
 exec zellij attach --create zj "$@"
