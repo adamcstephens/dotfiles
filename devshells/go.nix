@@ -1,20 +1,11 @@
 {
   mkShell,
-
-  delve,
-  gnumake,
-  go_1_23,
-  go-tools,
-  golangci-lint,
-  gopls,
-  gotools,
-  pcsclite,
-  pkg-config,
+  pkgs,
 }:
 mkShell {
-  packages = [
+  packages = with pkgs; [
     delve
-    go_1_23
+    go
     golangci-lint
     gopls
     go-tools
