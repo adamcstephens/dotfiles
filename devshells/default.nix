@@ -4,6 +4,7 @@ let
 in
 mkShell {
   name = "dots";
+
   packages = [
     # local only
     pkgs.attic-client
@@ -11,5 +12,5 @@ mkShell {
     ocamlPackages.dune_3
     ocamlPackages.ocamlformat
     ocamlPackages.ocaml-lsp
-  ] ++ self'.devShells.ci.nativeBuildInputs;
+  ];
 }
