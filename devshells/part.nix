@@ -8,24 +8,13 @@
     {
       distrobuilder = pkgs.callPackage ./distrobuilder.nix { };
       incus = pkgs.callPackage ./incus.nix { };
-
-      xmonad = pkgs.mkShellNoCC {
-        packages = [
-          (pkgs.ghc.withPackages (ps: [
-            ps.haskell-language-server
-            ps.ormolu
-            ps.xmonad
-            ps.xmonad-contrib
-          ]))
-        ];
-      };
+      xmonad = pkgs.callPackage ./xmonad.nix { };
     }
   );
 
   perSystem =
     {
       inputs',
-      lib,
       self',
       ...
     }:
@@ -34,23 +23,10 @@
     in
     {
       devShells = {
-        ci = pkgs.mkShellNoCC {
-          name = "ci";
-          packages =
-            [
-              pkgs.git
-              pkgs.just
-              pkgs.nix-update
-              pkgs.npins
-            ]
-            ++ lib.optionals pkgs.stdenv.isLinux [
-              inputs.sower.packages.${pkgs.system}.seed-ci
-              inputs.sower.packages.${pkgs.system}.client
-            ];
-        };
+        ci = pkgs.callPackage ./ci.nix { inherit inputs; };
+        default = pkgs.callPackage ./default.nix { };
 
         c = pkgs.callPackage ./c.nix { };
-        default = pkgs.callPackage ./default.nix { };
         elixir = pkgs.callPackage ./elixir.nix { };
         go = pkgs.callPackage ./go.nix { };
         js = pkgs.callPackage ./js.nix { };
@@ -59,9 +35,7 @@
         python = pkgs.callPackage ./python.nix { };
         rust = pkgs.callPackage ./rust.nix { };
         zig = pkgs.callPackage ./zig.nix { };
-        vscode = pkgs.callPackage ./vscode.nix {
-          devShells = self'.devShells;
-        };
+        vscode = pkgs.callPackage ./vscode.nix { devShells = self'.devShells; };
       };
     };
 }
