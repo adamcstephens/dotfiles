@@ -76,7 +76,6 @@ rebase = true
 
 [push]
 autoSetupRemote = true
-followTags = true
 
 [rebase]
 autoSquash = true
