@@ -24,6 +24,8 @@ ocamlPackages.buildDunePackage {
     };
 
   buildInputs = with ocamlPackages; [
+    eio
+    eio_main
     fileutils
     yojson
   ];
