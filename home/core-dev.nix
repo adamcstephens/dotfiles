@@ -55,7 +55,6 @@ in
       pkgs.restish
       pkgs.step-cli
       pkgs.unzip
-      pkgs.watchexec
 
       # apps
       eternal-terminal
