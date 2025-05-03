@@ -30,7 +30,7 @@ let () =
         match Dotfiles.Process.find_running_procs cmd with
         | Some existing_procs ->
             let pids =
-              List.map (fun {pid; cmd= _} -> pid) existing_procs
+              List.map (fun {pid; _} -> pid) existing_procs
               |> String.concat ", "
             in
             Printf.sprintf "Locker already running: %s, pid(s): %s" cmd pids
