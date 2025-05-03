@@ -1,14 +1,14 @@
-(version 0.7.0)
+(version 0.8.0)
 
 (build
  (run
   ocaml
   pkg/pkg.ml
   build
-  --pinned
-  %{pkg-self:pinned}
-  --with-js_of_ocaml
-  %{pkg:js_of_ocaml:installed}
+  --dev-pkg
+  %{pkg-self:dev}
+  --with-js_of_ocaml-compiler
+  %{pkg:js_of_ocaml-compiler:installed}
   --with-fmt
   %{pkg:fmt:installed}
   --with-cmdliner
@@ -18,10 +18,10 @@
   --with-base-threads
   %{pkg:base-threads:installed}))
 
-(depends ocaml ocamlfind ocamlbuild topkg lwt base-threads)
+(depends ocaml ocamlfind ocamlbuild topkg fmt lwt base-threads)
 
 (source
  (fetch
-  (url https://erratique.ch/software/logs/releases/logs-0.7.0.tbz)
+  (url https://erratique.ch/software/logs/releases/logs-0.8.0.tbz)
   (checksum
-   sha256=86f4a02807eb1a297aae44977d9f61e419c31458a5d7b23c6f55575e8e69d5ca)))
+   sha512=c34c67b00d6a989a2660204ea70db8521736d6105f15d1ee0ec6287a662798fe5c4d47075c6e7c84f5d5372adb5af5c4c404f79db70d69140af5e0ebbea3b6a5)))

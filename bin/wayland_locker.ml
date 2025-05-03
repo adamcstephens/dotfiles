@@ -1,4 +1,5 @@
 open Yojson.Basic.Util
+open Dotfiles.Process
 
 let waylock =
   let home = Sys.getenv "HOME" in
@@ -25,8 +26,20 @@ let locker desktop =
 let () =
   match Sys.getenv "XDG_CURRENT_DESKTOP" |> locker with
   | Some cmd ->
-      Printf.sprintf "Locking with command: %s" cmd |> print_endline ;
-      let _ = Sys.command cmd in
+      let _ =
+        match Dotfiles.Process.find_running_procs cmd with
+        | Some existing_procs ->
+            let pids =
+              List.map (fun {pid; cmd= _} -> pid) existing_procs
+              |> String.concat ", "
+            in
+            Printf.sprintf "Locker already running: %s, pid(s): %s" cmd pids
+            |> print_endline ;
+            0
+        | None ->
+            Printf.sprintf "Locking with command: %s" cmd |> print_endline ;
+            Sys.command cmd
+      in
       ()
   | None ->
       print_endline "Unsupported desktop environment" ;

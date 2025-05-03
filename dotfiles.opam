@@ -4,6 +4,7 @@ license: "UNLICENSE"
 depends: [
   "dune" {>= "3.17"}
   "ocaml"
+  "eio_main"
   "fileutils"
   "utop"
   "yojson"

@@ -24,3 +24,4 @@ nixos
 nixos
 symlinks
 runtime
+subcommand

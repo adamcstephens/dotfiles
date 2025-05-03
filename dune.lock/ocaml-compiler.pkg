@@ -16,63 +16,95 @@
    (run
     ./configure
     (when
-     (and_absorb_undefined_var
-      %{pkg:system-msvc:installed}
-      %{pkg:arch-x86_64:installed})
+     (catch_undefined_var
+      (and_absorb_undefined_var
+       %{pkg:system-msvc:installed}
+       %{pkg:arch-x86_64:installed})
+      false)
      --host=x86_64-pc-windows)
     (when
-     (and_absorb_undefined_var
-      %{pkg:system-msvc:installed}
-      %{pkg:arch-x86_32:installed})
+     (catch_undefined_var
+      (and_absorb_undefined_var
+       %{pkg:system-msvc:installed}
+       %{pkg:arch-x86_32:installed})
+      false)
      --host=i686-pc-windows)
     --prefix=%{prefix}
     --docdir=%{doc}/ocaml
     (when
-     %{pkg:system-msvc:installed}
+     (catch_undefined_var %{pkg:system-msvc:installed} false)
      --with-winpthreads-msvc=%{pkg:winpthreads:share})
     -C
-    (when %{pkg:ocaml-option-afl:installed} --with-afl)
     (when
-     %{pkg:ocaml-option-bytecode-only:installed}
+     (catch_undefined_var %{pkg:ocaml-option-afl:installed} false)
+     --with-afl)
+    (when
+     (catch_undefined_var %{pkg:ocaml-option-bytecode-only:installed} false)
      --disable-native-compiler)
     (when
-     %{pkg:ocaml-option-no-flat-float-array:installed}
+     (catch_undefined_var
+      %{pkg:ocaml-option-no-flat-float-array:installed}
+      false)
      --disable-flat-float-array)
-    (when %{pkg:ocaml-option-flambda:installed} --enable-flambda)
-    (when %{pkg:ocaml-option-fp:installed} --enable-frame-pointers)
-    (when %{pkg:ocaml-option-no-compression:installed} --without-zstd)
-    (when %{pkg:ocaml-option-tsan:installed} --enable-tsan)
     (when
-     (and_absorb_undefined_var %{pkg:ocaml-option-musl:installed} true)
+     (catch_undefined_var %{pkg:ocaml-option-flambda:installed} false)
+     --enable-flambda)
+    (when
+     (catch_undefined_var %{pkg:ocaml-option-fp:installed} false)
+     --enable-frame-pointers)
+    (when
+     (catch_undefined_var %{pkg:ocaml-option-no-compression:installed} false)
+     --without-zstd)
+    (when
+     (catch_undefined_var %{pkg:ocaml-option-tsan:installed} false)
+     --enable-tsan)
+    (when
+     (catch_undefined_var
+      (and_absorb_undefined_var %{pkg:ocaml-option-musl:installed} true)
+      false)
      CC=musl-gcc)
     (when
-     (and_absorb_undefined_var %{pkg:ocaml-option-musl:installed} true)
+     (catch_undefined_var
+      (and_absorb_undefined_var %{pkg:ocaml-option-musl:installed} true)
+      false)
      CFLAGS=-Os)
     (when
-     (or_absorb_undefined_var
-      %{pkg:ocaml-option-leak-sanitizer:installed}
-      (and_absorb_undefined_var
-       %{pkg:ocaml-option-address-sanitizer:installed}
-       true))
+     (catch_undefined_var
+      (or_absorb_undefined_var
+       %{pkg:ocaml-option-leak-sanitizer:installed}
+       (and_absorb_undefined_var
+        %{pkg:ocaml-option-address-sanitizer:installed}
+        true))
+      false)
      LDFLAGS=-Wl,--no-as-needed,-ldl)
     (when
-     %{pkg:ocaml-option-leak-sanitizer:installed}
+     (catch_undefined_var %{pkg:ocaml-option-leak-sanitizer:installed} false)
      "CC=gcc -ldl -fsanitize=leak -fno-omit-frame-pointer -O1 -g")
     (when
-     (and_absorb_undefined_var
-      %{pkg:ocaml-option-address-sanitizer:installed}
-      true)
+     (catch_undefined_var
+      (and_absorb_undefined_var
+       %{pkg:ocaml-option-address-sanitizer:installed}
+       true)
+      false)
      "CC=gcc -ldl -fsanitize=address -fno-omit-frame-pointer -O1 -g")
     (when
-     (and_absorb_undefined_var %{pkg:ocaml-option-32bit:installed} true)
+     (catch_undefined_var
+      (and_absorb_undefined_var %{pkg:ocaml-option-32bit:installed} true)
+      false)
      "CC=gcc -m32")
     (when
-     (and_absorb_undefined_var %{pkg:ocaml-option-musl:installed} true)
+     (catch_undefined_var
+      (and_absorb_undefined_var %{pkg:ocaml-option-musl:installed} true)
+      false)
      "ASPP=musl-gcc -c")
     (when
-     (and_absorb_undefined_var %{pkg:ocaml-option-32bit:installed} true)
+     (catch_undefined_var
+      (and_absorb_undefined_var %{pkg:ocaml-option-32bit:installed} true)
+      false)
      --host=i386-linux)
-    (when %{pkg:ocaml-option-static:installed} LIBS=-static)
+    (when
+     (catch_undefined_var %{pkg:ocaml-option-static:installed} false)
+     LIBS=-static)
     --disable-warn-error)
    (run %{make} -j%{jobs}))))
 

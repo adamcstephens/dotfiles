@@ -1,2 +1,3 @@
 (library
- (name dotfiles))
+ (name dotfiles)
+ (libraries eio eio_main eio_posix str))

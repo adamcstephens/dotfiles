@@ -23,11 +23,15 @@
    %{prefix}
    -no-custom
    (when
-    (and_absorb_undefined_var
-     (not %{pkg:ocaml:preinstalled})
-     (>= %{pkg:ocaml:version} 4.02.0))
+    (catch_undefined_var
+     (and_absorb_undefined_var
+      (not %{pkg:ocaml:preinstalled})
+      (>= %{pkg:ocaml:version} 4.02.0))
+     false)
     -no-camlp4)
-   (when %{pkg:ocaml:preinstalled} -no-topfind))
+   (when
+    (catch_undefined_var %{pkg:ocaml:preinstalled} false)
+    -no-topfind))
   (run %{make} all)
   (when
    %{pkg:ocaml:native}
