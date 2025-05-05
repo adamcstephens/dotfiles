@@ -6,10 +6,12 @@ type process = {pid: string; cmd: string}
 
 (* Use our own read_file, since Eio.Path.load doesn't seem to like null terminated files *)
 let read_file path =
-  Eio.Path.with_open_in path
-  @@ fun flow ->
-  let buf = Eio.Buf_read.of_flow flow ~max_size:Int.max_int in
-  Eio.Buf_read.take_all buf
+  try
+    Eio.Path.with_open_in path
+    @@ fun flow ->
+    let buf = Eio.Buf_read.of_flow flow ~max_size:Int.max_int in
+    Eio.Buf_read.take_all buf
+  with _ -> ""
 
 let load_procs ~proc =
   Eio.Path.with_open_dir proc

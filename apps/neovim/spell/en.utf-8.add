@@ -25,3 +25,9 @@ nixos
 symlinks
 runtime
 subcommand
+darwin
+sid
+sysroot
+substituters
+todo
+tempfile
