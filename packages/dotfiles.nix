@@ -1,7 +1,9 @@
 {
+  static ? false,
+
   lib,
   ocamlPackages,
-  static ? false,
+  stdenv,
 }:
 
 ocamlPackages.buildDunePackage {
@@ -16,11 +18,17 @@ ocamlPackages.buildDunePackage {
     with lib.fileset;
     toSource {
       root = ../.;
-      fileset = unions [
-        ../bin
-        ../lib
-        ../dune-project
-      ];
+      fileset = unions (
+        [
+          ../bin/dune
+          ../bin/escape_file.ml
+          ../lib
+          ../dune-project
+        ]
+        ++ lib.optionals stdenv.isLinux [
+          ../bin/wayland_locker.ml
+        ]
+      );
     };
 
   buildInputs = with ocamlPackages; [

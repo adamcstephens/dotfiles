@@ -12,6 +12,7 @@ rec {
       {
         ocamlPackages =
           inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.pkgsMusl.ocaml-ng.ocamlPackages_5_3;
+        static = true;
       }
     else
       {
