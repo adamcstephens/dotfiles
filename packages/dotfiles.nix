@@ -27,6 +27,8 @@ ocamlPackages.buildDunePackage {
     eio
     eio_main
     fileutils
+    ppx_deriving
+    ppxlib
     yojson
   ];
 }

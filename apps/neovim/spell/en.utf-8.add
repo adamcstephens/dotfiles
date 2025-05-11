@@ -31,3 +31,7 @@ sysroot
 substituters
 todo
 tempfile
+cmd
+nixpkgs
+json
+dir

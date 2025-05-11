@@ -1,3 +1,5 @@
 (library
  (name dotfiles)
- (libraries eio eio_main str))
+ (libraries eio eio_main str)
+ (preprocess
+  (pps ppx_deriving.show)))

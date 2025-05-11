@@ -6,6 +6,7 @@
 }:
 rec {
   arkenfox = pkgs.callPackage ./arkenfox { };
+  default = dotfiles;
   dotfiles = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.callPackage ./dotfiles.nix (
     if pkgs.stdenv.isLinux && pkgs.stdenv.isx86_64 then
       {

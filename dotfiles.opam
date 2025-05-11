@@ -6,6 +6,7 @@ depends: [
   "ocaml"
   "eio_main"
   "fileutils"
+  "ppx_deriving"
   "utop"
   "yojson"
   "odoc" {with-doc}
