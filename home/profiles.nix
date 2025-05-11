@@ -191,6 +191,20 @@ in
                 }
               ];
             }
+            {
+              profile.name = "laptop-present";
+              profile.outputs = [
+                {
+                  criteria = "HDMI-A-1";
+                  mode = "1920x1080";
+                }
+                {
+                  criteria = "eDP-1";
+                  scale = 1.75;
+                  status = "enable";
+                }
+              ];
+            }
           ];
         }
       ];
