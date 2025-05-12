@@ -1,5 +1,20 @@
 {
   "pins": {
+    "CopilotChat.nvim": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "Git",
+        "url": "https://github.com/CopilotC-Nvim/CopilotChat.nvim"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "submodules": false,
+      "version": "v3.11.1",
+      "revision": "6cb362d040f4f7e1177145fa27b3aee1c0bd6bff",
+      "url": null,
+      "hash": "17f969yx1yn77rxq5mncassk6k53i1qbrccpnf1ssjpmj8swry1l"
+    },
     "auto-dark-mode.nvim": {
       "type": "Git",
       "repository": {
@@ -94,10 +109,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v1.9.1",
-      "revision": "8a7181c6e8b48b6d62c80886243d202350b1ba35",
+      "version": "v2.0.0",
+      "revision": "5df369558553780e469196876cf00473cda1f138",
       "url": null,
-      "hash": "0fq4f841qqxhdh4gm9f7dakvx6rvfsnlcardw304mvs7iyckkdbx"
+      "hash": "0gp6gh35qihbj61dvyfn7xvfgkka2j2lqj0xv8002pgciyw9zdpq"
     },
     "vim-moonfly-colors": {
       "type": "Git",
@@ -107,9 +122,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "0cec429fe76eeda43b5b88226f16979bdeff1595",
+      "revision": "164888b0140d6a4ba3f5ec5d760d46fb6a417d7a",
       "url": null,
-      "hash": "011z3yfp1kij614i8npg5mf5wz9jbpipnmzmpcsahr4s8h91yjmg"
+      "hash": "0dlvfshrk0vv6swacxmiw2y5549l5cjb9m51470yqs351hkf0may"
     },
     "workspace-diagnotics-nvim": {
       "type": "Git",
