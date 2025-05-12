@@ -35,3 +35,7 @@ cmd
 nixpkgs
 json
 dir
+sd
+initrd
+systemctl
+symlink

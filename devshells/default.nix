@@ -6,9 +6,9 @@ mkShell {
   name = "dots";
 
   packages = [
-    # local only
     pkgs.attic-client
-    # ocamlPackages.ocaml
+    pkgs.npins
+
     ocamlPackages.dune_3
     ocamlPackages.ocamlformat
     ocamlPackages.ocaml-lsp

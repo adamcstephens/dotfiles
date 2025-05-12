@@ -67,6 +67,7 @@ mnw.lib.wrap pkgs {
     [
       actions-preview-nvim
       blink-cmp
+      copilot-lua
       cyberdream-nvim
       direnv-vim
       editorconfig-nvim
@@ -91,6 +92,7 @@ mnw.lib.wrap pkgs {
       nvim-web-devicons
       oil-nvim
       openingh-nvim
+      plenary-nvim
       rainbow-delimiters-nvim
       remember-nvim
       rustaceanvim
