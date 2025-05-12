@@ -37,8 +37,8 @@ let do_lock ~cmd =
 
 let () =
   match get_desktop with
+  | Ok desktop ->
+      do_lock ~cmd:(locker desktop)
   | Error err ->
       Printf.printf "Failure loading desktop: %s\n" (show_desktop_error err) ;
       exit 1
-  | Ok desktop ->
-      do_lock ~cmd:(locker desktop)
