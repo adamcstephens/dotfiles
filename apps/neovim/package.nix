@@ -60,64 +60,71 @@ mnw.lib.wrap pkgs {
     vim.opt.rtp:append("${dotvimPlugin}")
 
     require('dotinit')
+    require('lz.n').load('lazy')
   '';
 
-  plugins =
-    with vimPlugins;
-    [
-      actions-preview-nvim
-      blink-cmp
-      copilot-lua
-      cyberdream-nvim
-      direnv-vim
-      editorconfig-nvim
-      efmls-configs-nvim
-      elixir-tools-nvim
-      fidget-nvim
-      friendly-snippets
-      fugitive
-      gitsigns-nvim
-      Ionide-vim
-      lualine-nvim
-      mini-pick
-      neogit
-      nui-nvim
-      nvim-dap
-      nvim-dap-go
-      nvim-highlight-colors
-      nvim-lspconfig
-      nvim-treesitter
-      nvim-treesitter-endwise
-      nvim-surround
-      nvim-web-devicons
+  plugins = {
+    start =
+      with vimPlugins;
+      [
+        lz-n
+
+        actions-preview-nvim
+        blink-cmp
+        copilot-lua
+        cyberdream-nvim
+        direnv-vim
+        editorconfig-nvim
+        efmls-configs-nvim
+        elixir-tools-nvim
+        fidget-nvim
+        friendly-snippets
+        fugitive
+        gitsigns-nvim
+        Ionide-vim
+        lualine-nvim
+        mini-pick
+        neogit
+        nui-nvim
+        nvim-dap
+        nvim-dap-go
+        nvim-highlight-colors
+        nvim-lspconfig
+        nvim-treesitter.withAllGrammars
+        nvim-treesitter-endwise
+        nvim-surround
+        nvim-web-devicons
+        openingh-nvim
+        plenary-nvim
+        rainbow-delimiters-nvim
+        remember-nvim
+        rustaceanvim
+        smart-open-nvim
+        sqlite-lua
+        statuscol-nvim
+        telescope-dap-nvim
+        telescope-zf-native-nvim
+        telescope-nvim
+        telescope-undo-nvim
+        tmux-nvim
+        trouble-nvim
+        vim-dadbod
+        vim-dadbod-completion
+        vim-dadbod-ui
+        vim-illuminate
+        vim-just
+        vim-matchup
+        vim-repeat
+        which-key-nvim
+        whitespace-nvim
+        zk-nvim
+      ]
+      ++ npinsPlugins;
+
+    opt = with vimPlugins; [
       oil-nvim
-      openingh-nvim
-      plenary-nvim
-      rainbow-delimiters-nvim
-      remember-nvim
-      rustaceanvim
-      smart-open-nvim
-      sqlite-lua
-      statuscol-nvim
-      telescope-dap-nvim
-      telescope-zf-native-nvim
-      telescope-nvim
-      telescope-undo-nvim
-      tmux-nvim
-      trouble-nvim
-      vim-dadbod
-      vim-dadbod-completion
-      vim-dadbod-ui
-      vim-illuminate
-      vim-just
-      vim-matchup
-      vim-repeat
-      which-key-nvim
-      whitespace-nvim
-      zk-nvim
-    ]
-    ++ (builtins.attrValues nvim-treesitter.grammarPlugins)
-    ++ npinsPlugins;
+    ];
+  };
 
   extraBinPath =
     [ jq ]
