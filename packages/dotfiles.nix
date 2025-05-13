@@ -22,11 +22,9 @@ ocamlPackages.buildDunePackage {
         [
           ../bin/dune
           ../bin/escape_file.ml
+          ../bin/wayland_locker.ml
           ../lib
           ../dune-project
-        ]
-        ++ lib.optionals stdenv.isLinux [
-          ../bin/wayland_locker.ml
         ]
       );
     };
