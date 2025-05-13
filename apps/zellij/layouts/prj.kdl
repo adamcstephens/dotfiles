@@ -15,7 +15,7 @@ layout {
     }
   }
   swap_tiled_layout name="default" {
-    tab max_panes=5 {
+    tab max_panes=6 {
       pane size=1 borderless=true {
         plugin location="tab-bar"
       }
