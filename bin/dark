@@ -62,11 +62,17 @@ def set_waybar_theme(target):
 
 
 def set_state_data(target):
+    if os_name == "Darwin":
+        return
+
     with open(state_file, "w") as sf:
         json.dump(target, sf)
 
 
 def get_state_data():
+    if os_name == "Darwin":
+        return run("/opt/homebrew/bin/dark-mode status").strip() == "on"
+
     try:
         current = json.loads(open(state_file).read())
     except FileNotFoundError:
