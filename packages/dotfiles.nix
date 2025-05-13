@@ -18,15 +18,14 @@ ocamlPackages.buildDunePackage {
     with lib.fileset;
     toSource {
       root = ../.;
-      fileset = unions (
-        [
-          ../bin/dune
-          ../bin/escape_file.ml
-          ../bin/wayland_locker.ml
-          ../lib
-          ../dune-project
-        ]
-      );
+      fileset = unions ([
+        ../bin/dune
+        ../bin/dark.ml
+        ../bin/escape_file.ml
+        ../bin/wayland_locker.ml
+        ../lib
+        ../dune-project
+      ]);
     };
 
   buildInputs = with ocamlPackages; [
