@@ -3,7 +3,6 @@
 
   lib,
   ocamlPackages,
-  stdenv,
 }:
 
 ocamlPackages.buildDunePackage {
@@ -19,10 +18,7 @@ ocamlPackages.buildDunePackage {
     toSource {
       root = ../.;
       fileset = unions ([
-        ../bin/dune
-        ../bin/dark.ml
-        ../bin/escape_file.ml
-        ../bin/wayland_locker.ml
+        ../bin
         ../lib
         ../dune-project
       ]);

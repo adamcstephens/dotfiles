@@ -10,8 +10,8 @@
   (bash "echo '()'")))
 
 (executables
- (names dark escape_file wayland_locker)
- (public_names dark escape-file wayland-locker)
+ (names dark escape_file ssh_agent_mgr wayland_locker)
+ (public_names dark escape-file ssh-agent-mgr wayland-locker)
  (libraries dotfiles unix fileutils yojson)
  (link_flags
   (:include link_flags.%{system})))
