@@ -10,10 +10,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v3.11.1",
-      "revision": "6cb362d040f4f7e1177145fa27b3aee1c0bd6bff",
+      "version": "v3.12.0",
+      "revision": "eddc9a98930cda0b3819cc1d93427b402697dfab",
       "url": null,
-      "hash": "17f969yx1yn77rxq5mncassk6k53i1qbrccpnf1ssjpmj8swry1l"
+      "hash": "1ba6bi82dqpk06bkfcidc3f54wy5hwsk6anh8jdcckqwp1v1ir4z"
     },
     "auto-dark-mode.nvim": {
       "type": "Git",
@@ -50,9 +50,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "cccbd4ea9049ca5f99f025ffaddb7392359c7d6a",
+      "revision": "599b14047b82e92874b9a408e4df228b965c3a1d",
       "url": null,
-      "hash": "1425mbyvax63m6l7vkwbfi1l863mr86ba11gxa3hqxcgvjpvp638"
+      "hash": "1vz6h2n6h09q0v9zfkaiy9p64pxy88j0nykmaah3jrqj917qrvic"
     },
     "multiple-cursors-nvim": {
       "type": "GitRelease",
@@ -109,10 +109,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v2.0.0",
-      "revision": "5df369558553780e469196876cf00473cda1f138",
+      "version": "v2.0.1",
+      "revision": "7c9bc1cfc0582c8c6851c38bb3338db644039cf7",
       "url": null,
-      "hash": "0gp6gh35qihbj61dvyfn7xvfgkka2j2lqj0xv8002pgciyw9zdpq"
+      "hash": "0lhwkb07pdfi7dx9kbzynh0dxivhiryngkiy4565hyhxapfis5v7"
     },
     "vim-moonfly-colors": {
       "type": "Git",
