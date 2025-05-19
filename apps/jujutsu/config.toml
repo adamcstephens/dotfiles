@@ -3,7 +3,6 @@ fsmonitor = "watchman"
 
 [git]
 sign-on-push = true
-subprocess = true
 
 [signing]
 behavior = "drop"

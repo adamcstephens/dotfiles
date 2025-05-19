@@ -1,6 +1,15 @@
-{ config, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
-  configDir = if pkgs.stdenv.isLinux then ".config/jj" else "Library/Application Support/jj";
+  configDir =
+    if pkgs.stdenv.isLinux || (lib.versionAtLeast pkgs.jj.version "0.29.0") then
+      ".config/jj"
+    else
+      "Library/Application Support/jj";
 in
 {
   home.packages = [
