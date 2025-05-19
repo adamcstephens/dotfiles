@@ -183,27 +183,11 @@
                 self.overlays.upstreams
               ];
 
-              # nix.linux-builder = {
-              #   enable = true;
-              #   config = {
-              #     virtualisation = {
-              #       diskSize = lib.mkForce (128 * 1024);
-              #       memorySize = lib.mkForce (16 * 1024);
-              #       cores = 8;
-              #     };
-              #   };
-              #   maxJobs = 2;
-              #   supportedFeatures = [
-              #     "apple-virt"
-              #     "benchmark"
-              #     "big-parallel"
-              #     "kvm"
-              #     "nixos-test"
-              #   ];
-              # };
-
               security.pam.services.sudo_local.touchIdAuth = true;
+
+              system.primaryUser = "adam";
               system.stateVersion = 5;
+
               users.users.adam = {
                 home = "/Users/adam";
                 shell = "/home/adam/.nix-profile/bin/fish";
