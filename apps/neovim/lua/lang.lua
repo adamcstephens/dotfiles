@@ -149,13 +149,6 @@ require("vim.filetype.detect").match_contents = function(...)
   end
 end
 
--- nushell
-if vim.fn.executable("nu") == 1 then
-  lspconfig.nushell.setup({
-    capabilities = capabilities,
-  })
-end
-
 -- ocaml
 if vim.fn.executable("ocamllsp") == 1 then
   lspconfig.ocamllsp.setup({
