@@ -3,10 +3,10 @@ let is_symlink path =
   stat.st_kind == S_LNK
 
 let escape path real_path =
-  Printf.sprintf "Escaping %s -> %s" real_path path |> print_endline ;
-  FileUtil.rm [path] ;
-  FileUtil.cp [real_path] path ~recurse:true ;
-  FileUtil.chmod (`Symbolic [`User (`Add `Write)]) [path] ~recurse:true ;
+  Printf.sprintf "Escaping %s -> %s" real_path path |> print_endline;
+  FileUtil.rm [ path ];
+  FileUtil.cp [ real_path ] path ~recurse:true;
+  FileUtil.chmod (`Symbolic [ `User (`Add `Write) ]) [ path ] ~recurse:true;
   print_endline "Done!"
 
 let () =
@@ -18,5 +18,5 @@ let () =
       let real_path = Unix.realpath path in
       escape path real_path
     else
-      Printf.sprintf "Path %s must exist and be a symlink" path |> print_endline ;
+      Printf.sprintf "Path %s must exist and be a symlink" path |> print_endline;
     exit 1

@@ -6,10 +6,10 @@ type command = Enable | Disable | Toggle | Status
 module Platform = struct
   type t = Darwin | Linux | Unknown
 
-  let current = match Sys.os_type with
+  let current =
+    match Sys.os_type with
     | "Unix" ->
-        if Sys.command "uname | grep -q Darwin" = 0 then Darwin
-        else Linux
+        if Sys.command "uname | grep -q Darwin" = 0 then Darwin else Linux
     | _ -> Unknown
 end
 
@@ -63,16 +63,33 @@ end
 (* Linux specific operations *)
 module Linux = struct
   let set_gtk_theme = function
-    | Dark -> Util.run_command "gsettings-wrapper set org.gnome.desktop.interface gtk-theme Adwaita-dark" |> ignore
-    | Light -> Util.run_command "gsettings-wrapper set org.gnome.desktop.interface gtk-theme Adwaita" |> ignore
+    | Dark ->
+        Util.run_command
+          "gsettings-wrapper set org.gnome.desktop.interface gtk-theme \
+           Adwaita-dark"
+        |> ignore
+    | Light ->
+        Util.run_command
+          "gsettings-wrapper set org.gnome.desktop.interface gtk-theme Adwaita"
+        |> ignore
 
   let set_gnome_scheme = function
     | Dark ->
-        Util.run_command "gsettings-wrapper set org.gnome.desktop.interface color-scheme prefer-dark" |> ignore;
-        Util.run_command "dconf write /org/gnome/desktop/interface/color-scheme 'prefer-dark'" |> ignore
+        Util.run_command
+          "gsettings-wrapper set org.gnome.desktop.interface color-scheme \
+           prefer-dark"
+        |> ignore;
+        Util.run_command
+          "dconf write /org/gnome/desktop/interface/color-scheme 'prefer-dark'"
+        |> ignore
     | Light ->
-        Util.run_command "gsettings-wrapper set org.gnome.desktop.interface color-scheme prefer-light" |> ignore;
-        Util.run_command "dconf write /org/gnome/desktop/interface/color-scheme 'prefer-light'" |> ignore
+        Util.run_command
+          "gsettings-wrapper set org.gnome.desktop.interface color-scheme \
+           prefer-light"
+        |> ignore;
+        Util.run_command
+          "dconf write /org/gnome/desktop/interface/color-scheme 'prefer-light'"
+        |> ignore
 
   let set_theme state =
     set_gtk_theme state;
@@ -81,12 +98,14 @@ module Linux = struct
 end
 
 (* Core functionality *)
-let get_current_state () = match Platform.current with
+let get_current_state () =
+  match Platform.current with
   | Platform.Darwin -> Some (Darwin.get_state ())
   | Platform.Linux -> Util.read_state ()
   | Platform.Unknown -> None
 
-let set_dark_mode state = match Platform.current with
+let set_dark_mode state =
+  match Platform.current with
   | Platform.Darwin -> Darwin.set_theme state
   | Platform.Linux -> Linux.set_theme state
   | Platform.Unknown -> failwith "Unsupported platform"
@@ -99,14 +118,13 @@ let toggle_dark_mode () =
 (* Command line parsing and main *)
 let parse_args () =
   if Array.length Sys.argv = 2 then
-  match String.lowercase_ascii Sys.argv.(1) with
-      | "enable" -> Some Enable
-      | "disable" -> Some Disable
-      | "toggle" -> Some Toggle
-      | "status" -> Some Status
-      | _ -> None
-  else
-  None
+    match String.lowercase_ascii Sys.argv.(1) with
+    | "enable" -> Some Enable
+    | "disable" -> Some Disable
+    | "toggle" -> Some Toggle
+    | "status" -> Some Status
+    | _ -> None
+  else None
 
 let () =
   match parse_args () with
@@ -114,7 +132,8 @@ let () =
   | Some Disable -> set_dark_mode Light
   | Some Toggle -> toggle_dark_mode ()
   | Some Status ->
-      let state = match get_current_state () with
+      let state =
+        match get_current_state () with
         | Some Dark -> "true"
         | Some Light | None -> "false"
       in
