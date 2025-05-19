@@ -32,16 +32,6 @@
   superhtml,
   yaml-language-server,
 }:
-let
-  pins = import ./npins;
-  npinsPlugins = lib.mapAttrsToList (
-    name: src:
-    (vimUtils.buildVimPlugin {
-      inherit name src;
-      doCheck = false;
-    })
-  ) pins;
-in
 
 mnw.lib.wrap pkgs {
   inherit neovim;
@@ -73,7 +63,6 @@ mnw.lib.wrap pkgs {
         blink-cmp
         copilot-lua
         cyberdream-nvim
-        direnv-vim
         editorconfig-nvim
         efmls-configs-nvim
         elixir-tools-nvim
@@ -81,7 +70,6 @@ mnw.lib.wrap pkgs {
         friendly-snippets
         fugitive
         gitsigns-nvim
-        Ionide-vim
         lualine-nvim
         mini-pick
         neogit
@@ -119,11 +107,14 @@ mnw.lib.wrap pkgs {
         whitespace-nvim
         zk-nvim
       ]
-      ++ npinsPlugins;
+      ++ (mnw.lib.npinsToPlugins pkgs ./npins/sources.json);
 
-    opt = with vimPlugins; [
-      oil-nvim
-    ];
+    opt =
+      with vimPlugins;
+      [
+        oil-nvim
+      ]
+      ++ (mnw.lib.npinsToPlugins pkgs ./npins.lazy/sources.json);
   };
 
   extraBinPath =

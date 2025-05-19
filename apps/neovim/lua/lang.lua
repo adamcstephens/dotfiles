@@ -71,10 +71,6 @@ require("dap-go").setup({
   },
 })
 
--- fsharp
-require("ionide").setup({})
-vim.g["fsharp#lsp_auto_setup"] = 0
-
 -- haskell
 if vim.fn.executable("haskell-language-server-wrapper") == 1 then
   lspconfig.hls.setup({

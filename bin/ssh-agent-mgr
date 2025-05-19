@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+if [ -n "$TMUX" ] || [ -n "$SSH_TTY" ] || [ -n "$ET_VERSION" ] || [ -n "$ZELLIJ" ]; then
+  socket="$SSH_AUTH_SOCK"
+fi
+
+if [ -z "$socket" ]; then
+  for sock in \
+    "$XDG_RUNTIME_DIR/ssh-agent" \
+    "$XDG_RUNTIME_DIR/yubikey-agent/yubikey-agent.sock" \
+    "$XDG_RUNTIME_DIR/ssh-tpm-agent" \
+    "$HOME/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh" \
+    "$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"; do
+    if [ -S "$sock" ]; then
+      socket=$sock
+      break
+    fi
+  done
+fi
+
+export SSH_AUTH_SOCK="$socket"
+if ! ssh-add -l &>/dev/null; then
+  # if still no keys found, try and run through the local hardware again as a fallback
+  for sock in "$XDG_RUNTIME_DIR/ssh-agent" \
+    "$XDG_RUNTIME_DIR/yubikey-agent/yubikey-agent.sock" \
+    "$XDG_RUNTIME_DIR/ssh-tpm-agent" \
+    "$HOME/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh"; do
+    if [ -S "$sock" ]; then
+      socket=$sock
+    fi
+  done
+
+  export SSH_AUTH_SOCK="$socket"
+  if ! ssh-add -l &>/dev/null; then
+    echo "Empty ssh-agent" >&2
+  fi
+fi
+
+echo -n "$socket"

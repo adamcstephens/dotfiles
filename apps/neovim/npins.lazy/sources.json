@@ -1,0 +1,17 @@
+{
+  "pins": {
+    "direnv.nvim": {
+      "type": "Git",
+      "repository": {
+        "type": "Git",
+        "url": "https://github.com/NotAShelf/direnv.nvim"
+      },
+      "branch": "main",
+      "submodules": false,
+      "revision": "a2f1264909463fd012b7b0b6bbfebc282c5d2834",
+      "url": null,
+      "hash": "1gg38ppl6kw0n4hvd7bkridkfsnzpw615xh1x8azz498xysxj2cw"
+    }
+  },
+  "version": 5
+}
