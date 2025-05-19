@@ -1,4 +1,4 @@
-local snippets_path = "~/.dotfiles/apps/vscodium/snippets"
+local snippets_path = "~/.dotfiles/apps/neovim/snippets"
 
 -- blink completion
 require("blink.cmp").setup({

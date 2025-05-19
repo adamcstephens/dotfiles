@@ -11,15 +11,9 @@
 
     ../apps/ghostty
     ../apps/kitty
-    ../apps/vscode
-    ../apps/vscodium
   ];
 
   dotfiles = {
-    apps = {
-      vscodium.enable = lib.mkDefault false;
-    };
-
     gui.enable = true;
   };
 

@@ -55,9 +55,6 @@ in
                   "1password"
                   "1password-cli"
                   "datagrip"
-                  "vscode"
-                  "vscode-extension-github-copilot"
-                  "vscode-extension-ms-vsliveshare-vsliveshare"
                 ];
             };
 

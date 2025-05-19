@@ -22,8 +22,6 @@
         FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
       fi
 
-      [[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path zsh 2>/dev/null)"
-
       bindkey "^[[1;5C" forward-word
       bindkey "^[[1;5D" backward-word
     '';

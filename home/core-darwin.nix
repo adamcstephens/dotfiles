@@ -32,8 +32,6 @@
 
   dotfiles.apps = {
     zk.enable = true;
-    vscodium.enable = false;
-    vscode.enable = false;
   };
 
   home.activation.enable-ssh-agent = lib.hm.dag.entryAfter [ "writeBoundary" ] ''

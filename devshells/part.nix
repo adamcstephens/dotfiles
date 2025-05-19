@@ -35,7 +35,6 @@
         python = pkgs.callPackage ./python.nix { };
         rust = pkgs.callPackage ./rust.nix { };
         zig = pkgs.callPackage ./zig.nix { };
-        vscode = pkgs.callPackage ./vscode.nix { devShells = self'.devShells; };
       };
     };
 }

@@ -1,16 +1,7 @@
 #!/usr/bin/env sh
 
 if [ "$USER" != "root" ]; then
-  if [ "$TERM_PROGRAM" = "vscode" ]; then
-    case $TERM_PROGRAM_VERSION in
-    *-insider)
-      exec code-insiders --wait $@
-      ;;
-    *)
-      exec code --wait $@
-      ;;
-    esac
-  elif command -v nvim 2>&1; then
+  if command -v nvim 2>&1; then
     exec nvim $@
   elif command -v hx >/dev/null 2>&1; then
     exec hx $@
