@@ -15,7 +15,8 @@ let
   };
 in
 {
-  options.dotfiles.apps.neovim.full = lib.mkEnableOption "install the full set of tools, as if a workstation";
+  options.dotfiles.apps.neovim.full =
+    lib.mkEnableOption "install the full set of tools, as if a workstation";
 
   config = {
     home.sessionVariables = {
