@@ -33,7 +33,6 @@
     layout_mode: Tag,
     insert_behavior: Top,
     scratchpad: [
-        (name: "emacs", value: "emacsclient --create-frame --eval '(switch-to-buffer \"*scratch*\")'", x: 860, y: 390, height: 300, width: 200),
         (name: "Alacritty", value: "alacritty", x: 860, y: 390, height: 300, width: 200),
     ],
     window_rules: [
@@ -50,7 +49,6 @@
     sloppy_mouse_follows_focus: true,
     auto_derive_workspaces: true,
     keybind: [
-        (command: ToggleScratchPad, value: "emacs", modifier: ["modkey"], key: "p"),
         (command: Execute, value: "systemd-cat --identifier=rofi rofi -show drun", modifier: ["modkey"], key: "d"),
         (command: Execute, value: "systemd-cat --identifier=rofi rofi -show emoji", modifier: ["modkey", "Shift"], key: "d"),
 

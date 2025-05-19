@@ -14,7 +14,6 @@ in
 
   imports = [
     ../apps/atuin
-    ../apps/emacs
     ../apps/jujutsu
     ../apps/ssh
     ../apps/zk
@@ -22,7 +21,6 @@ in
 
   dotfiles = {
     apps = {
-      emacs.enable = false;
       neovim.full = true;
     };
 

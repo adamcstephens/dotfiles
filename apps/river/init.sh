@@ -40,7 +40,6 @@ riverctl focus-follows-cursor always || riverctl focus-follows-cursor normal
 riverctl focus-follows-cursor always || riverctl focus-follows-cursor normal
 riverctl map normal Super+Shift T spawn 'GDK_DEBUG=gl-disable-gles systemd-cat --identifier=terminal terminal'
 riverctl map normal Super+Shift Return spawn 'GDK_DEBUG=gl-disable-gles systemd-cat --identifier=terminal terminal'
-riverctl map normal Super+Shift+Control E spawn 'systemd-cat --identifier=gtk-launch gtk-launch emacsclient'
 riverctl map normal Super D spawn 'systemd-cat --identifier=rofi rofi -show drun'
 riverctl map normal Super+Shift D spawn 'systemd-cat --identifier=rofi rofi -show emoji'
 riverctl map normal Super+Shift+Control T spawn 'dark toggle'
@@ -191,7 +190,6 @@ riverctl rule-add -app-id blueberry.py ssd
 riverctl rule-add -app-id 'codium*' ssd
 riverctl rule-add -app-id chromium-browser ssd
 riverctl rule-add -app-id code-url-handler ssd
-riverctl rule-add -app-id emacs ssd
 riverctl rule-add -app-id com.mitchellh.ghostty ssd
 riverctl rule-add -app-id firefox ssd
 riverctl rule-add -app-id 'FFPWA-*' ssd
