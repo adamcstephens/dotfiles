@@ -117,7 +117,7 @@ in
         systemctl --user stop wayland-session.target
         systemctl --user unset-environment DISPLAY WAYLAND_DISPLAY
 
-        export SSH_AUTH_SOCK=$(~/.nix-profile/bin/ssh-agent-mgr)
+        export SSH_AUTH_SOCK=$(ssh-agent-mgr)
         export PATH=$HOME/.dotfiles/bin:$PATH
 
         # chrome and vscode use this to find the secret service

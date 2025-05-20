@@ -4,7 +4,7 @@ set -U fish_greeting
 fzf_configure_bindings --directory=\ct
 set fzf_fd_opts --hidden --exclude=.git
 
-set -x SSH_AUTH_SOCK (~/.nix-profile/bin/ssh-agent-mgr)
+set -x SSH_AUTH_SOCK (ssh-agent-mgr)
 
 if test -e $HOME/.shell_local.fish
     source $HOME/.shell_local.fish
