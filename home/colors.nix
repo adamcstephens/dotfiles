@@ -1,4 +1,9 @@
-{ config, inputs, ... }:
+{
+  config,
+  inputs,
+  lib,
+  ...
+}:
 {
   imports = [ inputs.nix-colors.homeManagerModule ];
 
@@ -26,5 +31,8 @@
     };
   };
 
-  xdg.configFile."colorscheme.json".text = builtins.toJSON config.colorScheme;
+  xdg.configFile."colorscheme.json".text = lib.pipe config.colorScheme [
+    (lib.filterAttrs (n: _: n != "kind" && n != "colors"))
+    builtins.toJSON
+  ];
 }
