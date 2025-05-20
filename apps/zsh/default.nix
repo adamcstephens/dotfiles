@@ -13,7 +13,7 @@
       size = 100000;
     };
 
-    initExtra = ''
+    initContent = ''
       # shellcheck disable=SC1090
       [[ -e "$HOME/.dotfiles/apps/shell_generic.sh" ]] && source "$HOME/.dotfiles/apps/shell_generic.sh"
 
