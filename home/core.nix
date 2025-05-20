@@ -16,7 +16,6 @@
     ../apps/fish
     ../apps/git
     ../apps/helix
-    ../apps/zellij
     ../apps/neovim
     ../apps/nix
     ../apps/ripgrep
@@ -26,14 +25,9 @@
     ../apps/starship
     ../apps/tmux
     ../apps/wayland
-    ../apps/xorg
-    ../apps/yamlfmt
+    ../apps/zellij
     ../apps/zsh
   ];
-
-  dotfiles = {
-    helix.enable = true;
-  };
 
   home.stateVersion = "22.05";
 

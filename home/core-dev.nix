@@ -30,14 +30,9 @@ in
   home.packages =
     [
       # crypt
-      pkgs.passage
       pkgs.pinentry.curses
       pkgs.rage
       pkgs.rbw
-
-      # lang
-      pkgs.elixir-ls
-      pkgs.next-ls
 
       # nix
       pkgs.hydra-check
@@ -48,15 +43,12 @@ in
       pkgs.nvd
 
       # tools
-      pkgs.pgcli
       pkgs.pwgen
-      pkgs.restish
       pkgs.step-cli
       pkgs.unzip
 
       # apps
       eternal-terminal
-      pkgs.senpai
     ]
     ++ lib.optionals pkgs.stdenv.isLinux [
       pkgs._1password-cli
