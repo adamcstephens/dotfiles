@@ -1,25 +1,11 @@
 {
   config,
-  inputs,
   lib,
   pkgs,
   ...
 }:
 let
   colors = config.colorScheme.palette;
-
-  wallpaper = inputs.nix-wallpaper.packages.${pkgs.system}.default.override {
-    logoSize = 12;
-    backgroundColor = "#${colors.base00}";
-    logoColors = {
-      color0 = "#${colors.base08}";
-      color1 = "#${colors.base0A}";
-      color2 = "#${colors.base0B}";
-      color3 = "#${colors.base0C}";
-      color4 = "#${colors.base0E}";
-      color5 = "#${colors.base0F}";
-    };
-  };
 
   xsecurelock = pkgs.writeShellScript "xsecurelock" ''
     export XSECURELOCK_COMPOSITE_OBSCURER=0
