@@ -54,6 +54,7 @@ in
     # xorg
     ../apps/polybar
     ../apps/xmonad
+    ../apps/xorg
 
     # apps
     ../apps/1password
