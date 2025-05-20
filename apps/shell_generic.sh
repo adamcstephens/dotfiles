@@ -2,7 +2,6 @@
 
 export PATH="$HOME/.dotfiles/bin:$PATH"
 
-# shellcheck disable=SC1090
 [[ -e "$HOME/.shell_local.sh" ]] && . "$HOME/.shell_local.sh"
 
 if [ -x /opt/homebrew/bin/brew ]; then
@@ -10,21 +9,7 @@ if [ -x /opt/homebrew/bin/brew ]; then
 fi
 
 # shell
-# shellcheck disable=SC2139
-alias esl="exec $SHELL -l"
-
-# passwords
-if command -v pwgen >/dev/null; then
-  alias pwgen='pwgen -csn1 20 12'
-fi
-
-# app specific
-#
-
-# gsed
-if command -v gsed >/dev/null; then
-  alias sed=gsed
-fi
+alias esl="exec \$SHELL -l"
 
 # nix
 if [ -e "${HOME}/.nix-profile/etc/profile.d/nix.sh" ]; then
@@ -40,11 +25,6 @@ if [ -d /run/current-system/sw/bin ]; then
   export PATH="$PATH:/run/current-system/sw/bin"
 fi
 
-# python
-export PYTHONSTARTUP="$HOME"/.dotfiles/apps/python/pythonstartup.py
-
 # ssh
-export SSH_AUTH_SOCK="$(ssh-agent-mgr)"
-if [[ -z $SSH_AUTH_SOCK ]]; then
-  echo "Empty ssh-agent"
-fi
+SSH_AUTH_SOCK="$(ssh-agent-mgr)"
+export SSH_AUTH_SOCK
