@@ -60,7 +60,7 @@
         config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/ghostty/gtk-custom.css";
   };
 
-  xdg.configFile."ghostty/mac.conf" = lib.mkIf pkgs.stdenv.isLinux {
+  xdg.configFile."ghostty/mac.conf" = lib.mkIf pkgs.stdenv.isDarwin {
     source =
       if config.dotfiles.nixosManaged then
         ./mac.conf
