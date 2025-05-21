@@ -67,7 +67,6 @@
     jc = "sudo journalctl";
     jcu = "journalctl --user";
     l = "ll -a";
-    lg = "lazygit";
     ll = "eza -lg";
     nix = "nix --print-build-logs";
     sy = "sudo systemctl";

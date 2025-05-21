@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+export SSH_AUTH_SOCK=$(ssh-agent-mgr)
+
+exec lazygit $@

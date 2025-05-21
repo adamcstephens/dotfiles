@@ -7,7 +7,7 @@ keybinds clear-defaults=true {
       SwitchToMode "normal"
     }
     bind "Super g" {
-      Run "lazygit" {
+      Run "lg" {
         floating true
         hold_on_close false
         close_on_exit true
