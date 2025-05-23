@@ -1,10 +1,17 @@
-module.exports = {
+export default {
   // get bundle id: mdls /Applications/Firefox.app/ | grep kMDItemCF
-  defaultBrowser: [
-    "org.mozilla.firefoxdeveloperedition",
-    "org.mozilla.firefox",
-    "Safari",
-  ],
+  defaultBrowser: () => {
+    const running = [
+      "org.mozilla.firefoxdeveloperedition",
+      "org.mozilla.firefox",
+      "Safari",
+    ].find((browser) => finicky.isAppRunning(browser));
+
+    const powerInfo = finicky.getPowerInfo();
+    const myDefault = powerInfo.isConnected ? "org.mozilla.firefox" : "Safari";
+
+    return running == undefined ? myDefault : running;
+  },
   options: {
     hideIcon: false,
     urlShorteners: [
@@ -70,10 +77,6 @@ module.exports = {
     {
       match: /zoom.us\/j\//,
       browser: "us.zoom.xos",
-    },
-    {
-      match: finicky.matchDomains("open.spotify.com"),
-      browser: "Spotify",
     },
     {
       match: ({ url }) => url.protocol === "msteams",
