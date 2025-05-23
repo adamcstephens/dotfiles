@@ -112,8 +112,8 @@
       pkgs.doggo
       pkgs.du-dust
       pkgs.file
-      pkgs.fx
       pkgs.gdu
+      pkgs.jless
       pkgs.jq
       pkgs.just
       # pkgs.kalker

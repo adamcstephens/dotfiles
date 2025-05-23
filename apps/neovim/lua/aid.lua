@@ -63,6 +63,7 @@ require("conform").setup({
     end,
     sql = { "sqlfluff" },
     teal = { "stylua" },
+    toml = { "taplo" },
     terraform = function()
       if vim.fn.executable("tofu") == 1 then
         return { "tofu_fmt" }
