@@ -11,10 +11,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v1.4.0",
-      "revision": "b6c46f8066b2d96cb75d5bc7202a9a4c097b5e9f",
-      "url": "https://api.github.com/repos/miikanissi/modus-themes.nvim/tarball/v1.4.0",
-      "hash": "15sqscfkhy0rxycql1y2iwc6hirfvbfxww3j17586jxflj3nh0lq"
+      "version": "v1.4.1",
+      "revision": "61b8c10ec636f42baf6c845edb14b9ae2723711f",
+      "url": "https://api.github.com/repos/miikanissi/modus-themes.nvim/tarball/v1.4.1",
+      "hash": "1x0hv5fcrsdcb06miyq0q1vlcgj1aaq5w1h9c112bbxf3b89k2ya"
     },
     "vim-moonfly-colors": {
       "type": "Git",
