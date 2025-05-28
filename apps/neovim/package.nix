@@ -9,7 +9,6 @@
   stdenv,
 
   vimPlugins,
-  vimUtils,
 
   jq,
   errcheck,

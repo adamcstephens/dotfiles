@@ -43,15 +43,13 @@ lspconfig.efm.setup({
 --     },
 --   })
 -- end
-if vim.fn.executable("elixir-ls") == 1 then
-  lspconfig.elixirls.setup({
-    capabilities = capabilities,
-    cmd = { "elixir-ls" },
-    on_attach = function(client)
-      client.server_capabilities.semanticTokensProvider = nil
-    end,
-  })
-end
+lspconfig.elixirls.setup({
+  capabilities = capabilities,
+  cmd = { "elixir-ls" },
+  on_attach = function(client)
+    client.server_capabilities.semanticTokensProvider = nil
+  end,
+})
 
 -- go
 lspconfig.golangci_lint_ls.setup({})
