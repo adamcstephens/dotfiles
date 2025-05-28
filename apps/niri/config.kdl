@@ -364,6 +364,7 @@ binds {
       spawn "systemd-cat" "--identifier=swayosd-client" "swayosd-client" "--brightness" "lower";
     }
 
+    Mod+Grave { toggle-overview; }
     Mod+Q { close-window; }
 
     Mod+Left  { focus-column-left; }
@@ -584,4 +585,11 @@ binds {
 
 hotkey-overlay {
     skip-at-startup
+}
+
+// Disable the hot corners.
+gestures {
+    hot-corners {
+        off
+    }
 }
