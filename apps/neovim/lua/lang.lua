@@ -1,11 +1,3 @@
--- print lsp info
--- lua =vim.lsp.get_active_clients()[5]
-
-local dap = require("dap")
-local lspconfig = require("lspconfig")
-local configs = require("lspconfig.configs")
-local capabilities = require("blink.cmp").get_lsp_capabilities()
-
 local efm_languages = {
   fish = {
     require("efmls-configs.linters.fish"),
@@ -17,8 +9,7 @@ local efm_languages = {
   },
 }
 
-lspconfig.efm.setup({
-  capabilities = capabilities,
+vim.lsp.config("efm", {
   filetypes = vim.tbl_keys(efm_languages),
   settings = {
     rootMarkers = { ".git/" },
@@ -29,35 +20,20 @@ lspconfig.efm.setup({
     documentRangeFormatting = true,
   },
 })
+vim.lsp.enable("efm")
 
 -- elixir
--- if vim.fn.executable("nextls") == 1 then
---   require("elixir").setup({
---     nextls = {
---       enable = true,
---       cmd = "nextls",
---     },
---     credo = { enable = true },
---     elixirls = {
---       enable = true,
---     },
---   })
--- end
-lspconfig.elixirls.setup({
-  capabilities = capabilities,
+vim.lsp.config("elixirls", {
   cmd = { "elixir-ls" },
   on_attach = function(client)
     client.server_capabilities.semanticTokensProvider = nil
   end,
 })
+vim.lsp.enable("elixirls")
 
 -- go
-lspconfig.golangci_lint_ls.setup({})
-if vim.fn.executable("gopls") == 1 then
-  lspconfig.gopls.setup({
-    capabilities = capabilities,
-  })
-end
+vim.lsp.enable("golangci_lint_ls")
+vim.lsp.enable("gopls")
 require("dap-go").setup({
   dap_configurations = {
     {
@@ -69,32 +45,20 @@ require("dap-go").setup({
   },
 })
 
--- haskell
-if vim.fn.executable("haskell-language-server-wrapper") == 1 then
-  lspconfig.hls.setup({
-    filetypes = { "haskell", "lhaskell", "cabal" },
-  })
-end
-
 -- html
-if vim.fn.executable("superhtml") == 1 then
-  require("lspconfig").superhtml.setup({
-    capabilities = capabilities,
-    filetypes = { "superhtml", "html", "heex" },
-  })
-end
+vim.lsp.config("superhtml", {
+  filetypes = { "superhtml", "html", "heex" },
+})
+vim.lsp.enable("superhtml")
 
 -- json
-if vim.fn.executable("vscode-json-languageserver") == 1 then
-  require("lspconfig").jsonls.setup({
-    capabilities = capabilities,
-    cmd = { "vscode-json-languageserver", "--stdio" },
-  })
-end
+vim.lsp.config("jsonls", {
+  cmd = { "vscode-json-languageserver", "--stdio" },
+})
+vim.lsp.enable("jsonls")
 
 -- lua
-lspconfig.lua_ls.setup({
-  capabilities = capabilities,
+vim.lsp.config("lua_ls", {
   settings = {
     Lua = {
       diagnostics = {
@@ -110,34 +74,11 @@ lspconfig.lua_ls.setup({
     },
   },
 })
-require("lspconfig").teal_ls.setup({})
+vim.lsp.enable("lua_ls")
+vim.lsp.enable("teal_ls")
 
 -- nix
-if vim.fn.executable("nixd") == 1 then
-  lspconfig.nixd.setup({
-    capabilities = capabilities,
-  })
-end
--- if vim.fn.executable("nil") == 1 then
---   lspconfig.nil_ls.setup({
---     capabilities = capabilities,
---     on_attach = function(client)
---       client.server_capabilities.semanticTokensProvider = nil
---       client.server_capabilities.documentFormattingProvider = nil
---     end,
---     settings = {
---       ["nil"] = {
---         nix = {
---           flake = {
---             autoArchive = true,
---             -- autoEvalInputs = true,
---             maxMemoryMB = 8192,
---           },
---         },
---       },
---     },
---   })
--- end
+vim.lsp.enable("nixd")
 -- ignore nix in shebangs
 local match_contents = require("vim.filetype.detect").match_contents
 require("vim.filetype.detect").match_contents = function(...)
@@ -148,82 +89,50 @@ require("vim.filetype.detect").match_contents = function(...)
 end
 
 -- ocaml
-if vim.fn.executable("ocamllsp") == 1 then
-  lspconfig.ocamllsp.setup({
-    capabilities = capabilities,
-    settings = {
-      codelens = { enable = true },
-    },
-  })
-end
-
--- protobuf
--- if vim.fn.executable("buf") == 1 then
---   require("lspconfig").buf_ls.setup({
---     capabilities = capabilities,
---     on_attach = function(client)
---       client.server_capabilities = {
---         semanticTokensProvider = nil,
---       }
---     end,
---   })
--- end
+vim.lsp.config("ocamllsp", {
+  settings = {
+    codelens = { enable = true },
+  },
+})
+vim.lsp.enable("ocamllsp")
 
 -- python
-if vim.fn.executable("pylsp") == 1 then
-  require("lspconfig").pylsp.setup({
-    capabilities = capabilities,
-    settings = {
-      pylsp = {
-        plugins = {
-          mypy = { enabled = true },
-        },
+vim.lsp.config("pylsp", {
+  settings = {
+    pylsp = {
+      plugins = {
+        mypy = { enabled = true },
       },
     },
-  })
-end
-if vim.fn.executable("pyright") == 1 then
-  require("lspconfig").pyright.setup({
-    capabilities = capabilities,
-  })
-end
-if vim.fn.executable("ruff") == 1 then
-  require("lspconfig").ruff.setup({})
-end
+  },
+})
+vim.lsp.enable("pylsp")
+vim.lsp.enable("pyright")
+vim.lsp.enable("ruff")
 
 -- tofu
-if vim.fn.executable("terraform-lsp") == 1 then
-  require("lspconfig").terraform_lsp.setup({
-    capabilities = capabilities,
-  })
-end
+vim.lsp.enable("terraformls")
 
 -- typescript and javascript
-if vim.fn.executable("typescript-language-server") == 1 then
-  require("lspconfig").ts_ls.setup({})
-end
+vim.lsp.enable("ts_ls")
 
 -- yaml
-if vim.fn.executable("yaml-language-server") == 1 then
-  require("lspconfig").yamlls.setup({
-    capabilities = capabilities,
-    settings = {
-      redhat = {
-        telemetry = {
-          enabled = false,
-        },
+vim.lsp.config("yamlls", {
+  settings = {
+    redhat = {
+      telemetry = {
+        enabled = false,
       },
     },
-  })
-end
+  },
+})
+vim.lsp.enable("yamlls")
 
 -- zig
-lspconfig.zls.setup({})
+vim.lsp.enable("zls")
 
 -- zk
 require("zk").setup({
   picker = "minipick",
 })
-if vim.fn.executable("zk") == 1 then
-  lspconfig.zk.setup({})
-end
+vim.lsp.enable("zk")

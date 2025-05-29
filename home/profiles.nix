@@ -118,7 +118,7 @@ in
               pkgs.docker
               pkgs.entr
               pkgs.git-lfs
-              pkgs.terraform-lsp
+              pkgs.terraform-ls
               pkgs.typescript-language-server
             ];
 
