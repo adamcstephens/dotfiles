@@ -10,7 +10,6 @@
 
   vimPlugins,
 
-  jq,
   errcheck,
   golangci-lint,
   golangci-lint-langserver,
@@ -118,7 +117,7 @@ mnw.lib.wrap pkgs {
   };
 
   extraBinPath =
-    [ jq ]
+    [ ]
     ++ lib.optionals full [
       errcheck
       golangci-lint

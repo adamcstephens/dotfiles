@@ -114,7 +114,7 @@
       pkgs.file
       pkgs.gdu
       pkgs.jless
-      pkgs.jq
+      pkgs.gojq
       pkgs.just
       # pkgs.kalker
       pkgs.kitty.terminfo

@@ -4,7 +4,7 @@
   bash,
   git,
   home-profile-selector,
-  jq,
+  gojq,
   just,
   nix-output-monitor,
   nvd,
@@ -21,7 +21,7 @@ writeShellScriptBin "hm" ''
       bash
       git
       home-profile-selector
-      jq
+      gojq
       just
       nix-output-monitor
       nvd
@@ -64,7 +64,7 @@ writeShellScriptBin "hm" ''
       true
       ;;
     switch|sw)
-      old_profile=$(nix ${nixArgs} profile list --json | jq -r '.elements."home-manager-path".storePaths[0]')
+      old_profile=$(nix ${nixArgs} profile list --json | gojq -r '.elements."home-manager-path".storePaths[0]')
       if [ -n "$old_profile" ]; then
         echo "❌ Removing old profile: $old_profile"
         nix ${nixArgs} profile remove $old_profile
