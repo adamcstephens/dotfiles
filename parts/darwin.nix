@@ -8,7 +8,8 @@
   imports = [ inputs.profile-parts.flakeModules.darwin ];
 
   profile-parts.default.darwin = {
-    inherit (inputs) nix-darwin nixpkgs;
+    inherit (inputs) nix-darwin;
+    nixpkgs = inputs.nixpkgs-unstable;
     exposePackages = true;
   };
 
@@ -30,7 +31,7 @@
             pkgs.jetbrains-mono
             pkgs.material-icons
             pkgs.material-design-icons
-            inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.nerd-fonts.symbols-only
+            pkgs.nerd-fonts.symbols-only
           ];
 
           nix = {
@@ -65,6 +66,8 @@
               };
               options = "--delete-older-than 21d";
             };
+
+            package = pkgs.nixVersions.nix_2_29;
 
             settings = {
               auto-optimise-store = false;
