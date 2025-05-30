@@ -11,6 +11,7 @@ require("aid")
 require("auto")
 require("lang")
 require("theme")
+require("dotinit.core")
 
 -- packages
 --
