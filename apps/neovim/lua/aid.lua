@@ -29,22 +29,6 @@ vim.diagnostic.config({
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
 
--- copilot
---
-require("copilot").setup({
-  suggestion = {
-    auto_trigger = false,
-  },
-  server_opts_overrides = {
-    settings = {
-      telemetry = {
-        telemetryLevel = "off",
-      },
-    },
-  },
-})
-require("CopilotChat").setup({})
-
 -- formatting
 --
 require("conform").setup({
