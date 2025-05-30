@@ -57,7 +57,7 @@ in
           default = pkgs.makeFontsConf {
             fontDirectories =
               [
-                inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.nerd-fonts.symbols-only
+                pkgs.nerd-fonts.symbols-only
                 pkgs.font-awesome
                 pkgs.ibm-plex
                 pkgs.jetbrains-mono

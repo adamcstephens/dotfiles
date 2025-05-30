@@ -1,7 +1,6 @@
 {
   config,
   flake,
-  inputs,
   lib,
   pkgs,
   ...
@@ -96,7 +95,7 @@ in
   };
 
   home.pointerCursor = {
-    package = inputs.nixpkgs-unstable-small.legacyPackages.${pkgs.system}.bibata-cursors;
+    package = pkgs.bibata-cursors;
     name = "Bibata-Original-Ice";
     size = 32;
     gtk.enable = true;
@@ -128,7 +127,7 @@ in
 
       # audio
       pkgs.playerctl
-      inputs.nixpkgs-unstable-small.legacyPackages.x86_64-linux.pwvucontrol
+      pkgs.pwvucontrol
       pkgs.wireplumber
 
       # firefox

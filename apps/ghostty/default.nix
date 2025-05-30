@@ -1,6 +1,5 @@
 {
   config,
-  inputs,
   lib,
   npins,
   pkgs,
@@ -8,7 +7,7 @@
 }:
 {
   home.packages = lib.optionals pkgs.stdenv.isLinux [
-    inputs.nixpkgs-unstable-small.legacyPackages.${pkgs.system}.ghostty
+    pkgs.ghostty
   ];
 
   programs.fish.interactiveShellInit = lib.optionalString pkgs.stdenv.isDarwin ''

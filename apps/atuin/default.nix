@@ -1,6 +1,5 @@
 {
   config,
-  inputs,
   lib,
   pkgs,
   ...
@@ -8,7 +7,6 @@
 {
   programs.atuin = {
     enable = true;
-    package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.atuin;
 
     flags = [ "--disable-up-arrow" ];
 

@@ -1,5 +1,4 @@
 {
-  inputs,
   pkgs,
   ...
 }:
@@ -17,7 +16,7 @@
   };
 
   home.packages = [
-    inputs.nixpkgs-unstable-small.legacyPackages.${pkgs.system}.age-plugin-yubikey
-    inputs.nixpkgs-unstable-small.legacyPackages.${pkgs.system}.yubikey-manager
+    pkgs.age-plugin-yubikey
+    pkgs.yubikey-manager
   ];
 }
