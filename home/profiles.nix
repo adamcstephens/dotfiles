@@ -163,8 +163,6 @@ in
 
           dotfiles = {
             apps = {
-              hypridle.enable = true;
-              swayidle.enable = false;
               zk.enable = true;
             };
             gui = {
@@ -220,8 +218,6 @@ in
 
             dotfiles = {
               apps = {
-                hypridle.enable = true;
-                swayidle.enable = false;
                 zk.enable = true;
               };
               gui = {
