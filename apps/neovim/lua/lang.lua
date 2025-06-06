@@ -28,6 +28,13 @@ vim.lsp.config("elixirls", {
   on_attach = function(client)
     client.server_capabilities.semanticTokensProvider = nil
   end,
+  root_dir = function(bufnr, on_dir)
+    local matches = vim.fs.find({ "mix.lock" }, { upward = true, limit = 1 })
+    local child_or_root_path, maybe_umbrella_path = unpack(matches)
+    local root_dir = vim.fs.dirname(maybe_umbrella_path or child_or_root_path)
+
+    on_dir(root_dir)
+  end,
 })
 vim.lsp.enable("elixirls")
 
