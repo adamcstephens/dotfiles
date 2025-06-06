@@ -19,12 +19,5 @@ return {
         icon = "󱚟",
       },
     })
-
-    vim.api.nvim_create_autocmd("User", {
-      pattern = "DirenvLoaded",
-      callback = function()
-        vim.cmd("LspStart")
-      end,
-    })
   end,
 }
