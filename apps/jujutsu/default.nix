@@ -1,5 +1,6 @@
 {
   config,
+  inputs,
   lib,
   pkgs,
   ...
@@ -13,7 +14,8 @@ let
 in
 {
   home.packages = [
-    pkgs.jujutsu
+    inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.jjui
+    inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.jujutsu
     pkgs.watchman
   ];
 

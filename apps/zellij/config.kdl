@@ -7,7 +7,7 @@ keybinds clear-defaults=true {
       SwitchToMode "normal"
     }
     bind "Super g" {
-      Run "lg" {
+      Run "vcs-tui" {
         floating true
         hold_on_close false
         close_on_exit true

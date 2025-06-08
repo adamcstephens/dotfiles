@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+SSH_AUTH_SOCK=$(ssh-agent-mgr)
+export SSH_AUTH_SOCK
+
+if [ -d .jj ]; then
+  exec jjui "$@"
+fi
+
+if [ -d .git ]; then
+  exec lazygit "$@"
+fi
