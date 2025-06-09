@@ -87,7 +87,12 @@
       if [ ! -h ${config.home.homeDirectory}/.dotfiles ]; then
         pushd ${config.home.homeDirectory}/.dotfiles || exit 1
         # git pull, but don't error on failure
-        ${lib.getExe pkgs.git} pull || true
+        if [ -d .jj ]; then
+          ${lib.getExe pkgs.jujutsu} git fetch --all-remotes || true
+          ${lib.getExe pkgs.jujutsu} rebase --destination main@origin || true
+        else
+          ${lib.getExe pkgs.git} pull || true
+        fi
       fi
     ''
   );
