@@ -4,22 +4,19 @@
   homeConfigurations,
   ...
 }:
+let
+  ocamlPackages =
+    if pkgs.stdenv.isLinux && pkgs.stdenv.isx86_64 then
+      inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.pkgsMusl.ocaml-ng.ocamlPackages_5_3
+    else
+      inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.ocaml-ng.ocamlPackages_5_3;
+in
 rec {
   arkenfox = pkgs.callPackage ./arkenfox { };
   default = dotfiles;
-  dotfiles = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.callPackage ./dotfiles.nix (
-    if pkgs.stdenv.isLinux && pkgs.stdenv.isx86_64 then
-      {
-        ocamlPackages =
-          inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.pkgsMusl.ocaml-ng.ocamlPackages_5_3;
-        static = true;
-      }
-    else
-      {
-        ocamlPackages = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.ocaml-ng.ocamlPackages_5_3;
-        static = false;
-      }
-  );
+  dotfiles = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.callPackage ./dotfiles.nix {
+    inherit ocamlPackages;
+  };
   hm = pkgs.callPackage ./hm.nix { inherit home-profile-selector; };
   home-profile-selector = pkgs.callPackage ./home-profile-selector.nix {
     inherit homeConfigurations;

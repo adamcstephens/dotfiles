@@ -1,5 +1,5 @@
 {
-  static ? false,
+  static ? true,
 
   lib,
   ocamlPackages,
