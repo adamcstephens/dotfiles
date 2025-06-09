@@ -17,11 +17,11 @@ ocamlPackages.buildDunePackage {
     with lib.fileset;
     toSource {
       root = ../.;
-      fileset = unions ([
+      fileset = unions [
         ../bin
         ../lib
         ../dune-project
-      ]);
+      ];
     };
 
   buildInputs = with ocamlPackages; [
