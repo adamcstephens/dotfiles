@@ -130,8 +130,8 @@
               "/bin/sh"
               "-c"
               ''
-                /bin/wait4path ${pkgs.nix}/bin/nix && \
-                  exec ${pkgs.nix}/bin/nix store optimise
+                /bin/wait4path ${config.nix.package}/bin/nix && \
+                  exec ${config.nix.package}/bin/nix store optimise
               ''
             ];
             StartCalendarInterval = [
