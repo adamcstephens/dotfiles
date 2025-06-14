@@ -1,4 +1,4 @@
-(version 3.18.2)
+(version 3.19.1)
 
 (build
  (progn
@@ -14,6 +14,6 @@
 (source
  (fetch
   (url
-   https://github.com/ocaml/dune/releases/download/3.18.2/dune-3.18.2.tbz)
+   https://github.com/ocaml/dune/releases/download/3.19.1/dune-3.19.1.tbz)
   (checksum
-   sha256=56be509ffc3c5ba652113d9e6b43edb04a691f1e1f6cbba17b9d243b1239a7af)))
+   sha256=a10386f980cda9417d1465466bed50dd2aef9c93b9d06a0f7feeedb0a1541158)))

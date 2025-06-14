@@ -12,6 +12,6 @@
 (executables
  (names dark escape_file ssh_agent_mgr vcs_tui wayland_locker)
  (public_names dark escape-file ssh-agent-mgr vcs-tui wayland-locker)
- (libraries dotfiles unix fileutils yojson)
+ (libraries dotfiles logs logs.fmt unix fileutils yojson)
  (link_flags
   (:include link_flags.%{system})))
