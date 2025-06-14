@@ -1,25 +1,3 @@
-local snippets_path = "~/.dotfiles/apps/neovim/snippets"
-
--- blink completion
-require("blink.cmp").setup({
-  completion = {
-    ghost_text = { enabled = true },
-    list = {
-      selection = {
-        preselect = false,
-        auto_insert = true,
-      },
-    },
-  },
-  keymap = {
-    preset = "enter",
-
-    ["<C-j>"] = { "select_next", "fallback" },
-    ["<C-k>"] = { "select_prev", "fallback" },
-  },
-  sources = { providers = { snippets = { opts = { search_paths = { snippets_path } } } } },
-})
-
 -- builtin
 vim.diagnostic.config({
   float = {
