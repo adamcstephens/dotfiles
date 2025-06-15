@@ -8,15 +8,19 @@ let
   cfg = config.dotfiles.apps.waybar;
 in
 {
-  options.dotfiles.apps.waybar.battery = lib.mkOption {
-    type = lib.types.enum [
-      "battery"
-      "upower"
-    ];
-    default = "battery";
+  options.dotfiles.apps.waybar = {
+    enable = lib.mkEnableOption "waybar service";
+
+    battery = lib.mkOption {
+      type = lib.types.enum [
+        "battery"
+        "upower"
+      ];
+      default = "battery";
+    };
   };
 
-  config = lib.mkIf config.dotfiles.gui.wayland.enable {
+  config = lib.mkIf cfg.enable {
     programs.waybar = {
       enable = true;
       systemd.enable = true;

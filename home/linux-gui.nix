@@ -43,6 +43,7 @@ in
     # wayland
     ../apps/hypridle
     ../apps/kanshi
+    ../apps/ironbar
     ../apps/niri
     ../apps/river
     ../apps/sleepwatcher-rs
@@ -69,7 +70,10 @@ in
     };
   };
 
-  dotfiles.apps.hypridle.enable = lib.mkDefault config.dotfiles.gui.wayland.enable;
+  dotfiles.apps = {
+    hypridle.enable = lib.mkDefault config.dotfiles.gui.wayland.enable;
+    ironbar.enable = lib.mkDefault config.dotfiles.gui.wayland.enable;
+  };
 
   # reads fonts from home.packages
   fonts.fontconfig.enable = true;

@@ -1,0 +1,53 @@
+@import url("colors.css");
+
+* {
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  text-shadow: none;
+  transition-duration: 0s;
+}
+
+.background,
+.clock label,
+.music .contents,
+.upower .contents {
+  background-color: @color_bg;
+}
+
+#bar {
+  border-bottom: 1px solid @color_03;
+}
+
+button,
+label {
+  background-color: @color_bg;
+  padding: 0;
+  margin: 0;
+}
+
+.tray {
+  margin-right: 10;
+}
+
+.upower {
+  margin-right: 10;
+}
+
+.upower .icon {
+  color: @color_fg;
+}
+
+.clock {
+  margin-right: 10;
+}
+
+.volume {
+  margin-right: 10;
+}
+
+.popup {
+  background-color: @color_bg;
+  border: 1px solid @color_fg;
+  padding: 4;
+}

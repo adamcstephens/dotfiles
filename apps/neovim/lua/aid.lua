@@ -14,6 +14,7 @@ require("conform").setup({
     lsp_fallback = true,
   },
   formatters_by_ft = {
+    css = { "biome" },
     direnv = { "shfmt" },
     dune = { "format-dune-file" },
     javascript = { "prettier" },
