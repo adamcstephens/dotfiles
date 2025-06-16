@@ -17,7 +17,7 @@ in
       pkgs.ironbar
     ];
 
-    home.file.".config/ironbar/config.json".text = builtins.toJSON {
+    xdg.configFile."ironbar/config.json".text = builtins.toJSON {
       center = [
         {
           type = "music";
@@ -59,7 +59,7 @@ in
       start = [ ];
     };
 
-    home.file.".config/ironbar/colors.css".text = ''
+    xdg.configFile."ironbar/colors.css".text = ''
       @define-color color_bg #${config.colorScheme.palette.base00};
       @define-color color_fg #bdbdbd;
       @define-color color_01 #${config.colorScheme.palette.base01};
@@ -67,7 +67,7 @@ in
 
     '';
 
-    home.file.".config/ironbar/style.css".source =
+    xdg.configFile."ironbar/style.css".source =
       if config.dotfiles.nixosManaged then
         ./style.css
       else
@@ -82,7 +82,7 @@ in
 
       Service = {
         Environment = [
-          "IRONBAR_CONFIG=${config.home.file.".config/ironbar/config.json".source}"
+          "IRONBAR_CONFIG=${config.xdg.configFile."ironbar/config.json".source}"
         ];
         ExecStart = lib.getExe pkgs.ironbar;
         Restart = "on-failure";

@@ -1,8 +1,19 @@
-{ npins, ... }:
 {
-  programs.tmux = {
-    enable = true;
-    extraConfig =
-      builtins.readFile "${npins.vim-moonfly-colors}/extras/moonfly.tmux" + builtins.readFile ./tmux.conf;
-  };
+  config,
+  npins,
+  pkgs,
+  ...
+}:
+{
+  home.packages = [
+    pkgs.tmux
+  ];
+
+  xdg.configFile."tmux/tmux.conf".source =
+    if config.dotfiles.nixosManaged then
+      ./tmux.conf
+    else
+      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/tmux/tmux.conf";
+
+  xdg.configFile."tmux/theme-dark.conf".source = "${npins.vim-moonfly-colors}/extras/moonfly.tmux";
 }
