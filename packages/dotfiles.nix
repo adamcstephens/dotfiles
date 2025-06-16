@@ -24,6 +24,11 @@ ocamlPackages.buildDunePackage {
       ];
     };
 
+  # only care about bin
+  postInstall = ''
+    rm -rf $out/lib
+  '';
+
   buildInputs = with ocamlPackages; [
     eio
     eio_main

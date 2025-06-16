@@ -16,6 +16,7 @@ rec {
   default = dotfiles;
   dotfiles = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.callPackage ./dotfiles.nix {
     inherit ocamlPackages;
+    static = pkgs.stdenv.isLinux && pkgs.stdenv.isx86_64;
   };
   hm = pkgs.callPackage ./hm.nix { inherit home-profile-selector; };
   home-profile-selector = pkgs.callPackage ./home-profile-selector.nix {
