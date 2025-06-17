@@ -1,9 +1,7 @@
 return {
   "CopilotChat",
 
-  -- event = "DeferredUIEnter",
-
-  cmd = { "CopilotChat", "CopilotChatOpen", "CopilotChatLoad", "CopilotChatToggle" },
+  cmd = { "Copilot", "CopilotChat", "CopilotChatOpen", "CopilotChatLoad", "CopilotChatToggle" },
 
   -- lazy = false,
 

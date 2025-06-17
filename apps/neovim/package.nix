@@ -112,6 +112,7 @@ mnw.lib.wrap pkgs {
         blink-cmp
         copilot-lua
         oil-nvim
+        tiny-inline-diagnostic-nvim
       ]
       ++ (mnw.lib.npinsToPlugins pkgs ./npins.lazy/sources.json);
   };
