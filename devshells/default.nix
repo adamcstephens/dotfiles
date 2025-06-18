@@ -7,6 +7,7 @@ mkShell {
 
   packages = [
     pkgs.attic-client
+    pkgs.nix-update
     pkgs.npins
 
     ocamlPackages.dune_3
