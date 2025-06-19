@@ -18,7 +18,7 @@
     sandbox.url = "git+https://codeberg.org/adamcstephens/nix-sandbox";
     sandbox.inputs.nixpkgs.follows = "nixpkgs";
     sandbox.inputs.sower.follows = "sower";
-    sower.url = "git+https://codeberg.org/adamcstephens/sower.git";
+    sower.url = "git+https://codeberg.org/adamcstephens/sower.git?ref=release-4";
   };
 
   outputs =
