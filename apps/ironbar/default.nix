@@ -18,6 +18,7 @@ in
     ];
 
     xdg.configFile."ironbar/config.json".text = builtins.toJSON {
+      start = [ ];
       center = [
         {
           type = "music";
@@ -56,7 +57,6 @@ in
       height = 30;
       icon_theme = config.gtk.iconTheme.name;
       position = "top";
-      start = [ ];
     };
 
     xdg.configFile."ironbar/colors.css".text = ''
