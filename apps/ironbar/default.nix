@@ -1,5 +1,6 @@
 {
   config,
+  inputs,
   lib,
   pkgs,
   ...
@@ -10,15 +11,21 @@ in
 {
   options.dotfiles.apps.ironbar = {
     enable = lib.mkEnableOption "ironbar service";
+
+    package = lib.mkPackageOption inputs.ironbar.packages.${pkgs.system} "ironbar" { };
   };
 
   config = lib.mkIf cfg.enable {
     home.packages = [
-      pkgs.ironbar
+      cfg.package
     ];
 
     xdg.configFile."ironbar/config.json".text = builtins.toJSON {
-      start = [ ];
+      start = [
+        {
+          type = "workspaces";
+        }
+      ];
       center = [
         {
           type = "music";
@@ -84,7 +91,7 @@ in
         Environment = [
           "IRONBAR_CONFIG=${config.xdg.configFile."ironbar/config.json".source}"
         ];
-        ExecStart = lib.getExe pkgs.ironbar;
+        ExecStart = lib.getExe cfg.package;
         Restart = "on-failure";
         RestartSec = 1;
       };
