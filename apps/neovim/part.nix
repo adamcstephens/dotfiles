@@ -6,7 +6,7 @@
       ...
     }:
     let
-      pkgs = inputs'.nixpkgs-unstable-small.legacyPackages;
+      pkgs = inputs'.nixpkgs-unstable.legacyPackages;
     in
     {
       packages = rec {

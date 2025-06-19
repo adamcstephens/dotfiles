@@ -14,7 +14,7 @@
 
   programs.fish = {
     enable = true;
-    package = inputs.nixpkgs-unstable-small.legacyPackages.${pkgs.system}.fish;
+    package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.fish;
     plugins = [ ];
 
     shellInit =
