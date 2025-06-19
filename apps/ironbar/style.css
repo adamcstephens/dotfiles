@@ -26,7 +26,15 @@ label {
   margin: 0px;
 }
 
-.tray {
+.popup {
+  background-color: @color_bg;
+  border: 1px solid @color_fg;
+  padding: 4px;
+}
+
+/* modules */
+
+.clock {
   margin-right: 10px;
 }
 
@@ -38,7 +46,7 @@ label {
   color: @color_fg;
 }
 
-.clock {
+.tray {
   margin-right: 10px;
 }
 
@@ -46,8 +54,12 @@ label {
   margin-right: 10px;
 }
 
-.popup {
-  background-color: @color_bg;
-  border: 1px solid @color_fg;
-  padding: 4px;
+.workspaces .item.focused label {
+  color: @color_bg;
+  background-color: @color_fg;
+}
+
+.workspaces .item label {
+  padding-left: 10px;
+  padding-right: 10px;
 }
