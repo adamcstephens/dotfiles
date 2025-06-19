@@ -61,6 +61,11 @@
     gss = "git status --short";
     gsw = "git switch";
     gswc = "git switch --create";
+    jjc = "jj commit";
+    jjd = "jj diff";
+    jjbm = "jj bookmark move --to @-";
+    jjgf = "jj git fetch --all-remotes";
+    jjgp = "jj git push";
     gw = "git worktree";
     gt = "git tag --list -n1";
     ivl = "sudo iptables -vnL --line-numbers";
