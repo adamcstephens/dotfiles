@@ -7,7 +7,6 @@ vim.g.mapleader = ","
 
 -- includes
 --
-require("aid")
 require("auto")
 require("lang")
 require("theme")
@@ -246,7 +245,6 @@ vim.keymap.set("n", "<leader>f", builtin.find_files, { desc = "Find Files" })
 vim.keymap.set("n", "<leader>g", neogit.open, { desc = "Open Neogit" })
 vim.keymap.set("n", "<leader>hk", builtin.keymaps, { desc = "Keymaps" })
 vim.keymap.set("n", "<leader>ho", builtin.help_tags, { desc = "Help Tags" })
-vim.keymap.set({ "v", "n" }, "<leader>la", require("actions-preview").code_actions, { desc = "Code actions" })
 
 vim.keymap.set("n", "<leader>lf", function()
   require("telescope.builtin").treesitter({ symbols = { "function", "method" } })

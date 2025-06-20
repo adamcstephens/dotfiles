@@ -12,21 +12,6 @@
       "url": null,
       "hash": "0ipix0fnnmvly2xrr6s97h54mx4m9nigksz53c782miyf2m649b4"
     },
-    "conform.nvim": {
-      "type": "GitRelease",
-      "repository": {
-        "type": "Git",
-        "url": "https://github.com/stevearc/conform.nvim"
-      },
-      "pre_releases": false,
-      "version_upper_bound": null,
-      "release_prefix": null,
-      "submodules": false,
-      "version": "v9.0.0",
-      "revision": "a6f5bdb78caa305496357d17e962bbc4c0b392e2",
-      "url": null,
-      "hash": "1jkm8pbfnp2s9y70cc67pj2fa25a4jl1y4lx6y1k5i323f4lplhz"
-    },
     "move-nvim": {
       "type": "Git",
       "repository": {

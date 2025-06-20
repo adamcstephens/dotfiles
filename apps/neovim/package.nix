@@ -58,7 +58,6 @@ mnw.lib.wrap pkgs {
       [
         lz-n
 
-        actions-preview-nvim
         cyberdream-nvim
         editorconfig-nvim
         efmls-configs-nvim
@@ -108,6 +107,7 @@ mnw.lib.wrap pkgs {
     opt =
       with vimPlugins;
       [
+        actions-preview-nvim
         blink-cmp
         copilot-lua
         oil-nvim
