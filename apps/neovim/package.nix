@@ -66,7 +66,6 @@ mnw.lib.wrap pkgs {
         fidget-nvim
         friendly-snippets
         fugitive
-        gitsigns-nvim
         lualine-nvim
         mini-pick
         neogit

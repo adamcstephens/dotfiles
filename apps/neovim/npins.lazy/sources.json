@@ -26,6 +26,21 @@
       "revision": "a2f1264909463fd012b7b0b6bbfebc282c5d2834",
       "url": null,
       "hash": "1gg38ppl6kw0n4hvd7bkridkfsnzpw615xh1x8azz498xysxj2cw"
+    },
+    "gitsigns.nvim": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "Git",
+        "url": "https://github.com/lewis6991/gitsigns.nvim"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "submodules": false,
+      "version": "v1.0.2",
+      "revision": "7010000889bfb6c26065e0b0f7f1e6aa9163edd9",
+      "url": null,
+      "hash": "0hl572j5l1bqg51rg545bavxs8kxya02ss3fj5fxvp9ylrnaqsx9"
     }
   },
   "version": 5

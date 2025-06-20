@@ -17,7 +17,6 @@ require("dotinit.core")
 --
 -- notifications
 require("fidget").setup({})
-require("gitsigns").setup()
 
 require("mini.pick").setup({})
 require("move").setup({
