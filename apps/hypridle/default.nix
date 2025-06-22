@@ -16,7 +16,7 @@ in
       enable = true;
       settings = {
         general = {
-          after_sleep_cmd = "niri msg action power-on-monitors";
+          after_sleep_cmd = "wayland-monitor on";
           before_sleep_cmd = "loginctl lock-session";
           ignore_dbus_inhibit = false;
           lock_cmd = "wayland-locker";
@@ -40,8 +40,8 @@ in
             }
             {
               timeout = 900;
-              on-timeout = "niri msg action power-off-monitors";
-              on-resume = "niri msg action power-on-monitors";
+              on-timeout = "wayland-monitor off";
+              on-resume = "wayland-monitor on";
             }
           ]
           ++ lib.optionals (!config.dotfiles.gui.dontSleep) [
