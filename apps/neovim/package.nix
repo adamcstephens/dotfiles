@@ -109,6 +109,7 @@ mnw.lib.wrap pkgs {
       [
         actions-preview-nvim
         blink-cmp
+        diffview-nvim
         copilot-lua
         oil-nvim
         tiny-inline-diagnostic-nvim
