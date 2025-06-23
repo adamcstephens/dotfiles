@@ -8,6 +8,8 @@ mkShell {
   packages = [
     pkgs.attic-client
     pkgs.nh
+    pkgs.gitMinimal
+    pkgs.just
     pkgs.nix-update
     pkgs.npins
 

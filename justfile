@@ -19,7 +19,7 @@ bump-packages:
     nix-update --flake arkenfox --commit
 
 nix-darwin-bootstrap:
-    eval $(nix build .#darwin/$(hostname -s) --print-out-paths)/sw/bin/darwin-rebuild switch --flake ~/.dotfiles
+    sudo $(nix build .#darwin/$(hostname -s) --print-out-paths)/sw/bin/darwin-rebuild switch --flake ~/.dotfiles
 
 fish-bootstrap:
     fish ~/.dotfiles/bin/theme.fish

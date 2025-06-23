@@ -8,7 +8,7 @@
 let
   prj =
     if (config.dotfiles.nixosManaged || pkgs.stdenv.isDarwin) then
-      pkgs.callPackage ../../packages/prj.nix { } |> lib.getExe
+      lib.getExe (pkgs.callPackage ../../packages/prj.nix { })
     else
       "${config.home.homeDirectory}/.dotfiles/bin/prj";
 in
