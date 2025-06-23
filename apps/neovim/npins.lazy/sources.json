@@ -56,6 +56,36 @@
       "revision": "7010000889bfb6c26065e0b0f7f1e6aa9163edd9",
       "url": null,
       "hash": "0hl572j5l1bqg51rg545bavxs8kxya02ss3fj5fxvp9ylrnaqsx9"
+    },
+    "nvim-dap": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "Git",
+        "url": "https://github.com/mfussenegger/nvim-dap"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "submodules": false,
+      "version": "0.10.0",
+      "revision": "b8abfc6baba5d9a561ca5d1a82aa790bc8175e6a",
+      "url": null,
+      "hash": "0i10mybxpz0vjkyspv8jkxawph9c823ryf0khb4g8zwpixwhrpmx"
+    },
+    "nvim-lspconfig": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "Git",
+        "url": "https://github.com/neovim/nvim-lspconfig"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "submodules": false,
+      "version": "v2.3.0",
+      "revision": "77d3fdfb3554632c7a3b101ded643d422de7626f",
+      "url": null,
+      "hash": "0xlad1n0jzk1cir2fp4mnry7l6rbsq3rh2j1y1i5v7j25nk81rf0"
     }
   },
   "version": 5

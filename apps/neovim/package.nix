@@ -69,10 +69,7 @@ mnw.lib.wrap pkgs {
         mini-pick
         neogit
         nui-nvim
-        nvim-dap
-        nvim-dap-go
         nvim-highlight-colors
-        nvim-lspconfig
         nvim-treesitter.withAllGrammars
         nvim-treesitter-endwise
         nvim-surround
@@ -111,6 +108,7 @@ mnw.lib.wrap pkgs {
         blink-cmp
         diffview-nvim
         copilot-lua
+        nvim-dap-go
         oil-nvim
         tiny-inline-diagnostic-nvim
       ]

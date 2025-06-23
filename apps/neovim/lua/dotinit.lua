@@ -8,7 +8,6 @@ vim.g.mapleader = ","
 -- includes
 --
 require("auto")
-require("lang")
 require("theme")
 require("dotinit.core")
 
@@ -224,23 +223,13 @@ end, { desc = "Switch buffers" })
 vim.keymap.set("n", "<leader>bd", function()
   vim.cmd("bdelete")
 end, { desc = "Delete" })
-vim.keymap.set("n", "<leader>db", require("dap").toggle_breakpoint, { desc = "dap toggle breakpoint" })
 vim.keymap.set(
   "n",
   "<leader>dB",
   require("telescope").extensions.dap.list_breakpoints,
   { desc = "dap list breakpoints" }
 )
-vim.keymap.set("n", "<leader>dc", function()
-  -- (Re-)reads launch.json if present
-  if vim.fn.filereadable(".vscode/launch.json") then
-    require("dap.ext.vscode").load_launchjs(nil, { lldb = { "rust" } })
-  end
-  require("dap").continue()
-end, { desc = "dap continue (start)" })
-
 vim.keymap.set("n", "<leader>dh", require("telescope").extensions.dap.commands, { desc = "dap commands" })
-vim.keymap.set("n", "<leader>dr", require("dap").repl.open, { desc = "dap repl" })
 vim.keymap.set("n", "<leader>f", builtin.find_files, { desc = "Find Files" })
 vim.keymap.set("n", "<leader>g", neogit.open, { desc = "Open Neogit" })
 vim.keymap.set("n", "<leader>hk", builtin.keymaps, { desc = "Keymaps" })
