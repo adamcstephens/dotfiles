@@ -8,9 +8,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "c31de126963ffe9403901b4b0990dde0e6999cc6",
+      "revision": "97a86c9402c784a254e5465ca2c51481eea310e3",
       "url": null,
-      "hash": "0ipix0fnnmvly2xrr6s97h54mx4m9nigksz53c782miyf2m649b4"
+      "hash": "1w0z2crla19vm273skr3yhgq60hzn9kxr9ch0699hy2gdsl71ryd"
     },
     "move-nvim": {
       "type": "Git",
