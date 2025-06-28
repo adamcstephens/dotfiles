@@ -122,6 +122,7 @@
       pkgs.doggo
       pkgs.du-dust
       pkgs.file
+      pkgs.fzf
       pkgs.gdu
       pkgs.jless
       pkgs.gojq
@@ -130,6 +131,7 @@
       # pkgs.kalker
       pkgs.kitty.terminfo
       pkgs.ncdu
+      pkgs.skim
       pkgs.tio
       pkgs.viddy
       pkgs.wget
@@ -143,7 +145,6 @@
 
   programs = {
     eza.enable = true;
-    fzf.enable = true;
     direnv.enable = true;
     direnv.nix-direnv.enable = true;
     home-manager.enable = true;

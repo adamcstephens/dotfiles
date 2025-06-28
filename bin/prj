@@ -51,17 +51,19 @@ def prj_finder(remote: bool = False) -> str:
     command: str
     project: str
 
+    finder = "sk --reverse --height 22 --header 'Select a project dir' --info hidden"
+
     if remote:
-        selected_remote = run("fzf --height 22 --no-sort --filepath-word --reverse", input=gen_remotes())
+        selected_remote = run(finder, input=gen_remotes())
         run(f"ssh {selected_remote} true")
         project = run(
-            "fzf --height 22 --no-sort --filepath-word --reverse",
+            finder,
             input=run(f"ssh {selected_remote} zoxide query --list"),
         )
         project = f"{selected_remote}:{project}"
     else:
         if is_kitty or is_tmux or is_zellij:
-            command = "fzf --height 22 --no-sort --filepath-word --reverse"
+            command = finder
         elif is_wayland:
             command = "rofi -dmenu"
         else:
