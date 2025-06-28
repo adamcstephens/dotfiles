@@ -181,7 +181,7 @@ in
   systemd.user.services.polkit-agent = {
     Install.WantedBy = [ "graphical-session.target" ];
     Unit.PartOf = [ "graphical-session.target" ];
-    Service.ExecStart = "${pkgs.mate.mate-polkit}/libexec/polkit-mate-authentication-agent-1";
+    Service.ExecStart = lib.getExe pkgs.soteria;
   };
 
   systemd.user.services.blueberry-tray = {
