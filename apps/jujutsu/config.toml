@@ -19,3 +19,7 @@ editor = "nvim"
 [user]
 name = "Adam C. Stephens"
 email = "adam@valkor.net"
+
+# [templates]
+# commit_trailers = '''
+# format_signed_off_by_trailer(self)'''
