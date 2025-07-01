@@ -1,12 +1,13 @@
 #!/usr/bin/env sh
 
-staged=$(git diff --name-only --cached)
+export DFT_COLOR=always
 
-commit=$(git log --color=always --format="%C(auto)%h%d %s0x09%C(white)%C(bold)%cr" --max-count=300 |
-  fzf --ansi --no-sort --reverse --header-first \
-    --bind=ctrl-s:toggle-sort \
-    --preview="git show --color=always \$(echo {} | cut -c -7)" --header="Staged:
-$staged" | cut -c -7)
+commit=$(
+  git log --color=always --date=iso --format="%C(auto)%h%C(auto)%d %s %C(auto,blue)[%ar]" --max-count=50 |
+    sk --ansi --reverse \
+      --height 50% --info hidden \
+      --preview 'git -c diff.external=difft show --ext-diff {1}'
+)
 
 [ -z "$commit" ] && exit 1
 
