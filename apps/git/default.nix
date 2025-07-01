@@ -15,7 +15,6 @@ in
     ]
     ++ lib.optionals config.dotfiles.dev.enable [
       pkgs.gh
-      pkgs.hut
       pkgs.lazygit
       (pkgs.writeShellScriptBin "lg" "exec ${lib.getExe pkgs.lazygit} $@")
       pkgs.tea
@@ -41,6 +40,7 @@ in
       ".lsp/"
       ".worktree/"
       "result"
+      "result-*"
     ];
   };
 }
