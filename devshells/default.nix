@@ -7,6 +7,7 @@ mkShell {
 
   packages = [
     pkgs.attic-client
+    pkgs.nh
     pkgs.nix-update
     pkgs.npins
 
