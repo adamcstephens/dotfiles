@@ -121,6 +121,7 @@ in
               pkgs.docker
               pkgs.entr
               pkgs.git-lfs
+              pkgs.sipcalc
               pkgs.terraform-ls
               pkgs.typescript-language-server
             ];
