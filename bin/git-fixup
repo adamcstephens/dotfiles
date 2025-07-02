@@ -6,9 +6,10 @@ commit=$(
   git log --color=always --date=iso --format="%C(auto)%h%C(auto)%d %s %C(auto,blue)[%ar]" --max-count=50 |
     sk --ansi --reverse \
       --height 50% --info hidden \
-      --preview 'git -c diff.external=difft show --ext-diff {1}'
+      --preview 'git -c diff.external=difft show --ext-diff {1}' |
+    cut -c -7
 )
 
 [ -z "$commit" ] && exit 1
 
-git commit --fixup $commit
+git commit --fixup "$commit"
