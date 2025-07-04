@@ -3,21 +3,23 @@
   mkShell,
   stdenv,
 
-  beam_minimal,
+  beamMinimal27Packages,
   inotify-tools,
-  next-ls,
 }:
 let
-  beamPackages = beam_minimal.packages.erlang_27;
-  elixir = beamPackages.elixir_1_17;
-  elixir-ls = (beamPackages.elixir-ls.override { inherit elixir; });
+  beamPackages = beamMinimal27Packages.extend (
+    _: prev: {
+      elixir = prev.elixir_1_18;
+    }
+  );
 in
 mkShell {
   packages = [
     beamPackages.erlang
-    elixir
-    elixir-ls
-    next-ls
+    beamPackages.elixir
+    beamPackages.elixir-ls
+    beamPackages.hex
+    beamPackages.rebar3
   ] ++ (lib.optionals stdenv.isLinux [ inotify-tools ]);
 
   shellHook = ''
