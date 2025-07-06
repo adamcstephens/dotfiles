@@ -48,12 +48,6 @@ return {
     vim.lsp.enable("golangci_lint_ls")
     vim.lsp.enable("gopls")
 
-    -- html
-    vim.lsp.config("superhtml", {
-      filetypes = { "superhtml", "html", "heex" },
-    })
-    vim.lsp.enable("superhtml")
-
     -- json
     vim.lsp.config("jsonls", {
       cmd = { "vscode-json-languageserver", "--stdio" },

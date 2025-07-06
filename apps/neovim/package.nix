@@ -27,7 +27,6 @@
   sqlfluff,
   sqlite,
   stylua,
-  superhtml,
   taplo,
   yaml-language-server,
 }:
@@ -137,7 +136,6 @@ mnw.lib.wrap pkgs {
       shfmt
       sqlfluff
       stylua
-      superhtml
       taplo
       yaml-language-server
     ];
