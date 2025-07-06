@@ -46,6 +46,7 @@ in
       pkgs.pwgen
       pkgs.step-cli
       pkgs.unzip
+      pkgs.watchexec
 
       # apps
       eternal-terminal
