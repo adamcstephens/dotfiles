@@ -126,9 +126,7 @@
       pkgs.gdu
       pkgs.jless
       pkgs.gojq
-      (pkgs.writeScriptBin "jq" "exec ${lib.getExe pkgs.gojq} $@")
       pkgs.just
-      # pkgs.kalker
       pkgs.kitty.terminfo
       pkgs.ncdu
       pkgs.skim
