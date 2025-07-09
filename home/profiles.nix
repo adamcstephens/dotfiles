@@ -112,7 +112,10 @@ in
         (
           { config, pkgs, ... }:
           {
-            dotfiles.apps.zk.defaultNotebook = "${config.home.homeDirectory}/git/calmwave/notebook";
+            dotfiles.apps = {
+              tmuxinator.enable = true;
+              zk.defaultNotebook = "${config.home.homeDirectory}/git/calmwave/notebook";
+            };
 
             home.packages = [
               pkgs.docker

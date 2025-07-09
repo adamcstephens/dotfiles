@@ -1,0 +1,26 @@
+name: cw
+root: ~/git/calmwave/cw
+
+windows:
+  - cw:
+      layout: even-horizontal
+      panes:
+        - vim flake.nix
+        - {}
+
+  - cwx:
+      layout: main-vertical
+      root: calmwavex
+      panes:
+        - vim mix.exs
+        - {}
+        - {}
+
+  - infra:
+      layout: tiled
+      root: infra
+      panes:
+        - {}
+        - {}
+        - {}
+        - {}

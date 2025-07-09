@@ -24,6 +24,7 @@
     ../apps/ssh
     ../apps/starship
     ../apps/tmux
+    ../apps/tmuxinator
     ../apps/wayland
     ../apps/zellij
     ../apps/zsh
