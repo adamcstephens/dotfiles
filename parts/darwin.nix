@@ -67,7 +67,7 @@
               options = "--delete-older-than 21d";
             };
 
-            package = pkgs.nixVersions.nix_2_29;
+            package = pkgs.nixVersions.nix_2_30;
 
             settings = {
               auto-optimise-store = false;
@@ -98,6 +98,14 @@
               extra-platforms = "x86_64-darwin";
             };
           };
+
+          system.activationScripts.extraActivation.text = ''
+            echo "removing nix from default profile"
+
+            if nix profile list --json --profile /nix/var/nix/profiles/default | ${lib.getExe pkgs.gojq} --raw-output --exit-status .elements.nix; then
+              nix profile remove nix --profile /nix/var/nix/profiles/default
+            fi
+          '';
 
           system.defaults = {
             NSGlobalDomain = {
