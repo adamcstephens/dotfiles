@@ -54,6 +54,9 @@ return {
     })
     vim.lsp.enable("jsonls")
 
+    -- julia
+    vim.lsp.enable("julials")
+
     -- lua
     vim.lsp.config("lua_ls", {
       settings = {
