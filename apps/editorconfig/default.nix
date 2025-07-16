@@ -13,6 +13,10 @@
         indent_size = 4;
       };
 
+      "*.jl" = {
+        indent_size = 4;
+      };
+
       "*.{nim,nims}" = {
         indent_size = 2;
       };
