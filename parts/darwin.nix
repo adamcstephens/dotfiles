@@ -59,7 +59,7 @@
             enable = true;
 
             gc = {
-              automatic = true;
+              automatic = false;
               interval = {
                 Hour = 3;
                 Minute = 15;
@@ -174,7 +174,7 @@
           inputs.home-manager-unstable.darwinModules.home-manager
 
           (
-            { lib, pkgs, ... }:
+            { ... }:
             {
               home-manager.users.adam = {
                 imports = homeModules;
