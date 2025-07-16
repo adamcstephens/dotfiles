@@ -139,20 +139,16 @@ in
 
       # apps
       pkgs.nemo
-      pkgs.finamp
       pkgs.fractal
       pkgs.eog
       pkgs.hunspell
       pkgs.hunspellDicts.en-us-large
-      pkgs.kid3
       pkgs.libreoffice-qt6-fresh
       pkgs.mediainfo
       pkgs.mpv
       pkgs.nmap
       pkgs.remmina
-      pkgs.thunderbird
       pkgs.ungoogled-chromium
-      pkgs.yt-dlp
 
       # bitwarden
       pkgs.rofi-rbw
@@ -163,7 +159,7 @@ in
       flake.packages.${pkgs.system}.rofi-wrapper
     ]
     ++ lib.optionals config.dotfiles.dev.enable [
-      pkgs.jetbrains.datagrip
+      # pkgs.jetbrains.datagrip
     ];
 
   programs.feh.enable = true;
