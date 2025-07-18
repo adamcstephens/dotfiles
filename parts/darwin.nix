@@ -47,6 +47,19 @@
                 ];
                 systems = [
                   "aarch64-linux"
+                ];
+              }
+              {
+                protocol = "ssh-ng";
+                hostName = "leaf.tail68e370.ts.net";
+                maxJobs = 4;
+                sshUser = "adam";
+                supportedFeatures = [
+                  "big-parallel"
+                  "kvm"
+                  "nixos-test"
+                ];
+                systems = [
                   "x86_64-linux"
                 ];
               }
