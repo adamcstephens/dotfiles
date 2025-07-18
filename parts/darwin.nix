@@ -194,7 +194,10 @@
                 self.overlays.upstreams
               ];
 
-              security.pam.services.sudo_local.touchIdAuth = true;
+              security.pam.services.sudo_local = {
+                reattach = true;
+                touchIdAuth = true;
+              };
 
               system.primaryUser = "adam";
               system.stateVersion = 5;
