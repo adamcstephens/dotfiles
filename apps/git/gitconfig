@@ -8,6 +8,7 @@ home = "!~/.dotfiles/bin/git-home"
 fixhome = remote set-head origin --auto
 subup = submodule update --remote --merge --recursive
 yolo = commit --amend --no-edit
+	rm-merged = !git branch --format '%(refname:short) %(upstream:track)' | awk '$2 == \"[gone]\" { print $1 }' | xargs -r git branch -D
 
 [branch]
 sort = committerdate

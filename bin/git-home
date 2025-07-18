@@ -31,5 +31,5 @@ if ref is None:
 branch = os.path.basename(ref)
 
 dotlib.run(f"git switch {branch}", capture_output=False)
-dotlib.run("git pull", capture_output=False)
+dotlib.run("git pull --prune", capture_output=False)
 print(f"Switched and updated to {branch}")
