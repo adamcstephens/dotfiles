@@ -37,6 +37,7 @@
           nix = {
             buildMachines = [
               {
+                protocol = "ssh-ng";
                 hostName = "nixos2.local";
                 maxJobs = 4;
                 sshUser = "root";
