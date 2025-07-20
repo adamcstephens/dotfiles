@@ -136,11 +136,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1752615949,
-        "narHash": "sha256-Rr9hSD/9OsRJjMzFx6pumG/X6K5IVcW+8FWGHcB+biw=",
+        "lastModified": 1752914036,
+        "narHash": "sha256-cldrrmYy3YBnsTeruOBasVjzmIa9FBIDx5xx0aZd6b8=",
         "owner": "JakeStanger",
         "repo": "ironbar",
-        "rev": "34da5edfe0ed42180a78441e4999d4b33de0c4aa",
+        "rev": "ccb57c84584a43ae20c9db1f4e28ad75e401706a",
         "type": "github"
       },
       "original": {
@@ -315,11 +315,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1752687322,
-        "narHash": "sha256-RKwfXA4OZROjBTQAl9WOZQFm7L8Bo93FQwSJpAiSRvo=",
+        "lastModified": 1752950548,
+        "narHash": "sha256-NS6BLD0lxOrnCiEOcvQCDVPXafX1/ek1dfJHX1nUIzc=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "6e987485eb2c77e5dcc5af4e3c70843711ef9251",
+        "rev": "c87b95e25065c028d31a94f06a62927d18763fdf",
         "type": "github"
       },
       "original": {
@@ -331,11 +331,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1752620740,
-        "narHash": "sha256-f3pO+9lg66mV7IMmmIqG4PL3223TYMlnlw+pnpelbss=",
+        "lastModified": 1752866191,
+        "narHash": "sha256-NV4S2Lf2hYmZQ3Qf4t/YyyBaJNuxLPyjzvDma0zPp/M=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "32a4e87942101f1c9f9865e04dc3ddb175f5f32e",
+        "rev": "f01fe91b0108a7aff99c99f2e9abbc45db0adc2a",
         "type": "github"
       },
       "original": {
@@ -418,11 +418,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1752842884,
-        "narHash": "sha256-ahLCK/dANDCoWuaMRv4MDBAvbolVdd1sm58NsKSlA7A=",
+        "lastModified": 1753016561,
+        "narHash": "sha256-JdnAkVlLewGGSu/TH9RJQdBLHy2XY0QmhbJJch2IeoU=",
         "ref": "refs/heads/main",
-        "rev": "17f2457e4c804000b9c0f2bba3f2006c0ae8aa26",
-        "revCount": 253,
+        "rev": "501907a742910fb1276a6367cbd1841a6458985c",
+        "revCount": 254,
         "type": "git",
         "url": "https://codeberg.org/adamcstephens/nix-sandbox"
       },
