@@ -17,6 +17,7 @@ bump-pins:
 
 bump-packages:
     nix-update --flake arkenfox --commit
+    nix-update --flake toney --commit
 
 nix-darwin-bootstrap:
     sudo $(nix build .#darwin/$(hostname -s) --print-out-paths)/sw/bin/darwin-rebuild switch --flake ~/.dotfiles
