@@ -51,7 +51,7 @@ def prj_finder(remote: bool = False) -> str:
     command: str
     project: str
 
-    finder = "sk --reverse --height 22 --header 'Select a project dir' --info hidden"
+    finder = "sk --reverse --height 22 --header 'Select a project dir' --info hidden --no-sort"
 
     if remote:
         selected_remote = run(finder, input=gen_remotes())
