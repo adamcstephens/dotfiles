@@ -8,7 +8,6 @@
 }:
 {
   home.packages = [
-    pkgs.fishPlugins.done
     pkgs.fishPlugins.fzf-fish
   ];
 

@@ -149,7 +149,6 @@ in
       pkgs.mpv
       pkgs.nmap
       pkgs.remmina
-      pkgs.ungoogled-chromium
 
       # bitwarden
       pkgs.rofi-rbw
