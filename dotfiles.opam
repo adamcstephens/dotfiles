@@ -2,13 +2,12 @@
 opam-version: "2.0"
 license: "UNLICENSE"
 depends: [
-  "ocaml"
   "dune" {>= "3.17"}
+  "ocaml"
   "eio_main"
   "fileutils"
   "ppx_deriving"
   "logs"
-  "logs-ppx"
   "utop"
   "yojson"
   "odoc" {with-doc}

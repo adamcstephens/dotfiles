@@ -1,11 +1,5 @@
-open Yojson.Basic.Util
 open Dotfiles.Desktop
 open Dotfiles.Process
-
-let load_colors =
-  let home = Sys.getenv "HOME" in
-  Yojson.Basic.from_file (Printf.sprintf "%s/.config/colorscheme.json" home)
-  |> member "palette"
 
 let locker desktop =
   match desktop with River -> "hyprlock" | Niri -> "gtklock --daemonize"
