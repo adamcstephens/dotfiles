@@ -110,6 +110,9 @@ return {
     vim.lsp.enable("pyright")
     vim.lsp.enable("ruff")
 
+    -- roc
+    vim.lsp.enable("roc_ls")
+
     -- tofu
     vim.lsp.enable("terraformls")
 
