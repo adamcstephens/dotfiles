@@ -42,6 +42,7 @@ in
 
     # wayland
     ../apps/hypridle
+    ../apps/hyprlock
     ../apps/kanshi
     ../apps/ironbar
     ../apps/niri

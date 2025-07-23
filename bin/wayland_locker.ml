@@ -2,23 +2,13 @@ open Yojson.Basic.Util
 open Dotfiles.Desktop
 open Dotfiles.Process
 
-let waylock ~palette =
-  let init_color = palette |> member "base04" |> to_string in
-  let input_color = palette |> member "base0A" |> to_string in
-  let fail_color = palette |> member "base08" |> to_string in
-  Printf.sprintf
-    "waylock -fork-on-lock -init-color 0x%s -input-color 0x%s -fail-color 0x%s"
-    init_color input_color fail_color
-
 let load_colors =
   let home = Sys.getenv "HOME" in
   Yojson.Basic.from_file (Printf.sprintf "%s/.config/colorscheme.json" home)
   |> member "palette"
 
 let locker desktop =
-  match desktop with
-  | River -> waylock ~palette:load_colors
-  | Niri -> "gtklock --daemonize"
+  match desktop with River -> "hyprlock" | Niri -> "gtklock --daemonize"
 
 let do_lock ~cmd =
   match find_running_procs cmd with
