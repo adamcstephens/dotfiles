@@ -123,6 +123,7 @@
 
           system.defaults = {
             NSGlobalDomain = {
+              AppleShowScrollBars = "Always";
               InitialKeyRepeat = 15;
               KeyRepeat = 1;
 
