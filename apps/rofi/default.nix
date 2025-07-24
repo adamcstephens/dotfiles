@@ -123,7 +123,7 @@
       kb-mode-next = "Shift+Right,Control+Tab";
       kb-mode-previous = "Shift+Left,Control+Shift+Tab";
       kb-remove-char-back = "BackSpace";
-      run-command = "rofi-wrapper {cmd}";
+      run-command = "app2unit -- {cmd}";
     };
   };
 }

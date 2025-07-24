@@ -9,9 +9,10 @@
 export MOZ_ENABLE_WAYLAND="1"
 export NIXOS_OZONE_WL="1"
 
-dbus-update-activation-environment --systemd DISPLAY XAUTHORITY WAYLAND_DISPLAY XDG_CONFIG_DIRS XDG_DATA_HOME XDG_CONFIG_HOME XDG_STATE_HOME XDG_CACHE_HOME XDG_DATA_DIRS XDG_CURRENT_DESKTOP XDG_SESSION_ID XDG_SESSION_TYPE XDG_SESSION_DESKTOP XDG_RUNTIME_DIR
+export APP2UNIT_SLICES='a=app-graphical.slice b=background-graphical.slice s=session-graphical.slice'
 
-systemctl --user start river-session.target
+uwsm finalize
+systemctl start wayland-session.target
 
 #
 ## input
@@ -38,18 +39,18 @@ riverctl focus-follows-cursor always || riverctl focus-follows-cursor normal
 ## map
 #
 riverctl focus-follows-cursor always || riverctl focus-follows-cursor normal
-riverctl map normal Super+Shift T spawn 'GDK_DEBUG=gl-disable-gles systemd-cat --identifier=terminal terminal'
-riverctl map normal Super+Shift Return spawn 'GDK_DEBUG=gl-disable-gles systemd-cat --identifier=terminal terminal'
-riverctl map normal Super D spawn 'systemd-cat --identifier=rofi rofi -show drun'
-riverctl map normal Super+Shift D spawn 'systemd-cat --identifier=rofi rofi -show emoji'
-riverctl map normal Super+Shift+Control T spawn 'dark toggle'
-riverctl map normal Super+Shift+Control D spawn 'systemd-cat --identifier=prj prj'
+riverctl map normal Super+Shift T spawn 'GDK_DEBUG=gl-disable-gles app2unit -- terminal'
+riverctl map normal Super+Shift Return spawn 'GDK_DEBUG=gl-disable-gles app2unit -- terminal'
+riverctl map normal Super D spawn 'app2unit -- rofi -show drun'
+riverctl map normal Super+Shift D spawn 'app2unit -- rofi -show emoji'
+riverctl map normal Super+Shift+Control T spawn 'app2unit -- dark toggle'
+riverctl map normal Super+Shift+Control D spawn 'app2unit -- prj'
 
-riverctl map normal Super+Shift+Control 0 spawn 'wlr-scale reset'
-riverctl map normal Super+Shift minus spawn 'wlr-scale up'
-riverctl map normal Super+Shift+Control minus spawn 'wlr-scale down'
+riverctl map normal Super+Shift+Control 0 spawn 'app2unit -- wlr-scale reset'
+riverctl map normal Super+Shift minus spawn 'app2unit -- wlr-scale up'
+riverctl map normal Super+Shift+Control minus spawn 'app2unit -- wlr-scale down'
 
-riverctl map normal None Print spawn 'systemd-cat --identifier=screenshot screenshot screen'
+riverctl map normal None Print spawn 'app2unit -- screenshot screen'
 # bindsym print exec screenshot.sh window
 # bindsym $mod+print exec screenshot.sh screen
 # bindsym Alt+print exec screenshot.sh box
@@ -112,7 +113,7 @@ riverctl map normal Super+Alt+Shift L resize horizontal 100
 
 focus_tag_map() {
   if command -v river-bnf >/dev/null; then
-    riverctl map "$1" "$2" "$3" spawn "river-bnf $4"
+    riverctl map "$1" "$2" "$3" spawn "app2unit -- river-bnf $4"
   else
     riverctl map "$1" "$2" "$3" set-focused-tags "$4"
   fi
@@ -147,7 +148,7 @@ riverctl map normal Super+Shift Space toggle-float
 
 # Mod+F to toggle fullscreen
 riverctl map normal Super+Shift F toggle-fullscreen
-riverctl map normal Super+Control+Shift P spawn 'systemd-cat --identifier=wl-present wl-present mirror'
+riverctl map normal Super+Control+Shift P spawn 'app2unit -- wl-present mirror'
 
 # Mod+{Up,Right,Down,Left} to change layout orientation
 riverctl map normal Super Up send-layout-cmd rivertile "main-location top"
@@ -166,20 +167,20 @@ riverctl map normal Super F11 enter-mode passthrough
 riverctl map passthrough Super F11 enter-mode normal
 
 for mode in normal locked; do
-  riverctl map $mode None XF86Eject spawn 'eject -T'
+  riverctl map $mode None XF86Eject spawn 'app2unit -- eject -T'
 
-  riverctl map $mode None XF86AudioLowerVolume spawn "swayosd-client --output-volume -5"
-  riverctl map $mode None XF86AudioRaiseVolume spawn "swayosd-client --output-volume 5"
-  riverctl map $mode None XF86AudioMute spawn "swayosd-client --output-volume mute-toggle"
-  riverctl map $mode None XF86AudioMicMute spawn "swayosd-client --input-volume mute-toggle"
+  riverctl map $mode None XF86AudioLowerVolume spawn "app2unit -- swayosd-client --output-volume -5"
+  riverctl map $mode None XF86AudioRaiseVolume spawn "app2unit -- swayosd-client --output-volume 5"
+  riverctl map $mode None XF86AudioMute spawn "app2unit -- swayosd-client --output-volume mute-toggle"
+  riverctl map $mode None XF86AudioMicMute spawn "app2unit -- swayosd-client --input-volume mute-toggle"
 
-  riverctl map $mode None XF86AudioMedia spawn 'playerctl play-pause'
-  riverctl map $mode None XF86AudioPlay spawn 'playerctl play-pause'
-  riverctl map $mode None XF86AudioPrev spawn 'playerctl previous'
-  riverctl map $mode None XF86AudioNext spawn 'playerctl next'
+  riverctl map $mode None XF86AudioMedia spawn 'app2unit -- playerctl play-pause'
+  riverctl map $mode None XF86AudioPlay spawn 'app2unit -- playerctl play-pause'
+  riverctl map $mode None XF86AudioPrev spawn 'app2unit -- playerctl previous'
+  riverctl map $mode None XF86AudioNext spawn 'app2unit -- playerctl next'
 
-  riverctl map $mode None XF86MonBrightnessDown spawn 'swayosd-client --brightness lower'
-  riverctl map $mode None XF86MonBrightnessUp spawn 'swayosd-client --brightness raise'
+  riverctl map $mode None XF86MonBrightnessDown spawn 'app2unit -- swayosd-client --brightness lower'
+  riverctl map $mode None XF86MonBrightnessUp spawn 'app2unit -- swayosd-client --brightness raise'
 done
 
 # Set repeat rate

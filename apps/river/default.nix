@@ -8,20 +8,6 @@
   config = lib.mkIf config.dotfiles.gui.wayland.enable {
     home.packages = [ pkgs.river-bnf ];
 
-    systemd.user.targets.river-session = {
-      Unit = {
-        BindsTo = [ "wayland-session.target" ];
-        Wants = [ "graphical-session-pre.target" ];
-        After = [ "graphical-session-pre.target" ];
-
-        Conflicts = [ "xserver-session.target" ];
-
-        Requires =
-          lib.optionals config.dotfiles.apps.sleepwatcher-rs.enable [ "sleepwatcher-rs.service" ]
-          ++ lib.optionals config.dotfiles.apps.swayidle.enable [ "swayidle.service" ];
-      };
-    };
-
     xdg.configFile."river/init" = {
       executable = true;
       source = ./init.sh;
@@ -65,12 +51,7 @@
             exit 1
           fi
 
-          # cleanup any previous sessions
-          systemctl --user stop wayland-session.target xserver-session.target
-
-          systemd-cat --identifier=river river
-
-          systemctl --user stop wayland-session.target
+          river
         '';
 
       executable = true;

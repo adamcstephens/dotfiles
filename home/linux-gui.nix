@@ -110,6 +110,8 @@ in
   home.packages =
     config.dotfiles.gui.font.fontconfig.fontDirectories
     ++ [
+      pkgs.app2unit
+
       pkgs.etBook
       pkgs.fira
       pkgs.font-awesome
@@ -154,9 +156,6 @@ in
       pkgs.rofi-rbw
 
       screenshot
-    ]
-    ++ lib.optionals config.dotfiles.nixosManaged [
-      flake.packages.${pkgs.system}.rofi-wrapper
     ]
     ++ lib.optionals config.dotfiles.dev.enable [
       # pkgs.jetbrains.datagrip

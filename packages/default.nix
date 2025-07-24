@@ -23,7 +23,6 @@ rec {
     inherit homeConfigurations;
   };
   prj = pkgs.callPackage ./prj.nix { };
-  rofi-wrapper = pkgs.callPackage ./rofi-wrapper.nix { };
   toney = pkgs.callPackage ./toney.nix { };
   vim-zellij-navigator = pkgs.callPackage ./vim-zellij-navigator.nix { };
 }

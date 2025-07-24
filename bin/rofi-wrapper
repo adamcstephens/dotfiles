@@ -1,5 +1,0 @@
-#!/usr/bin/env sh
-set -x
-
-UNIT=$(systemd-escape "$(echo "$@" | awk '{print $1}')")
-systemd-run --user --scope --unit="app-rofi-$UNIT-$RANDOM" --setenv=PATH="$PATH" --setenv=WAYLAND_DISPLAY="$WAYLAND_DISPLAY" --setenv=DISPLAY="$DISPLAY" "$@"
