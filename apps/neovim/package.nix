@@ -10,12 +10,13 @@
 
   vimPlugins,
 
+  bash-language-server,
   errcheck,
+  fish-lsp,
   golangci-lint,
   golangci-lint-langserver,
   go-tools,
   biome,
-  efm-langserver,
   lua,
   lua-language-server,
   nixd,
@@ -59,7 +60,6 @@ mnw.lib.wrap pkgs {
 
         cyberdream-nvim
         editorconfig-nvim
-        efmls-configs-nvim
         elixir-tools-nvim
         fidget-nvim
         friendly-snippets
@@ -120,11 +120,11 @@ mnw.lib.wrap pkgs {
       errcheck
       golangci-lint
       golangci-lint-langserver
-      # ineffassign
       go-tools
 
+      bash-language-server
       biome
-      efm-langserver
+      fish-lsp
       lua
       lua-language-server
       nixd

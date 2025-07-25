@@ -4,29 +4,8 @@ return {
   lazy = false,
 
   after = function()
-    local efm_languages = {
-      fish = {
-        require("efmls-configs.linters.fish"),
-        require("efmls-configs.formatters.fish_indent"),
-      },
-      sh = {
-        require("efmls-configs.linters.shellcheck"),
-        require("efmls-configs.formatters.shfmt"),
-      },
-    }
-
-    vim.lsp.config("efm", {
-      filetypes = vim.tbl_keys(efm_languages),
-      settings = {
-        rootMarkers = { ".git/" },
-        languages = efm_languages,
-      },
-      init_options = {
-        documentFormatting = true,
-        documentRangeFormatting = true,
-      },
-    })
-    vim.lsp.enable("efm")
+    -- bash
+    vim.lsp.enable("bashls")
 
     -- elixir
     vim.lsp.config("elixirls", {
@@ -43,6 +22,9 @@ return {
       end,
     })
     vim.lsp.enable("elixirls")
+
+    -- fish
+    vim.lsp.enable("fish_lsp")
 
     -- go
     vim.lsp.enable("golangci_lint_ls")
