@@ -1,10 +1,27 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 let
   cfg = config.dotfiles.apps.hypridle;
+
+  beforeSleep = pkgs.writeShellApplication {
+    name = "hypridle-before-sleep";
+    text = ''
+      loginctl lock-session
+      brightnessctl -sd tpacpi::kbd_backlight set 0
+    '';
+  };
+
+  afterSleep = pkgs.writeShellApplication {
+    name = "hypridle-before-sleep";
+    text = ''
+      wayland-monitor on
+      brightnessctl -sd tpacpi::kbd_backlight set 2
+    '';
+  };
 in
 {
   options.dotfiles.apps.hypridle = {
@@ -16,40 +33,39 @@ in
       enable = true;
       settings = {
         general = {
-          after_sleep_cmd = "wayland-monitor on";
-          before_sleep_cmd = "loginctl lock-session";
+          after_sleep_cmd = lib.getExe afterSleep;
+          before_sleep_cmd = lib.getExe beforeSleep;
           ignore_dbus_inhibit = false;
           lock_cmd = "wayland-locker";
         };
 
-        listener =
-          [
-            {
-              timeout = 60;
-              on-timeout = "brightnessctl -s set 10";
-              on-resume = "brightnessctl -r";
-            }
-            {
-              timeout = 60;
-              on-timeout = "brightnessctl -sd tpacpi::kbd_backlight set 1";
-              on-resume = "brightnessctl -sd tpacpi::kbd_backlight set 2";
-            }
-            {
-              timeout = 600;
-              on-timeout = "loginctl lock-session";
-            }
-            {
-              timeout = 900;
-              on-timeout = "wayland-monitor off";
-              on-resume = "wayland-monitor on";
-            }
-          ]
-          ++ lib.optionals (!config.dotfiles.gui.dontSleep) [
-            {
-              timeout = 360;
-              on-timeout = "systemctl sleep";
-            }
-          ];
+        listener = [
+          {
+            timeout = 60;
+            on-timeout = "brightnessctl -s set 10";
+            on-resume = "brightnessctl -r";
+          }
+          {
+            timeout = 60;
+            on-timeout = "brightnessctl -sd tpacpi::kbd_backlight set 1";
+            on-resume = "brightnessctl -sd tpacpi::kbd_backlight set 2";
+          }
+          {
+            timeout = 600;
+            on-timeout = "loginctl lock-session";
+          }
+          {
+            timeout = 900;
+            on-timeout = "wayland-monitor off";
+            on-resume = "wayland-monitor on";
+          }
+        ]
+        ++ lib.optionals (!config.dotfiles.gui.dontSleep) [
+          {
+            timeout = 360;
+            on-timeout = "systemctl sleep";
+          }
+        ];
       };
     };
 

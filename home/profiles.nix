@@ -55,6 +55,7 @@ in
                   "1password"
                   "1password-cli"
                   "datagrip"
+                  "bws"
                 ];
             };
 
