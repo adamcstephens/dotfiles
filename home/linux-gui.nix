@@ -47,7 +47,6 @@ in
     ../apps/ironbar
     ../apps/niri
     ../apps/river
-    ../apps/sleepwatcher-rs
     ../apps/swayidle
     ../apps/swayosd
     ../apps/waybar
