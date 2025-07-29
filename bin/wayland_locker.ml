@@ -2,7 +2,9 @@ open Dotfiles.Desktop
 open Dotfiles.Process
 
 let locker desktop =
-  match desktop with River -> "hyprlock" | Niri -> "gtklock --daemonize"
+  match desktop with
+  | River -> "gtklock --daemonize"
+  | Niri -> "gtklock --daemonize"
 
 let do_lock ~cmd =
   match find_running_procs cmd with
