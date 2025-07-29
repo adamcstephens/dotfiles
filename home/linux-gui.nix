@@ -156,7 +156,7 @@ in
       screenshot
     ]
     ++ lib.optionals config.dotfiles.dev.enable [
-      # pkgs.jetbrains.datagrip
+      pkgs.jetbrains.datagrip
     ];
 
   programs.feh.enable = true;
