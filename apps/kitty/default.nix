@@ -15,33 +15,32 @@ in
 {
   home.packages = [ pkgs.kitty.terminfo ] ++ lib.optionals (!pkgs.stdenv.isDarwin) [ pkgs.kitty ];
 
-  xdg.configFile."kitty/kitty.conf".text =
-    ''
-      include ${config.xdg.configHome}/kitty/dotfiles.conf
+  xdg.configFile."kitty/kitty.conf".text = ''
+    include ${config.xdg.configHome}/kitty/dotfiles.conf
 
-      allow_remote_control socket-only
-      font_family ${config.dotfiles.gui.font.mono}
-      map ctrl+shift+p launch --type=overlay-main ${prj}
-      map super+shift+p launch --type=overlay-main ${prj} --remote
-      shell_integration no-rc
+    allow_remote_control socket-only
+    font_family ${config.dotfiles.gui.font.mono}
+    map ctrl+shift+p launch --type=overlay-main ${prj}
+    map super+shift+p launch --type=overlay-main ${prj} --remote
+    shell_integration no-rc
 
-    ''
-    + lib.optionalString pkgs.stdenv.isDarwin ''
-      font_size 13
-      listen_on unix:''${TMPDIR}/kitty
-      macos_option_as_alt both
-      macos_show_window_title_in window
-      mouse_map cmd+left release grabbed,ungrabbed mouse_click_url
-      confirm_os_window_close 1
-    ''
-    + lib.optionalString pkgs.stdenv.isLinux ''
-      font_size 10
-      hide_window_decorations yes
-      kitty_mod ctrl+shift
-      listen_on unix:@kitty
-      touch_scroll_multiplier 20.0
-      confirm_os_window_close 0
-    '';
+  ''
+  + lib.optionalString pkgs.stdenv.isDarwin ''
+    font_size 13
+    listen_on unix:''${TMPDIR}/kitty
+    macos_option_as_alt both
+    macos_show_window_title_in window
+    mouse_map cmd+left release grabbed,ungrabbed mouse_click_url
+    confirm_os_window_close 1
+  ''
+  + lib.optionalString pkgs.stdenv.isLinux ''
+    font_size 10
+    hide_window_decorations yes
+    kitty_mod ctrl+shift
+    listen_on unix:@kitty
+    touch_scroll_multiplier 20.0
+    confirm_os_window_close 0
+  '';
 
   xdg.configFile."kitty/dotfiles.conf".source =
     if config.dotfiles.nixosManaged then

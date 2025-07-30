@@ -55,18 +55,17 @@ in
         fontconfig = lib.mkOption {
           type = lib.types.unspecified;
           default = pkgs.makeFontsConf {
-            fontDirectories =
-              [
-                pkgs.nerd-fonts.symbols-only
-                pkgs.font-awesome
-                pkgs.ibm-plex
-                pkgs.jetbrains-mono
-                pkgs.noto-fonts
-              ]
-              ++ lib.optionals pkgs.stdenv.isLinux [
-                inputs.sandbox.packages.${pkgs.system}.apple-emoji-linux
-              ]
-              ++ lib.optionals pkgs.stdenv.isDarwin [ "/Library/Fonts" ];
+            fontDirectories = [
+              pkgs.nerd-fonts.symbols-only
+              pkgs.font-awesome
+              pkgs.ibm-plex
+              pkgs.jetbrains-mono
+              pkgs.noto-fonts
+            ]
+            ++ lib.optionals pkgs.stdenv.isLinux [
+              inputs.sandbox.packages.${pkgs.system}.apple-emoji-linux
+            ]
+            ++ lib.optionals pkgs.stdenv.isDarwin [ "/Library/Fonts" ];
           };
         };
       };

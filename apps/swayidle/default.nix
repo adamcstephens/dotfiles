@@ -25,24 +25,23 @@ in
           command = "niri msg action power-on-monitors";
         }
       ];
-      timeouts =
-        [
-          {
-            timeout = 600;
-            command = "wayland-locker";
-          }
-          {
-            timeout = 900;
-            # command = "wlopm --off *";
-            command = "niri msg action power-off-monitors";
-          }
-        ]
-        ++ lib.optionals (!config.dotfiles.gui.dontSleep) [
-          {
-            timeout = 360;
-            command = "systemctl sleep";
-          }
-        ];
+      timeouts = [
+        {
+          timeout = 600;
+          command = "wayland-locker";
+        }
+        {
+          timeout = 900;
+          # command = "wlopm --off *";
+          command = "niri msg action power-off-monitors";
+        }
+      ]
+      ++ lib.optionals (!config.dotfiles.gui.dontSleep) [
+        {
+          timeout = 360;
+          command = "systemctl sleep";
+        }
+      ];
     };
 
     systemd.user.services.swayidle.Service.Environment = lib.mkForce [

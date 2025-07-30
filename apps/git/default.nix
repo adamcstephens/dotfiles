@@ -8,17 +8,16 @@ let
   os = pkgs.hostPlatform.uname.system;
 in
 {
-  home.packages =
-    [
-      pkgs.git
-      pkgs.git-extras
-    ]
-    ++ lib.optionals config.dotfiles.dev.enable [
-      pkgs.gh
-      pkgs.lazygit
-      (pkgs.writeShellScriptBin "lg" "exec ${lib.getExe pkgs.lazygit} $@")
-      pkgs.tea
-    ];
+  home.packages = [
+    pkgs.git
+    pkgs.git-extras
+  ]
+  ++ lib.optionals config.dotfiles.dev.enable [
+    pkgs.gh
+    pkgs.lazygit
+    (pkgs.writeShellScriptBin "lg" "exec ${lib.getExe pkgs.lazygit} $@")
+    pkgs.tea
+  ];
 
   xdg.configFile = {
     "git/config".source =

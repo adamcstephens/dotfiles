@@ -24,18 +24,17 @@
     end
   '';
 
-  xdg.configFile."ghostty/config".text =
-    ''
-      font-family = "${config.dotfiles.gui.font.mono}"
-      config-file = ${npins.vim-moonfly-colors}/extras/moonfly-ghostty.conf
-      config-file = dotfiles.conf
-    ''
-    + lib.optionalString pkgs.stdenv.isLinux ''
-      config-file = linux.conf
-    ''
-    + lib.optionalString pkgs.stdenv.isDarwin ''
-      config-file = mac.conf
-    '';
+  xdg.configFile."ghostty/config".text = ''
+    font-family = "${config.dotfiles.gui.font.mono}"
+    config-file = ${npins.vim-moonfly-colors}/extras/moonfly-ghostty.conf
+    config-file = dotfiles.conf
+  ''
+  + lib.optionalString pkgs.stdenv.isLinux ''
+    config-file = linux.conf
+  ''
+  + lib.optionalString pkgs.stdenv.isDarwin ''
+    config-file = mac.conf
+  '';
 
   xdg.configFile."ghostty/dotfiles.conf".source =
     if config.dotfiles.nixosManaged then

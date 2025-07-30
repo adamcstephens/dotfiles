@@ -17,7 +17,10 @@ buildGoModule rec {
 
   vendorHash = "sha256-Ri9s9JZOAXFxw7/ffPitlfk/O7ccfv/t80QIwMbe/mE=";
 
-  ldflags = [ "-s" "-w" ];
+  ldflags = [
+    "-s"
+    "-w"
+  ];
 
   meta = {
     description = "Toney is a fast, lightweight, terminal-based note-taking app for the modern developer";

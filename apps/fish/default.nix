@@ -20,18 +20,16 @@
       (builtins.readFile ./init.fish)
       + (lib.optionalString pkgs.stdenv.isDarwin (builtins.readFile ./init-darwin.fish));
 
-    interactiveShellInit =
-      (builtins.readFile ./interactive.fish)
-      + ''
-        source ${config.xdg.configHome}/fish/functions/ssh-auth-sock.fish
+    interactiveShellInit = (builtins.readFile ./interactive.fish) + ''
+      source ${config.xdg.configHome}/fish/functions/ssh-auth-sock.fish
 
-        if test -n "$KITTY_WINDOW_ID"
-            set --global KITTY_SHELL_INTEGRATION enabled
-            source "${pkgs.kitty.shell_integration}/fish/vendor_conf.d/kitty-shell-integration.fish"
-            set --prepend fish_complete_path "${pkgs.kitty.shell_integration}/fish/vendor_completions.d"
-            source ${config.xdg.configHome}/fish/functions/autodark.fish
-        end
-      '';
+      if test -n "$KITTY_WINDOW_ID"
+          set --global KITTY_SHELL_INTEGRATION enabled
+          source "${pkgs.kitty.shell_integration}/fish/vendor_conf.d/kitty-shell-integration.fish"
+          set --prepend fish_complete_path "${pkgs.kitty.shell_integration}/fish/vendor_completions.d"
+          source ${config.xdg.configHome}/fish/functions/autodark.fish
+      end
+    '';
 
     shellAbbrs = lib.filterAttrs (
       k: _:

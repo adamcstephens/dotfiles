@@ -27,32 +27,31 @@ in
     dev.enable = true;
   };
 
-  home.packages =
-    [
-      # crypt
-      pkgs.pinentry.curses
-      pkgs.rage
-      pkgs.rbw
+  home.packages = [
+    # crypt
+    pkgs.pinentry.curses
+    pkgs.rage
+    pkgs.rbw
 
-      # nix
-      pkgs.hydra-check
-      pkgs.nix-output-monitor
-      pkgs.nix-tree
-      pkgs.nixd
-      pkgs.nixfmt-rfc-style
-      pkgs.nvd
+    # nix
+    pkgs.hydra-check
+    pkgs.nix-output-monitor
+    pkgs.nix-tree
+    pkgs.nixd
+    pkgs.nixfmt-rfc-style
+    pkgs.nvd
 
-      # tools
-      pkgs.pwgen
-      pkgs.step-cli
-      pkgs.unzip
-      pkgs.watchexec
+    # tools
+    pkgs.pwgen
+    pkgs.step-cli
+    pkgs.unzip
+    pkgs.watchexec
 
-      # apps
-      eternal-terminal
-    ]
-    ++ lib.optionals pkgs.stdenv.isLinux [
-      pkgs._1password-cli
-      pkgs.bws
-    ];
+    # apps
+    eternal-terminal
+  ]
+  ++ lib.optionals pkgs.stdenv.isLinux [
+    pkgs._1password-cli
+    pkgs.bws
+  ];
 }
