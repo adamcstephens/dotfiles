@@ -29,6 +29,7 @@
         ./apps/neovim/part.nix
         ./devshells/part.nix
         ./home/profiles.nix
+        ./templates/part.nix
 
         ./parts/darwin.nix
         ./parts/overlays.nix
