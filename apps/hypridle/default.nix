@@ -11,15 +11,15 @@ let
     name = "hypridle-before-sleep";
     text = ''
       loginctl lock-session
-      brightnessctl -sd tpacpi::kbd_backlight set 0
+      app2unit -- brightnessctl -sd tpacpi::kbd_backlight set 0
     '';
   };
 
   afterSleep = pkgs.writeShellApplication {
-    name = "hypridle-before-sleep";
+    name = "hypridle-after-sleep";
     text = ''
-      wayland-monitor on
-      brightnessctl -sd tpacpi::kbd_backlight set 2
+      app2unit -- wayland-monitor on
+      app2unit -- brightnessctl -sd tpacpi::kbd_backlight set 2
     '';
   };
 in
@@ -36,19 +36,19 @@ in
           after_sleep_cmd = lib.getExe afterSleep;
           before_sleep_cmd = lib.getExe beforeSleep;
           ignore_dbus_inhibit = false;
-          lock_cmd = "wayland-locker";
+          lock_cmd = "app2unit -- wayland-locker";
         };
 
         listener = [
           {
             timeout = 60;
-            on-timeout = "brightnessctl -s set 10";
-            on-resume = "brightnessctl -r";
+            on-timeout = "app2unit -- brightnessctl -s set 10";
+            on-resume = "app2unit -- brightnessctl -r";
           }
           {
             timeout = 60;
-            on-timeout = "brightnessctl -sd tpacpi::kbd_backlight set 1";
-            on-resume = "brightnessctl -sd tpacpi::kbd_backlight set 2";
+            on-timeout = "app2unit -- brightnessctl -sd tpacpi::kbd_backlight set 1";
+            on-resume = "app2unit -- brightnessctl -sd tpacpi::kbd_backlight set 2";
           }
           {
             timeout = 600;
@@ -56,8 +56,8 @@ in
           }
           {
             timeout = 900;
-            on-timeout = "wayland-monitor off";
-            on-resume = "wayland-monitor on";
+            on-timeout = "app2unit -- wayland-monitor off";
+            on-resume = "app2unit -- wayland-monitor on";
           }
         ]
         ++ lib.optionals (!config.dotfiles.gui.dontSleep) [
