@@ -149,6 +149,7 @@ in
       pkgs.mpv
       pkgs.nmap
       pkgs.remmina
+      pkgs.signal-desktop
 
       # bitwarden
       pkgs.rofi-rbw
