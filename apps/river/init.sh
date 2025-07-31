@@ -8,6 +8,7 @@
 # . "$HOME"/.nix-profile/bin/configure-gtk
 export MOZ_ENABLE_WAYLAND="1"
 export NIXOS_OZONE_WL="1"
+export ELECTRON_OZONE_PLATFORM_HINT=auto
 
 export APP2UNIT_SLICES='a=app-graphical.slice b=background-graphical.slice s=session-graphical.slice'
 
