@@ -1,9 +1,6 @@
 set -U __done_notification_urgency_level_failure normal
 set -U fish_greeting
 
-fzf_configure_bindings --directory=\ct
-set fzf_fd_opts --hidden --exclude=.git
-
 set -x SSH_AUTH_SOCK (ssh-agent-mgr)
 
 if test -e $HOME/.shell_local.fish

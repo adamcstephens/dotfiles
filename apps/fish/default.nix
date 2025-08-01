@@ -7,10 +7,6 @@
   ...
 }:
 {
-  home.packages = [
-    pkgs.fishPlugins.fzf-fish
-  ];
-
   programs.fish = {
     enable = true;
     package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.fish;
@@ -22,6 +18,10 @@
 
     interactiveShellInit = (builtins.readFile ./interactive.fish) + ''
       source ${config.xdg.configHome}/fish/functions/ssh-auth-sock.fish
+
+      ${lib.getExe pkgs.fzf} --fish | source
+      set -x FZF_DEFAULT_COMMAND 'fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
+      set -x FZF_CTRL_T_COMMAND "$FZF_DEFAULT_COMMAND"
 
       if test -n "$KITTY_WINDOW_ID"
           set --global KITTY_SHELL_INTEGRATION enabled
