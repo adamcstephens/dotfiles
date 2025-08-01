@@ -65,7 +65,6 @@ mnw.lib.wrap pkgs {
         friendly-snippets
         fugitive
         lualine-nvim
-        mini-pick
         neogit
         nui-nvim
         nvim-highlight-colors

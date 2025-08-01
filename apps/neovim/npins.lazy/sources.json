@@ -57,6 +57,21 @@
       "url": null,
       "hash": "0hl572j5l1bqg51rg545bavxs8kxya02ss3fj5fxvp9ylrnaqsx9"
     },
+    "mini.pick": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "Git",
+        "url": "https://github.com/echasnovski/mini.pick"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "submodules": false,
+      "version": "v0.16.0",
+      "revision": "e4cb10dc426904e99f8ae4d4c487ec1fdfaf5ad2",
+      "url": null,
+      "hash": "1wqb0fisg5yd2g4b6zd8668axf8zwqd7a6vyxzzq2rd0qh9jkpa8"
+    },
     "nvim-dap": {
       "type": "GitRelease",
       "repository": {

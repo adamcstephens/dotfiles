@@ -16,7 +16,6 @@ require("dotinit.core")
 -- notifications
 require("fidget").setup({})
 
-require("mini.pick").setup({})
 require("move").setup({
   block = {
     enable = true,
