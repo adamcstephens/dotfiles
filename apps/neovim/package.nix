@@ -110,6 +110,7 @@ mnw.lib.wrap pkgs {
         nvim-dap-go
         oil-nvim
         tiny-inline-diagnostic-nvim
+        toggleterm-nvim
       ]
       ++ (mnw.lib.npinsToPlugins pkgs ./npins.lazy/sources.json);
   };
