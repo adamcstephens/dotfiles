@@ -16,4 +16,5 @@
       config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/tmux/tmux.conf";
 
   xdg.configFile."tmux/theme-dark.conf".source = "${npins.vim-moonfly-colors}/extras/moonfly.tmux";
+  xdg.configFile."tmux/smart-splits.tmux".source = "${npins."smart-splits.nvim"}/smart-splits.tmux";
 }
