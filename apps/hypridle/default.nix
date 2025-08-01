@@ -42,7 +42,7 @@ in
         listener = [
           {
             timeout = 60;
-            on-timeout = "app2unit -- brightnessctl -s set 10";
+            on-timeout = "app2unit -- brightnessctl -s set 1%";
             on-resume = "app2unit -- brightnessctl -r";
           }
           {
