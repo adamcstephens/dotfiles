@@ -1,5 +1,17 @@
 {
   "pins": {
+    "auto-dark-mode.nvim": {
+      "type": "Git",
+      "repository": {
+        "type": "Git",
+        "url": "https://github.com/f-person/auto-dark-mode.nvim"
+      },
+      "branch": "master",
+      "submodules": false,
+      "revision": "97a86c9402c784a254e5465ca2c51481eea310e3",
+      "url": null,
+      "hash": "1w0z2crla19vm273skr3yhgq60hzn9kxr9ch0699hy2gdsl71ryd"
+    },
     "codecompanion-history.nvim": {
       "type": "Git",
       "repository": {
@@ -113,6 +125,33 @@
       "revision": "77d3fdfb3554632c7a3b101ded643d422de7626f",
       "url": null,
       "hash": "0xlad1n0jzk1cir2fp4mnry7l6rbsq3rh2j1y1i5v7j25nk81rf0"
+    },
+    "rainbow-delimiters.nvim": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "Git",
+        "url": "https://github.com/hiphish/rainbow-delimiters.nvim"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "submodules": false,
+      "version": "v0.9.1",
+      "revision": "200b0d0f61ce05da496c86321123e080b212b0e1",
+      "url": null,
+      "hash": "12v9qfy0mwais5rmr03pkxy414x4lg75bi10001a4ybgd90ksqql"
+    },
+    "vim-moonfly-colors": {
+      "type": "Git",
+      "repository": {
+        "type": "Git",
+        "url": "https://github.com/bluz71/vim-moonfly-colors"
+      },
+      "branch": "master",
+      "submodules": false,
+      "revision": "ff822100c5d268e0db79e8e725cbd3ade3470de3",
+      "url": null,
+      "hash": "14ffclg7yjkyw05bdqwc7rmzf195vjswfpmcfi7sd85rr4d3midz"
     }
   },
   "version": 5

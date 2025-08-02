@@ -58,23 +58,19 @@ mnw.lib.wrap pkgs {
       [
         lz-n
 
-        cyberdream-nvim
         editorconfig-nvim
         elixir-tools-nvim
         fidget-nvim
         friendly-snippets
         fugitive
-        lualine-nvim
         neogit
         nui-nvim
-        nvim-highlight-colors
         nvim-treesitter.withAllGrammars
         nvim-treesitter-endwise
         nvim-surround
         nvim-web-devicons
         openingh-nvim
         plenary-nvim
-        rainbow-delimiters-nvim
         remember-nvim
         rustaceanvim
         smart-open-nvim
@@ -89,7 +85,6 @@ mnw.lib.wrap pkgs {
         vim-dadbod
         vim-dadbod-completion
         vim-dadbod-ui
-        vim-illuminate
         vim-just
         vim-matchup
         vim-repeat
@@ -104,12 +99,16 @@ mnw.lib.wrap pkgs {
       [
         actions-preview-nvim
         blink-cmp
+        cyberdream-nvim
         diffview-nvim
         copilot-lua
+        lualine-nvim
         nvim-dap-go
+        nvim-highlight-colors
         oil-nvim
         tiny-inline-diagnostic-nvim
         toggleterm-nvim
+        vim-illuminate
       ]
       ++ (mnw.lib.npinsToPlugins pkgs ./npins.lazy/sources.json);
   };

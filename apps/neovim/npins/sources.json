@@ -1,17 +1,5 @@
 {
   "pins": {
-    "auto-dark-mode.nvim": {
-      "type": "Git",
-      "repository": {
-        "type": "Git",
-        "url": "https://github.com/f-person/auto-dark-mode.nvim"
-      },
-      "branch": "master",
-      "submodules": false,
-      "revision": "97a86c9402c784a254e5465ca2c51481eea310e3",
-      "url": null,
-      "hash": "1w0z2crla19vm273skr3yhgq60hzn9kxr9ch0699hy2gdsl71ryd"
-    },
     "move-nvim": {
       "type": "Git",
       "repository": {
@@ -83,18 +71,6 @@
       "revision": "0670128ccecbec2e49d493d58ee6471d6edb7367",
       "url": null,
       "hash": "0lgcsysddq5jqkbz0064wc16pr897mmh4myxs2q2ax7f55lq3yyd"
-    },
-    "vim-moonfly-colors": {
-      "type": "Git",
-      "repository": {
-        "type": "Git",
-        "url": "https://github.com/bluz71/vim-moonfly-colors"
-      },
-      "branch": "master",
-      "submodules": false,
-      "revision": "ff822100c5d268e0db79e8e725cbd3ade3470de3",
-      "url": null,
-      "hash": "14ffclg7yjkyw05bdqwc7rmzf195vjswfpmcfi7sd85rr4d3midz"
     },
     "workspace-diagnotics-nvim": {
       "type": "Git",

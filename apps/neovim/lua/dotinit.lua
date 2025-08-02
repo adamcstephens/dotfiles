@@ -8,7 +8,6 @@ vim.g.mapleader = ","
 -- includes
 --
 require("auto")
-require("theme")
 require("dotinit.core")
 
 -- packages
