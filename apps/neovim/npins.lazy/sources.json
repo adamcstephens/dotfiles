@@ -1,19 +1,19 @@
 {
   "pins": {
-    "CopilotChat": {
+    "codecompanion.nvim": {
       "type": "GitRelease",
       "repository": {
         "type": "Git",
-        "url": "https://github.com/CopilotC-Nvim/CopilotChat.nvim"
+        "url": "https://github.com/olimorris/codecompanion.nvim"
       },
       "pre_releases": false,
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v3.12.0",
-      "revision": "eddc9a98930cda0b3819cc1d93427b402697dfab",
+      "version": "v17.12.0",
+      "revision": "44bf13d7e876b0fdc47597bf2e09d60794385b58",
       "url": null,
-      "hash": "1ba6bi82dqpk06bkfcidc3f54wy5hwsk6anh8jdcckqwp1v1ir4z"
+      "hash": "15qnqlwybd255mxj6wlbrplxic1ssa6l5hiblcj56crhaqvvpyk9"
     },
     "conform.nvim": {
       "type": "GitRelease",
