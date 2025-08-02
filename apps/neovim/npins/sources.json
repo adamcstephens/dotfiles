@@ -1,17 +1,5 @@
 {
   "pins": {
-    "move-nvim": {
-      "type": "Git",
-      "repository": {
-        "type": "Git",
-        "url": "https://github.com/fedepujol/move.nvim.git"
-      },
-      "branch": "main",
-      "submodules": false,
-      "revision": "599b14047b82e92874b9a408e4df228b965c3a1d",
-      "url": null,
-      "hash": "1vz6h2n6h09q0v9zfkaiy9p64pxy88j0nykmaah3jrqj917qrvic"
-    },
     "multiple-cursors-nvim": {
       "type": "GitRelease",
       "repository": {

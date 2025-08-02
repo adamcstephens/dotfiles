@@ -60,7 +60,6 @@ mnw.lib.wrap pkgs {
 
         editorconfig-nvim
         elixir-tools-nvim
-        fidget-nvim
         friendly-snippets
         fugitive
         neogit
@@ -102,6 +101,7 @@ mnw.lib.wrap pkgs {
         cyberdream-nvim
         diffview-nvim
         copilot-lua
+        fidget-nvim
         lualine-nvim
         nvim-dap-go
         nvim-highlight-colors

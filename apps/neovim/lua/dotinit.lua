@@ -1,8 +1,6 @@
 -- use experiemental lua loader
 vim.loader.enable()
 
--- map leader to <Space> before we do anything else
--- vim.keymap.set("n", " ", "<Nop>", { silent = true, remap = false })
 vim.g.mapleader = ","
 
 -- includes
@@ -12,18 +10,7 @@ require("dotinit.core")
 
 -- packages
 --
--- notifications
-require("fidget").setup({})
 
-require("move").setup({
-  block = {
-    enable = true,
-    indent = true,
-  },
-  char = {
-    enable = true,
-  },
-})
 require("multiple-cursors").setup({})
 local neogit = require("neogit")
 neogit.setup()
@@ -178,12 +165,6 @@ vim.keymap.set({ "n", "i", "t" }, "<leader><leader>h", require("smart-splits").s
 vim.keymap.set({ "n", "i", "t" }, "<leader><leader>j", require("smart-splits").swap_buf_down)
 vim.keymap.set({ "n", "i", "t" }, "<leader><leader>k", require("smart-splits").swap_buf_up)
 vim.keymap.set({ "n", "i", "t" }, "<leader><leader>l", require("smart-splits").swap_buf_right)
-
--- moves
-vim.keymap.set("n", "<A-Down>", ":MoveLine(1)<CR>")
-vim.keymap.set("n", "<A-Up>", ":MoveLine(-1)<CR>")
-vim.keymap.set("v", "<A-Down>", ":MoveBlock(1)<CR>")
-vim.keymap.set("v", "<A-Up>", ":MoveBlock(-1)<CR>")
 
 -- multiple-cursors
 vim.keymap.set({ "n", "x" }, "<C-j>", "<Cmd>MultipleCursorsAddDown<CR>", { desc = "Add cursor and move down" })
