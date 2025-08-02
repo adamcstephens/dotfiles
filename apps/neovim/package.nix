@@ -62,7 +62,6 @@ mnw.lib.wrap pkgs {
         elixir-tools-nvim
         friendly-snippets
         fugitive
-        neogit
         nui-nvim
         nvim-treesitter.withAllGrammars
         nvim-treesitter-endwise
@@ -103,6 +102,7 @@ mnw.lib.wrap pkgs {
         copilot-lua
         fidget-nvim
         lualine-nvim
+        neogit
         nvim-dap-go
         nvim-highlight-colors
         oil-nvim

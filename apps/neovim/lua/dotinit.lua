@@ -11,9 +11,6 @@ require("dotinit.core")
 -- packages
 --
 
-require("multiple-cursors").setup({})
-local neogit = require("neogit")
-neogit.setup()
 require("nvim-surround").setup({})
 require("nvim-treesitter.configs").setup({
   endwise = {
@@ -166,33 +163,6 @@ vim.keymap.set({ "n", "i", "t" }, "<leader><leader>j", require("smart-splits").s
 vim.keymap.set({ "n", "i", "t" }, "<leader><leader>k", require("smart-splits").swap_buf_up)
 vim.keymap.set({ "n", "i", "t" }, "<leader><leader>l", require("smart-splits").swap_buf_right)
 
--- multiple-cursors
-vim.keymap.set({ "n", "x" }, "<C-j>", "<Cmd>MultipleCursorsAddDown<CR>", { desc = "Add cursor and move down" })
-vim.keymap.set({ "n", "x" }, "<C-k>", "<Cmd>MultipleCursorsAddUp<CR>", { desc = "Add cursor and move up" })
-vim.keymap.set({ "n", "i", "x" }, "<C-Down>", "<Cmd>MultipleCursorsAddDown<CR>", { desc = "Add cursor and move down" })
-vim.keymap.set({ "n", "i", "x" }, "<C-Up>", "<Cmd>MultipleCursorsAddUp<CR>", { desc = "Add cursor and move up" })
-vim.keymap.set(
-  { "x" },
-  "<Leader>m",
-  "<Cmd>MultipleCursorsAddVisualArea<CR>",
-  { desc = "Add cursors to the lines of the visual area" }
-)
--- vim.keymap.set({ "n", "x" }, "<Leader>a", "<Cmd>MultipleCursorsAddMatches<CR>", { desc = "Add cursors to cword" })
--- vim.keymap.set(
---   { "n", "x" },
---   "<Leader>A",
---   "<Cmd>MultipleCursorsAddMatchesV<CR>",
---   { desc = "Add cursors to cword in previous area" }
--- )
--- vim.keymap.set(
---   { "n", "x" },
---   "<Leader>d",
---   "<Cmd>MultipleCursorsAddJumpNextMatch<CR>",
---   { desc = "Add cursor and jump to next cword" }
--- )
--- vim.keymap.set({ "n", "x" }, "<Leader>D", "<Cmd>MultipleCursorsJumpNextMatch<CR>", { desc = "Jump to next cword" })
--- vim.keymap.set({ "n", "x" }, "<Leader>L", "<Cmd>MultipleCursorsLock<CR>", { desc = "Lock virtual cursors" })
-
 -- vim.keymap.set("n", "<leader><leader>", function()
 --   require("telescope").extensions.smart_open.smart_open({ cwd_only = true, })
 -- end, { noremap = true, silent = true })
@@ -210,7 +180,6 @@ vim.keymap.set(
 )
 vim.keymap.set("n", "<leader>dh", require("telescope").extensions.dap.commands, { desc = "dap commands" })
 vim.keymap.set("n", "<leader>f", builtin.find_files, { desc = "Find Files" })
-vim.keymap.set("n", "<leader>g", neogit.open, { desc = "Open Neogit" })
 vim.keymap.set("n", "<leader>hk", builtin.keymaps, { desc = "Keymaps" })
 vim.keymap.set("n", "<leader>ho", builtin.help_tags, { desc = "Help Tags" })
 
