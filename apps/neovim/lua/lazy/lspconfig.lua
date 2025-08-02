@@ -50,6 +50,11 @@ return {
             -- global gitignore isn't processed
             ignoreDir = {
               ".direnv/",
+              ".git/",
+              ".jj/",
+              "__pycache__/",
+              "_build",
+              "result",
             },
             useGitIgnore = true,
           },

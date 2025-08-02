@@ -1,5 +1,17 @@
 {
   "pins": {
+    "codecompanion-history.nvim": {
+      "type": "Git",
+      "repository": {
+        "type": "Git",
+        "url": "https://github.com/ravitemer/codecompanion-history.nvim"
+      },
+      "branch": "main",
+      "submodules": false,
+      "revision": "811b9af74c8fd4752a3422acf2379fba0639a96c",
+      "url": null,
+      "hash": "0q2lymvb1mgcx4lsycimrqcjm3g0j4q4l3019lxr8182a2q3slcs"
+    },
     "codecompanion.nvim": {
       "type": "GitRelease",
       "repository": {

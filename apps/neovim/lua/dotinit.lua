@@ -197,21 +197,21 @@ vim.keymap.set(
   "<Cmd>MultipleCursorsAddVisualArea<CR>",
   { desc = "Add cursors to the lines of the visual area" }
 )
-vim.keymap.set({ "n", "x" }, "<Leader>a", "<Cmd>MultipleCursorsAddMatches<CR>", { desc = "Add cursors to cword" })
-vim.keymap.set(
-  { "n", "x" },
-  "<Leader>A",
-  "<Cmd>MultipleCursorsAddMatchesV<CR>",
-  { desc = "Add cursors to cword in previous area" }
-)
-vim.keymap.set(
-  { "n", "x" },
-  "<Leader>d",
-  "<Cmd>MultipleCursorsAddJumpNextMatch<CR>",
-  { desc = "Add cursor and jump to next cword" }
-)
-vim.keymap.set({ "n", "x" }, "<Leader>D", "<Cmd>MultipleCursorsJumpNextMatch<CR>", { desc = "Jump to next cword" })
-vim.keymap.set({ "n", "x" }, "<Leader>L", "<Cmd>MultipleCursorsLock<CR>", { desc = "Lock virtual cursors" })
+-- vim.keymap.set({ "n", "x" }, "<Leader>a", "<Cmd>MultipleCursorsAddMatches<CR>", { desc = "Add cursors to cword" })
+-- vim.keymap.set(
+--   { "n", "x" },
+--   "<Leader>A",
+--   "<Cmd>MultipleCursorsAddMatchesV<CR>",
+--   { desc = "Add cursors to cword in previous area" }
+-- )
+-- vim.keymap.set(
+--   { "n", "x" },
+--   "<Leader>d",
+--   "<Cmd>MultipleCursorsAddJumpNextMatch<CR>",
+--   { desc = "Add cursor and jump to next cword" }
+-- )
+-- vim.keymap.set({ "n", "x" }, "<Leader>D", "<Cmd>MultipleCursorsJumpNextMatch<CR>", { desc = "Jump to next cword" })
+-- vim.keymap.set({ "n", "x" }, "<Leader>L", "<Cmd>MultipleCursorsLock<CR>", { desc = "Lock virtual cursors" })
 
 -- vim.keymap.set("n", "<leader><leader>", function()
 --   require("telescope").extensions.smart_open.smart_open({ cwd_only = true, })
