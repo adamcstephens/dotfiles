@@ -1,4 +1,3 @@
--- notifications
 return {
   "neogit",
 

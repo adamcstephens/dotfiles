@@ -1,5 +1,5 @@
 return {
-  "dap-go",
+  "nvim-dap-go",
 
   ft = "go",
 

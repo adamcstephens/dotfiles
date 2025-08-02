@@ -11,36 +11,6 @@ require("dotinit.core")
 -- packages
 --
 
-require("nvim-surround").setup({})
-require("nvim-treesitter.configs").setup({
-  endwise = {
-    enable = true,
-  },
-  highlight = {
-    enable = true,
-  },
-  incremental_selection = {
-    enable = true,
-    keymaps = {
-      node_incremental = "v",
-      node_decremental = "V",
-    },
-  },
-  matchup = {
-    enable = true,
-  },
-  textobjects = {
-    lsp_interop = {
-      enable = true,
-      border = "none",
-      floating_preview_opts = {},
-      peek_definition_code = {
-        ["<leader>df"] = "@function.outer",
-        ["<leader>dF"] = "@class.outer",
-      },
-    },
-  },
-})
 require("nvim-web-devicons").setup({})
 require("remember").setup({})
 require("smart-splits").setup({

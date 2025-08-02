@@ -63,9 +63,6 @@ mnw.lib.wrap pkgs {
         friendly-snippets
         fugitive
         nui-nvim
-        nvim-treesitter.withAllGrammars
-        nvim-treesitter-endwise
-        nvim-surround
         nvim-web-devicons
         openingh-nvim
         plenary-nvim
@@ -84,7 +81,6 @@ mnw.lib.wrap pkgs {
         vim-dadbod-completion
         vim-dadbod-ui
         vim-just
-        vim-matchup
         vim-repeat
         which-key-nvim
         whitespace-nvim
@@ -97,14 +93,17 @@ mnw.lib.wrap pkgs {
       [
         actions-preview-nvim
         blink-cmp
+        copilot-lua
         cyberdream-nvim
         diffview-nvim
-        copilot-lua
         fidget-nvim
         lualine-nvim
         neogit
         nvim-dap-go
         nvim-highlight-colors
+        nvim-treesitter-endwise
+        nvim-treesitter-textobjects
+        nvim-treesitter.withAllGrammars
         oil-nvim
         tiny-inline-diagnostic-nvim
         toggleterm-nvim
