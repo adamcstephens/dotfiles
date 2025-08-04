@@ -129,6 +129,7 @@
       pkgs.gojq
       pkgs.just
       pkgs.kitty.terminfo
+      pkgs.moar
       pkgs.ncdu
       pkgs.skim
       pkgs.tio
