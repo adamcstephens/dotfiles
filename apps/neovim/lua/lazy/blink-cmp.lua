@@ -21,6 +21,9 @@ return {
         ["<C-k>"] = { "select_prev", "fallback" },
       },
       sources = {
+        per_filetype = {
+          codecompanion = { "codecompanion" },
+        },
         providers = {
           snippets = {
             opts = {
@@ -28,6 +31,13 @@ return {
                 "~/.dotfiles/apps/neovim/snippets",
               },
             },
+          },
+          codecompanion = {
+            name = "CodeCompanion",
+            module = "codecompanion.providers.completion.blink",
+            enabled = true,
+            score_offset = 10,
+            async = true,
           },
         },
       },
