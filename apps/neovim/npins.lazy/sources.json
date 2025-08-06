@@ -187,13 +187,13 @@
       "type": "Git",
       "repository": {
         "type": "Git",
-        "url": "https://github.com/belltoy/vim-matchup"
+        "url": "https://github.com/andymass/vim-matchup"
       },
-      "branch": "feature/add-erlang-elixir-support",
+      "branch": "master",
       "submodules": false,
-      "revision": "8de9e98a24e0da51f35694a7a62cf76125026777",
+      "revision": "b4efd6a97380b99bb9f5eb80c9002e061402c288",
       "url": null,
-      "hash": "069x7z1anlnbj1yw7m659mm010kk3h9pgygjywnbcgqcvvn2hi4l"
+      "hash": "09nhdj7nyxbw84ak83qbwrnp4sb8jxpssv9myl7sm0vc6g8sigip"
     },
     "vim-moonfly-colors": {
       "type": "Git",
