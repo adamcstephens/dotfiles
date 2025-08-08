@@ -1,5 +1,20 @@
 {
   "pins": {
+    "codecompanion-spinner.nvim": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "Git",
+        "url": "https://github.com/franco-ruggeri/codecompanion-spinner.nvim"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "submodules": false,
+      "version": "v0.2.2",
+      "revision": "1f53b8d402de2a5ee6f9d64793f5eda49ed12a64",
+      "url": null,
+      "hash": "02yqbpg4550y6x3jvbqlx6qcw4sbrixd56mhws2fxrvpz2s09fr7"
+    },
     "nvim-ufo": {
       "type": "GitRelease",
       "repository": {

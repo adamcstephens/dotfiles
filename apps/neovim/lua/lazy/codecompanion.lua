@@ -5,6 +5,7 @@ return {
 
   after = function()
     require("lz.n").trigger_load("codecompanion-history.nvim")
+    require("lz.n").trigger_load("codecompanion-spinner.nvim")
     require("codecompanion").setup({
       extensions = {
         history = {
@@ -82,11 +83,13 @@ return {
             -- },
           },
         },
+        spinner = {},
       },
     })
   end,
 
   keys = {
     { "<leader>ac", require("codecompanion").toggle, desc = "toggle code companion chat" },
+    { "<leader>aa", require("codecompanion").actions, desc = "code companion actions" },
   },
 }
