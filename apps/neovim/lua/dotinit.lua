@@ -13,9 +13,6 @@ require("dotinit.core")
 
 require("nvim-web-devicons").setup({})
 require("remember").setup({})
-require("smart-splits").setup({
-  at_edge = "stop",
-})
 
 local builtin = require("telescope.builtin")
 local open_with_trouble = require("trouble.sources.telescope").open
@@ -35,15 +32,6 @@ require("telescope").load_extension("dap")
 require("telescope").load_extension("undo")
 require("telescope").load_extension("zf-native")
 
-require("tmux").setup({
-  -- use smart-splits for navigation
-  navigation = {
-    enable_default_keybindings = false,
-  },
-  resize = {
-    enable_default_keybindings = false,
-  },
-})
 require("trouble").setup({
   -- win = {
   --   type = "split",
@@ -114,24 +102,6 @@ vim.keymap.set("i", "<C-e>", "<C-o>$")
 vim.keymap.set("i", "<C-a>", "<C-o>0")
 vim.keymap.set("n", "<C-e>", "$")
 vim.keymap.set("n", "<C-a>", "0")
-
--- moving between splits
-vim.keymap.set({ "n", "i", "t" }, "<A-h>", require("smart-splits").move_cursor_left)
-vim.keymap.set({ "n", "i", "t" }, "<A-j>", require("smart-splits").move_cursor_down)
-vim.keymap.set({ "n", "i", "t" }, "<A-k>", require("smart-splits").move_cursor_up)
-vim.keymap.set({ "n", "i", "t" }, "<A-l>", require("smart-splits").move_cursor_right)
--- resizing splits
--- these keymaps will also accept a range,
--- for example `10<A-h>` will `resize_left` by `(10 * config.default_amount)`
-vim.keymap.set({ "n", "i", "t" }, "<C-S-h>", require("smart-splits").resize_left)
-vim.keymap.set({ "n", "i", "t" }, "<C-S-j>", require("smart-splits").resize_down)
-vim.keymap.set({ "n", "i", "t" }, "<C-S-k>", require("smart-splits").resize_up)
-vim.keymap.set({ "n", "i", "t" }, "<C-S-l>", require("smart-splits").resize_right)
--- swapping buffers between windows
-vim.keymap.set({ "n", "i", "t" }, "<leader><leader>h", require("smart-splits").swap_buf_left)
-vim.keymap.set({ "n", "i", "t" }, "<leader><leader>j", require("smart-splits").swap_buf_down)
-vim.keymap.set({ "n", "i", "t" }, "<leader><leader>k", require("smart-splits").swap_buf_up)
-vim.keymap.set({ "n", "i", "t" }, "<leader><leader>l", require("smart-splits").swap_buf_right)
 
 -- vim.keymap.set("n", "<leader><leader>", function()
 --   require("telescope").extensions.smart_open.smart_open({ cwd_only = true, })

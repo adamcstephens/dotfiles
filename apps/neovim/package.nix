@@ -75,7 +75,6 @@ mnw.lib.wrap pkgs {
         telescope-zf-native-nvim
         telescope-nvim
         telescope-undo-nvim
-        tmux-nvim
         trouble-nvim
         vim-dadbod
         vim-dadbod-completion
@@ -106,6 +105,7 @@ mnw.lib.wrap pkgs {
         nvim-treesitter.withAllGrammars
         oil-nvim
         tiny-inline-diagnostic-nvim
+        tmux-nvim
         toggleterm-nvim
         vim-illuminate
       ]

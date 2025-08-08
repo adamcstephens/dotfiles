@@ -30,21 +30,6 @@
       "url": null,
       "hash": "19kyjzjvlj0c5w3d7r7pfrd5w5w2jv10y4xahiy4iyxa1qz50vsp"
     },
-    "smart-splits.nvim": {
-      "type": "GitRelease",
-      "repository": {
-        "type": "Git",
-        "url": "https://github.com/mrjones2014/smart-splits.nvim"
-      },
-      "pre_releases": false,
-      "version_upper_bound": null,
-      "release_prefix": null,
-      "submodules": false,
-      "version": "v2.0.3",
-      "revision": "0670128ccecbec2e49d493d58ee6471d6edb7367",
-      "url": null,
-      "hash": "0lgcsysddq5jqkbz0064wc16pr897mmh4myxs2q2ax7f55lq3yyd"
-    },
     "workspace-diagnotics-nvim": {
       "type": "Git",
       "repository": {
