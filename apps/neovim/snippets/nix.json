@@ -24,6 +24,23 @@
     "body": "lib.mkEnableOption \"$1\";",
     "description": ""
   },
+  "submodule": {
+    "prefix": "submodule",
+    "body": [
+      "lib.types.submodule (",
+      "  { name, config }:",
+      "  {",
+      "    options = {",
+      "      name = lib.mkOption {",
+      "        type = lib.types.str;",
+      "        default = name;",
+      "      };",
+      "    };",
+      "    config = { };",
+      "  }",
+      ")"
+    ]
+  },
   "mkpackage": {
     "prefix": "mkpackage",
     "body": "lib.mkPackageOption pkgs \"$1\" { };",
