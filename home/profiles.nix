@@ -231,59 +231,6 @@ in
       ];
     };
 
-    seek = {
-      nixpkgs = inputs.nixpkgs-unstable;
-      home-manager = inputs.home-manager-unstable;
-
-      modules = [
-        ./linux-gui.nix
-
-        (
-          { pkgs, ... }:
-          {
-            apps.ssh.tpm = true;
-
-            dotfiles = {
-              apps = {
-                zk.enable = true;
-              };
-              gui = {
-                dpi = 120;
-                wayland.enable = true;
-              };
-            };
-
-            programs.waybar.settings.main = {
-              network.interface = "wlp1s0";
-            };
-
-            services.kanshi.settings = [
-              {
-                profile.name = "undocked";
-                profile.outputs = [
-                  {
-                    criteria = "eDP-1";
-                    mode = "2880x1800@60Hz";
-                    scale = 1.5;
-                    status = "enable";
-                  }
-                ];
-              }
-            ];
-          }
-        )
-      ];
-    };
-
-    worker1 = {
-      nixpkgs = inputs.nixpkgs-unstable;
-      home-manager = inputs.home-manager-unstable;
-
-      modules = [
-        ./core-dev.nix
-      ];
-    };
-
     # generic systems
 
     aarch64-darwin = {
