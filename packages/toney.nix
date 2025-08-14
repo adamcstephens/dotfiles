@@ -6,16 +6,16 @@
 
 buildGoModule rec {
   pname = "toney";
-  version = "2.0.1";
+  version = "2.1.1";
 
   src = fetchFromGitHub {
     owner = "SourcewareLab";
     repo = "Toney";
     rev = "v${version}";
-    hash = "sha256-y2j/WselGVLMVUcYfzCJeOySwo1o6W5flhdJvx/F2qk=";
+    hash = "sha256-GIOWQCGqGrZBg+E7lg/doVx/UYQvI68AqEXykW/nYJA=";
   };
 
-  vendorHash = "sha256-Ri9s9JZOAXFxw7/ffPitlfk/O7ccfv/t80QIwMbe/mE=";
+  vendorHash = "sha256-0ImF4Ose1PyC6wa4miH/Uy8WQfo7jdRcOnYa6MwaEig=";
 
   ldflags = [
     "-s"
