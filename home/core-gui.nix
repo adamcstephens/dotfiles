@@ -7,6 +7,7 @@
     ./colors.nix
     ./core-dev.nix
 
+    ../apps/display-switch
     ../apps/ghostty
     ../apps/kitty
   ];
