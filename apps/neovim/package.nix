@@ -67,7 +67,6 @@ mnw.lib.wrap pkgs {
         openingh-nvim
         plenary-nvim
         remember-nvim
-        rustaceanvim
         smart-open-nvim
         sqlite-lua
         statuscol-nvim
