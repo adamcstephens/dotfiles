@@ -14,7 +14,6 @@ in
 
   imports = [
     ../apps/atuin
-    ../apps/jujutsu
     ../apps/ssh
     ../apps/zk
   ];
