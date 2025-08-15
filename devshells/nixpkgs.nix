@@ -17,6 +17,7 @@ mkShellNoCC {
       nix-prefetch
       nix-generate-from-cpan
       nix-init
+      nix-output-monitor
       nix-prefetch-github
       nix-prefetch-scripts
       nix-tree
