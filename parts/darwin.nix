@@ -106,8 +106,8 @@
                 "@admin"
               ];
 
-              substituters = [ "https://cache.junco.dev/v3?priority=41" ];
-              trusted-public-keys = [ "v3:aMXMnngJoGU8dpELPyNAhADrOgrn5GiXWP90NiB4aFY=" ];
+              substituters = [ "https://cache.junco.dev/v4?priority=41" ];
+              trusted-public-keys = [ "v4:6cq9xeMAepF20fTnv+ChvLkPLzBtCD9NRUaKrarK+nU=" ];
               extra-platforms = "x86_64-darwin";
             };
           };
