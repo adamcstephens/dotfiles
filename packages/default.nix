@@ -1,5 +1,6 @@
 {
   inputs,
+  lib,
   pkgs,
   homeConfigurations,
   ...
@@ -11,10 +12,12 @@ let
     else
       inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.ocaml-ng.ocamlPackages_5_3;
 in
-rec {
-  arkenfox = pkgs.callPackage ./arkenfox { };
+(lib.filesystem.packagesFromDirectoryRecursive {
+  inherit (pkgs) callPackage;
+  directory = ./.;
+})
+// rec {
   default = dotfiles;
-  display-switch = pkgs.callPackage ./display-switch.nix { };
   dotfiles = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.callPackage ./dotfiles.nix {
     inherit ocamlPackages;
     static = pkgs.stdenv.isLinux && pkgs.stdenv.isx86_64;
@@ -23,7 +26,4 @@ rec {
   home-profile-selector = pkgs.callPackage ./home-profile-selector.nix {
     inherit homeConfigurations;
   };
-  prj = pkgs.callPackage ./prj.nix { };
-  toney = pkgs.callPackage ./toney.nix { };
-  vim-zellij-navigator = pkgs.callPackage ./vim-zellij-navigator.nix { };
 }
