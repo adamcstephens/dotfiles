@@ -15,7 +15,6 @@
   perSystem =
     {
       inputs',
-      self',
       ...
     }:
     let
