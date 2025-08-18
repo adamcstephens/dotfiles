@@ -39,6 +39,12 @@ in
       };
 
       dontSleep = lib.mkEnableOption "Don't automatically sleep on idle";
+      sleepTimeout = lib.mkOption {
+        type = lib.types.int;
+        description = "when to sleep";
+        default = 360;
+      };
+
       insecure = lib.mkEnableOption "Insecure GUI disables locking";
 
       font = {

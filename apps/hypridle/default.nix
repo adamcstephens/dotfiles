@@ -62,7 +62,7 @@ in
         ]
         ++ lib.optionals (!config.dotfiles.gui.dontSleep) [
           {
-            timeout = 360;
+            timeout = config.dotfiles.gui.sleepTimeout;
             on-timeout = "systemctl sleep";
           }
         ];

@@ -84,6 +84,7 @@ in
             apps.zk.enable = true;
             gui = {
               dpi = 148;
+              sleepTimeout = 900;
               wayland.enable = true;
             };
           };
