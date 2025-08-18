@@ -232,6 +232,12 @@ in
       ];
     };
 
+    worker1 = {
+      modules = [
+        ./core-dev.nix
+      ];
+    };
+
     # generic systems
 
     aarch64-darwin = {
