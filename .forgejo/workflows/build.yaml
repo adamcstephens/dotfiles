@@ -18,13 +18,3 @@ jobs:
       - run: |
           export HOME=$PWD
           nix develop .#ci --command seed-ci --attic-upload=true --nom=false --sower-seed=true --system x86_64-linux --cache-build-deps=true
-
-  build-and-seed-aarch64:
-    runs-on: local/aarch64-linux
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - run: |
-          export HOME=$PWD
-          nix develop .#ci --command seed-ci --attic-upload=true --nom=false --sower-seed=true --system aarch64-linux --cache-build-deps=true
