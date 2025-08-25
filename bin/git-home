@@ -28,8 +28,15 @@ if ref is None:
     print("Failed to load symbolic-ref")
     sys.exit(1)
 
-branch = os.path.basename(ref)
+branch: str = os.path.basename(ref)
 
-dotlib.run(f"git switch {branch}", capture_output=False)
-dotlib.run("git pull --prune", capture_output=False)
-print(f"Switched and updated to {branch}")
+is_jj: bool = os.path.isdir(".jj")
+
+if is_jj:
+    dotlib.run("jj git fetch --all-remotes", capture_output=False)
+    dotlib.run(f"jj rebase --destination {branch}", capture_output=False)
+    print(f"Rebased on {branch}")
+else:
+    dotlib.run(f"git switch {branch}", capture_output=False)
+    dotlib.run("git pull --prune", capture_output=False)
+    print(f"Switched and updated to {branch}")

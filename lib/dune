@@ -1,5 +1,5 @@
 (library
  (name dotfiles)
- (libraries eio eio_main str yojson)
+ (libraries eio eio_main logs str yojson)
  (preprocess
   (pps ppx_deriving.show)))
