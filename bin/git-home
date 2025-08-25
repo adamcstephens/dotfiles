@@ -7,7 +7,9 @@ import sys
 
 dotlib.find_git_up()
 
-heads = [".git/refs/remotes/origin/HEAD", ".git/refs/remotes/upstream/HEAD"]
+is_jj: bool = os.path.isdir(".jj")
+
+heads = [".git/refs/remotes/upstream/HEAD", ".git/refs/remotes/origin/HEAD"]
 
 head: str = ""
 
@@ -29,8 +31,6 @@ if ref is None:
     sys.exit(1)
 
 branch: str = os.path.basename(ref)
-
-is_jj: bool = os.path.isdir(".jj")
 
 if is_jj:
     dotlib.run("jj git fetch --all-remotes", capture_output=False)
