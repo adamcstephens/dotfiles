@@ -71,7 +71,7 @@ in
 
   dotfiles.apps = {
     hypridle.enable = lib.mkDefault config.dotfiles.gui.wayland.enable;
-    ironbar.enable = lib.mkDefault config.dotfiles.gui.wayland.enable;
+    waybar.enable = lib.mkDefault config.dotfiles.gui.wayland.enable;
   };
 
   # reads fonts from home.packages
