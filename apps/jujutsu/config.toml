@@ -1,3 +1,6 @@
+[aliases]
+tug = ["bookmark", "move", "--from", "closest_bookmark(@-)", "--to", "@-"]
+
 [fsmonitor]
 backend = "watchman"
 watchman.register-snapshot-trigger = true
@@ -16,6 +19,9 @@ diff-formatter = ["difft", "--color=always", "$left", "$right"]
 diff-editor = ":builtin"
 editor = "nvim"
 pager = ":builtin"
+
+[revset-aliases]
+'closest_bookmark(to)' = 'heads(::to & bookmarks())'
 
 [user]
 name = "Adam C. Stephens"
