@@ -34,6 +34,6 @@ rustPlatform.buildRustPackage rec {
     changelog = "https://github.com/LesnyRumcajs/wakey/blob/${src.rev}/CHANGELOG.md";
     license = lib.licenses.mit;
     maintainers = with lib.maintainers; [ ];
-    mainProgram = "wakey";
+    mainProgram = "wakey-wake";
   };
 }
