@@ -74,7 +74,6 @@ mnw.lib.wrap pkgs {
         telescope-zf-native-nvim
         telescope-nvim
         telescope-undo-nvim
-        trouble-nvim
         vim-dadbod
         vim-dadbod-completion
         vim-dadbod-ui

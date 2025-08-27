@@ -15,13 +15,8 @@ require("nvim-web-devicons").setup({})
 require("remember").setup({})
 
 local builtin = require("telescope.builtin")
-local open_with_trouble = require("trouble.sources.telescope").open
 require("telescope").setup({
   defaults = {
-    mappings = {
-      i = { ["<c-q>"] = open_with_trouble },
-      n = { ["<c-q>"] = open_with_trouble },
-    },
     preview = false,
   },
   pickers = {
@@ -32,12 +27,6 @@ require("telescope").load_extension("dap")
 require("telescope").load_extension("undo")
 require("telescope").load_extension("zf-native")
 
-require("trouble").setup({
-  -- win = {
-  --   type = "split",
-  --   position = "right",
-  -- },
-})
 require("which-key").setup({})
 require("whitespace-nvim").setup({})
 
@@ -128,7 +117,7 @@ vim.keymap.set("n", "<leader>lf", function()
 end, { desc = "Rename symbol" })
 vim.keymap.set("n", "<leader>li", vim.lsp.buf.hover, { desc = "Show hover" })
 vim.keymap.set("n", "<leader>lr", function()
-  require("trouble").toggle("lsp_references")
+  builtin.lsp_references()
 end, { desc = "Find References" })
 vim.keymap.set("n", "<leader>lR", vim.lsp.buf.rename, { desc = "Rename symbol" })
 
@@ -151,16 +140,10 @@ end, { desc = "Save File (No autocmd)" })
 vim.keymap.set("n", "<leader>u", "<cmd>Telescope undo<cr>")
 
 -- diagnostics
-vim.keymap.set("n", "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", { desc = "Trouble Toggle" })
+vim.keymap.set("n", "<leader>xx", builtin.diagnostics, { desc = "Diagnostics" })
 vim.keymap.set("n", "]g", vim.diagnostic.goto_next)
 vim.keymap.set("n", "[g", vim.diagnostic.goto_prev)
 
-vim.keymap.set("n", "<leader>xq", function()
-  require("trouble").toggle("quickfix")
-end)
-vim.keymap.set("n", "<leader>xl", function()
-  require("trouble").toggle("loclist")
-end)
 vim.keymap.set({ "n", "v" }, "<leader>y", builtin.registers, { desc = "Registers" })
 
 vim.keymap.set("n", "<C-p>", builtin.find_files, { desc = "Find Files" })
