@@ -107,37 +107,28 @@
   home.file.".terminfo".source =
     config.lib.file.mkOutOfStoreSymlink "${config.home.profileDirectory}/share/terminfo";
 
-  home.packages =
-    let
-      python = pkgs.python312;
-    in
-    [
-      (python.withPackages (
-        ps: with ps; [
-          python-lsp-server
-          pylsp-mypy
-        ]
-      ))
+  home.packages = [
+    pkgs.python313
 
-      pkgs.difftastic
-      pkgs.direnv
-      pkgs.doggo
-      pkgs.du-dust
-      pkgs.file
-      pkgs.fzf
-      pkgs.gdu
-      pkgs.jless
-      pkgs.gojq
-      pkgs.just
-      pkgs.kitty.terminfo
-      pkgs.moar
-      pkgs.ncdu
-      pkgs.skim
-      pkgs.tio
-      pkgs.viddy
-      pkgs.wget
-      pkgs.zf
-    ];
+    pkgs.difftastic
+    pkgs.direnv
+    pkgs.doggo
+    pkgs.du-dust
+    pkgs.file
+    pkgs.fzf
+    pkgs.gdu
+    pkgs.jless
+    pkgs.gojq
+    pkgs.just
+    pkgs.kitty.terminfo
+    pkgs.moar
+    pkgs.ncdu
+    pkgs.skim
+    pkgs.tio
+    pkgs.viddy
+    pkgs.wget
+    pkgs.zf
+  ];
 
   home.sessionVariables = {
     EDITOR = "${config.home.homeDirectory}/.dotfiles/bin/editor";

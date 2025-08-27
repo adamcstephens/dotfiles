@@ -96,6 +96,7 @@ return {
     vim.lsp.enable("pylsp")
     vim.lsp.enable("pyright")
     vim.lsp.enable("ruff")
+    vim.lsp.enable("ty")
 
     -- roc
     vim.lsp.enable("roc_ls")
