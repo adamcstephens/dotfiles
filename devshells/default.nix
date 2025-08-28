@@ -13,6 +13,8 @@ mkShell {
     pkgs.nix-update
     pkgs.npins
 
+    pkgs.ty
+
     ocamlPackages.dune_3
     ocamlPackages.ocamlformat
     ocamlPackages.ocaml-lsp

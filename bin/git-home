@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import argparse
 import dotlib
 import os
 import sys
@@ -9,33 +10,46 @@ dotlib.find_git_up()
 
 is_jj: bool = os.path.isdir(".jj")
 
-heads = [".git/refs/remotes/upstream/HEAD", ".git/refs/remotes/origin/HEAD"]
 
-head: str = ""
+def get_default_branch() -> str:
+    heads = [".git/refs/remotes/upstream/HEAD", ".git/refs/remotes/origin/HEAD"]
 
-for h in heads:
-    if os.path.exists(h):
-        head = h
-        break
+    head: str = ""
 
-if head == "":
-    print("Failed to find git HEAD")
-    sys.exit(1)
+    for h in heads:
+        if os.path.exists(h):
+            head = h
+            break
 
-head = head.replace(".git/", "")
+    if head == "":
+        print("Failed to find git HEAD")
+        sys.exit(1)
 
-ref = dotlib.run(f"git symbolic-ref {head}")
+    head = head.replace(".git/", "")
 
-if ref is None:
-    print("Failed to load symbolic-ref")
-    sys.exit(1)
+    ref = dotlib.run(f"git symbolic-ref {head}")
 
-branch: str = os.path.basename(ref)
+    if ref is None:
+        print("Failed to load symbolic-ref")
+        sys.exit(1)
+
+    return os.path.basename(ref)
+
+
+parser = argparse.ArgumentParser()
+parser.add_argument("-r", "--rebase", action="store_true", help="rebase (jj only)")
+args = parser.parse_args()
+
+branch = get_default_branch()
 
 if is_jj:
     dotlib.run("jj git fetch --all-remotes", capture_output=False)
-    dotlib.run(f"jj rebase --destination {branch}", capture_output=False)
-    print(f"Rebased on {branch}")
+    if args.rebase:
+        dotlib.run(f"jj rebase --destination {branch}", capture_output=False)
+        print(f"Rebased on {branch}")
+    else:
+        dotlib.run(f"jj new {branch}", capture_output=False)
+        print(f"New commit on {branch}")
 else:
     dotlib.run(f"git switch {branch}", capture_output=False)
     dotlib.run("git pull --prune", capture_output=False)
