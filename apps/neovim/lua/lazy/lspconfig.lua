@@ -22,6 +22,7 @@ return {
       end,
     })
     vim.lsp.enable("elixirls")
+    -- vim.lsp.enable("expert")
 
     -- fish
     vim.lsp.enable("fish_lsp")

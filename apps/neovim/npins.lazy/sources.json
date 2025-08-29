@@ -124,19 +124,16 @@
       "hash": "0i10mybxpz0vjkyspv8jkxawph9c823ryf0khb4g8zwpixwhrpmx"
     },
     "nvim-lspconfig": {
-      "type": "GitRelease",
+      "type": "Git",
       "repository": {
         "type": "Git",
         "url": "https://github.com/neovim/nvim-lspconfig"
       },
-      "pre_releases": false,
-      "version_upper_bound": null,
-      "release_prefix": null,
+      "branch": "master",
       "submodules": false,
-      "version": "v2.3.0",
-      "revision": "77d3fdfb3554632c7a3b101ded643d422de7626f",
+      "revision": "408cf07b97535825cca6f1afa908d98348712ba6",
       "url": null,
-      "hash": "0xlad1n0jzk1cir2fp4mnry7l6rbsq3rh2j1y1i5v7j25nk81rf0"
+      "hash": "1cf5b0wr89s6byxakvk5g5ch2cfn1x0m4x6yk1ig822ynp3scwnx"
     },
     "nvim-surround": {
       "type": "GitRelease",
