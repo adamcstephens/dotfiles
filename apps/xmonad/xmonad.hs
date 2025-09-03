@@ -19,7 +19,7 @@ import XMonad.StackSet qualified as W
 import XMonad.Util.Cursor
 import XMonad.Util.EZConfig
 
-spawner exec = spawn ("systemd-cat --identifier=" ++ app ++ " " ++ exec)
+spawner exec = spawn ("app2unit -- " ++ exec)
   where
     app = head $ words exec
 

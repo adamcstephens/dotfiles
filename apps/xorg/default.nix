@@ -41,7 +41,7 @@ in
       pkgs.maim
       pkgs.xclip
       pkgs.xdotool
-      pkgs.xlayoutdisplay
+      # pkgs.xlayoutdisplay
       pkgs.xorg.xdpyinfo
       pkgs.xorg.xev
     ];

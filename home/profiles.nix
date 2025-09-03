@@ -92,6 +92,8 @@ in
               dpi = 148;
               sleepTimeout = 900;
               wayland.enable = true;
+              xorg.enable = true;
+              xorg.wm = "xmonad";
             };
           };
 
