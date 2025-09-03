@@ -17,9 +17,6 @@ in
     inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.jjui
     inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.jujutsu
     pkgs.watchman
-  ]
-  ++ lib.optionals config.dotfiles.gui.enable [
-    pkgs.gg-jj
   ];
 
   home.file."${configDir}/config.toml".source =
