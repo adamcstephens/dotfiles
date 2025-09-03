@@ -7,6 +7,15 @@ return {
     require("lz.n").trigger_load("codecompanion-history.nvim")
     require("lz.n").trigger_load("codecompanion-spinner.nvim")
     require("codecompanion").setup({
+      strategies = {
+        chat = {
+          adapter = {
+            name = "copilot",
+            model = "gemini-2.5-pro",
+          },
+        },
+      },
+
       extensions = {
         history = {
           enabled = true,
@@ -89,7 +98,19 @@ return {
   end,
 
   keys = {
-    { "<leader>ac", require("codecompanion").toggle, desc = "toggle code companion chat" },
-    { "<leader>aa", require("codecompanion").actions, desc = "code companion actions" },
+    {
+      "<leader>ac",
+      function()
+        require("codecompanion").toggle()
+      end,
+      desc = "toggle code companion chat",
+    },
+    {
+      "<leader>aa",
+      function()
+        require("codecompanion").actions()
+      end,
+      desc = "code companion actions",
+    },
   },
 }
