@@ -1,5 +1,6 @@
 [aliases]
 home = ["util", "exec", "--", "git-home"]
+pr = ["util", "exec", "--", "git-jjpr"]
 tug = ["bookmark", "move", "--from", "closest_bookmark(@-)", "--to", "@-"]
 
 [fsmonitor]
