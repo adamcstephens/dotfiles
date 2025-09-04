@@ -1,4 +1,9 @@
-{ lib, pkgs, ... }:
+{
+  inputs,
+  lib,
+  pkgs,
+  ...
+}:
 let
   eternal-terminal = pkgs.symlinkJoin {
     name = "eternal-terminal-wrapped";
@@ -16,6 +21,7 @@ in
     ../apps/atuin
     ../apps/ssh
     ../apps/zk
+    inputs.nix-index-database.homeModules.nix-index
   ];
 
   dotfiles = {
