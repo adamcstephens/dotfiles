@@ -12,6 +12,21 @@
       "url": null,
       "hash": "1w0z2crla19vm273skr3yhgq60hzn9kxr9ch0699hy2gdsl71ryd"
     },
+    "bufferline.nvim": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "Git",
+        "url": "https://github.com/akinsho/bufferline.nvim"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "submodules": false,
+      "version": "v4.9.1",
+      "revision": "655133c3b4c3e5e05ec549b9f8cc2894ac6f51b3",
+      "url": null,
+      "hash": "0m5363rpbjgvsnbhp9yrivbqj17lmrb5m57lpnq7dgxsmw3hrvk9"
+    },
     "codecompanion-history.nvim": {
       "type": "Git",
       "repository": {
