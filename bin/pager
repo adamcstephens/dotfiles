@@ -1,3 +1,3 @@
 #!/usr/bin/env sh
 
-exec moar -quit-if-one-screen -no-clear-on-exit "$@"
+exec ov --exit-write --quit-if-one-screen "$@"

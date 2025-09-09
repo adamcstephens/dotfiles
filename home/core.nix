@@ -121,8 +121,8 @@
     pkgs.gojq
     pkgs.just
     pkgs.kitty.terminfo
-    pkgs.moar
     pkgs.ncdu
+    pkgs.ov
     pkgs.skim
     pkgs.tio
     pkgs.viddy
