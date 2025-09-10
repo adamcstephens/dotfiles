@@ -1,6 +1,5 @@
 {
   config,
-  inputs,
   lib,
   pkgs,
   ...
@@ -12,7 +11,7 @@ in
   options.dotfiles.apps.ironbar = {
     enable = lib.mkEnableOption "ironbar service";
 
-    package = lib.mkPackageOption inputs.ironbar.packages.${pkgs.system} "ironbar" { };
+    package = lib.mkPackageOption pkgs "ironbar" { };
   };
 
   config = lib.mkIf cfg.enable {
