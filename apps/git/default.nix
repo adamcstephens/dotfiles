@@ -16,7 +16,7 @@ in
     pkgs.gh
     pkgs.lazygit
     (pkgs.writeShellScriptBin "lg" "exec ${lib.getExe pkgs.lazygit} $@")
-    pkgs.tea
+    pkgs.forgejo-cli
   ];
 
   xdg.configFile = {
