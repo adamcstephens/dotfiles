@@ -39,9 +39,6 @@ in
   };
 
   systemd.user.services.dunst = {
-    Install = {
-      WantedBy = [ "graphical-session.target" ];
-    };
     Service.ExecStartPre = lib.getExe config-script;
     Service.Environment = lib.mkForce [ "FONTCONFIG_FILE=${config.dotfiles.gui.font.fontconfig}" ];
   };
