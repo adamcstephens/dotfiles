@@ -4,10 +4,10 @@
 
   programs.rofi = {
     enable = true;
-    package = pkgs.rofi-wayland.override {
+    package = pkgs.rofi.override {
       plugins = [
-        (pkgs.rofi-calc.override { rofi-unwrapped = pkgs.rofi-wayland-unwrapped; })
-        pkgs.rofi-emoji-wayland
+        pkgs.rofi-calc
+        pkgs.rofi-emoji
       ];
     };
 
