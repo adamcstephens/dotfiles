@@ -74,6 +74,14 @@ in
     blank = {
       modules = [
         ./core-dev.nix
+        (
+          { pkgs, ... }:
+          {
+            home.packages = [
+              self.packages.${pkgs.system}.wakey
+            ];
+          }
+        )
       ];
     };
 
