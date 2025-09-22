@@ -81,7 +81,7 @@
               options = "--delete-older-than 21d";
             };
 
-            package = pkgs.nixVersions.nix_2_30;
+            package = pkgs.nixVersions.nix_2_31;
 
             settings = {
               auto-optimise-store = false;
