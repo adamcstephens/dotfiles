@@ -74,7 +74,7 @@ writeShellScriptBin "hm" ''
       if ! $NEXT/activate; then
         echo "❗ Failed to activate new profile"
         echo " Rolling back to old profile"
-        nix ${nixArgs} profile install $old_profile
+        nix ${nixArgs} profile add $old_profile
       fi
 
       echo "🦾 Running migrations"
