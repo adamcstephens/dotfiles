@@ -98,11 +98,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1758545873,
-        "narHash": "sha256-0VP5cVd6DyibHNPC/IJ5Ut+KuNYUeKmr5ltzf+IcpjA=",
+        "lastModified": 1758593331,
+        "narHash": "sha256-p+904PfmINyekyA/LieX3IYGsiFtExC00v5gSYfJtpM=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "de5369834ff1f75246c46be89ef993392e961c26",
+        "rev": "9a2dc0efbc569ce9352a6ffb8e8ec8dbc098e142",
         "type": "github"
       },
       "original": {
@@ -264,11 +264,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1758277210,
-        "narHash": "sha256-iCGWf/LTy+aY0zFu8q12lK8KuZp7yvdhStehhyX1v8w=",
+        "lastModified": 1758427187,
+        "narHash": "sha256-pHpxZ/IyCwoTQPtFIAG2QaxuSm8jWzrzBGjwQZIttJc=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "8eaee110344796db060382e15d3af0a9fc396e0e",
+        "rev": "554be6495561ff07b6c724047bdd7e0716aa7b46",
         "type": "github"
       },
       "original": {
@@ -351,11 +351,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1758285573,
-        "narHash": "sha256-Jk3SwgTTGkbGXlA4otkvYl8HmWj5SArR2SJIjtw0ydE=",
+        "lastModified": 1758632255,
+        "narHash": "sha256-Y7xzt40NXVVtT2kMXVq4xKFWW6O46CZqFCEyNt1nf78=",
         "ref": "refs/heads/main",
-        "rev": "674c1656358b4f4079ebb437c320beaf789f788a",
-        "revCount": 273,
+        "rev": "ec99f59a5266d6305bb0186bca7c9e34665a93c7",
+        "revCount": 274,
         "type": "git",
         "url": "https://codeberg.org/adamcstephens/nix-sandbox"
       },
