@@ -26,7 +26,6 @@
 
   xdg.configFile."ghostty/config".text = ''
     font-family = "${config.dotfiles.gui.font.mono}"
-    config-file = ${npins.vim-moonfly-colors}/extras/moonfly-ghostty.conf
     config-file = dotfiles.conf
   ''
   + lib.optionalString pkgs.stdenv.isLinux ''

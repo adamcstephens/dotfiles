@@ -54,3 +54,12 @@ AEResult
 AeResult
 CWOs
 shellcheck
+prometheus
+grafana
+loki
+Tailscale
+KMS
+decrypt
+keygen
+ed25519
+pagerduty
