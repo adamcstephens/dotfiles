@@ -37,7 +37,7 @@
           nix = {
             buildMachines = [
               {
-                protocol = "ssh-ng";
+                protocol = "ssh";
                 hostName = "nixos2.local";
                 maxJobs = 4;
                 sshUser = "root";
@@ -51,7 +51,7 @@
                 ];
               }
               {
-                protocol = "ssh-ng";
+                protocol = "ssh";
                 hostName = "leaf.tail68e370.ts.net";
                 maxJobs = 4;
                 sshUser = "adam";
