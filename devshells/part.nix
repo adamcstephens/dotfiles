@@ -7,7 +7,7 @@
     in
     {
       distrobuilder = pkgs.callPackage ./distrobuilder.nix { };
-      incus = pkgs.callPackage ./incus.nix { };
+      # incus = pkgs.callPackage ./incus.nix { };
       xmonad = pkgs.callPackage ./xmonad.nix { };
     }
   );
