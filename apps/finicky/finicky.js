@@ -14,35 +14,9 @@ export default {
   },
   options: {
     hideIcon: false,
-    urlShorteners: [
-      "applications.zoom.us",
-      "bit.ly",
-      "github.co",
-      "t.co",
-      // "nam11.safelinks.protection.outlook.com",
-    ],
+    urlShorteners: ["applications.zoom.us", "bit.ly", "github.co", "t.co"],
   },
   rewrite: [
-    // {
-    //   // debug stanza
-    //   match(all) {
-    //     finicky.log(JSON.stringify(all, null, 2));
-    //     return false;
-    //   },
-    //   url: ({ url }) => url,
-    // },
-    {
-      match: /^https?:\/\/([a-z]+\.)?bluejeans\.com\/[0-9]+/,
-      url({ url }) {
-        var path = url.pathname.replace(/([0-9]+)/, "id/$1");
-        return {
-          ...url,
-          host: "meet",
-          pathname: path,
-          protocol: "bjnb",
-        };
-      },
-    },
     {
       // strip tracking params
       match: ({ url }) => url.search.includes("utm_"),
@@ -71,10 +45,6 @@ export default {
       browser: "Visual Studio Code",
     },
     {
-      match: /bjnb:\/\/meet\/id/,
-      browser: "BlueJeans",
-    },
-    {
       match: /zoom.us\/j\//,
       browser: "us.zoom.xos",
     },
@@ -82,33 +52,5 @@ export default {
       match: ({ url }) => url.protocol === "msteams",
       browser: "Microsoft Teams",
     },
-  ].concat(
-    // [
-    //   /github.com/,
-    //   /reddit.com/,
-    //   /twitter.com/,
-    //   /youtube.com/,
-    //   /steampowered.com/,
-    //   /steamcommunity.com/,
-    // ].map((x) => {
-    //   return { match: x, browser: "org.mozilla.firefoxdeveloperedition" };
-    // }),
-
-    [
-      /instructure.com/,
-      /kent.edu/,
-      /outlook.com/,
-      /p5js.org/,
-      /qualtrics.com/,
-      /office.net/,
-    ].map((x) => {
-      return {
-        match: x,
-        browser: ({ urlString }) => ({
-          name: "org.mozilla.firefox",
-          args: ["-P", "Kent", `${urlString}`],
-        }),
-      };
-    }),
-  ),
+  ],
 };
