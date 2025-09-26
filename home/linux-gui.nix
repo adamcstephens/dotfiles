@@ -48,6 +48,7 @@ in
     ../apps/river
     ../apps/swayidle
     ../apps/swayosd
+    ../apps/walker
     ../apps/waybar
 
     # xorg

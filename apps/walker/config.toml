@@ -1,0 +1,4 @@
+theme = "dotfiles"
+# theme_base = []
+# theme_location = ["~/.config/walker/themes/"]
+hotreload_theme = true
