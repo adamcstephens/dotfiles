@@ -63,3 +63,6 @@ decrypt
 keygen
 ed25519
 pagerduty
+CLI
+erl
+sys
