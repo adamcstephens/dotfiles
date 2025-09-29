@@ -190,10 +190,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.9.1",
-      "revision": "200b0d0f61ce05da496c86321123e080b212b0e1",
+      "version": "v0.10.0",
+      "revision": "3277ad5f96eb03c9d618c88e24f683e4364e578c",
       "url": null,
-      "hash": "12v9qfy0mwais5rmr03pkxy414x4lg75bi10001a4ybgd90ksqql"
+      "hash": "018ns6zpg4d7kypfrs6fzfgj1sv304h1pv6ihkq78wvksn5lyihk"
     },
     "smart-splits.nvim": {
       "type": "GitRelease",
@@ -230,9 +230,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "2a3cade7d47a3f0b13bfe50926e645b8c2a2432f",
+      "revision": "bd51183ad84175f023261dbbef06870a5fe18001",
       "url": null,
-      "hash": "0sw0ckrgxag8yzx0j2ds9nm6vyysnnz0pz01zfqvr003z9ckqbhy"
+      "hash": "1ych3bk6180s492hm33353ir6drj3yzw9kd7362fhjvz81gsb54r"
     }
   },
   "version": 5
