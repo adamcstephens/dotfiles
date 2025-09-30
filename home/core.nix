@@ -108,8 +108,6 @@
     config.lib.file.mkOutOfStoreSymlink "${config.home.profileDirectory}/share/terminfo";
 
   home.packages = [
-    pkgs.python313
-
     pkgs.difftastic
     pkgs.direnv
     pkgs.doggo
@@ -117,17 +115,21 @@
     pkgs.file
     pkgs.fzf
     pkgs.gdu
-    pkgs.jless
     pkgs.gojq
+    pkgs.jless
     pkgs.just
     pkgs.kitty.terminfo
     pkgs.ncdu
     pkgs.ov
+    pkgs.python313
     pkgs.skim
     pkgs.tio
     pkgs.viddy
     pkgs.wget
     pkgs.zf
+  ]
+  ++ lib.optionals pkgs.stdenv.isLinux [
+    pkgs.ghostty.terminfo
   ];
 
   home.sessionVariables = {
