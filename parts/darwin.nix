@@ -52,7 +52,7 @@
               }
               {
                 protocol = "ssh";
-                hostName = "leaf.tail68e370.ts.net";
+                hostName = "branch.tail68e370.ts.net";
                 maxJobs = 4;
                 sshUser = "adam";
                 supportedFeatures = [
