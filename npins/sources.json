@@ -11,10 +11,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v1.4.1",
-      "revision": "61b8c10ec636f42baf6c845edb14b9ae2723711f",
-      "url": "https://api.github.com/repos/miikanissi/modus-themes.nvim/tarball/v1.4.1",
-      "hash": "1x0hv5fcrsdcb06miyq0q1vlcgj1aaq5w1h9c112bbxf3b89k2ya"
+      "version": "v1.4.2",
+      "revision": "c57c2c56c9f0af04f3b609d11caa840880074784",
+      "url": "https://api.github.com/repos/miikanissi/modus-themes.nvim/tarball/v1.4.2",
+      "hash": "0sg5apn7isk2w1zn49pizq0fx87c1257g073f8gni7b6zwc5kj3w"
     },
     "smart-splits.nvim": {
       "type": "GitRelease",
@@ -39,9 +39,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "c1add33aec2bd36621f865ab11552129ca01d353",
+      "revision": "78b47337cd6099c903909e5e71c6b57ddd574025",
       "url": null,
-      "hash": "1grxdk9h40d2hqvkij79q2vwp97p8rn2lxc147dxgkllbhw8xgxm"
+      "hash": "11lrmb6k9nri65hzvg8f3d4sgyfkj7lsv96jpx991rgxbgd8dnil"
     }
   },
   "version": 5
