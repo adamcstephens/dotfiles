@@ -40,8 +40,8 @@ riverctl focus-follows-cursor always || riverctl focus-follows-cursor normal
 ## map
 #
 riverctl focus-follows-cursor always || riverctl focus-follows-cursor normal
-riverctl map normal Super+Shift T spawn 'GDK_DEBUG=gl-disable-gles app2unit -- terminal'
-riverctl map normal Super+Shift Return spawn 'GDK_DEBUG=gl-disable-gles app2unit -- terminal'
+riverctl map normal Super+Shift T spawn 'app2unit -- terminal'
+riverctl map normal Super+Shift Return spawn 'app2unit -- terminal'
 riverctl map normal Super D spawn 'app2unit -- rofi -show drun'
 riverctl map normal Super+Shift D spawn 'app2unit -- rofi -show emoji'
 riverctl map normal Super+Shift+Control T spawn 'app2unit -- dark toggle'
