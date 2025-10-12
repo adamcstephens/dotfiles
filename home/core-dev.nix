@@ -19,6 +19,7 @@ in
 
   imports = [
     ../apps/atuin
+    ../apps/ruff
     ../apps/ssh
     ../apps/zk
     inputs.nix-index-database.homeModules.nix-index
