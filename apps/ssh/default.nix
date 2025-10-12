@@ -10,7 +10,6 @@ in
 {
   options.apps.ssh = {
     agent = {
-      enable = lib.mkEnableOption "ssh-agent";
       askpass = lib.mkEnableOption "askpass support";
     };
     tpm = lib.mkEnableOption "ssh-tpm-agent";
@@ -19,23 +18,11 @@ in
   config = {
     home.packages = lib.optionals cfg.tpm [ pkgs.ssh-tpm-agent ];
 
-    programs.ssh = {
-      enable = true;
-      controlMaster = "auto";
-      controlPersist = "600m";
-      serverAliveInterval = 60;
-      serverAliveCountMax = 2;
-
-      forwardAgent = config.dotfiles.dev.enable;
-
-      # use header: # -*- mode: ssh-config -*-
-      includes = [
-        "local.config"
-        "${./dotfiles.config}"
-      ];
-    };
-
-    services.ssh-agent.enable = cfg.agent.enable;
+    home.file.".ssh/config".source =
+      if config.dotfiles.nixosManaged then
+        ./dotfiles.config
+      else
+        config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/ssh/dotfiles.config";
 
     systemd.user.services.ssh-agent = lib.mkIf cfg.agent.askpass {
       Install.WantedBy = lib.mkForce [ "graphical-session.target" ];

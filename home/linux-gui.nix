@@ -163,8 +163,6 @@ in
 
   programs.feh.enable = true;
 
-  programs.ssh.forwardAgent = true;
-
   qt = {
     enable = true;
     platformTheme.name = "qtct";
