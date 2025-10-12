@@ -1,20 +1,8 @@
-open Yojson.Basic.Util
-open Dotfiles.Colors
 open Dotfiles.Desktop
+open Dotfiles.Locker
 open Dotfiles.Process
 
-let waylock ~palette =
-  let init_color = palette |> member "base04" |> to_string in
-  let input_color = palette |> member "base0A" |> to_string in
-  let fail_color = palette |> member "base08" |> to_string in
-  Printf.sprintf
-    "waylock -fork-on-lock -init-color 0x%s -input-color 0x%s -fail-color 0x%s"
-    init_color input_color fail_color
-
-let locker desktop =
-  match desktop with
-  | River -> waylock ~palette:load_colors
-  | Niri -> "gtklock --daemonize"
+let locker desktop = match desktop with River -> Waylock | Niri -> Gtklock
 
 let do_lock ~cmd =
   match find_running_procs cmd with
@@ -31,7 +19,7 @@ let do_lock ~cmd =
 
 let () =
   match get_desktop with
-  | Ok desktop -> do_lock ~cmd:(locker desktop)
+  | Ok desktop -> do_lock ~cmd:(locker desktop |> get_locker)
   | Error err ->
       Printf.printf "Failure loading desktop: %s\n" (show_desktop_error err);
       exit 1

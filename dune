@@ -1,0 +1,3 @@
+; ignore the dune file under templates
+
+(data_only_dirs templates)
