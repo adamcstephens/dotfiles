@@ -1,6 +1,6 @@
-{ pkgs, inputs, ... }:
+{ pkgs, flake, ... }:
 let
-  package = inputs.sandbox.packages.${pkgs.system}.xautocfg;
+  package = flake.packages.${pkgs.system}.xautocfg;
 in
 {
   xdg.configFile."xautocfg.cfg".text = ''

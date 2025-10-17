@@ -1,6 +1,6 @@
 {
   config,
-  inputs,
+  flake,
   lib,
   pkgs,
   ...
@@ -27,7 +27,7 @@
     # for class
     pkgs.nodejs
 
-    inputs.sandbox.packages.${pkgs.system}.m1ddc
+    flake.packages.${pkgs.system}.m1ddc
   ];
 
   dotfiles.apps = {

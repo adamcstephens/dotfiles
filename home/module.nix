@@ -1,6 +1,6 @@
 {
   config,
-  inputs,
+  flake,
   lib,
   pkgs,
   ...
@@ -69,7 +69,7 @@ in
               pkgs.noto-fonts
             ]
             ++ lib.optionals pkgs.stdenv.isLinux [
-              inputs.sandbox.packages.${pkgs.system}.apple-emoji-linux
+              flake.packages.${pkgs.system}.apple-emoji-linux
             ]
             ++ lib.optionals pkgs.stdenv.isDarwin [ "/Library/Fonts" ];
           };
