@@ -1,34 +1,49 @@
 {
   lib,
+  rustPlatform,
+  fetchFromGitHub,
+  curl,
+  pkg-config,
+  protobuf,
+  openssl,
+  zlib,
   stdenv,
-  fetchurl,
+  darwin,
 }:
 
-stdenv.mkDerivation rec {
+rustPlatform.buildRustPackage rec {
   pname = "vim-zellij-navigator";
-  version = "0.2.1";
+  version = "0.3.0";
 
-  src = fetchurl {
-    url = "https://github.com/hiasr/vim-zellij-navigator/releases/download/${version}/vim-zellij-navigator.wasm";
-    sha256 = "sha256-wpIxPkmVpoAgOsdQKYuipSlDAbsD3/n6tTuOEriJHn0=";
+  src = fetchFromGitHub {
+    owner = "hiasr";
+    repo = "vim-zellij-navigator";
+    rev = version;
+    hash = "sha256-1zzY1Z8ZpiNTdFW+gKRYaRR+oCzMnbJA2szY0k24bGg=";
   };
 
-  dontPatch = true;
-  dontUnpack = true;
-  dontConfigure = true;
-  dontBuild = true;
+  cargoHash = "sha256-AbfgDhQEbm5qULw2HHxG5EMCYdML4VhHxJaAqP2g3u0=";
 
-  installPhase = ''
-    mkdir -p $out/bin
-    cp $src $out/bin/vim-zellij-navigator.wasm
-    chmod +x $out/bin/vim-zellij-navigator.wasm
-  '';
+  nativeBuildInputs = [
+    # curl
+    pkg-config
+    protobuf
+  ];
 
-  meta = with lib; {
-    description = "Vim Zellij Navigator WASM plugin";
+  buildInputs = [
+    # curl
+    # openssl
+    # zlib
+  ]
+  ++ lib.optionals stdenv.isDarwin [
+    darwin.apple_sdk.frameworks.Security
+  ];
+
+  meta = {
+    description = "";
     homepage = "https://github.com/hiasr/vim-zellij-navigator";
-    license = licenses.mit;
-    platforms = platforms.all;
-    maintainers = [ ];
+    license = [ ]; # FIXME: nix-init did not find a license
+    maintainers = with lib.maintainers; [ ];
+    mainProgram = "vim-zellij-navigator";
   };
 }

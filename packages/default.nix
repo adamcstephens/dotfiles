@@ -11,6 +11,13 @@ let
       inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.pkgsMusl.ocaml-ng.ocamlPackages_5_3
     else
       inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.ocaml-ng.ocamlPackages_5_3;
+
+  wasm-nixpkgs = import inputs.nixpkgs {
+    system = "x86_64-linux";
+    crossSystem = lib.systems.examples.wasi32 // {
+      rust.rustcTarget = "wasm32-wasip1";
+    };
+  };
 in
 (lib.filesystem.packagesFromDirectoryRecursive {
   inherit (pkgs) callPackage;
@@ -26,4 +33,5 @@ in
   home-profile-selector = pkgs.callPackage ./home-profile-selector.nix {
     inherit homeConfigurations;
   };
+  vim-zellij-navigator = wasm-nixpkgs.callPackage ./vim-zellij-navigator.nix { };
 }
