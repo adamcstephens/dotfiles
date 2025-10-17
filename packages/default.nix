@@ -33,5 +33,4 @@ in
   home-profile-selector = pkgs.callPackage ./home-profile-selector.nix {
     inherit homeConfigurations;
   };
-  vim-zellij-navigator = wasm-nixpkgs.callPackage ./vim-zellij-navigator.nix { };
 }
