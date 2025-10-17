@@ -381,7 +381,7 @@ keybinds clear-defaults=true {
     bind "Alt ]" {
       NextSwapLayout
     }
-    bind "Alt i" {
+    bind "Ctrl Shift Left" {
       MoveTab "left"
     }
     bind "Alt f" {
@@ -425,7 +425,7 @@ keybinds clear-defaults=true {
     bind "Alt n" {
       NewPane
     }
-    bind "Alt o" {
+    bind "Ctrl Shift Right" {
       MoveTab "right"
     }
   }
