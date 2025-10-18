@@ -21,6 +21,6 @@ writeShellApplication {
     xdotool
   ];
 
-  text = builtins.readFile ./screenshot;
+  text = builtins.readFile ./screenshot.sh;
   name = "screenshot";
 }
