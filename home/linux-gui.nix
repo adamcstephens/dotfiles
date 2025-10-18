@@ -215,15 +215,15 @@ in
     };
     screenshot = {
       name = "screenshot";
-      exec = "/run/current-system/sw/bin/systemd-cat --identifier=screenshot ${lib.getExe screenshot} screen";
+      exec = "${lib.getExe flake.packages.${pkgs.system}.screenshot} screen";
     };
     screenshotBox = {
       name = "screenshot box";
-      exec = "/run/current-system/sw/bin/systemd-cat --identifier=screenshot ${lib.getExe screenshot} box";
+      exec = "${lib.getExe flake.packages.${pkgs.system}.screenshot} box";
     };
     screenshotWindow = {
       name = "screenshot window";
-      exec = "/run/current-system/sw/bin/systemd-cat --identifier=screenshot ${lib.getExe screenshot} window";
+      exec = "${lib.getExe flake.packages.${pkgs.system}.screenshot} window";
     };
   };
 }
