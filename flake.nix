@@ -16,9 +16,6 @@
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
     profile-parts.url = "git+https://codeberg.org/adamcstephens/profile-parts";
-    sandbox.url = "git+https://codeberg.org/adamcstephens/nix-sandbox";
-    sandbox.inputs.nixpkgs.follows = "nixpkgs";
-    sandbox.inputs.sower.follows = "sower";
     sower.url = "git+https://codeberg.org/adamcstephens/sower.git?ref=release-4";
   };
 

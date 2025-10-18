@@ -39,24 +39,6 @@
         "nixpkgs-lib": "nixpkgs-lib_3"
       },
       "locked": {
-        "lastModified": 1759362264,
-        "narHash": "sha256-wfG0S7pltlYyZTM+qqlhJ7GMw2fTF4mLKCIVhLii/4M=",
-        "owner": "hercules-ci",
-        "repo": "flake-parts",
-        "rev": "758cf7296bee11f1706a574c77d072b8a7baa881",
-        "type": "github"
-      },
-      "original": {
-        "owner": "hercules-ci",
-        "repo": "flake-parts",
-        "type": "github"
-      }
-    },
-    "flake-parts_3": {
-      "inputs": {
-        "nixpkgs-lib": "nixpkgs-lib_4"
-      },
-      "locked": {
         "lastModified": 1754487366,
         "narHash": "sha256-pHYj8gUBapuUzKV/kN/tR3Zvqc7o6gdFB9XKXIp1SQ8=",
         "owner": "hercules-ci",
@@ -234,21 +216,6 @@
     },
     "nixpkgs-lib_3": {
       "locked": {
-        "lastModified": 1754788789,
-        "narHash": "sha256-x2rJ+Ovzq0sCMpgfgGaaqgBSwY+LST+WbZ6TytnT9Rk=",
-        "owner": "nix-community",
-        "repo": "nixpkgs.lib",
-        "rev": "a73b9c743612e4244d865a2fdee11865283c04e6",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "nixpkgs.lib",
-        "type": "github"
-      }
-    },
-    "nixpkgs-lib_4": {
-      "locked": {
         "lastModified": 1753579242,
         "narHash": "sha256-zvaMGVn14/Zz8hnp4VWT9xVnhc8vuL3TStRqwk22biA=",
         "owner": "nix-community",
@@ -336,32 +303,7 @@
         "nixpkgs": "nixpkgs",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "profile-parts": "profile-parts",
-        "sandbox": "sandbox",
         "sower": "sower"
-      }
-    },
-    "sandbox": {
-      "inputs": {
-        "flake-parts": "flake-parts_2",
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "sower": [
-          "sower"
-        ]
-      },
-      "locked": {
-        "lastModified": 1760707089,
-        "narHash": "sha256-Hm3S3IpIUnA9aBT/n61cL1I5Hb5/Ci5Wg4n0W9Pl4dA=",
-        "ref": "refs/heads/main",
-        "rev": "d4379a5f0b9530cc62198e97033037b274b000d1",
-        "revCount": 281,
-        "type": "git",
-        "url": "https://codeberg.org/adamcstephens/nix-sandbox"
-      },
-      "original": {
-        "type": "git",
-        "url": "https://codeberg.org/adamcstephens/nix-sandbox"
       }
     },
     "services-flake": {
@@ -381,7 +323,7 @@
     },
     "sower": {
       "inputs": {
-        "flake-parts": "flake-parts_3",
+        "flake-parts": "flake-parts_2",
         "nixpkgs": "nixpkgs_2",
         "process-compose-flake": "process-compose-flake",
         "services-flake": "services-flake"
