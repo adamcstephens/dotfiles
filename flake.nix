@@ -29,10 +29,11 @@
         ./apps/neovim/part.nix
         ./devshells/part.nix
         ./home/profiles.nix
-        ./templates/part.nix
-
+        ./ocamlPackages/part.nix
+        ./packages/part.nix
         ./parts/darwin.nix
         ./parts/overlays.nix
+        ./templates/part.nix
 
         inputs.sower.flakeModules.seed
       ];
@@ -46,14 +47,5 @@
         "aarch64-darwin"
         "aarch64-linux"
       ];
-
-      perSystem =
-        { lib, pkgs, ... }:
-        {
-          packages = import ./packages {
-            inherit inputs lib pkgs;
-            homeConfigurations = builtins.attrNames self.homeConfigurations;
-          };
-        };
     };
 }
