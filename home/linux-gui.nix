@@ -28,8 +28,6 @@ let
       gsettings $@
     ''
   );
-
-  screenshot = pkgs.callPackage ../packages/screenshot.nix { };
 in
 {
   imports = [
@@ -155,7 +153,7 @@ in
       # bitwarden
       pkgs.rofi-rbw
 
-      screenshot
+      flake.packages.${pkgs.system}.screenshot
     ]
     ++ lib.optionals config.dotfiles.dev.enable [
       pkgs.jetbrains.datagrip
