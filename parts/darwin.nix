@@ -73,12 +73,12 @@
             enable = true;
 
             gc = {
-              automatic = false;
+              automatic = true;
               interval = {
                 Hour = 3;
                 Minute = 15;
               };
-              options = "--delete-older-than 21d";
+              options = "--delete-older-than 30d";
             };
 
             package = pkgs.nixVersions.nix_2_31;
@@ -100,6 +100,9 @@
               download-buffer-size = lib.mkDefault (256 * 1024 * 1024);
               http-connections = lib.mkDefault 128;
               max-substitution-jobs = lib.mkDefault 128;
+
+              min-free = "50G";
+              max-free = "100G";
 
               trusted-users = [
                 "root"
