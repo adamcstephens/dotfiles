@@ -21,26 +21,21 @@
             else
               pkgs-unstable.ocaml-ng.ocamlPackages_5_3;
         in
-        (lib.filesystem.packagesFromDirectoryRecursive {
+        lib.filesystem.packagesFromDirectoryRecursive {
           inherit (pkgs) callPackage;
-          directory =
-            with lib.fileset;
-            toSource {
-              root = ./.;
-              fileset = difference ./. ./part.nix;
-            };
-        })
+          directory = ../packages;
+        }
         // {
           default = self'.packages.dotfiles;
 
-          dotfiles = pkgs-unstable.callPackage ./dotfiles.nix {
+          dotfiles = pkgs-unstable.callPackage ../packages/dotfiles.nix {
             inherit ocamlPackages;
             static = pkgs.stdenv.isLinux && pkgs.stdenv.isx86_64;
           };
 
-          hm = pkgs.callPackage ./hm.nix { inherit (self'.packages) home-profile-selector; };
+          hm = pkgs.callPackage ../packages/hm.nix { inherit (self'.packages) home-profile-selector; };
 
-          home-profile-selector = pkgs.callPackage ./home-profile-selector.nix {
+          home-profile-selector = pkgs.callPackage ../packages/home-profile-selector.nix {
             homeConfigurations = builtins.attrNames self.homeConfigurations;
           };
         };

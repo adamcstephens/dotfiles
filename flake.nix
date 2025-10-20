@@ -27,9 +27,9 @@
         ./devshells/part.nix
         ./home/profiles.nix
         ./ocamlPackages/part.nix
-        ./packages/part.nix
         ./parts/darwin.nix
         ./parts/overlays.nix
+        ./parts/packages.nix
         ./templates/part.nix
 
         inputs.sower.flakeModules.seed
