@@ -26,8 +26,6 @@
 
     # for class
     pkgs.nodejs
-
-    flake.packages.${pkgs.system}.m1ddc
   ];
 
   dotfiles.apps = {
