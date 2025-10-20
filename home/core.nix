@@ -8,7 +8,6 @@
   imports = [
     ./module.nix
 
-    ../apps/bash
     ../apps/bat
     ../apps/btop
     ../apps/editorconfig
