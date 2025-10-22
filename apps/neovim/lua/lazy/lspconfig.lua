@@ -85,17 +85,17 @@ return {
     vim.lsp.enable("ocamllsp")
 
     -- python
-    vim.lsp.config("pylsp", {
-      settings = {
-        pylsp = {
-          plugins = {
-            mypy = { enabled = true },
-          },
-        },
-      },
-    })
-    vim.lsp.enable("pylsp")
-    vim.lsp.enable("pyright")
+    -- vim.lsp.config("pylsp", {
+    --   settings = {
+    --     pylsp = {
+    --       plugins = {
+    --         mypy = { enabled = true },
+    --       },
+    --     },
+    --   },
+    -- })
+    -- vim.lsp.enable("pylsp")
+    -- vim.lsp.enable("pyright")
     vim.lsp.enable("ruff")
     vim.lsp.enable("ty")
 

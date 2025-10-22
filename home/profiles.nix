@@ -148,6 +148,7 @@ in
               pkgs.git-lfs
               pkgs.sipcalc
               pkgs.terraform-ls
+              pkgs.ty
               pkgs.typescript-language-server
             ];
 
