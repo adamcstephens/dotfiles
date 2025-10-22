@@ -22,10 +22,23 @@ keybinds clear-defaults=true {
         floating true
         hold_on_close false
         close_on_exit true
-        x "10%"
-        y "15%"
-        width "80%"
-        height "70%"
+        name "open project"
+        x "30%"
+        y "30%"
+        width "40%"
+        height "40%"
+      }
+    }
+    bind "Super t" {
+      Run "zellij-tab-switch" {
+        floating true
+        hold_on_close false
+        close_on_exit true
+        name "switch tabs"
+        x "40%"
+        y "37%"
+        width "20%"
+        height "25%"
       }
     }
     bind "Super z" {
@@ -364,6 +377,12 @@ keybinds clear-defaults=true {
       GoToNextTab
     }
     bind "Ctrl Shift Tab" {
+      GoToPreviousTab
+    }
+    bind "Alt Tab" {
+      GoToNextTab
+    }
+    bind "Alt Shift Tab" {
       GoToPreviousTab
     }
     bind "Alt +" {

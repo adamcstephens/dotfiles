@@ -1,8 +1,5 @@
 layout {
   tab {
-    pane size=1 borderless=true {
-      plugin location="zellij:tab-bar"
-    }
     pane split_direction="vertical" {
       pane focus=true size="50%"
       pane size="50%" {
@@ -11,14 +8,11 @@ layout {
       }
     }
     pane size=1 borderless=true {
-      plugin location="zellij:status-bar"
+      plugin location="zellij:compact-bar"
     }
   }
   swap_tiled_layout name="default" {
     tab max_panes=6 {
-      pane size=1 borderless=true {
-        plugin location="tab-bar"
-      }
       pane {
         pane split_direction="vertical" {
           pane
@@ -28,15 +22,12 @@ layout {
         }
       }
       pane size=1 borderless=true {
-        plugin location="status-bar"
+        plugin location="compact-bar"
       }
     }
   }
   swap_tiled_layout name="stacked" {
     tab min_panes=5 {
-      pane size=1 borderless=true {
-        plugin location="tab-bar"
-      }
       pane {
         pane split_direction="vertical" {
           pane
@@ -46,7 +37,7 @@ layout {
         }
       }
       pane size=1 borderless=true {
-        plugin location="status-bar"
+        plugin location="compact-bar"
       }
     }
   }
