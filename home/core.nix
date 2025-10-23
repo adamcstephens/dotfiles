@@ -88,25 +88,54 @@
     done
   '';
 
-  home.activation.dotfiles-pull = lib.mkIf (!config.dotfiles.nixosManaged) (
-    lib.hm.dag.entryBefore [ "checkLinkTargets" ] ''
-      if [ ! -h ${config.home.homeDirectory}/.dotfiles ]; then
-        pushd ${config.home.homeDirectory}/.dotfiles || exit 1
-        # git pull, but don't error on failure
-        if [ -d .jj ]; then
-          ${lib.getExe pkgs.jujutsu} git fetch --all-remotes || true
-          ${lib.getExe pkgs.jujutsu} rebase --destination main@origin || true
-        else
-          ${lib.getExe pkgs.git} pull || true
-        fi
-      fi
-    ''
-  );
+  systemd.user = lib.mkIf (!config.dotfiles.nixosManaged) {
+    services.dotfiles-repo-pull = {
+      Unit = {
+        PartOf = [ "default.target" ];
+      };
+
+      Service = {
+        Type = "oneshot";
+        ExecStart =
+          pkgs.writeShellApplication {
+            name = "hypridle-before-sleep";
+
+            runtimeInputs = [
+              pkgs.git
+              pkgs.jujutsu
+            ];
+
+            text = ''
+              export PATH=${../bin}:$PATH
+
+              if [ -d .jj ]; then
+                jj home -r
+              else
+                git pull
+              fi
+            '';
+          }
+          |> lib.getExe;
+
+        WorkingDirectory = "${config.home.homeDirectory}/.dotfiles";
+      };
+
+      Install = {
+        WantedBy = [ "default.target" ];
+      };
+    };
+
+    timers.dotfiles-repo-pull = {
+      Timer.OnCalendar = "hourly";
+      Install.WantedBy = [ "timers.target" ];
+    };
+  };
 
   home.file.".terminfo".source =
     config.lib.file.mkOutOfStoreSymlink "${config.home.profileDirectory}/share/terminfo";
 
   home.packages = [
+    pkgs.delta
     pkgs.difftastic
     pkgs.direnv
     pkgs.doggo
