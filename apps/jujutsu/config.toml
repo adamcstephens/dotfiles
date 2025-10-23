@@ -47,10 +47,12 @@ log_compact = """
 
 [ui]
 default-command = ["log", "--template=log_compact"]
-diff-formatter = ["difft", "--color=always", "$left", "$right"]
 diff-editor = ":builtin"
+diff-formatter = ":git"
+# diff-formatter = ["difft", "--color=always", "$left", "$right"]
 editor = "nvim"
-pager = ":builtin"
+pager = ["delta", "--side-by-side"]
+# pager = ":builtin"
 
 [user]
 name = "Adam C. Stephens"
