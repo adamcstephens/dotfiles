@@ -1,7 +1,7 @@
 default:
     just --list
 
-bump: bump-flake bump-pins bump-packages
+bump: bump-flake bump-pins
 
 bump-flake:
     nix flake update --commit-lock-file
