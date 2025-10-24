@@ -11,7 +11,7 @@ return {
         chat = {
           adapter = {
             name = "copilot",
-            model = "gemini-2.5-pro",
+            model = "claude-haiku-4.5",
           },
         },
       },
