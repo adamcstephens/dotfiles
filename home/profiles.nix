@@ -85,6 +85,14 @@ in
       ];
     };
 
+    core-dev = {
+      nixpkgs = inputs.nixpkgs-unstable;
+      home-manager = inputs.home-manager-unstable;
+      modules = [
+        ./core-dev.nix
+      ];
+    };
+
     branch = {
       nixpkgs = inputs.nixpkgs-unstable;
       home-manager = inputs.home-manager-unstable;
