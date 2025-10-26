@@ -3,13 +3,13 @@
   mkShell,
   stdenv,
 
-  beamMinimal27Packages,
+  beamMinimal28Packages,
   inotify-tools,
 }:
 let
-  beamPackages = beamMinimal27Packages.extend (
+  beamPackages = beamMinimal28Packages.extend (
     _: prev: {
-      elixir = prev.elixir_1_18;
+      elixir = prev.elixir_1_19;
     }
   );
 in
