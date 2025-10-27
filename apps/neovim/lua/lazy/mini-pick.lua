@@ -1,5 +1,5 @@
 return {
-  "toggleterm.nvim",
+  "mini.pick",
 
   lazy = false,
 

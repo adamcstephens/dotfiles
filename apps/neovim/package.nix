@@ -70,10 +70,6 @@ mnw.lib.wrap pkgs {
         smart-open-nvim
         sqlite-lua
         statuscol-nvim
-        telescope-dap-nvim
-        telescope-zf-native-nvim
-        telescope-nvim
-        telescope-undo-nvim
         vim-dadbod
         vim-dadbod-completion
         vim-dadbod-ui
@@ -94,14 +90,17 @@ mnw.lib.wrap pkgs {
         cyberdream-nvim
         diffview-nvim
         fidget-nvim
+        fzf-lua
         lualine-nvim
         neogit
+        nvim-dap
         nvim-dap-go
         nvim-highlight-colors
         nvim-treesitter-endwise
         nvim-treesitter-textobjects
         nvim-treesitter.withAllGrammars
         oil-nvim
+        telescope-nvim
         tiny-inline-diagnostic-nvim
         tmux-nvim
         toggleterm-nvim

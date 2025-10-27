@@ -4,6 +4,8 @@ return {
   event = "LspAttach",
 
   after = function()
+    require("lz.n").trigger_load("telescope.nvim")
+
     require("actions-preview").setup({
       telescope = {
         sorting_strategy = "ascending",

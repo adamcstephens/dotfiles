@@ -18,7 +18,10 @@
           });
         };
 
-        neovim-full = neovim.override { full = true; };
+        neovim-full = neovim.override {
+          full = true;
+          dotvimPlugin = "$HOME/.dotfiles/apps/neovim";
+        };
       };
     };
 }

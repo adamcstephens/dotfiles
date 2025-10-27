@@ -14,19 +14,6 @@ require("dotinit.core")
 require("nvim-web-devicons").setup({})
 require("remember").setup({})
 
-local builtin = require("telescope.builtin")
-require("telescope").setup({
-  defaults = {
-    preview = false,
-  },
-  pickers = {
-    ["buffers"] = { sort_mru = true, ignore_current_buffer = true },
-  },
-})
-require("telescope").load_extension("dap")
-require("telescope").load_extension("undo")
-require("telescope").load_extension("zf-native")
-
 require("which-key").setup({})
 require("whitespace-nvim").setup({})
 
@@ -92,37 +79,13 @@ vim.keymap.set("i", "<C-a>", "<C-o>0")
 vim.keymap.set("n", "<C-e>", "$")
 vim.keymap.set("n", "<C-a>", "0")
 
--- vim.keymap.set("n", "<leader><leader>", function()
---   require("telescope").extensions.smart_open.smart_open({ cwd_only = true, })
--- end, { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>bb", function()
-  builtin.buffers({ sort_lastused = true })
-end, { desc = "Switch buffers" })
 vim.keymap.set("n", "<leader>bd", function()
   vim.cmd("bdelete")
 end, { desc = "Delete" })
-vim.keymap.set(
-  "n",
-  "<leader>dB",
-  require("telescope").extensions.dap.list_breakpoints,
-  { desc = "dap list breakpoints" }
-)
-vim.keymap.set("n", "<leader>dh", require("telescope").extensions.dap.commands, { desc = "dap commands" })
-vim.keymap.set("n", "<leader>f", builtin.find_files, { desc = "Find Files" })
-vim.keymap.set("n", "<leader>hk", builtin.keymaps, { desc = "Keymaps" })
-vim.keymap.set("n", "<leader>ho", builtin.help_tags, { desc = "Help Tags" })
 
-vim.keymap.set("n", "<leader>lf", function()
-  require("telescope.builtin").treesitter({ symbols = { "function", "method" } })
-end, { desc = "Rename symbol" })
 vim.keymap.set("n", "<leader>li", vim.lsp.buf.hover, { desc = "Show hover" })
-vim.keymap.set("n", "<leader>lr", function()
-  builtin.lsp_references()
-end, { desc = "Find References" })
 vim.keymap.set("n", "<leader>lR", vim.lsp.buf.rename, { desc = "Rename symbol" })
 
-vim.keymap.set("n", "<leader>r", builtin.live_grep, { desc = "Search" })
-vim.keymap.set("v", "<leader>r", builtin.grep_string, { desc = "Search selection" })
 vim.keymap.set("n", "<leader>s", function()
   local function starts_with(str, start)
     return str:sub(1, #start) == start
@@ -137,16 +100,10 @@ end, { desc = "Save File" })
 vim.keymap.set("n", "<leader>S", function()
   vim.cmd("noautocmd write ++p")
 end, { desc = "Save File (No autocmd)" })
-vim.keymap.set("n", "<leader>u", "<cmd>Telescope undo<cr>")
 
 -- diagnostics
-vim.keymap.set("n", "<leader>xx", builtin.diagnostics, { desc = "Diagnostics" })
 vim.keymap.set("n", "]g", vim.diagnostic.goto_next)
 vim.keymap.set("n", "[g", vim.diagnostic.goto_prev)
-
-vim.keymap.set({ "n", "v" }, "<leader>y", builtin.registers, { desc = "Registers" })
-
-vim.keymap.set("n", "<C-p>", builtin.find_files, { desc = "Find Files" })
 
 vim.keymap.set({ "i", "s" }, "<C-E>", function()
   if ls.choice_active() then
