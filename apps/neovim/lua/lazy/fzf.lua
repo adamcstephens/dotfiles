@@ -18,6 +18,8 @@ return {
         },
       },
     })
+
+    require("fzf-lua").register_ui_select()
   end,
 
   keys = {
@@ -36,18 +38,26 @@ return {
       desc = "file picker",
     },
     {
+      "<leader>la",
+      function()
+        require("fzf-lua").lsp_code_actions({})
+      end,
+      desc = "lsp code actions",
+      mode = { "n", "v" },
+    },
+    {
       "<leader>lr",
       function()
         require("fzf-lua").lsp_references({})
       end,
-      desc = "file picker",
+      desc = "lsp references",
     },
     {
       "<leader>r",
       function()
         require("fzf-lua").live_grep_native({})
       end,
-      desc = "file picker",
+      desc = "live grep",
       mode = { "n" },
     },
     {
@@ -55,7 +65,7 @@ return {
       function()
         require("fzf-lua").grep_visual({})
       end,
-      desc = "file picker",
+      desc = "grep selected",
       mode = { "v" },
     },
     {

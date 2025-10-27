@@ -85,7 +85,6 @@ mnw.lib.wrap pkgs {
     opt =
       with vimPlugins;
       [
-        actions-preview-nvim
         blink-cmp
         copilot-lua
         cyberdream-nvim
@@ -101,7 +100,6 @@ mnw.lib.wrap pkgs {
         nvim-treesitter-textobjects
         nvim-treesitter.withAllGrammars
         oil-nvim
-        telescope-nvim
         tiny-inline-diagnostic-nvim
         tmux-nvim
         toggleterm-nvim
