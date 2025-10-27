@@ -18,15 +18,12 @@ is_zellij = "ZELLIJ" in os.environ
 
 
 def gen_remotes():
-    hosts = ["nixos2"]
+    hosts = ["kale.incus"]
 
     return str.join("\n", hosts)
 
 
 def run(command: str, input: str | None = None):
-    if input is not None:
-        input = run(input)
-
     result = subprocess.run(command, shell=True, capture_output=True, input=input, encoding="UTF-8")
 
     if result.returncode != 0:
@@ -70,7 +67,7 @@ def prj_finder(remote: bool = False) -> str:
             logger.error("unsupported environment")
             sys.exit(1)
 
-        project = run(command, input="zoxide query --list")
+        project = run(command, input=run("zoxide query --list"))
 
     return project
 
@@ -85,7 +82,9 @@ def open_project(project: str, remote: bool = False):
 
     if remote:
         project_s = project.split(":")
-        wname = re.sub("[^a-zA-Z0-9:]", "", f"{project_s[0]}:{os.path.basename(project_s[1])}")
+        host = project_s[0]
+        project = project_s[1]
+        wname = re.sub("[^a-zA-Z0-9:@]", "", f"{os.path.basename(project)}@{host.split('.')[0]}")
     else:
         wname = re.sub("[^a-zA-Z0-9]", "", os.path.basename(project))
         run(f"zoxide add {project}")
@@ -120,7 +119,20 @@ def open_project(project: str, remote: bool = False):
         if wname in tabs:
             run(f"zellij action go-to-tab-name {wname}")
         else:
-            run(f"zellij action new-tab --name {wname} --layout prj --cwd {project}")
+            if remote:
+                run(f"zellij action new-tab --name {wname} --layout prj")
+
+                run("zellij action toggle-active-sync-tab")
+                run(f"zellij action write-chars 'ssh {host}'")
+                run("zellij action write 13")
+                time.sleep(0.2)
+                run(f"zellij action write-chars 'cd {project}'")
+                run("zellij action write 13")
+                run("zellij action toggle-active-sync-tab")
+
+            else:
+                run(f"zellij action new-tab --name {wname} --layout prj --cwd {project}")
+
             run("zellij action write-chars 'vim .'")
             # send newline
             run("zellij action write 13")
@@ -140,15 +152,15 @@ def open_project(project: str, remote: bool = False):
                 second_window = run(f"kitty @ new-window --match id:{new_tab} --dont-take-focus")
                 third_window = run(f"kitty @ new-window --match id:{new_tab} --dont-take-focus")
 
-                run(f'''kitty @ send-text --match id:{new_tab} "{connect_command("one")} {project_s[0]}\\n"''')
-                run(f'''kitty @ send-text --match id:{second_window} "{connect_command("two")} {project_s[0]}\\n"''')
-                run(f'''kitty @ send-text --match id:{third_window} "{connect_command("three")} {project_s[0]}\\n"''')
+                run(f'''kitty @ send-text --match id:{new_tab} "ssh {host}\\n"''')
+                run(f'''kitty @ send-text --match id:{second_window} "ssh {host}\\n"''')
+                run(f'''kitty @ send-text --match id:{third_window} "ssh {host}\\n"''')
 
                 time.sleep(1)
 
-                run(f'kitty @ send-text --match id:{new_tab} "cd {project_s[1]}\\n"')
-                run(f'kitty @ send-text --match id:{second_window} "cd {project_s[1]}\\n"')
-                run(f'kitty @ send-text --match id:{third_window} "cd {project_s[1]}\\n"')
+                run(f'kitty @ send-text --match id:{new_tab} "cd {project}\\n"')
+                run(f'kitty @ send-text --match id:{second_window} "cd {project}\\n"')
+                run(f'kitty @ send-text --match id:{third_window} "cd {project}\\n"')
 
                 run(f'kitty @ send-text --match id:{new_tab} "vim .\\n"')
             else:
@@ -156,26 +168,10 @@ def open_project(project: str, remote: bool = False):
                 run(f"kitty @ new-window --match id:{new_tab} --cwd {project} --dont-take-focus")
 
 
-def connect_command(identifier: str) -> str:
-    rundir: str
-    if "XDG_RUNTIME_DIR" in os.environ:
-        rundir = f"{os.getenv('XDG_RUNTIME_DIR')}/et/{identifier}"
-    elif "TMPDIR" in os.environ:
-        rundir = f"{os.getenv('TMPDIR')}et/{identifier}"
-    else:
-        rundir = f"/tmp/et/{identifier}"
-
-    if not os.path.exists(rundir):
-        os.makedirs(rundir)
-        os.chmod(rundir, 0o0700)
-
-    return f"et --forward-ssh-agent --silent --logdir {rundir}"
-
-
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("project", nargs="?", help="path")
-    parser.add_argument("--remote", action="store_true", help="remote")
+    parser.add_argument("--remote", "-r", action="store_true", help="remote")
     args = parser.parse_args()
 
     project: str
