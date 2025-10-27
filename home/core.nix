@@ -150,7 +150,6 @@
     pkgs.ncdu
     pkgs.ov
     pkgs.python313
-    pkgs.skim
     pkgs.tio
     pkgs.viddy
     pkgs.wget

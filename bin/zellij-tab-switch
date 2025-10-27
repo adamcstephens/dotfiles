@@ -19,7 +19,7 @@ def run(command: str, input: list[str] | str | None = None):
 
 
 def tab_selector():
-    finder = "sk --reverse --height 22 --header 'Select tab' --info hidden --tiebreak index --exact"
+    finder = "fzf --height 22 --no-sort --filepath-word --reverse"
     zj_tabs = run("zellij action query-tab-names")
 
     tab = run(finder, input=zj_tabs)
