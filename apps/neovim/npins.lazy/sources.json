@@ -180,6 +180,21 @@
       "url": null,
       "hash": "1y2z2z8h8nmrpcg2igrbmbzs96y9dmcgfajbljqci5fbihqh7vbz"
     },
+    "quicker.nvim": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "Git",
+        "url": "https://github.com/stevearc/quicker.nvim"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "submodules": false,
+      "version": "v1.4.0",
+      "revision": "76bfadd8f29895e79429fe0d30f0b3df82cd466a",
+      "url": null,
+      "hash": "1zq4b88kv6yfbbrmrxr2l42vv1h2ghsyx2sz44dwxy478xywcjig"
+    },
     "rainbow-delimiters.nvim": {
       "type": "GitRelease",
       "repository": {
