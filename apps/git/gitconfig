@@ -31,10 +31,15 @@ verbose = true
 
 [core]
 editor = ~/.dotfiles/bin/giteditor
+pager = delta
 untrackedCache = true
 
 [credential]
 helper = rbw
+
+[delta]
+features = gruvmax-fang
+navigate = true
 
 [diff]
 algorithm = histogram
@@ -64,9 +69,13 @@ format = ssh
 
 [include]
 path = config.os
+path = config.delta
 
 [init]
 defaultBranch = main
+
+[interactive]
+diffFilter = delta --color-only
 
 [merge]
 conflictstyle = zdiff3

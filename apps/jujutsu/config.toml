@@ -51,7 +51,7 @@ diff-editor = ":builtin"
 diff-formatter = ":git"
 # diff-formatter = ["difft", "--color=always", "$left", "$right"]
 editor = "nvim"
-pager = ["delta", "--side-by-side"]
+pager = ["delta", "--features", "gruvmax-fang"]
 # pager = ":builtin"
 
 [user]

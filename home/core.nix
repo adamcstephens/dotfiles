@@ -10,6 +10,7 @@
 
     ../apps/bat
     ../apps/btop
+    ../apps/delta
     ../apps/editorconfig
     ../apps/fd
     ../apps/fish
@@ -135,7 +136,6 @@
     config.lib.file.mkOutOfStoreSymlink "${config.home.profileDirectory}/share/terminfo";
 
   home.packages = [
-    pkgs.delta
     pkgs.difftastic
     pkgs.direnv
     pkgs.doggo
