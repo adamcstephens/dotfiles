@@ -13,6 +13,7 @@
   bash-language-server,
   errcheck,
   fish-lsp,
+  fzf,
   golangci-lint,
   golangci-lint-langserver,
   go-tools,
@@ -120,6 +121,7 @@ mnw.lib.wrap pkgs {
       bash-language-server
       biome
       fish-lsp
+      fzf
       lua
       lua-language-server
       nixd
