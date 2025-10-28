@@ -1,5 +1,17 @@
 {
   "pins": {
+    "amp.nvim": {
+      "type": "Git",
+      "repository": {
+        "type": "Git",
+        "url": "https://github.com/sourcegraph/amp.nvim"
+      },
+      "branch": "main",
+      "submodules": false,
+      "revision": "621f1ca375fc2887d30a4ac32a8b6c582d28f9c0",
+      "url": null,
+      "hash": "09f3md3khk5ccvhf897ddp387qjkvwwz5d9wjvlafb06cdixlagz"
+    },
     "auto-dark-mode.nvim": {
       "type": "Git",
       "repository": {
