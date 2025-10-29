@@ -20,7 +20,6 @@
     pkgs.gnutar
     pkgs.iftop
     pkgs.mas
-    pkgs.openssh
     pkgs.pinentry_mac
     pkgs.trippy
 
