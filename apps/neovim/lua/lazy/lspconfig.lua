@@ -12,6 +12,8 @@ return {
       cmd = { "elixir-ls" },
       on_attach = function(client)
         client.server_capabilities.semanticTokensProvider = nil
+        -- client.server_capabilities.documentFormattingProvider = nil
+        -- client.server_capabilities.documentRangeFormattingProvider = nil
       end,
       root_dir = function(bufnr, on_dir)
         local matches = vim.fs.find({ "mix.lock" }, { upward = true, limit = 1 })

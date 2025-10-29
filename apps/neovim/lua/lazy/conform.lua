@@ -12,6 +12,8 @@ return {
         css = { "biome" },
         direnv = { "shfmt" },
         dune = { "format-dune-file" },
+        elixir = { "mix" },
+        heex = { "mix" },
         javascript = { "prettier" },
         json = { "biome" },
         kdl = { "kdlfmt" },
