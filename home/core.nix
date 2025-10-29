@@ -16,6 +16,7 @@
     ../apps/fish
     ../apps/git
     ../apps/helix
+    ../apps/jjui
     ../apps/jujutsu
     ../apps/neovim
     ../apps/nix

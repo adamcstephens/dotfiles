@@ -1,0 +1,14 @@
+[preview]
+show_at_start = true
+revision_command = [
+  "show",
+  "--color",
+  "always",
+  "-r",
+  "$change_id",
+  "--config",
+  "ui.diff-formatter=delta",
+]
+
+[ui.colors]
+"revisions selected" = { bg = "0" }
