@@ -20,7 +20,7 @@ FINDER = "fzf --height 22 --no-sort --filepath-word --reverse"
 
 
 def gen_remotes():
-    hosts = ["kale.incus", "nixos2.local"]
+    hosts = ["branch", "kale.incus", "nixos2.local"]
 
     return str.join("\n", hosts)
 

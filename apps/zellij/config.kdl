@@ -29,6 +29,30 @@ keybinds clear-defaults=true {
         height "40%"
       }
     }
+    bind "Super r" {
+      Run "prj" "-r" {
+        floating true
+        hold_on_close false
+        close_on_exit true
+        name "open remote project"
+        x "30%"
+        y "30%"
+        width "40%"
+        height "40%"
+      }
+    }
+    bind "Super s" {
+      Run "prj" "-s" {
+        floating true
+        hold_on_close false
+        close_on_exit true
+        name "open ssh tab"
+        x "30%"
+        y "30%"
+        width "40%"
+        height "40%"
+      }
+    }
     bind "Super t" {
       Run "zellij-tab-switch" {
         floating true
@@ -295,6 +319,12 @@ keybinds clear-defaults=true {
     }
     bind "tab" {
       MovePane
+    }
+    bind "[" {
+      BreakPaneLeft
+    }
+    bind "]" {
+      BreakPaneRight
     }
   }
   scroll {
