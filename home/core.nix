@@ -1,5 +1,6 @@
 {
   config,
+  inputs,
   lib,
   pkgs,
   ...
@@ -140,7 +141,8 @@
     pkgs.difftastic
     pkgs.direnv
     pkgs.doggo
-    pkgs.du-dust
+    # remove 25.11
+    inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.dust
     pkgs.file
     pkgs.fzf
     pkgs.gdu

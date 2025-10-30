@@ -35,7 +35,8 @@ in
 
   home.packages = [
     # crypt
-    pkgs.pinentry.curses
+    # remove 25.11
+    inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.pinentry-curses
     pkgs.rage
     pkgs.rbw
 
