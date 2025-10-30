@@ -16,9 +16,11 @@ is_tmux = "TMUX" in os.environ
 is_wayland = "WAYLAND_DISPLAY" in os.environ
 is_zellij = "ZELLIJ" in os.environ
 
+FINDER = "fzf --height 22 --no-sort --filepath-word --reverse"
+
 
 def gen_remotes():
-    hosts = ["kale.incus"]
+    hosts = ["kale.incus", "nixos2.local"]
 
     return str.join("\n", hosts)
 
@@ -48,19 +50,17 @@ def prj_finder(remote: bool = False) -> str:
     command: str
     project: str
 
-    finder = "fzf --height 22 --no-sort --filepath-word --reverse"
-
     if remote:
-        selected_remote = run(finder, input=gen_remotes())
+        selected_remote = run(FINDER, input=gen_remotes())
         run(f"ssh {selected_remote} true")
         project = run(
-            finder,
+            FINDER,
             input=run(f"ssh {selected_remote} zoxide query --list"),
         )
         project = f"{selected_remote}:{project}"
     else:
         if is_kitty or is_tmux or is_zellij:
-            command = finder
+            command = FINDER
         elif is_wayland:
             command = "rofi -dmenu"
         else:
@@ -168,15 +168,46 @@ def open_project(project: str, remote: bool = False):
                 run(f"kitty @ new-window --match id:{new_tab} --cwd {project} --dont-take-focus")
 
 
+def open_ssh():
+    selected_remote = run(FINDER, input=gen_remotes())
+    run(f"ssh {selected_remote} true")
+    wname: str = f"ssh@{selected_remote}"
+
+    if is_tmux:
+        print("unsupported tmux + ssh")
+        sys.exit(1)
+
+    elif is_zellij:
+        tabs = run("zellij action query-tab-names").splitlines()
+
+        if wname in tabs:
+            run(f"zellij action go-to-tab-name {wname}")
+        else:
+            run(f"zellij action new-tab --name {wname} --layout prj")
+
+            run("zellij action toggle-active-sync-tab")
+            run(f"zellij action write-chars 'ssh {selected_remote}'")
+            run("zellij action write 13")
+            time.sleep(0.2)
+            run("zellij action toggle-active-sync-tab")
+
+    elif is_kitty:
+        print("unsupported tmux + ssh")
+        sys.exit(1)
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("project", nargs="?", help="path")
     parser.add_argument("--remote", "-r", action="store_true", help="remote")
+    parser.add_argument("--ssh", "-s", action="store_true", help="open ssh tab")
     args = parser.parse_args()
 
     project: str
 
-    if args.project is None:
+    if args.ssh:
+        open_ssh()
+    elif args.project is None:
         project = prj_finder(remote=args.remote)
         if project == "":
             print("no project selected")
