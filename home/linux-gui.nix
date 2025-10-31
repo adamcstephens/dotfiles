@@ -135,7 +135,7 @@ in
       pkgs.wireplumber
 
       # firefox
-      pkgs.firefox-wayland
+      pkgs.firefox
 
       # apps
       pkgs.nemo
