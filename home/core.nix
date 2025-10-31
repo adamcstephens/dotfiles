@@ -156,7 +156,6 @@
     pkgs.tio
     pkgs.viddy
     pkgs.wget
-    pkgs.zf
   ]
   ++ lib.optionals pkgs.stdenv.isLinux [
     pkgs.ghostty.terminfo
