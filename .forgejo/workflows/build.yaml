@@ -5,6 +5,8 @@ env:
   ATTIC_URL: ${{ vars.ATTIC_URL }}
   ATTIC_CACHE: ${{ vars.ATTIC_CACHE }}
   ATTIC_KEY: ${{ secrets.ATTIC_KEY }}
+  NTFY_HOST: ${{ vars.NTFY_HOST }}
+  NTFY_USER: ${{ secrets.NTFY_USER }}
   SOWER_ENDPOINT: ${{ vars.SOWER_ENDPOINT }}
   SOWER_API_TOKEN: ${{ secrets.SOWER_API_TOKEN }}
 
@@ -18,3 +20,12 @@ jobs:
       - run: |
           export HOME=$PWD
           nix develop .#ci --command seed-ci --attic-upload=true --nom=false --sower-seed=true --system x86_64-linux --cache-build-deps=true
+
+      - name: Notify on failure
+        if: failure()
+        run: |
+          nix develop .#ci --command \
+            ntfy send \
+            --click="${{ forgejo.server_url}}/${{ forgejo.repository }}/actions/runs/${{ forgejo.run_number }}/jobs/${{ forgejo.job }}/attempt/${{ forgejo.run_attempt }}" \
+            ${{ vars.NTFY_HOST }}/alerts \
+            "Build failure in ${FORGEJO_REPOSITORY}"
