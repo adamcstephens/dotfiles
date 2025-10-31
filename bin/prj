@@ -16,7 +16,7 @@ is_tmux = "TMUX" in os.environ
 is_wayland = "WAYLAND_DISPLAY" in os.environ
 is_zellij = "ZELLIJ" in os.environ
 
-FINDER = "fzf --height 22 --no-sort --filepath-word --reverse"
+FINDER = "fzf --height 22 --filepath-word --reverse --scheme=path"
 
 
 def gen_remotes():
