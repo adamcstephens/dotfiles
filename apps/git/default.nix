@@ -5,7 +5,7 @@
   ...
 }:
 let
-  os = pkgs.hostPlatform.uname.system;
+  os = pkgs.stdenv.hostPlatform.uname.system;
 in
 {
   home.packages = [
