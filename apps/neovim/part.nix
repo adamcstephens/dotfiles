@@ -12,7 +12,7 @@
       packages = rec {
         neovim = pkgs.callPackage ./package.nix {
           inherit (inputs) mnw;
-          neovim = pkgs.neovim-unwrapped;
+          neovim = inputs'.neovim-nightly-overlay.packages.neovim;
           golangci-lint-langserver = pkgs.golangci-lint-langserver.overrideAttrs (_: {
             doCheck = false;
           });
