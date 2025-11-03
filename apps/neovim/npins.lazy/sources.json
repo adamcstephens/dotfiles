@@ -61,10 +61,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v17.29.0",
-      "revision": "9c646bd193cb622fff1f9717177502fc6ad30a4a",
+      "version": "v17.30.0",
+      "revision": "418d8abce319ed8cd449933ca1e12be4e595881e",
       "url": null,
-      "hash": "1vzvxxnmwz0zjlw5x4gv779a648xbk5w05yfnjq64v38qdc7fgak"
+      "hash": "1cja8a24pik84pnb90bydc2wh15jy4q5h8wwv1gvamgzad33pp4s"
     },
     "conform.nvim": {
       "type": "GitRelease",
