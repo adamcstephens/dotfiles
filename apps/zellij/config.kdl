@@ -433,9 +433,6 @@ keybinds clear-defaults=true {
     bind "Ctrl Shift Left" {
       MoveTab "left"
     }
-    bind "Alt f" {
-      ToggleFloatingPanes
-    }
     bind "Alt h" {
       MessagePlugin "vim-zellij-navigator" {
         name "move_focus"
