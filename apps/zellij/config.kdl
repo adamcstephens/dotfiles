@@ -361,6 +361,9 @@ keybinds clear-defaults=true {
       SearchToggleOption "CaseSensitivity"
     }
     bind "n" {
+      Search "up"
+    }
+    bind "Shift n" {
       Search "down"
     }
     bind "o" {
@@ -465,7 +468,9 @@ keybinds clear-defaults=true {
       EditScrollback
     }
     bind "Super t" {
-      NewTab
+      NewTab {
+        cwd "~"
+      }
       SwitchToMode "locked"
     }
     bind "Alt n" {
