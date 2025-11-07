@@ -470,6 +470,7 @@ keybinds clear-defaults=true {
     bind "Super t" {
       NewTab {
         cwd "~"
+        layout "single"
       }
       SwitchToMode "locked"
     }
