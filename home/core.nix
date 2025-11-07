@@ -151,7 +151,6 @@
     pkgs.just
     pkgs.kitty.terminfo
     pkgs.ncdu
-    pkgs.ov
     pkgs.python313
     pkgs.tio
     pkgs.viddy

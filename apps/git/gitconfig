@@ -47,9 +47,6 @@ colorMoved = plain
 mnemonicPrefix = true
 renames = true
 
-[feature]
-experimental = true
-
 [fetch]
 all = true
 prune = true
