@@ -47,6 +47,9 @@ stdenvNoCC.mkDerivation rec {
           ln -sf ~/.dotfiles/apps/firefox/user-overrides.js .
           ./updater.sh -s -d
           bash ./prefsCleaner.sh -s
+
+          mkdir -vp chrome
+          ln -sf ~/.dotfiles/apps/firefox/userChrome.css chrome/userChrome.css
         done
       '';
     in

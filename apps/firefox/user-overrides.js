@@ -22,4 +22,5 @@ user_pref("privacy.resistFingerprinting", false);
 user_pref("privacy.resistFingerprinting.letterboxing", false);
 user_pref("sidebar.verticalTabs", true);
 user_pref("signon.rememberSignons", false);
+user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);
 user_pref("webgl.disabled", false);

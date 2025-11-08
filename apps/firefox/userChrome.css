@@ -1,0 +1,12 @@
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+/* Make the "title changed" notification dot on pinned tabs tiny */
+.tabbrowser-tab > .tab-stack > .tab-content[pinned][titlechanged] {
+	background-position: center bottom !important;
+	background-size: 4px !important;
+}
+
+/* Completely hide the "title changed" notification dot on pinned tabs */
+.tabbrowser-tab > .tab-stack > .tab-content[pinned][titlechanged] {
+	background-image: none !important;
+}
