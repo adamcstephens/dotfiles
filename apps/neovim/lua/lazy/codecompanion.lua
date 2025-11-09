@@ -10,9 +10,122 @@ return {
       strategies = {
         chat = {
           adapter = {
-            name = "copilot",
-            model = "claude-haiku-4.5",
+            name = "opencode_zen",
+            model = "claude-haiku-4-5",
           },
+        },
+      },
+
+      adapters = {
+        http = {
+          opencode_zen = function()
+            local openai = require("codecompanion.adapters.http.openai")
+
+            ---@class CodeCompanion.HTTPAdapter.xAI: CodeCompanion.HTTPAdapter
+            return {
+              name = "opencode_zen",
+              formatted_name = "Opencode Zen",
+              roles = {
+                llm = "assistant",
+                user = "user",
+              },
+              opts = {
+                stream = true,
+                vision = false,
+              },
+              features = {
+                text = true,
+                tokens = true,
+              },
+              url = "https://opencode.ai/zen/v1/chat/completions",
+              env = {
+                api_key = "OPENCODE_ZEN_API_KEY",
+              },
+              headers = {
+                Authorization = "Bearer ${api_key}",
+                ["Content-Type"] = "application/json",
+              },
+              handlers = {
+                setup = function(self)
+                  if self.opts and self.opts.stream then
+                    self.parameters.stream = true
+                  end
+                  return true
+                end,
+
+                --- Use the OpenAI adapter for the bulk of the work
+                tokens = function(self, data)
+                  return openai.handlers.tokens(self, data)
+                end,
+                form_parameters = function(self, params, messages)
+                  return openai.handlers.form_parameters(self, params, messages)
+                end,
+                form_messages = function(self, messages)
+                  return openai.handlers.form_messages(self, messages)
+                end,
+                chat_output = function(self, data)
+                  return openai.handlers.chat_output(self, data)
+                end,
+                inline_output = function(self, data, context)
+                  return openai.handlers.inline_output(self, data, context)
+                end,
+                on_exit = function(self, data)
+                  return openai.handlers.on_exit(self, data)
+                end,
+              },
+              schema = {
+                ---@type CodeCompanion.Schema
+                model = {
+                  order = 1,
+                  mapping = "parameters",
+                  type = "enum",
+                  desc = "ID of the model to use. See the model endpoint compatibility table for details on which models work with the Chat API.",
+                  default = "claude-haiku-4-5",
+                  choices = {
+                    "claude-opus-4-1",
+                    "claude-sonnet-4",
+                    "claude-sonnet-4-5",
+                    "claude-3-5-haiku",
+                    "claude-haiku-4-5",
+                    "gpt-5",
+                    "gpt-5-codex",
+                    "qwen3-coder",
+                    "glm-4.6",
+                    "big-pickle",
+                    "kimi-k2",
+                    "minimax-m2",
+                    "an-gd4",
+                    "grok-code",
+                  },
+                },
+              },
+            }
+          end,
+
+          opencode_zen_responses = function()
+            return require("codecompanion.adapters").extend("openai_responses", {
+              name = "opencode_zen_responses",
+              formatted_name = "Opencode Zen Responses",
+              url = "https://opencode.ai/zen/v1/responses",
+              env = {
+                api_key = "OPENCODE_ZEN_API_KEY",
+              },
+              schema = {
+                ---@type CodeCompanion.Schema
+                model = {
+                  order = 1,
+                  mapping = "parameters",
+                  type = "enum",
+                  desc = "ID of the model to use. See the model endpoint compatibility table for details on which models work with the Chat API.",
+                  default = "gpt-5-codex",
+                  choices = {
+                    "gpt-5",
+                    "gpt-5-codex",
+                  },
+                },
+              },
+            })
+          end,
         },
       },
 
