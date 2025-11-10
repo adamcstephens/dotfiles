@@ -71,6 +71,7 @@ mnw.lib.wrap pkgs {
         smart-open-nvim
         sqlite-lua
         statuscol-nvim
+        nvim-treesitter.withAllGrammars
         vim-dadbod
         vim-dadbod-completion
         vim-dadbod-ui
@@ -98,7 +99,6 @@ mnw.lib.wrap pkgs {
         nvim-highlight-colors
         nvim-treesitter-endwise
         nvim-treesitter-textobjects
-        nvim-treesitter.withAllGrammars
         oil-nvim
         tiny-inline-diagnostic-nvim
         tmux-nvim
