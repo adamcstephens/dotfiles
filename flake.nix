@@ -47,5 +47,7 @@
         "aarch64-darwin"
         "aarch64-linux"
       ];
+
+      flake.lib = inputs.nixpkgs.lib;
     };
 }

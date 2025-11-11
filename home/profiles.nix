@@ -290,6 +290,6 @@ in
   };
 
   flake.homeModules = builtins.mapAttrs (_: profile: profile.finalModules) cfgs;
-  flake.lib.findHome =
+  flake.dotfiles.findHome =
     hostname: system: if (builtins.elem hostname (builtins.attrNames cfgs)) then hostname else system;
 }
