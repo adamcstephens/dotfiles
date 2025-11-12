@@ -17,6 +17,11 @@ return {
           ["enter"] = actions.file_edit,
         },
       },
+      winopts = {
+        preview = {
+          flip_columns = 180,
+        },
+      },
     })
 
     require("fzf-lua").register_ui_select()
