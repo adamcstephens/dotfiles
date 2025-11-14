@@ -101,7 +101,7 @@
         Type = "oneshot";
         ExecStart =
           pkgs.writeShellApplication {
-            name = "hypridle-before-sleep";
+            name = "dotfiles-repo-pull";
 
             runtimeInputs = [
               pkgs.git
