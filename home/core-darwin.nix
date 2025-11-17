@@ -1,6 +1,5 @@
 {
   config,
-  flake,
   lib,
   pkgs,
   ...
@@ -22,6 +21,7 @@
     pkgs.mas
     pkgs.pinentry_mac
     pkgs.trippy
+    pkgs.xz
 
     # for class
     pkgs.nodejs
