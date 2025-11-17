@@ -158,9 +158,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "b34fbdffdcb6295c7a25df6ba375452a2e73c32e",
+      "revision": "dc7e7c7699cc01b1b6fefa97f9b496d8f447d7a1",
       "url": null,
-      "hash": "1rcgmv4pn2k59a6pg7b4ic2dl2kvrbnb78jnj2wqj6dxaf8fa1yv"
+      "hash": "0mj1jyyq74d7fbn00d6h1ri7g3lm3hk4pcf0b0fajcslx3wg9yiv"
     },
     "nvim-surround": {
       "type": "GitRelease",
