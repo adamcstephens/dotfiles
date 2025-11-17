@@ -22,6 +22,7 @@
     in
     {
       devShells = {
+        cd = pkgs.callPackage ./cd.nix { };
         ci = pkgs.callPackage ./ci.nix { inherit inputs; };
         default = pkgs.callPackage ./default.nix { };
 
