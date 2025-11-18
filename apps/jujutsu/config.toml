@@ -45,6 +45,14 @@ log_compact = """
     )
 """
 
+# [templates]
+# # change id
+# commit_trailers = '''
+# if(!trailers.contains_key("Change-Id"), format_gerrit_change_id_trailer(self))'''
+# # sign off
+# commit_trailers = '''
+# format_signed_off_by_trailer(self)'''
+
 [ui]
 default-command = ["log", "--template=log_compact"]
 diff-editor = ":builtin"
@@ -57,7 +65,3 @@ pager = ["delta", "--features", "gruvmax-fang"]
 [user]
 name = "Adam C. Stephens"
 email = "adam@valkor.net"
-
-# [templates]
-# commit_trailers = '''
-# format_signed_off_by_trailer(self)'''
