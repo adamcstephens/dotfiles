@@ -49,6 +49,7 @@ in
     pkgs.nvd
 
     # tools
+    pkgs.mergiraf
     pkgs.pwgen
     pkgs.step-cli
     pkgs.unzip
