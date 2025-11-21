@@ -92,7 +92,6 @@ mnw.lib.wrap pkgs {
         diffview-nvim
         fidget-nvim
         fzf-lua
-        lualine-nvim
         neogit
         nvim-dap
         nvim-dap-go
