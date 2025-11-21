@@ -49,6 +49,10 @@ in
                 self.overlays.upstreams
                 # nixpkgs removed this alias. we'll keep using it for now
                 (_: super: { system = super.stdenv.hostPlatform.system; })
+                (import "${npins.lix-nixos-module}/overlay.nix" {
+                  # use nixpkgs lix
+                  lix = npins.lix;
+                })
               ];
 
               config.allowUnfreePredicate =

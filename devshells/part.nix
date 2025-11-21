@@ -14,13 +14,41 @@
 
   perSystem =
     {
-      inputs',
+      pkgs-unstable,
+      system,
       ...
     }:
     let
-      pkgs = inputs'.nixpkgs-unstable.legacyPackages;
+      # use unstable for devshells
+      pkgs = pkgs-unstable;
+
+      npins = import ../npins;
     in
     {
+      _module.args = {
+        inherit npins;
+
+        # lix overlay for flake-parts
+        pkgs = import inputs.nixpkgs {
+          inherit system;
+          overlays = [
+            (import "${npins.lix-nixos-module}/overlay.nix" {
+              # use nixpkgs lix
+              lix = npins.lix;
+            })
+          ];
+        };
+        pkgs-unstable = import inputs.nixpkgs-unstable {
+          inherit system;
+          overlays = [
+            (import "${npins.lix-nixos-module}/overlay.nix" {
+              # use nixpkgs lix
+              lix = npins.lix;
+            })
+          ];
+        };
+      };
+
       devShells = {
         cd = pkgs.callPackage ./cd.nix { };
         ci = pkgs.callPackage ./ci.nix { inherit inputs; };
