@@ -81,7 +81,7 @@
               options = "--delete-older-than 30d";
             };
 
-            package = pkgs.nixVersions.nix_2_31;
+            package = pkgs.nixVersions.nix_2_32;
 
             settings = {
               auto-optimise-store = false;
@@ -101,8 +101,8 @@
               http-connections = lib.mkDefault 128;
               max-substitution-jobs = lib.mkDefault 128;
 
-              min-free = "50G";
-              max-free = "100G";
+              min-free = 50 * 1024 * 1024 * 1024;
+              max-free = 100 * 1024 * 1024 * 1024;
 
               trusted-users = [
                 "root"
