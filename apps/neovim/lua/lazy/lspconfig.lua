@@ -24,7 +24,12 @@ return {
       end,
     })
     vim.lsp.enable("elixirls")
-    -- vim.lsp.enable("expert")
+    vim.lsp.config("expert", {
+      on_attach = function(client)
+        client.server_capabilities.semanticTokensProvider = nil
+      end,
+    })
+    vim.lsp.enable("expert")
 
     -- fish
     vim.lsp.enable("fish_lsp")
