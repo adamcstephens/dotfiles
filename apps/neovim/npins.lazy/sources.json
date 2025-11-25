@@ -204,6 +204,18 @@
       "url": null,
       "hash": "1y2z2z8h8nmrpcg2igrbmbzs96y9dmcgfajbljqci5fbihqh7vbz"
     },
+    "opencode.nvim": {
+      "type": "Git",
+      "repository": {
+        "type": "Git",
+        "url": "https://github.com/NickvanDyke/opencode.nvim"
+      },
+      "branch": "main",
+      "submodules": false,
+      "revision": "fda7eedb597155257817a9f4c9ec17308164657d",
+      "url": null,
+      "hash": "0plz99c3vrq9mrcb6vacdb3qlrw3y037cggsabn85qjzwgfdac6f"
+    },
     "quicker.nvim": {
       "type": "GitRelease",
       "repository": {
