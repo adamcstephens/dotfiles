@@ -84,9 +84,9 @@ def open_project(project: str, remote: bool = False):
         project_s = project.split(":")
         host = project_s[0]
         project = project_s[1]
-        wname = re.sub("[^a-zA-Z0-9:@]", "", f"{os.path.basename(project)}@{host.split('.')[0]}")
+        wname = re.sub("[^a-zA-Z0-9:@\-]", "", f"{os.path.basename(project)}@{host.split('.')[0]}")
     else:
-        wname = re.sub("[^a-zA-Z0-9]", "", os.path.basename(project))
+        wname = re.sub("[^a-zA-Z0-9\-]", "", os.path.basename(project))
         run(f"zoxide add {project}")
 
     existing_tab: int
@@ -120,7 +120,11 @@ def open_project(project: str, remote: bool = False):
             run(f"zellij action go-to-tab-name {wname}")
         else:
             if remote:
-                run(f"zellij action new-tab --name {wname} --layout prj")
+                if os.path.exists(project):
+                    # if we have that directory locally, we'll use it
+                    run(f"zellij action new-tab --name {wname} --layout prj --cwd {project}")
+                else:
+                    run(f"zellij action new-tab --name {wname} --layout prj")
 
                 run("zellij action toggle-active-sync-tab")
                 run(f"zellij action write-chars 'ssh {host}'")
