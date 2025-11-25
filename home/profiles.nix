@@ -45,6 +45,8 @@ in
             nixpkgs = {
               overlays = [
                 self.overlays.dotfiles
+              ]
+              ++ lib.optionals (profile.system != "aarch64-darwin") [
                 (import "${npins.lix-nixos-module}/overlay.nix" {
                   # use nixpkgs lix
                   lix = npins.lix;
