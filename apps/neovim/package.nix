@@ -65,7 +65,6 @@ mnw.lib.wrap pkgs {
         fugitive
         nui-nvim
         nvim-web-devicons
-        openingh-nvim
         plenary-nvim
         remember-nvim
         smart-open-nvim
@@ -99,6 +98,7 @@ mnw.lib.wrap pkgs {
         nvim-treesitter-endwise
         nvim-treesitter-textobjects
         oil-nvim
+        openingh-nvim
         tiny-inline-diagnostic-nvim
         tmux-nvim
         toggleterm-nvim
