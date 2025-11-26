@@ -84,9 +84,9 @@ def open_project(project: str, remote: bool = False):
         project_s = project.split(":")
         host = project_s[0]
         project = project_s[1]
-        wname = re.sub("[^a-zA-Z0-9:@\-]", "", f"{os.path.basename(project)}@{host.split('.')[0]}")
+        wname = re.sub("[^a-zA-Z0-9:@\\-]", "", f"{os.path.basename(project)}@{host.split('.')[0]}")
     else:
-        wname = re.sub("[^a-zA-Z0-9\-]", "", os.path.basename(project))
+        wname = re.sub("[^a-zA-Z0-9\\-]", "", os.path.basename(project))
         run(f"zoxide add {project}")
 
     existing_tab: int
