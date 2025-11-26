@@ -1,7 +1,18 @@
+#:schema https://jj-vcs.github.io/jj/latest/config-schema.json
+
 [aliases]
+cl-up = ["util", "exec", "--", "bash", "-c", """
+set -euo pipefail
+INPUT=${1:-"@-"}
+HASH=$(jj log -r "${INPUT}" -T commit_id --no-graph)
+HASHINFO=$(git log -n 1 ${HASH} --oneline --color=always)
+echo "Pushing from commit ${HASHINFO}"
+git push gerrit "${HASH}":refs/for/main
+""", ""]
 home = ["util", "exec", "--", "git-home"]
 pr = ["util", "exec", "--", "git-jjpr"]
 tug = ["bookmark", "move", "--from", "closest_bookmark(@-)", "--to", "@-"]
+
 
 [fsmonitor]
 backend = "watchman"
