@@ -129,6 +129,8 @@ in
 
           # dotfiles.apps.waybar.battery = "upower";
           programs.waybar.settings.main.network.format-disconnected = "";
+
+          services.lorri.enable = true;
         }
       ];
     };
