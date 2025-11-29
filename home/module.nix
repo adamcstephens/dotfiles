@@ -68,9 +68,6 @@ in
               pkgs.jetbrains-mono
               pkgs.noto-fonts
             ]
-            ++ lib.optionals pkgs.stdenv.isLinux [
-              flake.packages.${pkgs.system}.apple-emoji-linux
-            ]
             ++ lib.optionals pkgs.stdenv.isDarwin [ "/Library/Fonts" ];
           };
         };
