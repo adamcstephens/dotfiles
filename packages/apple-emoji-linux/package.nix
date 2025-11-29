@@ -5,6 +5,7 @@
 
   fetchFromGitHub,
   imagemagick,
+  nototools,
   pngquant,
   python312Packages,
   which,
@@ -22,12 +23,12 @@ stdenv.mkDerivation (finalAttrs: {
   };
 
   buildInputs = [
-    which
     imagemagick
+    nototools
     pngquant
-    zopfli
     python312Packages.fonttools
-    python312Packages.nototools
+    which
+    zopfli
   ];
 
   buildPhase = ''
