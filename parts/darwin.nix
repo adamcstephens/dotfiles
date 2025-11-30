@@ -206,9 +206,7 @@
               networking.computerName = "maple";
 
               nixpkgs.overlays = [
-                self.overlays.default
                 self.overlays.dotfiles
-                self.overlays.upstreams
                 # nixpkgs removed this alias. we'll keep using it for now
                 (_: super: { system = super.stdenv.hostPlatform.system; })
               ];
