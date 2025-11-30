@@ -7,7 +7,7 @@
 {
   nix.gc = {
     automatic = !config.dotfiles.nixosManaged && !pkgs.stdenv.isDarwin;
-    frequency = "weekly";
+    dates = "weekly";
     options = "--delete-older-than +30d";
   };
 }

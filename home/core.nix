@@ -141,8 +141,7 @@
     pkgs.difftastic
     pkgs.direnv
     pkgs.doggo
-    # remove 25.11
-    inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.dust
+    pkgs.dust
     pkgs.file
     pkgs.fzf
     pkgs.gdu
