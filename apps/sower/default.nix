@@ -20,12 +20,12 @@ in
 
   config = lib.mkIf cfg.enable {
     home.packages = [
-      inputs.sower.packages.${pkgs.system}.client
+      inputs.sower.packages.${pkgs.stdenv.hostPlatform.system}.client
     ];
 
     services.sower.client = {
       enable = true;
-      package = inputs.sower.packages.${pkgs.system}.client;
+      package = inputs.sower.packages.${pkgs.stdenv.hostPlatform.system}.client;
 
       config = {
         # get the token from the host-managed location

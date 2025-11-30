@@ -9,7 +9,7 @@
 {
   programs.fish = {
     enable = true;
-    package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.fish;
+    package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.fish;
     plugins = [ ];
 
     shellInit =

@@ -27,6 +27,6 @@
     npins.vim-moonfly-colors + "/extras/moonfly-zellij.kdl";
 
   home.file.".config/zellij/plugins/vim-zellij-navigator.wasm".source = "${
-    flake.packages.${pkgs.system}.vim-zellij-navigator
+    flake.packages.${pkgs.stdenv.hostPlatform.system}.vim-zellij-navigator
   }/bin/vim-zellij-navigator.wasm";
 }

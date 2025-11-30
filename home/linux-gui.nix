@@ -153,7 +153,7 @@ in
       # bitwarden
       pkgs.rofi-rbw
 
-      flake.packages.${pkgs.system}.screenshot
+      flake.packages.${pkgs.stdenv.hostPlatform.system}.screenshot
     ]
     ++ lib.optionals config.dotfiles.dev.enable [
       pkgs.jetbrains.datagrip
@@ -215,15 +215,15 @@ in
     };
     screenshot = {
       name = "screenshot";
-      exec = "${lib.getExe flake.packages.${pkgs.system}.screenshot} screen";
+      exec = "${lib.getExe flake.packages.${pkgs.stdenv.hostPlatform.system}.screenshot} screen";
     };
     screenshotBox = {
       name = "screenshot box";
-      exec = "${lib.getExe flake.packages.${pkgs.system}.screenshot} box";
+      exec = "${lib.getExe flake.packages.${pkgs.stdenv.hostPlatform.system}.screenshot} box";
     };
     screenshotWindow = {
       name = "screenshot window";
-      exec = "${lib.getExe flake.packages.${pkgs.system}.screenshot} window";
+      exec = "${lib.getExe flake.packages.${pkgs.stdenv.hostPlatform.system}.screenshot} window";
     };
   };
 }

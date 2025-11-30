@@ -31,13 +31,13 @@ in
             dotfiles = {
               profile = name;
 
-              gui.wayland.locker = self.packages.${pkgs.system}.dotfiles.overrideAttrs (_: {
+              gui.wayland.locker = self.packages.${pkgs.stdenv.hostPlatform.system}.dotfiles.overrideAttrs (_: {
                 meta.mainProgram = "wayland-locker";
               });
             };
 
             home.packages = [
-              self.packages.${pkgs.system}.dotfiles
+              self.packages.${pkgs.stdenv.hostPlatform.system}.dotfiles
             ];
 
             nix.registry.nixpkgs.flake = lib.mkDefault profile.nixpkgs;
@@ -45,8 +45,6 @@ in
             nixpkgs = {
               overlays = [
                 self.overlays.dotfiles
-                # nixpkgs removed this alias. we'll keep using it for now
-                (_: super: { system = super.stdenv.hostPlatform.system; })
                 (import "${npins.lix-nixos-module}/overlay.nix" {
                   # use nixpkgs lix
                   lix = npins.lix;
@@ -82,7 +80,7 @@ in
           { pkgs, ... }:
           {
             home.packages = [
-              self.packages.${pkgs.system}.wakey
+              self.packages.${pkgs.stdenv.hostPlatform.system}.wakey
             ];
           }
         )

@@ -35,7 +35,7 @@ in
 
   config = lib.mkIf cfg.enable {
     home.packages = [
-      flake.packages.${pkgs.system}.display-switch
+      flake.packages.${pkgs.stdenv.hostPlatform.system}.display-switch
     ];
 
     home.file."${configDir}/display-switch.ini".source = configFile;

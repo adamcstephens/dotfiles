@@ -6,7 +6,7 @@
 }:
 {
   home.packages = [
-    inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.jjui
+    inputs.nixpkgs-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.jjui
   ];
 
   home.file.".config/jjui/config.toml".source =

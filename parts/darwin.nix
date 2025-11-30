@@ -173,7 +173,7 @@
 
           programs.fish = {
             enable = true;
-            package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.fish;
+            package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.fish;
           };
         }
       )
@@ -207,8 +207,6 @@
 
               nixpkgs.overlays = [
                 self.overlays.dotfiles
-                # nixpkgs removed this alias. we'll keep using it for now
-                (_: super: { system = super.stdenv.hostPlatform.system; })
               ];
 
               security.pam.services.sudo_local = {

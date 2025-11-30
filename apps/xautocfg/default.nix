@@ -1,6 +1,6 @@
 { pkgs, flake, ... }:
 let
-  package = flake.packages.${pkgs.system}.xautocfg;
+  package = flake.packages.${pkgs.stdenv.hostPlatform.system}.xautocfg;
 in
 {
   xdg.configFile."xautocfg.cfg".text = ''

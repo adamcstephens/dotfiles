@@ -14,7 +14,7 @@ let
 in
 {
   home.packages = [
-    inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.jujutsu
+    inputs.nixpkgs-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.jujutsu
     pkgs.watchman
   ];
 

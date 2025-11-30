@@ -15,7 +15,7 @@ in
     profile = lib.mkOption {
       type = lib.types.str;
       description = "name of home profile from flake";
-      default = pkgs.system;
+      default = pkgs.stdenv.hostPlatform.system;
     };
 
     dev.enable = lib.mkOption {

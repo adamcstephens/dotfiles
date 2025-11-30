@@ -12,7 +12,7 @@ mkShellNoCC {
     pkgs.ntfy-sh
   ]
   ++ lib.optionals pkgs.stdenv.isLinux [
-    inputs.sower.packages.${pkgs.system}.seed-ci
-    inputs.sower.packages.${pkgs.system}.client
+    inputs.sower.packages.${pkgs.stdenv.hostPlatform.system}.seed-ci
+    inputs.sower.packages.${pkgs.stdenv.hostPlatform.system}.client
   ];
 }

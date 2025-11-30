@@ -8,7 +8,7 @@
 let
   cfg = config.dotfiles.apps.neovim;
 
-  package = flake.packages.${pkgs.system}.neovim.override {
+  package = flake.packages.${pkgs.stdenv.hostPlatform.system}.neovim.override {
     inherit (cfg) full;
     dotvimPlugin =
       if config.dotfiles.nixosManaged then ./. else "${config.home.homeDirectory}/.dotfiles/apps/neovim";
