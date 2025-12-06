@@ -204,6 +204,21 @@
       "url": null,
       "hash": "1y2z2z8h8nmrpcg2igrbmbzs96y9dmcgfajbljqci5fbihqh7vbz"
     },
+    "ocaml.nvim": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "Git",
+        "url": "https://github.com/tarides/ocaml.nvim"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "submodules": false,
+      "version": "1.0.0",
+      "revision": "f13728bbedb02121ee54633465ac392bbf0a8e79",
+      "url": null,
+      "hash": "140hh72x96ihzg766rv1nn8x4la27xycxxaqym3vv0wi5jd5v1sx"
+    },
     "opencode.nvim": {
       "type": "Git",
       "repository": {
