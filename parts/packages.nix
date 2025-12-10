@@ -17,9 +17,9 @@
         let
           ocamlPackages =
             if pkgs.stdenv.isLinux && pkgs.stdenv.isx86_64 then
-              pkgs-unstable.pkgsMusl.ocaml-ng.ocamlPackages_5_3
+              pkgs-unstable.pkgsMusl.ocaml-ng.ocamlPackages_5_4
             else
-              pkgs-unstable.ocaml-ng.ocamlPackages_5_3;
+              pkgs-unstable.ocaml-ng.ocamlPackages_5_4;
         in
         lib.filesystem.packagesFromDirectoryRecursive {
           inherit (pkgs) callPackage;

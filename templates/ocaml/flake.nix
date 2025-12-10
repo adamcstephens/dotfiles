@@ -19,7 +19,7 @@
         perSystem =
           { pkgs, ... }:
           let
-            ocamlPackages = pkgs.ocamlPackages_5_3;
+            ocamlPackages = pkgs.ocaml-ng.ocamlPackages_5_4;
           in
           {
             devShells.default = pkgs.mkShell {
