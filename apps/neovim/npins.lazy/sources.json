@@ -170,9 +170,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "9c923997123ff9071198ea3b594d4c1931fab169",
+      "revision": "a2bd1cf7b0446a7414aaf373cea5e4ca804c9c69",
       "url": null,
-      "hash": "0zqpv90isjmmzj66lszflz24y94ia4dkvyqfl6rz7qzvqjjwz5jc"
+      "hash": "09qqii1cz0vxw9wrym4lxp91bx7wkijm6m8fg45i56nbypdfchc4"
     },
     "nvim-surround": {
       "type": "GitRelease",
@@ -227,9 +227,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "963fad75f794deb85d1c310d2e2cb033da44f670",
+      "revision": "8b737e45b8e665a0c1111d615b314951d8168a44",
       "url": null,
-      "hash": "0wa43jx3f1lgx2vabl8q4mk3zi7fpdv4r0p49g77kd190cgar8ww"
+      "hash": "02hwv2k0973mkxm2yxsnxrhhm85yxwp7xlla6pcs3v96i3995c4a"
     },
     "quicker.nvim": {
       "type": "GitRelease",
