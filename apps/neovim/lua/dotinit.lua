@@ -19,26 +19,6 @@ require("whitespace-nvim").setup({})
 
 -- vim settings
 --
--- force osc 52 to bypass checks since we use a supported terminal
--- but only for copy, we can use the terminal for paste
-local function paste()
-  return {
-    vim.split(vim.fn.getreg(""), "\n"),
-    vim.fn.getregtype(""),
-  }
-end
-
-vim.g.clipboard = {
-  name = "OSC 52",
-  copy = {
-    ["+"] = require("vim.ui.clipboard.osc52").copy("+"),
-    ["*"] = require("vim.ui.clipboard.osc52").copy("*"),
-  },
-  paste = {
-    ["+"] = paste,
-    ["*"] = paste,
-  },
-}
 
 -- disable end of line diagnostic message
 vim.diagnostic.config({ virtual_text = false })
