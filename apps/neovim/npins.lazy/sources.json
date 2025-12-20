@@ -61,10 +61,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v18.1.1",
-      "revision": "180bebe0a4d413b24a48442a943cd5b7a175e90c",
+      "version": "v18.2.1",
+      "revision": "57232d7aedcc0675933fe5596d3167029d9057a8",
       "url": null,
-      "hash": "0wl5n0l9ywijn3l1s14shflsjzz6vh9yb5la2k1c7z1fj0vqvbs9"
+      "hash": "0g3sylxwbgn66rd4rdgw5k0xk837516736307j9241myhza9g2zp"
     },
     "conform.nvim": {
       "type": "GitRelease",
@@ -130,10 +130,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.16.0",
-      "revision": "e4cb10dc426904e99f8ae4d4c487ec1fdfaf5ad2",
+      "version": "v0.17.0",
+      "revision": "bda35d8aa9550052f14a0510f0b28a6208adbd1a",
       "url": null,
-      "hash": "1wqb0fisg5yd2g4b6zd8668axf8zwqd7a6vyxzzq2rd0qh9jkpa8"
+      "hash": "1hsm3na5q3npclabl716lpmdmwd964r8vc73j2m7hbj61v9623fx"
     },
     "move.nvim": {
       "type": "Git",
@@ -170,9 +170,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "0d7d33e40f0c27f57cb29654ed78cab17d705e68",
+      "revision": "01304066f1390a5478c143a39e9aedaed6a4f209",
       "url": null,
-      "hash": "1jil6zapcjqah0divf6ln7j91lzq91hz9a3v9d1x33f80fnggsk6"
+      "hash": "065gis2v6p25zghlf1rnkcrxskdmgxhj3lkq7if0sh63yvf0kmqn"
     },
     "nvim-surround": {
       "type": "GitRelease",
@@ -227,9 +227,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "39a246b597d6050ca319142b5af5a8b81c74e7d9",
+      "revision": "86020e9033f0087993e505a2b2df9a798bec2a07",
       "url": null,
-      "hash": "0am5h33mp4b98qybia59fzxrzl9lg7fra9f9k7lvm0iz3av6vxl7"
+      "hash": "1vf9wn3a8m0wcbj6671vsamc1cy25gjsjva1s484bq5c99gmwi2q"
     },
     "quicker.nvim": {
       "type": "GitRelease",
