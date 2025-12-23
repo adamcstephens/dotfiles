@@ -1,6 +1,6 @@
 { mkShell, pkgs }:
 let
-  ocamlPackages = pkgs.ocaml-ng.ocamlPackages_5_3;
+  ocamlPackages = pkgs.ocaml-ng.ocamlPackages_5_4;
 in
 mkShell {
   name = "dots";

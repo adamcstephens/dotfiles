@@ -150,7 +150,7 @@
     pkgs.just
     pkgs.kitty.terminfo
     pkgs.ncdu
-    pkgs.python313
+    pkgs.python314
     pkgs.tio
     pkgs.viddy
     pkgs.wget
