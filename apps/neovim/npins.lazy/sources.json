@@ -61,10 +61,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v18.2.1",
-      "revision": "57232d7aedcc0675933fe5596d3167029d9057a8",
+      "version": "v18.3.0",
+      "revision": "b3bb0d73079643d4a5b0d8b621cde619a73bc91a",
       "url": null,
-      "hash": "0g3sylxwbgn66rd4rdgw5k0xk837516736307j9241myhza9g2zp"
+      "hash": "0jzldi9h98hci5ij1qnb4283hmh14irnprp5zg6mnfs9l6m8z3mq"
     },
     "conform.nvim": {
       "type": "GitRelease",
@@ -170,9 +170,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "d20d83b3f24f5884da73a9fc92fdc47e778b8d0d",
+      "revision": "b34c08e0ea22bac67798f00238318fd16bd99b7c",
       "url": null,
-      "hash": "1jzfxfl4f5735xqdy9jmv78bsbc34mdgy01xzq3lzvzzyxqc2iq4"
+      "hash": "0lygy88ip9b1ml2pn8rmvbm7cy1saig8kz5ngilb9yh9xhy61piz"
     },
     "nvim-surround": {
       "type": "GitRelease",
@@ -262,19 +262,16 @@
       "hash": "018ns6zpg4d7kypfrs6fzfgj1sv304h1pv6ihkq78wvksn5lyihk"
     },
     "smart-splits.nvim": {
-      "type": "GitRelease",
+      "type": "Git",
       "repository": {
         "type": "Git",
         "url": "https://github.com/mrjones2014/smart-splits.nvim"
       },
-      "pre_releases": false,
-      "version_upper_bound": null,
-      "release_prefix": null,
+      "branch": "master",
       "submodules": false,
-      "version": "v2.0.5",
-      "revision": "0b5eb952e7bb07569bd19818bb1a9c1ed7d822e3",
+      "revision": "f259035bdeda675f51e8461136c272f2bc667342",
       "url": null,
-      "hash": "1j8wqzr15sscn4n4lpgzmdv0vlbsf2f8sxqk3wlz43l07hcx5a8j"
+      "hash": "1jkffbwssyi20ha1y3qgz6nif8jkhw4bnykhfhy2gc13k6qxmgbm"
     },
     "vim-matchup": {
       "type": "Git",
