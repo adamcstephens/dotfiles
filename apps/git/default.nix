@@ -35,6 +35,7 @@ in
       "*.log"
       "*.retry"
       ".DS_Store"
+      ".claude/"
       ".direnv/"
       ".lsp/"
       ".worktree/"
