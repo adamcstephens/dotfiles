@@ -1,0 +1,45 @@
+# https://halloy.chat/configuration/
+theme = "Oxocarbon"
+
+[font]
+family = "JetBrains Mono"
+size = 14
+
+[servers.robins]
+nickname = "adamcstephens"
+server = "irc.robins.wtf"
+
+[servers.robins.sasl.plain]
+username = "adam"
+password_command = "rbw get irc.robins.wtf"
+
+[buffer.server_messages.join]
+enabled = false
+
+[buffer.server_messages.change_nick]
+smart = 500
+
+[buffer.server_messages.change_host]
+enabled = false
+
+[buffer.server_messages.change_topic]
+enabled = false
+
+[buffer.server_messages.topic]
+enabled = false
+
+[buffer.server_messages.part]
+smart = 500
+
+[buffer.server_messages.quit]
+smart = 500
+
+[keyboard]
+move_up = "alt+k"
+move_down = "alt+j"
+move_left = "alt+h"
+move_right = "alt+l"
+
+[buffer.channel.topic_banner]
+enabled = true
+max_lines = 1
