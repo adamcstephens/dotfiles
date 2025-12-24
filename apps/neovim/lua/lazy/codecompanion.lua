@@ -17,6 +17,15 @@ return {
       },
 
       adapters = {
+        acp = {
+          claude_code = function()
+            return require("codecompanion.adapters").extend("claude_code", {
+              env = {
+                CLAUDE_CODE_OAUTH_TOKEN = "CLAUDE_CODE_OAUTH_TOKEN",
+              },
+            })
+          end,
+        },
         http = {
           opencode_zen = function()
             local openai = require("codecompanion.adapters.http.openai")
@@ -152,7 +161,7 @@ return {
             --   duplicate = { n = "<C-y>", i = "<C-y>" },
             -- },
             ---Automatically generate titles for new chats
-            auto_generate_title = true,
+            auto_generate_title = false,
             title_generation_opts = {
               adapter = "copilot",
               model = "gpt-4o",

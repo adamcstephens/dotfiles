@@ -109,6 +109,9 @@ return {
     -- roc
     vim.lsp.enable("roc_ls")
 
+    -- rust
+    vim.lsp.enable("rust_analyzer")
+
     -- tofu
     vim.lsp.enable("terraformls")
 
