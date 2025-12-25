@@ -56,6 +56,7 @@ in
 
     # apps
     ../apps/1password
+    ../apps/halloy
     ../apps/kitty
     ../apps/mimeapps
     ../apps/newsboat
