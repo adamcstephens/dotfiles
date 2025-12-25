@@ -39,6 +39,7 @@ move_up = "alt+k"
 move_down = "alt+j"
 move_left = "alt+h"
 move_right = "alt+l"
+quit_application = "ctrl+q"
 
 [buffer.channel.topic_banner]
 enabled = true
