@@ -2,14 +2,14 @@
   "pins": {
     "lix": {
       "type": "Tarball",
-      "url": "https://git.lix.systems/lix-project/lix/archive/2.94.0.tar.gz",
-      "locked_url": "https://git.lix.systems/api/v1/repos/lix-project/lix/archive/43dc3b987fb47bd45ee7ed6967febac2595c468e.tar.gz?rev=43dc3b987fb47bd45ee7ed6967febac2595c468e",
+      "url": "https://git.junco.dev/lix-project/lix/archive/2.94.0.tar.gz",
+      "locked_url": "https://git.junco.dev/api/v1/repos/lix-project/lix/archive/43dc3b987fb47bd45ee7ed6967febac2595c468e.tar.gz?rev=43dc3b987fb47bd45ee7ed6967febac2595c468e",
       "hash": "0gyvk1x3ifjrj52bvp55yz3hvswfrd4v7js6b4h9k7hb30vgg9az"
     },
     "lix-nixos-module": {
       "type": "Tarball",
-      "url": "https://git.lix.systems/lix-project/nixos-module/archive/6b1163ae63da888649bde98f94cb7eaacb1dbd4e.tar.gz",
-      "locked_url": "https://git.lix.systems/api/v1/repos/lix-project/nixos-module/archive/6b1163ae63da888649bde98f94cb7eaacb1dbd4e.tar.gz?rev=6b1163ae63da888649bde98f94cb7eaacb1dbd4e",
+      "url": "https://git.junco.dev/lix-project/nixos-module/archive/6b1163ae63da888649bde98f94cb7eaacb1dbd4e.tar.gz",
+      "locked_url": "https://git.junco.dev/api/v1/repos/lix-project/nixos-module/archive/6b1163ae63da888649bde98f94cb7eaacb1dbd4e.tar.gz?rev=6b1163ae63da888649bde98f94cb7eaacb1dbd4e",
       "hash": "14c7brkz1awjhcivd7g1brlxh03n41wxr1qdzh084rafva8yh6gv"
     },
     "modus-themes.nvim": {
