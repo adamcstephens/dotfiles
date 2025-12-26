@@ -55,7 +55,6 @@ in
     ../apps/xorg
 
     # apps
-    ../apps/1password
     ../apps/halloy
     ../apps/kitty
     ../apps/mimeapps
