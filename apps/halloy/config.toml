@@ -3,7 +3,7 @@ theme = "Oxocarbon"
 
 [font]
 family = "JetBrains Mono"
-size = 14
+size = 13
 
 [servers.robins]
 nickname = "adamcstephens"
