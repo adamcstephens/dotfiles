@@ -43,6 +43,13 @@ return {
       desc = "file picker",
     },
     {
+      "<leader>g",
+      function()
+        require("fzf-lua").git_status({})
+      end,
+      desc = "git status",
+    },
+    {
       "<leader>la",
       function()
         require("fzf-lua").lsp_code_actions({})

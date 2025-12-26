@@ -91,7 +91,6 @@ mnw.lib.wrap pkgs {
         diffview-nvim
         fidget-nvim
         fzf-lua
-        neogit
         nvim-dap
         nvim-dap-go
         nvim-highlight-colors
