@@ -109,8 +109,8 @@ def open_project(project: str, remote: bool = False):
         else:
             run(f"tmux new-window -c {project} -n {wname}")
             run(f"tmux select-window -t {wname}")
-            run("tmux send-keys 'vim .' 'C-m'")
             run(f"tmux split-window -h -c {project}")
+            run("tmux send-keys 'vim .' 'C-m'")
             run(f"tmux split-window -h -c {project}")
             run("tmux select-layout even-horizontal")
             run("tmux select-pane -l")
