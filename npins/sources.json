@@ -4,13 +4,13 @@
       "type": "Tarball",
       "url": "https://git.junco.dev/lix-project/lix/archive/2.94.0.tar.gz",
       "locked_url": "https://git.junco.dev/api/v1/repos/lix-project/lix/archive/43dc3b987fb47bd45ee7ed6967febac2595c468e.tar.gz?rev=43dc3b987fb47bd45ee7ed6967febac2595c468e",
-      "hash": "0gyvk1x3ifjrj52bvp55yz3hvswfrd4v7js6b4h9k7hb30vgg9az"
+      "hash": "sha256-X6X3NhgLnpkgWUbLs0nLjusNx/el3L1EkVm6OHqY2z8="
     },
     "lix-nixos-module": {
       "type": "Tarball",
       "url": "https://git.junco.dev/lix-project/nixos-module/archive/6b1163ae63da888649bde98f94cb7eaacb1dbd4e.tar.gz",
       "locked_url": "https://git.junco.dev/api/v1/repos/lix-project/nixos-module/archive/6b1163ae63da888649bde98f94cb7eaacb1dbd4e.tar.gz?rev=6b1163ae63da888649bde98f94cb7eaacb1dbd4e",
-      "hash": "14c7brkz1awjhcivd7g1brlxh03n41wxr1qdzh084rafva8yh6gv"
+      "hash": "sha256-+xnokdpOZYIA/A2H3HkgdgDYaV7hnbYjg5Kr8Gdeh5E="
     },
     "modus-themes.nvim": {
       "type": "GitRelease",
@@ -26,7 +26,7 @@
       "version": "v1.4.2",
       "revision": "c57c2c56c9f0af04f3b609d11caa840880074784",
       "url": "https://api.github.com/repos/miikanissi/modus-themes.nvim/tarball/v1.4.2",
-      "hash": "0sg5apn7isk2w1zn49pizq0fx87c1257g073f8gni7b6zwc5kj3w"
+      "hash": "sha256-fMhZGP9mnWgfcuOAd4oI7KDuAP7xJmJ/4GLqeOxV5Wk="
     },
     "smart-splits.nvim": {
       "type": "GitRelease",
@@ -41,7 +41,7 @@
       "version": "v2.0.5",
       "revision": "0b5eb952e7bb07569bd19818bb1a9c1ed7d822e3",
       "url": null,
-      "hash": "1j8wqzr15sscn4n4lpgzmdv0vlbsf2f8sxqk3wlz43l07hcx5a8j"
+      "hash": "sha256-EqnSGTyADvIpHxN3jZxwetENdqv/XUossUzrEvLHHMk="
     },
     "vim-moonfly-colors": {
       "type": "Git",
@@ -53,8 +53,8 @@
       "submodules": false,
       "revision": "1ad5a8d40176a8749f0c77b8875225d9d299a438",
       "url": null,
-      "hash": "0w42ap8z9zvcrh8almxg8m99nbgj5vxnag0sb81hm72za083acwb"
+      "hash": "sha256-izM1EFBfnAoDWho8Zfsu8i2bUkWvV6oQzGz/9NFVgnA="
     }
   },
-  "version": 5
+  "version": 7
 }

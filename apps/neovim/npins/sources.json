@@ -10,10 +10,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.2.3",
-      "revision": "c1fa2a84ea1aed687aaed60df65e347c280f4f22",
+      "version": "v0.2.4",
+      "revision": "bfb31ca124bd1a2e032faea09844c8609154bdb5",
       "url": null,
-      "hash": "05cyf6wnzfj7jdyd2ppfs2r5i3mld2h4lwsfjm5qkn9lc70samps"
+      "hash": "sha256-77x9cN/TBfvH0tMfoEJDP+wJwFxv9Md2EOu8eP+mL/U="
     },
     "nvim-ufo": {
       "type": "GitRelease",
@@ -28,7 +28,7 @@
       "version": "v1.5.0",
       "revision": "61463090a4f55f5d080236ea62f09d1cd8976ff3",
       "url": null,
-      "hash": "0ri5nwv9zzwzar0k78avirr8dnsqz7bc8lnspdd5m3gvafj20r48"
+      "hash": "sha256-iGQgpFP7jVpau9pSxNb5WNuGco5boTNBVp//nza3JWY="
     },
     "promise-async": {
       "type": "GitRelease",
@@ -43,7 +43,7 @@
       "version": "v1.0.0",
       "revision": "38a4575da9497326badd3995e768b4ccf0bb153e",
       "url": null,
-      "hash": "19kyjzjvlj0c5w3d7r7pfrd5w5w2jv10y4xahiy4iyxa1qz50vsp"
+      "hash": "sha256-V29QPg6q+0h8hKoTD8KWghdeWnb35NMGLwxIuuWXfqY="
     },
     "workspace-diagnotics-nvim": {
       "type": "Git",
@@ -55,8 +55,8 @@
       "submodules": false,
       "revision": "60f9175b2501ae3f8b1aba9719c0df8827610c8e",
       "url": null,
-      "hash": "1plx01fcwqxym5z86wfwvc52if2qm5nfg51skxzjmjn6m5l4lald"
+      "hash": "sha256-jSpKaKnGyip/nzqU52ypWLgoCtvccYN+qb5jzlwAnd4="
     }
   },
-  "version": 5
+  "version": 7
 }
