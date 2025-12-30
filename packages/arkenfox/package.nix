@@ -6,13 +6,13 @@
 }:
 stdenvNoCC.mkDerivation rec {
   pname = "arkenfox";
-  version = "140.0";
+  version = "140.1";
 
   src = fetchFromGitHub {
     owner = "arkenfox";
     repo = "user.js";
     rev = "refs/tags/${version}";
-    hash = "sha256-+DN5bKev9IyefMikOqEWZf/u0flJbLAxwEotGhKSSS4=";
+    hash = "sha256-LPDiiEPOZu5Ah5vCLyCMT3w1uoBhUjyqoPWCOiLVLnw=";
   };
 
   dontBuild = true;
