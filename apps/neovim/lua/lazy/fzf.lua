@@ -7,7 +7,7 @@ return {
   after = function()
     local actions = require("fzf-lua").actions
     require("fzf-lua").setup({
-      "fzf-native",
+      "fzf-tmux",
       actions = {
         files = {
           true,
