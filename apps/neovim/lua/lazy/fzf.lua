@@ -10,11 +10,8 @@ return {
       "fzf-native",
       actions = {
         files = {
+          true,
           ["ctrl-q"] = { fn = actions.file_sel_to_qf, prefix = "select-all" },
-          ["ctrl-s"] = actions.file_vsplit,
-          ["ctrl-t"] = actions.file_tabedit,
-          ["ctrl-x"] = actions.file_split,
-          ["enter"] = actions.file_edit,
         },
       },
       winopts = {
