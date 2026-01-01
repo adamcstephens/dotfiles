@@ -49,11 +49,6 @@ in
     ../apps/walker
     ../apps/waybar
 
-    # xorg
-    ../apps/polybar
-    ../apps/xmonad
-    ../apps/xorg
-
     # apps
     ../apps/halloy
     ../apps/kitty
