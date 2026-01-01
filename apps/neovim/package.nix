@@ -26,7 +26,6 @@
   ruff,
   shellcheck,
   shfmt,
-  sqlfluff,
   sqlite,
   stylua,
   taplo,
@@ -127,7 +126,6 @@ mnw.lib.wrap pkgs {
       ruff
       shellcheck
       shfmt
-      sqlfluff
       stylua
       taplo
       yaml-language-server
