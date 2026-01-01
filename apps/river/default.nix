@@ -6,7 +6,10 @@
 }:
 {
   config = lib.mkIf config.dotfiles.gui.wayland.enable {
-    home.packages = [ pkgs.river-bnf ];
+    home.packages = [
+      # https://github.com/NixOS/nixpkgs/pull/476066
+      (pkgs.river-bnf.overrideAttrs { env.NIX_CFLAGS_COMPILE = "-std=gnu17"; })
+    ];
 
     xdg.configFile."river/init" = {
       executable = true;
