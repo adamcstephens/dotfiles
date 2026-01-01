@@ -281,9 +281,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "1c276e12b49a83c1bdca74351187b8adea5da4b9",
+      "revision": "0fb1e6b7cea34e931a2af50b8ad565c5c4fd8f4d",
       "url": null,
-      "hash": "sha256-rGAAymOrbBg69EM3EZshDa72MfgYQabXX3YE1efxY7E="
+      "hash": "sha256-f3Yp3uDZn4U3zgaIta6Vd+RrCXQ48l9hxhToXNNRs5Y="
     },
     "vim-moonfly-colors": {
       "type": "Git",
