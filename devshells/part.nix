@@ -57,7 +57,7 @@
       devShells = {
         cd = pkgs-unstable.callPackage ./cd.nix { };
         ci = pkgs-unstable.callPackage ./ci.nix { inherit inputs; };
-        default = pkgs-unstable.callPackage ./default.nix { };
+        default = pkgs-unstable.callPackage ./default.nix { inherit inputs; };
 
         c = pkgs-unstable.callPackage ./c.nix { };
         elixir = pkgs-unstable.callPackage ./elixir.nix { };

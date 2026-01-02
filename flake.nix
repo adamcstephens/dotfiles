@@ -20,6 +20,7 @@
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
     profile-parts.url = "git+https://codeberg.org/adamcstephens/profile-parts";
     sower.url = "git+https://codeberg.org/adamcstephens/sower.git?ref=release-4";
+    sower-next.url = "git+https://codeberg.org/adamcstephens/sower.git?ref=main";
   };
 
   outputs =
@@ -36,6 +37,7 @@
         ./templates/part.nix
 
         inputs.sower.flakeModules.seed
+        inputs.sower-next.flakeModules.sower
       ];
 
       # helpful for limiting seed building until seed-ci has better options
