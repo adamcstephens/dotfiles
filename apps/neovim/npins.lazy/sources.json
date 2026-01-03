@@ -264,14 +264,15 @@
     "smart-splits.nvim": {
       "type": "Git",
       "repository": {
-        "type": "Git",
-        "url": "https://github.com/mrjones2014/smart-splits.nvim"
+        "type": "GitHub",
+        "owner": "adamcstephens",
+        "repo": "smart-splits.nvim"
       },
-      "branch": "master",
+      "branch": "fix/tmux-pane-is-vim-cleanup",
       "submodules": false,
-      "revision": "1ea2e55bcc0dd2bdec5c5fef0082219f76c532fc",
-      "url": null,
-      "hash": "sha256-D5Yf9GTFpLMDS8zUHHkNM2BUCnwxMBnyyr2lQFAxouA="
+      "revision": "d1d8365d85ff6072569d20e7ec1e63e27e3e3c5a",
+      "url": "https://github.com/adamcstephens/smart-splits.nvim/archive/d1d8365d85ff6072569d20e7ec1e63e27e3e3c5a.tar.gz",
+      "hash": "sha256-5RjAFQRwrZDDghGqKl4i73JkJvJB0xHfsN2YMOVglQY="
     },
     "vim-matchup": {
       "type": "Git",

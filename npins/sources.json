@@ -29,19 +29,17 @@
       "hash": "sha256-fMhZGP9mnWgfcuOAd4oI7KDuAP7xJmJ/4GLqeOxV5Wk="
     },
     "smart-splits.nvim": {
-      "type": "GitRelease",
+      "type": "Git",
       "repository": {
-        "type": "Git",
-        "url": "https://github.com/mrjones2014/smart-splits.nvim"
+        "type": "GitHub",
+        "owner": "adamcstephens",
+        "repo": "smart-splits.nvim"
       },
-      "pre_releases": false,
-      "version_upper_bound": null,
-      "release_prefix": null,
+      "branch": "fix/tmux-pane-is-vim-cleanup",
       "submodules": false,
-      "version": "v2.0.5",
-      "revision": "0b5eb952e7bb07569bd19818bb1a9c1ed7d822e3",
-      "url": null,
-      "hash": "sha256-EqnSGTyADvIpHxN3jZxwetENdqv/XUossUzrEvLHHMk="
+      "revision": "d1d8365d85ff6072569d20e7ec1e63e27e3e3c5a",
+      "url": "https://github.com/adamcstephens/smart-splits.nvim/archive/d1d8365d85ff6072569d20e7ec1e63e27e3e3c5a.tar.gz",
+      "hash": "sha256-5RjAFQRwrZDDghGqKl4i73JkJvJB0xHfsN2YMOVglQY="
     },
     "vim-moonfly-colors": {
       "type": "Git",
