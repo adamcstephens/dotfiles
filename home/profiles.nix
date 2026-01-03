@@ -17,7 +17,6 @@ in
     inherit (inputs) home-manager nixpkgs;
 
     username = lib.mkDefault "adam";
-    exposePackages = true;
   };
 
   profile-parts.global.home-manager = {
