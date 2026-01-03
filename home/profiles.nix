@@ -48,8 +48,8 @@ in
               ]
               ++ lib.optionals (profile.system != "aarch64-darwin") [
                 (import "${npins.lix-nixos-module}/overlay.nix" {
-                  # use nixpkgs lix
-                  lix = npins.lix;
+                  # use nixpkgs lix matching version from module
+                  lix = null;
                 })
               ];
 
