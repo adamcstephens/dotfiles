@@ -94,7 +94,6 @@ mnw.lib.wrap pkgs {
         nvim-dap-go
         nvim-highlight-colors
         nvim-treesitter-endwise
-        nvim-treesitter-textobjects
         oil-nvim
         openingh-nvim
         tiny-inline-diagnostic-nvim
