@@ -8,3 +8,4 @@ results/
 _build/
 *.cmi
 *.cmo
+apps/fish/fish_variables
