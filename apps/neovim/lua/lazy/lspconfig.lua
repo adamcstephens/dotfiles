@@ -73,6 +73,15 @@ return {
     vim.lsp.enable("teal_ls")
 
     -- nix
+    vim.lsp.config("nixd", {
+      settings = {
+        nixd = {
+          diagnostic = {
+            suppress = { "sema-primop-removed-prefix" },
+          },
+        },
+      },
+    })
     vim.lsp.enable("nixd")
     -- ignore nix in shebangs
     local match_contents = require("vim.filetype.detect").match_contents
