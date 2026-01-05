@@ -81,7 +81,7 @@
               options = "--delete-older-than 30d";
             };
 
-            package = pkgs.nixVersions.nix_2_32;
+            package = pkgs.lixPackageSets.latest.lix;
 
             settings = {
               auto-optimise-store = false;
@@ -97,7 +97,9 @@
                 config.nix.package.pname == "lix" && lib.versionAtLeast config.nix.package.version "2.91"
               ) [ "pipe-operator" ];
 
-              download-buffer-size = lib.mkDefault (256 * 1024 * 1024);
+              download-buffer-size = lib.mkIf (config.nix.package.pname == "nix") (
+                lib.mkDefault (256 * 1024 * 1024)
+              );
               http-connections = lib.mkDefault 128;
               max-substitution-jobs = lib.mkDefault 128;
 
