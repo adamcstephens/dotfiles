@@ -11,13 +11,7 @@ if ! grep nixos /etc/os-release >/dev/null 2>&1
         source /nix/var/nix/profiles/default/etc/profile.d/nix.fish
     end
 
-    if test -e $HOME/.nix-profile/share/fish/vendor_functions.d
-        set --prepend --export fish_function_path ~/.nix-profile/share/fish/vendor_functions.d
+    if test -e $HOME/.nix-profile/share/fish/completions
+        set --prepend --export fish_complete_path ~/.nix-profile/share/fish/completions
     end
-
-    if test -e $HOME/.nix-profile/share/fish/vendor_completions.d
-        set --prepend --export fish_complete_path ~/.nix-profile/share/fish/vendor_completions.d
-    end
-
-    source $HOME/.nix-profile/share/fish/config.fish
 end
