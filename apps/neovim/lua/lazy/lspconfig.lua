@@ -23,7 +23,7 @@ return {
         on_dir(root_dir)
       end,
     })
-    vim.lsp.enable("elixirls")
+    -- vim.lsp.enable("elixirls")
     vim.lsp.config("expert", {
       on_attach = function(client)
         client.server_capabilities.semanticTokensProvider = nil
