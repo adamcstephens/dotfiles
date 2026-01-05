@@ -1,5 +1,6 @@
 {
   inputs,
+  lib,
   mkShell,
   pkgs,
 }:
@@ -10,8 +11,6 @@ mkShell {
   name = "dots";
 
   packages = [
-    inputs.sower-next.packages.${pkgs.stdenv.hostPlatform.system}.cli
-    pkgs.attic-client
     pkgs.gitMinimal
     pkgs.just
     pkgs.nix-update
@@ -22,5 +21,8 @@ mkShell {
     ocamlPackages.dune_3
     ocamlPackages.ocamlformat
     ocamlPackages.ocaml-lsp
+  ]
+  ++ lib.optionals pkgs.stdenv.isLinux [
+    inputs.sower-next.packages.${pkgs.stdenv.hostPlatform.system}.cli
   ];
 }
