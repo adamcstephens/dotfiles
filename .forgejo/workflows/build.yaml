@@ -19,7 +19,8 @@ jobs:
 
       - run: |
           export HOME=$PWD
-          nix develop .#ci --command seed-ci --attic-upload=true --nom=false --sower-seed=true --system x86_64-linux --cache-build-deps=true
+          nix develop .#ci --command attic login junco $ATTIC_URL --set-default $ATTIC_KEY
+          nix develop .#ci --command sower build --cache attic://junco:$ATTIC_CACHE --eval-jobs 12 .#sowerJobs.x86_64-linux --push
 
       - name: Notify on failure
         if: failure()
