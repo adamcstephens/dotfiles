@@ -557,11 +557,11 @@
         "services-flake": "services-flake_2"
       },
       "locked": {
-        "lastModified": 1767623801,
-        "narHash": "sha256-a9d/sIrPcy90pk6i2S6yE3VhdD+5fc8rwlMLxEQGeXI=",
+        "lastModified": 1767624030,
+        "narHash": "sha256-TwvOEfs6pyeS6F6D62lRtk2Uispv9jdqH8mxOGJNRUI=",
         "ref": "main",
-        "rev": "0250f2bfece99e138f4f01b60b620468d33bcf81",
-        "revCount": 779,
+        "rev": "320055cd7f1039ddecf5f3c132b1f3184db57b6f",
+        "revCount": 780,
         "type": "git",
         "url": "https://codeberg.org/adamcstephens/sower.git"
       },
