@@ -99,7 +99,6 @@ mnw.lib.wrap pkgs {
         tiny-inline-diagnostic-nvim
         tmux-nvim
         toggleterm-nvim
-        vim-illuminate
       ]
       ++ (mnw.lib.npinsToPlugins pkgs ./npins.lazy/sources.json);
   };
