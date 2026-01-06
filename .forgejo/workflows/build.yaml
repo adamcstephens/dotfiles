@@ -19,7 +19,7 @@ jobs:
         run: |
           export HOME=$PWD
           nix develop .#ci --command attic login junco $ATTIC_URL --set-default $ATTIC_KEY
-          nix develop .#ci --command sower build --cache attic://junco:$ATTIC_CACHE --eval-jobs 12 .#sowerJobs.x86_64-linux --push
+          nix develop .#ci --command sower build --cache attic://junco:$ATTIC_CACHE --eval-jobs 12 .#sowerJobs.x86_64-linux --seed
         env:
           SOWER_ENDPOINT: ${{ vars.SOWER_NEXT_ENDPOINT }}
           SOWER_API_TOKEN: ${{ secrets.SOWER_ACCESS_TOKEN }}
