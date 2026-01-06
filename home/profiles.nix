@@ -138,6 +138,12 @@ in
       ];
     };
 
+    kale = {
+      modules = [
+        ./core-dev.nix
+      ];
+    };
+
     maple = {
       system = "aarch64-darwin";
       nixpkgs = inputs.nixpkgs-unstable;
