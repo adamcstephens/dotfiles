@@ -27,7 +27,7 @@ jobs:
       - name: legacy
         run: |
           export HOME=$PWD
-          nix develop .#ci --command seed-ci --attic-upload=true --nom=false --sower-seed=true --system x86_64-linux --cache-build-deps=true
+          nix develop .#ci-legacy --command seed-ci --attic-upload=true --nom=false --sower-seed=true --system x86_64-linux --cache-build-deps=true
         env:
           SOWER_ENDPOINT: ${{ vars.SOWER_ENDPOINT }}
           SOWER_API_TOKEN: ${{ secrets.SOWER_API_TOKEN }}
