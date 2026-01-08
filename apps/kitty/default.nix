@@ -13,7 +13,11 @@ let
       "${config.home.homeDirectory}/.dotfiles/bin/prj";
 in
 {
-  home.packages = [ pkgs.kitty.terminfo ] ++ lib.optionals (!pkgs.stdenv.isDarwin) [ pkgs.kitty ];
+  home.packages = [
+    pkgs.kitty.shell_integration
+    pkgs.kitty.terminfo
+  ]
+  ++ lib.optionals (!pkgs.stdenv.isDarwin) [ pkgs.kitty ];
 
   xdg.configFile."kitty/kitty.conf".text = ''
     include ${config.xdg.configHome}/kitty/dotfiles.conf

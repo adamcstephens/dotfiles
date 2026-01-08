@@ -1,13 +1,13 @@
 {
   config,
   lib,
-  npins,
   pkgs,
   ...
 }:
 {
   home.packages = lib.optionals pkgs.stdenv.isLinux [
     pkgs.ghostty
+    pkgs.ghostty.shell_integration
   ];
 
   programs.fish.interactiveShellInit = lib.optionalString pkgs.stdenv.isDarwin ''

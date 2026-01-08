@@ -1,86 +1,32 @@
 {
   config,
   inputs,
-  lib,
-  npins,
   pkgs,
   ...
 }:
+let
+  homeManagerSessionVariables = pkgs.runCommand "hm-session-vars.fish" { } ''
+    mkdir -vp $out/share/fish/vendor_conf.d
+    (echo "function setup_hm_session_vars;"
+    ${pkgs.buildPackages.babelfish}/bin/babelfish \
+    <${config.home.sessionVariablesPackage}/etc/profile.d/hm-session-vars.sh
+    echo "end"
+    echo "setup_hm_session_vars") > $out/share/fish/vendor_conf.d/hm-session-vars.fish
+  '';
+in
 {
-  programs.fish = {
-    enable = true;
-    package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.fish;
-    plugins = [ ];
+  home.packages = [
+    inputs.nixpkgs-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.fish
+    homeManagerSessionVariables
+  ];
 
-    shellInit =
-      (builtins.readFile ./init.fish)
-      + (lib.optionalString pkgs.stdenv.isDarwin (builtins.readFile ./init-darwin.fish));
+  xdg.configFile."fish".source =
+    if config.dotfiles.nixosManaged then
+      ./.
+    else
+      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/fish";
 
-    interactiveShellInit = (builtins.readFile ./interactive.fish) + ''
-      source ${config.xdg.configHome}/fish/functions/ssh-auth-sock.fish
-
-      ${lib.getExe pkgs.fzf} --fish | source
-      set -x FZF_DEFAULT_COMMAND 'fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
-      set -x FZF_CTRL_T_COMMAND "$FZF_DEFAULT_COMMAND"
-
-      if test -n "$KITTY_WINDOW_ID"
-          set --global KITTY_SHELL_INTEGRATION enabled
-          source "${pkgs.kitty.shell_integration}/fish/vendor_conf.d/kitty-shell-integration.fish"
-          set --prepend fish_complete_path "${pkgs.kitty.shell_integration}/fish/vendor_completions.d"
-          source ${config.xdg.configHome}/fish/functions/autodark.fish
-      end
-    '';
-
-    shellAbbrs = lib.filterAttrs (
-      k: _:
-      !(builtins.elem k [
-        "cat"
-        "nix"
-      ])
-    ) config.home.shellAliases;
-    shellAliases = {
-      cat = "bat";
-      nix = "nix --print-build-logs";
-    };
-
-    functions = {
-      autodark = {
-        body = ''
-          if test -f ~/.dotfiles/.dark-mode.state
-              set dark_state (cat ~/.dotfiles/.dark-mode.state)
-          else
-              set dark_state true
-          end
-
-          if test -n "$auto_dark_mode" && test $auto_dark_mode = $dark_state
-              return 0
-          end
-
-          if test $dark_state = true
-              source ~/.config/fish/theme-dark.fish
-          else
-              source ~/.config/fish/theme-light.fish
-          end
-
-          set -g auto_dark_mode $dark_state
-        '';
-        onEvent = "fish_prompt";
-      };
-      esl = "exec fish -l";
-    };
-  };
-
-  xdg.configFile."fish/completions/mix.fish".source = pkgs.fetchurl {
-    url = "https://raw.githubusercontent.com/halostatue/fish-elixir/b8947ae71eb551ce5cd0d31c7084fd684a9e5289/completions/mix.fish";
-    hash = "sha256-kzbnU91ZLez0/pDgh1e14NyvtR6ST9ZXFSjAS6F6R/4=";
-  };
-
-  # remove > 3.6.1
-  xdg.configFile."fish/functions/__fish_is_zfs_feature_enabled.fish".source =
-    ./zfs-completion-fix.fish;
-  xdg.configFile."fish/functions/ssh-auth-sock.fish".source = ./ssh-auth-sock.fish;
-
-  xdg.configFile."fish/theme-dark.fish".source = npins.vim-moonfly-colors + "/extras/moonfly.fish";
-  xdg.configFile."fish/theme-light.fish".source =
-    npins."modus-themes.nvim" + "/extras/fish/modus_operandi.fish";
+  # xdg.configFile."fish/theme-dark.fish".source = npins.vim-moonfly-colors + "/extras/moonfly.fish";
+  # xdg.configFile."fish/theme-light.fish".source =
+  #   npins."modus-themes.nvim" + "/extras/fish/modus_operandi.fish";
 }
