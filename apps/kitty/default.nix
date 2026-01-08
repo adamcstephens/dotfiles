@@ -14,7 +14,6 @@ let
 in
 {
   home.packages = [
-    pkgs.kitty.shell_integration
     pkgs.kitty.terminfo
   ]
   ++ lib.optionals (!pkgs.stdenv.isDarwin) [ pkgs.kitty ];
