@@ -40,12 +40,5 @@ return {
       end,
       desc = "Jump Files",
     },
-    {
-      "<leader>j",
-      function()
-        require("oil").open()
-      end,
-      desc = "Jump Files",
-    },
   },
 }

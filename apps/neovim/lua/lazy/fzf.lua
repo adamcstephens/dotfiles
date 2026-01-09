@@ -22,6 +22,53 @@ return {
     })
 
     require("fzf-lua").register_ui_select()
+
+    local fzf_lua = require("fzf-lua")
+
+    -- jj status
+    fzf_lua.jj_status = function(opts)
+      opts = opts or {}
+
+      local contents = function(fzf_cb)
+        local handle = io.popen("jj diff --summary 2>&1")
+        if not handle then
+          return
+        end
+
+        for line in handle:lines() do
+          -- Only include lines that start with a status letter
+          if line:match("^[A-Z]") then
+            -- Extract just the filename
+            local file = line:match("^%S+%s+(.+)$")
+            if file then
+              fzf_cb(file)
+            end
+          end
+        end
+
+        handle:close()
+        fzf_cb()
+      end
+
+      opts = vim.tbl_deep_extend("force", {
+        prompt = "jj Status> ",
+        preview = "jj diff  --git {1} | delta",
+        -- preview = fzf_lua.shell.raw_preview_action_cmd(function(items)
+        --   return "jj diff --color=always --git " .. items[1] .. " | delta"
+        -- end),
+        actions = {
+          ["default"] = fzf_lua.actions.file_edit,
+          ["ctrl-v"] = fzf_lua.actions.file_vsplit,
+          ["ctrl-x"] = fzf_lua.actions.file_split,
+          ["ctrl-t"] = fzf_lua.actions.file_tabedit,
+        },
+        fzf_opts = {
+          ["--header"] = "Enter: edit | Ctrl-V/X/T: split",
+        },
+      }, opts)
+
+      fzf_lua.fzf_exec(contents, opts)
+    end
   end,
 
   keys = {
@@ -47,6 +94,14 @@ return {
       desc = "git status",
     },
     {
+      "<leader>j",
+      function()
+        require("fzf-lua").jj_status({})
+      end,
+      desc = "jj status",
+      mode = { "n" },
+    },
+    {
       "<leader>la",
       function()
         require("fzf-lua").lsp_code_actions({})
@@ -60,6 +115,13 @@ return {
         require("fzf-lua").lsp_references({})
       end,
       desc = "lsp references",
+    },
+    {
+      "<leader>oh",
+      function()
+        require("fzf-lua").helptags({})
+      end,
+      desc = "help tags",
     },
     {
       "<leader>r",
