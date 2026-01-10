@@ -26,7 +26,7 @@ in
     lib.nameValuePair "fish/${source}" {
       source =
         if config.dotfiles.nixosManaged then
-          ./. + source
+          ./. + "/${source}"
         else
           config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/fish/${source}";
     }
