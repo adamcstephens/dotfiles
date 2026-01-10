@@ -33,8 +33,8 @@ intel-check-cstate:
     sudo cat /sys/kernel/debug/pmc_core/package_cstate_show
 
 migrate:
-    # 2025-03-14
-    @if [ -h "$HOME/.config/zellij" ]; then rm -v "$HOME/.config/zellij"; fi
+    # 2026-01-09
+    @if [ -h "$HOME/.config/fish" ]; then rm -v "$HOME/.config/fish"; fi
     @true
 
 nix-upgrade:

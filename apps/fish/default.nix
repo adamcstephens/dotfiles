@@ -1,6 +1,7 @@
 {
   config,
   inputs,
+  lib,
   pkgs,
   ...
 }:
@@ -20,11 +21,16 @@ in
     homeManagerSessionVariables
   ];
 
-  xdg.configFile."fish".source =
-    if config.dotfiles.nixosManaged then
-      ./.
-    else
-      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/fish";
+  xdg.configFile = lib.genAttrs' [ "completions" "conf.d" "config.fish" "functions" ] (
+    source:
+    lib.nameValuePair "fish/${source}" {
+      source =
+        if config.dotfiles.nixosManaged then
+          ./. + source
+        else
+          config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/fish/${source}";
+    }
+  );
 
   # xdg.configFile."fish/theme-dark.fish".source = npins.vim-moonfly-colors + "/extras/moonfly.fish";
   # xdg.configFile."fish/theme-light.fish".source =
