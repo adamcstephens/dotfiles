@@ -44,7 +44,7 @@ in
     pkgs.nix-output-monitor
     pkgs.nix-tree
     pkgs.nixd
-    pkgs.nixfmt-rfc-style
+    pkgs.nixfmt
     pkgs.nvd
 
     # tools
