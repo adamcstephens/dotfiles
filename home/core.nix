@@ -12,6 +12,7 @@
     ../apps/bat
     ../apps/btop
     ../apps/delta
+    ../apps/direnv
     ../apps/editorconfig
     ../apps/fd
     ../apps/fish
@@ -95,9 +96,9 @@
 
   home.packages = [
     pkgs.difftastic
-    pkgs.direnv
     pkgs.doggo
     pkgs.dust
+    pkgs.eza
     pkgs.file
     pkgs.fzf
     pkgs.gdu
@@ -110,6 +111,7 @@
     pkgs.tio
     pkgs.viddy
     pkgs.wget
+    pkgs.zoxide
   ]
   ++ lib.optionals pkgs.stdenv.isLinux [
     pkgs.ghostty.terminfo
@@ -120,19 +122,7 @@
     PAGER = "${config.home.homeDirectory}/.dotfiles/bin/pager";
   };
 
-  programs = {
-    eza.enable = true;
-    direnv.enable = true;
-    direnv.nix-direnv.enable = true;
-    home-manager.enable = true;
-    zoxide = {
-      enable = true;
-      options = [
-        "--cmd"
-        "j"
-      ];
-    };
-  };
+  programs.home-manager.enable = true;
 
   xdg.enable = true;
 }

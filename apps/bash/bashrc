@@ -2,5 +2,9 @@
 
 [[ -e "$HOME/.dotfiles/apps/shell_generic.sh" ]] && . "$HOME/.dotfiles/apps/shell_generic.sh"
 
-# Starship prompt
+# Program integrations
+eval "$(fzf --bash)"
+eval "$(zoxide init bash --cmd j)"
+eval "$(direnv hook bash)"
+eval "$(atuin init bash --disable-up-arrow)"
 eval "$(starship init bash)"
