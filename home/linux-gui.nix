@@ -154,8 +154,6 @@ in
       pkgs.jetbrains.datagrip
     ];
 
-  programs.feh.enable = true;
-
   qt = {
     enable = true;
     platformTheme.name = "qtct";
