@@ -1,13 +1,6 @@
-{ ... }:
+{ pkgs, ... }:
 {
-  programs.btop = {
-    enable = true;
-    settings = {
-      color_theme = "TTY";
-      clock_format = "%H:%M - /host";
+  home.packages = [ pkgs.btop ];
 
-      theme_background = false;
-      truecolor = true;
-    };
-  };
+  xdg.configFile."btop/btop.conf".source = ./btop.conf;
 }
