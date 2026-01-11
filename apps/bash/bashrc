@@ -1,3 +1,6 @@
 # shellcheck shell=bash disable=SC1091
 
 [[ -e "$HOME/.dotfiles/apps/shell_generic.sh" ]] && . "$HOME/.dotfiles/apps/shell_generic.sh"
+
+# Starship prompt
+eval "$(starship init bash)"

@@ -5,27 +5,18 @@
   ...
 }:
 {
-  programs.atuin = {
-    enable = true;
+  home.packages = [ pkgs.atuin ];
 
-    flags = [ "--disable-up-arrow" ];
+  xdg.configFile."atuin/config.toml".text =
+    builtins.readFile ./config.toml
+    + ''
 
-    settings = {
-      daemon = {
-        enabled = true;
-        systemd_socket = pkgs.stdenv.isLinux;
-      };
-
-      enter_accept = false;
-      filter_mode = "directory";
-      inline_height = 30;
-      style = "compact";
-      sync_address = "https://atuin.junco.dev";
-      sync.records = true;
-      update_check = false;
-      local_timeout = 15;
-    };
-  };
+      [daemon]
+      enabled = true
+    ''
+    + lib.optionalString pkgs.stdenv.isLinux ''
+      systemd_socket = true
+    '';
 
   launchd = lib.mkIf pkgs.stdenv.isDarwin {
     agents.atuin =
@@ -34,7 +25,7 @@
           # force clean atuin socket in case of crash https://github.com/atuinsh/atuin/issues/2289
           rm -f ${config.home.homeDirectory}/.local/share/atuin/atuin.sock
 
-          exec ${lib.getExe config.programs.atuin.package} daemon
+          exec ${lib.getExe pkgs.atuin} daemon
         '';
       in
       {
@@ -60,7 +51,7 @@
     services.atuin = {
       Service = {
         Type = "simple";
-        ExecStart = "${lib.getExe config.programs.atuin.package} daemon";
+        ExecStart = "${lib.getExe pkgs.atuin} daemon";
         Restart = "on-abort";
       };
     };
