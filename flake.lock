@@ -43,6 +43,28 @@
         "type": "github"
       }
     },
+    "elephant": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs-unstable"
+        ],
+        "systems": "systems"
+      },
+      "locked": {
+        "lastModified": 1767940513,
+        "narHash": "sha256-5zldokar6W4bxK61dhZRnLwZHmstG/OIGKnrPT1uCas=",
+        "owner": "abenz1267",
+        "repo": "elephant",
+        "rev": "8908d4ebc00b2987efcced6911bcd9df797c9c59",
+        "type": "github"
+      },
+      "original": {
+        "owner": "abenz1267",
+        "ref": "v2.18.1",
+        "repo": "elephant",
+        "type": "github"
+      }
+    },
     "expert": {
       "inputs": {
         "beam-flakes": "beam-flakes",
@@ -481,6 +503,7 @@
     },
     "root": {
       "inputs": {
+        "elephant": "elephant",
         "flake-parts": "flake-parts",
         "home-manager": "home-manager",
         "home-manager-unstable": "home-manager-unstable",
@@ -493,7 +516,8 @@
         "nixpkgs-unstable": "nixpkgs-unstable",
         "profile-parts": "profile-parts",
         "sower": "sower",
-        "sower-next": "sower-next"
+        "sower-next": "sower-next",
+        "walker": "walker"
       }
     },
     "services-flake": {
@@ -569,6 +593,61 @@
         "ref": "main",
         "type": "git",
         "url": "https://codeberg.org/adamcstephens/sower.git"
+      }
+    },
+    "systems": {
+      "locked": {
+        "lastModified": 1689347949,
+        "narHash": "sha256-12tWmuL2zgBgZkdoB6qXZsgJEH9LR3oUgpaQq2RbI80=",
+        "owner": "nix-systems",
+        "repo": "default-linux",
+        "rev": "31732fcf5e8fea42e59c2488ad31a0e651500f68",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default-linux",
+        "type": "github"
+      }
+    },
+    "systems_2": {
+      "locked": {
+        "lastModified": 1689347949,
+        "narHash": "sha256-12tWmuL2zgBgZkdoB6qXZsgJEH9LR3oUgpaQq2RbI80=",
+        "owner": "nix-systems",
+        "repo": "default-linux",
+        "rev": "31732fcf5e8fea42e59c2488ad31a0e651500f68",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default-linux",
+        "type": "github"
+      }
+    },
+    "walker": {
+      "inputs": {
+        "elephant": [
+          "elephant"
+        ],
+        "nixpkgs": [
+          "nixpkgs-unstable"
+        ],
+        "systems": "systems_2"
+      },
+      "locked": {
+        "lastModified": 1767893373,
+        "narHash": "sha256-PYqT8GdCAsmCAgJXu88wvOU2n41iugVCph0RV+v2VAc=",
+        "owner": "abenz1267",
+        "repo": "walker",
+        "rev": "3dfc75e90e7a7cbff109ffa6e1af099d4e1f3867",
+        "type": "github"
+      },
+      "original": {
+        "owner": "abenz1267",
+        "ref": "v2.13.0",
+        "repo": "walker",
+        "type": "github"
       }
     }
   },

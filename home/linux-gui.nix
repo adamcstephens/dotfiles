@@ -65,6 +65,7 @@ in
 
   dotfiles.apps = {
     hypridle.enable = lib.mkDefault config.dotfiles.gui.wayland.enable;
+    walker.enable = lib.mkDefault config.dotfiles.gui.wayland.enable;
     waybar.enable = lib.mkDefault config.dotfiles.gui.wayland.enable;
   };
 
