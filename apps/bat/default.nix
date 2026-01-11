@@ -1,10 +1,6 @@
-{ ... }:
+{ pkgs, ... }:
 {
-  programs.bat = {
-    enable = true;
-    config = {
-      style = "plain";
-      theme = "ansi";
-    };
-  };
+  home.packages = [ pkgs.bat ];
+
+  xdg.configFile."bat/config".source = ./config;
 }
