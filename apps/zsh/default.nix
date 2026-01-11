@@ -1,32 +1,10 @@
-{ config, ... }:
+{ pkgs, ... }:
 {
-  programs.zsh = {
-    enable = true;
-    autosuggestion.enable = true;
-    dotDir = "${config.xdg.configHome}/zsh";
-    enableCompletion = true;
-    syntaxHighlighting.enable = true;
+  home.packages = [
+    pkgs.zsh
+    pkgs.zsh-autosuggestions
+    pkgs.zsh-syntax-highlighting
+  ];
 
-    history = {
-      share = true;
-      ignoreDups = true;
-      ignoreSpace = true;
-      size = 100000;
-    };
-
-    initContent = ''
-      # shellcheck disable=SC1090
-      [[ -e "$HOME/.dotfiles/apps/shell_generic.sh" ]] && source "$HOME/.dotfiles/apps/shell_generic.sh"
-
-      # brew
-      if type brew &>/dev/null; then
-        FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
-      fi
-
-      bindkey "^[[1;5C" forward-word
-      bindkey "^[[1;5D" backward-word
-    '';
-
-    shellAliases = config.home.shellAliases;
-  };
+  home.file.".zshrc".source = ./zshrc;
 }

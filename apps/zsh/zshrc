@@ -1,0 +1,34 @@
+# History
+HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}/zsh/history"
+HISTSIZE=100000
+SAVEHIST=100000
+setopt SHARE_HISTORY
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_SPACE
+
+# Ensure history directory exists
+[[ -d "${HISTFILE:h}" ]] || mkdir -p "${HISTFILE:h}"
+
+# Completion
+autoload -Uz compinit
+compinit
+
+# Plugins (from nix profile)
+if [[ -d "$HOME/.nix-profile/share/zsh-autosuggestions" ]]; then
+  source "$HOME/.nix-profile/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+fi
+if [[ -d "$HOME/.nix-profile/share/zsh-syntax-highlighting" ]]; then
+  source "$HOME/.nix-profile/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+fi
+
+# Shell generic config (PATH, aliases, etc.)
+[[ -e "$HOME/.dotfiles/apps/shell_generic.sh" ]] && source "$HOME/.dotfiles/apps/shell_generic.sh"
+
+# Brew completions
+if type brew &>/dev/null; then
+  FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+fi
+
+# Keybindings
+bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word

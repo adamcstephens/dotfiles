@@ -1,6 +1,5 @@
 {
   config,
-  inputs,
   lib,
   pkgs,
   ...
@@ -9,6 +8,7 @@
   imports = [
     ./module.nix
 
+    ../apps/bash
     ../apps/bat
     ../apps/btop
     ../apps/delta
@@ -38,50 +38,6 @@
   home.activation.dotfiles-migrate = lib.hm.dag.entryBefore [ "checkLinkTargets" ] ''
     ${lib.getExe pkgs.just} --justfile ${../justfile} migrate
   '';
-
-  home.shellAliases = {
-    cat = "bat";
-    cnf = "command-not-found";
-    da = "direnv allow";
-    db = "direnv block";
-    dc = "docker-compose";
-    dclf = "docker-compose logs --tail=100 -f";
-    dog = "doggo";
-    dps = ''docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}\t{{.Command}}\t{{.Image}}"'';
-
-    f = "fossil";
-    fs = "fossil status";
-
-    ga = "git add";
-    gbv = "git branch --all --verbose --verbose";
-    gc = "git commit";
-    gd = "git diff";
-    gl = "git pull";
-    glo = ''git log --date=iso --format="%C(auto)%h %C(auto,blue)[%ar]%C(auto)%d %s" --max-count=15'';
-    gp = "git push";
-    grh = "git reset HEAD";
-    grv = "git remote -v";
-    gs = "git status";
-    gss = "git status --short";
-    gsw = "git switch";
-    gswc = "git switch --create";
-    jjc = "jj commit";
-    jjd = "jj diff";
-    jjbm = "jj bookmark move --to @-";
-    jjgf = "jj git fetch --all-remotes";
-    jjgp = "jj git push";
-    gw = "git worktree";
-    gt = "git tag --list -n1";
-    ivl = "sudo iptables -vnL --line-numbers";
-    jc = "sudo journalctl";
-    jcu = "journalctl --user";
-    l = "ll -a";
-    ll = "eza -lg";
-    nix = "nix --print-build-logs";
-    sy = "sudo systemctl";
-    syu = "systemctl --user";
-    tree = "eza --tree";
-  };
 
   home.activation.directories = lib.hm.dag.entryBefore [ "checkLinkTargets" ] ''
     for dir in git projects tmp; do

@@ -2,6 +2,7 @@
 
 export PATH="$HOME/.dotfiles/bin:$PATH"
 
+[[ -e "$HOME/.dotfiles/apps/aliases.sh" ]] && . "$HOME/.dotfiles/apps/aliases.sh"
 [[ -e "$HOME/.shell_local.sh" ]] && . "$HOME/.shell_local.sh"
 
 if [ -x /opt/homebrew/bin/brew ]; then
