@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 let
   cfg = config.dotfiles.helix;
 in
@@ -6,25 +6,9 @@ in
   options.dotfiles.helix.enable = lib.mkEnableOption "helix app";
 
   config = lib.mkIf cfg.enable {
-    programs.helix = {
-      enable = true;
-      settings = {
-        theme = "base16_transparent";
-        editor.color-modes = true;
-      };
+    home.packages = [ pkgs.helix ];
 
-      languages = {
-        language = [
-          {
-            name = "nix";
-            auto-format = true;
-            formatter = {
-              command = "nixfmt";
-              args = [ ];
-            };
-          }
-        ];
-      };
-    };
+    xdg.configFile."helix/config.toml".source = ./config.toml;
+    xdg.configFile."helix/languages.toml".source = ./languages.toml;
   };
 }
