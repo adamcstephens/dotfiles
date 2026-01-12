@@ -1,0 +1,11 @@
+*.log
+*.retry
+.DS_Store
+.claude/
+.direnv/
+.lsp/
+.worktree/
+AGENTS.md
+CLAUDE.md
+result
+result-*

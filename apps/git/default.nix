@@ -31,16 +31,10 @@ in
       defaultKeyCommand = ${config.home.homeDirectory}/.dotfiles/bin/git-ssh-key.sh
     '';
 
-    "git/ignore".text = lib.concatStringsSep "\n" [
-      "*.log"
-      "*.retry"
-      ".DS_Store"
-      ".claude/"
-      ".direnv/"
-      ".lsp/"
-      ".worktree/"
-      "result"
-      "result-*"
-    ];
+    "git/ignore".source =
+      if config.dotfiles.nixosManaged then
+        ./ignore
+      else
+        config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/git/ignore";
   };
 }
