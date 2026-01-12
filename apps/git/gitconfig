@@ -66,8 +66,10 @@ user = adamcstephens
 [gpg]
 format = ssh
 
+[gpg "ssh"]
+defaultKeyCommand = sh -c '$HOME/.dotfiles/bin/git-ssh-key.sh'
+
 [include]
-path = config.os
 path = config.delta
 
 [init]

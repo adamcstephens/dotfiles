@@ -26,11 +26,6 @@ in
       else
         config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/git/gitconfig";
 
-    "git/config.os".source = pkgs.writeText "git-config-${os}" ''
-      [gpg "ssh"]
-      defaultKeyCommand = ${config.home.homeDirectory}/.dotfiles/bin/git-ssh-key.sh
-    '';
-
     "git/ignore".source =
       if config.dotfiles.nixosManaged then
         ./ignore
