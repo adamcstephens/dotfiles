@@ -7,5 +7,6 @@
 .worktree/
 AGENTS.md
 CLAUDE.md
+GEMINI.md
 result
 result-*
