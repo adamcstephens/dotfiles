@@ -81,8 +81,8 @@
               options = "--delete-older-than 30d";
             };
 
-            package = pkgs.lixPackageSets.latest.lix;
-
+            # package = pkgs.nixVersions.nix_2_32;
+            #
             settings = {
               auto-optimise-store = false;
               accept-flake-config = false;
