@@ -19,21 +19,18 @@
         perSystem =
           { pkgs, ... }:
           let
-            ocamlPackages = pkgs.ocaml-ng.ocamlPackages_5_4;
+            ocamlPackages = pkgs.ocamlPackages_latest;
           in
           {
             devShells.default = pkgs.mkShell {
-              packages = [
-                ocamlPackages.ocaml
-              ]
-              ++ (with ocamlPackages; [
+              packages = with ocamlPackages; [
                 dune_3
+                ocaml
                 ocamlformat
                 ocaml-lsp
-                ocaml_openapi_generator
                 odig
                 utop
-              ]);
+              ];
             };
 
             packages = {
