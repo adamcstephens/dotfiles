@@ -21,11 +21,33 @@ let
       ./. + "/${source}"
     else
       config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/fish/${source}";
+
+  # we'll steal this from HM
+  commandNotFound =
+    let
+      wrapper = pkgs.writeScript "fish-command-not-found" ''
+        #!${pkgs.bash}/bin/bash
+        source ${
+          inputs.nix-index-database.packages.${pkgs.stdenv.hostPlatform.system}.nix-index-with-small-db
+        }/etc/profile.d/command-not-found.sh
+        command_not_found_handle "$@"
+      '';
+    in
+    pkgs.writeTextFile {
+      name = "fish-command-not-found";
+      text = ''
+        function __fish_command_not_found_handler --on-event fish_command_not_found
+            ${wrapper} $argv
+        end
+      '';
+      destination = "/share/fish/vendor_functions.d/__fish_command_not_found_handler.fish";
+    };
 in
 {
   home.packages = [
     inputs.nixpkgs-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.fish
     homeManagerSessionVariables
+    commandNotFound
   ];
 
   # xdg.configFile."fish/theme-dark.fish".source = npins.vim-moonfly-colors + "/extras/moonfly.fish";

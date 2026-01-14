@@ -154,10 +154,6 @@ status is-interactive; and begin
         starship init fish | source
     end
 
-    function __fish_command_not_found_handler --on-event fish_command_not_found
-        /nix/store/vjszj5c5k5ccwqgdnz8378gbbkfxdnys-command-not-found $argv
-    end
-
     atuin init fish --disable-up-arrow | source
 
     direnv hook fish | source
