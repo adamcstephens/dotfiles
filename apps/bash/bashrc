@@ -1,10 +1,11 @@
 # shellcheck shell=bash disable=SC1091
+if [[ $- == *i* ]]; then
+  [[ -e "$HOME/.dotfiles/apps/shell_generic.sh" ]] && . "$HOME/.dotfiles/apps/shell_generic.sh"
 
-[[ -e "$HOME/.dotfiles/apps/shell_generic.sh" ]] && . "$HOME/.dotfiles/apps/shell_generic.sh"
-
-# Program integrations
-eval "$(fzf --bash)"
-eval "$(zoxide init bash --cmd j)"
-eval "$(direnv hook bash)"
-eval "$(atuin init bash --disable-up-arrow)"
-eval "$(starship init bash)"
+  # Program integrations
+  eval "$(fzf --bash)"
+  eval "$(zoxide init bash --cmd j)"
+  eval "$(direnv hook bash)"
+  eval "$(atuin init bash --disable-up-arrow)"
+  eval "$(starship init bash)"
+fi
