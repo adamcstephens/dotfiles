@@ -11,6 +11,7 @@ mkShell {
   name = "dots";
 
   packages = [
+    pkgs.attic-client
     pkgs.gitMinimal
     pkgs.just
     pkgs.nix-update
