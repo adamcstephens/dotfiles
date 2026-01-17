@@ -17,7 +17,6 @@ jobs:
 
       - name: next
         run: |
-          export HOME=$PWD
           nix develop .#ci --command attic login junco $ATTIC_URL --set-default $ATTIC_KEY
           nix develop .#ci --command sower build --cache attic://junco:$ATTIC_CACHE --eval-jobs 12 .#sowerJobs.x86_64-linux --seed
         env:
@@ -26,7 +25,6 @@ jobs:
 
       - name: legacy
         run: |
-          export HOME=$PWD
           nix develop .#ci-legacy --command seed-ci --attic-upload=true --nom=false --sower-seed=true --system x86_64-linux --cache-build-deps=true
         env:
           SOWER_ENDPOINT: ${{ vars.SOWER_ENDPOINT }}
