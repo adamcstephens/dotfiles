@@ -55,6 +55,8 @@ in
     ../apps/mimeapps
     ../apps/newsboat
     ../apps/ssh
+    ../apps/todoman
+    ../apps/vdirsyncer
   ];
 
   dconf.settings = {
@@ -147,6 +149,7 @@ in
       pkgs.signal-desktop
 
       # bitwarden
+      pkgs.bitwarden-desktop
       pkgs.rofi-rbw
 
       flake.packages.${pkgs.stdenv.hostPlatform.system}.screenshot
