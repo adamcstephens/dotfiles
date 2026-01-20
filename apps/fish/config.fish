@@ -148,13 +148,17 @@ status is-interactive; and begin
         source $HOME/.config/fish/functions/autodark.fish
     end
 
-    zoxide init fish --cmd j | source
+    if command -q zoxide
+        zoxide init fish --cmd j | source
+    end
 
-    if test "$TERM" != dumb
+    if test "$TERM" != dumb && command -q starship
         starship init fish | source
     end
 
-    atuin init fish --disable-up-arrow | source
+    if command -q atuin
+        atuin init fish --disable-up-arrow | source
+    end
 
     direnv hook fish | source
 

@@ -35,9 +35,19 @@ if [[ -o interactive ]]; then
   bindkey "^[[1;5D" backward-word
 
   # Program integrations
-  eval "$(fzf --zsh)"
-  eval "$(zoxide init zsh --cmd j)"
-  eval "$(direnv hook zsh)"
-  eval "$(atuin init zsh --disable-up-arrow)"
-  eval "$(starship init zsh)"
+  if command -v fzf &> /dev/null; then
+    eval "$(fzf --zsh)"
+  fi
+  if command -v zoxide &> /dev/null; then
+    eval "$(zoxide init zsh --cmd j)"
+  fi
+  if command -v direnv &> /dev/null; then
+    eval "$(direnv hook zsh)"
+  fi
+  if command -v atuin &> /dev/null; then
+    eval "$(atuin init zsh --disable-up-arrow)"
+  fi
+  if command -v starship &> /dev/null; then
+    eval "$(starship init zsh)"
+  fi
 fi

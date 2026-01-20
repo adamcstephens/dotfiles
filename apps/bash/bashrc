@@ -3,9 +3,19 @@ if [[ $- == *i* ]]; then
   [[ -e "$HOME/.dotfiles/apps/shell_generic.sh" ]] && . "$HOME/.dotfiles/apps/shell_generic.sh"
 
   # Program integrations
-  eval "$(fzf --bash)"
-  eval "$(zoxide init bash --cmd j)"
-  eval "$(direnv hook bash)"
-  eval "$(atuin init bash --disable-up-arrow)"
-  eval "$(starship init bash)"
+  if command -v fzf &>/dev/null; then
+    eval "$(fzf --bash)"
+  fi
+  if command -v zoxide &>/dev/null; then
+    eval "$(zoxide init bash --cmd j)"
+  fi
+  if command -v direnv &>/dev/null; then
+    eval "$(direnv hook bash)"
+  fi
+  if command -v atuin &>/dev/null; then
+    eval "$(atuin init bash --disable-up-arrow)"
+  fi
+  if command -v starship &>/dev/null; then
+    eval "$(starship init bash)"
+  fi
 fi
