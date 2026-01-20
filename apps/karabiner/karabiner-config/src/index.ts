@@ -6,13 +6,12 @@ writeToProfile("Default profile", [
     hrm(
       new Map([
         ["a", "l⌥"],
+        ["s", "l⌘"],
         ["d", "l⌃"],
         ["f", "l⇧"],
-        ["s", "l⌘"],
         ["j", "r⇧"],
-        ["k", "r⇧"],
-        ["l", "r⌘"],
         ["k", "r⌃"],
+        ["l", "r⌘"],
         [";", "r⌥"],
       ]),
     ).build(),
