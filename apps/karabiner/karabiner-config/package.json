@@ -1,0 +1,15 @@
+{
+  "name": "karabiner-config",
+  "description": "karabiner config in karabiner.ts",
+  "scripts": {
+    "build": "tsx src/index.ts",
+    "update": "npm update karabiner.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "karabiner.ts": "latest",
+    "karabiner.ts-greg-mods": "latest",
+    "tsx": "^4",
+    "typescript": "^5"
+  }
+}
