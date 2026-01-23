@@ -1,0 +1,9 @@
+[[entries]]
+default = true
+name = "Kagi"
+url = "https://kagi.com/search?q=%TERM%"
+
+[[entries]]
+default = true
+name = "Hex"
+url = "https://hex.pm/packages?search=%TERM%&sort=recent_downloads"

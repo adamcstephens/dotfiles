@@ -22,11 +22,8 @@
     sower.url = "git+https://codeberg.org/adamcstephens/sower.git?ref=release-4";
     sower-next.url = "git+https://codeberg.org/adamcstephens/sower.git?ref=main";
 
-    elephant.url = "github:abenz1267/elephant?ref=v2.18.2";
+    elephant.url = "github:abenz1267/elephant?ref=v2.19.1";
     elephant.inputs.nixpkgs.follows = "nixpkgs-unstable";
-    walker.url = "github:abenz1267/walker?ref=v2.13.0";
-    walker.inputs.elephant.follows = "elephant";
-    walker.inputs.nixpkgs.follows = "nixpkgs-unstable";
   };
 
   outputs =

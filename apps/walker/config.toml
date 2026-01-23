@@ -1,4 +1,476 @@
-theme = "dotfiles"
-# theme_base = []
-# theme_location = ["~/.config/walker/themes/"]
-hotreload_theme = true
+actions_as_menu = false
+click_to_close = true
+close_when_open = true
+debug = false
+disable_mouse = false
+exact_search_prefix = "'"
+force_keyboard_focus = false
+global_argument_delimiter = "#"
+hide_action_hints = false
+hide_action_hints_dmenu = true
+hide_quick_activation = false
+hide_return_action = false
+page_jump_items = 10
+resume_last_query = false
+selection_wrap = false
+single_click_activation = true
+theme = "default"
+
+[columns]
+symbols = 3
+
+[keybinds]
+close = ["Escape"]
+down = ["Down"]
+left = ["Left"]
+next = ["Down"]
+page_down = ["Page_Down"]
+page_up = ["Page_Up"]
+previous = ["Up"]
+quick_activate = ["F1", "F2", "F3", "F4"]
+resume_last_query = ["ctrl r"]
+right = ["Right"]
+show_actions = ["alt j"]
+toggle_exact = ["ctrl e"]
+up = ["Up"]
+
+[placeholders.default]
+input = "Search"
+list = "No Results"
+
+[providers]
+default = ["desktopapplications", "calc", "websearch"]
+empty = ["desktopapplications"]
+ignore_preview = []
+max_results = 50
+
+[[providers.actions.1password]]
+action = "copy_password"
+bind = "Return"
+default = true
+label = "copy password"
+
+[[providers.actions.1password]]
+action = "copy_username"
+bind = "shift Return"
+label = "copy username"
+
+[[providers.actions.1password]]
+action = "copy_2fa"
+bind = "ctrl Return"
+label = "copy 2fa"
+
+[[providers.actions.bitwarden]]
+action = "copypassword"
+bind = "Return"
+default = true
+label = "copy password"
+
+[[providers.actions.bitwarden]]
+action = "typepassword"
+bind = "ctrl p"
+default = true
+label = "type password"
+
+[[providers.actions.bitwarden]]
+action = "copyusername"
+bind = "shift Return"
+label = "copy username"
+
+[[providers.actions.bitwarden]]
+action = "typeusername"
+bind = "ctrl u"
+label = "type username"
+
+[[providers.actions.bitwarden]]
+action = "copyotp"
+bind = "ctrl Return"
+label = "copy 2fa"
+
+[[providers.actions.bitwarden]]
+action = "typeotp"
+bind = "ctrl t"
+label = "type 2fa"
+
+[[providers.actions.bitwarden]]
+action = "syncvault"
+bind = "ctrl s"
+label = "sync"
+
+[[providers.actions.bluetooth]]
+action = "find"
+after = "AsyncClearReload"
+bind = "ctrl f"
+
+[[providers.actions.bluetooth]]
+action = "remove"
+after = "AsyncReload"
+bind = "ctrl d"
+
+[[providers.actions.bluetooth]]
+action = "trust"
+after = "AsyncReload"
+bind = "ctrl t"
+
+[[providers.actions.bluetooth]]
+action = "untrust"
+after = "AsyncReload"
+bind = "ctrl t"
+
+[[providers.actions.bluetooth]]
+action = "pair"
+after = "AsyncReload"
+bind = "Return"
+
+[[providers.actions.bluetooth]]
+action = "connect"
+after = "AsyncReload"
+bind = "Return"
+default = true
+
+[[providers.actions.bluetooth]]
+action = "disconnect"
+after = "AsyncReload"
+bind = "Return"
+default = true
+
+[[providers.actions.bluetooth]]
+action = "power_on"
+after = "AsyncReload"
+bind = "ctrl e"
+label = "Power On"
+
+[[providers.actions.bluetooth]]
+action = "power_off"
+after = "AsyncReload"
+bind = "ctrl e"
+label = "Power Off"
+
+[[providers.actions.calc]]
+action = "copy"
+bind = "Return"
+default = true
+
+[[providers.actions.calc]]
+action = "delete"
+after = "AsyncReload"
+bind = "ctrl d"
+
+[[providers.actions.calc]]
+action = "delete_all"
+after = "AsyncReload"
+bind = "ctrl shift d"
+
+[[providers.actions.calc]]
+action = "save"
+after = "AsyncClearReload"
+bind = "ctrl s"
+
+[[providers.actions.clipboard]]
+action = "copy"
+bind = "Return"
+default = true
+
+[[providers.actions.clipboard]]
+action = "remove"
+after = "AsyncClearReload"
+bind = "ctrl d"
+
+[[providers.actions.clipboard]]
+action = "remove_all"
+after = "AsyncClearReload"
+bind = "ctrl shift d"
+label = "clear"
+
+[[providers.actions.clipboard]]
+action = "show_images_only"
+after = "AsyncClearReload"
+bind = "ctrl i"
+label = "only images"
+
+[[providers.actions.clipboard]]
+action = "show_text_only"
+after = "AsyncClearReload"
+bind = "ctrl i"
+label = "only text"
+
+[[providers.actions.clipboard]]
+action = "show_combined"
+after = "AsyncClearReload"
+bind = "ctrl i"
+label = "show all"
+
+[[providers.actions.clipboard]]
+action = "pause"
+bind = "ctrl shift p"
+
+[[providers.actions.clipboard]]
+action = "unpause"
+bind = "ctrl shift p"
+
+[[providers.actions.clipboard]]
+action = "unpin"
+after = "AsyncClearReload"
+bind = "ctrl p"
+
+[[providers.actions.clipboard]]
+action = "pin"
+after = "AsyncClearReload"
+bind = "ctrl p"
+
+[[providers.actions.clipboard]]
+action = "edit"
+bind = "ctrl o"
+
+[[providers.actions.clipboard]]
+action = "localsend"
+bind = "ctrl l"
+
+[[providers.actions.desktopapplications]]
+action = "start"
+bind = "Return"
+default = true
+
+[[providers.actions.desktopapplications]]
+action = "start:keep"
+after = "KeepOpen"
+bind = "shift Return"
+label = "open+next"
+
+[[providers.actions.desktopapplications]]
+action = "new_instance"
+bind = "ctrl Return"
+label = "new instance"
+
+[[providers.actions.desktopapplications]]
+action = "new_instance:keep"
+after = "KeepOpen"
+bind = "ctrl alt Return"
+label = "new+next"
+
+[[providers.actions.desktopapplications]]
+action = "pin"
+after = "AsyncReload"
+bind = "ctrl p"
+
+[[providers.actions.desktopapplications]]
+action = "unpin"
+after = "AsyncReload"
+bind = "ctrl p"
+
+[[providers.actions.desktopapplications]]
+action = "pinup"
+after = "AsyncReload"
+bind = "ctrl n"
+
+[[providers.actions.desktopapplications]]
+action = "pindown"
+after = "AsyncReload"
+bind = "ctrl m"
+
+[[providers.actions.dmenu]]
+action = "select"
+bind = "Return"
+default = true
+
+[[providers.actions.fallback]]
+action = "menus:open"
+after = "Nothing"
+label = "open"
+
+[[providers.actions.fallback]]
+action = "menus:default"
+after = "Close"
+label = "run"
+
+[[providers.actions.fallback]]
+action = "menus:parent"
+after = "Nothing"
+bind = "Escape"
+label = "back"
+
+[[providers.actions.fallback]]
+action = "erase_history"
+after = "AsyncReload"
+bind = "ctrl h"
+label = "clear hist"
+
+[[providers.actions.files]]
+action = "open"
+bind = "Return"
+default = true
+
+[[providers.actions.files]]
+action = "opendir"
+bind = "ctrl Return"
+label = "open dir"
+
+[[providers.actions.files]]
+action = "copypath"
+bind = "ctrl shift c"
+label = "copy path"
+
+[[providers.actions.files]]
+action = "copyfile"
+bind = "ctrl c"
+label = "copy file"
+
+[[providers.actions.files]]
+action = "localsend"
+bind = "ctrl l"
+label = "localsend"
+
+[[providers.actions.files]]
+action = "refresh_index"
+after = "AsyncReload"
+bind = "ctrl r"
+label = "reload"
+
+[[providers.actions.providerlist]]
+action = "activate"
+after = "ClearReload"
+bind = "Return"
+default = true
+
+[[providers.actions.runner]]
+action = "run"
+bind = "Return"
+default = true
+
+[[providers.actions.runner]]
+action = "runterminal"
+bind = "shift Return"
+label = "run in terminal"
+
+[[providers.actions.symbols]]
+action = "run_cmd"
+bind = "Return"
+default = true
+label = "select"
+
+[[providers.actions.todo]]
+action = "save"
+after = "AsyncClearReload"
+bind = "Return"
+default = true
+
+[[providers.actions.todo]]
+action = "save_next"
+after = "AsyncClearReload"
+bind = "shift Return"
+label = "save & new"
+
+[[providers.actions.todo]]
+action = "delete"
+after = "AsyncClearReload"
+bind = "ctrl d"
+
+[[providers.actions.todo]]
+action = "active"
+after = "Nothing"
+bind = "Return"
+default = true
+
+[[providers.actions.todo]]
+action = "inactive"
+after = "Nothing"
+bind = "Return"
+default = true
+
+[[providers.actions.todo]]
+action = "done"
+after = "Nothing"
+bind = "ctrl f"
+
+[[providers.actions.todo]]
+action = "change_category"
+after = "Nothing"
+bind = "ctrl y"
+label = "change category"
+
+[[providers.actions.todo]]
+action = "clear"
+after = "AsyncClearReload"
+bind = "ctrl x"
+
+[[providers.actions.todo]]
+action = "create"
+after = "AsyncClearReload"
+bind = "ctrl a"
+
+[[providers.actions.todo]]
+action = "search"
+after = "AsyncClearReload"
+bind = "ctrl a"
+
+[[providers.actions.unicode]]
+action = "run_cmd"
+bind = "Return"
+default = true
+label = "select"
+
+# [[providers.actions.websearch]]
+# action = "search"
+# bind = "Return"
+# default = true
+#
+# [[providers.actions.websearch]]
+# action = "open_url"
+# bind = "Return"
+# default = true
+# label = "open url"
+
+[providers.argument_delimiter]
+
+[providers.clipboard]
+time_format = "relative"
+
+[providers.max_results_provider]
+
+[[providers.prefixes]]
+prefix = ";"
+provider = "providerlist"
+
+[[providers.prefixes]]
+prefix = ">"
+provider = "runner"
+
+[[providers.prefixes]]
+prefix = "/"
+provider = "files"
+
+[[providers.prefixes]]
+prefix = "."
+provider = "symbols"
+
+[[providers.prefixes]]
+prefix = "!"
+provider = "todo"
+
+[[providers.prefixes]]
+prefix = "%"
+provider = "bookmarks"
+
+[[providers.prefixes]]
+prefix = "="
+provider = "calc"
+
+[[providers.prefixes]]
+prefix = "@"
+provider = "websearch"
+
+[[providers.prefixes]]
+prefix = ":"
+provider = "clipboard"
+
+[[providers.prefixes]]
+prefix = "$"
+provider = "windows"
+
+[providers.sets]
+
+[shell]
+anchor_bottom = true
+anchor_left = true
+anchor_right = true
+anchor_top = true
