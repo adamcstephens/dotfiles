@@ -1,0 +1,162 @@
+#!/usr/bin/env python3
+"""Update nix flake.lock for specific inputs and create a jj commit."""
+
+import argparse
+import json
+import subprocess
+import sys
+from pathlib import Path
+from typing import Dict, Any
+
+FLAKE_LOCK = Path("flake.lock")
+
+
+def run_command(cmd: list[str], check: bool = True) -> str:
+    """Run a command and return stdout."""
+    result = subprocess.run(cmd, capture_output=True, text=True, check=check)
+    return result.stdout.strip()
+
+
+def load_lock_file(path: Path) -> Dict[str, Any]:
+    """Load and parse a flake.lock JSON file."""
+    with open(path) as f:
+        return json.load(f)
+
+
+def get_changed_inputs(
+    old_lock: Dict, new_lock: Dict
+) -> list[tuple[str, str, str, str, str]]:
+    """
+    Compare lock files and return list of (input_name, old_rev, new_rev, old_date, new_date).
+
+    Matches inputs by content (url/flake) to handle nix renumbering duplicates.
+    Returns only inputs where the revision changed.
+    """
+    from datetime import datetime
+
+    old_nodes = old_lock.get("nodes", {})
+    new_nodes = new_lock.get("nodes", {})
+
+    # Build maps of locked content → (input_name, rev, lastModified)
+    def build_content_map(nodes):
+        content_map = {}
+        for name, node in nodes.items():
+            if name == "root":
+                continue
+            locked = node.get("locked", {})
+            if "rev" in locked:
+                # Build unique identifier from available fields
+                # Prefer url, fall back to owner/repo/type combination
+                if "url" in locked:
+                    key = locked["url"]
+                else:
+                    owner = locked.get("owner", "")
+                    repo = locked.get("repo", "")
+                    type_ = locked.get("type", "")
+                    key = f"{type_}:{owner}/{repo}"
+
+                last_modified = locked.get("lastModified", 0)
+                content_map[key] = (name, locked["rev"], last_modified)
+        return content_map
+
+    old_map = build_content_map(old_nodes)
+    new_map = build_content_map(new_nodes)
+
+    changes = []
+    for key, (new_name, new_rev, new_modified) in new_map.items():
+        if key in old_map:
+            old_name, old_rev, old_modified = old_map[key]
+            if old_rev != new_rev:
+                old_short = old_rev[:7]
+                new_short = new_rev[:7]
+                old_date = (
+                    datetime.fromtimestamp(old_modified).strftime("%Y-%m-%d")
+                    if old_modified
+                    else "unknown"
+                )
+                new_date = (
+                    datetime.fromtimestamp(new_modified).strftime("%Y-%m-%d")
+                    if new_modified
+                    else "unknown"
+                )
+                # Use new name for display (handles renames)
+                changes.append((new_name, old_short, new_short, old_date, new_date))
+
+    return sorted(changes)
+
+
+def format_commit_message(
+    changes: list[tuple[str, str, str, str, str]],
+    requested_inputs: list[str] | None = None,
+) -> str:
+    """Format the commit message like nix flake update does."""
+    title = "flake.lock: Update"
+    if requested_inputs:
+        title += f" ({', '.join(requested_inputs)})"
+
+    lines = [title, ""]
+
+    if changes:
+        lines.append("inputs:")
+        for input_name, old_rev, new_rev, old_date, new_date in changes:
+            lines.append(
+                f"  - {input_name}: {old_rev} ({old_date}) → {new_rev} ({new_date})"
+            )
+    else:
+        lines.append("flake.lock")
+
+    return "\n".join(lines)
+
+
+def main() -> int:
+    """Main entry point."""
+    parser = argparse.ArgumentParser(
+        description="Update specific nix flake inputs and commit with formatted message"
+    )
+    parser.add_argument(
+        "inputs",
+        nargs="*",
+        help="Input names to update (e.g., nixpkgs flake-parts). If omitted, updates all inputs.",
+    )
+    args = parser.parse_args()
+
+    try:
+        # Load current lock file
+        if not FLAKE_LOCK.exists():
+            print("Error: flake.lock not found", file=sys.stderr)
+            return 1
+
+        print("Updating flake")
+
+        old_lock = load_lock_file(FLAKE_LOCK)
+        run_command(["nix", "flake", "update"] + args.inputs)
+        new_lock = load_lock_file(FLAKE_LOCK)
+
+        changes = get_changed_inputs(old_lock, new_lock)
+        message = format_commit_message(changes, args.inputs)
+
+        # Check if flake.lock was modified
+        status = subprocess.run(
+            ["jj", "diff", "--stat", "flake.lock"],
+            capture_output=True,
+            text=True,
+        )
+
+        if status.returncode == 0 and status.stdout.strip():
+            print(message, file=sys.stderr)
+            run_command(["jj", "commit", "-m", message, "flake.lock"])
+            print("✓ Committed flake.lock", file=sys.stderr)
+        else:
+            print("No changes to flake.lock", file=sys.stderr)
+        return 0
+
+    except subprocess.CalledProcessError as e:
+        print(f"Error running command: {e}", file=sys.stderr)
+        return 1
+    except Exception as e:
+        print(f"Error: {e}", file=sys.stderr)
+        return 1
+
+
+if __name__ == "__main__":
+    sys.exit(main())
