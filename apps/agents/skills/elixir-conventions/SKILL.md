@@ -98,6 +98,29 @@ end
 
 Use `{:ok, value}` and `{:error, reason}` tuples for explicit error handling.
 
+## Logging
+
+Logger messages should be structured, with relevant information included as discrete fields. Field values must be simple strings or safely converted to strings—a log should never crash, and output should be parseable as simple key/value JSON fields:
+
+```elixir
+# Good - structured with simple string values
+Logger.error(msg: "Something bad happened", important_id: to_string(id), error: Exception.message(error))
+Logger.info(msg: "User created", user_id: to_string(user.id), email: user.email)
+
+# Good - safely convert complex values
+Logger.warning(msg: "Request failed", params: inspect(params, limit: :infinity))
+
+# Avoid - unstructured string interpolation
+Logger.error("Something bad happened: #{inspect(error)} for id #{id}")
+
+# Avoid - complex values that may not serialize cleanly
+Logger.error(msg: "Failed", data: some_struct, error: an_error_tuple)
+```
+
+## Typespecs
+
+Never add `@spec` or `@type` annotations. The `typedstruct` library handles type definitions for structs. Do not add typespecs to functions.
+
 ## Code Formatting
 
 Always run `mix format` after changes:
