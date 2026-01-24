@@ -18,6 +18,7 @@ in
 {
 
   imports = [
+    ../apps/agents
     ../apps/atuin
     ../apps/ruff
     ../apps/ssh
