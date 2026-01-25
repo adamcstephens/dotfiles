@@ -189,11 +189,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1769187349,
-        "narHash": "sha256-clG+nT6I2qxjIgk5WoSDKJyNhzKJs9jzbCujPF2S/yg=",
+        "lastModified": 1769289524,
+        "narHash": "sha256-6Cwtvzrw79cOk1lCzN2aKSVrpgSOSQoYhyMmhXXZjTA=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "082a4cd87c6089d1d9c58ebe52655f9e07245fcb",
+        "rev": "2539eba97a6df237d75617c25cd2dbef92df3d5b",
         "type": "github"
       },
       "original": {
@@ -204,11 +204,11 @@
     },
     "mnw": {
       "locked": {
-        "lastModified": 1768701608,
-        "narHash": "sha256-kSvWF3Xt2HW9hmV5V7i8PqeWJIBUKmuKoHhOgj3Znzs=",
+        "lastModified": 1769269517,
+        "narHash": "sha256-SgZOSmsbJN+oPDVZyavctrkjQYDCWtoJ3uhlzQChb6s=",
         "owner": "Gerg-L",
         "repo": "mnw",
-        "rev": "20d63a8a1ae400557c770052a46a9840e768926b",
+        "rev": "ee5e11d0d7f6a6cda68559c1a34b5392c3b1b1eb",
         "type": "github"
       },
       "original": {
@@ -228,11 +228,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1769213100,
-        "narHash": "sha256-/OJaEiSkbX1KVrR5QczSaO4S+PrI08qtI5BuzvWXXEU=",
+        "lastModified": 1769299463,
+        "narHash": "sha256-RxUJUDLWIvBJ6Dv6p//Ept7gUPb03ZURSWGirjlYwSQ=",
         "owner": "nix-community",
         "repo": "neovim-nightly-overlay",
-        "rev": "02508bed213f7bd3fc00e175eb1c01531b6d786f",
+        "rev": "041b08bc200ba1b08850943797a7e1a7f4ad142b",
         "type": "github"
       },
       "original": {
@@ -244,11 +244,11 @@
     "neovim-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1769212669,
-        "narHash": "sha256-cmTgIsQr0nuf+RXlPTtgbX2FaDHGRFz59LKc8Zq2nnI=",
+        "lastModified": 1769260606,
+        "narHash": "sha256-hTJJSGgYrPkVnpJCLXeCIKia6PM9y7D9/KBNmNafwOA=",
         "owner": "neovim",
         "repo": "neovim",
-        "rev": "f10a1dcf4d73768dc056c058f8a6bebdfc6bd3be",
+        "rev": "57574db15460be27f056eb21a71b96312396a615",
         "type": "github"
       },
       "original": {
@@ -410,11 +410,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1769018530,
-        "narHash": "sha256-MJ27Cy2NtBEV5tsK+YraYr2g851f3Fl1LpNHDzDX15c=",
+        "lastModified": 1769170682,
+        "narHash": "sha256-oMmN1lVQU0F0W2k6OI3bgdzp2YOHWYUAw79qzDSjenU=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "88d3861acdd3d2f0e361767018218e51810df8a1",
+        "rev": "c5296fdd05cfa2c187990dd909864da9658df755",
         "type": "github"
       },
       "original": {
@@ -548,11 +548,11 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1769227954,
-        "narHash": "sha256-DP3crNvCyZ7idGI9ISyGiWPR4L1a+z4ggFG4KNkbhHg=",
+        "lastModified": 1769353928,
+        "narHash": "sha256-IDKXwZILr14VffFNbhIvqhv7jngtMm23CP8q9vCKqyU=",
         "ref": "main",
-        "rev": "a8deda1960361e0ad0379e7c1fe72a8bbae33693",
-        "revCount": 860,
+        "rev": "9014c440ace84402d71339bb1d185a5088be1046",
+        "revCount": 865,
         "type": "git",
         "url": "https://codeberg.org/adamcstephens/sower.git"
       },
