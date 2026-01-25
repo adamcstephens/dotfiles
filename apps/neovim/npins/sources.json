@@ -10,10 +10,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.2.4",
-      "revision": "bfb31ca124bd1a2e032faea09844c8609154bdb5",
+      "version": "v0.2.5",
+      "revision": "7797a81141e5de62eecebf2af561698ed58900dc",
       "url": null,
-      "hash": "sha256-77x9cN/TBfvH0tMfoEJDP+wJwFxv9Md2EOu8eP+mL/U="
+      "hash": "sha256-QSkiyV70kFkArCnTXYRR+Dt4i5XSq072tYnOnHbKEBc="
     },
     "nvim-ufo": {
       "type": "GitRelease",
