@@ -4,7 +4,7 @@ default:
 bump: bump-flake bump-pins
 
 bump-flake:
-    nix flake update --commit-lock-file
+    flake-update-jj
 
 flake-check:
     nix flake check --no-build --all-systems
