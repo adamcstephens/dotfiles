@@ -26,6 +26,7 @@ mkShellNoCC {
       nixpkgs-review
       nurl
       pyright
+      treefmt
     ]
     ++ (lib.optionals stdenv.isLinux [
       bubblewrap
