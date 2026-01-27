@@ -2,10 +2,13 @@
   config,
   inputs,
   lib,
+  npins,
   pkgs,
   ...
 }:
 let
+  package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.fish;
+
   homeManagerSessionVariables = pkgs.runCommand "hm-session-vars.fish" { } ''
     mkdir -vp $out/share/fish/vendor_conf.d
     (echo "function setup_hm_session_vars;"
@@ -42,19 +45,37 @@ let
       '';
       destination = "/share/fish/vendor_functions.d/__fish_command_not_found_handler.fish";
     };
+
+  themeDump =
+    category: source:
+    pkgs.writeScriptBin "dotfiles-theme-builder"
+      # fish
+      ''
+        #!${lib.getExe package}
+
+        echo "[${category}]"
+        source "${source}"
+        fish_config theme dump
+      '';
+
+  theme = pkgs.runCommand "build-dotfiles-theme" { } ''
+    echo "# name: dotfiles" >dotfiles.theme
+
+    ${lib.getExe (themeDump "light" "${npins."modus-themes.nvim"}/extras/fish/modus_operandi.fish")} >>dotfiles.theme
+    ${lib.getExe (themeDump "dark" "${npins.vim-moonfly-colors}/extras/moonfly.fish")} >>dotfiles.theme
+    cp dotfiles.theme $out
+  '';
 in
 {
   home.packages = [
-    inputs.nixpkgs-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.fish
+    package
     homeManagerSessionVariables
     commandNotFound
   ];
 
-  # xdg.configFile."fish/theme-dark.fish".source = npins.vim-moonfly-colors + "/extras/moonfly.fish";
-  # xdg.configFile."fish/theme-light.fish".source =
-  #   npins."modus-themes.nvim" + "/extras/fish/modus_operandi.fish";
   xdg.configFile."fish/completions".source = mkSource "completions";
   xdg.configFile."fish/conf.d".source = mkSource "conf.d";
   xdg.configFile."fish/config.fish".source = mkSource "config.fish";
   xdg.configFile."fish/functions".source = mkSource "functions";
+  xdg.configFile."fish/themes/dotfiles.theme".source = theme;
 }

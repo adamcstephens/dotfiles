@@ -144,10 +144,6 @@ status is-interactive; and begin
     set -x FZF_DEFAULT_COMMAND 'fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
     set -x FZF_CTRL_T_COMMAND "$FZF_DEFAULT_COMMAND"
 
-    if test -n "$KITTY_WINDOW_ID"
-        source $HOME/.config/fish/functions/autodark.fish
-    end
-
     if command -q zoxide
         zoxide init fish --cmd j | source
     end
