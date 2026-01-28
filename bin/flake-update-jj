@@ -11,10 +11,13 @@ from typing import Dict, Any
 FLAKE_LOCK = Path("flake.lock")
 
 
-def run_command(cmd: list[str], check: bool = True) -> str:
+def run_command(cmd: list[str], check: bool = True, capture_output: bool = True) -> str:
     """Run a command and return stdout."""
-    result = subprocess.run(cmd, capture_output=True, text=True, check=check)
-    return result.stdout.strip()
+    if capture_output:
+        result = subprocess.run(cmd, capture_output=True, text=True, check=check)
+        return result.stdout.strip()
+    subprocess.run(cmd, check=check)
+    return ""
 
 
 def load_lock_file(path: Path) -> Dict[str, Any]:
@@ -54,6 +57,13 @@ def get_changed_inputs(
                     repo = locked.get("repo", "")
                     type_ = locked.get("type", "")
                     key = f"{type_}:{owner}/{repo}"
+
+                # Add ref/dir from original to differentiate inputs from same repo
+                original = node.get("original", {})
+                if "ref" in original:
+                    key += f"|ref={original['ref']}"
+                if "dir" in original:
+                    key += f"|dir={original['dir']}"
 
                 last_modified = locked.get("lastModified", 0)
                 content_map[key] = (name, locked["rev"], last_modified)
@@ -129,7 +139,7 @@ def main() -> int:
         print("Updating flake")
 
         old_lock = load_lock_file(FLAKE_LOCK)
-        run_command(["nix", "flake", "update"] + args.inputs)
+        run_command(["nix", "flake", "update"] + args.inputs, capture_output=False)
         new_lock = load_lock_file(FLAKE_LOCK)
 
         changes = get_changed_inputs(old_lock, new_lock)
