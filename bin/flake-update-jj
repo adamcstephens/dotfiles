@@ -2,6 +2,7 @@
 """Update nix flake.lock for specific inputs and create a jj commit."""
 
 import argparse
+import hashlib
 import json
 import subprocess
 import sys
@@ -9,6 +10,11 @@ from pathlib import Path
 from typing import Dict, Any
 
 FLAKE_LOCK = Path("flake.lock")
+
+
+def get_file_hash(path: Path) -> str:
+    """Compute SHA256 hash of a file."""
+    return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
 def run_command(cmd: list[str], check: bool = True, capture_output: bool = True) -> str:
@@ -138,8 +144,16 @@ def main() -> int:
 
         print("Updating flake")
 
+        old_hash = get_file_hash(FLAKE_LOCK)
         old_lock = load_lock_file(FLAKE_LOCK)
+
         run_command(["nix", "flake", "update"] + args.inputs, capture_output=False)
+
+        new_hash = get_file_hash(FLAKE_LOCK)
+        if old_hash == new_hash:
+            print("No changes to flake.lock", file=sys.stderr)
+            return 0
+
         new_lock = load_lock_file(FLAKE_LOCK)
 
         changes = get_changed_inputs(old_lock, new_lock)
