@@ -13,8 +13,7 @@ bump-pins:
     npins -d npins/ update
     npins -d apps/neovim/npins/ update
     npins -d apps/neovim/npins.lazy/ update
-    git add npins/ apps/neovim/npins/ apps/neovim/npins.lazy/
-    git commit -m 'chore: npins update' -- npins/ apps/neovim/npins/ apps/neovim/npins.lazy/ || true
+    jj commit -m 'chore: npins update' npins/ apps/neovim/npins/ apps/neovim/npins.lazy/ || true
 
 bump-packages:
     nix-update --flake arkenfox --commit
