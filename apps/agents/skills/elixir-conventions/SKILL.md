@@ -121,6 +121,31 @@ Logger.error(msg: "Failed", data: some_struct, error: an_error_tuple)
 
 Never add `@spec` or `@type` annotations. The `typedstruct` library handles type definitions for structs. Do not add typespecs to functions.
 
+## Callback Implementations
+
+Always use explicit module names with `@impl`, not `@impl true`:
+
+```elixir
+# Good - explicit module
+@impl GenServer
+def handle_call(:get_state, _from, state) do
+  {:reply, state, state}
+end
+
+@impl Plug
+def call(conn, opts) do
+  # ...
+end
+
+# Avoid - ambiguous
+@impl true
+def handle_call(:get_state, _from, state) do
+  {:reply, state, state}
+end
+```
+
+This makes it clear which behaviour the callback implements, especially in modules implementing multiple behaviours.
+
 ## Code Formatting
 
 Always run `mix format` after changes:
