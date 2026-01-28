@@ -25,5 +25,8 @@ mkShell {
   ]
   ++ lib.optionals pkgs.stdenv.isLinux [
     inputs.sower-next.packages.${pkgs.stdenv.hostPlatform.system}.cli
+  ]
+  ++ lib.optionals pkgs.stdenv.isDarwin [
+    pkgs.nh
   ];
 }
