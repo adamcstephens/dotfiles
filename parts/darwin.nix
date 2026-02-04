@@ -72,17 +72,6 @@
 
             enable = true;
 
-            gc = {
-              automatic = true;
-              interval = {
-                Hour = 3;
-                Minute = 15;
-              };
-              options = "--delete-older-than 30d";
-            };
-
-            # package = pkgs.nixVersions.nix_2_32;
-            #
             settings = {
               auto-optimise-store = false;
               accept-flake-config = false;
@@ -102,9 +91,6 @@
               );
               http-connections = lib.mkDefault 128;
               max-substitution-jobs = lib.mkDefault 128;
-
-              min-free = 50 * 1024 * 1024 * 1024;
-              max-free = 100 * 1024 * 1024 * 1024;
 
               trusted-users = [
                 "root"
