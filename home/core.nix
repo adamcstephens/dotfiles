@@ -24,7 +24,6 @@
     ../apps/nix
     ../apps/ripgrep
     ../apps/shellcheck
-    ../apps/sower
     ../apps/ssh
     ../apps/starship
     ../apps/tmux

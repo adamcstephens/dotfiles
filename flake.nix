@@ -19,7 +19,6 @@
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
     profile-parts.url = "git+https://codeberg.org/adamcstephens/profile-parts";
-    sower.url = "git+https://codeberg.org/adamcstephens/sower.git?ref=release-4";
     sower-next.url = "git+https://codeberg.org/adamcstephens/sower.git?ref=main";
 
     elephant.url = "github:abenz1267/elephant?ref=v2.19.1";
@@ -39,13 +38,8 @@
         ./parts/packages.nix
         ./templates/part.nix
 
-        inputs.sower.flakeModules.seed
         inputs.sower-next.flakeModules.sower
       ];
-
-      # helpful for limiting seed building until seed-ci has better options
-      # sower.seed.buildOutputs = [ ];
-      # flake.sower.home-manager.think.systems = [ "x86_64-linux" ];
 
       systems = [
         "x86_64-linux"

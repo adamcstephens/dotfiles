@@ -61,8 +61,6 @@ in
                   "bws"
                 ];
             };
-
-            services.sower.client.config.name = name;
           }
         )
       ];
@@ -184,7 +182,6 @@ in
         {
           home.username = "adamcstephens";
           home.homeDirectory = "/home/adamcstephens";
-          apps.sower.enable = false;
         }
       ];
     };
