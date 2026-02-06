@@ -9,9 +9,10 @@ Provides conventions and best practices for Elixir development in this project.
 
 ## Struct Usage
 
-Prefer structs over bare maps using the `typedstruct` library:
+Always define structured data with the `typedstruct` library. Never use bare maps for struct-like data, and never use `defstruct`.
 
 ```elixir
+# Good
 defmodule MyModule do
   use TypedStruct
 
@@ -23,32 +24,70 @@ defmodule MyModule do
 end
 ```
 
-If `typedstruct` is not installed, add to `mix.exs`:
+Ensure `typedstruct` is installed in `mix.exs`:
 
 ```elixir
 {:typedstruct, "~> 0.5"}
 ```
 
-Access struct fields using dot notation (`struct.field`), never bracket notation (`struct[:field]`).
+```elixir
+# Avoid
+defmodule MyModule do
+  defstruct [:name, :email, :age]
+end
+```
 
-## Pattern Matching in Function Declarations
+```elixir
+# Avoid
+user = %{name: "Jane", email: "jane@example.com", age: 30}
+```
 
-Pattern match on structs directly in function signatures:
+Access struct fields using dot notation (`struct.field`) when struct presence is guaranteed, never bracket notation (`struct[:field]`).
+
+## Nil-Safe Struct Field Lookup
+
+When an expected struct may be `nil`, use `get_in/2` for field lookup so the result is the field value or `nil` without raising.
 
 ```elixir
 # Good
+value = get_in(my_struct.myval)
+email = get_in(user.email)
+```
+
+```elixir
+# Avoid - raises if struct is nil
+value = my_struct.myval
+```
+
+## Pattern Matching in Function Declarations
+
+If an argument is a struct, always make that explicit in the function signature.
+
+Only match struct fields in the signature when those fields control function clause selection flow. Do not match fields just to extract them into local variables.
+
+```elixir
+# Good - explicit struct, fields read in body
+def process(%User{} = user) do
+  IO.puts("Processing #{user.name} (#{user.email})")
+end
+
+# Good - field matching used for clause selection flow
+def route_user(%User{role: :admin} = user), do: route_admin(user)
+def route_user(%User{} = user), do: route_member(user)
+
+# Avoid - matching fields only for extraction
 def process(%User{name: name, email: email}) do
   IO.puts("Processing #{name} (#{email})")
 end
 
-# Avoid
+# Avoid - struct type not explicit in signature
 def process(user) do
   %User{name: name, email: email} = user
   IO.puts("Processing #{name} (#{email})")
 end
 ```
 
-This makes function intent clear and provides early validation including field checking.
+This keeps clause intent explicit and avoids coupling field extraction with function dispatch logic.
 
 ## Test Practices
 
@@ -98,6 +137,57 @@ end
 
 Use `{:ok, value}` and `{:error, reason}` tuples for explicit error handling.
 
+## Nil Fallbacks
+
+When a value may be `nil`, use the `||` fallback pattern directly (for example, `item || %{}`).
+
+Do not use inline conditionals for this (`if`, `case`, or similar), and avoid helper functions that only wrap the same fallback behavior.
+
+```elixir
+# Good
+attrs = attrs || %{}
+metadata = metadata || %{}
+```
+
+```elixir
+# Avoid - inline conditional
+attrs = if attrs == nil, do: %{}, else: attrs
+```
+
+```elixir
+# Avoid - needless helper wrapper
+defp ensure_map(value), do: value || %{}
+
+attrs = ensure_map(attrs)
+```
+
+## With Statements
+
+Always handle failed matches and errors in `with` expressions using an `else` branch.
+
+```elixir
+# Good
+def create_user(params) do
+  with {:ok, attrs} <- parse_user_params(params),
+       {:ok, user} <- Repo.insert(attrs) do
+    {:ok, user}
+  else
+    {:error, reason} -> {:error, reason}
+    other -> {:error, "Unexpected with failure: #{inspect(other)}"}
+  end
+end
+```
+
+```elixir
+# Avoid
+def create_user(params) do
+  with {:ok, attrs} <- parse_user_params(params),
+       {:ok, user} <- Repo.insert(attrs) do
+    {:ok, user}
+  end
+end
+```
+
 ## Logging
 
 Logger messages should be structured, with relevant information included as discrete fields. Field values must be simple strings or safely converted to strings—a log should never crash, and output should be parseable as simple key/value JSON fields:
@@ -145,6 +235,20 @@ end
 ```
 
 This makes it clear which behaviour the callback implements, especially in modules implementing multiple behaviours.
+
+## List Literals
+
+Always write lists using standard list literal syntax:
+
+```elixir
+# Good - atom list
+allowed_keys = [:name, :email, :age]
+
+# Good - string list
+names = ["alice", "bob", "carol"]
+```
+
+Do not use sigils for lists (for example, avoid `~w(name email age)a` and `~w(alice bob carol)`).
 
 ## Code Formatting
 
