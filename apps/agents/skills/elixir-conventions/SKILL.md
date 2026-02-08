@@ -89,6 +89,28 @@ end
 
 This keeps clause intent explicit and avoids coupling field extraction with function dispatch logic.
 
+## Domain Struct Pass-Through
+
+Prefer passing domain structs end-to-end through call chains.
+
+Avoid intermediate `opts` maps/keyword lists unless the options shape is required by multiple consumers.
+
+```elixir
+# Good - pass domain structs directly
+def checkout(%Order{} = order) do
+  Pricing.calculate(order)
+  Payments.charge(order)
+end
+```
+
+```elixir
+# Avoid - intermediate opts for a single consumer
+def checkout(%Order{} = order) do
+  payment_opts = [order_id: order.id, total_cents: order.total_cents]
+  Payments.charge(payment_opts)
+end
+```
+
 ## Test Practices
 
 ### Capturing Logs
@@ -159,6 +181,27 @@ attrs = if attrs == nil, do: %{}, else: attrs
 defp ensure_map(value), do: value || %{}
 
 attrs = ensure_map(attrs)
+```
+
+## Single-Use Access Helpers
+
+Do not create private helper functions for single-use access/defaulting when Elixir stdlib can be used trivially.
+
+Prefer inline `Map.get/3` (or `get_in`) at call sites.
+
+Only introduce a helper when behavior is materially more complex than stdlib functions.
+
+```elixir
+# Good - inline stdlib access/defaulting
+status = Map.get(params, "status", "pending")
+role = get_in(user, [:account, :role]) || :member
+```
+
+```elixir
+# Avoid - single-use helper that wraps trivial stdlib behavior
+defp status_or_pending(params), do: Map.get(params, "status", "pending")
+
+status = status_or_pending(params)
 ```
 
 ## With Statements
