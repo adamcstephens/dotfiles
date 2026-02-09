@@ -11,10 +11,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v2.19.1",
-      "revision": "16a66a0d8e796ac0127f1e6416d2460ff36cbefe",
-      "url": "https://api.github.com/repos/abenz1267/elephant/tarball/refs/tags/v2.19.1",
-      "hash": "sha256-Ka1uvhSq66yp0IlNFFpx7h+NlysbN52/yUbQKvI4AiA="
+      "version": "v2.19.2",
+      "revision": "8f14b1e4310d61d70f378397c716f018aa90f009",
+      "url": "https://api.github.com/repos/abenz1267/elephant/tarball/refs/tags/v2.19.2",
+      "hash": "sha256-hs1Re7ltWYFBsiwDsK3Qb3/KgZ4E2HY7cFB/M8JWSu4="
     },
     "lix": {
       "type": "Tarball",
