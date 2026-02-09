@@ -84,13 +84,13 @@ in
     };
 
     iconTheme = {
-      name = "Papirus-Dark";
-      package = pkgs.papirus-icon-theme;
+      name = "Flat-Remix-Orange-Dark";
+      package = pkgs.flat-remix-icon-theme;
     };
 
     theme = {
-      name = "Adwaita-dark";
-      package = pkgs.gnome-themes-extra;
+      name = "Flat-Remix-GTK-Orange-Darkest-Solid";
+      package = pkgs.flat-remix-gtk;
     };
   };
 
