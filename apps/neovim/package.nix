@@ -61,7 +61,6 @@ mnw.lib.wrap pkgs {
         editorconfig-nvim
         elixir-tools-nvim
         friendly-snippets
-        fugitive
         nui-nvim
         nvim-web-devicons
         plenary-nvim
@@ -73,6 +72,7 @@ mnw.lib.wrap pkgs {
         vim-dadbod
         vim-dadbod-completion
         vim-dadbod-ui
+        vim-fugitive
         vim-just
         vim-repeat
         which-key-nvim
