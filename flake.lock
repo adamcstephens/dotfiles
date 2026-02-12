@@ -43,28 +43,6 @@
         "type": "github"
       }
     },
-    "elephant": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs-unstable"
-        ],
-        "systems": "systems"
-      },
-      "locked": {
-        "lastModified": 1769093894,
-        "narHash": "sha256-Ka1uvhSq66yp0IlNFFpx7h+NlysbN52/yUbQKvI4AiA=",
-        "owner": "abenz1267",
-        "repo": "elephant",
-        "rev": "b34dd272ab5dc60096157d7cc7ff781f359c48b1",
-        "type": "github"
-      },
-      "original": {
-        "owner": "abenz1267",
-        "ref": "v2.19.1",
-        "repo": "elephant",
-        "type": "github"
-      }
-    },
     "expert": {
       "inputs": {
         "beam-flakes": "beam-flakes",
@@ -424,7 +402,6 @@
     },
     "root": {
       "inputs": {
-        "elephant": "elephant",
         "flake-parts": "flake-parts",
         "home-manager": "home-manager",
         "home-manager-unstable": "home-manager-unstable",
@@ -458,21 +435,6 @@
         "ref": "main",
         "type": "git",
         "url": "https://codeberg.org/adamcstephens/sower.git"
-      }
-    },
-    "systems": {
-      "locked": {
-        "lastModified": 1689347949,
-        "narHash": "sha256-12tWmuL2zgBgZkdoB6qXZsgJEH9LR3oUgpaQq2RbI80=",
-        "owner": "nix-systems",
-        "repo": "default-linux",
-        "rev": "31732fcf5e8fea42e59c2488ad31a0e651500f68",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-systems",
-        "repo": "default-linux",
-        "type": "github"
       }
     }
   },

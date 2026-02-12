@@ -20,13 +20,10 @@
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
     profile-parts.url = "git+https://codeberg.org/adamcstephens/profile-parts";
     sower-next.url = "git+https://codeberg.org/adamcstephens/sower.git?ref=main";
-
-    elephant.url = "github:abenz1267/elephant?ref=v2.19.1";
-    elephant.inputs.nixpkgs.follows = "nixpkgs-unstable";
   };
 
   outputs =
-    { self, flake-parts, ... }@inputs:
+    { flake-parts, ... }@inputs:
     flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [
         ./apps/neovim/part.nix

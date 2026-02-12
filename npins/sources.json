@@ -68,22 +68,6 @@
       "revision": "d11b3d04cc1cb71a778d67a4df73283a5a6d66f4",
       "url": null,
       "hash": "sha256-+zUmQWRUNzdUDZBV7xmrA0415/HlagHDi+O9ehdaDN8="
-    },
-    "walker": {
-      "type": "GitRelease",
-      "repository": {
-        "type": "GitHub",
-        "owner": "abenz1267",
-        "repo": "walker"
-      },
-      "pre_releases": false,
-      "version_upper_bound": null,
-      "release_prefix": null,
-      "submodules": false,
-      "version": "v2.14.1",
-      "revision": "9840a4e3511b1b7c186b5be95058ef36e71f339a",
-      "url": "https://api.github.com/repos/abenz1267/walker/tarball/refs/tags/v2.14.1",
-      "hash": "sha256-ccwJ1ADGNFd5LDF2JWdfP7+f1Hs2EvJ+2o6sUOdYi7w="
     }
   },
   "version": 7

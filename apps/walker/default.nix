@@ -1,29 +1,20 @@
 {
   config,
-  inputs,
   lib,
-  npins,
   pkgs,
   ...
 }:
 let
   cfg = config.dotfiles.apps.walker;
-  walker = pkgs.callPackage "${npins.walker}/nix/package.nix" { };
 in
 {
-  imports = [
-    inputs.elephant.homeManagerModules.elephant
-  ];
-
   options.dotfiles.apps.walker = {
     enable = lib.mkEnableOption "walker launcher service";
   };
 
   config = lib.mkIf cfg.enable {
-    programs.elephant.enable = true;
-
     home.packages = [
-      walker
+      pkgs.walker
     ];
 
     home.file.".config/elephant/websearch.toml".source =
@@ -44,30 +35,55 @@ in
       @define-color theme_fg_color #${base08};
     '';
 
-    systemd.user.services.walker = {
-      Unit = {
-        Description = "Walker - Application Runner";
-        ConditionEnvironment = "WAYLAND_DISPLAY";
-        After = [
-          "graphical-session.target"
-          "elephant.service"
-        ];
-        Requires = [ "elephant.service" ];
-        PartOf = [ "graphical-session.target" ];
-        X-Restart-Triggers = [
-          (builtins.hashString "sha256" (
-            builtins.toJSON {
-              config = config.home.file.".config/walker/config.toml".source;
-              theme = config.home.file.".config/walker/themes/dotfiles/style.css".source;
-            }
-          ))
-        ];
+    systemd.user.services = {
+      elephant = {
+        Unit = {
+          Description = "Elephant launcher backend";
+          After = [ "graphical-session.target" ];
+          PartOf = [ "graphical-session.target" ];
+          ConditionEnvironment = "WAYLAND_DISPLAY";
+        };
+
+        Service = {
+          Type = "simple";
+          ExecStart = lib.getExe pkgs.elephant;
+          Restart = "on-failure";
+          RestartSec = 1;
+
+          # Clean up socket on stop
+          ExecStopPost = "${pkgs.coreutils}/bin/rm -f /tmp/elephant.sock";
+        };
+
+        Install = {
+          WantedBy = [ "graphical-session.target" ];
+        };
       };
-      Service = {
-        ExecStart = "${lib.getExe walker} --gapplication-service";
-        Restart = "on-failure";
+
+      walker = {
+        Unit = {
+          Description = "Walker - Application Runner";
+          ConditionEnvironment = "WAYLAND_DISPLAY";
+          After = [
+            "graphical-session.target"
+            "elephant.service"
+          ];
+          Requires = [ "elephant.service" ];
+          PartOf = [ "graphical-session.target" ];
+          X-Restart-Triggers = [
+            (builtins.hashString "sha256" (
+              builtins.toJSON {
+                config = config.home.file.".config/walker/config.toml".source;
+                theme = config.home.file.".config/walker/themes/dotfiles/style.css".source;
+              }
+            ))
+          ];
+        };
+        Service = {
+          ExecStart = "${lib.getExe pkgs.walker} --gapplication-service";
+          Restart = "on-failure";
+        };
+        Install.WantedBy = [ "graphical-session.target" ];
       };
-      Install.WantedBy = [ "graphical-session.target" ];
     };
   };
 }
