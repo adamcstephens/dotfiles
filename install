@@ -1,4 +1,8 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
+
+SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
+
+pushd "$SCRIPT_DIR" || exit 1
 
 if ! command -v nix >/dev/null 2>&1; then
   curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install --no-confirm --diagnostic-endpoint=""
@@ -8,12 +12,15 @@ if ! command -v nix >/dev/null 2>&1; then
 fi
 rm -rf ~/.config/fish
 
+export NIX_CONFIG="extra-experimental-features = nix-command flakes pipe-operator pipe-operators
+$NIX_CONFIG"
+
 case "$(uname)" in
 Darwin)
-  nix --extra-experimental-features "nix-command flakes" develop .# -c just nix-darwin-bootstrap
+  nix develop .# -c just nix-darwin-bootstrap
   ;;
 Linux)
-  nix --extra-experimental-features "nix-command flakes" run .#hm -- switch
+  nix run .#hm -- switch
   ;;
 *)
   echo "nope, unsupported platform"
