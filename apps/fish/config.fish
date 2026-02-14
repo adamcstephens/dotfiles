@@ -26,6 +26,7 @@ end
 status is-interactive; and begin
 
     # Abbreviations
+    abbr --add -- cat bat
     abbr --add -- cnf command-not-found
     abbr --add -- da 'direnv allow'
     abbr --add -- db 'direnv block'
@@ -38,6 +39,7 @@ status is-interactive; and begin
     abbr --add -- ga 'git add'
     abbr --add -- gbv 'git branch --all --verbose --verbose'
     abbr --add -- gc 'git commit'
+    abbr --add -- gco 'git checkout'
     abbr --add -- gd 'git diff'
     abbr --add -- gl 'git pull'
     abbr --add -- glo 'git log --date=iso --format="%C(auto)%h %C(auto,blue)[%ar]%C(auto)%d %s" --max-count=15'
@@ -59,55 +61,15 @@ status is-interactive; and begin
     abbr --add -- jjgf 'jj git fetch --all-remotes'
     abbr --add -- jjgp 'jj git push'
     abbr --add -- l 'll -a'
+    abbr --add -- la 'eza -a'
     abbr --add -- ll 'eza -lg'
+    abbr --add -- lla 'eza -la'
+    abbr --add -- ls eza
+    abbr --add -- lt 'eza --tree'
+    abbr --add -- nix 'nix --print-build-logs'
     abbr --add -- sy 'sudo systemctl'
     abbr --add -- syu 'systemctl --user'
     abbr --add -- tree 'eza --tree'
-
-    # Aliases
-    alias cat bat
-    alias cnf command-not-found
-    alias da 'direnv allow'
-    alias db 'direnv block'
-    alias dc docker-compose
-    alias dclf 'docker-compose logs --tail=100 -f'
-    alias dog doggo
-    alias dps 'docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}\t{{.Command}}\t{{.Image}}"'
-    alias f fossil
-    alias fs 'fossil status'
-    alias ga 'git add'
-    alias gbv 'git branch --all --verbose --verbose'
-    alias gc 'git commit'
-    alias gd 'git diff'
-    alias gl 'git pull'
-    alias glo 'git log --date=iso --format="%C(auto)%h %C(auto,blue)[%ar]%C(auto)%d %s" --max-count=15'
-    alias gp 'git push'
-    alias grh 'git reset HEAD'
-    alias grv 'git remote -v'
-    alias gs 'git status'
-    alias gss 'git status --short'
-    alias gsw 'git switch'
-    alias gswc 'git switch --create'
-    alias gt 'git tag --list -n1'
-    alias gw 'git worktree'
-    alias ivl 'sudo iptables -vnL --line-numbers'
-    alias jc 'sudo journalctl'
-    alias jcu 'journalctl --user'
-    alias jjbm 'jj bookmark move --to @-'
-    alias jjc 'jj commit'
-    alias jjd 'jj diff'
-    alias jjgf 'jj git fetch --all-remotes'
-    alias jjgp 'jj git push'
-    alias l 'll -a'
-    alias la 'eza -a'
-    alias ll 'eza -lg'
-    alias lla 'eza -la'
-    alias ls eza
-    alias lt 'eza --tree'
-    alias nix 'nix --print-build-logs'
-    alias sy 'sudo systemctl'
-    alias syu 'systemctl --user'
-    alias tree 'eza --tree'
 
     # Interactive shell initialisation
 
@@ -122,8 +84,6 @@ status is-interactive; and begin
     if test -e $HOME/.shell_local.fish
         source $HOME/.shell_local.fish
     end
-
-    abbr --add gco git checkout
 
     set -x PAGER $HOME/.dotfiles/bin/pager
     set -x EDITOR $HOME/.dotfiles/bin/editor
