@@ -66,7 +66,6 @@ status is-interactive; and begin
     abbr --add -- lla 'eza -la'
     abbr --add -- ls eza
     abbr --add -- lt 'eza --tree'
-    abbr --add -- nix 'nix --print-build-logs'
     abbr --add -- sy 'sudo systemctl'
     abbr --add -- syu 'systemctl --user'
     abbr --add -- tree 'eza --tree'
