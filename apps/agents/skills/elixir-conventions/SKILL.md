@@ -129,6 +129,50 @@ test "logs when processing fails" do
 end
 ```
 
+### Function Dependencies in Tests
+
+Do not mock functions in tests, including functions that perform IO or other side effects.
+Do not use `Application` environment for runtime dependency selection in tests (for example, `Application.get_env/3` or `Application.fetch_env!/2` for choosing modules/functions).
+
+Prefer dependency injection via function arguments:
+
+- For a single function dependency, add an extra function argument with a default to the preferred implementation.
+- For multiple function dependencies, use an `opts` keyword list and `Keyword.get/3` with defaults to the preferred implementations.
+
+```elixir
+# Good - single injectable dependency with default
+def fetch_user(id, fetch_fun \\ &Repo.get/2) do
+  fetch_fun.(User, id)
+end
+```
+
+```elixir
+# Good - multiple injectable dependencies via opts
+def publish_event(event, opts \\ []) do
+  encode_fun = Keyword.get(opts, :encode_fun, &Jason.encode!/1)
+  send_fun = Keyword.get(opts, :send_fun, &HTTPClient.post/1)
+
+  event
+  |> encode_fun.()
+  |> send_fun.()
+end
+```
+
+```elixir
+# Avoid - mocking function modules in tests
+with_mock Repo, [get: fn _schema, _id -> %User{id: 123} end] do
+  assert %User{id: 123} = fetch_user(123)
+end
+```
+
+```elixir
+# Avoid - selecting test dependencies via Application env
+def fetch_user(id) do
+  repo = Application.get_env(:my_app, :repo, Repo)
+  repo.get(User, id)
+end
+```
+
 ## Error Handling
 
 Do not throw messages. Only use catch/rescue when absolutely required:
