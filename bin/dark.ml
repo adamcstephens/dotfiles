@@ -66,11 +66,12 @@ module Linux = struct
     | Dark ->
         Util.run_command
           "gsettings-wrapper set org.gnome.desktop.interface gtk-theme \
-           Adwaita-dark"
+           Flat-Remix-GTK-Orange-Darkest-Solid"
         |> ignore
     | Light ->
         Util.run_command
-          "gsettings-wrapper set org.gnome.desktop.interface gtk-theme Adwaita"
+          "gsettings-wrapper set org.gnome.desktop.interface gtk-theme \
+           Flat-Remix-GTK-Orange-Light-Solid"
         |> ignore
 
   let set_gnome_scheme = function
