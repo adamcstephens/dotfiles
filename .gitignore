@@ -9,3 +9,5 @@ _build/
 *.cmi
 *.cmo
 apps/fish/fish_variables
+
+.dune/
