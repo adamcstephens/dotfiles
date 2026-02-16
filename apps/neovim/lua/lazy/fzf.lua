@@ -14,6 +14,7 @@ return {
           ["ctrl-q"] = { fn = actions.file_sel_to_qf, prefix = "select-all" },
         },
       },
+      fzf_opts = { ["--tmux"] = "center,90%,90%,border-native" },
       winopts = {
         preview = {
           flip_columns = 180,
