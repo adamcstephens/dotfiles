@@ -12,18 +12,6 @@
       "url": null,
       "hash": "sha256-f/li32jpVigbZANnnbgSArnOH4nusj0DUz7952K+Znw="
     },
-    "auto-dark-mode.nvim": {
-      "type": "Git",
-      "repository": {
-        "type": "Git",
-        "url": "https://github.com/f-person/auto-dark-mode.nvim"
-      },
-      "branch": "master",
-      "submodules": false,
-      "revision": "e300259ec777a40b4b9e3c8e6ade203e78d15881",
-      "url": null,
-      "hash": "sha256-PhhOlq4byctWJ5rLe3cifImH56vR2+k3BZGDZdQvjng="
-    },
     "bufferline.nvim": {
       "type": "GitRelease",
       "repository": {
@@ -243,6 +231,19 @@
       "revision": "a13db1c0364319d3ebde65030005dea9f8a198cc",
       "url": null,
       "hash": "sha256-L2rJJeKH0tgMc4x009VKxHbcPvcZTvnlvo4CC1ZP54Q="
+    },
+    "osc11.nvim": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "afonsofrancof",
+        "repo": "osc11.nvim"
+      },
+      "branch": "main",
+      "submodules": false,
+      "revision": "919e015336b737c3c567f56de677740684a41cf5",
+      "url": "https://github.com/afonsofrancof/osc11.nvim/archive/919e015336b737c3c567f56de677740684a41cf5.tar.gz",
+      "hash": "sha256-s7HyMf90WdO0pyk1EQeRzOwK+5jbPDaoooK/sKroCw4="
     },
     "quicker.nvim": {
       "type": "GitRelease",
