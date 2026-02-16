@@ -1,12 +1,10 @@
 return {
-  "cyberdream.nvim",
+  "modus-themes.nvim",
 
   lazy = false,
 
   after = function()
-    require("cyberdream").setup({
-      variant = "light",
-      italic_comments = true,
+    require("modus-themes").setup({
       colors = {
         -- default is too little contrast in active line
         bg_highlight = "#dadada",

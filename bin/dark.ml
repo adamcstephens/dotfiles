@@ -1,6 +1,6 @@
 (* Types *)
 type theme_state = Dark | Light
-type command = Enable | Disable | Toggle | Status
+type command = Enable | Disable | Toggle | Status | SyncTmux | WatchTmux
 
 (* Module for platform-specific operations *)
 module Platform = struct
@@ -46,6 +46,8 @@ module Util = struct
       close_in ic;
       Some (if state then Dark else Light)
     with _ -> None
+
+  let run_no_output cmd = Sys.command (cmd ^ " >/dev/null 2>&1") = 0
 end
 
 (* Darwin specific operations *)
@@ -62,6 +64,28 @@ end
 
 (* Linux specific operations *)
 module Linux = struct
+  let contains haystack needle =
+    let hay_len = String.length haystack in
+    let needle_len = String.length needle in
+    let rec loop i =
+      if i + needle_len > hay_len then false
+      else if String.sub haystack i needle_len = needle then true
+      else loop (i + 1)
+    in
+    loop 0
+
+  let get_state () =
+    match
+      Util.run_command
+        "gsettings get org.gnome.desktop.interface color-scheme 2>/dev/null || \
+         dconf read /org/gnome/desktop/interface/color-scheme 2>/dev/null"
+    with
+    | s when contains s "prefer-dark" -> Dark
+    | _ -> (
+        match Util.read_state () with
+        | Some state -> state
+        | None -> Light)
+
   let set_gtk_theme = function
     | Dark ->
         Util.run_command
@@ -81,7 +105,7 @@ module Linux = struct
            prefer-dark"
         |> ignore;
         Util.run_command
-          "dconf write /org/gnome/desktop/interface/color-scheme 'prefer-dark'"
+          "dconf write /org/gnome/desktop/interface/color-scheme \"'prefer-dark'\""
         |> ignore
     | Light ->
         Util.run_command
@@ -89,7 +113,7 @@ module Linux = struct
            prefer-light"
         |> ignore;
         Util.run_command
-          "dconf write /org/gnome/desktop/interface/color-scheme 'prefer-light'"
+          "dconf write /org/gnome/desktop/interface/color-scheme \"'prefer-light'\""
         |> ignore
 
   let set_theme state =
@@ -102,12 +126,14 @@ end
 let get_current_state () =
   match Platform.current with
   | Platform.Darwin -> Some (Darwin.get_state ())
-  | Platform.Linux -> Util.read_state ()
+  | Platform.Linux -> Some (Linux.get_state ())
   | Platform.Unknown -> None
 
 let set_dark_mode state =
   match Platform.current with
-  | Platform.Darwin -> Darwin.set_theme state
+  | Platform.Darwin ->
+      Darwin.set_theme state;
+      Util.write_state state
   | Platform.Linux -> Linux.set_theme state
   | Platform.Unknown -> failwith "Unsupported platform"
 
@@ -115,6 +141,59 @@ let toggle_dark_mode () =
   match get_current_state () with
   | Some Dark -> set_dark_mode Light
   | Some Light | None -> set_dark_mode Dark
+
+let tmux_theme_file = function
+  | Dark -> "~/.config/tmux/theme-dark.conf"
+  | Light -> "~/.config/tmux/theme-light.conf"
+
+let apply_tmux_theme state =
+  if Util.run_no_output "tmux list-sessions" then (
+    let theme = tmux_theme_file state in
+    let _ = Util.run_no_output ("tmux source-file " ^ theme) in
+    let _ = Util.run_no_output "tmux refresh-client -S" in
+    ())
+
+let sync_tmux () =
+  match get_current_state () with
+  | Some state ->
+      apply_tmux_theme state;
+      Util.write_state state
+  | None -> ()
+
+let lock_file () =
+  let base =
+    match Sys.getenv_opt "XDG_RUNTIME_DIR" with
+    | Some d -> d
+    | None -> "/tmp"
+  in
+  Filename.concat base "tmux-theme-sync.lockfile"
+
+let with_watch_lock f =
+  let file = lock_file () in
+  let fd =
+    Unix.openfile file [ Unix.O_CREAT; Unix.O_RDWR; Unix.O_CLOEXEC ] 0o600
+  in
+  try
+    Unix.lockf fd Unix.F_TLOCK 0;
+    Fun.protect ~finally:(fun () -> Unix.close fd) f
+  with
+  | Unix.Unix_error ((Unix.EAGAIN | Unix.EACCES), _, _) ->
+      (* Another watcher instance owns the lock; exit quietly. *)
+      Unix.close fd
+  | exn ->
+      Unix.close fd;
+      raise exn
+
+let watch_tmux () =
+  with_watch_lock (fun () ->
+      let rec loop prev =
+        let current = get_current_state () in
+        if current <> prev then sync_tmux ();
+        Unix.sleep 2;
+        loop current
+      in
+      sync_tmux ();
+      loop (get_current_state ()))
 
 (* Command line parsing and main *)
 let parse_args () =
@@ -124,6 +203,8 @@ let parse_args () =
     | "disable" -> Some Disable
     | "toggle" -> Some Toggle
     | "status" -> Some Status
+    | "sync-tmux" -> Some SyncTmux
+    | "watch-tmux" -> Some WatchTmux
     | _ -> None
   else None
 
@@ -139,6 +220,10 @@ let () =
         | Some Light | None -> "false"
       in
       print_endline state
+  | Some SyncTmux -> sync_tmux ()
+  | Some WatchTmux -> watch_tmux ()
   | None ->
-      Printf.eprintf "Usage: %s [enable|disable|toggle|status]\n" Sys.argv.(0);
+      Printf.eprintf
+        "Usage: %s [enable|disable|toggle|status|sync-tmux|watch-tmux]\n"
+        Sys.argv.(0);
       exit 1

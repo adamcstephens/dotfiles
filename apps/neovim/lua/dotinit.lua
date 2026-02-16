@@ -3,6 +3,8 @@ vim.loader.enable()
 
 vim.g.mapleader = ","
 
+vim.opt.termguicolors = true
+
 -- includes
 --
 require("auto")

@@ -59,7 +59,6 @@ mnw.lib.wrap pkgs {
         lz-n
 
         editorconfig-nvim
-        elixir-tools-nvim
         friendly-snippets
         nui-nvim
         nvim-web-devicons
@@ -86,7 +85,6 @@ mnw.lib.wrap pkgs {
       [
         blink-cmp
         copilot-lua
-        cyberdream-nvim
         diffview-nvim
         fidget-nvim
         fzf-lua

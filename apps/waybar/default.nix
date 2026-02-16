@@ -43,13 +43,13 @@ in
         }
 
         window#waybar {
-          color: #${config.colorScheme.palette.base0B};
-          background-color: #${config.colorScheme.palette.base00};
-          border-bottom: 2px solid #${config.colorScheme.palette.base03};
+          color: @theme_text_color;
+          background-color: alpha(@theme_bg_color, 0.94);
+          border-bottom: 1px solid @unfocused_borders;
         }
 
         window#waybar.solo {
-          color: #${config.colorScheme.palette.base0B};
+          color: @theme_text_color;
         }
 
         #tags {
@@ -57,25 +57,27 @@ in
 
         #workspaces button.empty,
         #tags button {
-          color: #${config.colorScheme.palette.base02};
+          color: alpha(@theme_text_color, 0.6);
           min-width: 14px;
+          background-color: transparent;
         }
 
         #workspaces button,
         #tags button.occupied {
-          color: #${config.colorScheme.palette.base04};
+          color: @theme_text_color;
         }
 
         #workspaces button.visible,
         #workspaces button.active,
         #tags button.focused {
-          color: #${config.colorScheme.palette.base06};
-          background-color: #${config.colorScheme.palette.base03};
+          color: @theme_selected_fg_color;
+          background-color: @theme_selected_bg_color;
         }
 
         #workspaces button.urgent,
         #tags button.urgent {
-          color: #${config.colorScheme.palette.base08};
+          color: @error_color;
+          background-color: alpha(@error_color, 0.14);
         }
 
         #battery,
@@ -88,31 +90,31 @@ in
         #upower {
           margin: 0px 10px;
           min-width: 10px;
-          color: #${config.colorScheme.palette.base04};
+          color: @theme_text_color;
         }
 
         #battery.warning {
-          color: #${config.colorScheme.palette.base0A};
+          color: @warning_color;
         }
 
         #battery.critical {
-          color: #${config.colorScheme.palette.base08};
+          color: @error_color;
         }
 
         #battery.charging {
-          color: #${config.colorScheme.palette.base0D};
+          color: @success_color;
         }
 
         #battery.plugged {
-          color: #${config.colorScheme.palette.base0B};
+          color: @success_color;
         }
 
         #upower.charging {
-          color: #${config.colorScheme.palette.base0D};
+          color: @success_color;
         }
 
         #upower.discharging {
-          color: #${config.colorScheme.palette.base0A};
+          color: @warning_color;
         }
       '';
     };

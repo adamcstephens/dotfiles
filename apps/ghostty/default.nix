@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  npins,
   pkgs,
   ...
 }:
@@ -50,4 +51,9 @@
       else
         config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/ghostty/mac.conf";
   };
+
+  xdg.configFile."ghostty/themes/moonfly".source =
+    npins.vim-moonfly-colors + "/extras/moonfly-ghostty.conf";
+  xdg.configFile."ghostty/themes/Modus Operandi".source =
+    npins."modus-themes.nvim" + "/extras/ghostty/modus_operandi";
 }

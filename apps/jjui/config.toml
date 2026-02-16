@@ -11,4 +11,4 @@ revision_command = [
 ]
 
 [ui.colors]
-"revisions selected" = { bg = "0" }
+"revisions selected" = { bg = "#353535" }

@@ -54,6 +54,7 @@ in
   # themes
   xdg.configFile."kitty/no-preference-theme.auto.conf".source =
     npins.vim-moonfly-colors + "/extras/moonfly-kitty.conf";
+
   xdg.configFile."kitty/dark-theme.auto.conf".source =
     npins.vim-moonfly-colors + "/extras/moonfly-kitty.conf";
   xdg.configFile."kitty/light-theme.auto.conf".source =

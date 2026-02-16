@@ -39,7 +39,6 @@ untrackedCache = true
 helper = rbw
 
 [delta]
-features = gruvmax-fang
 hyperlinks = true
 navigate = true
 
