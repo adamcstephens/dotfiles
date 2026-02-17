@@ -277,6 +277,20 @@ in
       ];
     };
 
+    dev-x86_64-linux = {
+      system = "aarch64-linux";
+      modules = [
+        ./core-dev.nix
+      ];
+    };
+
+    dev-aarch64-linux = {
+      system = "aarch64-linux";
+      modules = [
+        ./core-dev.nix
+      ];
+    };
+
     # generic systems
 
     aarch64-darwin = {
