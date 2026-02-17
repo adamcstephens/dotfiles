@@ -2,11 +2,14 @@ return {
   "osc11.nvim",
 
   lazy = false,
+  priority = 10,
 
-  after = function()
+  before = function()
     require("lz.n").trigger_load("modus_operandi")
     require("lz.n").trigger_load("vim-moonfly-colors")
+  end,
 
+  after = function()
     local function set_dark()
       require("lz.n").trigger_load("vim-moonfly-colors")
       vim.opt.background = "dark"
