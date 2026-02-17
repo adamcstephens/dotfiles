@@ -82,9 +82,7 @@ module Linux = struct
     with
     | s when contains s "prefer-dark" -> Dark
     | _ -> (
-        match Util.read_state () with
-        | Some state -> state
-        | None -> Light)
+        match Util.read_state () with Some state -> state | None -> Light)
 
   let set_gtk_theme = function
     | Dark ->
@@ -105,7 +103,8 @@ module Linux = struct
            prefer-dark"
         |> ignore;
         Util.run_command
-          "dconf write /org/gnome/desktop/interface/color-scheme \"'prefer-dark'\""
+          "dconf write /org/gnome/desktop/interface/color-scheme \
+           \"'prefer-dark'\""
         |> ignore
     | Light ->
         Util.run_command
@@ -113,7 +112,8 @@ module Linux = struct
            prefer-light"
         |> ignore;
         Util.run_command
-          "dconf write /org/gnome/desktop/interface/color-scheme \"'prefer-light'\""
+          "dconf write /org/gnome/desktop/interface/color-scheme \
+           \"'prefer-light'\""
         |> ignore
 
   let set_theme state =
@@ -143,15 +143,15 @@ let toggle_dark_mode () =
   | Some Light | None -> set_dark_mode Dark
 
 let tmux_theme_file = function
-  | Dark -> "~/.config/tmux/theme-dark.conf"
-  | Light -> "~/.config/tmux/theme-light.conf"
+  | Dark -> "~/.config/tmux/theme-dark.tmux"
+  | Light -> "~/.config/tmux/theme-light.tmux"
 
 let apply_tmux_theme state =
-  if Util.run_no_output "tmux list-sessions" then (
+  if Util.run_no_output "tmux list-sessions" then
     let theme = tmux_theme_file state in
     let _ = Util.run_no_output ("tmux source-file " ^ theme) in
     let _ = Util.run_no_output "tmux refresh-client -S" in
-    ())
+    ()
 
 let sync_tmux () =
   match get_current_state () with
@@ -162,9 +162,7 @@ let sync_tmux () =
 
 let lock_file () =
   let base =
-    match Sys.getenv_opt "XDG_RUNTIME_DIR" with
-    | Some d -> d
-    | None -> "/tmp"
+    match Sys.getenv_opt "XDG_RUNTIME_DIR" with Some d -> d | None -> "/tmp"
   in
   Filename.concat base "tmux-theme-sync.lockfile"
 
