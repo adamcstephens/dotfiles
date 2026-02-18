@@ -12,6 +12,9 @@ export ELECTRON_OZONE_PLATFORM_HINT=auto
 
 export APP2UNIT_SLICES='a=app-graphical.slice b=background-graphical.slice s=session-graphical.slice'
 
+# for polkit-agent
+systemctl import-environment --user XDG_SESSION_ID
+
 uwsm finalize
 systemctl --user start wayland-session.target
 
