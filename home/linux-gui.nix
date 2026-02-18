@@ -89,7 +89,7 @@ in
     };
 
     theme = {
-      name = "Flat-Remix-GTK-Orange-Darkest-Solid";
+      name = "Flat-Remix-GTK-Yellow-Darkest-Solid";
       package = pkgs.flat-remix-gtk;
     };
   };
@@ -107,7 +107,7 @@ in
     ++ [
       pkgs.app2unit
 
-      pkgs.etBook
+      pkgs.et-book
       pkgs.fira
       pkgs.font-awesome
       pkgs.jetbrains-mono
