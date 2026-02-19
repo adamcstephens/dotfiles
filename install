@@ -5,21 +5,24 @@ SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 pushd "$SCRIPT_DIR" || exit 1
 
 if ! command -v nix >/dev/null 2>&1; then
-  curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install --no-confirm --diagnostic-endpoint=""
+  curl --proto '=https' --tlsv1.2 -sSf -L https://install.lix.systems/lix | sh -s -- install --no-confirm --enable-flakes
 
   # shellcheck disable=SC1091
   . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
 fi
 rm -rf ~/.config/fish
 
-PIPE_FEATURE="pipe-operators"
-if nix --version | grep -q lix; then
-  PIPE_FEATURE="pipe-operator"
-fi
-
 if [ ! -e ~/.config/nix/nix.conf ]; then
+  PIPE_FEATURE="pipe-operators"
+  if nix --version | grep -q lix; then
+    PIPE_FEATURE="pipe-operator"
+  fi
+
   mkdir -vp ~/.config/nix
-  echo "extra-experimental-features = nix-command flakes $PIPE_FEATURE" >~/.config/nix/nix.conf
+  echo "extra-experimental-features = nix-command flakes $PIPE_FEATURE
+extra-substituters = https://cache.junco.dev/v4?priority=41
+extra-trusted-public-keys = v4:6cq9xeMAepF20fTnv+ChvLkPLzBtCD9NRUaKrarK+nU=
+" >~/.config/nix/nix.conf
 fi
 
 case "$(uname)" in
