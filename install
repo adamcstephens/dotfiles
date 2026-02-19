@@ -12,8 +12,15 @@ if ! command -v nix >/dev/null 2>&1; then
 fi
 rm -rf ~/.config/fish
 
-export NIX_CONFIG="extra-experimental-features = nix-command flakes pipe-operator pipe-operators
-$NIX_CONFIG"
+PIPE_FEATURE="pipe-operators"
+if nix --version | grep -q lix; then
+  PIPE_FEATURE="pipe-operator"
+fi
+
+if [ ! -e ~/.config/nix/nix.conf ]; then
+  mkdir -vp ~/.config/nix
+  echo "extra-experimental-features = nix-command flakes $PIPE_FEATURE" >~/.config/nix/nix.conf
+fi
 
 case "$(uname)" in
 Darwin)
