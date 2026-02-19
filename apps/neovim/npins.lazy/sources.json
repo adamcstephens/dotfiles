@@ -81,6 +81,19 @@
       "url": null,
       "hash": "sha256-TlQ3oTRirUf/Po1KWCL4wDp8GgrJXzYWQx0C5qyZFeQ="
     },
+    "fzf-lua-frecency.nvim": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "elanmed",
+        "repo": "fzf-lua-frecency.nvim"
+      },
+      "branch": "master",
+      "submodules": false,
+      "revision": "5726403e132fe8699d670c7ef8d59dbed887b4e6",
+      "url": "https://github.com/elanmed/fzf-lua-frecency.nvim/archive/5726403e132fe8699d670c7ef8d59dbed887b4e6.tar.gz",
+      "hash": "sha256-81FwV/rmFv5wbP1KtnvC+kwvUmg60lqk1haGwuV2N+A="
+    },
     "gitsigns.nvim": {
       "type": "GitRelease",
       "repository": {
