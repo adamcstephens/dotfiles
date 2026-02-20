@@ -6,18 +6,7 @@
   ...
 }:
 let
-  package =
-    if pkgs.stdenv.isx86_64 then
-      pkgs.zellij
-    else
-      pkgs.zellij.overrideAttrs {
-        patches = [
-          (pkgs.fetchpatch2 {
-            url = "https://github.com/Enzime/zellij/commit/60acd439985339e518f090821c0e4eb366ce6014.patch?full_index=1";
-            hash = "sha256-pCFDEbgceNzZAjxSXme/nQ4iQc8qNw2IOMtec16cr8k=";
-          })
-        ];
-      };
+  package = pkgs.zellij;
 in
 {
   home.packages = [
