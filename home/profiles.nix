@@ -115,7 +115,8 @@ in
             apps.zk.enable = true;
             gui = {
               dpi = 148;
-              sleepTimeout = 900;
+              # autosuspend in nixos handles this
+              dontSleep = true;
               wayland.enable = true;
             };
           };
