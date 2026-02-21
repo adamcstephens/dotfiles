@@ -1,5 +1,5 @@
 # https://halloy.chat/configuration/
-theme = { light = "IntelliJ Light", dark = "Oxocarbon" }
+theme = { light = "Modus Operandi", dark = "Moonfly" }
 
 [font]
 family = "JetBrains Mono"
