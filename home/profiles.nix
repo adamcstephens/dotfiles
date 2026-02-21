@@ -112,7 +112,11 @@ in
 
         {
           dotfiles = {
-            apps.zk.enable = true;
+            apps = {
+              hypridle.enable = false;
+              swayidle.enable = true;
+              zk.enable = true;
+            };
             gui = {
               dpi = 148;
               # autosuspend in nixos handles this

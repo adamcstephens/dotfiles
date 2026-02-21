@@ -70,7 +70,7 @@ in
     };
 
     systemd.user.services.hypridle.Service.Environment = [
-      "PATH=${config.home.homeDirectory}/.nix-profile/bin:/run/current-system/sw/bin"
+      "PATH=${config.home.profileDirectory}/bin:/run/current-system/sw/bin"
     ];
   };
 }
