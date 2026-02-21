@@ -44,3 +44,6 @@ quit_application = "ctrl+q"
 [buffer.channel.topic_banner]
 enabled = true
 max_lines = 1
+
+[preview]
+exclude = ['''https://.*github\.com/.*''', '''https://.*codeberg\.org/.*''']
