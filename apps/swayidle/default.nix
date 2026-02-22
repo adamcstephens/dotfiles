@@ -13,7 +13,7 @@ let
       ${lib.getExe pkgs.swayidle} \
       idlehint 120 \
       timeout 600 'app2unit -- wayland-locker' \
-      timeout 900 'app2unit -- wayland-monitor off' \
+      timeout 900 'app2unit -- wayland-monitor off' resume 'app2unit -- wayland-monitor on' \
     ''
     + lib.optionalString (!config.dotfiles.gui.dontSleep) "timeout 360 'systemctl sleep' \\"
     + ''
