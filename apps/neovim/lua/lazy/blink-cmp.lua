@@ -1,46 +1,60 @@
 return {
-  "blink.cmp",
+  {
+    "blink.cmp",
 
-  event = "InsertEnter",
+    event = "InsertEnter",
 
-  after = function()
-    require("blink.cmp").setup({
-      completion = {
-        ghost_text = { enabled = true },
-        list = {
-          selection = {
-            preselect = false,
-            auto_insert = true,
-          },
-        },
-      },
-      keymap = {
-        preset = "enter",
+    after = function()
+      require("lz.n").trigger_load("blink-copilot")
 
-        ["<C-j>"] = { "select_next", "fallback" },
-        ["<C-k>"] = { "select_prev", "fallback" },
-      },
-      sources = {
-        per_filetype = {
-          codecompanion = { "codecompanion" },
-        },
-        providers = {
-          snippets = {
-            opts = {
-              search_paths = {
-                "~/.dotfiles/apps/neovim/snippets",
-              },
+      require("blink.cmp").setup({
+        completion = {
+          ghost_text = { enabled = true },
+          list = {
+            selection = {
+              preselect = false,
+              auto_insert = true,
             },
           },
-          codecompanion = {
-            name = "CodeCompanion",
-            module = "codecompanion.providers.completion.blink",
-            enabled = true,
-            score_offset = 10,
-            async = true,
+        },
+        keymap = {
+          preset = "enter",
+
+          ["<C-j>"] = { "select_next", "fallback" },
+          ["<C-k>"] = { "select_prev", "fallback" },
+        },
+        sources = {
+          default = { "lsp", "copilot", "buffer", "snippets", "path" },
+          per_filetype = {
+            codecompanion = { "codecompanion" },
+          },
+          providers = {
+            snippets = {
+              opts = {
+                search_paths = {
+                  "~/.dotfiles/apps/neovim/snippets",
+                },
+              },
+            },
+            codecompanion = {
+              name = "CodeCompanion",
+              module = "codecompanion.providers.completion.blink",
+              enabled = true,
+              score_offset = 10,
+              async = true,
+            },
+            copilot = {
+              name = "copilot",
+              module = "blink-copilot",
+              score_offset = 100,
+              async = true,
+            },
           },
         },
-      },
-    })
-  end,
+      })
+    end,
+  },
+  {
+    "blink-copilot",
+  },
 }

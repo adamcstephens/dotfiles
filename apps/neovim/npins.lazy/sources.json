@@ -12,6 +12,22 @@
       "url": null,
       "hash": "sha256-f/li32jpVigbZANnnbgSArnOH4nusj0DUz7952K+Znw="
     },
+    "blink-copilot": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "GitHub",
+        "owner": "fang2hou",
+        "repo": "blink-copilot"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "submodules": false,
+      "version": "v1.4.1",
+      "revision": "41e91a659bd9b8cba9ba2ea68a69b52ba5a9ebd8",
+      "url": "https://api.github.com/repos/fang2hou/blink-copilot/tarball/refs/tags/v1.4.1",
+      "hash": "sha256-Ya9RagGE+Awo9xuF8XtwgAO2B9DKJLNsLDU2wsEMumo="
+    },
     "bufferline.nvim": {
       "type": "GitRelease",
       "repository": {
