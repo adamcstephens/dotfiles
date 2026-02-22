@@ -67,6 +67,17 @@
             text = ''
               export PATH=${../bin}:$PATH
 
+              if [ -h .dotfiles ]; then
+                echo "Refusing to overwrite dotfiles link"
+                exit 1
+              fi
+
+              if [ ! -e .dotfiles ]; then
+                git clone https://codeberg.org/adamcstephens/dotfiles.git .dotfiles
+              fi
+
+              cd .dotfiles
+
               if [ -d .jj ]; then
                 jj home -r
               else
@@ -76,7 +87,7 @@
           }
           |> lib.getExe;
 
-        WorkingDirectory = "${config.home.homeDirectory}/.dotfiles";
+        WorkingDirectory = config.home.homeDirectory;
       };
 
       Install = {
