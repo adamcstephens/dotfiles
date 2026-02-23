@@ -55,3 +55,23 @@ jobs:
             --click="${{ forgejo.server_url}}/${{ forgejo.repository }}/actions/runs/${{ forgejo.run_number }}/jobs/${{ forgejo.job }}/attempt/${{ forgejo.run_attempt }}" \
             ${{ vars.NTFY_HOST }}/alerts \
             "Build failure in ${FORGEJO_REPOSITORY}"
+
+  sower-dev:
+    runs-on: local/x86_64-linux
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: next
+        run: |
+          nix develop .#ci --command attic login junco $ATTIC_URL --set-default $ATTIC_KEY
+
+          nix develop .#ci --command sower build \
+            --cache attic://junco:$ATTIC_CACHE \
+            --memory-limit 5600 \
+            --seed \
+            --tag dev=true \
+            .#sowerJobs.x86_64-linux.home/kale
+        env:
+          SOWER_ENDPOINT: ${{ vars.SOWER_DEV_ENDPOINT }}
+          SOWER_ACCESS_TOKEN: ${{ secrets.SOWER_DEV_ACCESS_TOKEN }}
