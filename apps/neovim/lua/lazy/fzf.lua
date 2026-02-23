@@ -89,6 +89,11 @@ return {
         function()
           require("fzf-lua-frecency").frecency({
             cwd_only = true,
+            fzf_opts = {
+              ["--multi"] = true,
+              ["--scheme"] = "path",
+              ["--no-sort"] = false,
+            },
           })
         end,
         desc = "file picker",
