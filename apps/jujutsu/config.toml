@@ -71,6 +71,7 @@ diff-formatter = ":git"
 # diff-formatter = ["difft", "--color=always", "$left", "$right"]
 editor = "nvim"
 pager = ["delta"]
+default-command = "status"
 # pager = ":builtin"
 
 [user]
