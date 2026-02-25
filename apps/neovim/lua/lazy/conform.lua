@@ -26,6 +26,8 @@ return {
             return { "black" }
           elseif require("conform").get_formatter_info("ruff_format", bufnr).available then
             return { "ruff_lint", "ruff_format" }
+          else
+            return {}
           end
         end,
         sql = { "sqlfluff" },
