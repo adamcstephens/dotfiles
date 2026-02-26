@@ -5,6 +5,7 @@ import json
 import logging
 import os
 import re
+import shlex
 import subprocess
 import sys
 import time
@@ -44,6 +45,18 @@ def tmux_to_kitty(tab: str) -> dict:
     tab_split = tab.split(",")
 
     return {"id": int(tab_split[0]), "title": tab_split[1]}
+
+
+def tmux_panes_left_to_right(window_target: str) -> list[str]:
+    pane_lines = run(f"tmux list-panes -t {shlex.quote(window_target)} -F '#{{pane_id}} #{{pane_left}}'").splitlines()
+    panes = []
+
+    for pane in pane_lines:
+        pane_id, pane_left = pane.split(" ", 1)
+        panes.append((pane_id, int(pane_left)))
+
+    panes.sort(key=lambda p: p[1])
+    return [pane_id for pane_id, _ in panes]
 
 
 def prj_finder(remote: bool = False) -> str:
@@ -92,10 +105,6 @@ def open_project(project: str, remote: bool = False):
     existing_tab: int
 
     if is_tmux:
-        if remote:
-            print("unsupported tmux + remote")
-            sys.exit(1)
-
         tabs = list(
             map(
                 tmux_to_kitty,
@@ -107,13 +116,35 @@ def open_project(project: str, remote: bool = False):
         if existing_tab > 0:
             run(f"tmux select-window -t {wname}")
         else:
-            run(f"tmux new-window -c {project} -n {wname}")
-            run(f"tmux select-window -t {wname}")
-            run(f"tmux split-window -h -c {project}")
-            run("tmux send-keys 'vim .' 'C-m'")
-            run(f"tmux split-window -h -c {project}")
-            run("tmux select-layout even-horizontal")
-            run("tmux select-pane -l")
+            if remote:
+                if os.path.exists(project):
+                    run(f"tmux new-window -c {shlex.quote(project)} -n {wname}")
+                else:
+                    run(f"tmux new-window -n {wname}")
+
+                run(f"tmux select-window -t {wname}")
+                run("tmux split-window -h")
+                run("tmux split-window -h")
+                run("tmux select-layout even-horizontal")
+                pane_ids = tmux_panes_left_to_right(wname)
+                remote_shell_cmd = f"ssh {host} -t {shlex.quote(f'cd {project} && exec $SHELL -l')}"
+                remote_vim_cmd = f"ssh {host} -t {shlex.quote(f'cd {project} && vim .; exec $SHELL -l')}"
+                middle_pane = pane_ids[1]
+
+                for pane_id in pane_ids:
+                    pane_cmd = remote_vim_cmd if pane_id == middle_pane else remote_shell_cmd
+                    run(f"tmux send-keys -t {pane_id} {shlex.quote(pane_cmd)} 'C-m'")
+
+                run(f"tmux select-pane -t {middle_pane}")
+                run("tmux select-pane -l")
+            else:
+                run(f"tmux new-window -c {shlex.quote(project)} -n {wname}")
+                run(f"tmux select-window -t {wname}")
+                run(f"tmux split-window -h -c {shlex.quote(project)}")
+                run("tmux send-keys 'vim .' 'C-m'")
+                run(f"tmux split-window -h -c {shlex.quote(project)}")
+                run("tmux select-layout even-horizontal")
+                run("tmux select-pane -l")
 
     elif is_zellij:
         tabs = run("zellij action query-tab-names").splitlines()
@@ -180,8 +211,29 @@ def open_ssh():
     wname: str = f"ssh@{selected_remote}"
 
     if is_tmux:
-        print("unsupported tmux + ssh")
-        sys.exit(1)
+        tabs = list(
+            map(
+                tmux_to_kitty,
+                run("tmux list-windows -F '#{window_index},#{window_name}'").split("\n"),
+            )
+        )
+        existing_tab = existing_tab_index(tabs, wname)
+
+        if existing_tab > 0:
+            run(f"tmux select-window -t {wname}")
+        else:
+            run(f"tmux new-window -n {wname}")
+            run(f"tmux select-window -t {wname}")
+            run("tmux split-window -h")
+            run("tmux split-window -h")
+            run("tmux select-layout even-horizontal")
+            pane_ids = tmux_panes_left_to_right(wname)
+
+            for pane_id in pane_ids:
+                run(f"tmux send-keys -t {pane_id} {shlex.quote(f'ssh {selected_remote}')} 'C-m'")
+
+            run(f"tmux select-pane -t {pane_ids[1]}")
+            run("tmux select-pane -l")
 
     elif is_zellij:
         tabs = run("zellij action query-tab-names").splitlines()
