@@ -47,6 +47,14 @@
     done
   '';
 
+  # fix lix not having add
+  home.activation.installPackages = lib.mkForce (
+    lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      nixProfileRemove home-manager-path
+      run nix profile install ${config.home.path}
+    ''
+  );
+
   systemd.user = lib.mkIf (!config.dotfiles.nixosManaged) {
     services.dotfiles-repo-pull = {
       Unit = {
