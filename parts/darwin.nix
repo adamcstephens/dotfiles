@@ -38,9 +38,9 @@
             buildMachines = [
               {
                 protocol = "ssh";
-                hostName = "nixos2.local";
+                hostName = "lima-default.local";
                 maxJobs = 4;
-                sshUser = "root";
+                sshUser = "adam";
                 supportedFeatures = [
                   "big-parallel"
                   "kvm"
@@ -49,7 +49,22 @@
                 systems = [
                   "aarch64-linux"
                 ];
+                sshKey = "/Users/adam/git/calmwave/cw/.lima/_config/user";
               }
+              # {
+              #   protocol = "ssh";
+              #   hostName = "nixos2.local";
+              #   maxJobs = 4;
+              #   sshUser = "root";
+              #   supportedFeatures = [
+              #     "big-parallel"
+              #     "kvm"
+              #     "nixos-test"
+              #   ];
+              #   systems = [
+              #     "aarch64-linux"
+              #   ];
+              # }
               {
                 protocol = "ssh";
                 hostName = "branch.tail68e370.ts.net";
