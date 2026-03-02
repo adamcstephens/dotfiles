@@ -47,6 +47,9 @@ module Util = struct
       Some (if state then Dark else Light)
     with _ -> None
 
+  let command_exists cmd =
+    Sys.command ("command -v " ^ cmd ^ " >/dev/null 2>&1") = 0
+
   let run_no_output cmd = Sys.command (cmd ^ " >/dev/null 2>&1") = 0
 end
 
@@ -75,14 +78,17 @@ module Linux = struct
     loop 0
 
   let get_state () =
-    match
-      Util.run_command
-        "gsettings get org.gnome.desktop.interface color-scheme 2>/dev/null || \
-         dconf read /org/gnome/desktop/interface/color-scheme 2>/dev/null"
-    with
-    | s when contains s "prefer-dark" -> Dark
-    | _ -> (
-        match Util.read_state () with Some state -> state | None -> Light)
+    if not (Util.command_exists "gsettings") then
+      match Util.read_state () with Some state -> state | None -> Light
+    else
+      match
+        Util.run_command
+          "gsettings get org.gnome.desktop.interface color-scheme 2>/dev/null || \
+           dconf read /org/gnome/desktop/interface/color-scheme 2>/dev/null"
+      with
+      | s when contains s "prefer-dark" -> Dark
+      | _ -> (
+          match Util.read_state () with Some state -> state | None -> Light)
 
   let set_gtk_theme = function
     | Dark ->
