@@ -12,3 +12,6 @@
 .vscodium
 .worktree/
 
+openspec/
+.codex/
+.opencode/
