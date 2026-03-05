@@ -338,11 +338,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1772599866,
-        "narHash": "sha256-ZRgK7/jIfzzeNH/Pu4QHhB4XdDnSQaBWeq4yB6q6qrg=",
+        "lastModified": 1772690300,
+        "narHash": "sha256-ewZsPKirRRdYAI/M/8roaKS31PnKCfYdcw2cEVB8sdM=",
         "ref": "main",
-        "rev": "b57996d5b067c5e32834f12fb14a6c2f0c2c86d7",
-        "revCount": 968,
+        "rev": "205a186caf087b3a1f28322518ba2d6348c04669",
+        "revCount": 973,
         "type": "git",
         "url": "https://codeberg.org/adamcstephens/sower.git"
       },
