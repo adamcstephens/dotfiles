@@ -4,9 +4,7 @@
 .claude/
 .direnv/
 .lsp/
+.workspaces/
 .worktree/
-AGENTS.md
-CLAUDE.md
-GEMINI.md
 result
 result-*
