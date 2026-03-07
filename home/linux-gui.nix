@@ -124,7 +124,6 @@ in
       pkgs.blueberry
       pkgs.bluez
       pkgs.ddcutil
-      pkgs.light
       pkgs.networkmanagerapplet
 
       # audio
