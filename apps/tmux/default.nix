@@ -32,4 +32,6 @@
   '';
 
   xdg.configFile."tmux/smart-splits.tmux".source = "${npins."smart-splits.nvim"}/smart-splits.tmux";
+
+  xdg.configFile."tmux/tmux-click-copy".source = npins."tmux-click-copy";
 }

@@ -54,6 +54,19 @@
       "url": "https://github.com/adamcstephens/smart-splits.nvim/archive/d1d8365d85ff6072569d20e7ec1e63e27e3e3c5a.tar.gz",
       "hash": "sha256-5RjAFQRwrZDDghGqKl4i73JkJvJB0xHfsN2YMOVglQY="
     },
+    "tmux-click-copy": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "aless3",
+        "repo": "tmux-click-copy"
+      },
+      "branch": "main",
+      "submodules": false,
+      "revision": "1953566217b66fbf7000f6f2f6263533edeea424",
+      "url": "https://github.com/aless3/tmux-click-copy/archive/1953566217b66fbf7000f6f2f6263533edeea424.tar.gz",
+      "hash": "sha256-V3UcKPZzHo3GNen+MFthM+VyITm51iDLXksxzVsbVck="
+    },
     "vim-moonfly-colors": {
       "type": "Git",
       "repository": {
