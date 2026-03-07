@@ -15,3 +15,5 @@
 openspec/
 .codex/
 .opencode/
+.claude/
+CLAUDE.md

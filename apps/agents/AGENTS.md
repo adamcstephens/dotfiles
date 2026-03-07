@@ -1,0 +1,6 @@
+- Don't add unnecessary shell chaining (`;`, `&&`, `| tail`, `2>&1`, `||`) to Bash tool commands. Run commands cleanly and use separate tool calls when needed.
+- Don't chain bash commands,`>/dev/null; echo "exit: $?` is bad.
+- Avoid using subshells
+- Don't use `find` with `exec`
+- Always prefer project local paths over absolute paths for the same destination
+- When archiving openspec changes, always sync delta specs to main specs (skip the prompt, just do it).
