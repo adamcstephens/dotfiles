@@ -8,7 +8,10 @@
     home-manager-unstable.url = "github:nix-community/home-manager";
     home-manager-unstable.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
+    epi.url = "git+https://codeberg.org/adamcstephens/epi";
     flake-parts.url = "github:hercules-ci/flake-parts";
+    llm-agents.url = "github:numtide/llm-agents.nix";
+    llm-agents.inputs.nixpkgs.follows = "nixpkgs-unstable";
     mnw.url = "github:Gerg-L/mnw";
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     neovim-nightly-overlay.inputs.flake-parts.follows = "flake-parts";
@@ -31,6 +34,7 @@
         ./home/profiles.nix
         ./ocamlPackages/part.nix
         ./parts/darwin.nix
+        ./parts/epi.nix
         ./parts/overlays.nix
         ./parts/packages.nix
         ./templates/part.nix

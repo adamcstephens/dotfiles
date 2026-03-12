@@ -61,5 +61,7 @@ in
   ++ lib.optionals pkgs.stdenv.isLinux [
     pkgs._1password-cli
     pkgs.bws
+
+    inputs.epi.packages.${pkgs.stdenv.hostPlatform.system}.epi
   ];
 }
