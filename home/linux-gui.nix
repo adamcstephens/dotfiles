@@ -121,7 +121,7 @@ in
       pkgs.libnotify
 
       pkgs.brightnessctl
-      pkgs.blueberry
+      pkgs.blueman
       pkgs.bluez
       pkgs.ddcutil
       pkgs.networkmanagerapplet
@@ -169,13 +169,6 @@ in
     Install.WantedBy = [ "graphical-session.target" ];
     Unit.PartOf = [ "graphical-session.target" ];
     Service.ExecStart = lib.getExe pkgs.soteria;
-  };
-
-  systemd.user.services.blueberry-tray = {
-    Install.WantedBy = [ "xserver-session.target" ];
-    Unit.PartOf = [ "xserver-session.target" ];
-    Service.ExecStart = "${pkgs.blueberry}/bin/blueberry-tray";
-    Service.Type = "forking";
   };
 
   systemd.user.targets.wayland-session = {

@@ -122,7 +122,7 @@ in
     systemd.user.services.waybar = {
       Service.Environment = lib.mkForce "PATH=${
         lib.makeBinPath [
-          pkgs.blueberry
+          pkgs.blueman
           pkgs.networkmanagerapplet
           pkgs.pwvucontrol
         ]

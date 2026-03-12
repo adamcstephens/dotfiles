@@ -73,7 +73,7 @@
       disabled = "";
     };
     tooltip-format = "{}";
-    on-click = "blueberry";
+    on-click = "blueman";
   };
   network = {
     interface = lib.mkDefault "wlp0s20f3";
