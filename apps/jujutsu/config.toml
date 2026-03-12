@@ -14,9 +14,9 @@ pr = ["util", "exec", "--", "git-jjpr"]
 tug = ["bookmark", "move", "--from", "closest_bookmark(@-)", "--to", "@-"]
 
 
-[fsmonitor]
-backend = "watchman"
-watchman.register-snapshot-trigger = true
+# [fsmonitor]
+# backend = "watchman"
+# watchman.register-snapshot-trigger = true
 
 [git]
 sign-on-push = true

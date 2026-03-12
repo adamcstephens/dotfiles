@@ -7,6 +7,8 @@ description: Guides version control operations using jujutsu (jj) instead of git
 
 Use `jj` commands instead of `git` for all version control operations when the repository is managed by jujutsu (indicated by a `.jj/` directory).
 
+*Always* include your Co-Authored-By when making commits
+
 ## Key Differences from Git
 
 - No staging area—all changes are automatically tracked in the working copy
@@ -60,6 +62,15 @@ jj squash --into <rev>  # squash @ into specific revision
 jj bookmark create <name>        # create bookmark at @
 jj bookmark set <name> -r <rev>  # move bookmark to revision
 jj bookmark list                 # list all bookmarks
+```
+
+### Restore files or changes
+```bash
+jj restore                        # restore all paths in @ to parent state (empties the commit)
+jj restore file1.txt file2.txt    # restore specific files in @ to parent state
+jj restore --from <rev>           # restore all paths in @ from a specific revision
+jj restore --from <rev> file.txt  # restore a single file in @ from a specific revision
+jj restore --changes-in <rev>     # undo the changes introduced by a revision
 ```
 
 ### Undo operations

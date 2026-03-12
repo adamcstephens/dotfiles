@@ -127,7 +127,6 @@
     pkgs.ncdu
     pkgs.python314
     pkgs.tio
-    pkgs.viddy
     pkgs.wget
     pkgs.zoxide
   ]
