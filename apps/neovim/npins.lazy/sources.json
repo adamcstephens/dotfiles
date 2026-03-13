@@ -200,9 +200,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "0203a9608d63eda57679b01e69f33a7b4c34b0d1",
+      "revision": "3addf05a791ea256c36438220aced91c03071712",
       "url": null,
-      "hash": "sha256-+KwR8rOsKC6jz3suGTv1A6bhzh25cXi7Mm/ChlqIhrs="
+      "hash": "sha256-QZVvbO/VdMKOHm4CEdAKmcBjCNgAxgHjA7yTWmVnaYw="
     },
     "nvim-surround": {
       "type": "GitRelease",
@@ -257,9 +257,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "47f92ab676bf1c3d00a40100429c7b089f81a5fc",
+      "revision": "8804ffb81f9784dcd0e9af43a2068fb55282c4dd",
       "url": null,
-      "hash": "sha256-xxB6TKn0Nv9GoYc7Mz+rhAUX8OXaHSkD3zZzFgSSHkQ="
+      "hash": "sha256-N80LTAsWds4cmnHJkn18boo+zcBRj3jNPHABOyczoBM="
     },
     "osc11.nvim": {
       "type": "Git",
@@ -270,9 +270,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "919e015336b737c3c567f56de677740684a41cf5",
-      "url": "https://github.com/afonsofrancof/osc11.nvim/archive/919e015336b737c3c567f56de677740684a41cf5.tar.gz",
-      "hash": "sha256-s7HyMf90WdO0pyk1EQeRzOwK+5jbPDaoooK/sKroCw4="
+      "revision": "548380b6ef9f45d877215657bca55f5ca2ca4f1a",
+      "url": "https://github.com/afonsofrancof/osc11.nvim/archive/548380b6ef9f45d877215657bca55f5ca2ca4f1a.tar.gz",
+      "hash": "sha256-yYwH+OX6RPU55caXPxMJNkjEVb8MDj1wJnrRfWolOJU="
     },
     "quicker.nvim": {
       "type": "GitRelease",
