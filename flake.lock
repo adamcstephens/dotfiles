@@ -81,11 +81,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1773459573,
-        "narHash": "sha256-eWb/zdjWPs3djGGntli04DXqUj0heKzo9bkGxNwIMYw=",
+        "lastModified": 1773515647,
+        "narHash": "sha256-/D6Rxfz3blCnI3S4Oh8CAHdtIwhdv+EnnXk/ZcsQRo4=",
         "ref": "refs/heads/main",
-        "rev": "e40f30d47e0775b0e951f948ac41a39d78258839",
-        "revCount": 108,
+        "rev": "3d5dec8fc87929de8c2ce6325462bd89643bfe1f",
+        "revCount": 126,
         "type": "git",
         "url": "https://codeberg.org/adamcstephens/epi"
       },

@@ -20,6 +20,7 @@ in
   imports = [
     ../apps/agents
     ../apps/atuin
+    ../apps/epi
     ../apps/ruff
     ../apps/ssh
     ../apps/zk
@@ -61,7 +62,5 @@ in
   ++ lib.optionals pkgs.stdenv.isLinux [
     pkgs._1password-cli
     pkgs.bws
-
-    inputs.epi.packages.${pkgs.stdenv.hostPlatform.system}.epi
   ];
 }

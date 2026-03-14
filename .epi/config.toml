@@ -1,2 +1,2 @@
 target = ".#dotfiles"
-mounts = ["."]
+default_name = "dotfiles"

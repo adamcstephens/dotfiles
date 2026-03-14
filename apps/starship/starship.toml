@@ -46,3 +46,7 @@ format = ""
 [username]
 style_user = "fg:244"
 format = "[$user@]($style)"
+
+[custom.systemd_virt]
+command = 'systemd-detect-virt'
+when = 'test (systemd-detect-virt) != "none"'

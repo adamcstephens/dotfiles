@@ -14,9 +14,13 @@ let
         extraStorePaths = [
           config.home-manager.users.adam.home.activationPackage
         ];
+        # hooks.post-launch = {
+        #   "claude-auth"
+        # };
       };
 
       environment.systemPackages = [
+        inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.beads
         inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.claude-code
         inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.openspec
       ];
