@@ -11,3 +11,4 @@
 
 Working with nix:
 - in a flake project (flake.nix at root), you can find a nixpkgs copy on the system by running `nix flake metadata`
+- Always use `pkgs.fetchpatch` instead of vendoring patch files into the repo
