@@ -8,6 +8,8 @@
 - When archiving openspec changes, always sync delta specs to main specs (skip the prompt, just do it).
 - When writing commands to files, always use the long version (--name) over short (-n) if available.
 - Always use `/usr/bin/env` when writing scripts
+- NEVER delete or move git tags. Tags are immutable. If a tag is on the wrong commit, create a new one (e.g. v0.5.1) instead.
+- NEVER modify immutable jj commits without explicit permission. Create a new commit on top instead.
 
 Working with nix:
 - in a flake project (flake.nix at root), you can find a nixpkgs copy on the system by running `nix flake metadata`
