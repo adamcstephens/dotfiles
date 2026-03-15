@@ -20,9 +20,7 @@ let
       };
 
       environment.systemPackages = [
-        inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.beads
         inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.claude-code
-        inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.openspec
       ];
 
       home-manager = {
@@ -43,23 +41,27 @@ let
         };
       };
 
-      nix.settings.extra-experimental-features =
-        lib.optionals (
-          config.nix.package.pname == "nix" && lib.versionAtLeast config.nix.package.version "2.24"
-        ) [ "pipe-operators" ]
-        ++ lib.optionals (
-          config.nix.package.pname == "lix" && lib.versionAtLeast config.nix.package.version "2.91"
-        ) [ "pipe-operator" ];
+      nix.settings = {
+        extra-experimental-features =
+          lib.optionals (
+            config.nix.package.pname == "nix" && lib.versionAtLeast config.nix.package.version "2.24"
+          ) [ "pipe-operators" ]
+          ++ lib.optionals (
+            config.nix.package.pname == "lix" && lib.versionAtLeast config.nix.package.version "2.91"
+          ) [ "pipe-operator" ];
+        substituters = [ "https://cache.junco.dev/v4" ];
+        trusted-public-keys = [ "v4:6cq9xeMAepF20fTnv+ChvLkPLzBtCD9NRUaKrarK+nU=" ];
+      };
 
       programs.fish.enable = true;
 
       users.users.adam = {
         isNormalUser = true;
-        group = "adam";
+        group = "users";
         extraGroups = [ "wheel" ];
         shell = config.programs.fish.package;
+        linger = true;
       };
-      users.groups.adam = { };
     };
 in
 {
