@@ -1,7 +1,8 @@
 return {
   "rainbow-delimiters.nvim",
 
-  event = "DeferredUIEnter",
+  lazy = true,
+  -- event = "DeferredUIEnter",
 
   after = function()
     require("rainbow-delimiters.setup").setup({})
