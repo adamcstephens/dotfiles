@@ -10,6 +10,7 @@
 - Always use `/usr/bin/env` when writing scripts
 - NEVER delete or move git tags. Tags are immutable. If a tag is on the wrong commit, create a new one (e.g. v0.5.1) instead.
 - NEVER modify immutable jj commits without explicit permission. Create a new commit on top instead.
+- In a jj repo, before starting work on a new task, run `jj new` if the current change (`@`) is non-empty. If `@` is already empty, reuse it.
 
 Working with nix:
 - in a flake project (flake.nix at root), you can find a nixpkgs copy on the system by running `nix flake metadata`
