@@ -13,5 +13,9 @@
       path = ./ocaml;
       description = "OCaml project template";
     };
+    rust = {
+      path = ./rust;
+      description = "Rust project template";
+    };
   };
 }
