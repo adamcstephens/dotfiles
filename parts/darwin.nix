@@ -90,6 +90,7 @@
             settings = {
               auto-optimise-store = false;
               accept-flake-config = false;
+              builders-use-substitutes = true;
               experimental-features = [
                 "nix-command"
                 "flakes"
