@@ -1,7 +1,16 @@
 #!/usr/bin/env nix-shell
 #! nix-shell -i bash -p gojq
 
-# need a few keys from this massive state file, or won't be logged in and requires onboarding
-# shellcheck: disable=SC2016
-gojq --arg p "$PWD" '{oauthAccount, userID, hasCompletedOnboarding, projects: (if .projects[$p] then {($p): .projects[$p]} else {} end)}' <~/.claude.json |
-  "$EPI_BIN" exec "$EPI_INSTANCE" -- "cat > ~/.claude.json"
+if [ ! -e ~/.claude ]; then
+  mkdir -vp ~/.claude
+fi
+
+if [ -f ~/.claude.json ] && [ ! -h ~/.claude.json ]; then
+  mv ~/.claude.json ~/.claude/.claude.json
+fi
+
+if [ ! -e ~/.claude/.claude.json ]; then
+  echo "{}" >~/.claude/.claude.json
+fi
+
+"$EPI_BIN" exec "$EPI_INSTANCE" -- "test -h ~/.claude.json || ln -s ~/.claude/.claude.json ~/.claude.json"
