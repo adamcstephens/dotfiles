@@ -27,9 +27,12 @@ let
         users.adam = {
           imports = self.homeModules.core-dev ++ [
             {
-              nix.registry.nixpkgs.flake = lib.mkForce inputs.nixpkgs-unstable;
               dotfiles.nixosManaged = true;
+              home.packages = [
+                inputs.vein.packages.${pkgs.stdenv.hostPlatform.system}.vein
+              ];
               nix.package = lib.mkOverride 30 config.nix.package;
+              nix.registry.nixpkgs.flake = lib.mkForce inputs.nixpkgs-unstable;
             }
           ];
         };

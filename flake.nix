@@ -9,6 +9,7 @@
     home-manager-unstable.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
     epi.url = "git+https://codeberg.org/adamcstephens/epi";
+    vein.url = "git+https://codeberg.org/adamcstephens/vein";
     flake-parts.url = "github:hercules-ci/flake-parts";
     llm-agents.url = "github:numtide/llm-agents.nix";
     llm-agents.inputs.nixpkgs.follows = "nixpkgs-unstable";
