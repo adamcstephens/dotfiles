@@ -15,21 +15,6 @@
       "url": null,
       "hash": "sha256-QSkiyV70kFkArCnTXYRR+Dt4i5XSq072tYnOnHbKEBc="
     },
-    "nvim-ufo": {
-      "type": "GitRelease",
-      "repository": {
-        "type": "Git",
-        "url": "https://github.com/kevinhwang91/nvim-ufo"
-      },
-      "pre_releases": false,
-      "version_upper_bound": null,
-      "release_prefix": null,
-      "submodules": false,
-      "version": "v1.5.0",
-      "revision": "61463090a4f55f5d080236ea62f09d1cd8976ff3",
-      "url": null,
-      "hash": "sha256-iGQgpFP7jVpau9pSxNb5WNuGco5boTNBVp//nza3JWY="
-    },
     "promise-async": {
       "type": "GitRelease",
       "repository": {

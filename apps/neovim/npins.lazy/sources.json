@@ -234,6 +234,19 @@
       "url": null,
       "hash": "sha256-f+0DMYzLlciwpEsq91htyZuk/6orvygeu7laBNEXX/g="
     },
+    "nvim-ufo": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "kevinhwang91",
+        "repo": "nvim-ufo"
+      },
+      "branch": "main",
+      "submodules": false,
+      "revision": "ab3eb124062422d276fae49e0dd63b3ad1062cfc",
+      "url": "https://github.com/kevinhwang91/nvim-ufo/archive/ab3eb124062422d276fae49e0dd63b3ad1062cfc.tar.gz",
+      "hash": "sha256-zISVDb+YwBr5aQ/LdACKJ62eAzvtYVFpon4uh5OjA3A="
+    },
     "ocaml.nvim": {
       "type": "GitRelease",
       "repository": {
