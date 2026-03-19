@@ -1,0 +1,46 @@
+#!/usr/bin/env python3
+"""Wake and shell: close existing SSH connection, send WoL, wait for ping, then SSH in."""
+
+import socket
+import subprocess
+import sys
+import time
+import os
+
+
+def is_reachable(host, timeout=1):
+    """Check if host is reachable via TCP connect to SSH port."""
+    try:
+        with socket.create_connection((host, 22), timeout=timeout):
+            return True
+    except OSError:
+        return False
+
+
+def main():
+    if len(sys.argv) != 3:
+        print(f"Usage: {sys.argv[0]} <name> <mac>", file=sys.stderr)
+        sys.exit(1)
+
+    name = sys.argv[1]
+    mac = sys.argv[2]
+
+    # Close existing SSH control connection (ignore failure)
+    subprocess.run(["ssh", "-O", "exit", name], stderr=subprocess.DEVNULL)
+
+    # Send wake-on-lan via blank
+    subprocess.run(["ssh", "blank", "wakey-wake", mac], check=True)
+
+    # Wait until SSH port is reachable
+    print(f"Waiting for {name} to come up...")
+    while not is_reachable(name):
+        time.sleep(1)
+
+    print(f"{name} is up, connecting...")
+
+    # Replace process with ssh
+    os.execvp("ssh", ["ssh", name])
+
+
+if __name__ == "__main__":
+    main()
