@@ -1,5 +1,4 @@
-#!/usr/bin/env nix-shell
-#! nix-shell -i bash -p gojq
+#!/usr/bin/env bash
 
 if [ ! -e ~/.claude ]; then
   mkdir -vp ~/.claude

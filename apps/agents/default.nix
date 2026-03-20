@@ -13,8 +13,9 @@ let
       config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/agents/AGENTS.md";
 in
 {
-  home.file.".claude/CLAUDE.md".source = AGENTS;
+  # unmanage these for epi
+  # home.file.".claude/CLAUDE.md".source = AGENTS;
+  # home.file.".claude/skills".source = skills;
 
-  home.file.".claude/skills".source = skills;
   home.file.".config/agents/skills".source = skills;
 }
