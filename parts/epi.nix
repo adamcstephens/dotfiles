@@ -1,4 +1,9 @@
-{ inputs, self, ... }:
+{
+  inputs,
+  lib,
+  self,
+  ...
+}:
 let
   common =
 
@@ -92,5 +97,15 @@ in
         common
       ];
     };
+  };
+
+  flake.sowerJobs.x86_64-linux = {
+    "epi/agents/disk" = self.nixosConfigurations.agents.config.system.build.image;
+    "epi/agents/initrd" = self.nixosConfigurations.agents.config.system.build.initialRamdisk;
+    "epi/agents/kernel" = self.nixosConfigurations.agents.config.system.build.kernel;
+
+    "epi/dotfiles/disk" = self.nixosConfigurations.dotfiles.config.system.build.image;
+    "epi/dotfiles/initrd" = self.nixosConfigurations.dotfiles.config.system.build.initialRamdisk;
+    "epi/dotfiles/kernel" = self.nixosConfigurations.dotfiles.config.system.build.kernel;
   };
 }
