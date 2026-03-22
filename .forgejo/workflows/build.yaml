@@ -18,8 +18,8 @@ jobs:
       - name: next
         run: |
           nix develop .#ci --command attic login junco $ATTIC_URL --set-default $ATTIC_KEY
-          nix develop .#ci --command sower build --cache attic://junco:$ATTIC_CACHE --eval-jobs 1 --seed .#sowerJobs.aarch64-linux.home/aarch64-linux
-          nix develop .#ci --command sower build --cache attic://junco:$ATTIC_CACHE --eval-jobs 1 --seed .#sowerJobs.aarch64-linux.home/nixos2
+          nix develop .#ci --command sower build --cache niks3:// --cache attic://junco:$ATTIC_CACHE --eval-jobs 1 --seed .#sowerJobs.aarch64-linux.home/aarch64-linux
+          nix develop .#ci --command sower build --cache niks3:// --cache attic://junco:$ATTIC_CACHE --eval-jobs 1 --seed .#sowerJobs.aarch64-linux.home/nixos2
         env:
           SOWER_ENDPOINT: ${{ vars.SOWER_NEXT_ENDPOINT }}
           SOWER_ACCESS_TOKEN: ${{ secrets.SOWER_ACCESS_TOKEN }}
@@ -42,7 +42,7 @@ jobs:
       - name: next
         run: |
           nix develop .#ci --command attic login junco $ATTIC_URL --set-default $ATTIC_KEY
-          nix develop .#ci --command sower build --cache attic://junco:$ATTIC_CACHE --eval-jobs 12 .#sowerJobs.x86_64-linux --seed
+          nix develop .#ci --command sower build --cache niks3:// --cache attic://junco:$ATTIC_CACHE --eval-jobs 12 .#sowerJobs.x86_64-linux --seed
         env:
           SOWER_ENDPOINT: ${{ vars.SOWER_NEXT_ENDPOINT }}
           SOWER_ACCESS_TOKEN: ${{ secrets.SOWER_ACCESS_TOKEN }}
@@ -67,6 +67,7 @@ jobs:
           nix develop .#ci --command attic login junco $ATTIC_URL --set-default $ATTIC_KEY
 
           nix develop .#ci --command sower build \
+            --cache niks3:// \
             --cache attic://junco:$ATTIC_CACHE \
             --memory-limit 5600 \
             --seed \
