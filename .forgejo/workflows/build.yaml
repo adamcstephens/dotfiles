@@ -7,6 +7,8 @@ env:
   ATTIC_KEY: ${{ secrets.ATTIC_KEY }}
   NTFY_HOST: ${{ vars.NTFY_HOST }}
   NTFY_USER: ${{ secrets.NTFY_USER }}
+  NIKS3_SERVER_URL: ${{ vars.NIKS3_SERVER_URL }}
+  NIKS3_AUTH_TOKEN: ${{ secrets.NIKS3_AUTH_TOKEN }}
 
 jobs:
   build-and-seed-aarch64:
