@@ -79,7 +79,7 @@ jobs:
             --memory-limit 5600 \
             --seed \
             --tag dev=true \
-            .#sowerJobs.x86_64-linux.home/core-dev
+            .#sowerJobs.x86_64-linux.home/agents
         env:
           SOWER_ENDPOINT: ${{ vars.SOWER_DEV_ENDPOINT }}
           SOWER_ACCESS_TOKEN: ${{ secrets.SOWER_DEV_ACCESS_TOKEN }}

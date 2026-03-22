@@ -86,6 +86,17 @@ in
       ];
     };
 
+    agents = {
+      nixpkgs = inputs.nixpkgs-unstable;
+      home-manager = inputs.home-manager-unstable;
+      modules = [
+        ./core-dev.nix
+        {
+          dotfiles.apps.agents.enable = true;
+        }
+      ];
+    };
+
     core-dev = {
       nixpkgs = inputs.nixpkgs-unstable;
       home-manager = inputs.home-manager-unstable;

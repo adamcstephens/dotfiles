@@ -24,19 +24,11 @@ let
         # };
       };
 
-      environment.systemPackages = [
-        inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.claude-code
-        inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.opencode
-      ];
-
       home-manager = {
         users.adam = {
-          imports = self.homeModules.core-dev ++ [
+          imports = self.homeModules.agents ++ [
             {
               dotfiles.nixosManaged = true;
-              home.packages = [
-                inputs.vein.packages.${pkgs.stdenv.hostPlatform.system}.vein
-              ];
               nix.package = lib.mkOverride 30 config.nix.package;
               nix.registry.nixpkgs.flake = lib.mkForce inputs.nixpkgs-unstable;
             }

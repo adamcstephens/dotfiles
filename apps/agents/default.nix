@@ -1,4 +1,10 @@
-{ config, ... }:
+{
+  config,
+  inputs,
+  lib,
+  pkgs,
+  ...
+}:
 let
   skills =
     if config.dotfiles.nixosManaged then
@@ -11,11 +17,25 @@ let
       ./AGENTS.md
     else
       config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/agents/AGENTS.md";
+
+  cfg = config.dotfiles.apps.agents;
 in
 {
-  # unmanage these for epi
-  # home.file.".claude/CLAUDE.md".source = AGENTS;
-  # home.file.".claude/skills".source = skills;
+  options = {
+    dotfiles.apps.agents.enable = lib.mkEnableOption "agent things";
+  };
 
-  home.file.".config/agents/skills".source = skills;
+  config = lib.mkIf cfg.enable {
+    # unmanage these for epi
+    # home.file.".claude/CLAUDE.md".source = AGENTS;
+    # home.file.".claude/skills".source = skills;
+
+    home.packages = [
+      inputs.vein.packages.${pkgs.stdenv.hostPlatform.system}.vein
+      inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.claude-code
+      inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.opencode
+    ];
+
+    home.file.".config/agents/skills".source = skills;
+  };
 }
