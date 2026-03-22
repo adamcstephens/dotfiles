@@ -10,6 +10,7 @@ mkShellNoCC {
     pkgs.attic-client
     pkgs.git
     pkgs.just
+    pkgs.niks3
     pkgs.ntfy-sh
   ]
   ++ lib.optionals pkgs.stdenv.isLinux [
