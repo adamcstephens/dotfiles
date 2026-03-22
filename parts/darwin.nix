@@ -113,8 +113,14 @@
                 "@admin"
               ];
 
-              substituters = [ "https://cache.junco.dev/v4?priority=41" ];
-              trusted-public-keys = [ "v4:6cq9xeMAepF20fTnv+ChvLkPLzBtCD9NRUaKrarK+nU=" ];
+              substituters = [
+                "https://cache.junco.dev/v4?priority=41"
+                "https://cache-v5.junco.dev?priority=41"
+              ];
+              trusted-public-keys = [
+                "v4:6cq9xeMAepF20fTnv+ChvLkPLzBtCD9NRUaKrarK+nU="
+                "cache-v6:tXeE+WhO6k2OoUoNSzmQVIckjXtl14mtO+z0ZwAIork="
+              ];
               extra-platforms = "x86_64-darwin";
             };
           };

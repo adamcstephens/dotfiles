@@ -58,8 +58,14 @@ let
           ++ lib.optionals (
             config.nix.package.pname == "lix" && lib.versionAtLeast config.nix.package.version "2.91"
           ) [ "pipe-operator" ];
-        substituters = [ "https://cache.junco.dev/v4" ];
-        trusted-public-keys = [ "v4:6cq9xeMAepF20fTnv+ChvLkPLzBtCD9NRUaKrarK+nU=" ];
+        substituters = [
+          "https://cache.junco.dev/v4"
+          "https://cache-v5.junco.dev"
+        ];
+        trusted-public-keys = [
+          "v4:6cq9xeMAepF20fTnv+ChvLkPLzBtCD9NRUaKrarK+nU="
+          "cache-v6:tXeE+WhO6k2OoUoNSzmQVIckjXtl14mtO+z0ZwAIork="
+        ];
       };
 
       programs.fish.enable = true;
