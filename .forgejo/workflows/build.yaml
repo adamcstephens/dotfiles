@@ -8,7 +8,6 @@ env:
   NTFY_HOST: ${{ vars.NTFY_HOST }}
   NTFY_USER: ${{ secrets.NTFY_USER }}
   NIKS3_SERVER_URL: ${{ vars.NIKS3_SERVER_URL }}
-  NIKS3_AUTH_TOKEN: ${{ secrets.NIKS3_AUTH_TOKEN }}
 
 jobs:
   build-and-seed-aarch64:
@@ -19,6 +18,8 @@ jobs:
 
       - name: next
         run: |
+          printf '%s' '${{ secrets.NIKS3_AUTH_TOKEN }}' > ../niks3-token
+          export NIKS3_AUTH_TOKEN_FILE="$PWD/../niks3-token"
           nix develop .#ci --command attic login junco $ATTIC_URL --set-default $ATTIC_KEY
           nix develop .#ci --command sower build --cache niks3:// --cache attic://junco:$ATTIC_CACHE --eval-jobs 1 --seed .#sowerJobs.aarch64-linux.home/aarch64-linux
           nix develop .#ci --command sower build --cache niks3:// --cache attic://junco:$ATTIC_CACHE --eval-jobs 1 --seed .#sowerJobs.aarch64-linux.home/nixos2
@@ -43,6 +44,8 @@ jobs:
 
       - name: next
         run: |
+          printf '%s' '${{ secrets.NIKS3_AUTH_TOKEN }}' > ../niks3-token
+          export NIKS3_AUTH_TOKEN_FILE="$PWD/../niks3-token"
           nix develop .#ci --command attic login junco $ATTIC_URL --set-default $ATTIC_KEY
           nix develop .#ci --command sower build --cache niks3:// --cache attic://junco:$ATTIC_CACHE --eval-jobs 12 .#sowerJobs.x86_64-linux --seed
         env:
@@ -66,6 +69,8 @@ jobs:
 
       - name: next
         run: |
+          printf '%s' '${{ secrets.NIKS3_AUTH_TOKEN }}' > ../niks3-token
+          export NIKS3_AUTH_TOKEN_FILE="$PWD/../niks3-token"
           nix develop .#ci --command attic login junco $ATTIC_URL --set-default $ATTIC_KEY
 
           nix develop .#ci --command sower build \
