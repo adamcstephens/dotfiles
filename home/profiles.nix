@@ -169,11 +169,14 @@ in
           { config, pkgs, ... }:
           {
             dotfiles.apps = {
+              agents.enable = true;
               tmuxinator.enable = true;
               zk.defaultNotebook = "${config.home.homeDirectory}/git/calmwave/notebook";
             };
 
             home.packages = [
+              inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.copilot-cli
+              inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.gemini-cli
               pkgs.docker
               pkgs.entr
               pkgs.git-lfs
