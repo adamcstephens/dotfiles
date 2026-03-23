@@ -15,7 +15,7 @@ in
 {
   home.packages = [
     inputs.nixpkgs-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.jujutsu
-    pkgs.watchman
+    # pkgs.watchman
   ];
 
   home.file."${configDir}/config.toml".source =
