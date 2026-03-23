@@ -1,2 +1,2 @@
 target = ".#dotfiles"
-default_name = "dotfiles"
+default_name = "dotfiles-dev"
