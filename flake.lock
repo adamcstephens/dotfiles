@@ -81,11 +81,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1774401750,
-        "narHash": "sha256-sWXejvkLggFP8eOuNXdVrcaUVI1QWwH78h6G5CGHqyw=",
+        "lastModified": 1774496430,
+        "narHash": "sha256-B7CuKFQpFT7RAq5PJvF21NByah4brXaaGTGYTZYYXA4=",
         "ref": "refs/heads/main",
-        "rev": "d247dcef68c6e807679428f0d49ea7f18002c08d",
-        "revCount": 170,
+        "rev": "2b32f596e4e5335c0ad1da33bb263e0939f4d022",
+        "revCount": 171,
         "type": "git",
         "url": "https://codeberg.org/adamcstephens/epi"
       },
@@ -255,11 +255,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1774451242,
-        "narHash": "sha256-P4H6/DKVglU2fsKYquJdTbjQeUDrJq6hfbvmd3bdTD4=",
+        "lastModified": 1774495900,
+        "narHash": "sha256-3nR7HKulLSib37PWcWrfELuSrikFLiTqAqX2HQ9dV7g=",
         "owner": "numtide",
         "repo": "llm-agents.nix",
-        "rev": "56fd69cf8cb8b62864cc2f9b64775990ac5a1bd5",
+        "rev": "3e06fd5f99381f8101c8e7b5a1473154dd0095cd",
         "type": "github"
       },
       "original": {
@@ -578,11 +578,11 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1774405830,
-        "narHash": "sha256-dgeCJHzz3Ku7LHOfz7k1OPieB65Cox7HUl71iBfqYUs=",
+        "lastModified": 1774496130,
+        "narHash": "sha256-jfrN7SLJvs9D+cQmvckwqm61J7XGHSsMYrT0jJKqfJ0=",
         "ref": "main",
-        "rev": "17d52b83b48f8087531f741bbbeb07d72c85699b",
-        "revCount": 1033,
+        "rev": "ffd61554360186e0e6401a4b25ad45736313c84a",
+        "revCount": 1040,
         "type": "git",
         "url": "https://codeberg.org/adamcstephens/sower.git"
       },
