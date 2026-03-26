@@ -7,7 +7,6 @@
 mkShellNoCC {
   name = "ci";
   packages = [
-    pkgs.attic-client
     pkgs.git
     pkgs.just
     pkgs.niks3

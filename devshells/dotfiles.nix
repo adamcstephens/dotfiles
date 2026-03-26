@@ -11,7 +11,6 @@ mkShell {
   name = "dots";
 
   packages = [
-    pkgs.attic-client
     pkgs.gitMinimal
     pkgs.just
     pkgs.niks3

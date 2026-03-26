@@ -2,9 +2,6 @@ on:
   push:
 
 env:
-  ATTIC_URL: ${{ vars.ATTIC_URL }}
-  ATTIC_CACHE: ${{ vars.ATTIC_CACHE }}
-  ATTIC_KEY: ${{ secrets.ATTIC_KEY }}
   NTFY_HOST: ${{ vars.NTFY_HOST }}
   NTFY_USER: ${{ secrets.NTFY_USER }}
   NIKS3_SERVER_URL: ${{ vars.NIKS3_SERVER_URL }}
@@ -20,9 +17,8 @@ jobs:
         run: |
           printf '%s' '${{ secrets.NIKS3_AUTH_TOKEN }}' > ../niks3-token
           export NIKS3_AUTH_TOKEN_FILE="$PWD/../niks3-token"
-          nix develop .#ci --command attic login junco $ATTIC_URL --set-default $ATTIC_KEY
-          nix develop .#ci --command sower build --cache niks3:// --cache attic://junco:$ATTIC_CACHE --eval-jobs 1 --seed .#sowerJobs.aarch64-linux.home/aarch64-linux
-          nix develop .#ci --command sower build --cache niks3:// --cache attic://junco:$ATTIC_CACHE --eval-jobs 1 --seed .#sowerJobs.aarch64-linux.home/nixos2
+          nix develop .#ci --command sower build --cache niks3:// --eval-jobs 1 --seed .#sowerJobs.aarch64-linux.home/aarch64-linux
+          nix develop .#ci --command sower build --cache niks3:// --eval-jobs 1 --seed .#sowerJobs.aarch64-linux.home/nixos2
         env:
           SOWER_ENDPOINT: ${{ vars.SOWER_NEXT_ENDPOINT }}
           SOWER_ACCESS_TOKEN: ${{ secrets.SOWER_ACCESS_TOKEN }}
@@ -46,8 +42,7 @@ jobs:
         run: |
           printf '%s' '${{ secrets.NIKS3_AUTH_TOKEN }}' > ../niks3-token
           export NIKS3_AUTH_TOKEN_FILE="$PWD/../niks3-token"
-          nix develop .#ci --command attic login junco $ATTIC_URL --set-default $ATTIC_KEY
-          nix develop .#ci --command sower build --cache niks3:// --cache attic://junco:$ATTIC_CACHE --eval-jobs 12 .#sowerJobs.x86_64-linux --seed
+          nix develop .#ci --command sower build --cache niks3:// --eval-jobs 12 .#sowerJobs.x86_64-linux --seed
         env:
           SOWER_ENDPOINT: ${{ vars.SOWER_NEXT_ENDPOINT }}
           SOWER_ACCESS_TOKEN: ${{ secrets.SOWER_ACCESS_TOKEN }}
@@ -71,11 +66,9 @@ jobs:
         run: |
           printf '%s' '${{ secrets.NIKS3_AUTH_TOKEN }}' > ../niks3-token
           export NIKS3_AUTH_TOKEN_FILE="$PWD/../niks3-token"
-          nix develop .#ci --command attic login junco $ATTIC_URL --set-default $ATTIC_KEY
 
           nix develop .#ci --command sower build \
             --cache niks3:// \
-            --cache attic://junco:$ATTIC_CACHE \
             --memory-limit 5600 \
             --seed \
             --tag dev=true \
