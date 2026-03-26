@@ -32,6 +32,8 @@ in
 
     home.packages = [
       inputs.vein.packages.${pkgs.stdenv.hostPlatform.system}.vein
+
+      inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.agent-browser
       inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.claude-code
       inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.opencode
     ];
