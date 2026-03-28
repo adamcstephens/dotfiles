@@ -85,7 +85,7 @@ def main():
 
     while True:
         monitor.start()
-        proc = subprocess.run(["ssh", name])
+        proc = subprocess.run(["ssh", "-4", name])
         monitor.stop()
 
         if proc.returncode == 0:
