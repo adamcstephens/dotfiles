@@ -255,11 +255,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1774551325,
-        "narHash": "sha256-Q2dh3zBu3oixlEWAbtXGL44O6jtEP/Tog0P44qu0RJY=",
+        "lastModified": 1774668340,
+        "narHash": "sha256-ylJdC183ipwYKLZDWpPynZA4HKJ4oiav+JMbKE73X1U=",
         "owner": "numtide",
         "repo": "llm-agents.nix",
-        "rev": "8348bf988abbbafa5f105f819a6153f1dbe22a2e",
+        "rev": "9ab5add7450c178e21479619c6db52111d88d167",
         "type": "github"
       },
       "original": {
@@ -634,11 +634,11 @@
         "nixpkgs": "nixpkgs_4"
       },
       "locked": {
-        "lastModified": 1774121903,
-        "narHash": "sha256-PYNGEhy6187umcIH1HcGYVYhUS594u80cOBTYxIUFDc=",
+        "lastModified": 1774672548,
+        "narHash": "sha256-0Bh4XwkBusPeok7pmidxJrSLJbFWWlWnZ0DjX74KyOI=",
         "ref": "refs/heads/main",
-        "rev": "e6c55798b9a16418f32020880ef5b43075edd8b7",
-        "revCount": 52,
+        "rev": "721ec84666c71e036620a23ae407baf18a7b0c76",
+        "revCount": 53,
         "type": "git",
         "url": "https://codeberg.org/adamcstephens/vein"
       },
