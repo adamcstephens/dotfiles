@@ -175,6 +175,7 @@ in
             };
 
             home.packages = [
+              inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.claude-code-acp
               inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.copilot-cli
               inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.gemini-cli
               pkgs.docker
