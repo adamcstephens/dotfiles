@@ -1,4 +1,4 @@
-- CRITICAL: When I'm asking questions, proposing ideas, or saying things like "is it possible to...", "what if we...", "could we..." — NEVER implement. No code edits, no file writes. Only discuss. Wait for an explicit "do it", "go ahead", "implement it", etc. before touching any code. This applies even if the answer seems obvious.
+- *CRITICAL* I like to ask questions, this should *never* be construed to mean implement or revert immediately. Questions are to be answered, not acted upon. This applies even if the answer seems obvious.
 - Don't add unnecessary shell chaining (`;`, `&&`, `| tail`, `2>&1`, `||`) to Bash tool commands. Run commands cleanly and use separate tool calls when needed.
 - Don't chain bash commands,`>/dev/null; echo "exit: $?` is bad.
 - Avoid using subshells
