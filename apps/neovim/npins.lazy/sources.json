@@ -65,10 +65,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v19.6.0",
-      "revision": "af7f1042a424e17ab49cef93442f33a55d514de6",
+      "version": "v19.8.0",
+      "revision": "4b3f17b558fc92a3e10c4310e562b1ca7458c6a9",
       "url": null,
-      "hash": "sha256-QEBlzkkgNTLWAey8/HImga8gYiFXOU+ITjPwODUlnfo="
+      "hash": "sha256-eR7LnGdU93OQjpElDjHQArKNqL58y+PRSvVFqrJZPY8="
     },
     "conform.nvim": {
       "type": "GitRelease",
@@ -93,9 +93,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "9e58bb5e8db19d8bf2626de8e94a85fc305a8c1e",
+      "revision": "564146278b3d5fe4ffa389cd103bab20f9b515d6",
       "url": null,
-      "hash": "sha256-TlQ3oTRirUf/Po1KWCL4wDp8GgrJXzYWQx0C5qyZFeQ="
+      "hash": "sha256-JbnGoZMApLtq4lSdGolcpKdsneolSOrzIi+O5yR2NDQ="
     },
     "fzf-lua-frecency.nvim": {
       "type": "Git",
@@ -120,10 +120,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v2.0.0",
-      "revision": "42d6aed4e94e0f0bbced16bbdcc42f57673bd75e",
+      "version": "v2.1.0",
+      "revision": "a462f416e2ce4744531c6256252dee99a7d34a83",
       "url": null,
-      "hash": "sha256-L89x9n2OKCyUuWaNXPkuNGBEU9EBX+9zRlzS1Kfw428="
+      "hash": "sha256-ETVmrlUXmCiekjd68mY8657wg9CdQk/rPRv5ABO9pxk="
     },
     "lualine.nvim": {
       "type": "Git",
@@ -200,9 +200,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "46204c8fdaa36a9aa3768780450e4bc7a210025f",
+      "revision": "8e2084bf5e40c79c1f42210a6ef96a0a4793a763",
       "url": null,
-      "hash": "sha256-TtvGEfxkddKFzAhOKcMrWyloG77IvRC94B9a5jEM420="
+      "hash": "sha256-u3Ggo1HaSqFNtQjKe/7n3MR9fjfCukuNr8966wNtixo="
     },
     "nvim-surround": {
       "type": "GitRelease",
@@ -270,9 +270,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "4f4ff2c2a4bd979bf8f20a90e44be1b86855cfea",
+      "revision": "df533d6da724109bf08446392db860fdceddbd0c",
       "url": null,
-      "hash": "sha256-ABj3BvzUHep1jNWUf2diVfLGdHxdTIGIEUZjE5HffQo="
+      "hash": "sha256-Lm0/59MWndrpU6D4+Gdpgnel7B3Q6jR3z6cgSUF2XuQ="
     },
     "osc11.nvim": {
       "type": "Git",
