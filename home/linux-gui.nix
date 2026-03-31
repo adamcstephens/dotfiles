@@ -135,7 +135,7 @@ in
       pkgs.firefox
 
       # apps
-      pkgs.nemo
+      pkgs.nemo-with-extensions
       pkgs.fractal
       pkgs.eog
       pkgs.hunspell
