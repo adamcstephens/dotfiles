@@ -52,6 +52,37 @@
         config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/ghostty/mac.conf";
   };
 
+  xdg.dataFile."dbus-1/services/com.mitchellh.ghostty.service" = lib.mkIf pkgs.stdenv.isLinux {
+    text = ''
+      [D-BUS Service]
+      Name=com.mitchellh.ghostty
+      SystemdService=ghostty.service
+      Exec=${pkgs.ghostty}/bin/ghostty --gtk-single-instance=true --initial-window=false
+    '';
+  };
+
+  systemd.user.services.ghostty = lib.mkIf pkgs.stdenv.isLinux {
+    Unit = {
+      Description = "Ghostty";
+      After = [
+        "graphical-session.target"
+        "dbus.socket"
+      ];
+      Requires = [ "dbus.socket" ];
+    };
+
+    Service = {
+      Type = "notify-reload";
+      ReloadSignal = "SIGUSR2";
+      BusName = "com.mitchellh.ghostty";
+      ExecStart = "${pkgs.ghostty}/bin/ghostty --gtk-single-instance=true --initial-window=false";
+    };
+
+    Install = {
+      WantedBy = [ "graphical-session.target" ];
+    };
+  };
+
   xdg.configFile."ghostty/themes/moonfly".source =
     npins.vim-moonfly-colors + "/extras/moonfly-ghostty.conf";
   xdg.configFile."ghostty/themes/Modus Operandi".source =
