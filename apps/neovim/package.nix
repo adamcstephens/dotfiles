@@ -22,13 +22,14 @@
   lua-language-server,
   nixd,
   nodejs,
-  nodePackages,
+  prettier,
   ruff,
   shellcheck,
   shfmt,
   sqlite,
   stylua,
   taplo,
+  vscode-json-languageserver,
   yaml-language-server,
 }:
 
@@ -117,8 +118,8 @@ mnw.lib.wrap pkgs {
       lua-language-server
       nixd
       nodejs
-      nodePackages.prettier
-      nodePackages.vscode-json-languageserver
+      prettier
+      vscode-json-languageserver
       ruff
       shellcheck
       shfmt
