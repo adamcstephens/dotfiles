@@ -12,7 +12,7 @@
       packages = rec {
         neovim = pkgs.callPackage ./package.nix {
           inherit (inputs) mnw;
-          neovim = inputs'.neovim-nightly-overlay.packages.neovim;
+          neovim = pkgs.neovim-unwrapped;
         };
 
         neovim-full = neovim.override {

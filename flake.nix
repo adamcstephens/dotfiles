@@ -14,9 +14,6 @@
     llm-agents.url = "github:numtide/llm-agents.nix";
     llm-agents.inputs.nixpkgs.follows = "nixpkgs-unstable";
     mnw.url = "github:Gerg-L/mnw";
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
-    neovim-nightly-overlay.inputs.flake-parts.follows = "flake-parts";
-    neovim-nightly-overlay.inputs.nixpkgs.follows = "nixpkgs-unstable";
     nix-colors.url = "github:misterio77/nix-colors";
     nix-darwin.url = "github:lnl7/nix-darwin/master";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs-unstable";
