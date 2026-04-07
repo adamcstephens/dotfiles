@@ -12,11 +12,11 @@ let
     else
       config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/agents/skills";
 
-  AGENTS =
-    if config.dotfiles.nixosManaged then
-      ./AGENTS.md
-    else
-      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/agents/AGENTS.md";
+  # AGENTS =
+  #   if config.dotfiles.nixosManaged then
+  #     ./AGENTS.md
+  #   else
+  #     config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/agents/AGENTS.md";
 
   cfg = config.dotfiles.apps.agents;
 in
@@ -35,6 +35,7 @@ in
 
       inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.agent-browser
       inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.claude-code
+      inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.copilot-cli
       inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.opencode
     ];
 
