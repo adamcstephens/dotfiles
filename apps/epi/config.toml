@@ -1,4 +1,4 @@
 target = "~/.dotfiles#agents"
 cpus = 4
 memory = 4096
-mounts = ["~/.claude"]
+mounts = ["~/.claude", "~/.copilot"]
