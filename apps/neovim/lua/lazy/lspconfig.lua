@@ -8,28 +8,23 @@ return {
     vim.lsp.enable("bashls")
 
     -- elixir
-    vim.lsp.config("elixirls", {
-      cmd = { "elixir-ls" },
-      on_attach = function(client)
-        client.server_capabilities.semanticTokensProvider = nil
-        -- client.server_capabilities.documentFormattingProvider = nil
-        -- client.server_capabilities.documentRangeFormattingProvider = nil
-      end,
-      root_dir = function(bufnr, on_dir)
-        local matches = vim.fs.find({ "mix.lock" }, { upward = true, limit = 1 })
-        local child_or_root_path, maybe_umbrella_path = unpack(matches)
-        local root_dir = vim.fs.dirname(maybe_umbrella_path or child_or_root_path)
-
-        on_dir(root_dir)
-      end,
-    })
-    -- vim.lsp.enable("elixirls")
     vim.lsp.config("expert", {
       on_attach = function(client)
         client.server_capabilities.semanticTokensProvider = nil
       end,
     })
     vim.lsp.enable("expert")
+    vim.lsp.config("dexter", {
+      cmd = { "dexter", "lsp" },
+      root_markers = { ".dexter.db", ".git", "mix.exs" },
+      filetypes = { "elixir", "eelixir", "heex" },
+      init_options = {
+        followDelegates = true, -- jump through defdelegate to the target function
+        -- stdlibPath = "",      -- override Elixir stdlib path (auto-detected)
+        -- debug = false,        -- verbose logging to stderr (view with :LspLog)
+      },
+    })
+    vim.lsp.enable("dexter")
 
     -- fish
     vim.lsp.enable("fish_lsp")
