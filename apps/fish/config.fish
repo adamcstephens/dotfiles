@@ -60,6 +60,7 @@ status is-interactive; and begin
     abbr --add -- jjd 'jj diff'
     abbr --add -- jjgf 'jj git fetch --all-remotes'
     abbr --add -- jjgp 'jj git push'
+    abbr --add -- jjl 'jj log --limit 10'
     abbr --add -- l 'll -a'
     abbr --add -- la 'eza -a'
     abbr --add -- ll 'eza -lg'
