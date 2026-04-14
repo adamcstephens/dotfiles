@@ -19,6 +19,7 @@ stdenv.mkDerivation (finalAttrs: {
   };
 
   postPatch = ''
+    #test
     substituteInPlace dark-mode.xcodeproj/project.pbxproj \
       --replace-fail 'MACOSX_DEPLOYMENT_TARGET = 10.10' \
                      'MACOSX_DEPLOYMENT_TARGET = ${stdenv.hostPlatform.darwinMinVersion}'
