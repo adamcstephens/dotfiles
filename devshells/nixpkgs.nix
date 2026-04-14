@@ -11,20 +11,11 @@ mkShellNoCC {
     with pkgs;
     [
       common-updater-scripts
-      deadnix
-      hydra-check
-      nix-bisect
-      nix-prefetch
-      nix-generate-from-cpan
-      nix-init
-      nix-output-monitor
-      nix-prefetch-github
-      nix-prefetch-scripts
-      nix-tree
-      nix-update
-      nixpkgs-fmt
-      nixpkgs-review
-      nurl
+      lixPackageSets.latest.nix-init
+      lixPackageSets.latest.nix-update
+      lixPackageSets.latest.nixpkgs-reviewFull
+      lixPackageSets.latest.nurl
+
       pyright
       treefmt
     ]
