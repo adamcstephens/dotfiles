@@ -28,24 +28,9 @@
           {
             inherit npins;
 
-            # lix overlay for flake-parts
-            pkgs = import inputs.nixpkgs {
-              inherit system;
-              overlays = [
-                (import "${npins.lix-nixos-module}/overlay.nix" {
-                  # use nixpkgs lix matching version from module
-                  lix = null;
-                })
-              ];
-            };
             pkgs-unstable = import inputs.nixpkgs-unstable {
               inherit system;
-              overlays = [
-                (import "${npins.lix-nixos-module}/overlay.nix" {
-                  # use nixpkgs lix matching version from module
-                  lix = null;
-                })
-              ];
+              overlays = [ ];
             };
           }
         else

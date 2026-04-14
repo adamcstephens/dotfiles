@@ -44,12 +44,6 @@ in
             nixpkgs = {
               overlays = [
                 self.overlays.dotfiles
-              ]
-              ++ lib.optionals (profile.system != "aarch64-darwin") [
-                (import "${npins.lix-nixos-module}/overlay.nix" {
-                  # use nixpkgs lix matching version from module
-                  lix = null;
-                })
               ];
 
               config.allowUnfreePredicate =

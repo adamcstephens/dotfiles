@@ -16,18 +16,6 @@
       "url": "https://api.github.com/repos/abenz1267/elephant/tarball/refs/tags/v2.21.0",
       "hash": "sha256-h7Rw0vlb0n0Jsk21WJPm7H+1T1bG+PEuxE5cJ2TZl8A="
     },
-    "lix": {
-      "type": "Tarball",
-      "url": "https://git.junco.dev/lix-project/lix/archive/2.94.0.tar.gz",
-      "locked_url": "https://git.junco.dev/api/v1/repos/lix-project/lix/archive/43dc3b987fb47bd45ee7ed6967febac2595c468e.tar.gz?rev=43dc3b987fb47bd45ee7ed6967febac2595c468e",
-      "hash": "sha256-X6X3NhgLnpkgWUbLs0nLjusNx/el3L1EkVm6OHqY2z8="
-    },
-    "lix-nixos-module": {
-      "type": "Tarball",
-      "url": "https://git.junco.dev/lix-project/nixos-module/archive/6b1163ae63da888649bde98f94cb7eaacb1dbd4e.tar.gz",
-      "locked_url": "https://git.junco.dev/api/v1/repos/lix-project/nixos-module/archive/6b1163ae63da888649bde98f94cb7eaacb1dbd4e.tar.gz?rev=6b1163ae63da888649bde98f94cb7eaacb1dbd4e",
-      "hash": "sha256-+xnokdpOZYIA/A2H3HkgdgDYaV7hnbYjg5Kr8Gdeh5E="
-    },
     "modus-themes.nvim": {
       "type": "Git",
       "repository": {
