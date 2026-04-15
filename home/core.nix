@@ -132,6 +132,9 @@
   ]
   ++ lib.optionals pkgs.stdenv.isLinux [
     pkgs.ghostty.terminfo
+  ]
+  ++ lib.optionals pkgs.stdenv.isDarwin [
+    pkgs.ghostty-bin.terminfo
   ];
 
   home.sessionVariables = {

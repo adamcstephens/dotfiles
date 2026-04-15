@@ -86,6 +86,7 @@
             distributedBuilds = true;
 
             enable = true;
+            package = pkgs.lixPackageSets.latest.lix;
 
             settings = {
               auto-optimise-store = false;

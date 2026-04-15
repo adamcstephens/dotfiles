@@ -5,7 +5,9 @@ SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 pushd "$SCRIPT_DIR" || exit 1
 
 if ! command -v nix >/dev/null 2>&1; then
-  curl --proto '=https' --tlsv1.2 -sSf -L https://install.lix.systems/lix | sh -s -- install --no-confirm --enable-flakes
+  curl --proto '=https' --tlsv1.2 -sSf -L https://install.lix.systems/lix | sh -s -- install --no-confirm --enable-flakes --extra-conf "extra-trusted-users = @staff
+experimental-features = flakes
+"
 
   # shellcheck disable=SC1091
   . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
@@ -27,7 +29,10 @@ fi
 
 case "$(uname)" in
 Darwin)
-  nix develop .# -c just nix-darwin-bootstrap
+  set -e
+  artifact=$(nix shell nixpkgs#git -c nix build .#darwin/$(hostname -s) --print-out-paths)
+  set +e
+  sudo "${artifact}/sw/bin/darwin-rebuild" switch --flake ~/.dotfiles
   ;;
 Linux)
   nix run .#hm -- switch
