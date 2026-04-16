@@ -200,6 +200,25 @@
         nixpkgs = inputs.nixpkgs-unstable;
         modules = [
           inputs.home-manager-unstable.darwinModules.home-manager
+          (
+            { pkgs, ... }:
+            {
+              nix.settings.trusted-users = [ "remote-builder" ];
+
+              users.knownUsers = [ "remote-builder" ];
+
+              users.users.remote-builder = {
+                createHome = true;
+                openssh.authorizedKeys.keys = [
+                  "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFs5NiXbHfBIVf9O0VCBhmBuOSzXpSg1skLzinA5tJhu builder@builders"
+                ];
+
+                shell = "/bin/zsh";
+                uid = 1000;
+                home = "/Users/remote-builder";
+              };
+            }
+          )
 
           (
             { ... }:
