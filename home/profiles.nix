@@ -158,33 +158,12 @@ in
       home-manager = inputs.home-manager-unstable;
       modules = [
         ./core-darwin.nix
-        ../apps/postgresql
         (
           { config, pkgs, ... }:
           {
             dotfiles.apps = {
               agents.enable = true;
-              tmuxinator.enable = true;
-              zk.defaultNotebook = "${config.home.homeDirectory}/git/calmwave/notebook";
             };
-
-            home.packages = [
-              inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.claude-code-acp
-              inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.copilot-cli
-              inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.gemini-cli
-              pkgs.docker
-              pkgs.entr
-              pkgs.git-lfs
-              pkgs.sipcalc
-              pkgs.terraform-ls
-              pkgs.ty
-              pkgs.typescript-language-server
-            ];
-
-            xdg.configFile."direnv/direnv.toml".text = ''
-              [whitelist]
-              prefix = [ "~/git/calmwave/cw" ]
-            '';
           }
         )
       ];
