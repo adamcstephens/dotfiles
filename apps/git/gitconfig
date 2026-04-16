@@ -116,6 +116,9 @@ pushInsteadOf = https://git.sr.ht/~adamcstephens
 [url "git@codeberg.org:adamcstephens"]
 pushInsteadOf = https://codeberg.org/adamcstephens
 
+[url "https://github.com/"]
+pullInsteadOf = git@github.com:
+
 [user]
 name = Adam C. Stephens
 email = adam@valkor.net

@@ -221,10 +221,61 @@
           )
 
           (
-            { ... }:
+            { pkgs, ... }:
+            let
+              tomlFormat = pkgs.formats.toml { };
+
+              traefikDynamic = tomlFormat.generate "traefik-dynamic.toml" {
+                http.routers.lmstudio = {
+                  rule = "Host(`lmstudio.svc.junco.dev`)";
+                  service = "lmstudio";
+                  entryPoints = [ "websecure" ];
+                  tls = {
+                    certResolver = "junco";
+                    domains = [
+                      { main = "lmstudio.svc.junco.dev"; }
+                    ];
+                  };
+                };
+
+                http.services.lmstudio.loadBalancer.servers = [
+                  { url = "http://127.0.0.1:1234"; }
+                ];
+              };
+
+              traefikStatic = tomlFormat.generate "traefik-static.toml" {
+                entryPoints.websecure.address = ":8443";
+
+                certificatesResolvers.junco.acme = {
+                  caServer = "https://cert.junco.dev/acme/acme/directory";
+                  storage = "/Users/adam/.local/share/traefik/acme.json";
+                  tlsChallenge = { };
+                };
+
+                providers.file.filename = "${traefikDynamic}";
+              };
+            in
             {
               home-manager.users.adam = {
                 imports = homeModules;
+
+                home.activation.traefik-data = ''
+                  mkdir -p ~/.local/share/traefik
+                '';
+
+                launchd.agents.traefik = {
+                  enable = true;
+                  config = {
+                    ProgramArguments = [
+                      "${pkgs.traefik}/bin/traefik"
+                      "--configFile=${traefikStatic}"
+                    ];
+                    KeepAlive = true;
+                    RunAtLoad = true;
+                    StandardErrorPath = "/Users/adam/Library/Logs/traefik.log";
+                    StandardOutPath = "/Users/adam/Library/Logs/traefik.log";
+                  };
+                };
               };
 
               home-manager.extraSpecialArgs = {
