@@ -200,6 +200,7 @@
         nixpkgs = inputs.nixpkgs-unstable;
         modules = [
           inputs.home-manager-unstable.darwinModules.home-manager
+          ../darwinModules/pf.nix
           (
             { pkgs, ... }:
             {
@@ -244,12 +245,17 @@
               };
 
               traefikStatic = tomlFormat.generate "traefik-static.toml" {
+                entryPoints.web.address = ":8080";
+                entryPoints.web.http.redirections.entryPoint = {
+                  to = "websecure";
+                  scheme = "https";
+                };
                 entryPoints.websecure.address = ":8443";
 
                 certificatesResolvers.junco.acme = {
                   caServer = "https://cert.junco.dev/acme/acme/directory";
                   storage = "/Users/adam/.local/share/traefik/acme.json";
-                  tlsChallenge = { };
+                  httpChallenge.entryPoint = "web";
                 };
 
                 providers.file.filename = "${traefikDynamic}";
@@ -285,6 +291,29 @@
               };
 
               networking.computerName = "maple";
+
+              networking.applicationFirewall = {
+                enable = true;
+                enableStealthMode = true;
+              };
+              security.pf = {
+                enable = true;
+                rules = ''
+                  # redirect 80/443 to traefik
+                  rdr pass on utun4 proto tcp from any to any port 80 -> 127.0.0.1 port 8080
+                  rdr pass on utun4 proto tcp from any to any port 443 -> 127.0.0.1 port 8443
+
+                  pass quick on lo0 no state
+
+                  # restrict ssh
+                  block return in proto tcp from any to any port ssh
+                  pass in on utun4 proto tcp from any to port ssh
+
+                  # allow to traefik
+                  block in proto tcp from any to any port {8080, 8443}
+                  pass in on utun4 proto tcp from any to any port {8080, 8443}
+                '';
+              };
 
               nixpkgs.overlays = [
                 self.overlays.dotfiles
