@@ -228,7 +228,7 @@
 
               traefikDynamic = tomlFormat.generate "traefik-dynamic.toml" {
                 http.routers.lmstudio = {
-                  rule = "Host(`lmstudio.svc.junco.dev`)";
+                  rule = "Host(`lmstudio.svc.junco.dev`) || Host(`lmstudio.junco.dev`)";
                   service = "lmstudio";
                   entryPoints = [ "websecure" ];
                   tls = {
@@ -236,12 +236,20 @@
                     domains = [
                       { main = "lmstudio.svc.junco.dev"; }
                     ];
+                    options = "mtls";
                   };
                 };
 
                 http.services.lmstudio.loadBalancer.servers = [
                   { url = "http://127.0.0.1:1234"; }
                 ];
+
+                tls.options = {
+                  mtls.clientAuth = {
+                    caFiles = [ ./root_ca.crt ];
+                    clientAuthType = "RequireAndVerifyClientCert";
+                  };
+                };
               };
 
               traefikStatic = tomlFormat.generate "traefik-static.toml" {
