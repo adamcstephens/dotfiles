@@ -20,7 +20,7 @@
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
     profile-parts.url = "git+https://codeberg.org/adamcstephens/profile-parts";
-    sower-next.url = "git+https://codeberg.org/adamcstephens/sower.git?ref=main";
+    sower.url = "git+https://codeberg.org/adamcstephens/sower.git?ref=release-0.8";
   };
 
   outputs =
@@ -37,7 +37,7 @@
         ./parts/packages.nix
         ./templates/part.nix
 
-        inputs.sower-next.flakeModules.sower
+        inputs.sower.flakeModules.sower
       ];
 
       systems = [

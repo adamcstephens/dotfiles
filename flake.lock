@@ -528,26 +528,26 @@
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "profile-parts": "profile-parts",
-        "sower-next": "sower-next",
+        "sower": "sower",
         "vein": "vein"
       }
     },
-    "sower-next": {
+    "sower": {
       "inputs": {
         "flake-parts": "flake-parts_4",
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1776132489,
-        "narHash": "sha256-v5IsKn8woRYjOi9nRvm22sCDpH+hLK7aPQm9+d5o9bM=",
-        "ref": "main",
-        "rev": "d73d240960b30768443a814a724c906a82f03ad4",
-        "revCount": 1100,
+        "lastModified": 1776228082,
+        "narHash": "sha256-3X/bWdayC3rAth4ibaA/POkpUuzl214eAKQUBID8Bck=",
+        "ref": "release-0.8",
+        "rev": "5cc08f63a256d9aa8ad20c354bf24babc3de4240",
+        "revCount": 1101,
         "type": "git",
         "url": "https://codeberg.org/adamcstephens/sower.git"
       },
       "original": {
-        "ref": "main",
+        "ref": "release-0.8",
         "type": "git",
         "url": "https://codeberg.org/adamcstephens/sower.git"
       }

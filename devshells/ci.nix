@@ -13,6 +13,6 @@ mkShellNoCC {
     pkgs.ntfy-sh
   ]
   ++ lib.optionals pkgs.stdenv.isLinux [
-    inputs.sower-next.packages.${pkgs.stdenv.hostPlatform.system}.cli
+    inputs.sower.packages.${pkgs.stdenv.hostPlatform.system}.cli
   ];
 }
