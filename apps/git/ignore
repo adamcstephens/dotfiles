@@ -1,5 +1,6 @@
 *.log
 *.retry
+.claude/settings.local.json
 .DS_Store
 .direnv/
 .lsp/
