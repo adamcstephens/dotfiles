@@ -1,5 +1,6 @@
 {
   config,
+  flake,
   lib,
   pkgs,
   ...
@@ -11,6 +12,8 @@
     ../apps/finicky
     ../apps/karabiner
   ];
+
+  home.stateVersion = "25.11";
 
   home.packages = [
     pkgs.iproute2mac
@@ -25,6 +28,8 @@
 
     # for class
     pkgs.nodejs
+
+    flake.packages.${pkgs.stdenv.hostPlatform.system}.dark-mode
   ];
 
   dotfiles.apps = {

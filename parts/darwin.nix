@@ -36,21 +36,21 @@
 
           nix = {
             buildMachines = [
-              {
-                protocol = "ssh";
-                hostName = "lima-default.local";
-                maxJobs = 4;
-                sshUser = "adam";
-                supportedFeatures = [
-                  "big-parallel"
-                  "kvm"
-                  "nixos-test"
-                ];
-                systems = [
-                  "aarch64-linux"
-                ];
-                sshKey = "/Users/adam/git/calmwave/cw/.lima/_config/user";
-              }
+              # {
+              #   protocol = "ssh";
+              #   hostName = "lima-default.local";
+              #   maxJobs = 4;
+              #   sshUser = "adam";
+              #   supportedFeatures = [
+              #     "big-parallel"
+              #     "kvm"
+              #     "nixos-test"
+              #   ];
+              #   systems = [
+              #     "aarch64-linux"
+              #   ];
+              #   sshKey = "/Users/adam/git/calmwave/cw/.lima/_config/user";
+              # }
               # {
               #   protocol = "ssh";
               #   hostName = "nixos2.local";
@@ -65,20 +65,20 @@
               #     "aarch64-linux"
               #   ];
               # }
-              {
-                protocol = "ssh";
-                hostName = "branch.tail68e370.ts.net";
-                maxJobs = 4;
-                sshUser = "adam";
-                supportedFeatures = [
-                  "big-parallel"
-                  "kvm"
-                  "nixos-test"
-                ];
-                systems = [
-                  "x86_64-linux"
-                ];
-              }
+              # {
+              #   protocol = "ssh";
+              #   hostName = "branch.tail68e370.ts.net";
+              #   maxJobs = 4;
+              #   sshUser = "adam";
+              #   supportedFeatures = [
+              #     "big-parallel"
+              #     "kvm"
+              #     "nixos-test"
+              #   ];
+              #   systems = [
+              #     "x86_64-linux"
+              #   ];
+              # }
             ];
 
             channel.enable = false;
@@ -86,7 +86,6 @@
             distributedBuilds = true;
 
             enable = true;
-            package = pkgs.lixPackageSets.latest.lix;
 
             settings = {
               auto-optimise-store = false;
@@ -205,6 +204,7 @@
             { pkgs, ... }:
             {
               nix.settings.trusted-users = [ "remote-builder" ];
+              nix.package = pkgs.lixPackageSets.latest.lix;
 
               users.knownUsers = [ "remote-builder" ];
 
@@ -341,6 +341,56 @@
               };
             }
           )
+        ];
+      };
+
+    willow =
+      let
+        homeModules = config.profile-parts.home-manager.willow.finalModules;
+      in
+      {
+        nixpkgs = inputs.nixpkgs-unstable;
+        modules = [
+          inputs.home-manager-unstable.darwinModules.home-manager
+          {
+            home-manager.users.adam = {
+              imports = homeModules;
+
+              home.activation.traefik-data = ''
+                mkdir -p ~/.local/share/traefik
+              '';
+            };
+
+            home-manager.extraSpecialArgs = {
+              inherit inputs;
+              npins = import ../npins;
+              flake = self;
+            };
+
+            networking.computerName = "willow";
+
+            networking.applicationFirewall = {
+              enable = true;
+              enableStealthMode = true;
+            };
+
+            nixpkgs.overlays = [
+              self.overlays.dotfiles
+            ];
+
+            security.pam.services.sudo_local = {
+              reattach = true;
+              touchIdAuth = true;
+            };
+
+            system.primaryUser = "adam";
+            system.stateVersion = 5;
+
+            users.users.adam = {
+              home = "/Users/adam";
+              shell = "/home/adam/.nix-profile/bin/fish";
+            };
+          }
         ];
       };
   };

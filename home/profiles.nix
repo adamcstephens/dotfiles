@@ -264,6 +264,16 @@ in
       ];
     };
 
+    willow = {
+      username = "adam";
+      system = "aarch64-darwin";
+      nixpkgs = inputs.nixpkgs-unstable;
+      home-manager = inputs.home-manager-unstable;
+      modules = [
+        ./core-darwin.nix
+      ];
+    };
+
     worker1 = {
       modules = [
         ./core-dev.nix

@@ -56,13 +56,11 @@ end
 (* Darwin specific operations *)
 module Darwin = struct
   let get_state () =
-    match Util.run_command "/opt/homebrew/bin/dark-mode status" with
-    | "on" -> Dark
-    | _ -> Light
+    match Util.run_command "dark-mode status" with "on" -> Dark | _ -> Light
 
   let set_theme = function
-    | Dark -> Util.run_command "/opt/homebrew/bin/dark-mode on" |> ignore
-    | Light -> Util.run_command "/opt/homebrew/bin/dark-mode off" |> ignore
+    | Dark -> Util.run_command "dark-mode on" |> ignore
+    | Light -> Util.run_command "dark-mode off" |> ignore
 end
 
 (* Linux specific operations *)
@@ -83,8 +81,8 @@ module Linux = struct
     else
       match
         Util.run_command
-          "gsettings get org.gnome.desktop.interface color-scheme 2>/dev/null || \
-           dconf read /org/gnome/desktop/interface/color-scheme 2>/dev/null"
+          "gsettings get org.gnome.desktop.interface color-scheme 2>/dev/null \
+           || dconf read /org/gnome/desktop/interface/color-scheme 2>/dev/null"
       with
       | s when contains s "prefer-dark" -> Dark
       | _ -> (

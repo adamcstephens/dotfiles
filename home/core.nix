@@ -33,7 +33,7 @@
     ../apps/zsh
   ];
 
-  home.stateVersion = "22.05";
+  home.stateVersion = lib.mkDefault "22.05";
 
   home.activation.dotfiles-migrate = lib.hm.dag.entryBefore [ "checkLinkTargets" ] ''
     ${lib.getExe pkgs.just} --justfile ${../justfile} migrate

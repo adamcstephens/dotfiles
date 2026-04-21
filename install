@@ -14,11 +14,9 @@ experimental-features = flakes
 fi
 rm -rf ~/.config/fish
 
+export PIPE_FEATURE="pipe-operators pipe-operator"
+
 if [ ! -e ~/.config/nix/nix.conf ]; then
-  PIPE_FEATURE="pipe-operators"
-  if nix --version | grep -q lix; then
-    PIPE_FEATURE="pipe-operator"
-  fi
 
   mkdir -vp ~/.config/nix
   echo "extra-experimental-features = nix-command flakes $PIPE_FEATURE
@@ -30,7 +28,7 @@ fi
 case "$(uname)" in
 Darwin)
   set -e
-  artifact=$(nix shell nixpkgs#git -c nix build .#darwin/$(hostname -s) --print-out-paths)
+  artifact=$(nix shell nixpkgs#git -c nix build .#darwin/$(hostname -s) --print-out-paths --extra-experimental-features "nix-command flakes $PIPE_FEATURE")
   set +e
   sudo "${artifact}/sw/bin/darwin-rebuild" switch --flake ~/.dotfiles
   ;;
