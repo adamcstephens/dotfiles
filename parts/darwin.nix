@@ -35,55 +35,7 @@
           ];
 
           nix = {
-            buildMachines = [
-              # {
-              #   protocol = "ssh";
-              #   hostName = "lima-default.local";
-              #   maxJobs = 4;
-              #   sshUser = "adam";
-              #   supportedFeatures = [
-              #     "big-parallel"
-              #     "kvm"
-              #     "nixos-test"
-              #   ];
-              #   systems = [
-              #     "aarch64-linux"
-              #   ];
-              #   sshKey = "/Users/adam/git/calmwave/cw/.lima/_config/user";
-              # }
-              # {
-              #   protocol = "ssh";
-              #   hostName = "nixos2.local";
-              #   maxJobs = 4;
-              #   sshUser = "root";
-              #   supportedFeatures = [
-              #     "big-parallel"
-              #     "kvm"
-              #     "nixos-test"
-              #   ];
-              #   systems = [
-              #     "aarch64-linux"
-              #   ];
-              # }
-              # {
-              #   protocol = "ssh";
-              #   hostName = "branch.tail68e370.ts.net";
-              #   maxJobs = 4;
-              #   sshUser = "adam";
-              #   supportedFeatures = [
-              #     "big-parallel"
-              #     "kvm"
-              #     "nixos-test"
-              #   ];
-              #   systems = [
-              #     "x86_64-linux"
-              #   ];
-              # }
-            ];
-
             channel.enable = false;
-
-            distributedBuilds = true;
 
             enable = true;
 
@@ -372,6 +324,27 @@
             networking.applicationFirewall = {
               enable = true;
               enableStealthMode = true;
+            };
+
+            nix = {
+              distributedBuilds = true;
+              buildMachines = [
+                {
+                  protocol = "ssh";
+                  hostName = "kale.h.junco.dev";
+                  maxJobs = 4;
+                  sshUser = "builder";
+                  supportedFeatures = [
+                    "big-parallel"
+                    "kvm"
+                    "nixos-test"
+                  ];
+                  systems = [
+                    "x86_64-linux"
+                  ];
+                  sshKey = "/var/root/.ssh/id_ed25519";
+                }
+              ];
             };
 
             nixpkgs.overlays = [
