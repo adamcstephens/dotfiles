@@ -331,7 +331,7 @@
               buildMachines = [
                 {
                   protocol = "ssh";
-                  hostName = "kale.h.junco.dev";
+                  hostName = "leaf.h.junco.dev";
                   maxJobs = 4;
                   sshUser = "builder";
                   supportedFeatures = [
