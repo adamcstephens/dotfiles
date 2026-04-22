@@ -19,10 +19,10 @@ mkShellNoCC {
       pyright
       treefmt
     ]
-    ++ (lib.optionals stdenv.isLinux [
+    ++ lib.optionals stdenv.isLinux [
       bubblewrap
       cntr
-    ]);
+    ];
 
   shellHook = ''
     ln -sf $HOME/.dotfiles/apps/nix/dir-locals.el $PWD/.dir-locals.el

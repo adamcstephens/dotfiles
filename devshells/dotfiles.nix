@@ -14,8 +14,8 @@ mkShell {
     pkgs.gitMinimal
     pkgs.just
     pkgs.niks3
-    pkgs.nix-update
     pkgs.npins
+    pkgs.lixPackageSets.latest.nix-update
 
     pkgs.ty
 
