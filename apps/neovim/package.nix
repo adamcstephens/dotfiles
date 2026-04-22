@@ -11,6 +11,7 @@
   vimPlugins,
 
   bash-language-server,
+  dexter,
   errcheck,
   fish-lsp,
   fzf,
@@ -112,6 +113,7 @@ mnw.lib.wrap pkgs {
 
       bash-language-server
       biome
+      dexter
       fish-lsp
       fzf
       lua
