@@ -30,7 +30,7 @@ status is-interactive; and begin
     abbr --add -- cnf command-not-found
     abbr --add -- da 'direnv allow'
     abbr --add -- db 'direnv block'
-    abbr --add -- dc docker-compose
+    abbr --add -- dc docker compose
     abbr --add -- dclf 'docker-compose logs --tail=100 -f'
     abbr --add -- dog doggo
     abbr --add -- dps 'docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}\t{{.Command}}\t{{.Image}}"'
