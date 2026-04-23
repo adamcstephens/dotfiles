@@ -11,3 +11,4 @@ _build/
 apps/fish/fish_variables
 
 .dune/
+apps/walker/themes/dotfiles/style.css

@@ -19,6 +19,15 @@ let
   #     config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/agents/AGENTS.md";
 
   cfg = config.dotfiles.apps.agents;
+
+  # helper to drop unfree licenses
+  unfreePkg =
+    name: nixpkgs:
+    nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system}.${name}.overrideAttrs (old: {
+      meta = old.meta // {
+        license = [ ];
+      };
+    });
 in
 {
   options = {
@@ -33,10 +42,11 @@ in
     home.packages = [
       inputs.vein.packages.${pkgs.stdenv.hostPlatform.system}.vein
 
-      inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.agent-browser
-      inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.claude-code
-      inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.copilot-cli
-      inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.opencode
+      (unfreePkg "claude-code" inputs.nixpkgs-unstable-small)
+      (unfreePkg "github-copilot-cli" inputs.nixpkgs-unstable-small)
+
+      inputs.nixpkgs-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.agent-browser
+      inputs.nixpkgs-unstable-small.legacyPackages.${pkgs.stdenv.hostPlatform.system}.opencode
     ];
 
     home.file.".config/agents/skills".source = skills;

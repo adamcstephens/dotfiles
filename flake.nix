@@ -2,6 +2,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-25.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    nixpkgs-unstable-small.url = "github:nixos/nixpkgs?ref=nixos-unstable-small";
 
     home-manager.url = "github:nix-community/home-manager?ref=release-25.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -11,8 +12,6 @@
     epi.url = "git+https://codeberg.org/adamcstephens/epi";
     vein.url = "git+https://codeberg.org/adamcstephens/vein";
     flake-parts.url = "github:hercules-ci/flake-parts";
-    llm-agents.url = "github:numtide/llm-agents.nix";
-    llm-agents.inputs.nixpkgs.follows = "nixpkgs-unstable";
     mnw.url = "github:Gerg-L/mnw";
     nix-colors.url = "github:misterio77/nix-colors";
     nix-darwin.url = "github:lnl7/nix-darwin/master";

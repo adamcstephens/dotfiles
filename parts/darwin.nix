@@ -307,10 +307,6 @@
           {
             home-manager.users.adam = {
               imports = homeModules;
-
-              home.activation.traefik-data = ''
-                mkdir -p ~/.local/share/traefik
-              '';
             };
 
             home-manager.extraSpecialArgs = {
