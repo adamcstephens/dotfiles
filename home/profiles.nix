@@ -271,6 +271,9 @@ in
       home-manager = inputs.home-manager-unstable;
       modules = [
         ./core-darwin.nix
+        {
+          dotfiles.apps.agents.enable = true;
+        }
       ];
     };
 
