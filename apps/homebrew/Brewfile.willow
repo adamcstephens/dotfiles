@@ -5,12 +5,14 @@ cask "bluesnooze"
 cask "bruno"
 cask "datagrip"
 cask "discord"
+cask "docker-desktop"
 cask "domzilla-caffeine"
 cask "firefox"
 cask "ghostty"
 cask "notunes"
 cask "secretive"
 cask "signal"
+cask "tidal"
 cask "twingate"
 mas "1Password for Safari", id: 1569813296
 mas "GarageBand", id: 682658836
@@ -19,3 +21,4 @@ mas "Keynote", id: 409183694
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
 mas "Slack", id: 803453959
+mas "WireGuard", id: 1451685025
