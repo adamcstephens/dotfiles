@@ -4,9 +4,6 @@
   pkgs,
   ...
 }:
-let
-  os = pkgs.stdenv.hostPlatform.uname.system;
-in
 {
   home.packages = [
     pkgs.git
@@ -18,6 +15,10 @@ in
     (pkgs.writeShellScriptBin "lg" "exec ${lib.getExe pkgs.lazygit} $@")
     pkgs.forgejo-cli
   ];
+
+  home.sessionVariables = lib.mkIf config.dotfiles.dev.enable {
+    GH_TELEMETRY = "false";
+  };
 
   xdg.configFile = {
     "git/config".source =

@@ -138,6 +138,7 @@
   ];
 
   home.sessionVariables = {
+    DO_NOT_TRACK = "true";
     EDITOR = "${config.home.homeDirectory}/.dotfiles/bin/editor";
     PAGER = "${config.home.homeDirectory}/.dotfiles/bin/pager";
   };
