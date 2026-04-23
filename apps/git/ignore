@@ -1,6 +1,7 @@
 *.log
 *.retry
 .claude/settings.local.json
+.dexter.db*
 .DS_Store
 .direnv/
 .lsp/
