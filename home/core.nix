@@ -29,7 +29,7 @@
     ../apps/tmux
     ../apps/tmuxinator
     ../apps/wayland
-    ../apps/zellij
+    # ../apps/zellij
     ../apps/zsh
   ];
 
