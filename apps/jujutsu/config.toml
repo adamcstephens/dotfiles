@@ -64,6 +64,15 @@ key = "~/.ssh/signing-key.pub"
 # commit_trailers = '''
 # format_signed_off_by_trailer(self)'''
 
+[templates]
+draft_commit_description = """
+concat(
+  builtin_draft_commit_description,
+  "\nJJ: ignore-rest\n",
+  diff.git(),
+)
+"""
+
 [ui]
 # default-command = ["log", "--template=log_compact"]
 diff-editor = ":builtin"
