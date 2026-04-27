@@ -39,6 +39,8 @@ in
     # home.file.".claude/CLAUDE.md".source = AGENTS;
     # home.file.".claude/skills".source = skills;
 
+    home.sessionVariables.CLAUDE_CONFIG_DIR = "${config.home.homeDirectory}/.config/claude";
+
     home.packages = [
       inputs.vein.packages.${pkgs.stdenv.hostPlatform.system}.vein
 
