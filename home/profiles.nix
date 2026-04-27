@@ -271,9 +271,15 @@ in
       home-manager = inputs.home-manager-unstable;
       modules = [
         ./core-darwin.nix
-        {
-          dotfiles.apps.agents.enable = true;
-        }
+        (
+          { pkgs, ... }:
+          {
+            dotfiles.apps.agents.enable = true;
+            home.packages = [
+              pkgs.e1s
+            ];
+          }
+        )
       ];
     };
 
