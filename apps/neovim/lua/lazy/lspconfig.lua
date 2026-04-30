@@ -13,7 +13,7 @@ return {
         client.server_capabilities.semanticTokensProvider = nil
       end,
     })
-    -- vim.lsp.enable("expert")
+    vim.lsp.enable("expert")
     vim.lsp.config("dexter", {
       cmd = { "dexter", "lsp" },
       root_markers = { ".dexter.db", ".git", "mix.exs" },
