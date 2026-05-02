@@ -91,7 +91,6 @@ mnw.lib.wrap pkgs {
         fzf-lua
         nvim-dap
         nvim-dap-go
-        nvim-highlight-colors
         nvim-treesitter-endwise
         oil-nvim
         openingh-nvim

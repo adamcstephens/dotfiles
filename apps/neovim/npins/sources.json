@@ -15,6 +15,19 @@
       "url": null,
       "hash": "sha256-QSkiyV70kFkArCnTXYRR+Dt4i5XSq072tYnOnHbKEBc="
     },
+    "nvim-highlight-colors": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "brenoprata10",
+        "repo": "nvim-highlight-colors"
+      },
+      "branch": "main",
+      "submodules": false,
+      "revision": "e2cb22089cc2358b2b995c09578224f142de6039",
+      "url": "https://github.com/brenoprata10/nvim-highlight-colors/archive/e2cb22089cc2358b2b995c09578224f142de6039.tar.gz",
+      "hash": "sha256-LrY61knLKAn36+RnMddAzxf/wYtdnLxnnQhtHB3mQwc="
+    },
     "promise-async": {
       "type": "GitRelease",
       "repository": {

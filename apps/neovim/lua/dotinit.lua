@@ -17,7 +17,6 @@ require("nvim-web-devicons").setup({})
 require("remember").setup({})
 
 require("which-key").setup({})
-require("whitespace-nvim").setup({})
 
 -- vim settings
 --
