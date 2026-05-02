@@ -77,7 +77,6 @@ mnw.lib.wrap pkgs {
         vim-just
         vim-repeat
         which-key-nvim
-        whitespace-nvim
         zk-nvim
       ]
       ++ (mnw.lib.npinsToPlugins pkgs ./npins/sources.json);

@@ -30,6 +30,22 @@
       "url": null,
       "hash": "sha256-V29QPg6q+0h8hKoTD8KWghdeWnb35NMGLwxIuuWXfqY="
     },
+    "whitespace.nvim": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "GitHub",
+        "owner": "johnfrankmorgan",
+        "repo": "whitespace.nvim"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "submodules": false,
+      "version": "0.4.2",
+      "revision": "8bf60b4a6892aa517a78a6014896078ae0c4c642",
+      "url": "https://api.github.com/repos/johnfrankmorgan/whitespace.nvim/tarball/refs/tags/0.4.2",
+      "hash": "sha256-9Dtf6x2daQ6bP7qq6jKiDY8RpKNG03r1z8AzqM6/Oaw="
+    },
     "workspace-diagnotics-nvim": {
       "type": "Git",
       "repository": {
