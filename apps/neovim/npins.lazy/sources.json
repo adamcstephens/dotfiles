@@ -133,9 +133,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "a905eeebc4e63fdc48b5135d3bf8aea5618fb21c",
+      "revision": "131a558e13f9f28b15cd235557150ccb23f89286",
       "url": null,
-      "hash": "sha256-PHunrG0yd3pDw3c1S9w1AXQx5/1nT68M+mjxT53enmM="
+      "hash": "sha256-5+JKZD4w80QZxnFv+1OxkFVety8fgmcGVOuxfYouxhI="
     },
     "mini.pick": {
       "type": "GitRelease",
@@ -200,9 +200,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "8fde495949782bb61c2605174e231d145a048d8c",
+      "revision": "31026a13eefb20681124706a79fc1df6bf11ab27",
       "url": null,
-      "hash": "sha256-jK+IoR2u4KGKmipGXE3u6WpQorckmA6cpopXAymBhE0="
+      "hash": "sha256-Iox/cnIsgPXB6KYhuy5j2zYHudMCcdQRKWX9DTlIcoo="
     },
     "nvim-surround": {
       "type": "GitRelease",
@@ -270,9 +270,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "ceb03717b7bb2060d8d3504b8d56017035f0edcc",
+      "revision": "f1f2c08debbf1203f7c747ddcfc236e8cb327e13",
       "url": null,
-      "hash": "sha256-5aS5eVoyIYm2GiJAw6m7Z6Gy8wqPobgPvnu075HmQCM="
+      "hash": "sha256-Td1tmniHQfzvMCiKY1VbRqv6YDIPMkgFS27duLoQgP8="
     },
     "osc11.nvim": {
       "type": "Git",
@@ -350,9 +350,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "ed33cb0e0edfced6e86e782d51f23e67232ad4a9",
+      "revision": "4ed07bc0c6083cdd547c63f5c245e02c068b0c45",
       "url": null,
-      "hash": "sha256-xFEI7cn5X3E90X3Z7njTg5/nFXXECJxPYmitfr+29VA="
+      "hash": "sha256-78F44cldvn+D/cfeaSe4A7LURMArCvkUJER22oTUuyM="
     }
   },
   "version": 7
