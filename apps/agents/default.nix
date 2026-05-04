@@ -39,7 +39,12 @@ in
     # home.file.".claude/CLAUDE.md".source = AGENTS;
     # home.file.".claude/skills".source = skills;
 
-    home.sessionVariables.CLAUDE_CONFIG_DIR = "${config.home.homeDirectory}/.config/claude";
+    home.sessionVariables = {
+      CLAUDE_CONFIG_DIR = "${config.home.homeDirectory}/.config/claude";
+    }
+    // lib.optionalAttrs pkgs.stdenv.isLinux {
+      AGENT_BROWSER_EXECUTABLE_PATH = lib.getExe pkgs.chromium;
+    };
 
     home.packages = [
       inputs.vein.packages.${pkgs.stdenv.hostPlatform.system}.vein
