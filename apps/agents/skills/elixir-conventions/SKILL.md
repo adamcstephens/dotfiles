@@ -7,6 +7,20 @@ description: Guides Elixir development with project-specific conventions. Use wh
 
 Provides conventions and best practices for Elixir development in this project.
 
+## Code Navigation
+
+Prefer the `LSP` tool over `grep` or `find` for symbol-level lookups in Elixir code. It is backed by an Elixir language server and understands modules, functions, and behaviours:
+
+- `goToDefinition` — jump to where a module/function is defined
+- `findReferences` — find all callers of a function
+- `hover` — get docs and signatures for a symbol
+- `workspaceSymbol` — search symbols across the project
+- `documentSymbol` — outline a single file
+- `goToImplementation` — find behaviour implementations
+- `prepareCallHierarchy` / `incomingCalls` / `outgoingCalls` — trace call graphs
+
+Fall back to `grep` only for text patterns that are not symbols (string literals, comments, config keys).
+
 ## Struct Usage
 
 Always define structured data with the `typedstruct` library. Never use bare maps for struct-like data, and never use `defstruct`.

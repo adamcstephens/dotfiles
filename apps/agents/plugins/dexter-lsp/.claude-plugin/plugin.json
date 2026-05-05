@@ -1,0 +1,5 @@
+{
+  "name": "dexter-lsp",
+  "description": "Elixir code intelligence via the dexter language server",
+  "version": "0.1.0"
+}

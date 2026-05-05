@@ -1,0 +1,9 @@
+{
+  "expert-lsp": {
+    "command": "expert",
+    "args": ["--stdio"],
+    "extensionToLanguage": {
+      ".ex": "elixir"
+    }
+  }
+}

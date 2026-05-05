@@ -1,0 +1,5 @@
+{
+  "name": "expert-lsp",
+  "description": "Elixir code intelligence via the expert language server",
+  "version": "0.1.0"
+}

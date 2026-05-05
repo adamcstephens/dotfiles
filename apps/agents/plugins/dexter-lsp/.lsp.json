@@ -1,0 +1,9 @@
+{
+  "dexter-lsp": {
+    "command": "dexter",
+    "args": ["lsp"],
+    "extensionToLanguage": {
+      ".ex": "elixir"
+    }
+  }
+}
