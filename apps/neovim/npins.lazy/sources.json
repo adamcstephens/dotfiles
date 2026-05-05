@@ -65,10 +65,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v19.12.0",
-      "revision": "f70759ee8b63b46ea0cf158dc22daa2a5e9c6319",
+      "version": "v19.13.0",
+      "revision": "60d031862715a77b3655eac724e8926965e47b86",
       "url": null,
-      "hash": "sha256-SKqRMFG5xiJHhMCexOtQGAJRFYRgcfuInxTJvXhGhhI="
+      "hash": "sha256-9jSFvxX9m1+pFNY7YNRPz4Emm1HzNW/MjvR9BNDZpAo="
     },
     "conform.nvim": {
       "type": "GitRelease",
@@ -214,10 +214,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v4.0.4",
-      "revision": "61319d4bd1c5e336e197defa15bd104c51f0fb29",
+      "version": "v4.0.5",
+      "revision": "2e93e154de9ff326def6480a4358bfc149d5da2c",
       "url": null,
-      "hash": "sha256-3rvRrTVYImIuOPk7DsbP3m2w4M7WS1mjKE2EOKibGf4="
+      "hash": "sha256-U3nm27yb+Hz9MiB3yclO/TlB1AgQRoWTG6Arfl10SFA="
     },
     "nvim-treesitter-context": {
       "type": "GitRelease",
@@ -270,9 +270,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "f1f2c08debbf1203f7c747ddcfc236e8cb327e13",
+      "revision": "f77904d53bee4618e0b1e92796db4f154739777d",
       "url": null,
-      "hash": "sha256-Td1tmniHQfzvMCiKY1VbRqv6YDIPMkgFS27duLoQgP8="
+      "hash": "sha256-xTs6Dd46xHifabeINHz82+cWengCHCD7oTDrNF1xrE0="
     },
     "osc11.nvim": {
       "type": "Git",
