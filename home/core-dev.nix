@@ -46,7 +46,7 @@ in
     pkgs.nix-output-monitor
     pkgs.nix-tree
     pkgs.nixd
-    pkgs.nixfmt
+    pkgs.nixfmt-rs
     pkgs.nvd
 
     # tools
