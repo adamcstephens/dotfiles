@@ -341,6 +341,10 @@
                   sshKey = "/var/root/.ssh/id_ed25519";
                 }
               ];
+
+              linux-builder = {
+                enable = true;
+              };
             };
 
             nixpkgs.overlays = [

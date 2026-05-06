@@ -277,6 +277,7 @@ in
             dotfiles.apps.agents.enable = true;
             home.packages = [
               pkgs.e1s
+              pkgs.terraform-mcp-server
             ];
           }
         )
