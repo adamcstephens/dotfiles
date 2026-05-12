@@ -17,5 +17,9 @@
       path = ./rust;
       description = "Rust project template";
     };
+    rust-cli = {
+      path = ./rust-cli;
+      description = "Rust CLI app with Nix packaging and dynamic shell completions";
+    };
   };
 }

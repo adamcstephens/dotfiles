@@ -1,0 +1,10 @@
+[package]
+name = "myapp"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+clap = { version = "4", features = ["derive"] }
+clap_complete = { version = "4.6", features = ["unstable-dynamic"] }
+anyhow = "1"
+console = "0.16"
