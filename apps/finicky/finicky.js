@@ -5,6 +5,7 @@ export default {
       "org.mozilla.firefoxdeveloperedition",
       "org.mozilla.firefox",
       "Safari",
+      "org.chromium.Chromium",
     ].find((browser) => finicky.isAppRunning(browser));
 
     const powerInfo = finicky.getPowerInfo();
@@ -51,6 +52,10 @@ export default {
     {
       match: ({ url }) => url.protocol === "msteams",
       browser: "Microsoft Teams",
+    },
+    {
+      match: /meet\.google\.com/,
+      browser: "Chromium",
     },
   ],
 };
