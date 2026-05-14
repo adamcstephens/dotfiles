@@ -12,12 +12,6 @@ let
     else
       config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/agents/skills";
 
-  # AGENTS =
-  #   if config.dotfiles.nixosManaged then
-  #     ./AGENTS.md
-  #   else
-  #     config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/agents/AGENTS.md";
-
   cfg = config.dotfiles.apps.agents;
 
   # helper to drop unfree licenses
@@ -28,6 +22,33 @@ let
         license = [ ];
       };
     });
+
+  claude-wrapped = pkgs.symlinkJoin {
+    name = "claude-wrapped";
+    paths = [ (unfreePkg "claude-code" inputs.nixpkgs-unstable-small) ];
+    buildInputs = [ pkgs.makeWrapper ];
+    postBuild = ''
+      wrapProgram $out/bin/claude \
+        --set CLAUDE_CONFIG_DIR "${config.home.homeDirectory}/.config/claude"
+    '';
+  };
+
+  agent-browser =
+    inputs.nixpkgs-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.agent-browser;
+
+  agent-browser-wrapped =
+    if pkgs.stdenv.isLinux then
+      pkgs.symlinkJoin {
+        name = "agent-browser-wrapped";
+        paths = [ agent-browser ];
+        buildInputs = [ pkgs.makeWrapper ];
+        postBuild = ''
+          wrapProgram $out/bin/agent-browser \
+            --set AGENT_BROWSER_EXECUTABLE_PATH "${lib.getExe pkgs.chromium}"
+        '';
+      }
+    else
+      agent-browser;
 in
 {
   options = {
@@ -35,25 +56,13 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    # unmanage these for epi
-    # home.file.".claude/CLAUDE.md".source = AGENTS;
-    # home.file.".claude/skills".source = skills;
-
-    home.sessionVariables = {
-      CLAUDE_CONFIG_DIR = "${config.home.homeDirectory}/.config/claude";
-    }
-    // lib.optionalAttrs pkgs.stdenv.isLinux {
-      AGENT_BROWSER_EXECUTABLE_PATH = lib.getExe pkgs.chromium;
-    };
-
     home.packages = [
       inputs.vein.packages.${pkgs.stdenv.hostPlatform.system}.vein
 
-      (unfreePkg "claude-code" inputs.nixpkgs-unstable-small)
-      (unfreePkg "github-copilot-cli" inputs.nixpkgs-unstable-small)
-
-      inputs.nixpkgs-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.agent-browser
+      agent-browser-wrapped
+      claude-wrapped
       inputs.nixpkgs-unstable-small.legacyPackages.${pkgs.stdenv.hostPlatform.system}.opencode
+      (unfreePkg "github-copilot-cli" inputs.nixpkgs-unstable-small)
     ];
 
     home.file.".config/agents/skills".source = skills;
