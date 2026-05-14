@@ -15,6 +15,7 @@ bump-pins:
     npins -d apps/neovim/npins.lazy/ update
     jj commit -m 'chore: npins update' npins/ apps/neovim/npins/ apps/neovim/npins.lazy/ || true
 
+[env("NIX_CONFIG", "experimental-features = nix-command flakes pipe-operators pipe-operator")]
 bump-packages:
     nix-update --flake arkenfox --commit
     nix-update --flake toney --commit
