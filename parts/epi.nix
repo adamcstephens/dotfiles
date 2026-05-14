@@ -1,6 +1,5 @@
 {
   inputs,
-  lib,
   self,
   ...
 }:
@@ -10,7 +9,6 @@ let
     {
       config,
       lib,
-      pkgs,
       ...
     }:
     {
@@ -19,9 +17,6 @@ let
         extraStorePaths = [
           config.home-manager.users.adam.home.activationPackage
         ];
-        # hooks.post-launch = {
-        #   "claude-auth"
-        # };
       };
 
       home-manager = {
@@ -51,11 +46,9 @@ let
             config.nix.package.pname == "lix" && lib.versionAtLeast config.nix.package.version "2.91"
           ) [ "pipe-operator" ];
         substituters = [
-          "https://cache.junco.dev/v4"
           "https://cache-v5.junco.dev"
         ];
         trusted-public-keys = [
-          "v4:6cq9xeMAepF20fTnv+ChvLkPLzBtCD9NRUaKrarK+nU="
           "cache-v6:tXeE+WhO6k2OoUoNSzmQVIckjXtl14mtO+z0ZwAIork="
         ];
       };
