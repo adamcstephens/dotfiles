@@ -6,6 +6,16 @@
 }:
 let
   cfg = config.dotfiles.apps.zk;
+
+  zk = pkgs.symlinkJoin {
+    name = "zk-wrapped";
+    paths = [ pkgs.zk ];
+    buildInputs = [ pkgs.makeWrapper ];
+    postBuild = ''
+      wrapProgram $out/bin/zk \
+        --set ZK_NOTEBOOK_DIR "${cfg.defaultNotebook}"
+    '';
+  };
 in
 {
   options.dotfiles.apps.zk = {
@@ -19,11 +29,7 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = [ pkgs.zk ];
-
-    home.sessionVariables = {
-      ZK_NOTEBOOK_DIR = cfg.defaultNotebook;
-    };
+    home.packages = [ zk ];
 
     xdg.configFile."zk/config.toml".source = (pkgs.formats.toml { }).generate "zk-config-toml" {
       alias = {

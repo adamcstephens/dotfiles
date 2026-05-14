@@ -4,6 +4,17 @@
   pkgs,
   ...
 }:
+let
+  gh = pkgs.symlinkJoin {
+    name = "gh-wrapped";
+    paths = [ pkgs.gh ];
+    buildInputs = [ pkgs.makeWrapper ];
+    postBuild = ''
+      wrapProgram $out/bin/gh \
+        --set GH_TELEMETRY false
+    '';
+  };
+in
 {
   home.packages = [
     pkgs.git
@@ -15,10 +26,6 @@
     (pkgs.writeShellScriptBin "lg" "exec ${lib.getExe pkgs.lazygit} $@")
     pkgs.forgejo-cli
   ];
-
-  home.sessionVariables = lib.mkIf config.dotfiles.dev.enable {
-    GH_TELEMETRY = "false";
-  };
 
   xdg.configFile = {
     "git/config".source =
