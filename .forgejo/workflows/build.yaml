@@ -7,30 +7,30 @@ env:
   NIKS3_SERVER_URL: ${{ vars.NIKS3_SERVER_URL }}
 
 jobs:
-  build-and-seed-aarch64:
-    runs-on: local/aarch64-linux
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: next
-        run: |
-          printf '%s' '${{ secrets.NIKS3_AUTH_TOKEN }}' > ../niks3-token
-          export NIKS3_AUTH_TOKEN_FILE="$PWD/../niks3-token"
-          nix develop .#ci --command sower build --cache niks3:// --eval-jobs 1 --seed .#sowerJobs.aarch64-linux.home/aarch64-linux
-          nix develop .#ci --command sower build --cache niks3:// --eval-jobs 1 --seed .#sowerJobs.aarch64-linux.home/nixos2
-        env:
-          SOWER_ENDPOINT: ${{ vars.SOWER_NEXT_ENDPOINT }}
-          SOWER_ACCESS_TOKEN: ${{ secrets.SOWER_ACCESS_TOKEN }}
-
-      - name: Notify on failure
-        if: failure()
-        run: |
-          nix develop .#ci --command \
-            ntfy send \
-            --click="${{ forgejo.server_url}}/${{ forgejo.repository }}/actions/runs/${{ forgejo.run_number }}/jobs/${{ forgejo.job }}/attempt/${{ forgejo.run_attempt }}" \
-            ${{ vars.NTFY_HOST }}/alerts \
-            "Build failure in ${FORGEJO_REPOSITORY}"
+  # build-and-seed-aarch64:
+  #   runs-on: local/aarch64-linux
+  #
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #
+  #     - name: next
+  #       run: |
+  #         printf '%s' '${{ secrets.NIKS3_AUTH_TOKEN }}' > ../niks3-token
+  #         export NIKS3_AUTH_TOKEN_FILE="$PWD/../niks3-token"
+  #         nix develop .#ci --command sower build --cache niks3:// --eval-jobs 1 --seed .#sowerJobs.aarch64-linux.home/aarch64-linux
+  #         nix develop .#ci --command sower build --cache niks3:// --eval-jobs 1 --seed .#sowerJobs.aarch64-linux.home/nixos2
+  #       env:
+  #         SOWER_ENDPOINT: ${{ vars.SOWER_NEXT_ENDPOINT }}
+  #         SOWER_ACCESS_TOKEN: ${{ secrets.SOWER_ACCESS_TOKEN }}
+  #
+  #     - name: Notify on failure
+  #       if: failure()
+  #       run: |
+  #         nix develop .#ci --command \
+  #           ntfy send \
+  #           --click="${{ forgejo.server_url}}/${{ forgejo.repository }}/actions/runs/${{ forgejo.run_number }}/jobs/${{ forgejo.job }}/attempt/${{ forgejo.run_attempt }}" \
+  #           ${{ vars.NTFY_HOST }}/alerts \
+  #           "Build failure in ${FORGEJO_REPOSITORY}"
 
   build-and-seed-x86_64:
     runs-on: local/x86_64-linux
