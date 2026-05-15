@@ -342,6 +342,14 @@
 
               linux-builder = {
                 enable = true;
+                maxJobs = 4;
+
+                config = {
+                  virtualisation = {
+                    cores = 8;
+                    darwin-builder.memorySize = 16 * 1024;
+                  };
+                };
               };
             };
 
