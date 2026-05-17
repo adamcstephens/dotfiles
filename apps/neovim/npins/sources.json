@@ -54,10 +54,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "0.4.2",
-      "revision": "8bf60b4a6892aa517a78a6014896078ae0c4c642",
-      "url": "https://api.github.com/repos/johnfrankmorgan/whitespace.nvim/tarball/refs/tags/0.4.2",
-      "hash": "sha256-9Dtf6x2daQ6bP7qq6jKiDY8RpKNG03r1z8AzqM6/Oaw="
+      "version": "0.6.0",
+      "revision": "70cd14a1a2fad87da0e18e90b0dc4a461d2113c1",
+      "url": "https://api.github.com/repos/johnfrankmorgan/whitespace.nvim/tarball/refs/tags/0.6.0",
+      "hash": "sha256-mOB8QICPN9XT6N81n1PPMaktI0JdKAOnwi1Aqr+JJIs="
     },
     "workspace-diagnotics-nvim": {
       "type": "Git",
