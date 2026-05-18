@@ -279,6 +279,7 @@ in
             home.packages = [
               pkgs.e1s
               pkgs.terraform-mcp-server
+              pkgs.typescript-language-server
             ];
           }
         )
