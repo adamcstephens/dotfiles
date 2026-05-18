@@ -29,7 +29,7 @@ let
     buildInputs = [ pkgs.makeWrapper ];
     postBuild = ''
       wrapProgram $out/bin/claude \
-        --set CLAUDE_CONFIG_DIR "${config.home.homeDirectory}/.config/claude"
+        --set-default CLAUDE_CONFIG_DIR "${config.home.homeDirectory}/.config/claude"
     '';
   };
 
@@ -44,7 +44,7 @@ let
         buildInputs = [ pkgs.makeWrapper ];
         postBuild = ''
           wrapProgram $out/bin/agent-browser \
-            --set AGENT_BROWSER_EXECUTABLE_PATH "${lib.getExe pkgs.chromium}"
+            --set-default AGENT_BROWSER_EXECUTABLE_PATH "${lib.getExe pkgs.chromium}"
         '';
       }
     else
