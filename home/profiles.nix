@@ -119,6 +119,7 @@ in
           dotfiles = {
             apps = {
               hypridle.enable = false;
+              sower.enable = true;
               swayidle.enable = true;
               zk.enable = true;
             };

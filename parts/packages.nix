@@ -39,7 +39,10 @@
             static = pkgs.stdenv.isLinux && pkgs.stdenv.isx86_64;
           };
 
-          hm = pkgs.callPackage ../packages/hm.nix { inherit (self'.packages) home-profile-selector; };
+          hm = pkgs.callPackage ../packages/hm.nix {
+            inherit (self'.packages) home-profile-selector;
+            inherit (pkgs-unstable) just;
+          };
 
           home-profile-selector = pkgs.callPackage ../packages/home-profile-selector.nix {
             homeConfigurations = builtins.attrNames self.homeConfigurations;
