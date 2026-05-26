@@ -1,13 +1,14 @@
 { pkgs, ... }:
 let
-  package = (
-    pkgs.delta.overrideAttrs (prev: {
-      postInstall = prev.postInstall + ''
-        mkdir -vp $out/share/delta
-        cp -v themes.gitconfig $out/share/delta
-      '';
-    })
-  );
+  package = pkgs.symlinkJoin {
+    name = "delta-wrapped";
+    paths = [ pkgs.delta ];
+    postBuild = ''
+      mkdir -vp $out/share/delta
+      cp -v ${pkgs.delta.src}/themes.gitconfig $out/share/delta
+    '';
+    meta.mainProgram = "et";
+  };
 in
 {
   home.packages = [
