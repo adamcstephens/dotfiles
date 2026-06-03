@@ -224,6 +224,7 @@ in
 
           dotfiles = {
             apps = {
+              sower.enable = true;
               zk.enable = true;
             };
             gui = {
