@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Wake and shell: persistent SSH wrapper that auto-reconnects via WoL."""
 
+import shutil
 import signal
 import socket
 import subprocess
@@ -57,7 +58,7 @@ class ReachabilityMonitor:
 
 def wake_and_wait(name, mac):
     """Send WoL and wait for SSH port to become reachable."""
-    subprocess.run(["ssh", "-O", "exit", name])
+    subprocess.run(["ssh", "-O", "exit", name], stderr=subprocess.DEVNULL)
     subprocess.run(["ssh", "blank", "wakey-wake", mac], check=True)
 
     print(f"Waiting for {name} to come up...")
@@ -74,16 +75,15 @@ def main():
     name = sys.argv[1]
     mac = sys.argv[2]
 
-    # Forward SIGINT/SIGTERM to the SSH child, not us
-    signal.signal(signal.SIGINT, signal.SIG_IGN)
-    signal.signal(signal.SIGTERM, signal.SIG_IGN)
-
-    # Initial connection: always wake first
-    wake_and_wait(name, mac)
-
-    monitor = ReachabilityMonitor(name, mac)
-
     while True:
+        wake_and_wait(name, mac)
+
+        monitor = ReachabilityMonitor(name, mac)
+
+        # Forward SIGINT/SIGTERM to the SSH child, not us
+        signal.signal(signal.SIGINT, signal.SIG_IGN)
+        signal.signal(signal.SIGTERM, signal.SIG_IGN)
+
         monitor.start()
         proc = subprocess.run(["ssh", "-4", name])
         monitor.stop()
@@ -91,22 +91,21 @@ def main():
         if proc.returncode == 0:
             break
 
-        print(f"\nSSH disconnected (exit code {proc.returncode})")
+        rows, cols = shutil.get_terminal_size()
+        print(f"\033[{rows - 2};1H", end="", flush=True)
+        print("\r\033", flush=True)
 
-        # Close stale control master
-        subprocess.run(["ssh", "-O", "exit", name])
+        print(f"\r\033[KSSH disconnected (exit code {proc.returncode})", flush=True)
 
-        if monitor.wol_sent:
-            # WoL already sent preemptively, just wait for it
-            print(f"WoL already sent, waiting for {name}...")
-            while not is_reachable(name):
-                time.sleep(1)
-            print(f"{name} is up, connecting...")
-        elif is_reachable(name):
-            print(f"Reconnecting to {name}...")
+        signal.signal(signal.SIGINT, signal.SIG_DFL)  # recapture signals
+        sys.stdout.write("\x1b[=0;1u")  # reset kitty keyboard stack
+        sys.stdout.write("\x1b[!p")  # soft reset
+        sys.stdout.write("\x1b[?1004l")  # explicitly kill focus tracking
+
+        if input("Reconnect? [Y/n] ").strip().lower() in ("y", "Y", ""):
+            continue
         else:
-            print(f"{name} is unreachable, sending WoL...")
-            wake_and_wait(name, mac)
+            break
 
 
 if __name__ == "__main__":
