@@ -24,7 +24,7 @@ in
     programs.waybar = {
       enable = true;
       systemd.enable = true;
-      systemd.target = "wayland-session.target";
+      systemd.targets = [ "wayland-session.target" ];
 
       settings.main = import ./settings.nix {
         inherit lib;

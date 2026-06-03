@@ -115,27 +115,34 @@ in
         ./core-dev.nix
         ./linux-gui.nix
 
-        {
-          dotfiles = {
-            apps = {
-              hypridle.enable = false;
-              sower.enable = true;
-              swayidle.enable = true;
-              zk.enable = true;
+        (
+          { pkgs, ... }:
+          {
+            dotfiles = {
+              apps = {
+                hypridle.enable = false;
+                sower.enable = true;
+                swayidle.enable = true;
+                zk.enable = true;
+              };
+              gui = {
+                dpi = 148;
+                # autosuspend in nixos handles this
+                dontSleep = true;
+                wayland.enable = true;
+              };
             };
-            gui = {
-              dpi = 148;
-              # autosuspend in nixos handles this
-              dontSleep = true;
-              wayland.enable = true;
-            };
-          };
 
-          # dotfiles.apps.waybar.battery = "upower";
-          programs.waybar.settings.main.network.format-disconnected = "";
+            home.packages = [
+              pkgs.sone
+            ];
 
-          services.lorri.enable = true;
-        }
+            # dotfiles.apps.waybar.battery = "upower";
+            programs.waybar.settings.main.network.format-disconnected = "";
+
+            services.lorri.enable = true;
+          }
+        )
       ];
     };
 
