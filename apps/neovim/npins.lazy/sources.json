@@ -65,10 +65,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v19.13.0",
-      "revision": "60d031862715a77b3655eac724e8926965e47b86",
+      "version": "v19.14.0",
+      "revision": "74046d6a44bc15508e7182e6da69f7953f9c6971",
       "url": null,
-      "hash": "sha256-9jSFvxX9m1+pFNY7YNRPz4Emm1HzNW/MjvR9BNDZpAo="
+      "hash": "sha256-/cx7LV866OPfTaK781dPbouPRjb2HXJZ3SwGVU/rnsA="
     },
     "conform.nvim": {
       "type": "GitRelease",
@@ -133,9 +133,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "131a558e13f9f28b15cd235557150ccb23f89286",
+      "revision": "221ce6b2d999187044529f49da6554a92f740a96",
       "url": null,
-      "hash": "sha256-5+JKZD4w80QZxnFv+1OxkFVety8fgmcGVOuxfYouxhI="
+      "hash": "sha256-6PjGu30Ed4/e/HQ3mIFQuUOxcCiti/71jjlMsjN7EoA="
     },
     "mini.pick": {
       "type": "GitRelease",
@@ -200,9 +200,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "9573948c38bfabeec353ae7dd7d3ffec4c506a6b",
+      "revision": "229b79051b380377664edc4cbd534930154921a1",
       "url": null,
-      "hash": "sha256-KnZQMIp9qzZitsrwcx9Nty3V5KkszSbWJog/m5opMFg="
+      "hash": "sha256-RDhwY+C2ZHZPPRe1yvgJqonLcez77dVYvTIttVnFPis="
     },
     "nvim-surround": {
       "type": "GitRelease",
@@ -270,9 +270,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "1f6442f4b0bb140ac3e87a37c53729a72605a1c3",
+      "revision": "6eabb12f1afba7c19f511c95ab356ed4fa5ec60f",
       "url": null,
-      "hash": "sha256-fzdy9RJBrqlj0uEPDrXUl2uOR46ydb6xk3wssyg60NU="
+      "hash": "sha256-2A2M/uuJ4qduZHFqdUg8h8jqGFMZQ+6wiBmdi/kg0Qc="
     },
     "osc11.nvim": {
       "type": "Git",
@@ -350,9 +350,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "1c0a9994bb6bb5b43859c67924aabd061c4b7905",
+      "revision": "261664f92ed51cf0c077555b2d4b2530307eac17",
       "url": null,
-      "hash": "sha256-x3IbuNHg+y0NtNguJnWCpz3bsj9aR41ecTToUYFQlNM="
+      "hash": "sha256-g7Tjm3a1aAbEQocSK1iDRamXivq1AwWlD6Q0X6vphNU="
     }
   },
   "version": 8
