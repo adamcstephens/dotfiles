@@ -138,7 +138,22 @@ return {
       {
         "<leader>r",
         function()
-          require("fzf-lua").live_grep_native({})
+          require("fzf-lua").live_grep_native({
+            fzf_opts = { ["--delimiter"] = ":" },
+            keymap = {
+              fzf = {
+                -- ctrl-g: fzf-lua's live <-> fuzzy toggle (matches the whole line)
+                -- ctrl-f: pin results and fuzzy-match the filename only. Works both
+                --   straight from live mode and after ctrl-g, since enable-search /
+                --   unbind are no-ops once already in fuzzy mode:
+                --     unbind(change) stop reloading rg per keystroke (pins results)
+                --     enable-search  undo live mode's --disabled (fzf matches now)
+                --     change-nth(1)  restrict matching to field 1 (filename)
+                --     clear-query    drop the stale rg term so you can type a filename
+                ["ctrl-f"] = "unbind(change)+enable-search+change-nth(1)+change-prompt(Filename> )+clear-query",
+              },
+            },
+          })
         end,
         desc = "live grep",
         mode = { "n" },
