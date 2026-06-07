@@ -27,6 +27,10 @@ ocamlPackages.buildDunePackage {
   # only care about bin
   postInstall = ''
     rm -rf $out/lib
+
+    # bash-ported tools that are no longer built by dune
+    install -Dm755 bin/ssh-agent-mgr $out/bin/ssh-agent-mgr
+    install -Dm755 bin/vcs-tui $out/bin/vcs-tui
   '';
 
   buildInputs = with ocamlPackages; [

@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+# Locate a usable ssh-agent socket and print its path.
+#
+# In a multiplexer/remote context (tmux, ssh, eternal terminal, zellij) the
+# inherited SSH_AUTH_SOCK is trusted; otherwise the first valid candidate
+# socket is used. If the chosen socket holds no keys, candidate discovery is
+# retried before giving up.
+#
+# Ported from bin/ssh_agent_mgr.ml.
+
+set -euo pipefail
+
+# Candidate sockets, in priority order. Entries whose env var is unset expand
+# to an empty string and are skipped by find_valid_socket.
+socket_candidates() {
+  printf '%s\n' \
+    "${XDG_RUNTIME_DIR:+$XDG_RUNTIME_DIR/yubikey-agent/yubikey-agent.sock}" \
+    "${XDG_RUNTIME_DIR:+$XDG_RUNTIME_DIR/ssh-tpm-agent}" \
+    "${HOME:+$HOME/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh}" \
+    "${HOME:+$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock}" \
+    "${XDG_RUNTIME_DIR:+$XDG_RUNTIME_DIR/ssh-agent}"
+}
+
+find_valid_socket() {
+  local candidate
+  while IFS= read -r candidate; do
+    if [ -n "$candidate" ] && [ -S "$candidate" ]; then
+      printf '%s' "$candidate"
+      return 0
+    fi
+  done < <(socket_candidates)
+  return 1
+}
+
+ssh_agent_has_keys() {
+  ssh-add -l >/dev/null 2>&1
+}
+
+# In a mux/remote context trust the inherited socket, otherwise discover one.
+if [ -n "${TMUX:-}" ] || [ -n "${SSH_TTY:-}" ] || [ -n "${ET_VERSION:-}" ] || [ -n "${ZELLIJ:-}" ]; then
+  socket="${SSH_AUTH_SOCK:-}"
+else
+  socket="$(find_valid_socket || true)"
+fi
+
+if [ -n "$socket" ]; then
+  export SSH_AUTH_SOCK="$socket"
+fi
+
+if ! ssh_agent_has_keys; then
+  echo "Socket has no keys, re-running socket find" >&2
+  fallback_socket="$(find_valid_socket || true)"
+  if [ -n "$fallback_socket" ]; then
+    export SSH_AUTH_SOCK="$fallback_socket"
+  fi
+
+  if ! ssh_agent_has_keys; then
+    echo "Empty ssh-agent" >&2
+  fi
+fi
+
+printf '%s' "${SSH_AUTH_SOCK:-}"

@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+# Walk up from the current directory to find a VCS checkout and launch the
+# matching TUI: jjui for jujutsu, lazygit for git. Forwards any arguments and
+# points SSH_AUTH_SOCK at the well-known agent socket first.
+#
+# Ported from bin/vcs_tui.ml.
+
+set -euo pipefail
+
+well_known_socket() {
+  if [ -n "${XDG_RUNTIME_DIR:-}" ]; then
+    printf '%s/ssh-auth.sock' "$XDG_RUNTIME_DIR"
+  else
+    printf '%s/.ssh/ssh-auth.sock' "$HOME"
+  fi
+}
+
+# Echo the VCS kind (jujutsu/git) for the first ancestor that has one, or
+# nothing. Stops before $HOME and /, matching the original walk.
+find_vcs_up() {
+  local dir
+  dir="$(pwd)"
+  while [ "$dir" != "$HOME" ] && [ "$dir" != "/" ]; do
+    if [ -e "$dir/.jj" ]; then
+      printf 'jujutsu'
+      return 0
+    elif [ -e "$dir/.git" ]; then
+      printf 'git'
+      return 0
+    fi
+    dir="$(dirname "$dir")"
+  done
+  return 1
+}
+
+case "$(find_vcs_up || true)" in
+jujutsu) tui=jjui ;;
+git) tui=lazygit ;;
+*)
+  echo "No VCS directory found" >&2
+  exit 1
+  ;;
+esac
+
+SSH_AUTH_SOCK="$(well_known_socket)"
+export SSH_AUTH_SOCK
+exec "$tui" "$@"
