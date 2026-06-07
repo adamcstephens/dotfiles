@@ -1,17 +1,18 @@
 #!/usr/bin/env bash
-# Locate a usable ssh-agent socket and print its path.
+# Locate the best ssh-agent socket and print its path.
 #
-# In a multiplexer/remote context (tmux, ssh, eternal terminal, zellij) the
-# inherited SSH_AUTH_SOCK is trusted; otherwise the first valid candidate
-# socket is used. If the chosen socket holds no keys, candidate discovery is
-# retried before giving up.
+# Candidates are tried in priority order and the first agent that actually has
+# keys loaded wins. If no candidate has keys, the first reachable (but empty)
+# agent is used. In a mux/remote context (tmux, ssh, eternal terminal, zellij)
+# the inherited SSH_AUTH_SOCK is tried first.
 #
-# Ported from bin/ssh_agent_mgr.ml.
+# Originally ported from bin/ssh_agent_mgr.ml, then reworked to select by key
+# presence rather than mere socket existence.
 
 set -euo pipefail
 
 # Candidate sockets, in priority order. Entries whose env var is unset expand
-# to an empty string and are skipped by find_valid_socket.
+# to an empty string and are skipped below.
 socket_candidates() {
   printf '%s\n' \
     "${XDG_RUNTIME_DIR:+$XDG_RUNTIME_DIR/yubikey-agent/yubikey-agent.sock}" \
@@ -21,42 +22,44 @@ socket_candidates() {
     "${XDG_RUNTIME_DIR:+$XDG_RUNTIME_DIR/ssh-agent}"
 }
 
-find_valid_socket() {
-  local candidate
-  while IFS= read -r candidate; do
-    if [ -n "$candidate" ] && [ -S "$candidate" ]; then
-      printf '%s' "$candidate"
-      return 0
-    fi
-  done < <(socket_candidates)
-  return 1
+# Full ordered candidate list. In a mux/remote context the inherited socket is
+# tried ahead of the discovered candidates.
+candidates() {
+  if [ -n "${TMUX:-}" ] || [ -n "${SSH_TTY:-}" ] || [ -n "${ET_VERSION:-}" ] || [ -n "${ZELLIJ:-}" ]; then
+    printf '%s\n' "${SSH_AUTH_SOCK:-}"
+  fi
+  socket_candidates
 }
 
-ssh_agent_has_keys() {
-  ssh-add -l >/dev/null 2>&1
-}
+chosen=""
+first_reachable=""
 
-# In a mux/remote context trust the inherited socket, otherwise discover one.
-if [ -n "${TMUX:-}" ] || [ -n "${SSH_TTY:-}" ] || [ -n "${ET_VERSION:-}" ] || [ -n "${ZELLIJ:-}" ]; then
-  socket="${SSH_AUTH_SOCK:-}"
+# ssh-add -l exits 0 (has keys), 1 (reachable but empty), 2 (unreachable).
+while IFS= read -r sock; do
+  [ -n "$sock" ] || continue
+  [ -S "$sock" ] || continue
+
+  if SSH_AUTH_SOCK="$sock" ssh-add -l >/dev/null 2>&1; then
+    rc=0
+  else
+    rc=$?
+  fi
+
+  if [ "$rc" -eq 0 ]; then
+    chosen="$sock"
+    break
+  elif [ "$rc" -eq 1 ] && [ -z "$first_reachable" ]; then
+    first_reachable="$sock"
+  fi
+done < <(candidates)
+
+if [ -n "$chosen" ]; then
+  :
+elif [ -n "$first_reachable" ]; then
+  chosen="$first_reachable"
+  echo "No agent with keys, falling back to reachable agent" >&2
 else
-  socket="$(find_valid_socket || true)"
+  echo "No usable ssh-agent found" >&2
 fi
 
-if [ -n "$socket" ]; then
-  export SSH_AUTH_SOCK="$socket"
-fi
-
-if ! ssh_agent_has_keys; then
-  echo "Socket has no keys, re-running socket find" >&2
-  fallback_socket="$(find_valid_socket || true)"
-  if [ -n "$fallback_socket" ]; then
-    export SSH_AUTH_SOCK="$fallback_socket"
-  fi
-
-  if ! ssh_agent_has_keys; then
-    echo "Empty ssh-agent" >&2
-  fi
-fi
-
-printf '%s' "${SSH_AUTH_SOCK:-}"
+printf '%s' "$chosen"
