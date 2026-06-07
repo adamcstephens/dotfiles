@@ -270,9 +270,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "6eabb12f1afba7c19f511c95ab356ed4fa5ec60f",
+      "revision": "03377d04facaaa2bb43752e0178ccc87b263f5b0",
       "url": null,
-      "hash": "sha256-2A2M/uuJ4qduZHFqdUg8h8jqGFMZQ+6wiBmdi/kg0Qc="
+      "hash": "sha256-A2TFOebgb6FW6q4SruupXHumflhU/BCcQyRgfaY+ZLI="
     },
     "osc11.nvim": {
       "type": "Git",
