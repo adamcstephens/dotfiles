@@ -1,1 +1,4 @@
-
+brew "wireguard-tools"
+cask "aldente"
+cask "lm-studio"
+cask "syncthing-app"
