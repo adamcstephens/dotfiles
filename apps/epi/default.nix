@@ -1,12 +1,11 @@
 {
   config,
   inputs,
-  lib,
   pkgs,
   ...
 }:
 {
-  home.packages = lib.optionals pkgs.stdenv.isLinux [
+  home.packages = [
     inputs.epi.packages.${pkgs.stdenv.hostPlatform.system}.epi
   ];
 

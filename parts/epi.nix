@@ -66,6 +66,20 @@ let
 in
 {
   flake.nixosConfigurations = {
+    agents-aarch64 = inputs.nixpkgs-unstable.lib.nixosSystem {
+      system = "aarch64-linux";
+      modules = [
+        inputs.epi.nixosModules.epi
+        inputs.home-manager-unstable.nixosModules.home-manager
+        common
+        {
+          home-manager.users.adam.imports = [
+            { home.file.".dotfiles".source = "${self}"; }
+          ];
+        }
+      ];
+    };
+
     agents = inputs.nixpkgs-unstable.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
