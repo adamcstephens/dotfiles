@@ -93,9 +93,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "8962b7fe3f6267db9dd8b2a49f2c6175b7980210",
+      "revision": "e623d3645152839cbe7e73e7b2aa6e31256020ea",
       "url": null,
-      "hash": "sha256-S2AuTMOCiglrvB1mJWEDlSke130GWpnDvMuIapjMyFk="
+      "hash": "sha256-Bwdkf1ZHPsR3BUxdsGBNNNbzJ/CPOIlqb5EcQUUPuAk="
     },
     "fzf-lua-frecency.nvim": {
       "type": "Git",
@@ -270,9 +270,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "03377d04facaaa2bb43752e0178ccc87b263f5b0",
+      "revision": "e4e5894f0d115365c977fddb3081e1d26912aed8",
       "url": null,
-      "hash": "sha256-A2TFOebgb6FW6q4SruupXHumflhU/BCcQyRgfaY+ZLI="
+      "hash": "sha256-+OsXKIG7FR0yiZDqa1CCqWJ/Rz5ZT+Cw1/qRi04tnGU="
     },
     "osc11.nvim": {
       "type": "Git",
