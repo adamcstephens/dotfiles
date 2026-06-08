@@ -37,11 +37,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1780880815,
-        "narHash": "sha256-Y231wJYZPSKF80DrPKY4aeptoEIwODQOARGyUrD6MP0=",
+        "lastModified": 1780882235,
+        "narHash": "sha256-9RzUwel/P880LaChepWQWBHllbM9aozCn59+pqLQf24=",
         "ref": "refs/heads/main",
-        "rev": "c9d76c099765cb9705ef9693e3bbb9384759c6b0",
-        "revCount": 214,
+        "rev": "41e414ddceabb5ade9cc8dbc053dc4f38fb584f5",
+        "revCount": 218,
         "type": "git",
         "url": "https://codeberg.org/adamcstephens/epi"
       },
@@ -55,11 +55,11 @@
         "nixpkgs-lib": "nixpkgs-lib"
       },
       "locked": {
-        "lastModified": 1775087534,
-        "narHash": "sha256-91qqW8lhL7TLwgQWijoGBbiD4t7/q75KTi8NxjVmSmA=",
+        "lastModified": 1778716662,
+        "narHash": "sha256-m1Yf0wZ8j1OHjTc2UwHwyQRSnNeSgLJOd7q5Y45hzi4=",
         "owner": "hercules-ci",
         "repo": "flake-parts",
-        "rev": "3107b77cd68437b9a76194f0f7f9c55f2329ca5b",
+        "rev": "f7c1a2d347e4c52d5fb8d10cb4d94b5884e546fb",
         "type": "github"
       },
       "original": {
@@ -240,11 +240,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1775285073,
-        "narHash": "sha256-B7l3jN6Fnud6WTt5IK/WrMKFCLvB3onPWuTI4tXq4Y8=",
+        "lastModified": 1780795668,
+        "narHash": "sha256-RAPmF/rximnsPEVkHxGuLAMekHsQWsFou+Dmqw5PjnQ=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "b2c0242c2db5ac5fc532cb157c6e796e621402d5",
+        "rev": "afdf13dce322e2aec0a57490a45df202367ec2e2",
         "type": "github"
       },
       "original": {
@@ -256,11 +256,11 @@
     },
     "nixpkgs-lib": {
       "locked": {
-        "lastModified": 1774748309,
-        "narHash": "sha256-+U7gF3qxzwD5TZuANzZPeJTZRHS29OFQgkQ2kiTJBIQ=",
+        "lastModified": 1777168982,
+        "narHash": "sha256-GOkGPcboWE9BmGCRMLX3worL4EMnsnG8MyKmXNeYuhQ=",
         "owner": "nix-community",
         "repo": "nixpkgs.lib",
-        "rev": "333c4e0545a6da976206c74db8773a1645b5870a",
+        "rev": "f5901329dade4a6ea039af1433fb087bd9c1fe14",
         "type": "github"
       },
       "original": {
@@ -469,11 +469,11 @@
         "nixpkgs": "nixpkgs_4"
       },
       "locked": {
-        "lastModified": 1775685706,
-        "narHash": "sha256-AhRVa0DOtRU2qwG/P95K4/3LTNUaQlToXiyQn1U/k/A=",
+        "lastModified": 1780881465,
+        "narHash": "sha256-JVrKkjI3Fm9UP0IMAwmaEd+IedTDyJml1e3Zte+LSlc=",
         "ref": "refs/heads/main",
-        "rev": "99ca22c978929385a8463f61cd2b88542d536487",
-        "revCount": 68,
+        "rev": "8a95f435465167e9b0502d6183a4bb09729bcecd",
+        "revCount": 69,
         "type": "git",
         "url": "https://codeberg.org/adamcstephens/vein"
       },
