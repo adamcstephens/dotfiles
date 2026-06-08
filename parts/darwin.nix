@@ -273,6 +273,10 @@
                 '';
               };
 
+              nix.linux-builder = {
+                enable = true;
+              };
+
               nixpkgs.overlays = [
                 self.overlays.dotfiles
               ];
