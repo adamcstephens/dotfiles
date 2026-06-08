@@ -1,0 +1,222 @@
+#!/usr/bin/env python3
+"""Toggle and sync system dark/light mode across macOS, GNOME, and tmux.
+
+Ported from dark.ml. Defaults to dark mode whenever the current state cannot
+be determined.
+"""
+
+import fcntl
+import os
+import platform
+import shutil
+import subprocess
+import sys
+import time
+
+DARK = "dark"
+LIGHT = "light"
+
+COMMANDS = ("enable", "disable", "toggle", "status", "sync-tmux", "watch-tmux")
+
+
+def state_file():
+    base = os.environ.get("XDG_STATE_HOME") or os.path.join(os.path.expanduser("~"), ".local", "state")
+    return os.path.join(base, "dark-mode.state")
+
+
+def current_platform():
+    system = platform.system()
+    if system == "Darwin":
+        return "darwin"
+    if system == "Linux":
+        return "linux"
+    return "unknown"
+
+
+# Utilities -----------------------------------------------------------------
+
+
+def run_command(cmd):
+    """Run cmd in a shell and return its first line of stdout (or "")."""
+    result = subprocess.run(cmd, shell=True, capture_output=True, text=True)
+    return result.stdout.splitlines()[0] if result.stdout else ""
+
+
+def run_no_output(cmd):
+    """Run cmd discarding output; return True on success."""
+    return (
+        subprocess.run(
+            cmd,
+            shell=True,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        ).returncode
+        == 0
+    )
+
+
+def command_exists(cmd):
+    return shutil.which(cmd) is not None
+
+
+def write_state(state):
+    path = state_file()
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, "w") as f:
+        f.write("true" if state == DARK else "false")
+
+
+def read_state():
+    """Return the persisted state, defaulting to dark when unavailable."""
+    try:
+        with open(state_file()) as f:
+            return DARK if f.readline().strip() == "true" else LIGHT
+    except OSError:
+        return DARK
+
+
+# Darwin --------------------------------------------------------------------
+
+
+def darwin_get_state():
+    return DARK if run_command("dark-mode status") == "on" else LIGHT
+
+
+def darwin_set_theme(state):
+    run_command("dark-mode on" if state == DARK else "dark-mode off")
+
+
+# Linux ---------------------------------------------------------------------
+
+
+def linux_get_state():
+    if not command_exists("gsettings"):
+        return read_state()
+
+    scheme = run_command(
+        "gsettings get org.gnome.desktop.interface color-scheme 2>/dev/null "
+        "|| dconf read /org/gnome/desktop/interface/color-scheme 2>/dev/null"
+    )
+    if "prefer-dark" in scheme:
+        return DARK
+    return read_state()
+
+
+def linux_set_gtk_theme(state):
+    theme = "Flat-Remix-GTK-Orange-Darkest-Solid" if state == DARK else "Flat-Remix-GTK-Orange-Light-Solid"
+    run_command(f"gsettings-wrapper set org.gnome.desktop.interface gtk-theme {theme}")
+
+
+def linux_set_gnome_scheme(state):
+    scheme = "prefer-dark" if state == DARK else "prefer-light"
+    run_command(f"gsettings-wrapper set org.gnome.desktop.interface color-scheme {scheme}")
+    run_command(f"dconf write /org/gnome/desktop/interface/color-scheme \"'{scheme}'\"")
+
+
+def linux_set_theme(state):
+    linux_set_gtk_theme(state)
+    linux_set_gnome_scheme(state)
+    write_state(state)
+
+
+# Core ----------------------------------------------------------------------
+
+
+def get_current_state():
+    plat = current_platform()
+    if plat == "darwin":
+        return darwin_get_state()
+    if plat == "linux":
+        return linux_get_state()
+    return None
+
+
+def set_dark_mode(state):
+    plat = current_platform()
+    if plat == "darwin":
+        darwin_set_theme(state)
+        write_state(state)
+    elif plat == "linux":
+        linux_set_theme(state)
+    else:
+        raise SystemExit("Unsupported platform")
+
+
+def toggle_dark_mode():
+    set_dark_mode(LIGHT if get_current_state() == DARK else DARK)
+
+
+# tmux ----------------------------------------------------------------------
+
+
+def tmux_theme_file(state):
+    name = "theme-dark.tmux" if state == DARK else "theme-light.tmux"
+    return f"~/.config/tmux/{name}"
+
+
+def apply_tmux_theme(state):
+    if run_no_output("tmux list-sessions"):
+        run_no_output(f"tmux source-file {tmux_theme_file(state)}")
+        run_no_output("tmux refresh-client -S")
+
+
+def sync_tmux():
+    state = get_current_state()
+    if state is not None:
+        apply_tmux_theme(state)
+        write_state(state)
+
+
+def lock_file():
+    base = os.environ.get("XDG_RUNTIME_DIR") or "/tmp"
+    return os.path.join(base, "tmux-theme-sync.lockfile")
+
+
+def watch_tmux():
+    fd = os.open(lock_file(), os.O_CREAT | os.O_RDWR | os.O_CLOEXEC, 0o600)
+    try:
+        fcntl.lockf(fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
+    except OSError:
+        # Another watcher instance owns the lock; exit quietly.
+        os.close(fd)
+        return
+
+    # Hold the lock for the lifetime of the process; the OS releases it on
+    # exit, so the unbounded watch loop never needs to unwind.
+    sync_tmux()
+    prev = get_current_state()
+    while True:
+        current = get_current_state()
+        if current != prev:
+            sync_tmux()
+        time.sleep(2)
+        prev = current
+
+
+# Entry point ---------------------------------------------------------------
+
+
+def main(argv):
+    command = argv[1].lower() if len(argv) == 2 else None
+    if command not in COMMANDS:
+        prog = os.path.basename(argv[0])
+        print(f"Usage: {prog} [{'|'.join(COMMANDS)}]", file=sys.stderr)
+        return 1
+
+    if command == "enable":
+        set_dark_mode(DARK)
+    elif command == "disable":
+        set_dark_mode(LIGHT)
+    elif command == "toggle":
+        toggle_dark_mode()
+    elif command == "status":
+        print("true" if get_current_state() == DARK else "false")
+    elif command == "sync-tmux":
+        sync_tmux()
+    elif command == "watch-tmux":
+        watch_tmux()
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main(sys.argv))

@@ -11,12 +11,10 @@
 
 (executables
  (names
-  dark
   escape_file
   wayland_locker
   wayland_monitor)
  (public_names
-  dark
   escape-file
   wayland-locker
   wayland-monitor)

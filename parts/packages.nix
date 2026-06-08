@@ -15,11 +15,7 @@
     {
       packages =
         let
-          ocamlPackages =
-            if pkgs.stdenv.isLinux && pkgs.stdenv.isx86_64 then
-              pkgs-unstable.pkgsMusl.ocaml-ng.ocamlPackages_5_4
-            else
-              pkgs-unstable.ocaml-ng.ocamlPackages_5_4;
+          ocamlPackages = pkgs-unstable.ocaml-ng.ocamlPackages_5_4;
         in
         lib.filesystem.packagesFromDirectoryRecursive {
           inherit (pkgs) callPackage;
@@ -36,7 +32,6 @@
 
           dotfiles = pkgs-unstable.callPackage ../packages/dotfiles.nix {
             inherit ocamlPackages;
-            static = pkgs.stdenv.isLinux && pkgs.stdenv.isx86_64;
           };
 
           hm = pkgs.callPackage ../packages/hm.nix {
