@@ -275,6 +275,9 @@
 
               nix.linux-builder = {
                 enable = true;
+                # use stable release
+                # https://github.com/NixOS/nixpkgs/issues/528299
+                package = inputs.nixpkgs.legacyPackages.aarch64-darwin.darwin.linux-builder;
               };
 
               nixpkgs.overlays = [
@@ -346,6 +349,10 @@
 
               linux-builder = {
                 enable = true;
+                # use stable release
+                # https://github.com/NixOS/nixpkgs/issues/528299
+                package = inputs.nixpkgs.legacyPackages.aarch64-darwin.darwin.linux-builder;
+
                 maxJobs = 4;
 
                 config = {
