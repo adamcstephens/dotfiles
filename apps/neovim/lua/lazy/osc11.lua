@@ -23,7 +23,7 @@ return {
     end
 
     local function apply_state_from_file()
-      local state_file = vim.fn.expand("~/.dotfiles/.dark-mode.state")
+      local state_file = vim.fn.expand("~/.local/state/dark-mode.state")
       if vim.fn.filereadable(state_file) == 1 then
         local line = vim.fn.readfile(state_file, "", 1)[1] or ""
         if line == "true" then

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-STATE_FILE="$HOME/.dotfiles/.dark-mode.state"
+STATE_FILE="$HOME/.local/state/dark-mode.state"
 
 DARK=true
 if [ -e "$STATE_FILE" ]; then
