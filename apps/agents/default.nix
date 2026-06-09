@@ -66,5 +66,9 @@ in
     ];
 
     home.file.".config/agents/skills".source = skills;
+
+    home.sessionVariables = {
+      CLAUDE_CONFIG_DIR = "${config.home.homeDirectory}/.config/claude";
+    };
   };
 }
