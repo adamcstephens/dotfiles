@@ -43,6 +43,7 @@ return {
           end
         end,
         typescript = { "prettier" },
+        typescriptreact = { "prettier" },
         yaml = { "prettier" },
       },
     })

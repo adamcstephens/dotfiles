@@ -120,6 +120,13 @@ return {
     vim.lsp.enable("terraformls")
 
     -- typescript and javascript
+    vim.lsp.config("ts_ls", {
+      on_attach = function(client)
+        -- don't ever fall back to the bundled formatter
+        client.server_capabilities.documentFormattingProvider = false
+        client.server_capabilities.documentRangeFormattingProvider = false
+      end,
+    })
     vim.lsp.enable("ts_ls")
 
     -- yaml
