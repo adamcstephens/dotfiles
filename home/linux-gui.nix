@@ -131,6 +131,7 @@ in
       # audio
       pkgs.playerctl
       pkgs.pwvucontrol
+      pkgs.sone # tidal player
       pkgs.wireplumber
 
       # firefox
