@@ -49,6 +49,7 @@
         elixir = pkgs-unstable.callPackage ./elixir.nix { };
         go = pkgs-unstable.callPackage ./go.nix { };
         js = pkgs-unstable.callPackage ./js.nix { };
+        media = pkgs-unstable.callPackage ./media.nix { };
         nixpkgs = pkgs-unstable.callPackage ./nixpkgs.nix { };
         ocaml = pkgs-unstable.callPackage ./ocaml.nix { inherit inputs; };
         python = pkgs-unstable.callPackage ./python.nix { };
