@@ -5,7 +5,6 @@
 }:
 let
   common =
-
     {
       config,
       lib,
@@ -21,7 +20,7 @@ let
 
       home-manager = {
         users.adam = {
-          imports = self.homeModules.agents ++ [
+          imports = [
             {
               dotfiles.nixosManaged = true;
               nix.package = lib.mkOverride 30 config.nix.package;
@@ -73,7 +72,7 @@ in
         inputs.home-manager-unstable.nixosModules.home-manager
         common
         {
-          home-manager.users.adam.imports = [
+          home-manager.users.adam.imports = self.homeModules.agents ++ [
             { home.file.".dotfiles".source = "${self}"; }
           ];
         }
@@ -87,7 +86,7 @@ in
         inputs.home-manager-unstable.nixosModules.home-manager
         common
         {
-          home-manager.users.adam.imports = [
+          home-manager.users.adam.imports = self.homeModules.agents-aarch64 ++ [
             { home.file.".dotfiles".source = "${self}"; }
           ];
         }
@@ -100,6 +99,9 @@ in
         inputs.epi.nixosModules.epi
         inputs.home-manager-unstable.nixosModules.home-manager
         common
+        {
+          home-manager.users.adam.imports = self.homeModules.agents ++ [ ];
+        }
       ];
     };
   };
