@@ -58,9 +58,5 @@ in
 
     # apps
     eternal-terminal
-  ]
-  ++ lib.optionals pkgs.stdenv.isLinux [
-    pkgs._1password-cli
-    pkgs.bws
   ];
 }
