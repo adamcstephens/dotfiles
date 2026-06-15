@@ -1,13 +1,11 @@
 #!/usr/bin/env python3
 """Wake and shell: persistent SSH wrapper that auto-reconnects via WoL."""
 
-import re
 import shutil
 import signal
 import socket
 import subprocess
 import sys
-import threading
 import time
 import termios
 
@@ -26,43 +24,6 @@ def cooked_mode():
     attrs = termios.tcgetattr(fd)
     attrs[3] |= termios.ISIG | termios.ICANON | termios.ECHO  # lflag
     termios.tcsetattr(fd, termios.TCSAFLUSH, attrs)
-
-
-class ReachabilityMonitor:
-    """Background thread that monitors host reachability and sends preemptive WoL."""
-
-    def __init__(self, name, mac, interval=5):
-        self.name = name
-        self.mac = mac
-        self.interval = interval
-        self.reachable = True
-        self.wol_sent = False
-        self._stop = threading.Event()
-        self._thread = threading.Thread(target=self._run, daemon=True)
-
-    def start(self):
-        self._stop.clear()
-        self.reachable = True
-        self.wol_sent = False
-        self._thread = threading.Thread(target=self._run, daemon=True)
-        self._thread.start()
-
-    def stop(self):
-        self._stop.set()
-
-    def _run(self):
-        while not self._stop.is_set():
-            self._stop.wait(self.interval)
-            if self._stop.is_set():
-                break
-
-            reachable = is_reachable(self.name)
-            self.reachable = reachable
-
-            if not reachable and not self.wol_sent:
-                print(f"\n{self.name} became unreachable, sending preemptive WoL...")
-                subprocess.run(["ssh", "blank", "wakey-wake", self.mac])
-                self.wol_sent = True
 
 
 def wake_and_wait(name, mac):
@@ -87,15 +48,11 @@ def main():
     while True:
         wake_and_wait(name, mac)
 
-        monitor = ReachabilityMonitor(name, mac)
-
         # Forward SIGINT/SIGTERM to the SSH child, not us
         signal.signal(signal.SIGINT, signal.SIG_IGN)
         signal.signal(signal.SIGTERM, signal.SIG_IGN)
 
-        monitor.start()
         proc = subprocess.run(["ssh", "-4", name])
-        monitor.stop()
 
         if proc.returncode == 0:
             break
