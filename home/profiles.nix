@@ -172,23 +172,6 @@ in
       ];
     };
 
-    maple = {
-      system = "aarch64-darwin";
-      nixpkgs = inputs.nixpkgs-unstable;
-      home-manager = inputs.home-manager-unstable;
-      modules = [
-        ./core-darwin.nix
-        (
-          { config, pkgs, ... }:
-          {
-            dotfiles.apps = {
-              agents.enable = true;
-            };
-          }
-        )
-      ];
-    };
-
     nix-community-aarch64-linux = {
       system = "aarch64-linux";
       modules = [
@@ -196,38 +179,6 @@ in
           home.username = "adamcstephens";
           home.homeDirectory = "/home/adamcstephens";
         }
-      ];
-    };
-
-    nixos2 = {
-      system = "aarch64-linux";
-      nixpkgs = inputs.nixpkgs-unstable;
-      home-manager = inputs.home-manager-unstable;
-      modules = [
-        ./core-dev.nix
-        # ./linux-gui.nix
-        # {
-        #   dotfiles = {
-        #     gui = {
-        #       dpi = 120;
-        #       wayland.enable = true;
-        #     };
-        #   };
-        #
-        #   services.kanshi.settings = [
-        #     {
-        #       profile.name = "virtual";
-        #       profile.outputs = [
-        #         {
-        #           criteria = "Virtual-1";
-        #           mode = "3840x2160";
-        #           status = "enable";
-        #           scale = 1.333333;
-        #         }
-        #       ];
-        #     }
-        #   ];
-        # }
       ];
     };
 

@@ -141,166 +141,6 @@
   };
 
   profile-parts.darwin = {
-    maple =
-      let
-        homeModules = config.profile-parts.home-manager.maple.finalModules;
-      in
-      {
-        nixpkgs = inputs.nixpkgs-unstable;
-        modules = [
-          inputs.home-manager-unstable.darwinModules.home-manager
-          ../darwinModules/pf.nix
-          (
-            { pkgs, ... }:
-            {
-              nix.settings.trusted-users = [ "remote-builder" ];
-              nix.package = pkgs.lixPackageSets.latest.lix;
-
-              users.knownUsers = [ "remote-builder" ];
-
-              users.users.remote-builder = {
-                createHome = true;
-                openssh.authorizedKeys.keys = [
-                  "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFs5NiXbHfBIVf9O0VCBhmBuOSzXpSg1skLzinA5tJhu builder@builders"
-                ];
-
-                shell = "/bin/zsh";
-                uid = 1000;
-                home = "/Users/remote-builder";
-              };
-            }
-          )
-
-          (
-            { pkgs, ... }:
-            let
-              tomlFormat = pkgs.formats.toml { };
-
-              traefikDynamic = tomlFormat.generate "traefik-dynamic.toml" {
-                http.routers.lmstudio = {
-                  rule = "Host(`lmstudio.svc.junco.dev`) || Host(`lmstudio.junco.dev`)";
-                  service = "lmstudio";
-                  entryPoints = [ "websecure" ];
-                  tls = {
-                    certResolver = "junco";
-                    domains = [
-                      { main = "lmstudio.svc.junco.dev"; }
-                    ];
-                    options = "mtls";
-                  };
-                };
-
-                http.services.lmstudio.loadBalancer.servers = [
-                  { url = "http://127.0.0.1:1234"; }
-                ];
-
-                tls.options = {
-                  mtls.clientAuth = {
-                    caFiles = [ ./root_ca.crt ];
-                    clientAuthType = "RequireAndVerifyClientCert";
-                  };
-                };
-              };
-
-              traefikStatic = tomlFormat.generate "traefik-static.toml" {
-                entryPoints.web.address = ":8080";
-                entryPoints.web.http.redirections.entryPoint = {
-                  to = "websecure";
-                  scheme = "https";
-                };
-                entryPoints.websecure.address = ":8443";
-
-                certificatesResolvers.junco.acme = {
-                  caServer = "https://cert.junco.dev/acme/acme/directory";
-                  storage = "/Users/adam/.local/share/traefik/acme.json";
-                  httpChallenge.entryPoint = "web";
-                };
-
-                providers.file.filename = "${traefikDynamic}";
-              };
-            in
-            {
-              home-manager.users.adam = {
-                imports = homeModules;
-
-                home.activation.traefik-data = ''
-                  mkdir -p ~/.local/share/traefik
-                '';
-
-                launchd.agents.traefik = {
-                  enable = true;
-                  config = {
-                    ProgramArguments = [
-                      "${pkgs.traefik}/bin/traefik"
-                      "--configFile=${traefikStatic}"
-                    ];
-                    KeepAlive = true;
-                    RunAtLoad = true;
-                    StandardErrorPath = "/Users/adam/Library/Logs/traefik.log";
-                    StandardOutPath = "/Users/adam/Library/Logs/traefik.log";
-                  };
-                };
-              };
-
-              home-manager.extraSpecialArgs = {
-                inherit inputs;
-                npins = import ../npins;
-                flake = self;
-              };
-
-              networking.computerName = "maple";
-
-              networking.applicationFirewall = {
-                enable = true;
-                enableStealthMode = true;
-              };
-              security.pf = {
-                enable = true;
-                rules = ''
-                  # redirect 80/443 to traefik
-                  rdr pass on utun4 proto tcp from any to any port 80 -> 127.0.0.1 port 8080
-                  rdr pass on utun4 proto tcp from any to any port 443 -> 127.0.0.1 port 8443
-
-                  pass quick on lo0 no state
-
-                  # restrict ssh
-                  block return in proto tcp from any to any port ssh
-                  pass in on utun4 proto tcp from any to port ssh
-
-                  # allow to traefik
-                  block in proto tcp from any to any port {8080, 8443}
-                  pass in on utun4 proto tcp from any to any port {8080, 8443}
-                '';
-              };
-
-              nix.linux-builder = {
-                enable = true;
-                # use stable release
-                # https://github.com/NixOS/nixpkgs/issues/528299
-                package = inputs.nixpkgs.legacyPackages.aarch64-darwin.darwin.linux-builder;
-              };
-
-              nixpkgs.overlays = [
-                self.overlays.dotfiles
-              ];
-
-              security.pam.services.sudo_local = {
-                reattach = true;
-                touchIdAuth = true;
-              };
-
-              system.primaryUser = "adam";
-              system.stateVersion = 5;
-
-              users.users.adam = {
-                home = "/Users/adam";
-                shell = "/home/adam/.nix-profile/bin/fish";
-              };
-            }
-          )
-        ];
-      };
-
     willow =
       let
         homeModules = config.profile-parts.home-manager.willow.finalModules;
@@ -308,6 +148,7 @@
       {
         nixpkgs = inputs.nixpkgs-unstable;
         modules = [
+          ../darwinModules/pf.nix
           inputs.home-manager-unstable.darwinModules.home-manager
           {
             home-manager.users.adam = {
@@ -379,6 +220,121 @@
             users.users.adam = {
               home = "/Users/adam";
               shell = "/home/adam/.nix-profile/bin/fish";
+            };
+          }
+          #
+          # junco traefik
+          #
+          (
+            { pkgs, ... }:
+            let
+              tomlFormat = pkgs.formats.toml { };
+
+              traefikDynamic = tomlFormat.generate "traefik-dynamic.toml" {
+                http.routers.lmstudio = {
+                  rule = "Host(`lmstudio.svc.junco.dev`) || Host(`lmstudio.junco.dev`)";
+                  service = "lmstudio";
+                  entryPoints = [ "websecure" ];
+                  tls = {
+                    certResolver = "junco";
+                    domains = [
+                      { main = "lmstudio.svc.junco.dev"; }
+                    ];
+                    options = "mtls";
+                  };
+                };
+
+                http.services.lmstudio.loadBalancer.servers = [
+                  { url = "http://127.0.0.1:1234"; }
+                ];
+
+                tls.options = {
+                  mtls.clientAuth = {
+                    caFiles = [ ./root_ca.crt ];
+                    clientAuthType = "RequireAndVerifyClientCert";
+                  };
+                };
+              };
+
+              traefikStatic = tomlFormat.generate "traefik-static.toml" {
+                entryPoints.web.address = ":18080";
+                entryPoints.web.http.redirections.entryPoint = {
+                  to = "websecure";
+                  scheme = "https";
+                };
+                entryPoints.websecure.address = ":18443";
+
+                certificatesResolvers.junco.acme = {
+                  caServer = "https://cert.junco.dev/acme/acme/directory";
+                  storage = "/Users/adam/.local/share/traefik/acme.json";
+                  httpChallenge.entryPoint = "web";
+                };
+
+                providers.file.filename = "${traefikDynamic}";
+              };
+            in
+            {
+              home-manager.users.adam = {
+                home.activation.traefik-data = ''
+                  mkdir -p ~/.local/share/traefik
+                '';
+
+                launchd.agents.traefik = {
+                  enable = true;
+                  config = {
+                    ProgramArguments = [
+                      "${pkgs.traefik}/bin/traefik"
+                      "--configFile=${traefikStatic}"
+                    ];
+                    KeepAlive = true;
+                    RunAtLoad = true;
+                    StandardErrorPath = "/Users/adam/Library/Logs/traefik.log";
+                    StandardOutPath = "/Users/adam/Library/Logs/traefik.log";
+                  };
+                };
+              };
+
+              networking.applicationFirewall = {
+                enable = true;
+                enableStealthMode = true;
+              };
+              security.pf = {
+                enable = true;
+                rules = ''
+                  # redirect 80/443 to traefik
+                  rdr pass on utun4 proto tcp from any to any port 80 -> 127.0.0.1 port 18080
+                  rdr pass on utun4 proto tcp from any to any port 443 -> 127.0.0.1 port 18443
+
+                  pass quick on lo0 no state
+
+                  # restrict ssh
+                  block return in proto tcp from any to any port ssh
+                  pass in on utun4 proto tcp from any to port ssh
+
+                  # allow to traefik
+                  block in proto tcp from any to any port {18080, 18443}
+                  pass in on utun4 proto tcp from any to any port {18080, 18443}
+                '';
+              };
+            }
+          )
+          #
+          # junco builder
+          #
+          {
+            nix.settings.trusted-users = [ "remote-builder" ];
+
+            users.knownUsers = [ "remote-builder" ];
+
+            users.users.remote-builder = {
+              createHome = true;
+              openssh.authorizedKeys.keys = [
+                "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFs5NiXbHfBIVf9O0VCBhmBuOSzXpSg1skLzinA5tJhu builder@builders"
+              ];
+
+              shell = "/bin/zsh";
+              uid = 1000;
+              home = "/Users/remote-builder";
             };
           }
         ];
