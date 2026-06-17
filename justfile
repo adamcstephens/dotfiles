@@ -35,6 +35,8 @@ intel-check-cstate:
 migrate:
     # 2026-01-09
     @if [ -h "$HOME/.config/fish" ]; then rm -v "$HOME/.config/fish"; fi
+    # 2026-06-17
+    @if [ -h "$HOME/.config/epi" ]; then rm -v "$HOME/.config/epi"; fi
     @true
 
 nix-upgrade:
