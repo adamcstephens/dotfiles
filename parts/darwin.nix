@@ -270,7 +270,10 @@
                   httpChallenge.entryPoint = "web";
                 };
 
-                providers.file.filename = "${traefikDynamic}";
+                providers.file = {
+                  filename = "${traefikDynamic}";
+                  watch = false;
+                };
               };
             in
             {
@@ -294,6 +297,16 @@
                 };
               };
 
+              # required for the pf rdr above to reach traefik
+              launchd.daemons.ip-forwarding.serviceConfig = {
+                ProgramArguments = [
+                  "/usr/sbin/sysctl"
+                  "-w"
+                  "net.inet.ip.forwarding=1"
+                ];
+                RunAtLoad = true;
+              };
+
               networking.applicationFirewall = {
                 enable = true;
                 enableStealthMode = true;
@@ -301,9 +314,10 @@
               security.pf = {
                 enable = true;
                 rules = ''
-                  # redirect 80/443 to traefik
-                  rdr pass on utun4 proto tcp from any to any port 80 -> 127.0.0.1 port 18080
-                  rdr pass on utun4 proto tcp from any to any port 443 -> 127.0.0.1 port 18443
+                  # redirect 80/443 to traefik; target utun4's address, not
+                  # 127.0.0.1 (macOS drops rdr-to-loopback from a real iface)
+                  rdr pass on utun4 proto tcp from any to any port 80 -> (utun4) port 18080
+                  rdr pass on utun4 proto tcp from any to any port 443 -> (utun4) port 18443
 
                   pass quick on lo0 no state
 
