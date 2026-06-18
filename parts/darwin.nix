@@ -319,6 +319,10 @@
                   rdr pass on utun4 proto tcp from any to any port 80 -> (utun4) port 18080
                   rdr pass on utun4 proto tcp from any to any port 443 -> (utun4) port 18443
 
+                  # bf traefik
+                  rdr pass on lo0 inet proto tcp from any to 127.0.0.1 port 80 -> 127.0.0.1 port 8000
+                  rdr pass on lo0 inet proto tcp from any to 127.0.0.1 port 443 -> 127.0.0.1 port 8443
+
                   pass quick on lo0 no state
 
                   # restrict ssh
