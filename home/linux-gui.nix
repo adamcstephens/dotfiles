@@ -129,6 +129,7 @@ in
       pkgs.networkmanagerapplet
 
       # audio
+      pkgs.nocturne # subsonic
       pkgs.playerctl
       pkgs.pwvucontrol
       pkgs.sone # tidal player
