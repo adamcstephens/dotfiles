@@ -83,27 +83,28 @@
             fi
           '';
 
-          system.defaults = {
-            NSGlobalDomain = {
-              AppleShowScrollBars = "Always";
-              InitialKeyRepeat = 15;
-              KeyRepeat = 1;
-
-              NSAutomaticCapitalizationEnabled = false;
-              NSAutomaticDashSubstitutionEnabled = false;
-              NSAutomaticPeriodSubstitutionEnabled = false;
-              NSAutomaticQuoteSubstitutionEnabled = false;
-              NSAutomaticSpellingCorrectionEnabled = false;
-            };
-            dock = {
-              autohide = true;
-              autohide-delay = 2.0;
-              orientation = "left";
-              showhidden = true;
-              show-recents = false;
-            };
-            SoftwareUpdate.AutomaticallyInstallMacOSUpdates = true;
-          };
+          # disable in normal operation to avoid restarting things that break firefox profile windows in dock
+          # system.defaults = {
+          #   NSGlobalDomain = {
+          #     AppleShowScrollBars = "Always";
+          #     InitialKeyRepeat = 15;
+          #     KeyRepeat = 1;
+          #
+          #     NSAutomaticCapitalizationEnabled = false;
+          #     NSAutomaticDashSubstitutionEnabled = false;
+          #     NSAutomaticPeriodSubstitutionEnabled = false;
+          #     NSAutomaticQuoteSubstitutionEnabled = false;
+          #     NSAutomaticSpellingCorrectionEnabled = false;
+          #   };
+          #   dock = {
+          #     autohide = true;
+          #     autohide-delay = 2.0;
+          #     orientation = "left";
+          #     showhidden = true;
+          #     show-recents = false;
+          #   };
+          #   SoftwareUpdate.AutomaticallyInstallMacOSUpdates = true;
+          # };
 
           time.timeZone = "America/New_York";
 
