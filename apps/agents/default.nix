@@ -49,6 +49,20 @@ let
       }
     else
       agent-browser;
+
+  pi-coding-agent-wrapped = pkgs.symlinkJoin {
+    name = "pi-coding-agent-wrapped";
+    paths = [
+      inputs.nixpkgs-unstable-small.legacyPackages.${pkgs.stdenv.hostPlatform.system}.pi-coding-agent
+    ];
+    buildInputs = [ pkgs.makeWrapper ];
+    postBuild = ''
+      wrapProgram $out/bin/pi \
+        --set-default PI_CODING_AGENT_DIR "${config.home.homeDirectory}/.config/pi/agent" \
+        --set-default PI_OFFLINE true \
+        --set-default PI_TELEMETRY true
+    '';
+  };
 in
 {
   options = {
@@ -63,6 +77,7 @@ in
       claude-wrapped
       inputs.nixpkgs-unstable-small.legacyPackages.${pkgs.stdenv.hostPlatform.system}.opencode
       (unfreePkg "github-copilot-cli" inputs.nixpkgs-unstable-small)
+      pi-coding-agent-wrapped
     ];
 
     home.file.".config/agents/skills".source = skills;
