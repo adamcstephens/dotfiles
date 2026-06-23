@@ -151,78 +151,131 @@
         modules = [
           ../darwinModules/pf.nix
           inputs.home-manager-unstable.darwinModules.home-manager
-          {
-            home-manager.users.adam = {
-              imports = homeModules;
-            };
+          (
+            { pkgs, ... }:
+            {
+              home-manager.users.adam = {
+                imports = homeModules;
+              };
 
-            home-manager.extraSpecialArgs = {
-              inherit inputs;
-              npins = import ../npins;
-              flake = self;
-            };
+              home-manager.extraSpecialArgs = {
+                inherit inputs;
+                npins = import ../npins;
+                flake = self;
+              };
 
-            networking.computerName = "willow";
+              networking.computerName = "willow";
 
-            networking.applicationFirewall = {
-              enable = true;
-              enableStealthMode = true;
-            };
+              networking.applicationFirewall = {
+                enable = true;
+                enableStealthMode = true;
+              };
 
-            nix = {
-              distributedBuilds = true;
-              buildMachines = [
-                {
-                  protocol = "ssh";
-                  hostName = "leaf.h.junco.dev";
-                  maxJobs = 4;
-                  sshUser = "builder";
-                  supportedFeatures = [
-                    "big-parallel"
-                    "kvm"
-                    "nixos-test"
-                  ];
-                  systems = [
-                    "x86_64-linux"
-                  ];
-                  sshKey = "/var/root/.ssh/id_ed25519";
-                }
+              nix = {
+                distributedBuilds = true;
+                buildMachines = [
+                  {
+                    protocol = "ssh";
+                    hostName = "leaf.h.junco.dev";
+                    maxJobs = 4;
+                    sshUser = "builder";
+                    supportedFeatures = [
+                      "big-parallel"
+                      "kvm"
+                      "nixos-test"
+                    ];
+                    systems = [
+                      "x86_64-linux"
+                    ];
+                    sshKey = "/var/root/.ssh/id_ed25519";
+                  }
+                  {
+                    # epi-managed nixpkgs-dev VM; ssh alias supplied by the
+                    # included ssh_config (see environment.etc below)
+                    protocol = "ssh";
+                    hostName = "nixpkgs-dev";
+                    maxJobs = 8;
+                    sshUser = "adam";
+                    supportedFeatures = [
+                      "benchmark"
+                      "big-parallel"
+                      "kvm"
+                      "nixos-test"
+                    ];
+                    systems = [
+                      "aarch64-linux"
+                    ];
+                  }
+                ];
+
+                # linux-builder = {
+                #   enable = true;
+                #   # use stable release
+                #   # https://github.com/NixOS/nixpkgs/issues/528299
+                #   package = inputs.nixpkgs.legacyPackages.aarch64-darwin.darwin.linux-builder;
+                #
+                #   maxJobs = 4;
+                #
+                #   supportedFeatures = [
+                #     "apple-virt"
+                #     "benchmark"
+                #     "big-parallel"
+                #     "kvm"
+                #     "nixos-test"
+                #   ];
+                #
+                #   config = {
+                #     virtualisation = {
+                #       cores = 8;
+                #       darwin-builder = {
+                #         memorySize = 16 * 1024;
+                #         diskSize = 100 * 1024;
+                #       };
+                #     };
+                #   };
+                # };
+              };
+
+              nixpkgs.overlays = [
+                self.overlays.dotfiles
               ];
 
-              linux-builder = {
-                enable = true;
-                # use stable release
-                # https://github.com/NixOS/nixpkgs/issues/528299
-                package = inputs.nixpkgs.legacyPackages.aarch64-darwin.darwin.linux-builder;
-
-                maxJobs = 4;
-
-                config = {
-                  virtualisation = {
-                    cores = 8;
-                    darwin-builder.memorySize = 16 * 1024;
-                  };
+              # Keep a root-owned copy of the epi builder's ssh_config in
+              # /etc/ssh/ssh_config.d (which macOS Includes) so the nix-daemon's
+              # ssh accepts it -- ssh rejects the adam-owned original on its
+              # ownership check. WatchPaths re-copies whenever epi rewrites the
+              # file (e.g. the VM relaunches with a new address), so it stays in
+              # sync without a rebuild.
+              launchd.daemons."epi-builder-ssh-config" = {
+                serviceConfig = {
+                  RunAtLoad = true;
+                  WatchPaths = [ "/Users/adam/.local/state/epi/nixpkgs-dev/ssh_config" ];
+                  StandardErrorPath = "/var/log/epi-builder-ssh-config.log";
+                  StandardOutPath = "/var/log/epi-builder-ssh-config.log";
                 };
+                script = ''
+                  epi_cfg=/Users/adam/.local/state/epi/nixpkgs-dev/ssh_config
+                  if [ -f "$epi_cfg" ]; then
+                    ${pkgs.coreutils}/bin/install -m 0644 -o root -g wheel \
+                      "$epi_cfg" /etc/ssh/ssh_config.d/100-epi.conf
+                  fi
+                '';
               };
-            };
 
-            nixpkgs.overlays = [
-              self.overlays.dotfiles
-            ];
+              security.pam.services.sudo_local = {
+                reattach = true;
+                touchIdAuth = true;
+              };
 
-            security.pam.services.sudo_local = {
-              reattach = true;
-              touchIdAuth = true;
-            };
+              system.primaryUser = "adam";
+              system.stateVersion = 5;
 
-            system.primaryUser = "adam";
-            system.stateVersion = 5;
-
-            users.users.adam = {
-              home = "/Users/adam";
-              shell = "/home/adam/.nix-profile/bin/fish";
-            };
-          }
+              users.users.adam = {
+                home = "/Users/adam";
+                shell = "/home/adam/.nix-profile/bin/fish";
+              };
+            }
+          )
           #
           # junco traefik
           #
