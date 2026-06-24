@@ -46,6 +46,7 @@ in
     # ];
 
     system.activationScripts.networking.text = ''
+      pfctl -f /etc/pf.conf 1> /dev/null 2>&1
       pfctl -a com.apple/nix -F all 1> /dev/null
       pfctl -e -a com.apple/nix -f ${anchor} 1> /dev/null || true
     '';
@@ -55,7 +56,7 @@ in
         ProgramArguments = [
           "/bin/sh"
           "-c"
-          "/bin/wait4path /nix/store && /sbin/pfctl -e -a com.apple/nix -f ${anchor}"
+          "/bin/wait4path /nix/store && /sbin/pfctl -f /etc/pf.conf && /sbin/pfctl -e -a com.apple/nix -f ${anchor}"
         ];
 
         RunAtLoad = true;

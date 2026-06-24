@@ -151,26 +151,39 @@
         modules = [
           ../darwinModules/pf.nix
           inputs.home-manager-unstable.darwinModules.home-manager
+          {
+            home-manager.users.adam = {
+              imports = homeModules;
+            };
+
+            home-manager.extraSpecialArgs = {
+              inherit inputs;
+              npins = import ../npins;
+              flake = self;
+            };
+
+            networking.computerName = "willow";
+
+            nixpkgs.overlays = [
+              self.overlays.dotfiles
+            ];
+
+            security.pam.services.sudo_local = {
+              reattach = true;
+              touchIdAuth = true;
+            };
+
+            system.primaryUser = "adam";
+            system.stateVersion = 5;
+
+            users.users.adam = {
+              home = "/Users/adam";
+              shell = "/home/adam/.nix-profile/bin/fish";
+            };
+          }
           (
             { pkgs, ... }:
             {
-              home-manager.users.adam = {
-                imports = homeModules;
-              };
-
-              home-manager.extraSpecialArgs = {
-                inherit inputs;
-                npins = import ../npins;
-                flake = self;
-              };
-
-              networking.computerName = "willow";
-
-              networking.applicationFirewall = {
-                enable = true;
-                enableStealthMode = true;
-              };
-
               nix = {
                 distributedBuilds = true;
                 buildMachines = [
@@ -190,8 +203,6 @@
                     sshKey = "/var/root/.ssh/id_ed25519";
                   }
                   {
-                    # epi-managed nixpkgs-dev VM; ssh alias supplied by the
-                    # included ssh_config (see environment.etc below)
                     protocol = "ssh";
                     hostName = "nixpkgs-dev";
                     maxJobs = 8;
@@ -236,16 +247,6 @@
                 # };
               };
 
-              nixpkgs.overlays = [
-                self.overlays.dotfiles
-              ];
-
-              # Keep a root-owned copy of the epi builder's ssh_config in
-              # /etc/ssh/ssh_config.d (which macOS Includes) so the nix-daemon's
-              # ssh accepts it -- ssh rejects the adam-owned original on its
-              # ownership check. WatchPaths re-copies whenever epi rewrites the
-              # file (e.g. the VM relaunches with a new address), so it stays in
-              # sync without a rebuild.
               launchd.daemons."epi-builder-ssh-config" = {
                 serviceConfig = {
                   RunAtLoad = true;
@@ -260,19 +261,6 @@
                       "$epi_cfg" /etc/ssh/ssh_config.d/100-epi.conf
                   fi
                 '';
-              };
-
-              security.pam.services.sudo_local = {
-                reattach = true;
-                touchIdAuth = true;
-              };
-
-              system.primaryUser = "adam";
-              system.stateVersion = 5;
-
-              users.users.adam = {
-                home = "/Users/adam";
-                shell = "/home/adam/.nix-profile/bin/fish";
               };
             }
           )
@@ -370,22 +358,20 @@
                 rules = ''
                   # redirect 80/443 to traefik; target utun4's address, not
                   # 127.0.0.1 (macOS drops rdr-to-loopback from a real iface)
-                  rdr pass on utun4 proto tcp from any to any port 80 -> (utun4) port 18080
-                  rdr pass on utun4 proto tcp from any to any port 443 -> (utun4) port 18443
+                  rdr pass on utun5 proto tcp from any to any port 80 -> (lo0) port 18080
+                  rdr pass on utun5 proto tcp from any to any port 443 -> (lo0) port 18443
 
                   # bf traefik
-                  rdr pass on lo0 inet proto tcp from any to 127.0.0.1 port 80 -> 127.0.0.1 port 8000
-                  rdr pass on lo0 inet proto tcp from any to 127.0.0.1 port 443 -> 127.0.0.1 port 8443
+                  rdr pass on lo0 inet proto tcp from any to any port 80 -> (lo0) port 8000
+                  rdr pass on lo0 inet proto tcp from any to any port 443 -> (lo0) port 8443
 
                   pass quick on lo0 no state
 
                   # restrict ssh
                   block return in proto tcp from any to any port ssh
-                  pass in on utun4 proto tcp from any to port ssh
+                  pass in on utun5 proto tcp from any to port ssh
 
-                  # allow to traefik
                   block in proto tcp from any to any port {18080, 18443}
-                  pass in on utun4 proto tcp from any to any port {18080, 18443}
                 '';
               };
             }
