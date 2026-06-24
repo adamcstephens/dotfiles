@@ -13,8 +13,9 @@ let
     memory = 4096;
     mounts = [
       "~/.config/claude"
-      "~/.copilot"
       "~/.config/opencode"
+      "~/.config/pi"
+      "~/.copilot"
     ];
   };
 in

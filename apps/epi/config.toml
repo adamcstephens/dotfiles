@@ -1,4 +1,0 @@
-target = "~/.dotfiles#agents"
-cpus = 4
-memory = 4096
-mounts = ["~/.config/claude", "~/.copilot", "~/.config/opencode"]
