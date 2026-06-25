@@ -19,7 +19,7 @@
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
     profile-parts.url = "git+https://codeberg.org/adamcstephens/profile-parts";
-    sower.url = "git+https://codeberg.org/adamcstephens/sower.git?ref=release-0.10";
+    sower.url = "git+https://codeberg.org/adamcstephens/sower.git?ref=main";
   };
 
   outputs =
