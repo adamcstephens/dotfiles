@@ -14,10 +14,6 @@ if ! grep nixos /etc/os-release >/dev/null 2>&1
     if test -e /nix/var/nix/profiles/default/etc/profile.d/nix.fish
         source /nix/var/nix/profiles/default/etc/profile.d/nix.fish
     end
-
-    if test -e $HOME/.nix-profile/share/fish/completions
-        set --prepend --export fish_complete_path $HOME/.nix-profile/share/fish/completions
-    end
 end
 
 status is-login; and begin
@@ -127,5 +123,4 @@ status is-interactive; and begin
         set -l post (string split " " (string trim $post_joined))
         set fish_complete_path $prev "$HOME/.local/share/fish/home-manager/generated_completions" $post
     end
-
 end
