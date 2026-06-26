@@ -24,117 +24,193 @@
           ...
         }:
         {
-          fonts.packages = [
-            pkgs.noto-fonts
-            pkgs.font-awesome
-            pkgs.ibm-plex
-            pkgs.jetbrains-mono
-            pkgs.material-icons
-            pkgs.material-design-icons
-            pkgs.nerd-fonts.symbols-only
-          ];
-
-          nix = {
-            channel.enable = false;
-
-            enable = true;
-
-            settings = {
-              auto-optimise-store = false;
-              accept-flake-config = false;
-              builders-use-substitutes = true;
-              experimental-features = [
-                "nix-command"
-                "flakes"
-              ]
-              ++ lib.optionals (
-                config.nix.package.pname == "nix" && lib.versionAtLeast config.nix.package.version "2.24"
-              ) [ "pipe-operators" ]
-              ++ lib.optionals (
-                config.nix.package.pname == "lix" && lib.versionAtLeast config.nix.package.version "2.91"
-              ) [ "pipe-operator" ];
-
-              download-buffer-size = lib.mkIf (config.nix.package.pname == "nix") (
-                lib.mkDefault (256 * 1024 * 1024)
-              );
-              http-connections = lib.mkDefault 128;
-              max-substitution-jobs = lib.mkDefault 128;
-
-              trusted-users = [
-                "root"
-                "@admin"
+          options = {
+            dotfiles.macos.builder = lib.mkOption {
+              type = lib.types.enum [
+                "epi"
+                "linux-builder"
               ];
-
-              substituters = [
-                "https://cache-v5.junco.dev?priority=41"
-              ];
-              trusted-public-keys = [
-                "cache-v6:tXeE+WhO6k2OoUoNSzmQVIckjXtl14mtO+z0ZwAIork="
-              ];
-              extra-platforms = "x86_64-darwin";
+              description = "which aarch64-linux builder to enable";
+              default = "linux-builder";
             };
           };
 
-          system.activationScripts.extraActivation.text = ''
-            echo "removing nix from default profile"
-
-            if nix profile list --json --profile /nix/var/nix/profiles/default | ${lib.getExe pkgs.gojq} --raw-output --exit-status .elements.nix; then
-              nix profile remove nix --profile /nix/var/nix/profiles/default
-            fi
-          '';
-
-          # disable in normal operation to avoid restarting things that break firefox profile windows in dock
-          # system.defaults = {
-          #   NSGlobalDomain = {
-          #     AppleShowScrollBars = "Always";
-          #     InitialKeyRepeat = 15;
-          #     KeyRepeat = 1;
-          #
-          #     NSAutomaticCapitalizationEnabled = false;
-          #     NSAutomaticDashSubstitutionEnabled = false;
-          #     NSAutomaticPeriodSubstitutionEnabled = false;
-          #     NSAutomaticQuoteSubstitutionEnabled = false;
-          #     NSAutomaticSpellingCorrectionEnabled = false;
-          #   };
-          #   dock = {
-          #     autohide = true;
-          #     autohide-delay = 2.0;
-          #     orientation = "left";
-          #     showhidden = true;
-          #     show-recents = false;
-          #   };
-          #   SoftwareUpdate.AutomaticallyInstallMacOSUpdates = true;
-          # };
-
-          time.timeZone = "America/New_York";
-
-          # While it’s possible to set `nix.settings.auto-optimise-store`, it sometimes
-          # causes problems on Darwin. So run a job periodically to optimise the store:
-          # https://github.com/NixOS/nix/issues/7273
-          launchd.daemons."nix-store-optimise".serviceConfig = {
-            ProgramArguments = [
-              "/bin/sh"
-              "-c"
-              ''
-                /bin/wait4path ${config.nix.package}/bin/nix && \
-                  exec ${config.nix.package}/bin/nix store optimise
-              ''
+          config = {
+            fonts.packages = [
+              pkgs.noto-fonts
+              pkgs.font-awesome
+              pkgs.ibm-plex
+              pkgs.jetbrains-mono
+              pkgs.material-icons
+              pkgs.material-design-icons
+              pkgs.nerd-fonts.symbols-only
             ];
-            StartCalendarInterval = [
-              {
-                Hour = 2;
-                Minute = 30;
-              }
-            ];
-            StandardErrorPath = "/var/log/nix-store.log";
-            StandardOutPath = "/var/log/nix-store.log";
-          };
 
-          environment.shells = [ config.programs.fish.package ];
+            nix = {
+              channel.enable = false;
 
-          programs.fish = {
-            enable = true;
-            package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.fish;
+              enable = true;
+              package = pkgs.lixPackageSets.latest.lix;
+
+              settings = {
+                auto-optimise-store = false;
+                accept-flake-config = false;
+                builders-use-substitutes = true;
+                experimental-features = [
+                  "nix-command"
+                  "flakes"
+                ]
+                ++ lib.optionals (
+                  config.nix.package.pname == "nix" && lib.versionAtLeast config.nix.package.version "2.24"
+                ) [ "pipe-operators" ]
+                ++ lib.optionals (
+                  config.nix.package.pname == "lix" && lib.versionAtLeast config.nix.package.version "2.91"
+                ) [ "pipe-operator" ];
+
+                download-buffer-size = lib.mkIf (config.nix.package.pname == "nix") (
+                  lib.mkDefault (256 * 1024 * 1024)
+                );
+                http-connections = lib.mkDefault 128;
+                max-substitution-jobs = lib.mkDefault 128;
+
+                trusted-users = [
+                  "root"
+                  "@admin"
+                ];
+
+                substituters = [
+                  "https://cache-v5.junco.dev?priority=41"
+                ];
+                trusted-public-keys = [
+                  "cache-v6:tXeE+WhO6k2OoUoNSzmQVIckjXtl14mtO+z0ZwAIork="
+                ];
+                extra-platforms = "x86_64-darwin";
+              };
+              distributedBuilds = true;
+              buildMachines = lib.optionals (config.dotfiles.macos.builder == "epi") [
+                {
+                  protocol = "ssh";
+                  hostName = "nixpkgs-dev";
+                  maxJobs = 8;
+                  sshUser = "adam";
+                  supportedFeatures = [
+                    "benchmark"
+                    "big-parallel"
+                    "kvm"
+                    "nixos-test"
+                  ];
+                  systems = [
+                    "aarch64-linux"
+                  ];
+                }
+              ];
+
+              linux-builder = lib.mkIf (config.dotfiles.macos.builder == "linux-builder") {
+                enable = true;
+                # use stable release
+                # https://github.com/NixOS/nixpkgs/issues/528299
+                package = inputs.nixpkgs.legacyPackages.aarch64-darwin.darwin.linux-builder;
+
+                maxJobs = 4;
+
+                supportedFeatures = [
+                  "apple-virt"
+                  "benchmark"
+                  "big-parallel"
+                  "kvm"
+                  "nixos-test"
+                ];
+
+                config = {
+                  virtualisation = {
+                    cores = 8;
+                    darwin-builder = {
+                      memorySize = 16 * 1024;
+                      diskSize = 100 * 1024;
+                    };
+                  };
+                };
+              };
+
+            };
+
+            launchd.daemons."epi-builder-ssh-config" = lib.mkIf (config.dotfiles.macos.builder == "epi") {
+              serviceConfig = {
+                RunAtLoad = true;
+                WatchPaths = [ "/Users/adam/.local/state/epi/nixpkgs-dev/ssh_config" ];
+                StandardErrorPath = "/var/log/epi-builder-ssh-config.log";
+                StandardOutPath = "/var/log/epi-builder-ssh-config.log";
+              };
+              script = ''
+                epi_cfg=/Users/adam/.local/state/epi/nixpkgs-dev/ssh_config
+                if [ -f "$epi_cfg" ]; then
+                  ${pkgs.coreutils}/bin/install -m 0644 -o root -g wheel \
+                    "$epi_cfg" /etc/ssh/ssh_config.d/100-epi.conf
+                fi
+              '';
+            };
+
+            system.activationScripts.extraActivation.text = ''
+              echo "removing nix from default profile"
+
+              if nix profile list --json --profile /nix/var/nix/profiles/default | ${lib.getExe pkgs.gojq} --raw-output --exit-status .elements.nix; then
+                nix profile remove nix --profile /nix/var/nix/profiles/default
+              fi
+            '';
+
+            # disable in normal operation to avoid restarting things that break firefox profile windows in dock
+            # system.defaults = {
+            #   NSGlobalDomain = {
+            #     AppleShowScrollBars = "Always";
+            #     InitialKeyRepeat = 15;
+            #     KeyRepeat = 1;
+            #
+            #     NSAutomaticCapitalizationEnabled = false;
+            #     NSAutomaticDashSubstitutionEnabled = false;
+            #     NSAutomaticPeriodSubstitutionEnabled = false;
+            #     NSAutomaticQuoteSubstitutionEnabled = false;
+            #     NSAutomaticSpellingCorrectionEnabled = false;
+            #   };
+            #   dock = {
+            #     autohide = true;
+            #     autohide-delay = 2.0;
+            #     orientation = "left";
+            #     showhidden = true;
+            #     show-recents = false;
+            #   };
+            #   SoftwareUpdate.AutomaticallyInstallMacOSUpdates = true;
+            # };
+
+            time.timeZone = "America/New_York";
+
+            # While it’s possible to set `nix.settings.auto-optimise-store`, it sometimes
+            # causes problems on Darwin. So run a job periodically to optimise the store:
+            # https://github.com/NixOS/nix/issues/7273
+            launchd.daemons."nix-store-optimise".serviceConfig = {
+              ProgramArguments = [
+                "/bin/sh"
+                "-c"
+                ''
+                  /bin/wait4path ${config.nix.package}/bin/nix && \
+                    exec ${config.nix.package}/bin/nix store optimise
+                ''
+              ];
+              StartCalendarInterval = [
+                {
+                  Hour = 2;
+                  Minute = 30;
+                }
+              ];
+              StandardErrorPath = "/var/log/nix-store.log";
+              StandardOutPath = "/var/log/nix-store.log";
+            };
+
+            environment.shells = [ config.programs.fish.package ];
+
+            programs.fish = {
+              enable = true;
+              package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.fish;
+            };
           };
         }
       )
@@ -181,89 +257,30 @@
               shell = "/home/adam/.nix-profile/bin/fish";
             };
           }
-          (
-            { pkgs, ... }:
-            {
-              nix = {
-                distributedBuilds = true;
-                buildMachines = [
-                  {
-                    protocol = "ssh";
-                    hostName = "leaf.h.junco.dev";
-                    maxJobs = 4;
-                    sshUser = "builder";
-                    supportedFeatures = [
-                      "big-parallel"
-                      "kvm"
-                      "nixos-test"
-                    ];
-                    systems = [
-                      "x86_64-linux"
-                    ];
-                    sshKey = "/var/root/.ssh/id_ed25519";
-                  }
-                  {
-                    protocol = "ssh";
-                    hostName = "nixpkgs-dev";
-                    maxJobs = 8;
-                    sshUser = "adam";
-                    supportedFeatures = [
-                      "benchmark"
-                      "big-parallel"
-                      "kvm"
-                      "nixos-test"
-                    ];
-                    systems = [
-                      "aarch64-linux"
-                    ];
-                  }
-                ];
+          {
+            dotfiles.macos.builder = "linux-builder";
 
-                # linux-builder = {
-                #   enable = true;
-                #   # use stable release
-                #   # https://github.com/NixOS/nixpkgs/issues/528299
-                #   package = inputs.nixpkgs.legacyPackages.aarch64-darwin.darwin.linux-builder;
-                #
-                #   maxJobs = 4;
-                #
-                #   supportedFeatures = [
-                #     "apple-virt"
-                #     "benchmark"
-                #     "big-parallel"
-                #     "kvm"
-                #     "nixos-test"
-                #   ];
-                #
-                #   config = {
-                #     virtualisation = {
-                #       cores = 8;
-                #       darwin-builder = {
-                #         memorySize = 16 * 1024;
-                #         diskSize = 100 * 1024;
-                #       };
-                #     };
-                #   };
-                # };
-              };
-
-              launchd.daemons."epi-builder-ssh-config" = {
-                serviceConfig = {
-                  RunAtLoad = true;
-                  WatchPaths = [ "/Users/adam/.local/state/epi/nixpkgs-dev/ssh_config" ];
-                  StandardErrorPath = "/var/log/epi-builder-ssh-config.log";
-                  StandardOutPath = "/var/log/epi-builder-ssh-config.log";
-                };
-                script = ''
-                  epi_cfg=/Users/adam/.local/state/epi/nixpkgs-dev/ssh_config
-                  if [ -f "$epi_cfg" ]; then
-                    ${pkgs.coreutils}/bin/install -m 0644 -o root -g wheel \
-                      "$epi_cfg" /etc/ssh/ssh_config.d/100-epi.conf
-                  fi
-                '';
-              };
-            }
-          )
+            nix = {
+              distributedBuilds = true;
+              buildMachines = [
+                {
+                  protocol = "ssh";
+                  hostName = "leaf.h.junco.dev";
+                  maxJobs = 4;
+                  sshUser = "builder";
+                  supportedFeatures = [
+                    "big-parallel"
+                    "kvm"
+                    "nixos-test"
+                  ];
+                  systems = [
+                    "x86_64-linux"
+                  ];
+                  sshKey = "/var/root/.ssh/id_ed25519";
+                }
+              ];
+            };
+          }
           #
           # junco traefik
           #
@@ -299,12 +316,12 @@
               };
 
               traefikStatic = tomlFormat.generate "traefik-static.toml" {
-                entryPoints.web.address = ":18080";
+                entryPoints.web.address = "127.0.0.1:18080";
                 entryPoints.web.http.redirections.entryPoint = {
                   to = "websecure";
                   scheme = "https";
                 };
-                entryPoints.websecure.address = ":18443";
+                entryPoints.websecure.address = "127.0.0.1:18443";
 
                 certificatesResolvers.junco.acme = {
                   caServer = "https://cert.junco.dev/acme/acme/directory";
@@ -356,10 +373,9 @@
               security.pf = {
                 enable = true;
                 rules = ''
-                  # redirect 80/443 to traefik; target utun4's address, not
-                  # 127.0.0.1 (macOS drops rdr-to-loopback from a real iface)
-                  rdr pass on utun5 proto tcp from any to any port 80 -> (lo0) port 18080
-                  rdr pass on utun5 proto tcp from any to any port 443 -> (lo0) port 18443
+                  # junco traefik
+                  rdr pass on utun5 inet proto tcp from any to any port 80 -> (lo0) port 18080
+                  rdr pass on utun5 inet proto tcp from any to any port 443 -> (lo0) port 18443
 
                   # bf traefik
                   rdr pass on lo0 inet proto tcp from any to any port 80 -> (lo0) port 8000
@@ -371,7 +387,7 @@
                   block return in proto tcp from any to any port ssh
                   pass in on utun5 proto tcp from any to port ssh
 
-                  block in proto tcp from any to any port {18080, 18443}
+                  pass in on utun5 proto tcp from any to any port {80, 443}
                 '';
               };
             }
