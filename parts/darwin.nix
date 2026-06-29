@@ -287,6 +287,8 @@
           (
             { pkgs, ... }:
             let
+              listenAddress = "10.3.2.52";
+
               tomlFormat = pkgs.formats.toml { };
 
               traefikDynamic = tomlFormat.generate "traefik-dynamic.toml" {
@@ -316,12 +318,12 @@
               };
 
               traefikStatic = tomlFormat.generate "traefik-static.toml" {
-                entryPoints.web.address = "127.0.0.1:18080";
+                entryPoints.web.address = "${listenAddress}:18080";
                 entryPoints.web.http.redirections.entryPoint = {
                   to = "websecure";
                   scheme = "https";
                 };
-                entryPoints.websecure.address = "127.0.0.1:18443";
+                entryPoints.websecure.address = "${listenAddress}:18443";
 
                 certificatesResolvers.junco.acme = {
                   caServer = "https://cert.junco.dev/acme/acme/directory";
@@ -374,8 +376,8 @@
                 enable = true;
                 rules = ''
                   # junco traefik
-                  rdr pass on utun5 inet proto tcp from any to any port 80 -> (lo0) port 18080
-                  rdr pass on utun5 inet proto tcp from any to any port 443 -> (lo0) port 18443
+                  rdr pass inet proto tcp from any to ${listenAddress} port 80 -> ${listenAddress} port 18080
+                  rdr pass inet proto tcp from any to ${listenAddress} port 443 -> ${listenAddress} port 18443
 
                   # bf traefik
                   rdr pass on lo0 inet proto tcp from any to any port 80 -> (lo0) port 8000
@@ -385,9 +387,9 @@
 
                   # restrict ssh
                   block return in proto tcp from any to any port ssh
-                  pass in on utun5 proto tcp from any to port ssh
+                  pass in inet proto tcp from any to ${listenAddress} port ssh
 
-                  pass in on utun5 proto tcp from any to any port {80, 443}
+                  pass in inet proto tcp from any to ${listenAddress} port {80, 443}
                 '';
               };
             }
