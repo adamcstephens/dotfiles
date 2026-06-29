@@ -27,6 +27,7 @@
           options = {
             dotfiles.macos.builder = lib.mkOption {
               type = lib.types.enum [
+                "none"
                 "epi"
                 "linux-builder"
               ];
@@ -258,7 +259,7 @@
             };
           }
           {
-            dotfiles.macos.builder = "linux-builder";
+            dotfiles.macos.builder = "none";
 
             nix = {
               distributedBuilds = true;
