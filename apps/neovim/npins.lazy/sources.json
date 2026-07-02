@@ -65,10 +65,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v19.17.0",
-      "revision": "eba3b42f86ed3831b1a473744e94a90d6dee4b6b",
+      "version": "v19.18.0",
+      "revision": "2e8865f81a0c8b5900fced953a81fe86c53416b1",
       "url": null,
-      "hash": "sha256-/1XlRYSEucUMJAllX27OJNbydgLyzbWS+SXhyNXj4QU="
+      "hash": "sha256-4O0UuJuuv4gmyxiZlLMG/sKlt84SW2ZooeOlFlK6/7I="
     },
     "conform.nvim": {
       "type": "GitRelease",
@@ -93,9 +93,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "e623d3645152839cbe7e73e7b2aa6e31256020ea",
+      "revision": "9258f9f10c4c729d8296fce0e3ecb12543daad06",
       "url": null,
-      "hash": "sha256-Bwdkf1ZHPsR3BUxdsGBNNNbzJ/CPOIlqb5EcQUUPuAk="
+      "hash": "sha256-b5PpmkYWaDGLNcu+36tRR5ycATHYBjs9WrV8/jfmooQ="
     },
     "fzf-lua-frecency.nvim": {
       "type": "Git",
@@ -200,9 +200,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "bfcc0171a43f22afa61d927ffe9fcb6cb85dc99e",
+      "revision": "292f44408498103c47996ff5c18fd366293840d8",
       "url": null,
-      "hash": "sha256-d8d9Hz3xA/J+E0gBRlnfCAFTwmDJE12AWw0n3TrcelU="
+      "hash": "sha256-1dkozFPD2bsb1i4tCCIqy05BhjgvV71YvmSVv4a+jco="
     },
     "nvim-surround": {
       "type": "GitRelease",
@@ -270,9 +270,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "a940486a2ceb39db546f233c58112d0471fe3e73",
+      "revision": "8cb752f295664ab0736ad4498f659324e506e074",
       "url": null,
-      "hash": "sha256-QeMFa5X8WlXlxVQrDFE+EromzdXiy2ssuvjH8mtwuFA="
+      "hash": "sha256-bYd5xpdY9ZAcsdQwqhn3oK1Rndi87hNwlB86XmSqVNo="
     },
     "osc11.nvim": {
       "type": "Git",
@@ -338,9 +338,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "a2d618496223386844acb5a6763cfc3cc1357af1",
+      "revision": "055881643e1b37038a572c883de7b1969716db77",
       "url": null,
-      "hash": "sha256-6v4kWrOxGvrtSkL7itcxXgOarKWmb0y++8mLnyc1XRI="
+      "hash": "sha256-8PmYDrvUzUdg/ErnIGPdK8eZH7EvZezfpsjAjy/sAbw="
     },
     "vim-moonfly-colors": {
       "type": "Git",
