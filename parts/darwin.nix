@@ -281,6 +281,15 @@
                 }
               ];
             };
+
+            environment.etc."ssh/ssh_config.d/100-leaf.conf" = {
+              text = ''
+                Host leaf.h.junco.dev
+                    ControlMaster auto
+                    ControlPath ~/.ssh/%r@%h-%p
+                    ControlPersist 600
+              '';
+            };
           }
           #
           # junco traefik
