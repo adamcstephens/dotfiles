@@ -41,7 +41,7 @@ migrate:
     # may be a bit of a hack to ensure we purge fish's own init
     @if [ ! -h "$HOME/.config/fish/completions" ]; then rm -rfv "$HOME/.config/fish/completions"; fi
     @if [ ! -h "$HOME/.config/fish/conf.d" ]; then rm -rfv "$HOME/.config/fish/conf.d"; fi
-    @if [ ! -h "$HOME/.config/fish/config.fish" ]; then rm -v "$HOME/.config/fish/config.fish"; fi
+    @if [ ! -h "$HOME/.config/fish/config.fish" ]; then rm -fv "$HOME/.config/fish/config.fish"; fi
     @if [ ! -h "$HOME/.config/fish/functions" ]; then rm -rfv "$HOME/.config/fish/functions"; fi
     @true
 
