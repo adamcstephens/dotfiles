@@ -25,7 +25,7 @@ mkShell {
   ]
   ++ lib.optionals pkgs.stdenv.isLinux [
     inputs.epi.packages.${pkgs.stdenv.hostPlatform.system}.epi
-    inputs.sower.packages.${pkgs.stdenv.hostPlatform.system}.cli
+    inputs.sower.packages.${pkgs.stdenv.hostPlatform.system}.sower
   ]
   ++ lib.optionals pkgs.stdenv.isDarwin [
     pkgs.nh
