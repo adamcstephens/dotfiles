@@ -1,0 +1,2 @@
+update:
+    nix shell --inputs-from ../../.. nixpkgs#nodejs --command npm update --package-lock-only

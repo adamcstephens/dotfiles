@@ -50,6 +50,11 @@ let
     else
       agent-browser;
 
+  pi-extensions = pkgs.importNpmLock.buildNodeModules {
+    npmRoot = ./pi;
+    nodejs = pkgs.nodejs;
+  };
+
   pi-coding-agent-wrapped = pkgs.symlinkJoin {
     name = "pi-coding-agent-wrapped";
     paths = [
@@ -80,7 +85,13 @@ in
       pi-coding-agent-wrapped
     ];
 
-    home.file.".config/agents/skills".source = skills;
+    home.file = {
+      ".config/agents/skills".source = skills;
+
+      ".config/pi/agent/npm/package.json".source = ./pi/package.json;
+      ".config/pi/agent/npm/package-lock.json".source = ./pi/package-lock.json;
+      ".config/pi/agent/npm/node_modules".source = "${pi-extensions}/node_modules";
+    };
 
     home.sessionVariables = {
       CLAUDE_CONFIG_DIR = "${config.home.homeDirectory}/.config/claude";
