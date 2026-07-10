@@ -158,7 +158,8 @@ in
       flake.packages.${pkgs.stdenv.hostPlatform.system}.screenshot
     ]
     ++ lib.optionals config.dotfiles.dev.enable [
-      pkgs.jetbrains.datagrip
+      # broken 2026-07-10
+      # pkgs.jetbrains.datagrip
     ];
 
   qt = {
