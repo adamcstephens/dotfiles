@@ -32,71 +32,65 @@ def load_lock_file(path: Path) -> Dict[str, Any]:
         return json.load(f)
 
 
+def build_node_paths(lock: Dict) -> Dict[str, str]:
+    """
+    Map each node key to its shortest path from root in the inputs tree,
+    e.g. "nixpkgs" for a direct input or "sower/nixpkgs" for a transitive one.
+    """
+    nodes = lock.get("nodes", {})
+    root_key = lock.get("root", "root")
+    paths: Dict[str, str] = {}
+    queue = [(root_key, "")]
+    while queue:
+        node_key, prefix = queue.pop(0)
+        for input_name, target in nodes.get(node_key, {}).get("inputs", {}).items():
+            # A list value is a "follows" reference; its target is reachable
+            # via a real edge elsewhere
+            if not isinstance(target, str) or target in paths:
+                continue
+            paths[target] = f"{prefix}{input_name}"
+            queue.append((target, f"{paths[target]}/"))
+    return paths
+
+
 def get_changed_inputs(
     old_lock: Dict, new_lock: Dict
 ) -> list[tuple[str, str, str, str, str]]:
     """
-    Compare lock files and return list of (input_name, old_rev, new_rev, old_date, new_date).
+    Compare lock files and return list of (input_path, old_rev, new_rev, old_date, new_date).
 
-    Matches inputs by content (url/flake) to handle nix renumbering duplicates.
-    Returns only inputs where the revision changed.
+    Matches nodes by name and labels each with its path in the inputs tree,
+    so the same repo appearing under different parents is listed separately.
     """
     from datetime import datetime
 
     old_nodes = old_lock.get("nodes", {})
     new_nodes = new_lock.get("nodes", {})
+    paths = build_node_paths(new_lock)
 
-    # Build maps of locked content → (input_name, rev, lastModified)
-    def build_content_map(nodes):
-        content_map = {}
-        for name, node in nodes.items():
-            if name == "root":
-                continue
-            locked = node.get("locked", {})
-            if "rev" in locked:
-                # Build unique identifier from available fields
-                # Prefer url, fall back to owner/repo/type combination
-                if "url" in locked:
-                    key = locked["url"]
-                else:
-                    owner = locked.get("owner", "")
-                    repo = locked.get("repo", "")
-                    type_ = locked.get("type", "")
-                    key = f"{type_}:{owner}/{repo}"
-
-                # Add ref/dir from original to differentiate inputs from same repo
-                original = node.get("original", {})
-                if "ref" in original:
-                    key += f"|ref={original['ref']}"
-                if "dir" in original:
-                    key += f"|dir={original['dir']}"
-
-                last_modified = locked.get("lastModified", 0)
-                content_map[key] = (name, locked["rev"], last_modified)
-        return content_map
-
-    old_map = build_content_map(old_nodes)
-    new_map = build_content_map(new_nodes)
+    def fmt_date(timestamp):
+        if not timestamp:
+            return "unknown"
+        return datetime.fromtimestamp(timestamp).strftime("%Y-%m-%d")
 
     changes = []
-    for key, (new_name, new_rev, new_modified) in new_map.items():
-        if key in old_map:
-            old_name, old_rev, old_modified = old_map[key]
-            if old_rev != new_rev:
-                old_short = old_rev[:7]
-                new_short = new_rev[:7]
-                old_date = (
-                    datetime.fromtimestamp(old_modified).strftime("%Y-%m-%d")
-                    if old_modified
-                    else "unknown"
+    for name, new_node in new_nodes.items():
+        if name == "root" or name not in old_nodes:
+            continue
+        old_locked = old_nodes[name].get("locked", {})
+        new_locked = new_node.get("locked", {})
+        old_rev = old_locked.get("rev")
+        new_rev = new_locked.get("rev")
+        if old_rev and new_rev and old_rev != new_rev:
+            changes.append(
+                (
+                    paths.get(name, name),
+                    old_rev[:7],
+                    new_rev[:7],
+                    fmt_date(old_locked.get("lastModified")),
+                    fmt_date(new_locked.get("lastModified")),
                 )
-                new_date = (
-                    datetime.fromtimestamp(new_modified).strftime("%Y-%m-%d")
-                    if new_modified
-                    else "unknown"
-                )
-                # Use new name for display (handles renames)
-                changes.append((new_name, old_short, new_short, old_date, new_date))
+            )
 
     return sorted(changes)
 
