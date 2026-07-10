@@ -265,9 +265,9 @@
               distributedBuilds = true;
               buildMachines = [
                 {
-                  protocol = "ssh";
+                  protocol = "ssh-ng";
                   hostName = "leaf.h.junco.dev";
-                  maxJobs = 4;
+                  maxJobs = 8;
                   sshUser = "builder";
                   supportedFeatures = [
                     "big-parallel"
