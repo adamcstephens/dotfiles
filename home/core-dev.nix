@@ -54,9 +54,11 @@ in
     pkgs.pwgen
     pkgs.step-cli
     pkgs.unzip
-    pkgs.watchexec
 
     # apps
     eternal-terminal
+  ]
+  ++ lib.optionals pkgs.stdenv.hostPlatform.isLinux [
+    pkgs.watchexec
   ];
 }
