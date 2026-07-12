@@ -51,7 +51,7 @@
               channel.enable = false;
 
               enable = true;
-              package = pkgs.lixPackageSets.latest.lix;
+              package = pkgs.nixVersions.latest;
 
               settings = {
                 auto-optimise-store = false;

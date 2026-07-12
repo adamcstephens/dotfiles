@@ -15,7 +15,7 @@ mkShell {
     pkgs.just
     pkgs.niks3
     pkgs.npins
-    pkgs.lixPackageSets.latest.nix-update
+    pkgs.nix-update
 
     pkgs.ty
 
