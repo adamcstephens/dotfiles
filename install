@@ -4,33 +4,19 @@ SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 
 pushd "$SCRIPT_DIR" || exit 1
 
-if ! command -v nix >/dev/null 2>&1; then
-  curl --proto '=https' --tlsv1.2 -sSf -L https://install.lix.systems/lix | sh -s -- install --no-confirm --enable-flakes --extra-conf "extra-trusted-users = @staff
-experimental-features = flakes
-"
-
-  # shellcheck disable=SC1091
-  . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
-fi
 rm -rf ~/.config/fish
 
-export PIPE_FEATURE="pipe-operators pipe-operator"
-
-if [ ! -e ~/.config/nix/nix.conf ]; then
-
-  mkdir -vp ~/.config/nix
-  echo "extra-experimental-features = nix-command flakes $PIPE_FEATURE
+export NIX_CONFIG="extra-experimental-features = nix-command flakes pipe-operators pipe-operator
 extra-substituters = https://cache-v5.junco.dev?priority=41
-extra-trusted-public-keys = cache-v6:tXeE+WhO6k2OoUoNSzmQVIckjXtl14mtO+z0ZwAIork=
-" >~/.config/nix/nix.conf
-fi
+extra-trusted-public-keys = cache-v6:tXeE+WhO6k2OoUoNSzmQVIckjXtl14mtO+z0ZwAIork="
 
 case "$(uname)" in
 Darwin)
   set -e
-  artifact=$(nix shell nixpkgs#git -c nix build .#darwin/$(hostname -s) --print-out-paths --extra-experimental-features "nix-command flakes $PIPE_FEATURE")
+  artifact=$(nix shell nixpkgs#git -c nix build .#darwin/$(hostname -s) --print-out-paths --extra-experimental-features "nix-command flakes pipe-operators pipe-operator")
   set +e
-  sudo "${artifact}/sw/bin/darwin-rebuild" switch --flake ~/.dotfiles
+  sudo "${artifact}/sw/bin/darwin-rebuild" switch --flake ~/.dotfiles --option extra-experimental-features "nix-command flakes pipe-operators pipe-operator"
+  chsh -s /run/current-system/sw/bin/fish
   ;;
 Linux)
   nix run .#hm -- switch

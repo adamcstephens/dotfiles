@@ -60,13 +60,8 @@
                 experimental-features = [
                   "nix-command"
                   "flakes"
-                ]
-                ++ lib.optionals (
-                  config.nix.package.pname == "nix" && lib.versionAtLeast config.nix.package.version "2.24"
-                ) [ "pipe-operators" ]
-                ++ lib.optionals (
-                  config.nix.package.pname == "lix" && lib.versionAtLeast config.nix.package.version "2.91"
-                ) [ "pipe-operator" ];
+                  "pipe-operators"
+                ];
 
                 download-buffer-size = lib.mkIf (config.nix.package.pname == "nix") (
                   lib.mkDefault (256 * 1024 * 1024)

@@ -1,6 +1,5 @@
 {
   bash,
-  kitty,
   fzf,
   lib,
   python3,
@@ -13,7 +12,6 @@ writeScriptBin "prj" ''
   export PATH="${
     lib.makeBinPath [
       fzf
-      kitty
       tmux
       zoxide
     ]
