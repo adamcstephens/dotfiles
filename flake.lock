@@ -37,11 +37,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1782749244,
-        "narHash": "sha256-bDw1v/H59pGpZ1qB0FfgC3PJJM6GG8pBAHBFj88VOSY=",
+        "lastModified": 1783877103,
+        "narHash": "sha256-KVezadLXeUHZPyb9N4Lanik8RB/l/2+lvMIUTjwmKWY=",
         "ref": "refs/heads/main",
-        "rev": "15000a627f754d6fe2d0efa0f6bc1ffbdde7eb59",
-        "revCount": 230,
+        "rev": "0d641aac7cb9cd719f1e813a48b4539aceccadb7",
+        "revCount": 234,
         "type": "git",
         "url": "https://codeberg.org/adamcstephens/epi"
       },
@@ -225,11 +225,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1783835045,
-        "narHash": "sha256-yL4Ptl/aH7kJK/4HtLEzpSE40zdMNdXolfgwwGY3bmk=",
+        "lastModified": 1783864904,
+        "narHash": "sha256-BQxN5UMg9FOevAsgBRwPxfxlh51Puj+dNn/8Dsi3sPM=",
         "owner": "nix-community",
         "repo": "nix-index-database",
-        "rev": "9b7545740d701a28a6d46de0665a685191205ba1",
+        "rev": "1111b9bc836afb7e31a7014e8d1272de9b1c917d",
         "type": "github"
       },
       "original": {
