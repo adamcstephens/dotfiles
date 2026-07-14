@@ -11,10 +11,10 @@ mkShellNoCC {
     with pkgs;
     [
       common-updater-scripts
-      lixPackageSets.latest.nix-init
-      lixPackageSets.latest.nix-update
-      lixPackageSets.latest.nixpkgs-reviewFull
-      lixPackageSets.latest.nurl
+      nix-init
+      nix-update
+      nixpkgs-reviewFull
+      nurl
 
       pyright
       treefmt
