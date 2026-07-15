@@ -27,10 +27,10 @@
     flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [
         ./apps/neovim/part.nix
+        ./darwin/part.nix
         ./devshells/part.nix
         ./home/profiles.nix
         ./ocamlPackages/part.nix
-        ./parts/darwin.nix
         ./parts/epi.nix
         ./parts/overlays.nix
         ./parts/packages.nix

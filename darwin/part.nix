@@ -236,7 +236,7 @@ in
       {
         nixpkgs = inputs.nixpkgs-unstable;
         modules = [
-          ../darwinModules/pf.nix
+          ./modules/pf.nix
           inputs.home-manager-unstable.darwinModules.home-manager
           {
             home-manager.users.adam = {
