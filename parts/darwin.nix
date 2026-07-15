@@ -4,6 +4,9 @@
   self,
   ...
 }:
+let
+  npins = import ../npins;
+in
 {
   imports = [ inputs.profile-parts.flakeModules.darwin ];
 
@@ -16,6 +19,7 @@
   profile-parts.global.darwin = {
     modules = [
       (inputs.nix-darwin.outPath + "/modules/nix/nix-darwin.nix") # install darwin-rebuild
+      (npins.nix-hex-box + "/modules/container-builder.nix")
       (
         {
           config,
@@ -30,6 +34,7 @@
                 "none"
                 "epi"
                 "linux-builder"
+                "container"
               ];
               description = "which aarch64-linux builder to enable";
               default = "linux-builder";
@@ -146,6 +151,16 @@
               '';
             };
 
+            services.container-builder = lib.mkIf (config.dotfiles.macos.builder == "container") {
+              enable = true;
+              cpus = 12;
+              memory = "16G";
+              maxJobs = 4;
+              socktainer.enable = true;
+              # Optional override if you do not want to use config.system.primaryUser.
+              # user = "myuser";
+            };
+
             system.activationScripts.extraActivation.text = ''
               echo "removing nix from default profile"
 
@@ -254,7 +269,7 @@
             };
           }
           {
-            dotfiles.macos.builder = "none";
+            dotfiles.macos.builder = "container";
 
             nix = {
               distributedBuilds = true;
