@@ -1,0 +1,108 @@
+FROM alpine:3.24
+ARG NIX_VERSION=2.95.2
+
+RUN apk add --no-cache \
+      bash \
+      ca-certificates \
+      coreutils \
+      curl \
+      findutils \
+      gcompat \
+      iproute2 \
+      openssh-client \
+      openssh-server \
+      procps \
+      shadow \
+      socat \
+      sudo \
+      tar \
+      xz
+
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
+RUN curl -sSfL https://artifacts.nixos.org/nix-installer | sh -s -- install linux --enable-flakes --init none --no-confirm
+
+RUN mkdir -p /etc/hexbox /etc/machine /run/sshd /usr/local/bin /var/empty && \
+    adduser -D -s /bin/bash builder && \
+    passwd -d builder
+
+RUN cat > /etc/machine/create-user.sh <<'EOF'
+#!/bin/sh
+set -eu
+group_name=$(getent group | awk -F: -v gid="$CONTAINER_GID" '$3 == gid { print $1; exit }')
+if [ -z "$group_name" ]; then
+  group_name="$CONTAINER_USER"
+  addgroup -g "$CONTAINER_GID" "$group_name"
+fi
+if ! id "$CONTAINER_USER" >/dev/null 2>&1; then
+  adduser -D -u "$CONTAINER_UID" -G "$group_name" -h "/home/$CONTAINER_USER" -s /bin/bash "$CONTAINER_USER"
+  passwd -d "$CONTAINER_USER" >/dev/null 2>&1 || true
+fi
+EOF
+RUN chmod 0755 /etc/machine/create-user.sh
+
+RUN cat > /usr/local/bin/hexbox-nix-daemon <<'EOF'
+#!/bin/sh
+set -eu
+if [ "$(id -u)" -eq 0 ]; then
+  exec /nix/var/nix/profiles/default/bin/nix-daemon "$@"
+fi
+exec sudo -n /nix/var/nix/profiles/default/bin/nix-daemon "$@"
+EOF
+RUN chmod 0755 /usr/local/bin/hexbox-nix-daemon && \
+    ln -sf /usr/local/bin/hexbox-nix-daemon /usr/local/bin/nix-daemon
+
+RUN cat > /usr/local/bin/hexbox-idle-watchdog <<'EOF'
+#!/bin/sh
+set -eu
+timeout_seconds=300
+if [ -f /nix/var/hexbox/idle-timeout-seconds ]; then
+  timeout_seconds=$(cat /nix/var/hexbox/idle-timeout-seconds)
+elif [ -f /etc/hexbox/idle-timeout-seconds ]; then
+  timeout_seconds=$(cat /etc/hexbox/idle-timeout-seconds)
+fi
+ssh_port=$(awk '$1 == "Port" { port = $2 } END { print port ? port : 22 }' /etc/ssh/sshd_config 2>/dev/null || printf '22\n')
+interval_seconds=30
+idle_seconds=0
+log_file=/var/log/hexbox-idle.log
+touch "$log_file"
+exec >> "$log_file" 2>&1
+echo "[$(date)] idle watchdog started timeout=$timeout_seconds"
+
+while true; do
+  sleep "$interval_seconds"
+  if ss -H -tn state established "( sport = :$ssh_port )" 2>/dev/null | grep -q .; then
+    idle_seconds=0
+    echo "[$(date)] active ssh connection detected"
+    continue
+  fi
+  idle_seconds=$((idle_seconds + interval_seconds))
+  echo "[$(date)] idle=$idle_seconds"
+  if [ "$idle_seconds" -ge "$timeout_seconds" ]; then
+    echo "[$(date)] idle timeout reached; stopping machine"
+    kill -TERM 1
+    sleep 5
+    kill -KILL 1 2>/dev/null || true
+    exit 0
+  fi
+done
+EOF
+RUN chmod 0755 /usr/local/bin/hexbox-idle-watchdog
+
+RUN rm -f /sbin/init
+RUN cat > /sbin/init <<'EOF'
+#!/bin/sh
+set -eu
+mkdir -p /run/sshd /var/empty /var/log
+ssh-keygen -A >/dev/null 2>&1 || true
+/nix/var/nix/profiles/default/bin/nix-daemon >/var/log/nix-daemon.log 2>&1 &
+if [ "$(cat /etc/hexbox/idle-enable 2>/dev/null || echo false)" = true ]; then
+  watchdog=/usr/local/bin/hexbox-idle-watchdog
+  if [ -x /nix/var/hexbox/hexbox-idle-watchdog ]; then
+    watchdog=/nix/var/hexbox/hexbox-idle-watchdog
+  fi
+  "$watchdog" &
+fi
+exec /usr/sbin/sshd -D -e
+EOF
+RUN chmod 0755 /sbin/init

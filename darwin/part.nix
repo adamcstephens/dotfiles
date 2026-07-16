@@ -153,9 +153,10 @@ in
 
             services.container-builder = lib.mkIf (config.dotfiles.macos.builder == "container") {
               enable = true;
-              cpus = 12;
-              memory = "16G";
-              maxJobs = 4;
+              imageContainerfile = ./Containerfile;
+              cpus = 16;
+              memory = "24G";
+              maxJobs = 8;
               socktainer.enable = true;
               # Optional override if you do not want to use config.system.primaryUser.
               # user = "myuser";

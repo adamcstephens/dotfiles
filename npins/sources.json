@@ -30,20 +30,17 @@
       "hash": "sha256-5w1a8ISBM90bwajkAupBFXoucHat+lQsyD5Rr0e2SKY="
     },
     "nix-hex-box": {
-      "type": "GitRelease",
+      "type": "Git",
       "repository": {
         "type": "GitHub",
-        "owner": "RobertDeRose",
+        "owner": "adamcstephens",
         "repo": "nix-hex-box"
       },
-      "pre_releases": false,
-      "version_upper_bound": null,
-      "release_prefix": null,
+      "branch": "fix/containerfile-store-context",
       "submodules": false,
-      "version": "v0.5.2",
-      "revision": "136290b4bb817b4440968f8a852fe5806db4c021",
-      "url": "https://api.github.com/repos/RobertDeRose/nix-hex-box/tarball/refs/tags/v0.5.2",
-      "hash": "sha256-QTJo8Zoaij/J+RVT7UCbtM+wQPAWJSJNm1z6uKJEW+I="
+      "revision": "faa85e06ba29e23ce6947f3c7325fed8c8c2fdd4",
+      "url": "https://github.com/adamcstephens/nix-hex-box/archive/faa85e06ba29e23ce6947f3c7325fed8c8c2fdd4.tar.gz",
+      "hash": "sha256-ZuDOoPpLWR7v5IZE5I46pHSOpVK47xL6atuAkWXgleM="
     },
     "smart-splits.nvim": {
       "type": "Git",
