@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+bookmark=$(jj log --no-graph \
+  --revision 'latest(mutable() & ~empty() & mine() & bookmarks())' \
+  --template 'local_bookmarks.map(|b| b.name()).join("\n")')
+
+if [[ -z $bookmark ]]; then
+  echo "jj-pr-create: no bookmarked non-empty commit; run 'jj git push --change @' first" >&2
+  exit 1
+fi
+
+if [[ $bookmark == *$'\n'* ]]; then
+  echo "jj-pr-create: multiple bookmarks on that commit: ${bookmark//$'\n'/, }" >&2
+  exit 1
+fi
+
+base=$(jj log --no-graph \
+  --revision 'heads(::@ & remote_bookmarks(remote=exact:"upstream"))' \
+  --template 'remote_bookmarks.map(|b| b.name()).join("\n")' | head --lines=1)
+
+if [[ -z $base ]]; then
+  echo "jj-pr-create: no upstream bookmark is an ancestor of @; cannot infer --base" >&2
+  exit 1
+fi
+
+origin=$(jj git remote list | awk '$1 == "origin" { print $2 }')
+owner=$(sed --regexp-extended 's#^(git@[^:]+:|https?://[^/]+/)([^/]+)/.*$#\2#' <<<"$origin")
+
+exec gh pr create --base "$base" --head "$owner:$bookmark" "$@"
