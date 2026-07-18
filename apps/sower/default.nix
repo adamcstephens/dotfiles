@@ -21,7 +21,7 @@ in
 
   config = lib.mkIf cfg.enable {
     home.packages = [
-      inputs.sower.packages.${pkgs.stdenv.hostPlatform.system}.rust-cli
+      inputs.sower.packages.${pkgs.stdenv.hostPlatform.system}.sower
     ];
 
     services.sower.garden = {

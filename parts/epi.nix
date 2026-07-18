@@ -112,7 +112,7 @@ in
     };
     x86_64-linux = {
       "epi/agents/disk" = self.nixosConfigurations.agents.config.system.build.image;
-      "epi/agents/diskQcow2" = self.nixosConfigurations.agents.config.system.build.diskQcow2;
+      "epi/agents/diskQcow2" = self.nixosConfigurations.agents.config.system.build.epiDiskQcow2;
       "epi/agents/initrd" = self.nixosConfigurations.agents.config.system.build.initialRamdisk;
       "epi/agents/kernel" = self.nixosConfigurations.agents.config.system.build.kernel;
 
