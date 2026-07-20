@@ -11,10 +11,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v2.21.0",
-      "revision": "d911b1542f5fd449f825c41c0ef9f05e98329a92",
-      "url": "https://api.github.com/repos/abenz1267/elephant/tarball/refs/tags/v2.21.0",
-      "hash": "sha256-h7Rw0vlb0n0Jsk21WJPm7H+1T1bG+PEuxE5cJ2TZl8A="
+      "version": "v2.22.0",
+      "revision": "e5cdc169062496475d393e02d54b230cb1ba5cf8",
+      "url": "https://api.github.com/repos/abenz1267/elephant/tarball/refs/tags/v2.22.0",
+      "hash": "sha256-frlaSpCf/e94OqO5Glp1NW96bemc+BhrKoPu+4X1FyI="
     },
     "modus-themes.nvim": {
       "type": "Git",
