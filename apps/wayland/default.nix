@@ -14,7 +14,7 @@
   };
 
   config = lib.mkIf config.dotfiles.gui.wayland.enable {
-    home.packages = [
+    packages = [
       pkgs.grim
       pkgs.gtklock
       pkgs.lswt

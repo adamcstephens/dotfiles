@@ -8,12 +8,12 @@
   imports = [ ../xorg ];
 
   config = lib.mkIf (config.dotfiles.gui.xorg.enable && config.dotfiles.gui.xorg.wm == "leftwm") {
-    home.packages = [ pkgs.leftwm ];
+    packages = [ pkgs.leftwm ];
 
-    xdg.configFile."leftwm/config.ron".source =
-      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/leftwm/config.ron";
+    xdg.config.files."leftwm/config.ron".source =
+      "${config.directory}/.dotfiles/apps/leftwm/config.ron";
 
-    xdg.configFile."leftwm/themes/current/theme.ron".text = with config.colorScheme.palette; ''
+    xdg.config.files."leftwm/themes/current/theme.ron".text = with config.colorScheme.palette; ''
       (border_width: 1,
       margin: 0,
       background_color: "#${base00}",
@@ -23,7 +23,7 @@
       )
     '';
 
-    xdg.configFile."leftwm/themes/current/up" = {
+    xdg.config.files."leftwm/themes/current/up" = {
       executable = true;
       text = ''
         #!${lib.getExe pkgs.bash}
@@ -31,7 +31,7 @@
       '';
     };
 
-    xdg.configFile."leftwm/themes/current/down" = {
+    xdg.config.files."leftwm/themes/current/down" = {
       executable = true;
       text = ''
         #!${lib.getExe pkgs.bash}

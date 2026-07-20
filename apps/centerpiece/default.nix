@@ -1,8 +1,8 @@
 { pkgs, ... }:
 {
-  home.packages = [ pkgs.centerpiece ];
+  packages = [ pkgs.centerpiece ];
 
-  xdg.configFile."centerpiece/config.yml".text = builtins.toJSON {
+  xdg.config.files."centerpiece/config.yml".text = builtins.toJSON {
     plugin = {
       applications.enable = true;
       brave_bookmarks.enable = false;

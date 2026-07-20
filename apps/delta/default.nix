@@ -11,11 +11,11 @@ let
   };
 in
 {
-  home.packages = [
+  packages = [
     package
   ];
 
-  home.file.".config/git/config.delta".text = ''
+  files.".config/git/config.delta".text = ''
     [include]
     path = ${package}/share/delta/themes.gitconfig
   '';

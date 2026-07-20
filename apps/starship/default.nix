@@ -1,10 +1,10 @@
 { config, pkgs, ... }:
 {
-  home.packages = [ pkgs.starship ];
+  packages = [ pkgs.starship ];
 
-  xdg.configFile."starship.toml".source =
+  xdg.config.files."starship.toml".source =
     if config.dotfiles.nixosManaged then
       ./starship.toml
     else
-      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/starship/starship.toml";
+      "${config.directory}/.dotfiles/apps/starship/starship.toml";
 }

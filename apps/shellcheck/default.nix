@@ -1,6 +1,6 @@
 { pkgs, ... }:
 {
-  home.packages = [ pkgs.shellcheck ];
+  packages = [ pkgs.shellcheck ];
 
-  xdg.configFile.shellcheckrc.source = ./shellcheckrc;
+  xdg.config.files.shellcheckrc.source = ./shellcheckrc;
 }

@@ -1,5 +1,4 @@
 {
-  config,
   inputs,
   self,
   ...
@@ -158,8 +157,6 @@ in
               memory = "24G";
               maxJobs = 8;
               socktainer.enable = true;
-              # Optional override if you do not want to use config.system.primaryUser.
-              # user = "myuser";
             };
 
             system.activationScripts.extraActivation.text = ''
@@ -230,24 +227,58 @@ in
   };
 
   profile-parts.darwin = {
-    willow =
-      let
-        homeModules = config.profile-parts.home-manager.willow.finalModules;
-      in
-      {
-        nixpkgs = inputs.nixpkgs-unstable;
-        modules = [
-          ./modules/pf.nix
-          inputs.home-manager-unstable.darwinModules.home-manager
+    willow = {
+      nixpkgs = inputs.nixpkgs-unstable;
+      modules = [
+        ./modules/pf.nix
+        inputs.hjem.darwinModules.default
+        (
+          { lib, pkgs, ... }:
           {
-            home-manager.users.adam = {
-              imports = homeModules;
+            hjem = {
+              clobberByDefault = true;
+
+              specialArgs = {
+                inherit inputs;
+
+                flake = self;
+                npins = import ../npins;
+              };
+              extraModules = [
+                ../hjem/darwin.nix
+              ];
+
+              users.adam = {
+                directory = "/Users/adam";
+                user = "adam";
+                dotfiles.apps.agents.enable = true;
+                packages = [
+                  pkgs.e1s
+                  pkgs.terraform-mcp-server
+                  pkgs.typescript-language-server
+                ];
+              };
             };
 
-            home-manager.extraSpecialArgs = {
-              inherit inputs;
-              npins = import ../npins;
-              flake = self;
+            launchd.user.agents.atuin.serviceConfig = {
+              KeepAlive = true;
+              Program =
+                pkgs.writeShellApplication {
+                  name = "atuin-daemon";
+
+                  runtimeInputs = [
+                    pkgs.atuin
+                  ];
+
+                  text = ''
+                    # force clean atuin socket in case of crash https://github.com/atuinsh/atuin/issues/2289
+                    rm -f /Users/adam/.local/share/atuin/atuin.sock
+
+                    exec atuin daemon
+                  '';
+                }
+                |> lib.getExe;
+              RunAtLoad = true;
             };
 
             networking.computerName = "willow";
@@ -269,172 +300,175 @@ in
               shell = "/home/adam/.nix-profile/bin/fish";
             };
           }
-          {
-            dotfiles.macos.builder = "container";
+        )
+        {
+          dotfiles.macos.builder = "container";
 
-            nix = {
-              distributedBuilds = true;
-              buildMachines = [
-                {
-                  protocol = "ssh-ng";
-                  hostName = "leaf.h.junco.dev";
-                  maxJobs = 8;
-                  sshUser = "builder";
-                  supportedFeatures = [
-                    "big-parallel"
-                    "kvm"
-                    "nixos-test"
+          nix = {
+            distributedBuilds = true;
+            buildMachines = [
+              {
+                protocol = "ssh-ng";
+                hostName = "leaf.h.junco.dev";
+                maxJobs = 8;
+                sshUser = "builder";
+                supportedFeatures = [
+                  "big-parallel"
+                  "kvm"
+                  "nixos-test"
+                ];
+                systems = [
+                  "x86_64-linux"
+                ];
+                sshKey = "/var/root/.ssh/id_ed25519";
+              }
+            ];
+          };
+
+          environment.etc."ssh/ssh_config.d/100-leaf.conf" = {
+            text = ''
+              Host leaf.h.junco.dev
+                  ControlMaster auto
+                  ControlPath ~/.ssh/%r@%h-%p
+                  ControlPersist 600
+            '';
+          };
+        }
+        #
+        # junco traefik
+        #
+        (
+          { lib, pkgs, ... }:
+          let
+            listenAddress = "10.3.2.52";
+
+            tomlFormat = pkgs.formats.toml { };
+
+            traefikDynamic = tomlFormat.generate "traefik-dynamic.toml" {
+              http.routers.lmstudio = {
+                rule = "Host(`lmstudio.svc.junco.dev`) || Host(`lmstudio.junco.dev`)";
+                service = "lmstudio";
+                entryPoints = [ "websecure" ];
+                tls = {
+                  certResolver = "junco";
+                  domains = [
+                    { main = "lmstudio.svc.junco.dev"; }
                   ];
-                  systems = [
-                    "x86_64-linux"
-                  ];
-                  sshKey = "/var/root/.ssh/id_ed25519";
-                }
+                  options = "mtls";
+                };
+              };
+
+              http.services.lmstudio.loadBalancer.servers = [
+                { url = "http://127.0.0.1:1234"; }
               ];
+
+              tls.options = {
+                mtls.clientAuth = {
+                  caFiles = [ ./root_ca.crt ];
+                  clientAuthType = "RequireAndVerifyClientCert";
+                };
+              };
             };
 
-            environment.etc."ssh/ssh_config.d/100-leaf.conf" = {
-              text = ''
-                Host leaf.h.junco.dev
-                    ControlMaster auto
-                    ControlPath ~/.ssh/%r@%h-%p
-                    ControlPersist 600
+            traefikStatic = tomlFormat.generate "traefik-static.toml" {
+              entryPoints.web.address = "${listenAddress}:18080";
+              entryPoints.web.http.redirections.entryPoint = {
+                to = "websecure";
+                scheme = "https";
+              };
+              entryPoints.websecure.address = "${listenAddress}:18443";
+
+              certificatesResolvers.junco.acme = {
+                caServer = "https://cert.junco.dev/acme/acme/directory";
+                storage = "/Users/adam/.local/share/traefik/acme.json";
+                httpChallenge.entryPoint = "web";
+              };
+
+              providers.file = {
+                filename = "${traefikDynamic}";
+                watch = false;
+              };
+            };
+          in
+          {
+            launchd.user.agents.traefik.serviceConfig = {
+              ProgramArguments = [
+                (
+                  pkgs.writeShellApplication {
+                    name = "traefik";
+                    runtimeInputs = [
+                      pkgs.traefik
+                    ];
+                    text = ''
+                      mkdir -p ~/.local/share/traefik
+                      traefik --configFile=${traefikStatic}
+                    '';
+                  }
+                  |> lib.getExe
+                )
+              ];
+              KeepAlive = true;
+              RunAtLoad = true;
+              StandardErrorPath = "/Users/adam/Library/Logs/traefik.log";
+              StandardOutPath = "/Users/adam/Library/Logs/traefik.log";
+            };
+
+            # required for the pf rdr above to reach traefik
+            launchd.daemons.ip-forwarding.serviceConfig = {
+              ProgramArguments = [
+                "/usr/sbin/sysctl"
+                "-w"
+                "net.inet.ip.forwarding=1"
+              ];
+              RunAtLoad = true;
+            };
+
+            networking.applicationFirewall = {
+              enable = true;
+              enableStealthMode = true;
+            };
+            security.pf = {
+              enable = true;
+              rules = ''
+                # junco traefik
+                rdr pass inet proto tcp from any to ${listenAddress} port 80 -> ${listenAddress} port 18080
+                rdr pass inet proto tcp from any to ${listenAddress} port 443 -> ${listenAddress} port 18443
+
+                # bf traefik
+                rdr pass on lo0 inet proto tcp from any to any port 80 -> (lo0) port 8000
+                rdr pass on lo0 inet proto tcp from any to any port 443 -> (lo0) port 8443
+
+                pass quick on lo0 no state
+
+                # restrict ssh
+                block return in proto tcp from any to any port ssh
+                pass in inet proto tcp from any to ${listenAddress} port ssh
+
+                pass in inet proto tcp from any to ${listenAddress} port {80, 443}
               '';
             };
           }
-          #
-          # junco traefik
-          #
-          (
-            { pkgs, ... }:
-            let
-              listenAddress = "10.3.2.52";
+        )
+        #
+        # junco builder
+        #
+        {
+          nix.settings.trusted-users = [ "remote-builder" ];
 
-              tomlFormat = pkgs.formats.toml { };
+          users.knownUsers = [ "remote-builder" ];
 
-              traefikDynamic = tomlFormat.generate "traefik-dynamic.toml" {
-                http.routers.lmstudio = {
-                  rule = "Host(`lmstudio.svc.junco.dev`) || Host(`lmstudio.junco.dev`)";
-                  service = "lmstudio";
-                  entryPoints = [ "websecure" ];
-                  tls = {
-                    certResolver = "junco";
-                    domains = [
-                      { main = "lmstudio.svc.junco.dev"; }
-                    ];
-                    options = "mtls";
-                  };
-                };
+          users.users.remote-builder = {
+            createHome = true;
+            openssh.authorizedKeys.keys = [
+              "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFs5NiXbHfBIVf9O0VCBhmBuOSzXpSg1skLzinA5tJhu builder@builders"
+            ];
 
-                http.services.lmstudio.loadBalancer.servers = [
-                  { url = "http://127.0.0.1:1234"; }
-                ];
-
-                tls.options = {
-                  mtls.clientAuth = {
-                    caFiles = [ ./root_ca.crt ];
-                    clientAuthType = "RequireAndVerifyClientCert";
-                  };
-                };
-              };
-
-              traefikStatic = tomlFormat.generate "traefik-static.toml" {
-                entryPoints.web.address = "${listenAddress}:18080";
-                entryPoints.web.http.redirections.entryPoint = {
-                  to = "websecure";
-                  scheme = "https";
-                };
-                entryPoints.websecure.address = "${listenAddress}:18443";
-
-                certificatesResolvers.junco.acme = {
-                  caServer = "https://cert.junco.dev/acme/acme/directory";
-                  storage = "/Users/adam/.local/share/traefik/acme.json";
-                  httpChallenge.entryPoint = "web";
-                };
-
-                providers.file = {
-                  filename = "${traefikDynamic}";
-                  watch = false;
-                };
-              };
-            in
-            {
-              home-manager.users.adam = {
-                home.activation.traefik-data = ''
-                  mkdir -p ~/.local/share/traefik
-                '';
-
-                launchd.agents.traefik = {
-                  enable = true;
-                  config = {
-                    ProgramArguments = [
-                      "${pkgs.traefik}/bin/traefik"
-                      "--configFile=${traefikStatic}"
-                    ];
-                    KeepAlive = true;
-                    RunAtLoad = true;
-                    StandardErrorPath = "/Users/adam/Library/Logs/traefik.log";
-                    StandardOutPath = "/Users/adam/Library/Logs/traefik.log";
-                  };
-                };
-              };
-
-              # required for the pf rdr above to reach traefik
-              launchd.daemons.ip-forwarding.serviceConfig = {
-                ProgramArguments = [
-                  "/usr/sbin/sysctl"
-                  "-w"
-                  "net.inet.ip.forwarding=1"
-                ];
-                RunAtLoad = true;
-              };
-
-              networking.applicationFirewall = {
-                enable = true;
-                enableStealthMode = true;
-              };
-              security.pf = {
-                enable = true;
-                rules = ''
-                  # junco traefik
-                  rdr pass inet proto tcp from any to ${listenAddress} port 80 -> ${listenAddress} port 18080
-                  rdr pass inet proto tcp from any to ${listenAddress} port 443 -> ${listenAddress} port 18443
-
-                  # bf traefik
-                  rdr pass on lo0 inet proto tcp from any to any port 80 -> (lo0) port 8000
-                  rdr pass on lo0 inet proto tcp from any to any port 443 -> (lo0) port 8443
-
-                  pass quick on lo0 no state
-
-                  # restrict ssh
-                  block return in proto tcp from any to any port ssh
-                  pass in inet proto tcp from any to ${listenAddress} port ssh
-
-                  pass in inet proto tcp from any to ${listenAddress} port {80, 443}
-                '';
-              };
-            }
-          )
-          #
-          # junco builder
-          #
-          {
-            nix.settings.trusted-users = [ "remote-builder" ];
-
-            users.knownUsers = [ "remote-builder" ];
-
-            users.users.remote-builder = {
-              createHome = true;
-              openssh.authorizedKeys.keys = [
-                "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFs5NiXbHfBIVf9O0VCBhmBuOSzXpSg1skLzinA5tJhu builder@builders"
-              ];
-
-              shell = "/bin/zsh";
-              uid = 1000;
-              home = "/Users/remote-builder";
-            };
-          }
-        ];
-      };
+            shell = "/bin/zsh";
+            uid = 1000;
+            home = "/Users/remote-builder";
+          };
+        }
+      ];
+    };
   };
 }

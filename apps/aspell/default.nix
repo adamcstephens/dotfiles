@@ -1,5 +1,4 @@
 { config, ... }:
 {
-  home.file.".aspell.en.pws".source =
-    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/aspell/aspell.en.pws";
+  files.".aspell.en.pws".source = "${config.directory}/.dotfiles/aspell/aspell.en.pws";
 }

@@ -4,6 +4,9 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     nixpkgs-unstable-small.url = "github:nixos/nixpkgs?ref=nixos-unstable-small";
 
+    hjem.url = "github:feel-co/hjem";
+    hjem.inputs.nixpkgs.follows = "nixpkgs-unstable";
+
     home-manager.url = "github:nix-community/home-manager?ref=release-26.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     home-manager-unstable.url = "github:nix-community/home-manager";
@@ -13,7 +16,6 @@
     vein.url = "git+https://tangled.org/adam.robins.wtf/vein";
     flake-parts.url = "github:hercules-ci/flake-parts";
     mnw.url = "github:Gerg-L/mnw";
-    nix-colors.url = "github:misterio77/nix-colors";
     nix-darwin.url = "github:lnl7/nix-darwin/master";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs-unstable";
     nix-index-database.url = "github:nix-community/nix-index-database";

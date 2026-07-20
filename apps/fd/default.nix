@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }:
+{ pkgs, ... }:
 let
   fd = pkgs.symlinkJoin {
     name = "fd-wrapped";
@@ -10,5 +10,5 @@ let
   };
 in
 {
-  home.packages = [ fd ];
+  packages = [ fd ];
 }

@@ -1,6 +1,6 @@
 { pkgs, ... }:
 {
-  home.packages = [ pkgs.swayosd ];
+  packages = [ pkgs.swayosd ];
 
   systemd.user = {
     services.swayosd = {

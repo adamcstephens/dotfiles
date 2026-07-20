@@ -34,7 +34,7 @@ in
   };
 
   config = lib.mkIf config.dotfiles.gui.xorg.enable {
-    home.packages = [
+    packages = [
       pkgs.arandr
       pkgs.grobi
       pkgs.lxrandr
@@ -125,6 +125,6 @@ in
     };
 
     # re-use .xsession as .xinitrc
-    home.file.".xinitrc".source = config.home.file.${config.xsession.scriptPath}.source.outPath;
+    files.".xinitrc".source = config.home.file.${config.xsession.scriptPath}.source.outPath;
   };
 }

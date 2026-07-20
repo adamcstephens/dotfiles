@@ -13,24 +13,24 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = [
+    packages = [
       pkgs.elephant
       pkgs.walker
     ];
 
-    home.file.".config/elephant/websearch.toml".source =
+    files.".config/elephant/websearch.toml".source =
       if config.dotfiles.nixosManaged then
         ./elephant/websearch.toml
       else
-        config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/walker/elephant/websearch.toml";
+        "${config.directory}/.dotfiles/apps/walker/elephant/websearch.toml";
 
-    home.file.".config/walker/config.toml".source =
+    files.".config/walker/config.toml".source =
       if config.dotfiles.nixosManaged then
         ./config.toml
       else
-        config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/walker/config.toml";
+        "${config.directory}/.dotfiles/apps/walker/config.toml";
 
-    home.file.".config/walker/themes/dotfiles/style.css".text = with config.colorScheme.palette; ''
+    files.".config/walker/themes/dotfiles/style.css".text = with config.colorScheme.palette; ''
       @define-color window_bg_color #${base05};
       @define-color accent_bg_color #${base05};
       @define-color theme_fg_color #${base08};
@@ -73,8 +73,8 @@ in
           X-Restart-Triggers = [
             (builtins.hashString "sha256" (
               builtins.toJSON {
-                config = config.home.file.".config/walker/config.toml".source;
-                theme = config.home.file.".config/walker/themes/dotfiles/style.css".source;
+                config = config.files.".config/walker/config.toml".source;
+                theme = config.files.".config/walker/themes/dotfiles/style.css".source;
               }
             ))
           ];

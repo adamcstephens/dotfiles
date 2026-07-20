@@ -10,7 +10,7 @@ let
     if config.dotfiles.nixosManaged then
       ./skills
     else
-      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/agents/skills";
+      "${config.directory}/.dotfiles/apps/agents/skills";
 
   cfg = config.dotfiles.apps.agents;
 
@@ -29,7 +29,7 @@ let
     buildInputs = [ pkgs.makeWrapper ];
     postBuild = ''
       wrapProgram $out/bin/claude \
-        --set-default CLAUDE_CONFIG_DIR "${config.home.homeDirectory}/.config/claude"
+        --set-default CLAUDE_CONFIG_DIR "${config.directory}/.config/claude"
     '';
   };
 
@@ -63,7 +63,7 @@ let
     buildInputs = [ pkgs.makeWrapper ];
     postBuild = ''
       wrapProgram $out/bin/pi \
-        --set-default PI_CODING_AGENT_DIR "${config.home.homeDirectory}/.config/pi/agent" \
+        --set-default PI_CODING_AGENT_DIR "${config.directory}/.config/pi/agent" \
         --set-default PI_OFFLINE true \
         --set-default PI_TELEMETRY true
     '';
@@ -75,7 +75,7 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = [
+    packages = [
       inputs.vein.packages.${pkgs.stdenv.hostPlatform.system}.vein
 
       agent-browser-wrapped
@@ -85,7 +85,7 @@ in
       pi-coding-agent-wrapped
     ];
 
-    home.file = {
+    files = {
       ".config/agents/skills".source = skills;
 
       ".config/pi/agent/npm/package.json".source = ./pi/package.json;
@@ -93,8 +93,8 @@ in
       ".config/pi/agent/npm/node_modules".source = "${pi-extensions}/node_modules";
     };
 
-    home.sessionVariables = {
-      CLAUDE_CONFIG_DIR = "${config.home.homeDirectory}/.config/claude";
+    environment.sessionVariables = {
+      CLAUDE_CONFIG_DIR = "${config.directory}/.config/claude";
     };
   };
 }

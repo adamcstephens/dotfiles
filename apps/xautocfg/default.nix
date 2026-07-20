@@ -3,7 +3,7 @@ let
   package = flake.packages.${pkgs.stdenv.hostPlatform.system}.xautocfg;
 in
 {
-  xdg.configFile."xautocfg.cfg".text = ''
+  xdg.config.files."xautocfg.cfg".text = ''
     [keyboard]
     delay = 250
     rate = 80

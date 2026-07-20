@@ -6,17 +6,17 @@
 }:
 {
   config = lib.mkIf config.dotfiles.gui.wayland.enable {
-    home.packages = [
+    packages = [
       # https://github.com/NixOS/nixpkgs/pull/476066
       (pkgs.river-bnf.overrideAttrs { env.NIX_CFLAGS_COMPILE = "-std=gnu17"; })
     ];
 
-    xdg.configFile."river/init" = {
+    xdg.config.files."river/init" = {
       executable = true;
       source = ./init.sh;
     };
 
-    xdg.configFile."river/colors.sh" = {
+    xdg.config.files."river/colors.sh" = {
       executable = true;
       text = ''
         #!/usr/bin/env sh
@@ -36,7 +36,7 @@
       '';
     };
 
-    xdg.configFile."river/start" = {
+    xdg.config.files."river/start" = {
       text =
         let
           drmDevices = lib.concatStringsSep ":" config.dotfiles.gui.drmDevices;

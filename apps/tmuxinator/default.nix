@@ -13,12 +13,9 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = [ pkgs.tmuxinator ];
+    packages = [ pkgs.tmuxinator ];
 
-    home.file.".config/tmuxinator".source =
-      if config.dotfiles.nixosManaged then
-        ./.
-      else
-        config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/tmuxinator";
+    files.".config/tmuxinator".source =
+      if config.dotfiles.nixosManaged then ./. else "${config.directory}/.dotfiles/apps/tmuxinator";
   };
 }
