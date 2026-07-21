@@ -316,6 +316,7 @@ in
                   "big-parallel"
                   "kvm"
                   "nixos-test"
+                  "uid-range"
                 ];
                 systems = [
                   "x86_64-linux"

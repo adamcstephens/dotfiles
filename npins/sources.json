@@ -38,9 +38,9 @@
       },
       "branch": "fix/containerfile-store-context",
       "submodules": false,
-      "revision": "faa85e06ba29e23ce6947f3c7325fed8c8c2fdd4",
-      "url": "https://github.com/adamcstephens/nix-hex-box/archive/faa85e06ba29e23ce6947f3c7325fed8c8c2fdd4.tar.gz",
-      "hash": "sha256-ZuDOoPpLWR7v5IZE5I46pHSOpVK47xL6atuAkWXgleM="
+      "revision": "dd934dc40ce085bd382c86263cc7c2b20ef9301f",
+      "url": "https://github.com/adamcstephens/nix-hex-box/archive/dd934dc40ce085bd382c86263cc7c2b20ef9301f.tar.gz",
+      "hash": "sha256-qiW9WUpOQIIvWLq/YHxm+y+gkYzbQCSDdKnK6HHn0lQ="
     },
     "smart-splits.nvim": {
       "type": "Git",
