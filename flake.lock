@@ -43,11 +43,11 @@
         "rev": "0d641aac7cb9cd719f1e813a48b4539aceccadb7",
         "revCount": 234,
         "type": "git",
-        "url": "https://codeberg.org/adamcstephens/epi"
+        "url": "https://tangled.org/adam.robins.wtf/epi"
       },
       "original": {
         "type": "git",
-        "url": "https://codeberg.org/adamcstephens/epi"
+        "url": "https://tangled.org/adam.robins.wtf/epi"
       }
     },
     "flake-parts": {
@@ -417,11 +417,11 @@
         "rev": "c68cd75174dc1f0c93e44b27da3517a735050b4f",
         "revCount": 11,
         "type": "git",
-        "url": "https://codeberg.org/adamcstephens/profile-parts"
+        "url": "https://tangled.org/adam.robins.wtf/profile-parts"
       },
       "original": {
         "type": "git",
-        "url": "https://codeberg.org/adamcstephens/profile-parts"
+        "url": "https://tangled.org/adam.robins.wtf/profile-parts"
       }
     },
     "root": {
@@ -451,16 +451,15 @@
       "locked": {
         "lastModified": 1784321670,
         "narHash": "sha256-FowqUe4WjJtrxAK8Z8KFy6DvXSMbo4wVAnhdLEn4HtE=",
-        "ref": "main",
+        "ref": "refs/heads/main",
         "rev": "2ea7f885bcfc4f92d7e5fbf60964a77a775164d6",
         "revCount": 1202,
         "type": "git",
-        "url": "https://codeberg.org/adamcstephens/sower.git"
+        "url": "https://tangled.org/adam.robins.wtf/sower"
       },
       "original": {
-        "ref": "main",
         "type": "git",
-        "url": "https://codeberg.org/adamcstephens/sower.git"
+        "url": "https://tangled.org/adam.robins.wtf/sower"
       }
     },
     "vein": {
@@ -475,11 +474,11 @@
         "rev": "e58f5f698f15be6a3a4bfbc1459accb7037dfae6",
         "revCount": 75,
         "type": "git",
-        "url": "https://codeberg.org/adamcstephens/vein"
+        "url": "https://tangled.org/adam.robins.wtf/vein"
       },
       "original": {
         "type": "git",
-        "url": "https://codeberg.org/adamcstephens/vein"
+        "url": "https://tangled.org/adam.robins.wtf/vein"
       }
     }
   },

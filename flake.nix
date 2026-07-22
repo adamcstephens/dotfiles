@@ -9,8 +9,8 @@
     home-manager-unstable.url = "github:nix-community/home-manager";
     home-manager-unstable.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
-    epi.url = "git+https://codeberg.org/adamcstephens/epi";
-    vein.url = "git+https://codeberg.org/adamcstephens/vein";
+    epi.url = "git+https://tangled.org/adam.robins.wtf/epi";
+    vein.url = "git+https://tangled.org/adam.robins.wtf/vein";
     flake-parts.url = "github:hercules-ci/flake-parts";
     mnw.url = "github:Gerg-L/mnw";
     nix-colors.url = "github:misterio77/nix-colors";
@@ -18,8 +18,8 @@
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs-unstable";
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
-    profile-parts.url = "git+https://codeberg.org/adamcstephens/profile-parts";
-    sower.url = "git+https://codeberg.org/adamcstephens/sower.git?ref=main";
+    profile-parts.url = "git+https://tangled.org/adam.robins.wtf/profile-parts";
+    sower.url = "git+https://tangled.org/adam.robins.wtf/sower";
   };
 
   outputs =
