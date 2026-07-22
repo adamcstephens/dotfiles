@@ -19,6 +19,7 @@ in
     modules = [
       (inputs.nix-darwin.outPath + "/modules/nix/nix-darwin.nix") # install darwin-rebuild
       (npins.nix-hex-box + "/modules/container-builder.nix")
+      inputs.nbac.darwinModules.default
       (
         {
           config,
@@ -34,6 +35,7 @@ in
                 "epi"
                 "linux-builder"
                 "container"
+                "nbac"
               ];
               description = "which aarch64-linux builder to enable";
               default = "linux-builder";
@@ -148,6 +150,15 @@ in
                     "$epi_cfg" /etc/ssh/ssh_config.d/100-epi.conf
                 fi
               '';
+            };
+
+            services.nbac = lib.mkIf (config.dotfiles.macos.builder == "nbac") {
+              enable = true;
+              machine = {
+                cpus = 16;
+                memory = "12G";
+              };
+              stateDir = "/Users/adam/.local/state/nbac";
             };
 
             services.container-builder = lib.mkIf (config.dotfiles.macos.builder == "container") {
@@ -302,7 +313,7 @@ in
           }
         )
         {
-          dotfiles.macos.builder = "container";
+          dotfiles.macos.builder = "nbac";
 
           nix = {
             distributedBuilds = true;

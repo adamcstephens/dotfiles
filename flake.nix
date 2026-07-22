@@ -13,15 +13,18 @@
     home-manager-unstable.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
     epi.url = "git+https://tangled.org/adam.robins.wtf/epi";
-    vein.url = "git+https://tangled.org/adam.robins.wtf/vein";
     flake-parts.url = "github:hercules-ci/flake-parts";
     mnw.url = "github:Gerg-L/mnw";
-    nix-darwin.url = "github:lnl7/nix-darwin/master";
+    nbac.inputs.nix-darwin.follows = "nix-darwin";
+    nbac.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    nbac.url = "git+https://tangled.org/adam.robins.wtf/nbac";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs-unstable";
-    nix-index-database.url = "github:nix-community/nix-index-database";
+    nix-darwin.url = "github:lnl7/nix-darwin/master";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
+    nix-index-database.url = "github:nix-community/nix-index-database";
     profile-parts.url = "git+https://tangled.org/adam.robins.wtf/profile-parts";
     sower.url = "git+https://tangled.org/adam.robins.wtf/sower";
+    vein.url = "git+https://tangled.org/adam.robins.wtf/vein";
   };
 
   outputs =
