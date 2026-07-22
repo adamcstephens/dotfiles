@@ -2,6 +2,7 @@
   config,
   lib,
   npins,
+  options,
   pkgs,
   ...
 }:
@@ -68,7 +69,7 @@
       xdg.config.files."ghostty/themes/Modus Operandi".source =
         npins."modus-themes.nvim" + "/extras/ghostty/modus_operandi";
     }
-    (lib.optionalAttrs pkgs.stdenv.hostPlatform.isLinux {
+    (lib.optionalAttrs (lib.hasAttr "systemd" options) {
       systemd.user.services.ghostty = lib.mkIf pkgs.stdenv.isLinux {
         Unit = {
           Description = "Ghostty";

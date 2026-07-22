@@ -5,45 +5,43 @@
 }:
 let
   common =
+    { config, ... }:
     {
-      config,
-      lib,
-      ...
-    }:
-    {
+      imports = [
+        inputs.epi.nixosModules.epi
+        inputs.hjem.nixosModules.hjem
+      ];
+
       epi = {
         enable = true;
-        extraStorePaths = [
-          config.home-manager.users.adam.home.activationPackage
-        ];
       };
 
-      home-manager = {
-        users.adam = {
-          imports = [
-            {
-              dotfiles.nixosManaged = true;
-              nix.package = lib.mkOverride 30 config.nix.package;
-              nix.registry.nixpkgs.flake = lib.mkForce inputs.nixpkgs-unstable;
-            }
-          ];
+      hjem = {
+        clobberByDefault = true;
+
+        specialArgs = {
+          inherit inputs;
+
+          flake = self;
+          npins = import ../npins;
         };
 
-        extraSpecialArgs = {
-          inherit inputs;
-          npins = import ../npins;
-          flake = self;
+        extraModules = [
+          ../hjem/core.nix
+          ../hjem/dev.nix
+        ];
+
+        users.adam = {
+          directory = "/home/adam";
+          user = "adam";
+          files.".dotfiles".source = "${self}";
+
+          dotfiles.apps.agents.enable = true;
         };
       };
 
       nix.settings = {
-        extra-experimental-features =
-          lib.optionals (
-            config.nix.package.pname == "nix" && lib.versionAtLeast config.nix.package.version "2.24"
-          ) [ "pipe-operators" ]
-          ++ lib.optionals (
-            config.nix.package.pname == "lix" && lib.versionAtLeast config.nix.package.version "2.91"
-          ) [ "pipe-operator" ];
+        extra-experimental-features = [ "pipe-operators" ];
         substituters = [
           "https://cache-v5.junco.dev"
         ];
@@ -67,42 +65,17 @@ in
   flake.nixosConfigurations = {
     agents-aarch64 = inputs.nixpkgs-unstable.lib.nixosSystem {
       system = "aarch64-linux";
-      modules = [
-        inputs.epi.nixosModules.epi
-        inputs.home-manager-unstable.nixosModules.home-manager
-        common
-        {
-          home-manager.users.adam.imports = self.homeModules.agents ++ [
-            { home.file.".dotfiles".source = "${self}"; }
-          ];
-        }
-      ];
+      modules = [ common ];
     };
 
     agents = inputs.nixpkgs-unstable.lib.nixosSystem {
       system = "x86_64-linux";
-      modules = [
-        inputs.epi.nixosModules.epi
-        inputs.home-manager-unstable.nixosModules.home-manager
-        common
-        {
-          home-manager.users.adam.imports = self.homeModules.agents-aarch64 ++ [
-            { home.file.".dotfiles".source = "${self}"; }
-          ];
-        }
-      ];
+      modules = [ common ];
     };
 
     dotfiles = inputs.nixpkgs-unstable.lib.nixosSystem {
       system = "x86_64-linux";
-      modules = [
-        inputs.epi.nixosModules.epi
-        inputs.home-manager-unstable.nixosModules.home-manager
-        common
-        {
-          home-manager.users.adam.imports = self.homeModules.agents ++ [ ];
-        }
-      ];
+      modules = [ common ];
     };
   };
 

@@ -7,7 +7,7 @@
 {
   imports = [
     ../apps/agents
-    ../apps/atuin # TODO services
+    ../apps/atuin
     ../apps/epi
     ../apps/ruff
     ../apps/zk

@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  options,
   pkgs,
   ...
 }:
@@ -25,36 +26,38 @@ in
         else
           "${config.directory}/.dotfiles/apps/ssh/dotfiles.config";
     }
-    (lib.optionalAttrs pkgs.stdenv.hostPlatform.isLinux {
-      systemd.user.services.ssh-agent = lib.mkIf cfg.agent.askpass {
-        Install.WantedBy = lib.mkForce [ "graphical-session.target" ];
-        Service.Environment = [
-          "SSH_ASKPASS=${pkgs.seahorse}/libexec/seahorse/ssh-askpass"
-        ];
-      };
+    (lib.optionalAttrs (lib.hasAttr "systemd" options) {
+      systemd.services = {
+        ssh-agent = lib.mkIf cfg.agent.askpass {
+          wantedBy = lib.mkForce [ "graphical-session.target" ];
+          environment = {
+            SSH_ASKPASS = "${pkgs.seahorse}/libexec/seahorse/ssh-askpass";
+          };
+        };
 
-      systemd.user.services.ssh-tpm-agent = lib.mkIf cfg.tpm {
-        Unit = {
-          PartOf = [ "graphical-session.target" ];
-          After = [
+        ssh-tpm-agent = lib.mkIf cfg.tpm {
+          wantedBy = [ "graphical-session.target" ];
+          partOf = [ "graphical-session.target" ];
+          requires = [ "ssh-agent.service" ];
+          after = [
             "ssh-agent.service"
             "graphical-session.target"
           ];
-          Requires = [ "ssh-agent.service" ];
-          ConditionEnvironment = "WAYLAND_DISPLAY";
-        };
 
-        Service = {
-          Type = "simple";
-          Environment = [
-            "SSH_ASKPASS=${pkgs.seahorse}/libexec/seahorse/ssh-askpass"
-          ];
-          ExecStart = "${lib.getExe pkgs.ssh-tpm-agent} -l %t/ssh-tpm-agent -A %t/ssh-agent ";
-          RestartSec = 3;
-          Restart = "on-abort";
-        };
+          unitConfig = {
+            ConditionEnvironment = "WAYLAND_DISPLAY";
+          };
 
-        Install.WantedBy = [ "graphical-session.target" ];
+          serviceConfig = {
+            Type = "simple";
+            Environment = [
+              "SSH_ASKPASS=${pkgs.seahorse}/libexec/seahorse/ssh-askpass"
+            ];
+            ExecStart = "${lib.getExe pkgs.ssh-tpm-agent} -l %t/ssh-tpm-agent -A %t/ssh-agent ";
+            RestartSec = 3;
+            Restart = "on-abort";
+          };
+        };
       };
     })
   ];

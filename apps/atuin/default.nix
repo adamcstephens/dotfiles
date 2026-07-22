@@ -1,6 +1,6 @@
 {
-  config,
   lib,
+  options,
   pkgs,
   ...
 }:
@@ -20,11 +20,11 @@
           systemd_socket = true
         '';
     }
-    (lib.optionalAttrs pkgs.stdenv.hostPlatform.isLinux {
-      systemd.user = lib.mkIf (lib.versionAtLeast pkgs.atuin.version "18.3.0") {
+    (lib.optionalAttrs (lib.hasAttr "systemd" options) {
+      systemd = {
         sockets.atuin = {
-          Install.WantedBy = [ "default.target" ];
-          Socket = {
+          wantedBy = [ "default.target" ];
+          socketConfig = {
             ListenStream = "%t/atuin.sock";
             Accept = false;
             SocketMode = "0600";
@@ -32,7 +32,7 @@
         };
 
         services.atuin = {
-          Service = {
+          serviceConfig = {
             Type = "simple";
             ExecStart = "${lib.getExe pkgs.atuin} daemon";
             Restart = "on-abort";
