@@ -34,6 +34,7 @@
         ./apps/neovim/part.nix
         ./darwin/part.nix
         ./devshells/part.nix
+        ./hjem/part.nix
         ./home/profiles.nix
         ./ocamlPackages/part.nix
         ./parts/epi.nix
