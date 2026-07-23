@@ -15,8 +15,6 @@ in
 {
   packages = [
     inputs.nixpkgs-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.jujutsu
-  ]
-  ++ lib.optionals pkgs.stdenv.isLinux [
     pkgs.watchman
   ];
 

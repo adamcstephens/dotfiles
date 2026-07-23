@@ -1,6 +1,7 @@
 {
   config,
   inputs,
+  lib,
   pkgs,
   ...
 }:
@@ -16,6 +17,9 @@ let
       "~/.config/opencode"
       "~/.config/pi"
       "~/.copilot"
+    ]
+    ++ lib.optionals pkgs.stdenv.hostPlatform.isDarwin [
+      "~/.config/claude-personal"
     ];
   };
 in
