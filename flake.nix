@@ -4,7 +4,7 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     nixpkgs-unstable-small.url = "github:nixos/nixpkgs?ref=nixos-unstable-small";
 
-    hjem.url = "github:feel-co/hjem";
+    hjem.url = "github:adamcstephens/hjem?ref=push-wxvzlotzkqpl";
     hjem.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
     epi.url = "git+https://tangled.org/adam.robins.wtf/epi";

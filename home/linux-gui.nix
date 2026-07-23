@@ -31,7 +31,6 @@ let
 in
 {
   imports = [
-    ./core-gui.nix
     ../apps/wayland
 
     # common

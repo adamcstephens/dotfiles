@@ -11,6 +11,7 @@ mkShell {
   name = "dots";
 
   packages = [
+    inputs.hjem.packages.${pkgs.stdenv.hostPlatform.system}.hjem
     pkgs.gitMinimal
     pkgs.just
     pkgs.niks3
