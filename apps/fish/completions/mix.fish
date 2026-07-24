@@ -7,7 +7,7 @@ function _halostatue_fish_elixir_mix_needs_command
 end
 
 function _halostatue_fish_elixir_mix_tasks
-    mix help 2>/dev/null | string replace -f -r '^mix\s+(\S+)\s+#\s+(.*)' '$1\t$2'
+    mix help 2>/dev/null | string replace --filter --regex '^mix\s+(\S+)\s+#\s+(.*)' '$1\t$2'
 end
 
-complete -c mix -n _halostatue_fish_elixir_mix_needs_command -f -a '(_halostatue_fish_elixir_mix_tasks)'
+complete --command mix --condition _halostatue_fish_elixir_mix_needs_command --no-files --arguments '(_halostatue_fish_elixir_mix_tasks)'

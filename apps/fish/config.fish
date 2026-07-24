@@ -1,11 +1,11 @@
 # Only execute this file once per shell.
 set -q __fish_dotfiles_config_sourced; and exit
-set -g __fish_dotfiles_config_sourced 1
+set --global __fish_dotfiles_config_sourced 1
 
 fish_add_path --prepend --move $HOME/.dotfiles/bin
 
 if ! grep nixos /etc/os-release >/dev/null 2>&1
-    set -x TERMINFO_DIRS $HOME/.nix-profile/share/terminfo
+    set --export TERMINFO_DIRS $HOME/.nix-profile/share/terminfo
 
     if test -e /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.fish
         source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.fish
@@ -69,10 +69,10 @@ status is-interactive; and begin
 
     # Interactive shell initialisation
 
-    set -U __done_notification_urgency_level_failure normal
-    set -U fish_greeting
+    set --universal __done_notification_urgency_level_failure normal
+    set --universal fish_greeting
 
-    set -x SSH_AUTH_SOCK (ssh-agent-mgr)
+    set --export SSH_AUTH_SOCK (ssh-agent-mgr)
     source $HOME/.config/fish/functions/ssh-auth-sock.fish
 
     source $HOME/.config/fish/functions/_smart-splits.fish
@@ -81,8 +81,8 @@ status is-interactive; and begin
         source $HOME/.shell_local.fish
     end
 
-    set -x PAGER $HOME/.dotfiles/bin/pager
-    set -x EDITOR $HOME/.dotfiles/bin/editor
+    set --export PAGER $HOME/.dotfiles/bin/pager
+    set --export EDITOR $HOME/.dotfiles/bin/editor
 
     # fish made word/token platform dependent, so we'll hardcode these
     bind alt-backspace backward-kill-word
@@ -97,18 +97,18 @@ status is-interactive; and begin
     bind ctrl-right forward-token
 
     fzf --fish | source
-    set -x FZF_DEFAULT_COMMAND 'fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
-    set -x FZF_CTRL_T_COMMAND "$FZF_DEFAULT_COMMAND"
+    set --export FZF_DEFAULT_COMMAND 'fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
+    set --export FZF_CTRL_T_COMMAND "$FZF_DEFAULT_COMMAND"
 
-    if command -q zoxide
+    if command --query zoxide
         zoxide init fish --cmd j | source
     end
 
-    if test "$TERM" != dumb && command -q starship
+    if test "$TERM" != dumb && command --query starship
         starship init fish | source
     end
 
-    if command -q atuin
+    if command --query atuin
         atuin init fish --disable-up-arrow | source
     end
 
