@@ -32,6 +32,7 @@ in
 {
   imports = [
     ./core-gui.nix
+    ../apps/wayland
 
     # common
     ../apps/dunst

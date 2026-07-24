@@ -11,7 +11,6 @@
     ../apps/epi
     ../apps/ruff
     ../apps/zk
-    # TODO inputs.nix-index-database.homeModules.nix-index
   ];
 
   dotfiles = {
