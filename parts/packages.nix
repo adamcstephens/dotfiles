@@ -33,15 +33,6 @@
           dotfiles = pkgs-unstable.callPackage ../packages/dotfiles.nix {
             inherit ocamlPackages;
           };
-
-          hm = pkgs.callPackage ../packages/hm.nix {
-            inherit (self'.packages) home-profile-selector;
-            inherit (pkgs-unstable) just;
-          };
-
-          home-profile-selector = pkgs.callPackage ../packages/home-profile-selector.nix {
-            homeConfigurations = builtins.attrNames self.homeConfigurations;
-          };
         };
     };
 }

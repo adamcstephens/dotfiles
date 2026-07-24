@@ -7,11 +7,6 @@
     hjem.url = "github:feel-co/hjem";
     hjem.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
-    home-manager.url = "github:nix-community/home-manager?ref=release-26.05";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    home-manager-unstable.url = "github:nix-community/home-manager";
-    home-manager-unstable.inputs.nixpkgs.follows = "nixpkgs-unstable";
-
     epi.url = "git+https://tangled.org/adam.robins.wtf/epi";
     flake-parts.url = "github:hercules-ci/flake-parts";
     mnw.url = "github:Gerg-L/mnw";
@@ -35,7 +30,6 @@
         ./darwin/part.nix
         ./devshells/part.nix
         ./hjem/part.nix
-        ./home/profiles.nix
         ./ocamlPackages/part.nix
         ./parts/epi.nix
         ./parts/overlays.nix
