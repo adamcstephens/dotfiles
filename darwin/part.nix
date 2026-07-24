@@ -159,6 +159,12 @@ in
                 memory = "12G";
               };
               stateDir = "/Users/adam/.local/state/nbac";
+              supportedFeatures = [
+                "big-parallel"
+                "kvm"
+                "nixos-test"
+              ];
+              virtualization.enable = true;
             };
 
             services.container-builder = lib.mkIf (config.dotfiles.macos.builder == "container") {

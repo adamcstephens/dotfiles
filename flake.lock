@@ -170,11 +170,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1784922890,
-        "narHash": "sha256-GOUvc0YIvPSecs67gBFS2/xjKPRkaq2EEZPEXCcvDTY=",
+        "lastModified": 1784926390,
+        "narHash": "sha256-mWaGzk09I2+cJycWcXyA3ECF6X5BZRWXIozVqugn2Hg=",
         "ref": "refs/heads/main",
-        "rev": "5e2eeb467572871d52efd17b31d0e2603705dda0",
-        "revCount": 18,
+        "rev": "25b9ce2a432927c998021c435ba5f784c65305ae",
+        "revCount": 19,
         "type": "git",
         "url": "https://tangled.org/adam.robins.wtf/nbac"
       },
