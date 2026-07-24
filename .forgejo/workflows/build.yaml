@@ -76,3 +76,6 @@ jobs:
         env:
           SOWER_ENDPOINT: ${{ vars.SOWER_DEV_ENDPOINT }}
           SOWER_ACCESS_TOKEN: ${{ secrets.SOWER_DEV_ACCESS_TOKEN }}
+
+        # don't consider a dev failure a failure
+        continue-on-error: true
