@@ -21,7 +21,7 @@ let
         ];
 
         users.adam = {
-          directory = "/Users/adam";
+          directory = "/home/adam";
           user = "adam";
         };
       };
