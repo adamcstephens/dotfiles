@@ -23,6 +23,10 @@ let
         users.adam = {
           directory = "/home/adam";
           user = "adam";
+
+          dotfiles.nixosManaged = true;
+
+          files.".dotfiles".source = "${self}";
         };
       };
     }

@@ -41,10 +41,6 @@
         PAGER = "${config.directory}/.dotfiles/bin/pager";
       };
 
-      files = {
-        ".terminfo".source = "${config.directory}/share/terminfo";
-      };
-
       packages = [
         pkgs.difftastic
         pkgs.doggo
@@ -71,46 +67,48 @@
       ];
     }
     (lib.optionalAttrs (lib.hasAttr "systemd" options) {
-      systemd.services.dotfiles-repo-pull = {
-        wantedBy = [ "default.target" ];
-        partOf = [ "default.target" ];
-        startAt = "hourly";
+      systemd.services = lib.mkIf (!config.dotfiles.nixosManaged) {
+        dotfiles-repo-pull = {
+          wantedBy = [ "default.target" ];
+          partOf = [ "default.target" ];
+          startAt = "hourly";
 
-        serviceConfig = {
-          Type = "oneshot";
-          ExecStart =
-            pkgs.writeShellApplication {
-              name = "dotfiles-repo-pull";
+          serviceConfig = {
+            Type = "oneshot";
+            ExecStart =
+              pkgs.writeShellApplication {
+                name = "dotfiles-repo-pull";
 
-              runtimeInputs = [
-                pkgs.git
-                pkgs.jujutsu
-              ];
+                runtimeInputs = [
+                  pkgs.git
+                  pkgs.jujutsu
+                ];
 
-              text = ''
-                export PATH=${../bin}:$PATH
+                text = ''
+                  export PATH=${../bin}:$PATH
 
-                if [ -h .dotfiles ]; then
-                  echo "Refusing to overwrite dotfiles link"
-                  exit 1
-                fi
+                  if [ -h .dotfiles ]; then
+                    echo "Refusing to overwrite dotfiles link"
+                    exit 1
+                  fi
 
-                if [ ! -e .dotfiles ]; then
-                  git clone https://codeberg.org/adamcstephens/dotfiles.git .dotfiles
-                fi
+                  if [ ! -e .dotfiles ]; then
+                    git clone https://codeberg.org/adamcstephens/dotfiles.git .dotfiles
+                  fi
 
-                cd .dotfiles
+                  cd .dotfiles
 
-                if [ -d .jj ]; then
-                  jj home -r
-                else
-                  git pull
-                fi
-              '';
-            }
-            |> lib.getExe;
+                  if [ -d .jj ]; then
+                    jj home -r
+                  else
+                    git pull
+                  fi
+                '';
+              }
+              |> lib.getExe;
 
-          WorkingDirectory = config.directory;
+            WorkingDirectory = config.directory;
+          };
         };
       };
     })
