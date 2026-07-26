@@ -15,7 +15,7 @@
     {
       packages =
         let
-          ocamlPackages = pkgs-unstable.ocaml-ng.ocamlPackages_5_4;
+          ocamlPackages = pkgs-unstable.ocaml-ng.ocamlPackages_5_5;
         in
         lib.filesystem.packagesFromDirectoryRecursive {
           inherit (pkgs) callPackage;
