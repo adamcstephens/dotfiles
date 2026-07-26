@@ -66,59 +66,6 @@ in
   };
 
   profile-parts.home-manager = {
-    blank = {
-      modules = [
-        ./core-dev.nix
-        (
-          { pkgs, ... }:
-          {
-            home.packages = [
-              self.packages.${pkgs.stdenv.hostPlatform.system}.wakey
-            ];
-          }
-        )
-      ];
-    };
-
-    agents = {
-      nixpkgs = inputs.nixpkgs-unstable;
-      home-manager = inputs.home-manager-unstable;
-      modules = [
-        ./core-dev.nix
-        {
-          dotfiles.apps.agents.enable = true;
-        }
-      ];
-    };
-
-    agents-aarch64 = {
-      system = "aarch64-linux";
-      nixpkgs = inputs.nixpkgs-unstable;
-      home-manager = inputs.home-manager-unstable;
-      modules = [
-        ./core-dev.nix
-        {
-          dotfiles.apps.agents.enable = true;
-        }
-      ];
-    };
-
-    core-dev = {
-      nixpkgs = inputs.nixpkgs-unstable;
-      home-manager = inputs.home-manager-unstable;
-      modules = [
-        ./core-dev.nix
-      ];
-    };
-
-    branch = {
-      nixpkgs = inputs.nixpkgs-unstable;
-      home-manager = inputs.home-manager-unstable;
-      modules = [
-        ./core-dev.nix
-      ];
-    };
-
     deck = {
       nixpkgs = inputs.nixpkgs-unstable;
       home-manager = inputs.home-manager-unstable;
@@ -155,20 +102,6 @@ in
             services.lorri.enable = true;
           }
         )
-      ];
-    };
-
-    leaf = {
-      nixpkgs = inputs.nixpkgs-unstable;
-      home-manager = inputs.home-manager-unstable;
-      modules = [
-        ./core-dev.nix
-      ];
-    };
-
-    kale = {
-      modules = [
-        ./core-dev.nix
       ];
     };
 
@@ -235,60 +168,6 @@ in
         }
       ];
     };
-
-    willow = {
-      username = "adam";
-      system = "aarch64-darwin";
-      nixpkgs = inputs.nixpkgs-unstable;
-      home-manager = inputs.home-manager-unstable;
-      modules = [
-        ./core-darwin.nix
-        (
-          { pkgs, ... }:
-          {
-            dotfiles.apps.agents.enable = true;
-            home.packages = [
-              pkgs.e1s
-              pkgs.terraform-mcp-server
-              pkgs.typescript-language-server
-            ];
-          }
-        )
-      ];
-    };
-
-    worker1 = {
-      modules = [
-        ./core-dev.nix
-      ];
-    };
-
-    dev-x86_64-linux = {
-      system = "aarch64-linux";
-      modules = [
-        ./core-dev.nix
-      ];
-    };
-
-    dev-aarch64-linux = {
-      system = "aarch64-linux";
-      modules = [
-        ./core-dev.nix
-      ];
-    };
-
-    # generic systems
-
-    aarch64-darwin = {
-      system = "aarch64-darwin";
-      modules = [ ./core-darwin.nix ];
-    };
-
-    aarch64-linux = {
-      system = "aarch64-linux";
-    };
-
-    x86_64-linux = { };
   };
 
   flake.homeModules = builtins.mapAttrs (_: profile: profile.finalModules) cfgs;
