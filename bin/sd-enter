@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+# sd-enter UNIT [command...] — shell in a running unit's namespace, env, and uid
+set -euo pipefail
+
+unit=${1:?usage: sd-enter UNIT [command...]}
+shift
+
+pid=$(systemctl show -P MainPID "$unit")
+if [[ -z $pid || $pid == 0 ]]; then
+  echo "sd-enter: $unit is not running" >&2
+  exit 1
+fi
+
+read -r uid gid < <(awk '/^Uid:/{u=$2} /^Gid:/{g=$2} END{print u, g}' "/proc/$pid/status")
+grps=$(awk '/^Groups:/{$1=""; gsub(/^ +/,""); gsub(/ +/,","); print}' "/proc/$pid/status")
+wd=$(sudo readlink "/proc/$pid/cwd")
+mapfile -d '' -t envs < <(sudo cat "/proc/$pid/environ")
+
+if [[ ${#envs[@]} -eq 0 ]]; then
+  echo "sd-enter: empty environ — check sudo" >&2
+  exit 1
+fi
+
+grpargs=()
+[[ -n $grps ]] && grpargs=(--groups "$grps")
+
+cmd=("$@")
+if [[ ${#cmd[@]} -eq 0 ]]; then
+  cmd=(PS1="(${unit%.service}) \\w \\$ " /run/current-system/sw/bin/bash --noprofile --norc -i)
+fi
+
+exec sudo systemd-analyze unit-shell "$unit" \
+  /run/current-system/sw/bin/setpriv \
+  --reuid "$uid" --regid "$gid" "${grpargs[@]}" --inh-caps=-all -- \
+  /run/current-system/sw/bin/env -i -C "$wd" "${envs[@]}" "${cmd[@]}"
