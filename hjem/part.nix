@@ -60,6 +60,33 @@ in
         user
         ../hjem/core.nix
         ../hjem/dev.nix
+        ../hjem/linux-gui.nix
+        (
+          { pkgs, ... }:
+          {
+            dotfiles = {
+              apps = {
+                # hypridle.enable = false;
+                # sower.enable = true;
+                # swayidle.enable = true;
+                zk.enable = true;
+              };
+              # gui = {
+              #   dpi = 148;
+              #   # autosuspend in nixos handles this
+              #   dontSleep = true;
+              #   wayland.enable = true;
+              # };
+            };
+
+            packages = [
+              pkgs.sone
+            ];
+
+            # dotfiles.apps.waybar.battery = "upower";
+            # programs.waybar.settings.main.network.format-disconnected = "";
+          }
+        )
       ];
     }
   );

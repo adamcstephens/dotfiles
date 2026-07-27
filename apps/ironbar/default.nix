@@ -79,14 +79,11 @@ in
       else
         "${config.directory}/.dotfiles/apps/ironbar/style.css";
 
-    systemd.user.services.ironbar = {
-      Unit = {
-        PartOf = [ "wayland-session.target" ];
-      };
+    systemd.services.ironbar = {
+      partOf = [ "wayland-session.target" ];
+      wantedBy = [ "wayland-session.target" ];
 
-      Install.WantedBy = [ "wayland-session.target" ];
-
-      Service = {
+      serviceConfig = {
         Environment = [
           "IRONBAR_CONFIG=${config.xdg.config.files."ironbar/config.json".source}"
         ];

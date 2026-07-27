@@ -30,9 +30,5 @@
       pkgs.wlopm
       pkgs.wlr-randr
     ];
-
-    wayland = {
-      systemd.target = "wayland-session.target";
-    };
   };
 }

@@ -131,11 +131,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1785083431,
-        "narHash": "sha256-aoyzSe0YpGAJEdRhhbhGik2z9iZuLblf2Kwav2RV2g4=",
+        "lastModified": 1785122427,
+        "narHash": "sha256-5i/mZHLm+BmF/wOrdxWBkUzIiNrApVbFKj0H5UmYUGA=",
         "owner": "adamcstephens",
         "repo": "hjem",
-        "rev": "1235df081acda6f7609efd9fed6ecdd8abac3c93",
+        "rev": "316bc13e218708c2c48627e68ea34feee11bfe68",
         "type": "github"
       },
       "original": {

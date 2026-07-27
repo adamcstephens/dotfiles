@@ -60,19 +60,15 @@
       executable = true;
     };
 
-    systemd.user.services.nm-applet = {
-      Unit = {
-        PartOf = [ "wayland-session.target" ];
-      };
+    systemd.services.nm-applet = {
+      partOf = [ "wayland-session.target" ];
+      wantedBy = [ "wayland-session.target" ];
 
-      Install.WantedBy = [ "wayland-session.target" ];
-
-      Service = {
+      serviceConfig = {
         ExecStart = lib.getExe pkgs.networkmanagerapplet;
         Restart = "on-failure";
         RestartSec = 1;
       };
     };
-
   };
 }
