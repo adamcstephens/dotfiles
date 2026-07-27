@@ -18,7 +18,6 @@ in
   profile-parts.global.darwin = {
     modules = [
       (inputs.nix-darwin.outPath + "/modules/nix/nix-darwin.nix") # install darwin-rebuild
-      (npins.nix-hex-box + "/modules/container-builder.nix")
       inputs.nbac.darwinModules.default
       (
         {
@@ -32,9 +31,7 @@ in
             dotfiles.macos.builder = lib.mkOption {
               type = lib.types.enum [
                 "none"
-                "epi"
                 "linux-builder"
-                "container"
                 "nbac"
               ];
               description = "which aarch64-linux builder to enable";
@@ -89,23 +86,6 @@ in
                 extra-platforms = "x86_64-darwin";
               };
               distributedBuilds = true;
-              buildMachines = lib.optionals (config.dotfiles.macos.builder == "epi") [
-                {
-                  protocol = "ssh";
-                  hostName = "nixpkgs-dev";
-                  maxJobs = 8;
-                  sshUser = "adam";
-                  supportedFeatures = [
-                    "benchmark"
-                    "big-parallel"
-                    "kvm"
-                    "nixos-test"
-                  ];
-                  systems = [
-                    "aarch64-linux"
-                  ];
-                }
-              ];
 
               linux-builder = lib.mkIf (config.dotfiles.macos.builder == "linux-builder") {
                 enable = true;
@@ -136,22 +116,6 @@ in
 
             };
 
-            launchd.daemons."epi-builder-ssh-config" = lib.mkIf (config.dotfiles.macos.builder == "epi") {
-              serviceConfig = {
-                RunAtLoad = true;
-                WatchPaths = [ "/Users/adam/.local/state/epi/nixpkgs-dev/ssh_config" ];
-                StandardErrorPath = "/var/log/epi-builder-ssh-config.log";
-                StandardOutPath = "/var/log/epi-builder-ssh-config.log";
-              };
-              script = ''
-                epi_cfg=/Users/adam/.local/state/epi/nixpkgs-dev/ssh_config
-                if [ -f "$epi_cfg" ]; then
-                  ${pkgs.coreutils}/bin/install -m 0644 -o root -g wheel \
-                    "$epi_cfg" /etc/ssh/ssh_config.d/100-epi.conf
-                fi
-              '';
-            };
-
             services.nbac = lib.mkIf (config.dotfiles.macos.builder == "nbac") {
               enable = true;
               machine = {
@@ -165,15 +129,6 @@ in
                 "nixos-test"
               ];
               virtualization.enable = true;
-            };
-
-            services.container-builder = lib.mkIf (config.dotfiles.macos.builder == "container") {
-              enable = true;
-              imageContainerfile = ./Containerfile;
-              cpus = 16;
-              memory = "24G";
-              maxJobs = 8;
-              socktainer.enable = true;
             };
 
             system.activationScripts.extraActivation.text = ''
