@@ -21,10 +21,10 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1785154451,
-        "narHash": "sha256-OJQcgL1tA+z6+NiGKfqnh2ajVS47AZ4yScR/J9YRfV8=",
+        "lastModified": 1785154920,
+        "narHash": "sha256-9Vnx5nhkPrxjjNyzpqNOOueev8J2Jt78hrcZDMw95M4=",
         "ref": "refs/heads/main",
-        "rev": "418093df12e419feac1112783ba064f3f4e89f49",
+        "rev": "25751e03fe27070fb9a37f8228dc7dedb881cc82",
         "revCount": 239,
         "type": "git",
         "url": "https://tangled.org/adam.robins.wtf/epi"
@@ -334,11 +334,11 @@
     },
     "nixpkgs-unstable-small": {
       "locked": {
-        "lastModified": 1785117384,
-        "narHash": "sha256-/e3PvtL9D0AW1KpVY3cQ6gZVyJy9WS+dL2cgl1qwRR4=",
+        "lastModified": 1785152149,
+        "narHash": "sha256-vbH+CBdQn1k5xyEJE0m5In4lEXgZk9sjQHZdxjMgxN8=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "b8364a0bab3199c0c151e939dd08a74ac241d99a",
+        "rev": "aac3a899cc6ce8d928dfc5818dafc093b7936010",
         "type": "github"
       },
       "original": {
