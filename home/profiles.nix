@@ -42,10 +42,6 @@ in
             nix.registry.nixpkgs.flake = lib.mkDefault profile.nixpkgs;
 
             nixpkgs = {
-              overlays = [
-                self.overlays.dotfiles
-              ];
-
               config.allowUnfreePredicate =
                 pkg:
                 builtins.elem (lib.getName pkg) [

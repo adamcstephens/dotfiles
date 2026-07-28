@@ -255,10 +255,6 @@ in
 
             networking.computerName = "willow";
 
-            nixpkgs.overlays = [
-              self.overlays.dotfiles
-            ];
-
             security.pam.services.sudo_local = {
               reattach = true;
               touchIdAuth = true;

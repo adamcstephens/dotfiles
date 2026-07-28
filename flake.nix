@@ -30,9 +30,7 @@
         ./devshells/part.nix
         ./hjem/part.nix
         ./ocamlPackages/part.nix
-        ./parts/epi.nix
-        ./parts/overlays.nix
-        ./parts/packages.nix
+        ./apps/epi/part.nix
         ./templates/part.nix
 
         inputs.sower.flakeModules.sower
@@ -45,5 +43,36 @@
       ];
 
       flake.lib = inputs.nixpkgs.lib;
+
+      perSystem =
+        {
+          lib,
+          pkgs,
+          self',
+          ...
+        }:
+        {
+          packages =
+            let
+              ocamlPackages = pkgs.ocaml-ng.ocamlPackages_5_5;
+            in
+            lib.filesystem.packagesFromDirectoryRecursive {
+              inherit (pkgs) callPackage;
+              directory = ./packages;
+            }
+            // lib.optionalAttrs pkgs.stdenv.isDarwin (
+              lib.filesystem.packagesFromDirectoryRecursive {
+                inherit (pkgs) callPackage;
+                directory = ./packages-darwin;
+              }
+            )
+            // {
+              default = self'.packages.dotfiles;
+
+              dotfiles = pkgs.callPackage ./packages/dotfiles.nix {
+                inherit ocamlPackages;
+              };
+            };
+        };
     };
 }
