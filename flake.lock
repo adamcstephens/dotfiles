@@ -2,11 +2,11 @@
   "nodes": {
     "crane": {
       "locked": {
-        "lastModified": 1784248371,
-        "narHash": "sha256-0l0Y4D4wbZhp1Oi6h8OpbLtIm/4FN88oCf54MK2ZgiM=",
+        "lastModified": 1784564969,
+        "narHash": "sha256-TkTWNhJV/8Wk3czlbz4bwHZkFCaCHPsOy+oJe4PUiXg=",
         "owner": "ipetkov",
         "repo": "crane",
-        "rev": "f7d151ec0bf52cf9662e2f59d7bea28588c2f070",
+        "rev": "7930f6c291de6f83c257839d434592aa085f290a",
         "type": "github"
       },
       "original": {
@@ -131,11 +131,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1785122427,
-        "narHash": "sha256-5i/mZHLm+BmF/wOrdxWBkUzIiNrApVbFKj0H5UmYUGA=",
+        "lastModified": 1785187441,
+        "narHash": "sha256-dfENWyihS21h73yt8GJ7x7onNLP2s12Dldg4Y1/SooE=",
         "owner": "adamcstephens",
         "repo": "hjem",
-        "rev": "316bc13e218708c2c48627e68ea34feee11bfe68",
+        "rev": "94df2c224176b0044ba6e61ab9f71af4ea2a604b",
         "type": "github"
       },
       "original": {
@@ -350,11 +350,11 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1784120854,
-        "narHash": "sha256-KesHgItiZPgGX740axSiQLcIQ8D24MDqNpkKYWIek8k=",
+        "lastModified": 1785090369,
+        "narHash": "sha256-m0pDuRJG7EDo9ri+4Ksu83VsI+PlxNC9lNBfydejce4=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "753cc8a3a87467296ddd1fa93f0cc3e81120ee46",
+        "rev": "624af665418d3c65d544145b4d34ad696439570e",
         "type": "github"
       },
       "original": {
@@ -418,11 +418,11 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1784321670,
-        "narHash": "sha256-FowqUe4WjJtrxAK8Z8KFy6DvXSMbo4wVAnhdLEn4HtE=",
+        "lastModified": 1785158117,
+        "narHash": "sha256-MJMSkq9g/vdbj4fI/5ax3sqUU05m5lUvioRvuJC+zKM=",
         "ref": "refs/heads/main",
-        "rev": "2ea7f885bcfc4f92d7e5fbf60964a77a775164d6",
-        "revCount": 1202,
+        "rev": "41c1181530eb21baf1178bad0ab9f769b5af7b71",
+        "revCount": 1214,
         "type": "git",
         "url": "https://tangled.org/adam.robins.wtf/sower"
       },
