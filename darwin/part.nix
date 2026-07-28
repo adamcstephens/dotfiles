@@ -11,7 +11,7 @@ in
 
   profile-parts.default.darwin = {
     inherit (inputs) nix-darwin;
-    nixpkgs = inputs.nixpkgs-unstable;
+    nixpkgs = inputs.nixpkgs;
     exposePackages = true;
   };
 
@@ -190,7 +190,7 @@ in
 
             programs.fish = {
               enable = true;
-              package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.fish;
+              package = inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system}.fish;
             };
           };
         }
@@ -200,7 +200,7 @@ in
 
   profile-parts.darwin = {
     willow = {
-      nixpkgs = inputs.nixpkgs-unstable;
+      nixpkgs = inputs.nixpkgs;
       modules = [
         ./modules/pf.nix
         inputs.hjem.darwinModules.default

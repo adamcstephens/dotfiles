@@ -10,7 +10,7 @@
       ...
     }:
     let
-      pkgs-unstable = inputs'.nixpkgs-unstable.legacyPackages;
+      pkgs-unstable = inputs'.nixpkgs.legacyPackages;
     in
     {
       packages =

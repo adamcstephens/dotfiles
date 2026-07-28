@@ -67,7 +67,7 @@ in
 
   profile-parts.home-manager = {
     deck = {
-      nixpkgs = inputs.nixpkgs-unstable;
+      nixpkgs = inputs.nixpkgs;
       home-manager = inputs.home-manager-unstable;
 
       modules = [
@@ -116,7 +116,7 @@ in
     };
 
     punk = {
-      nixpkgs = inputs.nixpkgs-unstable;
+      nixpkgs = inputs.nixpkgs;
       home-manager = inputs.home-manager-unstable;
 
       modules = [

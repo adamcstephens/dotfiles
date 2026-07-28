@@ -33,7 +33,7 @@
     pkgs.nix-output-monitor
     pkgs.nix-tree
     pkgs.nixd
-    inputs.nixpkgs-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.nixfmt-rs
+    inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system}.nixfmt-rs
     pkgs.nvd
 
     # tools

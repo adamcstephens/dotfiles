@@ -25,7 +25,7 @@ let
 
   claude-wrapped = pkgs.symlinkJoin {
     name = "claude-wrapped";
-    paths = [ (unfreePkg "claude-code" inputs.nixpkgs-unstable-small) ];
+    paths = [ (unfreePkg "claude-code" inputs.nixos-unstable-small) ];
     buildInputs = [ pkgs.makeWrapper ];
     postBuild = ''
       wrapProgram $out/bin/claude \
@@ -34,7 +34,7 @@ let
   };
 
   agent-browser =
-    inputs.nixpkgs-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.agent-browser;
+    inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system}.agent-browser;
 
   agent-browser-wrapped =
     if pkgs.stdenv.isLinux then
@@ -58,7 +58,7 @@ let
   pi-coding-agent-wrapped = pkgs.symlinkJoin {
     name = "pi-coding-agent-wrapped";
     paths = [
-      inputs.nixpkgs-unstable-small.legacyPackages.${pkgs.stdenv.hostPlatform.system}.pi-coding-agent
+      inputs.nixos-unstable-small.legacyPackages.${pkgs.stdenv.hostPlatform.system}.pi-coding-agent
     ];
     buildInputs = [ pkgs.makeWrapper ];
     postBuild = ''
@@ -80,8 +80,8 @@ in
 
       agent-browser-wrapped
       claude-wrapped
-      inputs.nixpkgs-unstable-small.legacyPackages.${pkgs.stdenv.hostPlatform.system}.opencode
-      (unfreePkg "github-copilot-cli" inputs.nixpkgs-unstable-small)
+      inputs.nixos-unstable-small.legacyPackages.${pkgs.stdenv.hostPlatform.system}.opencode
+      (unfreePkg "github-copilot-cli" inputs.nixos-unstable-small)
       pi-coding-agent-wrapped
     ];
 

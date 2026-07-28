@@ -63,17 +63,17 @@ let
 in
 {
   flake.nixosConfigurations = {
-    agents-aarch64 = inputs.nixpkgs-unstable.lib.nixosSystem {
+    agents-aarch64 = inputs.nixpkgs.lib.nixosSystem {
       system = "aarch64-linux";
       modules = [ common ];
     };
 
-    agents = inputs.nixpkgs-unstable.lib.nixosSystem {
+    agents = inputs.nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [ common ];
     };
 
-    dotfiles = inputs.nixpkgs-unstable.lib.nixosSystem {
+    dotfiles = inputs.nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [ common ];
     };

@@ -7,7 +7,7 @@
   ...
 }:
 let
-  package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.fish;
+  package = inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system}.fish;
 
   hjemSessionVariables = pkgs.runCommand "hjem-session-vars.fish" { } ''
     mkdir -vp $out/share/fish/vendor_conf.d

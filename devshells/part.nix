@@ -3,7 +3,7 @@
   flake.devShells.x86_64-linux = withSystem "x86_64-linux" (
     { inputs', ... }:
     let
-      pkgs = inputs'.nixpkgs-unstable.legacyPackages;
+      pkgs = inputs'.nixpkgs.legacyPackages;
     in
     {
       distrobuilder = pkgs.callPackage ./distrobuilder.nix { };
@@ -28,7 +28,7 @@
           {
             inherit npins;
 
-            pkgs-unstable = import inputs.nixpkgs-unstable {
+            pkgs-unstable = import inputs.nixpkgs {
               inherit system;
               overlays = [ ];
             };
@@ -36,7 +36,7 @@
         else
           {
             inherit npins;
-            pkgs-unstable = inputs'.nixpkgs-unstable.legacyPackages;
+            pkgs-unstable = inputs'.nixpkgs.legacyPackages;
           };
 
       devShells = {
