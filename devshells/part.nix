@@ -27,6 +27,7 @@
 
         c = pkgs.callPackage ./c.nix { };
         elixir = pkgs.callPackage ./elixir.nix { };
+        esphome = pkgs.callPackage ./esphome.nix { };
         go = pkgs.callPackage ./go.nix { };
         js = pkgs.callPackage ./js.nix { };
         media = pkgs.callPackage ./media.nix { };
