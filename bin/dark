@@ -102,11 +102,6 @@ def linux_get_state():
     return read_state()
 
 
-def linux_set_gtk_theme(state):
-    theme = "Flat-Remix-GTK-Orange-Darkest-Solid" if state == DARK else "Flat-Remix-GTK-Orange-Light-Solid"
-    run_command(f"gsettings-wrapper set org.gnome.desktop.interface gtk-theme {theme}")
-
-
 def linux_set_gnome_scheme(state):
     scheme = "prefer-dark" if state == DARK else "prefer-light"
     run_command(f"gsettings-wrapper set org.gnome.desktop.interface color-scheme {scheme}")
@@ -114,7 +109,6 @@ def linux_set_gnome_scheme(state):
 
 
 def linux_set_theme(state):
-    linux_set_gtk_theme(state)
     linux_set_gnome_scheme(state)
     write_state(state)
 

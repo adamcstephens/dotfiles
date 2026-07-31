@@ -84,16 +84,6 @@ in
       package = pkgs.ibm-plex;
       size = 11;
     };
-
-    iconTheme = {
-      name = "Flat-Remix-Orange-Dark";
-      package = pkgs.flat-remix-icon-theme;
-    };
-
-    theme = {
-      name = "Flat-Remix-GTK-Yellow-Darkest-Solid";
-      package = pkgs.flat-remix-gtk;
-    };
   };
 
   home.pointerCursor = {
