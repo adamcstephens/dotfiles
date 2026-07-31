@@ -26,7 +26,7 @@ let
         clobberByDefault = true;
 
         extraModules = [
-          ../hjem/core.nix
+          ./core.nix
         ];
 
         users.adam = user // {
@@ -44,7 +44,7 @@ in
     dev = nixosCommon ++ [
       {
         hjem = {
-          extraModules = [ ../hjem/dev.nix ];
+          extraModules = [ ./dev.nix ];
         };
       }
     ];
@@ -58,9 +58,9 @@ in
 
       modules = [
         user
-        ../hjem/core.nix
-        ../hjem/dev.nix
-        ../hjem/linux-gui.nix
+        ./core.nix
+        ./dev.nix
+        ./linux-gui.nix
         (
           { pkgs, ... }:
           {

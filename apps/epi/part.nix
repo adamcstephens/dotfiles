@@ -23,12 +23,12 @@ let
           inherit inputs;
 
           flake = self;
-          npins = import ../npins;
+          npins = import ../../npins;
         };
 
         extraModules = [
-          ../hjem/core.nix
-          ../hjem/dev.nix
+          ../../hjem/core.nix
+          ../../hjem/dev.nix
         ];
 
         users.adam = {
