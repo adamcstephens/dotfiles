@@ -55,59 +55,59 @@
     ''
   );
 
-  systemd.user = lib.mkIf (!config.dotfiles.nixosManaged) {
-    services.dotfiles-repo-pull = {
-      Unit = {
-        PartOf = [ "default.target" ];
-      };
-
-      Service = {
-        Type = "oneshot";
-        ExecStart =
-          pkgs.writeShellApplication {
-            name = "dotfiles-repo-pull";
-
-            runtimeInputs = [
-              pkgs.git
-              pkgs.jujutsu
-            ];
-
-            text = ''
-              export PATH=${../bin}:$PATH
-
-              if [ -h .dotfiles ]; then
-                echo "Refusing to overwrite dotfiles link"
-                exit 1
-              fi
-
-              if [ ! -e .dotfiles ]; then
-                git clone https://codeberg.org/adamcstephens/dotfiles.git .dotfiles
-              fi
-
-              cd .dotfiles
-
-              if [ -d .jj ]; then
-                jj home -r
-              else
-                git pull
-              fi
-            '';
-          }
-          |> lib.getExe;
-
-        WorkingDirectory = config.home.homeDirectory;
-      };
-
-      Install = {
-        WantedBy = [ "default.target" ];
-      };
-    };
-
-    timers.dotfiles-repo-pull = {
-      Timer.OnCalendar = "hourly";
-      Install.WantedBy = [ "timers.target" ];
-    };
-  };
+  # systemd.user = lib.mkIf (!config.dotfiles.nixosManaged) {
+  #   services.dotfiles-repo-pull = {
+  #     Unit = {
+  #       PartOf = [ "default.target" ];
+  #     };
+  #
+  #     Service = {
+  #       Type = "oneshot";
+  #       ExecStart =
+  #         pkgs.writeShellApplication {
+  #           name = "dotfiles-repo-pull";
+  #
+  #           runtimeInputs = [
+  #             pkgs.git
+  #             pkgs.jujutsu
+  #           ];
+  #
+  #           text = ''
+  #             export PATH=${../bin}:$PATH
+  #
+  #             if [ -h .dotfiles ]; then
+  #               echo "Refusing to overwrite dotfiles link"
+  #               exit 1
+  #             fi
+  #
+  #             if [ ! -e .dotfiles ]; then
+  #               git clone https://codeberg.org/adamcstephens/dotfiles.git .dotfiles
+  #             fi
+  #
+  #             cd .dotfiles
+  #
+  #             if [ -d .jj ]; then
+  #               jj home -r
+  #             else
+  #               git pull
+  #             fi
+  #           '';
+  #         }
+  #         |> lib.getExe;
+  #
+  #       WorkingDirectory = config.home.homeDirectory;
+  #     };
+  #
+  #     Install = {
+  #       WantedBy = [ "default.target" ];
+  #     };
+  #   };
+  #
+  #   timers.dotfiles-repo-pull = {
+  #     Timer.OnCalendar = "hourly";
+  #     Install.WantedBy = [ "timers.target" ];
+  #   };
+  # };
 
   home.file.".terminfo".source =
     config.lib.file.mkOutOfStoreSymlink "${config.home.profileDirectory}/share/terminfo";
