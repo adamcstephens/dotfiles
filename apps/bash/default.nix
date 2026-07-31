@@ -1,4 +1,4 @@
 { ... }:
 {
-  files.".bashrc".source = ./bashrc;
+  # files.".bashrc".source = ./bashrc;
 }

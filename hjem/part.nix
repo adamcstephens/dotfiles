@@ -51,10 +51,9 @@ in
   };
 
   flake.hjemConfigurations.deck = withSystem "x86_64-linux" (
-    { pkgs-unstable, ... }:
-    inputs.hjem.lib.hjemConfiguration {
-      pkgs = pkgs-unstable;
-      inherit specialArgs;
+    { pkgs, ... }:
+    inputs.hjem.standalone.hjemConfiguration {
+      inherit pkgs specialArgs;
 
       modules = [
         user
@@ -69,7 +68,7 @@ in
                 # hypridle.enable = false;
                 # sower.enable = true;
                 # swayidle.enable = true;
-                zk.enable = true;
+                # zk.enable = true;
               };
               # gui = {
               #   dpi = 148;
@@ -79,9 +78,9 @@ in
               # };
             };
 
-            packages = [
-              pkgs.sone
-            ];
+            # packages = [
+            #   pkgs.sone
+            # ];
 
             # dotfiles.apps.waybar.battery = "upower";
             # programs.waybar.settings.main.network.format-disconnected = "";

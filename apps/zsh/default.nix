@@ -6,5 +6,5 @@
     pkgs.zsh-syntax-highlighting
   ];
 
-  files.".zshrc".source = ./zshrc;
+  # files.".zshrc".source = ./zshrc;
 }

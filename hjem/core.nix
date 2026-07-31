@@ -10,8 +10,8 @@
     ./options.nix
 
     ../apps/bash
-    ../apps/bat
-    ../apps/btop
+    # ../apps/bat
+    # ../apps/btop
     ../apps/delta
     ../apps/direnv
     ../apps/editorconfig
@@ -24,7 +24,7 @@
     ../apps/neovim
     # TODO HM module ../apps/nix
     ../apps/ripgrep
-    ../apps/shellcheck
+    # ../apps/shellcheck
     # TODO of course ../apps/sower
     ../apps/ssh
     ../apps/starship
@@ -60,7 +60,7 @@
         pkgs.zoxide
       ]
       ++ lib.optionals pkgs.stdenv.isLinux [
-        pkgs.ghostty.terminfo
+        # pkgs.ghostty.terminfo
       ]
       ++ lib.optionals pkgs.stdenv.isDarwin [
         pkgs.ghostty-bin.terminfo

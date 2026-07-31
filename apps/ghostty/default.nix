@@ -70,25 +70,19 @@
         npins."modus-themes.nvim" + "/extras/ghostty/modus_operandi";
     }
     (lib.optionalAttrs (lib.hasAttr "systemd" options) {
-      systemd.user.services.ghostty = lib.mkIf pkgs.stdenv.isLinux {
-        Unit = {
-          Description = "Ghostty";
-          After = [
-            "graphical-session.target"
-            "dbus.socket"
-          ];
-          Requires = [ "dbus.socket" ];
-        };
+      systemd.services.ghostty = lib.mkIf pkgs.stdenv.isLinux {
+        wantedBy = [ "graphical-session.target" ];
+        after = [
+          "graphical-session.target"
+          "dbus.socket"
+        ];
+        requires = [ "dbus.socket" ];
 
-        Service = {
+        serviceConfig = {
           Type = "notify-reload";
           ReloadSignal = "SIGUSR2";
           BusName = "com.mitchellh.ghostty";
           ExecStart = "${pkgs.ghostty}/bin/ghostty --gtk-single-instance=true --initial-window=false";
-        };
-
-        Install = {
-          WantedBy = [ "graphical-session.target" ];
         };
       };
     })

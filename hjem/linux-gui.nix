@@ -31,23 +31,24 @@ let
 in
 {
   imports = [
+    ./gui.nix
     ../apps/wayland
 
     # desktop env
     # ../apps/ironbar
-    ../apps/niri
-    ../apps/river
-    ../apps/swayidle
-    ../apps/swayosd
-    ../apps/vdirsyncer
-    ../apps/walker
+    # ../apps/niri
+    # ../apps/river
+    # ../apps/swayidle
+    # ../apps/swayosd
+    # ../apps/vdirsyncer
+    # ../apps/walker
 
     # apps
-    ../apps/halloy
-    ../apps/kitty
-    ../apps/newsboat
+    # ../apps/halloy
+    # ../apps/kitty
+    # ../apps/newsboat
     ../apps/ssh
-    ../apps/todoman
+    # ../apps/todoman
 
     # HM module users
     # ../apps/dunst
@@ -68,7 +69,7 @@ in
   dotfiles = {
     apps = {
       # hypridle.enable = lib.mkDefault config.dotfiles.gui.wayland.enable;
-      walker.enable = lib.mkDefault config.dotfiles.gui.wayland.enable;
+      # walker.enable = lib.mkDefault config.dotfiles.gui.wayland.enable;
       # waybar.enable = lib.mkDefault config.dotfiles.gui.wayland.enable;
     };
     gui.wayland.enable = true;

@@ -30,10 +30,6 @@
         riverctl border-color-focused 0x${config.colorScheme.palette.base05}
         riverctl border-color-unfocused 0x${config.colorScheme.palette.base03}
       '';
-
-      onChange = ''
-        ~/.config/river/colors.sh
-      '';
     };
 
     xdg.config.files."river/start" = {
