@@ -67,50 +67,50 @@
       ];
     }
     (lib.optionalAttrs (lib.hasAttr "systemd" options) {
-      systemd.services = lib.mkIf (!config.dotfiles.nixosManaged) {
-        dotfiles-repo-pull = {
-          wantedBy = [ "default.target" ];
-          partOf = [ "default.target" ];
-          startAt = "hourly";
-
-          serviceConfig = {
-            Type = "oneshot";
-            ExecStart =
-              pkgs.writeShellApplication {
-                name = "dotfiles-repo-pull";
-
-                runtimeInputs = [
-                  pkgs.git
-                  pkgs.jujutsu
-                ];
-
-                text = ''
-                  export PATH=${../bin}:$PATH
-
-                  if [ -h .dotfiles ]; then
-                    echo "Refusing to overwrite dotfiles link"
-                    exit 1
-                  fi
-
-                  if [ ! -e .dotfiles ]; then
-                    git clone https://codeberg.org/adamcstephens/dotfiles.git .dotfiles
-                  fi
-
-                  cd .dotfiles
-
-                  if [ -d .jj ]; then
-                    jj home -r
-                  else
-                    git pull
-                  fi
-                '';
-              }
-              |> lib.getExe;
-
-            WorkingDirectory = config.directory;
-          };
-        };
-      };
+      # systemd.services = lib.mkIf (!config.dotfiles.nixosManaged) {
+      #   dotfiles-repo-pull = {
+      #     wantedBy = [ "default.target" ];
+      #     partOf = [ "default.target" ];
+      #     startAt = "hourly";
+      #
+      #     serviceConfig = {
+      #       Type = "oneshot";
+      #       ExecStart =
+      #         pkgs.writeShellApplication {
+      #           name = "dotfiles-repo-pull";
+      #
+      #           runtimeInputs = [
+      #             pkgs.git
+      #             pkgs.jujutsu
+      #           ];
+      #
+      #           text = ''
+      #             export PATH=${../bin}:$PATH
+      #
+      #             if [ -h .dotfiles ]; then
+      #               echo "Refusing to overwrite dotfiles link"
+      #               exit 1
+      #             fi
+      #
+      #             if [ ! -e .dotfiles ]; then
+      #               git clone https://codeberg.org/adamcstephens/dotfiles.git .dotfiles
+      #             fi
+      #
+      #             cd .dotfiles
+      #
+      #             if [ -d .jj ]; then
+      #               jj home -r
+      #             else
+      #               git pull
+      #             fi
+      #           '';
+      #         }
+      #         |> lib.getExe;
+      #
+      #       WorkingDirectory = config.directory;
+      #     };
+      #   };
+      # };
     })
   ];
 }
