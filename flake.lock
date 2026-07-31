@@ -171,11 +171,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1784926390,
-        "narHash": "sha256-mWaGzk09I2+cJycWcXyA3ECF6X5BZRWXIozVqugn2Hg=",
+        "lastModified": 1785510773,
+        "narHash": "sha256-PO15ls5xnf66lB0BdZ5CSwkjlJIVy0hnRVJkUpv2+AI=",
         "ref": "refs/heads/main",
-        "rev": "25b9ce2a432927c998021c435ba5f784c65305ae",
-        "revCount": 19,
+        "rev": "12e0c3687b57bbd580b404dc1788e4c86e9de59d",
+        "revCount": 25,
         "type": "git",
         "url": "https://tangled.org/adam.robins.wtf/nbac"
       },
@@ -227,11 +227,11 @@
     },
     "nixos-unstable-small": {
       "locked": {
-        "lastModified": 1785382966,
-        "narHash": "sha256-TzNPxZZV/qnV8U5fEtrvcMF/GppHnlWm16RDHddPOyE=",
+        "lastModified": 1785501464,
+        "narHash": "sha256-TOU5zN4qZzi8Fd4FOPaO5liKYo+RHlleHDasnyI3S78=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "ba889d5db7c07eaf5cb8f37835d447d935c51b21",
+        "rev": "7e2391fc6abe0c200affe8e8a4efd2cc891fcffb",
         "type": "github"
       },
       "original": {
@@ -334,11 +334,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1785318670,
-        "narHash": "sha256-dN6Ou5x/+23FZLEpYP3IffO+NyJFzUlGumt1uu3MMaY=",
+        "lastModified": 1785454630,
+        "narHash": "sha256-LQy14TZp77TwbQf40gg1V3jo8FwJG0jGDkAH+zRHqg8=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "0954f7ee2f6bb3dc7d4e3d0d8bcb8fd4bde4cfc5",
+        "rev": "1559d3daa3ecc813a650b79375ea61b6741b8746",
         "type": "github"
       },
       "original": {
