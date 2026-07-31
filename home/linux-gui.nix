@@ -77,8 +77,6 @@ in
   gtk = {
     enable = true;
 
-    gtk4.theme = config.gtk.theme;
-
     font = {
       name = config.dotfiles.gui.font.variable;
       package = pkgs.ibm-plex;

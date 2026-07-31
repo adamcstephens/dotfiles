@@ -18,10 +18,6 @@ in
 
     configFile = "${config.xdg.configHome}/dunst/final.dunstrc";
 
-    iconTheme = {
-      inherit (config.gtk.iconTheme) name package;
-    };
-
     settings = {
       global = {
         monitor = 0;

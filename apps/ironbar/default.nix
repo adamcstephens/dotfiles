@@ -61,7 +61,6 @@ in
         }
       ];
       height = 30;
-      icon_theme = config.gtk.iconTheme.name;
       position = "top";
     };
 
