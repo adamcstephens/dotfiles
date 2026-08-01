@@ -31,7 +31,6 @@
         ./devshells/part.nix
         ./home/profiles.nix
         ./ocamlPackages/part.nix
-        ./parts/epi.nix
         ./parts/overlays.nix
         ./parts/packages.nix
         ./templates/part.nix
