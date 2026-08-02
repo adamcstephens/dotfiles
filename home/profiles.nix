@@ -105,6 +105,16 @@ in
       ];
     };
 
+    gui1 = {
+      nixpkgs = inputs.nixpkgs-unstable;
+      home-manager = inputs.home-manager-unstable;
+
+      modules = [
+        ./core-dev.nix
+        ./linux-gui.nix
+      ];
+    };
+
     punk = {
       nixpkgs = inputs.nixpkgs-unstable;
       home-manager = inputs.home-manager-unstable;
