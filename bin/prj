@@ -51,6 +51,17 @@ def tmux_to_kitty(tab: str) -> dict:
     return {"id": int(tab_split[0]), "title": tab_split[1]}
 
 
+def direnv_allowed(project: str) -> bool:
+    result = subprocess.run("direnv status --json", shell=True, cwd=project, capture_output=True, encoding="UTF-8")
+
+    if result.returncode != 0:
+        return False
+
+    found_rc = json.loads(result.stdout)["state"]["foundRC"]
+
+    return found_rc is not None and found_rc["allowed"] == 0
+
+
 def tmux_columns(window_target: str) -> list[list[str]]:
     pane_lines = run(f"tmux list-panes -t {shlex.quote(window_target)} -F '#{{pane_id}} #{{pane_left}}'").splitlines()
     columns: dict[int, list[str]] = {}
@@ -181,11 +192,31 @@ def open_project(project: str, remote: bool = False):
                 run(f"tmux select-pane -t {middle_pane}")
                 run("tmux select-pane -l")
             else:
-                run(f"tmux new-window -c {shlex.quote(project)} -n {wname}")
-                run(f"tmux select-window -t {wname}")
-                run(f"tmux split-window -h -c {shlex.quote(project)}")
-                run("tmux send-keys 'vim .' 'C-m'")
-                run(f"tmux split-window -h -c {shlex.quote(project)}")
+                if direnv_allowed(project):
+                    # one wait-for channel per gated pane; tmux does not count repeat signals
+                    gates = [f"prj-{wname}-{index}" for index in range(2)]
+                    signals = "; ".join(f"tmux wait-for -S {gate}" for gate in gates)
+
+                    run(
+                        f"tmux new-window -c {shlex.quote(project)} -n {wname} "
+                        f"{shlex.quote(f'direnv exec . true; {signals}; exec $SHELL')}"
+                    )
+                    run(f"tmux select-window -t {wname}")
+                    run(
+                        f"tmux split-window -h -c {shlex.quote(project)} "
+                        f"{shlex.quote(f'tmux wait-for {gates[0]}; direnv exec . vim .; exec $SHELL')}"
+                    )
+                    run(
+                        f"tmux split-window -h -c {shlex.quote(project)} "
+                        f"{shlex.quote(f'tmux wait-for {gates[1]}; exec $SHELL')}"
+                    )
+                else:
+                    run(f"tmux new-window -c {shlex.quote(project)} -n {wname}")
+                    run(f"tmux select-window -t {wname}")
+                    run(f"tmux split-window -h -c {shlex.quote(project)}")
+                    run("tmux send-keys 'vim .' 'C-m'")
+                    run(f"tmux split-window -h -c {shlex.quote(project)}")
+
                 tmux_layout_window(wname)
                 run("tmux select-pane -l")
 
