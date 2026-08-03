@@ -34,7 +34,7 @@
         services.atuin = {
           serviceConfig = {
             Type = "simple";
-            ExecStart = "${lib.getExe pkgs.atuin} daemon";
+            ExecStart = "${lib.getExe pkgs.atuin} daemon start";
             Restart = "on-abort";
           };
         };
