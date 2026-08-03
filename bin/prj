@@ -31,7 +31,7 @@ def gen_remotes():
 
 
 def run(command: str, input: str | None = None):
-    result = subprocess.run(command, shell=True, capture_output=True, input=input, encoding="UTF-8")
+    result = subprocess.run(command, shell=True, capture_output=True, input=input, encoding="UTF-8", check=False)
 
     if result.returncode != 0:
         print(result.stderr)
@@ -52,7 +52,9 @@ def tmux_to_kitty(tab: str) -> dict:
 
 
 def direnv_allowed(project: str) -> bool:
-    result = subprocess.run("direnv status --json", shell=True, cwd=project, capture_output=True, encoding="UTF-8")
+    result = subprocess.run(
+        "direnv status --json", shell=True, cwd=project, capture_output=True, encoding="UTF-8", check=False
+    )
 
     if result.returncode != 0:
         return False
@@ -141,7 +143,7 @@ def prj_finder(remote: bool = False) -> str:
 
 
 def kitty_active_window() -> dict:
-    return [i for i in json.loads(run("kitty @ ls")) if i["is_active"]][0]
+    return next(i for i in json.loads(run("kitty @ ls")) if i["is_active"])
 
 
 def open_project(project: str, remote: bool = False):

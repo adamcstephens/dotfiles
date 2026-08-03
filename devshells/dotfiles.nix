@@ -18,6 +18,7 @@ mkShell {
     pkgs.npins
     pkgs.nix-update
 
+    pkgs.ruff
     pkgs.ty
 
     ocamlPackages.dune_3
