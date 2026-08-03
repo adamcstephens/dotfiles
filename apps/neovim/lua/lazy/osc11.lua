@@ -23,7 +23,11 @@ return {
     end
 
     local function apply_state_from_file()
-      local state_file = vim.fn.expand("~/.local/state/dark-mode.state")
+      local state_home = vim.env.XDG_STATE_HOME
+      if state_home == nil or state_home == "" then
+        state_home = vim.fn.expand("~/.local/state")
+      end
+      local state_file = state_home .. "/dark-mode.state"
       if vim.fn.filereadable(state_file) == 1 then
         local line = vim.fn.readfile(state_file, "", 1)[1] or ""
         if line == "true" then
@@ -31,6 +35,8 @@ return {
         else
           set_light()
         end
+      else
+        set_dark()
       end
     end
 
