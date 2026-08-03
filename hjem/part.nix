@@ -8,6 +8,7 @@ let
   user = {
     directory = "/home/adam";
     user = "adam";
+    clobberFiles = true;
   };
 
   specialArgs = {
