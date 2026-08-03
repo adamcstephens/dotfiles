@@ -112,7 +112,18 @@ in
     # config.dotfiles.gui.font.fontconfig.fontDirectories
     # ++
     [
-      pkgs.app2unit
+      (pkgs.app2unit.overrideAttrs (old: {
+        version =
+          lib.throwIf (lib.versionAtLeast old.version "1.4.4") "app2unit override can be removed"
+            "1.4.4";
+        src = pkgs.fetchFromGitHub {
+          owner = "Vladimir-csp";
+          repo = "app2unit";
+          tag = "v1.4.4";
+          sha256 = "sha256-TIY+/9ekGub+10uyqXy5aYU+2NLysMtaQnD1PIjBCFA=";
+        };
+
+      }))
 
       pkgs.et-book
       pkgs.fira
