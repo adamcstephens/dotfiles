@@ -4,6 +4,11 @@ set --global __fish_dotfiles_config_sourced 1
 
 fish_add_path --prepend --move $HOME/.dotfiles/bin
 
+if test -d "$HOME/.local/state/hjem/standalone/current-profile"
+    fish_add_path --prepend --move "$HOME/.local/state/hjem/standalone/current-profile/sbin"
+    fish_add_path --prepend --move "$HOME/.local/state/hjem/standalone/current-profile/bin"
+end
+
 if ! grep nixos /etc/os-release >/dev/null 2>&1
     set --export TERMINFO_DIRS $HOME/.nix-profile/share/terminfo
 
