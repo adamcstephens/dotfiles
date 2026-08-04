@@ -107,7 +107,6 @@ in
   #   name = "Bibata-Original-Ice";
   #   size = 32;
   #   gtk.enable = true;
-  #   x11.enable = true;
   # };
 
   packages =
