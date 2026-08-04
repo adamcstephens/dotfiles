@@ -11,6 +11,7 @@ mkShellNoCC {
     with pkgs;
     [
       common-updater-scripts
+      nix-diff
       nix-init
       nix-update
       nixpkgs-reviewFull
