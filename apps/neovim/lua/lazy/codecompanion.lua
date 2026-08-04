@@ -162,12 +162,12 @@ return {
             -- },
             ---Automatically generate titles for new chats
             auto_generate_title = false,
-            title_generation_opts = {
-              adapter = "copilot",
-              model = "gpt-4o",
-              refresh_every_n_prompts = 3,
-              max_refreshes = 3,
-            },
+            -- title_generation_opts = {
+            --   adapter = "copilot",
+            --   model = "gpt-4o",
+            --   refresh_every_n_prompts = 3,
+            --   max_refreshes = 3,
+            -- },
             ---On exiting and entering neovim, loads the last chat on opening chat
             continue_last_chat = false,
             ---When chat is cleared with `gx` delete the chat from history
@@ -184,15 +184,15 @@ return {
               -- Keymap to browse summaries (default: "gbs")
               browse_summaries_keymap = "gbs",
 
-              generation_opts = {
-                adapter = "copilot",
-                model = "gpt-4o",
-                context_size = 90000, -- max tokens that the model supports
-                include_references = true, -- include slash command content
-                include_tool_outputs = true, -- include tool execution results
-                system_prompt = nil, -- custom system prompt (string or function)
-                format_summary = nil, -- custom function to format generated summary e.g to remove <think/> tags from summary
-              },
+              -- generation_opts = {
+              --   adapter = "copilot",
+              --   model = "gpt-4o",
+              --   context_size = 90000, -- max tokens that the model supports
+              --   include_references = true, -- include slash command content
+              --   include_tool_outputs = true, -- include tool execution results
+              --   system_prompt = nil, -- custom system prompt (string or function)
+              --   format_summary = nil, -- custom function to format generated summary e.g to remove <think/> tags from summary
+              -- },
             },
 
             -- Memory system (requires VectorCode CLI)
