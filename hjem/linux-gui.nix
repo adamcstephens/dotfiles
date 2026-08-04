@@ -32,6 +32,7 @@ in
 {
   imports = [
     ./gui.nix
+    ../apps/pinnacle
     ../apps/wayland
 
     # desktop env
