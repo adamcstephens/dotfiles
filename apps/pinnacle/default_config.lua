@@ -152,6 +152,15 @@ Pinnacle.setup(function()
     description = "Toggle maximized on the focused window",
   })
 
+  -- dotfiles keybinds ---------------------------
+
+  Input.keybind({ mod_key }, "d", function()
+    Process.spawn("noctalia", "msg", "panel-toggle", "launcher")
+  end, {
+    group = "Process",
+    description = "Toggle the launcher",
+  })
+
   -- Media keybinds ----------------------------------------------------
 
   Input.keybind({
