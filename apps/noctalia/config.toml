@@ -1,0 +1,5 @@
+[theme]
+mode = "dark"
+
+[bar.default]
+position = "top"

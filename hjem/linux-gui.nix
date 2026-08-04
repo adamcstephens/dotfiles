@@ -32,6 +32,7 @@ in
 {
   imports = [
     ./gui.nix
+    ../apps/noctalia
     ../apps/pinnacle
     ../apps/wayland
 
