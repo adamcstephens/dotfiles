@@ -11,6 +11,11 @@ local Util = require("pinnacle.util")
 local Snowcap = require("pinnacle.snowcap")
 
 Pinnacle.setup(function()
+  -- load hjem path in
+  local profile = assert(os.getenv("HOME")) .. "/.local/state/hjem/standalone/current-profile"
+  local path = assert(os.getenv("PATH"), "PATH is not set")
+  Process.set_env("PATH", profile .. "/bin:" .. path)
+
   local key = Input.key
 
   ---@type pinnacle.input.Mod
