@@ -33,8 +33,7 @@ let
     '';
   };
 
-  agent-browser =
-    inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system}.agent-browser;
+  agent-browser = inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system}.agent-browser;
 
   agent-browser-wrapped =
     if pkgs.stdenv.isLinux then
@@ -83,6 +82,7 @@ in
       inputs.nixos-unstable-small.legacyPackages.${pkgs.stdenv.hostPlatform.system}.opencode
       (unfreePkg "github-copilot-cli" inputs.nixos-unstable-small)
       pi-coding-agent-wrapped
+      pkgs.nono
     ];
 
     files = {
