@@ -25,20 +25,23 @@ let
     else
       "${config.directory}/.dotfiles/apps/fish/${source}";
 
-  commandNotFound = pkgs.writeScript "fish-command-not-found" ''
-    #!${pkgs.bash}/bin/bash
-    source ${
-      inputs.nix-index-database.packages.${pkgs.stdenv.hostPlatform.system}.nix-index-with-small-db
-    }/etc/profile.d/command-not-found.sh
-    command_not_found_handle "$@"
-  '';
+  commandNotFound = pkgs.writeShellApplication {
+    name = "command-not-found";
+    excludeShellChecks = [ "SC1091" ];
+    text = ''
+      source ${
+        inputs.nix-index-database.packages.${pkgs.stdenv.hostPlatform.system}.nix-index-with-small-db
+      }/etc/profile.d/command-not-found.sh
+      command_not_found_handle "$@"
+    '';
+  };
 
   # we'll steal this from HM
   fishCommandNotFound = pkgs.writeTextFile {
     name = "fish-command-not-found";
     text = ''
       function __fish_command_not_found_handler --on-event fish_command_not_found
-          ${commandNotFound} $argv
+          ${lib.getExe commandNotFound} $argv
       end
     '';
     destination = "/share/fish/vendor_functions.d/__fish_command_not_found_handler.fish";
