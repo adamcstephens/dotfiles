@@ -77,6 +77,25 @@ in
     gui.wayland.enable = true;
   };
 
+  systemd.services.fc-cache = {
+    wantedBy = [ "default.target" ];
+    partOf = [ "default.target" ];
+    serviceConfig.ExecStart = "${pkgs.fontconfig}/bin/fc-cache -v";
+    restartTriggers = [
+      config.xdg.config.files."fontconfig/conf.d/100-hjem.conf".source
+    ];
+  };
+
+  xdg.config.files."fontconfig/conf.d/100-hjem.conf".text =
+    # xml
+    ''
+      <?xml version="1.0"?>
+      <!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
+      <fontconfig>
+        <dir>${config.directory}/.local/state/hjem/standalone/current-profile/share/fonts</dir>
+      </fontconfig>
+    '';
+
   # reads fonts from home.packages
   # fonts.fontconfig.enable = true;
 
@@ -110,9 +129,8 @@ in
   # };
 
   packages =
-    # config.dotfiles.gui.font.fontconfig.fontDirectories
-    # ++
-    [
+    config.dotfiles.gui.font.fontconfig.fontDirectories
+    ++ [
       pkgs.app2unit
 
       pkgs.et-book
