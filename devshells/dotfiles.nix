@@ -11,12 +11,14 @@ mkShell {
   name = "dots";
 
   packages = [
+    inputs.hjem.packages.${pkgs.stdenv.hostPlatform.system}.hjem
     pkgs.gitMinimal
     pkgs.just
     pkgs.niks3
     pkgs.npins
     pkgs.nix-update
 
+    pkgs.ruff
     pkgs.ty
 
     ocamlPackages.dune_3

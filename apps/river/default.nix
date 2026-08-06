@@ -6,17 +6,17 @@
 }:
 {
   config = lib.mkIf config.dotfiles.gui.wayland.enable {
-    home.packages = [
+    packages = [
       # https://github.com/NixOS/nixpkgs/pull/476066
       (pkgs.river-bnf.overrideAttrs { env.NIX_CFLAGS_COMPILE = "-std=gnu17"; })
     ];
 
-    xdg.configFile."river/init" = {
+    xdg.config.files."river/init" = {
       executable = true;
       source = ./init.sh;
     };
 
-    xdg.configFile."river/colors.sh" = {
+    xdg.config.files."river/colors.sh" = {
       executable = true;
       text = ''
         #!/usr/bin/env sh
@@ -30,13 +30,9 @@
         riverctl border-color-focused 0x${config.colorScheme.palette.base05}
         riverctl border-color-unfocused 0x${config.colorScheme.palette.base03}
       '';
-
-      onChange = ''
-        ~/.config/river/colors.sh
-      '';
     };
 
-    xdg.configFile."river/start" = {
+    xdg.config.files."river/start" = {
       text =
         let
           drmDevices = lib.concatStringsSep ":" config.dotfiles.gui.drmDevices;
@@ -60,19 +56,15 @@
       executable = true;
     };
 
-    systemd.user.services.nm-applet = {
-      Unit = {
-        PartOf = [ "wayland-session.target" ];
-      };
+    systemd.services.nm-applet = {
+      partOf = [ "wayland-session.target" ];
+      wantedBy = [ "wayland-session.target" ];
 
-      Install.WantedBy = [ "wayland-session.target" ];
-
-      Service = {
+      serviceConfig = {
         ExecStart = lib.getExe pkgs.networkmanagerapplet;
         Restart = "on-failure";
         RestartSec = 1;
       };
     };
-
   };
 }

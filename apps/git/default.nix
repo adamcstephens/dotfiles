@@ -16,7 +16,7 @@ let
   };
 in
 {
-  home.packages = [
+  packages = [
     pkgs.git
     pkgs.git-extras
   ]
@@ -27,17 +27,14 @@ in
     pkgs.forgejo-cli
   ];
 
-  xdg.configFile = {
+  xdg.config.files = {
     "git/config".source =
       if config.dotfiles.nixosManaged then
         ./gitconfig
       else
-        config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/git/gitconfig";
+        "${config.directory}/.dotfiles/apps/git/gitconfig";
 
     "git/ignore".source =
-      if config.dotfiles.nixosManaged then
-        ./ignore
-      else
-        config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/git/ignore";
+      if config.dotfiles.nixosManaged then ./ignore else "${config.directory}/.dotfiles/apps/git/ignore";
   };
 }

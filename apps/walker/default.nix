@@ -13,39 +13,40 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = [
+    packages = [
       pkgs.elephant
       pkgs.walker
     ];
 
-    home.file.".config/elephant/websearch.toml".source =
+    xdg.config.files."elephant/websearch.toml".source =
       if config.dotfiles.nixosManaged then
         ./elephant/websearch.toml
       else
-        config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/walker/elephant/websearch.toml";
+        "${config.directory}/.dotfiles/apps/walker/elephant/websearch.toml";
 
-    home.file.".config/walker/config.toml".source =
+    xdg.config.files."walker/config.toml".source =
       if config.dotfiles.nixosManaged then
         ./config.toml
       else
-        config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/walker/config.toml";
+        "${config.directory}/.dotfiles/apps/walker/config.toml";
 
-    home.file.".config/walker/themes/dotfiles/style.css".text = with config.colorScheme.palette; ''
+    xdg.config.files."walker/themes/dotfiles/style.css".text = with config.colorScheme.palette; ''
       @define-color window_bg_color #${base05};
       @define-color accent_bg_color #${base05};
       @define-color theme_fg_color #${base08};
     '';
 
-    systemd.user.services = {
+    systemd.services = {
       elephant = {
-        Unit = {
-          Description = "Elephant launcher backend";
-          After = [ "graphical-session.target" ];
-          PartOf = [ "graphical-session.target" ];
+        after = [ "graphical-session.target" ];
+        partOf = [ "graphical-session.target" ];
+        wantedBy = [ "graphical-session.target" ];
+
+        unitConfig = {
           ConditionEnvironment = "WAYLAND_DISPLAY";
         };
 
-        Service = {
+        serviceConfig = {
           Type = "simple";
           ExecStart = lib.getExe pkgs.elephant;
           Restart = "on-failure";
@@ -54,36 +55,34 @@ in
           # Clean up socket on stop
           ExecStopPost = "${pkgs.coreutils}/bin/rm -f /tmp/elephant.sock";
         };
-
-        Install = {
-          WantedBy = [ "graphical-session.target" ];
-        };
       };
 
       walker = {
-        Unit = {
-          Description = "Walker - Application Runner";
+        wantedBy = [ "graphical-session.target" ];
+        partOf = [ "graphical-session.target" ];
+        requires = [ "elephant.service" ];
+        after = [
+          "graphical-session.target"
+          "elephant.service"
+        ];
+
+        reloadTriggers = [
+          (builtins.hashString "sha256" (
+            builtins.toJSON {
+              config = config.xdg.config.files."walker/config.toml".source;
+              theme = config.xdg.config.files."walker/themes/dotfiles/style.css".source;
+            }
+          ))
+        ];
+
+        unitConfig = {
           ConditionEnvironment = "WAYLAND_DISPLAY";
-          After = [
-            "graphical-session.target"
-            "elephant.service"
-          ];
-          Requires = [ "elephant.service" ];
-          PartOf = [ "graphical-session.target" ];
-          X-Restart-Triggers = [
-            (builtins.hashString "sha256" (
-              builtins.toJSON {
-                config = config.home.file.".config/walker/config.toml".source;
-                theme = config.home.file.".config/walker/themes/dotfiles/style.css".source;
-              }
-            ))
-          ];
         };
-        Service = {
+
+        serviceConfig = {
           ExecStart = "${lib.getExe pkgs.walker} --gapplication-service";
           Restart = "on-failure";
         };
-        Install.WantedBy = [ "graphical-session.target" ];
       };
     };
   };

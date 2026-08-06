@@ -5,8 +5,6 @@ return {
     event = "InsertEnter",
 
     after = function()
-      require("lz.n").trigger_load("blink-copilot")
-
       require("blink.cmp").setup({
         completion = {
           ghost_text = { enabled = true },
@@ -24,7 +22,7 @@ return {
           ["<C-k>"] = { "select_prev", "fallback" },
         },
         sources = {
-          default = { "lsp", "copilot", "buffer", "snippets", "path" },
+          default = { "lsp", "buffer", "snippets", "path" },
           per_filetype = {
             codecompanion = { "codecompanion" },
           },
@@ -43,18 +41,9 @@ return {
               score_offset = 10,
               async = true,
             },
-            copilot = {
-              name = "copilot",
-              module = "blink-copilot",
-              score_offset = 100,
-              async = true,
-            },
           },
         },
       })
     end,
-  },
-  {
-    "blink-copilot",
   },
 }

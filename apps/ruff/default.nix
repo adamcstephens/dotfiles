@@ -1,7 +1,6 @@
 { ... }:
 {
-
-  xdg.configFile."ruff/pyproject.toml".text = ''
+  xdg.config.files."ruff/pyproject.toml".text = ''
     line-length = 120
   '';
 }

@@ -1,0 +1,20 @@
+#!/usr/bin/env sh
+
+tab=$(printf '\t')
+
+target=$(
+  tmux list-panes -a -F "#{session_name}:#{window_index}.#{pane_index}${tab}#{window_name}${tab}#{pane_current_command}${tab}#{pane_title}" |
+    column -t -s "$tab" |
+    fzf --reverse \
+      --no-sort \
+      --prompt='jump> ' \
+      --preview='tmux capture-pane -e -p -t {1}' \
+      --preview-window=right,60% |
+    cut -d ' ' -f 1
+)
+
+[ -n "$target" ] || exit 0
+
+tmux switch-client -t "${target%%:*}"
+tmux select-window -t "${target%.*}"
+tmux select-pane -t "$target"

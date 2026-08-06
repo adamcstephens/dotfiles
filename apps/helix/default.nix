@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   cfg = config.dotfiles.helix;
 in
@@ -6,9 +11,9 @@ in
   options.dotfiles.helix.enable = lib.mkEnableOption "helix app";
 
   config = lib.mkIf cfg.enable {
-    home.packages = [ pkgs.helix ];
+    packages = [ pkgs.helix ];
 
-    xdg.configFile."helix/config.toml".source = ./config.toml;
-    xdg.configFile."helix/languages.toml".source = ./languages.toml;
+    xdg.config.files."helix/config.toml".source = ./config.toml;
+    xdg.config.files."helix/languages.toml".source = ./languages.toml;
   };
 }

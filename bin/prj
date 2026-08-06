@@ -19,6 +19,10 @@ is_zellij = "ZELLIJ" in os.environ
 
 FINDER = "fzf --height 22 --filepath-word --reverse --scheme=path"
 
+MIDDLE_MIN_WIDTH = 100
+MIDDLE_MAX_WIDTH = 140
+SIDE_MIN_WIDTH = 60
+
 
 def gen_remotes():
     hosts = ["branch", "kale", "nixos2.local"]
@@ -27,7 +31,7 @@ def gen_remotes():
 
 
 def run(command: str, input: str | None = None):
-    result = subprocess.run(command, shell=True, capture_output=True, input=input, encoding="UTF-8")
+    result = subprocess.run(command, shell=True, capture_output=True, input=input, encoding="UTF-8", check=False)
 
     if result.returncode != 0:
         print(result.stderr)
@@ -47,16 +51,69 @@ def tmux_to_kitty(tab: str) -> dict:
     return {"id": int(tab_split[0]), "title": tab_split[1]}
 
 
-def tmux_panes_left_to_right(window_target: str) -> list[str]:
+def direnv_allowed(project: str) -> bool:
+    result = subprocess.run(
+        "direnv status --json", shell=True, cwd=project, capture_output=True, encoding="UTF-8", check=False
+    )
+
+    if result.returncode != 0:
+        return False
+
+    found_rc = json.loads(result.stdout)["state"]["foundRC"]
+
+    return found_rc is not None and found_rc["allowed"] == 0
+
+
+def tmux_columns(window_target: str) -> list[list[str]]:
     pane_lines = run(f"tmux list-panes -t {shlex.quote(window_target)} -F '#{{pane_id}} #{{pane_left}}'").splitlines()
-    panes = []
+    columns: dict[int, list[str]] = {}
 
     for pane in pane_lines:
         pane_id, pane_left = pane.split(" ", 1)
-        panes.append((pane_id, int(pane_left)))
+        columns.setdefault(int(pane_left), []).append(pane_id)
 
-    panes.sort(key=lambda p: p[1])
-    return [pane_id for pane_id, _ in panes]
+    return [columns[left] for left in sorted(columns)]
+
+
+def side_column_width(usable: int) -> int:
+    even = usable // 3
+    middle = max(min(usable // 2, MIDDLE_MAX_WIDTH), MIDDLE_MIN_WIDTH, even)
+    side = (usable - middle) // 2
+
+    if side < SIDE_MIN_WIDTH:
+        side = min(SIDE_MIN_WIDTH, even)
+
+    # rounding must never leave the middle narrower than a side
+    return min(side, even)
+
+
+def tmux_layout_window(window_target: str) -> list[list[str]]:
+    columns = tmux_columns(window_target)
+
+    if len(columns) != 3:
+        return columns
+
+    # window_width counts the two column borders
+    usable = int(run(f"tmux display-message -p -t {shlex.quote(window_target)} '#{{window_width}}'")) - 2
+    side = side_column_width(usable)
+
+    run(f"tmux resize-pane -t {columns[0][0]} -x {side}")
+    run(f"tmux resize-pane -t {columns[2][0]} -x {side}")
+
+    return columns
+
+
+def tmux_relayout():
+    sized = 0
+    skipped = 0
+
+    for window_id in run("tmux list-windows -F '#{window_id}'").splitlines():
+        if len(tmux_layout_window(window_id)) == 3:
+            sized += 1
+        else:
+            skipped += 1
+
+    run(f"tmux display-message {shlex.quote(f'relayout: {sized} sized, {skipped} skipped')}")
 
 
 def prj_finder(remote: bool = False) -> str:
@@ -86,7 +143,7 @@ def prj_finder(remote: bool = False) -> str:
 
 
 def kitty_active_window() -> dict:
-    return [i for i in json.loads(run("kitty @ ls")) if i["is_active"]][0]
+    return next(i for i in json.loads(run("kitty @ ls")) if i["is_active"])
 
 
 def open_project(project: str, remote: bool = False):
@@ -125,8 +182,7 @@ def open_project(project: str, remote: bool = False):
                 run(f"tmux select-window -t {wname}")
                 run("tmux split-window -h")
                 run("tmux split-window -h")
-                run("tmux select-layout even-horizontal")
-                pane_ids = tmux_panes_left_to_right(wname)
+                pane_ids = [column[0] for column in tmux_layout_window(wname)]
                 remote_shell_cmd = f"ssh {host} -t {shlex.quote(f'cd {project} && exec $SHELL -l')}"
                 remote_vim_cmd = f"ssh {host} -t {shlex.quote(f'cd {project} && vim .; exec $SHELL -l')}"
                 middle_pane = pane_ids[1]
@@ -138,12 +194,32 @@ def open_project(project: str, remote: bool = False):
                 run(f"tmux select-pane -t {middle_pane}")
                 run("tmux select-pane -l")
             else:
-                run(f"tmux new-window -c {shlex.quote(project)} -n {wname}")
-                run(f"tmux select-window -t {wname}")
-                run(f"tmux split-window -h -c {shlex.quote(project)}")
-                run("tmux send-keys 'vim .' 'C-m'")
-                run(f"tmux split-window -h -c {shlex.quote(project)}")
-                run("tmux select-layout even-horizontal")
+                if direnv_allowed(project):
+                    # one wait-for channel per gated pane; tmux does not count repeat signals
+                    gates = [f"prj-{wname}-{index}" for index in range(2)]
+                    signals = "; ".join(f"tmux wait-for -S {gate}" for gate in gates)
+
+                    run(
+                        f"tmux new-window -c {shlex.quote(project)} -n {wname} "
+                        f"{shlex.quote(f'direnv exec . true; {signals}; exec $SHELL')}"
+                    )
+                    run(f"tmux select-window -t {wname}")
+                    run(
+                        f"tmux split-window -h -c {shlex.quote(project)} "
+                        f"{shlex.quote(f'tmux wait-for {gates[0]}; direnv exec . vim .; exec $SHELL')}"
+                    )
+                    run(
+                        f"tmux split-window -h -c {shlex.quote(project)} "
+                        f"{shlex.quote(f'tmux wait-for {gates[1]}; exec $SHELL')}"
+                    )
+                else:
+                    run(f"tmux new-window -c {shlex.quote(project)} -n {wname}")
+                    run(f"tmux select-window -t {wname}")
+                    run(f"tmux split-window -h -c {shlex.quote(project)}")
+                    run("tmux send-keys 'vim .' 'C-m'")
+                    run(f"tmux split-window -h -c {shlex.quote(project)}")
+
+                tmux_layout_window(wname)
                 run("tmux select-pane -l")
 
     elif is_zellij:
@@ -226,8 +302,7 @@ def open_ssh():
             run(f"tmux select-window -t {wname}")
             run("tmux split-window -h")
             run("tmux split-window -h")
-            run("tmux select-layout even-horizontal")
-            pane_ids = tmux_panes_left_to_right(wname)
+            pane_ids = [column[0] for column in tmux_layout_window(wname)]
 
             for pane_id in pane_ids:
                 run(f"tmux send-keys -t {pane_id} {shlex.quote(f'ssh {selected_remote}')} 'C-m'")
@@ -259,11 +334,19 @@ if __name__ == "__main__":
     parser.add_argument("project", nargs="?", help="path")
     parser.add_argument("--remote", "-r", action="store_true", help="remote")
     parser.add_argument("--ssh", "-s", action="store_true", help="open ssh tab")
+    parser.add_argument("--relayout", action="store_true", help="re-layout all three-pane windows")
     args = parser.parse_args()
 
     project: str
 
-    if args.ssh:
+    if args.relayout:
+        if not is_tmux:
+            logger.error("--relayout requires tmux")
+            sys.exit(1)
+
+        tmux_relayout()
+        sys.exit(0)
+    elif args.ssh:
         open_ssh()
     elif args.project is None:
         project = prj_finder(remote=args.remote)

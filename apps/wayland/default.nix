@@ -14,7 +14,7 @@
   };
 
   config = lib.mkIf config.dotfiles.gui.wayland.enable {
-    home.packages = [
+    packages = [
       pkgs.grim
       pkgs.gtklock
       pkgs.lswt
@@ -30,9 +30,5 @@
       pkgs.wlopm
       pkgs.wlr-randr
     ];
-
-    wayland = {
-      systemd.target = "wayland-session.target";
-    };
   };
 }

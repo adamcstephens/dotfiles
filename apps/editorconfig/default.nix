@@ -1,49 +1,38 @@
 { ... }:
 {
-  editorconfig = {
-    enable = true;
-    settings = {
-      "*" = {
-        end_of_line = "lf";
-        indent_style = "space";
-        indent_size = 2;
-      };
+  files.".editorconfig".text = ''
+    root=true
 
-      "*.fish" = {
-        indent_size = 4;
-      };
+    [*]
+    end_of_line=lf
+    indent_size=2
+    indent_style=space
 
-      "*.jl" = {
-        indent_size = 4;
-      };
+    [*.fish]
+    indent_size=4
 
-      "*.{nim,nims}" = {
-        indent_size = 2;
-      };
+    [*.jl]
+    indent_size=4
 
-      "*.nu" = {
-        indent_size = 2;
-      };
+    [*.nu]
+    indent_size=2
 
-      "*.org" = {
-        indent_size = 8;
-      };
+    [*.org]
+    indent_size=8
 
-      "*.py" = {
-        indent_size = 4;
-      };
+    [*.py]
+    indent_size=4
 
-      "*.rs" = {
-        indent_size = 4;
-      };
+    [*.rs]
+    indent_size=4
 
-      "justfile" = {
-        indent_size = 4;
-      };
+    [*.{nim,nims}]
+    indent_size=2
 
-      "Makefile" = {
-        indent_style = "tab";
-      };
-    };
-  };
+    [Makefile]
+    indent_style=tab
+
+    [justfile]
+    indent_size=4
+  '';
 }

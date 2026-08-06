@@ -1,6 +1,7 @@
 {
   config,
   inputs,
+  lib,
   pkgs,
   ...
 }:
@@ -16,19 +17,19 @@ let
       "~/.config/opencode"
       "~/.config/pi"
       "~/.copilot"
+    ]
+    ++ lib.optionals pkgs.stdenv.hostPlatform.isDarwin [
+      "~/.config/claude-personal"
     ];
   };
 in
 {
-  home.packages = [
+  packages = [
     inputs.epi.packages.${pkgs.stdenv.hostPlatform.system}.epi
   ];
 
-  xdg.configFile."epi/config.toml".source = epiConfig;
+  xdg.config.files."epi/config.toml".source = epiConfig;
 
-  xdg.configFile."epi/hooks".source =
-    if config.dotfiles.nixosManaged then
-      ./hooks
-    else
-      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/epi/hooks";
+  xdg.config.files."epi/hooks".source =
+    if config.dotfiles.nixosManaged then ./hooks else "${config.directory}/.dotfiles/apps/epi/hooks";
 }

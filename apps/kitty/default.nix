@@ -10,16 +10,16 @@ let
     if (config.dotfiles.nixosManaged || pkgs.stdenv.isDarwin) then
       lib.getExe (pkgs.callPackage ../../packages/prj.nix { })
     else
-      "${config.home.homeDirectory}/.dotfiles/bin/prj";
+      "${config.directory}/.dotfiles/bin/prj";
 in
 {
-  home.packages = [
+  packages = [
     pkgs.kitty.terminfo
   ]
   ++ lib.optionals (!pkgs.stdenv.isDarwin) [ pkgs.kitty ];
 
-  xdg.configFile."kitty/kitty.conf".text = ''
-    include ${config.xdg.configHome}/kitty/dotfiles.conf
+  xdg.config.files."kitty/kitty.conf".text = ''
+    include ${config.xdg.config.directory}/kitty/dotfiles.conf
 
     allow_remote_control socket-only
     font_family ${config.dotfiles.gui.font.mono}
@@ -45,26 +45,26 @@ in
     confirm_os_window_close 0
   '';
 
-  xdg.configFile."kitty/dotfiles.conf".source =
+  xdg.config.files."kitty/dotfiles.conf".source =
     if config.dotfiles.nixosManaged then
       ./dotfiles.conf
     else
-      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/kitty/dotfiles.conf";
+      "${config.directory}/.dotfiles/apps/kitty/dotfiles.conf";
 
   # themes
-  xdg.configFile."kitty/no-preference-theme.auto.conf".source =
+  xdg.config.files."kitty/no-preference-theme.auto.conf".source =
     npins.vim-moonfly-colors + "/extras/moonfly-kitty.conf";
 
-  xdg.configFile."kitty/dark-theme.auto.conf".source =
+  xdg.config.files."kitty/dark-theme.auto.conf".source =
     npins.vim-moonfly-colors + "/extras/moonfly-kitty.conf";
-  xdg.configFile."kitty/light-theme.auto.conf".source =
+  xdg.config.files."kitty/light-theme.auto.conf".source =
     npins."modus-themes.nvim" + "/extras/kitty/modus_operandi.conf";
 
   # smart-splits.nvim
-  xdg.configFile."kitty/neighboring_window.py".source =
+  xdg.config.files."kitty/neighboring_window.py".source =
     pkgs.vimPlugins.smart-splits-nvim + "/kitty/neighboring_window.py";
-  xdg.configFile."kitty/relative_resize.py".source =
+  xdg.config.files."kitty/relative_resize.py".source =
     pkgs.vimPlugins.smart-splits-nvim + "/kitty/relative_resize.py";
-  xdg.configFile."kitty/split_window.py".source =
+  xdg.config.files."kitty/split_window.py".source =
     pkgs.vimPlugins.smart-splits-nvim + "/kitty/split_window.py";
 }

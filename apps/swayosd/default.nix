@@ -1,27 +1,23 @@
 { pkgs, ... }:
 {
-  home.packages = [ pkgs.swayosd ];
+  packages = [ pkgs.swayosd ];
 
-  systemd.user = {
+  systemd = {
     services.swayosd = {
-      Unit = {
-        Description = "Volume/backlight OSD indicator";
-        PartOf = [ "wayland-session.target" ];
-        After = [ "wayland-session.target" ];
+      wantedBy = [ "wayland-session.target" ];
+      partOf = [ "wayland-session.target" ];
+      after = [ "wayland-session.target" ];
+
+      unitConfig = {
         ConditionEnvironment = "WAYLAND_DISPLAY";
-        Documentation = "man:swayosd(1)";
         StartLimitBurst = 5;
         StartLimitIntervalSec = 10;
       };
 
-      Service = {
+      serviceConfig = {
         Type = "simple";
         ExecStart = "${pkgs.swayosd}/bin/swayosd-server";
         RestartSec = "2s";
-      };
-
-      Install = {
-        WantedBy = [ "wayland-session.target" ];
       };
     };
   };

@@ -85,7 +85,6 @@ mnw.lib.wrap pkgs {
       with vimPlugins;
       [
         blink-cmp
-        copilot-lua
         diffview-nvim
         fidget-nvim
         fzf-lua

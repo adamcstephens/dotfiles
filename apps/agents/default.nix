@@ -10,7 +10,7 @@ let
     if config.dotfiles.nixosManaged then
       ./skills
     else
-      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/agents/skills";
+      "${config.directory}/.dotfiles/apps/agents/skills";
 
   cfg = config.dotfiles.apps.agents;
 
@@ -25,16 +25,15 @@ let
 
   claude-wrapped = pkgs.symlinkJoin {
     name = "claude-wrapped";
-    paths = [ (unfreePkg "claude-code" inputs.nixpkgs-unstable-small) ];
+    paths = [ (unfreePkg "claude-code" inputs.nixos-unstable-small) ];
     buildInputs = [ pkgs.makeWrapper ];
     postBuild = ''
       wrapProgram $out/bin/claude \
-        --set-default CLAUDE_CONFIG_DIR "${config.home.homeDirectory}/.config/claude"
+        --set-default CLAUDE_CONFIG_DIR "${config.directory}/.config/claude"
     '';
   };
 
-  agent-browser =
-    inputs.nixpkgs-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.agent-browser;
+  agent-browser = inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system}.agent-browser;
 
   agent-browser-wrapped =
     if pkgs.stdenv.isLinux then
@@ -58,12 +57,12 @@ let
   pi-coding-agent-wrapped = pkgs.symlinkJoin {
     name = "pi-coding-agent-wrapped";
     paths = [
-      inputs.nixpkgs-unstable-small.legacyPackages.${pkgs.stdenv.hostPlatform.system}.pi-coding-agent
+      inputs.nixos-unstable-small.legacyPackages.${pkgs.stdenv.hostPlatform.system}.pi-coding-agent
     ];
     buildInputs = [ pkgs.makeWrapper ];
     postBuild = ''
       wrapProgram $out/bin/pi \
-        --set-default PI_CODING_AGENT_DIR "${config.home.homeDirectory}/.config/pi/agent" \
+        --set-default PI_CODING_AGENT_DIR "${config.directory}/.config/pi/agent" \
         --set-default PI_OFFLINE true \
         --set-default PI_TELEMETRY true
     '';
@@ -75,17 +74,18 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = [
+    packages = [
       inputs.vein.packages.${pkgs.stdenv.hostPlatform.system}.vein
 
       agent-browser-wrapped
       claude-wrapped
-      inputs.nixpkgs-unstable-small.legacyPackages.${pkgs.stdenv.hostPlatform.system}.opencode
-      (unfreePkg "github-copilot-cli" inputs.nixpkgs-unstable-small)
+      inputs.nixos-unstable-small.legacyPackages.${pkgs.stdenv.hostPlatform.system}.opencode
+      (unfreePkg "github-copilot-cli" inputs.nixos-unstable-small)
       pi-coding-agent-wrapped
+      pkgs.nono
     ];
 
-    home.file = {
+    files = {
       ".config/agents/skills".source = skills;
 
       ".config/pi/agent/npm/package.json".source = ./pi/package.json;
@@ -93,8 +93,8 @@ in
       ".config/pi/agent/npm/node_modules".source = "${pi-extensions}/node_modules";
     };
 
-    home.sessionVariables = {
-      CLAUDE_CONFIG_DIR = "${config.home.homeDirectory}/.config/claude";
+    environment.sessionVariables = {
+      CLAUDE_CONFIG_DIR = "${config.directory}/.config/claude";
     };
   };
 }

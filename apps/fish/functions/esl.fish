@@ -1,3 +1,3 @@
 function esl
-    exec fish -l
+    exec fish --login
 end

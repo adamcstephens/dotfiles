@@ -13,16 +13,14 @@ let
       "Library/Application Support/jj";
 in
 {
-  home.packages = [
-    inputs.nixpkgs-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.jujutsu
-  ]
-  ++ lib.optionals pkgs.stdenv.isLinux [
+  packages = [
+    inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system}.jujutsu
     pkgs.watchman
   ];
 
-  home.file."${configDir}/config.toml".source =
+  files."${configDir}/config.toml".source =
     if config.dotfiles.nixosManaged then
       ./config.toml
     else
-      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/jujutsu/config.toml";
+      "${config.directory}/.dotfiles/apps/jujutsu/config.toml";
 }

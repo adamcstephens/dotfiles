@@ -7,15 +7,15 @@
   ...
 }:
 let
-  package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.fish;
+  package = inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system}.fish;
 
-  homeManagerSessionVariables = pkgs.runCommand "hm-session-vars.fish" { } ''
+  hjemSessionVariables = pkgs.runCommand "hjem-session-vars.fish" { } ''
     mkdir -vp $out/share/fish/vendor_conf.d
-    (echo "function setup_hm_session_vars;"
+    (echo "function setup_hjem_session_vars;"
     ${pkgs.buildPackages.babelfish}/bin/babelfish \
-    <${config.home.sessionVariablesPackage}/etc/profile.d/hm-session-vars.sh
+    <${config.environment.loadEnv}
     echo "end"
-    echo "setup_hm_session_vars") > $out/share/fish/vendor_conf.d/hm-session-vars.fish
+    echo "setup_hjem_session_vars") > $out/share/fish/vendor_conf.d/hjem-session-vars.fish
   '';
 
   mkSource =
@@ -23,28 +23,29 @@ let
     if config.dotfiles.nixosManaged then
       ./. + "/${source}"
     else
-      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/fish/${source}";
+      "${config.directory}/.dotfiles/apps/fish/${source}";
+
+  commandNotFound = pkgs.writeShellApplication {
+    name = "command-not-found";
+    excludeShellChecks = [ "SC1091" ];
+    text = ''
+      source ${
+        inputs.nix-index-database.packages.${pkgs.stdenv.hostPlatform.system}.nix-index-with-small-db
+      }/etc/profile.d/command-not-found.sh
+      command_not_found_handle "$@"
+    '';
+  };
 
   # we'll steal this from HM
-  commandNotFound =
-    let
-      wrapper = pkgs.writeScript "fish-command-not-found" ''
-        #!${pkgs.bash}/bin/bash
-        source ${
-          inputs.nix-index-database.packages.${pkgs.stdenv.hostPlatform.system}.nix-index-with-small-db
-        }/etc/profile.d/command-not-found.sh
-        command_not_found_handle "$@"
-      '';
-    in
-    pkgs.writeTextFile {
-      name = "fish-command-not-found";
-      text = ''
-        function __fish_command_not_found_handler --on-event fish_command_not_found
-            ${wrapper} $argv
-        end
-      '';
-      destination = "/share/fish/vendor_functions.d/__fish_command_not_found_handler.fish";
-    };
+  fishCommandNotFound = pkgs.writeTextFile {
+    name = "fish-command-not-found";
+    text = ''
+      function __fish_command_not_found_handler --on-event fish_command_not_found
+          ${lib.getExe commandNotFound} $argv
+      end
+    '';
+    destination = "/share/fish/vendor_functions.d/__fish_command_not_found_handler.fish";
+  };
 
   themeDump =
     category: source:
@@ -67,15 +68,16 @@ let
   '';
 in
 {
-  home.packages = [
+  packages = [
     package
-    homeManagerSessionVariables
+    hjemSessionVariables
     commandNotFound
+    fishCommandNotFound
   ];
 
-  xdg.configFile."fish/completions".source = mkSource "completions";
-  xdg.configFile."fish/conf.d".source = mkSource "conf.d";
-  xdg.configFile."fish/config.fish".source = mkSource "config.fish";
-  xdg.configFile."fish/functions".source = mkSource "functions";
-  xdg.configFile."fish/themes/dotfiles.theme".source = theme;
+  xdg.config.files."fish/completions".source = mkSource "completions";
+  xdg.config.files."fish/conf.d".source = mkSource "conf.d";
+  xdg.config.files."fish/config.fish".source = mkSource "config.fish";
+  xdg.config.files."fish/functions".source = mkSource "functions";
+  xdg.config.files."fish/themes/dotfiles.theme".source = theme;
 }

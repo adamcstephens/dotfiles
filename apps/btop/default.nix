@@ -1,6 +1,6 @@
 { pkgs, ... }:
 {
-  home.packages = [ pkgs.btop ];
+  packages = [ pkgs.btop ];
 
-  xdg.configFile."btop/btop.conf".source = ./btop.conf;
+  xdg.config.files."btop/btop.conf".source = ./btop.conf;
 }

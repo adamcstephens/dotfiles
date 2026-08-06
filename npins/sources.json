@@ -29,19 +29,6 @@
       "url": "https://github.com/miikanissi/modus-themes.nvim/archive/17a64464c27c1be605adca13dbe48f2f402fe107.tar.gz",
       "hash": "sha256-5w1a8ISBM90bwajkAupBFXoucHat+lQsyD5Rr0e2SKY="
     },
-    "nix-hex-box": {
-      "type": "Git",
-      "repository": {
-        "type": "GitHub",
-        "owner": "adamcstephens",
-        "repo": "nix-hex-box"
-      },
-      "branch": "fix/containerfile-store-context",
-      "submodules": false,
-      "revision": "faa85e06ba29e23ce6947f3c7325fed8c8c2fdd4",
-      "url": "https://github.com/adamcstephens/nix-hex-box/archive/faa85e06ba29e23ce6947f3c7325fed8c8c2fdd4.tar.gz",
-      "hash": "sha256-ZuDOoPpLWR7v5IZE5I46pHSOpVK47xL6atuAkWXgleM="
-    },
     "smart-splits.nvim": {
       "type": "Git",
       "repository": {

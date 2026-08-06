@@ -26,8 +26,6 @@ return {
         },
       })
 
-      require("fzf-lua").register_ui_select()
-
       local fzf_lua = require("fzf-lua")
 
       -- jj status

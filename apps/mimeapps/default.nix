@@ -12,7 +12,7 @@
         pkgs.ripgrep
       ]
     }"
-    export HOME="${config.home.homeDirectory}"
+    export HOME="${config.directory}"
 
     ${./switch-cleanup.sh}
   '';

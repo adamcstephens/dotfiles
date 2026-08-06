@@ -146,7 +146,7 @@ return {
 
     -- zk
     require("zk").setup({
-      picker = "minipick",
+      picker = "select",
     })
     vim.lsp.enable("zk")
   end,

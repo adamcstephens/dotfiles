@@ -1,12 +1,9 @@
 { config, pkgs, ... }:
 {
-  home.packages = [
+  packages = [
     pkgs.halloy
   ];
 
-  home.file.".config/halloy".source =
-    if config.dotfiles.nixosManaged then
-      ./.
-    else
-      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/apps/halloy";
+  files.".config/halloy".source =
+    if config.dotfiles.nixosManaged then ./. else "${config.directory}/.dotfiles/apps/halloy";
 }
