@@ -19,7 +19,7 @@ Pinnacle.setup(function()
   local key = Input.key
 
   ---@type pinnacle.input.Mod
-  local mod_key = "alt"
+  local mod_key = "super"
   -- Change the mod key to "alt" when running as a nested window
   if Pinnacle.backend() == "window" then
     mod_key = "alt"
@@ -61,27 +61,19 @@ Pinnacle.setup(function()
   if Snowcap then
     -- mod_key + shift + q = Quit Prompt
     Input.keybind({
-      mods = { mod_key, "shift" },
-      key = "q",
+      mods = { mod_key, "shift", "control" },
+      key = "x",
       on_press = function()
         Snowcap.integration.quit_prompt():show()
       end,
       group = "Compositor",
       description = "Show the quit prompt",
     })
-    -- mod_key + ctrl + shift + q = Hardcoded quit
-    Input.keybind({
-      mods = { mod_key, "ctrl", "shift" },
-      key = "q",
-      quit = true,
-      group = "Compositor",
-      description = "Quit Pinnacle without prompt",
-    })
   else
     -- mod_key + shift + q = Quit Pinnacle
     Input.keybind({
-      mods = { mod_key, "shift" },
-      key = "q",
+      mods = { mod_key, "shift", "control" },
+      key = "x",
       quit = true,
       group = "Compositor",
       description = "Quit Pinnacle",
@@ -108,6 +100,16 @@ Pinnacle.setup(function()
     description = "Close the focused window",
   })
 
+  -- mod_key + shift + t = Spawn `terminal`
+  Input.keybind({
+    mods = { mod_key, "shift" },
+    key = "t",
+    on_press = function()
+      Process.spawn(terminal)
+    end,
+    group = "Process",
+    description = "Spawn a terminal",
+  })
   -- mod_key + Return = Spawn `terminal`
   Input.keybind({ mod_key }, key.Return, function()
     Process.spawn(terminal)
@@ -116,20 +118,8 @@ Pinnacle.setup(function()
     description = "Spawn a terminal",
   })
 
-  -- mod_key + ctrl + space = Toggle floating
-  Input.keybind({ mod_key, "ctrl" }, key.space, function()
-    local focused = Window.get_focused()
-    if focused then
-      focused:toggle_floating()
-      focused:raise()
-    end
-  end, {
-    group = "Window",
-    description = "Toggle floating on the focused window",
-  })
-
   -- mod_key + f = Toggle fullscreen
-  Input.keybind({ mod_key }, "f", function()
+  Input.keybind({ mod_key, "shift" }, "f", function()
     local focused = Window.get_focused()
     if focused then
       focused:toggle_fullscreen()
@@ -413,6 +403,55 @@ Pinnacle.setup(function()
   -- Tags and Outputs --
   ----------------------
 
+  -- Last tag switched away from, keyed by output name
+  local prev_tag = {}
+
+  -- switch to tag or if current tag, switch to prev
+  local function switch_to_tag(tag_name)
+    local output = Output.get_focused()
+    if not output then
+      return
+    end
+
+    local tags = output:tags() or {}
+
+    ---@type (fun(): { active: boolean, name: string? })[]
+    local requests = {}
+    for i, t in ipairs(tags) do
+      requests[i] = function()
+        return { active = t:active(), name = t:name() }
+      end
+    end
+    requests = Util.batch(requests)
+
+    local current = nil
+    for i = 1, #tags do
+      local res = requests[i]
+      if res and res.active then
+        current = res.name
+        break
+      end
+    end
+
+    local target = tag_name
+    if target == nil or target == current then
+      target = prev_tag[output.name]
+    end
+    if not target then
+      return
+    end
+
+    local tag = Tag.get(target, output)
+    if tag then
+      prev_tag[output.name] = current
+      tag:switch_to()
+    end
+  end
+
+  Input.keybind({ mod_key }, key.grave, function()
+    switch_to_tag(nil)
+  end, { group = "Tag", description = "Switch to the previous tag" })
+
   local tag_names = { "1", "2", "3", "4", "5", "6", "7", "8", "9" }
 
   Output.for_each_output(function(output)
@@ -424,7 +463,7 @@ Pinnacle.setup(function()
   for _, tag_name in ipairs(tag_names) do
     -- mod_key + 1-9 = Switch to tags 1-9
     Input.keybind({ mod_key }, tag_name, function()
-      Tag.get(tag_name):switch_to()
+      switch_to_tag(tag_name)
     end, {
       group = "Tag",
       description = "Switch to tag " .. tag_name,
@@ -471,6 +510,11 @@ Pinnacle.setup(function()
       device:set_natural_scroll(true)
     end
   end)
+
+  -----------------------
+  -- Keyboard settings --
+  -----------------------
+  Input.set_repeat_rate(60, 300)
 
   -----------------------
   -- Other stuff       --
