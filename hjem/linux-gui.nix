@@ -194,12 +194,6 @@ in
 
   # systemd.startServices = "sd-switch";
 
-  systemd.services.polkit-agent = {
-    wantedBy = [ "graphical-session.target" ];
-    partOf = [ "graphical-session.target" ];
-    serviceConfig.ExecStart = lib.getExe pkgs.soteria;
-  };
-
   systemd.targets.wayland-session = {
     bindsTo = [ "graphical-session.target" ];
     wants = [ "graphical-session-pre.target" ];
