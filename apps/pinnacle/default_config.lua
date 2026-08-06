@@ -522,15 +522,25 @@ Pinnacle.setup(function()
 
   -- Enable focus borders
   if Snowcap then
+    local Color = require("snowcap.widget").color
+
+    local function decorate(window)
+      local border = Snowcap.integration.focus_border(window)
+      border.thickness = 1
+      border.focused_color = Color.from_rgba(0.55, 0.55, 0.6)
+      border.unfocused_color = Color.from_rgba(0.12, 0.12, 0.14)
+      border:decorate()
+    end
+
     -- Add borders to already existing windows
     for _, win in ipairs(Window.get_all()) do
-      Snowcap.integration.focus_border_with_titlebar(win):decorate()
+      decorate(win)
     end
 
     -- Add borders to new windows
     Window.add_window_rule(function(window)
       window:set_decoration_mode("server_side")
-      Snowcap.integration.focus_border_with_titlebar(window):decorate()
+      decorate(window)
     end)
   end
 
@@ -547,6 +557,97 @@ Pinnacle.setup(function()
       output:focus()
     end,
   })
+
+  --
+  -- Window navigation
+  --
+  -- Windows on the focused output's active tags, in layout stack order
+  local function view_stack()
+    local output = Output.get_focused()
+    if not output then
+      return {}
+    end
+
+    local tags = output:tags() or {}
+
+    ---@type (fun(): boolean)[]
+    local requests = {}
+    for i, t in ipairs(tags) do
+      requests[i] = function()
+        return t:active()
+      end
+    end
+    requests = Util.batch(requests)
+
+    local active_ids = {}
+    for i = 1, #tags do
+      if requests[i] then
+        active_ids[tags[i].id] = true
+      end
+    end
+
+    local wins = Window.get_all()
+
+    ---@type (fun(): pinnacle.tag.TagHandle[])[]
+    local tag_requests = {}
+    for i, w in ipairs(wins) do
+      tag_requests[i] = function()
+        return w:tags()
+      end
+    end
+    tag_requests = Util.batch(tag_requests)
+
+    local stack = {}
+    for i = 1, #wins do
+      for _, t in ipairs(tag_requests[i] or {}) do
+        if active_ids[t.id] then
+          table.insert(stack, wins[i])
+          break
+        end
+      end
+    end
+
+    return stack
+  end
+
+  local function stack_neighbor(offset)
+    local stack = view_stack()
+    if #stack < 2 then
+      return nil, nil
+    end
+
+    local focused = Window.get_focused()
+    local idx = 1
+    if focused then
+      for i, w in ipairs(stack) do
+        if w.id == focused.id then
+          idx = i
+          break
+        end
+      end
+    end
+
+    return stack[(idx - 1 + offset) % #stack + 1], focused
+  end
+
+  for key_name, offset in pairs({ j = 1, k = -1 }) do
+    -- focus-view next/previous
+    Input.keybind({ mod_key }, key_name, function()
+      local target = stack_neighbor(offset)
+      if target then
+        target:set_focused(true)
+        target:raise()
+      end
+    end, { group = "Window", description = "Focus the " .. (offset == 1 and "next" or "previous") .. " window" })
+
+    -- swap next/previous
+    Input.keybind({ mod_key, "shift" }, key_name, function()
+      local target, focused = stack_neighbor(offset)
+      if target and focused then
+        focused:swap(target)
+      end
+    end, { group = "Window", description = "Swap with the " .. (offset == 1 and "next" or "previous") .. " window" })
+  end
 
   -- Spawning should happen after you add tags, as Pinnacle currently doesn't render windows without tags.
   Process.spawn_once(terminal)
