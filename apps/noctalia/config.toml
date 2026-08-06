@@ -1,5 +1,18 @@
-[theme]
-mode = "dark"
-
 [bar.default]
 position = "top"
+
+[desktop_widgets]
+enabled = false
+
+[shell.animation]
+enabled = false
+
+[theme]
+builtin = "Ayu"
+community_palette = "One"
+mode = "dark"
+pure_black_dark = true
+wallpaper_scheme = "m3-tonal-spot"
+
+[wallpaper.default]
+path = "color:#000000"
