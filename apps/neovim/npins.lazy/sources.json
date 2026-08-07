@@ -12,22 +12,6 @@
       "url": null,
       "hash": "sha256-RS9BWupC50xhYos5eXqYz9SdVgl17zK4b09Ifze2j4A="
     },
-    "blink-copilot": {
-      "type": "GitRelease",
-      "repository": {
-        "type": "GitHub",
-        "owner": "fang2hou",
-        "repo": "blink-copilot"
-      },
-      "pre_releases": false,
-      "version_upper_bound": null,
-      "release_prefix": null,
-      "submodules": false,
-      "version": "v1.4.1",
-      "revision": "41e91a659bd9b8cba9ba2ea68a69b52ba5a9ebd8",
-      "url": "https://api.github.com/repos/fang2hou/blink-copilot/tarball/refs/tags/v1.4.1",
-      "hash": "sha256-Ya9RagGE+Awo9xuF8XtwgAO2B9DKJLNsLDU2wsEMumo="
-    },
     "bufferline.nvim": {
       "type": "GitRelease",
       "repository": {
@@ -136,21 +120,6 @@
       "revision": "221ce6b2d999187044529f49da6554a92f740a96",
       "url": null,
       "hash": "sha256-6PjGu30Ed4/e/HQ3mIFQuUOxcCiti/71jjlMsjN7EoA="
-    },
-    "mini.pick": {
-      "type": "GitRelease",
-      "repository": {
-        "type": "Git",
-        "url": "https://github.com/echasnovski/mini.pick"
-      },
-      "pre_releases": false,
-      "version_upper_bound": null,
-      "release_prefix": null,
-      "submodules": false,
-      "version": "v0.18.0",
-      "revision": "b4dc0ccbbde2f9db1044438a9f5cf18c34bbf6fa",
-      "url": null,
-      "hash": "sha256-ebjHOQpHWsOdAIdJjimCJqXOmKCZnLobLOF8JroRRxk="
     },
     "modus-themes.nvim": {
       "type": "Git",
