@@ -69,6 +69,10 @@ let
   };
 in
 {
+  imports = [
+    ../nono
+  ];
+
   options = {
     dotfiles.apps.agents.enable = lib.mkEnableOption "agent things";
   };
@@ -82,15 +86,14 @@ in
       inputs.nixos-unstable-small.legacyPackages.${pkgs.stdenv.hostPlatform.system}.opencode
       (unfreePkg "github-copilot-cli" inputs.nixos-unstable-small)
       pi-coding-agent-wrapped
-      pkgs.nono
     ];
 
-    files = {
-      ".config/agents/skills".source = skills;
+    xdg.config.files = {
+      "agents/skills".source = skills;
 
-      ".config/pi/agent/npm/package.json".source = ./pi/package.json;
-      ".config/pi/agent/npm/package-lock.json".source = ./pi/package-lock.json;
-      ".config/pi/agent/npm/node_modules".source = "${pi-extensions}/node_modules";
+      "pi/agent/npm/package.json".source = ./pi/package.json;
+      "pi/agent/npm/package-lock.json".source = ./pi/package-lock.json;
+      "pi/agent/npm/node_modules".source = "${pi-extensions}/node_modules";
     };
 
     environment.sessionVariables = {
