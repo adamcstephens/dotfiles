@@ -11,10 +11,11 @@ local Util = require("pinnacle.util")
 local Snowcap = require("pinnacle.snowcap")
 
 Pinnacle.setup(function()
-  -- load hjem path in
-  local profile = assert(os.getenv("HOME")) .. "/.local/state/hjem/standalone/current-profile"
+  -- load our path in
+  local home = assert(os.getenv("HOME"))
+  local profile = home .. "/.local/state/hjem/standalone/current-profile"
   local path = assert(os.getenv("PATH"), "PATH is not set")
-  Process.set_env("PATH", profile .. "/bin:" .. path)
+  Process.set_env("PATH", profile .. "/bin:" .. home .. "/.dotfiles/bin:" .. path)
 
   local key = Input.key
 
@@ -25,7 +26,7 @@ Pinnacle.setup(function()
     mod_key = "alt"
   end
 
-  local terminal = "ghostty"
+  local terminal = "terminal"
 
   --------------------
   -- Mousebinds     --
@@ -648,7 +649,4 @@ Pinnacle.setup(function()
       end
     end, { group = "Window", description = "Swap with the " .. (offset == 1 and "next" or "previous") .. " window" })
   end
-
-  -- Spawning should happen after you add tags, as Pinnacle currently doesn't render windows without tags.
-  Process.spawn_once(terminal)
 end)
