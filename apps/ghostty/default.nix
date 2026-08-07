@@ -78,6 +78,11 @@
         ];
         requires = [ "dbus.socket" ];
 
+        path = [
+          "${config.directory}/.local/state/hjem/standalone/current-profile"
+          "/run/current-system/sw"
+        ];
+
         serviceConfig = {
           Type = "notify-reload";
           ReloadSignal = "SIGUSR2";
