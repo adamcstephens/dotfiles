@@ -1,0 +1,241 @@
+diff --git a/src/compositors/compositor_detect.cpp b/src/compositors/compositor_detect.cpp
+index 937af564fc..26442869d5 100644
+--- a/src/compositors/compositor_detect.cpp
++++ b/src/compositors/compositor_detect.cpp
+@@ -48,6 +48,9 @@
+       if (const char* v = std::getenv("MANGO_INSTANCE_SIGNATURE"); v != nullptr && v[0] != '\0') {
+         return CompositorKind::Mango;
+       }
++      if (const char* v = std::getenv("PINNACLE_GRPC_SOCKET"); v != nullptr && v[0] != '\0') {
++        return CompositorKind::Pinnacle;
++      }
+ 
+       // Fall back to the desktop env hint (covers dwl-style compositors that don't expose a socket var).
+       const std::string hint = buildEnvHint();
+@@ -69,6 +72,9 @@
+       if (StringUtils::containsInsensitive(hint, "dwl")) {
+         return CompositorKind::Dwl;
+       }
++      if (StringUtils::containsInsensitive(hint, "pinnacle")) {
++        return CompositorKind::Pinnacle;
++      }
+       if (StringUtils::containsInsensitive(hint, "labwc")) {
+         return CompositorKind::Labwc;
+       }
+@@ -103,6 +109,8 @@
+       return "Labwc";
+     case CompositorKind::Kde:
+       return "KDE";
++    case CompositorKind::Pinnacle:
++      return "Pinnacle";
+     case CompositorKind::Unknown:
+       return "Unknown";
+     }
+diff --git a/src/compositors/compositor_detect.h b/src/compositors/compositor_detect.h
+index 73326a52d6..db9e60c8ae 100644
+--- a/src/compositors/compositor_detect.h
++++ b/src/compositors/compositor_detect.h
+@@ -15,6 +15,7 @@
+     Triad = 6,
+     Dwl = 7,
+     Kde = 8,
++    Pinnacle = 9,
+   };
+ 
+   // Detected once per process from env vars. Cached after the first call.
+@@ -34,5 +35,6 @@
+   [[nodiscard]] inline bool isTriad() { return detect() == CompositorKind::Triad; }
+   [[nodiscard]] inline bool isDwl() { return detect() == CompositorKind::Dwl; }
+   [[nodiscard]] inline bool isKde() { return detect() == CompositorKind::Kde; }
++  [[nodiscard]] inline bool isPinnacle() { return detect() == CompositorKind::Pinnacle; }
+ 
+ } // namespace compositors
+diff --git a/src/compositors/compositor_platform.cpp b/src/compositors/compositor_platform.cpp
+index 5792f10c03..05360773f6 100644
+--- a/src/compositors/compositor_platform.cpp
++++ b/src/compositors/compositor_platform.cpp
+@@ -337,6 +337,7 @@
+     case compositors::CompositorKind::Dwl:
+     case compositors::CompositorKind::Labwc:
+     case compositors::CompositorKind::Kde:
++    case compositors::CompositorKind::Pinnacle:
+     case compositors::CompositorKind::Unknown:
+       return std::make_unique<LambdaOutputPowerBackend>(&setGenericOutputPower);
+     }
+@@ -358,6 +359,7 @@
+     case compositors::CompositorKind::Labwc:
+     case compositors::CompositorKind::Kde:
+     case compositors::CompositorKind::Mango:
++    case compositors::CompositorKind::Pinnacle:
+     case compositors::CompositorKind::Unknown:
+       break;
+     }
+@@ -377,6 +379,7 @@
+     case compositors::CompositorKind::Dwl:
+     case compositors::CompositorKind::Kde:
+     case compositors::CompositorKind::Labwc:
++    case compositors::CompositorKind::Pinnacle:
+     case compositors::CompositorKind::Unknown:
+       break;
+     }
+@@ -399,6 +402,7 @@
+     case compositors::CompositorKind::Dwl:
+     case compositors::CompositorKind::Labwc:
+     case compositors::CompositorKind::Kde:
++    case compositors::CompositorKind::Pinnacle:
+     case compositors::CompositorKind::Unknown:
+       break;
+     }
+@@ -1484,6 +1488,7 @@
+     }
+     break;
+   case compositors::CompositorKind::Kde:
++  case compositors::CompositorKind::Pinnacle:
+   case compositors::CompositorKind::Unknown:
+     break;
+   }
+diff --git a/src/compositors/ext_workspace/ext_workspace_backend.cpp b/src/compositors/ext_workspace/ext_workspace_backend.cpp
+index c0aaf7f78b..8478f19a5e 100644
+--- a/src/compositors/ext_workspace/ext_workspace_backend.cpp
++++ b/src/compositors/ext_workspace/ext_workspace_backend.cpp
+@@ -1,5 +1,6 @@
+ #include "compositors/ext_workspace/ext_workspace_backend.h"
+ 
++#include "compositors/compositor_detect.h"
+ #include "core/log.h"
+ #include "ext-workspace-v1-client-protocol.h"
+ 
+@@ -148,6 +149,8 @@
+ 
+ } // namespace ext_workspace
+ 
++ExtWorkspaceBackend::ExtWorkspaceBackend() : m_exclusiveActivation(compositors::isPinnacle()) {}
++
+ void ExtWorkspaceBackend::bindExtWorkspace(ext_workspace_manager_v1* manager) {
+   m_manager = manager;
+   ext_workspace_manager_v1_add_listener(m_manager, &kManagerListener, this);
+@@ -155,6 +158,34 @@
+ 
+ void ExtWorkspaceBackend::setChangeCallback(ChangeCallback callback) { m_changeCallback = std::move(callback); }
+ 
++const ExtWorkspaceBackend::WorkspaceGroup*
++ExtWorkspaceBackend::groupForWorkspace(ext_workspace_handle_v1* workspace) const {
++  for (const auto& group : m_groups) {
++    if (std::ranges::contains(group.workspaces, workspace)) {
++      return &group;
++    }
++  }
++  return nullptr;
++}
++
++void ExtWorkspaceBackend::commitActivation(const WorkspaceGroup* group, ext_workspace_handle_v1* workspace) {
++  if (m_exclusiveActivation && group != nullptr) {
++    // Pinnacle orders deactivate before activate within a commit, so the switch stays atomic.
++    for (auto* handle : group->workspaces) {
++      if (handle == workspace) {
++        continue;
++      }
++      const auto it = m_workspaces.find(handle);
++      if (it != m_workspaces.end() && it->second.active) {
++        ext_workspace_handle_v1_deactivate(handle);
++      }
++    }
++  }
++
++  ext_workspace_handle_v1_activate(workspace);
++  ext_workspace_manager_v1_commit(m_manager);
++}
++
+ void ExtWorkspaceBackend::activate(const std::string& id) {
+   if (m_manager == nullptr) {
+     return;
+@@ -164,8 +195,7 @@
+     if (ws.id != id) {
+       continue;
+     }
+-    ext_workspace_handle_v1_activate(handle);
+-    ext_workspace_manager_v1_commit(m_manager);
++    commitActivation(groupForWorkspace(handle), handle);
+     kLog.debug("activating \"{}\"", ws.name);
+     return;
+   }
+@@ -188,8 +218,7 @@
+         continue;
+       }
+ 
+-      ext_workspace_handle_v1_activate(handle);
+-      ext_workspace_manager_v1_commit(m_manager);
++      commitActivation(&group, handle);
+       kLog.debug("activating \"{}\"", it->second.name);
+       return;
+     }
+@@ -229,8 +258,7 @@
+       if (it == m_workspaces.end() || !matchesExact(it->second)) {
+         continue;
+       }
+-      ext_workspace_handle_v1_activate(handle);
+-      ext_workspace_manager_v1_commit(m_manager);
++      commitActivation(&group, handle);
+       kLog.debug("activating \"{}\"", it->second.name);
+       return;
+     }
+@@ -240,8 +268,7 @@
+       if (it == m_workspaces.end() || !matchesId(it->second)) {
+         continue;
+       }
+-      ext_workspace_handle_v1_activate(handle);
+-      ext_workspace_manager_v1_commit(m_manager);
++      commitActivation(&group, handle);
+       kLog.debug("activating \"{}\"", it->second.name);
+       return;
+     }
+@@ -251,8 +278,7 @@
+       if (it == m_workspaces.end() || !matchesCoordinatesPrimary(it->second)) {
+         continue;
+       }
+-      ext_workspace_handle_v1_activate(handle);
+-      ext_workspace_manager_v1_commit(m_manager);
++      commitActivation(&group, handle);
+       kLog.debug("activating \"{}\" (coordinate fallback)", it->second.name);
+       return;
+     }
+diff --git a/src/compositors/ext_workspace/ext_workspace_backend.h b/src/compositors/ext_workspace/ext_workspace_backend.h
+index f4a804652b..707329b7be 100644
+--- a/src/compositors/ext_workspace/ext_workspace_backend.h
++++ b/src/compositors/ext_workspace/ext_workspace_backend.h
+@@ -23,6 +23,8 @@
+ 
+ class ExtWorkspaceBackend final : public WorkspaceBackend, public ExtWorkspaceProtocolBinder {
+ public:
++  ExtWorkspaceBackend();
++
+   void bindExtWorkspace(ext_workspace_manager_v1* manager) override;
+ 
+   [[nodiscard]] const char* backendName() const override { return "ext-workspace"; }
+@@ -57,8 +59,14 @@
+     std::vector<ext_workspace_handle_v1*> workspaces;
+   };
+ 
++  [[nodiscard]] const WorkspaceGroup* groupForWorkspace(ext_workspace_handle_v1* workspace) const;
++  void commitActivation(const WorkspaceGroup* group, ext_workspace_handle_v1* workspace);
++
+   ext_workspace_manager_v1* m_manager = nullptr;
+   std::vector<WorkspaceGroup> m_groups;
+   std::unordered_map<ext_workspace_handle_v1*, Workspace> m_workspaces;
+   ChangeCallback m_changeCallback;
++  // Pinnacle models workspaces as additive tags, so activate alone leaves the
++  // previous tag showing too. Deactivate the rest of the group in the same commit.
++  bool m_exclusiveActivation = false;
+ };
+diff --git a/src/wayland/wayland_workspaces.cpp b/src/wayland/wayland_workspaces.cpp
+index 2c22c3e23e..927d0e74a7 100644
+--- a/src/wayland/wayland_workspaces.cpp
++++ b/src/wayland/wayland_workspaces.cpp
+@@ -190,6 +190,7 @@
+     }
+     break;
+   case compositors::CompositorKind::Labwc:
++  case compositors::CompositorKind::Pinnacle:
+     if (availableOrConnected(m_extBackend)) {
+       setActiveBackend(m_extBackend);
+       return;

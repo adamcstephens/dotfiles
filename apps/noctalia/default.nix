@@ -4,12 +4,20 @@
   pkgs,
   ...
 }:
+let
+  package = pkgs.noctalia.overrideAttrs (old: {
+    patches = (old.patches or [ ]) ++ [
+      ./sorted-workspaces.patch
+      ./add-pinnacle.patch
+    ];
+  });
+in
 {
   xdg.config.files."noctalia".source =
     if config.dotfiles.nixosManaged then ./. else "${config.directory}/.dotfiles/apps/noctalia";
 
   packages = [
-    pkgs.noctalia
+    package
   ];
 
   systemd.services.noctalia = {
@@ -35,7 +43,7 @@
     ];
 
     serviceConfig = {
-      ExecStart = lib.getExe pkgs.noctalia;
+      ExecStart = lib.getExe package;
       Restart = "on-failure";
     };
   };

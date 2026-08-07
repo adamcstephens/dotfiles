@@ -1,0 +1,216 @@
+diff --git a/meson.build b/meson.build
+index 2f1b24102e..6c0b909808 100644
+--- a/meson.build
++++ b/meson.build
+@@ -1105,6 +1105,7 @@
+     'desktop_entry_launch',
+     'disk_mounts',
+     'dock_pinned_apps',
++    'ext_workspace_order',
+     'fcitx_status',
+     'google_client_calendar_list',
+     'hook_manager',
+diff --git a/src/compositors/ext_workspace/ext_workspace_backend.cpp b/src/compositors/ext_workspace/ext_workspace_backend.cpp
+index 94f7bdec89..c0aaf7f78b 100644
+--- a/src/compositors/ext_workspace/ext_workspace_backend.cpp
++++ b/src/compositors/ext_workspace/ext_workspace_backend.cpp
+@@ -4,6 +4,9 @@
+ #include "ext-workspace-v1-client-protocol.h"
+ 
+ #include <algorithm>
++#include <charconv>
++#include <cstddef>
++#include <optional>
+ 
+ namespace {
+ 
+@@ -102,8 +105,49 @@
+     return normalized;
+   }
+ 
++  [[nodiscard]] std::optional<std::uint64_t> parseUnsigned(const std::string& text) {
++    std::uint64_t value = 0;
++    const auto* end = text.data() + text.size();
++    const auto result = std::from_chars(text.data(), end, value);
++    if (result.ec != std::errc{} || result.ptr != end) {
++      return std::nullopt;
++    }
++    return value;
++  }
++
++  [[nodiscard]] bool orderBefore(const Workspace& lhs, const Workspace& rhs) {
++    if (lhs.coordinates != rhs.coordinates) {
++      return lhs.coordinates < rhs.coordinates;
++    }
++
++    const auto lhsName = parseUnsigned(lhs.name);
++    const auto rhsName = parseUnsigned(rhs.name);
++    if (lhsName.has_value() && rhsName.has_value() && *lhsName != *rhsName) {
++      return *lhsName < *rhsName;
++    }
++
++    const auto lhsId = parseUnsigned(lhs.id);
++    const auto rhsId = parseUnsigned(rhs.id);
++    if (lhsId.has_value() && rhsId.has_value() && *lhsId != *rhsId) {
++      return *lhsId < *rhsId;
++    }
++
++    return lhs.id < rhs.id;
++  }
++
+ } // namespace
+ 
++namespace ext_workspace {
++
++  void orderForDisplay(std::vector<Workspace>& workspaces) {
++    std::ranges::sort(workspaces, orderBefore);
++    for (std::size_t i = 0; i < workspaces.size(); ++i) {
++      workspaces[i].index = static_cast<std::uint32_t>(i + 1);
++    }
++  }
++
++} // namespace ext_workspace
++
+ void ExtWorkspaceBackend::bindExtWorkspace(ext_workspace_manager_v1* manager) {
+   m_manager = manager;
+   ext_workspace_manager_v1_add_listener(m_manager, &kManagerListener, this);
+@@ -265,7 +309,7 @@
+     result.push_back(ws);
+   }
+ 
+-  std::ranges::sort(result, {}, &Workspace::coordinates);
++  ext_workspace::orderForDisplay(result);
+   return result;
+ }
+ 
+@@ -286,7 +330,7 @@
+     }
+   }
+ 
+-  std::ranges::sort(result, {}, &Workspace::coordinates);
++  ext_workspace::orderForDisplay(result);
+   return result;
+ }
+ 
+diff --git a/src/compositors/ext_workspace/ext_workspace_backend.h b/src/compositors/ext_workspace/ext_workspace_backend.h
+index 5488beef5d..f4a804652b 100644
+--- a/src/compositors/ext_workspace/ext_workspace_backend.h
++++ b/src/compositors/ext_workspace/ext_workspace_backend.h
+@@ -3,11 +3,24 @@
+ #include "compositors/workspace_backend.h"
+ 
+ #include <unordered_map>
++#include <vector>
+ 
+ struct wl_array;
+ struct ext_workspace_group_handle_v1;
+ struct ext_workspace_handle_v1;
+ 
++namespace ext_workspace {
++
++  // Establishes the display order and fills in the 1-based Workspace::index.
++  //
++  // The coordinates event is optional and some compositors (Pinnacle) never send
++  // it, which leaves every workspace comparing equal. Tie-break on the numeric
++  // name the compositor reports, then on the numeric id, which tracks creation
++  // order for compositors that hand out monotonic ids.
++  void orderForDisplay(std::vector<Workspace>& workspaces);
++
++} // namespace ext_workspace
++
+ class ExtWorkspaceBackend final : public WorkspaceBackend, public ExtWorkspaceProtocolBinder {
+ public:
+   void bindExtWorkspace(ext_workspace_manager_v1* manager) override;
+diff --git a/tests/ext_workspace_order_test.cpp b/tests/ext_workspace_order_test.cpp
+new file mode 100644
+index 0000000000..b9fad6def4
+--- /dev/null
++++ b/tests/ext_workspace_order_test.cpp
+@@ -0,0 +1,87 @@
++#include "compositors/ext_workspace/ext_workspace_backend.h"
++
++#include <iostream>
++#include <string>
++#include <vector>
++
++namespace {
++
++  bool check(bool cond, const char* msg) {
++    if (!cond) {
++      std::cerr << "FAIL: " << msg << '\n';
++    }
++    return cond;
++  }
++
++  std::vector<std::string> names(const std::vector<Workspace>& workspaces) {
++    std::vector<std::string> result;
++    result.reserve(workspaces.size());
++    for (const auto& workspace : workspaces) {
++      result.push_back(workspace.name);
++    }
++    return result;
++  }
++
++  // Pinnacle sends no coordinates event and hands out tags in hash order with
++  // zero-based ids, which is what produced the scrambled "1 1 2 3 6 4 7 5 8" bar.
++  std::vector<Workspace> pinnacleTags() {
++    return {
++        Workspace{.id = "4", .name = "5"}, Workspace{.id = "0", .name = "1"}, Workspace{.id = "2", .name = "3"},
++        Workspace{.id = "8", .name = "9"}, Workspace{.id = "1", .name = "2"}, Workspace{.id = "6", .name = "7"},
++        Workspace{.id = "3", .name = "4"}, Workspace{.id = "7", .name = "8"}, Workspace{.id = "5", .name = "6"},
++    };
++  }
++
++} // namespace
++
++int main() {
++  bool ok = true;
++
++  auto tags = pinnacleTags();
++  ext_workspace::orderForDisplay(tags);
++  ok &= check(
++      names(tags) == std::vector<std::string>{"1", "2", "3", "4", "5", "6", "7", "8", "9"},
++      "coordinate-less workspaces sort by numeric name"
++  );
++
++  bool indexed = true;
++  for (std::size_t i = 0; i < tags.size(); ++i) {
++    indexed &= tags[i].index == i + 1;
++  }
++  ok &= check(indexed, "display index is 1-based and contiguous");
++
++  // The zero-based id that the label fallback used to drop must not reappear.
++  ok &= check(tags.front().index == 1 && tags.front().id == "0", "zero id still gets index 1");
++
++  std::vector<Workspace> coordinated{
++      Workspace{.id = "a", .name = "9", .coordinates = {1}},
++      Workspace{.id = "b", .name = "1", .coordinates = {0}},
++  };
++  ext_workspace::orderForDisplay(coordinated);
++  ok &= check(names(coordinated) == std::vector<std::string>{"1", "9"}, "coordinates outrank the name tiebreak");
++
++  // Named tags carry no numeric name, so creation order (numeric id) decides.
++  std::vector<Workspace> named{
++      Workspace{.id = "2", .name = "chat"},
++      Workspace{.id = "0", .name = "web"},
++      Workspace{.id = "1", .name = "term"},
++  };
++  ext_workspace::orderForDisplay(named);
++  ok &= check(
++      names(named) == std::vector<std::string>{"web", "term", "chat"}, "non-numeric names fall back to numeric id"
++  );
++
++  // Ids past the numeric range must not collapse into one bucket.
++  std::vector<Workspace> textual{
++      Workspace{.id = "ws-b", .name = "beta"},
++      Workspace{.id = "ws-a", .name = "alpha"},
++  };
++  ext_workspace::orderForDisplay(textual);
++  ok &= check(names(textual) == std::vector<std::string>{"alpha", "beta"}, "non-numeric ids sort lexicographically");
++
++  std::vector<Workspace> empty;
++  ext_workspace::orderForDisplay(empty);
++  ok &= check(empty.empty(), "empty input stays empty");
++
++  return ok ? 0 : 1;
++}
