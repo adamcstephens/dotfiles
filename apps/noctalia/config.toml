@@ -1,10 +1,38 @@
 [bar.default]
 position = "top"
+center = ["media"]
+concave_edge_corners = false
+end = [
+  "tray",
+  "notifications",
+  "clipboard",
+  "network",
+  "bluetooth",
+  "volume",
+  "brightness",
+  "battery",
+  "control-center",
+  "session",
+  "clock",
+]
+font_family = "IBM Plex Sans"
+margin_ends = 0
+radius = 0
+shadow = false
+
 
 [desktop_widgets]
 enabled = false
 
 [shell.animation]
+enabled = false
+
+[shell]
+external_ip_enabled = false
+password_style = "random"
+polkit_agent = true
+
+[system.monitor]
 enabled = false
 
 [theme]
@@ -16,3 +44,22 @@ wallpaper_scheme = "m3-tonal-spot"
 
 [wallpaper.default]
 path = "color:#000000"
+
+[widget.control-center]
+enabled = false
+
+[widget.launcher]
+enabled = false
+
+[widget.media]
+hide_when_no_media = true
+max_length = 320
+
+[widget.tray]
+anchor = true
+
+[widget.wallpaper]
+enabled = false
+
+[widget.workspaces]
+style = "minimal"
