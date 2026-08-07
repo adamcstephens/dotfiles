@@ -89,4 +89,35 @@
     StandardErrorPath = "/var/log/nix-store.log";
     StandardOutPath = "/var/log/nix-store.log";
   };
+
+  # logrotate our logs
+  system.newsyslog = {
+    enable = true;
+
+    files.nix = [
+      {
+        logfilename = "/var/log/nix-gc.log";
+        owner = "root";
+        group = "wheel";
+        count = 2;
+        size = 15 * 1024 |> toString;
+        flags = [
+          "N"
+          "Z"
+        ];
+      }
+      {
+        logfilename = "/var/log/nix-store.log";
+        owner = "root";
+        group = "wheel";
+        count = 2;
+        size = "1024";
+        flags = [
+          "N"
+          "Z"
+        ];
+      }
+    ];
+  };
+
 }
