@@ -11,6 +11,17 @@
     enable = true;
     package = pkgs.nixVersions.latest;
 
+    gc = {
+      automatic = true;
+      interval = [
+        {
+          Hour = 7;
+          Minute = 0;
+        }
+      ];
+      options = "--delete-older-than 14d";
+    };
+
     settings = {
       auto-optimise-store = false;
       accept-flake-config = false;
@@ -44,24 +55,37 @@
 
   };
 
+  # add a log to the nix-darwin gc'er
+  launchd.daemons."nix-gc".serviceConfig = {
+    StandardErrorPath = "/var/log/nix-gc.log";
+    StandardOutPath = "/var/log/nix-gc.log";
+  };
+
   # While it’s possible to set `nix.settings.auto-optimise-store`, it sometimes
   # causes problems on Darwin. So run a job periodically to optimise the store:
   # https://github.com/NixOS/nix/issues/7273
   launchd.daemons."nix-store-optimise".serviceConfig = {
-    ProgramArguments = [
-      "/bin/sh"
-      "-c"
-      ''
-        /bin/wait4path ${config.nix.package}/bin/nix && \
-          exec ${config.nix.package}/bin/nix store optimise
-      ''
-    ];
+    Program =
+      pkgs.writeShellApplication {
+        name = "nix-store-optimise";
+
+        runtimeInputs = [
+          config.nix.package
+        ];
+
+        text = ''
+          /bin/wait4path /nix/store && exec nix store optimise
+        '';
+      }
+      |> lib.getExe;
+
     StartCalendarInterval = [
       {
         Hour = 2;
         Minute = 30;
       }
     ];
+
     StandardErrorPath = "/var/log/nix-store.log";
     StandardOutPath = "/var/log/nix-store.log";
   };
