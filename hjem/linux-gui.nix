@@ -34,6 +34,7 @@ in
     ./gui.nix
     ../apps/noctalia
     ../apps/pinnacle
+    ../apps/shikane
     ../apps/wayland
 
     # desktop env
