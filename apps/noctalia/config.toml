@@ -24,6 +24,9 @@ shadow = false
 [desktop_widgets]
 enabled = false
 
+[idle]
+publish_logind_idle_hint = true
+
 [shell.animation]
 enabled = false
 

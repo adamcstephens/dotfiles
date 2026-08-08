@@ -9,6 +9,7 @@ let
     patches = (old.patches or [ ]) ++ [
       ./sorted-workspaces.patch
       ./add-pinnacle.patch
+      ./systemd-idle-hint.patch
     ];
   });
 in

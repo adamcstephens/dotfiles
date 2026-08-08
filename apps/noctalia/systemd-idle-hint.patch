@@ -1,0 +1,317 @@
+diff --git a/assets/translations/en.json b/assets/translations/en.json
+index 19ee1323f2..908e9f09a6 100644
+--- a/assets/translations/en.json
++++ b/assets/translations/en.json
+@@ -2057,6 +2057,10 @@
+           "description": "Named idle actions with presets (lock, screen off, suspend) or custom commands, timeouts, resume pairing, and order",
+           "label": "Behaviors"
+         },
++        "logind-idle-hint": {
++          "description": "Report session idle state to logind so external tools can read IdleHint",
++          "label": "Logind Idle Hint"
++        },
+         "pre-action-fade": {
+           "description": "Seconds of fullscreen dim before the idle command (0 disables)",
+           "label": "Idle Dim"
+diff --git a/example.toml b/example.toml
+index 1f6895c324..2a82b8b064 100644
+--- a/example.toml
++++ b/example.toml
+@@ -298,8 +298,12 @@
+ # Optional `[idle]` keys:
+ #   pre_action_fade_seconds — fade a fullscreen surface-color overlay in over this many seconds, then run `command`.
+ #                             Use 0 for immediate commands with no overlay. Input during the fade cancels.
++#   publish_logind_idle_hint — mirror the compositor idle state onto the logind session so
++#                             `loginctl show-session -p IdleHint` reflects it (default true).
++#                             Held off while Caffeine or a D-Bus screensaver inhibit is active.
+ # [idle]
+ # pre_action_fade_seconds = 2.0
++# publish_logind_idle_hint = true
+ 
+ [idle.behavior.lock]
+ timeout = 600
+diff --git a/src/app/application.h b/src/app/application.h
+index 3b4f2bb818..cc79d96624 100644
+--- a/src/app/application.h
++++ b/src/app/application.h
+@@ -214,6 +214,7 @@
+   void recoverGraphicsAfterReset();
+   void requestAllSurfacesRedraw();
+   void releaseSleepDelayInhibitIfPending();
++  void syncLogindIdleHint();
+   void onUpowerStateChangedForHooks();
+   void onNetworkStateChangedForEvents(const NetworkState& state, NetworkChangeOrigin origin);
+   void onBluetoothStateChangedForEvents(const BluetoothState& state, BluetoothStateChangeOrigin origin);
+diff --git a/src/app/application_services.cpp b/src/app/application_services.cpp
+index 293cf7a5ab..f63b1a6b41 100644
+--- a/src/app/application_services.cpp
++++ b/src/app/application_services.cpp
+@@ -784,6 +784,7 @@
+     if (shouldRefreshControlCenter()) {
+       m_panelManager.refresh();
+     }
++    syncLogindIdleHint();
+   });
+ }
+ 
+@@ -929,6 +930,16 @@
+   }
+ }
+ 
++void Application::syncLogindIdleHint() {
++  if (m_logindService == nullptr) {
++    return;
++  }
++  const bool idle = m_configService.config().idle.publishLogindIdleHint
++      && m_idleManager.liveIdleSeconds() > 0
++      && !m_idleInhibitor.enabled();
++  m_logindService->setIdleHint(idle);
++}
++
+ void Application::initSystemBusServices() {
+   auto shouldRefreshControlCenter = [this]() { return m_panelManager.isOpenPanel("control-center"); };
+ 
+@@ -1006,6 +1017,7 @@
+         });
+         kLog.info("logind sleep monitor active");
+         m_idleInhibitor.setLogindService(m_logindService.get());
++        syncLogindIdleHint();
+       } catch (const std::exception& e) {
+         kLog.warn("logind sleep monitor disabled: {}", e.what());
+         m_logindService.reset();
+diff --git a/src/app/application_ui.cpp b/src/app/application_ui.cpp
+index 94650d2260..dc3713b3d0 100644
+--- a/src/app/application_ui.cpp
++++ b/src/app/application_ui.cpp
+@@ -754,6 +754,7 @@
+       }
+   );
+   m_idleManager.setLiveIdleChangeCallback([this]() {
++    syncLogindIdleHint();
+     DeferredCall::callLater([this]() { m_settingsWindow.onIdleLiveStatusChanged(); });
+   });
+   m_idleManager.reload(m_configService.config().idle);
+@@ -775,6 +776,7 @@
+       [this]() {
+         if (m_configService.lastChange().idle) {
+           m_idleManager.reload(m_configService.config().idle);
++          syncLogindIdleHint();
+         }
+       },
+       "idle"
+diff --git a/src/config/config_types.h b/src/config/config_types.h
+index d61ce2c46a..9fb6fc699e 100644
+--- a/src/config/config_types.h
++++ b/src/config/config_types.h
+@@ -287,6 +287,10 @@
+   /// from transparent to opaque over this many seconds, then runs `command`. Compositor activity during
+   /// the fade cancels. When 0, the idle command runs immediately with no overlay.
+   float preActionFadeSeconds = 2.0f;
++  /// Mirrors the compositor's idle state onto the logind session (`SetIdleHint`) so external
++  /// tooling can read `IdleHint` / `IdleSinceHint`. Suppressed while Caffeine or a D-Bus
++  /// screensaver inhibit is active.
++  bool publishLogindIdleHint = true;
+ 
+   bool operator==(const IdleConfig&) const = default;
+ };
+diff --git a/src/config/schema/config_schema.cpp b/src/config/schema/config_schema.cpp
+index a947b7c4d5..50ed4c4a3e 100644
+--- a/src/config/schema/config_schema.cpp
++++ b/src/config/schema/config_schema.cpp
+@@ -876,6 +876,7 @@
+   const Schema<IdleConfig>& idleSchema() {
+     static const Schema<IdleConfig> s = {
+         field(&IdleConfig::preActionFadeSeconds, "pre_action_fade_seconds", Range<float>{0.0f, 120.0f}),
++        field(&IdleConfig::publishLogindIdleHint, "publish_logind_idle_hint"),
+         // behavior_order is emitted here (vector order); the actual reorder runs
+         // last, after the behavior map has been read.
+         custom<IdleConfig>(
+diff --git a/src/dbus/logind/logind_service.cpp b/src/dbus/logind/logind_service.cpp
+index 2f012abdd6..4e0b087069 100644
+--- a/src/dbus/logind/logind_service.cpp
++++ b/src/dbus/logind/logind_service.cpp
+@@ -17,6 +17,8 @@
+ 
+   const sdbus::ServiceName kLogindBusName{"org.freedesktop.login1"};
+   const sdbus::ObjectPath kLogindObjectPath{"/org/freedesktop/login1"};
++  // Alias for "the caller's session, or this user's display session if it has none".
++  const sdbus::ObjectPath kLogindAutoSessionPath{"/org/freedesktop/login1/session/auto"};
+   constexpr auto kLogindManagerInterface = "org.freedesktop.login1.Manager";
+   constexpr auto kLogindSessionInterface = "org.freedesktop.login1.Session";
+ 
+@@ -37,11 +39,30 @@
+         }
+       }
+ 
++      try {
++        sdbus::ObjectPath sessionPath;
++        managerProxy->callMethod("GetSessionByPID")
++            .onInterface(kLogindManagerInterface)
++            .withArguments(static_cast<std::uint32_t>(::getpid()))
++            .storeResultsTo(sessionPath);
++        return sessionPath;
++      } catch (const sdbus::Error& e) {
++        // Running under systemd --user puts us in user@.service instead of a session
++        // scope, so we own no session to look up.
++        kLog.debug("failed to resolve logind session via pid: {}", e.what());
++      }
++
++      // Resolve the alias to its canonical path: logind emits session signals (Lock/Unlock)
++      // on the real object path, so a proxy bound to the alias would never see them.
++      auto autoProxy = sdbus::createProxy(connection, kLogindBusName, kLogindAutoSessionPath);
++      const auto displaySessionId =
++          autoProxy->getProperty("Id").onInterface(kLogindSessionInterface).get<std::string>();
+       sdbus::ObjectPath sessionPath;
+-      managerProxy->callMethod("GetSessionByPID")
++      managerProxy->callMethod("GetSession")
+           .onInterface(kLogindManagerInterface)
+-          .withArguments(static_cast<std::uint32_t>(::getpid()))
++          .withArguments(displaySessionId)
+           .storeResultsTo(sessionPath);
++      kLog.info("resolved logind display session {}", displaySessionId);
+       return sessionPath;
+     } catch (const sdbus::Error& e) {
+       kLog.warn("failed to resolve logind session: {}", e.what());
+@@ -60,33 +81,37 @@
+ }
+ 
+ LogindService::~LogindService() {
++  if (m_idleHint.value_or(false)) {
++    setIdleHint(false);
++  }
+   releaseSleepDelayInhibit();
+   releaseIdleInhibit();
+ }
+ 
+-void LogindService::ensureSessionLockMonitor() {
++void LogindService::ensureSessionProxy() {
+   if (m_sessionProxy != nullptr) {
+     return;
+   }
+ 
+   const auto sessionPath = resolveSessionPath(m_bus.connection());
+   if (!sessionPath.has_value()) {
+-    kLog.warn("logind session lock monitor disabled: session path unavailable");
++    kLog.warn("logind session features disabled: session path unavailable");
+     return;
+   }
+ 
+   m_sessionProxy = sdbus::createProxy(m_bus.connection(), kLogindBusName, *sessionPath);
++  m_sessionPath = sessionPath->c_str();
+   m_sessionProxy->uponSignal("Lock").onInterface(kLogindSessionInterface).call([this]() {
+-    if (m_lockCallback) {
++    if (m_sessionLockIntegrationEnabled && m_lockCallback) {
+       m_lockCallback();
+     }
+   });
+   m_sessionProxy->uponSignal("Unlock").onInterface(kLogindSessionInterface).call([this]() {
+-    if (m_unlockCallback) {
++    if (m_sessionLockIntegrationEnabled && m_unlockCallback) {
+       m_unlockCallback();
+     }
+   });
+-  kLog.info("logind session lock monitor active ({})", std::string(sessionPath->c_str()));
++  kLog.info("logind session resolved ({})", m_sessionPath);
+ }
+ 
+ void LogindService::setSessionLockIntegrationEnabled(bool enabled) {
+@@ -96,14 +121,40 @@
+   m_sessionLockIntegrationEnabled = enabled;
+   if (!enabled) {
+     releaseSleepDelayInhibit();
+-    m_sessionProxy.reset();
+     kLog.info("logind session lock monitor disabled");
+     return;
+   }
+-  ensureSessionLockMonitor();
++  ensureSessionProxy();
++  if (m_sessionProxy != nullptr) {
++    kLog.info("logind session lock monitor active ({})", m_sessionPath);
++  }
+   (void)acquireSleepDelayInhibit();
+ }
+ 
++void LogindService::setIdleHint(bool idle) {
++  if (m_idleHintUnsupported || m_idleHint == idle) {
++    return;
++  }
++  ensureSessionProxy();
++  if (m_sessionProxy == nullptr) {
++    return;
++  }
++  try {
++    m_sessionProxy->callMethod("SetIdleHint").onInterface(kLogindSessionInterface).withArguments(idle);
++    m_idleHint = idle;
++    kLog.debug("logind idle hint set to {}", idle);
++  } catch (const sdbus::Error& e) {
++    // logind only accepts the hint on graphical sessions, so a shell started straight from a
++    // tty (Type=tty) is refused every time. Latch instead of warning on every idle transition.
++    if (e.getName() == "org.freedesktop.DBus.Error.NotSupported") {
++      m_idleHintUnsupported = true;
++      kLog.info("logind idle hint unsupported for this session (needs Type=x11/wayland): {}", e.getMessage());
++      return;
++    }
++    kLog.warn("failed to set logind idle hint: {}", e.what());
++  }
++}
++
+ void LogindService::setPrepareForSleepCallback(PrepareForSleepCallback callback) {
+   m_prepareForSleepCallback = std::move(callback);
+ }
+diff --git a/src/dbus/logind/logind_service.h b/src/dbus/logind/logind_service.h
+index 5a53f88b35..8c704bfa96 100644
+--- a/src/dbus/logind/logind_service.h
++++ b/src/dbus/logind/logind_service.h
+@@ -2,6 +2,8 @@
+ 
+ #include <functional>
+ #include <memory>
++#include <optional>
++#include <string>
+ 
+ class SystemBus;
+ 
+@@ -25,6 +27,10 @@
+   void syncSessionLocked();
+   void syncSessionUnlocked();
+ 
++  // Publishes session idle state to logind so `loginctl show-session -p IdleHint` (and anything
++  // else reading IdleHint/IdleSinceHint) reflects what the compositor reports.
++  void setIdleHint(bool idle);
++
+   [[nodiscard]] bool supportsIdleInhibit() const noexcept;
+   [[nodiscard]] bool hasIdleInhibit() const noexcept;
+   bool acquireIdleInhibit();
+@@ -37,11 +43,14 @@
+   void releaseSleepDelayInhibit();
+ 
+ private:
+-  void ensureSessionLockMonitor();
++  void ensureSessionProxy();
+ 
+   SystemBus& m_bus;
+   std::unique_ptr<sdbus::IProxy> m_managerProxy;
+   std::unique_ptr<sdbus::IProxy> m_sessionProxy;
++  std::string m_sessionPath;
++  std::optional<bool> m_idleHint;
++  bool m_idleHintUnsupported = false;
+   bool m_sessionLockIntegrationEnabled = false;
+   PrepareForSleepCallback m_prepareForSleepCallback;
+   SessionLockCallback m_lockCallback;
+diff --git a/src/shell/settings/settings_registry.cpp b/src/shell/settings/settings_registry.cpp
+index 4f15c166f4..55c27dc43a 100644
+--- a/src/shell/settings/settings_registry.cpp
++++ b/src/shell/settings/settings_registry.cpp
+@@ -2727,6 +2727,12 @@
+         "idle fade dim seconds overlay"
+     ));
+     entries.push_back(makeEntry(
++        SettingsSection::Power, "idle", tr("settings.schema.idle.logind-idle-hint.label"),
++        tr("settings.schema.idle.logind-idle-hint.description"), {"idle", "publish_logind_idle_hint"},
++        ToggleSetting{.checked = cfg.idle.publishLogindIdleHint},
++        "idle logind session hint loginctl external away presence"
++    ));
++    entries.push_back(makeEntry(
+         SettingsSection::Power, "idle", tr("settings.schema.idle.behaviors.label"),
+         tr("settings.schema.idle.behaviors.description"), {"idle", "behavior"},
+         IdleBehaviorsSetting{.items = cfg.idle.behaviors},
