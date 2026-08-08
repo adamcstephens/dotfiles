@@ -1,15 +1,35 @@
-- **CRITICAL** DO NOT under ANY circumstances jump to implementation when I'm asking questions, proposing ideas, or saying things like "is it possible to...", "what if we...", "could we...", "why does". No code edits, no file writes. Only discuss. Wait for an explicit "do it", "go ahead", "implement it", etc. before touching any code. This applies ALWAYS, even if the answer seems obvious.
-- Don't add unnecessary shell chaining (`;`, `&&`, `| tail`, `2>&1`, `||`) to Bash tool commands. Run commands cleanly and use separate tool calls when needed.
-- When writing commands to files, always use the long version (--name) over short (-n) if available.
+- **CRITICAL** I like to ask questions. When a question is asked, you should answer it, and stop. Do not edit files. Do not run commands that would modify/undo changes. Do not pass go. Do not collect $200.
+- When writing commands to files, e.g. scripts or docs, always use the long version (--name) over short (-n) if available.
+
+## My Global Definition of Done
+- ticket claimed (when relevant)
+- formatting done.
+- tests pass.
+- code committed with all ticket changes included
+  - Prefer no or very short commit body
+  - Ticket ID in the body (when relevant)
+  - Assisted-By line always included
+- *critical* After committing, stop and get user approval for completion.
+- ticket marked complete once approved (when relevant)
+
+## Coding Rules
+- NEVER add a dependency without permission. ALWAYS check you're adding the
+  latest version when approved.
+  - A dependency is anything version-pinned that you did not write, in any
+    file type: package manifests, flake inputs, container base images,
+    GitHub Actions `uses:` refs, vendored scripts, curl-piped installers.
+  - First-party publishers are not exempt. `actions/*` and official Docker
+    images count exactly like any third-party package.
+  - "Check the latest version" means running a command that reports it, not
+    recalling one.
 - Always use `/usr/bin/env` when writing scripts
+- AVOID comments. Comment only a surprising *why*. No history or ticket refs. When in doubt default to no comment, or ask if unsure.
+- AVOID defensive programming, discuss with me first before assuming backwards compatibility or handling all potential cases.
 
-### Coding Rules
-- NEVER add a dependency without permission. ALWAYS check you're adding the latest version when approved.
-
-### JJ Repositories
-- NEVER modify immutable jj commits without explicit permission. Create a new commit on top instead.
+### Code Repositories
+- Assume you're working in a jj repo by default, only falling back to git if needed.
 - Always start work on a clean jj commit.
-- Always commit or describe/new when finishing work.
+- Check jj state before creating a new change to avoid creating empty changes.
 
 ### Working with nix
 - in a flake project (flake.nix at root), you can find a nixpkgs copy on the system by running `nix flake metadata`
