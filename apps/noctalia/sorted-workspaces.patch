@@ -93,7 +93,7 @@ index 94f7bdec89..c0aaf7f78b 100644
  }
  
 diff --git a/src/compositors/ext_workspace/ext_workspace_backend.h b/src/compositors/ext_workspace/ext_workspace_backend.h
-index 5488beef5d..f4a804652b 100644
+index 5488beef5d..354ce8c481 100644
 --- a/src/compositors/ext_workspace/ext_workspace_backend.h
 +++ b/src/compositors/ext_workspace/ext_workspace_backend.h
 @@ -3,11 +3,24 @@
@@ -110,10 +110,10 @@ index 5488beef5d..f4a804652b 100644
 +
 +  // Establishes the display order and fills in the 1-based Workspace::index.
 +  //
-+  // The coordinates event is optional and some compositors (Pinnacle) never send
-+  // it, which leaves every workspace comparing equal. Tie-break on the numeric
-+  // name the compositor reports, then on the numeric id, which tracks creation
-+  // order for compositors that hand out monotonic ids.
++  // Coordinates are the only order the protocol defines, and the event is
++  // optional: compositors that don't send it (Pinnacle) leave every workspace
++  // comparing equal. Fall back to the numeric name, then the numeric id, which
++  // tracks creation order where ids are monotonic.
 +  void orderForDisplay(std::vector<Workspace>& workspaces);
 +
 +} // namespace ext_workspace
