@@ -43,7 +43,7 @@ index 3b4f2bb818..cc79d96624 100644
    void onNetworkStateChangedForEvents(const NetworkState& state, NetworkChangeOrigin origin);
    void onBluetoothStateChangedForEvents(const BluetoothState& state, BluetoothStateChangeOrigin origin);
 diff --git a/src/app/application_services.cpp b/src/app/application_services.cpp
-index 293cf7a5ab..f63b1a6b41 100644
+index 293cf7a5ab..5a1a05d419 100644
 --- a/src/app/application_services.cpp
 +++ b/src/app/application_services.cpp
 @@ -784,6 +784,7 @@
@@ -54,7 +54,7 @@ index 293cf7a5ab..f63b1a6b41 100644
    });
  }
  
-@@ -929,6 +930,16 @@
+@@ -929,6 +930,15 @@
    }
  }
  
@@ -62,16 +62,15 @@ index 293cf7a5ab..f63b1a6b41 100644
 +  if (m_logindService == nullptr) {
 +    return;
 +  }
-+  const bool idle = m_configService.config().idle.publishLogindIdleHint
-+      && m_idleManager.liveIdleSeconds() > 0
-+      && !m_idleInhibitor.enabled();
++  const bool idle =
++      m_configService.config().idle.publishLogindIdleHint && m_idleManager.sessionIdle() && !m_idleInhibitor.enabled();
 +  m_logindService->setIdleHint(idle);
 +}
 +
  void Application::initSystemBusServices() {
    auto shouldRefreshControlCenter = [this]() { return m_panelManager.isOpenPanel("control-center"); };
  
-@@ -1006,6 +1017,7 @@
+@@ -1006,6 +1016,7 @@
          });
          kLog.info("logind sleep monitor active");
          m_idleInhibitor.setLogindService(m_logindService.get());
@@ -298,6 +297,43 @@ index 5a53f88b35..8c704bfa96 100644
    bool m_sessionLockIntegrationEnabled = false;
    PrepareForSleepCallback m_prepareForSleepCallback;
    SessionLockCallback m_lockCallback;
+diff --git a/src/idle/idle_manager.cpp b/src/idle/idle_manager.cpp
+index d546020f62..e127a29adf 100644
+--- a/src/idle/idle_manager.cpp
++++ b/src/idle/idle_manager.cpp
+@@ -130,7 +130,7 @@
+ 
+   m_heartbeatNotification = m_wayland->createIdleNotification(kHeartbeatTimeoutMs);
+   if (m_heartbeatNotification == nullptr) {
+-    kLog.warn("failed to register idle heartbeat for live status");
++    kLog.warn("failed to register idle heartbeat for session idle status");
+     return;
+   }
+ 
+diff --git a/src/idle/idle_manager.h b/src/idle/idle_manager.h
+index 9150d0e3ab..d9476747b7 100644
+--- a/src/idle/idle_manager.h
++++ b/src/idle/idle_manager.h
+@@ -44,6 +44,10 @@
+   void setScreenSaverInhibitLocks(std::int64_t locks);
+   /// Seconds the compositor has reported session-idle (1s heartbeat notification); 0 when active.
+   [[nodiscard]] std::int64_t liveIdleSeconds() const noexcept { return m_liveIdleSeconds; }
++  /// The compositor reports the seat idle and nothing is inhibiting it.
++  [[nodiscard]] bool sessionIdle() const noexcept {
++    return m_heartbeatCompositorIdle && m_screenSaverInhibitLocks == 0;
++  }
+   void onSecondTick();
+   static void handleIdled(void* data, ext_idle_notification_v1* notification);
+   static void handleResumed(void* data, ext_idle_notification_v1* notification);
+@@ -65,6 +69,8 @@
+   };
+ 
+   void clearBehaviors();
++  // Arms the notification behind sessionIdle(). Must stay registered for the process lifetime:
++  // the logind idle hint depends on it, not just the settings live status readout.
+   void syncHeartbeat();
+   void destroyHeartbeat();
+   void notifyLiveIdleChanged();
 diff --git a/src/shell/settings/settings_registry.cpp b/src/shell/settings/settings_registry.cpp
 index 4f15c166f4..55c27dc43a 100644
 --- a/src/shell/settings/settings_registry.cpp

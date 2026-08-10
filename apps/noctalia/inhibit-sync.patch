@@ -1,0 +1,23 @@
+diff --git a/src/idle/idle_manager.cpp b/src/idle/idle_manager.cpp
+index ad36fa362d..d546020f62 100644
+--- a/src/idle/idle_manager.cpp
++++ b/src/idle/idle_manager.cpp
+@@ -77,9 +77,15 @@
+       notifyLiveIdleChanged();
+     }
+   }
+-  if (wasInhibited && !inhibited && m_idledWhileScreenSaverInhibited) {
+-    m_idledWhileScreenSaverInhibited = false;
+-    recreateBehaviorNotifications();
++  if (wasInhibited && !inhibited) {
++    // The heartbeat's idled event is dropped while inhibited, and ext-idle-notify only repeats
++    // it after a resume. Without a fresh notification live idle status stays stuck at active
++    // for as long as the user stays away.
++    syncHeartbeat();
++    if (m_idledWhileScreenSaverInhibited) {
++      m_idledWhileScreenSaverInhibited = false;
++      recreateBehaviorNotifications();
++    }
+   }
+ }
+ 

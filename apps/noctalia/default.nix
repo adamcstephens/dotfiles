@@ -11,6 +11,7 @@ let
       ./sorted-workspaces.patch
       ./add-pinnacle.patch
       ./logind-idle-hint.patch
+      ./inhibit-sync.patch
     ];
   });
 in
