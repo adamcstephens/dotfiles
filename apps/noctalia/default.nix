@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  profile,
   ...
 }:
 let
@@ -14,8 +15,17 @@ let
   });
 in
 {
-  xdg.config.files."noctalia".source =
-    if config.dotfiles.nixosManaged then ./. else "${config.directory}/.dotfiles/apps/noctalia";
+  xdg.config.files = {
+    noctalia.source =
+      if config.dotfiles.nixosManaged then ./. else "${config.directory}/.dotfiles/apps/noctalia";
+  }
+  // lib.optionalAttrs (builtins.pathExists (./profiles + "/${profile}.toml")) {
+    "noctalia/profile.toml".text = # toml
+      ''
+        [include]
+        files = ["profiles/${profile}.toml"]
+      '';
+  };
 
   packages = [
     package

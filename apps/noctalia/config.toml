@@ -27,10 +27,14 @@ enabled = false
 [idle]
 publish_logind_idle_hint = true
 
+[notification]
+position = "top_center"
+
 [shell.animation]
 enabled = false
 
 [shell]
+font_family = "IBM Plex Sans"
 external_ip_enabled = false
 password_style = "random"
 polkit_agent = true
@@ -47,6 +51,9 @@ wallpaper_scheme = "m3-tonal-spot"
 
 [wallpaper.default]
 path = "color:#000000"
+
+[widget.clock]
+format = "{:%d-%b %H:%M}"
 
 [widget.control-center]
 enabled = false
