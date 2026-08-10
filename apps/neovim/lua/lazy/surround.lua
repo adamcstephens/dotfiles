@@ -4,7 +4,7 @@ return {
   event = "DeferredUIEnter",
 
   before = function()
-    require("lz.n").trigger_load("nim-treesitter-textobjects")
+    require("lz.n").trigger_load("nvim-treesitter-textobjects")
   end,
 
   after = function()
