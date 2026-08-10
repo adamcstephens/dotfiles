@@ -27,9 +27,12 @@
       accept-flake-config = false;
       builders-use-substitutes = true;
       experimental-features = [
-        "nix-command"
+        "ca-derivations"
+        "dynamic-derivations"
         "flakes"
+        "nix-command"
         "pipe-operators"
+        "recursive-nix"
       ];
 
       download-buffer-size = lib.mkIf (config.nix.package.pname == "nix") (
