@@ -44,6 +44,7 @@
       packages = [
         pkgs.difftastic
         pkgs.doggo
+        pkgs.dua
         pkgs.dust
         pkgs.eza
         pkgs.file
@@ -53,7 +54,6 @@
         pkgs.jless
         pkgs.just
         pkgs.kitty.terminfo
-        pkgs.ncdu
         pkgs.python314
         pkgs.tio
         pkgs.wget
