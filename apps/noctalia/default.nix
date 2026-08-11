@@ -7,7 +7,7 @@
   ...
 }:
 let
-  cfg = config.apps.noctalia;
+  cfg = config.dotfiles.apps.noctalia;
 in
 {
   options = {
