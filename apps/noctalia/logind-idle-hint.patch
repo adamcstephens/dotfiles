@@ -1,8 +1,8 @@
 diff --git a/assets/translations/en.json b/assets/translations/en.json
-index 19ee1323f2..908e9f09a6 100644
+index bf2f730891..ebb08b8b96 100644
 --- a/assets/translations/en.json
 +++ b/assets/translations/en.json
-@@ -2057,6 +2057,10 @@
+@@ -2079,6 +2079,10 @@
            "description": "Named idle actions with presets (lock, screen off, suspend) or custom commands, timeouts, resume pairing, and order",
            "label": "Behaviors"
          },
@@ -14,10 +14,10 @@ index 19ee1323f2..908e9f09a6 100644
            "description": "Seconds of fullscreen dim before the idle command (0 disables)",
            "label": "Idle Dim"
 diff --git a/example.toml b/example.toml
-index 1f6895c324..2a82b8b064 100644
+index 54ffa1c9b4..525a0c62a6 100644
 --- a/example.toml
 +++ b/example.toml
-@@ -298,8 +298,12 @@
+@@ -301,8 +301,12 @@
  # Optional `[idle]` keys:
  #   pre_action_fade_seconds — fade a fullscreen surface-color overlay in over this many seconds, then run `command`.
  #                             Use 0 for immediate commands with no overlay. Input during the fade cancels.
@@ -31,7 +31,7 @@ index 1f6895c324..2a82b8b064 100644
  [idle.behavior.lock]
  timeout = 600
 diff --git a/src/app/application.h b/src/app/application.h
-index 3b4f2bb818..cc79d96624 100644
+index f7d16cff58..89849cfebd 100644
 --- a/src/app/application.h
 +++ b/src/app/application.h
 @@ -214,6 +214,7 @@
@@ -43,10 +43,10 @@ index 3b4f2bb818..cc79d96624 100644
    void onNetworkStateChangedForEvents(const NetworkState& state, NetworkChangeOrigin origin);
    void onBluetoothStateChangedForEvents(const BluetoothState& state, BluetoothStateChangeOrigin origin);
 diff --git a/src/app/application_services.cpp b/src/app/application_services.cpp
-index 293cf7a5ab..5a1a05d419 100644
+index 1dff908e32..9a71c04521 100644
 --- a/src/app/application_services.cpp
 +++ b/src/app/application_services.cpp
-@@ -784,6 +784,7 @@
+@@ -779,6 +779,7 @@
      if (shouldRefreshControlCenter()) {
        m_panelManager.refresh();
      }
@@ -54,7 +54,7 @@ index 293cf7a5ab..5a1a05d419 100644
    });
  }
  
-@@ -929,6 +930,15 @@
+@@ -924,6 +925,15 @@
    }
  }
  
@@ -70,7 +70,7 @@ index 293cf7a5ab..5a1a05d419 100644
  void Application::initSystemBusServices() {
    auto shouldRefreshControlCenter = [this]() { return m_panelManager.isOpenPanel("control-center"); };
  
-@@ -1006,6 +1016,7 @@
+@@ -1014,6 +1024,7 @@
          });
          kLog.info("logind sleep monitor active");
          m_idleInhibitor.setLogindService(m_logindService.get());
@@ -79,10 +79,10 @@ index 293cf7a5ab..5a1a05d419 100644
          kLog.warn("logind sleep monitor disabled: {}", e.what());
          m_logindService.reset();
 diff --git a/src/app/application_ui.cpp b/src/app/application_ui.cpp
-index 94650d2260..dc3713b3d0 100644
+index ff3a488f65..a610704fab 100644
 --- a/src/app/application_ui.cpp
 +++ b/src/app/application_ui.cpp
-@@ -754,6 +754,7 @@
+@@ -758,6 +758,7 @@
        }
    );
    m_idleManager.setLiveIdleChangeCallback([this]() {
@@ -90,7 +90,7 @@ index 94650d2260..dc3713b3d0 100644
      DeferredCall::callLater([this]() { m_settingsWindow.onIdleLiveStatusChanged(); });
    });
    m_idleManager.reload(m_configService.config().idle);
-@@ -775,6 +776,7 @@
+@@ -779,6 +780,7 @@
        [this]() {
          if (m_configService.lastChange().idle) {
            m_idleManager.reload(m_configService.config().idle);
@@ -99,13 +99,13 @@ index 94650d2260..dc3713b3d0 100644
        },
        "idle"
 diff --git a/src/config/config_types.h b/src/config/config_types.h
-index d61ce2c46a..9fb6fc699e 100644
+index ebac98d08e..68b643e5b7 100644
 --- a/src/config/config_types.h
 +++ b/src/config/config_types.h
-@@ -287,6 +287,10 @@
+@@ -296,6 +296,10 @@
    /// from transparent to opaque over this many seconds, then runs `command`. Compositor activity during
    /// the fade cancels. When 0, the idle command runs immediately with no overlay.
-   float preActionFadeSeconds = 2.0f;
+   float preActionFadeSeconds = 2.0F;
 +  /// Mirrors the compositor's idle state onto the logind session (`SetIdleHint`) so external
 +  /// tooling can read `IdleHint` / `IdleSinceHint`. Suppressed while Caffeine or a D-Bus
 +  /// screensaver inhibit is active.
@@ -114,22 +114,22 @@ index d61ce2c46a..9fb6fc699e 100644
    bool operator==(const IdleConfig&) const = default;
  };
 diff --git a/src/config/schema/config_schema.cpp b/src/config/schema/config_schema.cpp
-index a947b7c4d5..50ed4c4a3e 100644
+index f3876ed4ba..c27b8ff9cd 100644
 --- a/src/config/schema/config_schema.cpp
 +++ b/src/config/schema/config_schema.cpp
-@@ -876,6 +876,7 @@
+@@ -900,6 +900,7 @@
    const Schema<IdleConfig>& idleSchema() {
      static const Schema<IdleConfig> s = {
-         field(&IdleConfig::preActionFadeSeconds, "pre_action_fade_seconds", Range<float>{0.0f, 120.0f}),
+         field(&IdleConfig::preActionFadeSeconds, "pre_action_fade_seconds", Range<float>{0.0F, 120.0F}),
 +        field(&IdleConfig::publishLogindIdleHint, "publish_logind_idle_hint"),
          // behavior_order is emitted here (vector order); the actual reorder runs
          // last, after the behavior map has been read.
          custom<IdleConfig>(
 diff --git a/src/dbus/logind/logind_service.cpp b/src/dbus/logind/logind_service.cpp
-index 2f012abdd6..4e0b087069 100644
+index 89b8951939..984bf8dd6b 100644
 --- a/src/dbus/logind/logind_service.cpp
 +++ b/src/dbus/logind/logind_service.cpp
-@@ -17,6 +17,8 @@
+@@ -18,6 +18,8 @@
  
    const sdbus::ServiceName kLogindBusName{"org.freedesktop.login1"};
    const sdbus::ObjectPath kLogindObjectPath{"/org/freedesktop/login1"};
@@ -138,7 +138,7 @@ index 2f012abdd6..4e0b087069 100644
    constexpr auto kLogindManagerInterface = "org.freedesktop.login1.Manager";
    constexpr auto kLogindSessionInterface = "org.freedesktop.login1.Session";
  
-@@ -37,11 +39,30 @@
+@@ -52,11 +54,30 @@
          }
        }
  
@@ -171,7 +171,7 @@ index 2f012abdd6..4e0b087069 100644
        return sessionPath;
      } catch (const sdbus::Error& e) {
        kLog.warn("failed to resolve logind session: {}", e.what());
-@@ -60,33 +81,37 @@
+@@ -75,33 +96,37 @@
  }
  
  LogindService::~LogindService() {
@@ -214,7 +214,7 @@ index 2f012abdd6..4e0b087069 100644
  }
  
  void LogindService::setSessionLockIntegrationEnabled(bool enabled) {
-@@ -96,14 +121,40 @@
+@@ -111,11 +136,13 @@
    m_sessionLockIntegrationEnabled = enabled;
    if (!enabled) {
      releaseSleepDelayInhibit();
@@ -227,6 +227,10 @@ index 2f012abdd6..4e0b087069 100644
 +  if (m_sessionProxy != nullptr) {
 +    kLog.info("logind session lock monitor active ({})", m_sessionPath);
 +  }
+ }
+ 
+ void LogindService::setLockBeforeSuspendEnabled(bool enabled) {
+@@ -126,6 +153,30 @@
    (void)acquireSleepDelayInhibit();
  }
  
@@ -258,7 +262,7 @@ index 2f012abdd6..4e0b087069 100644
    m_prepareForSleepCallback = std::move(callback);
  }
 diff --git a/src/dbus/logind/logind_service.h b/src/dbus/logind/logind_service.h
-index 5a53f88b35..8c704bfa96 100644
+index f9698cc2c3..c208b15aee 100644
 --- a/src/dbus/logind/logind_service.h
 +++ b/src/dbus/logind/logind_service.h
 @@ -2,6 +2,8 @@
@@ -270,7 +274,7 @@ index 5a53f88b35..8c704bfa96 100644
  
  class SystemBus;
  
-@@ -25,6 +27,10 @@
+@@ -27,6 +29,10 @@
    void syncSessionLocked();
    void syncSessionUnlocked();
  
@@ -281,7 +285,7 @@ index 5a53f88b35..8c704bfa96 100644
    [[nodiscard]] bool supportsIdleInhibit() const noexcept;
    [[nodiscard]] bool hasIdleInhibit() const noexcept;
    bool acquireIdleInhibit();
-@@ -37,11 +43,14 @@
+@@ -39,11 +45,14 @@
    void releaseSleepDelayInhibit();
  
  private:
@@ -298,7 +302,7 @@ index 5a53f88b35..8c704bfa96 100644
    PrepareForSleepCallback m_prepareForSleepCallback;
    SessionLockCallback m_lockCallback;
 diff --git a/src/idle/idle_manager.cpp b/src/idle/idle_manager.cpp
-index d546020f62..e127a29adf 100644
+index 489d7d92d7..8f61ff1f8f 100644
 --- a/src/idle/idle_manager.cpp
 +++ b/src/idle/idle_manager.cpp
 @@ -130,7 +130,7 @@
@@ -335,10 +339,10 @@ index 9150d0e3ab..d9476747b7 100644
    void destroyHeartbeat();
    void notifyLiveIdleChanged();
 diff --git a/src/shell/settings/settings_registry.cpp b/src/shell/settings/settings_registry.cpp
-index 4f15c166f4..55c27dc43a 100644
+index 8afb78a6eb..020104687b 100644
 --- a/src/shell/settings/settings_registry.cpp
 +++ b/src/shell/settings/settings_registry.cpp
-@@ -2727,6 +2727,12 @@
+@@ -2762,6 +2762,12 @@
          "idle fade dim seconds overlay"
      ));
      entries.push_back(makeEntry(

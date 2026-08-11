@@ -1,11 +1,11 @@
 diff --git a/meson.build b/meson.build
-index 2f1b24102e..6c0b909808 100644
+index 2a7f66da24..08e0f6e736 100644
 --- a/meson.build
 +++ b/meson.build
-@@ -1105,6 +1105,7 @@
-     'desktop_entry_launch',
+@@ -1129,6 +1129,7 @@
      'disk_mounts',
      'dock_pinned_apps',
+     'event_link',
 +    'ext_workspace_order',
      'fcitx_status',
      'google_client_calendar_list',

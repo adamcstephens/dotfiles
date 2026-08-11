@@ -1,5 +1,5 @@
 diff --git a/src/idle/idle_manager.cpp b/src/idle/idle_manager.cpp
-index ad36fa362d..d546020f62 100644
+index 2402666d56..489d7d92d7 100644
 --- a/src/idle/idle_manager.cpp
 +++ b/src/idle/idle_manager.cpp
 @@ -77,9 +77,15 @@
