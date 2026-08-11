@@ -545,10 +545,18 @@ Pinnacle.setup(function()
     end)
   end
 
+  -- A swap shifts the layout under a stationary pointer, which emits
+  -- pointer_enter for the displaced window; that must not steal focus.
+  local swap_displaced = nil
+
   -- Enable sloppy focus
   Window.connect_signal({
     pointer_enter = function(window)
-      window:set_focused(true)
+      local displaced = swap_displaced
+      swap_displaced = nil
+      if window.id ~= displaced then
+        window:set_focused(true)
+      end
     end,
   })
 
@@ -631,6 +639,11 @@ Pinnacle.setup(function()
     return stack[(idx - 1 + offset) % #stack + 1], focused
   end
 
+  local function swap_windows(focused, target)
+    swap_displaced = target.id
+    focused:swap(target)
+  end
+
   for key_name, offset in pairs({ j = 1, k = -1 }) do
     -- focus-view next/previous
     Input.keybind({ mod_key }, key_name, function()
@@ -645,7 +658,7 @@ Pinnacle.setup(function()
     Input.keybind({ mod_key, "shift" }, key_name, function()
       local target, focused = stack_neighbor(offset)
       if target and focused then
-        focused:swap(target)
+        swap_windows(focused, target)
       end
     end, { group = "Window", description = "Swap with the " .. (offset == 1 and "next" or "previous") .. " window" })
   end
@@ -655,9 +668,7 @@ Pinnacle.setup(function()
     local focused = Window.get_focused()
     local master = view_stack()[1]
     if focused and master and master.id ~= focused.id then
-      focused:swap(master)
-      focused:set_focused(true)
-      focused:raise()
+      swap_windows(focused, master)
     end
   end, {
     group = "Window",
