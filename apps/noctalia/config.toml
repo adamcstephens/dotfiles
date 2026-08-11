@@ -20,12 +20,18 @@ margin_ends = 0
 radius = 0
 shadow = false
 
-
 [desktop_widgets]
 enabled = false
 
 [idle]
 publish_logind_idle_hint = true
+
+[location]
+auto_locate = true
+
+[nightlight]
+enabled = true
+temperature_night = 3000
 
 [notification]
 position = "top_center"
