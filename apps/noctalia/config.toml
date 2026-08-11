@@ -36,6 +36,7 @@ enabled = false
 [shell]
 font_family = "IBM Plex Sans"
 external_ip_enabled = false
+launch_apps_as_systemd_services = true
 password_style = "random"
 polkit_agent = true
 
