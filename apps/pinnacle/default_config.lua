@@ -650,6 +650,20 @@ Pinnacle.setup(function()
     end, { group = "Window", description = "Swap with the " .. (offset == 1 and "next" or "previous") .. " window" })
   end
 
+  -- mod_key + a = Move the focused window into the master area
+  Input.keybind({ mod_key }, "a", function()
+    local focused = Window.get_focused()
+    local master = view_stack()[1]
+    if focused and master and master.id ~= focused.id then
+      focused:swap(master)
+      focused:set_focused(true)
+      focused:raise()
+    end
+  end, {
+    group = "Window",
+    description = "Move the focused window to the master area",
+  })
+
   -- resize
   Input.keybind({
     mods = { mod_key, "shift" },
