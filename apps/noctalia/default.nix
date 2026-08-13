@@ -54,16 +54,6 @@ in
 
       enableDefaultPath = false;
 
-      environment = {
-        XDG_DATA_DIRS = lib.concatStringsSep ":" [
-          "${config.directory}/.local/state/hjem/standalone/current-profile/share"
-          "${config.directory}/.local/state/nix/profile/share"
-          "${config.directory}/.nix-profile/share"
-          "${config.directory}/.local/share/flatpak/exports/share"
-          "/run/current-system/sw/share"
-        ];
-      };
-
       path = [
         "${config.directory}/.local/state/hjem/standalone/current-profile"
         "/run/current-system/sw"
