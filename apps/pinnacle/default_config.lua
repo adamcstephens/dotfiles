@@ -28,6 +28,10 @@ Pinnacle.setup(function()
 
   local terminal = "terminal"
 
+  -- cursor
+  Input.set_xcursor_theme("Bibata-Original-Ice")
+  Input.set_xcursor_size(28)
+
   --------------------
   -- Mousebinds     --
   --------------------
