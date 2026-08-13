@@ -682,12 +682,32 @@ Pinnacle.setup(function()
   -- resize
   Input.keybind({
     mods = { mod_key, "shift" },
+    key = "l",
+    on_press = function()
+      Window.get_focused():resize_tile({ right = 20 })
+    end,
+    group = "Window",
+    description = "Increase window to the right",
+  })
+
+  Input.keybind({
+    mods = { mod_key, "shift" },
     key = key.Right,
     on_press = function()
       Window.get_focused():resize_tile({ right = 20 })
     end,
     group = "Window",
     description = "Increase window to the right",
+  })
+
+  Input.keybind({
+    mods = { mod_key, "shift" },
+    key = "h",
+    on_press = function()
+      Window.get_focused():resize_tile({ left = 20 })
+    end,
+    group = "Window",
+    description = "Increase window to the left",
   })
 
   Input.keybind({
