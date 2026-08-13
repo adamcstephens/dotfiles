@@ -33,6 +33,7 @@ in
 {
   imports = [
     ./gui.nix
+    ../apps/mimeapps
     ../apps/noctalia
     ../apps/pinnacle
     ../apps/shikane
@@ -57,7 +58,6 @@ in
     # HM module users
     # ../apps/dunst
     # ../apps/gammastep
-    # ../apps/mimeapps
     # ../apps/rofi
     # ../apps/hypridle
     # ../apps/kanshi
