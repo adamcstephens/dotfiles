@@ -162,8 +162,11 @@ in
       flake.packages.${pkgs.stdenv.hostPlatform.system}.screenshot
     ]
     ++ lib.optionals config.dotfiles.dev.enable [
-      # broken 2026-07-10
-      # pkgs.jetbrains.datagrip
+      (pkgs.jetbrains.datagrip.overrideAttrs (old: {
+        meta = old.meta // {
+          license = [ ];
+        };
+      }))
     ];
 
   systemd.targets.wayland-session = {
