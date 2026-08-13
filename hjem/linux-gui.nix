@@ -174,27 +174,4 @@ in
     wants = [ "graphical-session-pre.target" ];
     after = [ "graphical-session-pre.target" ];
   };
-
-  # xdg.desktopEntries = {
-  #   prj = {
-  #     name = "prj";
-  #     exec = "/run/current-system/sw/bin/systemd-cat --identifier=prj ${../bin/prj}";
-  #   };
-  #   reboot = {
-  #     name = "reboot";
-  #     exec = "/run/current-system/sw/bin/systemctl reboot";
-  #   };
-  #   screenshot = {
-  #     name = "screenshot";
-  #     exec = "${lib.getExe flake.packages.${pkgs.stdenv.hostPlatform.system}.screenshot} screen";
-  #   };
-  #   screenshotBox = {
-  #     name = "screenshot box";
-  #     exec = "${lib.getExe flake.packages.${pkgs.stdenv.hostPlatform.system}.screenshot} box";
-  #   };
-  #   screenshotWindow = {
-  #     name = "screenshot window";
-  #     exec = "${lib.getExe flake.packages.${pkgs.stdenv.hostPlatform.system}.screenshot} window";
-  #   };
-  # };
 }

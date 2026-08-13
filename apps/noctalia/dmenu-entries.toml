@@ -1,0 +1,7 @@
+[shell.launcher.dmenu.entry.commands]
+command = "printf 'box\nwindow\nscreen\n'"
+label = "Screenshot"
+prefix = "/screenshot"
+glyph = "screenshot"
+global = false
+exec = "screenshot {selection}"
