@@ -2,6 +2,7 @@
   config,
   flake,
   lib,
+  npins,
   pkgs,
   ...
 }:
@@ -61,21 +62,26 @@ in
     # ../apps/hypridle
     # ../apps/kanshi
     # ../apps/waybar
+
+    "${npins.hjem-rum}/modules/collection/misc/gtk.nix"
   ];
 
-  # dconf.settings = {
-  #   "org/gnome/desktop/interface" = {
-  #     color-scheme = "prefer-dark";
-  #   };
-  # };
+  _module.args.rumLib = import "${npins.hjem-rum}/modules/lib/default.nix" { inherit lib; };
 
   dotfiles = {
-    apps = {
-      # hypridle.enable = lib.mkDefault config.dotfiles.gui.wayland.enable;
-      # walker.enable = lib.mkDefault config.dotfiles.gui.wayland.enable;
-      # waybar.enable = lib.mkDefault config.dotfiles.gui.wayland.enable;
-    };
     gui.wayland.enable = true;
+  };
+
+  rum.misc.gtk = {
+    enable = true;
+    packages = [
+      pkgs.ibm-plex
+    ];
+
+    settings = {
+      font-name = "${config.dotfiles.gui.font.variable} 11";
+      application-prefer-dark-theme = true;
+    };
   };
 
   systemd.services.fc-cache = {
@@ -96,31 +102,6 @@ in
         <dir>${config.directory}/.local/state/hjem/standalone/current-profile/share/fonts</dir>
       </fontconfig>
     '';
-
-  # reads fonts from home.packages
-  # fonts.fontconfig.enable = true;
-
-  # gtk = {
-  #   enable = true;
-  #
-  #   gtk4.theme = config.gtk.theme;
-  #
-  #   font = {
-  #     name = config.dotfiles.gui.font.variable;
-  #     package = pkgs.ibm-plex;
-  #     size = 11;
-  #   };
-  #
-  #   iconTheme = {
-  #     name = "Flat-Remix-Orange-Dark";
-  #     package = pkgs.flat-remix-icon-theme;
-  #   };
-  #
-  #   theme = {
-  #     name = "Flat-Remix-GTK-Yellow-Darkest-Solid";
-  #     package = pkgs.flat-remix-gtk;
-  #   };
-  # };
 
   files.".local/share/icons".source =
     "${config.directory}/.local/state/hjem/standalone/current-profile/share/icons";
@@ -184,14 +165,6 @@ in
       # broken 2026-07-10
       # pkgs.jetbrains.datagrip
     ];
-
-  # qt = {
-  #   enable = true;
-  #   platformTheme.name = "qtct";
-  #   style.name = "kvantum";
-  # };
-
-  # systemd.startServices = "sd-switch";
 
   systemd.targets.wayland-session = {
     bindsTo = [ "graphical-session.target" ];

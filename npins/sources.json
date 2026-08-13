@@ -16,6 +16,19 @@
       "url": "https://api.github.com/repos/abenz1267/elephant/tarball/refs/tags/v2.22.0",
       "hash": "sha256-frlaSpCf/e94OqO5Glp1NW96bemc+BhrKoPu+4X1FyI="
     },
+    "hjem-rum": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "snugnug",
+        "repo": "hjem-rum"
+      },
+      "branch": "main",
+      "submodules": false,
+      "revision": "7db915475dcae2d69b7f9dd3e9cec3f7f2abe6f9",
+      "url": "https://github.com/snugnug/hjem-rum/archive/7db915475dcae2d69b7f9dd3e9cec3f7f2abe6f9.tar.gz",
+      "hash": "sha256-xnf/+FjpHFCAVgfE81RXLucvr9fgHdkkvNe6LYGuOXE="
+    },
     "modus-themes.nvim": {
       "type": "Git",
       "repository": {
