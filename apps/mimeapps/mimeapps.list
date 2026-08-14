@@ -11,7 +11,8 @@ application/x-extension-xhtml=firefox.desktop
 application/x-extension-xht=firefox.desktop
 x-scheme-handler/sgnl=signal.desktop
 x-scheme-handler/signalcaptcha=signal.desktop
-image/png=mpv.desktop
+image/png=org.gnome.eog.desktop
+image/jpeg=org.gnome.eog.desktop
 
 [Added Associations]
 x-scheme-handler/http=firefox.desktop;
@@ -26,4 +27,5 @@ application/x-extension-xhtml=firefox.desktop;
 application/x-extension-xht=firefox.desktop;
 x-scheme-handler/sgnl=signal.desktop;
 x-scheme-handler/signalcaptcha=signal.desktop;
-image/png=mpv.desktop;
+image/png=org.gnome.eog.desktop;
+image/jpeg=org.gnome.eog.desktop;
