@@ -104,13 +104,17 @@ in
     '';
 
   files.".local/share/icons".source =
-    "${config.directory}/.local/state/hjem/standalone/current-profile/share/icons";
+    (pkgs.buildEnv {
+      name = "icons";
+      paths = [
+        pkgs.bibata-cursors
+      ];
+    })
+    + "/share/icons";
 
   packages =
     config.dotfiles.gui.font.fontconfig.fontDirectories
     ++ [
-      pkgs.bibata-cursors
-
       pkgs.app2unit
 
       pkgs.et-book
