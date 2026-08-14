@@ -82,6 +82,7 @@
 
         path = [
           "${config.directory}/.local/state/hjem/standalone/current-profile"
+          "/run/wrappers"
           "/run/current-system/sw"
         ];
 
