@@ -37,6 +37,13 @@ let
       };
     }
   ];
+
+  standaloneModules = [
+    user
+    ./core.nix
+    ./dev.nix
+    ./linux-gui.nix
+  ];
 in
 {
   flake.hjemProfiles = {
@@ -51,47 +58,32 @@ in
     ];
   };
 
-  flake.hjemConfigurations.deck = withSystem "x86_64-linux" (
+  flake.hjemConfigurations = withSystem "x86_64-linux" (
     { pkgs, ... }:
-    inputs.hjem.standalone.hjemConfiguration {
-      inherit pkgs;
+    {
+      deck = inputs.hjem.standalone.hjemConfiguration {
+        inherit pkgs;
 
-      specialArgs = specialArgs // {
-        profile = "deck";
+        specialArgs = specialArgs // {
+          profile = "deck";
+        };
+
+        modules = standaloneModules;
       };
 
-      modules = [
-        user
-        ./core.nix
-        ./dev.nix
-        ./linux-gui.nix
-        (
-          { pkgs, ... }:
+      punk = inputs.hjem.standalone.hjemConfiguration {
+        inherit pkgs;
+
+        specialArgs = specialArgs // {
+          profile = "punk";
+        };
+
+        modules = standaloneModules ++ [
           {
-            dotfiles = {
-              apps = {
-                # hypridle.enable = false;
-                # sower.enable = true;
-                # swayidle.enable = true;
-                # zk.enable = true;
-              };
-              # gui = {
-              #   dpi = 148;
-              #   # autosuspend in nixos handles this
-              #   dontSleep = true;
-              #   wayland.enable = true;
-              # };
-            };
-
-            # packages = [
-            #   pkgs.sone
-            # ];
-
-            # dotfiles.apps.waybar.battery = "upower";
-            # programs.waybar.settings.main.network.format-disconnected = "";
+            dotfiles.apps.ssh.tpm.enable = true;
           }
-        )
-      ];
+        ];
+      };
     }
   );
 }
