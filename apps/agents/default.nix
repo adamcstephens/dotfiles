@@ -3,6 +3,7 @@
   inputs,
   lib,
   pkgs,
+  flake,
   ...
 }:
 let
@@ -80,6 +81,7 @@ in
   config = lib.mkIf cfg.enable {
     packages = [
       inputs.vein.packages.${pkgs.stdenv.hostPlatform.system}.vein
+      flake.packages.${pkgs.stdenv.hostPlatform.system}.veans
 
       agent-browser-wrapped
       claude-wrapped
