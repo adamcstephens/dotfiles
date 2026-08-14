@@ -7,7 +7,7 @@
 }:
 let
   configDir =
-    if pkgs.stdenv.isLinux || (lib.versionAtLeast pkgs.jj.version "0.29.0") then
+    if pkgs.stdenv.hostPlatform.isLinux || (lib.versionAtLeast pkgs.jj.version "0.29.0") then
       ".config/jj"
     else
       "Library/Application Support/jj";

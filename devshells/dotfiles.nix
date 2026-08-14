@@ -25,11 +25,11 @@ mkShell {
     ocamlPackages.ocamlformat
     ocamlPackages.ocaml-lsp
   ]
-  ++ lib.optionals pkgs.stdenv.isLinux [
+  ++ lib.optionals pkgs.stdenv.hostPlatform.isLinux [
     inputs.epi.packages.${pkgs.stdenv.hostPlatform.system}.epi
     inputs.sower.packages.${pkgs.stdenv.hostPlatform.system}.sower
   ]
-  ++ lib.optionals pkgs.stdenv.isDarwin [
+  ++ lib.optionals pkgs.stdenv.hostPlatform.isDarwin [
     pkgs.nh
   ];
 }

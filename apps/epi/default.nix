@@ -9,7 +9,8 @@ let
   tomlFormat = pkgs.formats.toml { };
 
   epiConfig = tomlFormat.generate "epi-config.toml" {
-    target = if pkgs.stdenv.isAarch64 then "~/.dotfiles#agents-aarch64" else "~/.dotfiles#agents";
+    target =
+      if pkgs.stdenv.hostPlatform.isAarch64 then "~/.dotfiles#agents-aarch64" else "~/.dotfiles#agents";
     cpus = 4;
     memory = 4096;
     mounts = [

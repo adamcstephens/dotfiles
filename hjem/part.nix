@@ -54,7 +54,7 @@ in
   flake.hjemConfigurations.deck = withSystem "x86_64-linux" (
     { pkgs, ... }:
     inputs.hjem.standalone.hjemConfiguration {
-      inherit pkgs ;
+      inherit pkgs;
 
       specialArgs = specialArgs // {
         profile = "deck";

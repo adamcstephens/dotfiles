@@ -37,7 +37,7 @@ let
   agent-browser = inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system}.agent-browser;
 
   agent-browser-wrapped =
-    if pkgs.stdenv.isLinux then
+    if pkgs.stdenv.hostPlatform.isLinux then
       pkgs.symlinkJoin {
         name = "agent-browser-wrapped";
         paths = [ agent-browser ];

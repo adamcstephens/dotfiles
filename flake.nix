@@ -83,7 +83,7 @@
               inherit (pkgs) callPackage;
               directory = ./packages;
             }
-            // lib.optionalAttrs pkgs.stdenv.isDarwin (
+            // lib.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin (
               lib.filesystem.packagesFromDirectoryRecursive {
                 inherit (pkgs) callPackage;
                 directory = ./packages-darwin;

@@ -46,7 +46,9 @@ mnw.lib.wrap pkgs {
   };
 
   initLua = ''
-    vim.g.sqlite_clib_path = '${sqlite.out}/lib/libsqlite3.${if stdenv.isDarwin then "dylib" else "so"}'
+    vim.g.sqlite_clib_path = '${sqlite.out}/lib/libsqlite3.${
+      if stdenv.hostPlatform.isDarwin then "dylib" else "so"
+    }'
 
     vim.opt.rtp:append("${dotvimPlugin}")
 

@@ -50,21 +50,18 @@ in
       '';
     };
     variant = mkOption {
-      type = types.enum [ "dark" "light" ];
-      default =
-        if builtins.substring 0 1 cfg.palette.base00 < "5" then
-          "dark"
-        else
-          "light";
+      type = types.enum [
+        "dark"
+        "light"
+      ];
+      default = if builtins.substring 0 1 cfg.palette.base00 < "5" then "dark" else "light";
       description = ''
         Whether the scheme is dark or light
       '';
     };
 
     palette = mkOption {
-      type = with types; attrsOf (
-        coercedTo str (removePrefix "#") hexColorType
-      );
+      type = with types; attrsOf (coercedTo str (removePrefix "#") hexColorType);
       default = { };
       example = literalExpression ''
         {

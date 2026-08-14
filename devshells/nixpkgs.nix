@@ -20,7 +20,7 @@ mkShellNoCC {
       pyright
       treefmt
     ]
-    ++ lib.optionals stdenv.isLinux [
+    ++ lib.optionals stdenv.hostPlatform.isLinux [
       bubblewrap
       cntr
     ];

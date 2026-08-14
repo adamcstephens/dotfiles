@@ -43,10 +43,10 @@ rustPlatform.buildRustPackage (finalAttrs: {
     libusb1
     zlib
   ]
-  ++ lib.optionals stdenv.isLinux [
+  ++ lib.optionals stdenv.hostPlatform.isLinux [
     udev
   ]
-  ++ lib.optionals stdenv.isDarwin [
+  ++ lib.optionals stdenv.hostPlatform.isDarwin [
     apple-sdk_15
   ];
 

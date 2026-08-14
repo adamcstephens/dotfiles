@@ -7,7 +7,7 @@
 }:
 let
   prj =
-    if (config.dotfiles.nixosManaged || pkgs.stdenv.isDarwin) then
+    if (config.dotfiles.nixosManaged || pkgs.stdenv.hostPlatform.isDarwin) then
       lib.getExe (pkgs.callPackage ../../packages/prj.nix { })
     else
       "${config.directory}/.dotfiles/bin/prj";
@@ -16,7 +16,7 @@ in
   packages = [
     pkgs.kitty.terminfo
   ]
-  ++ lib.optionals (!pkgs.stdenv.isDarwin) [ pkgs.kitty ];
+  ++ lib.optionals (!pkgs.stdenv.hostPlatform.isDarwin) [ pkgs.kitty ];
 
   xdg.config.files."kitty/kitty.conf".text = ''
     include ${config.xdg.config.directory}/kitty/dotfiles.conf
@@ -28,7 +28,7 @@ in
     shell_integration no-rc
 
   ''
-  + lib.optionalString pkgs.stdenv.isDarwin ''
+  + lib.optionalString pkgs.stdenv.hostPlatform.isDarwin ''
     font_size 13
     listen_on unix:''${TMPDIR}/kitty
     macos_option_as_alt both
@@ -36,7 +36,7 @@ in
     mouse_map cmd+left release grabbed,ungrabbed mouse_click_url
     confirm_os_window_close 1
   ''
-  + lib.optionalString pkgs.stdenv.isLinux ''
+  + lib.optionalString pkgs.stdenv.hostPlatform.isLinux ''
     font_size 10
     hide_window_decorations yes
     kitty_mod ctrl+shift

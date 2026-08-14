@@ -32,7 +32,7 @@
               beamPackages.hex
               beamPackages.rebar3
             ]
-            ++ (lib.optionals pkgs.stdenv.isLinux [ pkgs.inotify-tools ]);
+            ++ (lib.optionals pkgs.stdenv.hostPlatform.isLinux [ pkgs.inotify-tools ]);
 
             shellHook = ''
               export ERL_AFLAGS="-kernel shell_history enabled -kernel shell_history_file_bytes 1024000"

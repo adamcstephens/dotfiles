@@ -66,10 +66,10 @@
         pkgs.wget
         pkgs.zoxide
       ]
-      ++ lib.optionals (pkgs.stdenv.isLinux && (!config.dotfiles.gui.enable)) [
+      ++ lib.optionals (pkgs.stdenv.hostPlatform.isLinux && (!config.dotfiles.gui.enable)) [
         pkgs.ghostty.terminfo
       ]
-      ++ lib.optionals pkgs.stdenv.isDarwin [
+      ++ lib.optionals pkgs.stdenv.hostPlatform.isDarwin [
         pkgs.ghostty-bin.terminfo
       ];
     }

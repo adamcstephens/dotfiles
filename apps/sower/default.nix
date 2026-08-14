@@ -15,7 +15,7 @@ in
     enable = lib.mkOption {
       type = lib.types.bool;
       default = false;
-      # default = !config.dotfiles.nixosManaged && pkgs.stdenv.isLinux;
+      # default = !config.dotfiles.nixosManaged && pkgs.stdenv.hostPlatform.isLinux;
     };
   };
 

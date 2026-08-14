@@ -16,7 +16,7 @@
           [daemon]
           enabled = true
         ''
-        + lib.optionalString pkgs.stdenv.isLinux ''
+        + lib.optionalString pkgs.stdenv.hostPlatform.isLinux ''
           systemd_socket = true
         '';
     }

@@ -19,7 +19,8 @@
 let
   cfg = config.dotfiles.apps.display-switch;
 
-  configDir = if pkgs.stdenv.isLinux then ".config/display-switch" else "Library/Preferences";
+  configDir =
+    if pkgs.stdenv.hostPlatform.isLinux then ".config/display-switch" else "Library/Preferences";
   format = pkgs.formats.iniWithGlobalSection { };
   configFile = format.generate "display-switch.ini" cfg.settings;
 in

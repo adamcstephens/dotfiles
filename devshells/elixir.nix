@@ -21,7 +21,7 @@ mkShell {
     beamPackages.hex
     beamPackages.rebar3
   ]
-  ++ (lib.optionals stdenv.isLinux [ inotify-tools ]);
+  ++ (lib.optionals stdenv.hostPlatform.isLinux [ inotify-tools ]);
 
   shellHook = ''
     export ERL_AFLAGS="-kernel shell_history enabled -kernel shell_history_file_bytes 1024000"

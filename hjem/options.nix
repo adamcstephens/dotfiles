@@ -68,7 +68,7 @@ in
               pkgs.jetbrains-mono
               pkgs.noto-fonts
             ]
-            ++ lib.optionals pkgs.stdenv.isDarwin [ "/Library/Fonts" ];
+            ++ lib.optionals pkgs.stdenv.hostPlatform.isDarwin [ "/Library/Fonts" ];
           };
         };
       };
