@@ -6,19 +6,17 @@
   ...
 }:
 let
-  cfg = config.apps.ssh;
+  cfg = config.dotfiles.apps.ssh;
 in
 {
-  options.apps.ssh = {
-    agent = {
-      askpass = lib.mkEnableOption "askpass support";
-    };
-    tpm = lib.mkEnableOption "ssh-tpm-agent";
+  options.dotfiles.apps.ssh = {
+    agent.askpass.enable = lib.mkEnableOption "askpass support";
+    tpm.enable = lib.mkEnableOption "ssh-tpm-agent";
   };
 
   config = lib.mkMerge [
     {
-      packages = lib.optionals cfg.tpm [ pkgs.ssh-tpm-agent ];
+      packages = lib.optionals cfg.tpm.enable [ pkgs.ssh-tpm-agent ];
 
       files.".ssh/config".source =
         if config.dotfiles.nixosManaged then
@@ -28,14 +26,14 @@ in
     }
     (lib.optionalAttrs (lib.hasAttr "systemd" options) {
       systemd.services = {
-        ssh-agent = lib.mkIf cfg.agent.askpass {
+        ssh-agent = lib.mkIf cfg.agent.askpass.enable {
           wantedBy = lib.mkForce [ "graphical-session.target" ];
           environment = {
             SSH_ASKPASS = "${pkgs.seahorse}/libexec/seahorse/ssh-askpass";
           };
         };
 
-        ssh-tpm-agent = lib.mkIf cfg.tpm {
+        ssh-tpm-agent = lib.mkIf cfg.tpm.enable {
           wantedBy = [ "graphical-session.target" ];
           partOf = [ "graphical-session.target" ];
           requires = [ "ssh-agent.service" ];
