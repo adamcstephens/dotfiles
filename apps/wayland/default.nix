@@ -30,5 +30,7 @@
       pkgs.wlopm
       pkgs.wlr-randr
     ];
+
+    xdg.config.files."uwsm/env.d/hjem.sh".source = config.environment.loadEnv;
   };
 }

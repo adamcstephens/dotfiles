@@ -39,13 +39,7 @@
         DO_NOT_TRACK = "true";
         EDITOR = "${config.directory}/.dotfiles/bin/editor";
         PAGER = "${config.directory}/.dotfiles/bin/pager";
-        XDG_DATA_DIRS = lib.concatStringsSep ":" [
-          "${config.directory}/.local/state/hjem/standalone/current-profile/share"
-          "${config.directory}/.local/state/nix/profile/share"
-          "${config.directory}/.nix-profile/share"
-          "${config.directory}/.local/share/flatpak/exports/share"
-          "/run/current-system/sw/share"
-        ];
+        XDG_DATA_DIRS = "${config.directory}/.local/state/hjem/standalone/current-profile/share:\${XDG_DATA_DIRS}";
       };
 
       packages = [
@@ -74,16 +68,6 @@
       ];
     }
     (lib.optionalAttrs (lib.hasAttr "systemd" options) {
-      xdg.config.files."environment.d/90-hjem.conf".text =
-        config.environment.sessionVariables
-        |> lib.mapAttrsToList (
-          name: value:
-          ''${name}="${
-            if lib.isList value then lib.concatMapStringsSep ":" toString value else toString value
-          }"''
-        )
-        |> lib.concatLines;
-
       # systemd.services = lib.mkIf (!config.dotfiles.nixosManaged) {
       #   dotfiles-repo-pull = {
       #     wantedBy = [ "default.target" ];
