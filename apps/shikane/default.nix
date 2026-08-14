@@ -43,6 +43,21 @@
             }
           ];
         }
+        {
+          name = "punk";
+          output = [
+            {
+              enable = true;
+              search = [
+                "m=0x1400"
+                "s=Unknown"
+                "v=California Institute of Technology"
+              ];
+              mode = "3840x2160@60Hz";
+              scale = 1.75;
+            }
+          ];
+        }
       ];
     };
   };
