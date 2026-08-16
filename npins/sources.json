@@ -25,9 +25,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "7db915475dcae2d69b7f9dd3e9cec3f7f2abe6f9",
-      "url": "https://github.com/snugnug/hjem-rum/archive/7db915475dcae2d69b7f9dd3e9cec3f7f2abe6f9.tar.gz",
-      "hash": "sha256-xnf/+FjpHFCAVgfE81RXLucvr9fgHdkkvNe6LYGuOXE="
+      "revision": "5b60842e8f76ae5e818b502f874c469a92930d42",
+      "url": "https://github.com/snugnug/hjem-rum/archive/5b60842e8f76ae5e818b502f874c469a92930d42.tar.gz",
+      "hash": "sha256-QQecd6eWZj41JaWf2MoTtKj55N9o4OfnQYk7S5SsJWI="
     },
     "modus-themes.nvim": {
       "type": "Git",
@@ -38,9 +38,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "17a64464c27c1be605adca13dbe48f2f402fe107",
-      "url": "https://github.com/miikanissi/modus-themes.nvim/archive/17a64464c27c1be605adca13dbe48f2f402fe107.tar.gz",
-      "hash": "sha256-5w1a8ISBM90bwajkAupBFXoucHat+lQsyD5Rr0e2SKY="
+      "revision": "56233f0986ef6c8d0eab97e924e87144e584d970",
+      "url": "https://github.com/miikanissi/modus-themes.nvim/archive/56233f0986ef6c8d0eab97e924e87144e584d970.tar.gz",
+      "hash": "sha256-j10BCRHN6cTDx1+zBxgo6drtA9XoZAqaZg+1uTDQH4M="
     },
     "smart-splits.nvim": {
       "type": "Git",

@@ -10,10 +10,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.3.0",
-      "revision": "41c22e1fc2666c916b4be329e322368f5f86451e",
+      "version": "v0.4.0",
+      "revision": "eae7abc8ba13d2e13605a601c8508c759f20bfc8",
       "url": null,
-      "hash": "sha256-icFyR0q814mfLj+wT3ArSYwo50EWpn9BgI81qhbQDCQ="
+      "hash": "sha256-2YsANtNfp+Ya/fiTniregg5GWI8RqmSO4CmIreeexdE="
     },
     "nvim-highlight-colors": {
       "type": "Git",
