@@ -17,6 +17,7 @@ let
       "~/.config/claude"
       "~/.config/opencode"
       "~/.config/pi"
+      "~/.config/veans"
       "~/.copilot"
     ]
     ++ lib.optionals pkgs.stdenv.hostPlatform.isDarwin [
