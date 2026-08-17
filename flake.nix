@@ -49,32 +49,9 @@
           lib,
           pkgs,
           self',
-          system,
           ...
         }:
         {
-          _module.args.pkgs = import inputs.nixpkgs {
-            inherit system;
-
-            overlays = [
-              (_final: prev: {
-                pythonPackagesExtensions = prev.pythonPackagesExtensions ++ [
-                  (_pyFinal: pyPrev: {
-                    nanoemoji = pyPrev.nanoemoji.overrideAttrs (old: {
-                      src = old.src.overrideAttrs (oldsrc: {
-                        outputHash =
-                          let
-                            newhash = "sha256-FysyKC01XBnRiur5RR9fcsTxQqE8x0JJHSoe3q6JtKc=";
-                          in
-                          lib.throwIf (oldsrc.outputHash == newhash) "nanoemjoy overlay can be removed" newhash;
-                      });
-                    });
-                  })
-                ];
-              })
-            ];
-          };
-
           packages =
             let
               ocamlPackages = pkgs.ocaml-ng.ocamlPackages_5_5;
