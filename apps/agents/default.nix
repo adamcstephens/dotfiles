@@ -65,7 +65,10 @@ let
       wrapProgram $out/bin/pi \
         --set-default PI_CODING_AGENT_DIR "${config.directory}/.config/pi/agent" \
         --set-default PI_OFFLINE true \
-        --set-default PI_TELEMETRY true
+        --set-default PI_TELEMETRY true \
+        --set-default PI_LENS_HOME "${config.directory}/.config/pi/pi-lens" \
+        --set-default PI_LENS_CONFIG_PATH "${config.directory}/.config/pi/pi-lens/config.json" \
+        --set-default PILENS_DATA_DIR "${config.directory}/.config/pi/pi-lens/projects"
     '';
   };
 in
