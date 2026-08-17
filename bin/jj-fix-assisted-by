@@ -1,0 +1,82 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+revset='description(regex:"(?im)^Co-authored-by:")'
+dry_run=false
+describe_args=()
+
+usage() {
+	cat <<'EOF'
+Usage: jj-fix-assisted-by [OPTIONS]
+
+Rewrite "Co-Authored-By: ..." trailers to "Assisted-By: ..." across jj history.
+
+Options:
+      --revset <REVSET>     Revisions to scan
+                            (default: description(regex:"(?im)^Co-authored-by:"))
+      --dry-run             Show what would change, rewrite nothing
+      --include-immutable   Also rewrite immutable commits (already-pushed history)
+      --help                Show this help
+EOF
+}
+
+while [ $# -gt 0 ]; do
+	case "$1" in
+	--revset)
+		revset="$2"
+		shift 2
+		;;
+	--dry-run)
+		dry_run=true
+		shift
+		;;
+	--include-immutable)
+		describe_args+=(--ignore-immutable)
+		shift
+		;;
+	--help)
+		usage
+		exit 0
+		;;
+	*)
+		echo "unknown option: $1" >&2
+		usage >&2
+		exit 2
+		;;
+	esac
+done
+
+changes=()
+while IFS= read -r change; do
+	[ -n "$change" ] && changes+=("$change")
+done < <(jj log --no-graph --revisions "$revset" --template 'change_id ++ "\n"')
+
+if [ ${#changes[@]} -eq 0 ]; then
+	echo "No revisions matched: $revset"
+	exit 0
+fi
+
+rewritten=0
+for change in "${changes[@]}"; do
+	old=$(jj log --no-graph --revisions "$change" --template 'description')
+	new=$(printf '%s\n' "$old" | perl -pe 's/^Co-authored-by:/Assisted-By:/i')
+
+	if [ "$new" = "$old" ]; then
+		continue
+	fi
+
+	summary=$(printf '%s\n' "$old" | head -1)
+	echo "${change:0:8}  $summary"
+	diff <(printf '%s\n' "$old") <(printf '%s\n' "$new") | sed 's/^/    /' || true
+
+	if [ "$dry_run" = false ]; then
+		printf '%s\n' "$new" | jj describe "$change" --stdin "${describe_args[@]}"
+	fi
+	rewritten=$((rewritten + 1))
+done
+
+if [ "$dry_run" = true ]; then
+	echo "Dry run: $rewritten change(s) would be rewritten."
+else
+	echo "Rewrote $rewritten change(s). Undo with: jj undo"
+fi
