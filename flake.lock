@@ -28,16 +28,15 @@
         ]
       },
       "locked": {
-        "lastModified": 1786381483,
-        "narHash": "sha256-/MeOibq+eViALwjPE9hoqqQn7Ay/hw2cHXUWXb1UXlI=",
-        "owner": "adamcstephens",
+        "lastModified": 1787092639,
+        "narHash": "sha256-uxi+L7I3W1qhgutXSzF/PorynGKzgfqiWemsQwAaW5s=",
+        "owner": "figsoda",
         "repo": "drowse",
-        "rev": "358114c57372a1dfad97cb0142f6a850bb07c37d",
+        "rev": "f605ebf75f5f6c6a187afa7e45ff27e41804920c",
         "type": "github"
       },
       "original": {
-        "owner": "adamcstephens",
-        "ref": "push-mvosvrtpsrpq",
+        "owner": "figsoda",
         "repo": "drowse",
         "type": "github"
       }
@@ -222,11 +221,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1786999096,
-        "narHash": "sha256-1OqjgvwoTpeLhHmrnjUwStWr7CDdT1wE9hibnVifMdg=",
+        "lastModified": 1787155907,
+        "narHash": "sha256-HWTyPU61TL9WvttU2ZC7aXjF66EH91VwEmJRqP28OnM=",
         "ref": "refs/heads/main",
-        "rev": "69f0c833aede7992804000fd7b89352badc14dd8",
-        "revCount": 37,
+        "rev": "1fd27383ed5abdb252e823314c5ba2e112797d41",
+        "revCount": 42,
         "type": "git",
         "url": "https://tangled.org/adam.robins.wtf/nbac"
       },
