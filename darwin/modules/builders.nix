@@ -98,6 +98,10 @@ in
           "nixos-test"
         ];
         virtualization.enable = true;
+        home.enable = true;
+        image.packages = [
+          "nix-output-monitor"
+        ];
       };
 
       users.knownUsers = [ "remote-builder" ];
