@@ -11,46 +11,45 @@ dotlib.find_git_up()
 is_jj: bool = os.path.isdir(".jj")
 
 
-def get_default_branch() -> str:
-    heads = [".git/refs/remotes/upstream/HEAD", ".git/refs/remotes/origin/HEAD"]
+def get_default_remote_branch() -> tuple[str, str]:
+    remotes = ["upstream", "origin"]
+    refs = " ".join(f"refs/remotes/{r}/HEAD" for r in remotes)
 
-    head: str = ""
+    output = dotlib.run(f'git for-each-ref --format "%(refname) %(symref)" {refs}')
 
-    for h in heads:
-        if os.path.exists(h):
-            head = h
-            break
-
-    if head == "":
-        print("Failed to find git HEAD")
+    if output is None:
+        print("Failed to list remote HEADs")
         sys.exit(1)
 
-    head = head.replace(".git/", "")
+    heads = dict(line.split() for line in output.splitlines())
 
-    ref = dotlib.run(f"git symbolic-ref {head}")
+    for remote in remotes:
+        head = heads.get(f"refs/remotes/{remote}/HEAD")
 
-    if ref is None:
-        print("Failed to load symbolic-ref")
-        sys.exit(1)
+        if head is not None:
+            return remote, os.path.basename(head)
 
-    return os.path.basename(ref)
+    print("Failed to find git HEAD")
+    sys.exit(1)
 
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-r", "--rebase", action="store_true", help="rebase (jj only)")
 args = parser.parse_args()
 
-branch = get_default_branch()
+remote, branch = get_default_remote_branch()
 
 if is_jj:
+    target = f"{branch}@{remote}"
+
     dotlib.run("jj git fetch --all-remotes", capture_output=False)
     if args.rebase:
-        dotlib.run(f"jj rebase --destination {branch}", capture_output=False)
-        print(f"Rebased on {branch}")
+        dotlib.run(f"jj rebase --destination {target}", capture_output=False)
+        print(f"Rebased on {target}")
     else:
-        dotlib.run(f"jj new {branch}", capture_output=False)
-        print(f"New commit on {branch}")
+        dotlib.run(f"jj new {target}", capture_output=False)
+        print(f"New commit on {target}")
 else:
     dotlib.run(f"git switch {branch}", capture_output=False)
-    dotlib.run("git pull --prune", capture_output=False)
-    print(f"Switched and updated to {branch}")
+    dotlib.run(f"git pull --prune {remote} {branch}", capture_output=False)
+    print(f"Switched and updated to {branch} from {remote}")
