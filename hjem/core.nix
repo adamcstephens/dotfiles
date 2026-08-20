@@ -30,6 +30,7 @@
     ../apps/starship
     ../apps/tmux
     ../apps/tmuxinator
+    ../apps/zellij
     ../apps/zsh
   ];
 
