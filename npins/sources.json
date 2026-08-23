@@ -25,9 +25,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "5b60842e8f76ae5e818b502f874c469a92930d42",
-      "url": "https://github.com/snugnug/hjem-rum/archive/5b60842e8f76ae5e818b502f874c469a92930d42.tar.gz",
-      "hash": "sha256-QQecd6eWZj41JaWf2MoTtKj55N9o4OfnQYk7S5SsJWI="
+      "revision": "217c6e1f445b3973ca8f988f070c9b84cceaa1ca",
+      "url": "https://github.com/snugnug/hjem-rum/archive/217c6e1f445b3973ca8f988f070c9b84cceaa1ca.tar.gz",
+      "hash": "sha256-LLToYudTlFqNY0NsG//CnE2I/zF0cpktX44ZhFJ2alY="
     },
     "modus-themes.nvim": {
       "type": "Git",
