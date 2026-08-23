@@ -86,4 +86,9 @@ in
       };
     }
   );
+
+  flake.packages.x86_64-linux = {
+    "hjem/deck" = self.hjemConfigurations.deck.toplevel;
+    "hjem/punk" = self.hjemConfigurations.punk.toplevel;
+  };
 }
