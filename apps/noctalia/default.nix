@@ -21,10 +21,6 @@ in
               ./add-pinnacle.patch
               ./logind-idle-hint.patch
               ./inhibit-sync.patch
-              (pkgs.fetchpatch2 {
-                url = "https://github.com/noctalia-dev/noctalia/commit/4dcb8254eeed28edd69ec2d3bec90715b19ba0fd.patch?full_index=1";
-                hash = "sha256-zDbCgYbkedH7JCSR/ajXOaB3dlS6UkZb9rNwIF+s5yE=";
-              })
             ];
           });
     };
