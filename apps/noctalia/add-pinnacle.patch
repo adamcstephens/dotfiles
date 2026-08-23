@@ -1,10 +1,10 @@
 diff --git a/src/compositors/compositor_detect.cpp b/src/compositors/compositor_detect.cpp
-index 937af564fc..26442869d5 100644
+index bc033716bb..f58145bf67 100644
 --- a/src/compositors/compositor_detect.cpp
 +++ b/src/compositors/compositor_detect.cpp
-@@ -48,6 +48,9 @@
-       if (const char* v = std::getenv("MANGO_INSTANCE_SIGNATURE"); v != nullptr && v[0] != '\0') {
-         return CompositorKind::Mango;
+@@ -51,6 +51,9 @@
+       if (const char* v = std::getenv("UMBRIEL_SOCKET"); v != nullptr && v[0] != '\0') {
+         return CompositorKind::Umbriel;
        }
 +      if (const char* v = std::getenv("PINNACLE_GRPC_SOCKET"); v != nullptr && v[0] != '\0') {
 +        return CompositorKind::Pinnacle;
@@ -12,7 +12,7 @@ index 937af564fc..26442869d5 100644
  
        // Fall back to the desktop env hint (covers dwl-style compositors that don't expose a socket var).
        const std::string hint = buildEnvHint();
-@@ -69,6 +72,9 @@
+@@ -72,6 +75,9 @@
        if (StringUtils::containsInsensitive(hint, "dwl")) {
          return CompositorKind::Dwl;
        }
@@ -22,55 +22,55 @@ index 937af564fc..26442869d5 100644
        if (StringUtils::containsInsensitive(hint, "labwc")) {
          return CompositorKind::Labwc;
        }
-@@ -103,6 +109,8 @@
-       return "Labwc";
-     case CompositorKind::Kde:
+@@ -111,6 +117,8 @@
        return "KDE";
+     case CompositorKind::Umbriel:
+       return "Umbriel";
 +    case CompositorKind::Pinnacle:
 +      return "Pinnacle";
      case CompositorKind::Unknown:
        return "Unknown";
      }
 diff --git a/src/compositors/compositor_detect.h b/src/compositors/compositor_detect.h
-index 73326a52d6..db9e60c8ae 100644
+index caea4eccd5..569ccc8f6d 100644
 --- a/src/compositors/compositor_detect.h
 +++ b/src/compositors/compositor_detect.h
-@@ -15,6 +15,7 @@
-     Triad = 6,
+@@ -16,6 +16,7 @@
      Dwl = 7,
      Kde = 8,
-+    Pinnacle = 9,
+     Umbriel = 9,
++    Pinnacle = 10,
    };
  
    // Detected once per process from env vars. Cached after the first call.
-@@ -34,5 +35,6 @@
-   [[nodiscard]] inline bool isTriad() { return detect() == CompositorKind::Triad; }
+@@ -36,5 +37,6 @@
    [[nodiscard]] inline bool isDwl() { return detect() == CompositorKind::Dwl; }
    [[nodiscard]] inline bool isKde() { return detect() == CompositorKind::Kde; }
+   [[nodiscard]] inline bool isUmbriel() { return detect() == CompositorKind::Umbriel; }
 +  [[nodiscard]] inline bool isPinnacle() { return detect() == CompositorKind::Pinnacle; }
  
  } // namespace compositors
 diff --git a/src/compositors/compositor_platform.cpp b/src/compositors/compositor_platform.cpp
-index 4f60c31a5f..46274bbe3c 100644
+index 29a19cbfa8..1b93af581f 100644
 --- a/src/compositors/compositor_platform.cpp
 +++ b/src/compositors/compositor_platform.cpp
-@@ -354,6 +354,7 @@
-     case compositors::CompositorKind::Dwl:
+@@ -358,6 +358,7 @@
      case compositors::CompositorKind::Labwc:
      case compositors::CompositorKind::Kde:
+     case compositors::CompositorKind::Umbriel:
 +    case compositors::CompositorKind::Pinnacle:
      case compositors::CompositorKind::Unknown:
        return std::make_unique<LambdaOutputPowerBackend>(&setGenericOutputPower);
      }
-@@ -375,6 +376,7 @@
-     case compositors::CompositorKind::Labwc:
+@@ -380,6 +381,7 @@
      case compositors::CompositorKind::Kde:
      case compositors::CompositorKind::Mango:
+     case compositors::CompositorKind::Umbriel:
 +    case compositors::CompositorKind::Pinnacle:
      case compositors::CompositorKind::Unknown:
        break;
      }
-@@ -394,6 +396,7 @@
+@@ -401,6 +403,7 @@
      case compositors::CompositorKind::Dwl:
      case compositors::CompositorKind::Kde:
      case compositors::CompositorKind::Labwc:
@@ -78,7 +78,7 @@ index 4f60c31a5f..46274bbe3c 100644
      case compositors::CompositorKind::Unknown:
        break;
      }
-@@ -416,6 +419,7 @@
+@@ -425,6 +428,7 @@
      case compositors::CompositorKind::Dwl:
      case compositors::CompositorKind::Labwc:
      case compositors::CompositorKind::Kde:
@@ -86,7 +86,7 @@ index 4f60c31a5f..46274bbe3c 100644
      case compositors::CompositorKind::Unknown:
        break;
      }
-@@ -1553,6 +1557,7 @@
+@@ -1568,6 +1572,7 @@
      }
      break;
    case compositors::CompositorKind::Kde:
@@ -229,7 +229,7 @@ index 354ce8c481..151d710701 100644
 +  bool m_exclusiveActivation = false;
  };
 diff --git a/src/wayland/wayland_workspaces.cpp b/src/wayland/wayland_workspaces.cpp
-index 2c22c3e23e..927d0e74a7 100644
+index b22a558281..865012d776 100644
 --- a/src/wayland/wayland_workspaces.cpp
 +++ b/src/wayland/wayland_workspaces.cpp
 @@ -190,6 +190,7 @@
