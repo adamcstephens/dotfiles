@@ -49,10 +49,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v19.22.0",
-      "revision": "2b959b2bf5fdb13e3b333c078ba549996e477b7c",
+      "version": "v19.23.0",
+      "revision": "fd07e440c115e318031c5f3f8c746f01eb4cac56",
       "url": null,
-      "hash": "sha256-JYxW59FelB2vvC0Yr7eV2vqKeIIUzPs79ohmgVRc91Q="
+      "hash": "sha256-Qwp5GMiThljD7l9ygl8T333OlBQ2Me1k6/KWAkFq4QU="
     },
     "conform.nvim": {
       "type": "GitRelease",
@@ -169,9 +169,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "221c43884319e791519f0d6c94a7f2fbcd653278",
+      "revision": "af9adce488c75ca0a81017945c2b7fa7b461bc23",
       "url": null,
-      "hash": "sha256-wosaQ2DTbV58hv/ohnSJQG28srpp/Ietv0EQE/P9RwM="
+      "hash": "sha256-ckJLCAWPudUZEt3WkNsx/WTd9sUereg8hBHC9NOVTaw="
     },
     "nvim-surround": {
       "type": "GitRelease",
