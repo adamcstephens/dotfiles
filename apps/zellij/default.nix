@@ -13,12 +13,21 @@ in
     package
   ];
 
-  files.".config/zellij".source =
-    if config.dotfiles.nixosManaged then ./. else "${config.directory}/.dotfiles/apps/zellij";
+  xdg.config.files."zellij/config.kdl".source =
+    if config.dotfiles.nixosManaged then
+      ./config.kdl
+    else
+      "${config.directory}/.dotfiles/apps/zellij/config.kdl";
 
-  files.".config/zellij/themes/moonfly.kdl".source =
+  xdg.config.files."zellij/themes".source =
+    if config.dotfiles.nixosManaged then
+      ./themes
+    else
+      "${config.directory}/.dotfiles/apps/zellij/themes";
+
+  xdg.config.files."zellij/themes/moonfly.kdl".source =
     npins.vim-moonfly-colors + "/extras/moonfly-zellij.kdl";
 
-  files.".config/zellij/plugins/vim-zellij-navigator.wasm".source =
+  xdg.config.files."zellij/plugins/vim-zellij-navigator.wasm".source =
     pkgs.zellijPlugins.vim-zellij-navigator;
 }
