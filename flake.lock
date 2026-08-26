@@ -132,24 +132,6 @@
         "type": "github"
       }
     },
-    "flake-parts_5": {
-      "inputs": {
-        "nixpkgs-lib": "nixpkgs-lib_5"
-      },
-      "locked": {
-        "lastModified": 1778716662,
-        "narHash": "sha256-m1Yf0wZ8j1OHjTc2UwHwyQRSnNeSgLJOd7q5Y45hzi4=",
-        "owner": "hercules-ci",
-        "repo": "flake-parts",
-        "rev": "f7c1a2d347e4c52d5fb8d10cb4d94b5884e546fb",
-        "type": "github"
-      },
-      "original": {
-        "owner": "hercules-ci",
-        "repo": "flake-parts",
-        "type": "github"
-      }
-    },
     "haumea": {
       "inputs": {
         "nixpkgs": [
@@ -367,21 +349,6 @@
         "type": "github"
       }
     },
-    "nixpkgs-lib_5": {
-      "locked": {
-        "lastModified": 1777168982,
-        "narHash": "sha256-GOkGPcboWE9BmGCRMLX3worL4EMnsnG8MyKmXNeYuhQ=",
-        "owner": "nix-community",
-        "repo": "nixpkgs.lib",
-        "rev": "f5901329dade4a6ea039af1433fb087bd9c1fe14",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "nixpkgs.lib",
-        "type": "github"
-      }
-    },
     "nixpkgs_2": {
       "locked": {
         "lastModified": 1787498568,
@@ -414,22 +381,6 @@
         "type": "github"
       }
     },
-    "nixpkgs_4": {
-      "locked": {
-        "lastModified": 1780749050,
-        "narHash": "sha256-3av0pIjlOWQ6rDbNOmpUSvbNnJkGORQKKjb4LtCZsIY=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "a799d3e3886da994fa307f817a6bc705ae538eeb",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixos-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "profile-parts": {
       "locked": {
         "lastModified": 1717213353,
@@ -457,8 +408,7 @@
         "nixos-unstable-small": "nixos-unstable-small",
         "nixpkgs": "nixpkgs_2",
         "profile-parts": "profile-parts",
-        "sower": "sower",
-        "vein": "vein"
+        "sower": "sower"
       }
     },
     "sower": {
@@ -479,25 +429,6 @@
       "original": {
         "type": "git",
         "url": "https://tangled.org/adam.robins.wtf/sower"
-      }
-    },
-    "vein": {
-      "inputs": {
-        "flake-parts": "flake-parts_5",
-        "nixpkgs": "nixpkgs_4"
-      },
-      "locked": {
-        "lastModified": 1781561711,
-        "narHash": "sha256-13E59T47Ih60zrMs7SqyFiqiAjl644biER56HVmHzZQ=",
-        "ref": "refs/heads/main",
-        "rev": "e58f5f698f15be6a3a4bfbc1459accb7037dfae6",
-        "revCount": 75,
-        "type": "git",
-        "url": "https://tangled.org/adam.robins.wtf/vein"
-      },
-      "original": {
-        "type": "git",
-        "url": "https://tangled.org/adam.robins.wtf/vein"
       }
     }
   },

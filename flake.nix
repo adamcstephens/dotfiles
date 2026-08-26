@@ -18,7 +18,6 @@
     nix-index-database.url = "github:nix-community/nix-index-database";
     profile-parts.url = "git+https://tangled.org/adam.robins.wtf/profile-parts";
     sower.url = "git+https://tangled.org/adam.robins.wtf/sower";
-    vein.url = "git+https://tangled.org/adam.robins.wtf/vein";
   };
 
   outputs =
