@@ -18,7 +18,6 @@ bump-pins:
 [env("NIX_CONFIG", "experimental-features = nix-command flakes pipe-operators pipe-operator")]
 bump-packages:
     nix-update --flake arkenfox --commit
-    nix-update --flake toney --commit
 
 nix-darwin-bootstrap:
     sudo $(nix build .#darwin/$(hostname -s) --print-out-paths)/sw/bin/darwin-rebuild switch --flake ~/.dotfiles

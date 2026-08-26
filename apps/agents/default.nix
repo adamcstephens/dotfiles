@@ -63,7 +63,7 @@ in
   config = lib.mkIf cfg.enable {
     packages = [
       inputs.vein.packages.${pkgs.stdenv.hostPlatform.system}.vein
-      flake.packages.${pkgs.stdenv.hostPlatform.system}.veans
+      pkgs.vikunja.veans
 
       agent-browser-wrapped
       claude-wrapped
