@@ -1,5 +1,7 @@
 {
-  "extends": ["claude-code"],
+  "extends": [
+    "claude-code"
+  ],
   "meta": {
     "name": "claude-code-dotfiles",
     "version": "1.0.0",
@@ -22,7 +24,9 @@
     "deny": []
   },
   "filesystem": {
-    "allow": ["/usage-credits"],
+    "allow": [
+      "/usage-credits"
+    ],
     "read": [
       "/nix/store",
       "~/.config/claude",
@@ -77,6 +81,7 @@
     "listen_port": [],
     "listen_port_range": [],
     "connect_port": [],
+    "no_proxy": [],
     "custom_credentials": {},
     "tls_intercept": null,
     "upstream_proxy": null,
@@ -101,6 +106,12 @@
   "rollback": {
     "exclude_patterns": [],
     "exclude_globs": []
+  },
+  "open_urls": {
+    "allow_origins": [
+      "https://publicapi.turvo.com"
+    ],
+    "allow_localhost": false
   },
   "interactive": false,
   "skipdirs": [],

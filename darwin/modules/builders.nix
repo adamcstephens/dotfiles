@@ -31,7 +31,7 @@ in
         buildMachines = [
           {
             protocol = "ssh-ng";
-            hostName = "leaf.h.junco.dev";
+            hostName = "leaf.v.robins.wtf";
             maxJobs = 8;
             sshUser = "builder";
             supportedFeatures = [
@@ -78,7 +78,7 @@ in
 
       environment.etc."ssh/ssh_config.d/100-leaf.conf" = {
         text = ''
-          Host leaf.h.junco.dev
+          Host leaf.v.robins.wtf
               ControlMaster auto
               ControlPath ~/.ssh/%r@%h-%p
               ControlPersist 600
@@ -89,7 +89,7 @@ in
         enable = true;
         machine = {
           cpus = 16;
-          memory = "12G";
+          memory = "32G";
         };
         stateDir = "/Users/adam/.local/state/nbac";
         supportedFeatures = [
@@ -100,6 +100,7 @@ in
         virtualization.enable = true;
         home.enable = true;
         image.packages = [
+          "btop"
           "nix-output-monitor"
         ];
       };
