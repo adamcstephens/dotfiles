@@ -1,8 +1,8 @@
 diff --git a/assets/translations/en.json b/assets/translations/en.json
-index ad2daa813f..8138fc4046 100644
+index f4240284a3..9eb78f91f1 100644
 --- a/assets/translations/en.json
 +++ b/assets/translations/en.json
-@@ -2119,6 +2119,10 @@
+@@ -2124,6 +2124,10 @@
            "description": "Named idle actions with presets (lock, screen off, suspend) or custom commands, timeouts, resume pairing, and order",
            "label": "Behaviors"
          },
@@ -14,10 +14,10 @@ index ad2daa813f..8138fc4046 100644
            "description": "Seconds of fullscreen dim before the idle command (0 disables)",
            "label": "Idle Dim"
 diff --git a/example.toml b/example.toml
-index 0a45ae8415..d88507bdd0 100644
+index c55ab8d635..cc7f097e2f 100644
 --- a/example.toml
 +++ b/example.toml
-@@ -304,8 +304,12 @@
+@@ -306,8 +306,12 @@
  # Optional `[idle]` keys:
  #   pre_action_fade_seconds — fade a fullscreen surface-color overlay in over this many seconds, then run `command`.
  #                             Use 0 for immediate commands with no overlay. Input during the fade cancels.
@@ -99,10 +99,10 @@ index da576b7a1c..1b859b9650 100644
        },
        "idle"
 diff --git a/src/config/config_types.h b/src/config/config_types.h
-index 9c36fcf14a..da010c8892 100644
+index 21f1374c42..639b0f4804 100644
 --- a/src/config/config_types.h
 +++ b/src/config/config_types.h
-@@ -299,6 +299,10 @@
+@@ -301,6 +301,10 @@
    /// from transparent to opaque over this many seconds, then runs `command`. Compositor activity during
    /// the fade cancels. When 0, the idle command runs immediately with no overlay.
    float preActionFadeSeconds = 2.0F;
@@ -114,10 +114,10 @@ index 9c36fcf14a..da010c8892 100644
    bool operator==(const IdleConfig&) const = default;
  };
 diff --git a/src/config/schema/config_schema.cpp b/src/config/schema/config_schema.cpp
-index 1f219b3891..febe71d178 100644
+index e077efbd04..8cc7c0235f 100644
 --- a/src/config/schema/config_schema.cpp
 +++ b/src/config/schema/config_schema.cpp
-@@ -935,6 +935,7 @@
+@@ -924,6 +924,7 @@
    const Schema<IdleConfig>& idleSchema() {
      static const Schema<IdleConfig> s = {
          field(&IdleConfig::preActionFadeSeconds, "pre_action_fade_seconds", Range<float>{0.0F, 120.0F}),
@@ -339,10 +339,10 @@ index 579c61b3ed..d90c45686c 100644
    void destroyHeartbeat();
    void notifyLiveIdleChanged();
 diff --git a/src/shell/settings/settings_registry.cpp b/src/shell/settings/settings_registry.cpp
-index bd9d3b5c05..e6432b3d09 100644
+index e38e241756..59d94de018 100644
 --- a/src/shell/settings/settings_registry.cpp
 +++ b/src/shell/settings/settings_registry.cpp
-@@ -2778,6 +2778,12 @@
+@@ -2779,6 +2779,12 @@
          "idle fade dim seconds overlay"
      ));
      entries.push_back(makeEntry(

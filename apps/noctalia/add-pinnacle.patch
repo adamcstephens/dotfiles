@@ -51,18 +51,18 @@ index caea4eccd5..569ccc8f6d 100644
  
  } // namespace compositors
 diff --git a/src/compositors/compositor_platform.cpp b/src/compositors/compositor_platform.cpp
-index 29a19cbfa8..1b93af581f 100644
+index dd73c99b40..2667617625 100644
 --- a/src/compositors/compositor_platform.cpp
 +++ b/src/compositors/compositor_platform.cpp
-@@ -358,6 +358,7 @@
+@@ -364,6 +364,7 @@
+     case compositors::CompositorKind::Dwl:
      case compositors::CompositorKind::Labwc:
      case compositors::CompositorKind::Kde:
-     case compositors::CompositorKind::Umbriel:
 +    case compositors::CompositorKind::Pinnacle:
      case compositors::CompositorKind::Unknown:
        return std::make_unique<LambdaOutputPowerBackend>(&setGenericOutputPower);
      }
-@@ -380,6 +381,7 @@
+@@ -386,6 +387,7 @@
      case compositors::CompositorKind::Kde:
      case compositors::CompositorKind::Mango:
      case compositors::CompositorKind::Umbriel:
@@ -70,7 +70,7 @@ index 29a19cbfa8..1b93af581f 100644
      case compositors::CompositorKind::Unknown:
        break;
      }
-@@ -401,6 +403,7 @@
+@@ -407,6 +409,7 @@
      case compositors::CompositorKind::Dwl:
      case compositors::CompositorKind::Kde:
      case compositors::CompositorKind::Labwc:
@@ -78,7 +78,7 @@ index 29a19cbfa8..1b93af581f 100644
      case compositors::CompositorKind::Unknown:
        break;
      }
-@@ -425,6 +428,7 @@
+@@ -431,6 +434,7 @@
      case compositors::CompositorKind::Dwl:
      case compositors::CompositorKind::Labwc:
      case compositors::CompositorKind::Kde:
@@ -86,7 +86,7 @@ index 29a19cbfa8..1b93af581f 100644
      case compositors::CompositorKind::Unknown:
        break;
      }
-@@ -1568,6 +1572,7 @@
+@@ -1574,6 +1578,7 @@
      }
      break;
    case compositors::CompositorKind::Kde:
