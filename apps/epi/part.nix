@@ -35,8 +35,6 @@ let
           directory = "/home/adam";
           user = "adam";
           files.".dotfiles".source = "${self}";
-
-          dotfiles.apps.agents.enable = true;
         };
       };
 

@@ -21,7 +21,6 @@
     users.adam = {
       directory = "/Users/adam";
       user = "adam";
-      dotfiles.apps.agents.enable = true;
       packages = [
         pkgs.e1s
         pkgs.terraform-mcp-server

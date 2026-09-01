@@ -8,6 +8,8 @@
 
     epi.url = "git+https://tangled.org/adam.robins.wtf/epi";
     flake-parts.url = "github:hercules-ci/flake-parts";
+    llm-agents.url = "github:numtide/llm-agents.nix";
+    llm-agents.inputs.nixpkgs.follows = "nixpkgs";
     mnw.url = "github:Gerg-L/mnw";
     nbac.inputs.nix-darwin.follows = "nix-darwin";
     nbac.inputs.nixpkgs.follows = "nixpkgs";

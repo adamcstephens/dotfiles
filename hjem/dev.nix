@@ -14,11 +14,7 @@
   ];
 
   dotfiles = {
-    apps = {
-      agents.enable = true;
-      neovim.full = true;
-    };
-
+    apps.neovim.full = true;
     dev.enable = true;
   };
 
