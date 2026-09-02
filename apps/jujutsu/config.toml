@@ -49,7 +49,7 @@ concat(
 [ui]
 diff-editor = ":builtin"
 editor = "nvim"
-pager = ["pager"]
+pager = "pager"
 default-command = "status"
 
 [user]
@@ -60,5 +60,5 @@ email = "adam@valkor.net"
 [[--scope]]
 --when.commands = ["diff"]
 [--scope.ui]
-pager = ["delta"]
+pager = "delta"
 diff-formatter = ":git"
