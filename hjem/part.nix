@@ -68,7 +68,30 @@ in
           profile = "deck";
         };
 
-        modules = standaloneModules;
+        modules = standaloneModules ++ [
+          inputs.epi.hjemModules.epi
+          (
+            { config, lib, ... }:
+            {
+              services.epi = {
+                package = inputs.epi.packages.x86_64-linux.epi;
+                instances = {
+                  sower = {
+                    enable = true;
+                    settings = {
+                      target = "~/.dotfiles#agents";
+                      project_dir = "${config.directory}/projects/sower";
+                    };
+                  };
+                };
+              };
+
+              systemd.services.epi-sower.path = lib.mkBefore [
+                "${config.directory}/.local/state/hjem/standalone/current-profile"
+              ];
+            }
+          )
+        ];
       };
 
       punk = inputs.hjem.standalone.hjemConfiguration {
