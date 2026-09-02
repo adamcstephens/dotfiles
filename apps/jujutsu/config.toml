@@ -14,7 +14,6 @@ pr = ["util", "exec", "--", "git-jjpr"]
 pr-create = ["util", "exec", "--", "jj-pr-create"]
 tug = ["bookmark", "move", "--from", "closest_bookmark(@-)", "--to", "@-"]
 
-
 # [fsmonitor]
 # backend = "watchman"
 # watchman.register-snapshot-trigger = true
@@ -29,33 +28,6 @@ key = "~/.ssh/signing-key.pub"
 
 [revset-aliases]
 'closest_bookmark(to)' = 'heads(::to & bookmarks())'
-
-# [template-aliases]
-# log_compact = """
-#   if(root,
-#       format_root_commit(self),
-#       label(if(current_working_copy, "working_copy"),
-#         concat(
-#           separate(" ",
-#             format_short_change_id_with_hidden_and_divergent_info(self),
-#             if(empty, label("empty", "(empty)")),
-#             if(description,
-#               description.first_line(),
-#               label(if(empty, "empty"), description_placeholder),
-#             ),
-#             bookmarks,
-#             tags,
-#             working_copies,
-#             if(git_head, label("git_head", "HEAD")),
-#             if(conflict, label("conflict", "conflict")),
-#             if(config("ui.show-cryptographic-signatures").as_boolean(),
-#               format_short_cryptographic_signature(signature)),
-#             if(!description && !empty, "\n" ++ diff.summary()),
-#           ) ++ "\n",
-#         ),
-#       )
-#     )
-# """
 
 # [templates]
 # # change id
@@ -75,15 +47,18 @@ concat(
 """
 
 [ui]
-# default-command = ["log", "--template=log_compact"]
 diff-editor = ":builtin"
-diff-formatter = "delta"
-# diff-formatter = ["difft", "--color=always", "$left", "$right"]
 editor = "nvim"
-pager = ["delta"]
+pager = ["pager"]
 default-command = "status"
-# pager = ":builtin"
 
 [user]
 name = "Adam C. Stephens"
 email = "adam@valkor.net"
+
+# use delta only in diff
+[[--scope]]
+--when.commands = ["diff"]
+[--scope.ui]
+pager = ["delta"]
+diff-formatter = ":git"
