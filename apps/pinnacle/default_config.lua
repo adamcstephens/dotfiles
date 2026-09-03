@@ -464,6 +464,16 @@ Pinnacle.setup(function()
     tags[1]:set_active(true)
   end)
 
+  -- Outputs that connect later (e.g. docking) start with no tags at all
+  Output.connect_signal({
+    connect = function(output)
+      if #(output:tags() or {}) == 0 then
+        local tags = Tag.add(output, tag_names)
+        tags[1]:set_active(true)
+      end
+    end,
+  })
+
   -- Tag keybinds
   for _, tag_name in ipairs(tag_names) do
     -- mod_key + 1-9 = Switch to tags 1-9
@@ -504,6 +514,96 @@ Pinnacle.setup(function()
       description = "Toggle tag " .. tag_name .. " on the focused window",
     })
   end
+
+  -- Move the focused window to the next/previous output, keeping its tag
+  local function move_focused_to_output(direction)
+    local focused = Window.get_focused()
+    local current_output = Output.get_focused()
+    if not focused or not current_output then
+      return
+    end
+
+    local outputs = Output.get_all_enabled()
+    if #outputs < 2 then
+      return
+    end
+
+    local current_index = nil
+    for i, o in ipairs(outputs) do
+      if o.name == current_output.name then
+        current_index = i
+        break
+      end
+    end
+    if not current_index then
+      return
+    end
+
+    local target_index = ((current_index - 1 + direction) % #outputs) + 1
+    local target_output = outputs[target_index]
+
+    for _, tag in ipairs(focused:tags() or {}) do
+      local target_tag = Tag.get(tag:name(), target_output)
+      if target_tag then
+        focused:set_tag(tag, false)
+        focused:set_tag(target_tag, true)
+      end
+    end
+  end
+
+  Input.keybind({ mod_key, "shift" }, key.period, function()
+    move_focused_to_output(1)
+  end, {
+    group = "Output",
+    description = "Move the focused window to the next output",
+  })
+
+  Input.keybind({ mod_key, "shift" }, key.comma, function()
+    move_focused_to_output(-1)
+  end, {
+    group = "Output",
+    description = "Move the focused window to the previous output",
+  })
+
+  -- Move every window currently on `from_output` (or all outputs, if nil) to
+  -- `to_output`, keeping tag numbers
+  local function relocate_windows(to_output, from_output)
+    for _, win in ipairs(Window.get_all()) do
+      for _, tag in ipairs(win:tags() or {}) do
+        if not from_output or tag:output().name == from_output.name then
+          local target_tag = Tag.get(tag:name(), to_output)
+          if target_tag then
+            win:set_tag(tag, false)
+            win:set_tag(target_tag, true)
+          end
+        end
+      end
+    end
+  end
+
+  -- Move every window to the currently focused output, keeping tag numbers
+  Input.keybind({ mod_key, "shift", "ctrl" }, "r", function()
+    local output = Output.get_focused()
+    if output then
+      relocate_windows(output)
+    end
+  end, {
+    group = "Output",
+    description = "Relocate all windows to the focused output",
+  })
+
+  -- Pinnacle fires the connect/disconnect signals for enable/disable too
+  -- (there's no dedicated signal for that yet), which covers shikane
+  -- toggling an output's `enable` on/off. Relocate windows stranded on a
+  -- disabling output to whatever's left enabled.
+  Output.connect_signal({
+    disconnect = function(output)
+      local fallback = Output.get_all_enabled()[1] or Output.get_focused()
+      if fallback and fallback.name ~= output.name then
+        relocate_windows(fallback, output)
+      end
+    end,
+  })
 
   -----------------------
   -- Libinput settings --
