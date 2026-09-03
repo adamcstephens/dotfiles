@@ -58,6 +58,31 @@
             }
           ];
         }
+        {
+          name = "punk-docked";
+          output = [
+            {
+              enable = false;
+              search = [
+                "m=0x1400"
+                "s=Unknown"
+                "v=California Institute of Technology"
+              ];
+              mode = "3840x2160@60Hz";
+              scale = 1.75;
+            }
+            {
+              enable = true;
+              search = [
+                "m=DELL P2715Q"
+                "s=54KKD79CAQNL"
+                "v=Dell Inc."
+              ];
+              mode = "3840x2160@60Hz";
+              scale = 1.25;
+            }
+          ];
+        }
       ];
     };
   };
