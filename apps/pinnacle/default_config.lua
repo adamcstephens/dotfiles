@@ -459,20 +459,15 @@ Pinnacle.setup(function()
 
   local tag_names = { "1", "2", "3", "4", "5", "6", "7", "8", "9" }
 
-  Output.for_each_output(function(output)
-    local tags = Tag.add(output, tag_names)
-    tags[1]:set_active(true)
-  end)
-
   -- Outputs that connect later (e.g. docking) start with no tags at all
-  Output.connect_signal({
-    connect = function(output)
-      if #(output:tags() or {}) == 0 then
-        local tags = Tag.add(output, tag_names)
-        tags[1]:set_active(true)
-      end
-    end,
-  })
+  local function ensure_tags(output)
+    if #(output:tags() or {}) == 0 then
+      local tags = Tag.add(output, tag_names)
+      tags[1]:set_active(true)
+    end
+  end
+
+  Output.for_each_output(ensure_tags)
 
   -- Tag keybinds
   for _, tag_name in ipairs(tag_names) do
@@ -592,18 +587,41 @@ Pinnacle.setup(function()
     description = "Relocate all windows to the focused output",
   })
 
-  -- Pinnacle fires the connect/disconnect signals for enable/disable too
-  -- (there's no dedicated signal for that yet), which covers shikane
-  -- toggling an output's `enable` on/off. Relocate windows stranded on a
-  -- disabling output to whatever's left enabled.
+  -- Pinnacle fires connect/disconnect for enable/disable too (there's no
+  -- dedicated signal yet), which covers shikane toggling an output's
+  -- `enable`. Hook connect rather than disconnect: disconnect unmaps the
+  -- output before signalling, so windows are already output-less and
+  -- unmovable by then. Since only one output is ever enabled, pulling
+  -- everything onto the one that just came up handles either direction.
   Output.connect_signal({
-    disconnect = function(output)
-      local fallback = Output.get_all_enabled()[1] or Output.get_focused()
-      if fallback and fallback.name ~= output.name then
-        relocate_windows(fallback, output)
-      end
+    connect = function(output)
+      relocate_windows(output)
     end,
   })
+
+  -- Rescue windows already stranded on a disabled output, since no connect
+  -- signal will fire for them
+  local first_enabled = Output.get_all_enabled()[1]
+  if first_enabled then
+    for _, win in ipairs(Window.get_all()) do
+      local on_enabled = false
+      for _, tag in ipairs(win:tags() or {}) do
+        if tag:output():enabled() then
+          on_enabled = true
+          break
+        end
+      end
+      if not on_enabled then
+        for _, tag in ipairs(win:tags() or {}) do
+          local target_tag = Tag.get(tag:name(), first_enabled)
+          if target_tag then
+            win:set_tag(tag, false)
+            win:set_tag(target_tag, true)
+          end
+        end
+      end
+    end
+  end
 
   -----------------------
   -- Libinput settings --
