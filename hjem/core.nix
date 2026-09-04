@@ -56,7 +56,6 @@
         pkgs.jless
         pkgs.just
         pkgs.kitty.terminfo
-        pkgs.page
         pkgs.python314
         pkgs.tio
         pkgs.wget
