@@ -1,5 +1,6 @@
 {
   config,
+  flake,
   lib,
   options,
   pkgs,
@@ -44,6 +45,8 @@
       };
 
       packages = [
+        flake.packages.${pkgs.stdenv.hostPlatform.system}.dotfiles
+
         pkgs.difftastic
         pkgs.doggo
         pkgs.dua
