@@ -1,7 +1,7 @@
 {
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
-    nixos-unstable-small.url = "github:nixos/nixpkgs?ref=nixos-unstable-small";
+    nixpkgs.url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.zst";
+    nixos-unstable-small.url = "https://channels.nixos.org/nixos-unstable-small/nixexprs.tar.zst";
 
     hjem.url = "github:adamcstephens/hjem?ref=push-wxvzlotzkqpl";
     hjem.inputs.nixpkgs.follows = "nixpkgs";
