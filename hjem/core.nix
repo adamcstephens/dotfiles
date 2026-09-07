@@ -31,7 +31,7 @@
     ../apps/starship
     ../apps/tmux
     ../apps/tmuxinator
-    ../apps/zellij
+    # Disable to clear current managed dir ../apps/zellij
     ../apps/zsh
   ];
 
