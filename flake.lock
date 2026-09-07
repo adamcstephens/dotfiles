@@ -323,11 +323,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1788080100,
-        "narHash": "sha256-n14luQo3F/ZLfCEHk1QieiI1nGnW92ZQZeZ0UIb0UMQ=",
+        "lastModified": 1788680125,
+        "narHash": "sha256-amGSoDobwmp4CFvCn841ws2iuitus+HUJdD/gKgsrJA=",
         "owner": "nix-community",
         "repo": "nix-index-database",
-        "rev": "dbb978fa87faf13398e90ccbc52c343d21c7dd6d",
+        "rev": "116ad1c2adb642405ef8916f6a94c8626f971344",
         "type": "github"
       },
       "original": {
@@ -338,11 +338,11 @@
     },
     "nixos-unstable-small": {
       "locked": {
-        "lastModified": 1788659161,
-        "narHash": "sha256-WIxMXidJGRhqyL6abeRrtbzjcwBn3DajWHiWLDvqEpc=",
-        "rev": "de0ba0a81b0f6eed798a97fdec6f03a754b9d966",
+        "lastModified": 1788761488,
+        "narHash": "sha256-fbsVsg72in6TpZx3bTjDNfU4jxbvs8owEsRtnbD6qqI=",
+        "rev": "9485e5e151b6bcea0fef6980325ec8fb4194d30c",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/unstable-small/nixos-26.11pre1068398.de0ba0a81b0f/nixexprs.tar.zst"
+        "url": "https://releases.nixos.org/nixos/unstable-small/nixos-26.11pre1069007.9485e5e151b6/nixexprs.tar.zst"
       },
       "original": {
         "type": "tarball",
@@ -427,11 +427,11 @@
     },
     "nixpkgs-paseo": {
       "locked": {
-        "lastModified": 1788728501,
-        "narHash": "sha256-fF+QIC9VF1J6mBtFMQu8Q+GWkABYn9osc+0fFah+LJE=",
+        "lastModified": 1788798141,
+        "narHash": "sha256-EFnDAAyQ04CE+rHDih4W47/QhJsLSAcbn6BoCsqsY5g=",
         "owner": "adamcstephens",
         "repo": "nixpkgs",
-        "rev": "064732b1dda484e60e96d1ff14bfe23641348507",
+        "rev": "5ce45cb4076d9a38a946119999c25e558301cfbc",
         "type": "github"
       },
       "original": {
@@ -509,11 +509,11 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1788621550,
-        "narHash": "sha256-Puq7lnIoTtOwz+vDsGiINiXnuGS7KUKm14mOvITfJ4o=",
+        "lastModified": 1788796378,
+        "narHash": "sha256-wiLL97tqRfPJ1GTXp/I2HO2SsuXdBqXZbDYNt0oK8TU=",
         "ref": "refs/heads/main",
-        "rev": "b20af273dd97cd3a7682b51eb2b7252270c44115",
-        "revCount": 1250,
+        "rev": "0876cdfdad01c47488914686d6d4363ce8cb64d7",
+        "revCount": 1252,
         "type": "git",
         "url": "https://tangled.org/adam.robins.wtf/sower"
       },
