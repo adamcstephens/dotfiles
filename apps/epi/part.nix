@@ -66,7 +66,7 @@ let
       nix.settings = {
         extra-experimental-features = [ "pipe-operators" ];
         substituters = [
-          "https://cache-v5.junco.dev"
+          "https://cache-v6.junco.dev"
         ];
         trusted-public-keys = [
           "cache-v6:tXeE+WhO6k2OoUoNSzmQVIckjXtl14mtO+z0ZwAIork="

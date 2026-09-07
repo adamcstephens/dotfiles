@@ -7,7 +7,7 @@ pushd "$SCRIPT_DIR" || exit 1
 rm -rf ~/.config/fish
 
 export NIX_CONFIG="extra-experimental-features = nix-command flakes pipe-operators pipe-operator
-extra-substituters = https://cache-v5.junco.dev?priority=41
+extra-substituters = https://cache-v6.junco.dev?priority=41
 extra-trusted-public-keys = cache-v6:tXeE+WhO6k2OoUoNSzmQVIckjXtl14mtO+z0ZwAIork="
 
 case "$(uname)" in

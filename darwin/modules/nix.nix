@@ -47,7 +47,7 @@
       ];
 
       substituters = [
-        "https://cache-v5.junco.dev?priority=41"
+        "https://cache-v6.junco.dev?priority=41"
       ];
       trusted-public-keys = [
         "cache-v6:tXeE+WhO6k2OoUoNSzmQVIckjXtl14mtO+z0ZwAIork="
