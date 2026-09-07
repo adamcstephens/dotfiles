@@ -15,10 +15,11 @@ let
     memory = 4096;
     mounts = [
       "~/.config/claude"
+      "~/.config/codex"
+      "~/.config/omp"
       "~/.config/opencode"
       "~/.config/pi"
       "~/.config/veans"
-      "~/.copilot"
     ]
     ++ lib.optionals pkgs.stdenv.hostPlatform.isDarwin [
       "~/.config/claude-personal"

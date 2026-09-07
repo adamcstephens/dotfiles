@@ -72,23 +72,32 @@ in
           inputs.epi.hjemModules.epi
           (
             { config, lib, ... }:
+            let
+
+              epi-agent =
+                {
+                  project,
+                  project_dir ? "${config.directory}/projects/${project}",
+                }:
+                {
+                  enable = true;
+                  settings = {
+                    target = "~/.dotfiles#agents";
+                    inherit project_dir;
+                    mounts = [
+                      "~/.local/state/paseo/${project}:~/.local/state/paseo"
+                    ];
+                  };
+                };
+            in
             {
               services.epi = {
                 package = inputs.epi.packages.x86_64-linux.epi;
                 instances = {
-                  sower = {
-                    enable = true;
-                    settings = {
-                      target = "~/.dotfiles#agents";
-                      project_dir = "${config.directory}/projects/sower";
-                    };
-                  };
+                  epi = epi-agent { project = "epi"; };
+                  sower = epi-agent { project = "sower"; };
                 };
               };
-
-              systemd.services.epi-sower.path = lib.mkBefore [
-                "${config.directory}/.local/state/hjem/standalone/current-profile"
-              ];
             }
           )
         ];

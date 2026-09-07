@@ -42,6 +42,22 @@
       "url": "https://github.com/miikanissi/modus-themes.nvim/archive/56233f0986ef6c8d0eab97e924e87144e584d970.tar.gz",
       "hash": "sha256-j10BCRHN6cTDx1+zBxgo6drtA9XoZAqaZg+1uTDQH4M="
     },
+    "paseo": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "GitHub",
+        "owner": "getpaseo",
+        "repo": "paseo"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "submodules": false,
+      "version": "v0.7.2",
+      "revision": "c4e97d5cfbef62934e0915d58a72ddeae5c4caea",
+      "url": "https://api.github.com/repos/getpaseo/paseo/tarball/refs/tags/v0.7.2",
+      "hash": "sha256-JUVjE32qS29ZNh1tSOLy9YtyPD3+qjhz+W30lWtVqaw="
+    },
     "smart-splits.nvim": {
       "type": "Git",
       "repository": {

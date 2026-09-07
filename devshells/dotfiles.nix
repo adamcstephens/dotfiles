@@ -13,6 +13,7 @@ mkShell {
   packages = [
     inputs.hjem.packages.${pkgs.stdenv.hostPlatform.system}.hjem
     pkgs.gitMinimal
+    pkgs.nh
     pkgs.just
     pkgs.niks3
     pkgs.npins
