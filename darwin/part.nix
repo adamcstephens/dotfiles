@@ -6,9 +6,11 @@
 }:
 {
   flake.darwinConfigurations.willow = withSystem "aarch64-darwin" (
-    { pkgs, ... }:
+    { system, ... }:
     inputs.nix-darwin.lib.darwinSystem {
-      inherit pkgs;
+      pkgs = import inputs.nixpkgs-unstable {
+        inherit system;
+      };
 
       specialArgs = {
         inherit inputs;
