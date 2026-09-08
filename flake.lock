@@ -242,11 +242,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1788819613,
-        "narHash": "sha256-ByNLlNXbsvxwiJ004wVgp5oRJ8pvrgJafEeK7bTWwIo=",
+        "lastModified": 1788858717,
+        "narHash": "sha256-lNh6z7qJ35S8msz4kH3xNxXTN7PLENpesL5LatpNBGA=",
         "owner": "numtide",
         "repo": "llm-agents.nix",
-        "rev": "868527bc9eb4e8bee8610fa1d4027fbb37cfc012",
+        "rev": "30e001e67438ab6ba024fa8d4f2e9be0ba7548af",
         "type": "github"
       },
       "original": {
@@ -282,11 +282,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1787155907,
-        "narHash": "sha256-HWTyPU61TL9WvttU2ZC7aXjF66EH91VwEmJRqP28OnM=",
+        "lastModified": 1788890662,
+        "narHash": "sha256-OQWRkpQNG2DXfFYvPkMHkP00SDVwh0G24eUr7N8PbmI=",
         "ref": "refs/heads/main",
-        "rev": "1fd27383ed5abdb252e823314c5ba2e112797d41",
-        "revCount": 42,
+        "rev": "b4321e129d1cce25eb118de97af283d3f3714cc5",
+        "revCount": 47,
         "type": "git",
         "url": "https://tangled.org/adam.robins.wtf/nbac"
       },
@@ -338,11 +338,11 @@
     },
     "nixos-unstable-small": {
       "locked": {
-        "lastModified": 1788828625,
-        "narHash": "sha256-d9uvv6QDvlX2a62h1YuKbA9JP9KfnOX8Q1wghY5214o=",
-        "rev": "061f805b4194597a46ae87859c277207193d273f",
+        "lastModified": 1788861675,
+        "narHash": "sha256-IQlUeZ4FH4KZ36SK8Hh8b09rDPEVtopDPYaKrib+Rfw=",
+        "rev": "003f062570b04be4890c4acdcd970365281fc955",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/unstable-small/nixos-26.11pre1069591.061f805b4194/nixexprs.tar.zst"
+        "url": "https://releases.nixos.org/nixos/unstable-small/nixos-26.11pre1069739.003f062570b0/nixexprs.tar.zst"
       },
       "original": {
         "type": "tarball",
@@ -427,11 +427,11 @@
     },
     "nixpkgs-paseo": {
       "locked": {
-        "lastModified": 1788798141,
-        "narHash": "sha256-EFnDAAyQ04CE+rHDih4W47/QhJsLSAcbn6BoCsqsY5g=",
+        "lastModified": 1788880697,
+        "narHash": "sha256-mgPUtjWC4fGr6ttw0oM3Bgj1HH5lCL+N+i1pCODshyg=",
         "owner": "adamcstephens",
         "repo": "nixpkgs",
-        "rev": "5ce45cb4076d9a38a946119999c25e558301cfbc",
+        "rev": "9550cff31cd5788633d2ac8b4eff04b0ac7bf407",
         "type": "github"
       },
       "original": {
