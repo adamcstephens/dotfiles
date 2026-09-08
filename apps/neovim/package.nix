@@ -30,6 +30,7 @@
   sqlite,
   stylua,
   taplo,
+  typescript-language-server,
   vscode-json-languageserver,
   yaml-language-server,
 }:
@@ -120,12 +121,13 @@ mnw.lib.wrap pkgs {
       nixd
       nodejs
       prettier
-      vscode-json-languageserver
       ruff
       shellcheck
       shfmt
       stylua
       taplo
+      typescript-language-server
+      vscode-json-languageserver
       yaml-language-server
     ];
 }
