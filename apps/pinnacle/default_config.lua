@@ -115,13 +115,6 @@ Pinnacle.setup(function()
     group = "Process",
     description = "Spawn a terminal",
   })
-  -- mod_key + Return = Spawn `terminal`
-  Input.keybind({ mod_key }, key.Return, function()
-    Process.spawn(terminal)
-  end, {
-    group = "Process",
-    description = "Spawn a terminal",
-  })
 
   -- mod_key + f = Toggle fullscreen
   Input.keybind({ mod_key, "shift" }, "f", function()
@@ -785,16 +778,22 @@ Pinnacle.setup(function()
     end, { group = "Window", description = "Swap with the " .. (offset == 1 and "next" or "previous") .. " window" })
   end
 
-  -- mod_key + a = Move the focused window into the master area
-  Input.keybind({ mod_key }, "a", function()
+  local function swap_focused()
     local focused = Window.get_focused()
     local master = view_stack()[1]
     if focused and master and master.id ~= focused.id then
       swap_windows(focused, master)
     end
-  end, {
+  end
+
+  -- Move the focused window into the master area
+  Input.keybind({ mod_key }, "a", swap_focused, {
     group = "Window",
     description = "Move the focused window to the master area",
+  })
+  Input.keybind({ mod_key }, key.Return, swap_focused, {
+    group = "Process",
+    description = "Spawn a terminal",
   })
 
   -- resize
