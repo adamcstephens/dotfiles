@@ -1,4 +1,5 @@
 {
+  flake,
   inputs,
   pkgs,
   ...
@@ -7,7 +8,8 @@ let
   omp-wrapped = pkgs.symlinkJoin {
     name = "omp-wrapped";
     paths = [
-      inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.omp
+      # inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.omp
+      flake.packages.${pkgs.stdenv.hostPlatform.system}.omp
     ];
     buildInputs = [ pkgs.makeWrapper ];
     postBuild = ''
