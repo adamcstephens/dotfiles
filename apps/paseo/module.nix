@@ -226,6 +226,9 @@ in
         # Graceful shutdown (server handles SIGTERM with a 10s timeout)
         KillSignal = "SIGTERM";
         TimeoutStopSec = 15;
+      }
+      // lib.optionalAttrs cfg.relay.enable {
+        ExecStartPost = "${cfg.package}/bin/paseo daemon pair";
       };
     };
 
