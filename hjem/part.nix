@@ -71,7 +71,7 @@ in
         modules = standaloneModules ++ [
           inputs.epi.hjemModules.epi
           (
-            { config, lib, ... }:
+            { config, ... }:
             let
 
               epi-agent =
@@ -96,6 +96,7 @@ in
                 instances = {
                   epi = epi-agent { project = "epi"; };
                   sower = epi-agent { project = "sower"; };
+                  tracker-deck = epi-agent { project = "sower"; };
                 };
               };
             }
