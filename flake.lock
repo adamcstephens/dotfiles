@@ -425,22 +425,6 @@
         "type": "github"
       }
     },
-    "nixpkgs-paseo": {
-      "locked": {
-        "lastModified": 1788880697,
-        "narHash": "sha256-mgPUtjWC4fGr6ttw0oM3Bgj1HH5lCL+N+i1pCODshyg=",
-        "owner": "adamcstephens",
-        "repo": "nixpkgs",
-        "rev": "9550cff31cd5788633d2ac8b4eff04b0ac7bf407",
-        "type": "github"
-      },
-      "original": {
-        "owner": "adamcstephens",
-        "ref": "push-yntqrksqxloy",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "nixpkgs-unstable": {
       "locked": {
         "lastModified": 1789012029,
@@ -510,7 +494,6 @@
         "nix-index-database": "nix-index-database",
         "nixos-unstable-small": "nixos-unstable-small",
         "nixpkgs": "nixpkgs_2",
-        "nixpkgs-paseo": "nixpkgs-paseo",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "profile-parts": "profile-parts",
         "sower": "sower"

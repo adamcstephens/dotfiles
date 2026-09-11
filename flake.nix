@@ -3,7 +3,6 @@
     nixpkgs.url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.zst";
     nixpkgs-unstable.url = "https://channels.nixos.org/nixpkgs-unstable/nixexprs.tar.zst";
     nixos-unstable-small.url = "https://channels.nixos.org/nixos-unstable-small/nixexprs.tar.zst";
-    nixpkgs-paseo.url = "github:adamcstephens/nixpkgs?ref=push-yntqrksqxloy";
 
     hjem.url = "github:adamcstephens/hjem?ref=push-wxvzlotzkqpl";
     hjem.inputs.nixpkgs.follows = "nixpkgs";

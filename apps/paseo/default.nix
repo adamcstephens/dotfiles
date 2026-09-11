@@ -6,7 +6,7 @@
 
   services.paseo = {
     enable = true;
-    package = inputs.nixpkgs-paseo.legacyPackages.${pkgs.stdenv.hostPlatform.system}.paseo;
+    package = inputs.nixos-unstable-small.legacyPackages.${pkgs.stdenv.hostPlatform.system}.paseo;
 
     relay = {
       enable = true;
