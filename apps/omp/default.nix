@@ -1,5 +1,5 @@
 {
-  flake,
+  inputs,
   pkgs,
   ...
 }:
@@ -7,7 +7,7 @@ let
   omp-wrapped = pkgs.symlinkJoin {
     name = "omp-wrapped";
     paths = [
-      flake.packages.${pkgs.stdenv.hostPlatform.system}.omp
+      inputs.nixos-unstable-small.legacyPackages.${pkgs.stdenv.hostPlatform.system}.omp
     ];
     buildInputs = [ pkgs.makeWrapper ];
     postBuild = ''
