@@ -259,11 +259,11 @@
     },
     "nixos-unstable-small": {
       "locked": {
-        "lastModified": 1789066991,
-        "narHash": "sha256-pWcetjZrVB80DvTmsmkN99kcuoKUUayXZjs8taRsRvQ=",
-        "rev": "bd9326274b99a087d554057e76312fe93be8bfbb",
+        "lastModified": 1789181251,
+        "narHash": "sha256-R0SKMbE4+OWNaJ89DKnhl50dKt9w4jBr1JuZVjS3eHw=",
+        "rev": "f496248152e1ad8c61b59a6739cc499b447168e4",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/unstable-small/nixos-26.11pre1071055.bd9326274b99/nixexprs.tar.zst"
+        "url": "https://releases.nixos.org/nixos/unstable-small/nixos-26.11pre1072599.f496248152e1/nixexprs.tar.zst"
       },
       "original": {
         "type": "tarball",
@@ -348,11 +348,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1789012029,
-        "narHash": "sha256-pAelOjF4w4iqEJozlFGQmWMobMa6F9eLIbMeBPBW7Ts=",
-        "rev": "d5dfd8e6716dde34398bc14bc87c10dece9c8c68",
+        "lastModified": 1789073787,
+        "narHash": "sha256-vLblJRFZjrSBOyHD4jwBkGJm2iOVk8c9BJnzZTOojSc=",
+        "rev": "aff8a0b28396750446e5537a96461bc4facdb287",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixpkgs/nixpkgs-26.11pre1070774.d5dfd8e6716d/nixexprs.tar.zst"
+        "url": "https://releases.nixos.org/nixpkgs/nixpkgs-26.11pre1071116.aff8a0b28396/nixexprs.tar.zst"
       },
       "original": {
         "type": "tarball",
@@ -426,11 +426,11 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1788921742,
-        "narHash": "sha256-AUYCW9Wq6BVDMIv3rgvmempCHNV4nZQBOgYDrrrD+TI=",
+        "lastModified": 1789154920,
+        "narHash": "sha256-0Er0n1CpsrVgJI3PMEVjjsgXpi0erftGq19ueDn8zoQ=",
         "ref": "refs/heads/main",
-        "rev": "cb22305148a76e49f16a183fa5c56b37ed7ca47c",
-        "revCount": 1253,
+        "rev": "7fb5fbf3c1aef7937ca6716bf4bf8dab2481207e",
+        "revCount": 1257,
         "type": "git",
         "url": "https://tangled.org/adam.robins.wtf/sower"
       },
