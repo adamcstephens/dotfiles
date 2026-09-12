@@ -178,6 +178,8 @@ def open_project(project: str, remote: bool = False):
                     run(f"tmux new-window -c {shlex.quote(project)} -n {wname}")
                 else:
                     run(f"tmux new-window -n {wname}")
+                run(f"tmux set-option -w -t {shlex.quote(wname)} @prj_remote_host {shlex.quote(host)}")
+                run(f"tmux set-option -w -t {shlex.quote(wname)} @prj_remote_path {shlex.quote(project)}")
 
                 run(f"tmux select-window -t {wname}")
                 run("tmux split-window -h")

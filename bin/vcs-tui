@@ -6,6 +6,29 @@
 # Ported from bin/vcs_tui.ml.
 
 set -euo pipefail
+tmux_pane=
+
+if [ "${1:-}" = "--tmux-pane" ]; then
+  tmux_pane="${2:?--tmux-pane requires a pane ID}"
+  shift 2
+
+  remote_host="$(tmux show-window-options -v -t "$tmux_pane" @prj_remote_host 2>/dev/null || true)"
+  remote_path="$(tmux show-window-options -v -t "$tmux_pane" @prj_remote_path 2>/dev/null || true)"
+
+  if [ -n "$remote_host" ] && [ -n "$remote_path" ]; then
+    shell_quote() {
+      printf "'%s'" "${1//\'/\'\\\'\'}"
+    }
+
+    remote_command="cd -- $(shell_quote "$remote_path") && exec vcs-tui"
+    for arg in "$@"; do
+      remote_command+=" $(shell_quote "$arg")"
+    done
+
+    exec ssh -t "$remote_host" "$remote_command"
+  fi
+fi
+
 
 well_known_socket() {
   if [ -n "${XDG_RUNTIME_DIR:-}" ]; then
