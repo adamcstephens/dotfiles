@@ -72,30 +72,44 @@ in
         modules = standaloneModules ++ [
           inputs.epi.hjemModules.epi
           (
-            { config, ... }:
+            { config, lib, ... }:
             let
 
               epi-agent =
                 {
                   project,
                   project_dir ? "${config.directory}/projects/${project}",
+                  settings ? { },
                 }:
                 {
                   enable = true;
-                  settings = {
-                    target = flake.nixosConfigurations.agents.config.system.build.epi;
-                    inherit project_dir;
-                    mounts = [
-                      "~/.local/state/paseo/${project}:~/.local/state/paseo"
-                    ];
-                  };
+                  settings = lib.mkMerge [
+                    {
+                      target = flake.nixosConfigurations.agents.config.system.build.epi;
+                      inherit project_dir;
+                      mounts = [
+                        "~/.local/state/paseo/${project}:~/.local/state/paseo"
+                      ];
+                    }
+                    settings
+                  ];
                 };
             in
             {
               services.epi = {
                 package = inputs.epi.packages.x86_64-linux.epi;
                 instances = {
-                  epi = epi-agent { project = "epi"; };
+                  epi = epi-agent {
+                    project = "epi";
+                    settings = {
+                      memory = 8192;
+                    };
+                  };
+                  git-sync = epi-agent { project = "git-sync"; };
+                  hjem = epi-agent {
+                    project = "hjem";
+                    project_dir = "${config.directory}/git/hjem";
+                  };
                   sower = epi-agent { project = "sower"; };
                   tracker-deck = epi-agent { project = "sower"; };
                 };
