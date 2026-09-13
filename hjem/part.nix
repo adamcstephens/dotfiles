@@ -5,6 +5,8 @@
   ...
 }:
 let
+  flake = self;
+
   user = {
     directory = "/home/adam";
     user = "adam";
@@ -12,9 +14,8 @@ let
   };
 
   specialArgs = {
-    inherit inputs;
+    inherit flake inputs;
 
-    flake = self;
     npins = import ../npins;
   };
 
@@ -82,7 +83,7 @@ in
                 {
                   enable = true;
                   settings = {
-                    target = "~/.dotfiles#agents";
+                    target = flake.nixosConfigurations.agents.config.system.build.epi;
                     inherit project_dir;
                     mounts = [
                       "~/.local/state/paseo/${project}:~/.local/state/paseo"
