@@ -1,0 +1,26 @@
+modelRoles:
+  smol: openai-codex/gpt-5.6-luna:medium
+  plan: openai-codex/gpt-5.6-terra:high
+  default: openai-codex/gpt-5.6-terra
+  slow: openai-codex/gpt-5.6-sol:xhigh
+symbolPreset: nerd
+composer:
+  shape: rule
+theme:
+  dark: titanium
+  light: light
+setupVersion: 2
+steeringMode: one-at-a-time
+memory:
+  backend: "off"
+task:
+  showResolvedModelBadge: true
+defaultThinkingLevel: auto
+statusLine:
+  preset: default
+startup:
+  quiet: true
+disabledExtensions:
+  []
+dev:
+  autoqaConsent: granted

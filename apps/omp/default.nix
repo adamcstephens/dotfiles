@@ -1,4 +1,5 @@
 {
+  config,
   inputs,
   pkgs,
   ...
@@ -20,4 +21,16 @@ in
   packages = [
     omp-wrapped
   ];
+
+  xdg.config.files = {
+    "omp/agent/AGENTS.md".source = config.xdg.config.files."agents/AGENTS.md".source;
+    "omp/agent/config.yml".source =
+      if config.dotfiles.nixosManaged then
+        ./config.yml
+      else
+        "${config.directory}/.dotfiles/apps/omp/config.yml";
+    "omp/agent/hooks".source =
+      if config.dotfiles.nixosManaged then ./hooks else "${config.directory}/.dotfiles/apps/omp/hooks";
+    "omp/agent/skills".source = config.xdg.config.files."agents/skills".source;
+  };
 }

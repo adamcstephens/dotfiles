@@ -4,13 +4,6 @@
   pkgs,
   ...
 }:
-let
-  skills =
-    if config.dotfiles.nixosManaged then
-      ./skills
-    else
-      "${config.directory}/.dotfiles/apps/agents/skills";
-in
 {
   imports = [
     ../agent-browser
@@ -27,6 +20,16 @@ in
   ];
 
   xdg.config.files = {
-    "agents/skills".source = skills;
+    "agents/skills".source =
+      if config.dotfiles.nixosManaged then
+        ./skills
+      else
+        "${config.directory}/.dotfiles/apps/agents/skills";
+
+    "agents/AGENTS.md".source =
+      if config.dotfiles.nixosManaged then
+        ./AGENTS.md
+      else
+        "${config.directory}/.dotfiles/apps/agents/AGENTS.md";
   };
 }

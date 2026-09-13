@@ -16,4 +16,16 @@ in
   packages = [
     codex-wrapped
   ];
+
+  xdg.config.files = {
+    "codex/AGENTS.md".source = config.xdg.config.files."agents/AGENTS.md".source;
+    "codex/hooks.json".source =
+      if config.dotfiles.nixosManaged then
+        ./hooks.json
+      else
+        "${config.directory}/.dotfiles/apps/codex/hooks.json";
+    "codex/rules".source =
+      if config.dotfiles.nixosManaged then ./rules else "${config.directory}/.dotfiles/apps/codex/rules";
+    "codex/skills".source = config.xdg.config.files."agents/skills".source;
+  };
 }
