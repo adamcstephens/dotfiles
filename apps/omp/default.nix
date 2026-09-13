@@ -29,8 +29,11 @@ in
         ./config.yml
       else
         "${config.directory}/.dotfiles/apps/omp/config.yml";
-    "omp/agent/hooks".source =
-      if config.dotfiles.nixosManaged then ./hooks else "${config.directory}/.dotfiles/apps/omp/hooks";
+    "omp/agent/extensions".source =
+      if config.dotfiles.nixosManaged then
+        ./extensions
+      else
+        "${config.directory}/.dotfiles/apps/omp/extensions";
     "omp/agent/skills".source = config.xdg.config.files."agents/skills".source;
   };
 }
