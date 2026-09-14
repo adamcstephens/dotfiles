@@ -1,21 +1,5 @@
 {
   "pins": {
-    "elephant": {
-      "type": "GitRelease",
-      "repository": {
-        "type": "GitHub",
-        "owner": "abenz1267",
-        "repo": "elephant"
-      },
-      "pre_releases": false,
-      "version_upper_bound": null,
-      "release_prefix": null,
-      "submodules": false,
-      "version": "v2.22.0",
-      "revision": "e5cdc169062496475d393e02d54b230cb1ba5cf8",
-      "url": "https://api.github.com/repos/abenz1267/elephant/tarball/refs/tags/v2.22.0",
-      "hash": "sha256-frlaSpCf/e94OqO5Glp1NW96bemc+BhrKoPu+4X1FyI="
-    },
     "hjem-rum": {
       "type": "Git",
       "repository": {
@@ -53,10 +37,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.7.2",
-      "revision": "c4e97d5cfbef62934e0915d58a72ddeae5c4caea",
-      "url": "https://api.github.com/repos/getpaseo/paseo/tarball/refs/tags/v0.7.2",
-      "hash": "sha256-JUVjE32qS29ZNh1tSOLy9YtyPD3+qjhz+W30lWtVqaw="
+      "version": "v0.8.0",
+      "revision": "e432c9b47194d8c20071af2ef68a35e26149031a",
+      "url": "https://api.github.com/repos/getpaseo/paseo/tarball/refs/tags/v0.8.0",
+      "hash": "sha256-zYUj7CGz+i+w0elysbU+Sup+NACsBoIEqCu8WHA24PE="
     },
     "smart-splits.nvim": {
       "type": "Git",
