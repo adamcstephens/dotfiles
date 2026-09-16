@@ -53,7 +53,10 @@ in
     dev = nixosCommon ++ [
       {
         hjem = {
-          extraModules = [ ./dev.nix ];
+          extraModules = [
+            ./dev.nix
+            ../apps/paseo
+          ];
         };
       }
     ];

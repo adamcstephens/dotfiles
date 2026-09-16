@@ -94,17 +94,6 @@ let
         ];
       };
 
-      # services.paseo = {
-      #   enable = true;
-      #   package = (pkgs.callPackage "${npins.paseo}/nix/package.nix" { }).override {
-      #     npmDepsHash = "sha256-0hOGev0HglOQmofzPQMfiWh1opg6cpiEgsfK22AKcGk=";
-      #   };
-      #   hostnames = true; # allow any
-      #   relay.enable = false;
-      #   user = "adam";
-      #   # dataDir = "/home/adam/.config/paseo";
-      # };
-
       users.users.adam = {
         isNormalUser = true;
         group = "users";

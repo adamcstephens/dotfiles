@@ -20,16 +20,8 @@
   ];
 
   xdg.config.files = {
-    "agents/skills".source =
-      if config.dotfiles.nixosManaged then
-        ./skills
-      else
-        "${config.directory}/.dotfiles/apps/agents/skills";
+    "agents/skills".source = "${config.directory}/.dotfiles/apps/agents/skills";
 
-    "agents/AGENTS.md".source =
-      if config.dotfiles.nixosManaged then
-        ./AGENTS.md
-      else
-        "${config.directory}/.dotfiles/apps/agents/AGENTS.md";
+    "agents/AGENTS.md".source = "${config.directory}/.dotfiles/apps/agents/AGENTS.md";
   };
 }
