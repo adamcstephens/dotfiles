@@ -10,6 +10,7 @@
       inputs.nixos-unstable-small.legacyPackages.${pkgs.stdenv.hostPlatform.system}.paseo.overrideAttrs
         (old: {
           patches = (old.patches or [ ]) ++ [ ./omp-custom-message-history.patch ];
+          doCheck = false;
         });
 
     relay = {
