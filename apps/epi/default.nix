@@ -16,7 +16,7 @@ let
     mounts = [
       "~/.config/claude"
       "~/.config/codex"
-      "~/.config/omp"
+      "~/.config/omp/agent/sessions"
       "~/.config/opencode"
       "~/.config/pi"
       "~/.config/veans"

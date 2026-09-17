@@ -35,6 +35,7 @@
     # tools
     pkgs.mergiraf
     pkgs.pwgen
+    pkgs.sqlite-interactive
     pkgs.step-cli
     pkgs.unzip
   ]
