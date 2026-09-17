@@ -1,0 +1,812 @@
+--- a/meson.build
++++ b/meson.build
+@@ -377,6 +377,8 @@
+     'protocols/wlr-screencopy-unstable-v1.xml'],
+   ['wlr-output-management-unstable-v1',
+     'protocols/wlr-output-management-unstable-v1.xml'],
++  ['wlr-output-power-management-unstable-v1',
++    'protocols/wlr-output-power-management-unstable-v1.xml'],
+ ]
+   _name = _p[0]
+   _xml  = _p[1]
+@@ -916,6 +918,7 @@
+   'src/util/clamp.cpp',
+   'src/util/fuzzy_match.cpp',
+   'src/wayland/clipboard_service.cpp',
++  'src/wayland/output_power_service.cpp',
+   'src/wayland/text_input_service.cpp',
+   'src/wayland/virtual_keyboard_service.cpp',
+   'src/compositors/compositor_platform.cpp',
+@@ -923,7 +926,6 @@
+   'src/compositors/compositor_detect.cpp',
+   'src/compositors/compositor_runtime.cpp',
+   'src/compositors/dwl/dwl_workspace_backend.cpp',
+-  'src/compositors/ext_workspace/ext_workspace_output_backend.cpp',
+   'src/compositors/ext_workspace/ext_workspace_backend.cpp',
+   'src/compositors/hyprland/hyprland_runtime.cpp',
+   'src/compositors/hyprland/hyprland_event_handler.cpp',
+@@ -1271,6 +1273,18 @@
+     test(test_name, test_exe, args: test_args)
+   endforeach
+ 
++  output_power_server_h = custom_target('wlr-output-power-management-unstable-v1-server-header',
++    input: 'protocols/wlr-output-power-management-unstable-v1.xml',
++    output: 'wlr-output-power-management-unstable-v1-server-protocol.h',
++    command: [wayland_scanner, 'server-header', '@INPUT@', '@OUTPUT@'],
++  )
++  output_power_test_exe = executable('output_power_test',
++    sources: files('tests/output_power_test.cpp') + [output_power_server_h],
++    dependencies: [noctalia_core_dep, dependency('wayland-server')],
++    override_options: ['b_ndebug=false'],
++  )
++  test('output_power', output_power_test_exe, timeout: 10)
++
+   upower_integration_exe = executable('upower_charge_limit_integration_test',
+     sources: files('tests/upower_charge_limit_integration_test.cpp'),
+     dependencies: noctalia_core_dep,
+--- /dev/null
++++ b/protocols/wlr-output-power-management-unstable-v1.xml
+@@ -0,0 +1,128 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<protocol name="wlr_output_power_management_unstable_v1">
++  <copyright>
++    Copyright © 2019 Purism SPC
++
++    Permission is hereby granted, free of charge, to any person obtaining a
++    copy of this software and associated documentation files (the "Software"),
++    to deal in the Software without restriction, including without limitation
++    the rights to use, copy, modify, merge, publish, distribute, sublicense,
++    and/or sell copies of the Software, and to permit persons to whom the
++    Software is furnished to do so, subject to the following conditions:
++
++    The above copyright notice and this permission notice (including the next
++    paragraph) shall be included in all copies or substantial portions of the
++    Software.
++
++    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
++    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
++    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
++    THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
++    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
++    FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
++    DEALINGS IN THE SOFTWARE.
++  </copyright>
++
++  <description summary="Control power management modes of outputs">
++    This protocol allows clients to control power management modes
++    of outputs that are currently part of the compositor space. The
++    intent is to allow special clients like desktop shells to power
++    down outputs when the system is idle.
++
++    To modify outputs not currently part of the compositor space see
++    wlr-output-management.
++
++    Warning! The protocol described in this file is experimental and
++    backward incompatible changes may be made. Backward compatible changes
++    may be added together with the corresponding interface version bump.
++    Backward incompatible changes are done by bumping the version number in
++    the protocol and interface names and resetting the interface version.
++    Once the protocol is to be declared stable, the 'z' prefix and the
++    version number in the protocol and interface names are removed and the
++    interface version number is reset.
++  </description>
++
++  <interface name="zwlr_output_power_manager_v1" version="1">
++    <description summary="manager to create per-output power management">
++      This interface is a manager that allows creating per-output power
++      management mode controls.
++    </description>
++
++    <request name="get_output_power">
++      <description summary="get a power management for an output">
++        Create an output power management mode control that can be used to
++        adjust the power management mode for a given output.
++      </description>
++      <arg name="id" type="new_id" interface="zwlr_output_power_v1"/>
++      <arg name="output" type="object" interface="wl_output"/>
++    </request>
++
++    <request name="destroy" type="destructor">
++      <description summary="destroy the manager">
++        All objects created by the manager will still remain valid, until their
++        appropriate destroy request has been called.
++      </description>
++    </request>
++  </interface>
++
++  <interface name="zwlr_output_power_v1" version="1">
++    <description summary="adjust power management mode for an output">
++      This object offers requests to set the power management mode of
++      an output.
++    </description>
++
++    <enum name="mode">
++      <entry name="off" value="0"
++             summary="Output is turned off."/>
++      <entry name="on" value="1"
++             summary="Output is turned on, no power saving"/>
++    </enum>
++
++    <enum name="error">
++      <entry name="invalid_mode" value="1" summary="nonexistent power save mode"/>
++    </enum>
++
++    <request name="set_mode">
++      <description summary="Set an outputs power save mode">
++        Set an output's power save mode to the given mode. The mode change
++        is effective immediately. If the output does not support the given
++        mode a failed event is sent.
++      </description>
++      <arg name="mode" type="uint" enum="mode" summary="the power save mode to set"/>
++    </request>
++
++    <event name="mode">
++      <description summary="Report a power management mode change">
++        Report the power management mode change of an output.
++
++        The mode event is sent after an output changed its power
++        management mode. The reason can be a client using set_mode or the
++        compositor deciding to change an output's mode.
++        This event is also sent immediately when the object is created
++        so the client is informed about the current power management mode.
++      </description>
++      <arg name="mode" type="uint" enum="mode"
++           summary="the output's new power management mode"/>
++    </event>
++
++    <event name="failed">
++      <description summary="object no longer valid">
++        This event indicates that the output power management mode control
++        is no longer valid. This can happen for a number of reasons,
++        including:
++        - The output doesn't support power management
++        - Another client already has exclusive power management mode control
++          for this output
++        - The output disappeared
++
++        Upon receiving this event, the client should destroy this object.
++      </description>
++    </event>
++
++    <request name="destroy" type="destructor">
++      <description summary="destroy this power management">
++        Destroys the output power management mode control object.
++      </description>
++    </request>
++  </interface>
++</protocol>
+--- /dev/null
++++ b/src/wayland/output_power_service.h
+@@ -0,0 +1,29 @@
++#pragma once
++
++#include <unordered_map>
++
++struct wl_output;
++struct zwlr_output_power_manager_v1;
++struct zwlr_output_power_v1;
++
++class OutputPowerService {
++public:
++  OutputPowerService() = default;
++  ~OutputPowerService();
++
++  OutputPowerService(const OutputPowerService&) = delete;
++  OutputPowerService& operator=(const OutputPowerService&) = delete;
++
++  void bind(zwlr_output_power_manager_v1* manager);
++  void addOutput(wl_output* output);
++  void removeOutput(wl_output* output);
++  [[nodiscard]] bool setPower(bool on);
++  void cleanup();
++
++private:
++  zwlr_output_power_v1* createControl(wl_output* output);
++  void handleFailed(zwlr_output_power_v1* control);
++
++  zwlr_output_power_manager_v1* m_manager = nullptr;
++  std::unordered_map<wl_output*, zwlr_output_power_v1*> m_controls;
++};
+--- /dev/null
++++ b/src/wayland/output_power_service.cpp
+@@ -0,0 +1,86 @@
++#include "wayland/output_power_service.h"
++
++#include "wlr-output-power-management-unstable-v1-client-protocol.h"
++
++#include <cstdint>
++
++OutputPowerService::~OutputPowerService() { cleanup(); }
++
++void OutputPowerService::bind(zwlr_output_power_manager_v1* manager) {
++  if (m_manager == manager) {
++    return;
++  }
++  m_manager = manager;
++  for (auto& [output, control] : m_controls) {
++    if (control != nullptr) {
++      zwlr_output_power_v1_destroy(control);
++    }
++    control = createControl(output);
++  }
++}
++
++void OutputPowerService::addOutput(wl_output* output) {
++  auto [it, inserted] = m_controls.try_emplace(output, nullptr);
++  if (inserted) {
++    it->second = createControl(output);
++  }
++}
++
++void OutputPowerService::removeOutput(wl_output* output) {
++  const auto it = m_controls.find(output);
++  if (it == m_controls.end()) {
++    return;
++  }
++  if (it->second != nullptr) {
++    zwlr_output_power_v1_destroy(it->second);
++  }
++  m_controls.erase(it);
++}
++
++bool OutputPowerService::setPower(bool on) {
++  const auto mode = on ? ZWLR_OUTPUT_POWER_V1_MODE_ON : ZWLR_OUTPUT_POWER_V1_MODE_OFF;
++  bool requested = false;
++  for (const auto& [output, control] : m_controls) {
++    if (control != nullptr) {
++      zwlr_output_power_v1_set_mode(control, mode);
++      requested = true;
++    }
++  }
++  return requested;
++}
++
++void OutputPowerService::cleanup() {
++  for (const auto& [output, control] : m_controls) {
++    if (control != nullptr) {
++      zwlr_output_power_v1_destroy(control);
++    }
++  }
++  m_controls.clear();
++  m_manager = nullptr;
++}
++
++zwlr_output_power_v1* OutputPowerService::createControl(wl_output* output) {
++  if (m_manager == nullptr) {
++    return nullptr;
++  }
++  static const zwlr_output_power_v1_listener listener = {
++      .mode = [](void*, zwlr_output_power_v1*, std::uint32_t) {},
++      .failed = [](void* data,
++                   zwlr_output_power_v1* control) { static_cast<OutputPowerService*>(data)->handleFailed(control); },
++  };
++  auto* control = zwlr_output_power_manager_v1_get_output_power(m_manager, output);
++  if (control != nullptr) {
++    zwlr_output_power_v1_add_listener(control, &listener, this);
++  }
++  return control;
++}
++
++void OutputPowerService::handleFailed(zwlr_output_power_v1* control) {
++  for (auto& [output, current] : m_controls) {
++    if (current == control) {
++      zwlr_output_power_v1_destroy(current);
++      current = nullptr;
++      return;
++    }
++  }
++}
+--- a/src/wayland/wayland_connection.h
++++ b/src/wayland/wayland_connection.h
+@@ -1,6 +1,7 @@
+ #pragma once
+ 
+ #include "wayland/ext_foreign_toplevels.h"
++#include "wayland/output_power_service.h"
+ #include "wayland/output_scale.h"
+ #include "wayland/wayland_seat.h"
+ #include "wayland/wayland_toplevels.h"
+@@ -52,6 +53,7 @@
+ struct wp_fractional_scale_manager_v1;
+ struct wp_viewporter;
+ struct zwlr_output_manager_v1;
++struct zwlr_output_power_manager_v1;
+ struct zwlr_output_head_v1;
+ struct zwlr_output_mode_v1;
+ class ClipboardService;
+@@ -160,6 +162,7 @@
+   void setTextInputService(TextInputService* textInputService);
+   void setVirtualKeyboardService(VirtualKeyboardService* virtualKeyboardService);
+   void setCursorShape(std::uint32_t serial, std::uint32_t shape);
++  [[nodiscard]] bool setOutputPower(bool on);
+ 
+   [[nodiscard]] int repeatPollTimeoutMs() const;
+   void repeatTick();
+@@ -322,6 +325,9 @@
+   ext_image_copy_capture_manager_v1* m_imageCopyCaptureManager = nullptr;
+   ext_output_image_capture_source_manager_v1* m_outputImageCaptureSourceManager = nullptr;
+   zwlr_output_manager_v1* m_outputManager = nullptr;
++  zwlr_output_power_manager_v1* m_outputPowerManager = nullptr;
++  std::uint32_t m_outputPowerManagerName = 0;
++  OutputPowerService m_outputPowerService;
+   std::unordered_map<zwlr_output_head_v1*, WaylandOutputHeadInfo> m_outputHeads;
+   std::unordered_set<zwlr_output_mode_v1*> m_outputModes;
+   std::unique_ptr<FocusGrabService> m_focusGrabService;
+--- a/src/wayland/wayland_connection.cpp
++++ b/src/wayland/wayland_connection.cpp
+@@ -32,6 +32,7 @@
+ #include "wlr-gamma-control-unstable-v1-client-protocol.h"
+ #include "wlr-layer-shell-unstable-v1-client-protocol.h"
+ #include "wlr-output-management-unstable-v1-client-protocol.h"
++#include "wlr-output-power-management-unstable-v1-client-protocol.h"
+ #include "wlr-screencopy-unstable-v1-client-protocol.h"
+ #include "xdg-activation-v1-client-protocol.h"
+ #include "xdg-output-unstable-v1-client-protocol.h"
+@@ -80,6 +81,7 @@
+   constexpr std::uint32_t kOutputImageCaptureSourceManagerVersion = 1;
+   constexpr std::uint32_t kOutputManagerVersion = 4;
+   constexpr std::uint32_t kOutputManagerMinVersion = 3;
++  constexpr std::uint32_t kOutputPowerManagerVersion = 1;
+ 
+   const wl_registry_listener kRegistryListener = {
+       .global = &WaylandConnection::handleGlobal,
+@@ -460,10 +462,8 @@
+     std::erase(outputs, output);
+     if (outputs.empty()) {
+       m_surfaceOutputs.erase(it);
+-    } else if (
+-        auto current = m_surfaceOutputMap.find(surface);
+-        current != m_surfaceOutputMap.end() && current->second == output
+-    ) {
++    } else if (auto current = m_surfaceOutputMap.find(surface);
++               current != m_surfaceOutputMap.end() && current->second == output) {
+       current->second = outputs.back();
+     }
+   }
+@@ -578,6 +578,8 @@
+   m_seatHandler.setCursorShape(serial, shape);
+ }
+ 
++bool WaylandConnection::setOutputPower(bool on) { return m_outputPowerService.setPower(on); }
++
+ std::optional<ActiveToplevel> WaylandConnection::activeToplevel() const { return m_toplevelsHandler.current(); }
+ 
+ std::optional<ActiveToplevel> WaylandConnection::matchToplevelByTitleAndAppId(
+@@ -957,6 +959,16 @@
+ 
+ void WaylandConnection::handleGlobalRemove(void* data, wl_registry* /*registry*/, std::uint32_t name) {
+   auto* self = static_cast<WaylandConnection*>(data);
++  if (self->m_outputPowerManager != nullptr && name == self->m_outputPowerManagerName) {
++    self->m_outputPowerService.cleanup();
++    zwlr_output_power_manager_v1_destroy(self->m_outputPowerManager);
++    self->m_outputPowerManager = nullptr;
++    self->m_outputPowerManagerName = 0;
++    for (const auto& output : self->m_outputs) {
++      self->m_outputPowerService.addOutput(output.output);
++    }
++    return;
++  }
+   auto it = std::ranges::find_if(self->m_outputs, [name](const WaylandOutput& output) { return output.name == name; });
+   if (it == self->m_outputs.end()) {
+     return;
+@@ -967,6 +979,7 @@
+   // in a consistent state — never observed or mutated mid-removal.
+   WaylandOutput output = std::move(*it);
+   self->m_outputs.erase(it);
++  self->m_outputPowerService.removeOutput(output.output);
+ 
+   if (self->m_outputRemovedCallback && output.output != nullptr) {
+     self->m_outputRemovedCallback(output.output);
+@@ -1277,6 +1290,16 @@
+         wl_registry_bind(registry, name, &zwlr_output_manager_v1_interface, bindVersion)
+     );
+     zwlr_output_manager_v1_add_listener(m_outputManager, &kOutputManagerListener, this);
++    return;
++  }
++
++  if (interfaceName == zwlr_output_power_manager_v1_interface.name) {
++    const auto bindVersion = std::min(version, kOutputPowerManagerVersion);
++    m_outputPowerManager = static_cast<zwlr_output_power_manager_v1*>(
++        wl_registry_bind(registry, name, &zwlr_output_power_manager_v1_interface, bindVersion)
++    );
++    m_outputPowerManagerName = name;
++    m_outputPowerService.bind(m_outputPowerManager);
+     return;
+   }
+ 
+@@ -1294,6 +1317,7 @@
+         }
+     );
+     wl_output_add_listener(output, &kOutputListener, this);
++    m_outputPowerService.addOutput(output);
+     if (m_xdgOutputManager != nullptr) {
+       auto* xdgOut = zxdg_output_manager_v1_get_xdg_output(m_xdgOutputManager, output);
+       m_outputs.back().xdgOutput = xdgOut;
+@@ -1349,6 +1373,12 @@
+   }
+   m_toplevelsHandler.cleanup();
+   m_extForeignToplevels.cleanup();
++  m_outputPowerService.cleanup();
++  if (m_outputPowerManager != nullptr) {
++    zwlr_output_power_manager_v1_destroy(m_outputPowerManager);
++    m_outputPowerManager = nullptr;
++  }
++  m_outputPowerManagerName = 0;
+ 
+   for (auto& out : m_outputs) {
+     if (out.xdgOutput != nullptr) {
+--- a/src/compositors/compositor_platform.cpp
++++ b/src/compositors/compositor_platform.cpp
+@@ -2,7 +2,6 @@
+ 
+ #include "compositors/compositor_detect.h"
+ #include "compositors/compositor_runtime.h"
+-#include "compositors/ext_workspace/ext_workspace_output_backend.h"
+ #include "compositors/hyprland/hyprland_keyboard_backend.h"
+ #include "compositors/hyprland/hyprland_output_backend.h"
+ #include "compositors/hyprland/hyprland_runtime.h"
+@@ -319,10 +318,6 @@
+     Callback m_callback;
+     bool m_perOutputTargeted = false;
+   };
+-
+-  [[nodiscard]] bool setGenericOutputPower(WaylandConnection& /*wayland*/, bool on) {
+-    return compositors::ext_workspace::setOutputPower(on);
+-  }
+ 
+   [[nodiscard]] std::unique_ptr<compositors::OutputPowerBackend>
+   createOutputPowerBackend(compositors::CompositorRuntimeRegistry& runtimeRegistry) {
+@@ -366,7 +361,9 @@
+     case compositors::CompositorKind::Kde:
+     case compositors::CompositorKind::Pinnacle:
+     case compositors::CompositorKind::Unknown:
+-      return std::make_unique<LambdaOutputPowerBackend>(&setGenericOutputPower);
++      return std::make_unique<LambdaOutputPowerBackend>([](WaylandConnection& wayland, bool on) {
++        return wayland.setOutputPower(on);
++      });
+     }
+     return nullptr;
+   }
+--- /dev/null
++++ b/tests/output_power_test.cpp
+@@ -0,0 +1,318 @@
++#include "test_check.h"
++#include "wayland/output_power_service.h"
++#include "wlr-output-power-management-unstable-v1-client-protocol.h"
++#include "wlr-output-power-management-unstable-v1-server-protocol.h"
++
++#include <array>
++#include <cstdint>
++#include <cstring>
++#include <map>
++#include <poll.h>
++#include <sys/socket.h>
++#include <unistd.h>
++#include <vector>
++#include <wayland-client.h>
++#include <wayland-server.h>
++
++namespace {
++
++  class WaylandPeer {
++  public:
++    struct Output {
++      wl_global* global = nullptr;
++      wl_resource* resource = nullptr;
++      wl_resource* power = nullptr;
++      std::vector<std::uint32_t> modes;
++      unsigned controlsCreated = 0;
++      unsigned releases = 0;
++      bool failed = false;
++    };
++
++    explicit WaylandPeer(bool advertiseManager = true) {
++      server = wl_display_create();
++      TEST_CHECK(server != nullptr);
++      int sockets[2];
++      TEST_CHECK(socketpair(AF_UNIX, SOCK_STREAM | SOCK_CLOEXEC, 0, sockets) == 0);
++      TEST_CHECK(wl_client_create(server, sockets[0]) != nullptr);
++      client = wl_display_connect_to_fd(sockets[1]);
++      TEST_CHECK(client != nullptr);
++      for (auto& output : outputs) {
++        output.global = wl_global_create(server, &wl_output_interface, 3, &output, bindOutput);
++        TEST_CHECK(output.global != nullptr);
++      }
++      if (advertiseManager) {
++        addManager();
++      }
++      registry = wl_display_get_registry(client);
++      static const wl_registry_listener listener{
++          .global =
++              [](void* data, wl_registry* registry, std::uint32_t name, const char* interface, std::uint32_t) {
++                auto& peer = *static_cast<WaylandPeer*>(data);
++                if (std::strcmp(interface, wl_output_interface.name) == 0) {
++                  auto* output = static_cast<wl_output*>(wl_registry_bind(registry, name, &wl_output_interface, 3));
++                  peer.clientOutputs.emplace(name, output);
++                } else if (std::strcmp(interface, zwlr_output_power_manager_v1_interface.name) == 0) {
++                  peer.manager = static_cast<zwlr_output_power_manager_v1*>(
++                      wl_registry_bind(registry, name, &zwlr_output_power_manager_v1_interface, 1)
++                  );
++                }
++              },
++          .global_remove = [](void* data, wl_registry*,
++                              std::uint32_t name) { static_cast<WaylandPeer*>(data)->removedGlobals.push_back(name); },
++      };
++      TEST_CHECK(wl_registry_add_listener(registry, &listener, this) == 0);
++      roundtrip();
++      roundtrip();
++    }
++
++    ~WaylandPeer() {
++      roundtrip();
++      TEST_CHECK(managerDestructions == 0);
++      for (const auto& [name, output] : clientOutputs) {
++        wl_output_release(output);
++      }
++      if (manager != nullptr) {
++        zwlr_output_power_manager_v1_destroy(manager);
++      }
++      roundtrip();
++      wl_registry_destroy(registry);
++      wl_display_disconnect(client);
++      wl_display_destroy_clients(server);
++      wl_display_destroy(server);
++    }
++
++    WaylandPeer(const WaylandPeer&) = delete;
++    WaylandPeer& operator=(const WaylandPeer&) = delete;
++
++    void addManager() {
++      TEST_CHECK(managerGlobal == nullptr);
++      managerGlobal = wl_global_create(server, &zwlr_output_power_manager_v1_interface, 1, this, bindManager);
++      TEST_CHECK(managerGlobal != nullptr);
++    }
++
++    wl_output* outputProxy(std::size_t index) const {
++      TEST_CHECK(outputs[index].resource != nullptr);
++      const auto id = wl_resource_get_id(outputs[index].resource);
++      for (const auto& [name, output] : clientOutputs) {
++        if (wl_proxy_get_id(reinterpret_cast<wl_proxy*>(output)) == id) {
++          return output;
++        }
++      }
++      TEST_CHECK(false);
++      return nullptr;
++    }
++
++    void removeOutput(std::size_t index) {
++      auto* output = outputProxy(index);
++      for (auto it = clientOutputs.begin(); it != clientOutputs.end(); ++it) {
++        if (it->second == output) {
++          clientOutputs.erase(it);
++          break;
++        }
++      }
++      wl_output_release(output);
++      wl_global_destroy(outputs[index].global);
++      outputs[index].global = nullptr;
++    }
++
++    void failOutput(std::size_t index) {
++      auto& output = outputs[index];
++      TEST_CHECK(output.power != nullptr);
++      output.failed = true;
++      zwlr_output_power_v1_send_failed(output.power);
++      roundtrip();
++      roundtrip();
++    }
++
++    void roundtrip() {
++      bool done = false;
++      auto* callback = wl_display_sync(client);
++      TEST_CHECK(callback != nullptr);
++      static const wl_callback_listener listener{
++          .done = [](void* data, wl_callback* callback, std::uint32_t) {
++            *static_cast<bool*>(data) = true;
++            wl_callback_destroy(callback);
++          },
++      };
++      TEST_CHECK(wl_callback_add_listener(callback, &listener, &done) == 0);
++      for (int pass = 0; pass < 8 && !done; ++pass) {
++        TEST_CHECK(wl_display_flush(client) >= 0);
++        TEST_CHECK(wl_event_loop_dispatch(wl_display_get_event_loop(server), 0) >= 0);
++        wl_display_flush_clients(server);
++        TEST_CHECK(wl_display_dispatch_pending(client) >= 0);
++        if (!done) {
++          pollfd fd{.fd = wl_display_get_fd(client), .events = POLLIN, .revents = 0};
++          TEST_CHECK(poll(&fd, 1, 1000) == 1);
++          TEST_CHECK((fd.revents & POLLIN) != 0);
++          TEST_CHECK((fd.revents & (POLLERR | POLLHUP | POLLNVAL)) == 0);
++          TEST_CHECK(wl_display_dispatch(client) >= 0);
++        }
++      }
++      TEST_CHECK(done);
++      TEST_CHECK(wl_display_get_error(client) == 0);
++    }
++
++    std::array<Output, 2> outputs;
++    std::map<std::uint32_t, wl_output*> clientOutputs;
++    std::vector<std::uint32_t> removedGlobals;
++    zwlr_output_power_manager_v1* manager = nullptr;
++    unsigned managerDestructions = 0;
++
++  private:
++    static void bindOutput(wl_client* client, void* data, std::uint32_t version, std::uint32_t id) {
++      auto& output = *static_cast<Output*>(data);
++      output.resource = wl_resource_create(client, &wl_output_interface, static_cast<int>(version), id);
++      TEST_CHECK(output.resource != nullptr);
++      static const struct wl_output_interface implementation{
++          .release = [](wl_client*, wl_resource* resource) {
++            auto& output = *static_cast<Output*>(wl_resource_get_user_data(resource));
++            TEST_CHECK(output.power == nullptr);
++            ++output.releases;
++            wl_resource_destroy(resource);
++          },
++      };
++      wl_resource_set_implementation(output.resource, &implementation, &output, [](wl_resource* resource) {
++        static_cast<Output*>(wl_resource_get_user_data(resource))->resource = nullptr;
++      });
++    }
++
++    static void bindManager(wl_client* client, void* data, std::uint32_t version, std::uint32_t id) {
++      auto* resource =
++          wl_resource_create(client, &zwlr_output_power_manager_v1_interface, static_cast<int>(version), id);
++      TEST_CHECK(resource != nullptr);
++      static const struct zwlr_output_power_manager_v1_interface implementation{
++          .get_output_power = getPower,
++          .destroy = [](wl_client*, wl_resource* resource) {
++            ++static_cast<WaylandPeer*>(wl_resource_get_user_data(resource))->managerDestructions;
++            wl_resource_destroy(resource);
++          },
++      };
++      wl_resource_set_implementation(resource, &implementation, data, nullptr);
++    }
++
++    static void getPower(wl_client* client, wl_resource*, std::uint32_t id, wl_resource* outputResource) {
++      auto& output = *static_cast<Output*>(wl_resource_get_user_data(outputResource));
++      TEST_CHECK(output.power == nullptr);
++      TEST_CHECK(!output.failed);
++      output.power = wl_resource_create(client, &zwlr_output_power_v1_interface, 1, id);
++      TEST_CHECK(output.power != nullptr);
++      ++output.controlsCreated;
++      static const struct zwlr_output_power_v1_interface implementation{
++          .set_mode =
++              [](wl_client*, wl_resource* resource, std::uint32_t mode) {
++                auto& output = *static_cast<Output*>(wl_resource_get_user_data(resource));
++                TEST_CHECK(!output.failed);
++                TEST_CHECK(mode == ZWLR_OUTPUT_POWER_V1_MODE_OFF || mode == ZWLR_OUTPUT_POWER_V1_MODE_ON);
++                output.modes.push_back(mode);
++                zwlr_output_power_v1_send_mode(resource, mode);
++              },
++          .destroy = [](wl_client*, wl_resource* resource) { wl_resource_destroy(resource); },
++      };
++      wl_resource_set_implementation(output.power, &implementation, &output, [](wl_resource* resource) {
++        static_cast<Output*>(wl_resource_get_user_data(resource))->power = nullptr;
++      });
++      zwlr_output_power_v1_send_mode(output.power, ZWLR_OUTPUT_POWER_V1_MODE_ON);
++    }
++
++    wl_display* server = nullptr;
++    wl_display* client = nullptr;
++    wl_registry* registry = nullptr;
++    wl_global* managerGlobal = nullptr;
++  };
++
++  void powerRequestsKeepOutputs() {
++    WaylandPeer peer;
++    OutputPowerService service;
++    service.bind(peer.manager);
++    service.addOutput(peer.outputProxy(0));
++    service.addOutput(peer.outputProxy(1));
++
++    TEST_CHECK(service.setPower(false));
++    peer.roundtrip();
++    for (const auto& output : peer.outputs) {
++      TEST_CHECK(output.modes == std::vector<std::uint32_t>{ZWLR_OUTPUT_POWER_V1_MODE_OFF});
++      TEST_CHECK(output.releases == 0);
++    }
++
++    TEST_CHECK(service.setPower(true));
++    peer.roundtrip();
++    const std::vector<std::uint32_t> cycle{ZWLR_OUTPUT_POWER_V1_MODE_OFF, ZWLR_OUTPUT_POWER_V1_MODE_ON};
++    for (const auto& output : peer.outputs) {
++      TEST_CHECK(output.modes == cycle);
++      TEST_CHECK(output.releases == 0);
++    }
++
++    service.cleanup();
++    peer.roundtrip();
++    TEST_CHECK(!service.setPower(false));
++    TEST_CHECK(peer.outputs[0].power == nullptr);
++    TEST_CHECK(peer.outputs[1].power == nullptr);
++    TEST_CHECK(peer.managerDestructions == 0);
++  }
++
++  void lateManagerAndFailedControl() {
++    WaylandPeer peer(false);
++    OutputPowerService service;
++    service.addOutput(peer.outputProxy(0));
++    service.addOutput(peer.outputProxy(1));
++    TEST_CHECK(!service.setPower(false));
++
++    peer.addManager();
++    peer.roundtrip();
++    peer.roundtrip();
++    service.bind(peer.manager);
++    peer.roundtrip();
++    TEST_CHECK(peer.outputs[0].modes.empty());
++    TEST_CHECK(peer.outputs[1].modes.empty());
++    TEST_CHECK(service.setPower(false));
++    peer.roundtrip();
++
++    peer.failOutput(0);
++    TEST_CHECK(peer.outputs[0].power == nullptr);
++    TEST_CHECK(service.setPower(true));
++    peer.roundtrip();
++    TEST_CHECK(peer.outputs[0].modes == std::vector<std::uint32_t>{ZWLR_OUTPUT_POWER_V1_MODE_OFF});
++    const std::vector<std::uint32_t> cycle{ZWLR_OUTPUT_POWER_V1_MODE_OFF, ZWLR_OUTPUT_POWER_V1_MODE_ON};
++    TEST_CHECK(peer.outputs[1].modes == cycle);
++    TEST_CHECK(peer.outputs[0].controlsCreated == 1);
++    TEST_CHECK(peer.outputs[0].releases == 0);
++    TEST_CHECK(peer.removedGlobals.empty());
++  }
++
++  void removedOutputReceivesNoRequests() {
++    WaylandPeer peer;
++    OutputPowerService service;
++    service.bind(peer.manager);
++    service.addOutput(peer.outputProxy(0));
++    service.addOutput(peer.outputProxy(1));
++    TEST_CHECK(service.setPower(false));
++    peer.roundtrip();
++
++    service.removeOutput(peer.outputProxy(0));
++    peer.removeOutput(0);
++    peer.roundtrip();
++    TEST_CHECK(peer.outputs[0].power == nullptr);
++    TEST_CHECK(peer.outputs[0].releases == 1);
++    TEST_CHECK(service.setPower(true));
++    peer.roundtrip();
++    TEST_CHECK(peer.outputs[0].modes == std::vector<std::uint32_t>{ZWLR_OUTPUT_POWER_V1_MODE_OFF});
++    const std::vector<std::uint32_t> cycle{ZWLR_OUTPUT_POWER_V1_MODE_OFF, ZWLR_OUTPUT_POWER_V1_MODE_ON};
++    TEST_CHECK(peer.outputs[1].modes == cycle);
++
++    service.removeOutput(peer.outputProxy(1));
++    peer.removeOutput(1);
++    TEST_CHECK(!service.setPower(false));
++    peer.roundtrip();
++    TEST_CHECK(peer.outputs[1].modes == cycle);
++  }
++
++} // namespace
++
++int main() {
++  // Bound regressions that accidentally block inside a service call, before the peer can dispatch.
++  alarm(10);
++  powerRequestsKeepOutputs();
++  lateManagerAndFailedControl();
++  removedOutputReceivesNoRequests();
++  return 0;
++}
+--- a/src/compositors/ext_workspace/ext_workspace_output_backend.cpp
++++ /dev/null
+@@ -1,9 +0,0 @@
+-#include "compositors/ext_workspace/ext_workspace_output_backend.h"
+-
+-#include "core/process/process.h"
+-
+-namespace compositors::ext_workspace {
+-
+-  bool setOutputPower(bool on) { return process::runAsync({"wlr-randr", on ? "--on" : "--off"}); }
+-
+-} // namespace compositors::ext_workspace
+--- a/src/compositors/ext_workspace/ext_workspace_output_backend.h
++++ /dev/null
+@@ -1,7 +0,0 @@
+-#pragma once
+-
+-namespace compositors::ext_workspace {
+-
+-  [[nodiscard]] bool setOutputPower(bool on);
+-
+-} // namespace compositors::ext_workspace

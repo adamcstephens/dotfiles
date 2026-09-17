@@ -21,6 +21,7 @@ in
               ./add-pinnacle.patch
               ./logind-idle-hint.patch
               ./inhibit-sync.patch
+              ./output-power.patch
             ];
           });
     };
