@@ -21,8 +21,8 @@ statusLine:
   preset: default
 startup:
   quiet: true
-disabledExtensions:
-  []
+  checkUpdate: false
+disabledExtensions: []
 dev:
   autoqaConsent: granted
 cycleOrder:
