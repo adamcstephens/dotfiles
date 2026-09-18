@@ -11,6 +11,11 @@ in
 {
   options.dotfiles = {
     nixosManaged = lib.mkEnableOption "When nixos managed dotfiles is in the read-only store";
+    source = lib.mkOption {
+      type = lib.types.functionTo lib.types.str;
+      description = "resolve a dotfiles repository-relative path";
+      readOnly = true;
+    };
 
     profile = lib.mkOption {
       type = lib.types.str;

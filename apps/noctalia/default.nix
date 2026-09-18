@@ -29,8 +29,7 @@ in
 
   config = {
     xdg.config.files = {
-      noctalia.source =
-        if config.dotfiles.nixosManaged then ./. else "${config.directory}/.dotfiles/apps/noctalia";
+      noctalia.source = config.dotfiles.source "apps/noctalia";
     }
     // lib.optionalAttrs (builtins.pathExists (./profiles + "/${profile}.toml")) {
       "noctalia/profile.toml".text = # toml

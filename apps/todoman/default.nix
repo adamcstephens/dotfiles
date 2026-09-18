@@ -4,9 +4,5 @@
     pkgs.todoman
   ];
 
-  xdg.config.files."todoman/config.py".source =
-    if config.dotfiles.nixosManaged then
-      ./config.py
-    else
-      "${config.directory}/.dotfiles/apps/todoman/config.py";
+  xdg.config.files."todoman/config.py".source = config.dotfiles.source "apps/todoman/config.py";
 }

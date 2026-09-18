@@ -4,6 +4,5 @@
     pkgs.halloy
   ];
 
-  files.".config/halloy".source =
-    if config.dotfiles.nixosManaged then ./. else "${config.directory}/.dotfiles/apps/halloy";
+  files.".config/halloy".source = config.dotfiles.source "apps/halloy";
 }

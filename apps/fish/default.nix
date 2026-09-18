@@ -18,12 +18,7 @@ let
     echo "setup_hjem_session_vars") > $out/share/fish/vendor_conf.d/hjem-session-vars.fish
   '';
 
-  mkSource =
-    source:
-    if config.dotfiles.nixosManaged then
-      ./. + "/${source}"
-    else
-      "${config.directory}/.dotfiles/apps/fish/${source}";
+  mkSource = source: config.dotfiles.source "apps/fish/${source}";
 
   commandNotFound = pkgs.writeShellApplication {
     name = "command-not-found";

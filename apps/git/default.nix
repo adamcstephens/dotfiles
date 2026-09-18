@@ -28,13 +28,8 @@ in
   ];
 
   xdg.config.files = {
-    "git/config".source =
-      if config.dotfiles.nixosManaged then
-        ./gitconfig
-      else
-        "${config.directory}/.dotfiles/apps/git/gitconfig";
+    "git/config".source = config.dotfiles.source "apps/git/gitconfig";
 
-    "git/ignore".source =
-      if config.dotfiles.nixosManaged then ./ignore else "${config.directory}/.dotfiles/apps/git/ignore";
+    "git/ignore".source = config.dotfiles.source "apps/git/ignore";
   };
 }

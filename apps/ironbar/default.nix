@@ -72,11 +72,7 @@ in
 
     '';
 
-    xdg.config.files."ironbar/style.css".source =
-      if config.dotfiles.nixosManaged then
-        ./style.css
-      else
-        "${config.directory}/.dotfiles/apps/ironbar/style.css";
+    xdg.config.files."ironbar/style.css".source = config.dotfiles.source "apps/ironbar/style.css";
 
     systemd.services.ironbar = {
       partOf = [ "wayland-session.target" ];

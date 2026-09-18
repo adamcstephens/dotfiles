@@ -15,7 +15,6 @@ in
   config = lib.mkIf cfg.enable {
     packages = [ pkgs.tmuxinator ];
 
-    files.".config/tmuxinator".source =
-      if config.dotfiles.nixosManaged then ./. else "${config.directory}/.dotfiles/apps/tmuxinator";
+    files.".config/tmuxinator".source = config.dotfiles.source "apps/tmuxinator";
   };
 }

@@ -4,6 +4,5 @@
     pkgs.newsboat
   ];
 
-  xdg.config.files.newsboat.source =
-    if config.dotfiles.nixosManaged then ./. else "${config.directory}/.dotfiles/apps/newsboat";
+  xdg.config.files.newsboat.source = config.dotfiles.source "apps/newsboat";
 }

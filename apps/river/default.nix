@@ -11,11 +11,7 @@
 
   xdg.config.files."river/init" = {
     executable = true;
-    source =
-      if config.dotfiles.nixosManaged then
-        ./init.sh
-      else
-        "${config.directory}/.dotfiles/apps/river/init.sh";
+    source = config.dotfiles.source "apps/river/init.sh";
   };
 
   xdg.config.files."river/colors.sh" = {

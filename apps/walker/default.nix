@@ -19,16 +19,9 @@ in
     ];
 
     xdg.config.files."elephant/websearch.toml".source =
-      if config.dotfiles.nixosManaged then
-        ./elephant/websearch.toml
-      else
-        "${config.directory}/.dotfiles/apps/walker/elephant/websearch.toml";
+      config.dotfiles.source "apps/walker/elephant/websearch.toml";
 
-    xdg.config.files."walker/config.toml".source =
-      if config.dotfiles.nixosManaged then
-        ./config.toml
-      else
-        "${config.directory}/.dotfiles/apps/walker/config.toml";
+    xdg.config.files."walker/config.toml".source = config.dotfiles.source "apps/walker/config.toml";
 
     xdg.config.files."walker/themes/dotfiles/style.css".text = with config.colorScheme.palette; ''
       @define-color window_bg_color #${base05};

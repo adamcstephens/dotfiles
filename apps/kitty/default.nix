@@ -45,11 +45,7 @@ in
     confirm_os_window_close 0
   '';
 
-  xdg.config.files."kitty/dotfiles.conf".source =
-    if config.dotfiles.nixosManaged then
-      ./dotfiles.conf
-    else
-      "${config.directory}/.dotfiles/apps/kitty/dotfiles.conf";
+  xdg.config.files."kitty/dotfiles.conf".source = config.dotfiles.source "apps/kitty/dotfiles.conf";
 
   # themes
   xdg.config.files."kitty/no-preference-theme.auto.conf".source =

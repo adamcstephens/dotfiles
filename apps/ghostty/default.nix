@@ -26,33 +26,18 @@
       '';
 
       xdg.config.files."ghostty/dotfiles.conf".source =
-        if config.dotfiles.nixosManaged then
-          ./dotfiles.conf
-        else
-          "${config.directory}/.dotfiles/apps/ghostty/dotfiles.conf";
+        config.dotfiles.source "apps/ghostty/dotfiles.conf";
 
       xdg.config.files."ghostty/linux.conf" = lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
-        source =
-          if config.dotfiles.nixosManaged then
-            ./linux.conf
-          else
-            "${config.directory}/.dotfiles/apps/ghostty/linux.conf";
+        source = config.dotfiles.source "apps/ghostty/linux.conf";
       };
 
       xdg.config.files."ghostty/gtk-custom.css" = lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
-        source =
-          if config.dotfiles.nixosManaged then
-            ./gtk-custom.css
-          else
-            "${config.directory}/.dotfiles/apps/ghostty/gtk-custom.css";
+        source = config.dotfiles.source "apps/ghostty/gtk-custom.css";
       };
 
       xdg.config.files."ghostty/mac.conf" = lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
-        source =
-          if config.dotfiles.nixosManaged then
-            ./mac.conf
-          else
-            "${config.directory}/.dotfiles/apps/ghostty/mac.conf";
+        source = config.dotfiles.source "apps/ghostty/mac.conf";
       };
 
       xdg.data.files."dbus-1/services/com.mitchellh.ghostty.service" =

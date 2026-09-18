@@ -37,6 +37,13 @@
 
   config = lib.mkMerge [
     {
+      dotfiles.source =
+        relative:
+        if config.dotfiles.nixosManaged then
+          "${flake}/${relative}"
+        else
+          "${config.directory}/.dotfiles/${relative}";
+
       environment.sessionVariables = {
         DO_NOT_TRACK = "true";
         EDITOR = "${config.directory}/.dotfiles/bin/editor";

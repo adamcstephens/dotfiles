@@ -2,9 +2,5 @@
 {
   packages = [ pkgs.starship ];
 
-  xdg.config.files."starship.toml".source =
-    if config.dotfiles.nixosManaged then
-      ./starship.toml
-    else
-      "${config.directory}/.dotfiles/apps/starship/starship.toml";
+  xdg.config.files."starship.toml".source = config.dotfiles.source "apps/starship/starship.toml";
 }

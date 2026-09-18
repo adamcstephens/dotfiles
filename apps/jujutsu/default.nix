@@ -18,9 +18,5 @@ in
     pkgs.watchman
   ];
 
-  files."${configDir}/config.toml".source =
-    if config.dotfiles.nixosManaged then
-      ./config.toml
-    else
-      "${config.directory}/.dotfiles/apps/jujutsu/config.toml";
+  files."${configDir}/config.toml".source = config.dotfiles.source "apps/jujutsu/config.toml";
 }

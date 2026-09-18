@@ -18,11 +18,7 @@ in
     {
       packages = lib.optionals cfg.tpm.enable [ pkgs.ssh-tpm-agent ];
 
-      files.".ssh/config".source =
-        if config.dotfiles.nixosManaged then
-          ./dotfiles.config
-        else
-          "${config.directory}/.dotfiles/apps/ssh/dotfiles.config";
+      files.".ssh/config".source = config.dotfiles.source "apps/ssh/dotfiles.config";
     }
     (lib.optionalAttrs (lib.hasAttr "systemd" options) {
       systemd.services = {
