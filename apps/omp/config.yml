@@ -3,6 +3,7 @@ modelRoles:
   plan: openai-codex/gpt-5.6-terra:high
   default: openai-codex/gpt-5.6-terra
   slow: openai-codex/gpt-6-astra:high
+  CODER: openai-codex/gpt-6-astra:low
 symbolPreset: nerd
 composer:
   shape: rule
@@ -24,3 +25,8 @@ disabledExtensions:
   []
 dev:
   autoqaConsent: granted
+cycleOrder:
+  - smol
+  - default
+  - slow
+  - CODER
