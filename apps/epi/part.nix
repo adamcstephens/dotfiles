@@ -60,6 +60,7 @@ let
           directory = "/home/adam";
           user = "adam";
           files.".dotfiles".source = "${self}";
+          dotfiles.nixosManaged = true;
         };
       };
 
