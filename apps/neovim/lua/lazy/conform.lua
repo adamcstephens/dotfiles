@@ -19,7 +19,13 @@ return {
         kdl = { "kdlfmt" },
         lua = { "stylua" },
         just = { "just" },
-        nix = { "nixfmt" },
+        nix = function(bufnr)
+          if require("conform").get_formatter_info("alejandra", bufnr).available then
+            return { "alejandra" }
+          end
+
+          return { "nixfmt" }
+        end,
         proto = { "buf" },
         python = function(bufnr)
           if require("conform").get_formatter_info("black", bufnr).available then
