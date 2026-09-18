@@ -5,7 +5,7 @@
 }:
 let
   pkgs' = inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
-  ocamlPackages = pkgs'.ocaml-ng.ocamlPackages_5_5;
+  ocamlPackages = pkgs'.ocaml-ng.ocamlPackages_latest;
 in
 mkShell {
   packages = [

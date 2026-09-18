@@ -52,7 +52,6 @@
       trusted-public-keys = [
         "cache-v6:tXeE+WhO6k2OoUoNSzmQVIckjXtl14mtO+z0ZwAIork="
       ];
-      extra-platforms = "x86_64-darwin";
     };
     distributedBuilds = true;
 

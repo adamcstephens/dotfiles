@@ -3,13 +3,15 @@
   mkShell,
   stdenv,
 
-  beamMinimal28Packages,
+  dexter,
+  beamMinimal29Packages,
   inotify-tools,
+  nodejs,
 }:
 let
-  beamPackages = beamMinimal28Packages.extend (
+  beamPackages = beamMinimal29Packages.overrideScope (
     _: prev: {
-      elixir = prev.elixir_1_19;
+      elixir = prev.elixir_1_20;
     }
   );
 in
@@ -17,9 +19,11 @@ mkShell {
   packages = [
     beamPackages.erlang
     beamPackages.elixir
-    beamPackages.elixir-ls
+    beamPackages.expert
     beamPackages.hex
     beamPackages.rebar3
+    dexter
+    nodejs
   ]
   ++ (lib.optionals stdenv.hostPlatform.isLinux [ inotify-tools ]);
 

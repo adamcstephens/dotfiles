@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "https://channels.nixos.org/nixpkgs-unstable/nixexprs.tar.zst";
     flake-parts.url = "github:hercules-ci/flake-parts";
   };
 
@@ -17,9 +17,9 @@
       perSystem =
         { lib, pkgs, ... }:
         let
-          beamPackages = pkgs.beamMinimal27Packages.extend (
+          beamPackages = pkgs.beamMinimal29Packages.extend (
             _: prev: {
-              elixir = prev.elixir_1_18;
+              elixir = prev.elixir_1_20;
             }
           );
         in
@@ -28,9 +28,10 @@
             packages = [
               beamPackages.erlang
               beamPackages.elixir
-              beamPackages.elixir-ls
+              beamPackages.expert
               beamPackages.hex
               beamPackages.rebar3
+              pkgs.dexter
             ]
             ++ (lib.optionals pkgs.stdenv.hostPlatform.isLinux [ pkgs.inotify-tools ]);
 
