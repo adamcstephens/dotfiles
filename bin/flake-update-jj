@@ -32,41 +32,46 @@ def load_lock_file(path: Path) -> Dict[str, Any]:
         return json.load(f)
 
 
-def build_node_paths(lock: Dict) -> Dict[str, str]:
+def build_input_nodes(lock: Dict) -> Dict[str, str]:
     """
-    Map each node key to its shortest path from root in the inputs tree,
-    e.g. "nixpkgs" for a direct input or "sower/nixpkgs" for a transitive one.
+    Map each input path to its target node key.
+
+    Node keys such as "crane_2" are generated per lock file and may be
+    renumbered. Input paths are stable across a lock update.
     """
     nodes = lock.get("nodes", {})
     root_key = lock.get("root", "root")
-    paths: Dict[str, str] = {}
-    queue = [(root_key, "")]
-    while queue:
-        node_key, prefix = queue.pop(0)
+    input_nodes: Dict[str, str] = {}
+
+    def walk(node_key: str, prefix: str, ancestors: set[str]) -> None:
+        if node_key in ancestors:
+            return
+
         for input_name, target in nodes.get(node_key, {}).get("inputs", {}).items():
-            # A list value is a "follows" reference; its target is reachable
-            # via a real edge elsewhere
-            if not isinstance(target, str) or target in paths:
+            if not isinstance(target, str):
                 continue
-            paths[target] = f"{prefix}{input_name}"
-            queue.append((target, f"{paths[target]}/"))
-    return paths
+
+            input_path = f"{prefix}{input_name}"
+            input_nodes[input_path] = target
+            walk(target, f"{input_path}/", ancestors | {node_key})
+
+    walk(root_key, "", set())
+    return input_nodes
 
 
-def get_changed_inputs(
-    old_lock: Dict, new_lock: Dict
-) -> list[tuple[str, str, str, str, str]]:
+def get_changed_inputs(old_lock: Dict, new_lock: Dict) -> list[tuple[str, str, str, str, str]]:
     """
     Compare lock files and return list of (input_path, old_rev, new_rev, old_date, new_date).
 
-    Matches nodes by name and labels each with its path in the inputs tree,
-    so the same repo appearing under different parents is listed separately.
+    Matches inputs by their paths in the inputs tree, resolving each path to
+    its lock node before comparing revisions.
     """
     from datetime import datetime
 
     old_nodes = old_lock.get("nodes", {})
     new_nodes = new_lock.get("nodes", {})
-    paths = build_node_paths(new_lock)
+    old_inputs = build_input_nodes(old_lock)
+    new_inputs = build_input_nodes(new_lock)
 
     def fmt_date(timestamp):
         if not timestamp:
@@ -74,17 +79,19 @@ def get_changed_inputs(
         return datetime.fromtimestamp(timestamp).strftime("%Y-%m-%d")
 
     changes = []
-    for name, new_node in new_nodes.items():
-        if name == "root" or name not in old_nodes:
+    for input_path, new_name in new_inputs.items():
+        old_name = old_inputs.get(input_path)
+        if old_name is None:
             continue
-        old_locked = old_nodes[name].get("locked", {})
-        new_locked = new_node.get("locked", {})
+
+        old_locked = old_nodes[old_name].get("locked", {})
+        new_locked = new_nodes[new_name].get("locked", {})
         old_rev = old_locked.get("rev")
         new_rev = new_locked.get("rev")
         if old_rev and new_rev and old_rev != new_rev:
             changes.append(
                 (
-                    paths.get(name, name),
+                    input_path,
                     old_rev[:7],
                     new_rev[:7],
                     fmt_date(old_locked.get("lastModified")),
@@ -109,9 +116,7 @@ def format_commit_message(
     if changes:
         lines.append("inputs:")
         for input_name, old_rev, new_rev, old_date, new_date in changes:
-            lines.append(
-                f"  - {input_name}: {old_rev} ({old_date}) → {new_rev} ({new_date})"
-            )
+            lines.append(f"  - {input_name}: {old_rev} ({old_date}) → {new_rev} ({new_date})")
     else:
         lines.append("flake.lock")
 
@@ -120,9 +125,7 @@ def format_commit_message(
 
 def main() -> int:
     """Main entry point."""
-    parser = argparse.ArgumentParser(
-        description="Update specific nix flake inputs and commit with formatted message"
-    )
+    parser = argparse.ArgumentParser(description="Update specific nix flake inputs and commit with formatted message")
     parser.add_argument(
         "inputs",
         nargs="*",
