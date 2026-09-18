@@ -36,13 +36,13 @@ in
     ../apps/mimeapps
     ../apps/noctalia
     ../apps/pinnacle
+    ../apps/river
     ../apps/shikane
     ../apps/wayland
 
     # desktop env
     # ../apps/ironbar
     # ../apps/niri
-    # ../apps/river
     # ../apps/swayidle
     # ../apps/swayosd
     # ../apps/vdirsyncer

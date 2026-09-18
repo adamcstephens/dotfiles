@@ -46,7 +46,7 @@ riverctl focus-follows-cursor always || riverctl focus-follows-cursor normal
 riverctl map normal Super+Shift T spawn 'app2unit -- terminal'
 riverctl map normal Super+Shift Return spawn 'app2unit -- terminal'
 riverctl map normal Super D spawn 'app2unit -- walker'
-riverctl map normal Super+Shift D spawn 'app2unit -- walker -m unicode'
+riverctl map normal Super+Shift D spawn 'app2unit -- noctalia msg panel-toggle launcher'
 riverctl map normal Super+Shift+Control T spawn 'app2unit -- dark toggle'
 riverctl map normal Super+Shift+Control D spawn 'app2unit -- prj'
 
@@ -173,18 +173,18 @@ riverctl map passthrough Super F11 enter-mode normal
 for mode in normal locked; do
   riverctl map $mode None XF86Eject spawn 'app2unit -- eject -T'
 
-  riverctl map $mode None XF86AudioLowerVolume spawn "app2unit -- swayosd-client --output-volume -5"
-  riverctl map $mode None XF86AudioRaiseVolume spawn "app2unit -- swayosd-client --output-volume 5"
-  riverctl map $mode None XF86AudioMute spawn "app2unit -- swayosd-client --output-volume mute-toggle"
-  riverctl map $mode None XF86AudioMicMute spawn "app2unit -- swayosd-client --input-volume mute-toggle"
+  riverctl map $mode None XF86AudioLowerVolume spawn "app2unit -- noctalia msg volume-down 5"
+  riverctl map $mode None XF86AudioRaiseVolume spawn "app2unit -- noctalia msg volume-up 5"
+  riverctl map $mode None XF86AudioMute spawn "app2unit -- noctalia msg volume-mute"
+  riverctl map $mode None XF86AudioMicMute spawn "app2unit -- noctalia msg mic-mute"
 
   riverctl map $mode None XF86AudioMedia spawn 'app2unit -- playerctl play-pause'
   riverctl map $mode None XF86AudioPlay spawn 'app2unit -- playerctl play-pause'
   riverctl map $mode None XF86AudioPrev spawn 'app2unit -- playerctl previous'
   riverctl map $mode None XF86AudioNext spawn 'app2unit -- playerctl next'
 
-  riverctl map $mode None XF86MonBrightnessDown spawn 'app2unit -- swayosd-client --brightness lower'
-  riverctl map $mode None XF86MonBrightnessUp spawn 'app2unit -- swayosd-client --brightness raise'
+  riverctl map $mode None XF86MonBrightnessDown spawn 'app2unit -- noctalia msg brightness-down'
+  riverctl map $mode None XF86MonBrightnessUp spawn 'app2unit -- noctalia msg brightness-up'
 done
 
 # Set repeat rate
