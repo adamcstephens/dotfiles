@@ -12,11 +12,6 @@ local Snowcap = require("pinnacle.snowcap")
 
 Pinnacle.setup(function()
   -- load our path in
-  local home = assert(os.getenv("HOME"))
-  local profile = home .. "/.local/state/hjem/standalone/current-profile"
-  local path = assert(os.getenv("PATH"), "PATH is not set")
-  Process.set_env("PATH", profile .. "/bin:" .. home .. "/.dotfiles/bin:" .. path)
-
   local key = Input.key
 
   ---@type pinnacle.input.Mod
@@ -26,7 +21,7 @@ Pinnacle.setup(function()
     mod_key = "alt"
   end
 
-  local terminal = "terminal"
+  local terminal = "ghostty"
 
   -- cursor
   Input.set_xcursor_theme("Bibata-Original-Ice")
