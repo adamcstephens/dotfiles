@@ -97,8 +97,27 @@ in
                     settings
                   ];
                 };
+
+              paseoDirs =
+                config.services.epi.instances
+                |> (lib.foldlAttrs (
+                  acc: n: v:
+                  acc ++ v.settings.mounts
+                ) [ ])
+                |> lib.map (m: lib.splitString ":" m |> lib.head)
+                |> lib.filter (m: lib.strings.hasInfix "paseo" m)
+                |> lib.map (m: lib.replaceString "~/" "" m)
+                |> lib.map (m: {
+                  name = m;
+                  value = {
+                    type = "directory";
+                  };
+                })
+                |> lib.listToAttrs;
             in
             {
+              files = paseoDirs;
+
               services.epi = {
                 package = inputs.epi.packages.x86_64-linux.epi;
                 instances = {
