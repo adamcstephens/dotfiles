@@ -113,6 +113,13 @@ in
                     project = "hjem";
                     project_dir = "${config.directory}/git/hjem";
                   };
+                  noctalia = epi-agent {
+                    project = "noctalia";
+                    project_dir = "${config.directory}/git/noctalia";
+                    settings = {
+                      memory = 8192;
+                    };
+                  };
                   sower = epi-agent { project = "sower"; };
                   tracker-deck = epi-agent { project = "sower"; };
                 };
