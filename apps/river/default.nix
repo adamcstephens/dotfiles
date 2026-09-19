@@ -34,7 +34,7 @@
     pkgs.writeShellApplication {
       name = "river-start";
       text = ''
-        export PATH=$PATH:$HOME/.dotfiles/bin
+        export PATH=$HOME/.local/state/hjem/standalone/current-profile/bin:$HOME/.dotfiles/bin:$PATH
 
         if ! command -v river &>/dev/null; then
           echo "!! No river binary found in path"

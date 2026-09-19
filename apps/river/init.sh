@@ -45,7 +45,7 @@ riverctl focus-follows-cursor always || riverctl focus-follows-cursor normal
 riverctl focus-follows-cursor always || riverctl focus-follows-cursor normal
 riverctl map normal Super+Shift T spawn 'app2unit -- terminal'
 riverctl map normal Super+Shift Return spawn 'app2unit -- terminal'
-riverctl map normal Super D spawn 'app2unit -- walker'
+riverctl map normal Super D spawn 'app2unit -- noctalia msg panel-toggle launcher'
 riverctl map normal Super+Shift D spawn 'app2unit -- noctalia msg panel-toggle launcher'
 riverctl map normal Super+Shift+Control T spawn 'app2unit -- dark toggle'
 riverctl map normal Super+Shift+Control D spawn 'app2unit -- prj'
