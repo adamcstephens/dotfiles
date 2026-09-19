@@ -1,0 +1,1591 @@
+diff --git a/CREDITS.md b/CREDITS.md
+index ab5d6cbb59..7f6c426287 100644
+--- a/CREDITS.md
++++ b/CREDITS.md
+@@ -56,6 +56,10 @@
+ - **[Material Color Utilities](https://github.com/material-foundation/material-color-utilities)** — Material 3 palette generation (Apache-2.0)
+ - **[Wuffs](https://github.com/google/wuffs)** — Memory-safe image decoders (Apache-2.0)
+ 
++## Vendored Protocols
++
++- **[River Classic](https://github.com/riverwm/river-classic/tree/b1af960e1bea8506c25179775c18f902a5cb8c87/protocol)** — Status and control protocol definitions in `protocols/river-classic-*.xml` (ISC)
++
+ ## System Integration
+ 
+ External tools Noctalia integrates with at runtime when present:
+diff --git a/README.md b/README.md
+index 3267040e01..8f4a7aa3b1 100644
+--- a/README.md
++++ b/README.md
+@@ -70,10 +70,15 @@
+ integration works through compositor-native backends where needed, or through `ext-workspace-v1` on compositors that
+ implement it.
+ 
+-Current compositor integrations include Niri, Hyprland, Sway, Scroll, Mango, Labwc, Triad, dwl, and other compatible
+-Wayland compositors. Other compositors may run Noctalia but can have reduced workspace, window, output, or
++Current compositor integrations include Niri, Hyprland, Sway, Scroll, Mango, Labwc, Triad, dwl, River Classic, and other
++compatible Wayland compositors. Other compositors may run Noctalia but can have reduced workspace, window, output, or
+ session-action integration depending on the protocols and IPC they expose.
+ 
++River Classic uses its status and control protocols for per-output tags, including active, occupied, and urgent states.
++The `river-classic` backend is selected by protocol availability even when the desktop session is named `river`; modern
++River is not identified as River Classic from that name alone. Window lists use the existing foreign-toplevel integration;
++per-window tag assignments and taskbar workspace grouping are unavailable.
++
+ ## Scope
+ 
+ Noctalia is a desktop shell, not a full desktop environment. It provides the visual and service layer around your
+diff --git a/docs/user/bar/widgets/workspaces.mdx b/docs/user/bar/widgets/workspaces.mdx
+index 621abf07bb..bd7f7fe73e 100644
+--- a/docs/user/bar/widgets/workspaces.mdx
++++ b/docs/user/bar/widgets/workspaces.mdx
+@@ -15,6 +15,11 @@
+ Set `[widget.workspaces].capsule_radius` for just the workspace switcher, or `[bar.<name>].capsule_radius` as the bar default.
+ Pill styling and `capsule_radius` apply only when `style = "regular"`.
+ 
++On **River Classic**, workspaces represent all 32 tags on each output. Multiple tags can be active at once, and occupied
++and urgent states follow the compositor's tag masks. Clicking a tag focuses its output and displays only that tag.
++Set `hide_when_empty = true` to hide unused tags while keeping active and urgent tags visible. River Classic does not
++provide per-window tag assignments, so per-workspace application lists and taskbar workspace grouping are unavailable.
++
+ | Setting | Type | Default | Description |
+ |---------|------|---------|-------------|
+ | `style` | string | `"regular"` | Pill style: `"regular"` (animated pills), `"minimal"` (labels drawn without pill backgrounds), or `"focus_hint"` (inactive dots + expanded active pill with focused app icon). |
+diff --git a/docs/user/getting-started/faq.mdx b/docs/user/getting-started/faq.mdx
+index 0c7446edf5..5f5889948c 100644
+--- a/docs/user/getting-started/faq.mdx
++++ b/docs/user/getting-started/faq.mdx
+@@ -90,6 +90,14 @@
+ ```
+ :::
+ 
++:::note[River Classic]
++Add to your executable `~/.config/river/init` script:
++```sh
++noctalia &
++```
++The `river-classic` backend is discovered through the compositor's Wayland protocols; no desktop environment override is required.
++:::
++
+ :::note[KDE Plasma]
+ Add `noctalia` under System Settings → Autostart, or see [KDE Plasma](/noctalia/compositor-settings/kde/) for Plasma-specific limits (clipboard, blur, screenshots, and more).
+ :::
+diff --git a/meson.build b/meson.build
+index 7c581eabea..87aba00dd5 100644
+--- a/meson.build
++++ b/meson.build
+@@ -359,6 +359,10 @@
+     'protocols/virtual-keyboard-unstable-v1.xml'],
+   ['dwl-ipc-unstable-v2',
+     'protocols/dwl-ipc-unstable-v2.xml'],
++  ['river-classic-status-unstable-v1',
++    'protocols/river-classic-status-unstable-v1.xml'],
++  ['river-classic-control-unstable-v1',
++    'protocols/river-classic-control-unstable-v1.xml'],
+   ['org-kde-plasma-virtual-desktop',
+     'protocols/org-kde-plasma-virtual-desktop.xml'],
+   ['cursor-shape-v1',
+@@ -923,6 +927,7 @@
+   'src/compositors/compositor_detect.cpp',
+   'src/compositors/compositor_runtime.cpp',
+   'src/compositors/dwl/dwl_workspace_backend.cpp',
++  'src/compositors/river-classic/river-classic-workspace-backend.cpp',
+   'src/compositors/ext_workspace/ext_workspace_output_backend.cpp',
+   'src/compositors/ext_workspace/ext_workspace_backend.cpp',
+   'src/compositors/hyprland/hyprland_runtime.cpp',
+@@ -1271,6 +1276,40 @@
+     test(test_name, test_exe, args: test_args)
+   endforeach
+ 
++  river_classic_test = executable('river-classic-workspace-backend-test',
++    sources: files('tests/river-classic-workspace-backend-test.cpp'),
++    dependencies: noctalia_core_dep,
++    override_options: ['b_ndebug=false'],
++  )
++  test('river-classic-workspace-backend', river_classic_test)
++
++  river_classic_detection_test = executable('river-classic-detection-test',
++    sources: files('tests/river-classic-detection-test.cpp'),
++    dependencies: noctalia_core_dep,
++    override_options: ['b_ndebug=false'],
++  )
++  foreach detection_case : [
++    ['classic', 'river-classic', '', 'RiverClassic'],
++    ['modern', 'river', '', 'Unknown'],
++    ['triad', 'river-classic', 'triad', 'Triad'],
++  ]
++    detection_env = environment()
++    foreach variable : [
++      'UMBRIEL_SOCKET', 'LABWC_PID', 'TRIAD_SOCKET', 'NIRI_SOCKET',
++      'HYPRLAND_INSTANCE_SIGNATURE', 'SWAYSOCK', 'MANGO_INSTANCE_SIGNATURE',
++      'PINNACLE_GRPC_SOCKET', 'XDG_SESSION_DESKTOP', 'DESKTOP_SESSION',
++    ]
++      detection_env.set(variable, '')
++    endforeach
++    detection_env.set('XDG_CURRENT_DESKTOP', detection_case[1])
++    detection_env.set('RIVER_WM', detection_case[2])
++    test('river-classic-detection-' + detection_case[0],
++      river_classic_detection_test,
++      args: [detection_case[3]],
++      env: detection_env,
++    )
++  endforeach
++
+   upower_integration_exe = executable('upower_charge_limit_integration_test',
+     sources: files('tests/upower_charge_limit_integration_test.cpp'),
+     dependencies: noctalia_core_dep,
+diff --git a/protocols/river-classic-control-unstable-v1.xml b/protocols/river-classic-control-unstable-v1.xml
+new file mode 100644
+index 0000000000..aa5fc4dc6d
+--- /dev/null
++++ b/protocols/river-classic-control-unstable-v1.xml
+@@ -0,0 +1,85 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<protocol name="river_control_unstable_v1">
++  <copyright>
++    Copyright 2020 The River Developers
++
++    Permission to use, copy, modify, and/or distribute this software for any
++    purpose with or without fee is hereby granted, provided that the above
++    copyright notice and this permission notice appear in all copies.
++
++    THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
++    WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
++    MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
++    ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
++    WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
++    ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
++    OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
++  </copyright>
++
++  <interface name="zriver_control_v1" version="1">
++    <description summary="run compositor commands">
++      This interface allows clients to run compositor commands and receive a
++      success/failure response with output or a failure message respectively.
++
++      Each command is built up in a series of add_argument requests and
++      executed with a run_command request. The first argument is the command
++      to be run.
++
++      A complete list of commands should be made available in the man page of
++      the compositor.
++    </description>
++
++    <request name="destroy" type="destructor">
++      <description summary="destroy the river_control object">
++        This request indicates that the client will not use the
++        river_control object any more. Objects that have been created
++        through this instance are not affected.
++      </description>
++    </request>
++
++    <request name="add_argument">
++      <description summary="add an argument to the current command">
++        Arguments are stored by the server in the order they were sent until
++        the run_command request is made.
++      </description>
++      <arg name="argument" type="string" summary="the argument to add"/>
++    </request>
++
++    <request name="run_command">
++      <description summary="run the current command">
++        Execute the command built up using the add_argument request for the
++        given seat.
++      </description>
++      <arg name="seat" type="object" interface="wl_seat"/>
++      <arg name="callback" type="new_id" interface="zriver_command_callback_v1"
++        summary="callback object"/>
++    </request>
++  </interface>
++
++  <interface name="zriver_command_callback_v1" version="1">
++    <description summary="callback object">
++      This object is created by the run_command request. Exactly one of the
++      success or failure events will be sent. This object will be destroyed
++      by the compositor after one of the events is sent.
++    </description>
++
++    <event name="success" type="destructor">
++      <description summary="command successful">
++        Sent when the command has been successfully received and executed by
++        the compositor. Some commands may produce output, in which case the
++        output argument will be a non-empty string.
++      </description>
++      <arg name="output" type="string" summary="the output of the command"/>
++    </event>
++
++    <event name="failure" type="destructor">
++      <description summary="command failed">
++        Sent when the command could not be carried out. This could be due to
++        sending a non-existent command, no command, not enough arguments, too
++        many arguments, invalid arguments, etc.
++      </description>
++      <arg name="failure_message" type="string"
++        summary="a message explaining why failure occurred"/>
++    </event>
++  </interface>
++</protocol>
+diff --git a/protocols/river-classic-status-unstable-v1.xml b/protocols/river-classic-status-unstable-v1.xml
+new file mode 100644
+index 0000000000..e9629dde1d
+--- /dev/null
++++ b/protocols/river-classic-status-unstable-v1.xml
+@@ -0,0 +1,148 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<protocol name="river_status_unstable_v1">
++  <copyright>
++    Copyright 2020 The River Developers
++
++    Permission to use, copy, modify, and/or distribute this software for any
++    purpose with or without fee is hereby granted, provided that the above
++    copyright notice and this permission notice appear in all copies.
++
++    THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
++    WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
++    MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
++    ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
++    WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
++    ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
++    OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
++  </copyright>
++
++  <interface name="zriver_status_manager_v1" version="4">
++    <description summary="manage river status objects">
++      A global factory for objects that receive status information specific
++      to river. It could be used to implement, for example, a status bar.
++    </description>
++
++    <request name="destroy" type="destructor">
++      <description summary="destroy the river_status_manager object">
++        This request indicates that the client will not use the
++        river_status_manager object any more. Objects that have been created
++        through this instance are not affected.
++      </description>
++    </request>
++
++    <request name="get_river_output_status">
++      <description summary="create an output status object">
++        This creates a new river_output_status object for the given wl_output.
++      </description>
++      <arg name="id" type="new_id" interface="zriver_output_status_v1"/>
++      <arg name="output" type="object" interface="wl_output"/>
++    </request>
++
++    <request name="get_river_seat_status">
++      <description summary="create a seat status object">
++        This creates a new river_seat_status object for the given wl_seat.
++      </description>
++      <arg name="id" type="new_id" interface="zriver_seat_status_v1"/>
++      <arg name="seat" type="object" interface="wl_seat"/>
++    </request>
++  </interface>
++
++  <interface name="zriver_output_status_v1" version="4">
++    <description summary="track output tags and focus">
++      This interface allows clients to receive information about the current
++      windowing state of an output.
++    </description>
++
++    <request name="destroy" type="destructor">
++      <description summary="destroy the river_output_status object">
++        This request indicates that the client will not use the
++        river_output_status object any more.
++      </description>
++    </request>
++
++    <event name="focused_tags">
++      <description summary="focused tags of the output">
++        Sent once binding the interface and again whenever the tag focus of
++        the output changes.
++      </description>
++      <arg name="tags" type="uint" summary="32-bit bitfield"/>
++    </event>
++
++    <event name="view_tags">
++      <description summary="tag state of an output's views">
++        Sent once on binding the interface and again whenever the tag state
++        of the output changes.
++      </description>
++      <arg name="tags" type="array" summary="array of 32-bit bitfields"/>
++    </event>
++
++    <event name="urgent_tags" since="2">
++      <description summary="tags of the output with an urgent view">
++        Sent once on binding the interface and again whenever the set of
++        tags with at least one urgent view changes.
++      </description>
++      <arg name="tags" type="uint" summary="32-bit bitfield"/>
++    </event>
++
++    <event name="layout_name" since="4">
++      <description summary="name of the layout">
++        Sent once on binding the interface should a layout name exist and again
++        whenever the name changes.
++      </description>
++      <arg name="name" type="string" summary="layout name"/>
++    </event>
++
++    <event name="layout_name_clear" since="4">
++      <description summary="name of the layout">
++        Sent when the current layout name has been removed without a new one
++        being set, for example when the active layout generator disconnects.
++      </description>
++    </event>
++  </interface>
++
++  <interface name="zriver_seat_status_v1" version="3">
++    <description summary="track seat focus">
++      This interface allows clients to receive information about the current
++      focus of a seat. Note that (un)focused_output events will only be sent
++      if the client has bound the relevant wl_output globals.
++    </description>
++
++    <request name="destroy" type="destructor">
++      <description summary="destroy the river_seat_status object">
++        This request indicates that the client will not use the
++        river_seat_status object any more.
++      </description>
++    </request>
++
++    <event name="focused_output">
++      <description summary="the seat focused an output">
++        Sent on binding the interface and again whenever an output gains focus.
++      </description>
++      <arg name="output" type="object" interface="wl_output"/>
++    </event>
++
++    <event name="unfocused_output">
++      <description summary="the seat unfocused an output">
++        Sent whenever an output loses focus.
++      </description>
++      <arg name="output" type="object" interface="wl_output"/>
++    </event>
++
++    <event name="focused_view">
++      <description summary="information on the focused view">
++        Sent once on binding the interface and again whenever the focused
++        view or a property thereof changes. The title may be an empty string
++        if no view is focused or the focused view did not set a title.
++      </description>
++      <arg name="title" type="string" summary="title of the focused view"/>
++    </event>
++
++    <event name="mode" since="3">
++      <description summary="the active mode changed">
++        Sent once on binding the interface and again whenever a new mode
++        is entered (e.g. with riverctl enter-mode foobar).
++      </description>
++      <arg name="name" type="string" summary="name of the mode"/>
++    </event>
++  </interface>
++</protocol>
+diff --git a/src/compositors/compositor_detect.cpp b/src/compositors/compositor_detect.cpp
+index c55b81bc0e..9d89a0ba1f 100644
+--- a/src/compositors/compositor_detect.cpp
++++ b/src/compositors/compositor_detect.cpp
+@@ -63,6 +63,9 @@
+       if (StringUtils::containsInsensitive(hint, "triad")) {
+         return CompositorKind::Triad;
+       }
++      if (StringUtils::containsInsensitive(hint, "river-classic")) {
++        return CompositorKind::RiverClassic;
++      }
+       if (StringUtils::containsInsensitive(hint, "niri")) {
+         return CompositorKind::Niri;
+       }
+@@ -119,6 +122,8 @@
+       return "Umbriel";
+     case CompositorKind::Pinnacle:
+       return "Pinnacle";
++    case CompositorKind::RiverClassic:
++      return "RiverClassic";
+     case CompositorKind::Unknown:
+       return "Unknown";
+     }
+diff --git a/src/compositors/compositor_detect.h b/src/compositors/compositor_detect.h
+index 569ccc8f6d..f5ac4a9245 100644
+--- a/src/compositors/compositor_detect.h
++++ b/src/compositors/compositor_detect.h
+@@ -17,6 +17,7 @@
+     Kde = 8,
+     Umbriel = 9,
+     Pinnacle = 10,
++    RiverClassic = 11,
+   };
+ 
+   // Detected once per process from env vars. Cached after the first call.
+@@ -38,5 +39,6 @@
+   [[nodiscard]] inline bool isKde() { return detect() == CompositorKind::Kde; }
+   [[nodiscard]] inline bool isUmbriel() { return detect() == CompositorKind::Umbriel; }
+   [[nodiscard]] inline bool isPinnacle() { return detect() == CompositorKind::Pinnacle; }
++  [[nodiscard]] inline bool isRiverClassic() { return detect() == CompositorKind::RiverClassic; }
+ 
+ } // namespace compositors
+diff --git a/src/compositors/compositor_platform.cpp b/src/compositors/compositor_platform.cpp
+index 2667617625..96d4ca9af1 100644
+--- a/src/compositors/compositor_platform.cpp
++++ b/src/compositors/compositor_platform.cpp
+@@ -365,6 +365,7 @@
+     case compositors::CompositorKind::Labwc:
+     case compositors::CompositorKind::Kde:
+     case compositors::CompositorKind::Pinnacle:
++    case compositors::CompositorKind::RiverClassic:
+     case compositors::CompositorKind::Unknown:
+       return std::make_unique<LambdaOutputPowerBackend>(&setGenericOutputPower);
+     }
+@@ -388,6 +389,7 @@
+     case compositors::CompositorKind::Mango:
+     case compositors::CompositorKind::Umbriel:
+     case compositors::CompositorKind::Pinnacle:
++    case compositors::CompositorKind::RiverClassic:
+     case compositors::CompositorKind::Unknown:
+       break;
+     }
+@@ -410,6 +412,7 @@
+     case compositors::CompositorKind::Kde:
+     case compositors::CompositorKind::Labwc:
+     case compositors::CompositorKind::Pinnacle:
++    case compositors::CompositorKind::RiverClassic:
+     case compositors::CompositorKind::Unknown:
+       break;
+     }
+@@ -435,6 +438,7 @@
+     case compositors::CompositorKind::Labwc:
+     case compositors::CompositorKind::Kde:
+     case compositors::CompositorKind::Pinnacle:
++    case compositors::CompositorKind::RiverClassic:
+     case compositors::CompositorKind::Unknown:
+       break;
+     }
+@@ -609,6 +613,10 @@
+   m_wayland.setKdeVirtualDesktopManagerCallback([this](org_kde_plasma_virtual_desktop_management* management) {
+     bindKdeVirtualDesktop(management);
+   });
++  m_wayland.setRiverClassicWorkspaceCallbacks(
++      [this](zriver_status_manager_v1* manager) { bindRiverClassicStatus(manager); },
++      [this](zriver_control_v1* control) { bindRiverClassicControl(control); }
++  );
+   m_wayland.setHyprlandToplevelMappingManagerCallback([this](hyprland_toplevel_mapping_manager_v1* manager) {
+     bindHyprlandToplevelMappingManager(manager);
+   });
+@@ -623,6 +631,7 @@
+   m_wayland.setOutputLifecycleCallbacks({}, {});
+   m_wayland.setWorkspaceManagerCallbacks({}, {});
+   m_wayland.setKdeVirtualDesktopManagerCallback({});
++  m_wayland.setRiverClassicWorkspaceCallbacks({}, {});
+   m_wayland.setHyprlandToplevelMappingManagerCallback({});
+   m_wayland.setToplevelChangeCallback({});
+ }
+@@ -643,6 +652,7 @@
+   }
+   m_initialized = true;
+ 
++  m_workspaces->setSeat(m_wayland.seat());
+   m_workspaces->initialize();
+   for (const auto& output : m_wayland.outputs()) {
+     if (output.output != nullptr) {
+@@ -741,6 +751,11 @@
+       }
+     }
+   }
++  if (m_workspaces != nullptr) {
++    if (wl_output* output = m_workspaces->riverClassicFocusedOutput(); output != nullptr && outputReady(output)) {
++      return output;
++    }
++  }
+ 
+   if (compositors::isKde() && m_kwinActiveWindow != nullptr) {
+     if (const auto focusedName = m_kwinActiveWindow->focusedOutputName(); focusedName.has_value()) {
+@@ -1396,6 +1411,9 @@
+ }
+ 
+ bool CompositorPlatform::supportsTaskbarWorkspaceGrouping() const noexcept {
++  if (std::string_view(workspaceBackendName()) == "river-classic") {
++    return false;
++  }
+   if (taskbarAssignmentMode() == TaskbarAssignmentMode::WorkspaceOccurrenceTitle) {
+     return true;
+   }
+@@ -1579,6 +1597,7 @@
+     break;
+   case compositors::CompositorKind::Kde:
+   case compositors::CompositorKind::Pinnacle:
++  case compositors::CompositorKind::RiverClassic:
+   case compositors::CompositorKind::Unknown:
+     break;
+   }
+@@ -1629,6 +1648,14 @@
+   }
+ }
+ 
++void CompositorPlatform::bindRiverClassicStatus(zriver_status_manager_v1* manager) {
++  m_workspaces->bindRiverClassicStatus(manager);
++}
++
++void CompositorPlatform::bindRiverClassicControl(zriver_control_v1* control) {
++  m_workspaces->bindRiverClassicControl(control);
++}
++
+ void CompositorPlatform::onOutputAdded(wl_output* output) {
+   if (m_workspaces != nullptr) {
+     m_workspaces->onOutputAdded(output);
+diff --git a/src/compositors/compositor_platform.h b/src/compositors/compositor_platform.h
+index 96fb91baed..6351b960be 100644
+--- a/src/compositors/compositor_platform.h
++++ b/src/compositors/compositor_platform.h
+@@ -20,6 +20,8 @@
+ struct ext_workspace_manager_v1;
+ struct org_kde_plasma_virtual_desktop_management;
+ struct zdwl_ipc_manager_v2;
++struct zriver_status_manager_v1;
++struct zriver_control_v1;
+ struct hyprland_toplevel_mapping_manager_v1;
+ struct zwlr_foreign_toplevel_handle_v1;
+ struct ext_foreign_toplevel_handle_v1;
+@@ -195,6 +197,8 @@
+   void bindExtWorkspace(ext_workspace_manager_v1* manager);
+   void bindKdeVirtualDesktop(org_kde_plasma_virtual_desktop_management* management);
+   void bindDwlIpcWorkspace(zdwl_ipc_manager_v2* manager);
++  void bindRiverClassicStatus(zriver_status_manager_v1* manager);
++  void bindRiverClassicControl(zriver_control_v1* control);
+   void notifyToplevelsChanged();
+   void onOutputAdded(wl_output* output);
+   void onOutputRemoved(wl_output* output);
+diff --git a/src/compositors/river-classic/river-classic-workspace-backend.cpp b/src/compositors/river-classic/river-classic-workspace-backend.cpp
+new file mode 100644
+index 0000000000..d66ed143f6
+--- /dev/null
++++ b/src/compositors/river-classic/river-classic-workspace-backend.cpp
+@@ -0,0 +1,353 @@
++#include "compositors/river-classic/river-classic-workspace-backend.h"
++
++#include "core/log.h"
++#include "river-classic-control-unstable-v1-client-protocol.h"
++#include "river-classic-status-unstable-v1-client-protocol.h"
++
++#include <algorithm>
++#include <charconv>
++#include <cstring>
++#include <utility>
++
++namespace {
++
++  constexpr Logger kLog("river-classic-workspace");
++
++} // namespace
++
++RiverClassicWorkspaceBackend::~RiverClassicWorkspaceBackend() { cleanup(); }
++
++void RiverClassicWorkspaceBackend::bindRiverClassicStatus(zriver_status_manager_v1* manager) {
++  if (manager == nullptr || manager == m_statusManager) {
++    return;
++  }
++  cancelCommands();
++  releaseStatus();
++  m_statusManager = manager;
++  for (const auto& [output, _] : m_outputs) {
++    ensureOutputBound(output);
++  }
++  ensureSeatBound();
++}
++
++void RiverClassicWorkspaceBackend::bindRiverClassicControl(zriver_control_v1* control) {
++  if (control == nullptr || control == m_control) {
++    return;
++  }
++  cancelCommands();
++  if (m_control != nullptr) {
++    zriver_control_v1_destroy(m_control);
++  }
++  m_control = control;
++}
++
++void RiverClassicWorkspaceBackend::setSeat(wl_seat* seat) {
++  if (seat == m_seat) {
++    return;
++  }
++  cancelCommands();
++  if (m_seatStatus != nullptr) {
++    zriver_seat_status_v1_destroy(m_seatStatus);
++    m_seatStatus = nullptr;
++  }
++  m_seat = seat;
++  m_focusedOutput = nullptr;
++  ensureSeatBound();
++  notifyChanged();
++}
++
++void RiverClassicWorkspaceBackend::setOutputNameResolver(Resolver resolver) {
++  m_outputNameResolver = std::move(resolver);
++}
++
++bool RiverClassicWorkspaceBackend::isAvailable() const noexcept {
++  return m_statusManager != nullptr && m_control != nullptr && m_seat != nullptr;
++}
++
++void RiverClassicWorkspaceBackend::setChangeCallback(ChangeCallback callback) {
++  m_changeCallback = std::move(callback);
++}
++
++void RiverClassicWorkspaceBackend::activate(const std::string& id) { enqueueActivation(m_focusedOutput, id, false); }
++
++void RiverClassicWorkspaceBackend::activateForOutput(wl_output* output, const std::string& id) {
++  if (output == nullptr) {
++    activate(id);
++    return;
++  }
++  enqueueActivation(output, id, true);
++}
++
++void RiverClassicWorkspaceBackend::activateForOutput(wl_output* output, const Workspace& workspace) {
++  activateForOutput(output, workspace.id);
++}
++
++std::vector<Workspace> RiverClassicWorkspaceBackend::all() const { return forOutput(m_focusedOutput); }
++
++std::vector<Workspace> RiverClassicWorkspaceBackend::forOutput(wl_output* output) const {
++  const auto it = m_outputs.find(output != nullptr ? output : m_focusedOutput);
++  if (it == m_outputs.end() || it->second.handle == nullptr) {
++    return {};
++  }
++  const auto& state = it->second;
++  std::vector<Workspace> result;
++  result.reserve(32);
++  for (std::uint32_t index = 0; index < 32; ++index) {
++    const auto mask = std::uint32_t{1} << index;
++    const auto id = std::to_string(index + 1);
++    result.push_back(
++        Workspace{
++            .id = id,
++            .name = id,
++            .coordinates = {index},
++            .index = index + 1,
++            .active = (state.focused & mask) != 0,
++            .urgent = (state.urgent & mask) != 0,
++            .occupied = (state.occupied & mask) != 0,
++        }
++    );
++  }
++  return result;
++}
++
++void RiverClassicWorkspaceBackend::cleanup() {
++  cancelCommands();
++  releaseStatus();
++  if (m_control != nullptr) {
++    zriver_control_v1_destroy(m_control);
++    m_control = nullptr;
++  }
++  m_outputs.clear();
++  m_seat = nullptr;
++}
++
++void RiverClassicWorkspaceBackend::onOutputAdded(wl_output* output) {
++  if (output == nullptr) {
++    return;
++  }
++  m_outputs.try_emplace(output);
++  ensureOutputBound(output);
++}
++
++void RiverClassicWorkspaceBackend::onOutputRemoved(wl_output* output) {
++  const auto it = m_outputs.find(output);
++  if (it == m_outputs.end()) {
++    return;
++  }
++  if (it->second.handle != nullptr) {
++    m_outputByHandle.erase(it->second.handle);
++    zriver_output_status_v1_destroy(it->second.handle);
++  }
++  m_outputs.erase(it);
++  if (m_focusedOutput == output) {
++    m_focusedOutput = nullptr;
++  }
++  if (!m_activations.empty() && m_activations.front().output == output && m_commandCallback != nullptr) {
++    zriver_command_callback_v1_destroy(m_commandCallback);
++    m_commandCallback = nullptr;
++  }
++  std::erase_if(m_activations, [output](const Activation& activation) { return activation.output == output; });
++  startNextActivation();
++  notifyChanged();
++}
++
++void RiverClassicWorkspaceBackend::ensureOutputBound(wl_output* output) {
++  auto it = m_outputs.find(output);
++  if (m_statusManager == nullptr || it == m_outputs.end() || it->second.handle != nullptr) {
++    return;
++  }
++  static const zriver_output_status_v1_listener listener = {
++      .focused_tags =
++          [](void* data, zriver_output_status_v1* handle, std::uint32_t tags) {
++            static_cast<RiverClassicWorkspaceBackend*>(data)->updateTags(handle, &OutputState::focused, tags);
++          },
++      .view_tags =
++          [](void* data, zriver_output_status_v1* handle, wl_array* tags) {
++            std::uint32_t occupied = 0;
++            const auto* bytes = static_cast<const unsigned char*>(tags->data);
++            for (std::size_t offset = 0; offset + sizeof(std::uint32_t) <= tags->size;
++                 offset += sizeof(std::uint32_t)) {
++              std::uint32_t viewTags;
++              std::memcpy(&viewTags, bytes + offset, sizeof(viewTags));
++              occupied |= viewTags;
++            }
++            static_cast<RiverClassicWorkspaceBackend*>(data)->updateTags(handle, &OutputState::occupied, occupied);
++          },
++      .urgent_tags =
++          [](void* data, zriver_output_status_v1* handle, std::uint32_t tags) {
++            static_cast<RiverClassicWorkspaceBackend*>(data)->updateTags(handle, &OutputState::urgent, tags);
++          },
++      .layout_name = [](void*, zriver_output_status_v1*, const char*) {},
++      .layout_name_clear = [](void*, zriver_output_status_v1*) {},
++  };
++  auto* handle = zriver_status_manager_v1_get_river_output_status(m_statusManager, output);
++  if (handle == nullptr) {
++    return;
++  }
++  it->second.handle = handle;
++  m_outputByHandle.emplace(handle, output);
++  zriver_output_status_v1_add_listener(handle, &listener, this);
++}
++
++void RiverClassicWorkspaceBackend::ensureSeatBound() {
++  if (m_statusManager == nullptr || m_seat == nullptr || m_seatStatus != nullptr) {
++    return;
++  }
++  static const zriver_seat_status_v1_listener listener = {
++      .focused_output =
++          [](void* data, zriver_seat_status_v1*, wl_output* output) {
++            auto& backend = *static_cast<RiverClassicWorkspaceBackend*>(data);
++            if (backend.m_outputs.contains(output) && backend.m_focusedOutput != output) {
++              backend.m_focusedOutput = output;
++              backend.notifyChanged();
++            }
++          },
++      .unfocused_output =
++          [](void* data, zriver_seat_status_v1*, wl_output* output) {
++            auto& backend = *static_cast<RiverClassicWorkspaceBackend*>(data);
++            if (backend.m_focusedOutput == output) {
++              backend.m_focusedOutput = nullptr;
++              backend.notifyChanged();
++            }
++          },
++      .focused_view = [](void*, zriver_seat_status_v1*, const char*) {},
++      .mode = [](void*, zriver_seat_status_v1*, const char*) {},
++  };
++  m_seatStatus = zriver_status_manager_v1_get_river_seat_status(m_statusManager, m_seat);
++  if (m_seatStatus != nullptr) {
++    zriver_seat_status_v1_add_listener(m_seatStatus, &listener, this);
++  }
++}
++
++void RiverClassicWorkspaceBackend::releaseStatus() {
++  if (m_seatStatus != nullptr) {
++    zriver_seat_status_v1_destroy(m_seatStatus);
++    m_seatStatus = nullptr;
++  }
++  m_focusedOutput = nullptr;
++  for (auto& [_, state] : m_outputs) {
++    if (state.handle != nullptr) {
++      zriver_output_status_v1_destroy(state.handle);
++    }
++    state = {};
++  }
++  m_outputByHandle.clear();
++  if (m_statusManager != nullptr) {
++    zriver_status_manager_v1_destroy(m_statusManager);
++    m_statusManager = nullptr;
++  }
++}
++
++void RiverClassicWorkspaceBackend::cancelCommands() {
++  if (m_commandCallback != nullptr) {
++    zriver_command_callback_v1_destroy(m_commandCallback);
++    m_commandCallback = nullptr;
++  }
++  m_activations.clear();
++}
++
++void RiverClassicWorkspaceBackend::enqueueActivation(wl_output* output, const std::string& id, bool focusOutput) {
++  if (!isAvailable() || output == nullptr || !m_outputs.contains(output)) {
++    return;
++  }
++  std::uint32_t tag = 0;
++  const auto [end, error] = std::from_chars(id.data(), id.data() + id.size(), tag);
++  if (error != std::errc{} || end != id.data() + id.size() || tag == 0 || tag > 32) {
++    return;
++  }
++  m_activations.push_back({output, std::uint32_t{1} << (tag - 1), focusOutput});
++  startNextActivation();
++}
++
++void RiverClassicWorkspaceBackend::startNextActivation() {
++  if (m_commandCallback != nullptr || !isAvailable()) {
++    return;
++  }
++  while (!m_activations.empty()) {
++    const auto& activation = m_activations.front();
++    if (!m_outputs.contains(activation.output)) {
++      m_activations.pop_front();
++      continue;
++    }
++    if (activation.focusOutput || activation.output != m_focusedOutput) {
++      const auto name = m_outputNameResolver ? m_outputNameResolver(activation.output) : std::string{};
++      if (name.empty()) {
++        kLog.warn("cannot focus output without a connector name");
++        m_activations.pop_front();
++        continue;
++      }
++      runCommand("focus-output", name, true);
++    } else {
++      runCommand("set-focused-tags", std::to_string(activation.tags), false);
++    }
++    if (m_commandCallback != nullptr) {
++      return;
++    }
++    m_activations.pop_front();
++  }
++}
++
++void RiverClassicWorkspaceBackend::runCommand(const char* command, const std::string& argument, bool focusing) {
++  static const zriver_command_callback_v1_listener listener = {
++      .success = [](
++                     void* data, zriver_command_callback_v1* callback, const char* message
++                 ) { static_cast<RiverClassicWorkspaceBackend*>(data)->onCommandFinished(callback, true, message); },
++      .failure = [](
++                     void* data, zriver_command_callback_v1* callback, const char* message
++                 ) { static_cast<RiverClassicWorkspaceBackend*>(data)->onCommandFinished(callback, false, message); },
++  };
++  zriver_control_v1_add_argument(m_control, command);
++  zriver_control_v1_add_argument(m_control, argument.c_str());
++  m_commandCallback = zriver_control_v1_run_command(m_control, m_seat);
++  m_focusing = focusing;
++  if (m_commandCallback != nullptr) {
++    zriver_command_callback_v1_add_listener(m_commandCallback, &listener, this);
++  } else {
++    kLog.warn("failed to allocate {} callback", command);
++  }
++}
++
++void RiverClassicWorkspaceBackend::onCommandFinished(
++    zriver_command_callback_v1* callback, bool success, const char* message
++) {
++  if (callback != m_commandCallback) {
++    return;
++  }
++  zriver_command_callback_v1_destroy(callback);
++  m_commandCallback = nullptr;
++  if (!success) {
++    kLog.warn("{} failed: {}", m_focusing ? "focus-output" : "set-focused-tags", message != nullptr ? message : "");
++  }
++  if (m_activations.empty()) {
++    return;
++  }
++  const auto& activation = m_activations.front();
++  if (success && m_focusing && isAvailable() && m_outputs.contains(activation.output)) {
++    runCommand("set-focused-tags", std::to_string(activation.tags), false);
++    if (m_commandCallback != nullptr) {
++      return;
++    }
++  }
++  m_activations.pop_front();
++  startNextActivation();
++}
++
++void RiverClassicWorkspaceBackend::updateTags(
++    zriver_output_status_v1* handle, std::uint32_t OutputState::* field, std::uint32_t tags
++) {
++  const auto it = m_outputByHandle.find(handle);
++  if (it == m_outputByHandle.end()) {
++    return;
++  }
++  auto& current = m_outputs.at(it->second).*field;
++  if (current != tags) {
++    current = tags;
++    notifyChanged();
++  }
++}
++
++void RiverClassicWorkspaceBackend::notifyChanged() {
++  if (m_changeCallback) {
++    m_changeCallback();
++  }
++}
+diff --git a/src/compositors/river-classic/river-classic-workspace-backend.h b/src/compositors/river-classic/river-classic-workspace-backend.h
+new file mode 100644
+index 0000000000..cc1845fad3
+--- /dev/null
++++ b/src/compositors/river-classic/river-classic-workspace-backend.h
+@@ -0,0 +1,79 @@
++#pragma once
++
++#include "compositors/output_backend.h"
++#include "compositors/workspace_backend.h"
++
++#include <cstdint>
++#include <deque>
++#include <unordered_map>
++
++struct wl_seat;
++struct zriver_status_manager_v1;
++struct zriver_control_v1;
++struct zriver_output_status_v1;
++struct zriver_seat_status_v1;
++struct zriver_command_callback_v1;
++
++class RiverClassicWorkspaceBackend final : public WorkspaceBackend,
++                                           public OutputLifecycleObserver,
++                                           public WorkspaceOutputNameResolver {
++public:
++  ~RiverClassicWorkspaceBackend() override;
++
++  void bindRiverClassicStatus(zriver_status_manager_v1* manager);
++  void bindRiverClassicControl(zriver_control_v1* control);
++  void setSeat(wl_seat* seat);
++  void setOutputNameResolver(Resolver resolver) override;
++
++  [[nodiscard]] const char* backendName() const override { return "river-classic"; }
++  [[nodiscard]] bool isAvailable() const noexcept override;
++  void setChangeCallback(ChangeCallback callback) override;
++  void activate(const std::string& id) override;
++  void activateForOutput(wl_output* output, const std::string& id) override;
++  void activateForOutput(wl_output* output, const Workspace& workspace) override;
++  [[nodiscard]] std::vector<Workspace> all() const override;
++  [[nodiscard]] std::vector<Workspace> forOutput(wl_output* output) const override;
++  void cleanup() override;
++
++  void onOutputAdded(wl_output* output) override;
++  void onOutputRemoved(wl_output* output) override;
++  [[nodiscard]] wl_output* focusedOutput() const { return m_focusedOutput; }
++
++private:
++  struct OutputState {
++    zriver_output_status_v1* handle = nullptr;
++    std::uint32_t focused = 0;
++    std::uint32_t occupied = 0;
++    std::uint32_t urgent = 0;
++  };
++
++  struct Activation {
++    wl_output* output;
++    std::uint32_t tags;
++    bool focusOutput;
++  };
++
++  void ensureOutputBound(wl_output* output);
++  void ensureSeatBound();
++  void releaseStatus();
++  void cancelCommands();
++  void enqueueActivation(wl_output* output, const std::string& id, bool focusOutput);
++  void startNextActivation();
++  void runCommand(const char* command, const std::string& argument, bool focusing);
++  void onCommandFinished(zriver_command_callback_v1* callback, bool success, const char* message);
++  void updateTags(zriver_output_status_v1* handle, std::uint32_t OutputState::* field, std::uint32_t tags);
++  void notifyChanged();
++
++  zriver_status_manager_v1* m_statusManager = nullptr;
++  zriver_control_v1* m_control = nullptr;
++  wl_seat* m_seat = nullptr;
++  zriver_seat_status_v1* m_seatStatus = nullptr;
++  wl_output* m_focusedOutput = nullptr;
++  std::unordered_map<wl_output*, OutputState> m_outputs;
++  std::unordered_map<zriver_output_status_v1*, wl_output*> m_outputByHandle;
++  std::deque<Activation> m_activations;
++  zriver_command_callback_v1* m_commandCallback = nullptr;
++  bool m_focusing = false;
++  Resolver m_outputNameResolver;
++  ChangeCallback m_changeCallback;
++};
+diff --git a/src/wayland/wayland_connection.cpp b/src/wayland/wayland_connection.cpp
+index 8c2075ed4a..9181c3b457 100644
+--- a/src/wayland/wayland_connection.cpp
++++ b/src/wayland/wayland_connection.cpp
+@@ -18,6 +18,8 @@
+ #include "hyprland-toplevel-mapping-v1-client-protocol.h"
+ #include "idle-inhibit-unstable-v1-client-protocol.h"
+ #include "org-kde-plasma-virtual-desktop-client-protocol.h"
++#include "river-classic-control-unstable-v1-client-protocol.h"
++#include "river-classic-status-unstable-v1-client-protocol.h"
+ #include "text-input-unstable-v3-client-protocol.h"
+ #include "util/string_utils.h"
+ #include "viewporter-client-protocol.h"
+@@ -56,6 +58,8 @@
+   constexpr std::uint32_t kXdgWmBaseVersion = 6;
+   constexpr std::uint32_t kExtWorkspaceManagerVersion = 1;
+   constexpr std::uint32_t kKdeVirtualDesktopManagementVersion = 4;
++  constexpr std::uint32_t kRiverClassicStatusManagerVersion = 4;
++  constexpr std::uint32_t kRiverClassicControlVersion = 1;
+   constexpr std::uint32_t kWlrForeignToplevelManagerVersion = 3;
+   constexpr std::uint32_t kExtForeignToplevelListVersion = 1;
+   constexpr std::uint32_t kCursorShapeManagerVersion = 1;
+@@ -394,6 +398,13 @@
+   m_kdeVirtualDesktopManagerCallback = std::move(callback);
+ }
+ 
++void WaylandConnection::setRiverClassicWorkspaceCallbacks(
++    std::function<void(zriver_status_manager_v1*)> status, std::function<void(zriver_control_v1*)> control
++) {
++  m_riverClassicStatusCallback = std::move(status);
++  m_riverClassicControlCallback = std::move(control);
++}
++
+ void WaylandConnection::setToplevelChangeCallback(ChangeCallback callback) {
+   m_toplevelsHandler.setChangeCallback(callback);
+   m_extForeignToplevels.setChangeCallback(std::move(callback));
+@@ -653,6 +664,8 @@
+ bool WaylandConnection::hasExtWorkspaceManager() const noexcept { return m_hasExtWorkspaceGlobal; }
+ bool WaylandConnection::hasKdeVirtualDesktopManager() const noexcept { return m_hasKdeVirtualDesktopGlobal; }
+ bool WaylandConnection::hasDwlIpcManager() const noexcept { return m_hasDwlIpcGlobal; }
++bool WaylandConnection::hasRiverClassicStatusManager() const noexcept { return m_hasRiverClassicStatusGlobal; }
++bool WaylandConnection::hasRiverClassicControl() const noexcept { return m_hasRiverClassicControlGlobal; }
+ bool WaylandConnection::hasForeignToplevelManager() const noexcept { return m_hasForeignToplevelManagerGlobal; }
+ 
+ bool WaylandConnection::hasExtForeignToplevelList() const noexcept { return m_hasExtForeignToplevelListGlobal; }
+@@ -1084,6 +1097,33 @@
+     return;
+   }
+ 
++  if (interfaceName == zriver_status_manager_v1_interface.name) {
++    m_hasRiverClassicStatusGlobal = true;
++    const auto bindVersion = std::min(version, kRiverClassicStatusManagerVersion);
++    auto* manager = static_cast<zriver_status_manager_v1*>(
++        wl_registry_bind(registry, name, &zriver_status_manager_v1_interface, bindVersion)
++    );
++    if (m_riverClassicStatusCallback) {
++      m_riverClassicStatusCallback(manager);
++    } else {
++      zriver_status_manager_v1_destroy(manager);
++    }
++    return;
++  }
++
++  if (interfaceName == zriver_control_v1_interface.name) {
++    m_hasRiverClassicControlGlobal = true;
++    const auto bindVersion = std::min(version, kRiverClassicControlVersion);
++    auto* control =
++        static_cast<zriver_control_v1*>(wl_registry_bind(registry, name, &zriver_control_v1_interface, bindVersion));
++    if (m_riverClassicControlCallback) {
++      m_riverClassicControlCallback(control);
++    } else {
++      zriver_control_v1_destroy(control);
++    }
++    return;
++  }
++
+   if (interfaceName == zwlr_foreign_toplevel_manager_v1_interface.name) {
+     m_hasForeignToplevelManagerGlobal = true;
+     const auto bindVersion = std::min(version, kWlrForeignToplevelManagerVersion);
+@@ -1510,21 +1550,27 @@
+   m_hasLayerShellGlobal = false;
+   m_hasExtWorkspaceGlobal = false;
+   m_hasDwlIpcGlobal = false;
++  m_hasRiverClassicStatusGlobal = false;
++  m_hasRiverClassicControlGlobal = false;
+   m_hasForeignToplevelManagerGlobal = false;
+   m_outputAddedCallback = nullptr;
+   m_outputRemovedCallback = nullptr;
+   m_extWorkspaceManagerCallback = nullptr;
+   m_kdeVirtualDesktopManagerCallback = nullptr;
+   m_dwlIpcManagerCallback = nullptr;
++  m_riverClassicStatusCallback = nullptr;
++  m_riverClassicControlCallback = nullptr;
+ }
+ 
+ void WaylandConnection::logStartupSummary() const {
+   kLog.info(
+       "connected compositor={} shm={} layer-shell={} xdg-shell={} xdg-output={} ext-workspace={} kde-vd={} dwl-ipc={} "
+-      "session-lock={} fractional-scale={} gamma-control={} output-management={} outputs={}",
++      "river-classic-status={} river-classic-control={} session-lock={} fractional-scale={} gamma-control={} "
++      "output-management={} outputs={}",
+       m_compositor != nullptr ? "yes" : "no", m_shm != nullptr ? "yes" : "no", hasLayerShell() ? "yes" : "no",
+       hasXdgShell() ? "yes" : "no", hasXdgOutputManager() ? "yes" : "no", hasExtWorkspaceManager() ? "yes" : "no",
+       hasKdeVirtualDesktopManager() ? "yes" : "no", hasDwlIpcManager() ? "yes" : "no",
++      hasRiverClassicStatusManager() ? "yes" : "no", hasRiverClassicControl() ? "yes" : "no",
+       hasSessionLockManager() ? "yes" : "no", hasFractionalScale() ? "yes" : "no", hasGammaControl() ? "yes" : "no",
+       hasOutputManagement() ? "yes" : "no", m_outputs.size()
+   );
+diff --git a/src/wayland/wayland_connection.h b/src/wayland/wayland_connection.h
+index 558be8327d..d0177e921b 100644
+--- a/src/wayland/wayland_connection.h
++++ b/src/wayland/wayland_connection.h
+@@ -41,6 +41,8 @@
+ struct ext_workspace_manager_v1;
+ struct org_kde_plasma_virtual_desktop_management;
+ struct zdwl_ipc_manager_v2;
++struct zriver_status_manager_v1;
++struct zriver_control_v1;
+ struct zwp_virtual_keyboard_manager_v1;
+ struct zwp_text_input_manager_v3;
+ struct hyprland_focus_grab_manager_v1;
+@@ -147,6 +149,9 @@
+       std::function<void(ext_workspace_manager_v1*)> extWorkspace, std::function<void(zdwl_ipc_manager_v2*)> dwlIpc
+   );
+   void setKdeVirtualDesktopManagerCallback(std::function<void(org_kde_plasma_virtual_desktop_management*)> callback);
++  void setRiverClassicWorkspaceCallbacks(
++      std::function<void(zriver_status_manager_v1*)> status, std::function<void(zriver_control_v1*)> control
++  );
+   void setToplevelChangeCallback(ChangeCallback callback);
+   void setHyprlandToplevelMappingManagerCallback(
+       std::function<void(hyprland_toplevel_mapping_manager_v1* manager)> callback
+@@ -175,6 +180,8 @@
+   [[nodiscard]] bool hasExtWorkspaceManager() const noexcept;
+   [[nodiscard]] bool hasKdeVirtualDesktopManager() const noexcept;
+   [[nodiscard]] bool hasDwlIpcManager() const noexcept;
++  [[nodiscard]] bool hasRiverClassicStatusManager() const noexcept;
++  [[nodiscard]] bool hasRiverClassicControl() const noexcept;
+   [[nodiscard]] bool hasForeignToplevelManager() const noexcept;
+   [[nodiscard]] bool hasExtForeignToplevelList() const noexcept;
+   [[nodiscard]] bool hasSessionLockManager() const noexcept;
+@@ -338,6 +345,8 @@
+   bool m_hasExtWorkspaceGlobal = false;
+   bool m_hasKdeVirtualDesktopGlobal = false;
+   bool m_hasDwlIpcGlobal = false;
++  bool m_hasRiverClassicStatusGlobal = false;
++  bool m_hasRiverClassicControlGlobal = false;
+   bool m_hasForeignToplevelManagerGlobal = false;
+   bool m_hasExtForeignToplevelListGlobal = false;
+   std::vector<WaylandOutput> m_outputs;
+@@ -348,6 +357,8 @@
+   std::function<void(ext_workspace_manager_v1*)> m_extWorkspaceManagerCallback;
+   std::function<void(org_kde_plasma_virtual_desktop_management*)> m_kdeVirtualDesktopManagerCallback;
+   std::function<void(zdwl_ipc_manager_v2*)> m_dwlIpcManagerCallback;
++  std::function<void(zriver_status_manager_v1*)> m_riverClassicStatusCallback;
++  std::function<void(zriver_control_v1*)> m_riverClassicControlCallback;
+   std::function<void(hyprland_toplevel_mapping_manager_v1*)> m_hyprlandToplevelMappingManagerCallback;
+   std::unordered_map<wl_surface*, wl_output*> m_surfaceOutputMap;
+   std::unordered_map<wl_surface*, std::vector<wl_output*>> m_surfaceOutputs;
+diff --git a/src/wayland/wayland_workspaces.cpp b/src/wayland/wayland_workspaces.cpp
+index 865012d776..9d801d1b5c 100644
+--- a/src/wayland/wayland_workspaces.cpp
++++ b/src/wayland/wayland_workspaces.cpp
+@@ -8,6 +8,7 @@
+ #include "compositors/kde/kwin_workspace_backend.h"
+ #include "compositors/mango/mango_workspace_backend.h"
+ #include "compositors/output_backend.h"
++#include "compositors/river-classic/river-classic-workspace-backend.h"
+ #include "compositors/sway/sway_workspace_backend.h"
+ #include "compositors/triad/triad_workspace_backend.h"
+ #include "core/log.h"
+@@ -40,6 +41,12 @@
+   m_outputObservers.push_back(dwlIpcBackend.get());
+   m_backends.push_back(std::move(dwlIpcBackend));
+ 
++  auto riverClassicBackend = std::make_unique<RiverClassicWorkspaceBackend>();
++  m_riverClassicBackend = riverClassicBackend.get();
++  m_outputObservers.push_back(riverClassicBackend.get());
++  m_outputNameResolvers.push_back(riverClassicBackend.get());
++  m_backends.push_back(std::move(riverClassicBackend));
++
+   auto hyprlandBackend = std::make_unique<HyprlandWorkspaceBackend>(
+       [](wl_output* /*output*/) { return std::string{}; }, runtimeRegistry.hyprland()
+   );
+@@ -102,6 +109,16 @@
+   }
+ }
+ 
++void WaylandWorkspaces::bindRiverClassicStatus(zriver_status_manager_v1* manager) {
++  m_riverClassicBackend->bindRiverClassicStatus(manager);
++}
++
++void WaylandWorkspaces::bindRiverClassicControl(zriver_control_v1* control) {
++  m_riverClassicBackend->bindRiverClassicControl(control);
++}
++
++void WaylandWorkspaces::setSeat(wl_seat* seat) { m_riverClassicBackend->setSeat(seat); }
++
+ void WaylandWorkspaces::setOutputNameResolver(std::function<std::string(wl_output*)> resolver) {
+   for (auto* backend : m_outputNameResolvers) {
+     if (backend != nullptr) {
+@@ -120,6 +137,10 @@
+         && (m_triadConnector->connectSocket() || m_triadBackend->isAvailable());
+   };
+   auto tryFallback = [&](bool includeMangoIpc, bool includeDwlIpc) {
++    if (availableOrConnected(m_riverClassicBackend)) {
++      setActiveBackend(m_riverClassicBackend);
++      return true;
++    }
+     if (availableOrConnected(m_extBackend)) {
+       setActiveBackend(m_extBackend);
+       return true;
+@@ -202,6 +223,12 @@
+       return;
+     }
+     break;
++  case compositors::CompositorKind::RiverClassic:
++    if (availableOrConnected(m_riverClassicBackend)) {
++      setActiveBackend(m_riverClassicBackend);
++      return;
++    }
++    break;
+   case compositors::CompositorKind::Niri:
+   case compositors::CompositorKind::Unknown:
+     break;
+@@ -377,6 +404,13 @@
+   return static_cast<const DwlWorkspaceBackend*>(m_dwlIpcBackend)->ipcFocusedClientForOutput(output);
+ }
+ 
++wl_output* WaylandWorkspaces::riverClassicFocusedOutput() const {
++  if (m_activeBackend != m_riverClassicBackend || !m_riverClassicBackend->isAvailable()) {
++    return nullptr;
++  }
++  return m_riverClassicBackend->focusedOutput();
++}
++
+ void WaylandWorkspaces::setActiveBackend(WorkspaceBackend* backend) {
+   m_activeBackend = backend;
+   kLog.info("workspace backend={}", backendName());
+diff --git a/src/wayland/wayland_workspaces.h b/src/wayland/wayland_workspaces.h
+index 91595df336..ce245cc28f 100644
+--- a/src/wayland/wayland_workspaces.h
++++ b/src/wayland/wayland_workspaces.h
+@@ -9,9 +9,13 @@
+ #include <utility>
+ 
+ struct wl_output;
++struct wl_seat;
+ struct ext_workspace_manager_v1;
+ struct org_kde_plasma_virtual_desktop_management;
+ struct zdwl_ipc_manager_v2;
++struct zriver_status_manager_v1;
++struct zriver_control_v1;
++class RiverClassicWorkspaceBackend;
+ 
+ namespace compositors {
+   class CompositorRuntimeRegistry;
+@@ -27,6 +31,9 @@
+   void bindExtWorkspace(ext_workspace_manager_v1* manager);
+   void bindKdeVirtualDesktop(org_kde_plasma_virtual_desktop_management* management);
+   void bindDwlIpcWorkspace(zdwl_ipc_manager_v2* manager);
++  void bindRiverClassicStatus(zriver_status_manager_v1* manager);
++  void bindRiverClassicControl(zriver_control_v1* control);
++  void setSeat(wl_seat* seat);
+   void setOutputNameResolver(std::function<std::string(wl_output*)> resolver);
+   void initialize();
+   void onOutputAdded(wl_output* output);
+@@ -56,6 +63,7 @@
+   mangoIpcFocusedClientOnOutput(wl_output* output) const;
+   [[nodiscard]] wl_output* dwlIpcSelectedOutput() const;
+   [[nodiscard]] std::optional<std::pair<std::string, std::string>> dwlIpcFocusedClientOnOutput(wl_output* output) const;
++  [[nodiscard]] wl_output* riverClassicFocusedOutput() const;
+   [[nodiscard]] std::optional<std::string> focusedWindowId() const;
+ 
+ private:
+@@ -72,6 +80,7 @@
+   WorkspaceBackend* m_mangoIpcBackend = nullptr;
+   WorkspaceSocketConnector* m_mangoIpcConnector = nullptr;
+   WorkspaceBackend* m_dwlIpcBackend = nullptr;
++  RiverClassicWorkspaceBackend* m_riverClassicBackend = nullptr;
+   WorkspaceBackend* m_hyprlandBackend = nullptr;
+   WorkspaceBackend* m_swayBackend = nullptr;
+   WorkspaceBackend* m_kwinBackend = nullptr;
+diff --git a/tests/river-classic-detection-test.cpp b/tests/river-classic-detection-test.cpp
+new file mode 100644
+index 0000000000..6538f8a13c
+--- /dev/null
++++ b/tests/river-classic-detection-test.cpp
+@@ -0,0 +1,9 @@
++#include "compositors/compositor_detect.h"
++#include "tests/test_check.h"
++
++#include <string_view>
++
++int main(int argc, char** argv) {
++  TEST_CHECK(argc == 2);
++  TEST_CHECK(compositors::name(compositors::detect()) == std::string_view(argv[1]));
++}
+diff --git a/tests/river-classic-workspace-backend-test.cpp b/tests/river-classic-workspace-backend-test.cpp
+new file mode 100644
+index 0000000000..7d5375867e
+--- /dev/null
++++ b/tests/river-classic-workspace-backend-test.cpp
+@@ -0,0 +1,291 @@
++#include "compositors/river-classic/river-classic-workspace-backend.h"
++#include "river-classic-control-unstable-v1-client-protocol.h"
++#include "river-classic-status-unstable-v1-client-protocol.h"
++#include "tests/test_check.h"
++
++#include <algorithm>
++#include <cstdarg>
++#include <cstdint>
++#include <memory>
++#include <string>
++#include <utility>
++#include <vector>
++
++namespace {
++
++  struct FakeProxy {
++    const wl_interface* interface;
++    std::uint32_t version;
++    void (**listener)(void) = nullptr;
++    void* data = nullptr;
++    bool alive = true;
++  };
++
++  struct Command {
++    std::vector<std::string> arguments;
++    wl_seat* seat;
++    zriver_command_callback_v1* callback;
++  };
++
++  std::vector<std::unique_ptr<FakeProxy>> proxies;
++  std::vector<std::string> arguments;
++  std::vector<Command> commands;
++  std::vector<std::pair<wl_output*, zriver_output_status_v1*>> outputStatuses;
++  zriver_seat_status_v1* seatStatus = nullptr;
++
++  FakeProxy& proxy(void* handle) { return *static_cast<FakeProxy*>(handle); }
++
++  template <typename T> T* makeProxy(const wl_interface* interface, std::uint32_t version) {
++    proxies.push_back(std::make_unique<FakeProxy>(FakeProxy{interface, version}));
++    return reinterpret_cast<T*>(proxies.back().get());
++  }
++
++  template <typename T> const T& listener(void* handle) {
++    TEST_CHECK(proxy(handle).alive);
++    TEST_CHECK(proxy(handle).listener != nullptr);
++    return *reinterpret_cast<const T*>(proxy(handle).listener);
++  }
++
++  zriver_output_status_v1* statusFor(wl_output* output) {
++    for (auto it = outputStatuses.rbegin(); it != outputStatuses.rend(); ++it) {
++      if (it->first == output && proxy(it->second).alive) {
++        return it->second;
++      }
++    }
++    TEST_CHECK(false);
++    return nullptr;
++  }
++
++  void focus(wl_output* output) {
++    listener<zriver_seat_status_v1_listener>(seatStatus).focused_output(proxy(seatStatus).data, seatStatus, output);
++  }
++
++  void focusedTags(wl_output* output, std::uint32_t tags) {
++    auto* status = statusFor(output);
++    listener<zriver_output_status_v1_listener>(status).focused_tags(proxy(status).data, status, tags);
++  }
++
++  void viewTags(wl_output* output, std::vector<std::uint32_t> tags) {
++    auto* status = statusFor(output);
++    wl_array array{tags.size() * sizeof(std::uint32_t), tags.size() * sizeof(std::uint32_t), tags.data()};
++    listener<zriver_output_status_v1_listener>(status).view_tags(proxy(status).data, status, &array);
++  }
++
++  void urgentTags(wl_output* output, std::uint32_t tags) {
++    auto* status = statusFor(output);
++    listener<zriver_output_status_v1_listener>(status).urgent_tags(proxy(status).data, status, tags);
++  }
++
++  void finish(std::size_t index, bool success) {
++    auto* callback = commands.at(index).callback;
++    const auto& callbacks = listener<zriver_command_callback_v1_listener>(callback);
++    if (success) {
++      callbacks.success(proxy(callback).data, callback, "");
++    } else {
++      callbacks.failure(proxy(callback).data, callback, "Invalid output indicator");
++    }
++    TEST_CHECK(!proxy(callback).alive);
++  }
++
++} // namespace
++
++extern "C" {
++
++std::uint32_t wl_proxy_get_version(wl_proxy* handle) { return proxy(handle).version; }
++
++int wl_proxy_add_listener(wl_proxy* handle, void (**implementation)(void), void* data) {
++  TEST_CHECK(proxy(handle).alive);
++  TEST_CHECK(proxy(handle).listener == nullptr);
++  proxy(handle).listener = implementation;
++  proxy(handle).data = data;
++  return 0;
++}
++
++void wl_proxy_destroy(wl_proxy* handle) {
++  TEST_CHECK(proxy(handle).alive);
++  proxy(handle).alive = false;
++}
++
++wl_proxy* wl_proxy_marshal_flags(
++    wl_proxy* handle, std::uint32_t opcode, const wl_interface* interface, std::uint32_t version, std::uint32_t flags,
++    ...
++) {
++  TEST_CHECK(proxy(handle).alive);
++  if ((flags & WL_MARSHAL_FLAG_DESTROY) != 0) {
++    wl_proxy_destroy(handle);
++    return nullptr;
++  }
++
++  va_list args;
++  va_start(args, flags);
++  wl_proxy* result = nullptr;
++  if (proxy(handle).interface == &zriver_status_manager_v1_interface) {
++    (void)va_arg(args, void*);
++    result = makeProxy<wl_proxy>(interface, version);
++    if (opcode == ZRIVER_STATUS_MANAGER_V1_GET_RIVER_OUTPUT_STATUS) {
++      outputStatuses.emplace_back(va_arg(args, wl_output*), reinterpret_cast<zriver_output_status_v1*>(result));
++    } else {
++      TEST_CHECK(opcode == ZRIVER_STATUS_MANAGER_V1_GET_RIVER_SEAT_STATUS);
++      TEST_CHECK(va_arg(args, wl_seat*) != nullptr);
++      seatStatus = reinterpret_cast<zriver_seat_status_v1*>(result);
++    }
++  } else {
++    TEST_CHECK(proxy(handle).interface == &zriver_control_v1_interface);
++    if (opcode == ZRIVER_CONTROL_V1_ADD_ARGUMENT) {
++      arguments.emplace_back(va_arg(args, const char*));
++    } else {
++      TEST_CHECK(opcode == ZRIVER_CONTROL_V1_RUN_COMMAND);
++      auto* seat = va_arg(args, wl_seat*);
++      (void)va_arg(args, void*);
++      result = makeProxy<wl_proxy>(interface, version);
++      commands.push_back({std::move(arguments), seat, reinterpret_cast<zriver_command_callback_v1*>(result)});
++      arguments.clear();
++    }
++  }
++  va_end(args);
++  return result;
++}
++
++} // extern "C"
++
++int main() {
++  RiverClassicWorkspaceBackend backend;
++  auto* first = makeProxy<wl_output>(&wl_output_interface, 4);
++  auto* second = makeProxy<wl_output>(&wl_output_interface, 4);
++  auto* seat = makeProxy<wl_seat>(&wl_seat_interface, 7);
++  auto* manager = makeProxy<zriver_status_manager_v1>(&zriver_status_manager_v1_interface, 4);
++  auto* control = makeProxy<zriver_control_v1>(&zriver_control_v1_interface, 1);
++  int changes = 0;
++  backend.setChangeCallback([&changes]() { ++changes; });
++  backend.setOutputNameResolver([=](wl_output* output) { return output == first ? "DP-1" : "DP-2"; });
++
++  backend.onOutputAdded(first);
++  backend.setSeat(seat);
++  backend.bindRiverClassicControl(control);
++  TEST_CHECK(!backend.isAvailable());
++  backend.bindRiverClassicStatus(manager);
++  TEST_CHECK(backend.isAvailable());
++  backend.onOutputAdded(second);
++  backend.onOutputAdded(second);
++  TEST_CHECK(outputStatuses.size() == 2);
++  focus(first);
++  focusedTags(first, 0x80000001U);
++  focusedTags(second, 2U);
++  viewTags(first, {1U, 0x80000004U});
++  urgentTags(first, 0x80000000U);
++  const auto firstTags = backend.forOutput(first);
++  TEST_CHECK(firstTags.size() == 32);
++  for (std::uint32_t index = 0; index < 32; ++index) {
++    TEST_CHECK(firstTags[index].id == std::to_string(index + 1));
++    TEST_CHECK(firstTags[index].name == firstTags[index].id);
++    TEST_CHECK(firstTags[index].index == index + 1);
++    TEST_CHECK(firstTags[index].coordinates == std::vector<std::uint32_t>{index});
++  }
++  TEST_CHECK(firstTags[0].active && firstTags[31].active);
++  TEST_CHECK(firstTags[0].occupied && firstTags[2].occupied && firstTags[31].occupied);
++  TEST_CHECK(firstTags[31].urgent && !firstTags[0].urgent);
++  TEST_CHECK(backend.forOutput(second)[1].active && !backend.forOutput(second)[31].occupied);
++  TEST_CHECK(backend.focusedOutput() == first && backend.all()[31].active);
++  const int previousChanges = changes;
++  viewTags(first, {2U});
++  urgentTags(first, 0);
++  TEST_CHECK(changes > previousChanges);
++  TEST_CHECK(!backend.forOutput(first)[0].occupied && !backend.forOutput(first)[31].occupied);
++  TEST_CHECK(backend.forOutput(first)[1].occupied && !backend.forOutput(first)[31].urgent);
++  viewTags(first, {});
++  TEST_CHECK(!backend.forOutput(first)[1].occupied);
++  TEST_CHECK(backend.workspaceWindows(first).empty() && backend.appIdsByWorkspace(first).empty());
++
++  for (const auto* id : {"", "0", "33", "-1", "+1", "1suffix", " 1", "1 ", "4294967297"}) {
++    backend.activateForOutput(first, id);
++  }
++  TEST_CHECK(commands.empty());
++  backend.activate("32");
++  TEST_CHECK(commands.size() == 1);
++  TEST_CHECK(commands[0].arguments == std::vector<std::string>({"set-focused-tags", "2147483648"}));
++  TEST_CHECK(commands[0].seat == seat);
++  finish(0, true);
++
++  backend.activateForOutput(second, "2");
++  TEST_CHECK(commands.size() == 2);
++  TEST_CHECK(commands[1].arguments == std::vector<std::string>({"focus-output", "DP-2"}));
++  finish(1, false);
++  TEST_CHECK(commands.size() == 2);
++  backend.activateForOutput(second, firstTags[31]);
++  TEST_CHECK(commands.size() == 3);
++  finish(2, true);
++  TEST_CHECK(commands.size() == 4);
++  TEST_CHECK(commands[3].arguments == std::vector<std::string>({"set-focused-tags", "2147483648"}));
++  finish(3, true);
++
++  backend.activateForOutput(first, "1");
++  backend.activateForOutput(second, "2");
++  TEST_CHECK(commands.size() == 5);
++  finish(4, true);
++  TEST_CHECK(commands.size() == 6);
++  TEST_CHECK(commands[5].arguments == std::vector<std::string>({"set-focused-tags", "1"}));
++  finish(5, true);
++  TEST_CHECK(commands.size() == 7);
++  TEST_CHECK(commands[6].arguments == std::vector<std::string>({"focus-output", "DP-2"}));
++  finish(6, true);
++  TEST_CHECK(commands.size() == 8);
++  finish(7, true);
++
++  focus(second);
++  listener<zriver_seat_status_v1_listener>(seatStatus).unfocused_output(proxy(seatStatus).data, seatStatus, first);
++  TEST_CHECK(backend.focusedOutput() == second);
++  backend.activateForOutput(second, "3");
++  auto* removedStatus = statusFor(second);
++  auto* canceled = commands.back().callback;
++  const auto countBeforeRemoval = commands.size();
++  backend.onOutputRemoved(second);
++  TEST_CHECK(!proxy(removedStatus).alive && !proxy(canceled).alive);
++  TEST_CHECK(backend.focusedOutput() == nullptr && backend.forOutput(second).empty());
++  backend.activateForOutput(second, "1");
++  backend.activate("1");
++  TEST_CHECK(commands.size() == countBeforeRemoval);
++  backend.onOutputAdded(second);
++  TEST_CHECK(statusFor(second) != removedStatus);
++  TEST_CHECK(!backend.forOutput(second)[1].active && !backend.forOutput(second)[1].occupied);
++  backend.activateForOutput(second, "1");
++  finish(commands.size() - 1, true);
++  auto* removedTagsCallback = commands.back().callback;
++  backend.activateForOutput(first, "4");
++  backend.activateForOutput(second, "5");
++  const auto countBeforeQueuedRemoval = commands.size();
++  backend.onOutputRemoved(second);
++  TEST_CHECK(!proxy(removedTagsCallback).alive);
++  TEST_CHECK(commands.size() == countBeforeQueuedRemoval + 1);
++  TEST_CHECK(commands.back().arguments == std::vector<std::string>({"focus-output", "DP-1"}));
++  finish(commands.size() - 1, true);
++  TEST_CHECK(commands.back().arguments == std::vector<std::string>({"set-focused-tags", "8"}));
++  finish(commands.size() - 1, false);
++  TEST_CHECK(commands.size() == countBeforeQueuedRemoval + 2);
++  backend.onOutputAdded(second);
++  backend.activateForOutput(second, "1");
++  auto* cleanupCallback = commands.back().callback;
++  backend.cleanup();
++  backend.cleanup();
++  TEST_CHECK(!backend.isAvailable() && backend.focusedOutput() == nullptr && backend.all().empty());
++  TEST_CHECK(!proxy(cleanupCallback).alive && !proxy(manager).alive && !proxy(control).alive);
++  TEST_CHECK(proxy(first).alive && proxy(second).alive && proxy(seat).alive);
++  TEST_CHECK(std::all_of(proxies.begin(), proxies.end(), [](const auto& handle) {
++    return handle->interface == &wl_output_interface || handle->interface == &wl_seat_interface || !handle->alive;
++  }));
++
++  RiverClassicWorkspaceBackend lateSeat;
++  lateSeat.bindRiverClassicStatus(makeProxy<zriver_status_manager_v1>(&zriver_status_manager_v1_interface, 2));
++  lateSeat.onOutputAdded(first);
++  lateSeat.bindRiverClassicControl(makeProxy<zriver_control_v1>(&zriver_control_v1_interface, 1));
++  TEST_CHECK(!lateSeat.isAvailable());
++  lateSeat.setSeat(seat);
++  TEST_CHECK(lateSeat.isAvailable());
++  focus(first);
++  lateSeat.activate("1");
++  auto* oldCallback = commands.back().callback;
++  auto* oldSeatStatus = seatStatus;
++  lateSeat.setSeat(nullptr);
++  TEST_CHECK(!lateSeat.isAvailable() && !proxy(oldCallback).alive && !proxy(oldSeatStatus).alive);
++  lateSeat.cleanup();
++  return 0;
++}

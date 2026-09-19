@@ -1,10 +1,10 @@
 diff --git a/src/compositors/compositor_detect.cpp b/src/compositors/compositor_detect.cpp
-index bc033716bb..f58145bf67 100644
+index 4c4f713346..c55b81bc0e 100644
 --- a/src/compositors/compositor_detect.cpp
 +++ b/src/compositors/compositor_detect.cpp
 @@ -51,6 +51,9 @@
-       if (const char* v = std::getenv("UMBRIEL_SOCKET"); v != nullptr && v[0] != '\0') {
-         return CompositorKind::Umbriel;
+       if (const char* v = std::getenv("MANGO_INSTANCE_SIGNATURE"); v != nullptr && v[0] != '\0') {
+         return CompositorKind::Mango;
        }
 +      if (const char* v = std::getenv("PINNACLE_GRPC_SOCKET"); v != nullptr && v[0] != '\0') {
 +        return CompositorKind::Pinnacle;
@@ -12,7 +12,7 @@ index bc033716bb..f58145bf67 100644
  
        // Fall back to the desktop env hint (covers dwl-style compositors that don't expose a socket var).
        const std::string hint = buildEnvHint();
-@@ -72,6 +75,9 @@
+@@ -75,6 +78,9 @@
        if (StringUtils::containsInsensitive(hint, "dwl")) {
          return CompositorKind::Dwl;
        }

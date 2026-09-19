@@ -1,15 +1,15 @@
 diff --git a/meson.build b/meson.build
-index 8c5415c446..d3fe047f03 100644
+index 40477961f1..7c581eabea 100644
 --- a/meson.build
 +++ b/meson.build
-@@ -1153,6 +1153,7 @@
-     'disk_mounts',
+@@ -1176,6 +1176,7 @@
      'dock_pinned_apps',
+     'enterprise_credentials',
      'event_link',
 +    'ext_workspace_order',
      'fcitx_status',
+     'freedesktop_key_file',
      'google_client_calendar_list',
-     'hook_manager',
 diff --git a/src/compositors/ext_workspace/ext_workspace_backend.cpp b/src/compositors/ext_workspace/ext_workspace_backend.cpp
 index 94f7bdec89..c0aaf7f78b 100644
 --- a/src/compositors/ext_workspace/ext_workspace_backend.cpp

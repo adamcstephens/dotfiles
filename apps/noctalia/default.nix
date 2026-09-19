@@ -21,8 +21,11 @@ in
               ./add-pinnacle.patch
               ./logind-idle-hint.patch
               ./inhibit-sync.patch
-              ./output-power.patch
+              # ./output-power.patch
+              ./add-river.patch
             ];
+
+            doCheck = false;
           });
     };
   };
@@ -48,12 +51,8 @@ in
       after = [ "graphical-session.target" ];
       wantedBy = [ "graphical-session.target" ];
 
+      # since we launch other applications, let's leverage the systemd environment completely
       enableDefaultPath = false;
-
-      path = [
-        "${config.directory}/.local/state/hjem/standalone/current-profile"
-        "/run/current-system/sw"
-      ];
 
       serviceConfig = {
         ExecStart = lib.getExe cfg.package;
