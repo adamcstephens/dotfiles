@@ -26,6 +26,7 @@ in
     "omp/agent/AGENTS.md".source = config.xdg.config.files."agents/AGENTS.md".source;
     "omp/agent/config.yml".source = "${config.directory}/.dotfiles/apps/omp/config.yml";
     "omp/agent/extensions".source = "${config.directory}/.dotfiles/apps/omp/extensions";
+    "omp/agent/lsp.json".source = "${config.directory}/.dotfiles/apps/omp/lsp.json";
     "omp/agent/skills".source = config.xdg.config.files."agents/skills".source;
   };
 }

@@ -1,0 +1,10 @@
+{
+  "servers": {
+    "dexter": {
+      "command": "dexter",
+      "args": ["lsp"],
+      "fileTypes": [".ex", ".exs", ".heex", ".eex"],
+      "rootMarkers": ["mix.exs", "mix.lock"]
+    }
+  }
+}
