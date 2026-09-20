@@ -48,11 +48,7 @@
           output = [
             {
               enable = true;
-              search = [
-                "m=0x1400"
-                "s=Unknown"
-                "v=California Institute of Technology"
-              ];
+              search = "eDP-1";
               mode = "3840x2160@60Hz";
               scale = 1.75;
             }
@@ -63,11 +59,7 @@
           output = [
             {
               enable = false;
-              search = [
-                "m=0x1400"
-                "s=Unknown"
-                "v=California Institute of Technology"
-              ];
+              search = "eDP-1";
               mode = "3840x2160@60Hz";
               scale = 1.75;
             }
