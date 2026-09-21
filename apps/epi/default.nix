@@ -12,7 +12,7 @@ let
     target =
       if pkgs.stdenv.hostPlatform.isAarch64 then "~/.dotfiles#agents-aarch64" else "~/.dotfiles#agents";
     cpus = 4;
-    memory = 4096;
+    memory = 8192;
     mounts = [
       "~/.config/claude"
       "~/.config/codex"

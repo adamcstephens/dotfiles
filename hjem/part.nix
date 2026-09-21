@@ -121,12 +121,7 @@ in
               services.epi = {
                 package = inputs.epi.packages.x86_64-linux.epi;
                 instances = {
-                  epi = epi-agent {
-                    project = "epi";
-                    settings = {
-                      memory = 8192;
-                    };
-                  };
+                  epi = epi-agent { project = "epi"; };
                   git-sync = epi-agent { project = "git-sync"; };
                   hjem = epi-agent {
                     project = "hjem";
@@ -135,9 +130,6 @@ in
                   noctalia = epi-agent {
                     project = "noctalia";
                     project_dir = "${config.directory}/git/noctalia";
-                    settings = {
-                      memory = 8192;
-                    };
                   };
                   sower = epi-agent { project = "sower"; };
                   tracker-deck = epi-agent { project = "sower"; };
