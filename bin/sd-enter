@@ -12,7 +12,6 @@ if [[ -z $pid || $pid == 0 ]]; then
 fi
 
 read -r uid gid < <(awk '/^Uid:/{u=$2} /^Gid:/{g=$2} END{print u, g}' "/proc/$pid/status")
-grps=$(awk '/^Groups:/{$1=""; gsub(/^ +/,""); gsub(/ +/,","); print}' "/proc/$pid/status")
 wd=$(sudo readlink "/proc/$pid/cwd")
 mapfile -d '' -t envs < <(sudo cat "/proc/$pid/environ")
 
@@ -20,16 +19,25 @@ if [[ ${#envs[@]} -eq 0 ]]; then
   echo "sd-enter: empty environ — check sudo" >&2
   exit 1
 fi
+unit_binary() {
+  local name=$1 binary
+  binary=$(sudo find "/proc/$pid/root/nix/store" -path "*/bin/$name" -executable -print -quit)
+  if [[ -z $binary ]]; then
+    echo "sd-enter: $name is unavailable in $unit" >&2
+    return 1
+  fi
+  printf '%s\n' "${binary#"/proc/$pid/root"}"
+}
 
-grpargs=()
-[[ -n $grps ]] && grpargs=(--groups "$grps")
-
+setpriv=$(unit_binary setpriv)
+env=$(unit_binary env)
+bash=$(unit_binary bash)
 cmd=("$@")
 if [[ ${#cmd[@]} -eq 0 ]]; then
-  cmd=(PS1="(${unit%.service}) \\w \\$ " /run/current-system/sw/bin/bash --noprofile --norc -i)
+  cmd=(PS1="(${unit%.service}) \\w \\$ " "$bash" --noprofile --norc -i)
 fi
 
 exec sudo systemd-analyze unit-shell "$unit" \
-  /run/current-system/sw/bin/setpriv \
-  --reuid "$uid" --regid "$gid" "${grpargs[@]}" --inh-caps=-all -- \
-  /run/current-system/sw/bin/env -i -C "$wd" "${envs[@]}" "${cmd[@]}"
+  "$setpriv" \
+  --reuid "$uid" --regid "$gid" --keep-groups --inh-caps=-all -- \
+  "$env" -i -C "$wd" "${envs[@]}" "${cmd[@]}"
