@@ -3,6 +3,8 @@
 # load config from nix, such as colors
 ~/.config/river/colors.sh
 
+riverctl xcursor-theme Bibata-Modern-Ice 24
+
 # env
 # shellcheck disable=SC1091
 # . "$HOME"/.nix-profile/bin/configure-gtk

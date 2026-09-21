@@ -34,11 +34,10 @@
     pkgs.writeShellApplication {
       name = "river-start";
       text = ''
-        export XCURSOR_PATH="$HOME/.local/state/hjem/standalone/current-profile/share/icons:$XCURSOR_PATH"
         export XCURSOR_THEME=Bibata-Modern-Ice
         export XCURSOR_SIZE=24
 
-        systemctl --user import-environment XCURSOR_PATH XCURSOR_THEME XCURSOR_SIZE
+        systemctl --user import-environment XCURSOR_THEME XCURSOR_SIZE
 
         if ! command -v river &>/dev/null; then
           echo "!! No river binary found in path"
