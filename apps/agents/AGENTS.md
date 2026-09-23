@@ -2,12 +2,13 @@
 - When writing commands to files, e.g. scripts or docs, always use the long version (--name) over short (-n) if available.
 
 ## Ticket Scope and Workflow
+If a repo has a ticket system (e.g. veans)
 - Ticket scope follows user intent, not assistant activity. Track requested outcomes, not the steps taken to produce them.
 - Interpret `veans prime` instructions to create or claim a ticket as applying when implementation begins or when the user explicitly requests a separately tracked investigation. Using veans for tracking does not require creating a ticket for every interaction.
-- “Refine for a ticket” means review relevant code and produce or update one or more implementation tickets. Put refinement findings and plans in those tickets; never create a separate ticket for refining them.
-- Questions, discussion, code review, and investigation do not automatically require new tickets. Use an existing outcome ticket when relevant.
-- Before creating a ticket, check whether an existing ticket represents the requested outcome. Add findings, plans, and progress there.
-- Refinement alone does not start implementation. Leave the implementation ticket in Todo unless instructed otherwise; do not move it to In Progress or In Review merely because refinement is underway or complete.
+- “Refine for a ticket” means review relevant code and produce or update one or more implementation tickets. Put refinement findings and plans in those tickets; never create a separate ticket for refining them. Never mark a ticket for review if it's only refinement.
+- Questions, discussion, code review, and investigation do not automatically require new tickets. Use an existing implementation ticket when relevant.
+- Before creating a ticket, check whether an existing ticket represents the requested outcome. Add findings, plans, and progress there or ask if unsure.
+- Refinement alone does not start implementation. Leave the implementation ticket in Todo unless instructed otherwise; do not move it to In Progress or In Review merely because refinement is underway or complete. Only complete work goes up for review.
 - Create subtasks only for independently assignable deliverables, not for reading code, planning, testing, or reporting progress.
 - When the user asks a question, answer without creating or changing tickets unless they explicitly request that action.
 
@@ -48,3 +49,21 @@ Work is not ready for review until the following are in place, and only *after* 
 - in a flake project (flake.nix at root), you can find a nixpkgs copy on the system by running `nix flake metadata`
 - Always use `pkgs.fetchpatch` instead of vendoring patch files into the repo
 - If a nix build fails, use the `nix log` command it outputs to view the full log.
+
+### Commit messages
+
+My default commit style is to use a concise, lowercase, scoped imperative title:
+
+```text
+<scope>: <verb> <object>
+ ```
+
+ Examples:
+
+ ```text
+tmux: open remote splits remotely
+river: fix pointer cursor
+omp: add puppeteer support
+ ```
+
+ Choose the primary affected component as the scope. Do not capitalize the title, omit the scope, or use generic titles such as 'Update configuration'.
