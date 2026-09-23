@@ -1,6 +1,7 @@
 {
   config,
   inputs,
+  lib,
   pkgs,
   ...
 }:
@@ -13,7 +14,9 @@ let
     buildInputs = [ pkgs.makeWrapper ];
     postBuild = ''
       wrapProgram $out/bin/omp \
-        --set-default PI_CONFIG_DIR ".config/omp"
+        --set-default PI_CONFIG_DIR ".config/omp"\
+        --set PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true \
+        --set PUPPETEER_EXECUTABLE_PATH "${lib.getExe pkgs.chromium}"
     '';
   };
 in
