@@ -32,4 +32,6 @@ in
 
     "git/ignore".source = config.dotfiles.source "apps/git/ignore";
   };
+
+  xdg.data.files."gh/extensions/gh-stack/gh-stack".source = lib.getExe pkgs.gh-stack;
 }
