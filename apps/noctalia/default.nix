@@ -23,6 +23,7 @@ in
               ./inhibit-sync.patch
               # ./output-power.patch
               ./add-river.patch
+              ./river-classic-output.patch
             ];
 
             doCheck = false;

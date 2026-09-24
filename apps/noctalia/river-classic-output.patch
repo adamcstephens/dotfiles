@@ -1,0 +1,551 @@
+diff --git a/meson.build b/meson.build
+index 87aba00dd5..cc1c675a2c 100644
+--- a/meson.build
++++ b/meson.build
+@@ -381,6 +381,8 @@
+     'protocols/wlr-screencopy-unstable-v1.xml'],
+   ['wlr-output-management-unstable-v1',
+     'protocols/wlr-output-management-unstable-v1.xml'],
++  ['wlr-output-power-management-unstable-v1',
++    'protocols/wlr-output-power-management-unstable-v1.xml'],
+ ]
+   _name = _p[0]
+   _xml  = _p[1]
+@@ -927,6 +929,7 @@
+   'src/compositors/compositor_detect.cpp',
+   'src/compositors/compositor_runtime.cpp',
+   'src/compositors/dwl/dwl_workspace_backend.cpp',
++  'src/compositors/river-classic/river-classic-output-power-backend.cpp',
+   'src/compositors/river-classic/river-classic-workspace-backend.cpp',
+   'src/compositors/ext_workspace/ext_workspace_output_backend.cpp',
+   'src/compositors/ext_workspace/ext_workspace_backend.cpp',
+@@ -1283,6 +1286,16 @@
+   )
+   test('river-classic-workspace-backend', river_classic_test)
+ 
++  river_classic_output_power_test = executable('river-classic-output-power-backend-test',
++    sources: files('src/compositors/river-classic/river-classic-output-power-backend.cpp',
++      'tests/river-classic-output-power-backend-test.cpp') + _protocol_sources + _protocol_headers,
++    dependencies: wayland_client_dep,
++    include_directories: _noctalia_inc,
++    cpp_args: _noctalia_compile_definitions,
++    override_options: ['b_ndebug=false'],
++  )
++  test('river-classic-output-power-backend', river_classic_output_power_test)
++
+   river_classic_detection_test = executable('river-classic-detection-test',
+     sources: files('tests/river-classic-detection-test.cpp'),
+     dependencies: noctalia_core_dep,
+diff --git a/protocols/wlr-output-power-management-unstable-v1.xml b/protocols/wlr-output-power-management-unstable-v1.xml
+new file mode 100644
+index 0000000000..6b495fdcac
+--- /dev/null
++++ b/protocols/wlr-output-power-management-unstable-v1.xml
+@@ -0,0 +1,129 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<!-- SPDX-License-Identifier: MIT -->
++<protocol name="wlr_output_power_management_unstable_v1">
++  <copyright>
++    Copyright © 2019 Purism SPC
++
++    Permission is hereby granted, free of charge, to any person obtaining a
++    copy of this software and associated documentation files (the "Software"),
++    to deal in the Software without restriction, including without limitation
++    the rights to use, copy, modify, merge, publish, distribute, sublicense,
++    and/or sell copies of the Software, and to permit persons to whom the
++    Software is furnished to do so, subject to the following conditions:
++
++    The above copyright notice and this permission notice (including the next
++    paragraph) shall be included in all copies or substantial portions of the
++    Software.
++
++    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
++    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
++    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
++    THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
++    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
++    FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
++    DEALINGS IN THE SOFTWARE.
++  </copyright>
++
++  <description summary="Control power management modes of outputs">
++    This protocol allows clients to control power management modes
++    of outputs that are currently part of the compositor space. The
++    intent is to allow special clients like desktop shells to power
++    down outputs when the system is idle.
++
++    To modify outputs not currently part of the compositor space see
++    wlr-output-management.
++
++    Warning! The protocol described in this file is experimental and
++    backward incompatible changes may be made. Backward compatible changes
++    may be added together with the corresponding interface version bump.
++    Backward incompatible changes are done by bumping the version number in
++    the protocol and interface names and resetting the interface version.
++    Once the protocol is to be declared stable, the 'z' prefix and the
++    version number in the protocol and interface names are removed and the
++    interface version number is reset.
++  </description>
++
++  <interface name="zwlr_output_power_manager_v1" version="1">
++    <description summary="manager to create per-output power management">
++      This interface is a manager that allows creating per-output power
++      management mode controls.
++    </description>
++
++    <request name="get_output_power">
++      <description summary="get a power management for an output">
++        Create an output power management mode control that can be used to
++        adjust the power management mode for a given output.
++      </description>
++      <arg name="id" type="new_id" interface="zwlr_output_power_v1"/>
++      <arg name="output" type="object" interface="wl_output"/>
++    </request>
++
++    <request name="destroy" type="destructor">
++      <description summary="destroy the manager">
++        All objects created by the manager will still remain valid, until their
++        appropriate destroy request has been called.
++      </description>
++    </request>
++  </interface>
++
++  <interface name="zwlr_output_power_v1" version="1">
++    <description summary="adjust power management mode for an output">
++      This object offers requests to set the power management mode of
++      an output.
++    </description>
++
++    <enum name="mode">
++      <entry name="off" value="0"
++             summary="Output is turned off."/>
++      <entry name="on" value="1"
++             summary="Output is turned on, no power saving"/>
++    </enum>
++
++    <enum name="error">
++      <entry name="invalid_mode" value="1" summary="nonexistent power save mode"/>
++    </enum>
++
++    <request name="set_mode">
++      <description summary="Set an outputs power save mode">
++        Set an output's power save mode to the given mode. The mode change
++        is effective immediately. If the output does not support the given
++        mode a failed event is sent.
++      </description>
++      <arg name="mode" type="uint" enum="mode" summary="the power save mode to set"/>
++    </request>
++
++    <event name="mode">
++      <description summary="Report a power management mode change">
++        Report the power management mode change of an output.
++
++        The mode event is sent after an output changed its power management mode.
++        The reason can be a client using set_mode or the compositor deciding to change
++        the output's mode.
++        This event is also sent immediately when the object is created
++        so the client is informed about the current power management mode.
++      </description>
++      <arg name="mode" type="uint" enum="mode"
++           summary="the output's new power management mode"/>
++    </event>
++
++    <event name="failed">
++      <description summary="object no longer valid">
++        This event indicates that the output power management mode control
++        is no longer valid. This can happen for a number of reasons,
++        including:
++        - The output doesn't support power management
++        - Another client already has exclusive power management mode control
++          for this output
++        - The output disappeared
++
++        Upon receiving this event, the client should destroy this object.
++      </description>
++    </event>
++
++    <request name="destroy" type="destructor">
++      <description summary="destroy this power management">
++        Destroys the output power management mode control object.
++      </description>
++    </request>
++  </interface>
++</protocol>
+diff --git a/src/compositors/compositor_platform.cpp b/src/compositors/compositor_platform.cpp
+index 96d4ca9af1..fa6197c712 100644
+--- a/src/compositors/compositor_platform.cpp
++++ b/src/compositors/compositor_platform.cpp
+@@ -15,6 +15,7 @@
+ #include "compositors/niri/niri_output_backend.h"
+ #include "compositors/niri/niri_runtime.h"
+ #include "compositors/niri/niri_workspace_backend.h"
++#include "compositors/river-classic/river-classic-output-power-backend.h"
+ #include "compositors/sway/sway_keyboard_backend.h"
+ #include "compositors/sway/sway_output_backend.h"
+ #include "compositors/sway/sway_runtime.h"
+@@ -58,6 +59,7 @@
+     virtual ~OutputPowerBackend() = default;
+     [[nodiscard]] virtual bool setOutputPower(WaylandConnection& wayland, bool on) const = 0;
+     [[nodiscard]] virtual bool isPerOutputTargeted() const noexcept { return false; }
++    virtual void onOutputRemoved(wl_output*) {}
+   };
+ 
+ } // namespace compositors
+@@ -320,6 +322,24 @@
+     bool m_perOutputTargeted = false;
+   };
+ 
++  class RiverClassicOutputPowerBackend final : public compositors::OutputPowerBackend {
++  public:
++    ~RiverClassicOutputPowerBackend() override { compositors::river_classic::destroyOutputPowers(m_controls); }
++
++    [[nodiscard]] bool setOutputPower(WaylandConnection& wayland, bool on) const override {
++      return compositors::river_classic::setOutputPower(
++          wayland.outputPowerManager(), wayland.outputs(), m_controls, on
++      );
++    }
++    [[nodiscard]] bool isPerOutputTargeted() const noexcept override { return true; }
++    void onOutputRemoved(wl_output* output) override {
++      compositors::river_classic::removeOutputPower(m_controls, output);
++    }
++
++  private:
++    mutable compositors::river_classic::OutputPowerControls m_controls;
++  };
++
+   [[nodiscard]] bool setGenericOutputPower(WaylandConnection& /*wayland*/, bool on) {
+     return compositors::ext_workspace::setOutputPower(on);
+   }
+@@ -361,11 +381,12 @@
+             return compositors::umbriel::setOutputPower(runtime, on);
+           }
+       );
++    case compositors::CompositorKind::RiverClassic:
++      return std::make_unique<RiverClassicOutputPowerBackend>();
+     case compositors::CompositorKind::Dwl:
+     case compositors::CompositorKind::Labwc:
+     case compositors::CompositorKind::Kde:
+     case compositors::CompositorKind::Pinnacle:
+-    case compositors::CompositorKind::RiverClassic:
+     case compositors::CompositorKind::Unknown:
+       return std::make_unique<LambdaOutputPowerBackend>(&setGenericOutputPower);
+     }
+@@ -1668,6 +1689,9 @@
+ }
+ 
+ void CompositorPlatform::onOutputRemoved(wl_output* output) {
++  if (m_outputPowerBackend != nullptr) {
++    m_outputPowerBackend->onOutputRemoved(output);
++  }
+   if (m_workspaces != nullptr) {
+     m_workspaces->onOutputRemoved(output);
+   }
+diff --git a/src/compositors/river-classic/river-classic-output-power-backend.cpp b/src/compositors/river-classic/river-classic-output-power-backend.cpp
+new file mode 100644
+index 0000000000..3c660bed2e
+--- /dev/null
++++ b/src/compositors/river-classic/river-classic-output-power-backend.cpp
+@@ -0,0 +1,64 @@
++#include "compositors/river-classic/river-classic-output-power-backend.h"
++
++namespace compositors::river_classic {
++
++  namespace {
++
++    void outputPowerMode(void*, zwlr_output_power_v1*, std::uint32_t) {}
++
++    void outputPowerFailed(void*, zwlr_output_power_v1*) {}
++
++    const zwlr_output_power_v1_listener kOutputPowerListener = {
++        .mode = outputPowerMode,
++        .failed = outputPowerFailed,
++    };
++
++  } // namespace
++
++  bool setOutputPower(
++      zwlr_output_power_manager_v1* manager, const std::vector<WaylandOutput>& outputs, OutputPowerControls& controls,
++      bool on
++  ) {
++    if (manager == nullptr) {
++      return false;
++    }
++
++    bool requested = false;
++    for (const auto& output : outputs) {
++      if (output.output == nullptr) {
++        continue;
++      }
++      auto [it, inserted] = controls.try_emplace(output.output, nullptr);
++      if (inserted) {
++        it->second = zwlr_output_power_manager_v1_get_output_power(manager, output.output);
++        if (it->second == nullptr) {
++          controls.erase(it);
++          continue;
++        }
++        zwlr_output_power_v1_add_listener(it->second, &kOutputPowerListener, nullptr);
++      }
++
++      zwlr_output_power_v1_set_mode(it->second, on ? ZWLR_OUTPUT_POWER_V1_MODE_ON : ZWLR_OUTPUT_POWER_V1_MODE_OFF);
++      requested = true;
++    }
++    return requested;
++  }
++
++  void removeOutputPower(OutputPowerControls& controls, wl_output* output) {
++    const auto it = controls.find(output);
++    if (it == controls.end()) {
++      return;
++    }
++
++    zwlr_output_power_v1_destroy(it->second);
++    controls.erase(it);
++  }
++
++  void destroyOutputPowers(OutputPowerControls& controls) {
++    for (const auto& control : controls) {
++      zwlr_output_power_v1_destroy(control.second);
++    }
++    controls.clear();
++  }
++
++} // namespace compositors::river_classic
+diff --git a/src/compositors/river-classic/river-classic-output-power-backend.h b/src/compositors/river-classic/river-classic-output-power-backend.h
+new file mode 100644
+index 0000000000..f2643b5f0e
+--- /dev/null
++++ b/src/compositors/river-classic/river-classic-output-power-backend.h
+@@ -0,0 +1,19 @@
++#pragma once
++
++#include "wayland/wayland_connection.h"
++#include "wlr-output-power-management-unstable-v1-client-protocol.h"
++
++#include <unordered_map>
++
++namespace compositors::river_classic {
++
++  using OutputPowerControls = std::unordered_map<wl_output*, zwlr_output_power_v1*>;
++
++  [[nodiscard]] bool setOutputPower(
++      zwlr_output_power_manager_v1* manager, const std::vector<WaylandOutput>& outputs, OutputPowerControls& controls,
++      bool on
++  );
++  void removeOutputPower(OutputPowerControls& controls, wl_output* output);
++  void destroyOutputPowers(OutputPowerControls& controls);
++
++} // namespace compositors::river_classic
+diff --git a/src/wayland/wayland_connection.cpp b/src/wayland/wayland_connection.cpp
+index 9181c3b457..41d4d8a808 100644
+--- a/src/wayland/wayland_connection.cpp
++++ b/src/wayland/wayland_connection.cpp
+@@ -34,6 +34,7 @@
+ #include "wlr-gamma-control-unstable-v1-client-protocol.h"
+ #include "wlr-layer-shell-unstable-v1-client-protocol.h"
+ #include "wlr-output-management-unstable-v1-client-protocol.h"
++#include "wlr-output-power-management-unstable-v1-client-protocol.h"
+ #include "wlr-screencopy-unstable-v1-client-protocol.h"
+ #include "xdg-activation-v1-client-protocol.h"
+ #include "xdg-output-unstable-v1-client-protocol.h"
+@@ -83,6 +84,7 @@
+   constexpr std::uint32_t kImageCopyCaptureManagerVersion = 1;
+   constexpr std::uint32_t kOutputImageCaptureSourceManagerVersion = 1;
+   constexpr std::uint32_t kOutputManagerVersion = 4;
++  constexpr std::uint32_t kOutputPowerManagerVersion = 1;
+   constexpr std::uint32_t kOutputManagerMinVersion = 3;
+ 
+   const wl_registry_listener kRegistryListener = {
+@@ -685,6 +687,8 @@
+ 
+ zwlr_screencopy_manager_v1* WaylandConnection::screencopyManager() const noexcept { return m_screencopyManager; }
+ 
++zwlr_output_power_manager_v1* WaylandConnection::outputPowerManager() const noexcept { return m_outputPowerManager; }
++
+ ext_image_copy_capture_manager_v1* WaylandConnection::imageCopyCaptureManager() const noexcept {
+   return m_imageCopyCaptureManager;
+ }
+@@ -1320,6 +1324,14 @@
+     return;
+   }
+ 
++  if (interfaceName == zwlr_output_power_manager_v1_interface.name) {
++    const auto bindVersion = std::min(version, kOutputPowerManagerVersion);
++    m_outputPowerManager = static_cast<zwlr_output_power_manager_v1*>(
++        wl_registry_bind(registry, name, &zwlr_output_power_manager_v1_interface, bindVersion)
++    );
++    return;
++  }
++
+   if (interfaceName == wl_output_interface.name) {
+     const auto bindVersion = std::min(version, kOutputVersion);
+     auto* output = static_cast<wl_output*>(wl_registry_bind(registry, name, &wl_output_interface, bindVersion));
+@@ -1476,6 +1488,10 @@
+     zwlr_output_manager_v1_destroy(m_outputManager);
+     m_outputManager = nullptr;
+   }
++  if (m_outputPowerManager != nullptr) {
++    zwlr_output_power_manager_v1_destroy(m_outputPowerManager);
++    m_outputPowerManager = nullptr;
++  }
+ 
+   if (m_viewporter != nullptr) {
+     wp_viewporter_destroy(m_viewporter);
+diff --git a/src/wayland/wayland_connection.h b/src/wayland/wayland_connection.h
+index d0177e921b..e96c9f502b 100644
+--- a/src/wayland/wayland_connection.h
++++ b/src/wayland/wayland_connection.h
+@@ -56,6 +56,7 @@
+ struct zwlr_output_manager_v1;
+ struct zwlr_output_head_v1;
+ struct zwlr_output_mode_v1;
++struct zwlr_output_power_manager_v1;
+ class ClipboardService;
+ class FocusGrabService;
+ struct DataControlOps;
+@@ -216,6 +217,7 @@
+   /// Inhibitor-aware idle notification (`get_idle_notification`); honors `zwp_idle_inhibitor_v1`.
+   [[nodiscard]] ext_idle_notification_v1* createIdleNotification(std::uint32_t timeoutMs) const;
+   [[nodiscard]] zwp_idle_inhibit_manager_v1* idleInhibitManager() const noexcept;
++  [[nodiscard]] zwlr_output_power_manager_v1* outputPowerManager() const noexcept;
+   [[nodiscard]] const std::vector<WaylandOutput>& outputs() const noexcept;
+   [[nodiscard]] WaylandOutput* findOutputByWl(wl_output* wlOutput);
+   [[nodiscard]] const WaylandOutput* findOutputByWl(wl_output* wlOutput) const;
+@@ -329,6 +331,7 @@
+   ext_image_copy_capture_manager_v1* m_imageCopyCaptureManager = nullptr;
+   ext_output_image_capture_source_manager_v1* m_outputImageCaptureSourceManager = nullptr;
+   zwlr_output_manager_v1* m_outputManager = nullptr;
++  zwlr_output_power_manager_v1* m_outputPowerManager = nullptr;
+   std::unordered_map<zwlr_output_head_v1*, WaylandOutputHeadInfo> m_outputHeads;
+   std::unordered_set<zwlr_output_mode_v1*> m_outputModes;
+   std::unique_ptr<FocusGrabService> m_focusGrabService;
+diff --git a/tests/river-classic-output-power-backend-test.cpp b/tests/river-classic-output-power-backend-test.cpp
+new file mode 100644
+index 0000000000..b1de02fd72
+--- /dev/null
++++ b/tests/river-classic-output-power-backend-test.cpp
+@@ -0,0 +1,125 @@
++#include "compositors/river-classic/river-classic-output-power-backend.h"
++#include "tests/test_check.h"
++
++#include <cstdarg>
++#include <cstdint>
++#include <memory>
++#include <utility>
++#include <vector>
++
++namespace {
++
++  struct FakeProxy {
++    const wl_interface* interface;
++    std::uint32_t version;
++    bool alive = true;
++  };
++
++  struct Request {
++    wl_output* output;
++    std::uint32_t mode;
++  };
++
++  std::vector<std::unique_ptr<FakeProxy>> proxies;
++  std::vector<Request> requests;
++  std::vector<std::pair<zwlr_output_power_v1*, wl_output*>> outputPowers;
++
++  FakeProxy& proxy(void* handle) { return *static_cast<FakeProxy*>(handle); }
++
++  template <typename T> T* makeProxy(const wl_interface* interface, std::uint32_t version) {
++    proxies.push_back(std::make_unique<FakeProxy>(FakeProxy{interface, version}));
++    return reinterpret_cast<T*>(proxies.back().get());
++  }
++
++  wl_output* outputFor(zwlr_output_power_v1* power) {
++    for (const auto& [candidate, output] : outputPowers) {
++      if (candidate == power) {
++        return output;
++      }
++    }
++    TEST_CHECK(false);
++    return nullptr;
++  }
++
++} // namespace
++
++extern "C" {
++
++std::uint32_t wl_proxy_get_version(wl_proxy* handle) { return proxy(handle).version; }
++
++void wl_proxy_destroy(wl_proxy* handle) {
++  TEST_CHECK(proxy(handle).alive);
++  proxy(handle).alive = false;
++}
++
++int wl_proxy_add_listener(wl_proxy* handle, void (**implementation)(void), void* data) {
++  TEST_CHECK(proxy(handle).interface == &zwlr_output_power_v1_interface);
++  TEST_CHECK(implementation != nullptr);
++  TEST_CHECK(data == nullptr);
++  return 0;
++}
++
++wl_proxy* wl_proxy_marshal_flags(
++    wl_proxy* handle, std::uint32_t opcode, const wl_interface* interface, std::uint32_t version, std::uint32_t flags,
++    ...
++) {
++  TEST_CHECK(proxy(handle).alive);
++
++  va_list args;
++  va_start(args, flags);
++  if (proxy(handle).interface == &zwlr_output_power_manager_v1_interface) {
++    TEST_CHECK(opcode == ZWLR_OUTPUT_POWER_MANAGER_V1_GET_OUTPUT_POWER);
++    (void)va_arg(args, void*);
++    auto* output = va_arg(args, wl_output*);
++    auto* power = makeProxy<zwlr_output_power_v1>(interface, version);
++    outputPowers.emplace_back(power, output);
++    va_end(args);
++    return reinterpret_cast<wl_proxy*>(power);
++  }
++
++  TEST_CHECK(proxy(handle).interface == &zwlr_output_power_v1_interface);
++  if (opcode == ZWLR_OUTPUT_POWER_V1_SET_MODE) {
++    requests.push_back({outputFor(reinterpret_cast<zwlr_output_power_v1*>(handle)), va_arg(args, std::uint32_t)});
++  } else {
++    TEST_CHECK(opcode == ZWLR_OUTPUT_POWER_V1_DESTROY);
++    TEST_CHECK((flags & WL_MARSHAL_FLAG_DESTROY) != 0);
++    proxy(handle).alive = false;
++  }
++  va_end(args);
++  return nullptr;
++}
++
++} // extern "C"
++
++int main() {
++  auto* manager = makeProxy<zwlr_output_power_manager_v1>(&zwlr_output_power_manager_v1_interface, 1);
++  auto* first = makeProxy<wl_output>(&wl_output_interface, 4);
++  auto* second = makeProxy<wl_output>(&wl_output_interface, 4);
++  const std::vector<WaylandOutput> outputs = {{.output = first}, {.output = nullptr}, {.output = second}};
++  compositors::river_classic::OutputPowerControls controls;
++
++  TEST_CHECK(!compositors::river_classic::setOutputPower(nullptr, outputs, controls, false));
++  TEST_CHECK(compositors::river_classic::setOutputPower(manager, outputs, controls, false));
++  TEST_CHECK(requests.size() == 2);
++  TEST_CHECK(outputPowers.size() == 2);
++  TEST_CHECK(requests[0].output == first);
++  TEST_CHECK(requests[0].mode == ZWLR_OUTPUT_POWER_V1_MODE_OFF);
++  TEST_CHECK(requests[1].output == second);
++  TEST_CHECK(requests[1].mode == ZWLR_OUTPUT_POWER_V1_MODE_OFF);
++
++  TEST_CHECK(compositors::river_classic::setOutputPower(manager, outputs, controls, true));
++  TEST_CHECK(requests.size() == 4);
++  TEST_CHECK(outputPowers.size() == 2);
++  TEST_CHECK(requests[2].output == first);
++  TEST_CHECK(requests[2].mode == ZWLR_OUTPUT_POWER_V1_MODE_ON);
++  TEST_CHECK(requests[3].output == second);
++  TEST_CHECK(requests[3].mode == ZWLR_OUTPUT_POWER_V1_MODE_ON);
++
++  compositors::river_classic::removeOutputPower(controls, first);
++  TEST_CHECK(controls.size() == 1);
++  TEST_CHECK(!proxy(outputPowers[0].first).alive);
++  TEST_CHECK(proxy(outputPowers[1].first).alive);
++  compositors::river_classic::destroyOutputPowers(controls);
++  TEST_CHECK(controls.empty());
++  TEST_CHECK(!proxy(outputPowers[1].first).alive);
++}
