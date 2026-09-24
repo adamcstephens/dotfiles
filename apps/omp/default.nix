@@ -6,6 +6,12 @@
   ...
 }:
 let
+  chromium =
+    if pkgs.stdenv.hostPlatform.isLinux then
+      lib.getExe pkgs.chromium
+    else
+      "/Applications/Chromium.app/Contents/MacOS/Chromium";
+
   omp-wrapped = pkgs.symlinkJoin {
     name = "omp-wrapped";
     paths = [
@@ -16,7 +22,7 @@ let
       wrapProgram $out/bin/omp \
         --set-default PI_CONFIG_DIR ".config/omp"\
         --set PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true \
-        --set PUPPETEER_EXECUTABLE_PATH "${lib.getExe pkgs.chromium}"
+        --set PUPPETEER_EXECUTABLE_PATH "${chromium}"
     '';
   };
 in
