@@ -1,9 +1,9 @@
 modelRoles:
-  smol: openai-codex/gpt-5.6-luna:medium
+  smol: openai-codex/gpt-6-luna:medium
   plan: openai-codex/gpt-5.6-terra:high
-  default: openai-codex/gpt-5.6-terra
+  default: openai-codex/gpt-6-sol
   slow: openai-codex/gpt-6-astra:high
-  CODER: openai-codex/gpt-6-astra:low
+  CODER: openai-codex/gpt-6-sol:medium
 symbolPreset: nerd
 composer:
   shape: rule
@@ -22,7 +22,8 @@ statusLine:
 startup:
   quiet: true
   checkUpdate: false
-disabledExtensions: []
+disabledExtensions:
+  []
 dev:
   autoqaConsent: granted
 cycleOrder:
