@@ -33,7 +33,7 @@ riverctl set-repeat 60 300
 touchpad="$(riverctl list-inputs | rg Touchpad | head -n 1)"
 
 if [ -n "$touchpad" ]; then
-  riverctl input "$touchpad" events disabled
+  # riverctl input "$touchpad" events disabled
   riverctl input "$touchpad" natural-scroll enabled
   riverctl input "$touchpad" tap-button-map left-right-middle
   riverctl input "$touchpad" middle-emulation disabled
