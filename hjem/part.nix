@@ -132,7 +132,7 @@ in
                     project_dir = "${config.directory}/git/noctalia";
                   };
                   sower = epi-agent { project = "sower"; };
-                  tracker-deck = epi-agent { project = "sower"; };
+                  tracker-deck = epi-agent { project = "tracker"; };
                 };
               };
             }
