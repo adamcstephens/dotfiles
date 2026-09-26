@@ -4,8 +4,6 @@
   ...
 }:
 let
-  npins = import ../../npins;
-
   common =
     {
       config,
@@ -17,7 +15,6 @@ let
       imports = [
         inputs.epi.nixosModules.epi
         inputs.hjem.nixosModules.hjem
-        # "${npins.paseo}/nix/module.nix"
       ];
 
       epi = {
