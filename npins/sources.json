@@ -9,9 +9,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "217c6e1f445b3973ca8f988f070c9b84cceaa1ca",
-      "url": "https://github.com/snugnug/hjem-rum/archive/217c6e1f445b3973ca8f988f070c9b84cceaa1ca.tar.gz",
-      "hash": "sha256-LLToYudTlFqNY0NsG//CnE2I/zF0cpktX44ZhFJ2alY="
+      "revision": "4194064c687bf6ca7a79cbe127cbe5a3f51ed5d5",
+      "url": "https://github.com/snugnug/hjem-rum/archive/4194064c687bf6ca7a79cbe127cbe5a3f51ed5d5.tar.gz",
+      "hash": "sha256-ntcojKoFfndHu9/cw6zRyan2AECyxMwJ0e1Qr7a+m40="
     },
     "modus-themes.nvim": {
       "type": "Git",
@@ -37,10 +37,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.8.0",
-      "revision": "e432c9b47194d8c20071af2ef68a35e26149031a",
-      "url": "https://api.github.com/repos/getpaseo/paseo/tarball/refs/tags/v0.8.0",
-      "hash": "sha256-zYUj7CGz+i+w0elysbU+Sup+NACsBoIEqCu8WHA24PE="
+      "version": "v0.9.2",
+      "revision": "0f75f6f913aa06bf48c4c72b94483c0dc571abee",
+      "url": "https://api.github.com/repos/getpaseo/paseo/tarball/refs/tags/v0.9.2",
+      "hash": "sha256-8ko/EqTCWnAkUHnrRsVEK+dkNLCHRd89gmcoeOiVBV8="
     },
     "smart-splits.nvim": {
       "type": "Git",
