@@ -131,7 +131,12 @@ in
                     project = "noctalia";
                     project_dir = "${config.directory}/git/noctalia";
                   };
-                  sower = epi-agent { project = "sower"; };
+                  sower = epi-agent {
+                    project = "sower";
+                    settings = {
+                      memory = 16384;
+                    };
+                  };
                   tracker-deck = epi-agent { project = "tracker"; };
                 };
               };
