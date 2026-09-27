@@ -160,7 +160,7 @@ in
       pkgs.signal-desktop
 
       # bitwarden
-      # broken pkgs.bitwarden-desktop
+      # from nixos for polkit pkgs.bitwarden-desktop
       pkgs.rofi-rbw
 
       flake.packages.${pkgs.stdenv.hostPlatform.system}.screenshot
