@@ -1,8 +1,8 @@
 diff --git a/CREDITS.md b/CREDITS.md
-index ab5d6cbb59..7f6c426287 100644
+index 33d17de064..9a0f34d305 100644
 --- a/CREDITS.md
 +++ b/CREDITS.md
-@@ -56,6 +56,10 @@
+@@ -52,6 +52,10 @@
  - **[Material Color Utilities](https://github.com/material-foundation/material-color-utilities)** — Material 3 palette generation (Apache-2.0)
  - **[Wuffs](https://github.com/google/wuffs)** — Memory-safe image decoders (Apache-2.0)
  
@@ -14,7 +14,7 @@ index ab5d6cbb59..7f6c426287 100644
  
  External tools Noctalia integrates with at runtime when present:
 diff --git a/README.md b/README.md
-index 3267040e01..8f4a7aa3b1 100644
+index 4d8900cdc6..7c4c73493e 100644
 --- a/README.md
 +++ b/README.md
 @@ -70,10 +70,15 @@
@@ -36,10 +36,10 @@ index 3267040e01..8f4a7aa3b1 100644
  
  Noctalia is a desktop shell, not a full desktop environment. It provides the visual and service layer around your
 diff --git a/docs/user/bar/widgets/workspaces.mdx b/docs/user/bar/widgets/workspaces.mdx
-index 621abf07bb..bd7f7fe73e 100644
+index 84b9b5eb39..9f3275989b 100644
 --- a/docs/user/bar/widgets/workspaces.mdx
 +++ b/docs/user/bar/widgets/workspaces.mdx
-@@ -15,6 +15,11 @@
+@@ -17,6 +17,11 @@
  Set `[widget.workspaces].capsule_radius` for just the workspace switcher, or `[bar.<name>].capsule_radius` as the bar default.
  Pill styling and `capsule_radius` apply only when `style = "regular"`.
  
@@ -52,7 +52,7 @@ index 621abf07bb..bd7f7fe73e 100644
  |---------|------|---------|-------------|
  | `style` | string | `"regular"` | Pill style: `"regular"` (animated pills), `"minimal"` (labels drawn without pill backgrounds), or `"focus_hint"` (inactive dots + expanded active pill with focused app icon). |
 diff --git a/docs/user/getting-started/faq.mdx b/docs/user/getting-started/faq.mdx
-index 0c7446edf5..5f5889948c 100644
+index c6bce79af7..91481f809b 100644
 --- a/docs/user/getting-started/faq.mdx
 +++ b/docs/user/getting-started/faq.mdx
 @@ -90,6 +90,14 @@
@@ -71,10 +71,10 @@ index 0c7446edf5..5f5889948c 100644
  Add `noctalia` under System Settings → Autostart, or see [KDE Plasma](/noctalia/compositor-settings/kde/) for Plasma-specific limits (clipboard, blur, screenshots, and more).
  :::
 diff --git a/meson.build b/meson.build
-index 7c581eabea..87aba00dd5 100644
+index 115f16c497..2bee1f7cac 100644
 --- a/meson.build
 +++ b/meson.build
-@@ -359,6 +359,10 @@
+@@ -360,6 +360,10 @@
      'protocols/virtual-keyboard-unstable-v1.xml'],
    ['dwl-ipc-unstable-v2',
      'protocols/dwl-ipc-unstable-v2.xml'],
@@ -85,7 +85,7 @@ index 7c581eabea..87aba00dd5 100644
    ['org-kde-plasma-virtual-desktop',
      'protocols/org-kde-plasma-virtual-desktop.xml'],
    ['cursor-shape-v1',
-@@ -923,6 +927,7 @@
+@@ -938,6 +942,7 @@
    'src/compositors/compositor_detect.cpp',
    'src/compositors/compositor_runtime.cpp',
    'src/compositors/dwl/dwl_workspace_backend.cpp',
@@ -93,7 +93,7 @@ index 7c581eabea..87aba00dd5 100644
    'src/compositors/ext_workspace/ext_workspace_output_backend.cpp',
    'src/compositors/ext_workspace/ext_workspace_backend.cpp',
    'src/compositors/hyprland/hyprland_runtime.cpp',
-@@ -1271,6 +1276,40 @@
+@@ -1300,6 +1305,40 @@
      test(test_name, test_exe, args: test_args)
    endforeach
  
@@ -422,7 +422,7 @@ index 569ccc8f6d..f5ac4a9245 100644
  
  } // namespace compositors
 diff --git a/src/compositors/compositor_platform.cpp b/src/compositors/compositor_platform.cpp
-index 2667617625..96d4ca9af1 100644
+index 800799ffb8..698b847631 100644
 --- a/src/compositors/compositor_platform.cpp
 +++ b/src/compositors/compositor_platform.cpp
 @@ -365,6 +365,7 @@
@@ -433,15 +433,15 @@ index 2667617625..96d4ca9af1 100644
      case compositors::CompositorKind::Unknown:
        return std::make_unique<LambdaOutputPowerBackend>(&setGenericOutputPower);
      }
-@@ -388,6 +389,7 @@
+@@ -389,6 +390,7 @@
+     case compositors::CompositorKind::Kde:
      case compositors::CompositorKind::Mango:
-     case compositors::CompositorKind::Umbriel:
      case compositors::CompositorKind::Pinnacle:
 +    case compositors::CompositorKind::RiverClassic:
      case compositors::CompositorKind::Unknown:
        break;
      }
-@@ -410,6 +412,7 @@
+@@ -411,6 +413,7 @@
      case compositors::CompositorKind::Kde:
      case compositors::CompositorKind::Labwc:
      case compositors::CompositorKind::Pinnacle:
@@ -449,7 +449,7 @@ index 2667617625..96d4ca9af1 100644
      case compositors::CompositorKind::Unknown:
        break;
      }
-@@ -435,6 +438,7 @@
+@@ -436,6 +439,7 @@
      case compositors::CompositorKind::Labwc:
      case compositors::CompositorKind::Kde:
      case compositors::CompositorKind::Pinnacle:
@@ -457,7 +457,7 @@ index 2667617625..96d4ca9af1 100644
      case compositors::CompositorKind::Unknown:
        break;
      }
-@@ -609,6 +613,10 @@
+@@ -610,6 +614,10 @@
    m_wayland.setKdeVirtualDesktopManagerCallback([this](org_kde_plasma_virtual_desktop_management* management) {
      bindKdeVirtualDesktop(management);
    });
@@ -468,7 +468,7 @@ index 2667617625..96d4ca9af1 100644
    m_wayland.setHyprlandToplevelMappingManagerCallback([this](hyprland_toplevel_mapping_manager_v1* manager) {
      bindHyprlandToplevelMappingManager(manager);
    });
-@@ -623,6 +631,7 @@
+@@ -624,6 +632,7 @@
    m_wayland.setOutputLifecycleCallbacks({}, {});
    m_wayland.setWorkspaceManagerCallbacks({}, {});
    m_wayland.setKdeVirtualDesktopManagerCallback({});
@@ -476,7 +476,7 @@ index 2667617625..96d4ca9af1 100644
    m_wayland.setHyprlandToplevelMappingManagerCallback({});
    m_wayland.setToplevelChangeCallback({});
  }
-@@ -643,6 +652,7 @@
+@@ -644,6 +653,7 @@
    }
    m_initialized = true;
  
@@ -484,7 +484,7 @@ index 2667617625..96d4ca9af1 100644
    m_workspaces->initialize();
    for (const auto& output : m_wayland.outputs()) {
      if (output.output != nullptr) {
-@@ -741,6 +751,11 @@
+@@ -750,6 +760,11 @@
        }
      }
    }
@@ -496,7 +496,7 @@ index 2667617625..96d4ca9af1 100644
  
    if (compositors::isKde() && m_kwinActiveWindow != nullptr) {
      if (const auto focusedName = m_kwinActiveWindow->focusedOutputName(); focusedName.has_value()) {
-@@ -1396,6 +1411,9 @@
+@@ -1409,6 +1424,9 @@
  }
  
  bool CompositorPlatform::supportsTaskbarWorkspaceGrouping() const noexcept {
@@ -506,7 +506,7 @@ index 2667617625..96d4ca9af1 100644
    if (taskbarAssignmentMode() == TaskbarAssignmentMode::WorkspaceOccurrenceTitle) {
      return true;
    }
-@@ -1579,6 +1597,7 @@
+@@ -1592,6 +1610,7 @@
      break;
    case compositors::CompositorKind::Kde:
    case compositors::CompositorKind::Pinnacle:
@@ -514,7 +514,7 @@ index 2667617625..96d4ca9af1 100644
    case compositors::CompositorKind::Unknown:
      break;
    }
-@@ -1629,6 +1648,14 @@
+@@ -1642,6 +1661,14 @@
    }
  }
  
@@ -530,7 +530,7 @@ index 2667617625..96d4ca9af1 100644
    if (m_workspaces != nullptr) {
      m_workspaces->onOutputAdded(output);
 diff --git a/src/compositors/compositor_platform.h b/src/compositors/compositor_platform.h
-index 96fb91baed..6351b960be 100644
+index a3335008b0..8df1cc22b2 100644
 --- a/src/compositors/compositor_platform.h
 +++ b/src/compositors/compositor_platform.h
 @@ -20,6 +20,8 @@
@@ -542,7 +542,7 @@ index 96fb91baed..6351b960be 100644
  struct hyprland_toplevel_mapping_manager_v1;
  struct zwlr_foreign_toplevel_handle_v1;
  struct ext_foreign_toplevel_handle_v1;
-@@ -195,6 +197,8 @@
+@@ -204,6 +206,8 @@
    void bindExtWorkspace(ext_workspace_manager_v1* manager);
    void bindKdeVirtualDesktop(org_kde_plasma_virtual_desktop_management* management);
    void bindDwlIpcWorkspace(zdwl_ipc_manager_v2* manager);
@@ -996,7 +996,7 @@ index 0000000000..cc1845fad3
 +  ChangeCallback m_changeCallback;
 +};
 diff --git a/src/wayland/wayland_connection.cpp b/src/wayland/wayland_connection.cpp
-index 8c2075ed4a..9181c3b457 100644
+index 8710eba25b..17e6d5b28e 100644
 --- a/src/wayland/wayland_connection.cpp
 +++ b/src/wayland/wayland_connection.cpp
 @@ -18,6 +18,8 @@
@@ -1017,7 +1017,7 @@ index 8c2075ed4a..9181c3b457 100644
    constexpr std::uint32_t kWlrForeignToplevelManagerVersion = 3;
    constexpr std::uint32_t kExtForeignToplevelListVersion = 1;
    constexpr std::uint32_t kCursorShapeManagerVersion = 1;
-@@ -394,6 +398,13 @@
+@@ -395,6 +399,13 @@
    m_kdeVirtualDesktopManagerCallback = std::move(callback);
  }
  
@@ -1031,7 +1031,7 @@ index 8c2075ed4a..9181c3b457 100644
  void WaylandConnection::setToplevelChangeCallback(ChangeCallback callback) {
    m_toplevelsHandler.setChangeCallback(callback);
    m_extForeignToplevels.setChangeCallback(std::move(callback));
-@@ -653,6 +664,8 @@
+@@ -654,6 +665,8 @@
  bool WaylandConnection::hasExtWorkspaceManager() const noexcept { return m_hasExtWorkspaceGlobal; }
  bool WaylandConnection::hasKdeVirtualDesktopManager() const noexcept { return m_hasKdeVirtualDesktopGlobal; }
  bool WaylandConnection::hasDwlIpcManager() const noexcept { return m_hasDwlIpcGlobal; }
@@ -1040,7 +1040,7 @@ index 8c2075ed4a..9181c3b457 100644
  bool WaylandConnection::hasForeignToplevelManager() const noexcept { return m_hasForeignToplevelManagerGlobal; }
  
  bool WaylandConnection::hasExtForeignToplevelList() const noexcept { return m_hasExtForeignToplevelListGlobal; }
-@@ -1084,6 +1097,33 @@
+@@ -1090,6 +1103,33 @@
      return;
    }
  
@@ -1074,7 +1074,7 @@ index 8c2075ed4a..9181c3b457 100644
    if (interfaceName == zwlr_foreign_toplevel_manager_v1_interface.name) {
      m_hasForeignToplevelManagerGlobal = true;
      const auto bindVersion = std::min(version, kWlrForeignToplevelManagerVersion);
-@@ -1510,21 +1550,27 @@
+@@ -1528,21 +1568,27 @@
    m_hasLayerShellGlobal = false;
    m_hasExtWorkspaceGlobal = false;
    m_hasDwlIpcGlobal = false;
@@ -1104,7 +1104,7 @@ index 8c2075ed4a..9181c3b457 100644
        hasOutputManagement() ? "yes" : "no", m_outputs.size()
    );
 diff --git a/src/wayland/wayland_connection.h b/src/wayland/wayland_connection.h
-index 558be8327d..d0177e921b 100644
+index 92698b03ab..086679ed8c 100644
 --- a/src/wayland/wayland_connection.h
 +++ b/src/wayland/wayland_connection.h
 @@ -41,6 +41,8 @@
@@ -1116,7 +1116,7 @@ index 558be8327d..d0177e921b 100644
  struct zwp_virtual_keyboard_manager_v1;
  struct zwp_text_input_manager_v3;
  struct hyprland_focus_grab_manager_v1;
-@@ -147,6 +149,9 @@
+@@ -148,6 +150,9 @@
        std::function<void(ext_workspace_manager_v1*)> extWorkspace, std::function<void(zdwl_ipc_manager_v2*)> dwlIpc
    );
    void setKdeVirtualDesktopManagerCallback(std::function<void(org_kde_plasma_virtual_desktop_management*)> callback);
@@ -1126,7 +1126,7 @@ index 558be8327d..d0177e921b 100644
    void setToplevelChangeCallback(ChangeCallback callback);
    void setHyprlandToplevelMappingManagerCallback(
        std::function<void(hyprland_toplevel_mapping_manager_v1* manager)> callback
-@@ -175,6 +180,8 @@
+@@ -176,6 +181,8 @@
    [[nodiscard]] bool hasExtWorkspaceManager() const noexcept;
    [[nodiscard]] bool hasKdeVirtualDesktopManager() const noexcept;
    [[nodiscard]] bool hasDwlIpcManager() const noexcept;
@@ -1135,7 +1135,7 @@ index 558be8327d..d0177e921b 100644
    [[nodiscard]] bool hasForeignToplevelManager() const noexcept;
    [[nodiscard]] bool hasExtForeignToplevelList() const noexcept;
    [[nodiscard]] bool hasSessionLockManager() const noexcept;
-@@ -338,6 +345,8 @@
+@@ -342,6 +349,8 @@
    bool m_hasExtWorkspaceGlobal = false;
    bool m_hasKdeVirtualDesktopGlobal = false;
    bool m_hasDwlIpcGlobal = false;
@@ -1144,7 +1144,7 @@ index 558be8327d..d0177e921b 100644
    bool m_hasForeignToplevelManagerGlobal = false;
    bool m_hasExtForeignToplevelListGlobal = false;
    std::vector<WaylandOutput> m_outputs;
-@@ -348,6 +357,8 @@
+@@ -352,6 +361,8 @@
    std::function<void(ext_workspace_manager_v1*)> m_extWorkspaceManagerCallback;
    std::function<void(org_kde_plasma_virtual_desktop_management*)> m_kdeVirtualDesktopManagerCallback;
    std::function<void(zdwl_ipc_manager_v2*)> m_dwlIpcManagerCallback;
@@ -1154,7 +1154,7 @@ index 558be8327d..d0177e921b 100644
    std::unordered_map<wl_surface*, wl_output*> m_surfaceOutputMap;
    std::unordered_map<wl_surface*, std::vector<wl_output*>> m_surfaceOutputs;
 diff --git a/src/wayland/wayland_workspaces.cpp b/src/wayland/wayland_workspaces.cpp
-index 865012d776..9d801d1b5c 100644
+index fd98a7b4d4..f5297c43cb 100644
 --- a/src/wayland/wayland_workspaces.cpp
 +++ b/src/wayland/wayland_workspaces.cpp
 @@ -8,6 +8,7 @@
@@ -1219,7 +1219,7 @@ index 865012d776..9d801d1b5c 100644
    case compositors::CompositorKind::Niri:
    case compositors::CompositorKind::Unknown:
      break;
-@@ -377,6 +404,13 @@
+@@ -381,6 +408,13 @@
    return static_cast<const DwlWorkspaceBackend*>(m_dwlIpcBackend)->ipcFocusedClientForOutput(output);
  }
  
@@ -1234,7 +1234,7 @@ index 865012d776..9d801d1b5c 100644
    m_activeBackend = backend;
    kLog.info("workspace backend={}", backendName());
 diff --git a/src/wayland/wayland_workspaces.h b/src/wayland/wayland_workspaces.h
-index 91595df336..ce245cc28f 100644
+index 897c73bed9..739429b613 100644
 --- a/src/wayland/wayland_workspaces.h
 +++ b/src/wayland/wayland_workspaces.h
 @@ -9,9 +9,13 @@
@@ -1261,7 +1261,7 @@ index 91595df336..ce245cc28f 100644
    void setOutputNameResolver(std::function<std::string(wl_output*)> resolver);
    void initialize();
    void onOutputAdded(wl_output* output);
-@@ -56,6 +63,7 @@
+@@ -57,6 +64,7 @@
    mangoIpcFocusedClientOnOutput(wl_output* output) const;
    [[nodiscard]] wl_output* dwlIpcSelectedOutput() const;
    [[nodiscard]] std::optional<std::pair<std::string, std::string>> dwlIpcFocusedClientOnOutput(wl_output* output) const;
@@ -1269,7 +1269,7 @@ index 91595df336..ce245cc28f 100644
    [[nodiscard]] std::optional<std::string> focusedWindowId() const;
  
  private:
-@@ -72,6 +80,7 @@
+@@ -73,6 +81,7 @@
    WorkspaceBackend* m_mangoIpcBackend = nullptr;
    WorkspaceSocketConnector* m_mangoIpcConnector = nullptr;
    WorkspaceBackend* m_dwlIpcBackend = nullptr;

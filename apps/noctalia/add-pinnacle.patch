@@ -51,7 +51,7 @@ index caea4eccd5..569ccc8f6d 100644
  
  } // namespace compositors
 diff --git a/src/compositors/compositor_platform.cpp b/src/compositors/compositor_platform.cpp
-index dd73c99b40..2667617625 100644
+index 06c5790b7b..800799ffb8 100644
 --- a/src/compositors/compositor_platform.cpp
 +++ b/src/compositors/compositor_platform.cpp
 @@ -364,6 +364,7 @@
@@ -62,15 +62,15 @@ index dd73c99b40..2667617625 100644
      case compositors::CompositorKind::Unknown:
        return std::make_unique<LambdaOutputPowerBackend>(&setGenericOutputPower);
      }
-@@ -386,6 +387,7 @@
+@@ -387,6 +388,7 @@
+     case compositors::CompositorKind::Labwc:
      case compositors::CompositorKind::Kde:
      case compositors::CompositorKind::Mango:
-     case compositors::CompositorKind::Umbriel:
 +    case compositors::CompositorKind::Pinnacle:
      case compositors::CompositorKind::Unknown:
        break;
      }
-@@ -407,6 +409,7 @@
+@@ -408,6 +410,7 @@
      case compositors::CompositorKind::Dwl:
      case compositors::CompositorKind::Kde:
      case compositors::CompositorKind::Labwc:
@@ -78,7 +78,7 @@ index dd73c99b40..2667617625 100644
      case compositors::CompositorKind::Unknown:
        break;
      }
-@@ -431,6 +434,7 @@
+@@ -432,6 +435,7 @@
      case compositors::CompositorKind::Dwl:
      case compositors::CompositorKind::Labwc:
      case compositors::CompositorKind::Kde:
@@ -86,7 +86,7 @@ index dd73c99b40..2667617625 100644
      case compositors::CompositorKind::Unknown:
        break;
      }
-@@ -1574,6 +1578,7 @@
+@@ -1587,6 +1591,7 @@
      }
      break;
    case compositors::CompositorKind::Kde:
@@ -229,7 +229,7 @@ index 354ce8c481..151d710701 100644
 +  bool m_exclusiveActivation = false;
  };
 diff --git a/src/wayland/wayland_workspaces.cpp b/src/wayland/wayland_workspaces.cpp
-index b22a558281..865012d776 100644
+index e3468750f5..fd98a7b4d4 100644
 --- a/src/wayland/wayland_workspaces.cpp
 +++ b/src/wayland/wayland_workspaces.cpp
 @@ -190,6 +190,7 @@
