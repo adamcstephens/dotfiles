@@ -135,6 +135,7 @@ in
                     project = "sower";
                     settings = {
                       memory = 16384;
+                      disk_size = "80G";
                     };
                   };
                   tracker-deck = epi-agent { project = "tracker"; };
