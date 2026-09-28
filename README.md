@@ -3,13 +3,7 @@
 ## Installation
 
 ```sh
-git clone https://codeberg.org/adamcstephens/dotfiles ~/.dotfiles
+git clone <repo you're viewing> ~/.dotfiles
 cd ~/.dotfiles
 ./install
-```
-
-## Mirrors
-
-```
-git clone https://github.com/adamcstephens/dotfiles ~/.dotfiles
 ```
