@@ -65,11 +65,8 @@
         ];
         requires = [ "dbus.socket" ];
 
-        path = [
-          "${config.directory}/.local/state/hjem/standalone/current-profile"
-          "/run/wrappers"
-          "/run/current-system/sw"
-        ];
+        # we want the default system path
+        enableDefaultPath = false;
 
         serviceConfig = {
           Type = "notify-reload";
