@@ -88,7 +88,8 @@ in
                   enable = true;
                   settings = lib.mkMerge [
                     {
-                      target = flake.nixosConfigurations.agents.config.system.build.epi;
+                      # target = flake.nixosConfigurations.agents.config.system.build.epi;
+                      target = "git+https://tangled.org/adam.robins.wtf/dotfiles?ref=main#agents";
                       inherit project_dir;
                       mounts = [
                         "~/.local/state/paseo/${project}:~/.local/state/paseo"
