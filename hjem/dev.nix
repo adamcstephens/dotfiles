@@ -33,6 +33,7 @@
     pkgs.nvd
 
     # tools
+    pkgs.kalker
     pkgs.mergiraf
     pkgs.pwgen
     pkgs.sqlite-interactive
