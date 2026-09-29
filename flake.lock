@@ -36,11 +36,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1790481360,
-        "narHash": "sha256-WgYDhm940vRJ1rK/okgBtWW0w871dWt/a4aLyTHeQIM=",
+        "lastModified": 1790719431,
+        "narHash": "sha256-A7sX52VBRf+XfrHz/Em/2goLAwd1SNfBjEBX1DiIhe0=",
         "ref": "refs/heads/main",
-        "rev": "9eb1c77f908558147899987424360d739c2675aa",
-        "revCount": 280,
+        "rev": "993effefa054f2d8f76d5f1b419f8131e216cfcd",
+        "revCount": 281,
         "type": "git",
         "url": "https://tangled.org/adam.robins.wtf/epi"
       },
