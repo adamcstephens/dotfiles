@@ -1,2 +1,6 @@
-prefix_rule(pattern=["veans"], decision="allow")
+prefix_rule(pattern=["gh"], decision="allow")
+prefix_rule(pattern=["jj"], decision="allow")
+prefix_rule(pattern=["jj", "squash"], decision = "prompt")
+prefix_rule(pattern=["jj", "abandon"], decision = "prompt")
 prefix_rule(pattern=["nix"], decision="allow")
+prefix_rule(pattern=["veans"], decision="allow")
