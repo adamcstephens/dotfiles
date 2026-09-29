@@ -33,6 +33,7 @@ in
 
   xdg.config.files = {
     "omp/agent/AGENTS.md".source = config.xdg.config.files."agents/AGENTS.md".source;
+    "omp/agent/SYSTEM_TEMPLATE.md".source = "${config.directory}/.dotfiles/apps/omp/SYSTEM_TEMPLATE.md";
     "omp/agent/config.yml".source = "${config.directory}/.dotfiles/apps/omp/config.yml";
     "omp/agent/extensions".source = "${config.directory}/.dotfiles/apps/omp/extensions";
     "omp/agent/lsp.json".source = "${config.directory}/.dotfiles/apps/omp/lsp.json";
