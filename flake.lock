@@ -225,11 +225,11 @@
     },
     "nixos-unstable-small": {
       "locked": {
-        "lastModified": 1790573947,
-        "narHash": "sha256-jEM5snk620AVrd9LX3k9ucA2tJkwaiV3TQSf2DGMzgw=",
-        "rev": "e6025a0259c7e80f81b11effc15f65d95b708cba",
+        "lastModified": 1790616754,
+        "narHash": "sha256-vH4HHvCgqpALYWBW2OdO0B37p6gbsg5W7bAMFIvp9Sg=",
+        "rev": "3b454549718018467a25fc5d40a910132dc45709",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/unstable-small/nixos-26.11pre1080820.e6025a0259c7/nixexprs.tar.zst"
+        "url": "https://releases.nixos.org/nixos/unstable-small/nixos-26.11pre1081974.3b4545497180/nixexprs.tar.zst"
       },
       "original": {
         "type": "tarball",
@@ -386,11 +386,11 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1790611938,
-        "narHash": "sha256-GA/jq+IZ+EwI2l+0KBzQ2aAfECRboqyFdf1SYsiu11w=",
+        "lastModified": 1790628882,
+        "narHash": "sha256-Epoa9NbjKTdUz/Z8smeC0r5bRwy4N4uT4cgc7tNdhOg=",
         "ref": "refs/heads/main",
-        "rev": "722fd5cfe11e3ec97bf18a79b4972fcfe7d18041",
-        "revCount": 1272,
+        "rev": "4a05199081be5338734755a6cf7cfc9097e14aa0",
+        "revCount": 1273,
         "type": "git",
         "url": "https://tangled.org/adam.robins.wtf/sower"
       },
