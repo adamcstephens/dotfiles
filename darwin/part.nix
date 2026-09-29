@@ -22,6 +22,7 @@
         ./modules/builders.nix
         ./modules/junco-traefik.nix
         ./modules/nix.nix
+        ./modules/paseo.nix
         ./modules/pf.nix
         ./modules/system.nix
         ./modules/user.nix
