@@ -6,12 +6,7 @@
 
   services.paseo = {
     enable = true;
-    package =
-      inputs.nixos-unstable-small.legacyPackages.${pkgs.stdenv.hostPlatform.system}.paseo.overrideAttrs
-        (old: {
-          patches = (old.patches or [ ]) ++ [ ../../apps/paseo/omp-custom-message-history.patch ];
-          doCheck = false;
-        });
+    package = inputs.nixos-unstable-small.legacyPackages.${pkgs.stdenv.hostPlatform.system}.paseo;
 
     relay = {
       enable = true;
