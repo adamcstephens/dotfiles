@@ -31,6 +31,7 @@
     ../apps/starship
     ../apps/tmux
     ../apps/tmuxinator
+    ../apps/tuios
     # Disable to clear current managed dir ../apps/zellij
     ../apps/zsh
   ];
@@ -48,6 +49,7 @@
         DO_NOT_TRACK = "true";
         EDITOR = "${config.directory}/.dotfiles/bin/editor";
         PAGER = "${config.directory}/.dotfiles/bin/pager";
+        XDG_CONFIG_HOME = "${config.directory}/.config";
         XDG_DATA_DIRS = "${config.directory}/.local/state/hjem/standalone/current-profile/share:\${XDG_DATA_DIRS}";
       };
 
