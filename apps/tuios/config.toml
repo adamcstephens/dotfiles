@@ -114,21 +114,21 @@
 # ============================================================================
 
 [appearance]
-border_style = 'rounded'
+border_style = 'normal'
 zen_mode = 'disabled'
 links = 'all'
 hide_window_buttons = false
 window_button_style = 'dots'
 window_button_position = 'left'
 hide_scrollbar = false
-scrollback_lines = 10000
+scrollback_lines = 50000
 scroll_lines = 3
 kitty_placeholders = 'auto'
 auto_enter_terminal_on_focus = 'off'
 click_to_type = 'double'
 dockbar_position = 'top'
 preferred_shell = ''
-motion = 'full'
+motion = 'none'
 modal_dim = 30
 whichkey_position = ''
 window_title_position = 'top'
@@ -155,7 +155,7 @@ scroll_column_max = 90
 zoom_size = 95
 panel_padding = 2
 clock_format = '15:04:05'
-dim_unfocused = 0
+dim_unfocused = 40
 dim_multifocus = false
 background = 'off'
 pane_background = ''
@@ -452,12 +452,13 @@ snap_corner_3 = ['3']
 snap_corner_4 = ['4']
 
 [keybindings.terminal_mode]
+new_window = ['alt+n']
 terminal_exit_mode = ['opt+esc']
-terminal_focus_down = ['alt+down']
-terminal_focus_left = ['alt+left']
-terminal_focus_right = ['alt+right']
-terminal_focus_up = ['alt+up']
-terminal_next_window = ['opt+tab', 'alt+n']
+terminal_focus_down = ['alt+j']
+terminal_focus_left = ['alt+h']
+terminal_focus_right = ['alt+l']
+terminal_focus_up = ['alt+k']
+terminal_next_window = ['opt+tab']
 terminal_paste_host = ['ctrl+shift+v', 'super+v', 'shift+super+v']
 terminal_prev_window = ['opt+shift+tab', 'alt+p']
 terminal_scroll_down = ['shift+down']
