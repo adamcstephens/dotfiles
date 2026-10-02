@@ -65,6 +65,7 @@ mnw.lib.wrap pkgs {
 
         editorconfig-nvim
         friendly-snippets
+        luasnip
         nui-nvim
         nvim-web-devicons
         plenary-nvim

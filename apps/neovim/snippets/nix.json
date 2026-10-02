@@ -74,5 +74,8 @@
   },
   "buildinputs": {
     "body": "buildInputs = [ $1];"
+  },
+  "system": {
+    "body": "pkgs.stdenv.hostPlatform.system"
   }
 }

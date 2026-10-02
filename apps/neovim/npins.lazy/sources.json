@@ -12,6 +12,19 @@
       "url": null,
       "hash": "sha256-RS9BWupC50xhYos5eXqYz9SdVgl17zK4b09Ifze2j4A="
     },
+    "blink-cmp-luasnip-choice": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "adamcstephens",
+        "repo": "blink-cmp-luasnip-choice"
+      },
+      "branch": "fix-blink-module",
+      "submodules": false,
+      "revision": "feabe94ae901b7fda5f949a7fce7b49d855af70c",
+      "url": "https://github.com/adamcstephens/blink-cmp-luasnip-choice/archive/feabe94ae901b7fda5f949a7fce7b49d855af70c.tar.gz",
+      "hash": "sha256-XqqUolsiP/hPUBGY3c5Lh2yvfZFCm2HUYXKfezSRK1k="
+    },
     "bufferline.nvim": {
       "type": "GitRelease",
       "repository": {
