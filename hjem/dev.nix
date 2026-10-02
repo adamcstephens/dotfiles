@@ -34,14 +34,7 @@
 
     # tools
     pkgs.kalker
-    (pkgs.mergiraf.overrideAttrs (
-      old:
-      lib.optionalAttrs (pkgs.stdenv.hostPlatform.isLinux) {
-        env.NIX_CFLAGS_COMPILE =
-          lib.throwIf (lib.hasAttr "NIX_CFLAGS_COMPILE" old.env) "remove mergiraf workaround"
-            "-fno-strict-aliasing";
-      }
-    ))
+    pkgs.mergiraf
     pkgs.pwgen
     pkgs.sqlite-interactive
     pkgs.step-cli
