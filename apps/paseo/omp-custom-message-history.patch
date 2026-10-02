@@ -1,0 +1,22 @@
+diff --git a/packages/server/src/server/agent/providers/omp/history.ts b/packages/server/src/server/agent/providers/omp/history.ts
+--- a/packages/server/src/server/agent/providers/omp/history.ts
++++ b/packages/server/src/server/agent/providers/omp/history.ts
+@@ -321,6 +321,18 @@ export async function readActiveOmpEntryChain(
+ }
+ 
+ function mapEntryMessage(entry: OmpSessionEntry): OmpAgentMessage | null {
++  if (entry.type === "custom_message") {
++    return {
++      role: "custom",
++      customType: entry.customType,
++      content: entry.content,
++      display: entry.display,
++      details: entry.details,
++      attribution: entry.attribution,
++      id: entry.id,
++      timestamp: entry.timestamp,
++    } as OmpAgentMessage;
++  }
+   const message = entry.message;
+   if (message && typeof message.role === "string") {
+     if (message.role === "system") {
