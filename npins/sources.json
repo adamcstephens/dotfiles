@@ -22,9 +22,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "56233f0986ef6c8d0eab97e924e87144e584d970",
-      "url": "https://github.com/miikanissi/modus-themes.nvim/archive/56233f0986ef6c8d0eab97e924e87144e584d970.tar.gz",
-      "hash": "sha256-j10BCRHN6cTDx1+zBxgo6drtA9XoZAqaZg+1uTDQH4M="
+      "revision": "15ffb5ab6a12f72ee1e8393fe5810d5317da2d3e",
+      "url": "https://github.com/miikanissi/modus-themes.nvim/archive/15ffb5ab6a12f72ee1e8393fe5810d5317da2d3e.tar.gz",
+      "hash": "sha256-/HWmToZL9HnAYCjVNfpIu5IX21O+nuCzweqbah8pA/A="
     },
     "smart-splits.nvim": {
       "type": "Git",

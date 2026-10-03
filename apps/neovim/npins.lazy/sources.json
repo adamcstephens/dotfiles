@@ -49,10 +49,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v19.25.0",
-      "revision": "3d83aaa78ed125ea403fe8c975e51f07cf0c49b0",
+      "version": "v19.27.0",
+      "revision": "6794c8bcbe9e8614588749cafb5de29d7fa57c3b",
       "url": null,
-      "hash": "sha256-PTvllgZji45JdW1NW9YmRDJqiEvdmbpeB2QGvu10jbM="
+      "hash": "sha256-8iJyUnsgdJsLqrMKasoaDjSiAwgWAEujF6GMEF9Jq2k="
     },
     "conform.nvim": {
       "type": "GitRelease",
@@ -130,9 +130,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "56233f0986ef6c8d0eab97e924e87144e584d970",
-      "url": "https://github.com/miikanissi/modus-themes.nvim/archive/56233f0986ef6c8d0eab97e924e87144e584d970.tar.gz",
-      "hash": "sha256-j10BCRHN6cTDx1+zBxgo6drtA9XoZAqaZg+1uTDQH4M="
+      "revision": "15ffb5ab6a12f72ee1e8393fe5810d5317da2d3e",
+      "url": "https://github.com/miikanissi/modus-themes.nvim/archive/15ffb5ab6a12f72ee1e8393fe5810d5317da2d3e.tar.gz",
+      "hash": "sha256-/HWmToZL9HnAYCjVNfpIu5IX21O+nuCzweqbah8pA/A="
     },
     "move.nvim": {
       "type": "Git",
@@ -169,9 +169,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "046b1a797af1effe8e0474b9af9657a3761ec58a",
+      "revision": "3e8d598d3b5f8338a41699c436e5fa11d2666cf0",
       "url": null,
-      "hash": "sha256-QqbgCJxKHkiJUQji6+CGtGSD1HQjJ6F8R6pFRZd6BsQ="
+      "hash": "sha256-osWKz9uZD2VanBUMZONbb2AKXXkfy5expYz2urFMxQI="
     },
     "nvim-surround": {
       "type": "GitRelease",
