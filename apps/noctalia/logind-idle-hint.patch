@@ -1,8 +1,8 @@
 diff --git a/assets/translations/en.json b/assets/translations/en.json
-index 39f5ea9ab8..d7b9784db4 100644
+index b9b9a094fd..d1a3910ba7 100644
 --- a/assets/translations/en.json
 +++ b/assets/translations/en.json
-@@ -2268,6 +2268,10 @@
+@@ -2277,6 +2277,10 @@
            "description": "Named idle actions with presets (lock, screen off, suspend) or custom commands, timeouts, resume pairing, and order",
            "label": "Behaviors"
          },
@@ -14,10 +14,10 @@ index 39f5ea9ab8..d7b9784db4 100644
            "description": "Seconds of fullscreen dim before the idle command (0 disables)",
            "label": "Idle Dim"
 diff --git a/example.toml b/example.toml
-index 64a155099a..495b3389c4 100644
+index 065ecbdb65..0b659e6ad0 100644
 --- a/example.toml
 +++ b/example.toml
-@@ -330,8 +330,12 @@
+@@ -341,8 +341,12 @@
  # Optional `[idle]` keys:
  #   pre_action_fade_seconds: fade a fullscreen surface-color overlay in over this many seconds, then run `command`.
  #                             Use 0 for immediate commands with no overlay. Input during the fade cancels.
@@ -31,7 +31,7 @@ index 64a155099a..495b3389c4 100644
  [idle.behavior.lock]
  timeout = 600
 diff --git a/src/app/application.h b/src/app/application.h
-index 13544176bd..f0fe6c1db2 100644
+index 31ac81a036..f91abbb024 100644
 --- a/src/app/application.h
 +++ b/src/app/application.h
 @@ -225,6 +225,7 @@
@@ -43,10 +43,10 @@ index 13544176bd..f0fe6c1db2 100644
    void onNetworkStateChangedForEvents(const NetworkState& state, NetworkChangeOrigin origin);
    void onBluetoothStateChangedForEvents(const BluetoothState& state, BluetoothStateChangeOrigin origin);
 diff --git a/src/app/application_services.cpp b/src/app/application_services.cpp
-index 79d55b8219..6586c91e8d 100644
+index bdc20758a7..a85b5fb1df 100644
 --- a/src/app/application_services.cpp
 +++ b/src/app/application_services.cpp
-@@ -922,6 +922,7 @@
+@@ -919,6 +919,7 @@
      if (shouldRefreshControlCenter()) {
        m_panelManager.refresh();
      }
@@ -54,7 +54,7 @@ index 79d55b8219..6586c91e8d 100644
    });
  }
  
-@@ -1070,6 +1071,15 @@
+@@ -1067,6 +1068,15 @@
    }
  }
  
@@ -70,7 +70,7 @@ index 79d55b8219..6586c91e8d 100644
  void Application::initSystemBusServices() {
    auto shouldRefreshControlCenter = [this]() { return m_panelManager.isOpenPanel("control-center"); };
  
-@@ -1175,6 +1185,7 @@
+@@ -1172,6 +1182,7 @@
          });
          kLog.info("logind sleep monitor active");
          m_idleInhibitor.setLogindService(m_logindService.get());
@@ -79,10 +79,10 @@ index 79d55b8219..6586c91e8d 100644
          kLog.warn("logind sleep monitor disabled: {}", e.what());
          m_logindService.reset();
 diff --git a/src/app/application_ui.cpp b/src/app/application_ui.cpp
-index 02edd5fc2d..714bbdd3d5 100644
+index 7dd005bd46..e4a762aeb2 100644
 --- a/src/app/application_ui.cpp
 +++ b/src/app/application_ui.cpp
-@@ -800,6 +800,7 @@
+@@ -805,6 +805,7 @@
        }
    );
    m_idleManager.setLiveIdleChangeCallback([this]() {
@@ -90,7 +90,7 @@ index 02edd5fc2d..714bbdd3d5 100644
      DeferredCall::callLater([this]() { m_settingsWindow.onIdleLiveStatusChanged(); });
    });
    m_idleManager.reload(m_configService.config().idle);
-@@ -821,6 +822,7 @@
+@@ -826,6 +827,7 @@
        [this]() {
          if (m_configService.lastChange().idle) {
            m_idleManager.reload(m_configService.config().idle);
@@ -99,10 +99,10 @@ index 02edd5fc2d..714bbdd3d5 100644
        },
        "idle"
 diff --git a/src/config/config_types.h b/src/config/config_types.h
-index b8b644a054..47a8e3031e 100644
+index bad0c24152..b4ada58fcc 100644
 --- a/src/config/config_types.h
 +++ b/src/config/config_types.h
-@@ -303,6 +303,10 @@
+@@ -310,6 +310,10 @@
    /// from transparent to opaque over this many seconds, then runs `command`. Compositor activity during
    /// the fade cancels. When 0, the idle command runs immediately with no overlay.
    float preActionFadeSeconds = 2.0F;
@@ -114,10 +114,10 @@ index b8b644a054..47a8e3031e 100644
    bool operator==(const IdleConfig&) const = default;
  };
 diff --git a/src/config/schema/config_schema.cpp b/src/config/schema/config_schema.cpp
-index ada70d5b8e..2be79436a1 100644
+index ef45b41bff..bf30cb3ac0 100644
 --- a/src/config/schema/config_schema.cpp
 +++ b/src/config/schema/config_schema.cpp
-@@ -968,6 +968,7 @@
+@@ -999,6 +999,7 @@
    const Schema<IdleConfig>& idleSchema() {
      static const Schema<IdleConfig> s = {
          field(&IdleConfig::preActionFadeSeconds, "pre_action_fade_seconds", Range<float>{0.0F, 120.0F}),
@@ -339,10 +339,10 @@ index 579c61b3ed..d90c45686c 100644
    void destroyHeartbeat();
    void notifyLiveIdleChanged();
 diff --git a/src/shell/settings/settings_registry.cpp b/src/shell/settings/settings_registry.cpp
-index e21516c7b7..17cdd4925b 100644
+index 7b6e600b98..1adbe418b6 100644
 --- a/src/shell/settings/settings_registry.cpp
 +++ b/src/shell/settings/settings_registry.cpp
-@@ -2937,6 +2937,12 @@
+@@ -2971,6 +2971,12 @@
          "idle fade dim seconds overlay"
      ));
      entries.push_back(makeEntry(

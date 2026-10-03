@@ -1,5 +1,5 @@
 diff --git a/meson.build b/meson.build
-index 2bee1f7cac..0f6e8945d7 100644
+index e280429c73..dbb91987b7 100644
 --- a/meson.build
 +++ b/meson.build
 @@ -382,6 +382,8 @@
@@ -11,7 +11,7 @@ index 2bee1f7cac..0f6e8945d7 100644
  ]
    _name = _p[0]
    _xml  = _p[1]
-@@ -942,6 +944,7 @@
+@@ -943,6 +945,7 @@
    'src/compositors/compositor_detect.cpp',
    'src/compositors/compositor_runtime.cpp',
    'src/compositors/dwl/dwl_workspace_backend.cpp',
@@ -19,7 +19,7 @@ index 2bee1f7cac..0f6e8945d7 100644
    'src/compositors/river-classic/river-classic-workspace-backend.cpp',
    'src/compositors/ext_workspace/ext_workspace_output_backend.cpp',
    'src/compositors/ext_workspace/ext_workspace_backend.cpp',
-@@ -1312,6 +1315,16 @@
+@@ -1325,6 +1328,16 @@
    )
    test('river-classic-workspace-backend', river_classic_test)
  
@@ -172,7 +172,7 @@ index 0000000000..6b495fdcac
 +  </interface>
 +</protocol>
 diff --git a/src/compositors/compositor_platform.cpp b/src/compositors/compositor_platform.cpp
-index 698b847631..091d14ac34 100644
+index ca5db7b304..207be735b8 100644
 --- a/src/compositors/compositor_platform.cpp
 +++ b/src/compositors/compositor_platform.cpp
 @@ -15,6 +15,7 @@
@@ -183,7 +183,7 @@ index 698b847631..091d14ac34 100644
  #include "compositors/sway/sway_keyboard_backend.h"
  #include "compositors/sway/sway_output_backend.h"
  #include "compositors/sway/sway_runtime.h"
-@@ -58,6 +59,7 @@
+@@ -55,6 +56,7 @@
      virtual ~OutputPowerBackend() = default;
      [[nodiscard]] virtual bool setOutputPower(WaylandConnection& wayland, bool on) const = 0;
      [[nodiscard]] virtual bool isPerOutputTargeted() const noexcept { return false; }
@@ -191,7 +191,7 @@ index 698b847631..091d14ac34 100644
    };
  
  } // namespace compositors
-@@ -320,6 +322,24 @@
+@@ -318,6 +320,24 @@
      bool m_perOutputTargeted = false;
    };
  
@@ -216,7 +216,7 @@ index 698b847631..091d14ac34 100644
    [[nodiscard]] bool setGenericOutputPower(WaylandConnection& /*wayland*/, bool on) {
      return compositors::ext_workspace::setOutputPower(on);
    }
-@@ -361,11 +381,12 @@
+@@ -355,11 +375,12 @@
              return compositors::umbriel::setOutputPower(runtime, on);
            }
        );
@@ -230,7 +230,7 @@ index 698b847631..091d14ac34 100644
      case compositors::CompositorKind::Unknown:
        return std::make_unique<LambdaOutputPowerBackend>(&setGenericOutputPower);
      }
-@@ -1681,6 +1702,9 @@
+@@ -1674,6 +1695,9 @@
  }
  
  void CompositorPlatform::onOutputRemoved(wl_output* output) {
@@ -336,7 +336,7 @@ index 0000000000..f2643b5f0e
 +
 +} // namespace compositors::river_classic
 diff --git a/src/wayland/wayland_connection.cpp b/src/wayland/wayland_connection.cpp
-index 17e6d5b28e..9eafc78a59 100644
+index a51422e2ed..26c358e6ed 100644
 --- a/src/wayland/wayland_connection.cpp
 +++ b/src/wayland/wayland_connection.cpp
 @@ -34,6 +34,7 @@
@@ -347,7 +347,7 @@ index 17e6d5b28e..9eafc78a59 100644
  #include "wlr-screencopy-unstable-v1-client-protocol.h"
  #include "xdg-activation-v1-client-protocol.h"
  #include "xdg-output-unstable-v1-client-protocol.h"
-@@ -84,6 +85,7 @@
+@@ -91,6 +92,7 @@
    constexpr std::uint32_t kOutputImageCaptureSourceManagerVersion = 1;
    constexpr std::uint32_t kForeignToplevelImageCaptureSourceManagerVersion = 1;
    constexpr std::uint32_t kOutputManagerVersion = 4;
@@ -355,7 +355,7 @@ index 17e6d5b28e..9eafc78a59 100644
    constexpr std::uint32_t kOutputManagerMinVersion = 3;
  
    const wl_registry_listener kRegistryListener = {
-@@ -686,6 +688,8 @@
+@@ -1090,6 +1092,8 @@
  
  zwlr_screencopy_manager_v1* WaylandConnection::screencopyManager() const noexcept { return m_screencopyManager; }
  
@@ -364,7 +364,7 @@ index 17e6d5b28e..9eafc78a59 100644
  ext_image_copy_capture_manager_v1* WaylandConnection::imageCopyCaptureManager() const noexcept {
    return m_imageCopyCaptureManager;
  }
-@@ -1334,6 +1338,14 @@
+@@ -1745,6 +1749,14 @@
      return;
    }
  
@@ -379,7 +379,7 @@ index 17e6d5b28e..9eafc78a59 100644
    if (interfaceName == wl_output_interface.name) {
      const auto bindVersion = std::min(version, kOutputVersion);
      auto* output = static_cast<wl_output*>(wl_registry_bind(registry, name, &wl_output_interface, bindVersion));
-@@ -1494,6 +1506,10 @@
+@@ -1905,6 +1917,10 @@
      zwlr_output_manager_v1_destroy(m_outputManager);
      m_outputManager = nullptr;
    }
@@ -391,10 +391,10 @@ index 17e6d5b28e..9eafc78a59 100644
    if (m_viewporter != nullptr) {
      wp_viewporter_destroy(m_viewporter);
 diff --git a/src/wayland/wayland_connection.h b/src/wayland/wayland_connection.h
-index 086679ed8c..68e428b12c 100644
+index f8638a115c..c139497ac1 100644
 --- a/src/wayland/wayland_connection.h
 +++ b/src/wayland/wayland_connection.h
-@@ -57,6 +57,7 @@
+@@ -58,6 +58,7 @@
  struct zwlr_output_manager_v1;
  struct zwlr_output_head_v1;
  struct zwlr_output_mode_v1;
@@ -402,7 +402,7 @@ index 086679ed8c..68e428b12c 100644
  class ClipboardService;
  class FocusGrabService;
  struct DataControlOps;
-@@ -219,6 +220,7 @@
+@@ -228,6 +229,7 @@
    /// Inhibitor-aware idle notification (`get_idle_notification`); honors `zwp_idle_inhibitor_v1`.
    [[nodiscard]] ext_idle_notification_v1* createIdleNotification(std::uint32_t timeoutMs) const;
    [[nodiscard]] zwp_idle_inhibit_manager_v1* idleInhibitManager() const noexcept;
@@ -410,7 +410,7 @@ index 086679ed8c..68e428b12c 100644
    [[nodiscard]] const std::vector<WaylandOutput>& outputs() const noexcept;
    [[nodiscard]] WaylandOutput* findOutputByWl(wl_output* wlOutput);
    [[nodiscard]] const WaylandOutput* findOutputByWl(wl_output* wlOutput) const;
-@@ -333,6 +335,7 @@
+@@ -344,6 +346,7 @@
    ext_output_image_capture_source_manager_v1* m_outputImageCaptureSourceManager = nullptr;
    ext_foreign_toplevel_image_capture_source_manager_v1* m_foreignToplevelImageCaptureSourceManager = nullptr;
    zwlr_output_manager_v1* m_outputManager = nullptr;

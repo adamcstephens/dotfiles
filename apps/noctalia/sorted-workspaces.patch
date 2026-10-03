@@ -1,8 +1,8 @@
 diff --git a/meson.build b/meson.build
-index 3fdc4a5f2f..115f16c497 100644
+index 65c4041b05..987acca675 100644
 --- a/meson.build
 +++ b/meson.build
-@@ -1194,6 +1194,7 @@
+@@ -1200,6 +1200,7 @@
      'dock_pinned_apps',
      'enterprise_credentials',
      'event_link',

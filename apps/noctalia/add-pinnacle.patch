@@ -1,8 +1,8 @@
 diff --git a/src/compositors/compositor_detect.cpp b/src/compositors/compositor_detect.cpp
-index 4c4f713346..c55b81bc0e 100644
+index 7b7bbf60eb..a3874e6732 100644
 --- a/src/compositors/compositor_detect.cpp
 +++ b/src/compositors/compositor_detect.cpp
-@@ -51,6 +51,9 @@
+@@ -45,6 +45,9 @@
        if (const char* v = std::getenv("MANGO_INSTANCE_SIGNATURE"); v != nullptr && v[0] != '\0') {
          return CompositorKind::Mango;
        }
@@ -12,7 +12,7 @@ index 4c4f713346..c55b81bc0e 100644
  
        // Fall back to the desktop env hint (covers dwl-style compositors that don't expose a socket var).
        const std::string hint = buildEnvHint();
-@@ -75,6 +78,9 @@
+@@ -66,6 +69,9 @@
        if (StringUtils::containsInsensitive(hint, "dwl")) {
          return CompositorKind::Dwl;
        }
@@ -22,7 +22,7 @@ index 4c4f713346..c55b81bc0e 100644
        if (StringUtils::containsInsensitive(hint, "labwc")) {
          return CompositorKind::Labwc;
        }
-@@ -111,6 +117,8 @@
+@@ -100,6 +106,8 @@
        return "KDE";
      case CompositorKind::Umbriel:
        return "Umbriel";
@@ -32,18 +32,25 @@ index 4c4f713346..c55b81bc0e 100644
        return "Unknown";
      }
 diff --git a/src/compositors/compositor_detect.h b/src/compositors/compositor_detect.h
-index caea4eccd5..569ccc8f6d 100644
+index 539da9191e..3b667a9886 100644
 --- a/src/compositors/compositor_detect.h
 +++ b/src/compositors/compositor_detect.h
-@@ -16,6 +16,7 @@
-     Dwl = 7,
-     Kde = 8,
-     Umbriel = 9,
+@@ -12,9 +12,11 @@
+     Sway = 3,
+     Mango = 4,
+     Labwc = 5,
+-    Dwl = 6,
+-    Kde = 7,
+-    Umbriel = 8,
++    Triad = 6,
++    Dwl = 7,
++    Kde = 8,
++    Umbriel = 9,
 +    Pinnacle = 10,
    };
  
    // Detected once per process from env vars. Cached after the first call.
-@@ -36,5 +37,6 @@
+@@ -34,5 +36,6 @@
    [[nodiscard]] inline bool isDwl() { return detect() == CompositorKind::Dwl; }
    [[nodiscard]] inline bool isKde() { return detect() == CompositorKind::Kde; }
    [[nodiscard]] inline bool isUmbriel() { return detect() == CompositorKind::Umbriel; }
@@ -51,10 +58,10 @@ index caea4eccd5..569ccc8f6d 100644
  
  } // namespace compositors
 diff --git a/src/compositors/compositor_platform.cpp b/src/compositors/compositor_platform.cpp
-index 06c5790b7b..800799ffb8 100644
+index fe63e3ac16..80fdf8f398 100644
 --- a/src/compositors/compositor_platform.cpp
 +++ b/src/compositors/compositor_platform.cpp
-@@ -364,6 +364,7 @@
+@@ -358,6 +358,7 @@
      case compositors::CompositorKind::Dwl:
      case compositors::CompositorKind::Labwc:
      case compositors::CompositorKind::Kde:
@@ -62,7 +69,7 @@ index 06c5790b7b..800799ffb8 100644
      case compositors::CompositorKind::Unknown:
        return std::make_unique<LambdaOutputPowerBackend>(&setGenericOutputPower);
      }
-@@ -387,6 +388,7 @@
+@@ -379,6 +380,7 @@
      case compositors::CompositorKind::Labwc:
      case compositors::CompositorKind::Kde:
      case compositors::CompositorKind::Mango:
@@ -70,7 +77,7 @@ index 06c5790b7b..800799ffb8 100644
      case compositors::CompositorKind::Unknown:
        break;
      }
-@@ -408,6 +410,7 @@
+@@ -398,6 +400,7 @@
      case compositors::CompositorKind::Dwl:
      case compositors::CompositorKind::Kde:
      case compositors::CompositorKind::Labwc:
@@ -78,7 +85,7 @@ index 06c5790b7b..800799ffb8 100644
      case compositors::CompositorKind::Unknown:
        break;
      }
-@@ -432,6 +435,7 @@
+@@ -420,6 +423,7 @@
      case compositors::CompositorKind::Dwl:
      case compositors::CompositorKind::Labwc:
      case compositors::CompositorKind::Kde:
@@ -86,7 +93,7 @@ index 06c5790b7b..800799ffb8 100644
      case compositors::CompositorKind::Unknown:
        break;
      }
-@@ -1587,6 +1591,7 @@
+@@ -1580,6 +1584,7 @@
      }
      break;
    case compositors::CompositorKind::Kde:
@@ -229,10 +236,10 @@ index 354ce8c481..151d710701 100644
 +  bool m_exclusiveActivation = false;
  };
 diff --git a/src/wayland/wayland_workspaces.cpp b/src/wayland/wayland_workspaces.cpp
-index e3468750f5..fd98a7b4d4 100644
+index 4c50720c92..3237a12ed0 100644
 --- a/src/wayland/wayland_workspaces.cpp
 +++ b/src/wayland/wayland_workspaces.cpp
-@@ -190,6 +190,7 @@
+@@ -168,6 +168,7 @@
      }
      break;
    case compositors::CompositorKind::Labwc:
