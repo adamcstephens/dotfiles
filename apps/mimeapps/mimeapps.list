@@ -13,6 +13,7 @@ x-scheme-handler/sgnl=signal.desktop
 x-scheme-handler/signalcaptcha=signal.desktop
 image/png=org.gnome.eog.desktop
 image/jpeg=org.gnome.eog.desktop
+x-scheme-handler/bitwarden=bitwarden.desktop
 
 [Added Associations]
 x-scheme-handler/http=firefox.desktop;
