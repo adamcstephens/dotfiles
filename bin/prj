@@ -14,6 +14,7 @@ logger = logging.getLogger(__name__)
 
 is_kitty = "KITTY_PID" in os.environ
 is_tmux = "TMUX" in os.environ
+is_tuios = "TUIOS_SESSION" in os.environ
 is_wayland = "WAYLAND_DISPLAY" in os.environ
 is_zellij = "ZELLIJ" in os.environ
 
@@ -129,7 +130,7 @@ def prj_finder(remote: bool = False) -> str:
         )
         project = f"{selected_remote}:{project}"
     else:
-        if is_kitty or is_tmux or is_zellij:
+        if is_tuios or is_kitty or is_tmux or is_zellij:
             command = FINDER
         elif is_wayland:
             command = "rofi -dmenu"
@@ -146,22 +147,68 @@ def kitty_active_window() -> dict:
     return next(i for i in json.loads(run("kitty @ ls")) if i["is_active"])
 
 
+def tuios_workspace(wname: str) -> int | None:
+    session = shlex.quote(os.environ["TUIOS_SESSION"])
+    workspaces = json.loads(run(f"tuios list-workspaces --session {session} --json"))["workspaces"]
+    existing = next(
+        (workspace for workspace in workspaces if workspace["name"] == wname and workspace["window_count"] > 0),
+        None,
+    )
+
+    if existing is not None:
+        run(f"tuios select-workspace --session {session} {existing['workspace']}")
+        return None
+
+    empty = next((workspace for workspace in workspaces if workspace["window_count"] == 0), None)
+
+    if empty is None:
+        logger.error("no empty tuios workspace available")
+        sys.exit(1)
+
+    workspace = empty["workspace"]
+    run(f"tuios set-workspace-name --session {session} {workspace} {shlex.quote(wname)}")
+    run(f"tuios select-workspace --session {session} {workspace}")
+    return workspace
+
+
+def tuios_panes(workspace: int, project: str):
+    session = shlex.quote(os.environ["TUIOS_SESSION"])
+    command = (
+        f"tuios new-window --session {session} --workspace {workspace} "
+        f"--cwd {shlex.quote(project)} --no-focus --print-id"
+    )
+    panes = [run(command) for _ in range(3)]
+    run(f"tuios send-text --session {session} --window {shlex.quote(panes[0])} 'vim .\n'")
+    run(f"tuios focus-window --session {session} {shlex.quote(panes[0])}")
+
+
 def open_project(project: str, remote: bool = False):
     wname: str
     project_s: list[str] = []
 
     if remote:
-        project_s = project.split(":")
+        project_s = project.split(":", 1)
         host = project_s[0]
         project = project_s[1]
         wname = re.sub("[^a-zA-Z0-9:@\\-]", "", f"{os.path.basename(project)}@{host.split('.')[0]}")
     else:
         wname = re.sub("[^a-zA-Z0-9\\-]", "", os.path.basename(project))
-        run(f"zoxide add {project}")
+        run(f"zoxide add {shlex.quote(project)}")
 
     existing_tab: int
 
-    if is_tmux:
+    if is_tuios:
+        workspace = tuios_workspace(wname)
+
+        if workspace is None:
+            return
+
+        if direnv_allowed(project):
+            run(f"direnv exec {shlex.quote(project)} true")
+
+        tuios_panes(workspace, project)
+
+    elif is_tmux:
         tabs = list(
             map(
                 tmux_to_kitty,
@@ -339,6 +386,9 @@ if __name__ == "__main__":
     parser.add_argument("--relayout", action="store_true", help="re-layout all three-pane windows")
     args = parser.parse_args()
 
+    if is_tuios and (args.remote or args.ssh):
+        parser.error("--remote and --ssh are not supported in tuios")
+
     project: str
 
     if args.relayout:
@@ -350,13 +400,14 @@ if __name__ == "__main__":
         sys.exit(0)
     elif args.ssh:
         open_ssh()
+        sys.exit(0)
     elif args.project is None:
         project = prj_finder(remote=args.remote)
         if project == "":
             print("no project selected")
             sys.exit(1)
     else:
-        project = os.path.abspath(args.project)
+        project = args.project if args.remote else os.path.abspath(args.project)
 
     print(f":: Opening project {project}")
     open_project(project=project, remote=args.remote)

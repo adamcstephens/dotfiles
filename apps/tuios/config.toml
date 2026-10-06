@@ -475,6 +475,22 @@ toggle_zoom = ['super+z']
 [keybindings.global]
 command_palette = ['ctrl+p']
 launcher = ['alt+space']
+next_workspace = ['ctrl+tab']
+prev_workspace = ['ctrl+shift+tab']
+
+[[keybindings.command]]
+key = 'super+p'
+type = 'popup'
+command = '~/.dotfiles/bin/prj'
+width = '40%'
+height = '40%'
+
+[[keybindings.command]]
+key = 'super+g'
+type = 'popup'
+command = 'vcs-tui'
+width = '90%'
+height = '90%'
 
 [keybindings.script]
 script_pause = ['ctrl+p']
@@ -642,9 +658,3 @@ corner = 'bottom-right'
 
 [dock]
 [dock.clock]
-
-[hosts.deck]
-addr = "deck"
-
-[hosts.kale]
-addr = "kale"
