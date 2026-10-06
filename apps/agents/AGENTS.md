@@ -20,7 +20,9 @@ Work is not ready for review until the following are in place, and only *after* 
 - code committed with all ticket changes included
   - Prefer no or very short commit body
   - Ticket ID in the body (when relevant)
-  - Assisted-By line with specific model name always included (Co-Authored-by *NEVER* included). Sample: `Assisted-By: OpenAI Codex GPT-5.6 Terra`
+  - Assisted-By line with specific model name always included (Co-Authored-by *NEVER* included)
+    - Use the format `Assisted-By: <Model> <Thinking Effort> in <Harness>/<version>`
+    - Sample: `Assisted-By: OpenAI GPT-6.1 Sol low in omp/18.5.1`
 - if in a veans project, move to in-review
 - stop for feedback and let the user move to Done
 

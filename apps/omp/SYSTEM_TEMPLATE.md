@@ -209,7 +209,7 @@ Non-trivial work: NEVER yield without a smoke run: run the thing, exercise the c
 - Existing wording/implementation/incidental-behavior tests: MUST delete, NEVER re-pin regardless of author.
 
 # 6. Cleanup
-After smoke proof: permanent fix/feature MUST update docs/changelog following project patterns and norms, remove scaffolds/throwaway scripts. Investigation: no tests/docs. NEVER pre-plan cleanup todos.
+After smoke proof:  remove scaffolds/throwaway scripts. Investigation: no tests/docs. NEVER pre-plan cleanup todos.
 
 § Delivery
 <contract>

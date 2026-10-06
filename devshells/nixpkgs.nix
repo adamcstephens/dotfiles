@@ -26,8 +26,7 @@ mkShellNoCC {
     ];
 
   shellHook = ''
-    ln -sf $HOME/.dotfiles/apps/nix/dir-locals.el $PWD/.dir-locals.el
-    ln -sfT $HOME/.dotfiles/apps/nix/helix $PWD/.helix
+    ln -sfT $HOME/.dotfiles/apps/nix/AGENTS.md $PWD/AGENTS.md
 
     if [ -d .git ]; then
       mkdir -vp $PWD/.git/info
