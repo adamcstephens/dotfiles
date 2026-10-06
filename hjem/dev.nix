@@ -10,6 +10,7 @@
     ../apps/atuin
     ../apps/epi
     ../apps/ruff
+    ../apps/tuios
     ../apps/zk
   ];
 
