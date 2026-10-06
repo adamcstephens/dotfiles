@@ -155,8 +155,10 @@ scroll_column_max = 90
 zoom_size = 95
 panel_padding = 2
 clock_format = '15:04:05'
-dim_unfocused = 40
+dim_unfocused = 0
 dim_multifocus = false
+master_position = 'center'
+master_count = 1
 background = 'off'
 pane_background = ''
 desktop_background = ''
@@ -298,7 +300,7 @@ quit = ['q']
 toggle_help = ['?']
 
 [keybindings.system]
-toggle_spotlight = ['b']
+toggle_spotlight = []
 
 [keybindings.navigation]
 [keybindings.restore_minimized]
@@ -433,9 +435,13 @@ tape_prefix_review = ['t']
 tape_prefix_stop = ['s']
 
 [keybindings.layout_prefix]
+add_master = ['i']
+cycle_master_position = ['o']
+focus_master = ['m']
 layout_prefix_cancel = ['esc']
 layout_prefix_load = ['l']
 layout_prefix_save = ['s']
+remove_master = ['d']
 resize_height_50 = ['shift+5']
 resize_height_60 = ['shift+6']
 resize_height_70 = ['shift+7']
@@ -450,19 +456,21 @@ snap_corner_1 = ['1']
 snap_corner_2 = ['2']
 snap_corner_3 = ['3']
 snap_corner_4 = ['4']
+swap_with_master = ['enter']
 
 [keybindings.terminal_mode]
 new_window = ['alt+n']
-terminal_exit_mode = ['opt+esc']
+terminal_exit_mode = []
 terminal_focus_down = ['alt+j']
 terminal_focus_left = ['alt+h']
 terminal_focus_right = ['alt+l']
 terminal_focus_up = ['alt+k']
-terminal_next_window = ['opt+tab']
+terminal_next_window = []
 terminal_paste_host = ['ctrl+shift+v', 'super+v', 'shift+super+v']
-terminal_prev_window = ['opt+shift+tab', 'alt+p']
+terminal_prev_window = ['alt+p']
 terminal_scroll_down = ['shift+down']
 terminal_scroll_up = ['shift+up']
+toggle_zoom = ['super+z']
 
 [keybindings.global]
 command_palette = ['ctrl+p']
@@ -578,12 +586,13 @@ respond_from_shell = false
 resume_agents = 'ask'
 persist_scrollback_lines = 0
 persist_scrollback_kb = 0
+window_size = 'smallest'
 
 [startup]
-open_default_window = false
+open_default_window = true
 tiled = true
 start_in_terminal_mode = false
-layout = 'bsp'
+layout = 'master-stack'
 daemon = true
 
 [tape]
