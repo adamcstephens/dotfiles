@@ -1,5 +1,6 @@
 {
   config,
+  dotlib,
   lib,
   options,
   pkgs,
@@ -18,7 +19,7 @@ in
     {
       packages = lib.optionals cfg.tpm.enable [ pkgs.ssh-tpm-agent ];
 
-      files.".ssh/config".source = config.dotfiles.source "apps/ssh/dotfiles.config";
+      files.".ssh/config".source = dotlib.source "apps/ssh/dotfiles.config";
     }
     (lib.optionalAttrs (lib.hasAttr "systemd" options) {
       systemd.services = {

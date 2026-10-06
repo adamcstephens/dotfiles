@@ -1,5 +1,6 @@
 {
   config,
+  dotlib,
   lib,
   pkgs,
   flake,
@@ -10,7 +11,7 @@ let
 
   package = flake.packages.${pkgs.stdenv.hostPlatform.system}.neovim.override {
     inherit (cfg) full;
-    dotvimPlugin = config.dotfiles.source "apps/neovim";
+    dotvimPlugin = dotlib.source "apps/neovim";
   };
 in
 {

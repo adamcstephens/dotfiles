@@ -1,5 +1,5 @@
 {
-  config,
+  dotlib,
   inputs,
   lib,
   pkgs,
@@ -33,5 +33,5 @@ in
 
   xdg.config.files."epi/config.toml".source = epiConfig;
 
-  xdg.config.files."epi/hooks".source = config.dotfiles.source "apps/epi/hooks";
+  xdg.config.files."epi/hooks".source = dotlib.source "apps/epi/hooks";
 }

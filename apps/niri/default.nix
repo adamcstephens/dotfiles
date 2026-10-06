@@ -1,5 +1,5 @@
 {
-  config,
+  dotlib,
   pkgs,
   ...
 }:
@@ -8,5 +8,5 @@
     pkgs.kdlfmt
   ];
 
-  xdg.config.files."niri/config.kdl".source = config.dotfiles.source "apps/niri/config.kdl";
+  xdg.config.files."niri/config.kdl".source = dotlib.source "apps/niri/config.kdl";
 }

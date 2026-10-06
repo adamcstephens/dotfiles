@@ -1,8 +1,8 @@
-{ config, pkgs, ... }:
+{ dotlib, pkgs, ... }:
 {
   packages = [
     pkgs.newsboat
   ];
 
-  xdg.config.files.newsboat.source = config.dotfiles.source "apps/newsboat";
+  xdg.config.files.newsboat.source = dotlib.source "apps/newsboat";
 }

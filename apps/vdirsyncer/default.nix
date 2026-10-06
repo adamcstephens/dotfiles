@@ -1,8 +1,8 @@
-{ config, pkgs, ... }:
+{ dotlib, pkgs, ... }:
 {
   packages = [
     pkgs.vdirsyncer
   ];
 
-  xdg.config.files."vdirsyncer/config".source = config.dotfiles.source "apps/vdirsyncer/config";
+  xdg.config.files."vdirsyncer/config".source = dotlib.source "apps/vdirsyncer/config";
 }

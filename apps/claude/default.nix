@@ -1,5 +1,6 @@
 {
   config,
+  dotlib,
   inputs,
   pkgs,
   ...
@@ -7,7 +8,7 @@
 let
   claude-wrapped = pkgs.symlinkJoin {
     name = "claude-wrapped";
-    paths = [ (config.dotfiles.unfreePkg "claude-code" inputs.nixos-unstable-small) ];
+    paths = [ (dotlib.unfreePkg "claude-code" inputs.nixos-unstable-small) ];
     buildInputs = [ pkgs.makeWrapper ];
     postBuild = ''
       wrapProgram $out/bin/claude \

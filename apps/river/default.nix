@@ -1,5 +1,6 @@
 {
   config,
+  dotlib,
   lib,
   pkgs,
   ...
@@ -11,7 +12,7 @@
 
   xdg.config.files."river/init" = {
     executable = true;
-    source = config.dotfiles.source "apps/river/init.sh";
+    source = dotlib.source "apps/river/init.sh";
   };
 
   xdg.config.files."river/colors.sh" = {

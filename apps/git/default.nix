@@ -1,5 +1,6 @@
 {
   config,
+  dotlib,
   lib,
   pkgs,
   ...
@@ -28,9 +29,9 @@ in
   ];
 
   xdg.config.files = {
-    "git/config".source = config.dotfiles.source "apps/git/gitconfig";
+    "git/config".source = dotlib.source "apps/git/gitconfig";
 
-    "git/ignore".source = config.dotfiles.source "apps/git/ignore";
+    "git/ignore".source = dotlib.source "apps/git/ignore";
   };
 
   xdg.data.files."gh/extensions/gh-stack/gh-stack".source = lib.getExe pkgs.gh-stack;

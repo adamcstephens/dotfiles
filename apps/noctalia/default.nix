@@ -1,5 +1,6 @@
 {
   config,
+  dotlib,
   inputs,
   lib,
   pkgs,
@@ -33,7 +34,7 @@ in
 
   config = {
     xdg.config.files = {
-      noctalia.source = config.dotfiles.source "apps/noctalia";
+      noctalia.source = dotlib.source "apps/noctalia";
     }
     // lib.optionalAttrs (builtins.pathExists (./profiles + "/${profile}.toml")) {
       "noctalia/profile.toml".text = # toml

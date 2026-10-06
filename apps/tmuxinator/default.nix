@@ -1,5 +1,6 @@
 {
   config,
+  dotlib,
   lib,
   pkgs,
   ...
@@ -15,6 +16,6 @@ in
   config = lib.mkIf cfg.enable {
     packages = [ pkgs.tmuxinator ];
 
-    files.".config/tmuxinator".source = config.dotfiles.source "apps/tmuxinator";
+    files.".config/tmuxinator".source = dotlib.source "apps/tmuxinator";
   };
 }

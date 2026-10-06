@@ -1,5 +1,6 @@
 {
   config,
+  dotlib,
   flake,
   lib,
   npins,
@@ -166,7 +167,7 @@ in
       flake.packages.${pkgs.stdenv.hostPlatform.system}.screenshot
     ]
     ++ lib.optionals config.dotfiles.dev.enable [
-      (config.dotfiles.unfreePkg [ "jetbrains" "datagrip" ] pkgs)
+      (dotlib.unfreePkg [ "jetbrains" "datagrip" ] pkgs)
     ];
 
   systemd.targets.wayland-session = {

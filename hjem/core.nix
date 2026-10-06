@@ -37,7 +37,7 @@
 
   config = lib.mkMerge [
     {
-      dotfiles = {
+      _module.args.dotlib = {
         source =
           relative:
           if config.dotfiles.nixosManaged then
@@ -55,7 +55,6 @@
               license = [ ];
             };
           });
-
       };
 
       environment.sessionVariables = {

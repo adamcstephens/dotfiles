@@ -1,4 +1,4 @@
-{ config, ... }:
+{ dotlib, ... }:
 {
-  xdg.config.files."mimeapps.list".source = config.dotfiles.source "apps/mimeapps/mimeapps.list";
+  xdg.config.files."mimeapps.list".source = dotlib.source "apps/mimeapps/mimeapps.list";
 }

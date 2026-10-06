@@ -1,5 +1,6 @@
 {
   config,
+  dotlib,
   lib,
   npins,
   options,
@@ -25,19 +26,18 @@
         config-file = mac.conf
       '';
 
-      xdg.config.files."ghostty/dotfiles.conf".source =
-        config.dotfiles.source "apps/ghostty/dotfiles.conf";
+      xdg.config.files."ghostty/dotfiles.conf".source = dotlib.source "apps/ghostty/dotfiles.conf";
 
       xdg.config.files."ghostty/linux.conf" = lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
-        source = config.dotfiles.source "apps/ghostty/linux.conf";
+        source = dotlib.source "apps/ghostty/linux.conf";
       };
 
       xdg.config.files."ghostty/gtk-custom.css" = lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
-        source = config.dotfiles.source "apps/ghostty/gtk-custom.css";
+        source = dotlib.source "apps/ghostty/gtk-custom.css";
       };
 
       xdg.config.files."ghostty/mac.conf" = lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
-        source = config.dotfiles.source "apps/ghostty/mac.conf";
+        source = dotlib.source "apps/ghostty/mac.conf";
       };
 
       xdg.data.files."dbus-1/services/com.mitchellh.ghostty.service" =

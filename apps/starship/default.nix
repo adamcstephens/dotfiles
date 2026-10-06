@@ -1,6 +1,6 @@
-{ config, pkgs, ... }:
+{ dotlib, pkgs, ... }:
 {
   packages = [ pkgs.starship ];
 
-  xdg.config.files."starship.toml".source = config.dotfiles.source "apps/starship/starship.toml";
+  xdg.config.files."starship.toml".source = dotlib.source "apps/starship/starship.toml";
 }

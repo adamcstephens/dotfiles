@@ -1,5 +1,5 @@
 {
-  config,
+  dotlib,
   lib,
   options,
   pkgs,
@@ -12,8 +12,8 @@
         pkgs.tuios
       ];
 
-      xdg.config.files."tuios/config.toml".source = config.dotfiles.source "apps/tuios/config.toml";
-      xdg.config.files."tuios/themes".source = config.dotfiles.source "apps/tuios/themes";
+      xdg.config.files."tuios/config.toml".source = dotlib.source "apps/tuios/config.toml";
+      xdg.config.files."tuios/themes".source = dotlib.source "apps/tuios/themes";
     }
     (lib.optionalAttrs (lib.hasAttr "systemd" options) {
       systemd = {

@@ -1,6 +1,5 @@
 {
   config,
-  flake,
   lib,
   pkgs,
   ...
@@ -11,18 +10,6 @@ in
 {
   options.dotfiles = {
     nixosManaged = lib.mkEnableOption "When nixos managed dotfiles is in the read-only store";
-    source = lib.mkOption {
-      type = lib.types.functionTo lib.types.str;
-      description = "resolve a dotfiles repository-relative path";
-      readOnly = true;
-    };
-
-    unfreePkg = lib.mkOption {
-      type = lib.types.functionTo (lib.types.functionTo lib.types.package);
-      description = "ignore unfree licenses for a package";
-      readOnly = true;
-    };
-
     profile = lib.mkOption {
       type = lib.types.str;
       description = "name of home profile from flake";

@@ -1,8 +1,8 @@
-{ config, pkgs, ... }:
+{ dotlib, pkgs, ... }:
 {
   packages = [
     pkgs.halloy
   ];
 
-  files.".config/halloy".source = config.dotfiles.source "apps/halloy";
+  files.".config/halloy".source = dotlib.source "apps/halloy";
 }

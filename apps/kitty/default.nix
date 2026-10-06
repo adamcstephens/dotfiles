@@ -1,5 +1,6 @@
 {
   config,
+  dotlib,
   lib,
   npins,
   pkgs,
@@ -28,12 +29,12 @@ in
     map super+shift+p launch --type=overlay-main ${prj} --remote
   '';
 
-  xdg.config.files."kitty/dotfiles.conf".source = config.dotfiles.source "apps/kitty/dotfiles.conf";
+  xdg.config.files."kitty/dotfiles.conf".source = dotlib.source "apps/kitty/dotfiles.conf";
   xdg.config.files."kitty/os.conf".source =
     if pkgs.stdenv.hostPlatform.isDarwin then
-      config.dotfiles.source "apps/kitty/macos.conf"
+      dotlib.source "apps/kitty/macos.conf"
     else
-      config.dotfiles.source "apps.kitty/linux.conf";
+      dotlib.source "apps.kitty/linux.conf";
 
   # themes
   xdg.config.files."kitty/no-preference-theme.auto.conf".source =

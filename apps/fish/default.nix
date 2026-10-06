@@ -1,5 +1,6 @@
 {
   config,
+  dotlib,
   inputs,
   lib,
   npins,
@@ -18,7 +19,7 @@ let
     echo "setup_hjem_session_vars") > $out/share/fish/vendor_conf.d/hjem-session-vars.fish
   '';
 
-  mkSource = source: config.dotfiles.source "apps/fish/${source}";
+  mkSource = source: dotlib.source "apps/fish/${source}";
 
   commandNotFound = pkgs.writeShellApplication {
     name = "command-not-found";

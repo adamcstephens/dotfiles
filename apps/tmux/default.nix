@@ -1,5 +1,5 @@
 {
-  config,
+  dotlib,
   npins,
   pkgs,
   ...
@@ -9,7 +9,7 @@
     pkgs.tmux
   ];
 
-  xdg.config.files."tmux/tmux.conf".source = config.dotfiles.source "apps/tmux/tmux.conf";
+  xdg.config.files."tmux/tmux.conf".source = dotlib.source "apps/tmux/tmux.conf";
 
   xdg.config.files."tmux/theme-dark.tmux".source = pkgs.runCommand "theme-dark.tmux" { } ''
     cat ${npins.vim-moonfly-colors}/extras/moonfly.tmux > $out
