@@ -18,12 +18,14 @@ let
 in
 {
   packages = [
-    pkgs.vikunja.veans
-
     claude-wrapped
   ];
 
   environment.sessionVariables = {
     CLAUDE_CONFIG_DIR = "${config.directory}/.config/claude";
+  };
+
+  xdg.config.files = {
+    "claude/CLAUDE.md".source = config.xdg.config.files."agents/AGENTS.md".source;
   };
 }
