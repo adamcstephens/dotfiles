@@ -27,7 +27,7 @@ Work is not ready for review until the following are in place, and only *after* 
 - stop for feedback and let the user move to Done
 
 ## Coding Rules
-- Use red/green test-driven development.
+- Prefer red/green test-driven development when working with codebases that have test setups already.
 - NEVER add a dependency without permission. ALWAYS check you're adding the
   latest version when approved.
   - A dependency is anything version-pinned that you did not write, in any
