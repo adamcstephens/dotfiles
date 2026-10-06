@@ -22,8 +22,8 @@ show_clock = false
 show_cpu = false
 show_ram = false
 theme = 'moonfly'
-border_focused_color = ''
-border_unfocused_color = ''
+border_focused_color = '#80a0ff'
+border_unfocused_color = '#949494'
 window_title_format = ''
 zoom_max_width = 0
 niri_reverse_scroll = false
@@ -358,7 +358,7 @@ terminal_scroll_up = ['shift+up']
 toggle_zoom = ['super+z']
 
 [keybindings.global]
-command_palette = ['ctrl+p']
+command_palette = []
 launcher = ['alt+space']
 next_workspace = ['ctrl+tab']
 prev_workspace = ['ctrl+shift+tab']
@@ -378,7 +378,7 @@ width = '90%'
 height = '90%'
 
 [keybindings.script]
-script_pause = ['ctrl+p']
+script_pause = []
 
 [keybindings.sidebar]
 accent = ['c']
@@ -457,7 +457,7 @@ inbox_select = ['/']
 inbox_show_snoozed = ['S']
 inbox_snooze = ['z']
 inbox_undo = ['u']
-inbox_up = ['k', 'up', 'ctrl+p']
+inbox_up = ['k', 'up']
 
 [keybindings.inbox_peek]
 peek_approve = ['a']
@@ -477,7 +477,7 @@ mail_open = ['enter']
 mail_page_down = ['pgdown']
 mail_page_up = ['pgup']
 mail_reply = ['r']
-mail_up = ['k', 'up', 'ctrl+p']
+mail_up = ['k', 'up']
 
 [daemon]
 log_level = 'off'
