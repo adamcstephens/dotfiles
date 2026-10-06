@@ -13,6 +13,7 @@
       ];
 
       xdg.config.files."tuios/config.toml".source = config.dotfiles.source "apps/tuios/config.toml";
+      xdg.config.files."tuios/themes".source = config.dotfiles.source "apps/tuios/themes";
     }
     (lib.optionalAttrs (lib.hasAttr "systemd" options) {
       systemd = {
@@ -30,6 +31,8 @@
 
           # we want the default system path
           enableDefaultPath = false;
+
+          environment.TERM = "xterm-ghostty";
 
           serviceConfig = {
             Type = "simple";
