@@ -642,3 +642,9 @@ corner = 'bottom-right'
 
 [dock]
 [dock.clock]
+
+[hosts.deck]
+addr = "deck"
+
+[hosts.kale]
+addr = "kale"
