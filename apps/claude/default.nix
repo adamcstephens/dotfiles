@@ -5,18 +5,9 @@
   ...
 }:
 let
-  # helper to drop unfree licenses
-  unfreePkg =
-    name: nixpkgs:
-    nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system}.${name}.overrideAttrs (old: {
-      meta = old.meta // {
-        license = [ ];
-      };
-    });
-
   claude-wrapped = pkgs.symlinkJoin {
     name = "claude-wrapped";
-    paths = [ (unfreePkg "claude-code" inputs.nixos-unstable-small) ];
+    paths = [ (config.dotfiles.unfreePkg "claude-code" inputs.nixos-unstable-small) ];
     buildInputs = [ pkgs.makeWrapper ];
     postBuild = ''
       wrapProgram $out/bin/claude \

@@ -37,12 +37,26 @@
 
   config = lib.mkMerge [
     {
-      dotfiles.source =
-        relative:
-        if config.dotfiles.nixosManaged then
-          "${flake}/${relative}"
-        else
-          "${config.directory}/.dotfiles/${relative}";
+      dotfiles = {
+        source =
+          relative:
+          if config.dotfiles.nixosManaged then
+            "${flake}/${relative}"
+          else
+            "${config.directory}/.dotfiles/${relative}";
+
+        unfreePkg =
+          name: nixpkgs:
+          let
+            packages = nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system} or nixpkgs;
+          in
+          (lib.getAttrFromPath (lib.toList name) packages).overrideAttrs (old: {
+            meta = old.meta // {
+              license = [ ];
+            };
+          });
+
+      };
 
       environment.sessionVariables = {
         DO_NOT_TRACK = "true";

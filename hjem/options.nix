@@ -17,6 +17,12 @@ in
       readOnly = true;
     };
 
+    unfreePkg = lib.mkOption {
+      type = lib.types.functionTo (lib.types.functionTo lib.types.package);
+      description = "ignore unfree licenses for a package";
+      readOnly = true;
+    };
+
     profile = lib.mkOption {
       type = lib.types.str;
       description = "name of home profile from flake";
