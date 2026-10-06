@@ -30,11 +30,9 @@ in
   '';
 
   xdg.config.files."kitty/dotfiles.conf".source = dotlib.source "apps/kitty/dotfiles.conf";
-  xdg.config.files."kitty/os.conf".source =
-    if pkgs.stdenv.hostPlatform.isDarwin then
-      dotlib.source "apps/kitty/macos.conf"
-    else
-      dotlib.source "apps.kitty/linux.conf";
+  xdg.config.files."kitty/os.conf".source = dotlib.source (
+    if pkgs.stdenv.hostPlatform.isDarwin then "apps/kitty/macos.conf" else "apps/kitty/linux.conf"
+  );
 
   # themes
   xdg.config.files."kitty/no-preference-theme.auto.conf".source =
