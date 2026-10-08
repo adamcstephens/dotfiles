@@ -55,7 +55,7 @@ export default {
     },
     {
       match: /meet\.google\.com/,
-      browser: "Chromium",
+      browser: "com.google.Chrome",
     },
   ],
 };
