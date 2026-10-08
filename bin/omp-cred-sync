@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+# we evaluate env vars on remote hosts
+# shellcheck disable=SC2016
+
+set -euo pipefail
+
+usage() {
+  echo "usage: $0 [--epi] --push|--pull <host>" >&2
+  exit 1
+}
+
+MODE=""
+USE_EPI=false
+while [ "$#" -gt 0 ]; do
+  case "$1" in
+  --push | --pull)
+    [ -z "$MODE" ] || usage
+    MODE="$1"
+    ;;
+  --epi)
+    USE_EPI=true
+    ;;
+  *)
+    break
+    ;;
+  esac
+  shift
+done
+
+[ "$#" -eq 1 ] && [ -n "$MODE" ] || usage
+HOST="$1"
+if "$USE_EPI"; then
+  REMOTE=(epi exec "$HOST" --)
+else
+  REMOTE=(ssh "$HOST")
+fi
+DB="$HOME/.config/omp/agent/agent.db"
+
+case "$MODE" in
+--push)
+  "${REMOTE[@]}" 'mkdir --parents "$HOME/.config/omp/agent"'
+  echo ":: Removing remote credentials"
+  "${REMOTE[@]}" 'sqlite3 "$HOME/.config/omp/agent/agent.db" "DROP TABLE IF EXISTS auth_credentials"'
+  echo ":: Pushing credentials"
+  sqlite3 "$DB" '.dump auth_credentials' | "${REMOTE[@]}" 'sqlite3 "$HOME/.config/omp/agent/agent.db"'
+  ;;
+--pull)
+  mkdir --parents "$HOME/.config/omp/agent"
+  echo ":: Removing local credentials"
+  sqlite3 "$DB" 'DROP TABLE IF EXISTS auth_credentials'
+  echo ":: Pulling credentials"
+  "${REMOTE[@]}" 'sqlite3 "$HOME/.config/omp/agent/agent.db" ".dump auth_credentials"' | sqlite3 "$DB"
+  ;;
+*)
+  usage
+  ;;
+esac
+echo ":: Done"
