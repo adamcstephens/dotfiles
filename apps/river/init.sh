@@ -67,8 +67,6 @@ riverctl map normal Super+Shift C close
 # Mod+J and Mod+K to focus the next/previous view in the layout stack
 riverctl map normal Super J focus-view next
 riverctl map normal Super K focus-view previous
-riverctl map normal Super S focus-view next
-riverctl map normal Super W focus-view previous
 
 # Mod+Shift+J and Mod+Shift+K to swap the focused view with the next/previous
 # view in the layout stack
