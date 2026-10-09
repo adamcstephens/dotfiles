@@ -17,4 +17,5 @@ openspec/
 .opencode/
 .claude/
 CLAUDE.md
+AGENTS.md
 .epi/
