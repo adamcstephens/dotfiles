@@ -225,11 +225,11 @@
     },
     "nixos-unstable-small": {
       "locked": {
-        "lastModified": 1791382735,
-        "narHash": "sha256-I+pL0aRAD18vxL1AwKuyjK8ZEcUEm/MQz+kZZl32Ct0=",
-        "rev": "4164d3e0cab491e0973dd503757a4da25466f073",
+        "lastModified": 1791456040,
+        "narHash": "sha256-PQXSGV2ZuIofONen5AtiirSAmuHCt4ptO0p1zVM0Pkg=",
+        "rev": "e7439b6b14ad3cc35d05608ebca9bce01a25f5f8",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/unstable-small/nixos-26.11pre1087172.4164d3e0cab4/nixexprs.tar.zst"
+        "url": "https://releases.nixos.org/nixos/unstable-small/nixos-26.11pre1087755.e7439b6b14ad/nixexprs.tar.zst"
       },
       "original": {
         "type": "tarball",
@@ -311,11 +311,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1791336361,
-        "narHash": "sha256-7WQwlykef1x8n7aoyw4XP6882i2NRs5F6dVCXZ1NI1g=",
-        "rev": "7dd199b0e2993e37b4775ed66b1c291699608c9f",
+        "lastModified": 1791366222,
+        "narHash": "sha256-/4ezBOv6aldGab7qTb6ls3SDpgzG8kuuSqEAA9zEZ8E=",
+        "rev": "39ad350a0602fa0a58a544344e3e9187526ea45c",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixpkgs/nixpkgs-26.11pre1086972.7dd199b0e299/nixexprs.tar.zst"
+        "url": "https://releases.nixos.org/nixpkgs/nixpkgs-26.11pre1087089.39ad350a0602/nixexprs.tar.zst"
       },
       "original": {
         "type": "tarball",
@@ -324,11 +324,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1791260994,
-        "narHash": "sha256-MFBjw66d4h06MvpW6lIl7RwarLteD0sk859CncGwb1Q=",
-        "rev": "151fa4e8ddfdd8dd25d945ad94ed54a13de9f6e4",
+        "lastModified": 1791456040,
+        "narHash": "sha256-gRZ/s8WQJ2CsXdhcDVQH34qxuL0MuMCOs3aBiK1Prsw=",
+        "rev": "e7439b6b14ad3cc35d05608ebca9bce01a25f5f8",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/unstable/nixos-26.11pre1086391.151fa4e8ddfd/nixexprs.tar.zst"
+        "url": "https://releases.nixos.org/nixos/unstable/nixos-26.11pre1087755.e7439b6b14ad/nixexprs.tar.zst"
       },
       "original": {
         "type": "tarball",
@@ -386,11 +386,11 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1790628882,
-        "narHash": "sha256-Epoa9NbjKTdUz/Z8smeC0r5bRwy4N4uT4cgc7tNdhOg=",
+        "lastModified": 1791425035,
+        "narHash": "sha256-d1YzlK7NvChzU8M5RHcgaFvQ36FLT9eIiEGfCoCNVn8=",
         "ref": "refs/heads/main",
-        "rev": "4a05199081be5338734755a6cf7cfc9097e14aa0",
-        "revCount": 1273,
+        "rev": "f962ab69566ca5ca2fd7f821a072a264b8f59407",
+        "revCount": 1284,
         "type": "git",
         "url": "https://tangled.org/adam.robins.wtf/sower"
       },
