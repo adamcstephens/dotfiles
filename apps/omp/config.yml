@@ -8,8 +8,8 @@ symbolPreset: nerd
 composer:
   shape: rule
 theme:
-  dark: titanium
-  light: light
+  dark: moonfly
+  light: modus-operandi
 setupVersion: 2
 steeringMode: one-at-a-time
 memory:
