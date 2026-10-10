@@ -1,5 +1,6 @@
 {
   dotlib,
+  inputs,
   lib,
   options,
   pkgs,
@@ -9,7 +10,7 @@
   config = lib.mkMerge [
     {
       packages = [
-        pkgs.tuios
+        inputs.nixos-unstable-small.legacyPackages.${pkgs.stdenv.hostPlatform.system}.tuios
       ];
 
       xdg.config.files."tuios/config.toml".source = dotlib.source "apps/tuios/config.toml";
