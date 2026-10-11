@@ -1,12 +1,3 @@
-# Umbriel starting configuration
-#
-# Copy this file to ~/.config/umbriel/config.toml. Most changes apply when the
-# file is saved. Check edits with `umbriel config validate`.
-#
-# Complete reference: https://docs.noctalia.dev/umbriel/
-#
-# Commented settings below are examples, not built-in defaults.
-
 # ==============================================================================
 # Includes
 
@@ -23,7 +14,10 @@ files = []
 
 # Optional session examples. XWayland support is enabled by default.
 # https://docs.noctalia.dev/umbriel/configuration/#general
-# [general]
+[general]
+xwayland = true
+xwayland_native_resolution = true
+show_cheatsheet = true
 # autostart = ["noctalia", "kitty"]
 # xwayland = false
 # Sharp X11 apps and games on scaled outputs; they see physical resolutions.
@@ -68,7 +62,7 @@ files = []
 # Blur uses a smaller radius than the built-in default.
 # https://docs.noctalia.dev/umbriel/appearance/
 [appearance.blur]
-radius = 3
+radius = 1
 
 # Choose the background color shown if the lock screen takes too long to appear.
 # [colors]
@@ -105,19 +99,24 @@ radius = 3
 [input]
 client_window_drag = false
 
+[input.cursor]
+theme = "Bibata-Modern-Ice"
+size = 24
+follows_focus = true
+hide_when_typing = true
+
 [input.keyboard]
 numlock_toggle = true
-repeat_rate = 50
+repeat_rate = 60
 repeat_delay = 300
 
 # Focus can follow the pointer across tiled, floating, and pinned windows.
 [input.focus]
 follows_mouse = true
 
-# Confine touch input to one display.
-# [input.touch]
-# enabled = true
-# map_to_output = "eDP-1"
+[input.touchpad]
+natural_scroll = true
+accel_profile = "adaptive"
 
 # ==============================================================================
 # Keybinds
@@ -153,7 +152,7 @@ follows_mouse = true
 # Window state and layout
 # "Mod+T" = { action = "window-toggle-floating", repeat = false }
 # "Mod+Shift+T" = { action = "window-focus-switch-floating", repeat = false }
-"Mod+P" = { action = "window-toggle-pinned", repeat = false }
+# "Mod+P" = { action = "window-toggle-pinned", repeat = false }
 "Mod+M" = { action = "window-toggle-maximize-to-edges", repeat = false }
 "Mod+F" = { action = "window-toggle-fullscreen", repeat = false }
 "Mod+Ctrl+F" = { action = "window-toggle-maximize", repeat = false }
@@ -195,6 +194,14 @@ follows_mouse = true
 "Mod+Space" = "scratchpad-toggle"
 "Mod+Ctrl+Space" = { action = "window-restore-from-scratchpad", repeat = false }
 "Mod+Tab" = "scratchpad-focus-next"
+
+"XF86AudioRaiseVolume" = "spawn:noctalia msg volume-up 5"
+"XF86AudioLowerVolume" = "spawn:noctalia msg volume-down 5"
+"XF86AudioPlay" = "spawn:playerctl play-pause"
+"XF86AudioNext" = "spawn:playerctl next"
+"XF86AudioPrev" = "spawn:playerctl previous"
+"XF86MonBrightnessUp" = "spawn:noctalia msg brightness-up 5"
+"XF86MonBrightnessDown" = "spawn:noctalia msg brightness-down 5"
 
 # ==============================================================================
 # Layout
@@ -244,6 +251,19 @@ default_extent_fraction = 0.5
 [[window_rule]]
 blur = true
 blur_optimized = false
+
+[[window_rule]]
+match.is_alone = true
+default_maximize = true
+
+# Dim unfocused windows
+[[window_rule]]
+match.is_focused = false
+opacity = 0.85
+
+[[window_rule]]
+match.is_focused = true
+opacity = 1.0
 
 [[window_rule]]
 match.app_id = "^dev.noctalia.Noctalia$"
