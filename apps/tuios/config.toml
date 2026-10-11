@@ -1,6 +1,7 @@
 include = ["local.toml"]
 
 [appearance]
+nvim_navigation = true
 border_style = 'normal'
 zen_mode = 'disabled'
 links = 'all'
@@ -348,10 +349,10 @@ swap_with_master = ['enter']
 [keybindings.terminal_mode]
 new_window = ['alt+n']
 terminal_exit_mode = ['alt+esc']
-terminal_focus_down = ['alt+down', 'alt+j']
+terminal_focus_down = ['alt+j']
 terminal_focus_left = ['alt+h']
 terminal_focus_right = ['alt+l']
-terminal_focus_up = ['alt+up', 'alt+k']
+terminal_focus_up = ['alt+k']
 terminal_next_window = ['alt+tab']
 terminal_paste_host = ['ctrl+shift+v', 'super+v', 'shift+super+v']
 terminal_prev_window = ['alt+shift+tab']

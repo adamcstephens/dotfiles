@@ -4,9 +4,36 @@ return {
   lazy = false,
 
   after = function()
-    require("smart-splits").setup({
-      at_edge = "stop",
-    })
+    local options = { at_edge = "stop" }
+
+    if vim.env.TUIOS_SESSION then
+      local function send(command, value)
+        io.stdout:write("\27]7777;tuios-nvim-navigator;" .. command .. ";" .. value .. "\7")
+        io.stdout:flush()
+      end
+
+      options.multiplexer_integration = false
+      options.at_edge = function(context)
+        send("focus", context.direction)
+      end
+
+      local group = vim.api.nvim_create_augroup("TuiosSmartSplits", { clear = true })
+      vim.api.nvim_create_autocmd({ "VimResume", "FocusGained" }, {
+        group = group,
+        callback = function()
+          send("state", "active")
+        end,
+      })
+      vim.api.nvim_create_autocmd({ "VimSuspend", "VimLeavePre" }, {
+        group = group,
+        callback = function()
+          send("state", "inactive")
+        end,
+      })
+      send("state", "active")
+    end
+
+    require("smart-splits").setup(options)
   end,
 
   keys = {
