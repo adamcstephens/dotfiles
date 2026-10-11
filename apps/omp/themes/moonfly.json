@@ -1,7 +1,7 @@
 {
   "name": "moonfly",
   "vars": {
-    "bg": "#080808",
+    "bg": "#000000",
     "fg": "#bdbdbd",
     "white": "#c6c6c6",
     "grey0": "#323437",
@@ -107,7 +107,7 @@
   "terminal": {
     "background": "bg",
     "foreground": "fg",
-    "chrome": "grey16",
+    "chrome": "bg",
     "widget": "grey13",
     "ansi": [
       "grey0",
