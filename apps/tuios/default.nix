@@ -33,10 +33,9 @@
           # we want the default system path
           enableDefaultPath = false;
 
-          environment.TERM = "xterm-ghostty";
-
           serviceConfig = {
             Type = "simple";
+            ExecStartPre = "${lib.getExe pkgs.tuios} kill-server";
             ExecStart = "${lib.getExe pkgs.tuios} daemon";
             Restart = "on-failure";
           };
