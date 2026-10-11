@@ -483,6 +483,7 @@ mail_reply = ['r']
 mail_up = ['k', 'up']
 
 [daemon]
+ssh_agent = "follow"
 log_level = 'off'
 agent_detect_seconds = 0
 agent_binaries = []

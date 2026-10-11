@@ -25,7 +25,7 @@ socket_candidates() {
 # Full ordered candidate list. In a mux/remote context the inherited socket is
 # tried ahead of the discovered candidates.
 candidates() {
-  if [ -n "${TMUX:-}" ] || [ -n "${SSH_TTY:-}" ] || [ -n "${ET_VERSION:-}" ] || [ -n "${ZELLIJ:-}" ]; then
+  if [ -n "${TMUX:-}" ] || [ -n "${SSH_TTY:-}" ] || [ -n "${ET_VERSION:-}" ] || [ -n "${ZELLIJ:-}" ] || [ -n "${TUIOS_SESSION:-}" ]; then
     printf '%s\n' "${SSH_AUTH_SOCK:-}"
   fi
   socket_candidates
