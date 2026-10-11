@@ -7,7 +7,6 @@ fixup = "!~/.dotfiles/bin/git-fixup"
 ftag = push --tags --force
 home = "!~/.dotfiles/bin/git-home"
 fixhome = remote set-head origin --auto
-subup = submodule update --remote --merge --recursive
 yolo = commit --amend --no-edit
 rm-merged = "!git branch --format '%(refname:short) %(upstream:track)' | awk '$2 == \"[gone]\" { print $1 }' | xargs -r git branch -D"
 
@@ -35,9 +34,6 @@ editor = ~/.dotfiles/bin/giteditor
 pager = delta
 untrackedCache = true
 
-[credential]
-helper = rbw
-
 [delta]
 hyperlinks = true
 navigate = true
@@ -54,10 +50,10 @@ prune = true
 pruneTags = true
 
 [filter "lfs"]
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
-	clean = git-lfs clean -- %f
+smudge = git-lfs smudge -- %f
+process = git-lfs filter-process
+required = true
+clean = git-lfs clean -- %f
 
 [github]
 user = adamcstephens
@@ -81,8 +77,8 @@ diffFilter = delta --color-only
 	conflictStyle = diff3
 
 [merge "mergiraf"]
-    name = mergiraf
-    driver = mergiraf merge --git %O %A %B -s %S -x %X -y %Y -p %P -l %L
+name = mergiraf
+driver = mergiraf merge --git %O %A %B -s %S -x %X -y %Y -p %P -l %L
 
 [pull]
 ff = only
@@ -104,25 +100,13 @@ autoupdate = true
 gpgsign = true
 sort = version:refname
 
-[url "git@github.com:"]
-pushInsteadOf = "https://github.com/"
-
-[url "git@gitlab.com:"]
-pushInsteadOf = https://gitlab.com/
-
-[url "git@git.sr.ht:~adamcstephens"]
-pushInsteadOf = https://git.sr.ht/~adamcstephens
-
-[url "git@codeberg.org:adamcstephens"]
-pushInsteadOf = https://codeberg.org/adamcstephens
-
-[url "https://github.com/"]
-pullInsteadOf = git@github.com:
-
 [user]
 name = Adam C. Stephens
 email = adam@valkor.net
 
-[includeIf "gitdir:~/git/calmwave/"]
-path = ~/git/calmwave/.gitconfig
-
+[credential "https://github.com"]
+helper =
+helper = !gh auth git-credential
+[credential "https://gist.github.com"]
+helper =
+helper = !gh auth git-credential
