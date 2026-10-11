@@ -165,6 +165,8 @@ in
       pkgs.rofi-rbw
 
       flake.packages.${pkgs.stdenv.hostPlatform.system}.screenshot
+
+      flake.packages.${pkgs.stdenv.hostPlatform.system}.tern-wrapper
     ]
     ++ lib.optionals config.dotfiles.dev.enable [
       (dotlib.unfreePkg [ "jetbrains" "datagrip" ] pkgs)
