@@ -39,6 +39,7 @@ in
     ../apps/pinnacle
     ../apps/river
     ../apps/shikane
+    ../apps/umbriel
     ../apps/wayland
 
     # desktop env
