@@ -2,6 +2,17 @@ local autoid = vim.api.nvim_create_augroup("dotgroup", {
   clear = true,
 })
 
+local osc52_copy = require("vim.ui.clipboard.osc52").copy("+")
+vim.api.nvim_create_autocmd("TextYankPost", {
+  desc = "copy yanks via OSC 52",
+  callback = function()
+    if vim.v.event.operator == "y" then
+      osc52_copy(vim.v.event.regcontents)
+    end
+  end,
+  group = autoid,
+})
+
 vim.api.nvim_create_autocmd("BufEnter", {
   desc = "show cursorline active",
   callback = function()

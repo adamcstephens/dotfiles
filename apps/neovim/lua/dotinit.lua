@@ -5,8 +5,6 @@ vim.g.mapleader = ","
 
 vim.opt.termguicolors = true
 
-vim.g.clipboard = "osc52"
-
 -- includes
 --
 require("auto")
@@ -26,7 +24,7 @@ require("which-key").setup({})
 -- disable end of line diagnostic message
 vim.diagnostic.config({ virtual_text = false })
 
-vim.opt.clipboard = "unnamedplus"
+vim.opt.clipboard = ""
 vim.opt.autoread = true
 vim.opt.cursorline = true
 vim.opt.number = true
