@@ -21,7 +21,7 @@ modal_dim = 30
 whichkey_position = ''
 window_title_position = 'top'
 hide_clock = false
-show_clock = false
+show_clock = true
 show_cpu = false
 show_ram = false
 theme = 'moonfly'
@@ -548,4 +548,5 @@ height = 12
 corner = 'bottom-right'
 
 [dock]
+left = ["workspaces", "tape"]
 [dock.clock]
