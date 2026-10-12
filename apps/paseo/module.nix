@@ -179,6 +179,9 @@ in
         "/run/wrappers"
         "/run/current-system/sw"
         "/nix/var/nix/profiles/default"
+      ]
+      ++ lib.optionals (cfg.settings.pluginsEnabled or false) [
+        cfg.package.nodejs
       ];
 
       environment = {

@@ -30,19 +30,58 @@
     settings = {
       app.baseUrl = "https://paseo.junco.dev";
 
-      agents.providers = {
-        claude.enabled = true;
-        codex.enabled = true;
-        copilot.enabled = false;
-        opencode.enabled = false;
-        omp.enabled = true;
-        pi.enabled = false;
+      agents = {
+        providers = {
+          antigravity.enabled = false;
+          claude.enabled = true;
+          codex.enabled = true;
+          copilot.enabled = false;
+          muse.enabled = false;
+          omp.enabled = true;
+          opencode.enabled = false;
+          pi.enabled = false;
+        };
+
+        metadataGeneration.providers = [
+          {
+            provider = "omp";
+            model = "openai-codex/gpt-6-luna";
+          }
+        ];
+      };
+
+      daemon = {
+        mcp.injectIntoAgents = true;
+
+        agentProfiles = [
+          {
+            id = "agent_profile_mv4lollr_mxy2urjv64m";
+            name = "lightweight";
+            provider = "omp";
+            model = "openai-codex/gpt-6-luna";
+            modeId = "full";
+            thinkingOptionId = "medium";
+            notes = "Use for lightweight work, rote refactors, simple tasks.";
+          }
+          {
+            id = "agent_profile_mv4lpdj7_nspeck1ll2d";
+            name = "general";
+            icon = "hammer";
+            provider = "omp";
+            model = "openai-codex/gpt-6.1-sol";
+            modeId = "full";
+            thinkingOptionId = "low";
+            notes = "Use for general coding implementation.";
+          }
+        ];
       };
 
       features = {
         dictation.enabled = false;
         voiceMode.enabled = false;
       };
+
+      pluginsEnabled = true;
     };
   };
 
