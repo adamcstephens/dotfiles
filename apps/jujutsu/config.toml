@@ -58,7 +58,12 @@ email = "adam@valkor.net"
 
 # use delta only in diff
 [[--scope]]
---when.commands = ["diff"]
+--when.commands = ["diff", "show"]
 [--scope.ui]
 pager = "delta"
 diff-formatter = ":git"
+
+[[--scope]]
+--when.environments = ["JJUI"]
+[--scope.ui]
+diff-formatter = "delta"
