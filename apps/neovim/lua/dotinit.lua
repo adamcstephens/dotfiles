@@ -5,6 +5,8 @@ vim.g.mapleader = ","
 
 vim.opt.termguicolors = true
 
+vim.g.clipboard = "osc52"
+
 -- includes
 --
 require("auto")
