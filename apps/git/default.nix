@@ -22,10 +22,11 @@ in
     pkgs.git-extras
   ]
   ++ lib.optionals config.dotfiles.dev.enable [
-    pkgs.gh
+    gh
     pkgs.lazygit
     (pkgs.writeShellScriptBin "lg" "exec ${lib.getExe pkgs.lazygit} $@")
     pkgs.forgejo-cli
+    pkgs.tea
   ];
 
   xdg.config.files = {
