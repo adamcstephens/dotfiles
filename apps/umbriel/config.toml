@@ -168,6 +168,7 @@ accel_profile = "adaptive"
 "Mod+WheelUp" = "window-focus-left"
 "Mod+WheelDown" = "window-focus-right"
 "Mod+O" = { action = "overview-toggle", repeat = false }
+"Mod+Return" = { action = "window-swap-left", repeat = false }
 
 # Workspaces
 "Mod+1" = "workspace-switch:1"
