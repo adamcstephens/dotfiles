@@ -127,7 +127,7 @@ mnw.lib.wrap pkgs {
       shfmt
       stylua
       taplo
-      typescript-language-server
+      # typescript-language-server
       vscode-json-languageserver
       yaml-language-server
     ];
