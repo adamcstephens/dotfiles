@@ -135,6 +135,7 @@ in
                   sower = epi-agent {
                     project = "sower";
                     settings = {
+                      cpus = 8;
                       memory = 16384;
                       disk_size = "80G";
                       ports = [ "7150:7150" ];
