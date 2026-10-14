@@ -61,6 +61,8 @@ let
         };
       };
 
+      networking.nftables.enable = true;
+
       nix.settings = {
         extra-experimental-features = [ "pipe-operators" ];
         substituters = [
