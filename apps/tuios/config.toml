@@ -552,3 +552,6 @@ corner = 'bottom-right'
 [dock]
 left = ["workspaces", "tape"]
 [dock.clock]
+
+[agents]
+enabled = false

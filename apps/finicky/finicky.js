@@ -1,3 +1,6 @@
+const slackMessagePath =
+  /^\/(?:archives\/([A-Z0-9]+)\/p(\d{7,})|messages\/([A-Z0-9]+)\/convo\/[A-Z0-9]+-(\d+\.\d{6}))\/?$/;
+
 export default {
   // get bundle id: mdls /Applications/Firefox.app/ | grep kMDItemCF
   defaultBrowser: () => {
@@ -32,6 +35,19 @@ export default {
       },
     },
     {
+      match: ({ url }) =>
+        url.host === "bitfreighter.slack.com" &&
+        slackMessagePath.test(url.pathname),
+      url({ url }) {
+        const [, archiveChannel, archiveTimestamp, channel, timestamp] =
+          url.pathname.match(slackMessagePath);
+        const message =
+          timestamp ??
+          `${archiveTimestamp.slice(0, -6)}.${archiveTimestamp.slice(-6)}`;
+        return `slack://channel?team=T011H44Q50D&id=${channel ?? archiveChannel}&message=${message}`;
+      },
+    },
+    {
       match: ({ url }) => url.host === "teams.microsoft.com",
       url({ url }) {
         // Build the URL string manually so we get the required single "/" between "msteams:" and "l/meetup-join…"
@@ -46,6 +62,10 @@ export default {
       browser: "Visual Studio Code",
     },
     {
+      match: ({ url }) => url.protocol === "slack",
+      browser: "Slack",
+    },
+    {
       match: /zoom.us\/j\//,
       browser: "us.zoom.xos",
     },
@@ -56,6 +76,10 @@ export default {
     {
       match: /meet\.google\.com/,
       browser: "com.google.Chrome",
+    },
+    {
+      match: /linear.app/,
+      browser: "Linear",
     },
   ],
 };
