@@ -36,7 +36,7 @@ in
     ./gui.nix
     ../apps/mimeapps
     ../apps/noctalia
-    ../apps/pinnacle
+    # ../apps/pinnacle
     ../apps/river
     ../apps/shikane
     ../apps/umbriel
