@@ -1,17 +1,17 @@
 diff --git a/meson.build b/meson.build
-index 65c4041b05..987acca675 100644
+index ad6973b986..3b8eefdf61 100644
 --- a/meson.build
 +++ b/meson.build
-@@ -1200,6 +1200,7 @@
-     'dock_pinned_apps',
+@@ -1220,6 +1220,7 @@
      'enterprise_credentials',
      'event_link',
+     'event_merge',
 +    'ext_workspace_order',
      'fcitx_status',
      'freedesktop_key_file',
      'firefox_theme_manifest',
 diff --git a/src/compositors/ext_workspace/ext_workspace_backend.cpp b/src/compositors/ext_workspace/ext_workspace_backend.cpp
-index 94f7bdec89..c0aaf7f78b 100644
+index 94f7bdec89..0ffbc27e96 100644
 --- a/src/compositors/ext_workspace/ext_workspace_backend.cpp
 +++ b/src/compositors/ext_workspace/ext_workspace_backend.cpp
 @@ -4,6 +4,9 @@
@@ -24,7 +24,7 @@ index 94f7bdec89..c0aaf7f78b 100644
  
  namespace {
  
-@@ -102,8 +105,49 @@
+@@ -102,8 +105,55 @@ void ExtWorkspaceBackend::bindExtWorkspace(ext_workspace_manager_v1* manager) {
      return normalized;
    }
  
@@ -45,12 +45,18 @@ index 94f7bdec89..c0aaf7f78b 100644
 +
 +    const auto lhsName = parseUnsigned(lhs.name);
 +    const auto rhsName = parseUnsigned(rhs.name);
++    if (lhsName.has_value() != rhsName.has_value()) {
++      return lhsName.has_value();
++    }
 +    if (lhsName.has_value() && rhsName.has_value() && *lhsName != *rhsName) {
 +      return *lhsName < *rhsName;
 +    }
 +
 +    const auto lhsId = parseUnsigned(lhs.id);
 +    const auto rhsId = parseUnsigned(rhs.id);
++    if (lhsId.has_value() != rhsId.has_value()) {
++      return lhsId.has_value();
++    }
 +    if (lhsId.has_value() && rhsId.has_value() && *lhsId != *rhsId) {
 +      return *lhsId < *rhsId;
 +    }
@@ -74,7 +80,7 @@ index 94f7bdec89..c0aaf7f78b 100644
  void ExtWorkspaceBackend::bindExtWorkspace(ext_workspace_manager_v1* manager) {
    m_manager = manager;
    ext_workspace_manager_v1_add_listener(m_manager, &kManagerListener, this);
-@@ -265,7 +309,7 @@
+@@ -265,7 +315,7 @@ std::vector<Workspace> ExtWorkspaceBackend::all() const {
      result.push_back(ws);
    }
  
@@ -83,7 +89,7 @@ index 94f7bdec89..c0aaf7f78b 100644
    return result;
  }
  
-@@ -286,7 +330,7 @@
+@@ -286,7 +336,7 @@ std::vector<Workspace> ExtWorkspaceBackend::forOutput(wl_output* output) const {
      }
    }
  
@@ -123,12 +129,13 @@ index 5488beef5d..354ce8c481 100644
    void bindExtWorkspace(ext_workspace_manager_v1* manager) override;
 diff --git a/tests/ext_workspace_order_test.cpp b/tests/ext_workspace_order_test.cpp
 new file mode 100644
-index 0000000000..b9fad6def4
+index 0000000000..873b4630be
 --- /dev/null
 +++ b/tests/ext_workspace_order_test.cpp
-@@ -0,0 +1,87 @@
+@@ -0,0 +1,104 @@ int main() {
 +#include "compositors/ext_workspace/ext_workspace_backend.h"
 +
++#include <algorithm>
 +#include <iostream>
 +#include <string>
 +#include <vector>
@@ -207,6 +214,22 @@ index 0000000000..b9fad6def4
 +  };
 +  ext_workspace::orderForDisplay(textual);
 +  ok &= check(names(textual) == std::vector<std::string>{"alpha", "beta"}, "non-numeric ids sort lexicographically");
++
++  std::vector<Workspace> mixed{
++      Workspace{.id = "2", .name = "2"},
++      Workspace{.id = "0", .name = "10"},
++      Workspace{.id = "1", .name = "web"},
++      Workspace{.id = "ws-a", .name = "chat"},
++  };
++  std::ranges::sort(mixed, {}, &Workspace::id);
++  do {
++    auto ordered = mixed;
++    ext_workspace::orderForDisplay(ordered);
++    ok &= check(
++        names(ordered) == std::vector<std::string>{"2", "10", "web", "chat"},
++        "mixed numeric and textual workspaces have a consistent order across input permutations"
++    );
++  } while (std::ranges::next_permutation(mixed, {}, &Workspace::id).found);
 +
 +  std::vector<Workspace> empty;
 +  ext_workspace::orderForDisplay(empty);

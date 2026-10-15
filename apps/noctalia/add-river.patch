@@ -2,7 +2,7 @@ diff --git a/CREDITS.md b/CREDITS.md
 index 33d17de064..9a0f34d305 100644
 --- a/CREDITS.md
 +++ b/CREDITS.md
-@@ -52,6 +52,10 @@
+@@ -52,6 +52,10 @@ ## Vendored Libraries
  - **[Material Color Utilities](https://github.com/material-foundation/material-color-utilities)** — Material 3 palette generation (Apache-2.0)
  - **[Wuffs](https://github.com/google/wuffs)** — Memory-safe image decoders (Apache-2.0)
  
@@ -17,7 +17,7 @@ diff --git a/README.md b/README.md
 index cf880f9787..469404e4a9 100644
 --- a/README.md
 +++ b/README.md
-@@ -70,10 +70,15 @@
+@@ -70,10 +70,15 @@ ## Wayland Compositor Support
  integration works through compositor-native backends where needed, or through `ext-workspace-v1` on compositors that
  implement it.
  
@@ -36,7 +36,7 @@ index cf880f9787..469404e4a9 100644
  
  Noctalia is a desktop shell, not a full desktop environment. It provides the visual and service layer around your
 diff --git a/docs/user/bar/widgets/workspaces.mdx b/docs/user/bar/widgets/workspaces.mdx
-index 84b9b5eb39..9f3275989b 100644
+index 41bab5797c..a5ad240c31 100644
 --- a/docs/user/bar/widgets/workspaces.mdx
 +++ b/docs/user/bar/widgets/workspaces.mdx
 @@ -17,6 +17,11 @@
@@ -50,9 +50,9 @@ index 84b9b5eb39..9f3275989b 100644
 +
  | Setting | Type | Default | Description |
  |---------|------|---------|-------------|
- | `style` | string | `"regular"` | Pill style: `"regular"` (animated pills), `"minimal"` (labels drawn without pill backgrounds), or `"focus_hint"` (inactive dots + expanded active pill with focused app icon). |
+ | `style` | string | `"regular"` | Pill style: `"regular"` (animated pills), `"minimal"` (labels drawn without pill backgrounds, colored with the focused, occupied, empty, and urgent colors), or `"focus_hint"` (inactive dots + expanded active pill with focused app icon). |
 diff --git a/docs/user/getting-started/faq.mdx b/docs/user/getting-started/faq.mdx
-index c6bce79af7..91481f809b 100644
+index a5c347b3ca..bc17731851 100644
 --- a/docs/user/getting-started/faq.mdx
 +++ b/docs/user/getting-started/faq.mdx
 @@ -90,6 +90,14 @@
@@ -71,7 +71,7 @@ index c6bce79af7..91481f809b 100644
  Add `noctalia` under System Settings → Autostart, or see [KDE Plasma](/noctalia/compositor-settings/kde/) for Plasma-specific limits (clipboard, blur, screenshots, and more).
  :::
 diff --git a/meson.build b/meson.build
-index 987acca675..e280429c73 100644
+index 3b8eefdf61..bd892bf886 100644
 --- a/meson.build
 +++ b/meson.build
 @@ -360,6 +360,10 @@
@@ -85,7 +85,7 @@ index 987acca675..e280429c73 100644
    ['org-kde-plasma-virtual-desktop',
      'protocols/org-kde-plasma-virtual-desktop.xml'],
    ['cursor-shape-v1',
-@@ -939,6 +943,7 @@
+@@ -948,6 +952,7 @@
    'src/compositors/compositor_detect.cpp',
    'src/compositors/compositor_runtime.cpp',
    'src/compositors/dwl/dwl_workspace_backend.cpp',
@@ -93,9 +93,9 @@ index 987acca675..e280429c73 100644
    'src/compositors/ext_workspace/ext_workspace_output_backend.cpp',
    'src/compositors/ext_workspace/ext_workspace_backend.cpp',
    'src/compositors/hyprland/hyprland_runtime.cpp',
-@@ -1313,6 +1318,21 @@
+@@ -1365,6 +1370,37 @@
    )
-   test('screencopy_connection_isolation', screencopy_connection_isolation_exe)
+   test('brightness_service', brightness_service_exe, timeout: 60)
  
 +  river_classic_test = executable('river-classic-workspace-backend-test',
 +    sources: files('tests/river-classic-workspace-backend-test.cpp'),
@@ -109,9 +109,25 @@ index 987acca675..e280429c73 100644
 +    dependencies: noctalia_core_dep,
 +    override_options: ['b_ndebug=false'],
 +  )
-+  test('river-classic-detection-classic', river_classic_detection_test, args: ['RiverClassic'])
-+  test('river-classic-detection-modern', river_classic_detection_test, args: ['Unknown'])
-+  test('river-classic-detection-triad', river_classic_detection_test, args: ['Triad'])
++  foreach detection_case : [
++    ['classic', 'river-classic', 'RiverClassic'],
++    ['modern', 'river', 'Unknown'],
++    ['triad', 'triad', 'Triad'],
++  ]
++    river_classic_detection_env = environment()
++    foreach variable : [
++      'UMBRIEL_SOCKET', 'LABWC_PID', 'NIRI_SOCKET', 'HYPRLAND_INSTANCE_SIGNATURE',
++      'SWAYSOCK', 'MANGO_INSTANCE_SIGNATURE', 'PINNACLE_GRPC_SOCKET',
++      'XDG_SESSION_DESKTOP', 'DESKTOP_SESSION',
++    ]
++      river_classic_detection_env.set(variable, '')
++    endforeach
++    river_classic_detection_env.set('XDG_CURRENT_DESKTOP', detection_case[1])
++    test('river-classic-detection-' + detection_case[0], river_classic_detection_test,
++      args: [detection_case[2]],
++      env: river_classic_detection_env,
++    )
++  endforeach
    upower_integration_exe = executable('upower_charge_limit_integration_test',
      sources: files('tests/upower_charge_limit_integration_test.cpp'),
      dependencies: noctalia_core_dep,
@@ -361,7 +377,7 @@ index 0000000000..e9629dde1d
 +  </interface>
 +</protocol>
 diff --git a/src/compositors/compositor_detect.cpp b/src/compositors/compositor_detect.cpp
-index a3874e6732..383e7ceff3 100644
+index a3874e6732..2a6d557465 100644
 --- a/src/compositors/compositor_detect.cpp
 +++ b/src/compositors/compositor_detect.cpp
 @@ -54,6 +54,12 @@
@@ -377,7 +393,16 @@ index a3874e6732..383e7ceff3 100644
        if (StringUtils::containsInsensitive(hint, "niri")) {
          return CompositorKind::Niri;
        }
-@@ -108,6 +114,8 @@
+@@ -98,6 +104,8 @@
+       return "Sway";
+     case CompositorKind::Mango:
+       return "Mango";
++    case CompositorKind::Triad:
++      return "Triad";
+     case CompositorKind::Dwl:
+       return "dwl";
+     case CompositorKind::Labwc:
+@@ -108,6 +116,8 @@
        return "Umbriel";
      case CompositorKind::Pinnacle:
        return "Pinnacle";
@@ -406,10 +431,10 @@ index 3b667a9886..7dd7c061c3 100644
  
  } // namespace compositors
 diff --git a/src/compositors/compositor_platform.cpp b/src/compositors/compositor_platform.cpp
-index 80fdf8f398..ca5db7b304 100644
+index 94dfcfab5a..93d54fce70 100644
 --- a/src/compositors/compositor_platform.cpp
 +++ b/src/compositors/compositor_platform.cpp
-@@ -359,6 +359,7 @@
+@@ -375,6 +375,7 @@
      case compositors::CompositorKind::Labwc:
      case compositors::CompositorKind::Kde:
      case compositors::CompositorKind::Pinnacle:
@@ -417,7 +442,7 @@ index 80fdf8f398..ca5db7b304 100644
      case compositors::CompositorKind::Unknown:
        return std::make_unique<LambdaOutputPowerBackend>(&setGenericOutputPower);
      }
-@@ -381,6 +382,7 @@
+@@ -397,6 +398,7 @@
      case compositors::CompositorKind::Kde:
      case compositors::CompositorKind::Mango:
      case compositors::CompositorKind::Pinnacle:
@@ -425,7 +450,7 @@ index 80fdf8f398..ca5db7b304 100644
      case compositors::CompositorKind::Unknown:
        break;
      }
-@@ -401,6 +403,7 @@
+@@ -417,6 +419,7 @@
      case compositors::CompositorKind::Kde:
      case compositors::CompositorKind::Labwc:
      case compositors::CompositorKind::Pinnacle:
@@ -433,7 +458,7 @@ index 80fdf8f398..ca5db7b304 100644
      case compositors::CompositorKind::Unknown:
        break;
      }
-@@ -424,6 +427,7 @@
+@@ -440,6 +443,7 @@
      case compositors::CompositorKind::Labwc:
      case compositors::CompositorKind::Kde:
      case compositors::CompositorKind::Pinnacle:
@@ -441,7 +466,7 @@ index 80fdf8f398..ca5db7b304 100644
      case compositors::CompositorKind::Unknown:
        break;
      }
-@@ -598,6 +602,10 @@
+@@ -614,6 +618,10 @@ CompositorPlatform::CompositorPlatform(WaylandConnection& wayland)
    m_wayland.setKdeVirtualDesktopManagerCallback([this](org_kde_plasma_virtual_desktop_management* management) {
      bindKdeVirtualDesktop(management);
    });
@@ -452,7 +477,7 @@ index 80fdf8f398..ca5db7b304 100644
    m_wayland.setHyprlandToplevelMappingManagerCallback([this](hyprland_toplevel_mapping_manager_v1* manager) {
      bindHyprlandToplevelMappingManager(manager);
    });
-@@ -612,6 +620,7 @@
+@@ -628,6 +636,7 @@ CompositorPlatform::~CompositorPlatform() {
    m_wayland.setOutputLifecycleCallbacks({}, {});
    m_wayland.setWorkspaceManagerCallbacks({}, {});
    m_wayland.setKdeVirtualDesktopManagerCallback({});
@@ -460,7 +485,7 @@ index 80fdf8f398..ca5db7b304 100644
    m_wayland.setHyprlandToplevelMappingManagerCallback({});
    m_wayland.setToplevelChangeCallback({});
  }
-@@ -632,6 +641,7 @@
+@@ -648,6 +657,7 @@ void CompositorPlatform::initialize() {
    }
    m_initialized = true;
  
@@ -468,7 +493,7 @@ index 80fdf8f398..ca5db7b304 100644
    m_workspaces->initialize();
    for (const auto& output : m_wayland.outputs()) {
      if (output.output != nullptr) {
-@@ -738,6 +748,11 @@
+@@ -754,6 +764,11 @@ wl_output* CompositorPlatform::focusedInteractiveOutput(std::chrono::millisecond
        }
      }
    }
@@ -480,7 +505,7 @@ index 80fdf8f398..ca5db7b304 100644
  
    if (compositors::isKde() && m_kwinActiveWindow != nullptr) {
      if (const auto focusedName = m_kwinActiveWindow->focusedOutputName(); focusedName.has_value()) {
-@@ -1404,6 +1419,9 @@
+@@ -1451,6 +1466,9 @@ TaskbarAssignmentMode CompositorPlatform::taskbarAssignmentMode() const noexcept
  }
  
  bool CompositorPlatform::supportsTaskbarWorkspaceGrouping() const noexcept {
@@ -490,7 +515,7 @@ index 80fdf8f398..ca5db7b304 100644
    if (taskbarAssignmentMode() == TaskbarAssignmentMode::WorkspaceOccurrenceTitle) {
      return true;
    }
-@@ -1585,6 +1603,7 @@
+@@ -1632,6 +1650,7 @@ bool CompositorPlatform::requestSessionExit() const {
      break;
    case compositors::CompositorKind::Kde:
    case compositors::CompositorKind::Pinnacle:
@@ -498,7 +523,7 @@ index 80fdf8f398..ca5db7b304 100644
    case compositors::CompositorKind::Unknown:
      break;
    }
-@@ -1635,6 +1654,14 @@
+@@ -1721,6 +1740,14 @@ void CompositorPlatform::bindDwlIpcWorkspace(zdwl_ipc_manager_v2* manager) {
    }
  }
  
@@ -514,7 +539,7 @@ index 80fdf8f398..ca5db7b304 100644
    if (m_workspaces != nullptr) {
      m_workspaces->onOutputAdded(output);
 diff --git a/src/compositors/compositor_platform.h b/src/compositors/compositor_platform.h
-index a3335008b0..8df1cc22b2 100644
+index 05e403db00..aec3cdb01c 100644
 --- a/src/compositors/compositor_platform.h
 +++ b/src/compositors/compositor_platform.h
 @@ -20,6 +20,8 @@
@@ -526,7 +551,7 @@ index a3335008b0..8df1cc22b2 100644
  struct hyprland_toplevel_mapping_manager_v1;
  struct zwlr_foreign_toplevel_handle_v1;
  struct ext_foreign_toplevel_handle_v1;
-@@ -204,6 +206,8 @@
+@@ -208,6 +210,8 @@
    void bindExtWorkspace(ext_workspace_manager_v1* manager);
    void bindKdeVirtualDesktop(org_kde_plasma_virtual_desktop_management* management);
    void bindDwlIpcWorkspace(zdwl_ipc_manager_v2* manager);
@@ -540,7 +565,7 @@ new file mode 100644
 index 0000000000..d66ed143f6
 --- /dev/null
 +++ b/src/compositors/river-classic/river-classic-workspace-backend.cpp
-@@ -0,0 +1,353 @@
+@@ -0,0 +1,353 @@ RiverClassicWorkspaceBackend::~RiverClassicWorkspaceBackend() { cleanup(); }
 +#include "compositors/river-classic/river-classic-workspace-backend.h"
 +
 +#include "core/log.h"
@@ -980,7 +1005,7 @@ index 0000000000..cc1845fad3
 +  ChangeCallback m_changeCallback;
 +};
 diff --git a/src/wayland/wayland_connection.cpp b/src/wayland/wayland_connection.cpp
-index fea3ce7453..a51422e2ed 100644
+index 3e52cec463..82f90f7e93 100644
 --- a/src/wayland/wayland_connection.cpp
 +++ b/src/wayland/wayland_connection.cpp
 @@ -18,6 +18,8 @@
@@ -992,7 +1017,7 @@ index fea3ce7453..a51422e2ed 100644
  #include "text-input-unstable-v3-client-protocol.h"
  #include "util/string_utils.h"
  #include "viewporter-client-protocol.h"
-@@ -63,6 +65,8 @@
+@@ -64,6 +66,8 @@
    constexpr std::uint32_t kXdgWmBaseVersion = 6;
    constexpr std::uint32_t kExtWorkspaceManagerVersion = 1;
    constexpr std::uint32_t kKdeVirtualDesktopManagementVersion = 4;
@@ -1001,7 +1026,7 @@ index fea3ce7453..a51422e2ed 100644
    constexpr std::uint32_t kWlrForeignToplevelManagerVersion = 3;
    constexpr std::uint32_t kExtForeignToplevelListVersion = 1;
    constexpr std::uint32_t kCursorShapeManagerVersion = 1;
-@@ -795,6 +799,13 @@
+@@ -806,6 +810,13 @@ void WaylandConnection::setKdeVirtualDesktopManagerCallback(
    m_kdeVirtualDesktopManagerCallback = std::move(callback);
  }
  
@@ -1015,7 +1040,7 @@ index fea3ce7453..a51422e2ed 100644
  void WaylandConnection::setToplevelChangeCallback(ChangeCallback callback) {
    m_toplevelsHandler.setChangeCallback(callback);
    m_extForeignToplevels.setChangeCallback(std::move(callback));
-@@ -1058,6 +1069,8 @@
+@@ -1074,6 +1085,8 @@ bool WaylandConnection::hasExtWorkspaceManager() const noexcept { return m_hasEx
  bool WaylandConnection::hasExtWorkspaceManager() const noexcept { return m_hasExtWorkspaceGlobal; }
  bool WaylandConnection::hasKdeVirtualDesktopManager() const noexcept { return m_hasKdeVirtualDesktopGlobal; }
  bool WaylandConnection::hasDwlIpcManager() const noexcept { return m_hasDwlIpcGlobal; }
@@ -1024,7 +1049,7 @@ index fea3ce7453..a51422e2ed 100644
  bool WaylandConnection::hasForeignToplevelManager() const noexcept { return m_hasForeignToplevelManagerGlobal; }
  
  bool WaylandConnection::hasExtForeignToplevelList() const noexcept { return m_hasExtForeignToplevelListGlobal; }
-@@ -1501,6 +1514,33 @@
+@@ -1516,6 +1529,33 @@ void WaylandConnection::bindGlobal(
      return;
    }
  
@@ -1058,7 +1083,7 @@ index fea3ce7453..a51422e2ed 100644
    if (interfaceName == zwlr_foreign_toplevel_manager_v1_interface.name) {
      m_hasForeignToplevelManagerGlobal = true;
      const auto bindVersion = std::min(version, kWlrForeignToplevelManagerVersion);
-@@ -1939,21 +1979,27 @@
+@@ -1954,21 +1994,27 @@ void WaylandConnection::cleanup() {
    m_hasLayerShellGlobal = false;
    m_hasExtWorkspaceGlobal = false;
    m_hasDwlIpcGlobal = false;
@@ -1088,7 +1113,7 @@ index fea3ce7453..a51422e2ed 100644
        hasOutputManagement() ? "yes" : "no", m_outputs.size()
    );
 diff --git a/src/wayland/wayland_connection.h b/src/wayland/wayland_connection.h
-index 004dc5e499..f8638a115c 100644
+index 8f3d750c8c..7bf1e6ab43 100644
 --- a/src/wayland/wayland_connection.h
 +++ b/src/wayland/wayland_connection.h
 @@ -42,6 +42,8 @@
@@ -1100,7 +1125,7 @@ index 004dc5e499..f8638a115c 100644
  struct zwp_virtual_keyboard_manager_v1;
  struct zwp_text_input_manager_v3;
  struct hyprland_focus_grab_manager_v1;
-@@ -156,6 +158,9 @@
+@@ -162,6 +164,9 @@ void setWorkspaceManagerCallbacks(
        std::function<void(ext_workspace_manager_v1*)> extWorkspace, std::function<void(zdwl_ipc_manager_v2*)> dwlIpc
    );
    void setKdeVirtualDesktopManagerCallback(std::function<void(org_kde_plasma_virtual_desktop_management*)> callback);
@@ -1110,7 +1135,7 @@ index 004dc5e499..f8638a115c 100644
    void setToplevelChangeCallback(ChangeCallback callback);
    void setHyprlandToplevelMappingManagerCallback(
        std::function<void(hyprland_toplevel_mapping_manager_v1* manager)> callback
-@@ -185,6 +190,8 @@
+@@ -191,6 +196,8 @@ void setHyprlandToplevelMappingManagerCallback(
    [[nodiscard]] bool hasExtWorkspaceManager() const noexcept;
    [[nodiscard]] bool hasKdeVirtualDesktopManager() const noexcept;
    [[nodiscard]] bool hasDwlIpcManager() const noexcept;
@@ -1119,7 +1144,7 @@ index 004dc5e499..f8638a115c 100644
    [[nodiscard]] bool hasForeignToplevelManager() const noexcept;
    [[nodiscard]] bool hasExtForeignToplevelList() const noexcept;
    [[nodiscard]] bool hasSessionLockManager() const noexcept;
-@@ -353,6 +360,8 @@
+@@ -360,6 +367,8 @@ void setHyprlandToplevelMappingManagerCallback(
    bool m_hasExtWorkspaceGlobal = false;
    bool m_hasKdeVirtualDesktopGlobal = false;
    bool m_hasDwlIpcGlobal = false;
@@ -1128,7 +1153,7 @@ index 004dc5e499..f8638a115c 100644
    bool m_hasForeignToplevelManagerGlobal = false;
    bool m_hasExtForeignToplevelListGlobal = false;
    std::vector<WaylandOutput> m_outputs;
-@@ -363,6 +372,8 @@
+@@ -370,6 +379,8 @@ void setHyprlandToplevelMappingManagerCallback(
    std::function<void(ext_workspace_manager_v1*)> m_extWorkspaceManagerCallback;
    std::function<void(org_kde_plasma_virtual_desktop_management*)> m_kdeVirtualDesktopManagerCallback;
    std::function<void(zdwl_ipc_manager_v2*)> m_dwlIpcManagerCallback;
@@ -1149,7 +1174,7 @@ index 3237a12ed0..03cfabf899 100644
  #include "compositors/sway/sway_workspace_backend.h"
  #include "core/log.h"
  #include "dwl-ipc-unstable-v2-client-protocol.h"
-@@ -39,6 +40,12 @@
+@@ -39,6 +40,12 @@ WaylandWorkspaces::WaylandWorkspaces(compositors::CompositorRuntimeRegistry& run
    m_outputObservers.push_back(dwlIpcBackend.get());
    m_backends.push_back(std::move(dwlIpcBackend));
  
@@ -1162,7 +1187,7 @@ index 3237a12ed0..03cfabf899 100644
    auto hyprlandBackend = std::make_unique<HyprlandWorkspaceBackend>(
        [](wl_output* /*output*/) { return std::string{}; }, runtimeRegistry.hyprland()
    );
-@@ -95,6 +102,16 @@
+@@ -95,6 +102,16 @@ void WaylandWorkspaces::bindDwlIpcWorkspace(zdwl_ipc_manager_v2* manager) {
    }
  }
  
@@ -1179,7 +1204,7 @@ index 3237a12ed0..03cfabf899 100644
  void WaylandWorkspaces::setOutputNameResolver(std::function<std::string(wl_output*)> resolver) {
    for (auto* backend : m_outputNameResolvers) {
      if (backend != nullptr) {
-@@ -108,6 +125,10 @@
+@@ -108,6 +125,10 @@ void WaylandWorkspaces::initialize() {
      return backend != nullptr && (backend->isAvailable() || (connector != nullptr && connector->connectSocket()));
    };
    auto tryFallback = [&](bool includeMangoIpc, bool includeDwlIpc) {
@@ -1190,7 +1215,7 @@ index 3237a12ed0..03cfabf899 100644
      if (availableOrConnected(m_extBackend)) {
        setActiveBackend(m_extBackend);
        return true;
-@@ -180,6 +201,12 @@
+@@ -180,6 +201,12 @@ void WaylandWorkspaces::initialize() {
        return;
      }
      break;
@@ -1203,7 +1228,7 @@ index 3237a12ed0..03cfabf899 100644
    case compositors::CompositorKind::Niri:
    case compositors::CompositorKind::Unknown:
      break;
-@@ -356,6 +383,13 @@
+@@ -356,6 +383,13 @@ WaylandWorkspaces::dwlIpcFocusedClientOnOutput(wl_output* output) const {
    return static_cast<const DwlWorkspaceBackend*>(m_dwlIpcBackend)->ipcFocusedClientForOutput(output);
  }
  
@@ -1266,7 +1291,7 @@ new file mode 100644
 index 0000000000..6538f8a13c
 --- /dev/null
 +++ b/tests/river-classic-detection-test.cpp
-@@ -0,0 +1,9 @@
+@@ -0,0 +1,9 @@ int main(int argc, char** argv) {
 +#include "compositors/compositor_detect.h"
 +#include "tests/test_check.h"
 +
@@ -1281,7 +1306,7 @@ new file mode 100644
 index 0000000000..7d5375867e
 --- /dev/null
 +++ b/tests/river-classic-workspace-backend-test.cpp
-@@ -0,0 +1,291 @@
+@@ -0,0 +1,291 @@ std::uint32_t wl_proxy_get_version(wl_proxy* handle) { return proxy(handle).vers
 +#include "compositors/river-classic/river-classic-workspace-backend.h"
 +#include "river-classic-control-unstable-v1-client-protocol.h"
 +#include "river-classic-status-unstable-v1-client-protocol.h"
