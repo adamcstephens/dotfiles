@@ -160,7 +160,7 @@ accel_profile = "adaptive"
 "Mod+Period" = "window-consume-right"
 "Mod+Ctrl+Comma" = "window-consume-from-left"
 "Mod+Ctrl+Period" = "window-consume-from-right"
-"Mod+W" = { action = "column-toggle-tabbed", repeat = false }
+# "Mod+W" = { action = "column-toggle-tabbed", repeat = false }
 "Mod+Alt+Right" = "column-focus-tab-next"
 "Mod+Alt+Left" = "column-focus-tab-previous"
 "Mod+WheelUp" = "window-focus-left"

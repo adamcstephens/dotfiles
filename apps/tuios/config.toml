@@ -365,7 +365,8 @@ command_palette = []
 launcher = ['alt+space']
 next_workspace = ['ctrl+tab']
 prev_workspace = ['ctrl+shift+tab']
-prefix_workspace_switcher = ['super+s']
+prefix_workspace_switcher = ['super+w']
+prefix_session_switcher = ['super+s']
 
 [[keybindings.command]]
 key = 'super+p'
