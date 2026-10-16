@@ -6,12 +6,14 @@
   pkgs,
   ...
 }:
+let
+  package = inputs.nixos-unstable-small.legacyPackages.${pkgs.stdenv.hostPlatform.system}.tuios;
+in
+
 {
   config = lib.mkMerge [
     {
-      packages = [
-        inputs.nixos-unstable-small.legacyPackages.${pkgs.stdenv.hostPlatform.system}.tuios
-      ];
+      packages = [ package ];
 
       xdg.config.files."tuios/config.toml".source = dotlib.source "apps/tuios/config.toml";
       xdg.config.files."tuios/themes".source = dotlib.source "apps/tuios/themes";
@@ -35,8 +37,8 @@
 
           serviceConfig = {
             Type = "simple";
-            ExecStartPre = "${lib.getExe pkgs.tuios} kill-server";
-            ExecStart = "${lib.getExe pkgs.tuios} daemon";
+            ExecStartPre = "${lib.getExe package} kill-server";
+            ExecStart = "${lib.getExe package} daemon";
             Restart = "on-failure";
           };
         };
