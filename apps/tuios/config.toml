@@ -367,6 +367,7 @@ next_workspace = ['ctrl+tab']
 prev_workspace = ['ctrl+shift+tab']
 prefix_workspace_switcher = ['super+w']
 prefix_session_switcher = ['super+s']
+choose_tree = ["super+/"]
 
 [[keybindings.command]]
 key = 'super+p'
