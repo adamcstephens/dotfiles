@@ -1,5 +1,6 @@
 - **CRITICAL** I like to ask questions. When a question is asked, you should answer it, and stop. Do not edit files.
 - When writing commands to files, e.g. scripts or docs, always use the long version (--name) over short (-n) if available.
+- When you are asking questions, you should use the AskUserQuestion tool instead of sending as text questions.
 
 ## Ticket Scope and Workflow
 If a repo has a ticket system (e.g. veans)
