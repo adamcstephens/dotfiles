@@ -80,6 +80,7 @@
         pkgs.jless
         pkgs.just
         pkgs.kitty.terminfo
+        pkgs.osc
         pkgs.python314
         pkgs.tio
         pkgs.wget
