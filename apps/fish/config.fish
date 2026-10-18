@@ -77,9 +77,7 @@ status is-interactive; and begin
     set --universal __done_notification_urgency_level_failure normal
     set --universal fish_greeting
 
-    set --export SSH_AUTH_SOCK (ssh-agent-mgr)
     source $HOME/.config/fish/functions/ssh-auth-sock.fish
-
     source $HOME/.config/fish/functions/_smart-splits.fish
 
     if test -e $HOME/.shell_local.fish
