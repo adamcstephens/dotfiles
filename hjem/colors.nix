@@ -11,7 +11,7 @@
     name = "moonfly";
     author = "https://github.com/bluz71/vim-moonfly-colors";
     palette = {
-      base00 = "#080808";
+      base00 = "#000000";
       base01 = "#100323";
       base02 = "#323437";
       base03 = "#949494";

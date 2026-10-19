@@ -12,7 +12,7 @@
   xdg.config.files."tmux/tmux.conf".source = dotlib.source "apps/tmux/tmux.conf";
 
   xdg.config.files."tmux/theme-dark.tmux".source = pkgs.runCommand "theme-dark.tmux" { } ''
-    cat ${npins.vim-moonfly-colors}/extras/moonfly.tmux > $out
+    cat ${../../themes/moonfly/extras/moonfly.tmux} > $out
     cat << EOF >> $out
     set-option -g window-status-last-style fg=default,bg=default
     EOF

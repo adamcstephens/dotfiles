@@ -1,6 +1,5 @@
 {
   dotlib,
-  npins,
   pkgs,
   ...
 }:
@@ -22,5 +21,5 @@ in
   xdg.config.files."zellij/config.kdl".source = dotlib.source "apps/zellij/config.kdl";
 
   xdg.config.files."zellij/themes/moonfly.kdl".source =
-    npins.vim-moonfly-colors + "/extras/moonfly-zellij.kdl";
+    dotlib.source "themes/moonfly/extras/moonfly-zellij.kdl";
 }

@@ -1,5 +1,5 @@
 [general]
-background = "#080808"
+background = "#000000"
 border = "#262626"
 horizontal_rule = "#262626"
 unread_indicator = "#80A0FF"
@@ -13,7 +13,7 @@ error = "#FF5189"
 
 [buffer]
 action = "#80A0FF"
-background = "#080808"
+background = "#000000"
 background_text_input = "#121212"
 background_title_bar = "#1C1C1C"
 border = "#262626"

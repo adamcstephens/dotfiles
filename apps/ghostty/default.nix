@@ -52,7 +52,7 @@
           };
 
       xdg.config.files."ghostty/themes/moonfly".source =
-        npins.vim-moonfly-colors + "/extras/moonfly-ghostty.conf";
+        dotlib.source "themes/moonfly/extras/moonfly-ghostty.conf";
       xdg.config.files."ghostty/themes/Modus Operandi".source =
         npins."modus-themes.nvim" + "/extras/ghostty/modus_operandi";
     }

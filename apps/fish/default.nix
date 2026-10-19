@@ -59,7 +59,7 @@ let
     echo "# name: dotfiles" >dotfiles.theme
 
     ${lib.getExe (themeDump "light" "${npins."modus-themes.nvim"}/extras/fish/modus_operandi.fish")} >>dotfiles.theme
-    ${lib.getExe (themeDump "dark" "${npins.vim-moonfly-colors}/extras/moonfly.fish")} >>dotfiles.theme
+    ${lib.getExe (themeDump "dark" ../../themes/moonfly/extras/moonfly.fish)} >>dotfiles.theme
     cp dotfiles.theme $out
   '';
 in

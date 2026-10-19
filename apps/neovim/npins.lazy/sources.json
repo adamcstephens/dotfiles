@@ -323,18 +323,6 @@
       "revision": "0106b1afd4a2f7e1098037b5ceb161bab7471088",
       "url": null,
       "hash": "sha256-6m6tW5toDR+yiBpIT790Ntr6ljXrenv/f7vIGrnIPRI="
-    },
-    "vim-moonfly-colors": {
-      "type": "Git",
-      "repository": {
-        "type": "Git",
-        "url": "https://github.com/bluz71/vim-moonfly-colors"
-      },
-      "branch": "master",
-      "submodules": false,
-      "revision": "2c883835f5b7b380a0a9e80695c420f7efebdfe4",
-      "url": null,
-      "hash": "sha256-5Uv9DsUPasnPbBVK6+1WLzZUhV2gcS94CUaQVcds8Uc="
     }
   },
   "version": 8

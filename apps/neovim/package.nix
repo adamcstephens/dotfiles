@@ -101,6 +101,13 @@ mnw.lib.wrap pkgs {
         tmux-nvim
         toggleterm-nvim
       ]
+      ++ [
+        (pkgs.vimUtils.buildVimPlugin {
+          pname = "vim-moonfly-colors";
+          version = "local";
+          src = ../../themes/moonfly;
+        })
+      ]
       ++ (mnw.lib.npinsToPlugins pkgs ./npins.lazy/sources.json);
   };
 

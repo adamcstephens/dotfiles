@@ -36,10 +36,10 @@ in
 
   # themes
   xdg.config.files."kitty/no-preference-theme.auto.conf".source =
-    npins.vim-moonfly-colors + "/extras/moonfly-kitty.conf";
+    dotlib.source "themes/moonfly/extras/moonfly-kitty.conf";
 
   xdg.config.files."kitty/dark-theme.auto.conf".source =
-    npins.vim-moonfly-colors + "/extras/moonfly-kitty.conf";
+    dotlib.source "themes/moonfly/extras/moonfly-kitty.conf";
   xdg.config.files."kitty/light-theme.auto.conf".source =
     npins."modus-themes.nvim" + "/extras/kitty/modus_operandi.conf";
 }
