@@ -42,12 +42,4 @@ in
     npins.vim-moonfly-colors + "/extras/moonfly-kitty.conf";
   xdg.config.files."kitty/light-theme.auto.conf".source =
     npins."modus-themes.nvim" + "/extras/kitty/modus_operandi.conf";
-
-  # smart-splits.nvim
-  xdg.config.files."kitty/neighboring_window.py".source =
-    pkgs.vimPlugins.smart-splits-nvim + "/kitty/neighboring_window.py";
-  xdg.config.files."kitty/relative_resize.py".source =
-    pkgs.vimPlugins.smart-splits-nvim + "/kitty/relative_resize.py";
-  xdg.config.files."kitty/split_window.py".source =
-    pkgs.vimPlugins.smart-splits-nvim + "/kitty/split_window.py";
 }
