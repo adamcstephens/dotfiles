@@ -42,28 +42,6 @@ in
             Restart = "on-failure";
           };
         };
-
-        services.tuios-ssh-sock = {
-          wantedBy = [ "tuios.service" ];
-          requires = [ "tuios.service" ];
-          after = [ "tuios.service" ];
-          partOf = [ "tuios.service" ];
-          startLimitIntervalSec = 60;
-          startLimitBurst = 30;
-
-          path = [
-            package
-            pkgs.gojq
-            pkgs.coreutils
-            pkgs.gnused
-          ];
-
-          serviceConfig = {
-            ExecStart = "${pkgs.runtimeShell} ${dotlib.source "bin/tuios-ssh-sock.sh"}";
-            Restart = "always";
-            RestartSec = "1s";
-          };
-        };
       };
     })
   ];

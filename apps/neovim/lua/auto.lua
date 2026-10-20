@@ -29,29 +29,6 @@ vim.api.nvim_create_autocmd("BufLeave", {
   group = autoid,
 })
 
-vim.api.nvim_create_autocmd("FocusGained", {
-  desc = "update ssh auth sock in tmux",
-  callback = function()
-    if not vim.env.TMUX then
-      return nil
-    end
-
-    local tmuxEnv = vim.gsplit(vim.fn.system("tmux showenv"), "\n")
-    local tmuxEnvSSH = vim
-      .iter(tmuxEnv)
-      :filter(function(v)
-        return string.match(v, "SSH_AUTH_SOCK")
-      end)
-      :totable()
-    local tmuxEnvSSHAuthSock = (vim.split(tmuxEnvSSH[1], "="))[2]
-
-    if vim.env.SSH_AUTH_SOCK ~= tmuxEnvSSHAuthSock then
-      vim.env.SSH_AUTH_SOCK = tmuxEnvSSHAuthSock
-    end
-  end,
-  group = autoid,
-})
-
 vim.api.nvim_create_autocmd("FileType", {
   desc = "quit help with q",
   pattern = "help",

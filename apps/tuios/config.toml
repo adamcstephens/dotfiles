@@ -555,3 +555,6 @@ left = ["workspaces", "tape"]
 
 [agents]
 enabled = false
+
+[hooks]
+after-attach = "~/.dotfiles/apps/tuios/hooks/after-attach.sh"

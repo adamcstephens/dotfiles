@@ -29,15 +29,6 @@ if [ "${1:-}" = "--tmux-pane" ]; then
   fi
 fi
 
-
-well_known_socket() {
-  if [ -n "${XDG_RUNTIME_DIR:-}" ]; then
-    printf '%s/ssh-auth.sock' "$XDG_RUNTIME_DIR"
-  else
-    printf '%s/.ssh/ssh-auth.sock' "$HOME"
-  fi
-}
-
 # Echo the VCS kind (jujutsu/git) for the first ancestor that has one, or
 # nothing. Stops before $HOME and /, matching the original walk.
 find_vcs_up() {
@@ -65,6 +56,11 @@ git) tui=lazygit ;;
   ;;
 esac
 
-SSH_AUTH_SOCK="$(well_known_socket)"
+if [ -z "${XDG_RUNTIME_DIR:-}" ]; then
+  SSH_AUTH_SOCK="$HOME/.ssh/ssh-auth.sock"
+else
+  SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-auth.sock"
+fi
 export SSH_AUTH_SOCK
+
 exec "$tui" "$@"

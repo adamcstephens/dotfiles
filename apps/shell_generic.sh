@@ -27,5 +27,9 @@ if [ -d /run/current-system/sw/bin ]; then
 fi
 
 # ssh
-SSH_AUTH_SOCK="$(ssh-agent-mgr)"
+if [ -z "${XDG_RUNTIME_DIR:-}" ]; then
+  SSH_AUTH_SOCK="$HOME/.ssh/ssh-auth.sock"
+else
+  SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-auth.sock"
+fi
 export SSH_AUTH_SOCK

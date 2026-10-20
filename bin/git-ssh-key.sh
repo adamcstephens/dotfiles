@@ -1,8 +1,6 @@
 #!/usr/bin/env sh
 
-SSH_AUTH_SOCK="$(ssh-agent-mgr)"
-
-if [ -n "$SSH_AUTH_SOCK" ]; then
+if [ -S "$SSH_AUTH_SOCK" ]; then
   key="$(ssh-add -L | head -n 1)"
 fi
 
