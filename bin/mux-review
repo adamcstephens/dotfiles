@@ -21,6 +21,17 @@ if [ -n "$REX_SESSION" ]; then
     fi
     exit "$status"
   ' mux-review "$PR" "$@"
+elif [ -n "$TUIOS_SESSION" ]; then
+  tuios new-window "$PR" --cwd "$PWD" -- sh -c '
+    direnv exec . nixpkgs-review pr "$@"
+    rc=$?
+    [ "$rc" -eq 0 ] && exit 0
+
+    tuios status error --app nixpkgs-review --msg "Failed with exit status $rc"
+    printf "\nFailed (exit %s). Press Enter to close." "$rc"
+    read -r _
+    exit "$rc"
+  ' mux-review "$PR" "$@"
 else
   echo "Unsupported mux environment"
   exit 1
