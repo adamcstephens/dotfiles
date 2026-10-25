@@ -46,6 +46,15 @@ concat(
 )
 """
 
+duplicate_description = '''
+concat(
+  description.trim_end(),
+  "\n\n(cherry picked from commit ",
+  commit_id,
+  ")\n"
+)
+'''
+
 [ui]
 diff-editor = ":builtin"
 editor = "nvim"
