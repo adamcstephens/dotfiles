@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+if [ -z "$1" ]; then
+  echo "Usage: mux-review <PR> <args>"
+  exit 1
+fi
+
+PR="$1"
+TITLE="review-$PR"
+shift
+
+if [ -n "$REX_SESSION" ]; then
+  rex window new "$TITLE" --cwd "$PWD" -- bash -c '
+    direnv exec . nixpkgs-review pr "$@"
+    status=$?
+    if [ "$status" -ne 0 ]; then
+      message=$(printf "Review of PR %s failed (exit %s)" "$1" "$status" | base64 | tr -d "\n")
+      printf "\033]7501;state=error:app=mux-review:msg=%s\033\\" "$message"
+      printf "\nReview failed (exit %s). Press Enter to close." "$status"
+      read -r
+    fi
+    exit "$status"
+  ' mux-review "$PR" "$@"
+else
+  echo "Unsupported mux environment"
+  exit 1
+fi
