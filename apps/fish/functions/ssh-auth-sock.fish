@@ -1,5 +1,9 @@
 function find_ssh_agent
     set --local discovered_sock $SSH_AUTH_SOCK
+    # Previous invocations export our symlink; inspect its target rather than the alias.
+    if test "$discovered_sock" = "$argv[1]"
+        set discovered_sock (readlink "$argv[1]")
+    end
 
     function find_allowed_socket
         set --local allowlist
@@ -18,7 +22,7 @@ function find_ssh_agent
 
     set --local denylist '/var/run/com.apple.launchd.*/Listeners' '/tmp/tuios*/*.sock'
     for denied in $denylist
-        if string match --quiet $denied $SSH_AUTH_SOCK
+        if string match --quiet $denied "$discovered_sock"
             set discovered_sock (find_allowed_socket)
             break
         end
@@ -39,18 +43,19 @@ function ssh-auth-sock --on-event="fish_preexec"
     if test -n "$TUIOS_SESSION"
         set DISCOVERED_SOCK (tuios ssh-agent-path)
     else
-        set DISCOVERED_SOCK (find_ssh_agent)
+        set DISCOVERED_SOCK (find_ssh_agent "$WELL_KNOWN_SOCK")
     end
 
-    if ! test -e "$WELL_KNOWN_SOCK"
-        ln -sf "$DISCOVERED_SOCK" "$WELL_KNOWN_SOCK"
-    else if test "$WELL_KNOWN_SOCK" != "$DISCOVERED_SOCK" && test (readlink "$WELL_KNOWN_SOCK") != "$DISCOVERED_SOCK" && test -S "$DISCOVERED_SOCK"
+    if test -S "$DISCOVERED_SOCK"; and test (readlink "$WELL_KNOWN_SOCK") != "$DISCOVERED_SOCK"
         ln -sf "$DISCOVERED_SOCK" "$WELL_KNOWN_SOCK"
     end
 
-    if ! test -e "$SIGNING_KEY_FILE" || test "$WELL_KNOWN_SOCK" -nt "$SIGNING_KEY_FILE"
-        ssh-add -L | head --lines=1 >"$SIGNING_KEY_FILE"
-    end
-
+    # ssh-add must query the selected agent, not the socket we just replaced.
     set --export SSH_AUTH_SOCK "$WELL_KNOWN_SOCK"
+
+    # Keys can change without the socket changing. Preserve the file if the agent has no keys.
+    set --local signing_keys (ssh-add -L)
+    if test $status -eq 0; and test (count $signing_keys) -gt 0
+        printf '%s\n' "$signing_keys[1]" >"$SIGNING_KEY_FILE"
+    end
 end

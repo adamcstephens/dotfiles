@@ -82,6 +82,7 @@ status is-interactive; and begin
     set --universal fish_greeting
 
     source $HOME/.config/fish/functions/ssh-auth-sock.fish
+    ssh-auth-sock
     source $HOME/.config/fish/functions/_smart-splits.fish
 
     if test -e $HOME/.shell_local.fish
