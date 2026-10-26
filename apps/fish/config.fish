@@ -9,6 +9,10 @@ if test -d "$HOME/.local/state/hjem/standalone/current-profile"
     fish_add_path --prepend --move "$HOME/.local/state/hjem/standalone/current-profile/bin"
 end
 
+if test -n "$REX_BIN_DIR"
+    fish_add_path --prepend --move "$REX_BIN_DIR"
+end
+
 if ! grep nixos /etc/os-release >/dev/null 2>&1
     set --export TERMINFO_DIRS $HOME/.nix-profile/share/terminfo
 
