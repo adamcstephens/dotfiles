@@ -78,7 +78,8 @@ export default {
       browser: "com.google.Chrome",
     },
     {
-      match: /linear.app/,
+      match: (url, { opener }) =>
+        url.hostname === "linear.app" && opener?.bundleId !== "com.linear",
       browser: "Linear",
     },
   ],
