@@ -9,6 +9,44 @@ let
 
   settingsFormat = pkgs.formats.json { };
   settingsFile = settingsFormat.generate "paseo-config.json" cfg.settings;
+
+  environment = {
+    PASEO_HOME = cfg.dataDir;
+    PASEO_LISTEN = "${cfg.listenAddress}:${toString cfg.port}";
+  }
+  // lib.optionalAttrs (cfg.hostnames == true) {
+    PASEO_HOSTNAMES = "true";
+  }
+  // lib.optionalAttrs (lib.isList cfg.hostnames && cfg.hostnames != [ ]) {
+    PASEO_HOSTNAMES = lib.concatStringsSep "," cfg.hostnames;
+  }
+  // lib.optionalAttrs (cfg.relay.enable && cfg.relay.mode == "remote") {
+    PASEO_RELAY_ENDPOINT = "${cfg.relay.host}:${toString cfg.relay.port}";
+    PASEO_RELAY_USE_TLS = if cfg.relay.useTls then "true" else "false";
+  }
+  //
+    lib.optionalAttrs (cfg.relay.enable && cfg.relay.mode == "remote" && cfg.relay.publicUseTls != null)
+      {
+        PASEO_RELAY_PUBLIC_USE_TLS = if cfg.relay.publicUseTls then "true" else "false";
+      };
+
+  startPre = pkgs.writeShellApplication {
+    name = "paseo-start-pre";
+    runtimeInputs = [ pkgs.coreutils ];
+    text = ''
+      mkdir --parents ${lib.escapeShellArg cfg.dataDir}
+      ${lib.optionalString (cfg.settings != { }) ''
+        install --mode 0600 ${settingsFile} ${lib.escapeShellArg "${cfg.dataDir}/config.json"}
+      ''}
+    '';
+  };
+
+  start = pkgs.writeShellScript "paseo-start" ''
+    ${lib.getExe startPre}
+    exec ${lib.getExe' cfg.package "paseo-server"} ${
+      lib.optionalString (!cfg.relay.enable) "--no-relay"
+    }
+  '';
 in
 {
   options = {
@@ -81,9 +119,9 @@ in
               `relay.host:relay.port`. Sets `PASEO_RELAY_ENDPOINT` and
               `PASEO_RELAY_USE_TLS` for the daemon.
 
-            A `"local"` mode (running a relay on the same host as a systemd
-            unit) is not yet implemented — the relay package currently only
-            ships a Cloudflare Workers adapter. Tracked separately.
+            A `"local"` mode (running a relay on the same host) is not yet
+            implemented — the relay package currently only ships a Cloudflare
+            Workers adapter.
           '';
         };
 
@@ -166,7 +204,7 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    systemd.user.services.paseo = {
+    systemd.user.services.paseo = lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
       Unit = {
         Description = "Paseo - self-hosted daemon for AI coding agents";
         X-Restart-Triggers = [ settingsFile ];
@@ -175,44 +213,17 @@ in
 
       Service = {
         Environment = lib.mapAttrsToList (name: value: "${name}=${value}") (
-          {
+          environment
+          // {
             LOCALE_ARCHIVE = "${pkgs.glibcLocales}/lib/locale/locale-archive";
             TZDIR = "${pkgs.tzdata}/share/zoneinfo";
-            PASEO_HOME = cfg.dataDir;
-            PASEO_LISTEN = "${cfg.listenAddress}:${toString cfg.port}";
           }
-          // lib.optionalAttrs (cfg.hostnames == true) {
-            PASEO_HOSTNAMES = "true";
-          }
-          // lib.optionalAttrs (lib.isList cfg.hostnames && cfg.hostnames != [ ]) {
-            PASEO_HOSTNAMES = lib.concatStringsSep "," cfg.hostnames;
-          }
-          // lib.optionalAttrs (cfg.relay.enable && cfg.relay.mode == "remote") {
-            PASEO_RELAY_ENDPOINT = "${cfg.relay.host}:${toString cfg.relay.port}";
-            PASEO_RELAY_USE_TLS = if cfg.relay.useTls then "true" else "false";
-          }
-          //
-            lib.optionalAttrs (cfg.relay.enable && cfg.relay.mode == "remote" && cfg.relay.publicUseTls != null)
-              {
-                PASEO_RELAY_PUBLIC_USE_TLS = if cfg.relay.publicUseTls then "true" else "false";
-              }
           // cfg.environment
         );
 
         Type = "simple";
 
-        ExecStartPre = lib.getExe (
-          pkgs.writeShellApplication {
-            name = "paseo-start-pre";
-            runtimeInputs = [ pkgs.coreutils ];
-            text = ''
-              mkdir --parents ${lib.escapeShellArg cfg.dataDir}
-              ${lib.optionalString (cfg.settings != { }) ''
-                install --mode 0600 ${settingsFile} ${lib.escapeShellArg "${cfg.dataDir}/config.json"}
-              ''}
-            '';
-          }
-        );
+        ExecStartPre = lib.getExe startPre;
 
         ExecStart =
           "${cfg.package}/bin/paseo-server" + lib.optionalString (!cfg.relay.enable) " --no-relay";
@@ -223,6 +234,31 @@ in
         # Graceful shutdown (server handles SIGTERM with a 10s timeout)
         KillSignal = "SIGTERM";
         TimeoutStopSec = 15;
+      };
+    };
+
+    launchd.agents.paseo = lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
+      enable = true;
+      restartTriggers = [ settingsFile ];
+      config = {
+        ProgramArguments = [ "${start}" ];
+        RunAtLoad = true;
+        KeepAlive.SuccessfulExit = false;
+        ThrottleInterval = 5;
+        ExitTimeOut = 15;
+        EnvironmentVariables =
+          environment
+          // {
+            PATH = lib.concatStringsSep ":" [
+              "${config.home.profileDirectory}/bin"
+              "/nix/var/nix/profiles/default/bin"
+              "/usr/bin"
+              "/bin"
+              "/usr/sbin"
+              "/sbin"
+            ];
+          }
+          // cfg.environment;
       };
     };
 

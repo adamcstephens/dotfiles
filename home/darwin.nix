@@ -7,6 +7,7 @@
 
     ../apps/finicky
     ../apps/karabiner
+    ../apps/paseo
   ];
 
   home.packages = [

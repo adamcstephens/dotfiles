@@ -103,6 +103,7 @@ systemd-networkd-debug-reset:
     sudo systemctl systemd-networkd
 
 test:
+    nix eval --impure --json --file tests/paseo.nix
     nix build --print-build-logs --keep-going .#homeConfigurations.deck.activationPackage .#homeConfigurations.punk.activationPackage
     nix eval .#darwinConfigurations.willow.system.drvPath
     nix eval .#nixosConfigurations.agents.config.system.build.toplevel.drvPath
