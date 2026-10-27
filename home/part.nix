@@ -20,6 +20,7 @@ let
 
   nixosCommon = [
     inputs.home-manager.nixosModules.home-manager
+    ./migrate-nixos.nix
     {
       home-manager = {
         inherit extraSpecialArgs;

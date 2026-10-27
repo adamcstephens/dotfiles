@@ -58,6 +58,16 @@
     home.stateVersion = "26.05";
     xdg.enable = true;
 
+    home.activation.dotfiles-migrate = lib.hm.dag.entryBefore [ "checkLinkTargets" ] ''
+      run ${pkgs.coreutils}/bin/env \
+        PATH=${lib.makeBinPath [ pkgs.bash pkgs.coreutils pkgs.jq pkgs.just ]} \
+        ${pkgs.just}/bin/just \
+        --shell ${pkgs.bash}/bin/bash \
+        --justfile ${../justfile} \
+        --working-directory ${lib.escapeShellArg config.home.homeDirectory} \
+        migrate
+    '';
+
     xdg.configFile."home-manager/session-env.sh".text = ''
       . "${config.home.profileDirectory}/etc/profile.d/hm-session-vars.sh"
       export PATH="${config.home.profileDirectory}/bin:${config.home.profileDirectory}/sbin:$PATH"
