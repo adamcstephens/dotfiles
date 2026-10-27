@@ -46,7 +46,7 @@ function ssh-auth-sock --on-event="fish_preexec"
         set DISCOVERED_SOCK (find_ssh_agent "$WELL_KNOWN_SOCK")
     end
 
-    if test -S "$DISCOVERED_SOCK"; and test (readlink "$WELL_KNOWN_SOCK") != "$DISCOVERED_SOCK"
+    if test -S "$DISCOVERED_SOCK"; and test "$(readlink "$WELL_KNOWN_SOCK")" != "$DISCOVERED_SOCK"
         ln -sf "$DISCOVERED_SOCK" "$WELL_KNOWN_SOCK"
     end
 
