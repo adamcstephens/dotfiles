@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
 if [ -z "$1" ]; then
-  echo "Usage: mux-review <PR> <args>"
+  echo "Usage: mux-review <PR number or URL> <args>"
   exit 1
 fi
 
-PR="$1"
+PR="${1#https://github.com/NixOS/nixpkgs/pull/}"
 TITLE="review-$PR"
 shift
 
