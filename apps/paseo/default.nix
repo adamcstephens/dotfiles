@@ -45,7 +45,7 @@ in
           copilot.enabled = false;
           muse.enabled = false;
           omp.enabled = true;
-          opencode.enabled = false;
+          opencode.enabled = true;
           pi.enabled = false;
         };
 
