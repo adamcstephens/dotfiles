@@ -1,6 +1,5 @@
 {
   dotlib,
-  inputs,
   pkgs,
   ...
 }:
@@ -10,13 +9,13 @@
     ../claude
     ../codex
     ../nono
+    ../opencode
     ../omp
     ../pi
   ];
 
   home.packages = [
     pkgs.vikunja.veans
-    inputs.nixos-unstable-small.legacyPackages.${pkgs.stdenv.hostPlatform.system}.opencode
   ];
 
   xdg.configFile = {
