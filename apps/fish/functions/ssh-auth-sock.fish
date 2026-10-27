@@ -53,6 +53,10 @@ function ssh-auth-sock --on-event="fish_preexec"
     # ssh-add must query the selected agent, not the socket we just replaced.
     set --export SSH_AUTH_SOCK "$WELL_KNOWN_SOCK"
 
+    if not test -S "$SSH_AUTH_SOCK"
+        return
+    end
+
     # Keys can change without the socket changing. Preserve the file if the agent has no keys.
     set --local signing_keys (ssh-add -L)
     if test $status -eq 0; and test (count $signing_keys) -gt 0
