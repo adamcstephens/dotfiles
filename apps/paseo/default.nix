@@ -5,19 +5,26 @@
   pkgs,
   ...
 }:
+let
+  package =
+    inputs.nixos-unstable-small.legacyPackages.${pkgs.stdenv.hostPlatform.system}.paseo.overrideAttrs
+      (old: {
+        patches = (old.patches or [ ]) ++ [ ./omp-custom-message-history.patch ];
+        doCheck = false;
+      });
+in
 {
   imports = [
     ./module.nix
   ];
 
+  home.packages = lib.optionals pkgs.stdenv.hostPlatform.isDarwin [
+    package.desktop
+  ];
+
   services.paseo = {
     enable = true;
-    package =
-      inputs.nixos-unstable-small.legacyPackages.${pkgs.stdenv.hostPlatform.system}.paseo.overrideAttrs
-        (old: {
-          patches = (old.patches or [ ]) ++ [ ./omp-custom-message-history.patch ];
-          doCheck = false;
-        });
+    inherit package;
 
     relay = {
       enable = true;
