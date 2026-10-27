@@ -4,9 +4,9 @@
   ...
 }:
 {
-  packages = [
+  home.packages = [
     pkgs.nono
   ];
 
-  xdg.config.files."nono/profiles".source = dotlib.source "apps/nono/profiles";
+  xdg.configFile."nono/profiles".source = dotlib.source "apps/nono/profiles";
 }

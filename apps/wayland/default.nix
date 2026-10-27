@@ -14,7 +14,7 @@
   };
 
   config = lib.mkIf config.dotfiles.gui.wayland.enable {
-    packages = [
+    home.packages = [
       pkgs.grim
       pkgs.gtklock
       pkgs.lswt
@@ -31,6 +31,8 @@
       pkgs.wlr-randr
     ];
 
-    xdg.config.files."uwsm/env.d/hjem.sh".source = config.environment.loadEnv;
+    xdg.configFile."uwsm/env.d/home-manager.sh".text = ''
+      . ${lib.escapeShellArg "${config.home.profileDirectory}/etc/profile.d/hm-session-vars.sh"}
+    '';
   };
 }

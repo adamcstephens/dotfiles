@@ -19,7 +19,7 @@
     dev.enable = true;
   };
 
-  packages = [
+  home.packages = [
     # crypt
     pkgs.pinentry-curses
     pkgs.rage

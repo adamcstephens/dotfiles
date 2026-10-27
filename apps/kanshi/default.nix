@@ -8,7 +8,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 let
@@ -61,7 +60,6 @@ in
 
     systemd.user.services.kanshi = {
       Service = {
-        Environment = [ "PATH=${pkgs.bash}/bin:${pkgs.gnugrep}/bin:${pkgs.coreutils}/bin:$PATH" ];
         RestartSec = "5s";
       };
     };

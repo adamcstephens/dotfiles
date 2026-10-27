@@ -27,11 +27,11 @@ let
   };
 in
 {
-  packages = [
+  home.packages = [
     inputs.epi.packages.${pkgs.stdenv.hostPlatform.system}.epi
   ];
 
-  xdg.config.files."epi/config.toml".source = epiConfig;
+  xdg.configFile."epi/config.toml".source = epiConfig;
 
-  xdg.config.files."epi/hooks".source = dotlib.source "apps/epi/hooks";
+  xdg.configFile."epi/hooks".source = dotlib.source "apps/epi/hooks";
 }

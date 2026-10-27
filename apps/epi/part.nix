@@ -14,7 +14,7 @@ let
     {
       imports = [
         inputs.epi.nixosModules.epi
-        inputs.hjem.nixosModules.hjem
+        inputs.home-manager.nixosModules.home-manager
       ];
 
       epi = {
@@ -36,27 +36,28 @@ let
           |> lib.getExe;
       };
 
-      hjem = {
-        clobberByDefault = true;
-
-        specialArgs = {
+      home-manager = {
+        extraSpecialArgs = {
           inherit inputs;
 
           flake = self;
           npins = import ../../npins;
         };
 
-        extraModules = [
-          ../../hjem/core.nix
-          ../../hjem/dev.nix
+        sharedModules = [
+          ../../home/core.nix
+          ../../home/dev.nix
 
           ../paseo
         ];
 
         users.adam = {
-          directory = "/home/adam";
-          user = "adam";
-          files.".dotfiles".source = "${self}";
+          home = {
+            homeDirectory = "/home/adam";
+            username = "adam";
+            stateVersion = "26.05";
+            file.".dotfiles".source = "${self}";
+          };
           dotfiles.nixosManaged = true;
         };
       };

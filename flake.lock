@@ -36,11 +36,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1792945186,
-        "narHash": "sha256-QGJkVqPUhVIvvdDxhtLfF5Iza3pawzc0QKwbpPnLeVQ=",
+        "lastModified": 1793069131,
+        "narHash": "sha256-i///9pRIqpO+6GiJgyRbxf9WWMUfDznITfMUUXQbQEY=",
         "ref": "refs/heads/main",
-        "rev": "cf4d121bfc50f6c2ddb156cfa5c35b80e719806d",
-        "revCount": 288,
+        "rev": "bbe5d287691691afcfbd30129be23a75a4df0111",
+        "revCount": 289,
         "type": "git",
         "url": "https://tangled.org/adam.robins.wtf/epi"
       },
@@ -121,24 +121,23 @@
         "type": "github"
       }
     },
-    "hjem": {
+    "home-manager": {
       "inputs": {
         "nixpkgs": [
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1792942103,
-        "narHash": "sha256-ZAYu2rFoUAMTHL1zU52UfkhEeXr5GELJ9xL2qg4B4Pw=",
-        "owner": "adamcstephens",
-        "repo": "hjem",
-        "rev": "192277766b714d868e87e495d34cec09888abfb9",
+        "lastModified": 1793033486,
+        "narHash": "sha256-fXVURa0+CSCgaxLt8tmPNJq2U+fGYOwbk5j2YUe7kSc=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "7db163b2aee7e410e396b48aed02f646d742b9b8",
         "type": "github"
       },
       "original": {
-        "owner": "adamcstephens",
-        "ref": "push-wxvzlotzkqpl",
-        "repo": "hjem",
+        "owner": "nix-community",
+        "repo": "home-manager",
         "type": "github"
       }
     },
@@ -367,7 +366,7 @@
       "inputs": {
         "epi": "epi",
         "flake-parts": "flake-parts_2",
-        "hjem": "hjem",
+        "home-manager": "home-manager",
         "mnw": "mnw",
         "nbac": "nbac",
         "nix-darwin": "nix-darwin",

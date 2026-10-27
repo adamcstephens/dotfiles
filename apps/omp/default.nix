@@ -1,5 +1,6 @@
 {
   config,
+  dotlib,
   inputs,
   lib,
   pkgs,
@@ -27,17 +28,17 @@ let
   };
 in
 {
-  packages = [
+  home.packages = [
     omp-wrapped
   ];
 
-  xdg.config.files = {
-    "omp/agent/AGENTS.md".source = config.xdg.config.files."agents/AGENTS.md".source;
-    "omp/agent/SYSTEM_TEMPLATE.md".source = "${config.directory}/.dotfiles/apps/omp/SYSTEM_TEMPLATE.md";
-    "omp/agent/config.yml".source = "${config.directory}/.dotfiles/apps/omp/config.yml";
-    "omp/agent/extensions".source = "${config.directory}/.dotfiles/apps/omp/extensions";
-    "omp/agent/lsp.json".source = "${config.directory}/.dotfiles/apps/omp/lsp.json";
-    "omp/agent/skills".source = config.xdg.config.files."agents/skills".source;
-    "omp/agent/themes".source = "${config.directory}/.dotfiles/apps/omp/themes";
+  xdg.configFile = {
+    "omp/agent/AGENTS.md".source = config.xdg.configFile."agents/AGENTS.md".source;
+    "omp/agent/SYSTEM_TEMPLATE.md".source = dotlib.source "apps/omp/SYSTEM_TEMPLATE.md";
+    "omp/agent/config.yml".source = dotlib.source "apps/omp/config.yml";
+    "omp/agent/extensions".source = dotlib.source "apps/omp/extensions";
+    "omp/agent/lsp.json".source = dotlib.source "apps/omp/lsp.json";
+    "omp/agent/skills".source = config.xdg.configFile."agents/skills".source;
+    "omp/agent/themes".source = dotlib.source "apps/omp/themes";
   };
 }

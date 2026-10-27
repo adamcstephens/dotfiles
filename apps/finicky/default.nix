@@ -1,4 +1,4 @@
-{ config, ... }:
+{ dotlib, ... }:
 {
-  files.".finicky.js".source = "${config.directory}/.dotfiles/apps/finicky/finicky.js";
+  home.file.".finicky.js".source = dotlib.source "apps/finicky/finicky.js";
 }

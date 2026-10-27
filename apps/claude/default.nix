@@ -12,20 +12,20 @@ let
     buildInputs = [ pkgs.makeWrapper ];
     postBuild = ''
       wrapProgram $out/bin/claude \
-        --set-default CLAUDE_CONFIG_DIR "${config.directory}/.config/claude"
+        --set-default CLAUDE_CONFIG_DIR "${config.xdg.configHome}/claude"
     '';
   };
 in
 {
-  packages = [
+  home.packages = [
     claude-wrapped
   ];
 
-  environment.sessionVariables = {
-    CLAUDE_CONFIG_DIR = "${config.directory}/.config/claude";
+  home.sessionVariables = {
+    CLAUDE_CONFIG_DIR = "${config.xdg.configHome}/claude";
   };
 
-  xdg.config.files = {
-    "claude/CLAUDE.md".source = config.xdg.config.files."agents/AGENTS.md".source;
+  xdg.configFile = {
+    "claude/CLAUDE.md".source = config.xdg.configFile."agents/AGENTS.md".source;
   };
 }

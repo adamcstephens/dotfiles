@@ -11,7 +11,7 @@
     gui.enable = true;
   };
 
-  packages = [
+  home.packages = [
     pkgs.age-plugin-yubikey
     pkgs.yubikey-manager
 

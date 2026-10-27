@@ -1,8 +1,8 @@
 { dotlib, pkgs, ... }:
 {
-  packages = [
+  home.packages = [
     pkgs.halloy
   ];
 
-  files.".config/halloy".source = dotlib.source "apps/halloy";
+  xdg.configFile."halloy".source = dotlib.source "apps/halloy";
 }

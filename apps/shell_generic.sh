@@ -16,14 +16,15 @@ alias esl="exec \$SHELL -l"
 if [ -e "${HOME}/.nix-profile/etc/profile.d/nix.sh" ]; then
   . "${HOME}/.nix-profile/etc/profile.d/nix.sh"
 fi
-if [ -e "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh" ]; then
-  . "$HOME"/.nix-profile/etc/profile.d/hm-session-vars.sh
-fi
 if [ -e /nix/var/nix/profiles/default/etc/profile.d/nix.sh ]; then
   . /nix/var/nix/profiles/default/etc/profile.d/nix.sh
 fi
 if [ -d /run/current-system/sw/bin ]; then
   export PATH="$PATH:/run/current-system/sw/bin"
+fi
+
+if [ -e "${XDG_CONFIG_HOME:-$HOME/.config}/home-manager/session-env.sh" ]; then
+  . "${XDG_CONFIG_HOME:-$HOME/.config}/home-manager/session-env.sh"
 fi
 
 # ssh

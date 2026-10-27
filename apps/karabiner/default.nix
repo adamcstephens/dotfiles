@@ -1,4 +1,4 @@
-{ config, ... }:
+{ dotlib, ... }:
 {
-  files.".config/karabiner".source = "${config.directory}/.dotfiles/apps/karabiner";
+  xdg.configFile."karabiner".source = dotlib.source "apps/karabiner";
 }

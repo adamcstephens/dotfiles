@@ -17,7 +17,7 @@ let
   };
 in
 {
-  packages = [
+  home.packages = [
     pkgs.git
     pkgs.git-extras
   ]
@@ -29,11 +29,11 @@ in
     pkgs.tea
   ];
 
-  xdg.config.files = {
+  xdg.configFile = {
     "git/config".source = dotlib.source "apps/git/gitconfig";
 
     "git/ignore".source = dotlib.source "apps/git/ignore";
   };
 
-  xdg.data.files."gh/extensions/gh-stack/gh-stack".source = lib.getExe pkgs.gh-stack;
+  xdg.dataFile."gh/extensions/gh-stack/gh-stack".source = lib.getExe pkgs.gh-stack;
 }

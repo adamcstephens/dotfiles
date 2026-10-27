@@ -11,7 +11,7 @@ mkShell {
   name = "dots";
 
   packages = [
-    inputs.hjem.packages.${pkgs.stdenv.hostPlatform.system}.hjem
+    inputs.home-manager.packages.${pkgs.stdenv.hostPlatform.system}.home-manager
     pkgs.gitMinimal
     pkgs.nh
     pkgs.just

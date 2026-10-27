@@ -1,6 +1,6 @@
 { pkgs, ... }:
 {
-  packages = [ pkgs.bat ];
+  home.packages = [ pkgs.bat ];
 
-  xdg.config.files."bat/config".source = ./config;
+  xdg.configFile."bat/config".source = ./config;
 }

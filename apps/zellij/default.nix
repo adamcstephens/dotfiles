@@ -11,15 +11,15 @@ let
   };
 in
 {
-  packages = [
+  home.packages = [
     pkgs.kdlfmt
     package
   ];
 
-  xdg.config.files."zellij/layouts".source = dotlib.source "apps/zellij/layouts";
+  xdg.configFile."zellij/layouts".source = dotlib.source "apps/zellij/layouts";
 
-  xdg.config.files."zellij/config.kdl".source = dotlib.source "apps/zellij/config.kdl";
+  xdg.configFile."zellij/config.kdl".source = dotlib.source "apps/zellij/config.kdl";
 
-  xdg.config.files."zellij/themes/moonfly.kdl".source =
+  xdg.configFile."zellij/themes/moonfly.kdl".source =
     dotlib.source "themes/moonfly/extras/moonfly-zellij.kdl";
 }

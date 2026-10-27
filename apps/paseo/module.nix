@@ -20,7 +20,7 @@ in
       dataDir = lib.mkOption {
         type = lib.types.str;
         description = "where to store paseo data";
-        default = "${config.directory}/.local/state/paseo";
+        default = "${config.home.homeDirectory}/.local/state/paseo";
       };
 
       listenAddress = lib.mkOption {
@@ -166,58 +166,52 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    systemd.services.paseo = {
-      description = "Paseo - self-hosted daemon for AI coding agents";
-      wantedBy = [ "default.target" ];
+    systemd.user.services.paseo = {
+      Unit = {
+        Description = "Paseo - self-hosted daemon for AI coding agents";
+        X-Restart-Triggers = [ settingsFile ];
+      };
+      Install.WantedBy = [ "default.target" ];
 
-      path = [
-        "${config.directory}/.local/state/hjem/standalone/current-profile"
-        "${config.directory}/.nix-profile"
-        "${config.directory}/.local/state/nix/profile"
-        "/etc/profiles/per-user/${config.user}"
-
-        "/run/wrappers"
-        "/run/current-system/sw"
-        "/nix/var/nix/profiles/default"
-      ]
-      ++ lib.optionals (cfg.settings.pluginsEnabled or false) [
-        cfg.package.nodejs
-      ];
-
-      environment = {
-        PASEO_HOME = cfg.dataDir;
-        PASEO_LISTEN = "${cfg.listenAddress}:${toString cfg.port}";
-      }
-      // lib.optionalAttrs (cfg.hostnames == true) {
-        PASEO_HOSTNAMES = "true";
-      }
-      // lib.optionalAttrs (lib.isList cfg.hostnames && cfg.hostnames != [ ]) {
-        PASEO_HOSTNAMES = lib.concatStringsSep "," cfg.hostnames;
-      }
-      // lib.optionalAttrs (cfg.relay.enable && cfg.relay.mode == "remote") {
-        PASEO_RELAY_ENDPOINT = "${cfg.relay.host}:${toString cfg.relay.port}";
-        PASEO_RELAY_USE_TLS = if cfg.relay.useTls then "true" else "false";
-      }
-      //
-        lib.optionalAttrs (cfg.relay.enable && cfg.relay.mode == "remote" && cfg.relay.publicUseTls != null)
+      Service = {
+        Environment = lib.mapAttrsToList (name: value: "${name}=${value}") (
           {
-            PASEO_RELAY_PUBLIC_USE_TLS = if cfg.relay.publicUseTls then "true" else "false";
+            LOCALE_ARCHIVE = "${pkgs.glibcLocales}/lib/locale/locale-archive";
+            TZDIR = "${pkgs.tzdata}/share/zoneinfo";
+            PASEO_HOME = cfg.dataDir;
+            PASEO_LISTEN = "${cfg.listenAddress}:${toString cfg.port}";
           }
-      // cfg.environment;
+          // lib.optionalAttrs (cfg.hostnames == true) {
+            PASEO_HOSTNAMES = "true";
+          }
+          // lib.optionalAttrs (lib.isList cfg.hostnames && cfg.hostnames != [ ]) {
+            PASEO_HOSTNAMES = lib.concatStringsSep "," cfg.hostnames;
+          }
+          // lib.optionalAttrs (cfg.relay.enable && cfg.relay.mode == "remote") {
+            PASEO_RELAY_ENDPOINT = "${cfg.relay.host}:${toString cfg.relay.port}";
+            PASEO_RELAY_USE_TLS = if cfg.relay.useTls then "true" else "false";
+          }
+          //
+            lib.optionalAttrs (cfg.relay.enable && cfg.relay.mode == "remote" && cfg.relay.publicUseTls != null)
+              {
+                PASEO_RELAY_PUBLIC_USE_TLS = if cfg.relay.publicUseTls then "true" else "false";
+              }
+          // cfg.environment
+        );
 
-      serviceConfig = {
         Type = "simple";
 
-        ExecStartPre = lib.mkIf (cfg.settings != { }) (
-          lib.getExe (
-            pkgs.writeShellApplication {
-              name = "paseo-start-pre";
-              runtimeInputs = [ pkgs.coreutils ];
-              text = ''
-                install -m 0600 ${settingsFile} ${cfg.dataDir}/config.json
-              '';
-            }
-          )
+        ExecStartPre = lib.getExe (
+          pkgs.writeShellApplication {
+            name = "paseo-start-pre";
+            runtimeInputs = [ pkgs.coreutils ];
+            text = ''
+              mkdir --parents ${lib.escapeShellArg cfg.dataDir}
+              ${lib.optionalString (cfg.settings != { }) ''
+                install --mode 0600 ${settingsFile} ${lib.escapeShellArg "${cfg.dataDir}/config.json"}
+              ''}
+            '';
+          }
         );
 
         ExecStart =
@@ -232,6 +226,6 @@ in
       };
     };
 
-    packages = [ cfg.package ];
+    home.packages = [ cfg.package ];
   };
 }

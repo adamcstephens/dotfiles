@@ -2,7 +2,6 @@
   dotlib,
   inputs,
   lib,
-  options,
   pkgs,
   ...
 }:
@@ -13,16 +12,16 @@ in
 {
   config = lib.mkMerge [
     {
-      packages = [ package ];
+      home.packages = [ package ];
 
-      xdg.config.files."tuios/config.toml".source = dotlib.source "apps/tuios/config.toml";
-      xdg.config.files."tuios/themes".source = dotlib.source "apps/tuios/themes";
+      xdg.configFile."tuios/config.toml".source = dotlib.source "apps/tuios/config.toml";
+      xdg.configFile."tuios/themes".source = dotlib.source "apps/tuios/themes";
     }
-    (lib.optionalAttrs (lib.hasAttr "systemd" options) {
-      systemd = {
+    (lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
+      systemd.user = {
         sockets.tuios = {
-          wantedBy = [ "default.target" ];
-          socketConfig = {
+          Install.WantedBy = [ "default.target" ];
+          Socket = {
             ListenStream = "%t/tuios/tuios.sock";
             Accept = false;
             SocketMode = "0600";
@@ -30,12 +29,9 @@ in
         };
 
         services.tuios = {
-          wantedBy = [ "default.target" ];
+          Install.WantedBy = [ "default.target" ];
 
-          # we want the default system path
-          enableDefaultPath = false;
-
-          serviceConfig = {
+          Service = {
             Type = "simple";
             ExecStartPre = "${lib.getExe package} kill-server";
             ExecStart = "${lib.getExe package} daemon";

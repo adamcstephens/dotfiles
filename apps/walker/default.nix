@@ -14,33 +14,33 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    packages = [
+    home.packages = [
       pkgs.elephant
       pkgs.walker
     ];
 
-    xdg.config.files."elephant/websearch.toml".source =
+    xdg.configFile."elephant/websearch.toml".source =
       dotlib.source "apps/walker/elephant/websearch.toml";
 
-    xdg.config.files."walker/config.toml".source = dotlib.source "apps/walker/config.toml";
+    xdg.configFile."walker/config.toml".source = dotlib.source "apps/walker/config.toml";
 
-    xdg.config.files."walker/themes/dotfiles/style.css".text = with config.colorScheme.palette; ''
+    xdg.configFile."walker/themes/dotfiles/style.css".text = with config.colorScheme.palette; ''
       @define-color window_bg_color #${base05};
       @define-color accent_bg_color #${base05};
       @define-color theme_fg_color #${base08};
     '';
 
-    systemd.services = {
+    systemd.user.services = lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
       elephant = {
-        after = [ "graphical-session.target" ];
-        partOf = [ "graphical-session.target" ];
-        wantedBy = [ "graphical-session.target" ];
+        Unit.After = [ "graphical-session.target" ];
+        Unit.PartOf = [ "graphical-session.target" ];
+        Install.WantedBy = [ "graphical-session.target" ];
 
-        unitConfig = {
+        Unit = {
           ConditionEnvironment = "WAYLAND_DISPLAY";
         };
 
-        serviceConfig = {
+        Service = {
           Type = "simple";
           ExecStart = lib.getExe pkgs.elephant;
           Restart = "on-failure";
@@ -52,28 +52,24 @@ in
       };
 
       walker = {
-        wantedBy = [ "graphical-session.target" ];
-        partOf = [ "graphical-session.target" ];
-        requires = [ "elephant.service" ];
-        after = [
+        Install.WantedBy = [ "graphical-session.target" ];
+        Unit.PartOf = [ "graphical-session.target" ];
+        Unit.Requires = [ "elephant.service" ];
+        Unit.After = [
           "graphical-session.target"
           "elephant.service"
         ];
 
-        reloadTriggers = [
-          (builtins.hashString "sha256" (
-            builtins.toJSON {
-              config = config.xdg.config.files."walker/config.toml".source;
-              theme = config.xdg.config.files."walker/themes/dotfiles/style.css".source;
-            }
-          ))
+        Unit.X-Restart-Triggers = [
+          config.xdg.configFile."walker/config.toml".source
+          config.xdg.configFile."walker/themes/dotfiles/style.css".source
         ];
 
-        unitConfig = {
+        Unit = {
           ConditionEnvironment = "WAYLAND_DISPLAY";
         };
 
-        serviceConfig = {
+        Service = {
           ExecStart = "${lib.getExe pkgs.walker} --gapplication-service";
           Restart = "on-failure";
         };

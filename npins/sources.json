@@ -1,18 +1,5 @@
 {
   "pins": {
-    "hjem-rum": {
-      "type": "Git",
-      "repository": {
-        "type": "GitHub",
-        "owner": "snugnug",
-        "repo": "hjem-rum"
-      },
-      "branch": "main",
-      "submodules": false,
-      "revision": "4194064c687bf6ca7a79cbe127cbe5a3f51ed5d5",
-      "url": "https://github.com/snugnug/hjem-rum/archive/4194064c687bf6ca7a79cbe127cbe5a3f51ed5d5.tar.gz",
-      "hash": "sha256-ntcojKoFfndHu9/cw6zRyan2AECyxMwJ0e1Qr7a+m40="
-    },
     "modus-themes.nvim": {
       "type": "Git",
       "repository": {

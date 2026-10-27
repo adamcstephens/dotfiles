@@ -185,7 +185,6 @@ in
 
       EnvironmentVariables = {
         PATH = lib.concatStringsSep ":" [
-          "${home}/.local/state/hjem/standalone/current-profile/bin"
           "${home}/.nix-profile/bin"
           "${home}/.local/state/nix/profile/bin"
           "/etc/profiles/per-user/${user}/bin"

@@ -20,7 +20,7 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    packages = [
+    home.packages = [
       inputs.sower.packages.${pkgs.stdenv.hostPlatform.system}.sower
     ];
 

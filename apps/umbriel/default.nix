@@ -1,4 +1,4 @@
 { dotlib, ... }:
 {
-  xdg.config.files."umbriel/config.toml".source = dotlib.source "apps/umbriel/config.toml";
+  xdg.configFile."umbriel/config.toml".source = dotlib.source "apps/umbriel/config.toml";
 }

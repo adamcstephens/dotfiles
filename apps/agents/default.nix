@@ -1,5 +1,5 @@
 {
-  config,
+  dotlib,
   inputs,
   pkgs,
   ...
@@ -14,14 +14,14 @@
     ../pi
   ];
 
-  packages = [
+  home.packages = [
     pkgs.vikunja.veans
     inputs.nixos-unstable-small.legacyPackages.${pkgs.stdenv.hostPlatform.system}.opencode
   ];
 
-  xdg.config.files = {
-    "agents/skills".source = "${config.directory}/.dotfiles/apps/agents/skills";
+  xdg.configFile = {
+    "agents/skills".source = dotlib.source "apps/agents/skills";
 
-    "agents/AGENTS.md".source = "${config.directory}/.dotfiles/apps/agents/AGENTS.md";
+    "agents/AGENTS.md".source = dotlib.source "apps/agents/AGENTS.md";
   };
 }

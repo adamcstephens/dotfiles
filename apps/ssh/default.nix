@@ -2,7 +2,6 @@
   config,
   dotlib,
   lib,
-  options,
   pkgs,
   ...
 }:
@@ -17,33 +16,33 @@ in
 
   config = lib.mkMerge [
     {
-      packages = lib.optionals cfg.tpm.enable [ pkgs.ssh-tpm-agent ];
+      home.packages = lib.optionals cfg.tpm.enable [ pkgs.ssh-tpm-agent ];
 
-      files.".ssh/config".source = dotlib.source "apps/ssh/dotfiles.config";
+      home.file.".ssh/config".source = dotlib.source "apps/ssh/dotfiles.config";
     }
-    (lib.optionalAttrs (lib.hasAttr "systemd" options) {
-      systemd.services = {
+    (lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
+      systemd.user.services = {
         ssh-agent = lib.mkIf cfg.agent.askpass.enable {
-          wantedBy = lib.mkForce [ "graphical-session.target" ];
-          environment = {
-            SSH_ASKPASS = "${pkgs.seahorse}/libexec/seahorse/ssh-askpass";
-          };
+          Install.WantedBy = lib.mkForce [ "graphical-session.target" ];
+          Service.Environment = [
+            "SSH_ASKPASS=${pkgs.seahorse}/libexec/seahorse/ssh-askpass"
+          ];
         };
 
         ssh-tpm-agent = lib.mkIf cfg.tpm.enable {
-          wantedBy = [ "graphical-session.target" ];
-          partOf = [ "graphical-session.target" ];
-          requires = [ "ssh-agent.service" ];
-          after = [
+          Install.WantedBy = [ "graphical-session.target" ];
+          Unit.PartOf = [ "graphical-session.target" ];
+          Unit.Requires = [ "ssh-agent.service" ];
+          Unit.After = [
             "ssh-agent.service"
             "graphical-session.target"
           ];
 
-          unitConfig = {
+          Unit = {
             ConditionEnvironment = "WAYLAND_DISPLAY";
           };
 
-          serviceConfig = {
+          Service = {
             Type = "simple";
             Environment = [
               "SSH_ASKPASS=${pkgs.seahorse}/libexec/seahorse/ssh-askpass"

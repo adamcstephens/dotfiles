@@ -1,6 +1,6 @@
 { pkgs, ... }:
 {
-  packages = [ pkgs.way-displays ];
+  home.packages = [ pkgs.way-displays ];
 
   systemd.user.services.way-displays = {
     Unit = {

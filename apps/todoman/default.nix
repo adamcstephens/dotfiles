@@ -1,8 +1,8 @@
 { dotlib, pkgs, ... }:
 {
-  packages = [
+  home.packages = [
     pkgs.todoman
   ];
 
-  xdg.config.files."todoman/config.py".source = dotlib.source "apps/todoman/config.py";
+  xdg.configFile."todoman/config.py".source = dotlib.source "apps/todoman/config.py";
 }

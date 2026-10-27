@@ -1,4 +1,5 @@
 {
+  config,
   flake,
   inputs,
   npins,
@@ -7,25 +8,26 @@
   ...
 }:
 {
-  hjem = {
-    clobberByDefault = true;
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
 
-    specialArgs = {
+    extraSpecialArgs = {
       inherit flake inputs npins;
     };
 
-    extraModules = [
-      ../../hjem/darwin.nix
-    ];
-
     users.adam = {
-      directory = "/Users/adam";
-      user = "adam";
-      packages = [
-        pkgs.e1s
-        pkgs.terraform-mcp-server
-        pkgs.typescript-language-server
-      ];
+      imports = [ ../../home/darwin.nix ];
+
+      home = {
+        username = "adam";
+        homeDirectory = "/Users/adam";
+        packages = [
+          pkgs.e1s
+          pkgs.terraform-mcp-server
+          pkgs.typescript-language-server
+        ];
+      };
     };
   };
 
@@ -54,6 +56,6 @@
 
   users.users.adam = {
     home = "/Users/adam";
-    shell = "/home/adam/.nix-profile/bin/fish";
+    shell = "${config.home-manager.users.adam.home.profileDirectory}/bin/fish";
   };
 }

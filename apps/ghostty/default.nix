@@ -3,19 +3,18 @@
   dotlib,
   lib,
   npins,
-  options,
   pkgs,
   ...
 }:
 {
   config = lib.mkMerge [
     {
-      packages = lib.optionals pkgs.stdenv.hostPlatform.isLinux [
+      home.packages = lib.optionals pkgs.stdenv.hostPlatform.isLinux [
         pkgs.ghostty
         pkgs.ghostty.shell_integration
       ];
 
-      xdg.config.files."ghostty/config".text = ''
+      xdg.configFile."ghostty/config".text = ''
         font-family = "${config.dotfiles.gui.font.mono}"
         config-file = dotfiles.conf
       ''
@@ -26,21 +25,21 @@
         config-file = mac.conf
       '';
 
-      xdg.config.files."ghostty/dotfiles.conf".source = dotlib.source "apps/ghostty/dotfiles.conf";
+      xdg.configFile."ghostty/dotfiles.conf".source = dotlib.source "apps/ghostty/dotfiles.conf";
 
-      xdg.config.files."ghostty/linux.conf" = lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
+      xdg.configFile."ghostty/linux.conf" = lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
         source = dotlib.source "apps/ghostty/linux.conf";
       };
 
-      xdg.config.files."ghostty/gtk-custom.css" = lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
+      xdg.configFile."ghostty/gtk-custom.css" = lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
         source = dotlib.source "apps/ghostty/gtk-custom.css";
       };
 
-      xdg.config.files."ghostty/mac.conf" = lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
+      xdg.configFile."ghostty/mac.conf" = lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
         source = dotlib.source "apps/ghostty/mac.conf";
       };
 
-      xdg.data.files."dbus-1/services/com.mitchellh.ghostty.service" =
+      xdg.dataFile."dbus-1/services/com.mitchellh.ghostty.service" =
         lib.mkIf pkgs.stdenv.hostPlatform.isLinux
           {
             text = ''
@@ -51,24 +50,21 @@
             '';
           };
 
-      xdg.config.files."ghostty/themes/moonfly".source =
+      xdg.configFile."ghostty/themes/moonfly".source =
         dotlib.source "themes/moonfly/extras/moonfly-ghostty.conf";
-      xdg.config.files."ghostty/themes/Modus Operandi".source =
+      xdg.configFile."ghostty/themes/Modus Operandi".source =
         npins."modus-themes.nvim" + "/extras/ghostty/modus_operandi";
     }
-    (lib.optionalAttrs (lib.hasAttr "systemd" options) {
-      systemd.services.ghostty = lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
-        wantedBy = [ "graphical-session.target" ];
-        after = [
+    (lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
+      systemd.user.services.ghostty = {
+        Install.WantedBy = [ "graphical-session.target" ];
+        Unit.After = [
           "graphical-session.target"
           "dbus.socket"
         ];
-        requires = [ "dbus.socket" ];
+        Unit.Requires = [ "dbus.socket" ];
 
-        # we want the default system path
-        enableDefaultPath = false;
-
-        serviceConfig = {
+        Service = {
           Type = "notify-reload";
           ReloadSignal = "SIGUSR2";
           BusName = "com.mitchellh.ghostty";

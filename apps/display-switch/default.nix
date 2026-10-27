@@ -35,10 +35,10 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    packages = [
+    home.packages = [
       flake.packages.${pkgs.stdenv.hostPlatform.system}.display-switch
     ];
 
-    files."${configDir}/display-switch.ini".source = configFile;
+    home.file."${configDir}/display-switch.ini".source = configFile;
   };
 }

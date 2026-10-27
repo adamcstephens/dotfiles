@@ -13,10 +13,10 @@ let
       "Library/Application Support/jj";
 in
 {
-  packages = [
+  home.packages = [
     inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system}.jujutsu
     pkgs.watchman
   ];
 
-  files."${configDir}/config.toml".source = dotlib.source "apps/jujutsu/config.toml";
+  home.file."${configDir}/config.toml".source = dotlib.source "apps/jujutsu/config.toml";
 }

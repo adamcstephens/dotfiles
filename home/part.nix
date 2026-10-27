@@ -7,33 +7,28 @@
 let
   flake = self;
 
-  user = {
-    directory = "/home/adam";
-    user = "adam";
-    clobberFiles = true;
+  user.home = {
+    username = "adam";
+    homeDirectory = "/home/adam";
   };
 
-  specialArgs = {
+  extraSpecialArgs = {
     inherit flake inputs;
 
     npins = import ../npins;
   };
 
   nixosCommon = [
-    inputs.hjem.nixosModules.default
+    inputs.home-manager.nixosModules.home-manager
     {
-      hjem = {
-        inherit specialArgs;
-
-        clobberByDefault = true;
-
-        extraModules = [
-          ./core.nix
-        ];
-
-        users.adam = user // {
+      home-manager = {
+        inherit extraSpecialArgs;
+        useGlobalPkgs = true;
+        useUserPackages = true;
+        users.adam = {
+          imports = [ ./core.nix ];
           dotfiles.nixosManaged = true;
-          files.".dotfiles".source = "${self}";
+          home.file.".dotfiles".source = "${self}";
         };
       };
     }
@@ -47,33 +42,31 @@ let
   ];
 in
 {
-  flake.hjemProfiles = {
+  flake.homeManagerProfiles = {
     core = nixosCommon;
 
     dev = nixosCommon ++ [
       {
-        hjem = {
-          extraModules = [
-            ./dev.nix
-            ../apps/paseo
-          ];
-        };
+        home-manager.users.adam.imports = [
+          ./dev.nix
+          ../apps/paseo
+        ];
       }
     ];
   };
 
-  flake.hjemConfigurations = withSystem "x86_64-linux" (
+  flake.homeConfigurations = withSystem "x86_64-linux" (
     { pkgs, ... }:
     {
-      deck = inputs.hjem.standalone.hjemConfiguration {
+      deck = inputs.home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
 
-        specialArgs = specialArgs // {
+        extraSpecialArgs = extraSpecialArgs // {
           profile = "deck";
         };
 
         modules = standaloneModules ++ [
-          inputs.epi.hjemModules.epi
+          inputs.epi.homeManagerModules.epi
           (
             { config, lib, ... }:
             let
@@ -81,7 +74,7 @@ in
               epi-agent =
                 {
                   project,
-                  project_dir ? "${config.directory}/projects/${project}",
+                  project_dir ? "${config.home.homeDirectory}/projects/${project}",
                   settings ? { },
                 }:
                 {
@@ -107,17 +100,13 @@ in
                 ) [ ])
                 |> lib.map (m: lib.splitString ":" m |> lib.head)
                 |> lib.filter (m: lib.strings.hasInfix "paseo" m)
-                |> lib.map (m: lib.replaceString "~/" "" m)
-                |> lib.map (m: {
-                  name = m;
-                  value = {
-                    type = "directory";
-                  };
-                })
-                |> lib.listToAttrs;
+                |> lib.map (m: lib.replaceString "~/" "${config.home.homeDirectory}/" m)
+                |> lib.unique;
             in
             {
-              files = paseoDirs;
+              home.activation.paseoDirectories = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+                run mkdir --parents -- ${lib.escapeShellArgs paseoDirs}
+              '';
 
               services.epi = {
                 package = inputs.epi.packages.x86_64-linux.epi;
@@ -126,11 +115,11 @@ in
                   git-sync = epi-agent { project = "git-sync"; };
                   hjem = epi-agent {
                     project = "hjem";
-                    project_dir = "${config.directory}/git/hjem";
+                    project_dir = "${config.home.homeDirectory}/git/hjem";
                   };
                   noctalia = epi-agent {
                     project = "noctalia";
-                    project_dir = "${config.directory}/git/noctalia";
+                    project_dir = "${config.home.homeDirectory}/git/noctalia";
                   };
                   sower = epi-agent {
                     project = "sower";
@@ -149,10 +138,10 @@ in
         ];
       };
 
-      punk = inputs.hjem.standalone.hjemConfiguration {
+      punk = inputs.home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
 
-        specialArgs = specialArgs // {
+        extraSpecialArgs = extraSpecialArgs // {
           profile = "punk";
         };
 
@@ -166,7 +155,7 @@ in
   );
 
   flake.packages.x86_64-linux = {
-    "hjem/deck" = self.hjemConfigurations.deck.toplevel;
-    "hjem/punk" = self.hjemConfigurations.punk.toplevel;
+    "home/deck" = self.homeConfigurations.deck.activationPackage;
+    "home/punk" = self.homeConfigurations.punk.activationPackage;
   };
 }

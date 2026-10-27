@@ -1,15 +1,14 @@
 {
   lib,
-  options,
   pkgs,
   ...
 }:
 {
   config = lib.mkMerge [
     {
-      packages = [ pkgs.atuin ];
+      home.packages = [ pkgs.atuin ];
 
-      xdg.config.files."atuin/config.toml".text =
+      xdg.configFile."atuin/config.toml".text =
         builtins.readFile ./config.toml
         + ''
 
@@ -20,11 +19,11 @@
           systemd_socket = true
         '';
     }
-    (lib.optionalAttrs (lib.hasAttr "systemd" options) {
-      systemd = {
+    (lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
+      systemd.user = {
         sockets.atuin = {
-          wantedBy = [ "default.target" ];
-          socketConfig = {
+          Install.WantedBy = [ "default.target" ];
+          Socket = {
             ListenStream = "%t/atuin.sock";
             Accept = false;
             SocketMode = "0600";
@@ -32,7 +31,7 @@
         };
 
         services.atuin = {
-          serviceConfig = {
+          Service = {
             Type = "simple";
             ExecStart = "${lib.getExe pkgs.atuin} daemon start";
             Restart = "on-abort";

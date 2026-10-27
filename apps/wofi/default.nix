@@ -6,14 +6,14 @@
 }:
 {
   config = lib.mkIf config.dotfiles.gui.wayland.enable {
-    xdg.config.files."wofi/config".text = ''
+    xdg.configFile."wofi/config".text = ''
       width=800
       height=400
       insensitive=true
       mode=drun,run
     '';
 
-    xdg.config.files."wofi/style.css".text = ''
+    xdg.configFile."wofi/style.css".text = ''
       window {
         border: 2px solid #${config.colorScheme.palette.base03};
         background-color: #${config.colorScheme.palette.base00};
@@ -48,6 +48,6 @@
       }
     '';
 
-    packages = [ pkgs.wofi ];
+    home.packages = [ pkgs.wofi ];
   };
 }

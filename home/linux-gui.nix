@@ -3,7 +3,6 @@
   dotlib,
   flake,
   lib,
-  npins,
   pkgs,
   ...
 }:
@@ -64,48 +63,46 @@ in
     # ../apps/hypridle
     # ../apps/kanshi
     # ../apps/waybar
-
-    "${npins.hjem-rum}/modules/collection/misc/gtk.nix"
   ];
-
-  _module.args.rumLib = import "${npins.hjem-rum}/modules/lib/default.nix" { inherit lib; };
 
   dotfiles = {
     gui.wayland.enable = true;
   };
 
-  rum.misc.gtk = {
+  gtk = {
     enable = true;
-    packages = [
-      pkgs.ibm-plex
-    ];
-
-    settings = {
-      font-name = "${config.dotfiles.gui.font.variable} 11";
-      application-prefer-dark-theme = true;
+    font = {
+      name = config.dotfiles.gui.font.variable;
+      size = 11;
+      package = pkgs.ibm-plex;
     };
+    gtk2.extraConfig = "gtk-application-prefer-dark-theme = true";
+    gtk3.extraConfig.gtk-application-prefer-dark-theme = true;
+    gtk4.extraConfig.gtk-application-prefer-dark-theme = true;
   };
 
-  systemd.services.fc-cache = {
-    wantedBy = [ "default.target" ];
-    partOf = [ "default.target" ];
-    serviceConfig.ExecStart = "${pkgs.fontconfig}/bin/fc-cache -v";
-    restartTriggers = [
-      config.xdg.config.files."fontconfig/conf.d/100-hjem.conf".source
-    ];
+  systemd.user.services.fc-cache = {
+    Unit = {
+      PartOf = [ "default.target" ];
+      X-Restart-Triggers = [
+        config.xdg.configFile."fontconfig/conf.d/100-home-manager.conf".source
+      ];
+    };
+    Service.ExecStart = "${pkgs.fontconfig}/bin/fc-cache -v";
+    Install.WantedBy = [ "default.target" ];
   };
 
-  xdg.config.files."fontconfig/conf.d/100-hjem.conf".text =
+  xdg.configFile."fontconfig/conf.d/100-home-manager.conf".text =
     # xml
     ''
       <?xml version="1.0"?>
       <!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
       <fontconfig>
-        <dir>${config.directory}/.local/state/hjem/standalone/current-profile/share/fonts</dir>
+        <dir>${config.home.profileDirectory}/share/fonts</dir>
       </fontconfig>
     '';
 
-  files.".local/share/icons".source =
+  home.file.".local/share/icons".source =
     (pkgs.buildEnv {
       name = "icons";
       paths = [
@@ -114,7 +111,7 @@ in
     })
     + "/share/icons";
 
-  packages =
+  home.packages =
     config.dotfiles.gui.font.fontconfig.fontDirectories
     ++ [
       pkgs.app2unit
@@ -173,9 +170,9 @@ in
       (dotlib.unfreePkg [ "jetbrains" "datagrip" ] pkgs)
     ];
 
-  systemd.targets.wayland-session = {
-    bindsTo = [ "graphical-session.target" ];
-    wants = [ "graphical-session-pre.target" ];
-    after = [ "graphical-session-pre.target" ];
+  systemd.user.targets.wayland-session.Unit = {
+    BindsTo = [ "graphical-session.target" ];
+    Wants = [ "graphical-session-pre.target" ];
+    After = [ "graphical-session-pre.target" ];
   };
 }

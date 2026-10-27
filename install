@@ -1,27 +1,48 @@
 #!/usr/bin/env bash
 
-SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
+set -euo pipefail
 
-pushd "$SCRIPT_DIR" || exit 1
+SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
 
-rm -rf ~/.config/fish
+if [[ "${1:-}" == --help || "${1:-}" == -h ]]; then
+  printf '%s\n' 'Usage: install [deck|punk|willow]'
+  exit 0
+fi
+if (( $# > 1 )); then
+  printf '%s\n' 'Usage: install [deck|punk|willow]' >&2
+  exit 2
+fi
+host=${1:-}
 
-export NIX_CONFIG="extra-experimental-features = nix-command flakes pipe-operators pipe-operator
+export NIX_CONFIG="${NIX_CONFIG:-}
+extra-experimental-features = nix-command flakes pipe-operators pipe-operator
 extra-substituters = https://cache-v6.junco.dev?priority=41
 extra-trusted-public-keys = cache-v6:tXeE+WhO6k2OoUoNSzmQVIckjXtl14mtO+z0ZwAIork="
 
 case "$(uname)" in
-Darwin)
-  set -e
-  artifact=$(nix shell nixpkgs#git -c nix build .#darwin/$(hostname -s) --print-out-paths --extra-experimental-features "nix-command flakes pipe-operators pipe-operator")
-  set +e
-  sudo "${artifact}/sw/bin/darwin-rebuild" switch --flake ~/.dotfiles --option extra-experimental-features "nix-command flakes pipe-operators pipe-operator"
-  chsh -s /run/current-system/sw/bin/fish
-  ;;
-Linux)
-  nix run .#hm -- switch
-  ;;
-*)
-  echo "nope, unsupported platform"
-  ;;
+  Darwin)
+    host=${host:-$(hostname -s)}
+    if [[ "$host" != willow ]]; then
+      printf 'Unsupported Darwin host: %s. Expected willow.\n' "$host" >&2
+      exit 2
+    fi
+    artifact=$(nix shell nixpkgs#git --command nix build \
+      "$SCRIPT_DIR#darwinConfigurations.willow.system" --no-link --print-out-paths)
+    sudo "${artifact}/sw/bin/darwin-rebuild" switch --flake "$SCRIPT_DIR#willow"
+    ;;
+  Linux)
+    host=${host:-$(hostname --short)}
+    case "$host" in
+      deck|punk) ;;
+      *)
+        printf 'Unsupported Home Manager host: %s. Expected deck or punk.\n' "$host" >&2
+        exit 2
+        ;;
+    esac
+    nh home switch --configuration "$host" --backup-extension "hm-backup-$(date --utc +%Y%m%dT%H%M%SZ)-$$" "$SCRIPT_DIR"
+    ;;
+  *)
+    printf 'Unsupported platform: %s.\n' "$(uname)" >&2
+    exit 2
+    ;;
 esac

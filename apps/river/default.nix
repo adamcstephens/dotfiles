@@ -6,16 +6,15 @@
   ...
 }:
 {
-  packages = [
+  home.packages = [
     pkgs.river-bnf
   ];
 
-  xdg.config.files."river/init" = {
-    executable = true;
+  xdg.configFile."river/init" = {
     source = dotlib.source "apps/river/init.sh";
   };
 
-  xdg.config.files."river/colors.sh" = {
+  xdg.configFile."river/colors.sh" = {
     executable = true;
     text = ''
       #!/usr/bin/env sh
@@ -31,7 +30,7 @@
     '';
   };
 
-  xdg.config.files."river/start".source =
+  xdg.configFile."river/start".source =
     pkgs.writeShellApplication {
       name = "river-start";
       text = ''

@@ -22,7 +22,7 @@ let
       agent-browser;
 in
 {
-  packages = [
+  home.packages = [
     agent-browser-wrapped
   ];
 }

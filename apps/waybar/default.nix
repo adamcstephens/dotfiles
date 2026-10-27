@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 let
@@ -120,13 +119,6 @@ in
     };
 
     systemd.user.services.waybar = {
-      Service.Environment = lib.mkForce "PATH=${
-        lib.makeBinPath [
-          pkgs.blueman
-          pkgs.networkmanagerapplet
-          pkgs.pwvucontrol
-        ]
-      }";
       Unit = {
         PartOf = lib.mkForce [ "wayland-session.target" ];
         After = lib.mkForce [

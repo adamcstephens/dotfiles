@@ -19,11 +19,11 @@ in
     lib.mkEnableOption "install the full set of tools, as if a workstation";
 
   config = {
-    environment.sessionVariables = {
+    home.sessionVariables = {
       MANPAGER = "nvim +Man!";
       MANWIDTH = "999";
     };
 
-    packages = [ package ];
+    home.packages = [ package ];
   };
 }

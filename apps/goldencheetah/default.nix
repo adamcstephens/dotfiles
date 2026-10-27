@@ -1,6 +1,6 @@
-{ config, pkgs, ... }:
+{ dotlib, pkgs, ... }:
 {
-  packages = [ pkgs.golden-cheetah ];
+  home.packages = [ pkgs.golden-cheetah ];
 
-  files.".config/goldencheetah.org".source = "${config.directory}/.dotfiles/apps/goldencheetah";
+  xdg.configFile."goldencheetah.org".source = dotlib.source "apps/goldencheetah";
 }

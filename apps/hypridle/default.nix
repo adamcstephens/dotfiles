@@ -68,9 +68,5 @@ in
         ];
       };
     };
-
-    systemd.user.services.hypridle.Service.Environment = [
-      "PATH=${config.home.profileDirectory}/bin:/run/current-system/sw/bin"
-    ];
   };
 }

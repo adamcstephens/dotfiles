@@ -10,5 +10,5 @@ let
   };
 in
 {
-  packages = [ fd ];
+  home.packages = [ fd ];
 }

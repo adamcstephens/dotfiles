@@ -9,7 +9,7 @@
     ../apps/karabiner
   ];
 
-  packages = [
+  home.packages = [
     pkgs.iproute2mac
     pkgs.gnugrep
     pkgs.gnused

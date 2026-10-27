@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
 {
-  packages = [ config.programs.rofi.package ];
+  home.packages = [ config.programs.rofi.package ];
 
   programs.rofi = {
     enable = true;

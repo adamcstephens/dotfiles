@@ -1,6 +1,6 @@
 { ... }:
 {
-  files.".editorconfig".text = ''
+  home.file.".editorconfig".text = ''
     root=true
 
     [*]

@@ -20,7 +20,7 @@ bump-packages:
     nix-update --flake arkenfox --commit
 
 nix-darwin-bootstrap:
-    sudo $(nix build .#darwin/$(hostname -s) --print-out-paths)/sw/bin/darwin-rebuild switch --flake ~/.dotfiles
+    sudo $(nix build .#darwinConfigurations.willow.system --no-link --print-out-paths)/sw/bin/darwin-rebuild switch --flake ~/.dotfiles#willow
 
 fish-bootstrap:
     fish ~/.dotfiles/bin/theme.fish
@@ -68,4 +68,7 @@ systemd-networkd-debug-reset:
     sudo systemctl systemd-networkd
 
 test:
-    nix build --print-build-logs --keep-going .#homeConfigurations.aarch64-darwin.activationPackage .#homeConfigurations.aarch64-linux.activationPackage .#homeConfigurations.think.activationPackage
+    nix build --print-build-logs --keep-going .#homeConfigurations.deck.activationPackage .#homeConfigurations.punk.activationPackage
+    nix eval .#darwinConfigurations.willow.system.drvPath
+    nix eval .#nixosConfigurations.agents.config.system.build.toplevel.drvPath
+    nix eval .#nixosConfigurations.agents-aarch64.config.system.build.toplevel.drvPath

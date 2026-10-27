@@ -1,8 +1,8 @@
 { dotlib, pkgs, ... }:
 {
-  packages = [
+  home.packages = [
     pkgs.newsboat
   ];
 
-  xdg.config.files.newsboat.source = dotlib.source "apps/newsboat";
+  xdg.configFile.newsboat.source = dotlib.source "apps/newsboat";
 }

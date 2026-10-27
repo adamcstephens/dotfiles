@@ -85,25 +85,32 @@
     };
   };
 
-  systemd.services.paseo.serviceConfig.EnvironmentFile = "${config.services.paseo.dataDir}/pass.env";
+  systemd.user.services.paseo.Service.EnvironmentFile = "${config.services.paseo.dataDir}/pass.env";
 
-  systemd.services.paseo-pwgen = {
-    wantedBy = [ "default.target" ];
-    requiredBy = [ "paseo.service" ];
-    before = [ "paseo.service" ];
-
-    environment = {
-      inherit (config.systemd.services.paseo.environment) PASEO_HOME;
+  systemd.user.services.paseo-pwgen = {
+    Unit = {
+      Before = [ "paseo.service" ];
+    };
+    Install = {
+      WantedBy = [ "default.target" ];
+      RequiredBy = [ "paseo.service" ];
     };
 
-    serviceConfig = {
+    Service = {
+      Environment = [
+        "PASEO_HOME=${config.services.paseo.environment.PASEO_HOME or config.services.paseo.dataDir}"
+      ];
       Type = "oneshot";
       RemainAfterExit = true;
       ExecStart =
         pkgs.writeShellApplication {
           name = "paseo-pwgen";
-          runtimeInputs = [ pkgs.pwgen ];
+          runtimeInputs = [
+            pkgs.coreutils
+            pkgs.pwgen
+          ];
           text = ''
+            mkdir -p "$PASEO_HOME"
             if [ ! -e "$PASEO_HOME/pass.env" ]; then
               echo "PASEO_PASSWORD=$(pwgen -sc1 32)" > "$PASEO_HOME/pass.env"
             fi

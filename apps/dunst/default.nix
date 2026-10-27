@@ -39,8 +39,8 @@ in
     Service.Environment = lib.mkForce [ "FONTCONFIG_FILE=${config.dotfiles.gui.font.fontconfig}" ];
   };
 
-  xdg.config.files."dunst/theme-dark.conf".source =
+  xdg.configFile."dunst/theme-dark.conf".source =
     npins."modus-themes.nvim" + "/extras/dunst/modus_vivendi.dunstrc";
-  xdg.config.files."dunst/theme-light.conf".source =
+  xdg.configFile."dunst/theme-light.conf".source =
     npins."modus-themes.nvim" + "/extras/dunst/modus_operandi.dunstrc";
 }

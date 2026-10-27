@@ -11,17 +11,17 @@ let
     if (config.dotfiles.nixosManaged || pkgs.stdenv.hostPlatform.isDarwin) then
       lib.getExe (pkgs.callPackage ../../packages/prj.nix { })
     else
-      "${config.directory}/.dotfiles/bin/prj";
+      "${config.home.homeDirectory}/.dotfiles/bin/prj";
 in
 {
-  packages = [
+  home.packages = [
     pkgs.kitty.terminfo
   ]
   ++ lib.optionals (!pkgs.stdenv.hostPlatform.isDarwin) [ pkgs.kitty ];
 
-  xdg.config.files."kitty/kitty.conf".text = ''
-    include ${config.xdg.config.directory}/kitty/dotfiles.conf
-    include ${config.xdg.config.directory}/kitty/os.conf
+  xdg.configFile."kitty/kitty.conf".text = ''
+    include ${config.xdg.configHome}/kitty/dotfiles.conf
+    include ${config.xdg.configHome}/kitty/os.conf
 
     # nix provided configs
     font_family ${config.dotfiles.gui.font.mono}
@@ -29,17 +29,17 @@ in
     map super+shift+p launch --type=overlay-main ${prj} --remote
   '';
 
-  xdg.config.files."kitty/dotfiles.conf".source = dotlib.source "apps/kitty/dotfiles.conf";
-  xdg.config.files."kitty/os.conf".source = dotlib.source (
+  xdg.configFile."kitty/dotfiles.conf".source = dotlib.source "apps/kitty/dotfiles.conf";
+  xdg.configFile."kitty/os.conf".source = dotlib.source (
     if pkgs.stdenv.hostPlatform.isDarwin then "apps/kitty/macos.conf" else "apps/kitty/linux.conf"
   );
 
   # themes
-  xdg.config.files."kitty/no-preference-theme.auto.conf".source =
+  xdg.configFile."kitty/no-preference-theme.auto.conf".source =
     dotlib.source "themes/moonfly/extras/moonfly-kitty.conf";
 
-  xdg.config.files."kitty/dark-theme.auto.conf".source =
+  xdg.configFile."kitty/dark-theme.auto.conf".source =
     dotlib.source "themes/moonfly/extras/moonfly-kitty.conf";
-  xdg.config.files."kitty/light-theme.auto.conf".source =
+  xdg.configFile."kitty/light-theme.auto.conf".source =
     npins."modus-themes.nvim" + "/extras/kitty/modus_operandi.conf";
 }

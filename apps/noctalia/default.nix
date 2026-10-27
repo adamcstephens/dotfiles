@@ -33,30 +33,31 @@ in
   };
 
   config = {
-    xdg.config.files = {
-      noctalia.source = dotlib.source "apps/noctalia";
-    }
-    // lib.optionalAttrs (builtins.pathExists (./profiles + "/${profile}.toml")) {
-      "noctalia/profile.toml".text = # toml
-        ''
-          [include]
-          files = ["profiles/${profile}.toml"]
-        '';
-    };
+    xdg.configFile =
+      lib.mapAttrs' (
+        name: _:
+        lib.nameValuePair "noctalia/${name}" {
+          source = dotlib.source "apps/noctalia/${name}";
+        }
+      ) (builtins.readDir ./.)
+      // lib.optionalAttrs (builtins.pathExists (./profiles + "/${profile}.toml")) {
+        "noctalia/profile.toml".text = # toml
+          ''
+            [include]
+            files = ["profiles/${profile}.toml"]
+          '';
+      };
 
-    packages = [
+    home.packages = [
       cfg.package
     ];
 
-    systemd.services.noctalia = {
-      partOf = [ "graphical-session.target" ];
-      after = [ "graphical-session.target" ];
-      wantedBy = [ "graphical-session.target" ];
+    systemd.user.services.noctalia = lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
+      Unit.PartOf = [ "graphical-session.target" ];
+      Unit.After = [ "graphical-session.target" ];
+      Install.WantedBy = [ "graphical-session.target" ];
 
-      # since we launch other applications, let's leverage the systemd environment completely
-      enableDefaultPath = false;
-
-      serviceConfig = {
+      Service = {
         ExecStart = lib.getExe cfg.package;
         Restart = "on-failure";
       };

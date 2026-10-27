@@ -4,8 +4,8 @@
     nixpkgs-unstable.url = "https://channels.nixos.org/nixpkgs-unstable/nixexprs.tar.zst";
     nixos-unstable-small.url = "https://channels.nixos.org/nixos-unstable-small/nixexprs.tar.zst";
 
-    hjem.url = "github:adamcstephens/hjem?ref=push-wxvzlotzkqpl";
-    hjem.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager.url = "github:nix-community/home-manager";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     epi.url = "git+https://tangled.org/adam.robins.wtf/epi";
     flake-parts.url = "github:hercules-ci/flake-parts";
@@ -29,7 +29,7 @@
         ./apps/neovim/part.nix
         ./darwin/part.nix
         ./devshells/part.nix
-        ./hjem/part.nix
+        ./home/part.nix
         ./ocamlPackages/part.nix
         ./templates/part.nix
 
@@ -48,10 +48,16 @@
         {
           lib,
           pkgs,
+          system,
           self',
           ...
         }:
         {
+          apps.hm = {
+            type = "app";
+            program = "${inputs.home-manager.packages.${system}.home-manager}/bin/home-manager";
+          };
+
           packages =
             let
               ocamlPackages = pkgs.ocaml-ng.ocamlPackages_latest;

@@ -5,9 +5,9 @@
   ...
 }:
 {
-  packages = [
+  home.packages = [
     inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system}.jjui
   ];
 
-  files.".config/jjui/config.toml".source = dotlib.source "apps/jjui/config.toml";
+  xdg.configFile."jjui/config.toml".source = dotlib.source "apps/jjui/config.toml";
 }

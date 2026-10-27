@@ -28,7 +28,7 @@
         ./modules/user.nix
 
         (inputs.nix-darwin.outPath + "/modules/nix/nix-darwin.nix") # install darwin-rebuild
-        inputs.hjem.darwinModules.default
+        inputs.home-manager.darwinModules.home-manager
         inputs.nbac.darwinModules.default
       ];
     }

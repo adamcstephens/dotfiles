@@ -10,14 +10,24 @@
 let
   package = inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system}.fish;
 
-  hjemSessionVariables = pkgs.runCommand "hjem-session-vars.fish" { } ''
-    mkdir -vp $out/share/fish/vendor_conf.d
-    (echo "function setup_hjem_session_vars;"
-    ${pkgs.buildPackages.babelfish}/bin/babelfish \
-    <${config.environment.loadEnv}
-    echo "end"
-    echo "setup_hjem_session_vars") > $out/share/fish/vendor_conf.d/hjem-session-vars.fish
-  '';
+  homeManagerSessionVariables = pkgs.writeTextFile {
+    name = "home-manager-session-vars.fish";
+    destination = "/share/fish/vendor_conf.d/home-manager-session-vars.fish";
+    text = ''
+      function __dotfiles_setup_home_manager_session_vars
+          ${lib.getExe pkgs.babelfish} < ${lib.escapeShellArg "${config.home.profileDirectory}/etc/profile.d/hm-session-vars.sh"} | source
+      end
+      __dotfiles_setup_home_manager_session_vars
+      functions --erase __dotfiles_setup_home_manager_session_vars
+
+      fish_add_path --global --path --prepend --move ${
+        lib.escapeShellArgs [
+          "${config.home.profileDirectory}/bin"
+          "${config.home.profileDirectory}/sbin"
+        ]
+      }
+    '';
+  };
 
   mkSource = source: dotlib.source "apps/fish/${source}";
 
@@ -32,7 +42,7 @@ let
     '';
   };
 
-  # we'll steal this from HM
+  # Keep the handler in fish's vendor functions without managing programs.fish.
   fishCommandNotFound = pkgs.writeTextFile {
     name = "fish-command-not-found";
     text = ''
@@ -64,16 +74,16 @@ let
   '';
 in
 {
-  packages = [
+  home.packages = [
     package
-    hjemSessionVariables
+    homeManagerSessionVariables
     commandNotFound
     fishCommandNotFound
   ];
 
-  xdg.config.files."fish/completions".source = mkSource "completions";
-  xdg.config.files."fish/conf.d".source = mkSource "conf.d";
-  xdg.config.files."fish/config.fish".source = mkSource "config.fish";
-  xdg.config.files."fish/functions".source = mkSource "functions";
-  xdg.config.files."fish/themes/dotfiles.theme".source = theme;
+  xdg.configFile."fish/completions".source = mkSource "completions";
+  xdg.configFile."fish/conf.d".source = mkSource "conf.d";
+  xdg.configFile."fish/config.fish".source = mkSource "config.fish";
+  xdg.configFile."fish/functions".source = mkSource "functions";
+  xdg.configFile."fish/themes/dotfiles.theme".source = theme;
 }

@@ -16,11 +16,11 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    packages = [
+    home.packages = [
       cfg.package
     ];
 
-    xdg.config.files."ironbar/config.json".text = builtins.toJSON {
+    xdg.configFile."ironbar/config.json".text = builtins.toJSON {
       start = [
         {
           type = "workspaces";
@@ -65,7 +65,7 @@ in
       position = "top";
     };
 
-    xdg.config.files."ironbar/colors.css".text = ''
+    xdg.configFile."ironbar/colors.css".text = ''
       @define-color color_bg #${config.colorScheme.palette.base00};
       @define-color color_fg #bdbdbd;
       @define-color color_01 #${config.colorScheme.palette.base01};
@@ -73,15 +73,15 @@ in
 
     '';
 
-    xdg.config.files."ironbar/style.css".source = dotlib.source "apps/ironbar/style.css";
+    xdg.configFile."ironbar/style.css".source = dotlib.source "apps/ironbar/style.css";
 
-    systemd.services.ironbar = {
-      partOf = [ "wayland-session.target" ];
-      wantedBy = [ "wayland-session.target" ];
+    systemd.user.services.ironbar = lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
+      Unit.PartOf = [ "wayland-session.target" ];
+      Install.WantedBy = [ "wayland-session.target" ];
 
-      serviceConfig = {
+      Service = {
         Environment = [
-          "IRONBAR_CONFIG=${config.xdg.config.files."ironbar/config.json".source}"
+          "IRONBAR_CONFIG=${config.xdg.configFile."ironbar/config.json".source}"
         ];
         ExecStart = lib.getExe cfg.package;
         Restart = "on-failure";

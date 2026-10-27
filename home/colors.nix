@@ -30,7 +30,7 @@
     };
   };
 
-  xdg.config.files."colorscheme.json".text = lib.pipe config.colorScheme [
+  xdg.configFile."colorscheme.json".text = lib.pipe config.colorScheme [
     (lib.filterAttrs (n: _: n != "kind" && n != "colors"))
     builtins.toJSON
   ];

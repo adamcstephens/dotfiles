@@ -1,10 +1,10 @@
 { pkgs, ... }:
 {
-  packages = [
+  home.packages = [
     pkgs.zsh
     pkgs.zsh-autosuggestions
     pkgs.zsh-syntax-highlighting
   ];
 
-  # files.".zshrc".source = ./zshrc;
+  # home.file.".zshrc".source = ./zshrc;
 }

@@ -1,6 +1,6 @@
 { pkgs, ... }:
 {
-  packages = [
+  home.packages = [
     (pkgs.symlinkJoin {
       name = "ripgrep-dotfiles-wrapped";
       paths = [ pkgs.ripgrep ];

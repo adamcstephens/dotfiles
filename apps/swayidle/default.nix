@@ -26,17 +26,16 @@ in
   options.dotfiles.apps.swayidle.enable = lib.mkEnableOption "swayidle";
 
   config = lib.mkIf cfg.enable {
-    systemd.services.swayidle = {
-      wantedBy = [ "wayland-session.target" ];
-      after = [ "wayland-session.target" ];
-      partOf = [ "wayland-session.target" ];
+    systemd.user.services.swayidle = lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
+      Install.WantedBy = [ "wayland-session.target" ];
+      Unit.After = [ "wayland-session.target" ];
+      Unit.PartOf = [ "wayland-session.target" ];
 
-      unitConfig = {
+      Unit = {
         ConditionEnvironment = "WAYLAND_DISPLAY";
       };
 
-      serviceConfig = {
-        Environment = [ "PATH=${config.directory}/bin:/run/current-system/sw/bin" ];
+      Service = {
         ExecStart = [ (lib.getExe script) ];
         Restart = "always";
       };

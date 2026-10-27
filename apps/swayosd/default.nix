@@ -1,20 +1,20 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 {
-  packages = [ pkgs.swayosd ];
+  home.packages = [ pkgs.swayosd ];
 
-  systemd = {
+  systemd.user = lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
     services.swayosd = {
-      wantedBy = [ "wayland-session.target" ];
-      partOf = [ "wayland-session.target" ];
-      after = [ "wayland-session.target" ];
+      Install.WantedBy = [ "wayland-session.target" ];
+      Unit.PartOf = [ "wayland-session.target" ];
+      Unit.After = [ "wayland-session.target" ];
 
-      unitConfig = {
+      Unit = {
         ConditionEnvironment = "WAYLAND_DISPLAY";
         StartLimitBurst = 5;
         StartLimitIntervalSec = 10;
       };
 
-      serviceConfig = {
+      Service = {
         Type = "simple";
         ExecStart = "${pkgs.swayosd}/bin/swayosd-server";
         RestartSec = "2s";
