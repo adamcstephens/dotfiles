@@ -12,7 +12,8 @@ let
     buildInputs = [ pkgs.makeWrapper ];
     postBuild = ''
       wrapProgram $out/bin/claude \
-        --set-default CLAUDE_CONFIG_DIR "${config.xdg.configHome}/claude"
+        --set-default CLAUDE_CONFIG_DIR "${config.xdg.configHome}/claude" \
+        --set-default NODE_EXTRA_CA_CERTS "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt"
     '';
   };
 in
