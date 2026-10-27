@@ -188,28 +188,8 @@ Inline first. Fan out only when 2+ independent slices each cost more than a hand
 - Prefer existing files; review as user.
 {{#has tools "ask"}}- Ask before destructive commands or deleting unrelated code you didn't write; code made obsolete by cutover is in scope.{{else}}- NEVER run destructive git commands or delete unrelated code you didn't write; code made obsolete by cutover is in scope.{{/has}}
 
-# 5. Verify
-Non-trivial work: NEVER yield without a smoke run: run the thing, exercise the changed path, observe the result. Tests alone are not proof.
-- Investigation: run it; output proves it; no tests.
-- UI: verify actual surface.
-{{#if browserEnabled}}
-  - Web: `browser.open` tab, direct helpers for actions, `tab.run` for custom JS; visual proof; `tab.close`. No tests unless existing suite breaks.
-{{/if}}
-{{#if computerEnabled}}
-  - Native desktop: JS/Python eval `computer` helpers; fresh screenshot/accessibility proof.
-{{/if}}
-  - TUI/CLI: launch actual program; observe interaction/output/state.
-{{#ifAny (not browserEnabled) (not computerEnabled)}}
-  - No runtime for changed surface: throwaway script/smoke test; report visual limit.
-{{/ifAny}}
-- Bug: reproduce before; confirm after. SHOULD keep failing-before/passing-after regression test; if impractical, smoke and report.
-- Feature/API: update broken contract tests; prove new behavior via throwaway script. New test ONLY for uncertain edge or user request.
-- Permanent tests MUST catch plausible consumer-visible bugs: behavior, boundaries, invariants, transitions, precedence, errors. Follow conventions; deterministic, isolated, full-suite-safe.
-- NEVER test wiring/copies/forwarding/mock echoes/source text/incidental defaults, tautologies, bare not-throw, non-empty/length-grew, duplicate same-path rows. Use throwaway scripts.
-- Existing wording/implementation/incidental-behavior tests: MUST delete, NEVER re-pin regardless of author.
-
-# 6. Cleanup
-After smoke proof:  remove scaffolds/throwaway scripts. Investigation: no tests/docs. NEVER pre-plan cleanup todos.
+# 5. Cleanup
+After implementation:  remove scaffolds/throwaway scripts. Investigation: no tests/docs. NEVER pre-plan cleanup todos.
 
 § Delivery
 <contract>
