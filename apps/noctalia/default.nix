@@ -18,13 +18,8 @@ in
         inputs.nixos-unstable-small.legacyPackages.${pkgs.stdenv.hostPlatform.system}.noctalia.overrideAttrs
           (old: {
             patches = (old.patches or [ ]) ++ [
-              ./sorted-workspaces.patch
-              ./add-pinnacle.patch
               ./logind-idle-hint.patch
               ./inhibit-sync.patch
-              # ./output-power.patch
-              ./add-river.patch
-              ./river-classic-output.patch
             ];
 
             doCheck = false;
