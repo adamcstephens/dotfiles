@@ -1,4 +1,5 @@
 {
+  config,
   dotlib,
   inputs,
   lib,
@@ -37,6 +38,20 @@ in
             ExecStart = "${lib.getExe package} daemon";
             Restart = "on-failure";
           };
+        };
+      };
+    })
+    (lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
+      launchd.agents.tuios = {
+        enable = true;
+        config = {
+          EnvironmentVariables.XDG_CONFIG_HOME = config.xdg.configHome;
+          ProgramArguments = [
+            (lib.getExe package)
+            "daemon"
+          ];
+          RunAtLoad = true;
+          KeepAlive.SuccessfulExit = false;
         };
       };
     })
