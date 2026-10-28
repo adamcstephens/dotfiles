@@ -64,6 +64,16 @@ class RexTest(unittest.TestCase):
             call("com.superlogical.terminal.size", {"block_id": "block:caller", "args": {}}),
         )
 
+    def test_width_from_popup_uses_window_relative_rectangle(self):
+        popup = {
+            "kind": "floating",
+            "bounds": [0.3, 0.3, 0.4, 0.4],
+            "layout": {"block_id": "block:caller", "rect": [0.3, 0.3, 0.4, 0.4]},
+        }
+        view = {"windows": [{"layers": [popup]}]}
+        with patch.object(prj, "rex_api", return_value={"columns": 120}):
+            self.assertEqual(prj.rex_window_width(view), 300)
+
     def create_window(self, project="/src/project", host=None, allowed=False):
         api = self.enterContext(
             patch.object(

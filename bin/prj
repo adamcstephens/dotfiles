@@ -133,15 +133,15 @@ def rex_leaves(layout: dict) -> list[dict]:
 
 def rex_window_width(view: dict) -> int:
     block_id = os.environ["REX_BLOCK"]
-    node, layer = next(
-        (node, layer)
+    node = next(
+        node
         for window in view["windows"]
         for layer in window["layers"]
         for node in rex_leaves(layer["layout"])
         if node["block_id"] == block_id
     )
     size = rex_api("com.superlogical.terminal.size", {"block_id": block_id, "args": {}})
-    return round(size["columns"] / (node["rect"][2] * layer["bounds"][2]))
+    return round(size["columns"] / node["rect"][2])
 
 
 def rex_open_window(wname: str, project: str | None = None, host: str | None = None):
