@@ -123,27 +123,6 @@ def rex_api(method: str, args: dict | None = None) -> dict:
     return json.loads(run(f"rex api call {method} -", input=json.dumps(request)))
 
 
-def rex_leaves(layout: dict) -> list[dict]:
-    if "block_id" in layout:
-        return [layout]
-
-    split = layout["split"]
-    return rex_leaves(split["before"]) + rex_leaves(split["after"])
-
-
-def rex_window_width(view: dict) -> int:
-    block_id = os.environ["REX_BLOCK"]
-    node = next(
-        node
-        for window in view["windows"]
-        for layer in window["layers"]
-        for node in rex_leaves(layer["layout"])
-        if node["block_id"] == block_id
-    )
-    size = rex_api("com.superlogical.terminal.size", {"block_id": block_id, "args": {}})
-    return round(size["columns"] / node["rect"][2])
-
-
 def rex_show_window(window_id: str):
     args = {"session_id": os.environ["REX_SESSION"], "window_id": window_id}
     run(f"rex do session.select --args {shlex.quote(json.dumps(args))}")
@@ -162,11 +141,9 @@ def rex_open_window(wname: str, project: str | None = None, host: str | None = N
     if allowed:
         run(f"direnv exec {shlex.quote(project)} true")
 
-    usable = rex_window_width(view)
-    side = side_column_width(usable)
     blocks = []
 
-    for index in range(3):
+    for index in range(2):
         options = {}
         if host is None:
             options["cwd"] = project
@@ -184,16 +161,9 @@ def rex_open_window(wname: str, project: str | None = None, host: str | None = N
     layout = {
         "split": {
             "direction": "horizontal",
-            "ratio": side / usable,
+            "ratio": 0.5,
             "before": blocks[0],
-            "after": {
-                "split": {
-                    "direction": "horizontal",
-                    "ratio": (usable - 2 * side) / (usable - side),
-                    "before": blocks[1],
-                    "after": blocks[2],
-                }
-            },
+            "after": blocks[1],
         }
     }
     created = rex_api("session.new_window", {"window_label": wname, "layout": layout})
@@ -201,57 +171,32 @@ def rex_open_window(wname: str, project: str | None = None, host: str | None = N
     rex_show_window(created["window_id"])
 
 
-def rex_columns(layout: dict) -> list[dict]:
-    if "block_id" in layout:
-        return [layout]
-
-    split = layout["split"]
-    if split["direction"] != "horizontal":
-        return []
-
-    before = rex_columns(split["before"])
-    after = rex_columns(split["after"])
-    return before + after if before and after else []
-
-
-def rex_resize_layout(layout: dict, widths: dict[str, int]):
-    if "block_id" in layout:
-        return
-
-    split = layout["split"]
-    before = rex_leaves(split["before"])
-    after = rex_leaves(split["after"])
-    before_width = sum(widths[node["block_id"]] for node in before)
-    after_width = sum(widths[node["block_id"]] for node in after)
-    rex_api(
-        "session.resize_pane",
-        {
-            "direction": "horizontal",
-            "before_block_id": before[0]["block_id"],
-            "after_block_id": after[0]["block_id"],
-            "ratio": before_width / (before_width + after_width),
-        },
-    )
-    rex_resize_layout(split["before"], widths)
-    rex_resize_layout(split["after"], widths)
-
-
 def rex_relayout():
     view = rex_api("session.view")
-    usable = rex_window_width(view)
-    side = side_column_width(usable)
     sized = 0
     skipped = 0
 
     for window in view["windows"]:
         layout = next(layer["layout"] for layer in window["layers"] if layer["kind"] == "tiled")
-        columns = rex_columns(layout)
-        if len(columns) != 3:
+        split = layout.get("split")
+        if (
+            split is None
+            or split["direction"] != "horizontal"
+            or "block_id" not in split["before"]
+            or "block_id" not in split["after"]
+        ):
             skipped += 1
             continue
 
-        widths = dict(zip((node["block_id"] for node in columns), (side, usable - 2 * side, side)))
-        rex_resize_layout(layout, widths)
+        rex_api(
+            "session.resize_pane",
+            {
+                "direction": "horizontal",
+                "before_block_id": split["before"]["block_id"],
+                "after_block_id": split["after"]["block_id"],
+                "ratio": 0.5,
+            },
+        )
         sized += 1
 
     print(f"relayout: {sized} sized, {skipped} skipped")
@@ -532,7 +477,7 @@ if __name__ == "__main__":
     parser.add_argument("project", nargs="?", help="path")
     parser.add_argument("--remote", "-r", action="store_true", help="remote")
     parser.add_argument("--ssh", "-s", action="store_true", help="open ssh tab")
-    parser.add_argument("--relayout", action="store_true", help="re-layout all three-pane windows")
+    parser.add_argument("--relayout", action="store_true", help="balance tmux three-column or Rex two-column windows")
     args = parser.parse_args()
 
     if is_tuios and (args.remote or args.ssh):

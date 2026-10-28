@@ -55,25 +55,6 @@ class RexTest(unittest.TestCase):
             self.assertEqual(prj.prj_finder(), "/src/project")
         self.assertEqual(run.call_args, call(prj.FINDER, input="/src/project"))
 
-    def test_width_accounts_for_callers_split(self):
-        view = {"windows": [window(split(leaf("block:caller", 0, 0.4), leaf("other", 0.4, 0.6)))]}
-        with patch.object(prj, "rex_api", return_value={"columns": 120}) as api:
-            self.assertEqual(prj.rex_window_width(view), 300)
-        self.assertEqual(
-            api.call_args,
-            call("com.superlogical.terminal.size", {"block_id": "block:caller", "args": {}}),
-        )
-
-    def test_width_from_popup_uses_window_relative_rectangle(self):
-        popup = {
-            "kind": "floating",
-            "bounds": [0.3, 0.3, 0.4, 0.4],
-            "layout": {"block_id": "block:caller", "rect": [0.3, 0.3, 0.4, 0.4]},
-        }
-        view = {"windows": [{"layers": [popup]}]}
-        with patch.object(prj, "rex_api", return_value={"columns": 120}):
-            self.assertEqual(prj.rex_window_width(view), 300)
-
     def create_window(self, project="/src/project", host=None, allowed=False):
         api = self.enterContext(
             patch.object(
@@ -81,12 +62,11 @@ class RexTest(unittest.TestCase):
                 "rex_api",
                 side_effect=[
                     {"windows": []},
-                    {"window_id": "window:new", "block_ids": ["left", "middle", "right"]},
+                    {"window_id": "window:new", "block_ids": ["left", "right"]},
                     {},
                 ],
             )
         )
-        self.enterContext(patch.object(prj, "rex_window_width", return_value=300))
         self.enterContext(patch.object(prj, "direnv_allowed", return_value=allowed))
         run = self.enterContext(patch.object(prj, "run"))
         prj.rex_open_window("project", project, host)
@@ -97,19 +77,18 @@ class RexTest(unittest.TestCase):
             return [layout["block"]]
         return self.blocks(layout["split"]["before"]) + self.blocks(layout["split"]["after"])
 
-    def test_local_project_has_three_columns_and_focused_editor(self):
+    def test_local_project_has_two_equal_columns_and_focused_editor(self):
         api, run = self.create_window()
         request = api.call_args_list[1]
         self.assertEqual(request.args[0], "session.new_window")
         layout = request.args[1]["layout"]
         self.assertEqual(request.args[1]["window_label"], "project")
         blocks = self.blocks(layout)
-        self.assertEqual(len(blocks), 3)
-        self.assertEqual([block["options"]["cwd"] for block in blocks], ["/src/project"] * 3)
-        self.assertEqual([block["options"].get("initial_input") for block in blocks], [None, "vim .\n", None])
-        self.assertAlmostEqual(layout["split"]["ratio"], 80 / 300)
-        self.assertAlmostEqual(layout["split"]["after"]["split"]["ratio"], 140 / 220)
-        self.assertEqual(api.call_args, call("session.focus_block", {"block_id": "middle"}))
+        self.assertEqual(len(blocks), 2)
+        self.assertEqual([block["options"]["cwd"] for block in blocks], ["/src/project"] * 2)
+        self.assertEqual([block["options"].get("initial_input") for block in blocks], [None, "vim .\n"])
+        self.assertEqual(layout["split"]["ratio"], 0.5)
+        self.assertEqual(api.call_args, call("session.focus_block", {"block_id": "right"}))
         run.assert_called_once_with(
             "rex do session.select --args "
             + shlex.quote(json.dumps({"session_id": "session:test", "window_id": "window:new"}))
@@ -119,7 +98,6 @@ class RexTest(unittest.TestCase):
         events = []
         with (
             patch.object(prj, "rex_api") as api,
-            patch.object(prj, "rex_window_width", return_value=300),
             patch.object(prj, "direnv_allowed", return_value=True),
             patch.object(prj, "run", side_effect=lambda *a, **kw: events.append("warm")),
         ):
@@ -129,7 +107,7 @@ class RexTest(unittest.TestCase):
                 return (
                     {"windows": []}
                     if method == "session.view"
-                    else {"window_id": "window:new", "block_ids": ["left", "middle", "right"]}
+                    else {"window_id": "window:new", "block_ids": ["left", "right"]}
                 )
 
             api.side_effect = request
@@ -182,9 +160,10 @@ class RexTest(unittest.TestCase):
             prj.open_ssh()
         self.assertEqual(open_window.call_args, call("ssh@host", host="host"))
 
-    def test_ssh_has_three_shells_and_no_editor(self):
+    def test_ssh_has_two_shells_and_no_editor(self):
         api, _ = self.create_window(project=None, host="host.example")
         blocks = self.blocks(api.call_args_list[1].args[1]["layout"])
+        self.assertEqual(len(blocks), 2)
         for block in blocks:
             self.assertEqual(shlex.split(block["options"]["initial_input"]), ["ssh", "--", "host.example"])
 
@@ -208,28 +187,26 @@ class RexTest(unittest.TestCase):
         open_window.assert_not_called()
         self.assertEqual(run.call_args, call("zellij action go-to-tab-name project"))
 
-    def test_relayout_handles_both_horizontal_tree_shapes_and_skips_other_layouts(self):
+    def test_relayout_balances_two_columns_and_skips_other_layouts(self):
         left, middle, right = leaf("left", 0, 0.25), leaf("middle", 0.25, 0.5), leaf("right", 0.75, 0.25)
         layouts = [
             split(left, split(middle, right)),
-            split(split(left, middle), right),
             split(left, right),
-            split(left, split(middle, right, direction="vertical")),
+            split(left, right, direction="vertical"),
+            left,
         ]
         with (
             patch.object(prj, "rex_api", return_value={}) as api,
-            patch.object(prj, "rex_window_width", return_value=300),
             patch("builtins.print") as output,
         ):
-            api.side_effect = [{"windows": [window(layout) for layout in layouts]}] + [{}] * 4
+            api.side_effect = [{"windows": [window(layout) for layout in layouts]}, {}]
             prj.rex_relayout()
         resizes = [c.args[1] for c in api.call_args_list if c.args[0] == "session.resize_pane"]
-        self.assertEqual(len(resizes), 4)
-        self.assertAlmostEqual(resizes[0]["ratio"], 80 / 300)
-        self.assertAlmostEqual(resizes[1]["ratio"], 140 / 220)
-        self.assertAlmostEqual(resizes[2]["ratio"], 220 / 300)
-        self.assertAlmostEqual(resizes[3]["ratio"], 80 / 220)
-        output.assert_called_once_with("relayout: 2 sized, 2 skipped")
+        self.assertEqual(
+            resizes,
+            [{"direction": "horizontal", "before_block_id": "left", "after_block_id": "right", "ratio": 0.5}],
+        )
+        output.assert_called_once_with("relayout: 1 sized, 3 skipped")
 
 
 if __name__ == "__main__":
