@@ -15,6 +15,6 @@ writeScriptBin "prj" ''
       tmux
       zoxide
     ]
-  }"
-  ${lib.getExe python3} ${../bin/prj}
+  }:$PATH"
+  ${lib.getExe python3} ${../bin/prj} "$@"
 ''

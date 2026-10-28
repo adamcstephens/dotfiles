@@ -13,6 +13,7 @@ import time
 logger = logging.getLogger(__name__)
 
 is_kitty = "KITTY_PID" in os.environ
+is_rex = "REX_SESSION" in os.environ
 is_tmux = "TMUX" in os.environ
 is_tuios = "TUIOS_SESSION" in os.environ
 is_wayland = "WAYLAND_DISPLAY" in os.environ
@@ -117,6 +118,138 @@ def tmux_relayout():
     run(f"tmux display-message {shlex.quote(f'relayout: {sized} sized, {skipped} skipped')}")
 
 
+def rex_api(method: str, args: dict | None = None) -> dict:
+    request = {"session_id": os.environ["REX_SESSION"], **(args or {})}
+    return json.loads(run(f"rex api call {method} -", input=json.dumps(request)))
+
+
+def rex_leaves(layout: dict) -> list[dict]:
+    if "block_id" in layout:
+        return [layout]
+
+    split = layout["split"]
+    return rex_leaves(split["before"]) + rex_leaves(split["after"])
+
+
+def rex_window_width(view: dict) -> int:
+    block_id = os.environ["REX_BLOCK"]
+    node, layer = next(
+        (node, layer)
+        for window in view["windows"]
+        for layer in window["layers"]
+        for node in rex_leaves(layer["layout"])
+        if node["block_id"] == block_id
+    )
+    size = rex_api("com.superlogical.terminal.size", {"block_id": block_id, "args": {}})
+    return round(size["columns"] / (node["rect"][2] * layer["bounds"][2]))
+
+
+def rex_open_window(wname: str, project: str | None = None, host: str | None = None):
+    view = rex_api("session.view")
+    existing = next((window for window in view["windows"] if window["label"] == wname), None)
+
+    if existing is not None:
+        rex_api("session.focus_window", {"window_id": existing["window_id"]})
+        return
+
+    allowed = host is None and project is not None and direnv_allowed(project)
+    if allowed:
+        run(f"direnv exec {shlex.quote(project)} true")
+
+    usable = rex_window_width(view)
+    side = side_column_width(usable)
+    blocks = []
+
+    for index in range(3):
+        options = {}
+        if host is None:
+            options["cwd"] = project
+            if index == 1:
+                options["initial_input"] = "direnv exec . vim .\n" if allowed else "vim .\n"
+        elif project is None:
+            options["initial_input"] = shlex.join(["ssh", "--", host]) + "\n"
+        else:
+            command = f"cd -- {shlex.quote(project)} && "
+            command += "vim .; exec $SHELL -l" if index == 1 else "exec $SHELL -l"
+            options["initial_input"] = shlex.join(["ssh", "-t", "--", host, command]) + "\n"
+
+        blocks.append({"block": {"flavor": "com.superlogical.terminal.shell", "options": options}})
+
+    layout = {
+        "split": {
+            "direction": "horizontal",
+            "ratio": side / usable,
+            "before": blocks[0],
+            "after": {
+                "split": {
+                    "direction": "horizontal",
+                    "ratio": (usable - 2 * side) / (usable - side),
+                    "before": blocks[1],
+                    "after": blocks[2],
+                }
+            },
+        }
+    }
+    created = rex_api("session.new_window", {"window_label": wname, "layout": layout})
+    rex_api("session.focus_block", {"block_id": created["block_ids"][1]})
+
+
+def rex_columns(layout: dict) -> list[dict]:
+    if "block_id" in layout:
+        return [layout]
+
+    split = layout["split"]
+    if split["direction"] != "horizontal":
+        return []
+
+    before = rex_columns(split["before"])
+    after = rex_columns(split["after"])
+    return before + after if before and after else []
+
+
+def rex_resize_layout(layout: dict, widths: dict[str, int]):
+    if "block_id" in layout:
+        return
+
+    split = layout["split"]
+    before = rex_leaves(split["before"])
+    after = rex_leaves(split["after"])
+    before_width = sum(widths[node["block_id"]] for node in before)
+    after_width = sum(widths[node["block_id"]] for node in after)
+    rex_api(
+        "session.resize_pane",
+        {
+            "direction": "horizontal",
+            "before_block_id": before[0]["block_id"],
+            "after_block_id": after[0]["block_id"],
+            "ratio": before_width / (before_width + after_width),
+        },
+    )
+    rex_resize_layout(split["before"], widths)
+    rex_resize_layout(split["after"], widths)
+
+
+def rex_relayout():
+    view = rex_api("session.view")
+    usable = rex_window_width(view)
+    side = side_column_width(usable)
+    sized = 0
+    skipped = 0
+
+    for window in view["windows"]:
+        layout = next(layer["layout"] for layer in window["layers"] if layer["kind"] == "tiled")
+        columns = rex_columns(layout)
+        if len(columns) != 3:
+            skipped += 1
+            continue
+
+        widths = dict(zip((node["block_id"] for node in columns), (side, usable - 2 * side, side)))
+        rex_resize_layout(layout, widths)
+        sized += 1
+
+    print(f"relayout: {sized} sized, {skipped} skipped")
+
+
 def prj_finder(remote: bool = False) -> str:
     command: str
     project: str
@@ -130,7 +263,7 @@ def prj_finder(remote: bool = False) -> str:
         )
         project = f"{selected_remote}:{project}"
     else:
-        if is_tuios or is_kitty or is_tmux or is_zellij:
+        if is_tuios or is_kitty or is_tmux or is_zellij or is_rex:
             command = FINDER
         elif is_wayland:
             command = "rofi -dmenu"
@@ -299,6 +432,12 @@ def open_project(project: str, remote: bool = False):
             # send newline
             run("zellij action write 13")
 
+    elif is_rex:
+        if remote:
+            rex_open_window(wname, project, host)
+        else:
+            rex_open_window(wname, project)
+
     elif is_kitty:
         # needs to come after tmux in case tmux in kitty
         existing_tab = existing_tab_index(kitty_active_window()["tabs"], wname)
@@ -373,6 +512,9 @@ def open_ssh():
             time.sleep(0.2)
             run("zellij action toggle-active-sync-tab")
 
+    elif is_rex:
+        rex_open_window(wname, host=selected_remote)
+
     elif is_kitty:
         print("unsupported tmux + ssh")
         sys.exit(1)
@@ -392,11 +534,13 @@ if __name__ == "__main__":
     project: str
 
     if args.relayout:
-        if not is_tmux:
-            logger.error("--relayout requires tmux")
+        if is_tmux:
+            tmux_relayout()
+        elif is_rex and not (is_tuios or is_zellij):
+            rex_relayout()
+        else:
+            logger.error("--relayout requires tmux or rex")
             sys.exit(1)
-
-        tmux_relayout()
         sys.exit(0)
     elif args.ssh:
         open_ssh()
