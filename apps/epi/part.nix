@@ -50,6 +50,7 @@ let
           ../../home/dev.nix
 
           ../paseo
+          ../rex
         ];
 
         users.adam = {

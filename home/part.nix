@@ -54,6 +54,7 @@ in
         home-manager.users.adam.imports = [
           ./dev.nix
           ../apps/paseo
+          ../apps/rex
         ];
       }
     ];

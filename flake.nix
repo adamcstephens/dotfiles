@@ -18,6 +18,7 @@
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
     nix-index-database.url = "github:nix-community/nix-index-database";
     profile-parts.url = "git+https://tangled.org/adam.robins.wtf/profile-parts";
+    rex.url = "https://pkgs.superlogical.com/rex/nix/snapshot.tar.gz";
     sower.url = "git+https://tangled.org/adam.robins.wtf/sower";
   };
 
