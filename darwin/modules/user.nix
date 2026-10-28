@@ -17,7 +17,10 @@
     };
 
     users.adam = {
-      imports = [ ../../home/darwin.nix ];
+      imports = [
+        ../../home/darwin.nix
+        ../../apps/rex
+      ];
 
       home = {
         username = "adam";

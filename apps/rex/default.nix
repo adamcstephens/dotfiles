@@ -1,21 +1,49 @@
-{ config, inputs, ... }: {
+{
+  config,
+  dotlib,
+  inputs,
+  lib,
+  pkgs,
+  ...
+}:
+let
+  cfg = config.dotfiles.apps.rex;
+in
+{
   imports = [
     inputs.rex.homeManagerModules.default
   ];
 
-  programs.rex = {
-    enable = true;
-    sshGuard = false;
+  options = {
+    dotfiles.apps.rex = {
+      server.enable = lib.mkOption {
+        type = lib.types.bool;
+        description = "rex server";
+        default = pkgs.stdenv.hostPlatform.isLinux;
+      };
+    };
   };
 
-  services.rex = {
-    enable = true;
-    extraListen = [ "[::]:7297" ];
-    allowAnonymous = true;
-  };
+  config = lib.mkMerge [
+    (lib.mkIf cfg.server.enable {
+      programs.rex = {
+        enable = true;
+        sshGuard = false;
+      };
 
-  xdg.configFile = {
-    "git/conf.d/50-rex.conf".source =
-      "${config.programs.rex.package}/share/rex/ssh_config.d/50-rex.conf";
-  };
+      services.rex = {
+        enable = true;
+        extraListen = [ "[::]:7297" ];
+        allowAnonymous = true;
+      };
+
+      xdg.configFile = {
+        "git/conf.d/50-rex.conf".source =
+          "${config.programs.rex.package}/share/rex/ssh_config.d/50-rex.conf";
+      };
+    })
+    (lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
+      xdg.configFile."rex/init.lua".source = dotlib.source "apps/rex/init.lua";
+    })
+  ];
 }
