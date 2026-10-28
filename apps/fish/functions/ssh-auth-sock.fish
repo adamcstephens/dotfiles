@@ -20,7 +20,7 @@ function find_ssh_agent
         end
     end
 
-    set --local denylist '/var/run/com.apple.launchd.*/Listeners' '/tmp/tuios*/*.sock'
+    set --local denylist '/var/run/com.apple.launchd.*/Listeners' '/tmp/tuios*/*.sock' "$XDG_RUNTIME_DIR/ssh-agent"
     for denied in $denylist
         if string match --quiet $denied "$discovered_sock"
             set discovered_sock (find_allowed_socket)
