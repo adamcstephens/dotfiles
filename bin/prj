@@ -144,12 +144,18 @@ def rex_window_width(view: dict) -> int:
     return round(size["columns"] / node["rect"][2])
 
 
+def rex_show_window(window_id: str):
+    args = {"session_id": os.environ["REX_SESSION"], "window_id": window_id}
+    run(f"rex do session.select --args {shlex.quote(json.dumps(args))}")
+
+
 def rex_open_window(wname: str, project: str | None = None, host: str | None = None):
     view = rex_api("session.view")
     existing = next((window for window in view["windows"] if window["label"] == wname), None)
 
     if existing is not None:
         rex_api("session.focus_window", {"window_id": existing["window_id"]})
+        rex_show_window(existing["window_id"])
         return
 
     allowed = host is None and project is not None and direnv_allowed(project)
@@ -192,6 +198,7 @@ def rex_open_window(wname: str, project: str | None = None, host: str | None = N
     }
     created = rex_api("session.new_window", {"window_label": wname, "layout": layout})
     rex_api("session.focus_block", {"block_id": created["block_ids"][1]})
+    rex_show_window(created["window_id"])
 
 
 def rex_columns(layout: dict) -> list[dict]:

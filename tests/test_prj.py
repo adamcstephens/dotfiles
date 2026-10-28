@@ -79,7 +79,11 @@ class RexTest(unittest.TestCase):
             patch.object(
                 prj,
                 "rex_api",
-                side_effect=[{"windows": []}, {"block_ids": ["left", "middle", "right"]}, {}],
+                side_effect=[
+                    {"windows": []},
+                    {"window_id": "window:new", "block_ids": ["left", "middle", "right"]},
+                    {},
+                ],
             )
         )
         self.enterContext(patch.object(prj, "rex_window_width", return_value=300))
@@ -106,7 +110,10 @@ class RexTest(unittest.TestCase):
         self.assertAlmostEqual(layout["split"]["ratio"], 80 / 300)
         self.assertAlmostEqual(layout["split"]["after"]["split"]["ratio"], 140 / 220)
         self.assertEqual(api.call_args, call("session.focus_block", {"block_id": "middle"}))
-        run.assert_not_called()
+        run.assert_called_once_with(
+            "rex do session.select --args "
+            + shlex.quote(json.dumps({"session_id": "session:test", "window_id": "window:new"}))
+        )
 
     def test_direnv_is_warmed_before_layout_creation(self):
         events = []
@@ -119,7 +126,11 @@ class RexTest(unittest.TestCase):
 
             def request(method, args=None):
                 events.append(method)
-                return {"windows": []} if method == "session.view" else {"block_ids": ["left", "middle", "right"]}
+                return (
+                    {"windows": []}
+                    if method == "session.view"
+                    else {"window_id": "window:new", "block_ids": ["left", "middle", "right"]}
+                )
 
             api.side_effect = request
             prj.rex_open_window("project", "/src/my project")
@@ -135,10 +146,15 @@ class RexTest(unittest.TestCase):
                 side_effect=[{"windows": [{"label": "project", "window_id": "existing"}]}, {}],
             ) as api,
             patch.object(prj, "direnv_allowed") as allowed,
+            patch.object(prj, "run") as run,
         ):
             prj.rex_open_window("project", "/src/project")
         self.assertEqual(api.call_args, call("session.focus_window", {"window_id": "existing"}))
         allowed.assert_not_called()
+        run.assert_called_once_with(
+            "rex do session.select --args "
+            + shlex.quote(json.dumps({"session_id": "session:test", "window_id": "existing"}))
+        )
 
     def test_remote_project_quotes_host_and_path_without_local_direnv(self):
         api, _ = self.create_window("/remote/it's a project", "host.example")
