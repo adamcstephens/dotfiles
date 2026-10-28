@@ -169,6 +169,7 @@ accel_profile = "adaptive"
 "Mod+Return" = { action = "window-swap-left", repeat = false }
 
 # Workspaces
+"Mod+grave" = "workspace-focus-last"
 "Mod+1" = "workspace-switch:1"
 "Mod+2" = "workspace-switch:2"
 "Mod+3" = "workspace-switch:3"
