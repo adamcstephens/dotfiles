@@ -36,3 +36,8 @@ rex.action({
 
 rex.bind("cmd+p", "prj_popup")
 rex.bind("cmd+g", "vcs_popup")
+
+rex.bind("alt+h", "pane.focus", { direction = "left" })
+rex.bind("alt+j", "pane.focus", { direction = "down" })
+rex.bind("alt+k", "pane.focus", { direction = "up" })
+rex.bind("alt+l", "pane.focus", { direction = "right" })
