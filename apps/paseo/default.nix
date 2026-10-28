@@ -11,6 +11,10 @@ let
       (old: {
         patches = (old.patches or [ ]) ++ [ ./omp-custom-message-history.patch ];
         doCheck = false;
+        postInstall = ''
+          wrapProgram "$out/bin/paseo" \
+            --run 'export PASEO_STATE_HOME="''${PASEO_STATE_HOME:-''${HOME}/.local/state/paseo}"'
+        '';
       });
 in
 {
