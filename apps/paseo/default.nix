@@ -26,14 +26,6 @@ in
     enable = true;
     inherit package;
 
-    relay = {
-      enable = true;
-      mode = "remote";
-      host = "paseo-relay.junco.dev";
-      port = 443;
-      useTls = true;
-    };
-
     settings = {
       app.baseUrl = "https://paseo.junco.dev";
 
@@ -58,6 +50,12 @@ in
       };
 
       daemon = {
+        relay = {
+          enabled = true;
+          endpoint = "paseo-relay.junco.dev:443";
+          useTls = true;
+        };
+
         mcp.injectIntoAgents = true;
 
         agentProfiles = [

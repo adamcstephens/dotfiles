@@ -19,16 +19,7 @@ let
   }
   // lib.optionalAttrs (lib.isList cfg.hostnames && cfg.hostnames != [ ]) {
     PASEO_HOSTNAMES = lib.concatStringsSep "," cfg.hostnames;
-  }
-  // lib.optionalAttrs (cfg.relay.enable && cfg.relay.mode == "remote") {
-    PASEO_RELAY_ENDPOINT = "${cfg.relay.host}:${toString cfg.relay.port}";
-    PASEO_RELAY_USE_TLS = if cfg.relay.useTls then "true" else "false";
-  }
-  //
-    lib.optionalAttrs (cfg.relay.enable && cfg.relay.mode == "remote" && cfg.relay.publicUseTls != null)
-      {
-        PASEO_RELAY_PUBLIC_USE_TLS = if cfg.relay.publicUseTls then "true" else "false";
-      };
+  };
 
   startPre = pkgs.writeShellApplication {
     name = "paseo-start-pre";
@@ -43,9 +34,7 @@ let
 
   start = pkgs.writeShellScript "paseo-start" ''
     ${lib.getExe startPre}
-    exec ${lib.getExe' cfg.package "paseo-server"} ${
-      lib.optionalString (!cfg.relay.enable) "--no-relay"
-    }
+    exec ${lib.getExe' cfg.package "paseo-server"}
   '';
 in
 {
@@ -93,77 +82,9 @@ in
         '';
       };
 
-      relay = {
-        enable = lib.mkOption {
-          type = lib.types.bool;
-          default = true;
-          description = ''
-            Whether to enable relay-based remote access. When false, the daemon
-            runs with `--no-relay` and only accepts direct (LAN/loopback)
-            connections.
-          '';
-        };
-
-        mode = lib.mkOption {
-          type = lib.types.enum [
-            "hosted"
-            "remote"
-          ];
-          default = "hosted";
-          description = ''
-            How the daemon reaches the relay when `relay.enable = true`:
-
-            - `"hosted"` (default): use the upstream `app.paseo.sh` relay.
-              Preserves the current behavior; no extra options needed.
-            - `"remote"`: connect to a self-hosted relay at
-              `relay.host:relay.port`. Sets `PASEO_RELAY_ENDPOINT` and
-              `PASEO_RELAY_USE_TLS` for the daemon.
-
-            A `"local"` mode (running a relay on the same host) is not yet
-            implemented — the relay package currently only ships a Cloudflare
-            Workers adapter.
-          '';
-        };
-
-        host = lib.mkOption {
-          type = lib.types.str;
-          default = "";
-          example = "relay.example.com";
-          description = "Relay hostname. Required when `relay.mode = \"remote\"`.";
-        };
-
-        port = lib.mkOption {
-          type = lib.types.port;
-          default = 443;
-          description = "Relay port. Used when `relay.mode = \"remote\"`.";
-        };
-
-        useTls = lib.mkOption {
-          type = lib.types.bool;
-          default = true;
-          description = "Whether to use TLS when connecting to the relay. Used when `relay.mode = \"remote\"`.";
-        };
-
-        publicUseTls = lib.mkOption {
-          type = lib.types.nullOr lib.types.bool;
-          default = null;
-          description = ''
-            Whether the public (client-facing) relay endpoint uses TLS.
-            When `null` (default), the daemon falls back to `relay.useTls`.
-            Override when the internal path is plain `ws://` behind a
-            TLS-terminating reverse proxy.
-          '';
-        };
-      };
-
       environment = lib.mkOption {
         type = lib.types.attrsOf lib.types.str;
         default = { };
-        example = lib.literalExpression ''
-          {
-            PASEO_RELAY_ENDPOINT = "relay.paseo.sh:443";
-          }
-        '';
         description = "Extra environment variables for the Paseo daemon.";
       };
 
@@ -177,6 +98,7 @@ in
         });
         example = lib.literalExpression ''
           {
+            daemon.relay = { enabled = true; endpoint = "relay.example.com:443"; useTls = true; };
             daemon.mcp = { enabled = true; injectIntoAgents = false; };
             agents.providers.myAcp = {
               extends = "acp";
@@ -195,8 +117,8 @@ in
           overwritten on the next restart. Pick one: manage via this option, or
           manage via the CLI — not both.
 
-          The full schema is defined by `PersistedConfigSchema` in
-          `packages/server/src/server/persisted-config.ts`.
+          The full schema is available at
+          https://paseo.sh/schemas/paseo.config.v1.json.
         '';
         default = { };
       };
@@ -225,8 +147,7 @@ in
 
         ExecStartPre = lib.getExe startPre;
 
-        ExecStart =
-          "${cfg.package}/bin/paseo-server" + lib.optionalString (!cfg.relay.enable) " --no-relay";
+        ExecStart = "${cfg.package}/bin/paseo-server";
 
         Restart = "on-failure";
         RestartSec = 5;
