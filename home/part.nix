@@ -21,10 +21,13 @@ let
   nixosCommon = [
     inputs.home-manager.nixosModules.home-manager
     ./migrate-nixos.nix
-    {
+    ({ pkgs, ... }: {
       home-manager = {
-        inherit extraSpecialArgs;
-        useGlobalPkgs = true;
+        extraSpecialArgs = extraSpecialArgs // {
+          pkgs = withSystem pkgs.stdenv.hostPlatform.system ({ pkgs, ... }: pkgs);
+          lib = import "${inputs.home-manager}/modules/lib/stdlib-extended.nix" inputs.nixpkgs.lib;
+        };
+        useGlobalPkgs = false;
         useUserPackages = true;
         users.adam = {
           imports = [ ./core.nix ];
@@ -32,7 +35,7 @@ let
           home.file.".dotfiles".source = "${self}";
         };
       };
-    }
+    })
   ];
 
   standaloneModules = [
