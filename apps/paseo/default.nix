@@ -56,7 +56,10 @@ in
           useTls = true;
         };
 
-        mcp.injectIntoAgents = true;
+        mcp = {
+          enabled = true;
+          injectIntoAgents = true;
+        };
 
         agentProfiles = [
           {
