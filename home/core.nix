@@ -25,7 +25,7 @@
     # TODO HM module ../apps/nix
     ../apps/ripgrep
     ../apps/shellcheck
-    # TODO of course ../apps/sower
+    ../apps/sower
     ../apps/ssh
     ../apps/starship
     ../apps/tmux

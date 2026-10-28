@@ -14,8 +14,7 @@ in
   options.dotfiles.apps.sower = {
     enable = lib.mkOption {
       type = lib.types.bool;
-      default = false;
-      # default = !config.dotfiles.nixosManaged && pkgs.stdenv.hostPlatform.isLinux;
+      default = !config.dotfiles.nixosManaged && pkgs.stdenv.hostPlatform.isLinux;
     };
   };
 
@@ -65,9 +64,5 @@ in
         };
       };
     };
-
-    systemd.user.services.sower-garden.Service.Environment = [
-      "RELEASE_NODE=deck-adam"
-    ];
   };
 }
