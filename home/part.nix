@@ -66,19 +66,18 @@ in
       agents = inputs.home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
 
-        extraSpecialArgs = extraSpecialArgs // {
-          profile = "agents";
-        };
+        inherit extraSpecialArgs;
 
-        modules = standaloneModules ++ [ ../apps/paseo ];
+        modules = standaloneModules ++ [
+          ../apps/paseo
+          { dotfiles.profile = "agents"; }
+        ];
       };
 
       deck = inputs.home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
 
-        extraSpecialArgs = extraSpecialArgs // {
-          profile = "deck";
-        };
+        inherit extraSpecialArgs;
 
         modules = standaloneModules ++ [
           inputs.epi.homeManagerModules.epi
@@ -119,6 +118,8 @@ in
                 |> lib.unique;
             in
             {
+              dotfiles.profile = "deck";
+
               home.activation.paseoDirectories = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
                 run mkdir --parents -- ${lib.escapeShellArgs paseoDirs}
               '';
@@ -156,12 +157,11 @@ in
       funk = inputs.home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
 
-        extraSpecialArgs = extraSpecialArgs // {
-          profile = "funk";
-        };
+        inherit extraSpecialArgs;
 
         modules = standaloneModules ++ [
           {
+            dotfiles.profile = "funk";
             dotfiles.apps.ssh.tpm.enable = true;
           }
         ];

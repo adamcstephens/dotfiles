@@ -4,7 +4,6 @@
   inputs,
   lib,
   pkgs,
-  profile,
   ...
 }:
 let
@@ -35,11 +34,11 @@ in
           source = dotlib.source "apps/noctalia/${name}";
         }
       ) (builtins.readDir ./.)
-      // lib.optionalAttrs (builtins.pathExists (./profiles + "/${profile}.toml")) {
+      // lib.optionalAttrs (builtins.pathExists (./profiles + "/${config.dotfiles.profile}.toml")) {
         "noctalia/profile.toml".text = # toml
           ''
             [include]
-            files = ["profiles/${profile}.toml"]
+            files = ["profiles/${config.dotfiles.profile}.toml"]
           '';
       };
 
