@@ -332,3 +332,6 @@ action = "overview-open"
 
 [workspaces]
 back_and_forth = true
+
+[output.eDP-1]
+workspaces = 4
