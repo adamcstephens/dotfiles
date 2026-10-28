@@ -62,6 +62,16 @@ in
   flake.homeConfigurations = withSystem "x86_64-linux" (
     { pkgs, ... }:
     {
+      agents = inputs.home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+
+        extraSpecialArgs = extraSpecialArgs // {
+          profile = "agents";
+        };
+
+        modules = standaloneModules ++ [ ../apps/paseo ];
+      };
+
       deck = inputs.home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
 
@@ -142,11 +152,11 @@ in
         ];
       };
 
-      punk = inputs.home-manager.lib.homeManagerConfiguration {
+      funk = inputs.home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
 
         extraSpecialArgs = extraSpecialArgs // {
-          profile = "punk";
+          profile = "funk";
         };
 
         modules = standaloneModules ++ [
@@ -157,9 +167,4 @@ in
       };
     }
   );
-
-  flake.packages.x86_64-linux = {
-    "home/deck" = self.homeConfigurations.deck.activationPackage;
-    "home/punk" = self.homeConfigurations.punk.activationPackage;
-  };
 }
