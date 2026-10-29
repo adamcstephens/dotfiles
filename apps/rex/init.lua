@@ -1,7 +1,21 @@
-local function open_popup(ctx, command, bounds)
+local function tuios_running(ctx, process)
+  local name = process.foreground and process.foreground.name
+  if name ~= "ssh" then
+    return name == "tuios"
+  end
+  local title = assert(rex.block.call("com.superlogical.terminal", "title", {
+    block_id = ctx.block_id,
+  })).title
+  return title:match("^%[[^%]]+%] tuios%s") ~= nil
+end
+
+local function open_popup(ctx, key, command, bounds)
   local process = assert(rex.block.call("com.superlogical.terminal", "process", {
     block_id = ctx.block_id,
   }))
+  if ctx.origin == "key" and tuios_running(ctx, process) then
+    return rex.client.queue("pane.send_key", { key = key })
+  end
   local cwd =
     assert(process.foreground and process.foreground.cwd, "Cannot determine the focused terminal's working directory")
 
@@ -22,7 +36,7 @@ rex.action({
   name = "prj_popup",
   title = "Open Project Popup",
   run = function(ctx)
-    return open_popup(ctx, { "env", "REX_CLIENT=" .. ctx.client_id, "prj" }, { 0.3, 0.3, 0.4, 0.4 })
+    return open_popup(ctx, "cmd+p", { "env", "REX_CLIENT=" .. ctx.client_id, "prj" }, { 0.3, 0.3, 0.4, 0.4 })
   end,
 })
 
@@ -30,7 +44,7 @@ rex.action({
   name = "vcs_popup",
   title = "Open VCS Popup",
   run = function(ctx)
-    return open_popup(ctx, { "vcs-tui" }, { 0.05, 0.05, 0.9, 0.9 })
+    return open_popup(ctx, "cmd+g", { "vcs-tui" }, { 0.05, 0.05, 0.9, 0.9 })
   end,
 })
 
