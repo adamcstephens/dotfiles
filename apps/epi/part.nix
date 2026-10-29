@@ -52,6 +52,8 @@ let
           ../rex
         ];
 
+        backupFileExtension = "bhm";
+
         users.adam = {
           home = {
             homeDirectory = "/home/adam";

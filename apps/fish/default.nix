@@ -81,24 +81,9 @@ in
     fishCommandNotFound
   ];
 
-  xdg.configFile."fish/completions" = {
-    source = mkSource "completions";
-    force = true;
-  };
-  xdg.configFile."fish/conf.d" = {
-    source = mkSource "conf.d";
-    force = true;
-  };
-  xdg.configFile."fish/config.fish" = {
-    source = mkSource "config.fish";
-    force = true;
-  };
-  xdg.configFile."fish/functions" = {
-    source = mkSource "functions";
-    force = true;
-  };
-  xdg.configFile."fish/themes/dotfiles.theme" = {
-    source = theme;
-    force = true;
-  };
+  xdg.configFile."fish/completions".source = mkSource "completions";
+  xdg.configFile."fish/conf.d".source = mkSource "conf.d";
+  xdg.configFile."fish/config.fish".source = mkSource "config.fish";
+  xdg.configFile."fish/functions".source = mkSource "functions";
+  xdg.configFile."fish/themes/dotfiles.theme".source = theme;
 }
