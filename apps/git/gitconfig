@@ -66,7 +66,6 @@ defaultKeyCommand = sh -c '$HOME/.dotfiles/bin/git-ssh-key.sh'
 
 [include]
 path = config.delta
-path = conf.d/50-rex.conf
 
 [init]
 defaultBranch = main

@@ -37,8 +37,8 @@ in
         allowAnonymous = true;
       };
 
-      xdg.configFile = {
-        "git/conf.d/50-rex.conf".source =
+      home.file = {
+        ".ssh/conf.d/50-rex.conf".source =
           "${config.programs.rex.package}/share/rex/ssh_config.d/50-rex.conf";
       };
     })
