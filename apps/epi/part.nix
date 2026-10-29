@@ -15,7 +15,6 @@ let
       imports = [
         inputs.epi.nixosModules.epi
         inputs.home-manager.nixosModules.home-manager
-        ../../home/migrate-nixos.nix
       ];
 
       epi = {

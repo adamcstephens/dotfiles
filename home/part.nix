@@ -20,7 +20,6 @@ let
 
   nixosCommon = [
     inputs.home-manager.nixosModules.home-manager
-    ./migrate-nixos.nix
     ({ pkgs, ... }: {
       home-manager = {
         extraSpecialArgs = extraSpecialArgs // {
@@ -129,10 +128,6 @@ in
                 instances = {
                   epi = epi-agent { project = "epi"; };
                   git-sync = epi-agent { project = "git-sync"; };
-                  hjem = epi-agent {
-                    project = "hjem";
-                    project_dir = "${config.home.homeDirectory}/git/hjem";
-                  };
                   noctalia = epi-agent {
                     project = "noctalia";
                     project_dir = "${config.home.homeDirectory}/git/noctalia";
