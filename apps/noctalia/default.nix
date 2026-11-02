@@ -18,7 +18,6 @@ in
           (old: {
             patches = (old.patches or [ ]) ++ [
               ./logind-idle-hint.patch
-              ./inhibit-sync.patch
             ];
 
             doCheck = false;
