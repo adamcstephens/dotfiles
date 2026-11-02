@@ -3,7 +3,6 @@
   flake,
   inputs,
   npins,
-  lib,
   pkgs,
   ...
 }:
@@ -32,27 +31,6 @@
         ];
       };
     };
-  };
-
-  launchd.user.agents.atuin.serviceConfig = {
-    KeepAlive = true;
-    Program =
-      pkgs.writeShellApplication {
-        name = "atuin-daemon";
-
-        runtimeInputs = [
-          pkgs.atuin
-        ];
-
-        text = ''
-          # force clean atuin socket in case of crash https://github.com/atuinsh/atuin/issues/2289
-          rm -f /Users/adam/.local/share/atuin/atuin.sock
-
-          exec atuin daemon
-        '';
-      }
-      |> lib.getExe;
-    RunAtLoad = true;
   };
 
   system.primaryUser = "adam";
