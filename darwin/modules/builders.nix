@@ -31,7 +31,7 @@ in
         buildMachines = [
           {
             protocol = "ssh-ng";
-            hostName = "leaf.v.robins.wtf";
+            hostName = "leaf.tl.robins.wtf";
             maxJobs = 8;
             sshUser = "builder";
             supportedFeatures = [
