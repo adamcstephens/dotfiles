@@ -88,6 +88,7 @@ background = ''
 agent_rest_fold = '1h'
 
 [notifications]
+level = "warning"
 duration = 0
 warning_duration = 0
 error_duration = 0
