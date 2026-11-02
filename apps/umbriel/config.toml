@@ -127,8 +127,8 @@ accel_profile = "adaptive"
 [keybinds]
 
 # Applications and session
-"Mod+Shift+Return" = { action = "spawn:kitty", repeat = false }
-"Mod+Shift+T" = { action = "spawn:kitty", repeat = false }
+"Mod+Shift+Return" = { action = "spawn:terminal", repeat = false }
+"Mod+Shift+T" = { action = "spawn:terminal", repeat = false }
 "Mod+D" = "spawn:noctalia msg panel-toggle launcher"
 "Mod+Shift+C" = { action = "window-close", repeat = false }
 "Mod+Shift+X" = "session-quit"
