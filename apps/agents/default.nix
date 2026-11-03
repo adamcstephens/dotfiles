@@ -9,7 +9,7 @@
     ../claude
     ../codex
     ../nono
-    ../opencode
+    # ../opencode
     ../omp
     ../pi
   ];
