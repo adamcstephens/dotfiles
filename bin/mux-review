@@ -31,7 +31,7 @@ elif [ -n "$TUIOS_SESSION" ]; then
     printf "\nFailed (exit %s). Press Enter to close." "$rc"
     read -r _
     exit "$rc"
-  ' mux-review "$PR" "$@"
+  ' mux-review "$PR" "--no-shell --post-result $@"
 else
   echo "Unsupported mux environment"
   exit 1
