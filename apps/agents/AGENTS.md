@@ -24,7 +24,7 @@ Work is not ready for review until the following are in place, and only *after* 
   - Assisted-By line with specific model name always included (Co-Authored-by *NEVER* included)
     - Use the format `Assisted-By: <Model> <Thinking Effort> in <Harness>/<version>`
     - Sample: `Assisted-By: OpenAI GPT-6.1 Sol low in omp/18.5.1`
-- if in a veans project, move to in-review
+- if in a veans project *only*, move to in-review
 - stop for feedback and let the user move to Done
 
 ## Coding Rules
