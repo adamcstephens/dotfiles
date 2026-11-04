@@ -8,6 +8,10 @@ if test -n "$REX_BIN_DIR"
     fish_add_path --prepend --move "$REX_BIN_DIR"
 end
 
+if test -n "$HOME/.local/bin"
+    fish_add_path --move "$HOME/.local/bin"
+end
+
 if ! grep nixos /etc/os-release >/dev/null 2>&1
     set --export TERMINFO_DIRS $HOME/.nix-profile/share/terminfo
 
