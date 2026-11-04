@@ -147,8 +147,6 @@ def rex_open_window(wname: str, project: str | None = None, host: str | None = N
         options = {}
         if host is None:
             options["cwd"] = project
-            if index == 1:
-                options["initial_input"] = "direnv exec . vim .\n" if allowed else "vim .\n"
         elif project is None:
             options["initial_input"] = shlex.join(["ssh", "--", host]) + "\n"
         else:
