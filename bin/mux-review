@@ -32,7 +32,20 @@ def main() -> int:
 
     worker = [sys.executable, str(Path(__file__).resolve()), "--worker"]
     if os.environ.get("REX_SESSION"):
-        command = ["rex", "window", "new", f"review-{pr}", "--cwd", os.getcwd(), "--", *worker, pr, *args.args]
+        command = [
+            "rex",
+            "window",
+            "new",
+            f"review-{pr}",
+            "--cwd",
+            os.getcwd(),
+            "--",
+            *worker,
+            pr,
+            "--no-shell",
+            "--post-result",
+            *args.args,
+        ]
     elif os.environ.get("TUIOS_SESSION"):
         command = [
             "tuios",
