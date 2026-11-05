@@ -31,8 +31,8 @@ show_cheatsheet = true
 # `umbriel outputs`.
 # https://docs.noctalia.dev/umbriel/configuration/#events
 # [events]
-# lid_close = "umbriel msg output-disable:eDP-1"
-# lid_open = "umbriel msg output-enable:eDP-1"
+# lid_close = "umbriel msg output-disable eDP-1"
+# lid_open = "umbriel msg output-enable eDP-1"
 
 # ==============================================================================
 # Screencast
@@ -86,7 +86,7 @@ radius = 1
 # selection = "unused_first" # or round_robin, random
 # Select with border = "borders" in your [effects] table.
 # Add to your existing [keybinds] table:
-# "Mod+Shift+E" = "effect-border-cycle:borders"
+# "Mod+Shift+E" = "effect-border-cycle borders"
 # "Mod+Ctrl+E" = "effect-border-toggle"
 # "Mod+Alt+E" = "effect-border-reset"
 
@@ -127,9 +127,9 @@ accel_profile = "adaptive"
 [keybinds]
 
 # Applications and session
-"Mod+Shift+Return" = { action = "spawn:terminal", repeat = false }
-"Mod+Shift+T" = { action = "spawn:terminal", repeat = false }
-"Mod+D" = "spawn:noctalia msg panel-toggle launcher"
+"Mod+Shift+Return" = { action = "spawn terminal", repeat = false }
+"Mod+Shift+T" = { action = "spawn terminal", repeat = false }
+"Mod+D" = "spawn noctalia msg panel-toggle launcher"
 "Mod+Shift+C" = { action = "window-close", repeat = false }
 "Mod+Shift+X" = "session-quit"
 "Mod+Shift+Escape" = { action = "shortcuts-inhibit-toggle", allow_when_inhibited = true, repeat = false }
@@ -170,24 +170,24 @@ accel_profile = "adaptive"
 
 # Workspaces
 "Mod+grave" = "workspace-focus-last"
-"Mod+1" = "workspace-switch:1"
-"Mod+2" = "workspace-switch:2"
-"Mod+3" = "workspace-switch:3"
-"Mod+4" = "workspace-switch:4"
-"Mod+5" = "workspace-switch:5"
-"Mod+6" = "workspace-switch:6"
-"Mod+7" = "workspace-switch:7"
-"Mod+8" = "workspace-switch:8"
-"Mod+9" = "workspace-switch:9"
-"Mod+Shift+1" = "window-move-to-workspace:1"
-"Mod+Shift+2" = "window-move-to-workspace:2"
-"Mod+Shift+3" = "window-move-to-workspace:3"
-"Mod+Shift+4" = "window-move-to-workspace:4"
-"Mod+Shift+5" = "window-move-to-workspace:5"
-"Mod+Shift+6" = "window-move-to-workspace:6"
-"Mod+Shift+7" = "window-move-to-workspace:7"
-"Mod+Shift+8" = "window-move-to-workspace:8"
-"Mod+Shift+9" = "window-move-to-workspace:9"
+"Mod+1" = "workspace-switch 1"
+"Mod+2" = "workspace-switch 2"
+"Mod+3" = "workspace-switch 3"
+"Mod+4" = "workspace-switch 4"
+"Mod+5" = "workspace-switch 5"
+"Mod+6" = "workspace-switch 6"
+"Mod+7" = "workspace-switch 7"
+"Mod+8" = "workspace-switch 8"
+"Mod+9" = "workspace-switch 9"
+"Mod+Shift+1" = "window-move-to-workspace 1"
+"Mod+Shift+2" = "window-move-to-workspace 2"
+"Mod+Shift+3" = "window-move-to-workspace 3"
+"Mod+Shift+4" = "window-move-to-workspace 4"
+"Mod+Shift+5" = "window-move-to-workspace 5"
+"Mod+Shift+6" = "window-move-to-workspace 6"
+"Mod+Shift+7" = "window-move-to-workspace 7"
+"Mod+Shift+8" = "window-move-to-workspace 8"
+"Mod+Shift+9" = "window-move-to-workspace 9"
 
 # Scratchpad
 "Mod+Shift+Space" = { action = "window-move-to-scratchpad", repeat = false }
@@ -195,13 +195,13 @@ accel_profile = "adaptive"
 "Mod+Ctrl+Space" = { action = "window-restore-from-scratchpad", repeat = false }
 "Mod+Tab" = "scratchpad-focus-next"
 
-"XF86AudioRaiseVolume" = "spawn:noctalia msg volume-up 5"
-"XF86AudioLowerVolume" = "spawn:noctalia msg volume-down 5"
-"XF86AudioPlay" = "spawn:playerctl play-pause"
-"XF86AudioNext" = "spawn:playerctl next"
-"XF86AudioPrev" = "spawn:playerctl previous"
-"XF86MonBrightnessUp" = "spawn:noctalia msg brightness-up 5"
-"XF86MonBrightnessDown" = "spawn:noctalia msg brightness-down 5"
+"XF86AudioRaiseVolume" = "spawn noctalia msg volume-up 5"
+"XF86AudioLowerVolume" = "spawn noctalia msg volume-down 5"
+"XF86AudioPlay" = "spawn playerctl play-pause"
+"XF86AudioNext" = "spawn playerctl next"
+"XF86AudioPrev" = "spawn playerctl previous"
+"XF86MonBrightnessUp" = "spawn noctalia msg brightness-up 5"
+"XF86MonBrightnessDown" = "spawn noctalia msg brightness-down 5"
 
 # ==============================================================================
 # Layout
