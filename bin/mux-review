@@ -7,39 +7,32 @@ import sys
 from pathlib import Path
 
 
-def run_review(mux: str, pr: str, args: list[str]) -> int:
+def run_review(pr: str, args: list[str]) -> int:
     status = subprocess.run(["direnv", "exec", ".", "nixpkgs-review", "pr", pr, *args], check=False).returncode
     if status == 0:
         return 0
 
-    if mux == "rex":
-        message = base64.b64encode(f"Review of PR {pr} failed (exit {status})".encode()).decode()
-        print(f"\033]7501;state=error:app=mux-review:msg={message}\033\\", end="", flush=True)
-        print(f"\nReview failed (exit {status}). Press Enter to close.", end="", flush=True)
-    else:
-        subprocess.run(
-            ["tuios", "status", "error", "--app", "nixpkgs-review", "--msg", f"Failed with exit status {status}"],
-            check=False,
-        )
-        print(f"\nFailed (exit {status}). Press Enter to close.", end="", flush=True)
+    message = base64.b64encode(f"Review of PR {pr} failed (exit {status})".encode()).decode()
+    print(f"\033]7501;state=error:app=mux-review:msg={message}\033\\", end="", flush=True)
+    print(f"\nReview failed (exit {status}). Press Enter to close.", end="", flush=True)
     sys.stdin.readline()
     return status if status > 0 else 128 - status
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Review a nixpkgs PR in a new mux window.")
-    parser.add_argument("--worker", choices=("rex", "tuios"), help=argparse.SUPPRESS)
+    parser.add_argument("--worker", action="store_true", help=argparse.SUPPRESS)
     parser.add_argument("pr", metavar="PR", help="PR number or GitHub URL")
     parser.add_argument("args", nargs=argparse.REMAINDER, help="arguments passed to nixpkgs-review")
     args = parser.parse_args()
     pr = args.pr.removeprefix("https://github.com/NixOS/nixpkgs/pull/")
 
     if args.worker:
-        return run_review(args.worker, pr, args.args)
+        return run_review(pr, args.args)
 
     worker = [sys.executable, str(Path(__file__).resolve()), "--worker"]
     if os.environ.get("REX_SESSION"):
-        command = ["rex", "window", "new", f"review-{pr}", "--cwd", os.getcwd(), "--", *worker, "rex", pr, *args.args]
+        command = ["rex", "window", "new", f"review-{pr}", "--cwd", os.getcwd(), "--", *worker, pr, *args.args]
     elif os.environ.get("TUIOS_SESSION"):
         command = [
             "tuios",
@@ -49,7 +42,6 @@ def main() -> int:
             os.getcwd(),
             "--",
             *worker,
-            "tuios",
             pr,
             "--no-shell",
             "--post-result",
