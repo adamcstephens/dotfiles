@@ -8,6 +8,7 @@
 {
   imports = [
     ./options.nix
+    ./dotfiles-sync.nix
 
     ../apps/bash
     ../apps/bat
@@ -60,7 +61,14 @@
 
     home.activation.dotfiles-migrate = lib.hm.dag.entryBefore [ "checkLinkTargets" ] ''
       run ${pkgs.coreutils}/bin/env \
-        PATH=${lib.makeBinPath [ pkgs.bash pkgs.coreutils pkgs.jq pkgs.just ]} \
+        PATH=${
+          lib.makeBinPath [
+            pkgs.bash
+            pkgs.coreutils
+            pkgs.jq
+            pkgs.just
+          ]
+        } \
         ${pkgs.just}/bin/just \
         --shell ${pkgs.bash}/bin/bash \
         --justfile ${../justfile} \
