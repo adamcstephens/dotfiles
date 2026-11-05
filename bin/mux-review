@@ -1,38 +1,65 @@
-#!/usr/bin/env bash
+#!/usr/bin/env python3
+import argparse
+import base64
+import os
+import subprocess
+import sys
+from pathlib import Path
 
-if [ -z "$1" ]; then
-  echo "Usage: mux-review <PR number or URL> <args>"
-  exit 1
-fi
 
-PR="${1#https://github.com/NixOS/nixpkgs/pull/}"
-TITLE="review-$PR"
-shift
+def run_review(mux: str, pr: str, args: list[str]) -> int:
+    status = subprocess.run(["direnv", "exec", ".", "nixpkgs-review", "pr", pr, *args], check=False).returncode
+    if status == 0:
+        return 0
 
-if [ -n "$REX_SESSION" ]; then
-  rex window new "$TITLE" --cwd "$PWD" -- bash -c '
-    direnv exec . nixpkgs-review pr "$@"
-    status=$?
-    if [ "$status" -ne 0 ]; then
-      message=$(printf "Review of PR %s failed (exit %s)" "$1" "$status" | base64 | tr -d "\n")
-      printf "\033]7501;state=error:app=mux-review:msg=%s\033\\" "$message"
-      printf "\nReview failed (exit %s). Press Enter to close." "$status"
-      read -r
-    fi
-    exit "$status"
-  ' mux-review "$PR" "$@"
-elif [ -n "$TUIOS_SESSION" ]; then
-  tuios new-window "$PR" --cwd "$PWD" -- sh -c '
-    direnv exec . nixpkgs-review pr "$@"
-    rc=$?
-    [ "$rc" -eq 0 ] && exit 0
+    if mux == "rex":
+        message = base64.b64encode(f"Review of PR {pr} failed (exit {status})".encode()).decode()
+        print(f"\033]7501;state=error:app=mux-review:msg={message}\033\\", end="", flush=True)
+        print(f"\nReview failed (exit {status}). Press Enter to close.", end="", flush=True)
+    else:
+        subprocess.run(
+            ["tuios", "status", "error", "--app", "nixpkgs-review", "--msg", f"Failed with exit status {status}"],
+            check=False,
+        )
+        print(f"\nFailed (exit {status}). Press Enter to close.", end="", flush=True)
+    sys.stdin.readline()
+    return status if status > 0 else 128 - status
 
-    tuios status error --app nixpkgs-review --msg "Failed with exit status $rc"
-    printf "\nFailed (exit %s). Press Enter to close." "$rc"
-    read -r _
-    exit "$rc"
-  ' mux-review "$PR" --no-shell --post-result "$@"
-else
-  echo "Unsupported mux environment"
-  exit 1
-fi
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description="Review a nixpkgs PR in a new mux window.")
+    parser.add_argument("--worker", choices=("rex", "tuios"), help=argparse.SUPPRESS)
+    parser.add_argument("pr", metavar="PR", help="PR number or GitHub URL")
+    parser.add_argument("args", nargs=argparse.REMAINDER, help="arguments passed to nixpkgs-review")
+    args = parser.parse_args()
+    pr = args.pr.removeprefix("https://github.com/NixOS/nixpkgs/pull/")
+
+    if args.worker:
+        return run_review(args.worker, pr, args.args)
+
+    worker = [sys.executable, str(Path(__file__).resolve()), "--worker"]
+    if os.environ.get("REX_SESSION"):
+        command = ["rex", "window", "new", f"review-{pr}", "--cwd", os.getcwd(), "--", *worker, "rex", pr, *args.args]
+    elif os.environ.get("TUIOS_SESSION"):
+        command = [
+            "tuios",
+            "new-window",
+            pr,
+            "--cwd",
+            os.getcwd(),
+            "--",
+            *worker,
+            "tuios",
+            pr,
+            "--no-shell",
+            "--post-result",
+            *args.args,
+        ]
+    else:
+        print("Unsupported mux environment", file=sys.stderr)
+        return 1
+    return subprocess.run(command, check=False).returncode
+
+
+if __name__ == "__main__":
+    sys.exit(main())
