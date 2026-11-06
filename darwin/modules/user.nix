@@ -19,6 +19,12 @@
       imports = [
         ../../home/darwin.nix
         ../../apps/rex
+        {
+          dotfiles.apps.paseo.profiles = {
+            claude = true;
+            omp = false;
+          };
+        }
       ];
 
       home = {
