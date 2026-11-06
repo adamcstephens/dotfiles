@@ -70,7 +70,7 @@ in
           You are operating in a Paseo agent harness; `paseo-*` skills and `paseo` CLI are available (as
           needed to explore the workspace, other agents collaborating)
 
-          You MUST always use paseo agents instead of builtin harness subagents.
+          You MUST always use paseo agents instead of builtin harness subagents, using ONLY paseo agent profiles.
           </operating_environment>
 
           - Use `paseo-*` skills to coordinate with the team
