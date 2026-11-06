@@ -224,11 +224,11 @@
     },
     "nixos-unstable-small": {
       "locked": {
-        "lastModified": 1793868652,
-        "narHash": "sha256-9zGJg9JtFpg1z06WYTrJax5H1mbjs5RxSmDOXDgPBFE=",
-        "rev": "9bb2612fd2b5838e8895f694bdedc46ba1ad844a",
+        "lastModified": 1793931523,
+        "narHash": "sha256-zhDDTq8TUT4jAM4ajNzQkMMcX5mcGLlt9wD52vWDZ7o=",
+        "rev": "7dd597af6a9776394693e4d0fed85dd5ea8d56da",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/unstable-small/nixos-26.11pre1108938.9bb2612fd2b5/nixexprs.tar.zst"
+        "url": "https://releases.nixos.org/nixos/unstable-small/nixos-26.11pre1109465.7dd597af6a97/nixexprs.tar.zst"
       },
       "original": {
         "type": "tarball",
@@ -380,10 +380,10 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1793910724,
-        "narHash": "sha256-LfiDGOT/ldWUItHQ6wilNiQ0bFEonyXxSpHg1XGjJmc=",
+        "lastModified": 1793977705,
+        "narHash": "sha256-VYfQZrMlOqXUsnK2TwDREBXXQBWCrduc1syfzEVdQ5g=",
         "type": "tarball",
-        "url": "https://pkgs.superlogical.com/rex/nix/snapshot/0.0.1793910724-g2e71f8.tar.gz"
+        "url": "https://pkgs.superlogical.com/rex/nix/snapshot/0.0.1793977705-g0ed2d0.tar.gz"
       },
       "original": {
         "type": "tarball",
