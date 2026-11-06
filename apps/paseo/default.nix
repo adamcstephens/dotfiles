@@ -6,6 +6,8 @@
   ...
 }:
 let
+  cfg = config.dotfiles.apps.paseo;
+
   package =
     inputs.nixos-unstable-small.legacyPackages.${pkgs.stdenv.hostPlatform.system}.paseo.overrideAttrs
       (old: {
@@ -22,189 +24,200 @@ in
     ./module.nix
   ];
 
-  home.packages = lib.optionals pkgs.stdenv.hostPlatform.isDarwin [
-    package.desktop
-  ];
-
-  services.paseo = {
-    enable = true;
-    inherit package;
-
-    settings = {
-      app.baseUrl = "https://paseo.junco.dev";
-
-      agents = {
-        providers = {
-          antigravity.enabled = false;
-          claude.enabled = true;
-          codex.enabled = true;
-          copilot.enabled = false;
-          muse.enabled = false;
-          omp.enabled = true;
-          opencode.enabled = false;
-          pi.enabled = false;
-        };
-
-        metadataGeneration.providers = [
-          {
-            provider = "omp";
-            model = "openai-codex/gpt-6-luna";
-          }
-        ];
-      };
-
-      daemon = {
-        relay = {
-          enabled = true;
-          endpoint = "paseo-relay.junco.dev:443";
-          useTls = true;
-        };
-
-        mcp = {
-          enabled = true;
-          injectIntoAgents = true;
-        };
-
-        appendSystemPrompt = ''
-          <operating_environment>
-          You are operating in a Paseo agent harness; `paseo-*` skills and `paseo` CLI are available (as
-          needed to explore the workspace, other agents collaborating)
-
-          You MUST always use paseo agents instead of builtin harness subagents, using ONLY paseo agent profiles.
-          </operating_environment>
-
-          - Use `paseo-*` skills to coordinate with the team
-          - When starting a new agent, always let them know their identity, specific role, ownership of
-          responsibilities, and how they can contribute; set clear expectations at initialization.
-          - Use XML *when initializing new agents*: <role>(sub-agent role, identity; them)</role>,
-          <lead_role>("self", you; identity + role)</lead_role>, <objective>(sub-agent's goal)</objective>,
-          <instruction_details>(existing context, inputs, info, details of task, tips, references,
-          etc.)</instruction_details>, <scope>(what do vs what not do)</scope>, <team>(other sub-agents,
-          team info, responsibilities, roles; as needed)</team>, <gates>(any specific exit gates, checks;
-          only as relevant (optional))</gates><comms>(specific instructions for comms, what to report, when
-          to report, format of report, etc.; optional as needed)</comms>
-          - Use a "risk-based" approach when assembling team to work on a task; assign work that has higher
-          risk to more senior engineers
-          - For technical design work/architecture, ask Member of Technical Staff and/or System Architect
-          for inputs, other ideas, expand and explore the solution space before proceeding
-          when available
-          - Create workspaces (worktrees) only when work benefits from isolated branches (parallel,
-          overlapping work).  Coordinate edits otherwise.  Worktrees add some complexity.
-        '';
-
-        agentProfiles = [
-          {
-            id = "agent_profile_system_architect";
-            name = "System Architect";
-            icon = "layers";
-            color = "sky";
-            provider = "omp";
-            model = "openai-codex/gpt-6.1-sol";
-            modeId = "ask";
-            thinkingOptionId = "high";
-            notes = ''
-              The most senior member of the team; deep technical understanding, knows how to direct a team
-              to build, knows how to guide the team to verify code and features.  Provides feedback on
-              system-level design decisions.  Instruct to read code first and understand current state of
-              architecture and design when considering system-level changes.  Instruct not to code; delegate
-              coding to engineers.  Ask for design opinion and feedback before implementation team (not a
-              hard gate; use risk-based assessment).
-            '';
-          }
-          {
-            id = "agent_profile_staff_engineer";
-            name = "Staff Engineer";
-            icon = "hammer";
-            provider = "omp";
-            model = "openai-codex/gpt-6.1-terra";
-            modeId = "full";
-            thinkingOptionId = "auto";
-            notes = ''
-              taff Engineer, full-stack with deep knowledge of software engineering.  Works with the
-              System Architect to plan and implement features, end-to-end.  Always give a clear plan of
-              attack, implementation overview, key design decisions, architecture, and ask to
-              implement.  Ask to keep comms open, report back, ask questions if not clear.  Use for
-              every-day, low-risk work; leave challenging work to Principal Engineer.
-            '';
-          }
-          {
-            id = "agent_profile_principal_engineer";
-            name = "Principal Engineer";
-            icon = "code";
-            color = "violet";
-            provider = "omp";
-            model = "openai-codex/gpt-6.1-sol";
-            modeId = "full";
-            thinkingOptionId = "low";
-            notes = ''
-              Principal Engineer, full-stack that is comfortable working at all layers of the
-              stack.  Applies rigor to the implementation and focuses not only on solving the problem, but
-              also thinking deeply about modularity, scalability, security, and clean code.  Uses interfaces
-              and abstractions where necessary to decouple contracts from implementation.  YAGNI does not
-              apply to things that make code more malleable and extensible since this gives degrees of
-              freedom. Thinks deeply about testability and how to properly test code without creating noise;
-              over doing testing with low signal tests slows everyone down.  Works with a team of Staff
-              Engineers when work can be delegated, coordinated, and performed in parallel.  Ask to
-              implement the agreed upon design; ask questions if lack of clarity.  Ask to provide feedback
-              if it sees a gap in the design.  Focuses on implementation for HARD, challenging work.  Do not
-              hand easy, low-risk work to this engineer.
-            '';
-          }
-          {
-            id = "agent_profile_junior_engineer";
-            name = "Junior Engineer";
-            icon = "hammer";
-            provider = "omp";
-            model = "openai-codex/gpt-6.1-terra";
-            modeId = "full";
-            thinkingOptionId = "medium";
-            notes = "Use for lightweight work, rote refactors, and simple, low-risk tasks.";
-          }
-        ];
-      };
-
-      features = {
-        dictation.enabled = false;
-        voiceMode.enabled = false;
-      };
-
-      pluginsEnabled = true;
+  options.dotfiles.apps.paseo.profiles = {
+    claude = lib.mkEnableOption "claude profiles";
+    omp = lib.mkOption {
+      type = lib.types.bool;
+      description = "omp profiles";
+      default = true;
     };
   };
 
-  systemd.user.services = lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
-    paseo.Service.EnvironmentFile = "${config.services.paseo.dataDir}/pass.env";
+  config = {
+    home.packages = lib.optionals pkgs.stdenv.hostPlatform.isDarwin [
+      package.desktop
+    ];
 
-    paseo-pwgen = {
-      Unit = {
-        Before = [ "paseo.service" ];
-      };
-      Install = {
-        WantedBy = [ "default.target" ];
-        RequiredBy = [ "paseo.service" ];
-      };
+    services.paseo = {
+      enable = true;
+      inherit package;
 
-      Service = {
-        Environment = [
-          "PASEO_HOME=${config.services.paseo.environment.PASEO_HOME or config.services.paseo.dataDir}"
-        ];
-        Type = "oneshot";
-        RemainAfterExit = true;
-        ExecStart =
-          pkgs.writeShellApplication {
-            name = "paseo-pwgen";
-            runtimeInputs = [
-              pkgs.coreutils
-              pkgs.pwgen
-            ];
-            text = ''
-              mkdir -p "$PASEO_HOME"
-              if [ ! -e "$PASEO_HOME/pass.env" ]; then
-                echo "PASEO_PASSWORD=$(pwgen -sc1 32)" > "$PASEO_HOME/pass.env"
-              fi
-            '';
-          }
-          |> lib.getExe;
+      settings = {
+        app.baseUrl = "https://paseo.junco.dev";
+
+        agents = {
+          providers = {
+            antigravity.enabled = false;
+            claude.enabled = true;
+            codex.enabled = true;
+            copilot.enabled = false;
+            muse.enabled = false;
+            omp.enabled = true;
+            opencode.enabled = false;
+            pi.enabled = false;
+          };
+
+          metadataGeneration.providers = [
+            {
+              provider = "omp";
+              model = "openai-codex/gpt-6-luna";
+            }
+          ];
+        };
+
+        daemon = {
+          relay = {
+            enabled = true;
+            endpoint = "paseo-relay.junco.dev:443";
+            useTls = true;
+          };
+
+          mcp = {
+            enabled = true;
+            injectIntoAgents = true;
+          };
+
+          appendSystemPrompt = ''
+            <operating_environment>
+            You are operating in a Paseo agent harness; `paseo-*` skills and `paseo` CLI are available (as
+            needed to explore the workspace, other agents collaborating)
+
+            You MUST always use paseo agents instead of builtin harness subagents, using ONLY paseo agent profiles.
+            </operating_environment>
+
+            - Use `paseo-*` skills to coordinate with the team
+            - When starting a new agent, always let them know their identity, specific role, ownership of
+            responsibilities, and how they can contribute; set clear expectations at initialization.
+            - Use XML *when initializing new agents*: <role>(sub-agent role, identity; them)</role>,
+            <lead_role>("self", you; identity + role)</lead_role>, <objective>(sub-agent's goal)</objective>,
+            <instruction_details>(existing context, inputs, info, details of task, tips, references,
+            etc.)</instruction_details>, <scope>(what do vs what not do)</scope>, <team>(other sub-agents,
+            team info, responsibilities, roles; as needed)</team>, <gates>(any specific exit gates, checks;
+            only as relevant (optional))</gates><comms>(specific instructions for comms, what to report, when
+            to report, format of report, etc.; optional as needed)</comms>
+            - Use a "risk-based" approach when assembling team to work on a task; assign work that has higher
+            risk to more senior engineers
+            - For technical design work/architecture, ask Member of Technical Staff and/or System Architect
+            for inputs, other ideas, expand and explore the solution space before proceeding
+            when available
+            - Create workspaces (worktrees) only when work benefits from isolated branches (parallel,
+            overlapping work).  Coordinate edits otherwise.  Worktrees add some complexity.
+          '';
+
+          agentProfiles = lib.optionals cfg.profiles.omp [
+            {
+              id = "agent_profile_system_architect";
+              name = "System Architect";
+              icon = "layers";
+              color = "sky";
+              provider = "omp";
+              model = "openai-codex/gpt-6.1-sol";
+              modeId = "ask";
+              thinkingOptionId = "high";
+              notes = ''
+                The most senior member of the team; deep technical understanding, knows how to direct a team
+                to build, knows how to guide the team to verify code and features.  Provides feedback on
+                system-level design decisions.  Instruct to read code first and understand current state of
+                architecture and design when considering system-level changes.  Instruct not to code; delegate
+                coding to engineers.  Ask for design opinion and feedback before implementation team (not a
+                hard gate; use risk-based assessment).
+              '';
+            }
+            {
+              id = "agent_profile_staff_engineer";
+              name = "Staff Engineer";
+              icon = "hammer";
+              provider = "omp";
+              model = "openai-codex/gpt-6.1-terra";
+              modeId = "full";
+              thinkingOptionId = "auto";
+              notes = ''
+                taff Engineer, full-stack with deep knowledge of software engineering.  Works with the
+                System Architect to plan and implement features, end-to-end.  Always give a clear plan of
+                attack, implementation overview, key design decisions, architecture, and ask to
+                implement.  Ask to keep comms open, report back, ask questions if not clear.  Use for
+                every-day, low-risk work; leave challenging work to Principal Engineer.
+              '';
+            }
+            {
+              id = "agent_profile_principal_engineer";
+              name = "Principal Engineer";
+              icon = "code";
+              color = "violet";
+              provider = "omp";
+              model = "openai-codex/gpt-6.1-sol";
+              modeId = "full";
+              thinkingOptionId = "low";
+              notes = ''
+                Principal Engineer, full-stack that is comfortable working at all layers of the
+                stack.  Applies rigor to the implementation and focuses not only on solving the problem, but
+                also thinking deeply about modularity, scalability, security, and clean code.  Uses interfaces
+                and abstractions where necessary to decouple contracts from implementation.  YAGNI does not
+                apply to things that make code more malleable and extensible since this gives degrees of
+                freedom. Thinks deeply about testability and how to properly test code without creating noise;
+                over doing testing with low signal tests slows everyone down.  Works with a team of Staff
+                Engineers when work can be delegated, coordinated, and performed in parallel.  Ask to
+                implement the agreed upon design; ask questions if lack of clarity.  Ask to provide feedback
+                if it sees a gap in the design.  Focuses on implementation for HARD, challenging work.  Do not
+                hand easy, low-risk work to this engineer.
+              '';
+            }
+            {
+              id = "agent_profile_junior_engineer";
+              name = "Junior Engineer";
+              icon = "hammer";
+              provider = "omp";
+              model = "openai-codex/gpt-6.1-terra";
+              modeId = "full";
+              thinkingOptionId = "medium";
+              notes = "Use for lightweight work, rote refactors, and simple, low-risk tasks.";
+            }
+          ];
+        };
+
+        features = {
+          dictation.enabled = false;
+          voiceMode.enabled = false;
+        };
+
+        pluginsEnabled = true;
+      };
+    };
+
+    systemd.user.services = lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
+      paseo.Service.EnvironmentFile = "${config.services.paseo.dataDir}/pass.env";
+
+      paseo-pwgen = {
+        Unit = {
+          Before = [ "paseo.service" ];
+        };
+        Install = {
+          WantedBy = [ "default.target" ];
+          RequiredBy = [ "paseo.service" ];
+        };
+
+        Service = {
+          Environment = [
+            "PASEO_HOME=${config.services.paseo.environment.PASEO_HOME or config.services.paseo.dataDir}"
+          ];
+          Type = "oneshot";
+          RemainAfterExit = true;
+          ExecStart =
+            pkgs.writeShellApplication {
+              name = "paseo-pwgen";
+              runtimeInputs = [
+                pkgs.coreutils
+                pkgs.pwgen
+              ];
+              text = ''
+                mkdir -p "$PASEO_HOME"
+                if [ ! -e "$PASEO_HOME/pass.env" ]; then
+                  echo "PASEO_PASSWORD=$(pwgen -sc1 32)" > "$PASEO_HOME/pass.env"
+                fi
+              '';
+            }
+            |> lib.getExe;
+        };
       };
     };
   };
