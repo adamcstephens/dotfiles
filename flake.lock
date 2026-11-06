@@ -224,11 +224,11 @@
     },
     "nixos-unstable-small": {
       "locked": {
-        "lastModified": 1793840328,
-        "narHash": "sha256-LqcfywlS4+BqFx2WedBxYtmSBWEu6GomqiuOghdtlzo=",
-        "rev": "ae2b13d55ef7c751d16ebc990d2338c8044003e5",
+        "lastModified": 1793868652,
+        "narHash": "sha256-9zGJg9JtFpg1z06WYTrJax5H1mbjs5RxSmDOXDgPBFE=",
+        "rev": "9bb2612fd2b5838e8895f694bdedc46ba1ad844a",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/unstable-small/nixos-26.11pre1108738.ae2b13d55ef7/nixexprs.tar.zst"
+        "url": "https://releases.nixos.org/nixos/unstable-small/nixos-26.11pre1108938.9bb2612fd2b5/nixexprs.tar.zst"
       },
       "original": {
         "type": "tarball",
@@ -310,11 +310,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1793735720,
-        "narHash": "sha256-WqewjvVjGQ1yhAvxeZW7IKoIT08vUNfyaeZewOwyYxg=",
-        "rev": "9d3b8db48266c17be0b5f9c6360c3ecfbac3d1f5",
+        "lastModified": 1793826729,
+        "narHash": "sha256-JiTUXdoNJNvdD+fjVlftWiLKJfHut3cIi8j2HXL9kT4=",
+        "rev": "6dadaf4375be35033e1c84395adbd53ff5fded96",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixpkgs/nixpkgs-26.11pre1107841.9d3b8db48266/nixexprs.tar.zst"
+        "url": "https://releases.nixos.org/nixpkgs/nixpkgs-26.11pre1108556.6dadaf4375be/nixexprs.tar.zst"
       },
       "original": {
         "type": "tarball",
@@ -380,10 +380,10 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1793741575,
-        "narHash": "sha256-MfxrlfzGXlWjQsEZc3Rd0G+HJ3XyrBrdMUdLUYUrO5M=",
+        "lastModified": 1793910724,
+        "narHash": "sha256-LfiDGOT/ldWUItHQ6wilNiQ0bFEonyXxSpHg1XGjJmc=",
         "type": "tarball",
-        "url": "https://pkgs.superlogical.com/rex/nix/snapshot/0.0.1793741575-g1b6654.tar.gz"
+        "url": "https://pkgs.superlogical.com/rex/nix/snapshot/0.0.1793910724-g2e71f8.tar.gz"
       },
       "original": {
         "type": "tarball",
