@@ -48,7 +48,7 @@ rex.action({
   end,
 })
 
-rex.bind("cmd+p", "prj_popup")
+rex.bind("cmd+alt+p", "prj_popup")
 rex.bind("cmd+g", "vcs_popup")
 
 rex.bind("cmd+z", "pane.zoom")
