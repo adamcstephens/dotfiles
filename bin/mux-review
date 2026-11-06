@@ -8,7 +8,10 @@ from pathlib import Path
 
 
 def run_review(pr: str, args: list[str]) -> int:
-    status = subprocess.run(["direnv", "exec", ".", "nixpkgs-review", "pr", pr, *args], check=False).returncode
+    command = ["direnv", "exec", ".", "nixpkgs-review", "pr", pr, *args]
+    if sys.platform == "darwin":
+        command.insert(0, "caffeinate")
+    status = subprocess.run(command, check=False).returncode
     if status == 0:
         return 0
 
