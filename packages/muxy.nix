@@ -45,6 +45,13 @@ rustPlatform.buildRustPackage (finalAttrs: {
   version = "2.3.0";
   __structuredAttrs = true;
 
+  outputs = [
+    "out"
+    "gui"
+    "server"
+  ];
+  wrapGAppsInOutputs = [ "gui" ];
+
   src = fetchFromGitHub {
     owner = "muxy-app";
     repo = "muxy";
@@ -72,6 +79,9 @@ rustPlatform.buildRustPackage (finalAttrs: {
   postPatch = ''
     substituteInPlace crates/muxy-server/tests/history_links.rs \
       --replace-fail /bin/sleep ${lib.getExe' coreutils "sleep"}
+    substituteInPlace crates/muxy-cli/src/open.rs \
+      --replace-fail ${lib.escapeShellArg "    let Ok(executable) = muxy_core::executable::current_path() else {\n        return false;\n    };\n    desktop_session"} '    desktop_session' \
+      --replace-fail 'launch(&executable.with_file_name("muxy-app"), folder)' 'launch(Path::new("muxy-app"), folder)'
   '';
 
   buildInputs = [
@@ -107,6 +117,27 @@ rustPlatform.buildRustPackage (finalAttrs: {
     export HOME=$(mktemp --directory)
   '';
 
+  postInstall = ''
+    mkdir --parents "$gui/bin" "$server/bin"
+    mv "$out/bin/muxy-app" "$gui/bin/"
+    mv "$out/bin/muxy-server" "$server/bin/"
+  '';
+
+  preFixup = ''
+    gappsWrapperArgs+=(
+      --set-default MUXY_SERVER_BIN "$server/bin/muxy-server"
+      --suffix PATH : "$out/bin"
+    )
+  ''
+  + lib.optionalString stdenv.hostPlatform.isLinux ''
+    gappsWrapperArgs+=(--prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath finalAttrs.buildInputs}")
+  '';
+
+  postFixup = ''
+    wrapProgram "$out/bin/muxy" \
+      --set-default MUXY_SERVER_BIN "$server/bin/muxy-server"
+  '';
+
   passthru.updateScript = nix-update-script { };
 
   meta = {
@@ -116,5 +147,6 @@ rustPlatform.buildRustPackage (finalAttrs: {
     license = lib.licenses.mit;
     maintainers = with lib.maintainers; [ ];
     mainProgram = "muxy";
+    outputsToInstall = [ "out" ];
   };
 })
