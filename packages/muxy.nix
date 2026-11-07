@@ -12,6 +12,7 @@
   freetype,
   gdk-pixbuf,
   glib,
+  glib-networking,
   gtk3,
   libgit2,
   libsoup_3,
@@ -91,6 +92,7 @@ rustPlatform.buildRustPackage (finalAttrs: {
     freetype
     gdk-pixbuf
     glib
+    glib-networking
     gtk3
     libgit2
     libsoup_3
