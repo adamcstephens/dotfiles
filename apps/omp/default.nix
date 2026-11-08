@@ -7,6 +7,8 @@
   ...
 }:
 let
+  cfg = config.dotfiles.apps.omp;
+
   chromium =
     if pkgs.stdenv.hostPlatform.isLinux then
       lib.getExe pkgs.chromium
@@ -15,22 +17,13 @@ let
 
   omp-wrapped = pkgs.symlinkJoin {
     name = "omp-wrapped";
+
     paths = [
-      (inputs.nixos-unstable-small.legacyPackages.${pkgs.stdenv.hostPlatform.system}.omp.overrideAttrs
-        (old: {
-          buildInputs =
-            lib.throwIfNot (lib.versionOlder old.version "18.18.0") "remove omp buildInputs override"
-              (
-                old.buildInputs
-                ++ [
-                  pkgs.oniguruma
-                  pkgs.zstd
-                ]
-              );
-        })
-      )
+      inputs.nixos-unstable-small.legacyPackages.${pkgs.stdenv.hostPlatform.system}.omp
     ];
+
     buildInputs = [ pkgs.makeWrapper ];
+
     postBuild = ''
       wrapProgram $out/bin/omp \
         --set-default PI_CONFIG_DIR ".config/omp"\
@@ -40,17 +33,23 @@ let
   };
 in
 {
-  home.packages = [
-    omp-wrapped
-  ];
+  options.dotfiles.apps.omp.package = (lib.mkPackageOption pkgs "omp" { }) // {
+    default = omp-wrapped;
+  };
 
-  xdg.configFile = {
-    "omp/agent/AGENTS.md".source = config.xdg.configFile."agents/AGENTS.md".source;
-    "omp/agent/SYSTEM_TEMPLATE.md".source = dotlib.source "apps/omp/SYSTEM_TEMPLATE.md";
-    "omp/agent/config.yml".source = dotlib.source "apps/omp/config.yml";
-    "omp/agent/extensions".source = dotlib.source "apps/omp/extensions";
-    "omp/agent/lsp.json".source = dotlib.source "apps/omp/lsp.json";
-    "omp/agent/skills".source = config.xdg.configFile."agents/skills".source;
-    "omp/agent/themes".source = dotlib.source "apps/omp/themes";
+  config = {
+    home.packages = [
+      cfg.package
+    ];
+
+    xdg.configFile = {
+      "omp/agent/AGENTS.md".source = config.xdg.configFile."agents/AGENTS.md".source;
+      "omp/agent/SYSTEM_TEMPLATE.md".source = dotlib.source "apps/omp/SYSTEM_TEMPLATE.md";
+      "omp/agent/config.yml".source = dotlib.source "apps/omp/config.yml";
+      "omp/agent/extensions".source = dotlib.source "apps/omp/extensions";
+      "omp/agent/lsp.json".source = dotlib.source "apps/omp/lsp.json";
+      "omp/agent/skills".source = config.xdg.configFile."agents/skills".source;
+      "omp/agent/themes".source = dotlib.source "apps/omp/themes";
+    };
   };
 }
