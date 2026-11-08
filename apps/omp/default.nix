@@ -16,7 +16,19 @@ let
   omp-wrapped = pkgs.symlinkJoin {
     name = "omp-wrapped";
     paths = [
-      inputs.nixos-unstable-small.legacyPackages.${pkgs.stdenv.hostPlatform.system}.omp
+      (inputs.nixos-unstable-small.legacyPackages.${pkgs.stdenv.hostPlatform.system}.omp.overrideAttrs
+        (old: {
+          buildInputs =
+            lib.throwIfNot (lib.versionOlder old.version "18.18.0") "remove omp buildInputs override"
+              (
+                old.buildInputs
+                ++ [
+                  pkgs.oniguruma
+                  pkgs.zstd
+                ]
+              );
+        })
+      )
     ];
     buildInputs = [ pkgs.makeWrapper ];
     postBuild = ''
