@@ -1,5 +1,6 @@
 {
   config,
+  inputs,
   dotlib,
   pkgs,
   ...
@@ -8,7 +9,7 @@ let
   codex-wrapped = pkgs.symlinkJoin {
     name = "codex-wrapped";
     paths = [
-      pkgs.codex
+      inputs.nixos-unstable-small.legacyPackages.${pkgs.stdenv.hostPlatform.system}.codex
     ];
     buildInputs = [ pkgs.makeWrapper ];
     postBuild = ''
