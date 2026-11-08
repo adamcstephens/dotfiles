@@ -23,18 +23,18 @@
 
 rustPlatform.buildRustPackage (finalAttrs: {
   pname = "microsandbox";
-  version = "0.7.8";
+  version = "0.7.14";
   __structuredAttrs = true;
 
   src = fetchFromGitHub {
     owner = "superradcompany";
     repo = "microsandbox";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-IS55FpCT0r0KPmjczyzsUGwkoKvGQIRUs4xxaYxYxWk=";
+    hash = "sha256-u18U2cGuVilqtaI9pt4PuVRkhPfV8Z+RH8Yg4mHK2T4=";
     fetchSubmodules = true;
   };
 
-  cargoHash = "sha256-SCQnx6ibf//lEdWcmD0ACrhl4GvzKf9hYGQyPPfUVS4=";
+  cargoHash = "sha256-Q+7yOg08OQntqT62pG4GeF7bTtlUerBAQ+/+xYYbs1E=";
 
   nativeBuildInputs = [
     pkg-config
@@ -72,7 +72,7 @@ rustPlatform.buildRustPackage (finalAttrs: {
 
   libkrunfw = stdenv.mkDerivation (firmwareAttrs: {
     pname = "microsandbox-libkrunfw";
-    version = "5.6.1";
+    version = finalAttrs.version;
     src = "${finalAttrs.src}/vendor/libkrunfw";
     __structuredAttrs = true;
 
