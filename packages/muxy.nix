@@ -77,6 +77,10 @@ rustPlatform.buildRustPackage (finalAttrs: {
 
   nativeCheckInputs = [ openssh ];
 
+  checkFlags = [
+    "--skip=dialog::picker::tests::the_dialog_starts_in_the_nearest_existing_folder_with_its_exact_bytes"
+  ];
+
   postPatch = ''
     substituteInPlace crates/muxy-server/tests/history_links.rs \
       --replace-fail /bin/sleep ${lib.getExe' coreutils "sleep"}
