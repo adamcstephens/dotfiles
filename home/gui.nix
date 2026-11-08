@@ -2,7 +2,6 @@
 {
   imports = [
     ./colors.nix
-    # unused? ../apps/display-switch
     ../apps/ghostty
     ../apps/kitty
   ];
