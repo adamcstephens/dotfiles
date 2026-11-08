@@ -19,6 +19,7 @@
   python3,
   elfutils,
   libkrunfw,
+  aws-lc,
 }:
 
 rustPlatform.buildRustPackage (finalAttrs: {
@@ -41,6 +42,7 @@ rustPlatform.buildRustPackage (finalAttrs: {
   ];
 
   buildInputs = [
+    aws-lc
     bzip2
     dbus
     sqlite
