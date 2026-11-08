@@ -17,5 +17,6 @@
 
     # dev tools
     pkgs.meld
+    pkgs.paseo-desktop
   ];
 }
