@@ -11,7 +11,13 @@ let
   package =
     inputs.nixos-unstable-small.legacyPackages.${pkgs.stdenv.hostPlatform.system}.paseo.overrideAttrs
       (old: {
-        patches = (old.patches or [ ]) ++ [ ./omp-custom-message-history.patch ];
+        patches = (old.patches or [ ]) ++ [
+          ./omp-custom-message-history.patch
+          (pkgs.fetchpatch {
+            url = "https://github.com/getpaseo/paseo/commit/040dc103f6b3e21d96b8d35c248f8ffd39d61473.patch";
+            hash = "sha256-apvlzVMww0vYk1Qv3DQy2KkHQx2vsGGNYQ3vnGqADO0=";
+          })
+        ];
         doCheck = false;
         postInstall = ''
           wrapProgram "$out/bin/paseo" \
