@@ -117,7 +117,7 @@ return {
     vim.lsp.enable("rust_analyzer")
 
     -- tofu
-    vim.lsp.enable("terraformls")
+    vim.lsp.enable("tofu_ls")
 
     -- typescript and javascript
     vim.lsp.config("ts_ls", {
