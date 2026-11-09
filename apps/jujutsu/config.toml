@@ -18,8 +18,8 @@ tug = ["bookmark", "move", "--from", "closest_bookmark(@-)", "--to", "@-"]
 # backend = "watchman"
 # watchman.register-snapshot-trigger = true
 
-[git]
-sign-on-push = true
+[revsets]
+git-sign-on-push = "~signed() & mine()"
 
 [signing]
 behavior = "drop"
