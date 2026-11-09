@@ -106,7 +106,7 @@ in
   };
 
   config = {
-    home.packages = lib.optionals pkgs.stdenv.hostPlatform.isDarwin [
+    home.packages = lib.optionals config.dotfiles.gui.enable [
       package.desktop
     ];
 
