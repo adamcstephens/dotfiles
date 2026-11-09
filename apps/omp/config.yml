@@ -10,7 +10,7 @@ composer:
 theme:
   dark: moonfly
   light: modus-operandi
-setupVersion: 2
+setupVersion: 3
 steeringMode: one-at-a-time
 memory:
   backend: "off"
@@ -22,8 +22,7 @@ statusLine:
 startup:
   quiet: true
   checkUpdate: false
-disabledExtensions:
-  []
+disabledExtensions: []
 dev:
   autoqaConsent: granted
 cycleOrder:
