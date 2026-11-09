@@ -118,7 +118,7 @@ rustPlatform.buildRustPackage (finalAttrs: {
 
   postInstall = ''
     mkdir --parents "$out/lib"
-    ln --symbolic ${finalAttrs.libkrunfw}/lib/libkrunfw.so.${finalAttrs.libkrunfw.version} "$out/lib/"
+    ln --symbolic ${finalAttrs.libkrunfw}/lib/libkrunfw.* "$out/lib/"
   '';
 
   buildNoDefaultFeatures = true;
