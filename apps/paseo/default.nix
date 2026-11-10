@@ -26,18 +26,38 @@ let
       });
 
   roles = {
+    director = {
+      id = "agent_profile_engineering_director";
+      name = "Engineering Director";
+      icon = "users";
+      notes = ''
+        Use to coordinate delivery across engineers, with the System Architect as a peer.
+        When launching, instruct the Director to own execution planning, staffing, delegation,
+        dependencies, progress, integration, and verification.  Ask it to coordinate through
+        Paseo tools and profiles and delegate product implementation to engineers, not write
+        product code.  Require clear assignment ownership, scope, dependencies, and acceptance
+        criteria.  Instruct it to consult the Architect for consequential design decisions,
+        not every task; the Architect owns technical direction, design tradeoffs, and
+        architectural review.  Ask it to resolve execution issues and surface unresolved
+        technical disagreements to the user rather than override the Architect.  Instruct it
+        to use proportional staffing, avoid assembling a team for simple requests, and obtain
+        integration and verification evidence before reporting completion.
+      '';
+    };
+
     architect = {
       id = "agent_profile_system_architect";
       name = "System Architect";
       icon = "layers";
       color = "sky";
       notes = ''
-        The most senior member of the team; deep technical understanding, knows how to direct a team
-        to build, knows how to guide the team to verify code and features.  Provides feedback on
-        system-level design decisions.  Instruct to read code first and understand current state of
-        architecture and design when considering system-level changes.  Instruct not to code; delegate
-        coding to engineers.  Ask for design opinion and feedback before implementation team (not a
-        hard gate; use risk-based assessment).
+        Use for technical direction, design tradeoffs, and architectural review, with the
+        Engineering Director as a peer responsible for execution and coordination.
+        When launching, instruct the Architect to read code and understand the current
+        architecture before proposing system-level changes.  Ask it to use Paseo tools to
+        consult and coordinate with the team, but not write product code; delegate
+        implementation to engineers.  Request design opinion and feedback before
+        implementation when warranted by risk, not as a mandatory gate for every task.
       '';
     };
 
@@ -160,6 +180,9 @@ in
             - Use `paseo-*` skills to coordinate with the team
             - When starting a new agent, always let them know their identity, specific role, ownership of
             responsibilities, and how they can contribute; set clear expectations at initialization.
+            - Profile notes are briefing guidance, not automatically injected role instructions.
+            Read the selected profile's notes and include the applicable role responsibilities,
+            constraints, and coordination expectations in the new agent's initialization prompt.
             - Use XML *when initializing new agents*: <role>(sub-agent role, identity; them)</role>,
             <lead_role>("self", you; identity + role)</lead_role>, <objective>(sub-agent's goal)</objective>,
             <instruction_details>(existing context, inputs, info, details of task, tips, references,
@@ -179,11 +202,20 @@ in
           agentProfiles =
             lib.optionals cfg.profiles.omp [
               (
+                roles.director
+                // {
+                  provider = "omp";
+                  model = "openai-codex/gpt-6-astra";
+                  modeId = "full";
+                  thinkingOptionId = "medium";
+                }
+              )
+              (
                 roles.architect
                 // {
                   provider = "omp";
-                  model = "openai-codex/gpt-6.1-sol";
-                  modeId = "ask";
+                  model = "openai-codex/gpt-6-astra";
+                  modeId = "full";
                   thinkingOptionId = "high";
                 }
               )
@@ -191,18 +223,18 @@ in
                 roles.staff
                 // {
                   provider = "omp";
-                  model = "openai-codex/gpt-6.1-terra";
+                  model = "openai-codex/gpt-6.1-sol";
                   modeId = "full";
-                  thinkingOptionId = "auto";
+                  thinkingOptionId = "low";
                 }
               )
               (
                 roles.principal
                 // {
                   provider = "omp";
-                  model = "openai-codex/gpt-6.1-sol";
+                  model = "openai-codex/gpt-6-astra";
                   modeId = "full";
-                  thinkingOptionId = "low";
+                  thinkingOptionId = "medium";
                 }
               )
               (
