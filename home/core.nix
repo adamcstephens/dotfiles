@@ -84,6 +84,7 @@
     home.sessionVariables = {
       DO_NOT_TRACK = "true";
       EDITOR = "${config.home.homeDirectory}/.dotfiles/bin/editor";
+      OP_BIOMETRIC_UNLOCK_ENABLED = "true";
       PAGER = "${config.home.homeDirectory}/.dotfiles/bin/pager";
       XDG_CONFIG_HOME = config.xdg.configHome;
       XDG_DATA_DIRS = "${config.home.profileDirectory}/share:\${XDG_DATA_DIRS}";

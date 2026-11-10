@@ -1,0 +1,25 @@
+{
+  "$schema": "https://raw.githubusercontent.com/can1357/oh-my-pi/main/packages/coding-agent/src/config/mcp-schema.json",
+  "mcpServers": {
+    "miniflux": {
+      "enabled": false,
+      "type": "stdio",
+      "command": "op",
+      "args": [
+        "run",
+        "--env-file=.env",
+        "--no-masking",
+        "--",
+        "container",
+        "run",
+        "--interactive",
+        "--rm",
+        "--env",
+        "MINIFLUX_URL",
+        "--env",
+        "MINIFLUX_API_KEY",
+        "jwonder/miniflux-mcp:latest"
+      ]
+    }
+  }
+}
