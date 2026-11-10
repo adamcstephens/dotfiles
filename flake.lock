@@ -2,11 +2,11 @@
   "nodes": {
     "crane": {
       "locked": {
-        "lastModified": 1792350552,
-        "narHash": "sha256-292lvpvxTGKryKxh3/3tcIVi85CwYGdl4oOi113Sob8=",
+        "lastModified": 1793836618,
+        "narHash": "sha256-TREenflwEjxOSq292FYwbc3kEm7TDRtXCZRNWEdjBmg=",
         "owner": "ipetkov",
         "repo": "crane",
-        "rev": "e675a36b7377bebe41d548388a2501cbb16d380d",
+        "rev": "79fd63528501446749c09f08cad486a58c7d173e",
         "type": "github"
       },
       "original": {
@@ -90,11 +90,11 @@
         "nixpkgs-lib": "nixpkgs-lib_3"
       },
       "locked": {
-        "lastModified": 1790898470,
-        "narHash": "sha256-zTwuwezD0w3hpga6a6P8emidzAZFyWqlNeRBlpWOOl8=",
+        "lastModified": 1793576659,
+        "narHash": "sha256-V1h85lUaJBQoHFrB2vpXZOE0Ju1MYSnIpsehoVZYlDo=",
         "owner": "hercules-ci",
         "repo": "flake-parts",
-        "rev": "024633cd702b10285db5cb19b40ad48d2399ba60",
+        "rev": "ea2630b7470978622c7689a1ff75d2b389175399",
         "type": "github"
       },
       "original": {
@@ -168,11 +168,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1793019793,
-        "narHash": "sha256-DUFGtHWRuVEUZkNFjnmI8+ppxjxzd1vRuMe51qSmTa8=",
+        "lastModified": 1794348582,
+        "narHash": "sha256-+uRw0DQFZMt061MrkJnGgkPnJW59gN6gwL+eGOvpWM4=",
         "ref": "refs/heads/main",
-        "rev": "0306c90884a53824e19da17467a7ddbf6748d474",
-        "revCount": 64,
+        "rev": "f090b9b3b8323f4955405acf2a227878979d5383",
+        "revCount": 65,
         "type": "git",
         "url": "https://tangled.org/adam.robins.wtf/nbac"
       },
@@ -224,11 +224,11 @@
     },
     "nixos-unstable-small": {
       "locked": {
-        "lastModified": 1794272644,
-        "narHash": "sha256-tOW6qflUVDiw5PPhkVRnmwyFImwPUMpmbiwiGabZ6V8=",
-        "rev": "62c4d39509125c04b6aba03eb3dd0ee5b955cc9c",
+        "lastModified": 1794309823,
+        "narHash": "sha256-W5iTNOSDOtBklDuka7mxyY53st3yUorpeMvc+u2QlX0=",
+        "rev": "f37ff5c2009e3923aa79378f923f01d5759b6d84",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/unstable-small/nixos-26.11pre1115805.62c4d3950912/nixexprs.tar.zst"
+        "url": "https://releases.nixos.org/nixos/unstable-small/nixos-26.11pre1116118.f37ff5c2009e/nixexprs.tar.zst"
       },
       "original": {
         "type": "tarball",
@@ -280,11 +280,11 @@
     },
     "nixpkgs-lib_3": {
       "locked": {
-        "lastModified": 1790477367,
-        "narHash": "sha256-oujbxmVKDhci2E4EM3KyAbRUgp5/IsCoiA/LfEF7OOk=",
+        "lastModified": 1793504054,
+        "narHash": "sha256-ThkfL3D/FhCiZFc9+3BtxwuMmpuK+/bGtXCSo1+yVew=",
         "owner": "nix-community",
         "repo": "nixpkgs.lib",
-        "rev": "f7cd230690d9fc982d06129f9189b101fddcfa3b",
+        "rev": "7851ba61fd862b277cb6a9cef37394bc18bb94e4",
         "type": "github"
       },
       "original": {
@@ -380,10 +380,10 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1794270332,
-        "narHash": "sha256-aP3Zf5EwV1mtvsi1ZaBP6A4J+9VNZd6y1BjAQKE5Bpw=",
+        "lastModified": 1794347992,
+        "narHash": "sha256-9MbV7IznQ9XjrO3dpr/+ehhYHgyvofn8ocTN+O1Dq70=",
         "type": "tarball",
-        "url": "https://pkgs.superlogical.com/rex/nix/snapshot/0.0.1794270332-g4ba7cc.tar.gz"
+        "url": "https://pkgs.superlogical.com/rex/nix/snapshot/0.0.1794347992-g99caa8.tar.gz"
       },
       "original": {
         "type": "tarball",
