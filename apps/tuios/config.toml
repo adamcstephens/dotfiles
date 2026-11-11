@@ -76,11 +76,11 @@ copy_entry = 'cursor'
 osc52_write = 'focused'
 
 [appearance.sidebar]
-enabled = true
+enabled = false
 position = 'right'
 width = 24
 workspaces = ''
-sections = 'sessions:25,terminals,files:25,agents:34'
+sections = 'sessions:25,agents:34'
 folder_click = 'navigate'
 editor = ''
 file_delete = 'trash'
