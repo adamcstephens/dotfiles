@@ -76,10 +76,18 @@
         migrate
     '';
 
-    xdg.configFile."home-manager/session-env.sh".text = ''
-      . "${config.home.profileDirectory}/etc/profile.d/hm-session-vars.sh"
-      export PATH="${config.home.profileDirectory}/bin:${config.home.profileDirectory}/sbin:$PATH"
-    '';
+    xdg.configFile = {
+      "environment.d/60-dotfiles.conf" = lib.mkIf pkgs.stdenv.isLinux {
+        text = ''
+          SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-auth.sock
+        '';
+      };
+
+      "home-manager/session-env.sh".text = ''
+        . "${config.home.profileDirectory}/etc/profile.d/hm-session-vars.sh"
+        export PATH="${config.home.profileDirectory}/bin:${config.home.profileDirectory}/sbin:$PATH"
+      '';
+    };
 
     home.sessionVariables = {
       DO_NOT_TRACK = "true";
