@@ -7,7 +7,7 @@
       "command": "op",
       "args": [
         "run",
-        "--env-file=.env",
+        "--env-file=.mcp.json.env",
         "--no-masking",
         "--",
         "container",
