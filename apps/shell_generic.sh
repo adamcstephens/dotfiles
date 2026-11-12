@@ -6,7 +6,7 @@ export PATH="$HOME/.dotfiles/bin:$PATH"
 [[ -e "$HOME/.shell_local.sh" ]] && . "$HOME/.shell_local.sh"
 
 if [ -x /opt/homebrew/bin/brew ]; then
-  eval "$(/opt/homebrew/bin/brew shellenv)"
+  eval "$(/opt/homebrew/bin/brew shellenv "${BASH_VERSION:+bash}${ZSH_VERSION:+zsh}")"
 fi
 
 # shell
