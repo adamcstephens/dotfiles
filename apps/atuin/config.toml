@@ -5,6 +5,13 @@ style = "compact"
 sync_address = "https://atuin.junco.dev"
 update_check = false
 local_timeout = 15
+data_dir = "~/.local/share/atuin"
+
+[daemon]
+enabled = true
+
+[logs]
+enabled = false
 
 [sync]
 records = true

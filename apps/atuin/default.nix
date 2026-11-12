@@ -8,22 +8,21 @@ let
   package = pkgs.atuin.overrideAttrs {
     doCheck = false;
   };
+  socketPath = "${config.home.homeDirectory}/.local/share/atuin/atuin.sock";
+  settings = lib.recursiveUpdate (builtins.fromTOML (builtins.readFile ./config.toml)) (
+    if pkgs.stdenv.hostPlatform.isLinux then
+      { daemon.systemd_socket = true; }
+    else
+      { daemon.socket_path = socketPath; }
+  );
+  configFile = (pkgs.formats.toml { }).generate "atuin-config.toml" settings;
 in
 {
   config = lib.mkMerge [
     {
       home.packages = [ package ];
 
-      xdg.configFile."atuin/config.toml".text =
-        builtins.readFile ./config.toml
-        + ''
-
-          [daemon]
-          enabled = true
-        ''
-        + lib.optionalString pkgs.stdenv.hostPlatform.isLinux ''
-          systemd_socket = true
-        '';
+      xdg.configFile."atuin/config.toml".source = configFile;
     }
     (lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
       systemd.user = {
@@ -48,6 +47,7 @@ in
     (lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
       launchd.agents.atuin = {
         enable = true;
+        restartTriggers = [ configFile ];
         config = {
           KeepAlive = true;
           Program =
@@ -56,13 +56,14 @@ in
               runtimeInputs = [ package ];
               text = ''
                 # force clean atuin socket in case of crash https://github.com/atuinsh/atuin/issues/2289
-                rm -f ${lib.escapeShellArg "${config.home.homeDirectory}/.local/share/atuin/atuin.sock"}
+                rm -f ${lib.escapeShellArg socketPath}
 
-                exec atuin daemon
+                exec atuin daemon --show-logs
               '';
             }
             |> lib.getExe;
           RunAtLoad = true;
+          StandardErrorPath = "${config.home.homeDirectory}/Library/Logs/atuin-daemon.log";
         };
       };
     })
