@@ -1,7 +1,5 @@
 {
-  "extends": [
-    "claude-code"
-  ],
+  "extends": ["nolabs-ai/claude"],
   "meta": {
     "name": "claude-code-dotfiles",
     "version": "1.0.0",
@@ -13,6 +11,20 @@
     "process_info_mode": null,
     "ipc_mode": null,
     "capability_elevation": null,
+    "approval_backends": {
+      "review": {
+        "type": "terminal",
+        "url": null,
+        "auth": null,
+        "timeout_secs": 60,
+        "mode": null,
+        "backends": []
+      }
+    },
+    "approval_defaults": {
+      "backend": "review",
+      "timeout_secs": null
+    },
     "wsl2_proxy_policy": null
   },
   "groups": {
@@ -24,41 +36,44 @@
     "deny": []
   },
   "filesystem": {
-    "allow": [
-      "/usage-credits"
-    ],
+    "allow": ["~/.local/share/direnv", "~/.config/claude"],
     "read": [
       "/nix/store",
+      "~/.dotfiles",
+      "~/.orca",
+      "~/.config/home-manager",
+      "~/.config/starship",
+      "~/.CFUserTextEncoding",
+      "~/.agents",
       "~/.config/claude",
-      "~/.config/claude-personal",
+      "~/.config/direnv",
       "~/.config/gh",
       "~/.config/git",
       "~/.config/jj",
-      "~/.config/pi",
-      "~/.dotfiles",
-      "~/.dotfiles/apps/agents/plugins/dexter-lsp",
-      "~/.dotfiles/apps/agents/skills",
-      "~/.pi"
+      "~/.config/nix",
+      "~/.dotfiles/apps/agents",
+      "~/.dotfiles/apps/jujutsu",
+      "~/.ssh/known_hosts"
     ],
-    "write": [
-      "~/.config/claude",
-      "~/.config/claude-personal",
-      "~/.config/pi",
-      "~/.pi"
-    ],
+    "write": [],
     "allow_file": [],
-    "read_file": [],
+    "read_file": [
+      "~/.ssh/known_hosts",
+      "~/.bashrc",
+      "~/.dotfiles/apps/shell_generic.sh",
+      "~/.dotfiles/apps/aliases.sh"
+    ],
     "write_file": [
       "~/Applications/Claude Code URL Handler.app/Contents/MacOS/claude"
     ],
-    "unix_socket": [],
+    "unix_socket": ["/nix/var/nix/daemon-socket/socket"],
     "unix_socket_bind": [],
     "unix_socket_dir": [],
     "unix_socket_dir_bind": [],
     "unix_socket_subtree": [],
     "unix_socket_subtree_bind": [],
-    "deny": [],
-    "bypass_protection": [],
+    "deny": ["~/Library/Keychains"],
+    "bypass_protection": ["/nix/store", "~/.ssh/known_hosts"],
     "suppress_save_prompt": [
       "~/Library/Application Support/Arc/User Data",
       "~/Library/Application Support/Chromium",
@@ -66,17 +81,25 @@
       "~/Library/Application Support/Microsoft Edge",
       "~/Library/Application Support/Vivaldi",
       "~/Applications/Claude Code URL Handler.app/Contents/MacOS",
-      "/Users",
-      "~/",
-      "~/.config"
+      "~/.config",
+      "~/.bash_history"
     ]
   },
   "network": {
     "block": false,
-    "allow_http2": false,
-    "allow_domain": [],
+    "allow_http2": true,
+    "allow_domain": [
+      "*.github.com",
+      "github.com",
+      "*.amazonaws.com",
+      "*.bitfreighter.dev",
+      "*.anthropic.com",
+      "*.claude.com",
+      "*.datadoghq.com",
+      "*.clickhouse.cloud"
+    ],
     "deny_domain": [],
-    "open_port": [],
+    "open_port": [0],
     "open_port_range": [],
     "listen_port": [],
     "listen_port_range": [],
@@ -88,13 +111,23 @@
     "upstream_bypass": []
   },
   "diagnostics": {
-    "suppress_system_services": []
+    "suppress_system_services": [],
+    "redaction": {
+      "extra_env_vars": []
+    },
+    "network_denial_audit": {}
   },
   "linux": {
     "af_unix_mediation": null,
     "sandbox_policy": null
   },
   "env_credentials": {},
+  "environment": {
+    "allow_vars": ["PATH", "HOME", "TERM", "LANG", "MANPATH", "AWS_*"],
+    "deny_vars": [],
+    "case_insensitive_vars": false,
+    "set_vars": {}
+  },
   "credential_capture": {},
   "credential_providers": {},
   "credential_routes": [],
@@ -109,13 +142,15 @@
   },
   "open_urls": {
     "allow_origins": [
-      "https://publicapi.turvo.com"
+      "https://publicapi.turvo.com",
+      "https://mcp.clickhouse.cloud"
     ],
     "allow_localhost": false
   },
-  "interactive": false,
   "skipdirs": [],
   "packs": [],
   "command_args": [],
-  "unsafe_macos_seatbelt_rules": []
+  "unsafe_macos_seatbelt_rules": [
+    "(allow file-read-data (literal \"/Users\") (regex #\"^/Users/[^/]+(/git|/.config)?$\") )"
+  ]
 }
