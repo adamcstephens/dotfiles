@@ -77,7 +77,7 @@
     '';
 
     xdg.configFile = {
-      "environment.d/60-dotfiles.conf" = lib.mkIf pkgs.stdenv.isLinux {
+      "environment.d/60-dotfiles.conf" = lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
         text = ''
           SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-auth.sock
         '';
