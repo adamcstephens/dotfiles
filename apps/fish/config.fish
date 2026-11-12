@@ -2,14 +2,14 @@
 set -q __fish_dotfiles_config_sourced; and exit
 set --global __fish_dotfiles_config_sourced 1
 
-fish_add_path --prepend --move $HOME/.dotfiles/bin
+fish_add_path --global --prepend --move $HOME/.dotfiles/bin
 
 if test -n "$REX_BIN_DIR"
-    fish_add_path --prepend --move "$REX_BIN_DIR"
+    fish_add_path --global --prepend --move "$REX_BIN_DIR"
 end
 
 if test -n "$HOME/.local/bin"
-    fish_add_path --move "$HOME/.local/bin"
+    fish_add_path --global --move "$HOME/.local/bin"
 end
 
 if ! grep nixos /etc/os-release >/dev/null 2>&1
