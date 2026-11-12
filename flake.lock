@@ -224,11 +224,11 @@
     },
     "nixos-unstable-small": {
       "locked": {
-        "lastModified": 1794406962,
-        "narHash": "sha256-7aeBMTxorr9f9CeCEjmk9nfueyd/eLQkSlpZoWSrYHU=",
-        "rev": "39b15f146050cf402c45e0f0ea09170da0293fba",
+        "lastModified": 1794435240,
+        "narHash": "sha256-t+xPCSAczNKJBG0a7dkjZDJXKDtN9th6bqOCrdx8Sz4=",
+        "rev": "18808198c9047939daaaefad3772c72b4e955116",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/unstable-small/nixos-26.11pre1117830.39b15f146050/nixexprs.tar.zst"
+        "url": "https://releases.nixos.org/nixos/unstable-small/nixos-26.11pre1118267.18808198c904/nixexprs.tar.zst"
       },
       "original": {
         "type": "tarball",
@@ -310,11 +310,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1793977579,
-        "narHash": "sha256-4/Yzr1fWTh/zBAR1tR84ZQ1Zhmor8AXwgD4AS7sPn60=",
-        "rev": "4fe25e12eb9f4c744966dd3de5a05246cf098601",
+        "lastModified": 1794158174,
+        "narHash": "sha256-FdIy8FR+/hjGqfL/JkSS5NdFsmSrtuc8Jy2vZHzRIvA=",
+        "rev": "f6bf1059f02576e0b913c7b49d5e4eb6dda9cc22",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixpkgs/nixpkgs-26.11pre1109744.4fe25e12eb9f/nixexprs.tar.zst"
+        "url": "https://releases.nixos.org/nixpkgs/nixpkgs-26.11pre1114617.f6bf1059f025/nixexprs.tar.zst"
       },
       "original": {
         "type": "tarball",
@@ -323,11 +323,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1794042290,
-        "narHash": "sha256-VZ8WvA9m3XN36juXyg/GwbDRU2OezOHJlXpJCXkccv0=",
-        "rev": "f4a03c008967841f2a0b3cb7c436fc6fc31671f6",
+        "lastModified": 1794192123,
+        "narHash": "sha256-YOhabADcIwaWo9992egosQF3iVpvWysmZAyhbGBzinY=",
+        "rev": "177d0540942fb205af6993b1d5fa0b57799e09f8",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/unstable/nixos-26.11pre1113206.f4a03c008967/nixexprs.tar.zst"
+        "url": "https://releases.nixos.org/nixos/unstable/nixos-26.11pre1114946.177d0540942f/nixexprs.tar.zst"
       },
       "original": {
         "type": "tarball",
