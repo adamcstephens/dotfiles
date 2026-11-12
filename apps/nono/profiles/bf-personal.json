@@ -26,10 +26,14 @@
       "~/.config/jjui",
       "~/.CFUserTextEncoding",
       "~/.local/share/fish",
+      "~/.ssh/signing-key.pub",
       "~/git"
     ],
     "read_file": ["~/.bashrc"],
-    "unix_socket": ["~/.local/share/atuin/atuin.sock"],
-    "bypass_protection": ["~/.config/fish"]
+    "unix_socket": [
+      "~/.local/share/atuin/atuin.sock",
+      "/Users/adam/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh"
+    ],
+    "bypass_protection": ["~/.config/fish", "~/.ssh/signing-key.pub"]
   }
 }

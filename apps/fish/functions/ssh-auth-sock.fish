@@ -40,6 +40,12 @@ function ssh-auth-sock --on-event="fish_preexec"
         set WELL_KNOWN_SOCK $XDG_RUNTIME_DIR/ssh-auth.sock
     end
 
+    # assume nono cannot update these files and that well-known is authoritative
+    if set --query NONO_CAP_FILE
+        set --export SSH_AUTH_SOCK "$WELL_KNOWN_SOCK"
+        return
+    end
+
     if test -n "$TUIOS_SESSION"
         set DISCOVERED_SOCK (tuios ssh-agent-path)
     else
