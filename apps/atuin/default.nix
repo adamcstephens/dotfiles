@@ -5,9 +5,7 @@
   ...
 }:
 let
-  package = pkgs.atuin.overrideAttrs {
-    doCheck = false;
-  };
+  package = pkgs.atuin;
   socketPath = "${config.home.homeDirectory}/.local/share/atuin/atuin.sock";
   settings = lib.recursiveUpdate (builtins.fromTOML (builtins.readFile ./config.toml)) (
     if pkgs.stdenv.hostPlatform.isLinux then
