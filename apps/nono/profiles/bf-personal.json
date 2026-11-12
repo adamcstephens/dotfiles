@@ -1,0 +1,35 @@
+{
+  "extends": [
+    "bitfreighter/nix",
+    "bitfreighter/network",
+    "bitfreighter/container"
+  ],
+  "meta": {
+    "name": "bf-personal",
+    "description": "Adam's personal additions to the Bitfreighter profiles"
+  },
+  "environment": {
+    "set_vars": { "HISTFILE": "", "fish_history": "" }
+  },
+  "filesystem": {
+    "allow": ["~/.config/claude", "~/.local/share/atuin"],
+    "read": [
+      "~/.dotfiles",
+      "~/.orca",
+      "~/.agents",
+      "~/.config/home-manager",
+      "~/.config/starship.toml",
+      "~/.config/atuin",
+      "~/.config/fish",
+      "~/.config/git",
+      "~/.config/jj",
+      "~/.config/jjui",
+      "~/.CFUserTextEncoding",
+      "~/.local/share/fish",
+      "~/git"
+    ],
+    "read_file": ["~/.bashrc"],
+    "unix_socket": ["~/.local/share/atuin/atuin.sock"],
+    "bypass_protection": ["~/.config/fish"]
+  }
+}
