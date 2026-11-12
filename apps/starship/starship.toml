@@ -1,6 +1,7 @@
 command_timeout = 100
 
 format = """
+${env_var.NONO_CAP_FILE}\
 $username\
 $hostname\
 $localip\
@@ -50,3 +51,7 @@ format = "[$user@]($style)"
 [custom.systemd_virt]
 command = 'systemd-detect-virt'
 when = 'test (systemd-detect-virt) != "none"'
+
+[env_var.NONO_CAP_FILE]
+format = "[<nono> ]($style)"
+style = "bold red"
