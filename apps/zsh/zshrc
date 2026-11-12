@@ -1,13 +1,9 @@
 # History
-HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}/zsh/history"
 HISTSIZE=100000
 SAVEHIST=100000
 setopt SHARE_HISTORY
 setopt HIST_IGNORE_DUPS
 setopt HIST_IGNORE_SPACE
-
-# Ensure history directory exists
-[[ -d "${HISTFILE:h}" ]] || mkdir -p "${HISTFILE:h}"
 
 if [[ -o interactive ]]; then
   # Completion
