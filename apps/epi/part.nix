@@ -14,8 +14,8 @@ let
     {
       imports = [
         inputs.epi.nixosModules.epi
-        inputs.home-manager.nixosModules.home-manager
-      ];
+      ]
+      ++ self.homeManagerProfiles.dev;
 
       epi = {
         enable = true;
@@ -34,35 +34,6 @@ let
             "$EPI_BIN" exec "$EPI_INSTANCE" -- sudo systemctl restart --no-block netbird-vrob0-login
           ''
           |> lib.getExe;
-      };
-
-      home-manager = {
-        extraSpecialArgs = {
-          inherit inputs;
-
-          flake = self;
-          npins = import ../../npins;
-        };
-
-        sharedModules = [
-          ../../home/core.nix
-          ../../home/dev.nix
-
-          ../paseo
-          ../rex
-        ];
-
-        backupFileExtension = "bhm";
-
-        users.adam = {
-          home = {
-            homeDirectory = "/home/adam";
-            username = "adam";
-            stateVersion = "26.05";
-            file.".dotfiles".source = "${self}";
-          };
-          dotfiles.nixosManaged = true;
-        };
       };
 
       networking.nftables.enable = true;
