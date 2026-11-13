@@ -33,35 +33,34 @@ in
 {
   imports = [
     ./gui.nix
+
+    # desktop
     ../apps/mimeapps
     ../apps/noctalia
-    # ../apps/pinnacle
     ../apps/river
     ../apps/shikane
     ../apps/umbriel
     ../apps/wayland
 
-    # desktop env
-    # ../apps/ironbar
-    # ../apps/niri
-    # ../apps/swayidle
-    # ../apps/swayosd
-    # ../apps/vdirsyncer
-    # ../apps/walker
-
     # apps
-    # ../apps/halloy
-    # ../apps/kitty
-    # ../apps/newsboat
+    ../apps/halloy
+    ../apps/paseo
     ../apps/ssh
-    # ../apps/todoman
 
-    # HM module users
     # ../apps/dunst
     # ../apps/gammastep
-    # ../apps/rofi
     # ../apps/hypridle
+    # ../apps/ironbar
     # ../apps/kanshi
+    # ../apps/newsboat
+    # ../apps/niri
+    # ../apps/pinnacle
+    # ../apps/rofi
+    # ../apps/swayidle
+    # ../apps/swayosd
+    # ../apps/todoman
+    # ../apps/vdirsyncer
+    # ../apps/walker
     # ../apps/waybar
   ];
 
