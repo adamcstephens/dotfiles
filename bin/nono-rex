@@ -1,0 +1,82 @@
+#!/usr/bin/env bash
+# Usage: nono-rex [nono run flags]
+#        nono-rex --stop
+set -euo pipefail
+
+profile="${NONO_REX_PROFILE:-personal}"
+rex_app="$HOME/Library/Application Support/com.superlogical.rex/RexServer"
+rex="$(command -v rex || echo "$rex_app/Versions/Current/Rex Server.app/Contents/MacOS/rex")"
+rex_dir="${XDG_STATE_HOME:-$HOME/.local/state}/nono-rex"
+session="$(basename "$PWD")"
+
+running() {
+  "$rex" --server "unix://$rex_dir/$1.sock" --autostart=false whoami >/dev/null 2>&1
+}
+
+# The Rex app only knows the hosts it copied from the server once, so reuse those slots.
+slot=""
+free=""
+for label in $("$rex" hosts list --json | grep --only-matching --extended-regexp '"label": "sandbox-[0-9]+"' | grep --only-matching --extended-regexp 'sandbox-[0-9]+'); do
+  if running "$label"; then
+    if [ "$(cat "$rex_dir/$label/cwd" 2>/dev/null)" = "$PWD" ]; then
+      slot="$label"
+      break
+    fi
+  elif [ -z "$free" ]; then
+    free="$label"
+  fi
+done
+
+if [ "${1:-}" = "--stop" ]; then
+  if [ -z "$slot" ]; then
+    echo "No sandbox is running for $PWD" >&2
+    exit 1
+  fi
+  REX_RUNTIME_DIR="$rex_dir/$slot/run" exec "$rex" server stop
+fi
+
+if [ -z "$slot" ]; then
+  if [ -z "$free" ]; then
+    echo "Every sandbox-N host in Rex is in use; add another with Add Remote Host" >&2
+    exit 1
+  fi
+  slot="$free"
+  server_dir="$rex_dir/$slot"
+  rm -rf "$server_dir"
+  mkdir -p "$server_dir/run"
+  echo "$PWD" >"$server_dir/cwd"
+
+  REX_RUNTIME_DIR="$server_dir/run" REX_HOME="$server_dir/home" nohup nono run --verbose --profile "$profile" --allow-cwd "$@" \
+    --read "$rex_app" \
+    --allow "$server_dir" \
+    --allow-unix-socket-dir-bind "$server_dir/run" \
+    -- "$rex" server run --state-dir "$server_dir/state" \
+    >"$server_dir/server.log" 2>&1 &
+  server_pid=$!
+
+  until [ -S "$server_dir/run/server.sock" ]; do
+    if ! kill -0 "$server_pid" 2>/dev/null; then
+      cat "$server_dir/server.log" >&2
+      exit 1
+    fi
+    sleep 0.2
+  done
+  ln -sfn "$server_dir/run/server.sock" "$rex_dir/$slot.sock"
+  nohup "$rex" --server "unix://$rex_dir/$slot.sock" "do" --all "$HOME/.dotfiles/apps/rex/nono-login-shells.lua" cwd="$PWD" \
+    >"$server_dir/login-shells.log" 2>&1 &
+  echo "Started $slot for $PWD; logs in $server_dir/server.log" >&2
+fi
+
+if ! "$rex" --server "unix://$rex_dir/$slot.sock" session inspect "$session" >/dev/null 2>&1; then
+  "$rex" --server "unix://$rex_dir/$slot.sock" api call session.create \
+    "{\"label\": \"$session\", \"initial_windows\": [{\"layout\": {\"block\": {\"flavor\": \"com.superlogical.terminal.shell\", \"options\": {\"login\": false, \"cwd\": \"$PWD\"}}}}]}" >/dev/null
+fi
+
+for _ in $(seq 30); do
+  if osascript -e "tell application id \"com.superlogical.rex\" to show (first session whose host name is \"$slot\" and name is \"$session\")" >/dev/null 2>&1; then
+    exit 0
+  fi
+  sleep 1
+done
+echo "Rex didn't connect to $slot; open it with Switch Host" >&2
+exit 1
