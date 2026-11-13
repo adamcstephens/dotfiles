@@ -1,3 +1,6 @@
+[askpass]
+enabled = false
+
 [preview]
 show_at_start = true
 revision_command = [
