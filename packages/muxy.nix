@@ -43,7 +43,7 @@ let
 in
 rustPlatform.buildRustPackage (finalAttrs: {
   pname = "muxy";
-  version = "2.3.0";
+  version = "2.5.0";
   __structuredAttrs = true;
 
   outputs = [
@@ -57,10 +57,10 @@ rustPlatform.buildRustPackage (finalAttrs: {
     owner = "muxy-app";
     repo = "muxy";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-Zwd2X18Kr22rYH9r8OQvofHWCwvomTn+4tBYMmFAuos=";
+    hash = "sha256-VIumNyaBub+89a4P842H0zmsaUS9RSLNG9yV6xcEPdc=";
   };
 
-  cargoHash = "sha256-nj1Nf0yHC9AcpvdydO3pZfhKnhQtaFB4geTxnjf5Bu0=";
+  cargoHash = "sha256-RVZuabBbgX/MEZeBwF3Gzr/A33TG/+j9Y2A8qrpwzFw=";
 
   dontUseZigConfigure = true;
   dontUseZigBuild = true;
