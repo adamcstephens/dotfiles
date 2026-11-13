@@ -54,6 +54,9 @@ in
           ./dev.nix
           ../apps/paseo
           ../apps/rex
+          {
+            dotfiles.apps.paseo.daemon.enable = true;
+          }
         ];
       }
     ];
