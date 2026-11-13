@@ -2,38 +2,17 @@
   "extends": [
     "bitfreighter/nix",
     "bitfreighter/network",
-    "bitfreighter/container"
+    "bitfreighter/container",
+    "personal"
   ],
   "meta": {
     "name": "bf-personal",
     "description": "Adam's personal additions to the Bitfreighter profiles"
   },
-  "environment": {
-    "set_vars": { "HISTFILE": "", "fish_history": "" }
-  },
   "filesystem": {
-    "allow": ["~/.config/claude", "~/.local/share/atuin"],
-    "read": [
-      "~/.dotfiles",
-      "~/.orca",
-      "~/.agents",
-      "~/.config/home-manager",
-      "~/.config/starship.toml",
-      "~/.config/atuin",
-      "~/.config/fish",
-      "~/.config/git",
-      "~/.config/jj",
-      "~/.config/jjui",
-      "~/.CFUserTextEncoding",
-      "~/.local/share/fish",
-      "~/.ssh/signing-key.pub",
-      "~/git"
-    ],
-    "read_file": ["~/.bashrc"],
+    "read": ["~/.orca", "~/.CFUserTextEncoding"],
     "unix_socket": [
-      "~/.local/share/atuin/atuin.sock",
       "/Users/adam/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh"
-    ],
-    "bypass_protection": ["~/.config/fish", "~/.ssh/signing-key.pub"]
+    ]
   }
 }

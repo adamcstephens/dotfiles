@@ -15,3 +15,6 @@ enabled = false
 
 [sync]
 records = true
+
+[threads]
+capture = true

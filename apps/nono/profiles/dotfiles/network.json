@@ -1,0 +1,26 @@
+{
+  "extends": "base",
+  "meta": {
+    "name": "dotfiles-network",
+    "description": "Restrict outbound network"
+  },
+  "network": {
+    "allow_http2": true,
+    "allow_domain": [
+      "*.anthropic.com",
+      "*.claude.com",
+      "*.github.com",
+      "*.githubusercontent.com",
+      "*.nixos.org",
+      "builds.hex.pm",
+      "chatgpt.com",
+      "github.com",
+      "hex.pm",
+      "registry.npmjs.org",
+      "registry.yarnpkg.com",
+      "repo.hex.pm",
+      "www.superlogical.com"
+    ],
+    "open_port": [0]
+  }
+}

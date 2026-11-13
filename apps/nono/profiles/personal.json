@@ -1,0 +1,35 @@
+{
+  "extends": ["dotfiles/nix", "dotfiles/network"],
+  "meta": {
+    "name": "personal",
+    "description": "Adam's personal profile"
+  },
+  "environment": {
+    "set_vars": { "HISTFILE": "", "fish_history": "" }
+  },
+  "filesystem": {
+    "allow": [
+      "~/.config/claude",
+      "~/.config/omp",
+      "~/.local/share/atuin",
+      "~/.local/state/dotvim"
+    ],
+    "read": [
+      "~/.dotfiles",
+      "~/.agents",
+      "~/.config/home-manager",
+      "~/.config/starship.toml",
+      "~/.config/atuin",
+      "~/.config/fish",
+      "~/.config/git",
+      "~/.config/jj",
+      "~/.config/jjui",
+      "~/.local/share/fish",
+      "~/.ssh/signing-key.pub",
+      "~/git"
+    ],
+    "read_file": ["~/.bashrc"],
+    "unix_socket": ["~/.local/share/atuin/atuin.sock"],
+    "bypass_protection": ["~/.config/fish", "~/.ssh/signing-key.pub"]
+  }
+}

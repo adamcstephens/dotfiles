@@ -1,0 +1,16 @@
+{
+  "extends": "base",
+  "meta": {
+    "name": "dotfiles-nix",
+    "description": "nix dev shell and direnv"
+  },
+  "filesystem": {
+    "allow": ["$HOME/.local/share/direnv"],
+    "read": ["/nix/store", "$HOME/.config/direnv", "$HOME/.config/nix"],
+    "bypass_protection": ["/nix/store"],
+    "unix_socket": ["/nix/var/nix/daemon-socket/socket"]
+  },
+  "unsafe_macos_seatbelt_rules": [
+    "(allow file-read-data (literal \"/Users\") (regex #\"^/Users/[^/]+(/\\.config)?$\"))"
+  ]
+}

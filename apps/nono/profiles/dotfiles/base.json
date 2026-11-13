@@ -1,0 +1,25 @@
+{
+  "extends": "nolabs-ai/claude",
+  "meta": {
+    "name": "dotfiles-base",
+    "description": "Shared base"
+  },
+  "workdir": {
+    "access": "readwrite"
+  },
+  "filesystem": {
+    "read_file": [
+      "$HOME/.ssh/known_hosts",
+      "$HOME/.config/gh/config.yml",
+      "$HOME/.config/gh/hosts.yml"
+    ],
+    "bypass_protection": ["$HOME/.ssh/known_hosts"],
+    "suppress_save_prompt": [
+      "$HOME/Library/Application Support/Arc/User Data",
+      "$HOME/Library/Application Support/Chromium",
+      "$HOME/Library/Application Support/Google/Chrome",
+      "$HOME/Library/Application Support/Microsoft Edge",
+      "$HOME/Library/Application Support/Vivaldi"
+    ]
+  }
+}
