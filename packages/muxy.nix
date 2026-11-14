@@ -99,8 +99,14 @@ rustPlatform.buildRustPackage (finalAttrs: {
   ];
 
   postPatch = ''
-    substituteInPlace crates/muxy-server/tests/history_links.rs \
+    substituteInPlace crates/muxy-server/tests/{history_links,images}.rs \
+      crates/muxy-server/src/connection/tests.rs \
       --replace-fail /bin/sleep ${lib.getExe' coreutils "sleep"}
+    substituteInPlace crates/muxy-server/src/session/owner/tests.rs \
+      --replace-fail /bin/cat ${lib.getExe' coreutils "cat"}
+    substituteInPlace crates/muxy-server/src/exec.rs \
+      --replace-fail 'read_login_path(Path::new("/bin/sh"))' 'read_login_path(Path::new("${stdenv.shell}"))' \
+      --replace-fail 'Path::new("/usr/bin")' 'Path::new("${coreutils}/bin")'
     substituteInPlace crates/muxy-cli/src/open.rs \
       --replace-fail ${lib.escapeShellArg "    let Ok(executable) = muxy_core::executable::current_path() else {\n        return false;\n    };\n    desktop_session"} '    desktop_session' \
       --replace-fail 'launch(&executable.with_file_name("muxy-app"), folder)' 'launch(Path::new("muxy-app"), folder)'
