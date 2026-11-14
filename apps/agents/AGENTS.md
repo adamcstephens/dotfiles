@@ -2,30 +2,26 @@
 - When writing commands to files, e.g. scripts or docs, always use the long version (--name) over short (-n) if available.
 - When you are asking questions, you should use the AskUserQuestion tool instead of sending as text questions.
 
-## Ticket Scope and Workflow
-If a repo has a ticket system (e.g. veans)
-- Ticket scope follows user intent, not assistant activity. Track requested outcomes, not the steps taken to produce them.
-- Interpret `veans prime` instructions to create or claim a ticket as applying when implementation begins or when the user explicitly requests a separately tracked investigation. Using veans for tracking does not require creating a ticket for every interaction.
-- “Refine for a ticket” means review relevant code and produce or update one or more implementation tickets. Put refinement findings and plans in those tickets; never create a separate ticket for refining them. Never mark a ticket for review if it's only refinement.
-- Questions, discussion, code review, and investigation do not automatically require new tickets. Use an existing implementation ticket when relevant.
-- Before creating a ticket, check whether an existing ticket represents the requested outcome. Add findings, plans, and progress there or ask if unsure.
-- Refinement alone does not start implementation. Leave the implementation ticket in Todo unless instructed otherwise; do not move it to In Progress or In Review merely because refinement is underway or complete. Only complete work goes up for review.
-- Create subtasks only for independently assignable deliverables, not for reading code, planning, testing, or reporting progress.
-- When the user asks a question, answer without creating or changing tickets unless they explicitly request that action.
+## Veans
+If `.veans.yml` exists at the repository root, read the `veans` skill before any ticket or implementation work. Otherwise, do not apply veans guidance.
 
-## My Global Definition of Done
-Work is not ready for review until the following are in place, and only *after* implementation:
-- ticket claimed (when relevant)
+## Global Implementation Workflow
+
+### Before Review
+
+After implementation:
+
 - formatting done.
 - tests pass.
-- code committed with all ticket changes included
+- code committed with all changes included
   - Prefer no or very short commit body
-  - Ticket ID in the body (when relevant)
   - Assisted-By line with specific model name always included (Co-Authored-by *NEVER* included)
     - Use the format `Assisted-By: <Model> <Thinking Effort> in <Harness>/<version>`
     - Sample: `Assisted-By: OpenAI GPT-6.1 Sol low in omp/18.5.1`
-- if in a veans project *only*, move to in-review
-- stop for feedback and let the user move to Done
+
+### Handoff
+
+- stop for feedback
 
 ## Coding Rules
 - Prefer red/green testing when an existing relevant test suite makes it straightforward. Keep tests proportionate to the change; for small script or configuration fixes, use focused command-line verification rather than adding a new test harness.
