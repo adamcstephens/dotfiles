@@ -380,10 +380,10 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1794597018,
-        "narHash": "sha256-x3GOolhVKNEvtPpWLmSU3MYBqwfhfgv5iSlANcjY4+0=",
+        "lastModified": 1794604880,
+        "narHash": "sha256-Fu6KG10PPvv0NWBePxT3JJ9carEEK2bAUppGzsCPr/s=",
         "type": "tarball",
-        "url": "https://pkgs.superlogical.com/rex/nix/snapshot/0.0.1794597018-ge8b238.tar.gz"
+        "url": "https://pkgs.superlogical.com/rex/nix/snapshot/0.0.1794604880-ge4e811.tar.gz"
       },
       "original": {
         "type": "tarball",
