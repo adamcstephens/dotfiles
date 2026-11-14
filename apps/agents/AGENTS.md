@@ -23,6 +23,15 @@ After implementation:
 
 - stop for feedback
 
+## Scope and Simplicity
+
+- Implement only the requested behavior. Do not add adjacent features, speculative generality, compatibility layers, or unrelated cleanup.
+- Prefer the smallest coherent solution using existing patterns. New abstractions must solve a present requirement, not a hypothetical future need.
+- Add failure handling only for failures relevant to the requested behavior or required by an existing contract. Do not invent fallback behavior, silently swallow errors, or validate internal invariants repeatedly.
+- If the change grows beyond the requested outcome, stop expanding it. Explain the concrete requirement driving the extra work and propose the simpler alternative.
+- If additional scope seems necessary, distinguish **required for correctness** from **optional improvement**. State the consequence of omitting it and ask before implementing it.
+- Ask the user when an unresolved requirement materially changes scope, complexity, or failure behavior. Do not guess or implement multiple possibilities to avoid asking. Resolve questions from existing code and documentation first; if they remain unresolved, pause the affected work and ask a focused question with your recommendation.
+
 ## Coding Rules
 - Prefer red/green testing when an existing relevant test suite makes it straightforward. Keep tests proportionate to the change; for small script or configuration fixes, use focused command-line verification rather than adding a new test harness.
 - NEVER add a dependency without permission. ALWAYS check you're adding the
@@ -39,9 +48,9 @@ After implementation:
 - AVOID defensive programming, discuss with me first before assuming backwards compatibility or handling all potential cases.
 
 ### Code Repositories
-- Assume you're working in a jj repo by default, only falling back to git if needed.
-- Always start work on a clean jj commit.
-- Check jj state before creating a new change to avoid creating empty changes.
+- If a `.jj` directory exists, read the `jujutsu` skill and use jj exclusively instead of git.
+  - Always start work on a clean jj commit.
+  - Check jj state before creating a new change to avoid creating empty changes.
 
 ### Working with nix
 - When nix is available, and a package is in nix, you can access its source by building its `<package.src` attribute. Use this by default whether working on nix-related things or not.
