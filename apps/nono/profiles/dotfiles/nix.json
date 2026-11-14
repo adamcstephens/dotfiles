@@ -5,12 +5,12 @@
     "description": "nix dev shell and direnv"
   },
   "filesystem": {
-    "allow": ["$HOME/.local/share/direnv"],
+    "allow": ["$HOME/.local/share/direnv", "$HOME/.cache/nix"],
     "read": ["/nix/store", "$HOME/.config/direnv", "$HOME/.config/nix"],
     "bypass_protection": ["/nix/store"],
     "unix_socket": ["/nix/var/nix/daemon-socket/socket"]
   },
   "unsafe_macos_seatbelt_rules": [
-    "(allow file-read-data (literal \"/Users\") (regex #\"^/Users/[^/]+(/\\.config)?$\"))"
+    "(allow file-read-data (literal \"/(home|Users)\") (regex #\"^/(home|Users)/[^/]+(/\\.config)?$\"))"
   ]
 }

@@ -30,6 +30,10 @@
     ],
     "read_file": ["~/.bashrc"],
     "unix_socket": ["~/.local/share/atuin/atuin.sock"],
-    "bypass_protection": ["~/.config/fish", "~/.ssh/signing-key.pub"]
+    "bypass_protection": [
+      "~/.dotfiles/apps/zsh/zshrc",
+      "~/.config/fish",
+      "~/.ssh/signing-key.pub"
+    ]
   }
 }

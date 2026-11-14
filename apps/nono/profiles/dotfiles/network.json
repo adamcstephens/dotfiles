@@ -20,7 +20,6 @@
       "registry.yarnpkg.com",
       "repo.hex.pm",
       "www.superlogical.com"
-    ],
-    "open_port": [0]
+    ]
   }
 }
