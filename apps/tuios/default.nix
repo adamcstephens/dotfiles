@@ -24,15 +24,6 @@ in
     }
     (lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
       systemd.user = {
-        sockets.tuios = {
-          Install.WantedBy = [ "default.target" ];
-          Socket = {
-            ListenStream = "%t/tuios/tuios.sock";
-            Accept = false;
-            SocketMode = "0600";
-          };
-        };
-
         services.tuios = {
           Install.WantedBy = [ "default.target" ];
 
