@@ -15,6 +15,8 @@ let
       ]
       ++ self.homeManagerProfiles.dev;
 
+      epi.enable = true;
+
       home-manager.users.adam.onenix.enable = false;
 
       networking.nftables.enable = true;
