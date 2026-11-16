@@ -246,6 +246,15 @@ default_extent_fraction = 0.5
 # Rules combine in order, with later values overriding earlier ones.
 # https://docs.noctalia.dev/umbriel/window-rules/
 
+[[window_rule]]
+match.is_alone = true
+default_maximize_to_edges = true
+
+[[window_rule]]
+match.is_only_window = true
+border_width = 0
+outer_border_width = 0
+
 # Blur windows using the non-optimized path so translucent windows include
 # overlapping windows behind them.
 [[window_rule]]
