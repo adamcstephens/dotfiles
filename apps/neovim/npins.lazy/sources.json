@@ -62,10 +62,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v20.0.1",
-      "revision": "142eadffdaa8dd06060646b6f8ef74e99c42ab06",
+      "version": "v20.2.0",
+      "revision": "8ffcc9a78d87732a26243de37ef697f54efe91c2",
       "url": null,
-      "hash": "sha256-29Z/aTSK6xtLCNp+FJH1D89MpNztm6Hjgfz80XZVTlI="
+      "hash": "sha256-EKZDomMxqMCI12my3c/2UCh/JVO9kymgyoqyc0/J2B4="
     },
     "conform.nvim": {
       "type": "GitRelease",
@@ -103,9 +103,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "5726403e132fe8699d670c7ef8d59dbed887b4e6",
-      "url": "https://github.com/elanmed/fzf-lua-frecency.nvim/archive/5726403e132fe8699d670c7ef8d59dbed887b4e6.tar.gz",
-      "hash": "sha256-81FwV/rmFv5wbP1KtnvC+kwvUmg60lqk1haGwuV2N+A="
+      "revision": "8bc61658653d2e74cf7d7fb0e12cb09f42d4aeeb",
+      "url": "https://github.com/elanmed/fzf-lua-frecency.nvim/archive/8bc61658653d2e74cf7d7fb0e12cb09f42d4aeeb.tar.gz",
+      "hash": "sha256-owCWy6v765XOxWS0rlR4lH7K3s8rsIsKHDAvMS0GYR8="
     },
     "gitsigns.nvim": {
       "type": "GitRelease",
@@ -182,9 +182,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "77b7432d4770d23b277d37923e5a08a442d8bb07",
+      "revision": "6e72b89d499455611f09f46d13ee9f79325406e5",
       "url": null,
-      "hash": "sha256-y1yMOwXGWn/f8h9J2XM8hczCODrVjDjoONcUnhRY/r0="
+      "hash": "sha256-nh4i/D9QzUgTqErY+1OliGc7n4usw2CpI45ngSfM5XU="
     },
     "nvim-surround": {
       "type": "GitRelease",
@@ -252,9 +252,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "f8e8cf02be7340489df1b67b518ce2842c65520f",
+      "revision": "4851ae503585dc5142ad66a98e8952a74e1f7b3a",
       "url": null,
-      "hash": "sha256-vPTAB62yN2T7+5yJqjBD3EN0hzIeLvaYpUs2RrKTJQk="
+      "hash": "sha256-Qhn8hGQ/S6SCV0GxsrS8nAPSq0ndwMNaEYhOw0Mv/Pc="
     },
     "osc11.nvim": {
       "type": "Git",
