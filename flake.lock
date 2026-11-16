@@ -417,11 +417,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1794800006,
-        "narHash": "sha256-msawx+NHXoNUHGqNtqclptQuxuTsm+PIOvDU20OLKRE=",
+        "lastModified": 1794862554,
+        "narHash": "sha256-KC4gFN5rtz6yt/KtdzBqgdBFV5LcbV5mrbgIjlrJOIw=",
         "ref": "refs/heads/main",
-        "rev": "83895c3031f359a3f844d9283b3136135db4cb2a",
-        "revCount": 24,
+        "rev": "6aafad8d5b859015be2d40737bf86cd39976defe",
+        "revCount": 26,
         "type": "git",
         "url": "https://tangled.org/adam.robins.wtf/onenix"
       },
