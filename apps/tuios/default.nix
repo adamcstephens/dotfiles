@@ -8,11 +8,12 @@
 }:
 let
   cfg = config.dotfiles.apps.tuios;
-  package = inputs.nixos-unstable-small.legacyPackages.${pkgs.stdenv.hostPlatform.system}.tuios;
 in
 {
   options.dotfiles.apps.tuios.package = (lib.mkPackageOption pkgs "tuios" { }) // {
-    default = package;
+    default =
+      inputs.nixpkgs-tuios.legacyPackages.${pkgs.stdenv.hostPlatform.system}.tuios.overrideAttrs
+        { doCheck = false; };
   };
 
   config = lib.mkMerge [

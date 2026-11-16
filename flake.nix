@@ -3,6 +3,7 @@
     nixpkgs.url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.zst";
     nixpkgs-unstable.url = "https://channels.nixos.org/nixpkgs-unstable/nixexprs.tar.zst";
     nixos-unstable-small.url = "https://channels.nixos.org/nixos-unstable-small/nixexprs.tar.zst";
+    nixpkgs-tuios.url = "github:adamcstephens/nixpkgs?ref=push-oprwxoqssukl";
 
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
