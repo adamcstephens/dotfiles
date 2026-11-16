@@ -26,11 +26,13 @@ in
       systemd.user = {
         services.tuios = {
           Install.WantedBy = [ "default.target" ];
+          Unit.X-SwitchMethod = "reload";
 
           Service = {
             Type = "simple";
             ExecStartPre = "${lib.getExe cfg.package} kill-server";
             ExecStart = "${lib.getExe cfg.package} daemon";
+            ExecReload = "${lib.getExe cfg.package} daemon upgrade";
             Restart = "on-failure";
           };
         };
