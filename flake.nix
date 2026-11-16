@@ -18,6 +18,8 @@
     nix-darwin.url = "github:lnl7/nix-darwin/master";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
     nix-index-database.url = "github:nix-community/nix-index-database";
+    onenix.url = "git+https://tangled.org/adam.robins.wtf/onenix";
+    onenix.inputs.nixpkgs.follows = "nixpkgs";
     profile-parts.url = "git+https://tangled.org/adam.robins.wtf/profile-parts";
     rex.url = "https://pkgs.superlogical.com/rex/nix/snapshot.tar.gz";
     sower.url = "git+https://tangled.org/adam.robins.wtf/sower";

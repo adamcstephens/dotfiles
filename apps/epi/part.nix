@@ -15,6 +15,8 @@ let
       ]
       ++ self.homeManagerProfiles.dev;
 
+      home-manager.users.adam.onenix.enable = false;
+
       networking.nftables.enable = true;
 
       nix.settings = {

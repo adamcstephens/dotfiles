@@ -1,5 +1,6 @@
 {
   config,
+  inputs,
   flake,
   lib,
   pkgs,
@@ -33,6 +34,8 @@
     ../apps/tmuxinator
     # Disable to clear current managed dir ../apps/zellij
     ../apps/zsh
+
+    inputs.onenix.homeModules.default
   ];
 
   config = {
