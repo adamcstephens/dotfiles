@@ -450,10 +450,10 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1794831907,
-        "narHash": "sha256-gJ8CNJpU5IuBcUP0Cw/HLy5gdfIlOego3VH6xmeAKB4=",
+        "lastModified": 1794859600,
+        "narHash": "sha256-PWLHg3VQuk83i7dZLe4ObpV65RMIqsfu1dBQJ2xcdQs=",
         "type": "tarball",
-        "url": "https://pkgs.superlogical.com/rex/nix/snapshot/0.0.1794831907-gef3705.tar.gz"
+        "url": "https://pkgs.superlogical.com/rex/nix/snapshot/0.0.1794859600-g40b90d.tar.gz"
       },
       "original": {
         "type": "tarball",
