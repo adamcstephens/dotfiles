@@ -7,13 +7,17 @@
   ...
 }:
 let
+  cfg = config.dotfiles.apps.tuios;
   package = inputs.nixos-unstable-small.legacyPackages.${pkgs.stdenv.hostPlatform.system}.tuios;
 in
-
 {
+  options.dotfiles.apps.tuios.package = (lib.mkPackageOption pkgs "tuios" { }) // {
+    default = package;
+  };
+
   config = lib.mkMerge [
     {
-      home.packages = [ package ];
+      home.packages = [ cfg.package ];
 
       xdg.configFile."tuios/config.toml".source = dotlib.source "apps/tuios/config.toml";
       xdg.configFile."tuios/themes".source = dotlib.source "apps/tuios/themes";
@@ -34,8 +38,8 @@ in
 
           Service = {
             Type = "simple";
-            ExecStartPre = "${lib.getExe package} kill-server";
-            ExecStart = "${lib.getExe package} daemon";
+            ExecStartPre = "${lib.getExe cfg.package} kill-server";
+            ExecStart = "${lib.getExe cfg.package} daemon";
             Restart = "on-failure";
           };
         };
@@ -47,7 +51,7 @@ in
         config = {
           EnvironmentVariables.XDG_CONFIG_HOME = config.xdg.configHome;
           ProgramArguments = [
-            (lib.getExe package)
+            (lib.getExe cfg.package)
             "daemon"
           ];
           RunAtLoad = true;
