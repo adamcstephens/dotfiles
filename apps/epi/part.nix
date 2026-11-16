@@ -7,8 +7,6 @@ let
   common =
     {
       config,
-      lib,
-      pkgs,
       ...
     }:
     {
@@ -16,25 +14,6 @@ let
         inputs.epi.nixosModules.epi
       ]
       ++ self.homeManagerProfiles.dev;
-
-      epi = {
-        enable = true;
-
-        hooks.post-launch."10-netbird.sh" =
-          pkgs.writeScriptBin "10-netbird" ''
-            #!/usr/bin/env bash
-
-            "$EPI_BIN" cp /run/agenix/epi-netbird-env "$EPI_INSTANCE:/tmp/netbird.env"
-            "$EPI_BIN" cp /run/agenix/epi-netbird-setup-key "$EPI_INSTANCE:/tmp/setup-key"
-
-            "$EPI_BIN" exec "$EPI_INSTANCE" -- sudo mv /tmp/netbird.env /var/lib/netbird-vrob0/env
-            "$EPI_BIN" exec "$EPI_INSTANCE" -- sudo mv /tmp/setup-key /var/lib/netbird-vrob0/setup-key
-            "$EPI_BIN" exec "$EPI_INSTANCE" -- sudo chown root:root /var/lib/netbird-vrob0/env /var/lib/netbird-vrob0/setup-key
-            "$EPI_BIN" exec "$EPI_INSTANCE" -- sudo chmod 0444 /var/lib/netbird-vrob0/env /var/lib/netbird-vrob0/setup-key
-            "$EPI_BIN" exec "$EPI_INSTANCE" -- sudo systemctl restart --no-block netbird-vrob0-login
-          ''
-          |> lib.getExe;
-      };
 
       networking.nftables.enable = true;
 
@@ -49,25 +28,6 @@ let
       };
 
       programs.fish.enable = true;
-
-      services.netbird = {
-        clients.vrob0 = {
-          port = 61820;
-          login = {
-            enable = true;
-            setupKeyFile = "/var/lib/netbird-vrob0/setup-key";
-          };
-        };
-      };
-
-      systemd.services.netbird-vrob0-login = {
-        # NB_MANAGEMENT_URL=https://...:443
-        # NB_ENABLE_ROSENPASS=true
-        # NB_PRESHARED_KEY=...
-        serviceConfig.EnvironmentFile = [
-          "/var/lib/netbird-vrob0/env"
-        ];
-      };
 
       users.users.adam = {
         isNormalUser = true;
