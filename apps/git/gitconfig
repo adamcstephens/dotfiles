@@ -66,6 +66,7 @@ defaultKeyCommand = sh -c '$HOME/.dotfiles/bin/git-ssh-key.sh'
 
 [include]
 path = config.delta
+path = local.config
 
 [init]
 defaultBranch = main
