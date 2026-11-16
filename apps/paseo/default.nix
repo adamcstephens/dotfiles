@@ -253,10 +253,18 @@ in
               ]
               ++ lib.optionals cfg.profiles.claude [
                 (
+                  claudeRole roles.director
+                  // {
+                    model = "claude-fable-5-2";
+                    modeId = "auto";
+                    thinkingOptionId = "medium";
+                  }
+                )
+                (
                   claudeRole roles.architect
                   // {
-                    model = "claude-fable-5-1";
-                    modeId = "plan";
+                    model = "claude-fable-5-2";
+                    modeId = "auto";
                     thinkingOptionId = "high";
                   }
                 )
@@ -271,7 +279,7 @@ in
                 (
                   claudeRole roles.principal
                   // {
-                    model = "claude-fable-5-1";
+                    model = "claude-fable-5-2";
                     modeId = "auto";
                     thinkingOptionId = "low";
                   }

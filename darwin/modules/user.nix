@@ -19,13 +19,16 @@
       imports = [
         ../../home/darwin.nix
         ../../apps/rex
-        {
-          dotfiles.apps.paseo.profiles = {
-            claude = true;
-            omp = false;
-          };
-        }
       ];
+
+      dotfiles.apps.paseo = {
+        daemon.enable = true;
+
+        profiles = {
+          claude = true;
+          omp = false;
+        };
+      };
 
       home = {
         username = "adam";
