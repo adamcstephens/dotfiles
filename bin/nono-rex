@@ -1,24 +1,100 @@
 #!/usr/bin/env bash
-# Usage: nono-rex [nono run flags]
-#        nono-rex --stop
+# Usage: nono-rex [--workspace|-w [name]] [nono run flags]
+#        nono-rex --list|-l
+#        nono-rex --stop [workspace-id-or-path]
 set -euo pipefail
 
 profile="${NONO_REX_PROFILE:-personal}"
 rex_app="$HOME/Library/Application Support/com.superlogical.rex/RexServer"
 rex="$(command -v rex || echo "$rex_app/Versions/Current/Rex Server.app/Contents/MacOS/rex")"
 rex_dir="${XDG_STATE_HOME:-$HOME/.local/state}/nono-rex"
-session="$(basename "$PWD")"
+workspaces_dir="${XDG_STATE_HOME:-$HOME/.local/state}/rex/workspaces"
+if [ -d "$workspaces_dir" ]; then
+  workspaces_dir="$(cd "$workspaces_dir" && pwd -P)"
+fi
+mode="open"
+target="$PWD"
+workspace_name=""
+case "${1:-}" in
+  --workspace|-w)
+    mode="workspace"
+    shift
+    if [ "$#" -gt 0 ] && [[ "$1" != -* ]]; then
+      workspace_name="$1"
+      if [[ ! "$workspace_name" =~ ^[a-zA-Z0-9][a-zA-Z0-9._-]*$ ]]; then
+        echo "Workspace names must start with a letter or digit and contain only letters, digits, dots, underscores, or hyphens" >&2
+        exit 1
+      fi
+      shift
+    fi
+    ;;
+  --list|-l)
+    mode="list"
+    shift
+    ;;
+  --stop)
+    mode="stop"
+    shift
+    if [ "$#" -gt 0 ]; then
+      target="$1"
+      shift
+      if [[ "$target" != */* ]] && [ -d "$workspaces_dir/$target" ]; then
+        target="$workspaces_dir/$target"
+      fi
+    fi
+    ;;
+esac
+if { [ "$mode" = "list" ] || [ "$mode" = "stop" ]; } && [ "$#" -ne 0 ]; then
+  echo "--$mode does not accept additional arguments" >&2
+  exit 1
+fi
 
 running() {
   "$rex" --server "unix://$rex_dir/$1.sock" --autostart=false whoami >/dev/null 2>&1
 }
+
+slot_for() {
+  local cwd_file label
+  for cwd_file in "$rex_dir"/sandbox-*/cwd; do
+    [ -f "$cwd_file" ] || continue
+    [ "$(cat "$cwd_file")" = "$1" ] || continue
+    label="$(basename "$(dirname "$cwd_file")")"
+    if running "$label"; then
+      printf '%s' "$label"
+      return
+    fi
+  done
+}
+
+if [ "$mode" = "list" ]; then
+  printf 'ID\tSTATUS\tHOST\tPATH\n'
+  for workspace in "$workspaces_dir"/*; do
+    [ -d "$workspace/.jj" ] || continue
+    slot="$(slot_for "$workspace")"
+    status="stopped"
+    [ -z "$slot" ] || status="running"
+    printf '%s\t%s\t%s\t%s\n' "$(basename "$workspace")" "$status" "${slot:--}" "$workspace"
+  done
+  exit 0
+fi
+
+cd -P "$target"
+target="$(pwd -P)"
+if [ "$mode" = "stop" ]; then
+  slot="$(slot_for "$target")"
+  if [ -z "$slot" ]; then
+    echo "No sandbox is running for $target" >&2
+    exit 1
+  fi
+  REX_RUNTIME_DIR="$rex_dir/$slot/run" exec "$rex" server stop
+fi
 
 # The Rex app only knows the hosts it copied from the server once, so reuse those slots.
 slot=""
 free=""
 for label in $("$rex" hosts list --json | grep --only-matching --extended-regexp '"label": "sandbox-[0-9]+"' | grep --only-matching --extended-regexp 'sandbox-[0-9]+'); do
   if running "$label"; then
-    if [ "$(cat "$rex_dir/$label/cwd" 2>/dev/null)" = "$PWD" ]; then
+    if [ "$mode" != "workspace" ] && [ "$(cat "$rex_dir/$label/cwd" 2>/dev/null)" = "$target" ]; then
       slot="$label"
       break
     fi
@@ -27,12 +103,35 @@ for label in $("$rex" hosts list --json | grep --only-matching --extended-regexp
   fi
 done
 
-if [ "${1:-}" = "--stop" ]; then
-  if [ -z "$slot" ]; then
-    echo "No sandbox is running for $PWD" >&2
+if [ "$mode" = "workspace" ]; then
+  if [ -z "$free" ]; then
+    echo "Every sandbox-N host in Rex is in use; add another with Add Remote Host" >&2
     exit 1
   fi
-  REX_RUNTIME_DIR="$rex_dir/$slot/run" exec "$rex" server stop
+  root="$(jj root)"
+  mkdir --parents "$workspaces_dir"
+  if [ -n "$workspace_name" ]; then
+    workspace="$workspaces_dir/$workspace_name"
+    mkdir "$workspace"
+  else
+    workspace="$(mktemp --directory "$workspaces_dir/$(basename "$root").XXXXXXXX")"
+  fi
+  jj workspace add --no-colocate "$workspace"
+  cd -P "$workspace"
+fi
+session="$(basename "$PWD")"
+
+grants=()
+if root="$(jj root 2>/dev/null)" && [ -f "$root/.jj/repo" ]; then
+  repo="$(cat "$root/.jj/repo")"
+  if [[ "$repo" != /* ]]; then
+    repo="$root/.jj/$repo"
+  fi
+  repo="$(cd "$repo" && pwd -P)"
+  grants+=(--allow "$root" --allow "$repo")
+  if git_dir="$(jj git root 2>/dev/null)"; then
+    grants+=(--allow "$git_dir")
+  fi
 fi
 
 if [ -z "$slot" ]; then
@@ -46,7 +145,7 @@ if [ -z "$slot" ]; then
   mkdir -p "$server_dir/run"
   echo "$PWD" >"$server_dir/cwd"
 
-  REX_RUNTIME_DIR="$server_dir/run" REX_HOME="$server_dir/home" nohup nono run --verbose --profile "$profile" --allow-cwd "$@" \
+  REX_RUNTIME_DIR="$server_dir/run" REX_HOME="$server_dir/home" nohup nono run --verbose --profile "$profile" --allow-cwd "$@" ${grants[@]+"${grants[@]}"} \
     --read "$rex_app" \
     --allow "$server_dir" \
     --allow-unix-socket-dir-bind "$server_dir/run" \
