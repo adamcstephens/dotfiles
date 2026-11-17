@@ -48,6 +48,12 @@ export default {
       },
     },
     {
+      match: ({ url }) =>
+        ["discord.com", "discordapp.com"].includes(url.host) &&
+        url.pathname.startsWith("/channels/"),
+      url: ({ url }) => ({ ...url, protocol: "discord" }),
+    },
+    {
       match: ({ url }) => url.host === "teams.microsoft.com",
       url({ url }) {
         // Build the URL string manually so we get the required single "/" between "msteams:" and "l/meetup-join…"
@@ -64,6 +70,10 @@ export default {
     {
       match: ({ url }) => url.protocol === "slack",
       browser: "Slack",
+    },
+    {
+      match: ({ url }) => url.protocol === "discord",
+      browser: "Discord",
     },
     {
       match: /zoom.us\/j\//,
