@@ -1,181 +1,300 @@
-#!/usr/bin/env bash
-# Usage: nono-rex [--workspace|-w [name]] [nono run flags]
-#        nono-rex --list|-l
-#        nono-rex --stop [workspace-id-or-path]
-set -euo pipefail
+#!/usr/bin/env python3
+import argparse
+import json
+import os
+import re
+import shutil
+import subprocess
+import sys
+import tempfile
+import time
+from pathlib import Path
 
-profile="${NONO_REX_PROFILE:-personal}"
-rex_app="$HOME/Library/Application Support/com.superlogical.rex/RexServer"
-rex="$(command -v rex || echo "$rex_app/Versions/Current/Rex Server.app/Contents/MacOS/rex")"
-rex_dir="${XDG_STATE_HOME:-$HOME/.local/state}/nono-rex"
-workspaces_dir="${XDG_STATE_HOME:-$HOME/.local/state}/rex/workspaces"
-if [ -d "$workspaces_dir" ]; then
-  workspaces_dir="$(cd "$workspaces_dir" && pwd -P)"
-fi
-mode="open"
-target="$PWD"
-workspace_name=""
-case "${1:-}" in
-  --workspace|-w)
-    mode="workspace"
-    shift
-    if [ "$#" -gt 0 ] && [[ "$1" != -* ]]; then
-      workspace_name="$1"
-      if [[ ! "$workspace_name" =~ ^[a-zA-Z0-9][a-zA-Z0-9._-]*$ ]]; then
-        echo "Workspace names must start with a letter or digit and contain only letters, digits, dots, underscores, or hyphens" >&2
-        exit 1
-      fi
-      shift
-    fi
-    ;;
-  --list|-l)
-    mode="list"
-    shift
-    ;;
-  --stop)
-    mode="stop"
-    shift
-    if [ "$#" -gt 0 ]; then
-      target="$1"
-      shift
-      if [[ "$target" != */* ]] && [ -d "$workspaces_dir/$target" ]; then
-        target="$workspaces_dir/$target"
-      fi
-    fi
-    ;;
-esac
-if { [ "$mode" = "list" ] || [ "$mode" = "stop" ]; } && [ "$#" -ne 0 ]; then
-  echo "--$mode does not accept additional arguments" >&2
-  exit 1
-fi
+NO_SLOTS = "Every sandbox-N host in Rex is in use; add another with Add Remote Host"
 
-running() {
-  "$rex" --server "unix://$rex_dir/$1.sock" --autostart=false whoami >/dev/null 2>&1
-}
 
-slot_for() {
-  local cwd_file label
-  for cwd_file in "$rex_dir"/sandbox-*/cwd; do
-    [ -f "$cwd_file" ] || continue
-    [ "$(cat "$cwd_file")" = "$1" ] || continue
-    label="$(basename "$(dirname "$cwd_file")")"
-    if running "$label"; then
-      printf '%s' "$label"
-      return
-    fi
-  done
-}
+def parse_args(args: list[str], workspaces_dir: Path) -> tuple[str, str | None, Path, list[str]]:
+    def workspace_name(value: str) -> str:
+        if not re.fullmatch(r"[a-zA-Z0-9][a-zA-Z0-9._-]*", value):
+            raise argparse.ArgumentTypeError(
+                "Workspace names must start with a letter or digit and contain only letters, digits, dots, "
+                "underscores, or hyphens"
+            )
+        return value
 
-if [ "$mode" = "list" ]; then
-  printf 'ID\tSTATUS\tHOST\tPATH\n'
-  for workspace in "$workspaces_dir"/*; do
-    [ -d "$workspace/.jj" ] || continue
-    slot="$(slot_for "$workspace")"
-    status="stopped"
-    [ -z "$slot" ] || status="running"
-    printf '%s\t%s\t%s\t%s\n' "$(basename "$workspace")" "$status" "${slot:--}" "$workspace"
-  done
-  exit 0
-fi
+    parser = argparse.ArgumentParser(
+        prog="nono-rex",
+        description="Launch a sandboxed Rex server and session in the current directory.",
+        epilog="Pass nono run arguments after --, e.g. nono-rex -w TICKET-123 -- --read /extra",
+        allow_abbrev=False,
+    )
+    modes = parser.add_mutually_exclusive_group()
+    modes.add_argument(
+        "-w",
+        "--workspace",
+        nargs="?",
+        const=True,
+        type=workspace_name,
+        metavar="NAME",
+        help="create a new jj workspace; generate a name if omitted",
+    )
+    modes.add_argument("-l", "--list", action="store_true", help="list workspace IDs, paths, status, and hosts")
+    modes.add_argument(
+        "--stop",
+        nargs="?",
+        const=True,
+        metavar="ID|PATH",
+        help="stop a server; default to the current directory",
+    )
+    nono_args = []
+    if "--" in args:
+        separator = args.index("--")
+        args, nono_args = args[:separator], args[separator + 1 :]
+    options = parser.parse_args(args)
+    mode = "open"
+    name = None
+    target = Path.cwd()
+    if options.workspace is not None:
+        mode = "workspace"
+        name = options.workspace if isinstance(options.workspace, str) else None
+    elif options.list:
+        mode = "list"
+    elif options.stop is not None:
+        mode = "stop"
+        if isinstance(options.stop, str):
+            target = Path(options.stop)
+            if "/" not in options.stop and (workspaces_dir / options.stop).is_dir():
+                target = workspaces_dir / options.stop
+    if mode in ("list", "stop") and nono_args:
+        parser.error(f"--{mode} does not accept additional arguments")
+    return mode, name, target, nono_args
 
-cd -P "$target"
-target="$(pwd -P)"
-if [ "$mode" = "stop" ]; then
-  slot="$(slot_for "$target")"
-  if [ -z "$slot" ]; then
-    echo "No sandbox is running for $target" >&2
-    exit 1
-  fi
-  REX_RUNTIME_DIR="$rex_dir/$slot/run" exec "$rex" server stop
-fi
 
-# The Rex app only knows the hosts it copied from the server once, so reuse those slots.
-slot=""
-free=""
-for label in $("$rex" hosts list --json | grep --only-matching --extended-regexp '"label": "sandbox-[0-9]+"' | grep --only-matching --extended-regexp 'sandbox-[0-9]+'); do
-  if running "$label"; then
-    if [ "$mode" != "workspace" ] && [ "$(cat "$rex_dir/$label/cwd" 2>/dev/null)" = "$target" ]; then
-      slot="$label"
-      break
-    fi
-  elif [ -z "$free" ]; then
-    free="$label"
-  fi
-done
+def create_workspace(workspaces_dir: Path, name: str | None) -> Path:
+    root = Path(subprocess.check_output(["jj", "root"], text=True).rstrip("\n"))
+    workspaces_dir.mkdir(parents=True, exist_ok=True)
+    if name is not None:
+        workspace = workspaces_dir / name
+        workspace.mkdir()
+    else:
+        workspace = Path(tempfile.mkdtemp(prefix=f"{root.name}.", dir=workspaces_dir))
+    subprocess.run(["jj", "workspace", "add", "--no-colocate", str(workspace)], check=True)
+    return workspace.resolve()
 
-if [ "$mode" = "workspace" ]; then
-  if [ -z "$free" ]; then
-    echo "Every sandbox-N host in Rex is in use; add another with Add Remote Host" >&2
-    exit 1
-  fi
-  root="$(jj root)"
-  mkdir --parents "$workspaces_dir"
-  if [ -n "$workspace_name" ]; then
-    workspace="$workspaces_dir/$workspace_name"
-    mkdir "$workspace"
-  else
-    workspace="$(mktemp --directory "$workspaces_dir/$(basename "$root").XXXXXXXX")"
-  fi
-  jj workspace add --no-colocate "$workspace"
-  cd -P "$workspace"
-fi
-session="$(basename "$PWD")"
 
-grants=()
-if root="$(jj root 2>/dev/null)" && [ -f "$root/.jj/repo" ]; then
-  repo="$(cat "$root/.jj/repo")"
-  if [[ "$repo" != /* ]]; then
-    repo="$root/.jj/$repo"
-  fi
-  repo="$(cd "$repo" && pwd -P)"
-  grants+=(--allow "$root" --allow "$repo")
-  if git_dir="$(jj git root 2>/dev/null)"; then
-    grants+=(--allow "$git_dir")
-  fi
-fi
+def metadata_grants() -> list[str]:
+    try:
+        root_result = subprocess.run(
+            ["jj", "root"], stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, text=True, check=False
+        )
+    except FileNotFoundError:
+        return []
+    if root_result.returncode:
+        return []
+    root = Path(root_result.stdout.rstrip("\n"))
+    pointer = root / ".jj/repo"
+    if not pointer.is_file():
+        return []
+    repo = Path(pointer.read_text().rstrip("\n"))
+    if not repo.is_absolute():
+        repo = root / ".jj" / repo
+    grants = ["--allow", str(root), "--allow", str(repo.resolve(strict=True))]
+    git_result = subprocess.run(
+        ["jj", "git", "root"], stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, text=True, check=False
+    )
+    if git_result.returncode == 0:
+        grants.extend(["--allow", git_result.stdout.rstrip("\n")])
+    return grants
 
-if [ -z "$slot" ]; then
-  if [ -z "$free" ]; then
-    echo "Every sandbox-N host in Rex is in use; add another with Add Remote Host" >&2
-    exit 1
-  fi
-  slot="$free"
-  server_dir="$rex_dir/$slot"
-  rm -rf "$server_dir"
-  mkdir -p "$server_dir/run"
-  echo "$PWD" >"$server_dir/cwd"
 
-  REX_RUNTIME_DIR="$server_dir/run" REX_HOME="$server_dir/home" nohup nono run --verbose --profile "$profile" --allow-cwd "$@" ${grants[@]+"${grants[@]}"} \
-    --read "$rex_app" \
-    --allow "$server_dir" \
-    --allow-unix-socket-dir-bind "$server_dir/run" \
-    -- "$rex" server run --state-dir "$server_dir/state" \
-    >"$server_dir/server.log" 2>&1 &
-  server_pid=$!
+class Sandbox:
+    def __init__(self) -> None:
+        self.home = Path.home()
+        self.profile = os.environ.get("NONO_REX_PROFILE") or "personal"
+        self.rex_app = self.home / "Library/Application Support/com.superlogical.rex/RexServer"
+        self.rex = shutil.which("rex") or str(self.rex_app / "Versions/Current/Rex Server.app/Contents/MacOS/rex")
+        state = Path(os.environ.get("XDG_STATE_HOME") or self.home / ".local/state")
+        self.rex_dir = state / "nono-rex"
+        self.workspaces_dir = (state / "rex/workspaces").resolve()
 
-  until [ -S "$server_dir/run/server.sock" ]; do
-    if ! kill -0 "$server_pid" 2>/dev/null; then
-      cat "$server_dir/server.log" >&2
-      exit 1
-    fi
-    sleep 0.2
-  done
-  ln -sfn "$server_dir/run/server.sock" "$rex_dir/$slot.sock"
-  nohup "$rex" --server "unix://$rex_dir/$slot.sock" "do" --all "$HOME/.dotfiles/apps/rex/nono-login-shells.lua" cwd="$PWD" \
-    >"$server_dir/login-shells.log" 2>&1 &
-  echo "Started $slot for $PWD; logs in $server_dir/server.log" >&2
-fi
+    def running(self, label: str) -> bool:
+        return (
+            subprocess.run(
+                [self.rex, "--server", f"unix://{self.rex_dir / label}.sock", "--autostart=false", "whoami"],
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
+                check=False,
+            ).returncode
+            == 0
+        )
 
-if ! "$rex" --server "unix://$rex_dir/$slot.sock" session inspect "$session" >/dev/null 2>&1; then
-  "$rex" --server "unix://$rex_dir/$slot.sock" api call session.create \
-    "{\"label\": \"$session\", \"initial_windows\": [{\"layout\": {\"block\": {\"flavor\": \"com.superlogical.terminal.shell\", \"options\": {\"login\": false, \"cwd\": \"$PWD\"}}}}]}" >/dev/null
-fi
+    def slot_for(self, target: Path) -> str | None:
+        for marker in sorted(self.rex_dir.glob("sandbox-*/cwd")):
+            if marker.is_file() and marker.read_text().rstrip("\n") == str(target) and self.running(marker.parent.name):
+                return marker.parent.name
+        return None
 
-for _ in $(seq 30); do
-  if osascript -e "tell application id \"com.superlogical.rex\" to show (first session whose host name is \"$slot\" and name is \"$session\")" >/dev/null 2>&1; then
-    exit 0
-  fi
-  sleep 1
-done
-echo "Rex didn't connect to $slot; open it with Switch Host" >&2
-exit 1
+    def list_workspaces(self) -> None:
+        print("ID\tSTATUS\tHOST\tPATH")
+        for workspace in sorted(self.workspaces_dir.glob("*")):
+            if not (workspace / ".jj").is_dir():
+                continue
+            slot = self.slot_for(workspace)
+            status = "running" if slot else "stopped"
+            print(f"{workspace.name}\t{status}\t{slot or '-'}\t{workspace}")
+
+    def choose_slot(self, target: Path, new_workspace: bool = False) -> tuple[str | None, str | None]:
+        hosts = subprocess.check_output([self.rex, "hosts", "list", "--json"], text=True)
+        free = None
+        # The Rex app only knows the hosts it copied once, so reuse those slots.
+        for label in re.findall(r'"label"\s*:\s*"(sandbox-[0-9]+)"', hosts):
+            if self.running(label):
+                marker = self.rex_dir / label / "cwd"
+                if not new_workspace and marker.is_file() and marker.read_text().rstrip("\n") == str(target):
+                    return label, free
+            elif free is None:
+                free = label
+        return None, free
+
+    def start(self, slot: str, args: list[str]) -> bool:
+        server_dir = self.rex_dir / slot
+        if server_dir.exists():
+            shutil.rmtree(server_dir)
+        runtime = server_dir / "run"
+        runtime.mkdir(parents=True)
+        (server_dir / "cwd").write_text(f"{Path.cwd()}\n")
+        with (server_dir / "server.log").open("w") as log:
+            server = subprocess.Popen(
+                [
+                    "nono",
+                    "run",
+                    "--verbose",
+                    "--profile",
+                    self.profile,
+                    "--allow-cwd",
+                    *args,
+                    *metadata_grants(),
+                    "--read",
+                    str(self.rex_app),
+                    "--allow",
+                    str(server_dir),
+                    "--allow-unix-socket-dir-bind",
+                    str(runtime),
+                    "--",
+                    self.rex,
+                    "server",
+                    "run",
+                    "--state-dir",
+                    str(server_dir / "state"),
+                ],
+                env=os.environ | {"REX_RUNTIME_DIR": str(runtime), "REX_HOME": str(server_dir / "home")},
+                stdin=subprocess.DEVNULL,
+                stdout=log,
+                stderr=subprocess.STDOUT,
+                start_new_session=True,
+            )
+        socket = runtime / "server.sock"
+        while not socket.is_socket():
+            if server.poll() is not None:
+                print((server_dir / "server.log").read_text(), end="", file=sys.stderr)
+                return False
+            time.sleep(0.2)
+        link = self.rex_dir / f"{slot}.sock"
+        link.unlink(missing_ok=True)
+        link.symlink_to(socket)
+        with (server_dir / "login-shells.log").open("w") as log:
+            subprocess.Popen(
+                [
+                    self.rex,
+                    "--server",
+                    f"unix://{link}",
+                    "do",
+                    "--all",
+                    str(self.home / ".dotfiles/apps/rex/nono-login-shells.lua"),
+                    f"cwd={Path.cwd()}",
+                ],
+                stdin=subprocess.DEVNULL,
+                stdout=log,
+                stderr=subprocess.STDOUT,
+                start_new_session=True,
+            )
+        print(f"Started {slot} for {Path.cwd()}; logs in {server_dir / 'server.log'}", file=sys.stderr)
+        return True
+
+    def open_session(self, slot: str) -> int:
+        cwd = str(Path.cwd())
+        session = Path.cwd().name
+        command = [self.rex, "--server", f"unix://{self.rex_dir / slot}.sock"]
+        if subprocess.run(
+            [*command, "session", "inspect", session], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=False
+        ).returncode:
+            payload = {
+                "label": session,
+                "initial_windows": [
+                    {
+                        "layout": {
+                            "block": {
+                                "flavor": "com.superlogical.terminal.shell",
+                                "options": {"login": False, "cwd": cwd},
+                            }
+                        }
+                    }
+                ],
+            }
+            subprocess.run(
+                [*command, "api", "call", "session.create", json.dumps(payload)], stdout=subprocess.DEVNULL, check=True
+            )
+        script = (
+            'tell application id "com.superlogical.rex" to show (first session whose host name is '
+            f"{json.dumps(slot, ensure_ascii=False)} and name is {json.dumps(session, ensure_ascii=False)})"
+        )
+        for _ in range(30):
+            if (
+                subprocess.run(
+                    ["osascript", "-e", script], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=False
+                ).returncode
+                == 0
+            ):
+                return 0
+            time.sleep(1)
+        print(f"Rex didn't connect to {slot}; open it with Switch Host", file=sys.stderr)
+        return 1
+
+
+def main() -> int:
+    sandbox = Sandbox()
+    mode, name, target, args = parse_args(sys.argv[1:], sandbox.workspaces_dir)
+    if mode == "list":
+        sandbox.list_workspaces()
+        return 0
+    os.chdir(target)
+    target = Path.cwd()
+    if mode == "stop":
+        slot = sandbox.slot_for(target)
+        if slot is None:
+            print(f"No sandbox is running for {target}", file=sys.stderr)
+            return 1
+        os.execvpe(
+            sandbox.rex,
+            [sandbox.rex, "server", "stop"],
+            os.environ | {"REX_RUNTIME_DIR": str(sandbox.rex_dir / slot / "run")},
+        )
+    slot, free = sandbox.choose_slot(target, new_workspace=mode == "workspace")
+    if slot is None:
+        if free is None:
+            print(NO_SLOTS, file=sys.stderr)
+            return 1
+        if mode == "workspace":
+            os.chdir(create_workspace(sandbox.workspaces_dir, name))
+        slot = free
+        if not sandbox.start(slot, args):
+            return 1
+    return sandbox.open_session(slot)
+
+
+if __name__ == "__main__":
+    try:
+        sys.exit(main())
+    except (OSError, ValueError, subprocess.CalledProcessError) as error:
+        print(error, file=sys.stderr)
+        sys.exit(1)

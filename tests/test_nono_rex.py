@@ -1,0 +1,551 @@
+#!/usr/bin/env python3
+import contextlib
+import importlib.util
+import io
+import json
+import os
+import subprocess
+import tempfile
+import unittest
+from importlib.machinery import SourceFileLoader
+from pathlib import Path
+from unittest.mock import Mock, patch
+
+SCRIPT = Path(__file__).parents[1] / "bin" / "nono-rex"
+LOADER = SourceFileLoader("nono_rex", str(SCRIPT))
+SPEC = importlib.util.spec_from_loader(LOADER.name, LOADER)
+assert SPEC is not None
+nono_rex = importlib.util.module_from_spec(SPEC)
+LOADER.exec_module(nono_rex)
+
+
+class LauncherTest(unittest.TestCase):
+    def setUp(self):
+        self.root = Path(self.enterContext(tempfile.TemporaryDirectory())).resolve()
+        self.home = self.root / "home"
+        self.home.mkdir()
+        self.enterContext(
+            patch.dict(
+                os.environ,
+                {"HOME": str(self.home), "XDG_STATE_HOME": str(self.root / "state"), "NONO_REX_PROFILE": "testing"},
+            )
+        )
+        self.enterContext(patch.object(nono_rex.shutil, "which", return_value="/tools/rex"))
+        self.workspaces = self.root / "workspaces"
+
+    def sandbox(self):
+        return nono_rex.Sandbox()
+
+    def test_default_and_passthrough_arguments(self):
+        self.assertEqual(nono_rex.parse_args([], self.workspaces), ("open", None, Path.cwd(), []))
+        for args in ([], ["--allow", "/tmp", "--workspace", "later"], ["-w", "--stop", "--list", "--"]):
+            with self.subTest(args=args):
+                self.assertEqual(nono_rex.parse_args(["--", *args], self.workspaces), ("open", None, Path.cwd(), args))
+
+    def test_nono_arguments_require_separator(self):
+        for args in (
+            ["--allow", "/tmp"],
+            ["project"],
+            ["-w", "--allow-cwd"],
+            ["-w", "ABC-123", "--read", "/tmp"],
+            ["--workspace", "ABC-123", "extra", "--", "--block-net"],
+            ["--unknown", "--", "--read", "/tmp"],
+            ["--stop", "--unknown"],
+            ["-w", "-l"],
+        ):
+            with (
+                self.subTest(args=args),
+                self.assertRaises(SystemExit) as error,
+                contextlib.redirect_stderr(io.StringIO()),
+            ):
+                nono_rex.parse_args(args, self.workspaces)
+            self.assertEqual(error.exception.code, 2)
+
+    def test_help_is_generated_by_argparse_without_launching(self):
+        for flag in ("-h", "--help"):
+            with self.subTest(flag=flag):
+                output = io.StringIO()
+                with (
+                    patch.object(nono_rex.sys, "argv", ["nono-rex", "-w", "TICKET-123", flag]),
+                    patch.object(nono_rex.subprocess, "run") as run,
+                    patch.object(nono_rex.subprocess, "check_output") as check_output,
+                    patch.object(nono_rex.os, "chdir") as chdir,
+                    contextlib.redirect_stdout(output),
+                    self.assertRaises(SystemExit) as error,
+                ):
+                    nono_rex.main()
+                self.assertEqual(error.exception.code, 0)
+                for option in ("-h, --help", "--workspace", "--list", "--stop", "after --"):
+                    self.assertIn(option, output.getvalue())
+                run.assert_not_called()
+                check_output.assert_not_called()
+                chdir.assert_not_called()
+
+    def test_help_after_separator_is_forwarded(self):
+        for flag in ("-h", "--help"):
+            with self.subTest(flag=flag):
+                self.assertEqual(
+                    nono_rex.parse_args(["--", flag], self.workspaces),
+                    ("open", None, Path.cwd(), [flag]),
+                )
+
+    def test_workspace_optional_name_and_flags(self):
+        for flag in ("-w", "--workspace"):
+            for name in ("a", "9._-ok", "ABC-123"):
+                with self.subTest(flag=flag, name=name):
+                    self.assertEqual(
+                        nono_rex.parse_args([flag, name, "--", "--read", "/tmp"], self.workspaces),
+                        ("workspace", name, Path.cwd(), ["--read", "/tmp"]),
+                    )
+            self.assertEqual(nono_rex.parse_args([flag], self.workspaces), ("workspace", None, Path.cwd(), []))
+            self.assertEqual(
+                nono_rex.parse_args([flag, "--", "--allow-cwd"], self.workspaces),
+                ("workspace", None, Path.cwd(), ["--allow-cwd"]),
+            )
+
+    def test_workspace_names_are_full_matches(self):
+        for name in ("", ".hidden", "_hidden", "../escape", "a/b", "a b", "a\n", "é"):
+            with (
+                self.subTest(name=name),
+                self.assertRaises(SystemExit) as error,
+                contextlib.redirect_stderr(io.StringIO()),
+            ):
+                nono_rex.parse_args(["-w", name], self.workspaces)
+            self.assertEqual(error.exception.code, 2)
+
+    def test_list_and_stop_reject_extra_arguments(self):
+        for flag in ("-l", "--list"):
+            self.assertEqual(nono_rex.parse_args([flag], self.workspaces), ("list", None, Path.cwd(), []))
+            with self.assertRaises(SystemExit) as error, contextlib.redirect_stderr(io.StringIO()):
+                nono_rex.parse_args([flag, "extra"], self.workspaces)
+            self.assertEqual(error.exception.code, 2)
+        with self.assertRaises(SystemExit) as error, contextlib.redirect_stderr(io.StringIO()):
+            nono_rex.parse_args(["--stop", "one", "two"], self.workspaces)
+        self.assertEqual(error.exception.code, 2)
+        for args in (
+            ["--list", "--", "--block-net"],
+            ["-l", "--", "--read", "/tmp"],
+            ["--stop", "--", "--block-net"],
+            ["--stop", "named", "--", "--block-net"],
+        ):
+            with (
+                self.subTest(args=args),
+                self.assertRaises(SystemExit) as error,
+                contextlib.redirect_stderr(io.StringIO()),
+            ):
+                nono_rex.parse_args(args, self.workspaces)
+            self.assertEqual(error.exception.code, 2)
+
+    def test_stop_resolves_only_existing_bare_workspace_ids(self):
+        workspace = self.workspaces / "named"
+        workspace.mkdir(parents=True)
+        for args, target in (
+            (["--stop"], Path.cwd()),
+            (["--stop", "named"], workspace),
+            (["--stop", "missing"], Path("missing")),
+            (["--stop", "./named"], Path("./named")),
+            (["--stop", str(workspace)], workspace),
+        ):
+            with self.subTest(args=args):
+                self.assertEqual(nono_rex.parse_args(args, self.workspaces), ("stop", None, target, []))
+
+    def test_environment_paths_and_profile(self):
+        sandbox = self.sandbox()
+        self.assertEqual(sandbox.home, self.home)
+        self.assertEqual(sandbox.rex, "/tools/rex")
+        self.assertEqual(sandbox.rex_app, self.home / "Library/Application Support/com.superlogical.rex/RexServer")
+        self.assertEqual(sandbox.rex_dir, self.root / "state/nono-rex")
+        self.assertEqual(sandbox.workspaces_dir, self.root / "state/rex/workspaces")
+        self.assertEqual(sandbox.profile, "testing")
+
+    def test_default_environment_paths(self):
+        with patch.dict(os.environ, {}, clear=True), patch.dict(os.environ, {"HOME": str(self.home)}):
+            sandbox = self.sandbox()
+        self.assertEqual(sandbox.rex_dir, self.home / ".local/state/nono-rex")
+        self.assertEqual(sandbox.profile, "personal")
+
+    def test_named_workspace_creation_preserves_cwd(self):
+        cwd = Path.cwd()
+        with (
+            patch.object(nono_rex.subprocess, "check_output", return_value=str(self.root / "source") + "\n"),
+            patch.object(nono_rex.subprocess, "run") as run,
+        ):
+            target = nono_rex.create_workspace(self.workspaces, "feature")
+        self.assertEqual(target, self.workspaces / "feature")
+        self.assertTrue(target.is_dir())
+        self.assertEqual(Path.cwd(), cwd)
+        self.assertEqual(list(run.call_args_list[-1].args[0]), ["jj", "workspace", "add", "--no-colocate", str(target)])
+
+    def test_named_workspace_collision_is_not_reused(self):
+        (self.workspaces / "feature").mkdir(parents=True)
+        with (
+            patch.object(nono_rex.subprocess, "check_output", return_value=str(self.root / "source") + "\n"),
+            patch.object(nono_rex.subprocess, "run") as run,
+            self.assertRaises(FileExistsError),
+        ):
+            nono_rex.create_workspace(self.workspaces, "feature")
+        run.assert_not_called()
+
+    def test_anonymous_workspaces_are_unique(self):
+        with (
+            patch.object(nono_rex.subprocess, "check_output", return_value=str(self.root / "source") + "\n"),
+            patch.object(nono_rex.subprocess, "run"),
+        ):
+            first = nono_rex.create_workspace(self.workspaces, None)
+            second = nono_rex.create_workspace(self.workspaces, None)
+        self.assertNotEqual(first, second)
+        for target in (first, second):
+            self.assertEqual(target.parent, self.workspaces)
+            self.assertTrue(target.name.startswith("source."))
+            self.assertTrue(target.is_dir())
+
+    def test_metadata_grants_relative_and_absolute_shared_repo(self):
+        workspace = self.root / "checkout"
+        (workspace / ".jj").mkdir(parents=True)
+        repo = self.root / "shared/repo"
+        repo.mkdir(parents=True)
+        git = self.root / "git"
+        for pointer in (str(repo), "../../shared/repo"):
+            with self.subTest(pointer=pointer):
+                (workspace / ".jj/repo").write_text(pointer + "\n")
+                with patch.object(
+                    nono_rex.subprocess,
+                    "run",
+                    side_effect=[
+                        subprocess.CompletedProcess([], 0, str(workspace) + "\n", ""),
+                        subprocess.CompletedProcess([], 0, str(git) + "\n", ""),
+                    ],
+                ):
+                    self.assertEqual(
+                        nono_rex.metadata_grants(),
+                        ["--allow", str(workspace), "--allow", str(repo), "--allow", str(git)],
+                    )
+
+    def test_primary_checkout_needs_no_extra_grants(self):
+        (self.root / ".jj/repo").mkdir(parents=True)
+        with patch.object(
+            nono_rex.subprocess, "run", return_value=subprocess.CompletedProcess([], 0, str(self.root) + "\n", "")
+        ):
+            self.assertEqual(nono_rex.metadata_grants(), [])
+
+    def test_non_jj_directory_needs_no_extra_grants(self):
+        with patch.object(nono_rex.subprocess, "run", return_value=subprocess.CompletedProcess([], 1, "", "")):
+            self.assertEqual(nono_rex.metadata_grants(), [])
+
+    def test_slot_for_ignores_stopped_and_unrelated_servers(self):
+        sandbox = self.sandbox()
+        for label, target in (("sandbox-1", self.root), ("sandbox-2", self.root), ("sandbox-3", self.home)):
+            directory = sandbox.rex_dir / label
+            directory.mkdir(parents=True)
+            (directory / "cwd").write_text(str(target) + "\n")
+        with patch.object(sandbox, "running", side_effect=lambda label: label != "sandbox-1"):
+            self.assertEqual(sandbox.slot_for(self.root), "sandbox-2")
+            self.assertIsNone(sandbox.slot_for(self.root / "missing"))
+
+    def test_listing_includes_only_jj_workspaces(self):
+        sandbox = self.sandbox()
+        for name in ("alpha", "beta"):
+            (sandbox.workspaces_dir / name / ".jj").mkdir(parents=True)
+        (sandbox.workspaces_dir / "ordinary").mkdir()
+        output = io.StringIO()
+        with (
+            patch.object(
+                sandbox, "slot_for", side_effect=lambda target: "sandbox-2" if target.name == "alpha" else None
+            ),
+            contextlib.redirect_stdout(output),
+        ):
+            sandbox.list_workspaces()
+        self.assertEqual(
+            output.getvalue().splitlines(),
+            [
+                "ID\tSTATUS\tHOST\tPATH",
+                f"alpha\trunning\tsandbox-2\t{sandbox.workspaces_dir / 'alpha'}",
+                f"beta\tstopped\t-\t{sandbox.workspaces_dir / 'beta'}",
+            ],
+        )
+
+    def test_listing_empty_directory_prints_header(self):
+        output = io.StringIO()
+        with contextlib.redirect_stdout(output):
+            self.sandbox().list_workspaces()
+        self.assertEqual(output.getvalue(), "ID\tSTATUS\tHOST\tPATH\n")
+
+    def test_choose_slot_reuses_matching_server_except_for_new_workspace(self):
+        sandbox = self.sandbox()
+        directory = sandbox.rex_dir / "sandbox-2"
+        directory.mkdir(parents=True)
+        (directory / "cwd").write_text(str(self.root) + "\n")
+        hosts = json.dumps({"hosts": [{"label": "sandbox-1"}, {"label": "sandbox-2"}, {"label": "unrelated"}]})
+        with (
+            patch.object(nono_rex.subprocess, "check_output", return_value=hosts),
+            patch.object(sandbox, "running", side_effect=lambda label: label == "sandbox-2"),
+        ):
+            self.assertEqual(sandbox.choose_slot(self.root), ("sandbox-2", "sandbox-1"))
+            self.assertEqual(sandbox.choose_slot(self.root, new_workspace=True), (None, "sandbox-1"))
+
+    def test_running_checks_explicit_socket_without_autostart(self):
+        sandbox = self.sandbox()
+        for status in (0, 1):
+            with (
+                self.subTest(status=status),
+                patch.object(nono_rex.subprocess, "run", return_value=subprocess.CompletedProcess([], status)) as run,
+            ):
+                self.assertEqual(sandbox.running("sandbox-1"), status == 0)
+            self.assertEqual(
+                run.call_args.args[0],
+                [
+                    sandbox.rex,
+                    "--server",
+                    f"unix://{sandbox.rex_dir / 'sandbox-1.sock'}",
+                    "--autostart=false",
+                    "whoami",
+                ],
+            )
+
+    def test_missing_jj_executable_needs_no_grants(self):
+        with patch.object(nono_rex.subprocess, "run", side_effect=FileNotFoundError):
+            self.assertEqual(nono_rex.metadata_grants(), [])
+
+    def test_shared_repo_without_git_still_has_metadata_grants(self):
+        workspace = self.root / "checkout"
+        (workspace / ".jj").mkdir(parents=True)
+        repo = self.root / "repo"
+        repo.mkdir()
+        (workspace / ".jj/repo").write_text(str(repo))
+        with patch.object(
+            nono_rex.subprocess,
+            "run",
+            side_effect=[
+                subprocess.CompletedProcess([], 0, str(workspace), ""),
+                subprocess.CompletedProcess([], 1, "", ""),
+            ],
+        ):
+            self.assertEqual(nono_rex.metadata_grants(), ["--allow", str(workspace), "--allow", str(repo)])
+
+    def test_choose_slot_returns_none_when_all_sandbox_hosts_are_busy(self):
+        sandbox = self.sandbox()
+        with (
+            patch.object(
+                nono_rex.subprocess,
+                "check_output",
+                return_value='[{"label":"sandbox-1"},{"label":"sandbox-2"},{"label":"other"}]',
+            ),
+            patch.object(sandbox, "running", return_value=True),
+        ):
+            self.assertEqual(sandbox.choose_slot(self.root), (None, None))
+
+    def test_main_reuses_running_server_without_starting(self):
+        sandbox = self.sandbox()
+        with (
+            patch.object(nono_rex, "Sandbox", return_value=sandbox),
+            patch.object(nono_rex.sys, "argv", ["nono-rex"]),
+            patch.object(nono_rex.os, "chdir"),
+            patch.object(sandbox, "choose_slot", return_value=("sandbox-1", None)),
+            patch.object(sandbox, "start") as start,
+            patch.object(sandbox, "open_session", return_value=0),
+        ):
+            self.assertEqual(nono_rex.main(), 0)
+        start.assert_not_called()
+
+    def test_main_does_not_open_session_after_start_failure(self):
+        sandbox = self.sandbox()
+        with (
+            patch.object(nono_rex, "Sandbox", return_value=sandbox),
+            patch.object(nono_rex.sys, "argv", ["nono-rex"]),
+            patch.object(nono_rex.os, "chdir"),
+            patch.object(sandbox, "choose_slot", return_value=(None, "sandbox-1")),
+            patch.object(sandbox, "start", return_value=False),
+            patch.object(sandbox, "open_session") as open_session,
+        ):
+            self.assertEqual(nono_rex.main(), 1)
+        open_session.assert_not_called()
+
+    def test_start_detaches_server_and_login_shells_and_publishes_socket(self):
+        sandbox = self.sandbox()
+        with (
+            patch.object(nono_rex, "metadata_grants", return_value=["--allow", "/shared"]),
+            patch.object(Path, "is_socket", return_value=True),
+            patch.object(nono_rex.subprocess, "Popen") as popen,
+            contextlib.redirect_stderr(io.StringIO()),
+        ):
+            self.assertTrue(sandbox.start("sandbox-1", ["--read", "/extra space"]))
+        self.assertEqual(popen.call_count, 2)
+        server, login = popen.call_args_list
+        directory = sandbox.rex_dir / "sandbox-1"
+        self.assertEqual(
+            server.args[0],
+            [
+                "nono",
+                "run",
+                "--verbose",
+                "--profile",
+                "testing",
+                "--allow-cwd",
+                "--read",
+                "/extra space",
+                "--allow",
+                "/shared",
+                "--read",
+                str(sandbox.rex_app),
+                "--allow",
+                str(directory),
+                "--allow-unix-socket-dir-bind",
+                str(directory / "run"),
+                "--",
+                sandbox.rex,
+                "server",
+                "run",
+                "--state-dir",
+                str(directory / "state"),
+            ],
+        )
+        for invocation in (server, login):
+            self.assertTrue(invocation.kwargs["start_new_session"])
+            self.assertEqual(invocation.kwargs["stdin"], subprocess.DEVNULL)
+            self.assertEqual(invocation.kwargs["stderr"], subprocess.STDOUT)
+        self.assertEqual(server.kwargs["env"]["REX_RUNTIME_DIR"], str(directory / "run"))
+        self.assertEqual(server.kwargs["env"]["REX_HOME"], str(directory / "home"))
+        self.assertEqual((sandbox.rex_dir / "sandbox-1.sock").readlink(), directory / "run/server.sock")
+        self.assertEqual((directory / "cwd").read_text(), str(Path.cwd()) + "\n")
+        self.assertEqual(login.args[0][-1], f"cwd={Path.cwd()}")
+        self.assertIn(str(self.home / ".dotfiles/apps/rex/nono-login-shells.lua"), login.args[0])
+
+    def test_start_prints_failed_server_log_without_publishing_socket(self):
+        sandbox = self.sandbox()
+
+        def failed_server(*args, **kwargs):
+            kwargs["stdout"].write("sandbox denied permission\n")
+            kwargs["stdout"].flush()
+            return Mock(poll=Mock(return_value=1))
+
+        output = io.StringIO()
+        with (
+            patch.object(nono_rex, "metadata_grants", return_value=[]),
+            patch.object(Path, "is_socket", return_value=False),
+            patch.object(nono_rex.subprocess, "Popen", side_effect=failed_server) as popen,
+            contextlib.redirect_stderr(output),
+        ):
+            self.assertFalse(sandbox.start("sandbox-1", []))
+        self.assertEqual(popen.call_count, 1)
+        self.assertIn("sandbox denied permission", output.getvalue())
+        self.assertFalse((sandbox.rex_dir / "sandbox-1.sock").is_symlink())
+
+    def test_open_session_escapes_json_and_applescript(self):
+        sandbox = self.sandbox()
+        cwd = self.root / 'project "quoted"\\slash'
+        with (
+            patch.object(Path, "cwd", return_value=cwd),
+            patch.object(
+                nono_rex.subprocess,
+                "run",
+                side_effect=[
+                    subprocess.CompletedProcess([], 1),
+                    subprocess.CompletedProcess([], 0),
+                    subprocess.CompletedProcess([], 0),
+                ],
+            ) as run,
+        ):
+            self.assertEqual(sandbox.open_session("sandbox-1"), 0)
+        creation = run.call_args_list[1].args[0]
+        self.assertEqual(creation[-2], "session.create")
+        payload = json.loads(creation[-1])
+        self.assertEqual(payload["label"], cwd.name)
+        options = payload["initial_windows"][0]["layout"]["block"]["options"]
+        self.assertEqual(options, {"login": False, "cwd": str(cwd)})
+        self.assertIn(json.dumps(cwd.name), run.call_args_list[-1].args[0][-1])
+
+    def test_open_session_reuses_existing_and_retries_thirty_times(self):
+        sandbox = self.sandbox()
+        output = io.StringIO()
+        with (
+            patch.object(
+                nono_rex.subprocess,
+                "run",
+                side_effect=[subprocess.CompletedProcess([], 0)] + [subprocess.CompletedProcess([], 1)] * 30,
+            ) as run,
+            patch.object(nono_rex.time, "sleep"),
+            contextlib.redirect_stderr(output),
+        ):
+            self.assertEqual(sandbox.open_session("sandbox-1"), 1)
+        self.assertEqual(run.call_count, 31)
+        self.assertTrue(all(invocation.args[0][0] == "osascript" for invocation in run.call_args_list[1:]))
+        self.assertIn("Switch Host", output.getvalue())
+
+    def test_main_lists_without_slot_selection(self):
+        sandbox = Mock()
+        with (
+            patch.object(nono_rex, "Sandbox", return_value=sandbox),
+            patch.object(nono_rex.sys, "argv", ["nono-rex", "--list"]),
+        ):
+            self.assertEqual(nono_rex.main(), 0)
+        sandbox.list_workspaces.assert_called_once_with()
+        sandbox.choose_slot.assert_not_called()
+
+    def test_main_checks_slot_before_creating_workspace(self):
+        sandbox = self.sandbox()
+        with (
+            patch.object(nono_rex, "Sandbox", return_value=sandbox),
+            patch.object(nono_rex.sys, "argv", ["nono-rex", "-w", "feature"]),
+            patch.object(sandbox, "choose_slot", return_value=(None, None)),
+            patch.object(nono_rex, "create_workspace") as create,
+            patch.object(nono_rex.os, "chdir"),
+            contextlib.redirect_stderr(io.StringIO()),
+        ):
+            self.assertEqual(nono_rex.main(), 1)
+        create.assert_not_called()
+
+    def test_main_creates_workspace_then_starts_and_opens(self):
+        sandbox = self.sandbox()
+        target = self.root / "new"
+        events = []
+        with (
+            patch.object(nono_rex, "Sandbox", return_value=sandbox),
+            patch.object(nono_rex.sys, "argv", ["nono-rex", "-w", "feature", "--", "--read", "/extra"]),
+            patch.object(
+                sandbox, "choose_slot", side_effect=lambda *a, **kw: events.append("choose") or (None, "sandbox-1")
+            ),
+            patch.object(nono_rex, "create_workspace", side_effect=lambda *a: events.append("create") or target),
+            patch.object(nono_rex.os, "chdir") as chdir,
+            patch.object(sandbox, "start", side_effect=lambda *a: events.append("start") or True) as start,
+            patch.object(sandbox, "open_session", return_value=0) as open_session,
+        ):
+            self.assertEqual(nono_rex.main(), 0)
+        self.assertEqual(events, ["choose", "create", "start"])
+        self.assertEqual(chdir.call_args.args, (target,))
+        start.assert_called_once_with("sandbox-1", ["--read", "/extra"])
+        open_session.assert_called_once_with("sandbox-1")
+
+    def test_main_stop_executes_with_runtime_environment(self):
+        sandbox = self.sandbox()
+        with (
+            patch.object(nono_rex, "Sandbox", return_value=sandbox),
+            patch.object(nono_rex.sys, "argv", ["nono-rex", "--stop"]),
+            patch.object(nono_rex.os, "chdir"),
+            patch.object(sandbox, "slot_for", return_value="sandbox-2"),
+            patch.object(nono_rex.os, "execvpe", side_effect=SystemExit(0)) as execute,
+            self.assertRaises(SystemExit),
+        ):
+            nono_rex.main()
+        executable, arguments, environment = execute.call_args.args
+        self.assertEqual(executable, sandbox.rex)
+        self.assertEqual(arguments, [sandbox.rex, "server", "stop"])
+        self.assertEqual(environment["REX_RUNTIME_DIR"], str(sandbox.rex_dir / "sandbox-2/run"))
+
+    def test_main_stop_reports_missing_server(self):
+        sandbox = self.sandbox()
+        output = io.StringIO()
+        with (
+            patch.object(nono_rex, "Sandbox", return_value=sandbox),
+            patch.object(nono_rex.sys, "argv", ["nono-rex", "--stop"]),
+            patch.object(nono_rex.os, "chdir"),
+            patch.object(sandbox, "slot_for", return_value=None),
+            patch.object(nono_rex.os, "execvpe") as execute,
+            contextlib.redirect_stderr(output),
+        ):
+            self.assertEqual(nono_rex.main(), 1)
+        execute.assert_not_called()
+        self.assertIn("No sandbox is running", output.getvalue())
+
+
+if __name__ == "__main__":
+    unittest.main()
