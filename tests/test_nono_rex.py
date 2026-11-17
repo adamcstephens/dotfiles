@@ -38,7 +38,7 @@ class LauncherTest(unittest.TestCase):
 
     def test_default_and_passthrough_arguments(self):
         self.assertEqual(nono_rex.parse_args([], self.workspaces), ("open", None, Path.cwd(), []))
-        for args in ([], ["--allow", "/tmp", "--workspace", "later"], ["-w", "--stop", "--list", "--"]):
+        for args in ([], ["--allow", "/tmp", "--workspace", "later"], ["-w", "--stop", "--list", "--remove", "--"]):
             with self.subTest(args=args):
                 self.assertEqual(nono_rex.parse_args(["--", *args], self.workspaces), ("open", None, Path.cwd(), args))
 
@@ -75,7 +75,7 @@ class LauncherTest(unittest.TestCase):
                 ):
                     nono_rex.main()
                 self.assertEqual(error.exception.code, 0)
-                for option in ("-h, --help", "--workspace", "--list", "--stop", "after --"):
+                for option in ("-h, --help", "--workspace", "--list", "--stop", "--remove", "after --"):
                     self.assertIn(option, output.getvalue())
                 run.assert_not_called()
                 check_output.assert_not_called()
@@ -148,6 +148,46 @@ class LauncherTest(unittest.TestCase):
         ):
             with self.subTest(args=args):
                 self.assertEqual(nono_rex.parse_args(args, self.workspaces), ("stop", None, target, []))
+
+    def test_remove_resolves_existing_bare_workspace_ids(self):
+        workspace = self.workspaces / "named"
+        workspace.mkdir(parents=True)
+        for flag in ("-r", "--remove"):
+            for argument, target in (
+                ("named", workspace),
+                ("missing", Path("missing")),
+                ("./named", Path("./named")),
+                (str(workspace), workspace),
+            ):
+                with self.subTest(flag=flag, argument=argument):
+                    self.assertEqual(
+                        nono_rex.parse_args([flag, argument], self.workspaces),
+                        ("remove", None, target, []),
+                    )
+
+    def test_remove_requires_target_and_rejects_extra_arguments_and_modes(self):
+        for flag in ("-r", "--remove"):
+            for args in (
+                [flag],
+                [flag, "--"],
+                [flag, "named", "extra"],
+                [flag, "named", "--read", "/tmp"],
+                [flag, "named", "--", "--read", "/tmp"],
+                [flag, "named", "--force"],
+                [flag, "named", "--list"],
+                [flag, "named", "--stop"],
+                [flag, "named", "--workspace"],
+                ["--list", flag, "named"],
+                ["--stop", flag, "named"],
+                ["--workspace", flag, "named"],
+            ):
+                with (
+                    self.subTest(args=args),
+                    self.assertRaises(SystemExit) as error,
+                    contextlib.redirect_stderr(io.StringIO()),
+                ):
+                    nono_rex.parse_args(args, self.workspaces)
+                self.assertEqual(error.exception.code, 2)
 
     def test_environment_paths_and_profile(self):
         sandbox = self.sandbox()
@@ -545,6 +585,202 @@ class LauncherTest(unittest.TestCase):
             self.assertEqual(nono_rex.main(), 1)
         execute.assert_not_called()
         self.assertIn("No sandbox is running", output.getvalue())
+
+    def secondary_workspace(self, sandbox, name="removable"):
+        target = sandbox.workspaces_dir / name
+        (target / ".jj").mkdir(parents=True)
+        (target / ".jj/repo").write_text("/shared/repo\n")
+        return target
+
+    def test_remove_deletes_ignored_files_and_symlinks_in_safe_order(self):
+        for slot in (None, "sandbox-2"):
+            with self.subTest(slot=slot):
+                sandbox = self.sandbox()
+                target = self.secondary_workspace(sandbox)
+                (target / "nested").mkdir()
+                (target / "nested/ignored\nfile").write_text("ignored")
+                (target / "untracked").write_text("untracked")
+                (target / "untracked-link").symlink_to(self.home, target_is_directory=True)
+                (target / "broken-link").symlink_to(self.root / "missing")
+                (self.home / "not-in-workspace").write_text("preserve the symlink target")
+                events = []
+                real_rmtree = nono_rex.shutil.rmtree
+
+                def run(command, *, sandbox=sandbox, events=events, slot=slot, target=target, **kwargs):
+                    if command[0] == sandbox.rex:
+                        events.append("stop")
+                        self.assertEqual(command, [sandbox.rex, "server", "stop"])
+                        self.assertEqual(
+                            kwargs["env"]["REX_RUNTIME_DIR"],
+                            str(sandbox.rex_dir / slot / "run"),
+                        )
+                    else:
+                        events.append("forget")
+                        self.assertEqual(command, ["jj", "--repository", str(target), "workspace", "forget"])
+                        self.assertEqual(kwargs["cwd"], target)
+                    self.assertTrue(kwargs["check"])
+                    self.assertTrue(target.is_dir())
+                    return subprocess.CompletedProcess(command, 0)
+
+                def check_output(command, *, target=target, events=events, **kwargs):
+                    self.assertTrue(target.is_dir())
+                    events.append("check")
+                    self.assertEqual(
+                        command,
+                        [
+                            "jj",
+                            "--repository",
+                            str(target),
+                            "log",
+                            "--no-graph",
+                            "--revision",
+                            "@",
+                            "--template",
+                            'empty && description == ""',
+                        ],
+                    )
+                    self.assertTrue(kwargs["text"])
+                    self.assertEqual(kwargs["cwd"], target)
+                    return "true\n"
+
+                def chdir(directory, *, events=events, sandbox=sandbox, target=target):
+                    events.append("chdir")
+                    self.assertEqual(directory, sandbox.workspaces_dir)
+                    self.assertTrue(target.is_dir())
+
+                def remove_tree(directory, *, events=events, target=target, real_rmtree=real_rmtree):
+                    events.append("delete")
+                    self.assertEqual(directory, target)
+                    real_rmtree(directory)
+
+                output = io.StringIO()
+                with (
+                    patch.object(sandbox, "slot_for", return_value=slot) as slot_for,
+                    patch.object(nono_rex.subprocess, "run", side_effect=run),
+                    patch.object(nono_rex.subprocess, "check_output", side_effect=check_output),
+                    patch.object(nono_rex.os, "chdir", side_effect=chdir),
+                    patch.object(nono_rex.shutil, "rmtree", side_effect=remove_tree),
+                    contextlib.redirect_stdout(output),
+                ):
+                    self.assertEqual(sandbox.remove(target), 0)
+                slot_for.assert_called_once_with(target.resolve())
+                self.assertEqual(events, (["stop"] if slot else []) + ["check", "forget", "chdir", "delete"])
+                self.assertFalse(target.exists())
+                self.assertTrue((self.home / "not-in-workspace").is_file())
+                self.assertIn(target.name, output.getvalue())
+
+    def test_remove_refuses_unsafe_workspace_locations_and_primary_repositories(self):
+        sandbox = self.sandbox()
+        outside = self.root / "outside"
+        (outside / ".jj").mkdir(parents=True)
+        (outside / ".jj/repo").write_text("/shared/repo\n")
+        primary = sandbox.workspaces_dir / "primary"
+        (primary / ".jj/repo").mkdir(parents=True)
+        nested = self.secondary_workspace(sandbox, "parent/nested")
+        ordinary = sandbox.workspaces_dir / "ordinary"
+        ordinary.mkdir()
+        escaped = sandbox.workspaces_dir / "escape"
+        escaped.symlink_to(outside, target_is_directory=True)
+        for target in (outside, primary, nested, ordinary, escaped, sandbox.workspaces_dir):
+            with (
+                self.subTest(target=target),
+                patch.object(sandbox, "slot_for") as slot_for,
+                patch.object(nono_rex.subprocess, "run") as run,
+                patch.object(nono_rex.subprocess, "check_output") as check_output,
+                patch.object(nono_rex.shutil, "rmtree") as rmtree,
+                patch.object(nono_rex.os, "chdir") as chdir,
+                self.assertRaises(ValueError),
+            ):
+                sandbox.remove(target)
+            slot_for.assert_not_called()
+            run.assert_not_called()
+            check_output.assert_not_called()
+            rmtree.assert_not_called()
+            chdir.assert_not_called()
+            self.assertTrue(target.exists())
+
+    def test_remove_requires_existing_target(self):
+        sandbox = self.sandbox()
+        with (
+            patch.object(nono_rex.subprocess, "run") as run,
+            patch.object(nono_rex.subprocess, "check_output") as check_output,
+            patch.object(nono_rex.shutil, "rmtree") as rmtree,
+            self.assertRaises(FileNotFoundError),
+        ):
+            sandbox.remove(sandbox.workspaces_dir / "missing")
+        run.assert_not_called()
+        check_output.assert_not_called()
+        rmtree.assert_not_called()
+
+    def test_remove_refuses_nonempty_or_described_working_copy(self):
+        sandbox = self.sandbox()
+        target = self.secondary_workspace(sandbox)
+        for reason in ("nonempty working copy", "described empty working copy"):
+            with (
+                self.subTest(reason=reason),
+                patch.object(sandbox, "slot_for", return_value=None),
+                patch.object(nono_rex.subprocess, "run") as run,
+                patch.object(nono_rex.subprocess, "check_output", return_value="false\n") as check_output,
+                patch.object(nono_rex.shutil, "rmtree") as rmtree,
+                patch.object(nono_rex.os, "chdir") as chdir,
+                self.assertRaises(ValueError),
+            ):
+                sandbox.remove(target)
+            self.assertEqual(check_output.call_count, 1)
+            run.assert_not_called()
+            rmtree.assert_not_called()
+            chdir.assert_not_called()
+            self.assertTrue(target.is_dir())
+
+    def test_remove_subprocess_failures_prevent_later_steps(self):
+        for failure in ("stop", "log", "forget"):
+            with self.subTest(failure=failure):
+                sandbox = self.sandbox()
+                target = self.secondary_workspace(sandbox, failure)
+                error = subprocess.CalledProcessError(1, [failure])
+                outputs = {
+                    "stop": [],
+                    "log": [error],
+                    "forget": ["true\n"],
+                }
+                with (
+                    patch.object(sandbox, "slot_for", return_value="sandbox-2"),
+                    patch.object(
+                        nono_rex.subprocess,
+                        "run",
+                        side_effect=[error] if failure == "stop" else [None, error],
+                    ) as run,
+                    patch.object(nono_rex.subprocess, "check_output", side_effect=outputs[failure]) as check_output,
+                    patch.object(nono_rex.shutil, "rmtree") as rmtree,
+                    patch.object(nono_rex.os, "chdir") as chdir,
+                    self.assertRaises(subprocess.CalledProcessError) as raised,
+                ):
+                    sandbox.remove(target)
+                self.assertIs(raised.exception, error)
+                self.assertEqual(run.call_count, 2 if failure == "forget" else 1)
+                self.assertEqual(check_output.call_count, len(outputs[failure]))
+                rmtree.assert_not_called()
+                chdir.assert_not_called()
+                self.assertTrue(target.is_dir())
+
+    def test_main_removes_before_chdir_without_selecting_a_host(self):
+        sandbox = self.sandbox()
+        target = self.secondary_workspace(sandbox)
+        with (
+            patch.object(nono_rex, "Sandbox", return_value=sandbox),
+            patch.object(nono_rex.sys, "argv", ["nono-rex", "--remove", target.name]),
+            patch.object(sandbox, "remove", return_value=7) as remove,
+            patch.object(sandbox, "choose_slot") as choose_slot,
+            patch.object(sandbox, "start") as start,
+            patch.object(sandbox, "open_session") as open_session,
+            patch.object(nono_rex.os, "chdir") as chdir,
+        ):
+            self.assertEqual(nono_rex.main(), 7)
+        remove.assert_called_once_with(target)
+        choose_slot.assert_not_called()
+        start.assert_not_called()
+        open_session.assert_not_called()
+        chdir.assert_not_called()
 
 
 if __name__ == "__main__":

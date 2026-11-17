@@ -46,6 +46,12 @@ def parse_args(args: list[str], workspaces_dir: Path) -> tuple[str, str | None, 
         metavar="ID|PATH",
         help="stop a server; default to the current directory",
     )
+    modes.add_argument(
+        "-r",
+        "--remove",
+        metavar="ID|PATH",
+        help="stop and delete a managed workspace, including ignored files; refuse working-copy changes",
+    )
     nono_args = []
     if "--" in args:
         separator = args.index("--")
@@ -59,13 +65,14 @@ def parse_args(args: list[str], workspaces_dir: Path) -> tuple[str, str | None, 
         name = options.workspace if isinstance(options.workspace, str) else None
     elif options.list:
         mode = "list"
-    elif options.stop is not None:
-        mode = "stop"
-        if isinstance(options.stop, str):
-            target = Path(options.stop)
-            if "/" not in options.stop and (workspaces_dir / options.stop).is_dir():
-                target = workspaces_dir / options.stop
-    if mode in ("list", "stop") and nono_args:
+    elif options.stop is not None or options.remove is not None:
+        mode = "remove" if options.remove is not None else "stop"
+        value = options.remove if mode == "remove" else options.stop
+        if isinstance(value, str):
+            target = Path(value)
+            if "/" not in value and (workspaces_dir / value).is_dir():
+                target = workspaces_dir / value
+    if mode in ("list", "stop", "remove") and nono_args:
         parser.error(f"--{mode} does not accept additional arguments")
     return mode, name, target, nono_args
 
@@ -133,6 +140,33 @@ class Sandbox:
             if marker.is_file() and marker.read_text().rstrip("\n") == str(target) and self.running(marker.parent.name):
                 return marker.parent.name
         return None
+
+    def remove(self, target: Path) -> int:
+        target = target.resolve(strict=True)
+        if target.parent != self.workspaces_dir or not (target / ".jj/repo").is_file():
+            raise ValueError(f"Not a managed workspace: {target}")
+        slot = self.slot_for(target)
+        if slot is not None:
+            subprocess.run(
+                [self.rex, "server", "stop"],
+                env=os.environ | {"REX_RUNTIME_DIR": str(self.rex_dir / slot / "run")},
+                check=True,
+            )
+        command = ["jj", "--repository", str(target)]
+        disposable = subprocess.check_output(
+            [*command, "log", "--no-graph", "--revision", "@", "--template", 'empty && description == ""'],
+            text=True,
+            cwd=target,
+        ).strip()
+        if disposable != "true":
+            raise ValueError(
+                f"Workspace has working-copy changes or a description; preserve them with jj new: {target}"
+            )
+        subprocess.run([*command, "workspace", "forget"], cwd=target, check=True)
+        os.chdir(self.workspaces_dir)
+        shutil.rmtree(target)
+        print(f"Removed workspace {target.name}: {target}")
+        return 0
 
     def list_workspaces(self) -> None:
         print("ID\tSTATUS\tHOST\tPATH")
@@ -267,6 +301,8 @@ def main() -> int:
     if mode == "list":
         sandbox.list_workspaces()
         return 0
+    if mode == "remove":
+        return sandbox.remove(target)
     os.chdir(target)
     target = Path.cwd()
     if mode == "stop":
