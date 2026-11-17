@@ -6,5 +6,10 @@ if [ -z "$1" ]; then
 fi
 
 PR="$1"
+REMOTE=origin
 
-git fetch --force upstream pull/$PR/head:review/$PR && jj new review/$PR
+if git remote | grep -q upstream; then
+  REMOTE=upstream
+fi
+
+git fetch --force $REMOTE pull/$PR/head:review/$PR && jj new review/$PR
