@@ -10,9 +10,6 @@
     "description": "Adam's personal additions to the Bitfreighter profiles"
   },
   "filesystem": {
-    "read": ["~/.orca", "~/.CFUserTextEncoding"],
-    "unix_socket": [
-      "/Users/adam/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh"
-    ]
+    "read": ["~/.orca", "~/.CFUserTextEncoding"]
   }
 }

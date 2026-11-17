@@ -30,7 +30,10 @@
       "~/git"
     ],
     "read_file": ["~/.bashrc"],
-    "unix_socket": ["~/.local/share/atuin/atuin.sock"],
+    "unix_socket": [
+      "~/.local/share/atuin/atuin.sock",
+      "/Users/adam/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh"
+    ],
     "bypass_protection": [
       "~/.dotfiles/apps/zsh/zshrc",
       "~/.config/fish",
