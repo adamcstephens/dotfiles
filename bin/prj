@@ -123,50 +123,9 @@ def rex_api(method: str, args: dict | None = None) -> dict:
     return json.loads(run(f"rex api call {method} -", input=json.dumps(request)))
 
 
-def rex_show_window(window_id: str):
-    args = {"session_id": os.environ["REX_SESSION"], "window_id": window_id}
-    run(f"rex do session.select --args {shlex.quote(json.dumps(args))}")
-
-
-def rex_open_window(wname: str, project: str | None = None, host: str | None = None):
-    view = rex_api("session.view")
-    existing = next((window for window in view["windows"] if window["label"] == wname), None)
-
-    if existing is not None:
-        rex_api("session.focus_window", {"window_id": existing["window_id"]})
-        rex_show_window(existing["window_id"])
-        return
-
-    allowed = host is None and project is not None and direnv_allowed(project)
-    if allowed:
-        run(f"direnv exec {shlex.quote(project)} true")
-
-    blocks = []
-
-    for index in range(2):
-        options = {}
-        if host is None:
-            options["cwd"] = project
-        elif project is None:
-            options["initial_input"] = shlex.join(["ssh", "--", host]) + "\n"
-        else:
-            command = f"cd -- {shlex.quote(project)} && "
-            command += "vim .; exec $SHELL -l" if index == 1 else "exec $SHELL -l"
-            options["initial_input"] = shlex.join(["ssh", "-t", "--", host, command]) + "\n"
-
-        blocks.append({"block": {"flavor": "com.superlogical.terminal.shell", "options": options}})
-
-    layout = {
-        "split": {
-            "direction": "horizontal",
-            "ratio": 0.5,
-            "before": blocks[0],
-            "after": blocks[1],
-        }
-    }
-    created = rex_api("session.new_window", {"window_label": wname, "layout": layout})
-    rex_api("session.focus_block", {"block_id": created["block_ids"][1]})
-    rex_show_window(created["window_id"])
+def rex_open_window(wname: str, project: str):
+    args = {"project": project, "window_label": wname}
+    run(f"rex do prj_open --args {shlex.quote(json.dumps(args))}")
 
 
 def rex_relayout():
@@ -204,6 +163,9 @@ def prj_finder(remote: bool = False) -> str:
     command: str
     project: str
 
+    if is_rex and not (is_tuios or is_tmux or is_zellij):
+        return json.loads(run("rex do prj_pick --json"))["project"]
+
     if remote:
         selected_remote = run(FINDER, input=gen_remotes())
         run(f"ssh {selected_remote} true")
@@ -213,7 +175,7 @@ def prj_finder(remote: bool = False) -> str:
         )
         project = f"{selected_remote}:{project}"
     else:
-        if is_tuios or is_kitty or is_tmux or is_zellij or is_rex:
+        if is_tuios or is_kitty or is_tmux or is_zellij:
             command = FINDER
         elif is_wayland:
             command = "rofi -dmenu"
@@ -276,7 +238,8 @@ def open_project(project: str, remote: bool = False):
         wname = re.sub("[^a-zA-Z0-9:@\\-]", "", f"{os.path.basename(project)}@{host.split('.')[0]}")
     else:
         wname = re.sub("[^a-zA-Z0-9\\-]", "", os.path.basename(project))
-        run(f"zoxide add {shlex.quote(project)}")
+        if not is_rex or is_tuios or is_tmux or is_zellij:
+            run(f"zoxide add {shlex.quote(project)}")
 
     existing_tab: int
 
@@ -383,10 +346,7 @@ def open_project(project: str, remote: bool = False):
             run("zellij action write 13")
 
     elif is_rex:
-        if remote:
-            rex_open_window(wname, project, host)
-        else:
-            rex_open_window(wname, project)
+        rex_open_window(wname, project)
 
     elif is_kitty:
         # needs to come after tmux in case tmux in kitty
@@ -462,9 +422,6 @@ def open_ssh():
             time.sleep(0.2)
             run("zellij action toggle-active-sync-tab")
 
-    elif is_rex:
-        rex_open_window(wname, host=selected_remote)
-
     elif is_kitty:
         print("unsupported tmux + ssh")
         sys.exit(1)
@@ -480,6 +437,9 @@ if __name__ == "__main__":
 
     if is_tuios and (args.remote or args.ssh):
         parser.error("--remote and --ssh are not supported in tuios")
+
+    if is_rex and not (is_tuios or is_tmux or is_zellij) and (args.remote or args.ssh):
+        parser.error("--remote and --ssh are not supported in rex")
 
     project: str
 

@@ -3,6 +3,8 @@ import importlib.util
 import json
 import os
 import shlex
+import subprocess
+import sys
 import unittest
 from importlib.machinery import SourceFileLoader
 from pathlib import Path
@@ -50,122 +52,128 @@ class RexTest(unittest.TestCase):
             {"session_id": "session:test", "window_id": "window:project"},
         )
 
-    def test_finder_uses_fzf_in_rex(self):
-        with patch.object(prj, "run", side_effect=["/src/project", "/src/project"]) as run:
-            self.assertEqual(prj.prj_finder(), "/src/project")
-        self.assertEqual(run.call_args, call(prj.FINDER, input="/src/project"))
+    def test_finder_uses_native_rex_picker(self):
+        with patch.object(prj, "run", return_value='{"project": "/src/my project"}') as run:
+            self.assertEqual(prj.prj_finder(), "/src/my project")
+        run.assert_called_once_with("rex do prj_pick --json")
 
-    def create_window(self, project="/src/project", host=None, allowed=False):
-        api = self.enterContext(
-            patch.object(
-                prj,
-                "rex_api",
-                side_effect=[
-                    {"windows": []},
-                    {"window_id": "window:new", "block_ids": ["left", "right"]},
-                    {},
-                ],
-            )
-        )
-        self.enterContext(patch.object(prj, "direnv_allowed", return_value=allowed))
-        run = self.enterContext(patch.object(prj, "run"))
-        prj.rex_open_window("project", project, host)
-        return api, run
+    def test_finder_cancellation(self):
+        with patch.object(prj, "run", return_value='{"project": ""}') as run:
+            self.assertEqual(prj.prj_finder(), "")
+        run.assert_called_once_with("rex do prj_pick --json")
 
-    def blocks(self, layout):
-        if "block" in layout:
-            return [layout["block"]]
-        return self.blocks(layout["split"]["before"]) + self.blocks(layout["split"]["after"])
+    def test_finder_propagates_rex_failure(self):
+        with patch.object(prj, "run", side_effect=SystemExit(1)), self.assertRaises(SystemExit):
+            prj.prj_finder()
 
-    def test_local_project_has_two_equal_columns_and_focused_editor(self):
-        api, run = self.create_window()
-        request = api.call_args_list[1]
-        self.assertEqual(request.args[0], "session.new_window")
-        layout = request.args[1]["layout"]
-        self.assertEqual(request.args[1]["window_label"], "project")
-        blocks = self.blocks(layout)
-        self.assertEqual(len(blocks), 2)
-        self.assertEqual([block["options"]["cwd"] for block in blocks], ["/src/project"] * 2)
-        self.assertEqual([block["options"].get("initial_input") for block in blocks], [None, "vim .\n"])
-        self.assertEqual(layout["split"]["ratio"], 0.5)
-        self.assertEqual(api.call_args, call("session.focus_block", {"block_id": "right"}))
-        run.assert_called_once_with(
-            "rex do session.select --args "
-            + shlex.quote(json.dumps({"session_id": "session:test", "window_id": "window:new"}))
-        )
-
-    def test_direnv_is_warmed_before_layout_creation(self):
-        events = []
-        with (
-            patch.object(prj, "rex_api") as api,
-            patch.object(prj, "direnv_allowed", return_value=True),
-            patch.object(prj, "run", side_effect=lambda *a, **kw: events.append("warm")),
-        ):
-
-            def request(method, args=None):
-                events.append(method)
-                return (
-                    {"windows": []}
-                    if method == "session.view"
-                    else {"window_id": "window:new", "block_ids": ["left", "right"]}
+    def test_nested_backends_keep_fzf(self):
+        for backend in ("is_tmux", "is_tuios", "is_zellij"):
+            with (
+                self.subTest(backend=backend),
+                patch.object(prj, backend, True),
+                patch.object(prj, "run", side_effect=["/src/project", "/src/project"]) as run,
+            ):
+                self.assertEqual(prj.prj_finder(), "/src/project")
+                self.assertEqual(
+                    run.call_args_list,
+                    [call("zoxide query --list"), call(prj.FINDER, input="/src/project")],
                 )
 
-            api.side_effect = request
-            prj.rex_open_window("project", "/src/my project")
-        self.assertLess(events.index("warm"), events.index("session.new_window"))
-        blocks = self.blocks(api.call_args_list[1].args[1]["layout"])
-        self.assertEqual(blocks[1]["options"]["initial_input"], "direnv exec . vim .\n")
+    def test_rex_rejects_remote_flags_before_running_commands(self):
+        env = {"REX_SESSION": "session:test", "PATH": ""}
+        for flag in ("--remote", "--ssh", "-r", "-s"):
+            with self.subTest(flag=flag):
+                result = subprocess.run(
+                    [sys.executable, str(SCRIPT), flag],
+                    env=env,
+                    capture_output=True,
+                    text=True,
+                    check=False,
+                )
+                self.assertEqual(result.returncode, 2)
+                self.assertIn("--remote and --ssh are not supported in rex", result.stderr)
+                self.assertEqual(result.stdout, "")
 
-    def test_existing_window_is_reused_without_starting_processes(self):
-        with (
-            patch.object(
-                prj,
-                "rex_api",
-                side_effect=[{"windows": [{"label": "project", "window_id": "existing"}]}, {}],
-            ) as api,
-            patch.object(prj, "direnv_allowed") as allowed,
-            patch.object(prj, "run") as run,
-        ):
-            prj.rex_open_window("project", "/src/project")
-        self.assertEqual(api.call_args, call("session.focus_window", {"window_id": "existing"}))
-        allowed.assert_not_called()
-        run.assert_called_once_with(
-            "rex do session.select --args "
-            + shlex.quote(json.dumps({"session_id": "session:test", "window_id": "existing"}))
+    def test_explicit_project_bypasses_picker_and_uses_absolute_path(self):
+        code = """
+import json
+import os
+import runpy
+import subprocess
+import sys
+from unittest.mock import patch
+
+def command(command, **kwargs):
+    print(json.dumps({
+        "command": command,
+        "session": os.environ.get("REX_SESSION"),
+        "client": os.environ.get("REX_CLIENT"),
+    }))
+    return subprocess.CompletedProcess(command, 0, "null", "")
+
+sys.argv = [sys.argv[1], "--", "my-project"]
+with patch("subprocess.run", side_effect=command):
+    runpy.run_path(sys.argv[0], run_name="__main__")
+"""
+        result = subprocess.run(
+            [sys.executable, "-c", code, str(SCRIPT)],
+            env={"REX_SESSION": "session:test", "REX_CLIENT": "client:test", "PATH": ""},
+            capture_output=True,
+            text=True,
+            check=False,
         )
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn(f":: Opening project {os.path.abspath('my-project')}", result.stdout)
+        commands = [json.loads(line) for line in result.stdout.splitlines() if line.startswith("{")]
+        self.assertEqual(len(commands), 1)
+        argv = shlex.split(commands[0]["command"])
+        self.assertEqual(argv[:4], ["rex", "do", "prj_open", "--args"])
+        self.assertEqual(
+            json.loads(argv[4]),
+            {"project": os.path.abspath("my-project"), "window_label": "my-project"},
+        )
+        self.assertEqual(commands[0]["session"], "session:test")
+        self.assertEqual(commands[0]["client"], "client:test")
 
-    def test_remote_project_quotes_host_and_path_without_local_direnv(self):
-        api, _ = self.create_window("/remote/it's a project", "host.example")
-        prj.direnv_allowed.assert_not_called()
-        blocks = self.blocks(api.call_args_list[1].args[1]["layout"])
-        for index, block in enumerate(blocks):
-            self.assertNotIn("cwd", block["options"])
-            command = shlex.split(block["options"]["initial_input"].strip())
-            self.assertEqual(command[:4], ["ssh", "-t", "--", "host.example"])
-            self.assertIn(shlex.quote("/remote/it's a project"), command[4])
-            self.assertEqual("vim ." in command[4], index == 1)
+    def test_open_window_delegates_to_native_action(self):
+        project = "/src/my project's directory"
+        with patch.object(prj, "run") as run, patch.object(prj, "direnv_allowed") as allowed:
+            prj.rex_open_window("my-project", project)
+        run.assert_called_once()
+        argv = shlex.split(run.call_args.args[0])
+        self.assertEqual(argv[:4], ["rex", "do", "prj_open", "--args"])
+        self.assertEqual(json.loads(argv[4]), {"project": project, "window_label": "my-project"})
+        allowed.assert_not_called()
 
     def test_project_dispatches_to_rex(self):
-        with patch.object(prj, "run"), patch.object(prj, "rex_open_window") as open_window:
+        with patch.object(prj, "run") as run, patch.object(prj, "rex_open_window") as open_window:
             prj.open_project("/src/my-project")
-            self.assertEqual(open_window.call_args, call("my-project", "/src/my-project"))
-            prj.open_project("host.example:/src/my-project", remote=True)
-            self.assertEqual(open_window.call_args, call("my-project@host", "/src/my-project", "host.example"))
+        open_window.assert_called_once_with("my-project", "/src/my-project")
+        run.assert_not_called()
 
-    def test_ssh_dispatches_to_rex(self):
+    def test_rex_takes_precedence_over_kitty(self):
         with (
-            patch.object(prj, "run", side_effect=["host", ""]),
+            patch.object(prj, "is_kitty", True),
+            patch.object(prj, "run") as run,
+            patch.object(prj, "rex_open_window") as open_window,
+            patch.object(prj, "kitty_active_window") as kitty,
+        ):
+            prj.open_project("/src/project")
+        open_window.assert_called_once_with("project", "/src/project")
+        run.assert_not_called()
+        kitty.assert_not_called()
+
+    def test_nested_tuios_takes_precedence(self):
+        with (
+            patch.object(prj, "is_tuios", True),
+            patch.object(prj, "run") as run,
+            patch.object(prj, "tuios_workspace", return_value=None) as workspace,
             patch.object(prj, "rex_open_window") as open_window,
         ):
-            prj.open_ssh()
-        self.assertEqual(open_window.call_args, call("ssh@host", host="host"))
-
-    def test_ssh_has_two_shells_and_no_editor(self):
-        api, _ = self.create_window(project=None, host="host.example")
-        blocks = self.blocks(api.call_args_list[1].args[1]["layout"])
-        self.assertEqual(len(blocks), 2)
-        for block in blocks:
-            self.assertEqual(shlex.split(block["options"]["initial_input"]), ["ssh", "--", "host.example"])
+            prj.open_project("/src/project")
+        workspace.assert_called_once_with("project")
+        open_window.assert_not_called()
+        run.assert_called_once_with("zoxide add /src/project")
 
     def test_nested_tmux_takes_precedence(self):
         with (
@@ -176,6 +184,7 @@ class RexTest(unittest.TestCase):
             prj.open_project("/src/project")
         open_window.assert_not_called()
         self.assertEqual(run.call_args, call("tmux select-window -t project"))
+        self.assertEqual(run.call_args_list[0], call("zoxide add /src/project"))
 
     def test_nested_zellij_takes_precedence(self):
         with (
@@ -186,6 +195,7 @@ class RexTest(unittest.TestCase):
             prj.open_project("/src/project")
         open_window.assert_not_called()
         self.assertEqual(run.call_args, call("zellij action go-to-tab-name project"))
+        self.assertEqual(run.call_args_list[0], call("zoxide add /src/project"))
 
     def test_relayout_balances_two_columns_and_skips_other_layouts(self):
         left, middle, right = leaf("left", 0, 0.25), leaf("middle", 0.25, 0.5), leaf("right", 0.75, 0.25)
