@@ -36,7 +36,7 @@ def parse_args(args: list[str], workspaces_dir: Path) -> tuple[str, str | None, 
         const=True,
         type=workspace_name,
         metavar="NAME",
-        help="create a new jj workspace; generate a name if omitted",
+        help="open or create a named jj workspace; create a fresh workspace if no name is given",
     )
     modes.add_argument("-l", "--list", action="store_true", help="list workspace IDs, paths, status, and hosts")
     modes.add_argument(
@@ -77,6 +77,29 @@ def parse_args(args: list[str], workspaces_dir: Path) -> tuple[str, str | None, 
     return mode, name, target, nono_args
 
 
+def workspace_repo(root: Path) -> Path:
+    pointer = root / ".jj/repo"
+    if pointer.is_file():
+        pointer = pointer.parent / pointer.read_text().rstrip("\n")
+    return pointer.resolve(strict=True)
+
+
+def existing_workspace(workspaces_dir: Path, name: str | None) -> Path | None:
+    if name is None:
+        return None
+    workspace = workspaces_dir / name
+    if not workspace.exists():
+        return None
+    root = Path(subprocess.check_output(["jj", "root"], text=True).rstrip("\n"))
+    if (workspace / ".jj/repo").is_file() and workspace_repo(workspace) == workspace_repo(root):
+        names = subprocess.check_output(
+            ["jj", "--ignore-working-copy", "workspace", "list", "--template", 'name ++ "\n"'], text=True
+        ).splitlines()
+        if name in names:
+            return workspace.resolve()
+    raise ValueError(f"Not a managed workspace of the current repository: {workspace}")
+
+
 def create_workspace(workspaces_dir: Path, name: str | None) -> Path:
     root = Path(subprocess.check_output(["jj", "root"], text=True).rstrip("\n"))
     workspaces_dir.mkdir(parents=True, exist_ok=True)
@@ -99,13 +122,9 @@ def metadata_grants() -> list[str]:
     if root_result.returncode:
         return []
     root = Path(root_result.stdout.rstrip("\n"))
-    pointer = root / ".jj/repo"
-    if not pointer.is_file():
+    if not (root / ".jj/repo").is_file():
         return []
-    repo = Path(pointer.read_text().rstrip("\n"))
-    if not repo.is_absolute():
-        repo = root / ".jj" / repo
-    grants = ["--allow", str(root), "--allow", str(repo.resolve(strict=True))]
+    grants = ["--allow", str(root), "--allow", str(workspace_repo(root))]
     git_result = subprocess.run(
         ["jj", "git", "root"], stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, text=True, check=False
     )
@@ -315,12 +334,17 @@ def main() -> int:
             [sandbox.rex, "server", "stop"],
             os.environ | {"REX_RUNTIME_DIR": str(sandbox.rex_dir / slot / "run")},
         )
-    slot, free = sandbox.choose_slot(target, new_workspace=mode == "workspace")
+    existing = existing_workspace(sandbox.workspaces_dir, name)
+    if existing is not None:
+        os.chdir(existing)
+        target = existing
+    new_workspace = mode == "workspace" and existing is None
+    slot, free = sandbox.choose_slot(target, new_workspace=new_workspace)
     if slot is None:
         if free is None:
             print(NO_SLOTS, file=sys.stderr)
             return 1
-        if mode == "workspace":
+        if new_workspace:
             os.chdir(create_workspace(sandbox.workspaces_dir, name))
         slot = free
         if not sandbox.start(slot, args):
