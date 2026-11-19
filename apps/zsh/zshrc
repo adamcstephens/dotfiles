@@ -34,7 +34,7 @@ if [[ -o interactive ]]; then
   if command -v fzf &> /dev/null; then
     eval "$(fzf --zsh)"
   fi
-  if command -v zoxide &> /dev/null; then
+  if command -v zoxide &> /dev/null && zoxide query --list >/dev/null 2>&1; then
     eval "$(zoxide init zsh --cmd j)"
   fi
   if command -v direnv &> /dev/null; then
