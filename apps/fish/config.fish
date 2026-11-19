@@ -107,7 +107,7 @@ status is-interactive; and begin
     set --export FZF_DEFAULT_COMMAND 'fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
     set --export FZF_CTRL_T_COMMAND "$FZF_DEFAULT_COMMAND"
 
-    if command --query zoxide
+    if command --query zoxide; and zoxide query --list >/dev/null 2>&1
         zoxide init fish --cmd j | source
     end
 

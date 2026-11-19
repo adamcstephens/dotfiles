@@ -6,7 +6,7 @@ if [[ $- == *i* ]]; then
   if command -v fzf &>/dev/null; then
     eval "$(fzf --bash)"
   fi
-  if command -v zoxide &>/dev/null; then
+  if command -v zoxide &>/dev/null && zoxide query --list >/dev/null 2>&1; then
     eval "$(zoxide init bash --cmd j)"
   fi
   if command -v direnv &>/dev/null; then
