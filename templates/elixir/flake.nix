@@ -17,7 +17,7 @@
       perSystem =
         { lib, pkgs, ... }:
         let
-          beamPackages = pkgs.beamMinimal29Packages.extend (
+          beamPackages = pkgs.beamMinimal29Packages.overrideScope (
             _: prev: {
               elixir = prev.elixir_1_20;
             }
