@@ -12,6 +12,9 @@ theme:
   light: modus-operandi
 setupVersion: 3
 steeringMode: one-at-a-time
+commit:
+  # https://github.com/can1357/oh-my-pi/pull/19442 left duplicate JJ changes unfixed.
+  enabled: false
 memory:
   backend: "off"
 task:
