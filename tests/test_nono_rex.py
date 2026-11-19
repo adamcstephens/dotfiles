@@ -75,7 +75,7 @@ class LauncherTest(unittest.TestCase):
                 ):
                     nono_rex.main()
                 self.assertEqual(error.exception.code, 0)
-                for option in ("-h, --help", "--workspace", "--list", "--stop", "--remove", "after --"):
+                for option in ("-h, --help", "--workspace", "--list", "-s, --stop", "-r, --remove", "after --"):
                     self.assertIn(option, output.getvalue())
                 run.assert_not_called()
                 check_output.assert_not_called()
@@ -139,15 +139,17 @@ class LauncherTest(unittest.TestCase):
     def test_stop_resolves_only_existing_bare_workspace_ids(self):
         workspace = self.workspaces / "named"
         workspace.mkdir(parents=True)
-        for args, target in (
-            (["--stop"], Path.cwd()),
-            (["--stop", "named"], workspace),
-            (["--stop", "missing"], Path("missing")),
-            (["--stop", "./named"], Path("./named")),
-            (["--stop", str(workspace)], workspace),
-        ):
-            with self.subTest(args=args):
-                self.assertEqual(nono_rex.parse_args(args, self.workspaces), ("stop", None, target, []))
+        for flag in ("-s", "--stop"):
+            for arguments, target in (
+                ([], Path.cwd()),
+                (["named"], workspace),
+                (["missing"], Path("missing")),
+                (["./named"], Path("./named")),
+                ([str(workspace)], workspace),
+            ):
+                args = [flag, *arguments]
+                with self.subTest(args=args):
+                    self.assertEqual(nono_rex.parse_args(args, self.workspaces), ("stop", None, target, []))
 
     def test_remove_resolves_existing_bare_workspace_ids(self):
         workspace = self.workspaces / "named"

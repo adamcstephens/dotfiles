@@ -40,6 +40,7 @@ def parse_args(args: list[str], workspaces_dir: Path) -> tuple[str, str | None, 
     )
     modes.add_argument("-l", "--list", action="store_true", help="list workspace IDs, paths, status, and hosts")
     modes.add_argument(
+        "-s",
         "--stop",
         nargs="?",
         const=True,
