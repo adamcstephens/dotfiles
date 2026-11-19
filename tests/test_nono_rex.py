@@ -555,21 +555,49 @@ class LauncherTest(unittest.TestCase):
         start.assert_called_once_with("sandbox-1", ["--read", "/extra"])
         open_session.assert_called_once_with("sandbox-1")
 
-    def test_main_stop_executes_with_runtime_environment(self):
+    def test_main_stop_delegates_to_sandbox(self):
         sandbox = self.sandbox()
         with (
             patch.object(nono_rex, "Sandbox", return_value=sandbox),
             patch.object(nono_rex.sys, "argv", ["nono-rex", "--stop"]),
             patch.object(nono_rex.os, "chdir"),
             patch.object(sandbox, "slot_for", return_value="sandbox-2"),
-            patch.object(nono_rex.os, "execvpe", side_effect=SystemExit(0)) as execute,
-            self.assertRaises(SystemExit),
+            patch.object(sandbox, "stop") as stop,
         ):
-            nono_rex.main()
-        executable, arguments, environment = execute.call_args.args
-        self.assertEqual(executable, sandbox.rex)
-        self.assertEqual(arguments, [sandbox.rex, "server", "stop"])
-        self.assertEqual(environment["REX_RUNTIME_DIR"], str(sandbox.rex_dir / "sandbox-2/run"))
+            self.assertEqual(nono_rex.main(), 0)
+        stop.assert_called_once_with("sandbox-2")
+
+    def test_stop_closes_sessions_before_stopping_server(self):
+        sandbox = self.sandbox()
+        slot = "sandbox-2"
+        command = [sandbox.rex, "--server", f"unix://{sandbox.rex_dir / slot}.sock", "--autostart=false"]
+        for sessions in ([], ["first-id", "second-id"]):
+            with (
+                self.subTest(sessions=sessions),
+                patch.object(nono_rex.subprocess, "check_output", return_value="\n".join(sessions)) as output,
+                patch.object(nono_rex.subprocess, "run") as run,
+            ):
+                sandbox.stop(slot)
+            output.assert_called_once_with([*command, "session", "ls", "--quiet", "--short=false"], text=True)
+            self.assertEqual(run.call_count, 2 if sessions else 1)
+            if sessions:
+                self.assertEqual(run.call_args_list[0].args, ([*command, "session", "kill", *sessions],))
+                self.assertTrue(run.call_args_list[0].kwargs["check"])
+            self.assertEqual(run.call_args.args, ([sandbox.rex, "server", "stop"],))
+            self.assertEqual(run.call_args.kwargs["env"]["REX_RUNTIME_DIR"], str(sandbox.rex_dir / slot / "run"))
+            self.assertTrue(run.call_args.kwargs["check"])
+
+    def test_stop_leaves_server_running_on_session_teardown_failure(self):
+        sandbox = self.sandbox()
+        error = subprocess.CalledProcessError(1, ["session", "kill"])
+        with (
+            patch.object(nono_rex.subprocess, "check_output", return_value="session-id\n"),
+            patch.object(nono_rex.subprocess, "run", side_effect=error) as run,
+            self.assertRaises(subprocess.CalledProcessError),
+        ):
+            sandbox.stop("sandbox-2")
+        self.assertEqual(run.call_count, 1)
+        self.assertEqual(run.call_args.args[0][-3:], ["session", "kill", "session-id"])
 
     def test_main_stop_reports_missing_server(self):
         sandbox = self.sandbox()
@@ -579,11 +607,11 @@ class LauncherTest(unittest.TestCase):
             patch.object(nono_rex.sys, "argv", ["nono-rex", "--stop"]),
             patch.object(nono_rex.os, "chdir"),
             patch.object(sandbox, "slot_for", return_value=None),
-            patch.object(nono_rex.os, "execvpe") as execute,
+            patch.object(sandbox, "stop") as stop,
             contextlib.redirect_stderr(output),
         ):
             self.assertEqual(nono_rex.main(), 1)
-        execute.assert_not_called()
+        stop.assert_not_called()
         self.assertIn("No sandbox is running", output.getvalue())
 
     def secondary_workspace(self, sandbox, name="removable"):
@@ -606,18 +634,14 @@ class LauncherTest(unittest.TestCase):
                 events = []
                 real_rmtree = nono_rex.shutil.rmtree
 
-                def run(command, *, sandbox=sandbox, events=events, slot=slot, target=target, **kwargs):
-                    if command[0] == sandbox.rex:
-                        events.append("stop")
-                        self.assertEqual(command, [sandbox.rex, "server", "stop"])
-                        self.assertEqual(
-                            kwargs["env"]["REX_RUNTIME_DIR"],
-                            str(sandbox.rex_dir / slot / "run"),
-                        )
-                    else:
-                        events.append("forget")
-                        self.assertEqual(command, ["jj", "--repository", str(target), "workspace", "forget"])
-                        self.assertEqual(kwargs["cwd"], target)
+                def stop_server(selected_slot, *, slot=slot, events=events):
+                    events.append("stop")
+                    self.assertEqual(selected_slot, slot)
+
+                def run(command, *, events=events, target=target, **kwargs):
+                    events.append("forget")
+                    self.assertEqual(command, ["jj", "--repository", str(target), "workspace", "forget"])
+                    self.assertEqual(kwargs["cwd"], target)
                     self.assertTrue(kwargs["check"])
                     self.assertTrue(target.is_dir())
                     return subprocess.CompletedProcess(command, 0)
@@ -656,6 +680,7 @@ class LauncherTest(unittest.TestCase):
                 output = io.StringIO()
                 with (
                     patch.object(sandbox, "slot_for", return_value=slot) as slot_for,
+                    patch.object(sandbox, "stop", side_effect=stop_server),
                     patch.object(nono_rex.subprocess, "run", side_effect=run),
                     patch.object(nono_rex.subprocess, "check_output", side_effect=check_output),
                     patch.object(nono_rex.os, "chdir", side_effect=chdir),
@@ -745,11 +770,8 @@ class LauncherTest(unittest.TestCase):
                 }
                 with (
                     patch.object(sandbox, "slot_for", return_value="sandbox-2"),
-                    patch.object(
-                        nono_rex.subprocess,
-                        "run",
-                        side_effect=[error] if failure == "stop" else [None, error],
-                    ) as run,
+                    patch.object(sandbox, "stop", side_effect=error if failure == "stop" else None),
+                    patch.object(nono_rex.subprocess, "run", side_effect=error) as run,
                     patch.object(nono_rex.subprocess, "check_output", side_effect=outputs[failure]) as check_output,
                     patch.object(nono_rex.shutil, "rmtree") as rmtree,
                     patch.object(nono_rex.os, "chdir") as chdir,
@@ -757,7 +779,7 @@ class LauncherTest(unittest.TestCase):
                 ):
                     sandbox.remove(target)
                 self.assertIs(raised.exception, error)
-                self.assertEqual(run.call_count, 2 if failure == "forget" else 1)
+                self.assertEqual(run.call_count, int(failure == "forget"))
                 self.assertEqual(check_output.call_count, len(outputs[failure]))
                 rmtree.assert_not_called()
                 chdir.assert_not_called()

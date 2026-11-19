@@ -160,17 +160,24 @@ class Sandbox:
                 return marker.parent.name
         return None
 
+    def stop(self, slot: str) -> None:
+        command = [self.rex, "--server", f"unix://{self.rex_dir / slot}.sock", "--autostart=false"]
+        sessions = subprocess.check_output([*command, "session", "ls", "--quiet", "--short=false"], text=True).split()
+        if sessions:
+            subprocess.run([*command, "session", "kill", *sessions], check=True)
+        subprocess.run(
+            [self.rex, "server", "stop"],
+            env=os.environ | {"REX_RUNTIME_DIR": str(self.rex_dir / slot / "run")},
+            check=True,
+        )
+
     def remove(self, target: Path) -> int:
         target = target.resolve(strict=True)
         if target.parent != self.workspaces_dir or not (target / ".jj/repo").is_file():
             raise ValueError(f"Not a managed workspace: {target}")
         slot = self.slot_for(target)
         if slot is not None:
-            subprocess.run(
-                [self.rex, "server", "stop"],
-                env=os.environ | {"REX_RUNTIME_DIR": str(self.rex_dir / slot / "run")},
-                check=True,
-            )
+            self.stop(slot)
         command = ["jj", "--repository", str(target)]
         disposable = subprocess.check_output(
             [*command, "log", "--no-graph", "--revision", "@", "--template", 'empty && description == ""'],
@@ -329,11 +336,8 @@ def main() -> int:
         if slot is None:
             print(f"No sandbox is running for {target}", file=sys.stderr)
             return 1
-        os.execvpe(
-            sandbox.rex,
-            [sandbox.rex, "server", "stop"],
-            os.environ | {"REX_RUNTIME_DIR": str(sandbox.rex_dir / slot / "run")},
-        )
+        sandbox.stop(slot)
+        return 0
     existing = existing_workspace(sandbox.workspaces_dir, name)
     if existing is not None:
         os.chdir(existing)
