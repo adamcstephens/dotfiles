@@ -13,6 +13,7 @@
       "~/.config/claude-personal",
       "~/.config/omp",
       "~/.local/share/atuin",
+      "~/.local/share/dotvim",
       "~/.local/state/dotvim"
     ],
     "read": [
