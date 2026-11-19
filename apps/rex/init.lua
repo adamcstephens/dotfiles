@@ -25,7 +25,14 @@ local function open_popup(ctx, key, command, bounds)
     layout = rex.layout.block({
       flavor = "com.superlogical.terminal.shell",
       options = {
-        command = command,
+        command = {
+          "sh",
+          "-c",
+          'origin=$1; shift; "$@"; status=$?; rex block focus --session "$REX_SESSION" "$origin"; exit "$status"',
+          "sh",
+          ctx.block_id,
+          unpack(command),
+        },
         cwd = cwd,
       },
     }),

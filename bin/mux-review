@@ -70,7 +70,18 @@ return assert(rex.call("session.set_layer_state", {
                 {
                     "label": f"review-{pr}",
                     "cwd": os.getcwd(),
-                    "command": [*worker, pr, "--no-shell", "--post-result", *args.args],
+                    "command": [
+                        "sh",
+                        "-c",
+                        'origin=$1; shift; "$@"; status=$?; rex block focus --session "$REX_SESSION" "$origin"; exit "$status"',
+                        "sh",
+                        os.environ["REX_BLOCK"],
+                        *worker,
+                        pr,
+                        "--no-shell",
+                        "--post-result",
+                        *args.args,
+                    ],
                 }
             ),
         ]

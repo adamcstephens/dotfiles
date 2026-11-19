@@ -146,7 +146,10 @@ local function assert_popup()
   assert(popup and popup.focus == true)
   assert(popup.layout.flavor == "com.superlogical.terminal.shell")
   assert(popup.layout.options.cwd == "/test/project")
-  assert(#popup.layout.options.command == 1 and popup.layout.options.command[1] == "vcs-tui")
+  local command = popup.layout.options.command
+  assert(command[1] == "sh" and command[2] == "-c")
+  assert(command[3]:find('rex block focus --session "$REX_SESSION" "$origin"', 1, true))
+  assert(command[5] == context.block_id and command[6] == "vcs-tui" and #command == 6)
   for index, value in ipairs({ 0.05, 0.05, 0.9, 0.9 }) do
     assert(popup.bounds[index] == value)
   end

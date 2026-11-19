@@ -94,6 +94,11 @@ class ReviewTest(unittest.TestCase):
                 "label": "review-123",
                 "cwd": os.getcwd(),
                 "command": [
+                    "sh",
+                    "-c",
+                    'origin=$1; shift; "$@"; status=$?; rex block focus --session "$REX_SESSION" "$origin"; exit "$status"',
+                    "sh",
+                    "block:caller",
                     mux_review.sys.executable,
                     str(SCRIPT.resolve()),
                     "--worker",
