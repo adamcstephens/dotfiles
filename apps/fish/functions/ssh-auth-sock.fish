@@ -21,6 +21,9 @@ function find_ssh_agent
     end
 
     set --local denylist '/var/run/com.apple.launchd.*/Listeners' '/tmp/tuios*/*.sock' "$XDG_RUNTIME_DIR/ssh-agent"
+    if test -n "$TUIOS_SESSION" && test "$TUIOS_HOST" = "$hostname"
+        set --append denylist "$XDG_RUNTIME_DIR/tuios/*.sock"
+    end
     for denied in $denylist
         if string match --quiet $denied "$discovered_sock"
             set discovered_sock (find_allowed_socket)
@@ -46,14 +49,14 @@ function ssh-auth-sock --on-event="fish_preexec"
         return
     end
 
-    if test -n "$TUIOS_SESSION"
+    if test -n "$TUIOS_SESSION" && test "$TUIOS_HOST" != "$hostname"
         set DISCOVERED_SOCK (tuios ssh-agent-path)
     else
         set DISCOVERED_SOCK (find_ssh_agent "$WELL_KNOWN_SOCK")
     end
 
     if test -S "$DISCOVERED_SOCK"; and test "$(readlink "$WELL_KNOWN_SOCK")" != "$DISCOVERED_SOCK"
-        ln -sf "$DISCOVERED_SOCK" "$WELL_KNOWN_SOCK"
+        ln -svf "$DISCOVERED_SOCK" "$WELL_KNOWN_SOCK"
     end
 
     # ssh-add must query the selected agent, not the socket we just replaced.
