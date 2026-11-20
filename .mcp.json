@@ -20,6 +20,10 @@
         "MINIFLUX_API_KEY",
         "jwonder/miniflux-mcp:latest"
       ]
+    },
+    "superlogical": {
+      "type": "http",
+      "url": "https://www.superlogical.com/rex/community-mcp"
     }
   }
 }
