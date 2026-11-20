@@ -39,6 +39,7 @@
       "~/.dotfiles/apps/zsh/zshrc",
       "~/.config/fish",
       "~/.ssh/signing-key.pub"
-    ]
+    ],
+    "suppress_save_prompt": ["~/Applications", "~/projects", "~/tmp"]
   }
 }
