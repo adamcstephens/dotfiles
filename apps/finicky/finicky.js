@@ -1,6 +1,17 @@
 const slackMessagePath =
   /^\/(?:archives\/([A-Z0-9]+)\/p(\d{7,})|messages\/([A-Z0-9]+)\/convo\/[A-Z0-9]+-(\d+\.\d{6}))\/?$/;
 
+const firefox_bitfreighter = (url) => ({
+  name: "Firefox",
+  args: [
+    "-n",
+    "--args",
+    "--profile",
+    "/Users/adam/Library/Application Support/Firefox/Profiles/i9a1wojq.default",
+    url.href,
+  ],
+});
+
 export default {
   // get bundle id: mdls /Applications/Firefox.app/ | grep kMDItemCF
   defaultBrowser: () => {
@@ -91,6 +102,14 @@ export default {
       match: (url, { opener }) =>
         url.hostname === "linear.app" && opener?.bundleId !== "com.linear",
       browser: "Linear",
+    },
+    {
+      match: /bitfreighter/,
+      browser: firefox_bitfreighter,
+    },
+    {
+      match: /amazonaws\.com/,
+      browser: firefox_bitfreighter,
     },
   ],
 };
