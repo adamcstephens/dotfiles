@@ -94,6 +94,7 @@ warning_duration = 0
 error_duration = 0
 
 [notifications.agent]
+notify = false
 sound_mode = ''
 command = ''
 quiet_hours = ''
