@@ -23,6 +23,7 @@
       "registry.npmjs.org",
       "registry.yarnpkg.com",
       "repo.hex.pm",
+      "rustfs.junco.dev",
       "www.superlogical.com"
     ]
   }
