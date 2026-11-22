@@ -1,7 +1,7 @@
 {
   config,
-  inputs,
   dotlib,
+  inputs,
   pkgs,
   ...
 }:
@@ -23,10 +23,10 @@ in
     codex-wrapped
   ];
 
-  xdg.configFile = {
-    "codex/AGENTS.md".source = config.xdg.configFile."agents/AGENTS.md".source;
+  smfh.xdg.config.files = {
+    "codex/AGENTS.md".source = config.smfh.xdg.config.files."agents/AGENTS.md".source;
     "codex/hooks.json".source = dotlib.source "apps/codex/hooks.json";
     "codex/rules".source = dotlib.source "apps/codex/rules";
-    "codex/skills".source = config.xdg.configFile."agents/skills".source;
+    "codex/skills".source = config.smfh.xdg.config.files."agents/skills".source;
   };
 }

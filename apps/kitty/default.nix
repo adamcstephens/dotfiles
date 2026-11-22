@@ -29,16 +29,16 @@ in
     map super+shift+p launch --type=overlay-main ${prj} --remote
   '';
 
-  xdg.configFile."kitty/dotfiles.conf".source = dotlib.source "apps/kitty/dotfiles.conf";
-  xdg.configFile."kitty/os.conf".source = dotlib.source (
+  smfh.xdg.config.files."kitty/dotfiles.conf".source = dotlib.source "apps/kitty/dotfiles.conf";
+  smfh.xdg.config.files."kitty/os.conf".source = dotlib.source (
     if pkgs.stdenv.hostPlatform.isDarwin then "apps/kitty/macos.conf" else "apps/kitty/linux.conf"
   );
 
   # themes
-  xdg.configFile."kitty/no-preference-theme.auto.conf".source =
+  smfh.xdg.config.files."kitty/no-preference-theme.auto.conf".source =
     dotlib.source "themes/moonfly/extras/moonfly-kitty.conf";
 
-  xdg.configFile."kitty/dark-theme.auto.conf".source =
+  smfh.xdg.config.files."kitty/dark-theme.auto.conf".source =
     dotlib.source "themes/moonfly/extras/moonfly-kitty.conf";
   xdg.configFile."kitty/light-theme.auto.conf".source =
     npins."modus-themes.nvim" + "/extras/kitty/modus_operandi.conf";

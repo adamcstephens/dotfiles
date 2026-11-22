@@ -26,20 +26,22 @@ in
   };
 
   config = {
+    smfh.xdg.config.files = lib.mapAttrs' (
+      name: _:
+      lib.nameValuePair "noctalia/${name}" {
+        source = dotlib.source "apps/noctalia/${name}";
+      }
+    ) (builtins.readDir ./.);
+
     xdg.configFile =
-      lib.mapAttrs' (
-        name: _:
-        lib.nameValuePair "noctalia/${name}" {
-          source = dotlib.source "apps/noctalia/${name}";
-        }
-      ) (builtins.readDir ./.)
-      // lib.optionalAttrs (builtins.pathExists (./profiles + "/${config.dotfiles.profile}.toml")) {
-        "noctalia/profile.toml".text = # toml
-          ''
-            [include]
-            files = ["profiles/${config.dotfiles.profile}.toml"]
-          '';
-      };
+      lib.optionalAttrs (builtins.pathExists (./profiles + "/${config.dotfiles.profile}.toml"))
+        {
+          "noctalia/profile.toml".text = # toml
+            ''
+              [include]
+              files = ["profiles/${config.dotfiles.profile}.toml"]
+            '';
+        };
 
     home.packages = [
       cfg.package

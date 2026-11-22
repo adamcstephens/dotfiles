@@ -16,10 +16,10 @@ in
     package
   ];
 
-  xdg.configFile."zellij/layouts".source = dotlib.source "apps/zellij/layouts";
+  smfh.xdg.config.files."zellij/layouts".source = dotlib.source "apps/zellij/layouts";
 
-  xdg.configFile."zellij/config.kdl".source = dotlib.source "apps/zellij/config.kdl";
+  smfh.xdg.config.files."zellij/config.kdl".source = dotlib.source "apps/zellij/config.kdl";
 
-  xdg.configFile."zellij/themes/moonfly.kdl".source =
+  smfh.xdg.config.files."zellij/themes/moonfly.kdl".source =
     dotlib.source "themes/moonfly/extras/moonfly-zellij.kdl";
 }

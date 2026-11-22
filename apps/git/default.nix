@@ -21,7 +21,7 @@
     pkgs.tea
   ];
 
-  xdg.configFile = {
+  smfh.xdg.config.files = {
     "git/config".source = dotlib.source "apps/git/gitconfig";
     "git/ignore".source = dotlib.source "apps/git/ignore";
   };

@@ -4,5 +4,5 @@
     pkgs.newsboat
   ];
 
-  xdg.configFile.newsboat.source = dotlib.source "apps/newsboat";
+  smfh.xdg.config.files.newsboat.source = dotlib.source "apps/newsboat";
 }

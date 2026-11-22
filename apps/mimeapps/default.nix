@@ -1,4 +1,4 @@
 { dotlib, ... }:
 {
-  xdg.configFile."mimeapps.list".source = dotlib.source "apps/mimeapps/mimeapps.list";
+  smfh.xdg.config.files."mimeapps.list".source = dotlib.source "apps/mimeapps/mimeapps.list";
 }

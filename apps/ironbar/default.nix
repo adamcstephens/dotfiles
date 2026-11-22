@@ -73,7 +73,7 @@ in
 
     '';
 
-    xdg.configFile."ironbar/style.css".source = dotlib.source "apps/ironbar/style.css";
+    smfh.xdg.config.files."ironbar/style.css".source = dotlib.source "apps/ironbar/style.css";
 
     systemd.user.services.ironbar = lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
       Unit.PartOf = [ "wayland-session.target" ];

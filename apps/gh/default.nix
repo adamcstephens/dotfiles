@@ -22,7 +22,7 @@ in
       gh
     ];
 
-    xdg.configFile = {
+    smfh.xdg.config.files = {
       "gh/config.yml" = {
         source = dotlib.source "apps/gh/config.yml";
         force = true;

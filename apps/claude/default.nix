@@ -26,7 +26,6 @@ in
     CLAUDE_CONFIG_DIR = "${config.xdg.configHome}/claude";
   };
 
-  xdg.configFile = {
-    "claude/CLAUDE.md".source = config.xdg.configFile."agents/AGENTS.md".source;
-  };
+  smfh.xdg.config.files."claude/CLAUDE.md".source =
+    config.smfh.xdg.config.files."agents/AGENTS.md".source;
 }

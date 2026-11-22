@@ -16,6 +16,6 @@ in
   config = lib.mkIf cfg.enable {
     home.packages = [ pkgs.tmuxinator ];
 
-    xdg.configFile."tmuxinator".source = dotlib.source "apps/tmuxinator";
+    smfh.xdg.config.files."tmuxinator".source = dotlib.source "apps/tmuxinator";
   };
 }

@@ -4,5 +4,5 @@
     pkgs.todoman
   ];
 
-  xdg.configFile."todoman/config.py".source = dotlib.source "apps/todoman/config.py";
+  smfh.xdg.config.files."todoman/config.py".source = dotlib.source "apps/todoman/config.py";
 }

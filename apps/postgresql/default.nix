@@ -4,5 +4,5 @@
     PSQLRC = "$XDG_CONFIG_HOME/postgresql/psqlrc";
   };
 
-  xdg.configFile."postgresql/psqlrc".source = dotlib.source "apps/postgresql/psqlrc";
+  smfh.xdg.config.files."postgresql/psqlrc".source = dotlib.source "apps/postgresql/psqlrc";
 }

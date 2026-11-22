@@ -29,8 +29,6 @@ let
     '';
   };
 
-  mkSource = source: dotlib.source "apps/fish/${source}";
-
   commandNotFound = pkgs.writeShellApplication {
     name = "command-not-found";
     excludeShellChecks = [ "SC1091" ];
@@ -81,9 +79,12 @@ in
     fishCommandNotFound
   ];
 
-  xdg.configFile."fish/completions".source = mkSource "completions";
-  xdg.configFile."fish/conf.d".source = mkSource "conf.d";
-  xdg.configFile."fish/config.fish".source = mkSource "config.fish";
-  xdg.configFile."fish/functions".source = mkSource "functions";
+  smfh.xdg.config.files = {
+    "fish/completions".source = dotlib.source "apps/fish/completions";
+    "fish/conf.d".source = dotlib.source "apps/fish/conf.d";
+    "fish/config.fish".source = dotlib.source "apps/fish/config.fish";
+    "fish/functions".source = dotlib.source "apps/fish/functions";
+  };
+
   xdg.configFile."fish/themes/dotfiles.theme".source = theme;
 }

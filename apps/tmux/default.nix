@@ -9,7 +9,7 @@
     pkgs.tmux
   ];
 
-  xdg.configFile."tmux/tmux.conf".source = dotlib.source "apps/tmux/tmux.conf";
+  smfh.xdg.config.files."tmux/tmux.conf".source = dotlib.source "apps/tmux/tmux.conf";
 
   xdg.configFile."tmux/theme-dark.tmux".source = pkgs.runCommand "theme-dark.tmux" { } ''
     cat ${../../themes/moonfly/extras/moonfly.tmux} > $out

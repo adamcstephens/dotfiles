@@ -18,5 +18,5 @@ in
     pkgs.watchman
   ];
 
-  home.file."${configDir}/config.toml".source = dotlib.source "apps/jujutsu/config.toml";
+  smfh.files."${configDir}/config.toml".source = dotlib.source "apps/jujutsu/config.toml";
 }

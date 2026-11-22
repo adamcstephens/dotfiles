@@ -4,5 +4,5 @@
     pkgs.halloy
   ];
 
-  xdg.configFile."halloy".source = dotlib.source "apps/halloy";
+  smfh.xdg.config.files."halloy".source = dotlib.source "apps/halloy";
 }

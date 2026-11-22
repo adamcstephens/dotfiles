@@ -42,13 +42,13 @@ in
       cfg.package
     ];
 
-    xdg.configFile = {
-      "omp/agent/AGENTS.md".source = config.xdg.configFile."agents/AGENTS.md".source;
+    smfh.xdg.config.files = {
+      "omp/agent/AGENTS.md".source = config.smfh.xdg.config.files."agents/AGENTS.md".source;
+      "omp/agent/skills".source = config.smfh.xdg.config.files."agents/skills".source;
       "omp/agent/SYSTEM_TEMPLATE.md".source = dotlib.source "apps/omp/SYSTEM_TEMPLATE.md";
       "omp/agent/config.yml".source = dotlib.source "apps/omp/config.yml";
       "omp/agent/extensions".source = dotlib.source "apps/omp/extensions";
       "omp/agent/lsp.json".source = dotlib.source "apps/omp/lsp.json";
-      "omp/agent/skills".source = config.xdg.configFile."agents/skills".source;
       "omp/agent/themes".source = dotlib.source "apps/omp/themes";
     };
   };

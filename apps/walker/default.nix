@@ -1,12 +1,14 @@
 {
   config,
   dotlib,
+  flake,
   lib,
   pkgs,
   ...
 }:
 let
   cfg = config.dotfiles.apps.walker;
+  configPath = "apps/walker/config.toml";
 in
 {
   options.dotfiles.apps.walker = {
@@ -19,10 +21,10 @@ in
       pkgs.walker
     ];
 
-    xdg.configFile."elephant/websearch.toml".source =
+    smfh.xdg.config.files."elephant/websearch.toml".source =
       dotlib.source "apps/walker/elephant/websearch.toml";
 
-    xdg.configFile."walker/config.toml".source = dotlib.source "apps/walker/config.toml";
+    smfh.xdg.config.files."walker/config.toml".source = dotlib.source configPath;
 
     xdg.configFile."walker/themes/dotfiles/style.css".text = with config.colorScheme.palette; ''
       @define-color window_bg_color #${base05};
@@ -61,7 +63,7 @@ in
         ];
 
         Unit.X-Restart-Triggers = [
-          config.xdg.configFile."walker/config.toml".source
+          "${flake}/${configPath}"
           config.xdg.configFile."walker/themes/dotfiles/style.css".source
         ];
 

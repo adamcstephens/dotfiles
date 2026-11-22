@@ -10,7 +10,7 @@
     pkgs.river-bnf
   ];
 
-  xdg.configFile."river/init" = {
+  smfh.xdg.config.files."river/init" = {
     source = dotlib.source "apps/river/init.sh";
   };
 

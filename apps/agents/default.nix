@@ -32,7 +32,7 @@
     secrets.forgejo-token.reference = "op://Agents/forgejo_token/credential";
   };
 
-  xdg.configFile = {
+  smfh.xdg.config.files = {
     "agents/skills".source = dotlib.source "apps/agents/skills";
 
     "agents/AGENTS.md".source = dotlib.source "apps/agents/AGENTS.md";

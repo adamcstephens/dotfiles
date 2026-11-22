@@ -18,7 +18,7 @@ in
     {
       home.packages = lib.optionals cfg.tpm.enable [ pkgs.ssh-tpm-agent ];
 
-      home.file.".ssh/config".source = dotlib.source "apps/ssh/dotfiles.config";
+      smfh.files.".ssh/config".source = dotlib.source "apps/ssh/dotfiles.config";
     }
     (lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
       systemd.user.services = {

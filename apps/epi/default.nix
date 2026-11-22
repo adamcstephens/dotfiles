@@ -33,5 +33,5 @@ in
 
   xdg.configFile."epi/config.toml".source = epiConfig;
 
-  xdg.configFile."epi/hooks".source = dotlib.source "apps/epi/hooks";
+  smfh.xdg.config.files."epi/hooks".source = dotlib.source "apps/epi/hooks";
 }

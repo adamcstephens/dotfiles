@@ -6,5 +6,5 @@
     pkgs.zsh-syntax-highlighting
   ];
 
-  home.file.".zshrc".source = dotlib.source "apps/zsh/zshrc";
+  smfh.files.".zshrc".source = dotlib.source "apps/zsh/zshrc";
 }

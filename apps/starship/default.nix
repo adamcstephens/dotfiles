@@ -2,5 +2,5 @@
 {
   home.packages = [ pkgs.starship ];
 
-  xdg.configFile."starship.toml".source = dotlib.source "apps/starship/starship.toml";
+  smfh.xdg.config.files."starship.toml".source = dotlib.source "apps/starship/starship.toml";
 }

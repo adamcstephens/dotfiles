@@ -25,17 +25,17 @@
         config-file = mac.conf
       '';
 
-      xdg.configFile."ghostty/dotfiles.conf".source = dotlib.source "apps/ghostty/dotfiles.conf";
+      smfh.xdg.config.files."ghostty/dotfiles.conf".source = dotlib.source "apps/ghostty/dotfiles.conf";
 
-      xdg.configFile."ghostty/linux.conf" = lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
+      smfh.xdg.config.files."ghostty/linux.conf" = lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
         source = dotlib.source "apps/ghostty/linux.conf";
       };
 
-      xdg.configFile."ghostty/gtk-custom.css" = lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
+      smfh.xdg.config.files."ghostty/gtk-custom.css" = lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
         source = dotlib.source "apps/ghostty/gtk-custom.css";
       };
 
-      xdg.configFile."ghostty/mac.conf" = lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
+      smfh.xdg.config.files."ghostty/mac.conf" = lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
         source = dotlib.source "apps/ghostty/mac.conf";
       };
 
@@ -50,7 +50,7 @@
             '';
           };
 
-      xdg.configFile."ghostty/themes/moonfly".source =
+      smfh.xdg.config.files."ghostty/themes/moonfly".source =
         dotlib.source "themes/moonfly/extras/moonfly-ghostty.conf";
       xdg.configFile."ghostty/themes/Modus Operandi".source =
         npins."modus-themes.nvim" + "/extras/ghostty/modus_operandi";

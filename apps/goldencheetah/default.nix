@@ -2,5 +2,5 @@
 {
   home.packages = [ pkgs.golden-cheetah ];
 
-  xdg.configFile."goldencheetah.org".source = dotlib.source "apps/goldencheetah";
+  smfh.xdg.config.files."goldencheetah.org".source = dotlib.source "apps/goldencheetah";
 }

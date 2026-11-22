@@ -1,4 +1,4 @@
 { dotlib, ... }:
 {
-  xdg.configFile."karabiner".source = dotlib.source "apps/karabiner";
+  smfh.xdg.config.files."karabiner".source = dotlib.source "apps/karabiner";
 }

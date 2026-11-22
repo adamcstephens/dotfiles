@@ -43,7 +43,7 @@ in
       };
     })
     (lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
-      xdg.configFile."rex/init.lua".source = dotlib.source "apps/rex/init.lua";
+      smfh.xdg.config.files."rex/init.lua".source = dotlib.source "apps/rex/init.lua";
     })
   ];
 }

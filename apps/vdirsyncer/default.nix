@@ -4,5 +4,5 @@
     pkgs.vdirsyncer
   ];
 
-  xdg.configFile."vdirsyncer/config".source = dotlib.source "apps/vdirsyncer/config";
+  smfh.xdg.config.files."vdirsyncer/config".source = dotlib.source "apps/vdirsyncer/config";
 }

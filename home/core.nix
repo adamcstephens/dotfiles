@@ -10,6 +10,7 @@
   imports = [
     ./options.nix
     ./dotfiles-sync.nix
+    ./checkout.nix
 
     ../apps/bash
     ../apps/bat
@@ -45,7 +46,7 @@
         if config.dotfiles.nixosManaged then
           "${flake}/${relative}"
         else
-          config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/${relative}";
+          "${config.home.homeDirectory}/.dotfiles/${relative}";
 
       unfreePkg =
         name: nixpkgs:

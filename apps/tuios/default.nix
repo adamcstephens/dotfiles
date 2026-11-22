@@ -20,8 +20,8 @@ in
     {
       home.packages = [ cfg.package ];
 
-      xdg.configFile."tuios/config.toml".source = dotlib.source "apps/tuios/config.toml";
-      xdg.configFile."tuios/themes".source = dotlib.source "apps/tuios/themes";
+      smfh.xdg.config.files."tuios/config.toml".source = dotlib.source "apps/tuios/config.toml";
+      smfh.xdg.config.files."tuios/themes".source = dotlib.source "apps/tuios/themes";
     }
     (lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
       systemd.user = {

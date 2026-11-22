@@ -9,5 +9,5 @@
     inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system}.jjui
   ];
 
-  xdg.configFile."jjui/config.toml".source = dotlib.source "apps/jjui/config.toml";
+  smfh.xdg.config.files."jjui/config.toml".source = dotlib.source "apps/jjui/config.toml";
 }
