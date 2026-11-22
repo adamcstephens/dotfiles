@@ -5,7 +5,16 @@
   ...
 }:
 let
-  package = pkgs.atuin;
+  package = pkgs.symlinkJoin {
+    name = "atuin";
+    paths = [ pkgs.atuin ];
+    nativeBuildInputs = [ pkgs.makeWrapper ];
+    inherit (pkgs.atuin) meta;
+    postBuild = ''
+      wrapProgram "$out/bin/atuin" \
+        --set ATUIN_CONFIG_DIR ${lib.escapeShellArg "${config.xdg.configHome}/atuin"}
+    '';
+  };
   socketPath = "${config.home.homeDirectory}/.local/share/atuin/atuin.sock";
   settings = lib.recursiveUpdate (builtins.fromTOML (builtins.readFile ./config.toml)) (
     if pkgs.stdenv.hostPlatform.isLinux then
