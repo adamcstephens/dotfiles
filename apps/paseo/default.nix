@@ -19,7 +19,8 @@ let
         patches = (old.patches or [ ]) ++ patches;
         postInstall = ''
           wrapProgram "$out/bin/paseo" \
-            --run 'export PASEO_STATE_HOME="''${PASEO_STATE_HOME:-''${HOME}/.local/state/paseo}"'
+            --run 'export PASEO_STATE_HOME="''${PASEO_STATE_HOME:-''${HOME}/.local/state/paseo}"' \
+            --run 'export PASEO_HOME="''${PASEO_HOME:-''${HOME}/.local/state/paseo}"'
         '';
       });
 
