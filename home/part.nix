@@ -144,7 +144,15 @@ in
                       ports = [ "7150:7150" ];
                     };
                   };
-                  tracker-deck = epi-agent { project = "tracker"; };
+                  tracker = epi-agent {
+                    project = "tracker";
+                    settings = {
+                      cpus = 8;
+                      memory = 16384;
+                      disk_size = "80G";
+                      ports = [ "6950:6950" ];
+                    };
+                  };
                 };
               };
             }
