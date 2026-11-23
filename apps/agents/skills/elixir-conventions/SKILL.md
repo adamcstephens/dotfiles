@@ -142,6 +142,8 @@ end
 
 ### Capturing Logs
 
+You MUST ensure handled warnings or errors should not show up when running tests. A clean test run SHOULD NOT show errors or warnings.
+
 Use `ExUnit.CaptureLog.capture_log/1` to capture and assert on logs:
 
 ```elixir
