@@ -36,7 +36,32 @@
     # Disable to clear current managed dir ../apps/zellij
     ../apps/zsh
 
-    inputs.onenix.homeModules.default
+    (
+      {
+        config,
+        lib,
+        pkgs,
+        ...
+      }:
+      let
+        upstream = inputs.onenix.homeModules.default { inherit config lib pkgs; };
+        token = config.onenix.auth.serviceAccountTokenFile;
+        activation = upstream.config.content.home.activation.onenix;
+      in
+      lib.recursiveUpdate upstream {
+        config.content.home.activation.onenix.data =
+          if token == null then
+            activation.data
+          else
+            ''
+              if [[ -f ${lib.escapeShellArg token} && -r ${lib.escapeShellArg token} && ! -s ${lib.escapeShellArg token} ]]; then
+                errorEcho "onenix: service account token file is empty; skipping activation" >&2
+              else
+                ${activation.data}
+              fi
+            '';
+      }
+    )
   ];
 
   config = {
