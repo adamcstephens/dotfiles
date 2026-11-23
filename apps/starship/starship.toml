@@ -30,6 +30,8 @@ error_symbol = "[𑁱](bold red)"
 symbol = ""
 
 [hostname]
+ssh_only = false
+detect_env_vars = ["SSH_CONNECTION", "SSH_CLIENT", "SSH_TTY", "TUIOS_SESSION"]
 style = "bold yellow"
 format = "[$hostname]($style) "
 trim_at = ""
@@ -45,6 +47,7 @@ disabled = false
 format = ""
 
 [username]
+detect_env_vars = ["TUIOS_SESSION"]
 style_user = "fg:244"
 format = "[$user@]($style)"
 
