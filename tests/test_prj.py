@@ -36,7 +36,7 @@ def window(layout, label="project", window_id="window:project"):
 
 class RexTest(unittest.TestCase):
     def setUp(self):
-        self.enterContext(patch.dict(os.environ, {"REX_SESSION": "session:test", "REX_BLOCK": "block:caller"}))
+        self.enterContext(patch.dict(os.environ, {"REX_BLOCK": "block:caller"}, clear=True))
         for name in ("is_kitty", "is_tmux", "is_tuios", "is_wayland", "is_zellij"):
             self.enterContext(patch.object(prj, name, False))
         self.enterContext(patch.object(prj, "is_rex", True))
@@ -49,7 +49,7 @@ class RexTest(unittest.TestCase):
         self.assertEqual(shlex.split(command), ["rex", "api", "call", "session.focus_window", "-"])
         self.assertEqual(
             json.loads(run.call_args.kwargs["input"]),
-            {"session_id": "session:test", "window_id": "window:project"},
+            {"session_id": "block:caller", "window_id": "window:project"},
         )
 
     def test_finder_uses_native_rex_picker(self):
@@ -80,7 +80,7 @@ class RexTest(unittest.TestCase):
                 )
 
     def test_rex_rejects_remote_flags_before_running_commands(self):
-        env = {"REX_SESSION": "session:test", "PATH": ""}
+        env = {"REX_BLOCK": "block:caller", "PATH": ""}
         for flag in ("--remote", "--ssh", "-r", "-s"):
             with self.subTest(flag=flag):
                 result = subprocess.run(
@@ -106,7 +106,7 @@ from unittest.mock import patch
 def command(command, **kwargs):
     print(json.dumps({
         "command": command,
-        "session": os.environ.get("REX_SESSION"),
+        "block": os.environ.get("REX_BLOCK"),
         "client": os.environ.get("REX_CLIENT"),
     }))
     return subprocess.CompletedProcess(command, 0, "null", "")
@@ -117,7 +117,7 @@ with patch("subprocess.run", side_effect=command):
 """
         result = subprocess.run(
             [sys.executable, "-c", code, str(SCRIPT)],
-            env={"REX_SESSION": "session:test", "REX_CLIENT": "client:test", "PATH": ""},
+            env={"REX_BLOCK": "block:caller", "REX_CLIENT": "client:test", "PATH": ""},
             capture_output=True,
             text=True,
             check=False,
@@ -132,7 +132,7 @@ with patch("subprocess.run", side_effect=command):
             json.loads(argv[4]),
             {"project": os.path.abspath("my-project"), "window_label": "my-project"},
         )
-        self.assertEqual(commands[0]["session"], "session:test")
+        self.assertEqual(commands[0]["block"], "block:caller")
         self.assertEqual(commands[0]["client"], "client:test")
 
     def test_open_window_delegates_to_native_action(self):

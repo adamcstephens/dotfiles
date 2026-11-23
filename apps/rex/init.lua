@@ -28,7 +28,7 @@ local function open_popup(ctx, key, command, bounds)
         command = {
           "sh",
           "-c",
-          'origin=$1; shift; "$@"; status=$?; rex block focus --session "$REX_SESSION" "$origin"; exit "$status"',
+          'origin=$1; shift; "$@"; status=$?; rex block focus --session "$origin" "$origin"; exit "$status"',
           "sh",
           ctx.block_id,
           unpack(command),

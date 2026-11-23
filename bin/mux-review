@@ -38,14 +38,14 @@ def main() -> int:
         return run_review(pr, args.args)
 
     worker = [sys.executable, str(Path(__file__).resolve()), "--worker"]
-    if os.environ.get("REX_SESSION"):
+    if block := os.environ.get("REX_BLOCK"):
         command = [
             "rex",
             "do",
             "--session",
-            os.environ["REX_SESSION"],
+            block,
             "--block",
-            os.environ["REX_BLOCK"],
+            block,
             "--eval",
             """
 local origin = assert(rex.session.describe_block({ block_id = rex.block_id }))
@@ -73,9 +73,9 @@ return assert(rex.call("session.set_layer_state", {
                     "command": [
                         "sh",
                         "-c",
-                        'origin=$1; shift; "$@"; status=$?; rex block focus --session "$REX_SESSION" "$origin"; exit "$status"',
+                        'origin=$1; shift; "$@"; status=$?; rex block focus --session "$origin" "$origin"; exit "$status"',
                         "sh",
-                        os.environ["REX_BLOCK"],
+                        block,
                         *worker,
                         pr,
                         "--no-shell",
