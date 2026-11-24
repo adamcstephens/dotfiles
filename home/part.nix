@@ -72,7 +72,10 @@ in
 
         modules = standaloneModules ++ [
           ../apps/paseo
-          { dotfiles.profile = "agents"; }
+          {
+            dotfiles.apps.paseo.daemon.enable = true;
+            dotfiles.profile = "agents";
+          }
         ];
       };
 
