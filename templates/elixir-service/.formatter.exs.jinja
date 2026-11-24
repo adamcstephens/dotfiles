@@ -1,0 +1,7 @@
+# Used by "mix format"
+[
+{% if phoenix or postgres %}
+  import_deps: [{{ ":phoenix" if phoenix }}{{ ", " if phoenix and postgres }}{{ ":ecto_sql" if postgres }}],
+{% endif %}
+  inputs: ["{mix,.formatter}.exs", "{config,lib,{{ 'priv,' if postgres }}test}/**/*.{ex,exs}"]
+]

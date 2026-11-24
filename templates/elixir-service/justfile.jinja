@@ -1,0 +1,60 @@
+{% if postgres %}
+set positional-arguments
+
+export PC_CONFIG_FILES := justfile_directory() / ".services/process-compose.yaml"
+export PGHOST := justfile_directory() / ".services/postgres"
+export PGDATA := PGHOST / "data"
+export PGPORT := "5432"
+export PGUSER := "postgres"
+
+{% endif %}
+check:
+    mix format --check-formatted
+    MIX_ENV=test mix compile --warnings-as-errors
+    just test
+
+format:
+    mix format
+    nixfmt *.nix nix/*.nix
+
+setup:
+    mix deps.get
+
+update-elixir:
+    mix deps.clean --unused --unlock
+    mix deps.update --all
+    mix deps.get
+    mix hex.audit
+    mix hex.outdated --within-requirements
+    just mix-nix-lock
+
+mix-nix-lock:
+    deps_nix
+
+dev:{{ ' _database db-setup' if postgres else '' }}
+    iex -S mix{{ ' phx.server' if phoenix else '' }}
+
+test:{{ ' _database' if postgres else '' }}
+    mix test
+{% if postgres %}
+
+pc *args:
+    @install -d -m 700 .services/run
+    @process-compose --use-uds --unix-socket .services/run/pc.sock --log-file .services/run/pc.log "$@"
+
+# Prepare the development database after PostgreSQL is ready.
+db-setup:
+    mix ecto.create --quiet
+    mix ecto.migrate --quiet
+
+_database:
+    #!/usr/bin/env bash
+    set -eu
+    just pc process list >/dev/null 2>&1 || just pc up --detached
+    for ((i = 0; i < 60; i++)); do
+      if pg_isready --quiet --dbname=postgres; then exit 0; fi
+      sleep 1
+    done
+    echo 'Local database not ready; inspect it with just pc attach.' >&2
+    exit 1
+{% endif %}

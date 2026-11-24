@@ -1,0 +1,27 @@
+defmodule {{ module_name }}.Config do
+  @moduledoc """
+  Reads secrets for use in `config/runtime.exs`. For example:
+
+      config :{{ app_name }}, api_token: {{ module_name }}.Config.fetch_secret!("API_TOKEN")
+
+  Set `API_TOKEN_FILE` to the credential's path, or set `API_TOKEN` directly.
+  For non-secret settings, use `System.get_env/1` or `System.fetch_env!/1` directly.
+  """
+
+  @doc """
+  Reads the file named by `NAME_FILE`, removing only trailing CR and LF bytes.
+  If `NAME_FILE` is unset, returns `NAME` unchanged, or `nil` if neither is set.
+  Raises `File.Error` if the configured file cannot be read.
+  """
+  def get_secret(name) do
+    case System.get_env(name <> "_FILE") do
+      nil -> System.get_env(name)
+      path -> path |> File.read!() |> String.replace(~r/[\r\n]+\z/, "")
+    end
+  end
+
+  @doc "Like `get_secret/1`, but raises `System.EnvError` if neither variable is set."
+  def fetch_secret!(name) do
+    get_secret(name) || raise System.EnvError, env: name
+  end
+end

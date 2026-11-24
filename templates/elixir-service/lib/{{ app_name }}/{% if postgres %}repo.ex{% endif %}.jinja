@@ -1,0 +1,6 @@
+defmodule {{ module_name }}.Repo do
+  @moduledoc "Provides access to the service's PostgreSQL database."
+  use Ecto.Repo,
+    otp_app: :{{ app_name }},
+    adapter: Ecto.Adapters.Postgres
+end

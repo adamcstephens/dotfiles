@@ -1,0 +1,37 @@
+import Config
+
+alias {{ module_name }}, as: Service
+
+app = :{{ app_name }}
+{% if phoenix %}
+
+port = String.to_integer(System.get_env("PORT", "4000"))
+
+config app, Service.Endpoint, http: [ip: {127, 0, 0, 1}, port: port]
+{% endif %}
+
+if config_env() == :prod do
+{% if phoenix %}
+  config app, Service.Endpoint, secret_key_base: Service.Config.fetch_secret!("SECRET_KEY_BASE")
+{% endif %}
+{% if phoenix and postgres %}
+
+{% endif %}
+{% if postgres %}
+  config app, Service.Repo, url: Service.Config.fetch_secret!("DATABASE_URL")
+{% endif %}
+else
+{% if phoenix %}
+  config app, Service.Endpoint, secret_key_base: String.duplicate("local-development-only-", 4)
+{% endif %}
+{% if phoenix and postgres %}
+
+{% endif %}
+{% if postgres %}
+  config app, Service.Repo,
+    database: "#{app}_#{config_env()}",
+    username: "postgres",
+    socket_dir: System.get_env("PGHOST", Path.expand("../.services/postgres", __DIR__)),
+    port: String.to_integer(System.get_env("PGPORT", "5432"))
+{% endif %}
+end

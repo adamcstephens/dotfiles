@@ -1,0 +1,36 @@
+_envops:
+  keep_trailing_newline: true
+  trim_blocks: true
+  lstrip_blocks: true
+
+_tasks:
+  - nix develop path:. --command just update-elixir format
+
+project_name:
+  type: str
+  help: Project name (lowercase, hyphen-separated)
+  default: "{{ _folder_name }}"
+  validator: >-
+    {% if project_name | length > 58 or not (project_name | regex_search('^[a-z][a-z0-9]*(?:-[a-z0-9]+)*\\Z')) %}
+    Use up to 58 lowercase letters, digits, and single hyphens; start with a letter.
+    {% endif %}
+
+phoenix:
+  type: bool
+  help: Is this a Phoenix app?
+  default: false
+
+postgres:
+  type: bool
+  help: Do you need PostgreSQL?
+  default: false
+
+app_name:
+  type: str
+  when: false
+  default: "{{ project_name | replace('-', '_') }}"
+
+module_name:
+  type: str
+  when: false
+  default: "{{ project_name.split('-') | map('capitalize') | join }}"

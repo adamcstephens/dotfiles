@@ -1,0 +1,24 @@
+defmodule {{ module_name }}.ApplicationTest do
+  use ExUnit.Case, async: true
+
+  alias {{ module_name }}, as: Service
+
+  test "the application starts its named root supervisor" do
+    assert is_pid(Process.whereis(Service.Supervisor))
+  end
+{% if postgres %}
+
+  test "the supervised repo connects to the test database" do
+    result = Service.Repo.query!("SELECT current_database()")
+    assert result.rows == [["{{ app_name }}_test"]]
+  end
+{% endif %}
+{% if phoenix %}
+
+  test "the endpoint serves the root route" do
+    conn = Service.Endpoint.call(Plug.Test.conn(:get, "/"), [])
+    assert conn.status == 200
+    assert conn.resp_body == "ok"
+  end
+{% endif %}
+end

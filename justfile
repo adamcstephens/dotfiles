@@ -61,6 +61,9 @@ systemd-networkd-debug-reset:
     sudo systemctl daemon-reload
     sudo systemctl systemd-networkd
 
+test-elixir-service:
+    ./tests/test_elixir_service.sh
+
 test:
     nix eval --impure --json --file tests/paseo.nix
     nix build --print-build-logs --keep-going .#homeConfigurations.deck.activationPackage .#homeConfigurations.punk.activationPackage

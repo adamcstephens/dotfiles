@@ -22,4 +22,16 @@
       description = "Rust CLI app with Nix packaging and dynamic shell completions";
     };
   };
+
+  perSystem =
+    { pkgs, ... }:
+    {
+      packages.elixir-service = pkgs.writeShellApplication {
+        name = "elixir-service";
+        runtimeInputs = [ pkgs.copier ];
+        text = ''
+          exec copier copy --trust "$HOME/.dotfiles/templates/elixir-service" "$@"
+        '';
+      };
+    };
 }

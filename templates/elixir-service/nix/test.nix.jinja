@@ -1,0 +1,144 @@
+{ self }:
+{
+  name = "{{ project_name }}";
+
+  nodes.machine =
+    { pkgs, ... }:
+    let
+      probe = pkgs.writeText "{{ project_name }}-service-probe.erl" ''
+        supervisor:which_children('Elixir.{{ module_name }}.Supervisor').
+        ExpectedNode = case os:getenv("RELEASE_DISTRIBUTION") of
+          "none" -> nonode@nohost;
+          "name" -> '{{ app_name }}@127.0.0.1'
+        end.
+        ExpectedNode = node().
+        "from-settings" = os:getenv("VM_SETTING").
+        Credential = filename:join(os:getenv("CREDENTIALS_DIRECTORY"), "VM_TOKEN_FILE").
+        Credential = os:getenv("VM_TOKEN_FILE").
+        {error, enoent} = file:read_file("/run/{{ project_name }}-test-token").
+        {error, enoent} = file:read_file("/run/{{ project_name }}-host-only").
+        Token = 'Elixir.{{ module_name }}.Config':'fetch_secret!'(<<"VM_TOKEN">>).
+        false = os:getenv("VM_TOKEN").
+        false = lists:any(fun(E) -> string:find(E, binary_to_list(Token)) =/= nomatch end, os:getenv()).
+        {error, enoent} = file:read_file_info("/proc/1/status").
+        {error, enoent} = file:read_file_info("/proc/meminfo").
+        {ok, Socket} = gen_tcp:listen(0, [{ip, {127,0,0,1}}]).
+        ok = gen_tcp:close(Socket).
+{% if postgres %}
+        #{rows := [[1]]} = 'Elixir.{{ module_name }}.Repo':'query!'(<<"SELECT 1">>).
+{% endif %}
+        ok = file:write_file("/run/{{ project_name }}/proof", integer_to_binary(erlang:crc32(Token))).
+      '';
+    in
+    {
+      imports = [ self.nixosModules.default ];
+      services."{{ project_name }}" = {
+        enable = true;
+        settings.VM_SETTING = "from-settings";
+        credentials.VM_TOKEN_FILE = "/run/{{ project_name }}-test-token";
+{% if phoenix %}
+        settings.PORT = "4080";
+        credentials.SECRET_KEY_BASE_FILE = "/run/{{ project_name }}-test-key";
+{% endif %}
+{% if postgres %}
+        credentials.DATABASE_URL_FILE = "/run/postgresql/service-test-database-url";
+{% endif %}
+      };
+
+      specialisation.admin.configuration.services."{{ project_name }}".admin.enable = true;
+
+      system.activationScripts.serviceTestCredentials.text = ''
+        (
+          umask 077
+          cat /proc/sys/kernel/random/uuid > /run/{{ project_name }}-test-token
+{% if phoenix %}
+          head --bytes=48 /dev/urandom | base64 > /run/{{ project_name }}-test-key
+{% endif %}
+        )
+        touch /run/{{ project_name }}-host-only
+        chmod 0644 /run/{{ project_name }}-host-only
+      '';
+{% if phoenix %}
+      environment.systemPackages = [ pkgs.curl ];
+{% endif %}
+{% if postgres %}
+
+      # Only the test machine provisions the database. The service consumes its URL.
+      services.postgresql = {
+        enable = true;
+        package = pkgs.postgresql_18;
+        ensureDatabases = [ "service_test" ];
+        ensureUsers = [
+          {
+            name = "service_test";
+            ensureDBOwnership = true;
+          }
+        ];
+      };
+      systemd.services.postgresql-setup.postStart = ''
+        umask 077
+        psql --dbname=postgres --set=ON_ERROR_STOP=1 --quiet --no-align --tuples-only \
+          > /run/postgresql/service-test-database-url <<'SQL'
+        SELECT gen_random_uuid() AS password \gset
+        ALTER ROLE service_test PASSWORD :'password';
+        SELECT 'postgresql://service_test:' || :'password' || '@127.0.0.1/service_test';
+        SQL
+      '';
+{% endif %}
+
+      systemd.services."{{ project_name }}" = {
+{% if postgres %}
+        after = [ "postgresql-setup.service" ];
+        requires = [ "postgresql-setup.service" ];
+{% endif %}
+        confinement.packages = [ probe ];
+        # OTP runs -eval after the boot script, inside the release's own VM.
+        environment.ERL_AFLAGS = ''-eval "{ok, ok} = file:script('${probe}')."'';
+      };
+    };
+
+  testScript = ''
+    import zlib
+
+    machine.wait_for_unit("{{ project_name }}.service")
+    machine.wait_until_succeeds("test -s /run/{{ project_name }}/proof")
+    token = machine.succeed("cat /run/{{ project_name }}-test-token").strip()
+    assert int(machine.succeed("cat /run/{{ project_name }}/proof")) == zlib.crc32(token.encode())
+    assert machine.succeed("stat --format=%a /run/{{ project_name }}/proof").strip() == "600"
+    machine.succeed("test $(stat --format=%a /run/{{ project_name }}-host-only) = 644")
+    machine.succeed("test ! -e /run/{{ project_name }}/.erlang.cookie")
+    machine.fail("command -v {{ project_name }}")
+{% if phoenix %}
+    machine.wait_for_open_port(4080)
+    assert machine.succeed("curl --fail --silent --show-error http://127.0.0.1:4080/").strip() == "ok"
+{% endif %}
+
+    pid = machine.succeed("systemctl show --property=MainPID --value {{ project_name }}.service").strip()
+    status = dict(line.split(":", 1) for line in machine.succeed(f"cat /proc/{pid}/status").splitlines())
+    assert int(status["CapBnd"], 16) == 0
+    assert int(status["NoNewPrivs"]) == 1
+
+    machine.succeed("/run/current-system/specialisation/admin/bin/switch-to-configuration test")
+    machine.wait_for_unit("{{ project_name }}.service")
+    cookie = "/run/{{ project_name }}/.erlang.cookie"
+    rpc = "{{ project_name }} rpc"
+    check_node = f"""{rpc} 'true = Node.self() == :"{{ app_name }}@127.0.0.1"; true = Atom.to_string(Node.get_cookie()) == String.trim(File.read!("{cookie}"))'"""
+    machine.wait_until_succeeds(check_node)
+    machine.succeed(f"test -s {cookie} && test $(stat --format=%a {cookie}) = 600")
+    machine.succeed(f"sudo --user=nobody sh -c '! test -r {cookie}'")
+    machine.fail(f"grep --quiet --fixed-strings --file={cookie} /proc/$(systemctl show --property=MainPID --value {{ project_name }}.service)/cmdline")
+
+    port = int(machine.succeed(rpc + """ '{:ok, names} = :net_adm.names(~c"127.0.0.1"); IO.puts(List.keyfind(names, ~c"{{ app_name }}", 0) |> elem(1))'""").strip())
+    for listener in (4369, port):
+        sockets = machine.succeed(f"ss --no-header --listening --numeric --tcp 'sport = :{listener}'").splitlines()
+        endpoints = {line.split()[3] for line in sockets}
+        assert f"127.0.0.1:{listener}" in endpoints, endpoints
+        assert endpoints <= {f"127.0.0.1:{listener}", f"[::1]:{listener}"}, endpoints
+    machine.succeed("printf 'IO.puts(\"remote node: #{Node.self()}\")\\n' | sudo {{ project_name }} remote | grep --fixed-strings 'remote node: {{ app_name }}@127.0.0.1'")
+
+    first_cookie = machine.succeed(f"sha256sum {cookie}")
+    machine.succeed("systemctl restart {{ project_name }}.service")
+    machine.wait_until_succeeds(check_node)
+    assert machine.succeed(f"sha256sum {cookie}") != first_cookie
+  '';
+}

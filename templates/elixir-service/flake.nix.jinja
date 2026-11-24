@@ -1,0 +1,66 @@
+{
+  inputs = {
+    nixpkgs.url = "https://channels.nixos.org/nixpkgs-unstable/nixexprs.tar.zst";
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    deps_nix = {
+      url = "github:adamcstephens/deps_nix/push-lqyzksrxytlt";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
+
+  outputs =
+    inputs@{ flake-parts, ... }:
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      flake.nixosModules.default = import ./nix/module.nix inputs.self;
+
+      systems = [
+        "x86_64-linux"
+        "aarch64-darwin"
+      ];
+
+      perSystem =
+        {
+          inputs',
+          lib,
+          pkgs,
+          ...
+        }:
+        let
+          beamPackages = pkgs.beamMinimal29Packages.overrideScope (
+            _: prev: {
+              elixir = prev.elixir_1_20;
+            }
+          );
+        in
+        {
+          packages.default = pkgs.callPackage ./nix/package.nix { inherit beamPackages; };
+
+          checks = lib.optionalAttrs pkgs.stdenv.hostPlatform.isLinux {
+            service = pkgs.testers.runNixOSTest (import ./nix/test.nix { self = inputs.self; });
+          };
+
+          devShells.default = pkgs.mkShell {
+            packages = [
+              beamPackages.erlang
+              beamPackages.elixir
+              beamPackages.expert
+              beamPackages.hex
+              beamPackages.rebar3
+              inputs'.deps_nix.packages.deps_nix
+              pkgs.dexter
+              pkgs.just
+              pkgs.nixfmt
+{% if postgres %}
+              pkgs.process-compose
+              pkgs.postgresql_18
+{% endif %}
+            ]
+            ++ (lib.optionals pkgs.stdenv.hostPlatform.isLinux [ pkgs.inotify-tools ]);
+
+            shellHook = ''
+              export ERL_AFLAGS="-kernel shell_history enabled -kernel shell_history_file_bytes 1024000"
+            '';
+          };
+        };
+    };
+}

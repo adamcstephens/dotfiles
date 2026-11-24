@@ -1,0 +1,22 @@
+version: "0.5"
+disable_env_expansion: true
+
+processes:
+  postgres_db:
+    command: |
+      set -eu
+      install -d -m 700 "$PGHOST"
+      if [ ! -s "$PGDATA/PG_VERSION" ]; then
+        # The socket directory is relative to PGDATA, so the checkout can move.
+        initdb --username=postgres --encoding=UTF8 --locale=C --auth-local=trust --auth-host=reject \
+          --set=listen_addresses= --set=unix_socket_directories=.. --set=unix_socket_permissions=0700
+      fi
+      exec postgres
+    readiness_probe:
+      exec:
+        command: pg_isready --dbname=postgres --quiet
+      period_seconds: 1
+      timeout_seconds: 3
+      failure_threshold: 60
+    shutdown:
+      signal: 2  # SIGINT: fast, clean PostgreSQL shutdown even with connected clients.

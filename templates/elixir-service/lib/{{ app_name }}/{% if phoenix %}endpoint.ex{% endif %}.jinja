@@ -1,0 +1,6 @@
+defmodule {{ module_name }}.Endpoint do
+  @moduledoc "Serves HTTP requests through the application's router."
+  use Phoenix.Endpoint, otp_app: :{{ app_name }}
+
+  plug {{ module_name }}.Router
+end

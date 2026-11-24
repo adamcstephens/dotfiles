@@ -1,0 +1,6 @@
+defmodule {{ module_name }}.HomeController do
+  @moduledoc "Handles the service's root route."
+  use Phoenix.Controller, formats: [:txt], layouts: []
+
+  def index(%Plug.Conn{} = conn, _params), do: text(conn, "ok")
+end

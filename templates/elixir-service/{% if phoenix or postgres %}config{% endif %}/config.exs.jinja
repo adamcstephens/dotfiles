@@ -1,0 +1,22 @@
+import Config
+
+alias {{ module_name }}, as: Service
+
+app = :{{ app_name }}
+{% if phoenix %}
+
+config :phoenix, :json_library, JSON
+
+config app, Service.Endpoint,
+  adapter: Bandit.PhoenixAdapter,
+  render_errors: [formats: [txt: Service.ErrorText], layout: false]
+
+if config_env() == :prod do
+  config app, Service.Endpoint, server: true
+end
+{% endif %}
+{% if postgres %}
+
+config :postgrex, :json_library, JSON
+config app, ecto_repos: [Service.Repo]
+{% endif %}

@@ -1,0 +1,132 @@
+self:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+let
+  cfg = config.services."{{ project_name }}";
+  runtimeDir = "/run/{{ project_name }}";
+  cookieFile = "${runtimeDir}/.erlang.cookie";
+  release = lib.getExe cfg.package;
+  adminRelease = pkgs.writeShellScriptBin "{{ project_name }}" ''
+    set -eu
+    test -r ${cookieFile}
+    export RELEASE_DISTRIBUTION=name RELEASE_NODE={{ app_name }}@127.0.0.1
+    export ERL_EPMD_ADDRESS=127.0.0.1 RELEASE_TMP=${runtimeDir}
+    # Two -setcookie arguments make OTP read the private cookie file instead of using Mix's argv cookie.
+    export RELEASE_COOKIE=nocookie
+    export ERL_AFLAGS="''${ERL_AFLAGS:+$ERL_AFLAGS }-setcookie nocookie -kernel inet_dist_use_interface {127,0,0,1}"
+    # Use the runtime directory for cookie lookup, but retain the caller's HOME inside the VM.
+    ERL_AFLAGS="$ERL_AFLAGS -env HOME \"''${HOME:-${runtimeDir}}\""
+    export HOME=${runtimeDir}
+    exec ${release} "$@"
+  '';
+  generateCookie = pkgs.writeShellScript "{{ project_name }}-generate-cookie" ''
+    exec ${lib.getExe pkgs.openssl} rand -hex 32 > ${cookieFile}
+  '';
+in
+{
+  options.services."{{ project_name }}" = {
+    enable = lib.mkEnableOption "the {{ project_name }} OTP service";
+    admin.enable = lib.mkEnableOption "loopback-only release administration via sudo {{ project_name }} remote";
+
+    package = lib.mkOption {
+      type = lib.types.package;
+      default = self.packages.${pkgs.stdenv.hostPlatform.system}.default;
+      defaultText = lib.literalExpression "self.packages.\${pkgs.stdenv.hostPlatform.system}.default";
+      description = "The {{ project_name }} release to run.";
+    };
+
+    settings = lib.mkOption {
+      type = lib.types.attrsOf lib.types.str;
+      default = { };
+      example = {
+        LOG_LEVEL = "info";
+      };
+      description = "Non-secret environment variables for the service.";
+    };
+
+    credentials = lib.mkOption {
+      type = lib.types.attrsOf lib.types.externalPath;
+      default = { };
+      example = {
+        API_TOKEN_FILE = "/run/secrets/api-token";
+      };
+      description = ''
+        Runtime secret files outside the Nix store, keyed by their _FILE environment
+        variables. systemd loads each file and passes its private copy's path to the service.
+      '';
+    };
+  };
+
+  config = lib.mkIf cfg.enable {
+    environment.systemPackages = lib.optional cfg.admin.enable adminRelease;
+
+    systemd.services."{{ project_name }}" = {
+      description = "{{ module_name }} OTP service";
+      wantedBy = [ "multi-user.target" ];
+      confinement.enable = true;
+      environment = {
+        RELEASE_DISTRIBUTION = "none";
+        RELEASE_TMP = runtimeDir;
+      }
+      // lib.optionalAttrs ((cfg.settings.RELEASE_DISTRIBUTION or "none") == "none") {
+        RELEASE_COOKIE = "nocookie";
+      }
+      // cfg.settings
+      // lib.mapAttrs (name: _: "%d/${name}") cfg.credentials;
+
+      serviceConfig = {
+        Type = "exec";
+        DynamicUser = true;
+        ExecStartPre = lib.optional cfg.admin.enable generateCookie;
+        ExecStart = "${if cfg.admin.enable then lib.getExe adminRelease else release} start";
+        Restart = "on-failure";
+        LoadCredential = lib.mapAttrsToList (name: path: "${name}:${toString path}") cfg.credentials;
+        RuntimeDirectory = [ "{{ project_name }}" ];
+        RuntimeDirectoryMode = "0700";
+        UMask = "0077";
+        BindReadOnlyPaths = [
+          "/etc/hosts"
+          "-/etc/resolv.conf"
+        ];
+
+        CapabilityBoundingSet = [ "" ];
+        LockPersonality = true;
+        MemoryDenyWriteExecute = true;
+        NoNewPrivileges = true;
+        PrivateDevices = true;
+        PrivateIPC = true;
+        PrivateTmp = true;
+        PrivateUsers = true;
+        ProcSubset = "pid";
+        ProtectClock = true;
+        ProtectControlGroups = true;
+        ProtectHome = true;
+        ProtectHostname = true;
+        ProtectKernelLogs = true;
+        ProtectKernelModules = true;
+        ProtectKernelTunables = true;
+        ProtectProc = "invisible";
+        ProtectSystem = "strict";
+        RestrictAddressFamilies = [
+          "AF_INET"
+          "AF_INET6"
+          "AF_UNIX"
+        ];
+        RestrictNamespaces = true;
+        RestrictRealtime = true;
+        RestrictSUIDSGID = true;
+        SystemCallArchitectures = "native";
+        SystemCallErrorNumber = "EPERM";
+        SystemCallFilter = [
+          "@system-service"
+          "~@privileged"
+          "~@resources"
+        ];
+      };
+    };
+  };
+}

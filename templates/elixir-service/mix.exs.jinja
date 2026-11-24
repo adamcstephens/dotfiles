@@ -1,0 +1,46 @@
+defmodule {{ module_name }}.MixProject do
+  @moduledoc "Defines the build and application entry point for {{ project_name }}."
+  use Mix.Project
+
+  @version_path Path.join(__DIR__, "VERSION")
+  @external_resource @version_path
+  @version @version_path |> File.read!() |> String.trim()
+
+  def project do
+    [
+      app: :{{ app_name }},
+      version: @version,
+      elixir: "~> 1.20",
+      start_permanent: Mix.env() == :prod,
+{% if postgres %}
+      aliases: [test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"]],
+{% endif %}
+      deps: deps(),
+      elixirc_paths: elixirc_paths(Mix.env())
+    ]
+  end
+
+  def application do
+    [
+      mod: { {{- module_name }}.Application, []},
+      extra_applications: [:logger]
+    ]
+  end
+
+  defp elixirc_paths(:test), do: ["lib", "test/support"]
+  defp elixirc_paths(_env), do: ["lib"]
+
+  defp deps do
+    [
+{% if phoenix %}
+      {:phoenix, "~> 1.8.17"},
+      {:bandit, "~> 1.15.0"},
+{% endif %}
+{% if postgres %}
+      {:ecto_sql, "~> 3.14.0"},
+      {:postgrex, "~> 0.23.0"},
+{% endif %}
+      {:exsync, "~> 0.4.1", only: :dev}
+    ]
+  end
+end

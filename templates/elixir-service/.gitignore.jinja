@@ -20,5 +20,14 @@ erl_crash.dump
 *.ez
 
 # Ignore package tarball (built via "mix hex.build").
-template-*.tar
+{{ app_name }}-*.tar
 
+# Local direnv state and the default nix build output link.
+/.direnv/
+/result
+{% if postgres %}
+
+# Local development service state.
+/.services/run/
+/.services/postgres/
+{% endif %}

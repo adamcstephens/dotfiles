@@ -1,0 +1,25 @@
+{
+  lib,
+  beamPackages,
+  callPackages,
+}:
+beamPackages.mixRelease {
+  pname = "{{ project_name }}";
+  version = lib.trim (builtins.readFile ../VERSION);
+
+  src = lib.fileset.toSource {
+    root = ../.;
+    fileset = lib.fileset.unions [
+      (lib.fileset.maybeMissing ../config)
+      ../lib
+      ../mix.exs
+      (lib.fileset.maybeMissing ../mix.lock)
+      (lib.fileset.maybeMissing ../priv)
+      ../VERSION
+    ];
+  };
+
+  mixNixDeps = callPackages ../deps.nix { inherit beamPackages; };
+
+  meta.mainProgram = "{{ app_name }}";
+}

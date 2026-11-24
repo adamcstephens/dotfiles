@@ -1,0 +1,5 @@
+defmodule {{ module_name }}.ErrorText do
+  @moduledoc "Renders HTTP errors as plain text without disclosing exception details."
+
+  def render(template, _assigns), do: Phoenix.Controller.status_message_from_template(template)
+end

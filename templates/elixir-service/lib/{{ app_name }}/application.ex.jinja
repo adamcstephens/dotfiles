@@ -1,0 +1,24 @@
+defmodule {{ module_name }}.Application do
+  @moduledoc "Starts the service's root supervisor. Add service processes to its child list."
+  use Application
+
+  @impl Application
+  def start(_type, _args) do
+    name = {{ module_name }}.Supervisor
+{% if phoenix or postgres %}
+
+    children = [
+{% if postgres %}
+      {{ module_name }}.Repo{{ "," if phoenix }}
+{% endif %}
+{% if phoenix %}
+      {{ module_name }}.Endpoint
+{% endif %}
+    ]
+
+    Supervisor.start_link(children, strategy: :one_for_one, name: name)
+{% else %}
+    Supervisor.start_link([], strategy: :one_for_one, name: name)
+{% endif %}
+  end
+end

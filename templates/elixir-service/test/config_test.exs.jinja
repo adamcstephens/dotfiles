@@ -1,0 +1,46 @@
+defmodule {{ module_name }}.ConfigTest do
+  use ExUnit.Case, async: false
+
+  alias {{ module_name }}.Config
+
+  @name "{{ app_name | upper }}_CONFIG_TEST_SECRET"
+  @file_key @name <> "_FILE"
+
+  setup do
+    previous = for key <- [@name, @file_key], do: {key, System.get_env(key)}
+    on_exit(fn -> System.put_env(previous) end)
+    System.delete_env(@name)
+    System.delete_env(@file_key)
+  end
+
+  @tag :tmp_dir
+  test "the file takes precedence and only trailing line endings are removed", %{tmp_dir: dir} do
+    path = Path.join(dir, "secret")
+    File.write!(path, "  first\r\nsecond\t \r\n\r\n")
+    System.put_env([{@name, "fallback"}, {@file_key, path}])
+
+    assert Config.get_secret(@name) == "  first\r\nsecond\t "
+    assert Config.fetch_secret!(@name) == "  first\r\nsecond\t "
+  end
+
+  test "without a file, the environment value is returned unchanged" do
+    System.put_env(@name, "  value \n")
+    assert Config.get_secret(@name) == "  value \n"
+
+    System.put_env(@name, "")
+    assert Config.fetch_secret!(@name) == ""
+  end
+
+  test "a missing secret is optional unless fetched" do
+    assert Config.get_secret(@name) == nil
+    assert_raise System.EnvError, fn -> Config.fetch_secret!(@name) end
+  end
+
+  @tag :tmp_dir
+  test "an unreadable credential does not fall back to the environment", %{tmp_dir: dir} do
+    System.put_env([{@name, "fallback"}, {@file_key, Path.join(dir, "absent")}])
+
+    assert_raise File.Error, fn -> Config.get_secret(@name) end
+    assert_raise File.Error, fn -> Config.fetch_secret!(@name) end
+  end
+end

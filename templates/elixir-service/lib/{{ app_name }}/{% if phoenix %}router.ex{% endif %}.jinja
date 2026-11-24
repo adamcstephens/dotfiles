@@ -1,0 +1,6 @@
+defmodule {{ module_name }}.Router do
+  @moduledoc "Routes incoming HTTP requests."
+  use Phoenix.Router, helpers: false
+
+  get "/", {{ module_name }}.HomeController, :index
+end
