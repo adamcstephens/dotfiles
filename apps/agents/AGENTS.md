@@ -1,6 +1,7 @@
 - **CRITICAL** I like to ask questions. When a question is asked, you should answer it, and stop. Do not edit files.
 - When writing commands to files, e.g. scripts or docs, always use the long version (--name) over short (-n) if available.
 - When you are asking questions, you should use the AskUserQuestion tool instead of sending as text questions.
+- Avoid making assumptions that influence design. Stop and ask the user.
 
 ## Veans
 If `.veans.yml` exists at the repository root, read the `veans` skill before any ticket or implementation work. Otherwise, do not apply veans guidance.
@@ -16,7 +17,7 @@ After implementation:
 - code committed with all changes included
   - Prefer no or very short commit body
   - Assisted-By line with specific model name always included (Co-Authored-by *NEVER* included)
-    - Use the format `Assisted-By: <Model> <Thinking Effort> in <Harness>/<version>`
+    - Use the format `Assisted-By: <Model> [<Thinking Effort>] in <Harness>/<version>` - skipping effort if unknown
     - Sample: `Assisted-By: OpenAI GPT-6.1 Sol low in omp/18.5.1`
 
 ### Handoff
