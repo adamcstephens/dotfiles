@@ -104,6 +104,10 @@ export default {
       browser: "Linear",
     },
     {
+      match: (_url, { opener }) => opener?.bundleId !== "com.slack",
+      browser: firefox_bitfreighter,
+    },
+    {
       match: /bitfreighter/,
       browser: firefox_bitfreighter,
     },
