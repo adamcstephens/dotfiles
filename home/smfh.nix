@@ -60,7 +60,7 @@ in
       smfhHandoffTargets=()
       smfhHandoffLinks=()
       function checkSmfhLinks() {
-        local oldManifest=${state} oldFiles="" rows target previous desired force actual sourceLink
+        local oldManifest=${state} oldFiles="" rows target previous desired force actual relative generation
         if [[ ! -f "$oldManifest" ]]; then
           oldManifest=${pkgs.writeText "empty-smfh-files.json" ''{"version":3,"files":[]}''}
         fi
@@ -97,12 +97,13 @@ in
                   "$actual" == "$oldFiles/''${target#"$HOME/"}" && -L "$actual" ]]; then
               continue
             fi
-            if [[ -n "$desired" && "$target" == "$HOME/"* &&
-                  "$actual" == ${lib.escapeShellArg builtins.storeDir}/*-home-manager-files/"''${target#"$HOME/"}" &&
-                  -L "$actual" ]]; then
-              sourceLink="$(readlink "$actual")"
-              if [[ "$sourceLink" == ${lib.escapeShellArg builtins.storeDir}/* && -L "$sourceLink" &&
-                    "$(readlink "$sourceLink")" == "$desired" ]]; then
+            if [[ -n "$desired" && "$target" == "$HOME/"* ]]; then
+              relative="''${target#"$HOME/"}"
+              generation="''${actual%/"$relative"}"
+              generation="''${generation#${lib.escapeShellArg "${builtins.storeDir}/"}}"
+              if [[ "$generation" == *-home-manager-files && "$generation" != */* &&
+                    "$actual" == ${lib.escapeShellArg builtins.storeDir}/"$generation/$relative" &&
+                    -L "$actual" ]]; then
                 smfhHandoffTargets+=("$target")
                 smfhHandoffLinks+=("$actual")
                 continue
