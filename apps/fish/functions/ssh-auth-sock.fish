@@ -8,7 +8,7 @@ function find_ssh_agent
     function find_allowed_socket
         set --local allowlist
         if test -n "$XDG_RUNTIME_DIR"
-            set --append allowlist "$XDG_RUNTIME_DIR/yubikey-agent/yubikey-agent.sock" "$XDG_RUNTIME_DIR/ssh-tpm-agent"
+            set --append allowlist "$XDG_RUNTIME_DIR/ssh-tpm-agent" "$XDG_RUNTIME_DIR/yubikey-agent/yubikey-agent.sock"
         end
         set --append allowlist "$HOME/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh"
 
