@@ -8,21 +8,7 @@
 let
   cfg = config.dotfiles.apps.paseo;
 
-  patches = [
-    ./omp-custom-message-history.patch
-  ];
-
-  package =
-    inputs.nixos-unstable-small.legacyPackages.${pkgs.stdenv.hostPlatform.system}.paseo.overrideAttrs
-      (old: {
-        doCheck = false;
-        patches = (old.patches or [ ]) ++ patches;
-        postInstall = ''
-          wrapProgram "$out/bin/paseo" \
-            --run 'export PASEO_STATE_HOME="''${PASEO_STATE_HOME:-''${HOME}/.local/state/paseo}"' \
-            --run 'export PASEO_HOME="''${PASEO_HOME:-''${HOME}/.local/state/paseo}"'
-        '';
-      });
+  package = inputs.nixos-unstable-small.legacyPackages.${pkgs.stdenv.hostPlatform.system}.paseo;
 
   roles = {
     director = {
