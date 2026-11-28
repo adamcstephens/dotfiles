@@ -242,11 +242,11 @@
     },
     "nixos-unstable-small": {
       "locked": {
-        "lastModified": 1795806733,
-        "narHash": "sha256-YN3L1AO3ZkKXkiaggC7x9I1UjOCqWvew/I3BHkBO6OY=",
-        "rev": "0c08d75a1e6735054cfad1a121a4a7083dfe9034",
+        "lastModified": 1795868413,
+        "narHash": "sha256-Dl2QaDAP8TNJYYha0uFfHQcgw6YdcvSE+htVITD6gOc=",
+        "rev": "eb477848b18c1376153a351fb087dd886213b889",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/unstable-small/nixos-27.05pre1131632.0c08d75a1e67/nixexprs.tar.zst"
+        "url": "https://releases.nixos.org/nixos/unstable-small/nixos-27.05pre1132013.eb477848b18c/nixexprs.tar.zst"
       },
       "original": {
         "type": "tarball",
@@ -372,11 +372,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1795234589,
-        "narHash": "sha256-pAEASBc6wof0S58XcSEdZoQ2iFQDkCnZwH+wFLrkd1Q=",
-        "rev": "2786a2a72088ecf32aea5b3ec52099e6a7cff78f",
+        "lastModified": 1795546490,
+        "narHash": "sha256-35vVm59QE15oPhDJ2y2J03w+h/4XTMJvvDMP3zRSrY0=",
+        "rev": "58d0d3e9d527ca7263be6a45d1f86eacdc700dab",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/unstable/nixos-26.11pre1125864.2786a2a72088/nixexprs.tar.zst"
+        "url": "https://releases.nixos.org/nixos/unstable/nixos-26.11pre1129576.58d0d3e9d527/nixexprs.tar.zst"
       },
       "original": {
         "type": "tarball",
@@ -450,10 +450,10 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1795821914,
-        "narHash": "sha256-w7LtNhRt+SovdPb8PAih3v+CCmP54NoluRq8iZbosoQ=",
+        "lastModified": 1795877391,
+        "narHash": "sha256-/W2dfXMlF6RUX8zX0P+tT3pLccWj4aOm5KKNFsbQJbY=",
         "type": "tarball",
-        "url": "https://pkgs.superlogical.com/rex/nix/snapshot/0.1.0-snapshot.2702.tar.gz"
+        "url": "https://pkgs.superlogical.com/rex/nix/snapshot/0.1.0-snapshot.2711.tar.gz"
       },
       "original": {
         "type": "tarball",
