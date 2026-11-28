@@ -15,6 +15,8 @@ steeringMode: one-at-a-time
 commit:
   # https://github.com/can1357/oh-my-pi/pull/19442 left duplicate JJ changes unfixed.
   enabled: false
+mcp:
+  shared: false
 memory:
   backend: "off"
 task:
